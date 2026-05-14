@@ -399,15 +399,15 @@ export default function ResumeBuilder() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="col-span-1 sm:col-span-2">
                   <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Full Name *</label>
-                  <input type="text" name="name" value={personal.name} onChange={handlePersonalChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm" placeholder="e.g. Jane Doe" />
+                  <input type="text" name="name" value={personal.name} onChange={handlePersonalChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="e.g. Jane Doe" />
                 </div>
                 <div className="col-span-1 sm:col-span-2">
                   <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Job Title</label>
-                  <input type="text" name="title" value={personal.title} onChange={handlePersonalChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm" placeholder="e.g. Product Manager" />
+                  <input type="text" name="title" value={personal.title} onChange={handlePersonalChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="e.g. Product Manager" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Email *</label>
-                  <input type="email" name="email" value={personal.email} onChange={handlePersonalChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm" placeholder="jane@example.com" />
+                  <input type="email" name="email" value={personal.email} onChange={handlePersonalChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="jane@example.com" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Phone</label>
@@ -438,7 +438,7 @@ export default function ResumeBuilder() {
               <div className="space-y-4">
                 <div>
                   <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Target Job Title</label>
-                  <input type="text" value={targetJob.title} onChange={e => setTargetJob({...targetJob, title: e.target.value})} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm" placeholder="e.g. Senior Frontend Engineer" />
+                  <input type="text" value={targetJob.title} onChange={e => setTargetJob({...targetJob, title: e.target.value})} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="e.g. Senior Frontend Engineer" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Job Description</label>
@@ -446,7 +446,7 @@ export default function ResumeBuilder() {
                     rows={4} 
                     value={targetJob.description} 
                     onChange={e => setTargetJob({...targetJob, description: e.target.value})} 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm resize-none custom-scrollbar" 
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900 resize-none custom-scrollbar" 
                     placeholder="Paste the job description here for ATS keyword optimization..." 
                   />
                   <p className="text-[11px] text-gray-500 mt-1.5 font-medium">Paste the job description to get a live ATS keyword match score on the right.</p>
@@ -475,7 +475,7 @@ export default function ResumeBuilder() {
                 value={summary}
                 onChange={(e) => setSummary(e.target.value)}
                 placeholder="Write a brief summary of your professional background..."
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm resize-none custom-scrollbar"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900 resize-none custom-scrollbar"
               />
             </section>
 
@@ -501,16 +501,16 @@ export default function ResumeBuilder() {
                     </button>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                       <div>
-                        <input type="text" value={exp.role} onChange={e => updateExperience(exp.id, 'role', e.target.value)} placeholder="Role / Job Title" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 outline-none text-sm font-medium" />
+                        <input type="text" value={exp.role} onChange={e => updateExperience(exp.id, 'role', e.target.value)} placeholder="Role / Job Title" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 bg-white outline-none text-sm font-medium placeholder:text-gray-400 text-gray-900" />
                       </div>
                       <div>
-                        <input type="text" value={exp.company} onChange={e => updateExperience(exp.id, 'company', e.target.value)} placeholder="Company Name" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 outline-none text-sm" />
+                        <input type="text" value={exp.company} onChange={e => updateExperience(exp.id, 'company', e.target.value)} placeholder="Company Name" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 bg-white outline-none text-sm placeholder:text-gray-400 text-gray-900" />
                       </div>
                       <div>
-                        <input type="text" value={exp.start} onChange={e => updateExperience(exp.id, 'start', e.target.value)} placeholder="Start Date (e.g. Jan 2021)" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 outline-none text-sm" />
+                        <input type="text" value={exp.start} onChange={e => updateExperience(exp.id, 'start', e.target.value)} placeholder="Start Date (e.g. Jan 2021)" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 bg-white outline-none text-sm placeholder:text-gray-400 text-gray-900" />
                       </div>
                       <div>
-                        <input type="text" value={exp.end} onChange={e => updateExperience(exp.id, 'end', e.target.value)} placeholder="End Date (e.g. Present)" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 outline-none text-sm" />
+                        <input type="text" value={exp.end} onChange={e => updateExperience(exp.id, 'end', e.target.value)} placeholder="End Date (e.g. Present)" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 bg-white outline-none text-sm placeholder:text-gray-400 text-gray-900" />
                       </div>
                     </div>
                     <textarea 

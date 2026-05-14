@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { 
   Download, Crop, RefreshCw, CheckCircle,
-  ImageIcon, Sliders, ImagePlus, AlertCircle
+  ImageIcon, Sliders, ImagePlus, AlertCircle, Palette
 } from 'lucide-react';
 
 type SizeKey = "India Passport (35x45 mm)" | "US Passport (2x2 inch)" | "Visa Photo (35x45 mm)" | "Custom (Square)";
@@ -45,6 +45,7 @@ export default function PassportPhotoMaker() {
   const [autoCropDefaults, setAutoCropDefaults] = useState({ zoom: 1, moveX: 0, moveY: 0 });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const colorInputRef = useRef<HTMLInputElement>(null);
 
   const processUploadedImage = async (file: File) => {
     try {
@@ -527,28 +528,59 @@ export default function PassportPhotoMaker() {
 
                       <div>
                         <label className="block text-sm font-bold text-gray-700 mb-3">Background Color</label>
-                        <div className="flex gap-4 items-center">
+                        <div className="flex gap-3 items-center flex-wrap">
                           {STANDARD_BG_COLORS.map((bg) => (
-                            <button
-                              key={bg.name}
-                              onClick={() => setSelectedBgHex(bg.hex)}
-                              className={`w-12 h-12 rounded-full border-2 transition-all duration-200 ${
-                                selectedBgHex === bg.hex ? 'border-blue-600 scale-110 shadow-md ring-4 ring-blue-50' : 'border-gray-200 hover:border-gray-300 hover:scale-105 shadow-sm'
-                              }`}
-                              style={{ backgroundColor: bg.hex }}
-                              title={bg.name}
-                            />
+                            <div key={bg.name} className="flex flex-col items-center gap-1.5">
+                              <button
+                                onClick={() => setSelectedBgHex(bg.hex)}
+                                className={`w-12 h-12 rounded-full border-2 transition-all duration-300 hover:scale-110 shadow-sm ${
+                                  selectedBgHex === bg.hex ? 'border-blue-600 ring-4 ring-blue-500/20' : 'border-gray-200 hover:border-gray-300'
+                                }`}
+                                style={{ backgroundColor: bg.hex }}
+                                title={bg.name}
+                              />
+                              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tight">{bg.name}</span>
+                            </div>
                           ))}
+                          
                           <div className="w-px h-10 bg-gray-200 mx-1"></div>
-                          <div className="relative w-12 h-12 rounded-full border-2 border-gray-200 overflow-hidden hover:border-gray-300 transition-all hover:scale-105 shadow-sm" title="Custom Color">
-                            <input 
-                              type="color" 
-                              value={selectedBgHex} 
-                              onChange={(e) => setSelectedBgHex(e.target.value)} 
-                              className="absolute -top-4 -left-4 w-20 h-20 cursor-pointer" 
-                            />
+                          
+                          <div className="flex flex-col items-center gap-1.5">
+                            <button
+                              onClick={() => colorInputRef.current?.click()}
+                              className={`w-14 h-14 rounded-full border-2 transition-all duration-300 hover:scale-110 shadow-md flex items-center justify-center relative overflow-hidden group ${
+                                !STANDARD_BG_COLORS.some(bg => bg.hex === selectedBgHex) 
+                                ? 'border-blue-600 ring-4 ring-blue-500/30' 
+                                : 'border-gray-200 hover:border-gray-300'
+                              }`}
+                              style={{ 
+                                background: 'linear-gradient(45deg, #ff0000, #ff9900, #ffee00, #00ff66, #00ccff, #3366ff, #9933ff, #ff0099)' 
+                              }}
+                              title="Custom Color"
+                            >
+                              <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></div>
+                              <Palette className="w-6 h-6 text-white drop-shadow-md relative z-10" />
+                              <input 
+                                type="color" 
+                                ref={colorInputRef}
+                                value={selectedBgHex} 
+                                onChange={(e) => setSelectedBgHex(e.target.value)} 
+                                className="sr-only" 
+                              />
+                            </button>
+                            <span className="text-[10px] font-bold text-gray-500 uppercase tracking-tight">Custom</span>
                           </div>
                         </div>
+                        
+                        {!STANDARD_BG_COLORS.some(bg => bg.hex === selectedBgHex) && (
+                          <div className="mt-4 p-2.5 bg-gray-50 rounded-xl border border-gray-100 flex items-center justify-between animate-in fade-in slide-in-from-top-2 duration-300">
+                            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Selected Color</span>
+                            <div className="flex items-center gap-2">
+                              <div className="w-4 h-4 rounded-full border border-gray-200 shadow-sm" style={{ backgroundColor: selectedBgHex }}></div>
+                              <span className="text-sm font-mono font-bold text-blue-600">{selectedBgHex.toUpperCase()}</span>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

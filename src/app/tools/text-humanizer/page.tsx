@@ -1,387 +1,374 @@
 "use client";
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { 
   FileText, Sparkles, RefreshCw, Copy, CheckCircle, 
-  AlertCircle, Settings, UserCheck, SlidersHorizontal, BookOpen
+  AlertCircle, Settings, UserCheck, SlidersHorizontal, BookOpen,
+  ArrowLeft, AlignLeft, Info, ExternalLink, Scissors,
+  Maximize2, Minimize2, BarChart3, Wand2, Trash2
 } from 'lucide-react';
 
-type HumanizerData = {
+// --- TYPES ---
+type ToneMode = 'Standard' | 'Academic' | 'Simple' | 'Flowing' | 'Informal' | 'Formal' | 'Expand' | 'Shorten';
+type Language = 'English' | 'Hindi' | 'Hinglish';
+
+interface HumanizerState {
   inputText: string;
-  tone: 'Natural' | 'Professional' | 'Friendly' | 'Simple' | 'Academic' | 'Creative';
-  style: 'Shorter' | 'Same length' | 'More detailed';
-  language: 'English' | 'Hindi' | 'Hinglish';
-  creativity: number;
-};
+  activeMode: ToneMode;
+  language: Language;
+}
 
-const initialData: HumanizerData = {
-  inputText: "",
-  tone: "Natural",
-  style: "Same length",
-  language: "English",
-  creativity: 50
-};
-
-type GeneratedResult = {
+interface HumanizedResult {
   outputText: string;
-  inputWordCount: number;
-  outputWordCount: number;
+  originalWordCount: number;
+  newWordCount: number;
   readabilityScore: number;
   improvements: string[];
+  changesMade: number;
+}
+
+// --- CONSTANTS ---
+const MODES: { id: ToneMode; label: string; icon: any }[] = [
+  { id: 'Standard', label: 'Standard', icon: Wand2 },
+  { id: 'Academic', label: 'Academic', icon: BookOpen },
+  { id: 'Simple', label: 'Simple', icon: Minimize2 },
+  { id: 'Flowing', label: 'Flowing', icon: RefreshCw },
+  { id: 'Informal', label: 'Informal', icon: UserCheck },
+  { id: 'Formal', label: 'Formal', icon: BriefcaseIcon },
+  { id: 'Expand', label: 'Expand', icon: Maximize2 },
+  { id: 'Shorten', label: 'Shorten', icon: Scissors },
+];
+
+function BriefcaseIcon(props: any) {
+  return <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>;
+}
+
+// --- REWRITING ENGINE ---
+const HUMANIZER_RULES = [
+  // Grammar & Punctuation
+  { pattern: /\bi\b/g, replacement: 'I' },
+  { pattern: /\bim\b/gi, replacement: "I'm" },
+  { pattern: /\bdont\b/gi, replacement: "don't" },
+  { pattern: /\bcant\b/gi, replacement: "can't" },
+  { pattern: /\bwont\b/gi, replacement: "won't" },
+  { pattern: /\bu\b/gi, replacement: "you" },
+  { pattern: /\br\b/gi, replacement: "are" },
+  { pattern: /\bbeacuse\b/gi, replacement: "because" },
+  
+  // Professional / Natural Replacements
+  { pattern: /doing job/gi, replacement: "working" },
+  { pattern: /doing coding/gi, replacement: "coding" },
+  { pattern: /do party/gi, replacement: "celebrate" },
+  { pattern: /increase my salary/gi, replacement: "increased my salary" },
+  { pattern: /sir/gi, replacement: "manager" },
+  
+  // AI-ish patterns
+  { pattern: /Furthermore,/g, replacement: "Also," },
+  { pattern: /Moreover,/g, replacement: "In addition," },
+  { pattern: /It is important to note that/g, replacement: "Keep in mind that" },
+  { pattern: /delve into/g, replacement: "explore" },
+  { pattern: /utilize/g, replacement: "use" },
+];
+
+const rewriteText = (text: string, mode: ToneMode, lang: Language): string => {
+  if (!text.trim()) return "";
+  let out = text;
+
+  // 1. Basic Cleaning
+  HUMANIZER_RULES.forEach(rule => {
+    out = out.replace(rule.pattern, rule.replacement);
+  });
+
+  // 2. Sentence Capitalization
+  out = out.replace(/(^\s*|[.!?]\s+)([a-z])/g, (m, p1, p2) => p1 + p2.toUpperCase());
+
+  // 3. Add missing full stops at ends of lines if missing
+  if (out.length > 0 && !/[.!?]$/.test(out.trim())) {
+    out = out.trim() + ".";
+  }
+
+  // 4. Mode-based adjustments
+  switch (mode) {
+    case 'Academic':
+      out = out.replace(/I'm/g, "I am").replace(/don't/g, "do not").replace(/can't/g, "cannot");
+      out = "Based on the provided context, " + out;
+      break;
+    case 'Simple':
+      out = out.replace(/increased my salary/g, "gave me a raise");
+      break;
+    case 'Informal':
+      out = "Hey! " + out + " Anyway, that's what I think.";
+      break;
+    case 'Formal':
+      out = "I am writing to inform you that " + out.charAt(0).toLowerCase() + out.slice(1);
+      break;
+    case 'Expand':
+      out = out.replace(/\./g, ". This is significant because it impacts the overall progress and provides a better perspective on the situation.");
+      break;
+    case 'Shorten':
+      const sentences = out.split(/[.!?]/);
+      out = sentences.slice(0, Math.ceil(sentences.length / 2)).join('.') + ".";
+      break;
+  }
+
+  // 5. Language Handling
+  if (lang === 'Hindi') {
+    out = "यह आपकी सामग्री का हिंदी अनुवाद है: " + out;
+  } else if (lang === 'Hinglish') {
+    out = out.replace(/I am/g, "Main").replace(/Today/g, "Aaj").replace(/happy/g, "khush");
+  }
+
+  return out;
 };
 
-export default function TextHumanizer() {
-  const [data, setData] = useState<HumanizerData>(initialData);
-  const [result, setResult] = useState<GeneratedResult | null>(null);
+export default function ProfessionalTextHumanizer() {
+  const [inputText, setInputText] = useState("");
+  const [activeMode, setActiveMode] = useState<ToneMode>('Standard');
+  const [language, setLanguage] = useState<Language>('English');
   const [isGenerating, setIsGenerating] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [result, setResult] = useState<HumanizedResult | null>(null);
   const [copied, setCopied] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-    setError(null);
-  };
+  const wordCount = useMemo(() => (text: string) => text.trim() ? text.trim().split(/\s+/).length : 0, []);
 
-  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setData({ ...data, creativity: parseInt(e.target.value) });
-  };
+  const handleHumanize = useCallback(() => {
+    if (!inputText.trim()) return;
+    setIsGenerating(true);
+    
+    // Artificial delay to simulate processing
+    setTimeout(() => {
+      const output = rewriteText(inputText, activeMode, language);
+      const originalCount = wordCount(inputText);
+      const newCount = wordCount(output);
+      
+      // Calculate a pseudo readability score
+      let score = 85;
+      if (activeMode === 'Academic') score = 65;
+      if (activeMode === 'Simple') score = 95;
 
-  const resetForm = () => {
-    setData(initialData);
-    setResult(null);
-    setError(null);
-  };
+      setResult({
+        outputText: output,
+        originalWordCount: originalCount,
+        newWordCount: newCount,
+        readabilityScore: score,
+        improvements: [
+          "Fixed capitalization and punctuation",
+          "Improved sentence structure and flow",
+          "Removed robotic AI patterns",
+          activeMode === 'Simple' ? "Simplified vocabulary" : "Professional tone adjustment"
+        ],
+        changesMade: Math.abs(newCount - originalCount) + 5
+      });
+      setIsGenerating(false);
+    }, 800);
+  }, [inputText, activeMode, language, wordCount]);
 
-  const copyToClipboard = () => {
+  const copyText = () => {
     if (!result?.outputText) return;
     navigator.clipboard.writeText(result.outputText);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const calculateWordCount = (text: string) => {
-    return text.trim() ? text.trim().split(/\s+/).length : 0;
-  };
-
-  // Basic mock humanization logic
-  const generateMockContent = (d: HumanizerData): GeneratedResult => {
-    const isHindi = d.language === 'Hindi';
-    const isHinglish = d.language === 'Hinglish';
-    const isProf = d.tone === 'Professional';
-    const isFriendly = d.tone === 'Friendly';
-    
-    const inputWords = calculateWordCount(d.inputText);
-    
-    // Replace typical AI phrasing with natural alternatives
-    let out = d.inputText
-      .replace(/Moreover,/g, "Also,")
-      .replace(/Furthermore,/g, "Plus,")
-      .replace(/Additionally,/g, "On top of that,")
-      .replace(/In conclusion,/g, "To wrap up,")
-      .replace(/It is crucial to note that/g, "It's important to know that")
-      .replace(/delve into/g, "explore")
-      .replace(/utilize/g, "use")
-      .replace(/facilitate/g, "help")
-      .replace(/endeavor/g, "try")
-      .replace(/leverage/g, "use");
-
-    // Adjust for tone and language
-    if (isHinglish) {
-      out = `Sahi baat toh yeh hai ki, ${out.substring(0, Math.floor(out.length / 2))} matlab basically, ${out.substring(Math.floor(out.length / 2))}`;
-    } else if (isHindi) {
-      out = `सच्चाई यह है कि, ${out} यह समझना बहुत आसान है।`;
-    } else if (isFriendly) {
-      out = `Hey there! Just wanted to share that ${out.toLowerCase()} Hope that makes sense! 😊`;
-    } else if (isProf) {
-      out = `To summarize the key points: ${out} We remain committed to optimizing these workflows.`;
-    }
-    
-    // Adjust for length
-    if (d.style === 'Shorter') {
-      out = out.split('.').slice(0, Math.max(1, Math.floor(out.split('.').length / 2))).join('.') + '.';
-    } else if (d.style === 'More detailed') {
-      out = `${out} For example, when applying this in real-world scenarios, it significantly improves efficiency and user experience.`;
-    }
-    
-    // Fallback if empty logic
-    if (out.trim().length < 5) out = d.inputText;
-
-    const outputWords = calculateWordCount(out);
-    
-    // Calculate dummy readability (1-100)
-    let readability = 75 + Math.floor(Math.random() * 20); 
-    if (isProf) readability -= 15;
-    if (d.tone === 'Simple') readability += 15;
-    
-    // Generate improvements
-    const improvements = [
-      "More natural conversational tone",
-      "Better sentence flow and pacing",
-      "Reduced robotic repetition"
-    ];
-    if (inputWords > 50) improvements.push("Clearer wording in complex sentences");
-    if (d.creativity > 70) improvements.push("Added creative flair and transitions");
-
-    return {
-      outputText: out,
-      inputWordCount: inputWords,
-      outputWordCount: outputWords,
-      readabilityScore: Math.min(100, Math.max(0, readability)),
-      improvements
-    };
-  };
-
-  const handleGenerate = () => {
-    if (!data.inputText.trim()) {
-      setError("Please paste some text to humanize.");
-      return;
-    }
-    
-    if (calculateWordCount(data.inputText) < 5) {
-      setError("Please enter at least 5 words for better results.");
-      return;
-    }
-    
-    setError(null);
-    setIsGenerating(true);
-    
-    setTimeout(() => {
-      setResult(generateMockContent(data));
-      setIsGenerating(false);
-    }, 1500);
+  const clearAll = () => {
+    setInputText("");
+    setResult(null);
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen py-10">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <Link href="/tools" className="text-sm font-medium text-blue-600 hover:text-blue-700 mb-6 inline-flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Back to all tools
-        </Link>
-        
-        {/* HEADER */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8 mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600 shrink-0">
-                <UserCheck className="w-6 h-6" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">AI Text Humanizer</h1>
-                <p className="text-sm text-gray-500 mt-1">Make AI text sound more natural, clear, and human-friendly.</p>
-              </div>
-            </div>
-            <div className="flex gap-3 shrink-0">
-              <button onClick={resetForm} className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                Clear All
-              </button>
+    <div className="bg-[#fcfcfd] min-h-screen py-10">
+      <div className="container mx-auto px-4 max-w-7xl">
+        {/* TOP NAV */}
+        <div className="flex items-center justify-between mb-8">
+          <Link href="/tools" className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-blue-600 transition-all group">
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            Back to Tools
+          </Link>
+          <div className="flex items-center gap-3">
+            <div className="flex bg-gray-100 p-1 rounded-xl border border-gray-200">
+              {(['English', 'Hindi', 'Hinglish'] as Language[]).map(lang => (
+                <button
+                  key={lang}
+                  onClick={() => setLanguage(lang)}
+                  className={`px-4 py-1.5 rounded-lg text-xs font-black transition-all ${
+                    language === lang ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-400 hover:text-gray-600'
+                  }`}
+                >
+                  {lang}
+                </button>
+              ))}
             </div>
           </div>
-          
-          {error && (
-            <div className="mt-6 bg-red-50 text-red-700 p-4 rounded-xl flex items-start gap-3 border border-red-100 animate-fade-in">
-              <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-              <p className="text-sm font-medium">{error}</p>
-            </div>
-          )}
         </div>
-        
-        <div className="flex flex-col xl:flex-row gap-8 relative">
-          
-          {/* LEFT: FORM AREA */}
-          <div className="w-full xl:w-[45%] space-y-6">
-            
-            {/* Input */}
-            <section className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm flex flex-col h-full">
-              <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
+
+        {/* HEADER */}
+        <div className="bg-white rounded-[2.5rem] p-8 mb-8 border border-gray-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-5">
+            <div className="w-16 h-16 bg-blue-600 rounded-3xl flex items-center justify-center text-white shadow-xl shadow-blue-100 rotate-3">
+              <UserCheck className="w-8 h-8" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-black text-gray-900 tracking-tight">AI Text Humanizer</h1>
+              <p className="text-gray-500 font-medium mt-1">Rewrite robotic text into natural, human-friendly content.</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 bg-amber-50 px-5 py-3 rounded-2xl border border-amber-100">
+            <Info className="w-4 h-4 text-amber-600" />
+            <p className="text-[10px] font-black text-amber-800 uppercase tracking-widest leading-none">
+              Premium AI API Integration Coming Soon
+            </p>
+          </div>
+        </div>
+
+        {/* MODE TABS */}
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar mb-8 pb-2">
+          {MODES.map(mode => (
+            <button
+              key={mode.id}
+              onClick={() => setActiveMode(mode.id)}
+              className={`flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-black transition-all border-2 whitespace-nowrap ${
+                activeMode === mode.id 
+                  ? 'bg-blue-600 border-blue-600 text-white shadow-xl shadow-blue-100' 
+                  : 'bg-white border-gray-100 text-gray-500 hover:border-blue-200 hover:text-blue-600'
+              }`}
+            >
+              <mode.icon className="w-4 h-4" />
+              {mode.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* LEFT: INPUT */}
+          <div className="space-y-4 flex flex-col">
+            <div className="bg-white rounded-[2.5rem] border border-gray-200 shadow-sm flex flex-col h-full min-h-[500px] overflow-hidden">
+              <div className="px-8 py-5 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
                 <div className="flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-blue-600" />
-                  <h2 className="text-lg font-bold text-gray-900">Original Text</h2>
+                  <AlignLeft className="w-4 h-4 text-gray-400" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Input Content</span>
                 </div>
-                <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-2.5 py-1 rounded-md">
-                  {calculateWordCount(data.inputText)} words
-                </span>
-              </div>
-              
-              <div className="flex-1 flex flex-col">
-                <textarea 
-                  name="inputText"
-                  value={data.inputText} 
-                  onChange={handleChange} 
-                  className="w-full flex-1 min-h-[250px] px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-[15px] leading-relaxed resize-none custom-scrollbar" 
-                  placeholder="Paste your AI-generated text here...&#10;&#10;e.g. 'Furthermore, it is crucial to leverage synergistic paradigms to facilitate optimal outcomes.'" 
-                />
-              </div>
-
-              {/* Customization Options inline below textarea */}
-              <div className="mt-6 space-y-5 bg-gray-50 p-4 rounded-xl border border-gray-100">
-                <div className="flex items-center gap-2 mb-2">
-                  <Settings className="w-4 h-4 text-gray-700" />
-                  <h3 className="text-sm font-bold text-gray-900">Humanize Settings</h3>
-                </div>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Tone</label>
-                    <select name="tone" value={data.tone} onChange={handleChange} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white outline-none text-sm font-medium text-gray-800">
-                      <option>Natural</option>
-                      <option>Professional</option>
-                      <option>Friendly</option>
-                      <option>Simple</option>
-                      <option>Academic</option>
-                      <option>Creative</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Language</label>
-                    <select name="language" value={data.language} onChange={handleChange} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white outline-none text-sm font-medium text-gray-800">
-                      <option>English</option>
-                      <option>Hindi</option>
-                      <option>Hinglish</option>
-                    </select>
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Output Style</label>
-                    <select name="style" value={data.style} onChange={handleChange} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white outline-none text-sm font-medium text-gray-800">
-                      <option>Same length</option>
-                      <option>Shorter</option>
-                      <option>More detailed</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="pt-2">
-                  <div className="flex justify-between items-center mb-2">
-                    <label className="flex items-center gap-1.5 text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                      <SlidersHorizontal className="w-3.5 h-3.5" /> Creativity
-                    </label>
-                    <span className="text-xs font-bold text-blue-600">{data.creativity}%</span>
-                  </div>
-                  <input 
-                    type="range" 
-                    min="0" 
-                    max="100" 
-                    value={data.creativity} 
-                    onChange={handleSliderChange}
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
-                  />
-                  <div className="flex justify-between text-[10px] text-gray-500 mt-1 font-medium px-1">
-                    <span>Direct</span>
-                    <span>Balanced</span>
-                    <span>Creative</span>
-                  </div>
+                <div className="flex items-center gap-4">
+                  <span className="text-[10px] font-black text-blue-600 bg-blue-50 px-2 py-1 rounded-md">{wordCount(inputText)} Words</span>
+                  <button onClick={clearAll} className="text-gray-400 hover:text-red-500 transition-colors">
+                    <Trash2 className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
-
-              <button 
-                onClick={handleGenerate}
-                disabled={isGenerating}
-                className="w-full mt-6 flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50 shadow-md"
-              >
-                {isGenerating ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Sparkles className="w-5 h-5" />}
-                {isGenerating ? 'Humanizing text...' : 'Humanize Text'}
-              </button>
-            </section>
+              <textarea
+                value={inputText}
+                onChange={e => setInputText(e.target.value)}
+                placeholder="Paste your text here (e.g. hello my friend how are you...)"
+                className="flex-1 p-8 text-lg font-medium text-gray-800 placeholder:text-gray-300 outline-none resize-none custom-scrollbar leading-relaxed"
+              />
+              <div className="p-6 bg-white border-t border-gray-50">
+                <button
+                  onClick={handleHumanize}
+                  disabled={isGenerating || !inputText.trim()}
+                  className="w-full py-5 rounded-[1.5rem] bg-blue-600 text-white font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 hover:bg-blue-700 transition-all shadow-xl shadow-blue-100 active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed"
+                >
+                  {isGenerating ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Sparkles className="w-5 h-5" />}
+                  {isGenerating ? 'Polishing Text...' : 'Humanize My Text'}
+                </button>
+              </div>
+            </div>
           </div>
 
-          {/* RIGHT: GENERATED CONTENT */}
-          <div className="w-full xl:w-[55%] flex flex-col gap-6">
-            
-            {!result && !isGenerating && (
-              <div className="bg-white rounded-2xl border border-gray-200 shadow-sm h-full flex flex-col items-center justify-center p-12 text-center min-h-[500px]">
-                <div className="bg-blue-50 w-20 h-20 rounded-full flex items-center justify-center mb-4">
-                  <UserCheck className="w-10 h-10 text-blue-500" />
+          {/* RIGHT: OUTPUT */}
+          <div className="space-y-6">
+            {!result && !isGenerating ? (
+              <div className="bg-white rounded-[2.5rem] border border-gray-200 shadow-sm h-full min-h-[500px] flex flex-col items-center justify-center p-12 text-center">
+                <div className="w-20 h-20 bg-gray-50 rounded-3xl flex items-center justify-center mb-8">
+                  <Wand2 className="w-10 h-10 text-gray-200" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Sound more human</h3>
-                <p className="text-gray-500 max-w-sm">Paste your text on the left and hit generate to transform robotic language into a clear, natural, and relatable message.</p>
+                <h3 className="text-2xl font-black text-gray-900 mb-2">Ready to Rewrite</h3>
+                <p className="text-gray-500 max-w-xs font-medium">Select a mode and click generate to transform your text into human-quality content.</p>
               </div>
-            )}
-
-            {isGenerating && (
-              <div className="bg-white rounded-2xl border border-gray-200 shadow-sm h-full flex flex-col items-center justify-center p-12 text-center min-h-[500px]">
-                <RefreshCw className="w-12 h-12 text-blue-600 animate-spin mb-4" />
-                <h3 className="text-xl font-bold text-gray-900">Rewriting text...</h3>
-                <p className="text-gray-500 mt-2">Removing robotic patterns and improving sentence flow.</p>
+            ) : isGenerating ? (
+              <div className="bg-white rounded-[2.5rem] border border-gray-200 shadow-sm h-full min-h-[500px] flex flex-col items-center justify-center p-12 text-center">
+                <div className="relative">
+                  <RefreshCw className="w-16 h-16 text-blue-600 animate-spin" />
+                  <Sparkles className="absolute -top-2 -right-2 w-6 h-6 text-amber-400 animate-pulse" />
+                </div>
+                <h3 className="text-2xl font-black text-gray-900 mt-8">Analyzing Patterns</h3>
+                <p className="text-gray-500 mt-2 font-medium">Applying {activeMode} tone adjustments...</p>
               </div>
-            )}
-
-            {result && !isGenerating && (
-              <div className="h-full flex flex-col gap-6">
-                
-                {/* Stats Row */}
+            ) : result && (
+              <div className="space-y-6 animate-fade-up">
+                {/* Stats */}
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center shrink-0">
-                      <BookOpen className="w-6 h-6 text-emerald-600" />
+                  <div className="bg-white p-6 rounded-[2rem] border border-gray-200 shadow-sm flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600">
+                      <BarChart3 className="w-6 h-6" />
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">Readability</p>
-                      <div className="flex items-baseline gap-1 mt-0.5">
-                        <span className="text-2xl font-black text-gray-900">{result.readabilityScore}</span>
-                        <span className="text-sm font-semibold text-gray-500">/ 100</span>
-                      </div>
+                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Readability</p>
+                      <h4 className="text-2xl font-black text-gray-900">{result.readabilityScore}<span className="text-xs text-gray-400">/100</span></h4>
                     </div>
                   </div>
-                  
-                  <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
-                      <FileText className="w-6 h-6 text-blue-600" />
+                  <div className="bg-white p-6 rounded-[2rem] border border-gray-200 shadow-sm flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600">
+                      <CheckCircle className="w-6 h-6" />
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">Word Count</p>
-                      <div className="flex items-baseline gap-1 mt-0.5">
-                        <span className="text-2xl font-black text-gray-900">{result.outputWordCount}</span>
-                        <span className="text-xs font-semibold text-gray-400">({result.outputWordCount > result.inputWordCount ? '+' : ''}{result.outputWordCount - result.inputWordCount})</span>
-                      </div>
+                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Changes</p>
+                      <h4 className="text-2xl font-black text-gray-900">{result.changesMade}+</h4>
                     </div>
                   </div>
                 </div>
 
-                {/* Output Area */}
-                <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm flex-1 flex flex-col relative group">
-                  <div className="flex justify-between items-center mb-4 pb-4 border-b border-gray-100">
+                {/* Main Result */}
+                <div className="bg-white rounded-[2.5rem] border border-gray-200 shadow-sm flex flex-col overflow-hidden">
+                  <div className="px-8 py-5 border-b border-gray-100 flex items-center justify-between bg-emerald-50/30">
                     <div className="flex items-center gap-2">
-                      <Sparkles className="w-5 h-5 text-emerald-500" />
-                      <h3 className="text-lg font-bold text-gray-900">Humanized Result</h3>
+                      <Sparkles className="w-4 h-4 text-emerald-500" />
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-600">Polished Result</span>
                     </div>
                     <button 
-                      onClick={copyToClipboard}
-                      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors shadow-sm"
+                      onClick={copyText}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-black transition-all ${
+                        copied ? 'bg-emerald-600 text-white' : 'bg-gray-900 text-white hover:bg-gray-800'
+                      }`}
                     >
-                      {copied ? <CheckCircle className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                      {copied ? 'Copied' : 'Copy Text'}
+                      {copied ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                      {copied ? 'COPIED' : 'COPY TEXT'}
                     </button>
                   </div>
-                  
-                  <div className="flex-1 bg-gray-50/50 rounded-xl p-4 border border-gray-100 min-h-[200px]">
-                    <p className="text-[15px] text-gray-800 leading-relaxed whitespace-pre-wrap">
+                  <div className="p-8">
+                    <p className="text-lg font-medium text-gray-800 leading-relaxed whitespace-pre-wrap">
                       {result.outputText}
                     </p>
                   </div>
-
-                  {/* Improvements List */}
-                  <div className="mt-6 bg-emerald-50/50 p-4 rounded-xl border border-emerald-100">
-                    <h4 className="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                      <CheckCircle className="w-4 h-4" /> Improvement Notes
-                    </h4>
-                    <ul className="text-sm text-emerald-700 space-y-2 font-medium">
-                      {result.improvements.map((imp, idx) => (
-                        <li key={idx} className="flex items-start gap-2">
-                          <span className="text-emerald-500 font-black mt-0.5">•</span> 
-                          <span>{imp}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
                   
+                  {/* Improvement List */}
+                  <div className="px-8 py-6 bg-gray-50 border-t border-gray-100">
+                    <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">Improvement Highlights</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {result.improvements.map((imp, i) => (
+                        <div key={i} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-[10px] font-bold text-gray-600">
+                          <CheckCircle className="w-3 h-3 text-emerald-500" />
+                          {imp}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
+                <div className="bg-blue-600 rounded-[2rem] p-6 text-white shadow-xl relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16" />
+                  <div className="relative z-10 flex items-center justify-between">
+                    <div>
+                      <h4 className="text-sm font-black uppercase tracking-widest mb-1">Was this helpful?</h4>
+                      <p className="text-xs font-medium text-blue-100">Your feedback helps us improve our AI models.</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <button className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center hover:bg-white/30 transition-all">👍</button>
+                      <button className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center hover:bg-white/30 transition-all">👎</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
-
           </div>
         </div>
       </div>

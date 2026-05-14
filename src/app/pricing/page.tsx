@@ -1,108 +1,136 @@
-import SectionTitle from '@/components/SectionTitle';
 import Link from 'next/link';
-import { Check } from 'lucide-react';
+import { 
+  Zap, Hammer, MessageCircle, Rocket, 
+  Sparkles, Video, Users, Image as ImageIcon, 
+  Maximize, MessageSquare, Layout, CheckCircle2 
+} from 'lucide-react';
 
 export const metadata = {
   title: "Pricing | ToolWala AI",
-  description: "Simple, transparent pricing for ToolWala AI. Choose the plan that works best for you.",
+  description: "ToolWala AI is currently in free beta. Access all AI tools for free during our early access period.",
 };
 
-const tiers = [
+const betaFeatures = [
   {
-    name: 'Free',
-    id: 'tier-free',
-    href: '/signup',
-    price: '$0',
-    description: 'Perfect for individuals and light usage.',
-    features: [
-      'Access to 5 AI tools',
-      'Standard processing speed',
-      'Up to 10 uses per day',
-      'Community support',
-      'Ad-supported',
-    ],
-    mostPopular: false,
+    title: 'Unlimited access',
+    description: 'Use all available AI tools without restrictions or hidden costs.',
+    icon: Zap,
+    iconColor: 'text-amber-500',
+    iconBg: 'bg-amber-50',
   },
   {
-    name: 'Pro',
-    id: 'tier-pro',
-    href: '/signup?plan=pro',
-    price: '$9',
-    description: 'Ideal for professionals and power users.',
-    features: [
-      'Access to all premium AI tools',
-      'Lightning fast processing',
-      'Unlimited uses',
-      'Priority email support',
-      'Ad-free experience',
-      'Early access to new features',
-    ],
-    mostPopular: true,
+    title: 'New tools every week',
+    description: 'Passport maker, Resume ATS, Voice Generator, Caption AI and more.',
+    icon: Hammer,
+    iconColor: 'text-blue-500',
+    iconBg: 'bg-blue-50',
   },
+  {
+    title: 'Help shape ToolWala AI',
+    description: 'Your feedback directly helps us build better tools and features.',
+    icon: MessageCircle,
+    iconColor: 'text-emerald-500',
+    iconBg: 'bg-emerald-50',
+  },
+];
+
+const comingSoon = [
+  { name: 'AI Studio Photos', icon: ImageIcon },
+  { name: 'AI Video Tools', icon: Video },
+  { name: 'AI Face Swap', icon: Users },
+  { name: 'AI Image Upscaler', icon: Maximize },
+  { name: 'AI Mock Interview', icon: Sparkles },
+  { name: 'AI PDF Chat', icon: MessageSquare },
+  { name: 'AI Website Builder', icon: Layout },
 ];
 
 export default function PricingPage() {
   return (
-    <div className="bg-white py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-4xl text-center">
-          <SectionTitle 
-            title="Simple, transparent pricing" 
-            subtitle="Choose the perfect plan for your needs. Always know what you'll pay."
-            centered
-          />
+    <div className="bg-gray-50 min-h-screen">
+      {/* HERO SECTION */}
+      <section className="relative pt-20 pb-16 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-gradient-to-b from-blue-50/50 to-transparent -z-10" />
+        <div className="container mx-auto px-4 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-bold mb-8 animate-fade-in">
+            <Rocket className="w-4 h-4" />
+            <span>BETA EARLY ACCESS</span>
+          </div>
+          <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-6 tracking-tight">
+            🚀 ToolWala AI is currently <span className="text-blue-600">FREE</span>
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            We're in early access beta. Use all AI tools free while we improve and add more powerful features.
+          </p>
         </div>
-        <div className="isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:gap-x-8 xl:gap-x-12 px-4">
-          {tiers.map((tier) => (
-            <div
-              key={tier.id}
-              className={`rounded-3xl p-8 ring-1 xl:p-10 ${
-                tier.mostPopular ? 'ring-2 ring-blue-600 bg-gray-50' : 'ring-gray-200 bg-white'
-              }`}
-            >
-              <div className="flex items-center justify-between gap-x-4">
-                <h3
-                  id={tier.id}
-                  className={`text-lg font-semibold leading-8 ${
-                    tier.mostPopular ? 'text-blue-600' : 'text-gray-900'
-                  }`}
-                >
-                  {tier.name}
-                </h3>
-                {tier.mostPopular ? (
-                  <p className="rounded-full bg-blue-600/10 px-2.5 py-1 text-xs font-semibold leading-5 text-blue-600">
-                    Most popular
-                  </p>
-                ) : null}
+      </section>
+
+      {/* FEATURES GRID */}
+      <section className="py-12">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {betaFeatures.map((feature, idx) => (
+              <div key={idx} className="bg-white p-8 rounded-3xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                <div className={`w-14 h-14 ${feature.iconBg} ${feature.iconColor} rounded-2xl flex items-center justify-center mb-6`}>
+                  <feature.icon className="w-7 h-7" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
               </div>
-              <p className="mt-4 text-sm leading-6 text-gray-600">{tier.description}</p>
-              <p className="mt-6 flex items-baseline gap-x-1">
-                <span className="text-4xl font-bold tracking-tight text-gray-900">{tier.price}</span>
-                <span className="text-sm font-semibold leading-6 text-gray-600">/month</span>
-              </p>
-              <Link
-                href={tier.href}
-                aria-describedby={tier.id}
-                className={`mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
-                  tier.mostPopular
-                    ? 'bg-blue-600 text-white shadow-sm hover:bg-blue-500 focus-visible:outline-blue-600'
-                    : 'text-blue-600 ring-1 ring-inset ring-blue-200 hover:ring-blue-300'
-                }`}
-              >
-                Get started today
-              </Link>
-              <ul role="list" className="mt-8 space-y-3 text-sm leading-6 text-gray-600">
-                {tier.features.map((feature) => (
-                  <li key={feature} className="flex gap-x-3">
-                    <Check className="h-6 w-5 flex-none text-blue-600" aria-hidden="true" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* COMING SOON SECTION */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-black text-gray-900 mb-4">Coming Soon</h2>
+            <div className="w-20 h-1.5 bg-blue-600 mx-auto rounded-full" />
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {comingSoon.map((item, idx) => (
+              <div key={idx} className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-gray-100 shadow-sm text-gray-700 font-bold text-sm">
+                <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400 shrink-0">
+                  <item.icon className="w-4 h-4" />
+                </div>
+                {item.name}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* BOTTOM CTA */}
+      <section className="py-20 pb-32">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-3xl mx-auto bg-gray-900 rounded-[3rem] p-12 text-white shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl -z-0" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl -z-0" />
+            
+            <h2 className="text-3xl md:text-4xl font-black mb-8 relative z-10">Join ToolWala AI Early Users</h2>
+            
+            <div className="flex flex-col items-center gap-6 relative z-10">
+              <Link 
+                href="/tools" 
+                className="group flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white px-10 py-5 rounded-2xl font-black text-lg transition-all hover:scale-105 active:scale-95 shadow-xl shadow-blue-900/20"
+              >
+                Start Using Free
+                <CheckCircle2 className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              
+              <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-bold text-gray-400 uppercase tracking-widest">
+                <span>No signup</span>
+                <span className="text-gray-700">•</span>
+                <span>No credit card</span>
+                <span className="text-gray-700">•</span>
+                <span>Free beta access</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

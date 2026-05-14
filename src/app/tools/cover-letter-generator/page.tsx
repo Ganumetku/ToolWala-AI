@@ -192,15 +192,15 @@ export default function CoverLetterGenerator() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="col-span-1 sm:col-span-2">
                   <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Full Name *</label>
-                  <input type="text" name="name" value={data.name} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm" placeholder="e.g. Jane Doe" />
+                  <input type="text" name="name" value={data.name} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="e.g. Jane Doe" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Email</label>
-                  <input type="email" name="email" value={data.email} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm" placeholder="jane@example.com" />
+                  <input type="email" name="email" value={data.email} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="jane@example.com" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Phone</label>
-                  <input type="text" name="phone" value={data.phone} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm" placeholder="+1 234 567 8900" />
+                  <input type="text" name="phone" value={data.phone} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="+1 234 567 8900" />
                 </div>
               </div>
             </section>
@@ -215,11 +215,11 @@ export default function CoverLetterGenerator() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Job Title *</label>
-                    <input type="text" name="jobTitle" value={data.jobTitle} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm" placeholder="e.g. Frontend Engineer" />
+                    <input type="text" name="jobTitle" value={data.jobTitle} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="e.g. Frontend Engineer" />
                   </div>
                   <div>
                     <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Company Name *</label>
-                    <input type="text" name="companyName" value={data.companyName} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm" placeholder="e.g. Acme Corp" />
+                    <input type="text" name="companyName" value={data.companyName} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="e.g. Acme Corp" />
                   </div>
                 </div>
                 <div>
@@ -229,7 +229,7 @@ export default function CoverLetterGenerator() {
                     rows={3} 
                     value={data.jobDescription} 
                     onChange={handleChange} 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm resize-none custom-scrollbar" 
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900 resize-none custom-scrollbar" 
                     placeholder="Paste the job description for a highly targeted letter..." 
                   />
                 </div>
@@ -265,7 +265,7 @@ export default function CoverLetterGenerator() {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Key Skills</label>
-                  <input type="text" name="skills" value={data.skills} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm" placeholder="React, Python, Project Management..." />
+                  <input type="text" name="skills" value={data.skills} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="React, Python, Project Management..." />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Why this company?</label>
@@ -274,7 +274,7 @@ export default function CoverLetterGenerator() {
                     rows={2} 
                     value={data.whyCompany} 
                     onChange={handleChange} 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm resize-none custom-scrollbar" 
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900 resize-none custom-scrollbar" 
                     placeholder="E.g. I love your company culture and recent product launches..." 
                   />
                 </div>

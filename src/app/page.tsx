@@ -1,137 +1,168 @@
-import Link from 'next/link';
-import ToolCard from '@/components/ToolCard';
-import SectionTitle from '@/components/SectionTitle';
+"use client";
 
-const popularTools = [
-  {
-    title: "Passport Photo Maker",
-    description: "Create perfectly sized passport photos for any country with AI background removal.",
-    icon: "📸",
-    href: "/tools/passport-photo-maker",
-    isPopular: true
-  },
-  {
-    title: "Image Compressor",
-    description: "Compress images up to 90% without losing visible quality. Fast and secure.",
-    icon: "📉",
-    href: "/tools/image-compressor",
-    isPopular: true
-  },
-  {
-    title: "QR Code Generator",
-    description: "Create custom QR codes for URLs, text, WiFi, and more with your logo.",
-    icon: "📱",
-    href: "/tools/qr-code-generator",
-    isPopular: false
-  },
-  {
-    title: "PDF Tools",
-    description: "Merge, split, compress, and convert PDF files easily and securely.",
-    icon: "📄",
-    href: "/tools/pdf-tools",
-    isPopular: false
-  },
-  {
-    title: "AI Logo Maker",
-    description: "Generate unique logos for your brand or business using advanced AI.",
-    icon: "🎨",
-    href: "/tools/ai-logo-maker",
-    isPopular: false
-  },
-  {
-    title: "AI Resume Builder",
-    description: "Create an ATS-friendly, professional resume in minutes with AI assistance.",
-    icon: "📝",
-    href: "/tools/resume-builder",
-    isPopular: true
-  },
-  {
-    title: "AI Caption Generator",
-    description: "Create engaging, platform-optimized captions with AI. Perfect for Instagram, LinkedIn, and more.",
-    icon: "✍️",
-    href: "/tools/caption-generator",
-    isPopular: true
-  },
-  {
-    title: "AI Text Humanizer",
-    description: "Make AI text sound more natural, clear, and human-friendly in seconds.",
-    icon: "👤",
-    href: "/tools/text-humanizer",
-    isPopular: true
-  },
-  {
-    title: "AI Voice Generator",
-    description: "Transform text into lifelike speech with premium AI voices.",
-    icon: "🎙️",
-    href: "/tools/voice-generator",
-    isPopular: true
-  },
-  {
-    title: "Invoice Generator",
-    description: "Create professional invoices in seconds. Download as PDF or send directly to clients.",
-    icon: "🧾",
-    href: "/tools/invoice-generator",
-    isPopular: false
-  }
-];
+import { useState, useRef, useMemo } from 'react';
+import Link from 'next/link';
+import SectionTitle from '@/components/SectionTitle';
+import ToolCard from '@/components/ToolCard';
+import { toolsData, toolCategories, ToolCategory } from '@/data/tools';
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState<ToolCategory>("All");
+  const toolsSectionRef = useRef<HTMLElement | null>(null);
+
+  const scrollToTools = () => {
+    // Adding a slight delay to allow React state to settle if needed
+    setTimeout(() => {
+      toolsSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+  };
+
+  const handleHeroSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    if (e.target.value.trim() !== "") {
+      scrollToTools();
+    }
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    scrollToTools();
+  };
+
+  const filteredTools = useMemo(() => {
+    return toolsData.filter(tool => {
+      const matchesSearch = 
+        tool.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        tool.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        tool.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        tool.category.toLowerCase().includes(searchQuery.toLowerCase());
+        
+      const matchesCategory = activeCategory === "All" || tool.category === activeCategory;
+      
+      return matchesSearch && matchesCategory;
+    });
+  }, [searchQuery, activeCategory]);
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-white pt-24 pb-32 sm:pt-32 sm:pb-40">
+      <section className="relative overflow-hidden bg-white pt-12 pb-16 sm:pt-16 sm:pb-20">
         <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
           <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#eff6ff] to-[#bfdbfe] opacity-50 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"></div>
         </div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="mx-auto max-w-4xl font-display text-5xl font-bold tracking-tight text-slate-900 sm:text-7xl">
+          <h1 className="mx-auto max-w-4xl font-display text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl">
             Powerful AI tools for your <span className="relative whitespace-nowrap text-blue-600">everyday tasks</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700">
+          <p className="mx-auto mt-4 max-w-2xl text-lg tracking-tight text-slate-700">
             Boost your productivity with ToolWala AI. From image processing to PDF manipulation, get everything done in one place, instantly.
           </p>
           
-          {/* Search Bar */}
-          <div className="mx-auto mt-10 max-w-2xl flex items-center justify-center">
+          {/* Hero Search Bar */}
+          <form onSubmit={handleSearchSubmit} className="mx-auto mt-8 max-w-2xl flex items-center justify-center">
             <div className="relative w-full max-w-xl">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
                 <svg className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" />
                 </svg>
               </div>
               <input
                 type="text"
-                className="block w-full rounded-full border-0 py-4 pl-10 pr-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-lg sm:leading-6"
-                placeholder="Search for tools (e.g., 'Compress image', 'QR code')"
+                value={searchQuery}
+                onChange={handleHeroSearchChange}
+                className="block w-full rounded-full border-0 py-4 pl-12 pr-4 text-gray-900 shadow-lg ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-lg sm:leading-6 transition-all hover:shadow-xl"
+                placeholder="Search tools (e.g., 'PDF', 'Compress image')"
               />
             </div>
-            <button className="ml-4 rounded-full bg-blue-600 px-8 py-4 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors">
+            <button type="submit" className="ml-3 sm:ml-4 rounded-full bg-blue-600 px-6 sm:px-8 py-4 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors">
               Search
             </button>
-          </div>
+          </form>
           
-          <div className="mt-10 flex justify-center gap-x-6">
-            <Link href="/tools" className="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600 flex items-center transition-colors">
-              Browse all tools <span aria-hidden="true" className="ml-1">→</span>
-            </Link>
+          <div className="mt-8 flex justify-center gap-x-6">
+            <button onClick={scrollToTools} className="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600 flex items-center transition-colors">
+              Browse all tools <span aria-hidden="true" className="ml-1">↓</span>
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Popular Tools Section */}
-      <section className="bg-gray-50 py-24 sm:py-32">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionTitle 
-            title="Popular Tools" 
-            subtitle="Explore our most frequently used AI-powered utilities designed to save you time."
-            centered
-          />
-          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-4">
-            {popularTools.map((tool) => (
-              <ToolCard key={tool.href} {...tool} />
-            ))}
+      {/* All Tools Section */}
+      <section ref={toolsSectionRef} id="tools-section" className="bg-gray-50 flex-1 flex flex-col relative pb-20">
+        
+        {/* Sticky Filtering Header */}
+        <div className="sticky top-[64px] z-40 bg-gray-50/95 backdrop-blur-md pt-6 pb-4 border-b border-gray-200/60 shadow-sm w-full">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              {/* Internal Sticky Search */}
+              <div className="relative w-full md:w-80">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                  <svg className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                  </svg>
+                </div>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="block w-full rounded-full border-0 py-2.5 pl-10 pr-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                  placeholder="Refine search..."
+                />
+              </div>
+
+              {/* Category Chips */}
+              <div className="flex flex-wrap items-center gap-2 overflow-x-auto pb-1 md:pb-0 w-full md:w-auto no-scrollbar">
+                {toolCategories.map(category => (
+                  <button
+                    key={category}
+                    onClick={() => setActiveCategory(category)}
+                    className={`whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                      activeCategory === category 
+                        ? 'bg-blue-600 text-white shadow-md' 
+                        : 'bg-white text-gray-600 border border-gray-200 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700'
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Results Count & Status */}
+            <div className="mt-3 text-sm font-medium h-5">
+              {searchQuery && (
+                <span className="text-gray-600 animate-fade-in">
+                  Found <span className="text-blue-600 font-bold">{filteredTools.length}</span> tools for <span className="text-gray-900 font-semibold">"{searchQuery}"</span>
+                  {activeCategory !== "All" && <span> in {activeCategory}</span>}
+                </span>
+              )}
+            </div>
           </div>
+        </div>
+
+        {/* Tools Grid */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+          {filteredTools.length > 0 ? (
+            <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-3 xl:grid-cols-4">
+              {filteredTools.map((tool) => (
+                <ToolCard key={tool.id} {...tool} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20 bg-white rounded-3xl border border-gray-200 border-dashed shadow-sm">
+              <div className="text-5xl mb-4">🔍</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">No tools found</h3>
+              <p className="text-gray-500 max-w-md mx-auto">We couldn't find any tools matching your search criteria. Try using different keywords or categories.</p>
+              <button 
+                onClick={() => { setSearchQuery(""); setActiveCategory("All"); }}
+                className="mt-6 inline-flex items-center justify-center rounded-full bg-blue-50 px-6 py-2.5 text-sm font-semibold text-blue-600 hover:bg-blue-100 transition-colors"
+              >
+                Clear all filters
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

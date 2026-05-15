@@ -8,7 +8,7 @@ import {
   Download, Sparkles, Palette, Briefcase, 
   Search, Filter, Heart, ChevronRight, X,
   Type, Layout, RotateCcw, ArrowLeft,
-  Shield, Hexagon as HexIcon, Star,
+  Shield, ShieldCheck, Hexagon as HexIcon, Star,
   Smartphone, Zap, Rocket, Globe, Box,
   ShoppingBag, Coffee, Settings, ChevronLeft,
   Trash2, Copy, Monitor

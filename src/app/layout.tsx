@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Toaster } from 'sonner';
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,8 +30,24 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans bg-gray-50 text-gray-900">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-KJ7MKF306J"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-KJ7MKF306J');
+          `}
+        </Script>
+      </head>
+      <body className="min-h-full flex flex-col font-sans bg-[#030712] text-white">
         <Toaster position="top-center" richColors />
         <Header />
         <main className="flex-1">{children}</main>

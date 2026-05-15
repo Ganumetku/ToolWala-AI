@@ -26,6 +26,8 @@ export async function POST(req: Request) {
       );
     }
 
+    console.log(`DEBUG: Using SMTP_EMAIL: ${smtpEmail}`);
+
     // 2. Parse and Validate Request Body
     const body = await req.json();
     const { firstName, lastName, email, message, honeypot } = body;
@@ -48,20 +50,15 @@ export async function POST(req: Request) {
     }
 
     // 3. Configure Nodemailer Transporter
-    // For Gmail, we use 'smtp.gmail.com'
-    // User requested Port 587 with secure: true
+    // Port 465 with secure: true is the most reliable for Gmail SMTP
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
-      port: 587,
-      secure: true, // User specific requirement
+      port: 465,
+      secure: true,
       auth: {
         user: smtpEmail,
         pass: smtpPassword,
       },
-      tls: {
-        // This helps with some Gmail connection issues on port 587 if secure: true is used
-        rejectUnauthorized: false
-      }
     });
 
     const fullName = `${firstName} ${lastName}`;

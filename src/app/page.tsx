@@ -300,7 +300,7 @@ export default function Home() {
             >
               <div className="absolute -inset-4 bg-gradient-to-br from-blue-600 to-purple-600 rounded-[3rem] blur-2xl opacity-20 animate-pulse-slow" />
               <div className="relative aspect-square w-full overflow-hidden rounded-[3rem] bg-[#0f172a] shadow-2xl flex items-center justify-center border border-white/10">
-                <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20" />
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
                 <div className="flex flex-col items-center gap-10 text-center px-12 relative z-10">
                   <motion.div 
                     animate={{ rotate: 360 }}

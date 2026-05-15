@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { toolsData, toolCategories, ToolCategory } from '@/data/tools';
 import ToolCard from '@/components/ToolCard';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, X } from 'lucide-react';
 
 interface ToolsDirectoryProps {
   initialSearchQuery?: string;
@@ -48,34 +50,40 @@ export default function ToolsDirectory({
     <div className="w-full" id="tools-directory">
       {/* Search Bar */}
       {!hideSearch && (
-        <div className="mx-auto max-w-2xl flex flex-col sm:flex-row items-center gap-4 mb-8">
-          <div className="relative w-full">
-            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              <svg className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" />
-              </svg>
+        <div className="mx-auto max-w-2xl flex flex-col items-center gap-4 mb-16">
+          <div className="relative w-full group">
+            <div className="absolute inset-y-0 left-6 flex items-center text-gray-500 group-focus-within:text-blue-500 transition-colors">
+              <Search className="h-5 w-5" />
             </div>
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => handleSearchChange(e.target.value)}
-              className="block w-full rounded-full border-0 py-4 pl-10 pr-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-base sm:leading-6 transition-shadow hover:shadow-md"
-              placeholder="Search for tools (e.g., 'Compress image', 'QR code')"
+              className="block w-full rounded-2xl border border-white/5 bg-white/[0.03] py-5 pl-14 pr-12 text-white placeholder:text-gray-600 focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/10 sm:text-lg font-bold outline-none transition-all shadow-2xl backdrop-blur-md"
+              placeholder="Filter by name, tag or category..."
             />
+            {searchQuery && (
+              <button 
+                onClick={() => handleSearchChange("")}
+                className="absolute inset-y-0 right-4 flex items-center px-2 text-gray-500 hover:text-white"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            )}
           </div>
         </div>
       )}
 
       {/* Category Chips */}
-      <div className="flex flex-wrap justify-center gap-2 mb-10">
+      <div className="flex flex-wrap justify-center gap-3 mb-16">
         {toolCategories.map(category => (
           <button
             key={category}
             onClick={() => setActiveCategory(category)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+            className={`px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 transform active:scale-95 ${
               activeCategory === category 
-                ? 'bg-blue-600 text-white shadow-md transform scale-105' 
-                : 'bg-white text-gray-600 border border-gray-200 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700'
+                ? 'bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.3)]' 
+                : 'bg-white/5 text-gray-500 border border-white/10 hover:border-white/20 hover:text-white'
             }`}
           >
             {category}
@@ -85,31 +93,51 @@ export default function ToolsDirectory({
 
       {/* Results Header */}
       {searchQuery && (
-        <div className="mb-8 text-center animate-fade-in">
-          <p className="text-gray-600 text-lg">
-            Showing results for <span className="font-semibold text-gray-900">"{searchQuery}"</span>
-            {activeCategory !== "All" && <span> in <span className="font-semibold text-blue-600">{activeCategory}</span></span>}
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-12 text-center"
+        >
+          <p className="text-gray-500 font-medium">
+            Found <span className="text-white font-black">{filteredTools.length}</span> tools for <span className="text-blue-500 font-black">"{searchQuery}"</span>
+            {activeCategory !== "All" && <span className="text-gray-500 font-medium"> in <span className="text-white font-black">{activeCategory}</span></span>}
           </p>
-        </div>
+        </motion.div>
       )}
 
       {/* Grid */}
       {filteredTools.length > 0 ? (
-        <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-3 xl:grid-cols-4">
-          {filteredTools.map((tool) => (
-            <ToolCard key={tool.id} {...tool} />
-          ))}
-        </div>
+        <motion.div 
+          layout
+          className="grid grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-3 xl:grid-cols-4"
+        >
+          <AnimatePresence>
+            {filteredTools.map((tool) => (
+              <motion.div 
+                key={tool.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+              >
+                <ToolCard {...tool} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       ) : (
-        <div className="text-center py-20 bg-white rounded-3xl border border-gray-200 border-dashed shadow-sm">
-          <div className="text-5xl mb-4">🔍</div>
-          <h3 className="text-xl font-bold text-gray-900 mb-2">No tools found</h3>
-          <p className="text-gray-500 max-w-md mx-auto">We couldn't find any tools matching your search criteria. Try using different keywords or categories.</p>
+        <div className="text-center py-32 glass rounded-[3rem] border border-white/5 border-dashed">
+          <div className="bg-white/5 w-24 h-24 rounded-[2rem] flex items-center justify-center mx-auto mb-8 border border-white/5 shadow-inner">
+            <Search className="w-12 h-12 text-gray-700" />
+          </div>
+          <h3 className="text-3xl font-black text-white mb-3 tracking-tighter">No tools found</h3>
+          <p className="text-gray-500 max-w-sm mx-auto font-medium">Try broadening your search or exploring a different category.</p>
           <button 
             onClick={() => { handleSearchChange(""); setActiveCategory("All"); }}
-            className="mt-6 inline-flex items-center justify-center rounded-full bg-blue-50 px-6 py-2.5 text-sm font-semibold text-blue-600 hover:bg-blue-100 transition-colors"
+            className="mt-10 px-8 py-4 rounded-2xl bg-blue-600 text-white font-black uppercase tracking-widest text-sm hover:bg-blue-500 transition-all active:scale-95 shadow-2xl"
           >
-            Clear all filters
+            Clear Filters
           </button>
         </div>
       )}

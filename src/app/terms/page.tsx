@@ -1,60 +1,75 @@
 import SectionTitle from '@/components/SectionTitle';
+import { FileText, Scale, AlertCircle, RefreshCcw } from 'lucide-react';
 
 export const metadata = {
   title: "Terms of Service | ToolWala AI",
-  description: "Terms and conditions for using ToolWala AI services.",
+  description: "Terms and conditions for using ToolWala AI professional services.",
 };
 
 export default function TermsPage() {
   return (
-    <div className="bg-white py-16 sm:py-24">
-      <div className="mx-auto max-w-4xl px-6 lg:px-8">
+    <div className="bg-[#030712] min-h-screen py-24 sm:py-32 relative overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
+      
+      <div className="mx-auto max-w-4xl px-6 lg:px-8 relative z-10">
         <SectionTitle 
           title="Terms of Service" 
-          subtitle="Last updated: May 13, 2026"
+          subtitle="Last updated: May 15, 2026"
+          centered
         />
-        <div className="mt-10 prose prose-blue prose-lg max-w-none text-gray-600">
-          <p>
-            Welcome to ToolWala AI. By accessing or using our website and services, you agree to be bound by the following Terms of Service. Please read them carefully.
-          </p>
+        
+        <div className="mt-20 space-y-12">
+          <div className="glass p-10 rounded-[3rem] border border-white/5">
+            <div className="flex items-center gap-4 mb-8">
+              <FileText className="w-8 h-8 text-blue-500" />
+              <h3 className="text-2xl font-black text-white tracking-tight uppercase">Agreement</h3>
+            </div>
+            <p className="text-gray-400 font-medium leading-relaxed">
+              By accessing ToolWala AI, you agree to these terms. Our mission is to provide powerful AI tools, and in return, we ask for responsible usage that respects our systems and other users.
+            </p>
+          </div>
 
-          <h3 className="text-xl font-bold text-gray-900 mt-8 mb-4">1. Acceptance of Terms</h3>
-          <p>
-            By accessing this website, you are agreeing to be bound by these Terms of Service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
-          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <TermCard 
+              icon={<Scale />}
+              title="Usage License"
+              desc="You are granted a non-exclusive license to use our tools for personal and commercial projects. Redistribution of our engine code is prohibited."
+            />
+            <TermCard 
+              icon={<AlertCircle />}
+              title="Fair Use"
+              desc="Automated scraping or bot-driven usage of our tools is strictly forbidden to ensure fair access for all human users."
+            />
+            <TermCard 
+              icon={<RefreshCcw />}
+              title="Service Changes"
+              desc="We evolve daily. We reserve the right to modify, pause, or discontinue any tool without prior notice during our beta phase."
+            />
+            <TermCard 
+              icon={<FileText />}
+              title="Content Ownership"
+              desc="You retain 100% ownership of any content you generate or process using ToolWala AI. We claim no rights over your outputs."
+            />
+          </div>
 
-          <h3 className="text-xl font-bold text-gray-900 mt-8 mb-4">2. Use License</h3>
-          <p>
-            Permission is granted to temporarily use the tools provided on ToolWala AI's website for personal or commercial use, subject to the following restrictions:
-          </p>
-          <ul className="list-disc pl-6 space-y-2 mt-4 mb-6">
-            <li>You may not use the tools for any illegal or unauthorized purpose.</li>
-            <li>You may not attempt to reverse engineer or extract the source code of the tools provided.</li>
-            <li>You may not use our services to process illegal, copyrighted, or sensitive material for which you do not have authorization.</li>
-            <li>You may not automate usage of our free tools (e.g., via bots or scripts) without explicit permission or an API license.</li>
-          </ul>
-
-          <h3 className="text-xl font-bold text-gray-900 mt-8 mb-4">3. Disclaimer</h3>
-          <p>
-            The materials and tools on ToolWala AI's website are provided on an 'as is' basis. ToolWala AI makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
-          </p>
-
-          <h3 className="text-xl font-bold text-gray-900 mt-8 mb-4">4. Limitations</h3>
-          <p>
-            In no event shall ToolWala AI or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on ToolWala AI's website, even if ToolWala AI or a ToolWala AI authorized representative has been notified orally or in writing of the possibility of such damage.
-          </p>
-
-          <h3 className="text-xl font-bold text-gray-900 mt-8 mb-4">5. Revisions and Errata</h3>
-          <p>
-            The materials appearing on ToolWala AI's website could include technical, typographical, or photographic errors. ToolWala AI does not warrant that any of the materials on its website are accurate, complete or current. ToolWala AI may make changes to the materials contained on its website at any time without notice.
-          </p>
-
-          <h3 className="text-xl font-bold text-gray-900 mt-8 mb-4">6. Modifications</h3>
-          <p>
-            ToolWala AI may revise these terms of service for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service.
-          </p>
+          <div className="glass p-10 rounded-[3rem] border border-white/5 space-y-6 text-gray-400 font-medium">
+             <h4 className="text-white font-black uppercase tracking-widest text-sm">Disclaimers</h4>
+             <p className="text-sm">ToolWala AI provides tools "as-is". While we strive for perfection, we are not liable for any inaccuracies in AI-generated outputs or service interruptions.</p>
+          </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function TermCard({ icon, title, desc }: { icon: any; title: string; desc: string }) {
+  return (
+    <div className="glass p-8 rounded-[2.5rem] border border-white/5 space-y-4">
+      <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-blue-500 border border-white/10">
+        {icon}
+      </div>
+      <h4 className="text-lg font-black text-white uppercase tracking-tight">{title}</h4>
+      <p className="text-sm text-gray-500 leading-relaxed font-medium">{desc}</p>
     </div>
   );
 }

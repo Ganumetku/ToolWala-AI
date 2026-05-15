@@ -13,6 +13,7 @@
     "@tensorflow-models/face-detection": "^1.0.3",
     "@tensorflow/tfjs": "^4.22.0",
     "browser-image-compression": "^2.0.2",
+    "framer-motion": "^12.38.0",
     "html-to-image": "^1.11.13",
     "html2canvas": "^1.4.1",
     "jspdf": "^4.2.1",
@@ -22,7 +23,8 @@
     "qrcode": "^1.5.4",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "resend": "^6.12.3"
+    "resend": "^6.12.3",
+    "sonner": "^2.0.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

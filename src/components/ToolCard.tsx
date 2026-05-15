@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { ToolCategory } from '@/data/tools';
+import { motion } from 'framer-motion';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
 export interface ToolCardProps {
   title: string;
@@ -12,35 +14,47 @@ export interface ToolCardProps {
 
 export default function ToolCard({ title, description, icon, href, isPopular, category }: ToolCardProps) {
   return (
-    <Link 
-      href={href}
-      className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-gray-200 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-100/50 block w-full h-full"
+    <motion.div
+      whileHover={{ y: -8 }}
+      transition={{ type: "spring", stiffness: 300 }}
     >
-      <div className="absolute top-4 right-4 flex flex-col gap-2 items-end z-10">
-        {isPopular && (
-          <span className="inline-flex items-center rounded-full bg-gradient-to-r from-orange-100 to-amber-100 px-3 py-1 text-xs font-bold text-orange-700 shadow-sm border border-orange-200/50 backdrop-blur-sm">
-            🔥 Popular
-          </span>
-        )}
-        {category && (
-          <span className="inline-flex items-center rounded-full bg-blue-50/80 px-3 py-1 text-xs font-semibold text-blue-700 border border-blue-100/50 backdrop-blur-sm">
-            {category}
-          </span>
-        )}
-      </div>
-      <div className="relative z-0 mt-2">
-        <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 text-3xl shadow-sm border border-blue-100 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-          {icon}
+      <Link 
+        href={href}
+        className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 block w-full h-full glass"
+      >
+        {/* Glow Effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        
+        <div className="absolute top-4 right-4 flex flex-col gap-2 items-end z-10">
+          {isPopular && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-blue-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-blue-400 border border-blue-500/20 backdrop-blur-md">
+              <Sparkles className="w-3 h-3" />
+              Popular
+            </span>
+          )}
+          {category && (
+            <span className="inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-gray-400 border border-white/10 backdrop-blur-md">
+              {category}
+            </span>
+          )}
         </div>
-        <h3 className="mb-3 text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors pr-16">{title}</h3>
-        <p className="text-sm text-gray-500 leading-relaxed line-clamp-3">{description}</p>
-      </div>
-      <div className="mt-8 flex items-center text-sm font-semibold text-blue-600 bg-blue-50/0 group-hover:bg-blue-50/50 p-2 -ml-2 rounded-lg transition-colors w-max">
-        Try now 
-        <svg xmlns="http://www.w3.org/2000/svg" className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </div>
-    </Link>
+
+        <div className="relative z-10 mt-2">
+          <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-4xl shadow-2xl border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+            {icon}
+          </div>
+          <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">{title}</h3>
+          <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">{description}</p>
+        </div>
+
+        <div className="relative z-10 mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-500 transition-all group-hover:gap-4">
+          Try Tool
+          <ArrowRight className="w-4 h-4" />
+        </div>
+
+        {/* Decorative corner accent */}
+        <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-br from-transparent to-blue-600/5 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+      </Link>
+    </motion.div>
   );
 }

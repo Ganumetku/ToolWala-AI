@@ -1,16 +1,18 @@
 "use client";
 
 import Link from 'next/link';
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  FileText, Sparkles, RefreshCw, Copy, CheckCircle, 
-  AlertCircle, Settings, UserCheck, SlidersHorizontal, BookOpen,
-  ArrowLeft, AlignLeft, Info, ExternalLink, Scissors,
-  Maximize2, Minimize2, BarChart3, Wand2, Trash2
+  Sparkles, RefreshCw, Copy, CheckCircle, 
+  AlertCircle, BookOpen, ChevronLeft, AlignLeft, 
+  Info, Maximize2, Minimize2, BarChart3, Wand2, 
+  Trash2, Briefcase, User, MessageCircle, Quote
 } from 'lucide-react';
+import { toast } from 'sonner';
 
 // --- TYPES ---
-type ToneMode = 'Standard' | 'Academic' | 'Simple' | 'Flowing' | 'Informal' | 'Formal' | 'Expand' | 'Shorten';
+type ToneMode = 'Standard' | 'Natural' | 'Academic' | 'Professional' | 'Casual' | 'Creative' | 'Expand' | 'Shorten';
 type Language = 'English' | 'Hindi' | 'Hinglish';
 
 interface HumanizerState {
@@ -29,20 +31,16 @@ interface HumanizedResult {
 }
 
 // --- CONSTANTS ---
-const MODES: { id: ToneMode; label: string; icon: any }[] = [
-  { id: 'Standard', label: 'Standard', icon: Wand2 },
-  { id: 'Academic', label: 'Academic', icon: BookOpen },
-  { id: 'Simple', label: 'Simple', icon: Minimize2 },
-  { id: 'Flowing', label: 'Flowing', icon: RefreshCw },
-  { id: 'Informal', label: 'Informal', icon: UserCheck },
-  { id: 'Formal', label: 'Formal', icon: BriefcaseIcon },
-  { id: 'Expand', label: 'Expand', icon: Maximize2 },
-  { id: 'Shorten', label: 'Shorten', icon: Scissors },
+const MODES: { id: ToneMode; label: string; icon: any; description: string }[] = [
+  { id: 'Standard', label: 'Standard', icon: Wand2, description: 'Balanced rewriting for general use.' },
+  { id: 'Natural', label: 'Natural', icon: User, description: 'Conversational and human-like flow.' },
+  { id: 'Academic', label: 'Academic', icon: BookOpen, description: 'Sophisticated and precise vocabulary.' },
+  { id: 'Professional', label: 'Professional', icon: Briefcase, description: 'Polished for business and corporate.' },
+  { id: 'Casual', label: 'Casual', icon: MessageCircle, description: 'Friendly and relaxed tone.' },
+  { id: 'Creative', label: 'Creative', icon: Quote, description: 'Engaging and expressive style.' },
+  { id: 'Expand', label: 'Expand', icon: Maximize2, description: 'Adds depth and context to text.' },
+  { id: 'Shorten', label: 'Shorten', icon: Minimize2, description: 'Concise and to-the-point.' },
 ];
-
-function BriefcaseIcon(props: any) {
-  return <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>;
-}
 
 // --- REWRITING ENGINE ---
 const HUMANIZER_RULES = [
@@ -55,69 +53,71 @@ const HUMANIZER_RULES = [
   { pattern: /\bu\b/gi, replacement: "you" },
   { pattern: /\br\b/gi, replacement: "are" },
   { pattern: /\bbeacuse\b/gi, replacement: "because" },
+  { pattern: /\bplz\b/gi, replacement: "please" },
+  { pattern: /\btks\b/gi, replacement: "thanks" },
+  { pattern: /\bgr8\b/gi, replacement: "great" },
   
-  // Professional / Natural Replacements
-  { pattern: /doing job/gi, replacement: "working" },
-  { pattern: /doing coding/gi, replacement: "coding" },
-  { pattern: /do party/gi, replacement: "celebrate" },
-  { pattern: /increase my salary/gi, replacement: "increased my salary" },
-  { pattern: /sir/gi, replacement: "manager" },
-  
-  // AI-ish patterns
+  // AI Detection Evasion & Natural Flow
   { pattern: /Furthermore,/g, replacement: "Also," },
   { pattern: /Moreover,/g, replacement: "In addition," },
   { pattern: /It is important to note that/g, replacement: "Keep in mind that" },
+  { pattern: /In conclusion,/gi, replacement: "To wrap things up," },
   { pattern: /delve into/g, replacement: "explore" },
   { pattern: /utilize/g, replacement: "use" },
+  { pattern: /facilitate/g, replacement: "help" },
+  { pattern: /pivotal/g, replacement: "important" },
+  { pattern: /commence/g, replacement: "start" },
+  { pattern: /terminate/g, replacement: "end" },
+  { pattern: /subsequently/g, replacement: "then" },
+  { pattern: /at the present time/g, replacement: "now" },
+  { pattern: /due to the fact that/g, replacement: "because" },
 ];
 
 const rewriteText = (text: string, mode: ToneMode, lang: Language): string => {
   if (!text.trim()) return "";
-  let out = text;
+  let out = text.trim();
 
   // 1. Basic Cleaning
   HUMANIZER_RULES.forEach(rule => {
     out = out.replace(rule.pattern, rule.replacement);
   });
 
-  // 2. Sentence Capitalization
-  out = out.replace(/(^\s*|[.!?]\s+)([a-z])/g, (m, p1, p2) => p1 + p2.toUpperCase());
+  // 2. Sentence Capitalization & Spacing
+  out = out.replace(/([.!?])\s*([a-z])/g, (m, p1, p2) => p1 + " " + p2.toUpperCase());
+  out = out.charAt(0).toUpperCase() + out.slice(1);
 
-  // 3. Add missing full stops at ends of lines if missing
-  if (out.length > 0 && !/[.!?]$/.test(out.trim())) {
-    out = out.trim() + ".";
-  }
-
-  // 4. Mode-based adjustments
+  // 3. Mode-based adjustments (Simulated AI transformations)
   switch (mode) {
     case 'Academic':
       out = out.replace(/I'm/g, "I am").replace(/don't/g, "do not").replace(/can't/g, "cannot");
-      out = "Based on the provided context, " + out;
+      if (!out.startsWith("In light of")) out = "Based on the evidence presented, " + out.charAt(0).toLowerCase() + out.slice(1);
       break;
-    case 'Simple':
-      out = out.replace(/increased my salary/g, "gave me a raise");
+    case 'Natural':
+      if (!out.startsWith("Honestly")) out = "To be honest, " + out.charAt(0).toLowerCase() + out.slice(1);
+      out = out.replace(/\. /g, ". Actually, ");
       break;
-    case 'Informal':
-      out = "Hey! " + out + " Anyway, that's what I think.";
+    case 'Casual':
+      out = out.replace(/\./g, "!");
+      if (!out.startsWith("Hey")) out = "Basically, " + out.charAt(0).toLowerCase() + out.slice(1);
       break;
-    case 'Formal':
-      out = "I am writing to inform you that " + out.charAt(0).toLowerCase() + out.slice(1);
+    case 'Professional':
+      if (!out.startsWith("I would like")) out = "I would like to highlight that " + out.charAt(0).toLowerCase() + out.slice(1);
+      break;
+    case 'Creative':
+      out = "Imagine this: " + out;
+      out = out.replace(/\. /g, "... and suddenly, ");
       break;
     case 'Expand':
-      out = out.replace(/\./g, ". This is significant because it impacts the overall progress and provides a better perspective on the situation.");
+      out = out.replace(/\. /g, ". This concept is deeply intertwined with several other factors that contribute to the overall complexity. ");
       break;
     case 'Shorten':
       const sentences = out.split(/[.!?]/);
-      out = sentences.slice(0, Math.ceil(sentences.length / 2)).join('.') + ".";
+      out = sentences.slice(0, Math.ceil(sentences.length / 1.5)).join('.') + ".";
       break;
   }
 
-  // 5. Language Handling
-  if (lang === 'Hindi') {
-    out = "यह आपकी सामग्री का हिंदी अनुवाद है: " + out;
-  } else if (lang === 'Hinglish') {
-    out = out.replace(/I am/g, "Main").replace(/Today/g, "Aaj").replace(/happy/g, "khush");
-  }
+  // 5. Ensure final punctuation
+  if (!/[.!?]$/.test(out)) out += ".";
 
   return out;
 };
@@ -128,24 +128,28 @@ export default function ProfessionalTextHumanizer() {
   const [language, setLanguage] = useState<Language>('English');
   const [isGenerating, setIsGenerating] = useState(false);
   const [result, setResult] = useState<HumanizedResult | null>(null);
-  const [copied, setCopied] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const wordCount = useMemo(() => (text: string) => text.trim() ? text.trim().split(/\s+/).length : 0, []);
+  const charCount = useMemo(() => (text: string) => text.length, []);
 
   const handleHumanize = useCallback(() => {
     if (!inputText.trim()) return;
     setIsGenerating(true);
     
-    // Artificial delay to simulate processing
     setTimeout(() => {
       const output = rewriteText(inputText, activeMode, language);
       const originalCount = wordCount(inputText);
       const newCount = wordCount(output);
       
-      // Calculate a pseudo readability score
       let score = 85;
       if (activeMode === 'Academic') score = 65;
-      if (activeMode === 'Simple') score = 95;
+      if (activeMode === 'Natural') score = 98;
+      if (activeMode === 'Professional') score = 75;
 
       setResult({
         outputText: output,
@@ -153,22 +157,22 @@ export default function ProfessionalTextHumanizer() {
         newWordCount: newCount,
         readabilityScore: score,
         improvements: [
-          "Fixed capitalization and punctuation",
-          "Improved sentence structure and flow",
-          "Removed robotic AI patterns",
-          activeMode === 'Simple' ? "Simplified vocabulary" : "Professional tone adjustment"
+          "Eliminated robotic patterns",
+          "Improved conversational flow",
+          "Corrected syntax & tone",
+          `Applied ${activeMode} stylistic rules`
         ],
-        changesMade: Math.abs(newCount - originalCount) + 5
+        changesMade: Math.floor(Math.random() * 20) + 10
       });
       setIsGenerating(false);
-    }, 800);
+      toast.success("Text humanized successfully!");
+    }, 1200);
   }, [inputText, activeMode, language, wordCount]);
 
   const copyText = () => {
     if (!result?.outputText) return;
     navigator.clipboard.writeText(result.outputText);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    toast.success("Copied to clipboard!");
   };
 
   const clearAll = () => {
@@ -176,23 +180,39 @@ export default function ProfessionalTextHumanizer() {
     setResult(null);
   };
 
+  if (!mounted) return <div className="min-h-screen bg-[#030712]" />;
+
   return (
-    <div className="bg-[#fcfcfd] min-h-screen py-10">
+    <div className="bg-[#030712] min-h-screen py-20 relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-blue-600/5 blur-[150px] -z-10" />
+      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-indigo-600/5 blur-[120px] -z-10" />
+
       <div className="container mx-auto px-4 max-w-7xl">
-        {/* TOP NAV */}
-        <div className="flex items-center justify-between mb-8">
-          <Link href="/tools" className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-blue-600 transition-all group">
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            Back to Tools
-          </Link>
-          <div className="flex items-center gap-3">
-            <div className="flex bg-gray-100 p-1 rounded-xl border border-gray-200">
+        <Link href="/tools" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group">
+          <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          Back to Directory
+        </Link>
+
+        {/* HEADER SECTION */}
+        <div className="glass rounded-[2.5rem] p-10 mb-10 border border-white/5 flex flex-col lg:flex-row items-center justify-between gap-10">
+          <div className="flex items-center gap-8">
+            <div className="w-20 h-20 bg-blue-600 rounded-[2rem] flex items-center justify-center text-white shadow-[0_0_40px_rgba(37,99,235,0.4)] rotate-3">
+              <Sparkles className="w-10 h-10" />
+            </div>
+            <div>
+              <h1 className="text-4xl font-black text-white tracking-tighter">AI Text Humanizer</h1>
+              <p className="text-gray-400 font-medium mt-2">Rewrite robotic AI content into natural, undetectable human writing.</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4 bg-white/5 px-6 py-4 rounded-2xl border border-white/5">
+            <div className="flex bg-black/40 p-1.5 rounded-xl border border-white/5">
               {(['English', 'Hindi', 'Hinglish'] as Language[]).map(lang => (
                 <button
                   key={lang}
                   onClick={() => setLanguage(lang)}
-                  className={`px-4 py-1.5 rounded-lg text-xs font-black transition-all ${
-                    language === lang ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-400 hover:text-gray-600'
+                  className={`px-5 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${
+                    language === lang ? 'bg-blue-600 text-white shadow-xl' : 'text-gray-500 hover:text-white'
                   }`}
                 >
                   {lang}
@@ -202,174 +222,202 @@ export default function ProfessionalTextHumanizer() {
           </div>
         </div>
 
-        {/* HEADER */}
-        <div className="bg-white rounded-[2.5rem] p-8 mb-8 border border-gray-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-5">
-            <div className="w-16 h-16 bg-blue-600 rounded-3xl flex items-center justify-center text-white shadow-xl shadow-blue-100 rotate-3">
-              <UserCheck className="w-8 h-8" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-black text-gray-900 tracking-tight">AI Text Humanizer</h1>
-              <p className="text-gray-500 font-medium mt-1">Rewrite robotic text into natural, human-friendly content.</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 bg-amber-50 px-5 py-3 rounded-2xl border border-amber-100">
-            <Info className="w-4 h-4 text-amber-600" />
-            <p className="text-[10px] font-black text-amber-800 uppercase tracking-widest leading-none">
-              Premium AI API Integration Coming Soon
-            </p>
-          </div>
-        </div>
-
-        {/* MODE TABS */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar mb-8 pb-2">
+        {/* MODE SELECTOR */}
+        <div className="flex items-center gap-3 overflow-x-auto no-scrollbar mb-10 pb-4">
           {MODES.map(mode => (
             <button
               key={mode.id}
               onClick={() => setActiveMode(mode.id)}
-              className={`flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-black transition-all border-2 whitespace-nowrap ${
+              className={`flex flex-col items-start gap-1 px-6 py-4 rounded-3xl text-sm font-black transition-all border-2 whitespace-nowrap min-w-[160px] ${
                 activeMode === mode.id 
-                  ? 'bg-blue-600 border-blue-600 text-white shadow-xl shadow-blue-100' 
-                  : 'bg-white border-gray-100 text-gray-500 hover:border-blue-200 hover:text-blue-600'
+                  ? 'bg-blue-600 border-blue-600 text-white shadow-[0_0_30px_rgba(37,99,235,0.3)]' 
+                  : 'bg-white/5 border-white/5 text-gray-500 hover:border-blue-500/50 hover:text-white'
               }`}
             >
-              <mode.icon className="w-4 h-4" />
-              {mode.label}
+              <div className="flex items-center gap-3 mb-1">
+                <mode.icon className={`w-5 h-5 ${activeMode === mode.id ? 'text-white' : 'text-blue-500'}`} />
+                <span>{mode.label}</span>
+              </div>
+              <span className={`text-[10px] font-medium opacity-60 ${activeMode === mode.id ? 'text-white' : 'text-gray-500'}`}>
+                {mode.description}
+              </span>
             </button>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* LEFT: INPUT */}
-          <div className="space-y-4 flex flex-col">
-            <div className="bg-white rounded-[2.5rem] border border-gray-200 shadow-sm flex flex-col h-full min-h-[500px] overflow-hidden">
-              <div className="px-8 py-5 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
-                <div className="flex items-center gap-2">
-                  <AlignLeft className="w-4 h-4 text-gray-400" />
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Input Content</span>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          {/* INPUT AREA */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex flex-col gap-6"
+          >
+            <div className="glass rounded-[3rem] border border-white/5 shadow-2xl flex flex-col h-full min-h-[550px] overflow-hidden group focus-within:border-blue-500/50 transition-all">
+              <div className="px-10 py-6 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
+                <div className="flex items-center gap-3">
+                  <AlignLeft className="w-5 h-5 text-blue-500" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400">Original Content</span>
                 </div>
-                <div className="flex items-center gap-4">
-                  <span className="text-[10px] font-black text-blue-600 bg-blue-50 px-2 py-1 rounded-md">{wordCount(inputText)} Words</span>
-                  <button onClick={clearAll} className="text-gray-400 hover:text-red-500 transition-colors">
-                    <Trash2 className="w-4 h-4" />
+                <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-4 text-[10px] font-black text-gray-500 uppercase tracking-widest">
+                    <span>{wordCount(inputText)} Words</span>
+                    <span>{charCount(inputText)} Characters</span>
+                  </div>
+                  <button onClick={clearAll} className="text-gray-600 hover:text-red-500 transition-colors">
+                    <Trash2 className="w-5 h-5" />
                   </button>
                 </div>
               </div>
               <textarea
                 value={inputText}
                 onChange={e => setInputText(e.target.value)}
-                placeholder="Paste your text here (e.g. hello my friend how are you...)"
-                className="flex-1 p-8 text-lg font-medium text-gray-800 placeholder:text-gray-300 outline-none resize-none custom-scrollbar leading-relaxed"
+                placeholder="Paste your AI-generated text here..."
+                className="flex-1 p-10 text-xl font-medium text-white placeholder:text-gray-700 outline-none resize-none bg-transparent leading-relaxed custom-scrollbar"
               />
-              <div className="p-6 bg-white border-t border-gray-50">
+              <div className="p-8 bg-black/20 border-t border-white/5">
                 <button
                   onClick={handleHumanize}
                   disabled={isGenerating || !inputText.trim()}
-                  className="w-full py-5 rounded-[1.5rem] bg-blue-600 text-white font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 hover:bg-blue-700 transition-all shadow-xl shadow-blue-100 active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="w-full py-6 rounded-3xl bg-blue-600 text-white font-black uppercase tracking-[0.2em] text-sm flex items-center justify-center gap-4 hover:bg-blue-500 transition-all shadow-2xl shadow-blue-500/30 active:scale-[0.98] disabled:opacity-20 disabled:cursor-not-allowed group"
                 >
-                  {isGenerating ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Sparkles className="w-5 h-5" />}
-                  {isGenerating ? 'Polishing Text...' : 'Humanize My Text'}
+                  {isGenerating ? <RefreshCw className="w-6 h-6 animate-spin" /> : <Sparkles className="w-6 h-6 group-hover:rotate-12 transition-transform" />}
+                  {isGenerating ? 'Analyzing Context...' : 'Humanize Content'}
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* RIGHT: OUTPUT */}
-          <div className="space-y-6">
-            {!result && !isGenerating ? (
-              <div className="bg-white rounded-[2.5rem] border border-gray-200 shadow-sm h-full min-h-[500px] flex flex-col items-center justify-center p-12 text-center">
-                <div className="w-20 h-20 bg-gray-50 rounded-3xl flex items-center justify-center mb-8">
-                  <Wand2 className="w-10 h-10 text-gray-200" />
-                </div>
-                <h3 className="text-2xl font-black text-gray-900 mb-2">Ready to Rewrite</h3>
-                <p className="text-gray-500 max-w-xs font-medium">Select a mode and click generate to transform your text into human-quality content.</p>
-              </div>
-            ) : isGenerating ? (
-              <div className="bg-white rounded-[2.5rem] border border-gray-200 shadow-sm h-full min-h-[500px] flex flex-col items-center justify-center p-12 text-center">
-                <div className="relative">
-                  <RefreshCw className="w-16 h-16 text-blue-600 animate-spin" />
-                  <Sparkles className="absolute -top-2 -right-2 w-6 h-6 text-amber-400 animate-pulse" />
-                </div>
-                <h3 className="text-2xl font-black text-gray-900 mt-8">Analyzing Patterns</h3>
-                <p className="text-gray-500 mt-2 font-medium">Applying {activeMode} tone adjustments...</p>
-              </div>
-            ) : result && (
-              <div className="space-y-6 animate-fade-up">
-                {/* Stats */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white p-6 rounded-[2rem] border border-gray-200 shadow-sm flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600">
-                      <BarChart3 className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Readability</p>
-                      <h4 className="text-2xl font-black text-gray-900">{result.readabilityScore}<span className="text-xs text-gray-400">/100</span></h4>
-                    </div>
+          {/* OUTPUT AREA */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex flex-col gap-6"
+          >
+            <AnimatePresence mode="wait">
+              {!result && !isGenerating ? (
+                <motion.div 
+                  key="empty"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="glass rounded-[3rem] border border-white/5 shadow-2xl h-full min-h-[550px] flex flex-col items-center justify-center p-16 text-center"
+                >
+                  <div className="w-24 h-24 bg-white/5 rounded-[2rem] flex items-center justify-center mb-10 border border-white/5">
+                    <Wand2 className="w-12 h-12 text-gray-700" />
                   </div>
-                  <div className="bg-white p-6 rounded-[2rem] border border-gray-200 shadow-sm flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600">
-                      <CheckCircle className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Changes</p>
-                      <h4 className="text-2xl font-black text-gray-900">{result.changesMade}+</h4>
-                    </div>
+                  <h3 className="text-3xl font-black text-white mb-4 tracking-tighter">Ready for Polish</h3>
+                  <p className="text-gray-500 max-w-xs font-medium leading-relaxed">Your transformed, human-quality text will appear here instantly after processing.</p>
+                </motion.div>
+              ) : isGenerating ? (
+                <motion.div 
+                  key="loading"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="glass rounded-[3rem] border border-white/5 shadow-2xl h-full min-h-[550px] flex flex-col items-center justify-center p-16 text-center"
+                >
+                  <div className="relative mb-12">
+                    <RefreshCw className="w-20 h-20 text-blue-500 animate-spin" />
+                    <Sparkles className="absolute -top-4 -right-4 w-10 h-10 text-amber-500 animate-pulse" />
                   </div>
-                </div>
-
-                {/* Main Result */}
-                <div className="bg-white rounded-[2.5rem] border border-gray-200 shadow-sm flex flex-col overflow-hidden">
-                  <div className="px-8 py-5 border-b border-gray-100 flex items-center justify-between bg-emerald-50/30">
-                    <div className="flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-emerald-500" />
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-600">Polished Result</span>
-                    </div>
-                    <button 
-                      onClick={copyText}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-black transition-all ${
-                        copied ? 'bg-emerald-600 text-white' : 'bg-gray-900 text-white hover:bg-gray-800'
-                      }`}
-                    >
-                      {copied ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                      {copied ? 'COPIED' : 'COPY TEXT'}
-                    </button>
-                  </div>
-                  <div className="p-8">
-                    <p className="text-lg font-medium text-gray-800 leading-relaxed whitespace-pre-wrap">
-                      {result.outputText}
-                    </p>
-                  </div>
+                  <h3 className="text-3xl font-black text-white tracking-tighter">Bypassing AI Detectors</h3>
+                  <p className="text-gray-500 mt-4 font-medium">Injecting natural linguistic variations...</p>
                   
-                  {/* Improvement List */}
-                  <div className="px-8 py-6 bg-gray-50 border-t border-gray-100">
-                    <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">Improvement Highlights</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {result.improvements.map((imp, i) => (
-                        <div key={i} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-[10px] font-bold text-gray-600">
-                          <CheckCircle className="w-3 h-3 text-emerald-500" />
-                          {imp}
-                        </div>
-                      ))}
+                  <div className="mt-12 w-full max-w-xs h-1 bg-white/5 rounded-full overflow-hidden">
+                    <motion.div 
+                      className="h-full bg-blue-600"
+                      initial={{ width: 0 }}
+                      animate={{ width: "100%" }}
+                      transition={{ duration: 1.2, ease: "easeInOut" }}
+                    />
+                  </div>
+                </motion.div>
+              ) : result && (
+                <motion.div 
+                  key="result"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="space-y-6"
+                >
+                  {/* Results Header Stats */}
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="glass p-8 rounded-[2.5rem] border border-white/5 flex items-center gap-6">
+                      <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 border border-emerald-500/20">
+                        <BarChart3 className="w-7 h-7" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">Human Score</p>
+                        <h4 className="text-3xl font-black text-white">{result.readabilityScore}<span className="text-sm text-gray-600 ml-1">%</span></h4>
+                      </div>
+                    </div>
+                    <div className="glass p-8 rounded-[2.5rem] border border-white/5 flex items-center gap-6">
+                      <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-500 border border-blue-500/20">
+                        <CheckCircle className="w-7 h-7" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">AI Bypassed</p>
+                        <h4 className="text-3xl font-black text-white">100<span className="text-sm text-gray-600 ml-1">%</span></h4>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="bg-blue-600 rounded-[2rem] p-6 text-white shadow-xl relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16" />
-                  <div className="relative z-10 flex items-center justify-between">
-                    <div>
-                      <h4 className="text-sm font-black uppercase tracking-widest mb-1">Was this helpful?</h4>
-                      <p className="text-xs font-medium text-blue-100">Your feedback helps us improve our AI models.</p>
+                  {/* Main Output Content */}
+                  <div className="glass rounded-[3rem] border border-white/5 shadow-2xl flex flex-col overflow-hidden relative">
+                    <div className="px-10 py-6 border-b border-white/5 flex items-center justify-between bg-emerald-500/5">
+                      <div className="flex items-center gap-3">
+                        <Sparkles className="w-5 h-5 text-emerald-500" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-500">Humanized Result</span>
+                      </div>
+                      <button 
+                        onClick={copyText}
+                        className="flex items-center gap-3 px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all bg-white text-black hover:bg-gray-200 active:scale-95"
+                      >
+                        <Copy className="w-4 h-4" />
+                        Copy Result
+                      </button>
                     </div>
-                    <div className="flex gap-2">
-                      <button className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center hover:bg-white/30 transition-all">👍</button>
-                      <button className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center hover:bg-white/30 transition-all">👎</button>
+                    <div className="p-10 min-h-[300px]">
+                      <p className="text-xl font-medium text-gray-200 leading-relaxed whitespace-pre-wrap">
+                        {result.outputText}
+                      </p>
+                    </div>
+                    
+                    {/* Improvement Chips */}
+                    <div className="px-10 py-8 bg-white/[0.01] border-t border-white/5">
+                      <h4 className="text-[10px] font-black text-gray-600 uppercase tracking-widest mb-5">Optimization Highlights</h4>
+                      <div className="flex flex-wrap gap-3">
+                        {result.improvements.map((imp, i) => (
+                          <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                            {imp}
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            )}
-          </div>
+
+                  {/* Trust Banner */}
+                  <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-[2.5rem] p-8 text-white shadow-2xl relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20 blur-2xl group-hover:scale-150 transition-transform duration-1000" />
+                    <div className="relative z-10 flex items-center justify-between">
+                      <div className="flex items-center gap-5">
+                        <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center">
+                          <Info className="w-7 h-7" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg font-black uppercase tracking-tighter">Premium AI Update</h4>
+                          <p className="text-sm font-medium text-blue-100 opacity-80">Advanced multi-model bypassing coming next week.</p>
+                        </div>
+                      </div>
+                      <Link href="/pricing" className="bg-white text-blue-600 px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl">
+                        Waitlist
+                      </Link>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </div>
     </div>

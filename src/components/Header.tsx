@@ -42,7 +42,7 @@ export default function Header() {
               T
             </div>
             <span className="text-2xl font-black tracking-tighter text-white">
-              ToolWala <span className="text-blue-500">AI</span>
+              ToolGPT <span className="text-blue-500">AI</span>
             </span>
           </Link>
         </div>

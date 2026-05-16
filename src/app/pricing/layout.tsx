@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Pricing & Plans | ToolWala AI",
-  description: "ToolWala AI is currently in free beta. Access all AI tools for free during our early access period.",
+  title: "Pricing & Plans | ToolGPT AI",
+  description: "ToolGPT AI is currently in free beta. Access all AI tools for free during our early access period.",
 };
 
 export default function PricingLayout({

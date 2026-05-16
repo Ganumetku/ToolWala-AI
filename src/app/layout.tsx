@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ToolWala AI - Free AI Tools for Images, PDF, Resume, Voice & More",
+  title: "ToolGPT AI - Free AI Tools for Images, PDF, Resume, Voice & More",
   description: "Free online AI tools for image compression, passport photos, QR codes, invoices, resumes, captions, text humanizer, voice generator and PDF tools.",
 };
 

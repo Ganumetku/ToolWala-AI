@@ -20,7 +20,7 @@ export default function Footer() {
                 T
               </div>
               <span className="text-2xl font-black tracking-tighter text-white">
-                ToolWala <span className="text-blue-500">AI</span>
+                ToolGPT <span className="text-blue-500">AI</span>
               </span>
             </Link>
             <p className="text-gray-400 leading-relaxed font-medium">
@@ -82,7 +82,7 @@ export default function Footer() {
               <li><Link href="/" className="text-gray-400 hover:text-white font-bold transition-colors">Home</Link></li>
               <li><Link href="/tools" className="text-gray-400 hover:text-white font-bold transition-colors">All Tools</Link></li>
               <li><Link href="/pricing" className="text-gray-400 hover:text-white font-bold transition-colors">Pricing</Link></li>
-              <li><Link href="/about" className="text-gray-400 hover:text-white font-bold transition-colors">About ToolWala</Link></li>
+              <li><Link href="/about" className="text-gray-400 hover:text-white font-bold transition-colors">About ToolGPT</Link></li>
               <li><Link href="/contact" className="text-gray-400 hover:text-white font-bold transition-colors">Contact Us</Link></li>
             </ul>
           </div>
@@ -91,11 +91,11 @@ export default function Footer() {
           <div className="space-y-10">
             <div>
               <h3 className="text-xs font-black text-white uppercase tracking-[0.2em] mb-6">Contact Support</h3>
-              <a href="mailto:support@toolwala.ai" className="flex items-center gap-4 text-gray-300 hover:text-blue-400 font-black transition-all group">
+              <a href="mailto:support@toolgpt.in" className="flex items-center gap-4 text-gray-300 hover:text-blue-400 font-black transition-all group">
                 <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-blue-600/10 group-hover:border-blue-600/20 transition-all">
                   <Mail className="w-5 h-5" />
                 </div>
-                support@toolwala.ai
+                support@toolgpt.in
               </a>
             </div>
             
@@ -114,7 +114,7 @@ export default function Footer() {
         <div className="mt-24 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
           <div className="space-y-2">
             <p className="text-sm text-gray-500 font-bold">
-              &copy; {currentYear} ToolWala AI. All rights reserved.
+              &copy; {currentYear} ToolGPT AI. All rights reserved.
             </p>
             <div className="flex justify-center md:justify-start gap-6 text-xs font-bold text-gray-600">
               <Link href="/privacy-policy" className="hover:text-gray-400 transition-colors">Privacy Policy</Link>

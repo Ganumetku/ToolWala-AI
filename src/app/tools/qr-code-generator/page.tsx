@@ -313,7 +313,7 @@ export default function ProfessionalQRCodeGenerator() {
                       value={inputText}
                       onChange={(e) => setInputText(e.target.value)}
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-600 outline-none text-gray-900 font-medium transition-all"
-                      placeholder="e.g. www.toolwala.ai"
+                      placeholder="e.g. www.toolgpt.in"
                     />
                   </div>
                 )}

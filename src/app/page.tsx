@@ -118,7 +118,7 @@ export default function Home() {
                   value={searchQuery}
                   onChange={handleHeroSearchChange}
                   className="block w-full border-0 bg-transparent py-5 pl-4 pr-4 text-white placeholder:text-gray-500 focus:ring-0 text-lg md:text-xl font-bold"
-                  placeholder="Ask ToolWala: 'remove image background'..."
+                  placeholder="Ask ToolGPT: 'remove image background'..."
                 />
                 <button type="submit" className="hidden md:flex items-center gap-2 rounded-[1.4rem] bg-blue-600 px-8 py-4 text-sm font-black text-white shadow-xl hover:bg-blue-500 active:scale-95 transition-all">
                   Search Tools
@@ -263,7 +263,7 @@ export default function Home() {
             >
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-6">
                 <Sparkles className="w-3.5 h-3.5 fill-blue-400" />
-                The ToolWala Edge
+                The ToolGPT Edge
               </div>
               <h2 className="text-4xl md:text-6xl font-black text-white leading-[1.1] tracking-tighter mb-8">
                 Professional tools, <br /> 

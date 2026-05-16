@@ -122,7 +122,7 @@ export default function ProfessionalLogoMaker() {
   };
 
   const useSample = () => {
-    setBusinessName('ToolWala');
+    setBusinessName('ToolGPT');
     setKeywords('AI Tech');
     setErrorMessage('');
   };
@@ -130,7 +130,7 @@ export default function ProfessionalLogoMaker() {
   const getInitials = (name: string) => {
     const parts = name.trim().split(' ');
     if (parts.length > 1) return (parts[0][0] + parts[1][0]).toUpperCase();
-    return name.trim().slice(0, 2).toUpperCase() || 'TW';
+    return name.trim().slice(0, 2).toUpperCase() || 'TG';
   };
 
   const toggleFavorite = (id: number) => {

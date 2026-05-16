@@ -2,8 +2,8 @@ import SectionTitle from '@/components/SectionTitle';
 import { FileText, Scale, AlertCircle, RefreshCcw } from 'lucide-react';
 
 export const metadata = {
-  title: "Terms of Service | ToolWala AI",
-  description: "Terms and conditions for using ToolWala AI professional services.",
+  title: "Terms of Service | ToolGPT AI",
+  description: "Terms and conditions for using ToolGPT AI professional services.",
 };
 
 export default function TermsPage() {
@@ -25,7 +25,7 @@ export default function TermsPage() {
               <h3 className="text-2xl font-black text-white tracking-tight uppercase">Agreement</h3>
             </div>
             <p className="text-gray-400 font-medium leading-relaxed">
-              By accessing ToolWala AI, you agree to these terms. Our mission is to provide powerful AI tools, and in return, we ask for responsible usage that respects our systems and other users.
+              By accessing ToolGPT AI, you agree to these terms. Our mission is to provide powerful AI tools, and in return, we ask for responsible usage that respects our systems and other users.
             </p>
           </div>
 
@@ -48,13 +48,13 @@ export default function TermsPage() {
             <TermCard 
               icon={<FileText />}
               title="Content Ownership"
-              desc="You retain 100% ownership of any content you generate or process using ToolWala AI. We claim no rights over your outputs."
+              desc="You retain 100% ownership of any content you generate or process using ToolGPT AI. We claim no rights over your outputs."
             />
           </div>
 
           <div className="glass p-10 rounded-[3rem] border border-white/5 space-y-6 text-gray-400 font-medium">
              <h4 className="text-white font-black uppercase tracking-widest text-sm">Disclaimers</h4>
-             <p className="text-sm">ToolWala AI provides tools "as-is". While we strive for perfection, we are not liable for any inaccuracies in AI-generated outputs or service interruptions.</p>
+             <p className="text-sm">ToolGPT AI provides tools "as-is". While we strive for perfection, we are not liable for any inaccuracies in AI-generated outputs or service interruptions.</p>
           </div>
         </div>
       </div>

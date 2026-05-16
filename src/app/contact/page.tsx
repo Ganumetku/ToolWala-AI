@@ -3,8 +3,8 @@ import ContactForm from './ContactForm';
 import { MeshGradient } from '@/components/BackgroundEffects';
 
 export const metadata = {
-  title: "Contact Support | ToolWala AI",
-  description: "Get in touch with the ToolWala AI team for support, feedback, or business inquiries.",
+  title: "Contact Support | ToolGPT AI",
+  description: "Get in touch with the ToolGPT AI team for support, feedback, or business inquiries.",
 };
 
 export default function ContactPage() {

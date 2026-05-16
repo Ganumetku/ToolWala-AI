@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
+import { motion, AnimatePresence } from 'framer-motion';
 
 type VoicePreset = {
   id: string;

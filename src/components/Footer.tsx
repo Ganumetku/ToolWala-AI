@@ -84,6 +84,7 @@ export default function Footer() {
               <li><Link href="/pricing" className="text-gray-400 hover:text-white font-bold transition-colors">Pricing</Link></li>
               <li><Link href="/about" className="text-gray-400 hover:text-white font-bold transition-colors">About ToolGPT</Link></li>
               <li><Link href="/contact" className="text-gray-400 hover:text-white font-bold transition-colors">Contact Us</Link></li>
+              <li><Link href="/disclaimer" className="text-gray-400 hover:text-white font-bold transition-colors">Disclaimer</Link></li>
             </ul>
           </div>
           
@@ -116,9 +117,11 @@ export default function Footer() {
             <p className="text-sm text-gray-500 font-bold">
               &copy; {currentYear} ToolGPT AI. All rights reserved.
             </p>
-            <div className="flex justify-center md:justify-start gap-6 text-xs font-bold text-gray-600">
+            <div className="flex flex-wrap justify-center md:justify-start gap-6 text-xs font-bold text-gray-600">
               <Link href="/privacy-policy" className="hover:text-gray-400 transition-colors">Privacy Policy</Link>
               <Link href="/terms" className="hover:text-gray-400 transition-colors">Terms of Service</Link>
+              <Link href="/disclaimer" className="hover:text-gray-400 transition-colors">Disclaimer</Link>
+              <Link href="/contact" className="hover:text-gray-400 transition-colors">Contact</Link>
             </div>
           </div>
           

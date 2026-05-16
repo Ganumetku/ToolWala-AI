@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { useState } from 'react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import { 
-  FileText, Download, Sparkles, RefreshCw, Copy, CheckCircle, 
+import {
+  FileText, Download, Sparkles, RefreshCw, Copy, CheckCircle,
   AlertCircle, Building, User, Settings, AlignLeft, ChevronLeft
 } from 'lucide-react';
 import ToolArticle from '@/components/ToolArticle';
@@ -57,16 +57,16 @@ export default function CoverLetterGenerator() {
 
   function createMockLetter(d: CoverLetterData) {
     const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-    
+
     let opening = `I am writing to express my strong interest in the ${d.jobTitle} position at ${d.companyName}. `;
     if (d.tone === 'Friendly') opening = `I was incredibly excited to see the opening for the ${d.jobTitle} role at ${d.companyName}. `;
     if (d.tone === 'Confident') opening = `With my proven track record, I am the ideal candidate for the ${d.jobTitle} position at ${d.companyName}. `;
-    
+
     let body = `As a professional with ${d.experience} of experience, I have developed a strong skill set in ${d.skills || 'my field'}, allowing me to deliver high-quality results. `;
     if (d.experience === 'Fresher') body = `As a recent graduate, I am eager to bring my strong foundational skills in ${d.skills || 'my field'} to your dynamic team. `;
-    
+
     let why = d.whyCompany ? `I am particularly drawn to ${d.companyName} because ${d.whyCompany}. ` : `I have been following ${d.companyName}'s recent growth and am highly motivated by your mission. `;
-    
+
     let closing = `I would welcome the opportunity to discuss how my background aligns with your needs. Thank you for your time and consideration.`;
     if (d.tone === 'Short') {
       body = `I bring ${d.experience} of experience specializing in ${d.skills}. `;
@@ -81,10 +81,10 @@ export default function CoverLetterGenerator() {
     if (!data.name.trim()) { setError("Full name is required."); return; }
     if (!data.jobTitle.trim()) { setError("Job title is required."); return; }
     if (!data.companyName.trim()) { setError("Company name is required."); return; }
-    
+
     setError(null);
     setIsGenerating(true);
-    
+
     // Simulate AI generation delay
     setTimeout(() => {
       setGeneratedLetter(createMockLetter(data));
@@ -114,25 +114,25 @@ export default function CoverLetterGenerator() {
     try {
       const element = document.getElementById('letter-preview-container');
       if (!element) return;
-      
+
       const originalWidth = element.style.width;
       const originalMinWidth = element.style.minWidth;
       const originalMaxWidth = element.style.maxWidth;
       element.style.width = '794px';
       element.style.minWidth = '794px';
       element.style.maxWidth = '794px';
-      
+
       const canvas = await html2canvas(element, { scale: 2, useCORS: true, logging: false, windowWidth: 794 });
-      
+
       element.style.width = originalWidth;
       element.style.minWidth = originalMinWidth;
       element.style.maxWidth = originalMaxWidth;
-      
+
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-      
+
       pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
       pdf.save(`${data.name.replace(/\s+/g, '_')}_Cover_Letter.pdf`);
     } catch (err) {
@@ -153,7 +153,7 @@ export default function CoverLetterGenerator() {
           <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Back to Directory
         </Link>
-        
+
         {/* HEADER */}
         <div className="glass rounded-[2rem] p-6 sm:p-8 mb-8 border border-white/5">
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
@@ -172,7 +172,7 @@ export default function CoverLetterGenerator() {
               </button>
             </div>
           </div>
-          
+
           {error && (
             <div className="mt-6 bg-red-500/10 text-red-400 p-4 rounded-xl flex items-start gap-3 border border-red-500/20 animate-fade-in">
               <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
@@ -180,12 +180,12 @@ export default function CoverLetterGenerator() {
             </div>
           )}
         </div>
-        
+
         <div className="flex flex-col xl:flex-row gap-8 relative">
-          
+
           {/* LEFT: FORM AREA */}
           <div className="w-full xl:w-[45%] lg:h-[calc(100vh-200px)] overflow-y-auto custom-scrollbar pr-0 lg:pr-4 space-y-6 pb-20">
-            
+
             {/* Applicant Details */}
             <section className="glass p-6 rounded-2xl border border-white/5">
               <div className="flex items-center gap-2 mb-6 pb-4 border-b border-white/5">
@@ -227,13 +227,13 @@ export default function CoverLetterGenerator() {
                 </div>
                 <div>
                   <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Job Description (Optional)</label>
-                  <textarea 
+                  <textarea
                     name="jobDescription"
-                    rows={4} 
-                    value={data.jobDescription} 
-                    onChange={handleChange} 
-                    className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none text-sm text-white resize-none custom-scrollbar" 
-                    placeholder="Paste the job description for a highly targeted letter..." 
+                    rows={4}
+                    value={data.jobDescription}
+                    onChange={handleChange}
+                    className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none text-sm text-white resize-none custom-scrollbar"
+                    placeholder="Paste the job description for a highly targeted letter..."
                   />
                 </div>
               </div>
@@ -272,18 +272,18 @@ export default function CoverLetterGenerator() {
                 </div>
                 <div>
                   <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Why this company?</label>
-                  <textarea 
+                  <textarea
                     name="whyCompany"
-                    rows={2} 
-                    value={data.whyCompany} 
-                    onChange={handleChange} 
-                    className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none text-sm text-white resize-none custom-scrollbar" 
-                    placeholder="E.g. I love your company culture and recent product launches..." 
+                    rows={2}
+                    value={data.whyCompany}
+                    onChange={handleChange}
+                    className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none text-sm text-white resize-none custom-scrollbar"
+                    placeholder="E.g. I love your company culture and recent product launches..."
                   />
                 </div>
               </div>
 
-              <button 
+              <button
                 onClick={generateLetter}
                 disabled={isGenerating}
                 className="w-full mt-8 flex items-center justify-center gap-3 px-6 py-4 text-sm font-black uppercase tracking-widest text-white bg-blue-600 rounded-xl hover:bg-blue-500 transition-all disabled:opacity-50 shadow-[0_0_20px_rgba(37,99,235,0.3)] active:scale-95"
@@ -298,14 +298,14 @@ export default function CoverLetterGenerator() {
           {/* RIGHT: PREVIEW AREA */}
           <div className="w-full xl:w-[55%] flex flex-col">
             <div className="sticky top-6 flex flex-col gap-4">
-              
+
               <div className="flex justify-between items-center glass p-4 rounded-2xl border border-white/5">
                 <div className="flex items-center gap-3 text-white">
                   <AlignLeft className="w-5 h-5 text-blue-500" />
                   <h2 className="text-sm font-black uppercase tracking-widest">Live Preview</h2>
                 </div>
                 <div className="flex gap-2">
-                  <button 
+                  <button
                     onClick={copyToClipboard}
                     disabled={!generatedLetter || isGenerating}
                     className="flex items-center gap-2 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all disabled:opacity-50"
@@ -313,7 +313,7 @@ export default function CoverLetterGenerator() {
                     {copied ? <CheckCircle className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
                     {copied ? 'Copied!' : 'Copy'}
                   </button>
-                  <button 
+                  <button
                     onClick={downloadPDF}
                     disabled={!generatedLetter || isGenerating || isDownloading}
                     className="hidden sm:flex items-center gap-2 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-white bg-blue-600 rounded-xl hover:bg-blue-500 transition-all disabled:opacity-50 shadow-[0_0_15px_rgba(37,99,235,0.2)]"
@@ -323,10 +323,10 @@ export default function CoverLetterGenerator() {
                   </button>
                 </div>
               </div>
-              
+
               {/* Live Preview Document Wrapper */}
               <div className="w-full overflow-x-auto max-w-full bg-[#0f172a] p-4 sm:p-10 rounded-[2.5rem] border border-white/5 shadow-2xl relative custom-scrollbar">
-                
+
                 {isGenerating && (
                   <div className="absolute inset-0 z-10 bg-[#030712]/60 backdrop-blur-sm flex items-center justify-center rounded-[2.5rem]">
                     <div className="glass p-8 rounded-3xl shadow-2xl flex flex-col items-center gap-4 border border-white/10">
@@ -337,14 +337,14 @@ export default function CoverLetterGenerator() {
                 )}
 
                 {/* A4 Container */}
-                <div 
-                  id="letter-preview-container" 
+                <div
+                  id="letter-preview-container"
                   className="bg-white mx-auto relative shadow-2xl"
-                  style={{ 
-                    width: '100%', 
-                    maxWidth: '794px', 
-                    minWidth: 'min(794px, 100%)', 
-                    minHeight: '1123px', 
+                  style={{
+                    width: '100%',
+                    maxWidth: '794px',
+                    minWidth: 'min(794px, 100%)',
+                    minHeight: '1123px',
                     padding: 'clamp(40px, 8vw, 80px)',
                     fontFamily: '"Times New Roman", Times, serif',
                     color: '#000000'
@@ -360,10 +360,10 @@ export default function CoverLetterGenerator() {
                   </div>
                 </div>
               </div>
-              
+
               {/* Mobile Download Button */}
               <div className="sm:hidden">
-                <button 
+                <button
                   onClick={downloadPDF}
                   disabled={!generatedLetter || isGenerating || isDownloading}
                   className="w-full flex items-center justify-center gap-3 px-6 py-5 text-sm font-black uppercase tracking-widest text-white bg-blue-600 rounded-2xl hover:bg-blue-500 transition-all disabled:opacity-50 shadow-xl"

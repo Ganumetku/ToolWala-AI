@@ -125,7 +125,7 @@ export const toolsData: Tool[] = [
     title: "AI Background Remover",
     description: "Remove image backgrounds automatically in seconds with high precision.",
     icon: "🖼️",
-    href: "/tools/background-remover",
+    href: "/tools/bg-remover",
     category: "Image",
     isPopular: true,
     tags: ["background", "remove", "transparent", "png", "image", "cutout"]

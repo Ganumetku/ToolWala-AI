@@ -24,6 +24,9 @@ import {
   Eye,
   Sparkles
 } from 'lucide-react';
+import ToolArticle from '@/components/ToolArticle';
+import { toolArticles } from '@/data/toolArticles';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // QR Types
 type QRType = 'URL' | 'Text' | 'WiFi' | 'Email' | 'Phone' | 'SMS';
@@ -240,46 +243,50 @@ export default function ProfessionalQRCodeGenerator() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen py-10">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <Link href="/tools" className="text-sm font-medium text-blue-600 hover:text-blue-700 mb-6 inline-flex items-center group">
-          <RotateCcw className="h-4 w-4 mr-1 group-hover:-rotate-45 transition-transform" />
-          Back to all tools
+    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+        <Link href="/tools" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group">
+          <RotateCcw className="h-4 w-4 group-hover:-rotate-45 transition-transform" />
+          Back to Directory
         </Link>
         
         {/* HEADER */}
-        <div className="bg-white rounded-3xl shadow-sm border border-gray-200 p-6 sm:p-8 mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-            <div className="flex items-center gap-5">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-xl shadow-blue-100">
+        <div className="glass rounded-[2.5rem] border border-white/5 p-8 sm:p-10 mb-10 shadow-2xl relative overflow-hidden">
+          <div className="absolute inset-0 bg-blue-600/5 blur-[80px] -z-10" />
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-8">
+            <div className="flex items-center gap-6">
+              <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-blue-600 text-white shadow-[0_0_30px_rgba(37,99,235,0.4)] border border-blue-400/20">
                 <Globe className="w-8 h-8" />
               </div>
               <div>
-                <h1 className="text-3xl font-black text-gray-900 tracking-tight">Professional QR Generator</h1>
-                <p className="text-gray-500 font-medium mt-1">Create, customize, and brand your QR codes instantly.</p>
+                <h1 className="text-3xl font-black text-white tracking-tighter uppercase">Professional QR Generator</h1>
+                <p className="text-gray-400 font-medium mt-1">Create, customize, and brand your QR codes instantly.</p>
               </div>
             </div>
-            <div className="flex gap-3">
-              <button onClick={resetAll} className="flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-gray-600 bg-gray-100 rounded-xl hover:bg-gray-200 transition-all active:scale-95">
-                <RotateCcw className="w-4 h-4" /> Reset
+            <div className="flex gap-4 shrink-0">
+              <button onClick={resetAll} className="px-6 py-3.5 text-[10px] font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/5 rounded-2xl hover:bg-white/10 hover:text-white transition-all active:scale-95">
+                <RotateCcw className="w-4 h-4 mr-2" /> Reset Studio
               </button>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-10">
           
           {/* LEFT: SETTINGS */}
-          <div className="w-full lg:w-[60%] space-y-8">
+          <div className="w-full lg:w-[60%] space-y-10">
             
             {/* TYPE SELECTION */}
-            <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-200">
-              <div className="flex items-center gap-2 mb-6 border-b border-gray-100 pb-4">
-                <Settings className="w-5 h-5 text-blue-600" />
-                <h2 className="text-lg font-bold text-gray-900">1. Select Data Type</h2>
+            <div className="glass p-8 rounded-[2.5rem] border border-white/5 shadow-2xl">
+              <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-6">
+                <Settings className="w-5 h-5 text-blue-500" />
+                <h2 className="text-xl font-black text-white tracking-tight uppercase">1. Select Data Type</h2>
               </div>
               
-              <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
+              <div className="grid grid-cols-3 sm:grid-cols-6 gap-4">
                 {[
                   { id: 'URL', icon: LinkIcon, label: 'URL' },
                   { id: 'Text', icon: Type, label: 'Text' },
@@ -291,94 +298,94 @@ export default function ProfessionalQRCodeGenerator() {
                   <button
                     key={type.id}
                     onClick={() => setActiveTab(type.id as QRType)}
-                    className={`flex flex-col items-center gap-2 p-3 rounded-2xl transition-all border-2 ${
+                    className={`flex flex-col items-center gap-3 p-4 rounded-[1.5rem] transition-all border-2 ${
                       activeTab === type.id 
-                        ? 'bg-blue-50 border-blue-600 text-blue-600 shadow-sm' 
-                        : 'bg-gray-50 border-transparent text-gray-500 hover:bg-white hover:border-gray-200'
+                        ? 'bg-blue-600/10 border-blue-600 text-blue-500 shadow-[0_0_20px_rgba(37,99,235,0.2)]' 
+                        : 'bg-white/5 border-transparent text-gray-500 hover:bg-white/10 hover:border-white/10'
                     }`}
                   >
                     <type.icon className="w-6 h-6" />
-                    <span className="text-[11px] font-black uppercase tracking-wider">{type.label}</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest">{type.label}</span>
                   </button>
                 ))}
               </div>
 
               {/* INPUT FIELDS */}
-              <div className="mt-8 space-y-4">
+              <div className="mt-10 space-y-6">
                 {activeTab === 'URL' && (
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 uppercase tracking-widest mb-2">Website URL</label>
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Website URL</label>
                     <input 
                       type="text" 
                       value={inputText}
                       onChange={(e) => setInputText(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-600 outline-none text-gray-900 font-medium transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700"
                       placeholder="e.g. www.toolgpt.in"
                     />
                   </div>
                 )}
                 
                 {activeTab === 'Text' && (
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 uppercase tracking-widest mb-2">Plain Text Content</label>
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Plain Text Content</label>
                     <textarea 
                       rows={4}
                       value={inputText}
                       onChange={(e) => setInputText(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-600 outline-none text-gray-900 font-medium transition-all resize-none"
+                      className="w-full bg-white/5 border border-white/10 rounded-[2rem] px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700 resize-none custom-scrollbar"
                       placeholder="Enter any text you want to encode..."
                     />
                   </div>
                 )}
 
                 {activeTab === 'WiFi' && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="sm:col-span-2">
-                      <label className="block text-xs font-bold text-gray-700 uppercase tracking-widest mb-2">Network Name (SSID)</label>
-                      <input type="text" value={wifiSsid} onChange={e => setWifiSsid(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-blue-600" placeholder="My Home WiFi" />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="sm:col-span-2 space-y-3">
+                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Network Name (SSID)</label>
+                      <input type="text" value={wifiSsid} onChange={e => setWifiSsid(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700" placeholder="My Home WiFi" />
                     </div>
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 uppercase tracking-widest mb-2">Password</label>
-                      <input type="password" value={wifiPassword} onChange={e => setWifiPassword(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-blue-600" placeholder="••••••••" />
+                    <div className="space-y-3">
+                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Password</label>
+                      <input type="password" value={wifiPassword} onChange={e => setWifiPassword(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700" placeholder="••••••••" />
                     </div>
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 uppercase tracking-widest mb-2">Encryption</label>
-                      <select value={wifiEncryption} onChange={e => setWifiEncryption(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-blue-600 bg-white">
-                        <option value="WPA">WPA/WPA2</option>
-                        <option value="WEP">WEP</option>
-                        <option value="nopass">None</option>
+                    <div className="space-y-3">
+                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Encryption</label>
+                      <select value={wifiEncryption} onChange={e => setWifiEncryption(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all appearance-none cursor-pointer">
+                        <option className="bg-slate-900" value="WPA">WPA/WPA2</option>
+                        <option className="bg-slate-900" value="WEP">WEP</option>
+                        <option className="bg-slate-900" value="nopass">None</option>
                       </select>
                     </div>
                   </div>
                 )}
 
                 {activeTab === 'Email' && (
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 uppercase tracking-widest mb-2">Email Recipient</label>
-                      <input type="email" value={emailTo} onChange={e => setEmailTo(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-blue-600" placeholder="hello@example.com" />
+                  <div className="space-y-6">
+                    <div className="space-y-3">
+                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Email Recipient</label>
+                      <input type="email" value={emailTo} onChange={e => setEmailTo(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700" placeholder="hello@example.com" />
                     </div>
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 uppercase tracking-widest mb-2">Subject</label>
-                      <input type="text" value={emailSubject} onChange={e => setEmailSubject(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-blue-600" placeholder="Inquiry" />
+                    <div className="space-y-3">
+                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Subject</label>
+                      <input type="text" value={emailSubject} onChange={e => setEmailSubject(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700" placeholder="Inquiry" />
                     </div>
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 uppercase tracking-widest mb-2">Message Body</label>
-                      <textarea rows={3} value={emailBody} onChange={e => setEmailBody(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-blue-600 resize-none" placeholder="Type your email content..." />
+                    <div className="space-y-3">
+                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Message Body</label>
+                      <textarea rows={3} value={emailBody} onChange={e => setEmailBody(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-[2rem] px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700 resize-none custom-scrollbar" placeholder="Type your email content..." />
                     </div>
                   </div>
                 )}
 
                 {(activeTab === 'Phone' || activeTab === 'SMS') && (
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 uppercase tracking-widest mb-2">Phone Number</label>
-                      <input type="text" value={phone} onChange={e => setPhone(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-blue-600" placeholder="+1 (555) 000-0000" />
+                  <div className="space-y-6">
+                    <div className="space-y-3">
+                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Phone Number</label>
+                      <input type="text" value={phone} onChange={e => setPhone(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700" placeholder="+1 (555) 000-0000" />
                     </div>
                     {activeTab === 'SMS' && (
-                      <div>
-                        <label className="block text-xs font-bold text-gray-700 uppercase tracking-widest mb-2">SMS Message</label>
-                        <textarea rows={3} value={smsMessage} onChange={e => setSmsMessage(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-blue-600 resize-none" placeholder="Type your text message..." />
+                      <div className="space-y-3">
+                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">SMS Message</label>
+                        <textarea rows={3} value={smsMessage} onChange={e => setSmsMessage(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-[2rem] px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700 resize-none custom-scrollbar" placeholder="Type your text message..." />
                       </div>
                     )}
                   </div>
@@ -387,65 +394,68 @@ export default function ProfessionalQRCodeGenerator() {
             </div>
 
             {/* CUSTOMIZATION */}
-            <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-200">
-              <div className="flex items-center gap-2 mb-6 border-b border-gray-100 pb-4">
-                <Palette className="w-5 h-5 text-blue-600" />
-                <h2 className="text-lg font-bold text-gray-900">2. Design & Branding</h2>
+            <div className="glass p-8 rounded-[2.5rem] border border-white/5 shadow-2xl">
+              <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-6">
+                <Palette className="w-5 h-5 text-blue-500" />
+                <h2 className="text-xl font-black text-white tracking-tight uppercase">2. Design & Branding</h2>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 {/* Colors */}
-                <div className="space-y-5">
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-2xl border border-gray-100">
-                    <span className="text-sm font-bold text-gray-700">QR Color</span>
-                    <input type="color" value={fgColor} onChange={e => setFgColor(e.target.value)} className="w-10 h-10 rounded-lg cursor-pointer border-none bg-transparent" />
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between p-5 bg-white/5 rounded-2xl border border-white/10 group hover:border-blue-500/30 transition-all">
+                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">QR Color</span>
+                    <input type="color" value={fgColor} onChange={e => setFgColor(e.target.value)} className="w-12 h-12 rounded-xl cursor-pointer border-2 border-white/10 bg-transparent overflow-hidden" />
                   </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-2xl border border-gray-100">
-                    <span className="text-sm font-bold text-gray-700">Background</span>
-                    <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-10 h-10 rounded-lg cursor-pointer border-none bg-transparent" />
+                  <div className="flex items-center justify-between p-5 bg-white/5 rounded-2xl border border-white/10 group hover:border-blue-500/30 transition-all">
+                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Background</span>
+                    <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-12 h-12 rounded-xl cursor-pointer border-2 border-white/10 bg-transparent overflow-hidden" />
                   </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-2xl border border-gray-100">
-                    <span className="text-sm font-bold text-gray-700">Include Margin</span>
+                  <div className="flex items-center justify-between p-5 bg-white/5 rounded-2xl border border-white/10">
+                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Include Margin</span>
                     <button 
                       onClick={() => setIncludeMargin(!includeMargin)}
-                      className={`w-12 h-6 rounded-full transition-colors relative ${includeMargin ? 'bg-blue-600' : 'bg-gray-300'}`}
+                      className={`w-14 h-7 rounded-full transition-all relative ${includeMargin ? 'bg-blue-600' : 'bg-white/10'}`}
                     >
-                      <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${includeMargin ? 'left-7' : 'left-1'}`} />
+                      <div className={`absolute top-1 w-5 h-5 bg-white rounded-full transition-all shadow-xl ${includeMargin ? 'left-8' : 'left-1'}`} />
                     </button>
                   </div>
                 </div>
 
                 {/* Logo Upload */}
-                <div className="space-y-4">
-                  <label className="block text-xs font-bold text-gray-700 uppercase tracking-widest mb-1">Center Logo</label>
+                <div className="space-y-5">
+                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Center Logo</label>
                   <div className="relative group">
-                    <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-200 rounded-2xl cursor-pointer bg-gray-50 hover:bg-gray-100 hover:border-blue-300 transition-all">
+                    <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-white/10 rounded-[2rem] cursor-pointer bg-white/5 hover:bg-white/[0.08] hover:border-blue-500/50 transition-all group overflow-hidden">
                       {logo ? (
-                        <div className="relative group">
-                          <img src={logo} alt="Logo" className="w-16 h-16 object-contain rounded-lg" />
+                        <div className="relative z-10">
+                          <img src={logo} alt="Logo" className="w-20 h-20 object-contain rounded-xl shadow-2xl" />
                           <button 
                             onClick={(e) => { e.preventDefault(); setLogo(null); }}
-                            className="absolute -top-2 -right-2 bg-red-500 text-white p-1 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="absolute -top-3 -right-3 bg-red-600 text-white p-1.5 rounded-full shadow-2xl transition-all hover:scale-110"
                           >
-                            <XCircle className="w-4 h-4" />
+                            <XCircle className="w-5 h-5" />
                           </button>
                         </div>
                       ) : (
-                        <>
-                          <Upload className="w-8 h-8 text-gray-400 mb-2" />
-                          <span className="text-xs font-bold text-gray-500 uppercase">Upload Logo</span>
-                        </>
+                        <div className="flex flex-col items-center gap-3">
+                          <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-gray-500 group-hover:text-blue-400 transition-colors">
+                            <Upload className="w-6 h-6" />
+                          </div>
+                          <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Upload Branding</span>
+                        </div>
                       )}
                       <input type="file" className="hidden" onChange={handleLogoUpload} accept="image/*" />
+                      <div className="absolute inset-0 bg-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </label>
                   </div>
                   {logo && (
-                    <div className="pt-2">
-                      <div className="flex justify-between text-[10px] font-black text-gray-500 uppercase mb-2">
+                    <div className="pt-4 space-y-4">
+                      <div className="flex justify-between text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">
                         <span>Logo Size</span>
-                        <span>{logoSize}%</span>
+                        <span className="text-blue-500">{logoSize}%</span>
                       </div>
-                      <input type="range" min="10" max="30" value={logoSize} onChange={e => setLogoSize(parseInt(e.target.value))} className="w-full accent-blue-600" />
+                      <input type="range" min="10" max="30" value={logoSize} onChange={e => setLogoSize(parseInt(e.target.value))} className="w-full h-2 bg-white/5 rounded-full appearance-none cursor-pointer accent-blue-600" />
                     </div>
                   )}
                 </div>
@@ -453,30 +463,30 @@ export default function ProfessionalQRCodeGenerator() {
             </div>
 
             {/* FRAMES */}
-            <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-200">
-              <div className="flex items-center gap-2 mb-6 border-b border-gray-100 pb-4">
-                <Layout className="w-5 h-5 text-blue-600" />
-                <h2 className="text-lg font-bold text-gray-900">3. Select Frame Template</h2>
+            <div className="glass p-8 rounded-[2.5rem] border border-white/5 shadow-2xl">
+              <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-6">
+                <Layout className="w-5 h-5 text-blue-500" />
+                <h2 className="text-xl font-black text-white tracking-tight uppercase">3. Select Frame Template</h2>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
                 {FRAMES.map((frame) => (
                   <button
                     key={frame.id}
                     onClick={() => setSelectedFrame(frame.id)}
-                    className={`p-4 rounded-2xl border-2 transition-all flex flex-col items-center gap-3 ${
+                    className={`p-6 rounded-[2rem] border-2 transition-all flex flex-col items-center gap-4 group ${
                       selectedFrame === frame.id 
-                        ? 'border-blue-600 bg-blue-50 text-blue-600 shadow-sm' 
-                        : 'border-gray-100 bg-gray-50 text-gray-500 hover:border-gray-200'
+                        ? 'border-blue-600 bg-blue-600/10 text-blue-500 shadow-[0_0_20px_rgba(37,99,235,0.2)]' 
+                        : 'border-white/5 bg-white/5 text-gray-500 hover:border-white/10 hover:bg-white/[0.08]'
                     }`}
                   >
-                    <div className={`w-12 h-16 border-2 rounded-md relative flex flex-col items-center justify-center ${selectedFrame === frame.id ? 'border-blue-400' : 'border-gray-300'}`}>
-                      <div className="w-8 h-8 bg-gray-200 rounded-sm mb-1" />
+                    <div className={`w-14 h-20 border-2 rounded-lg relative flex flex-col items-center justify-center transition-all ${selectedFrame === frame.id ? 'border-blue-400' : 'border-white/20 group-hover:border-white/40'}`}>
+                      <div className={`w-10 h-10 rounded-sm mb-1 ${selectedFrame === frame.id ? 'bg-blue-600/20' : 'bg-white/10'}`} />
                       {frame.id !== 'None' && (
-                        <div className="absolute bottom-0 w-full h-3 bg-current opacity-20" />
+                        <div className="absolute bottom-0 w-full h-4 bg-current opacity-20" />
                       )}
                     </div>
-                    <span className="text-[10px] font-black uppercase tracking-widest">{frame.label}</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest transition-colors group-hover:text-white">{frame.label}</span>
                   </button>
                 ))}
               </div>
@@ -485,34 +495,40 @@ export default function ProfessionalQRCodeGenerator() {
 
           {/* RIGHT: LIVE PREVIEW */}
           <div className="w-full lg:w-[40%]">
-            <div className="sticky top-24 space-y-6">
-              <div className="bg-white p-8 rounded-[3rem] shadow-xl border border-gray-200 flex flex-col items-center">
-                <div className="flex items-center gap-2 mb-8 bg-blue-50 px-4 py-2 rounded-full">
-                  <Eye className="w-4 h-4 text-blue-600" />
-                  <span className="text-xs font-black text-blue-600 uppercase tracking-widest">Live Preview</span>
+            <div className="sticky top-32 space-y-8">
+              <div className="glass p-10 rounded-[3rem] shadow-[0_0_80px_rgba(37,99,235,0.15)] border border-white/5 flex flex-col items-center relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-10">
+                   <div className="bg-blue-600/10 text-blue-500 text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-xl border border-blue-500/20 flex items-center gap-2 backdrop-blur-md">
+                    <Eye className="w-4 h-4" /> Live
+                  </div>
+                </div>
+
+                <div className="w-full mb-12">
+                  <h3 className="text-2xl font-black text-white tracking-tight uppercase">Studio Preview</h3>
+                  <p className="text-gray-500 font-medium mt-1">Real-time generation engine.</p>
                 </div>
 
                 {/* QR PREVIEW CARD */}
-                <div className="w-full max-w-[320px] h-auto min-h-[320px] relative group bg-gray-100 rounded-2xl p-6 shadow-inner flex items-center justify-center">
-                  <div className="absolute inset-0 bg-grid-pattern opacity-10 rounded-2xl" />
+                <div className="w-full aspect-square relative group bg-black/40 rounded-[2.5rem] p-10 shadow-inner flex items-center justify-center border border-white/5">
+                  <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] rounded-[2.5rem]" />
                   
                   {!getQRContent() ? (
-                    <div className="text-center p-8 space-y-4 relative z-10">
-                      <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mx-auto shadow-sm">
-                        <Smartphone className="w-10 h-10 text-gray-200" />
+                    <div className="text-center p-8 space-y-6 relative z-10 opacity-30">
+                      <div className="w-24 h-24 bg-white/5 rounded-[2rem] flex items-center justify-center mx-auto border border-white/10">
+                        <Smartphone className="w-12 h-12 text-gray-500" />
                       </div>
-                      <p className="text-sm font-bold text-gray-400 uppercase tracking-tight">Enter data to see <br /> live preview</p>
+                      <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em] leading-loose">Enter configuration to <br /> initiate preview</p>
                     </div>
                   ) : (
-                    <div className="relative bg-white p-1 rounded-xl shadow-2xl transition-transform duration-500 hover:scale-[1.02] z-10">
+                    <div className="relative bg-white p-2 rounded-[1.5rem] shadow-[0_0_50px_rgba(255,255,255,0.1)] transition-all duration-700 hover:scale-[1.05] z-10 group-hover:shadow-[0_0_80px_rgba(37,99,235,0.3)]">
                       <canvas 
                         ref={canvasRef} 
-                        className="w-full h-auto rounded-lg shadow-sm block"
+                        className="w-full h-auto rounded-xl block"
                         style={{ maxWidth: '100%', objectFit: 'contain' }}
                       />
                       {isGenerating && (
-                        <div className="absolute inset-0 bg-white/50 backdrop-blur-[1px] flex items-center justify-center rounded-xl">
-                          <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
+                        <div className="absolute inset-0 bg-white/80 backdrop-blur-[2px] flex items-center justify-center rounded-xl">
+                          <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
                         </div>
                       )}
                     </div>
@@ -520,27 +536,27 @@ export default function ProfessionalQRCodeGenerator() {
                 </div>
 
                 {/* DOWNLOAD CONTROLS */}
-                <div className="w-full mt-10 space-y-3">
+                <div className="w-full mt-12 space-y-4">
                   <button 
                     onClick={downloadPNG}
                     disabled={!getQRContent()}
-                    className="w-full flex items-center justify-center gap-3 bg-gray-900 text-white py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl shadow-gray-200 disabled:opacity-30 disabled:cursor-not-allowed active:scale-95 group"
+                    className="w-full flex items-center justify-center gap-4 bg-blue-600 text-white py-6 rounded-3xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-500 transition-all shadow-[0_0_40px_rgba(37,99,235,0.4)] disabled:opacity-20 disabled:grayscale active:scale-95 group"
                   >
-                    <Download className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
-                    Download PNG
+                    <Download className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
+                    Download Master Assets
                   </button>
-                  <p className="text-[10px] text-gray-400 font-bold uppercase text-center">High Resolution 1000x1000 Output</p>
+                  <p className="text-[10px] text-gray-600 font-black uppercase tracking-[0.2em] text-center">Ultra-High Res 1000x1000px Output</p>
                 </div>
               </div>
 
               {/* QUICK TIP */}
-              <div className="bg-blue-600 rounded-[2rem] p-6 text-white shadow-xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8" />
-                <h4 className="text-lg font-black mb-2 flex items-center gap-2">
-                  <Sparkles className="w-5 h-5" /> Pro Tip
+              <div className="bg-gradient-to-br from-blue-600 to-indigo-900 rounded-[3rem] p-10 text-white shadow-2xl relative overflow-hidden group">
+                <div className="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-[60px] pointer-events-none group-hover:scale-150 transition-transform duration-1000" />
+                <h4 className="text-xl font-black mb-3 flex items-center gap-3 uppercase tracking-tight">
+                  <Sparkles className="w-6 h-6 text-amber-400" /> Marketing Tip
                 </h4>
                 <p className="text-sm text-blue-100 font-medium leading-relaxed">
-                  Adding a center logo or a custom frame can increase your QR code scan rate by up to 40%!
+                  Branded QR codes with custom frames increase user engagement by up to 40% compared to standard generic codes.
                 </p>
               </div>
             </div>
@@ -550,6 +566,10 @@ export default function ProfessionalQRCodeGenerator() {
       
       {/* Hidden Download Helpers */}
       <canvas ref={canvasRef} className="hidden" />
+      
+      {/* SEO Article Section */}
+      <ToolArticle {...toolArticles['qr-code-generator']} />
     </div>
   );
+
 }

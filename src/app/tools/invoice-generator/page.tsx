@@ -7,8 +7,10 @@ import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 import { 
   FileText, Download, Plus, Trash2, Upload, 
-  Settings, RefreshCw, LayoutTemplate, Building, User, Receipt
+  Settings, RefreshCw, LayoutTemplate, Building, User, Receipt, ChevronLeft
 } from 'lucide-react';
+import ToolArticle from '@/components/ToolArticle';
+import { toolArticles } from '@/data/toolArticles';
 
 type InvoiceItem = {
   id: string;
@@ -376,31 +378,32 @@ export default function InvoiceGenerator() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen py-12">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <Link href="/tools" className="text-sm font-medium text-blue-600 hover:text-blue-700 mb-6 inline-flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Back to all tools
+    <div className="bg-[#030712] min-h-screen py-12 relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+        <Link href="/tools" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group">
+          <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          Back to Directory
         </Link>
         
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
-              <Receipt className="w-6 h-6" />
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
+          <div className="flex items-center gap-6">
+            <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-blue-600 text-white shadow-[0_0_30px_rgba(37,99,235,0.4)]">
+              <Receipt className="w-8 h-8" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Professional Invoice Generator</h1>
-              <p className="text-sm text-gray-500">Create, customize, and download beautiful PDF invoices instantly.</p>
+              <h1 className="text-3xl font-black text-white tracking-tighter">Professional Invoice Generator</h1>
+              <p className="text-gray-400 font-medium mt-1">Create, customize, and download beautiful PDF invoices instantly.</p>
             </div>
           </div>
           
-          <div className="hidden md:flex gap-3">
-            <button onClick={resetForm} className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+          <div className="hidden md:flex gap-4">
+            <button onClick={resetForm} className="flex items-center gap-2 px-6 py-3 text-[10px] font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all">
               <RefreshCw className="w-4 h-4" /> Reset
             </button>
-            <button onClick={downloadPDF} disabled={isGenerating} className="flex items-center gap-2 px-5 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-70 shadow-sm">
+            <button onClick={downloadPDF} disabled={isGenerating} className="flex items-center gap-2 px-8 py-3 text-[10px] font-black uppercase tracking-widest text-white bg-blue-600 rounded-2xl hover:bg-blue-500 transition-all disabled:opacity-70 shadow-[0_0_20px_rgba(37,99,235,0.3)]">
               {isGenerating ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
               {isGenerating ? 'Generating...' : 'Download PDF'}
             </button>
@@ -411,39 +414,39 @@ export default function InvoiceGenerator() {
           
           <div className="w-full xl:w-[45%] space-y-6">
             
-            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-              <h3 className="text-base font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <LayoutTemplate className="w-5 h-5 text-blue-500" /> Template & Styling
+            <div className="glass p-8 rounded-[2.5rem] border border-white/5">
+              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-blue-400 mb-8 flex items-center gap-3">
+                <LayoutTemplate className="w-4 h-4" /> Template & Styling
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Template Style</label>
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Template Style</label>
                   <select 
                     name="template" 
                     value={data.template} 
                     onChange={handleInputChange}
-                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white"
+                    className="w-full rounded-xl border border-white/10 px-4 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-white/5 text-white"
                   >
-                    {TEMPLATES.map(t => <option key={t} value={t}>{t}</option>)}
+                    {TEMPLATES.map(t => <option key={t} value={t} className="bg-[#0f172a]">{t}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Theme Color</label>
-                  <div className="flex gap-2">
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Theme Color</label>
+                  <div className="flex flex-wrap gap-2">
                     {THEME_COLORS.map(color => (
                       <button
                         key={color}
                         onClick={() => setData(prev => ({ ...prev, themeColor: color }))}
-                        className={`w-8 h-8 rounded-full border-2 transition-all ${data.themeColor === color ? 'border-gray-900 scale-110 shadow-sm' : 'border-transparent hover:scale-105'}`}
+                        className={`w-8 h-8 rounded-full border-2 transition-all ${data.themeColor === color ? 'border-white scale-110 shadow-[0_0_15px_rgba(255,255,255,0.2)]' : 'border-transparent hover:scale-105'}`}
                         style={{ backgroundColor: color }}
                       />
                     ))}
-                    <div className="relative w-8 h-8 rounded-full border border-gray-300 overflow-hidden ml-1">
+                    <div className="relative w-8 h-8 rounded-full border border-white/10 overflow-hidden ml-1">
                       <input 
                         type="color" 
                         value={data.themeColor}
                         onChange={(e) => setData(prev => ({ ...prev, themeColor: e.target.value }))}
-                        className="absolute -top-2 -left-2 w-12 h-12 cursor-pointer"
+                        className="absolute -top-2 -left-2 w-12 h-12 cursor-pointer bg-transparent border-0"
                       />
                     </div>
                   </div>
@@ -451,25 +454,25 @@ export default function InvoiceGenerator() {
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-              <h3 className="text-base font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <Building className="w-5 h-5 text-blue-500" /> Your Business
+            <div className="glass p-8 rounded-[2.5rem] border border-white/5">
+              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-blue-400 mb-8 flex items-center gap-3">
+                <Building className="w-4 h-4" /> Your Business
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Business Name *</label>
-                    <input name="businessName" value={data.businessName} onChange={handleInputChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" placeholder="Acme Corp" />
+                    <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Business Name *</label>
+                    <input name="businessName" value={data.businessName} onChange={handleInputChange} className="w-full rounded-xl border border-white/10 px-4 py-3 bg-white/5 text-white text-sm focus:border-blue-500 outline-none" placeholder="Acme Corp" />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Logo</label>
+                    <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Logo</label>
                     <div className="flex items-center gap-2">
-                      <label className="flex-1 flex items-center justify-center gap-2 bg-gray-50 border border-gray-300 border-dashed rounded-md px-3 py-2 text-sm text-gray-600 cursor-pointer hover:bg-gray-100 transition-colors">
-                        <Upload className="w-4 h-4" /> {data.logoUrl ? 'Change Logo' : 'Upload Logo'}
+                      <label className="flex-1 flex items-center justify-center gap-2 bg-white/5 border border-white/10 border-dashed rounded-xl px-4 py-3 text-xs font-black uppercase tracking-widest text-gray-400 cursor-pointer hover:bg-white/10 transition-colors">
+                        <Upload className="w-4 h-4" /> {data.logoUrl ? 'Change' : 'Upload'}
                         <input type="file" ref={fileInputRef} onChange={handleLogoUpload} accept="image/*" className="hidden" />
                       </label>
                       {data.logoUrl && (
-                        <button onClick={() => { setData(prev => ({...prev, logoUrl: null})); if(fileInputRef.current) fileInputRef.current.value = ''; }} className="p-2 text-red-500 hover:bg-red-50 rounded-md border border-gray-200" title="Remove Logo">
+                        <button onClick={() => { setData(prev => ({...prev, logoUrl: null})); if(fileInputRef.current) fileInputRef.current.value = ''; }} className="p-3 text-red-500 hover:bg-red-500/10 rounded-xl border border-white/10" title="Remove Logo">
                           <Trash2 className="w-4 h-4" />
                         </button>
                       )}
@@ -478,113 +481,113 @@ export default function InvoiceGenerator() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Email</label>
-                    <input name="businessEmail" value={data.businessEmail} onChange={handleInputChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" />
+                    <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Email</label>
+                    <input name="businessEmail" value={data.businessEmail} onChange={handleInputChange} className="w-full rounded-xl border border-white/10 px-4 py-3 bg-white/5 text-white text-sm focus:border-blue-500 outline-none" />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Phone</label>
-                    <input name="businessPhone" value={data.businessPhone} onChange={handleInputChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" />
+                    <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Phone</label>
+                    <input name="businessPhone" value={data.businessPhone} onChange={handleInputChange} className="w-full rounded-xl border border-white/10 px-4 py-3 bg-white/5 text-white text-sm focus:border-blue-500 outline-none" />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1">Address</label>
-                  <textarea name="businessAddress" value={data.businessAddress} onChange={handleInputChange} rows={2} className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Address</label>
+                  <textarea name="businessAddress" value={data.businessAddress} onChange={handleInputChange} rows={2} className="w-full rounded-xl border border-white/10 px-4 py-3 bg-white/5 text-white text-sm focus:border-blue-500 outline-none resize-none" />
                 </div>
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-              <h3 className="text-base font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <User className="w-5 h-5 text-blue-500" /> Client Details
+            <div className="glass p-8 rounded-[2.5rem] border border-white/5">
+              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-blue-400 mb-8 flex items-center gap-3">
+                <User className="w-4 h-4" /> Client Details
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="col-span-full">
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Client Name *</label>
-                    <input name="clientName" value={data.clientName} onChange={handleInputChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" />
+                    <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Client Name *</label>
+                    <input name="clientName" value={data.clientName} onChange={handleInputChange} className="w-full rounded-xl border border-white/10 px-4 py-3 bg-white/5 text-white text-sm focus:border-blue-500 outline-none" />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Email</label>
-                    <input name="clientEmail" value={data.clientEmail} onChange={handleInputChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" />
+                    <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Email</label>
+                    <input name="clientEmail" value={data.clientEmail} onChange={handleInputChange} className="w-full rounded-xl border border-white/10 px-4 py-3 bg-white/5 text-white text-sm focus:border-blue-500 outline-none" />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Phone</label>
-                    <input name="clientPhone" value={data.clientPhone} onChange={handleInputChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" />
+                    <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Phone</label>
+                    <input name="clientPhone" value={data.clientPhone} onChange={handleInputChange} className="w-full rounded-xl border border-white/10 px-4 py-3 bg-white/5 text-white text-sm focus:border-blue-500 outline-none" />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1">Address</label>
-                  <textarea name="clientAddress" value={data.clientAddress} onChange={handleInputChange} rows={2} className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Address</label>
+                  <textarea name="clientAddress" value={data.clientAddress} onChange={handleInputChange} rows={2} className="w-full rounded-xl border border-white/10 px-4 py-3 bg-white/5 text-white text-sm focus:border-blue-500 outline-none resize-none" />
                 </div>
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-              <h3 className="text-base font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <FileText className="w-5 h-5 text-blue-500" /> Invoice Details
+            <div className="glass p-8 rounded-[2.5rem] border border-white/5">
+              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-blue-400 mb-8 flex items-center gap-3">
+                <FileText className="w-4 h-4" /> Invoice Details
               </h3>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1">Invoice Number</label>
-                  <input name="invoiceNumber" value={data.invoiceNumber} onChange={handleInputChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Invoice #</label>
+                  <input name="invoiceNumber" value={data.invoiceNumber} onChange={handleInputChange} className="w-full rounded-xl border border-white/10 px-4 py-3 bg-white/5 text-white text-xs focus:border-blue-500 outline-none" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1">Currency</label>
-                  <select name="currency" value={data.currency} onChange={handleInputChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none bg-white">
-                    {CURRENCIES.map(c => <option key={c.code} value={c.code}>{c.code} ({c.symbol})</option>)}
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Currency</label>
+                  <select name="currency" value={data.currency} onChange={handleInputChange} className="w-full rounded-xl border border-white/10 px-4 py-3 text-xs font-black bg-white/5 text-white outline-none focus:border-blue-500">
+                    {CURRENCIES.map(c => <option key={c.code} value={c.code} className="bg-[#0f172a]">{c.code} ({c.symbol})</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1">Invoice Date</label>
-                  <input type="date" name="invoiceDate" value={data.invoiceDate} onChange={handleInputChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Date</label>
+                  <input type="date" name="invoiceDate" value={data.invoiceDate} onChange={handleInputChange} className="w-full rounded-xl border border-white/10 px-4 py-3 bg-white/5 text-white text-xs focus:border-blue-500 outline-none" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1">Due Date</label>
-                  <input type="date" name="dueDate" value={data.dueDate} onChange={handleInputChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Due Date</label>
+                  <input type="date" name="dueDate" value={data.dueDate} onChange={handleInputChange} className="w-full rounded-xl border border-white/10 px-4 py-3 bg-white/5 text-white text-xs focus:border-blue-500 outline-none" />
                 </div>
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-              <h3 className="text-base font-semibold text-gray-900 mb-4">Line Items *</h3>
-              <div className="space-y-3">
-                <div className="hidden sm:grid sm:grid-cols-12 gap-2 text-xs font-semibold text-gray-500 px-1">
+            <div className="glass p-8 rounded-[2.5rem] border border-white/5">
+              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-blue-400 mb-8">Line Items *</h3>
+              <div className="space-y-4">
+                <div className="hidden sm:grid sm:grid-cols-12 gap-4 text-[10px] font-black text-gray-500 uppercase tracking-widest px-1">
                   <div className="col-span-6">Description</div>
-                  <div className="col-span-2">Quantity</div>
+                  <div className="col-span-2">Qty</div>
                   <div className="col-span-3">Rate</div>
                   <div className="col-span-1"></div>
                 </div>
                 
                 {data.items.map((item, index) => (
-                  <div key={item.id} className="grid grid-cols-1 sm:grid-cols-12 gap-2 p-3 sm:p-0 bg-gray-50 sm:bg-transparent rounded-lg border sm:border-none border-gray-200">
+                  <div key={item.id} className="grid grid-cols-1 sm:grid-cols-12 gap-4 p-4 sm:p-0 bg-white/5 sm:bg-transparent rounded-2xl border sm:border-none border-white/5">
                     <div className="sm:col-span-6">
-                      <span className="sm:hidden text-xs text-gray-500 mb-1 block">Description</span>
+                      <span className="sm:hidden text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 block">Description</span>
                       <input 
                         value={item.description} 
                         onChange={(e) => updateItem(item.id, 'description', e.target.value)}
-                        placeholder="Item name or description"
-                        className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" 
+                        placeholder="Item name"
+                        className="w-full rounded-xl border border-white/10 px-4 py-3 bg-white/5 text-white text-sm focus:border-blue-500 outline-none" 
                       />
                     </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-5 sm:col-span-5 gap-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-5 sm:col-span-5 gap-4">
                       <div className="sm:col-span-2">
-                        <span className="sm:hidden text-xs text-gray-500 mb-1 block">Qty</span>
+                        <span className="sm:hidden text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 block">Qty</span>
                         <input 
                           type="number" min="1" step="any"
                           value={item.quantity} 
                           onChange={(e) => updateItem(item.id, 'quantity', parseFloat(e.target.value) || 0)}
-                          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" 
+                          className="w-full rounded-xl border border-white/10 px-4 py-3 bg-white/5 text-white text-sm focus:border-blue-500 outline-none" 
                         />
                       </div>
                       <div className="sm:col-span-3">
-                        <span className="sm:hidden text-xs text-gray-500 mb-1 block">Rate</span>
+                        <span className="sm:hidden text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 block">Rate</span>
                         <div className="relative">
-                          <span className="absolute left-3 top-2 text-gray-500 text-sm">{currencySymbol}</span>
+                          <span className="absolute left-4 top-3 text-gray-500 text-sm">{currencySymbol}</span>
                           <input 
                             type="number" min="0" step="any"
                             value={item.rate} 
                             onChange={(e) => updateItem(item.id, 'rate', parseFloat(e.target.value) || 0)}
-                            className="w-full rounded-md border border-gray-300 pl-7 pr-3 py-2 text-sm focus:border-blue-500 focus:outline-none" 
+                            className="w-full rounded-xl border border-white/10 pl-8 pr-4 py-3 bg-white/5 text-white text-sm focus:border-blue-500 outline-none" 
                           />
                         </div>
                       </div>
@@ -592,10 +595,9 @@ export default function InvoiceGenerator() {
                     <div className="sm:col-span-1 flex items-end sm:items-center justify-end">
                       <button 
                         onClick={() => removeItem(item.id)} 
-                        className="p-2 text-red-500 hover:bg-red-50 rounded-md transition-colors w-full sm:w-auto flex justify-center border border-red-100 sm:border-none mt-2 sm:mt-0"
+                        className="p-3 text-red-500 hover:bg-red-500/10 rounded-xl transition-all w-full sm:w-auto flex justify-center border border-white/5 sm:border-none"
                       >
-                        <Trash2 className="w-4 h-4" />
-                        <span className="sm:hidden ml-2 text-sm">Remove Item</span>
+                        <Trash2 className="w-5 h-5" />
                       </button>
                     </div>
                   </div>
@@ -603,46 +605,46 @@ export default function InvoiceGenerator() {
               </div>
               <button 
                 onClick={addItem} 
-                className="mt-4 flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 bg-blue-50 px-4 py-2 rounded-lg transition-colors"
+                className="mt-6 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-blue-400 hover:text-blue-300 bg-blue-600/10 px-6 py-3 rounded-xl transition-all"
               >
                 <Plus className="w-4 h-4" /> Add Item
               </button>
             </div>
 
-            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-              <h3 className="text-base font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <Settings className="w-5 h-5 text-blue-500" /> Summary Settings
+            <div className="glass p-8 rounded-[2.5rem] border border-white/5">
+              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-blue-400 mb-8 flex items-center gap-3">
+                <Settings className="w-4 h-4" /> Summary Settings
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1">Tax (%)</label>
-                  <input type="number" min="0" max="100" name="taxPercent" value={data.taxPercent} onChange={handleNumberChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Tax (%)</label>
+                  <input type="number" min="0" max="100" name="taxPercent" value={data.taxPercent} onChange={handleNumberChange} className="w-full rounded-xl border border-white/10 px-4 py-3 bg-white/5 text-white text-sm focus:border-blue-500 outline-none" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1">Discount ({currencySymbol})</label>
-                  <input type="number" min="0" name="discount" value={data.discount} onChange={handleNumberChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Discount ({currencySymbol})</label>
+                  <input type="number" min="0" name="discount" value={data.discount} onChange={handleNumberChange} className="w-full rounded-xl border border-white/10 px-4 py-3 bg-white/5 text-white text-sm focus:border-blue-500 outline-none" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1">Shipping ({currencySymbol})</label>
-                  <input type="number" min="0" name="shipping" value={data.shipping} onChange={handleNumberChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Shipping ({currencySymbol})</label>
+                  <input type="number" min="0" name="shipping" value={data.shipping} onChange={handleNumberChange} className="w-full rounded-xl border border-white/10 px-4 py-3 bg-white/5 text-white text-sm focus:border-blue-500 outline-none" />
                 </div>
               </div>
               
-              <div className="space-y-4 border-t border-gray-100 pt-6">
+              <div className="space-y-6 border-t border-white/5 pt-8">
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1">Notes to Client</label>
-                  <textarea name="notes" value={data.notes} onChange={handleInputChange} rows={2} className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" placeholder="Thank you for your business!" />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Notes to Client</label>
+                  <textarea name="notes" value={data.notes} onChange={handleInputChange} rows={2} className="w-full rounded-xl border border-white/10 px-4 py-4 bg-white/5 text-white text-sm focus:border-blue-500 outline-none resize-none" placeholder="Thank you!" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1">Terms & Conditions</label>
-                  <textarea name="terms" value={data.terms} onChange={handleInputChange} rows={2} className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none" placeholder="Payment due within 14 days." />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Terms & Conditions</label>
+                  <textarea name="terms" value={data.terms} onChange={handleInputChange} rows={2} className="w-full rounded-xl border border-white/10 px-4 py-4 bg-white/5 text-white text-sm focus:border-blue-500 outline-none resize-none" placeholder="Due in 14 days." />
                 </div>
               </div>
             </div>
             
-            <div className="md:hidden flex flex-col gap-3 pt-4">
-              <button onClick={downloadPDF} disabled={isGenerating} className="w-full flex justify-center items-center gap-2 px-5 py-3 text-sm font-semibold text-white bg-blue-600 rounded-lg shadow-sm">
-                {isGenerating ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+            <div className="md:hidden flex flex-col gap-4 pt-4">
+              <button onClick={downloadPDF} disabled={isGenerating} className="w-full flex justify-center items-center gap-3 px-8 py-5 text-sm font-black uppercase tracking-widest text-white bg-blue-600 rounded-2xl shadow-xl">
+                {isGenerating ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
                 Download PDF
               </button>
             </div>
@@ -651,12 +653,23 @@ export default function InvoiceGenerator() {
 
           <div className="w-full xl:w-[55%]">
             <div className="sticky top-6">
-              <div className="hidden xl:flex justify-between items-center mb-4">
-                <h2 className="text-lg font-semibold text-gray-900">Live Preview</h2>
-                <span className="text-xs font-medium bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full border border-blue-100">Updates instantly</span>
+              <div className="hidden xl:flex justify-between items-center mb-6">
+                <div className="flex items-center gap-3">
+                  <LayoutTemplate className="w-5 h-5 text-blue-500" />
+                  <h2 className="text-sm font-black uppercase tracking-[0.2em] text-white">Live Preview</h2>
+                </div>
+                <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 bg-blue-600/10 px-4 py-2 rounded-full border border-blue-500/20 shadow-[0_0_15px_rgba(37,99,235,0.1)]">Updates instantly</span>
               </div>
               
-              <div className="w-full overflow-x-auto max-w-full bg-gray-200/50 p-4 sm:p-6 rounded-2xl border border-gray-200 shadow-inner custom-scrollbar">
+              <div className="w-full overflow-x-auto max-w-full bg-[#0f172a] p-4 sm:p-10 rounded-[3rem] border border-white/5 shadow-2xl relative custom-scrollbar">
+                 {isGenerating && (
+                    <div className="absolute inset-0 z-10 bg-[#030712]/60 backdrop-blur-sm flex items-center justify-center rounded-[3rem]">
+                      <div className="glass p-8 rounded-3xl shadow-2xl flex flex-col items-center gap-4 border border-white/10">
+                        <RefreshCw className="w-10 h-10 text-blue-500 animate-spin" />
+                        <p className="text-xs font-black uppercase tracking-widest text-white">Generating...</p>
+                      </div>
+                    </div>
+                  )}
                 {renderPreview()}
               </div>
             </div>
@@ -664,6 +677,9 @@ export default function InvoiceGenerator() {
           
         </div>
       </div>
+
+      {/* SEO Article Section */}
+      <ToolArticle {...toolArticles['invoice-generator']} />
     </div>
   );
 }

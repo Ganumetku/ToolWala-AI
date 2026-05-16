@@ -10,6 +10,8 @@ import {
   Trash2, Briefcase, User, MessageCircle, Quote
 } from 'lucide-react';
 import { toast } from 'sonner';
+import ToolArticle from '@/components/ToolArticle';
+import { toolArticles } from '@/data/toolArticles';
 
 // --- TYPES ---
 type ToneMode = 'Standard' | 'Natural' | 'Academic' | 'Professional' | 'Casual' | 'Creative' | 'Expand' | 'Shorten';
@@ -183,7 +185,7 @@ export default function ProfessionalTextHumanizer() {
   if (!mounted) return <div className="min-h-screen bg-[#030712]" />;
 
   return (
-    <div className="bg-[#030712] min-h-screen py-20 relative overflow-hidden">
+    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-blue-600/5 blur-[150px] -z-10" />
       <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-indigo-600/5 blur-[120px] -z-10" />
@@ -420,6 +422,9 @@ export default function ProfessionalTextHumanizer() {
           </motion.div>
         </div>
       </div>
+
+      {/* SEO Article Section */}
+      <ToolArticle {...toolArticles['text-humanizer']} />
     </div>
   );
 }

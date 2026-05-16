@@ -6,8 +6,10 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { 
   FileText, Download, Sparkles, RefreshCw, Copy, CheckCircle, 
-  AlertCircle, Building, User, Settings, AlignLeft
+  AlertCircle, Building, User, Settings, AlignLeft, ChevronLeft
 } from 'lucide-react';
+import ToolArticle from '@/components/ToolArticle';
+import { toolArticles } from '@/data/toolArticles';
 
 type CoverLetterData = {
   name: string;
@@ -142,36 +144,37 @@ export default function CoverLetterGenerator() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen py-10">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <Link href="/tools" className="text-sm font-medium text-blue-600 hover:text-blue-700 mb-6 inline-flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Back to all tools
+    <div className="bg-[#030712] min-h-screen py-10 relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+        <Link href="/tools" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group">
+          <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          Back to Directory
         </Link>
         
         {/* HEADER */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8 mb-8">
+        <div className="glass rounded-[2rem] p-6 sm:p-8 mb-8 border border-white/5">
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600 shrink-0">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.3)] shrink-0">
                 <FileText className="w-6 h-6" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">AI Cover Letter Generator</h1>
-                <p className="text-sm text-gray-500 mt-1">Generate highly tailored, professional cover letters in seconds.</p>
+                <h1 className="text-2xl font-black text-white tracking-tighter">AI Cover Letter Generator</h1>
+                <p className="text-sm text-gray-400 font-medium mt-1">Generate highly tailored, professional cover letters in seconds.</p>
               </div>
             </div>
             <div className="flex gap-3 shrink-0">
-              <button onClick={resetForm} className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+              <button onClick={resetForm} className="px-4 py-2 text-xs font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all">
                 Clear All
               </button>
             </div>
           </div>
           
           {error && (
-            <div className="mt-6 bg-red-50 text-red-700 p-4 rounded-xl flex items-start gap-3 border border-red-100 animate-fade-in">
+            <div className="mt-6 bg-red-500/10 text-red-400 p-4 rounded-xl flex items-start gap-3 border border-red-500/20 animate-fade-in">
               <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
               <p className="text-sm font-medium">{error}</p>
             </div>
@@ -184,52 +187,52 @@ export default function CoverLetterGenerator() {
           <div className="w-full xl:w-[45%] lg:h-[calc(100vh-200px)] overflow-y-auto custom-scrollbar pr-0 lg:pr-4 space-y-6 pb-20">
             
             {/* Applicant Details */}
-            <section className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-              <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-100">
-                <User className="w-5 h-5 text-blue-600" />
-                <h2 className="text-lg font-bold text-gray-900">Your Details</h2>
+            <section className="glass p-6 rounded-2xl border border-white/5">
+              <div className="flex items-center gap-2 mb-6 pb-4 border-b border-white/5">
+                <User className="w-5 h-5 text-blue-500" />
+                <h2 className="text-lg font-black text-white uppercase tracking-tight">Your Details</h2>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="col-span-1 sm:col-span-2">
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Full Name *</label>
-                  <input type="text" name="name" value={data.name} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="e.g. Jane Doe" />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Full Name *</label>
+                  <input type="text" name="name" value={data.name} onChange={handleChange} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none text-sm text-white" placeholder="e.g. Jane Doe" />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Email</label>
-                  <input type="email" name="email" value={data.email} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="jane@example.com" />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Email</label>
+                  <input type="email" name="email" value={data.email} onChange={handleChange} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none text-sm text-white" placeholder="jane@example.com" />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Phone</label>
-                  <input type="text" name="phone" value={data.phone} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="+1 234 567 8900" />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Phone</label>
+                  <input type="text" name="phone" value={data.phone} onChange={handleChange} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none text-sm text-white" placeholder="+1 234 567 8900" />
                 </div>
               </div>
             </section>
 
             {/* Target Job */}
-            <section className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-              <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-100">
-                <Building className="w-5 h-5 text-blue-600" />
-                <h2 className="text-lg font-bold text-gray-900">Target Role</h2>
+            <section className="glass p-6 rounded-2xl border border-white/5">
+              <div className="flex items-center gap-2 mb-6 pb-4 border-b border-white/5">
+                <Building className="w-5 h-5 text-blue-500" />
+                <h2 className="text-lg font-black text-white uppercase tracking-tight">Target Role</h2>
               </div>
               <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Job Title *</label>
-                    <input type="text" name="jobTitle" value={data.jobTitle} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="e.g. Frontend Engineer" />
+                    <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Job Title *</label>
+                    <input type="text" name="jobTitle" value={data.jobTitle} onChange={handleChange} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none text-sm text-white" placeholder="e.g. Frontend Engineer" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Company Name *</label>
-                    <input type="text" name="companyName" value={data.companyName} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="e.g. Acme Corp" />
+                    <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Company Name *</label>
+                    <input type="text" name="companyName" value={data.companyName} onChange={handleChange} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none text-sm text-white" placeholder="e.g. Acme Corp" />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Job Description (Optional)</label>
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Job Description (Optional)</label>
                   <textarea 
                     name="jobDescription"
-                    rows={3} 
+                    rows={4} 
                     value={data.jobDescription} 
                     onChange={handleChange} 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900 resize-none custom-scrollbar" 
+                    className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none text-sm text-white resize-none custom-scrollbar" 
                     placeholder="Paste the job description for a highly targeted letter..." 
                   />
                 </div>
@@ -237,44 +240,44 @@ export default function CoverLetterGenerator() {
             </section>
 
             {/* Generation Settings */}
-            <section className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-              <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-100">
-                <Settings className="w-5 h-5 text-blue-600" />
-                <h2 className="text-lg font-bold text-gray-900">Letter Customization</h2>
+            <section className="glass p-6 rounded-2xl border border-white/5">
+              <div className="flex items-center gap-2 mb-6 pb-4 border-b border-white/5">
+                <Settings className="w-5 h-5 text-blue-500" />
+                <h2 className="text-lg font-black text-white uppercase tracking-tight">Customization</h2>
               </div>
               <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Experience Level</label>
-                    <select name="experience" value={data.experience} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm">
-                      <option>Fresher</option>
-                      <option>1-2 years</option>
-                      <option>3-5 years</option>
-                      <option>5+ years</option>
+                    <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Experience Level</label>
+                    <select name="experience" value={data.experience} onChange={handleChange} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none text-sm text-white">
+                      <option className="bg-[#0f172a]">Fresher</option>
+                      <option className="bg-[#0f172a]">1-2 years</option>
+                      <option className="bg-[#0f172a]">3-5 years</option>
+                      <option className="bg-[#0f172a]">5+ years</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Tone</label>
-                    <select name="tone" value={data.tone} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm">
-                      <option>Professional</option>
-                      <option>Friendly</option>
-                      <option>Confident</option>
-                      <option>Short</option>
+                    <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Tone</label>
+                    <select name="tone" value={data.tone} onChange={handleChange} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none text-sm text-white">
+                      <option className="bg-[#0f172a]">Professional</option>
+                      <option className="bg-[#0f172a]">Friendly</option>
+                      <option className="bg-[#0f172a]">Confident</option>
+                      <option className="bg-[#0f172a]">Short</option>
                     </select>
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Key Skills</label>
-                  <input type="text" name="skills" value={data.skills} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="React, Python, Project Management..." />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Key Skills</label>
+                  <input type="text" name="skills" value={data.skills} onChange={handleChange} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none text-sm text-white" placeholder="React, Python, Project Management..." />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Why this company?</label>
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Why this company?</label>
                   <textarea 
                     name="whyCompany"
                     rows={2} 
                     value={data.whyCompany} 
                     onChange={handleChange} 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900 resize-none custom-scrollbar" 
+                    className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none text-sm text-white resize-none custom-scrollbar" 
                     placeholder="E.g. I love your company culture and recent product launches..." 
                   />
                 </div>
@@ -283,10 +286,10 @@ export default function CoverLetterGenerator() {
               <button 
                 onClick={generateLetter}
                 disabled={isGenerating}
-                className="w-full mt-6 flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50 shadow-md"
+                className="w-full mt-8 flex items-center justify-center gap-3 px-6 py-4 text-sm font-black uppercase tracking-widest text-white bg-blue-600 rounded-xl hover:bg-blue-500 transition-all disabled:opacity-50 shadow-[0_0_20px_rgba(37,99,235,0.3)] active:scale-95"
               >
                 {isGenerating ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Sparkles className="w-5 h-5" />}
-                {isGenerating ? 'Drafting Letter...' : 'Generate Cover Letter'}
+                {isGenerating ? 'Drafting Letter...' : 'Generate Letter'}
               </button>
             </section>
 
@@ -296,24 +299,24 @@ export default function CoverLetterGenerator() {
           <div className="w-full xl:w-[55%] flex flex-col">
             <div className="sticky top-6 flex flex-col gap-4">
               
-              <div className="flex justify-between items-center bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-                <div className="flex items-center gap-2 text-gray-800">
+              <div className="flex justify-between items-center glass p-4 rounded-2xl border border-white/5">
+                <div className="flex items-center gap-3 text-white">
                   <AlignLeft className="w-5 h-5 text-blue-500" />
-                  <h2 className="text-base font-bold">Live Preview</h2>
+                  <h2 className="text-sm font-black uppercase tracking-widest">Live Preview</h2>
                 </div>
                 <div className="flex gap-2">
                   <button 
                     onClick={copyToClipboard}
                     disabled={!generatedLetter || isGenerating}
-                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-gray-700 bg-gray-100 border border-gray-200 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-50"
+                    className="flex items-center gap-2 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all disabled:opacity-50"
                   >
                     {copied ? <CheckCircle className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
-                    {copied ? 'Copied!' : 'Copy Text'}
+                    {copied ? 'Copied!' : 'Copy'}
                   </button>
                   <button 
                     onClick={downloadPDF}
                     disabled={!generatedLetter || isGenerating || isDownloading}
-                    className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 shadow-sm"
+                    className="hidden sm:flex items-center gap-2 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-white bg-blue-600 rounded-xl hover:bg-blue-500 transition-all disabled:opacity-50 shadow-[0_0_15px_rgba(37,99,235,0.2)]"
                   >
                     {isDownloading ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Download className="w-3.5 h-3.5" />}
                     PDF
@@ -322,13 +325,13 @@ export default function CoverLetterGenerator() {
               </div>
               
               {/* Live Preview Document Wrapper */}
-              <div className="w-full overflow-x-auto max-w-full bg-gray-200/50 p-4 sm:p-6 rounded-2xl border border-gray-200 shadow-inner custom-scrollbar relative">
+              <div className="w-full overflow-x-auto max-w-full bg-[#0f172a] p-4 sm:p-10 rounded-[2.5rem] border border-white/5 shadow-2xl relative custom-scrollbar">
                 
                 {isGenerating && (
-                  <div className="absolute inset-0 z-10 bg-white/50 backdrop-blur-sm flex items-center justify-center rounded-2xl">
-                    <div className="bg-white p-6 rounded-2xl shadow-xl flex flex-col items-center gap-4">
-                      <RefreshCw className="w-8 h-8 text-blue-600 animate-spin" />
-                      <p className="text-sm font-bold text-gray-800">Crafting your cover letter...</p>
+                  <div className="absolute inset-0 z-10 bg-[#030712]/60 backdrop-blur-sm flex items-center justify-center rounded-[2.5rem]">
+                    <div className="glass p-8 rounded-3xl shadow-2xl flex flex-col items-center gap-4 border border-white/10">
+                      <RefreshCw className="w-10 h-10 text-blue-500 animate-spin" />
+                      <p className="text-xs font-black uppercase tracking-widest text-white">Generating...</p>
                     </div>
                   </div>
                 )}
@@ -336,37 +339,37 @@ export default function CoverLetterGenerator() {
                 {/* A4 Container */}
                 <div 
                   id="letter-preview-container" 
-                  className="bg-white mx-auto relative shadow-sm"
+                  className="bg-white mx-auto relative shadow-2xl"
                   style={{ 
                     width: '100%', 
                     maxWidth: '794px', 
-                    minWidth: 'min(794px, 100%)', // Responsive scaling for mobile
-                    minHeight: '1123px', // Standard A4 height
-                    padding: 'clamp(30px, 6vw, 60px)',
-                    fontFamily: '"Times New Roman", Times, serif', // Classic cover letter font
+                    minWidth: 'min(794px, 100%)', 
+                    minHeight: '1123px', 
+                    padding: 'clamp(40px, 8vw, 80px)',
+                    fontFamily: '"Times New Roman", Times, serif',
                     color: '#000000'
                   }}
                 >
-                  <div className="whitespace-pre-wrap text-[15px] leading-relaxed">
+                  <div className="whitespace-pre-wrap text-[16px] leading-relaxed">
                     {generatedLetter || (
-                      <div className="flex flex-col items-center justify-center h-full text-gray-400 mt-40 gap-4">
-                        <FileText className="w-16 h-16 opacity-20" />
-                        <p>Fill out the form and click Generate</p>
+                      <div className="flex flex-col items-center justify-center h-full text-gray-300 mt-40 gap-6">
+                        <FileText className="w-20 h-20 opacity-10" />
+                        <p className="font-serif italic text-xl">Your professional letter will appear here...</p>
                       </div>
                     )}
                   </div>
                 </div>
               </div>
               
-              {/* Mobile Download Button (Visible only on small screens) */}
+              {/* Mobile Download Button */}
               <div className="sm:hidden">
                 <button 
                   onClick={downloadPDF}
                   disabled={!generatedLetter || isGenerating || isDownloading}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-4 text-sm font-bold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50 shadow-md"
+                  className="w-full flex items-center justify-center gap-3 px-6 py-5 text-sm font-black uppercase tracking-widest text-white bg-blue-600 rounded-2xl hover:bg-blue-500 transition-all disabled:opacity-50 shadow-xl"
                 >
                   {isDownloading ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
-                  {isDownloading ? 'Generating PDF...' : 'Download PDF'}
+                  Download PDF
                 </button>
               </div>
 
@@ -374,6 +377,9 @@ export default function CoverLetterGenerator() {
           </div>
         </div>
       </div>
+
+      {/* SEO Article Section */}
+      <ToolArticle {...toolArticles['cover-letter-generator']} />
     </div>
   );
 }

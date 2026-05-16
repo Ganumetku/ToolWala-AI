@@ -14,6 +14,8 @@ import {
   Trash2, Copy, Monitor
 } from 'lucide-react';
 import { toast } from 'sonner';
+import ToolArticle from '@/components/ToolArticle';
+import { toolArticles } from '@/data/toolArticles';
 
 // --- DATA ---
 const LOGO_STYLES = [
@@ -256,7 +258,7 @@ export default function ProfessionalLogoMaker() {
   if (!mounted) return <div className="min-h-screen bg-[#030712]" />;
 
   return (
-    <div className="bg-[#030712] min-h-screen text-white pb-20">
+    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
       {/* --- TOP NAV --- */}
       <div className="container mx-auto max-w-7xl px-4 pt-10 flex flex-col md:flex-row items-center justify-between gap-10">
         <Link href="/tools" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors group">
@@ -629,6 +631,9 @@ export default function ProfessionalLogoMaker() {
           </div>
         )}
       </AnimatePresence>
+
+      {/* SEO Article Section */}
+      <ToolArticle {...toolArticles['ai-logo-maker']} />
     </div>
   );
 }

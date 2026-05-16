@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { useState, useRef } from 'react';
 import imageCompression from 'browser-image-compression';
+import ToolArticle from '@/components/ToolArticle';
+import { toolArticles } from '@/data/toolArticles';
 
 export default function ImageCompressor() {
   const [originalFile, setOriginalFile] = useState<File | null>(null);
@@ -134,33 +136,38 @@ export default function ImageCompressor() {
   const reductionValue = calculateReduction();
 
   return (
-    <div className="bg-gray-50 min-h-screen py-16">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-        <Link href="/tools" className="text-sm font-medium text-blue-600 hover:text-blue-700 mb-8 inline-flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+        <Link href="/tools" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          Back to all tools
+          Back to Directory
         </Link>
         
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-          <div className="p-8 border-b border-gray-200 bg-white">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-2xl">
-                📉
+        <div className="glass rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl">
+          <div className="p-8 sm:p-10 border-b border-white/5 bg-white/[0.02]">
+            <div className="flex flex-col md:flex-row md:items-center gap-8">
+              <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-blue-600 text-white shadow-[0_0_30px_rgba(37,99,235,0.4)]">
+                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+                </svg>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Image Compressor</h1>
-                <p className="text-sm text-gray-500">Compress images up to 90% without losing visible quality.</p>
+                <h1 className="text-3xl font-black text-white tracking-tighter uppercase">Image Compressor</h1>
+                <p className="text-gray-400 font-medium mt-1">Compress images up to 90% without losing visible quality.</p>
               </div>
             </div>
           </div>
           
-          <div className="p-8 bg-gray-50/50">
+          <div className="p-8 sm:p-10">
             {!originalFile ? (
               <div 
                 onClick={() => fileInputRef.current?.click()}
-                className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:bg-gray-50 hover:border-blue-400 transition-colors cursor-pointer"
+                className="group relative border-2 border-dashed border-white/10 rounded-[2.5rem] p-16 sm:p-24 text-center hover:border-blue-500/50 hover:bg-white/[0.02] transition-all cursor-pointer overflow-hidden"
               >
                 <input 
                   type="file" 
@@ -169,35 +176,41 @@ export default function ImageCompressor() {
                   accept="image/jpeg, image/png, image/webp" 
                   className="hidden" 
                 />
-                <div className="mx-auto h-12 w-12 text-gray-400 mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                  </svg>
-                </div>
-                <h3 className="text-sm font-semibold text-gray-900 mb-1">Upload image to compress</h3>
-                <p className="text-xs text-gray-500">JPG, PNG or WebP up to 20MB</p>
                 
-                <button className="mt-6 rounded-full bg-blue-600 px-6 py-2.5 text-sm font-medium text-white hover:bg-blue-700 transition-colors pointer-events-none">
-                  Select Image
-                </button>
+                {/* Decorative Glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                <div className="relative z-10">
+                  <div className="mx-auto h-20 w-20 text-blue-500 bg-blue-500/10 rounded-[1.5rem] flex items-center justify-center mb-8 shadow-2xl border border-blue-500/20 group-hover:scale-110 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-black text-white mb-3 tracking-tight">Drop image here or click to upload</h3>
+                  <p className="text-gray-500 mb-10 max-w-sm mx-auto font-medium leading-relaxed">Supports JPG, PNG, and WebP up to 20MB. All processing happens safely in your browser.</p>
+                  
+                  <button className="rounded-2xl bg-blue-600 px-10 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-white hover:bg-blue-500 transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)] pointer-events-none">
+                    Select Image
+                  </button>
+                </div>
               </div>
             ) : (
-              <div className="space-y-8">
-                <div className="bg-white p-6 rounded-xl border border-gray-200">
-                  <div className="flex items-center justify-between mb-6">
-                    <h4 className="text-lg font-semibold text-gray-900">Compression Settings</h4>
+              <div className="space-y-10">
+                <div className="glass p-8 rounded-[2rem] border border-white/5">
+                  <div className="flex items-center justify-between mb-10 pb-6 border-b border-white/5">
+                    <h4 className="text-xl font-black text-white tracking-tight">Compression Settings</h4>
                     <button 
                       onClick={resetAll}
-                      className="text-sm font-medium text-red-600 hover:text-red-700 transition-colors"
+                      className="text-[10px] font-black text-red-500 uppercase tracking-widest hover:text-red-400 transition-colors"
                     >
-                      Clear & Upload New
+                      Reset & Upload New
                     </button>
                   </div>
-                  <div className="space-y-4 max-w-md">
-                    <div>
-                      <div className="flex justify-between mb-1">
-                        <label className="text-sm font-medium text-gray-700">Target Quality</label>
-                        <span className="text-sm font-semibold text-blue-600">{compressionQuality}%</span>
+                  <div className="space-y-8 max-w-xl">
+                    <div className="space-y-6">
+                      <div className="flex justify-between items-end">
+                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Target Quality</label>
+                        <span className="text-xl font-black text-blue-500">{compressionQuality}%</span>
                       </div>
                       <input 
                         type="range" 
@@ -205,98 +218,101 @@ export default function ImageCompressor() {
                         max="100" 
                         value={compressionQuality}
                         onChange={(e) => setCompressionQuality(Number(e.target.value))}
-                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600" 
+                        className="w-full h-3 bg-white/5 rounded-full appearance-none cursor-pointer accent-blue-600" 
                       />
-                      <p className="text-xs text-gray-500 mt-2">Lower quality = smaller file size but more visual degradation</p>
+                      <p className="text-xs text-gray-500 font-medium italic">Hint: 70-80% usually offers the best balance of size and visual clarity.</p>
                     </div>
                     <button 
                       onClick={compressImage}
                       disabled={isCompressing}
-                      className="w-full rounded-full bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 transition-colors shadow-sm disabled:opacity-50 flex justify-center items-center"
+                      className="w-full sm:w-auto rounded-2xl bg-blue-600 px-12 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-white hover:bg-blue-500 transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)] disabled:opacity-50 flex justify-center items-center gap-3 active:scale-[0.98]"
                     >
                       {isCompressing ? (
                         <>
-                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                           </svg>
-                          Compressing...
+                          Processing...
                         </>
                       ) : (
-                        'Compress Image'
+                        <>
+                          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
+                          </svg>
+                          Compress Image Now
+                        </>
                       )}
                     </button>
                   </div>
                 </div>
 
                 {warningMessage && (
-                  <div className="p-4 bg-yellow-50 text-yellow-800 text-sm rounded-xl border border-yellow-200 flex items-start">
-                    <svg className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="p-6 bg-amber-500/10 text-amber-500 text-sm font-bold rounded-[1.5rem] border border-amber-500/20 flex items-start gap-4">
+                    <svg className="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                     </svg>
                     <span>{warningMessage}</span>
                   </div>
                 )}
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                   {/* Original Image */}
-                  <div className="bg-white rounded-xl border border-gray-200 overflow-hidden flex flex-col">
-                    <div className="bg-gray-100 p-3 border-b border-gray-200 flex justify-between items-center">
-                      <span className="text-sm font-semibold text-gray-700">Original</span>
-                      <span className="text-xs font-mono bg-gray-200 text-gray-700 px-2 py-1 rounded">
+                  <div className="glass rounded-[2rem] border border-white/5 overflow-hidden flex flex-col shadow-2xl relative group">
+                    <div className="absolute top-4 right-4 z-20">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-white/50 bg-black/60 px-4 py-2 rounded-xl backdrop-blur-md border border-white/10">
                         {formatSize(originalFile.size)}
                       </span>
                     </div>
-                    <div className="p-4 flex-1 flex items-center justify-center bg-gray-50">
+                    <div className="bg-white/5 p-4 border-b border-white/5 flex justify-between items-center">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Original Source</span>
+                    </div>
+                    <div className="p-6 flex-1 flex items-center justify-center bg-[#030712]/50 min-h-[350px]">
                       {originalUrl && (
-                        <img src={originalUrl} alt="Original" className="max-h-[300px] object-contain shadow-sm rounded border border-gray-200" />
+                        <img src={originalUrl} alt="Original" className="max-h-[300px] w-full object-contain shadow-2xl rounded-2xl transition-transform group-hover:scale-105" />
                       )}
                     </div>
                   </div>
 
                   {/* Compressed Image */}
-                  <div className="bg-white rounded-xl border border-gray-200 overflow-hidden flex flex-col relative">
-                    <div className="bg-blue-50 p-3 border-b border-blue-100 flex justify-between items-center">
-                      <span className="text-sm font-semibold text-blue-800">Compressed</span>
-                      {compressedFile && (
-                        <div className="flex items-center gap-2">
-                          {reductionValue > 0 ? (
-                            <span className="text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded">
-                              -{reductionValue.toFixed(1)}%
-                            </span>
-                          ) : (
-                            <span className="text-xs font-bold text-gray-600 bg-gray-100 px-2 py-1 rounded">
-                              No reduction
-                            </span>
-                          )}
-                          <span className="text-xs font-mono bg-blue-200 text-blue-800 px-2 py-1 rounded">
-                            {formatSize(compressedFile.size)}
-                          </span>
-                        </div>
+                  <div className="glass rounded-[2rem] border border-white/5 overflow-hidden flex flex-col shadow-2xl relative group">
+                    <div className="absolute top-4 right-4 z-20 flex gap-3">
+                      {compressedFile && reductionValue > 0 && (
+                        <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400 bg-emerald-500/20 px-4 py-2 rounded-xl backdrop-blur-md border border-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+                          -{reductionValue.toFixed(1)}% Smaller
+                        </span>
                       )}
+                      <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 bg-blue-500/20 px-4 py-2 rounded-xl backdrop-blur-md border border-blue-500/20 shadow-[0_0_20px_rgba(37,99,235,0.2)]">
+                        {compressedFile ? formatSize(compressedFile.size) : 'Ready'}
+                      </span>
                     </div>
-                    <div className="p-4 flex-1 flex items-center justify-center bg-gray-50 relative">
+                    <div className="bg-blue-600/5 p-4 border-b border-white/5 flex justify-between items-center">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-blue-400">AI Result</span>
+                    </div>
+                    <div className="p-6 flex-1 flex items-center justify-center bg-[#030712]/50 min-h-[350px] relative">
                       {compressedUrl ? (
-                        <img src={compressedUrl} alt="Compressed" className="max-h-[300px] object-contain shadow-sm rounded border border-gray-200" />
+                        <img src={compressedUrl} alt="Compressed" className="max-h-[300px] w-full object-contain shadow-2xl rounded-2xl animate-fade-in" />
                       ) : (
-                        <div className="text-center text-gray-400">
-                          <svg className="mx-auto h-12 w-12 text-gray-300 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                          </svg>
-                          <span className="text-sm">Click compress to see preview</span>
+                        <div className="text-center">
+                          <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/10">
+                            <svg className="h-8 w-8 text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                          </div>
+                          <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">Preview will appear here</span>
                         </div>
                       )}
                     </div>
                     {compressedUrl && (
-                      <div className="p-4 border-t border-gray-200 bg-white">
+                      <div className="p-6 border-t border-white/5 bg-white/[0.02]">
                         <button 
                           onClick={downloadImage}
-                          className="w-full flex items-center justify-center rounded-full bg-green-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-green-700 transition-colors"
+                          className="w-full flex items-center justify-center rounded-2xl bg-blue-600 px-6 py-4 text-[10px] font-black uppercase tracking-widest text-white hover:bg-blue-500 transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)] active:scale-[0.98]"
                         >
-                          <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg className="w-4 h-4 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                           </svg>
-                          Download Compressed Image
+                          Download Optimized Image
                         </button>
                       </div>
                     )}
@@ -307,6 +323,10 @@ export default function ImageCompressor() {
           </div>
         </div>
       </div>
+      
+      {/* SEO Article Section */}
+      <ToolArticle {...toolArticles['image-compressor']} />
     </div>
   );
+
 }

@@ -7,6 +7,8 @@ import {
   AlertCircle, Sparkles, SlidersHorizontal, Volume2,
   Clock, Lock, Copy, CheckCircle, Headphones, FileText, RefreshCw
 } from 'lucide-react';
+import ToolArticle from '@/components/ToolArticle';
+import { toolArticles } from '@/data/toolArticles';
 
 type VoicePreset = {
   id: string;
@@ -178,63 +180,68 @@ export default function VoiceGenerator() {
   const formattedDuration = `${Math.floor(estSeconds / 60)}:${(estSeconds % 60).toString().padStart(2, '0')}`;
 
   return (
-    <div className="bg-gray-50 min-h-screen py-10">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <Link href="/tools" className="text-sm font-medium text-blue-600 hover:text-blue-700 mb-6 inline-flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+        <Link href="/tools" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          Back to all tools
+          Back to Directory
         </Link>
         
         {/* HEADER */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8 mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600 shrink-0">
-                <Mic className="w-6 h-6" />
+        <div className="glass rounded-[2.5rem] border border-white/5 p-8 sm:p-10 mb-10 shadow-2xl relative overflow-hidden">
+          <div className="absolute inset-0 bg-blue-600/5 blur-[80px] -z-10" />
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-8">
+            <div className="flex items-center gap-6">
+              <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-blue-600 text-white shadow-[0_0_30px_rgba(37,99,235,0.4)] border border-blue-400/20">
+                <Mic className="w-8 h-8" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">AI Voice Generator</h1>
-                <p className="text-sm text-gray-500 mt-1">Transform text into lifelike speech with premium AI voices.</p>
+                <h1 className="text-3xl font-black text-white tracking-tighter uppercase">AI Voice Generator</h1>
+                <p className="text-gray-400 font-medium mt-1">Transform text into lifelike speech with premium AI voices.</p>
               </div>
             </div>
-            <div className="flex gap-3 shrink-0">
-              <button onClick={resetForm} className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                Reset
+            <div className="flex gap-4 shrink-0">
+              <button onClick={resetForm} className="px-6 py-3.5 text-[10px] font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/5 rounded-2xl hover:bg-white/10 hover:text-white transition-all active:scale-95">
+                Reset Studio
               </button>
             </div>
           </div>
           
           {error && (
-            <div className="mt-6 bg-red-50 text-red-700 p-4 rounded-xl flex items-start gap-3 border border-red-100 animate-fade-in">
-              <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-              <p className="text-sm font-medium">{error}</p>
+            <div className="mt-8 bg-red-500/10 text-red-500 p-5 rounded-2xl flex items-start gap-4 border border-red-500/20 animate-fade-in shadow-2xl">
+              <AlertCircle className="w-6 h-6 flex-shrink-0 mt-0.5" />
+              <p className="text-sm font-bold leading-relaxed">{error}</p>
             </div>
           )}
         </div>
         
-        <div className="flex flex-col xl:flex-row gap-8 relative">
+        <div className="flex flex-col xl:flex-row gap-10 relative">
           
           {/* LEFT: FORM AREA */}
-          <div className="w-full xl:w-[55%] space-y-6">
+          <div className="w-full xl:w-[55%] space-y-8">
             
             {/* Input Script */}
-            <section className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm flex flex-col h-full">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                  <Volume2 className="w-5 h-5 text-blue-600" />
+            <section className="glass p-8 rounded-[2.5rem] border border-white/5 shadow-2xl flex flex-col h-full relative overflow-hidden group">
+              <div className="absolute inset-0 bg-blue-600/5 opacity-0 group-focus-within:opacity-100 transition-opacity" />
+              <div className="flex justify-between items-center mb-6 relative z-10">
+                <h2 className="text-sm font-black text-white flex items-center gap-3 uppercase tracking-widest">
+                  <Volume2 className="w-5 h-5 text-blue-500" />
                   Voice Script
                 </h2>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-5">
                   <button 
                     onClick={copyText}
-                    className="text-xs font-semibold text-gray-500 hover:text-gray-700 transition-colors flex items-center gap-1"
+                    className="text-[10px] font-black text-gray-500 hover:text-blue-500 transition-colors flex items-center gap-2 uppercase tracking-widest"
                   >
-                    {copied ? <CheckCircle className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                    {copied ? <CheckCircle className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
                     {copied ? 'Copied' : 'Copy'}
                   </button>
-                  <span className={`text-xs font-semibold px-2 py-1 rounded-md ${text.length > 3000 ? 'bg-red-100 text-red-700' : 'bg-gray-100 text-gray-600'}`}>
+                  <span className={`text-[10px] font-black px-4 py-2 rounded-xl border ${text.length > 3000 ? 'bg-red-500/10 border-red-500/20 text-red-500' : 'bg-white/5 border-white/5 text-gray-500'}`}>
                     {text.length} / 3000
                   </span>
                 </div>
@@ -243,24 +250,24 @@ export default function VoiceGenerator() {
               <textarea 
                 value={text} 
                 onChange={e => setText(e.target.value)} 
-                className="w-full flex-1 min-h-[200px] px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-[15px] leading-relaxed resize-none custom-scrollbar" 
-                placeholder="Type or paste the script you want the AI to speak...&#10;&#10;e.g. 'Welcome to our latest update! Today we are thrilled to announce some highly requested features...'" 
+                className="w-full flex-1 min-h-[300px] px-6 py-5 bg-white/5 border border-white/5 rounded-[2rem] focus:border-blue-500/50 outline-none text-lg font-medium text-white leading-relaxed resize-none custom-scrollbar transition-all placeholder:text-gray-700 relative z-10 shadow-inner" 
+                placeholder="Type or paste the script you want the AI to speak...&#10;&#10;e.g. 'Welcome to ToolGPT! Today we are thrilled to announce our premium voice synthesis engine...'" 
               />
               
               {/* Voice Presets */}
-              <div className="mt-6">
-                <h3 className="text-xs font-bold text-gray-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                  <Sparkles className="w-4 h-4 text-blue-500" /> Premium Voice Clones
+              <div className="mt-8 relative z-10">
+                <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-5 flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-amber-500" /> Premium Voice Clones
                 </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                   {presets.map(preset => (
                     <button 
                       key={preset.id}
                       onClick={() => handlePresetSelect(preset)}
-                      className={`p-3 rounded-xl border text-left transition-all ${selectedPreset === preset.id ? `ring-2 ring-blue-500 shadow-md ${preset.color}` : 'bg-white border-gray-200 hover:border-blue-300 hover:shadow-sm'}`}
+                      className={`p-5 rounded-[1.5rem] border-2 text-left transition-all group ${selectedPreset === preset.id ? `border-blue-600 bg-blue-600/10 shadow-[0_0_20px_rgba(37,99,235,0.2)]` : 'bg-white/5 border-white/5 hover:border-white/10 hover:bg-white/[0.08]'}`}
                     >
-                      <h4 className="font-bold text-sm text-gray-900">{preset.name}</h4>
-                      <p className="text-[11px] text-gray-500 mt-0.5 font-medium">{preset.desc}</p>
+                      <h4 className="font-black text-sm text-white group-hover:text-blue-400 transition-colors">{preset.name}</h4>
+                      <p className="text-[10px] text-gray-500 mt-1 font-black uppercase tracking-widest">{preset.desc}</p>
                     </button>
                   ))}
                 </div>
@@ -268,72 +275,72 @@ export default function VoiceGenerator() {
             </section>
 
             {/* Voice Settings */}
-            <section className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-              <div className="flex items-center gap-2 mb-6 pb-4 border-b border-gray-100">
-                <Settings className="w-5 h-5 text-blue-600" />
-                <h2 className="text-lg font-bold text-gray-900">Voice Settings</h2>
+            <section className="glass p-8 rounded-[2.5rem] border border-white/5 shadow-2xl">
+              <div className="flex items-center gap-3 mb-10 pb-6 border-b border-white/5">
+                <Settings className="w-5 h-5 text-blue-500" />
+                <h2 className="text-xl font-black text-white tracking-tight uppercase">Config Studio</h2>
               </div>
               
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-6">
-                <div>
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Language</label>
-                  <select value={language} onChange={e => { setLanguage(e.target.value as any); setSelectedPreset(null); }} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white outline-none text-sm font-medium">
-                    <option>English</option>
-                    <option>Hindi</option>
-                    <option>Hinglish</option>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div className="space-y-3">
+                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Language</label>
+                  <select value={language} onChange={e => { setLanguage(e.target.value as any); setSelectedPreset(null); }} className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all appearance-none cursor-pointer">
+                    <option className="bg-slate-900">English</option>
+                    <option className="bg-slate-900">Hindi</option>
+                    <option className="bg-slate-900">Hinglish</option>
                   </select>
                 </div>
-                <div>
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Gender</label>
-                  <select value={gender} onChange={e => { setGender(e.target.value as any); setSelectedPreset(null); }} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white outline-none text-sm font-medium">
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Neutral</option>
+                <div className="space-y-3">
+                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Gender</label>
+                  <select value={gender} onChange={e => { setGender(e.target.value as any); setSelectedPreset(null); }} className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all appearance-none cursor-pointer">
+                    <option className="bg-slate-900">Male</option>
+                    <option className="bg-slate-900">Female</option>
+                    <option className="bg-slate-900">Neutral</option>
                   </select>
                 </div>
-                <div>
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Voice Style</label>
-                  <select value={style} onChange={e => { setStyle(e.target.value); setSelectedPreset(null); }} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white outline-none text-sm font-medium">
-                    <option>Natural</option>
-                    <option>Professional</option>
-                    <option>Storytelling</option>
-                    <option>Energetic</option>
-                    <option>Calm</option>
-                    <option>Romantic</option>
-                    <option>News Reader</option>
-                    <option>YouTube Voice</option>
+                <div className="space-y-3">
+                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Voice Style</label>
+                  <select value={style} onChange={e => { setStyle(e.target.value); setSelectedPreset(null); }} className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all appearance-none cursor-pointer">
+                    <option className="bg-slate-900">Natural</option>
+                    <option className="bg-slate-900">Professional</option>
+                    <option className="bg-slate-900">Storytelling</option>
+                    <option className="bg-slate-900">Energetic</option>
+                    <option className="bg-slate-900">Calm</option>
+                    <option className="bg-slate-900">Romantic</option>
+                    <option className="bg-slate-900">News Reader</option>
+                    <option className="bg-slate-900">YouTube Voice</option>
                   </select>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <label className="flex items-center gap-1.5 text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                      <SlidersHorizontal className="w-3.5 h-3.5" /> Speed
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div className="space-y-5">
+                  <div className="flex justify-between items-center">
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-2">
+                      <SlidersHorizontal className="w-3.5 h-3.5" /> Narrator Speed
                     </label>
-                    <span className="text-xs font-bold text-blue-600">{speed.toFixed(2)}x</span>
+                    <span className="text-xs font-black text-blue-500 bg-blue-500/10 px-3 py-1 rounded-lg border border-blue-500/20">{speed.toFixed(2)}x</span>
                   </div>
-                  <input type="range" min="0.5" max="1.5" step="0.05" value={speed} onChange={e => { setSpeed(parseFloat(e.target.value)); setSelectedPreset(null); }} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600" />
-                  <div className="flex justify-between text-[10px] text-gray-500 mt-1.5 font-medium px-1">
-                    <span>Slow</span>
-                    <span>Normal</span>
-                    <span>Fast</span>
+                  <input type="range" min="0.5" max="1.5" step="0.05" value={speed} onChange={e => { setSpeed(parseFloat(e.target.value)); setSelectedPreset(null); }} className="w-full h-3 bg-white/5 rounded-full appearance-none cursor-pointer accent-blue-600" />
+                  <div className="flex justify-between text-[10px] text-gray-600 font-black uppercase tracking-tighter px-1">
+                    <span>Adagio</span>
+                    <span>Andante</span>
+                    <span>Presto</span>
                   </div>
                 </div>
 
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <label className="flex items-center gap-1.5 text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                      <SlidersHorizontal className="w-3.5 h-3.5" /> Pitch
+                <div className="space-y-5">
+                  <div className="flex justify-between items-center">
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-2">
+                      <SlidersHorizontal className="w-3.5 h-3.5" /> Vocal Pitch
                     </label>
-                    <span className="text-xs font-bold text-blue-600">{pitch.toFixed(2)}</span>
+                    <span className="text-xs font-black text-blue-500 bg-blue-500/10 px-3 py-1 rounded-lg border border-blue-500/20">{pitch.toFixed(2)}</span>
                   </div>
-                  <input type="range" min="0.5" max="1.5" step="0.05" value={pitch} onChange={e => { setPitch(parseFloat(e.target.value)); setSelectedPreset(null); }} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600" />
-                  <div className="flex justify-between text-[10px] text-gray-500 mt-1.5 font-medium px-1">
-                    <span>Deep</span>
-                    <span>Flat</span>
-                    <span>High</span>
+                  <input type="range" min="0.5" max="1.5" step="0.05" value={pitch} onChange={e => { setPitch(parseFloat(e.target.value)); setSelectedPreset(null); }} className="w-full h-3 bg-white/5 rounded-full appearance-none cursor-pointer accent-blue-600" />
+                  <div className="flex justify-between text-[10px] text-gray-600 font-black uppercase tracking-tighter px-1">
+                    <span>Baritone</span>
+                    <span>Tenor</span>
+                    <span>Soprano</span>
                   </div>
                 </div>
               </div>
@@ -341,107 +348,117 @@ export default function VoiceGenerator() {
           </div>
 
           {/* RIGHT: RESULT PANEL */}
-          <div className="w-full xl:w-[45%] flex flex-col gap-6">
+          <div className="w-full xl:w-[45%] flex flex-col gap-8">
             
             {/* Player Interface */}
-            <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-              <div className="flex justify-between items-start mb-6">
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">Preview Studio</h3>
-                  <p className="text-xs text-gray-500 font-medium">Test your script and settings.</p>
-                </div>
-                <div className="bg-blue-50 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-md border border-blue-100 flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5" /> {formattedDuration}
+            <div className="glass p-8 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden flex flex-col">
+              <div className="absolute top-0 right-0 p-8">
+                <div className="bg-blue-600/10 text-blue-500 text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-xl border border-blue-500/20 flex items-center gap-2 backdrop-blur-md">
+                  <Clock className="w-3.5 h-3.5" /> Est. {formattedDuration}
                 </div>
               </div>
 
-              {/* Waveform Visualization (CSS Animation) */}
-              <div className="h-24 bg-gray-900 rounded-xl mb-6 overflow-hidden relative flex items-center justify-center p-4">
+              <div className="mb-10">
+                <h3 className="text-2xl font-black text-white tracking-tight uppercase">Preview Engine</h3>
+                <p className="text-gray-500 font-medium mt-1">Listen to your generation in real-time.</p>
+              </div>
+
+              {/* Waveform Visualization */}
+              <div className="h-32 bg-black/60 rounded-[2rem] mb-10 overflow-hidden relative flex items-center justify-center p-8 border border-white/5 shadow-inner">
                 {isPlaying ? (
-                  <div className="flex items-end justify-center gap-1 h-full w-full">
-                    {[...Array(24)].map((_, i) => (
+                  <div className="flex items-end justify-center gap-1.5 h-full w-full">
+                    {[...Array(32)].map((_, i) => (
                       <div 
                         key={i} 
-                        className="w-2 bg-blue-500 rounded-t-sm animate-pulse" 
+                        className="w-1.5 bg-blue-600 rounded-full animate-pulse" 
                         style={{ 
-                          height: `${Math.max(10, Math.random() * 100)}%`,
-                          animationDuration: `${0.3 + Math.random() * 0.5}s`,
-                          animationDelay: `${Math.random() * 0.5}s`
+                          height: `${Math.max(15, Math.random() * 100)}%`,
+                          animationDuration: `${0.2 + Math.random() * 0.4}s`,
+                          animationDelay: `${Math.random() * 0.5}s`,
+                          boxShadow: '0 0 20px rgba(37,99,235,0.4)'
                         }}
                       />
                     ))}
                   </div>
                 ) : (
-                  <div className="flex items-center gap-2 text-gray-500">
-                    <Headphones className="w-6 h-6 opacity-50" />
-                    <span className="text-sm font-semibold opacity-80">Ready to play</span>
+                  <div className="flex flex-col items-center gap-4 text-gray-600">
+                    <Headphones className="w-10 h-10 opacity-20" />
+                    <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40">Awaiting Playback</span>
                   </div>
                 )}
               </div>
 
-              <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
                 <button 
                   onClick={isPlaying ? stopVoice : previewVoice}
-                  className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-bold text-sm transition-all shadow-sm ${isPlaying ? 'bg-red-50 text-red-600 border border-red-200 hover:bg-red-100' : 'bg-gray-900 text-white hover:bg-gray-800'}`}
+                  className={`flex items-center justify-center gap-4 px-8 py-5 rounded-[2rem] font-black text-[10px] uppercase tracking-widest transition-all shadow-2xl active:scale-95 ${isPlaying ? 'bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500/20' : 'bg-blue-600 text-white hover:bg-blue-500 shadow-[0_0_40px_rgba(37,99,235,0.4)]'}`}
                 >
-                  {isPlaying ? <Square className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current" />}
-                  {isPlaying ? 'Stop Playback' : 'Preview Voice'}
+                  {isPlaying ? <Square className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current ml-1" />}
+                  {isPlaying ? 'Terminate Playback' : 'Listen Preview'}
                 </button>
                 <button 
                   onClick={downloadVoice}
                   disabled={isDownloading}
-                  className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-bold text-sm bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 transition-all shadow-sm disabled:opacity-50"
+                  className="flex items-center justify-center gap-4 px-8 py-5 rounded-[2rem] font-black text-[10px] uppercase tracking-widest bg-white text-black hover:bg-gray-200 transition-all shadow-2xl disabled:opacity-20 active:scale-95"
                 >
                   {isDownloading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
-                  Download MP3
+                  Export MP3
                 </button>
               </div>
 
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-start gap-2.5">
-                <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-                <p className="text-[11px] text-amber-800 font-medium leading-relaxed">
-                  <strong>Browser Preview Notice:</strong> The free preview relies on your device's built-in speech engine, which may sound robotic. High-fidelity human-like MP3 downloads will require the upcoming Premium Voice API.
+              <div className="bg-amber-500/10 border border-amber-500/20 rounded-[1.5rem] p-6 flex items-start gap-5 shadow-inner">
+                <AlertCircle className="w-6 h-6 text-amber-500 shrink-0 mt-0.5" />
+                <p className="text-xs text-gray-400 font-bold leading-relaxed">
+                  <span className="text-amber-500 uppercase tracking-widest text-[10px] block mb-2 font-black">Browser Engine Notice</span>
+                  Free preview uses your local speech engine. High-fidelity human-like MP3 downloads require our Premium AI API (Coming Soon).
                 </p>
               </div>
             </div>
 
-            {/* Generated Script Summary */}
-            <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm flex-1 flex flex-col">
-              <h3 className="text-sm font-bold text-gray-900 mb-4 border-b border-gray-100 pb-3 flex items-center gap-2">
-                <FileText className="w-4 h-4 text-gray-500" /> Active Configuration
+            {/* Active Config */}
+            <div className="glass p-8 rounded-[3rem] border border-white/5 shadow-2xl flex-1 flex flex-col relative overflow-hidden">
+              <div className="absolute inset-0 bg-white/5 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+              <h3 className="text-[10px] font-black text-gray-500 mb-8 pb-5 border-b border-white/5 flex items-center gap-3 uppercase tracking-widest">
+                <FileText className="w-4 h-4" /> Studio Log
               </h3>
               
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2.5 py-1 bg-gray-100 text-gray-700 text-xs font-bold rounded-md">{language}</span>
-                <span className="px-2.5 py-1 bg-gray-100 text-gray-700 text-xs font-bold rounded-md">{gender}</span>
-                <span className="px-2.5 py-1 bg-gray-100 text-gray-700 text-xs font-bold rounded-md">{style}</span>
+              <div className="flex flex-wrap gap-3 mb-8">
+                <span className="px-4 py-2 bg-blue-600/10 text-blue-400 text-[10px] font-black rounded-xl border border-blue-600/20 uppercase tracking-widest">{language}</span>
+                <span className="px-4 py-2 bg-white/5 text-gray-400 text-[10px] font-black rounded-xl border border-white/5 uppercase tracking-widest">{gender}</span>
+                <span className="px-4 py-2 bg-white/5 text-gray-400 text-[10px] font-black rounded-xl border border-white/5 uppercase tracking-widest">{style}</span>
               </div>
 
-              <div className="flex-1 bg-gray-50 rounded-xl p-4 border border-gray-100 overflow-y-auto max-h-[150px] custom-scrollbar">
-                <p className="text-[13px] text-gray-600 font-medium italic leading-relaxed">
-                  {text ? `"${text}"` : "Your script will appear here during playback..."}
+              <div className="flex-1 bg-black/40 rounded-[2rem] p-8 border border-white/5 overflow-y-auto max-h-[200px] custom-scrollbar shadow-inner relative z-10">
+                <p className="text-lg font-medium text-gray-400 italic leading-relaxed">
+                  {text ? `"${text}"` : "Input text to generate audio preview..."}
                 </p>
               </div>
             </div>
 
             {/* Pro Upgrade Card */}
-            <div className="bg-gradient-to-br from-indigo-600 to-blue-700 rounded-2xl p-6 shadow-md text-white relative overflow-hidden">
-              <div className="absolute -right-6 -top-6 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
-              <div className="flex items-center gap-3 mb-3">
-                <Lock className="w-5 h-5 text-indigo-200" />
-                <h3 className="text-lg font-bold">Premium API Coming Soon</h3>
+            <div className="bg-gradient-to-br from-blue-600 to-indigo-900 rounded-[3rem] p-10 shadow-[0_0_60px_rgba(37,99,235,0.4)] text-white relative overflow-hidden group">
+              <div className="absolute -right-10 -top-10 w-64 h-64 bg-white/10 rounded-full blur-[80px] pointer-events-none group-hover:scale-150 transition-transform duration-1000"></div>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-md">
+                  <Lock className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-2xl font-black uppercase tracking-tight">Ultra Realistic AI</h3>
               </div>
-              <p className="text-indigo-100 text-sm font-medium mb-4 leading-relaxed">
-                Unlock ultra-realistic, emotionally intelligent voices powered by ElevenLabs. Export directly to high-quality WAV/MP3 files.
+              <p className="text-blue-100 font-medium mb-10 leading-relaxed">
+                Unlock 11Labs-powered human clones with emotional intelligence. Join the waitlist for direct MP3 high-fidelity exports.
               </p>
-              <button className="w-full py-2.5 bg-white text-indigo-700 text-sm font-bold rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                Join the Waitlist
+              <button className="w-full py-5 bg-white text-blue-700 text-[10px] font-black uppercase tracking-widest rounded-2xl shadow-2xl hover:bg-gray-100 transition-all active:scale-95">
+                Join Premium Waitlist
               </button>
             </div>
 
           </div>
         </div>
       </div>
+
+      {/* SEO Article Section */}
+      <ToolArticle {...toolArticles['voice-generator']} />
     </div>
   );
+
 }

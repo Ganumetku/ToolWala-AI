@@ -8,6 +8,8 @@ import {
   ImageIcon, Sparkles, AlertCircle, Maximize2,
   ChevronLeft, Trash2, ShieldCheck, Zap
 } from 'lucide-react';
+import ToolArticle from '@/components/ToolArticle';
+import { toolArticles } from '@/data/toolArticles';
 
 const checkerboardStyle = {
   backgroundImage: 'repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05)), repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 25%, #030712 25%, #030712 75%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05))',
@@ -127,11 +129,11 @@ export default function BackgroundRemover() {
   if (!mounted) return <div className="min-h-screen bg-[#030712]" />;
 
   return (
-    <div className="bg-[#030712] min-h-screen py-20 relative overflow-hidden">
+    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <Link href="/tools" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group">
           <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Back to Directory
@@ -360,6 +362,9 @@ export default function BackgroundRemover() {
           </div>
         </div>
       </div>
+
+      {/* SEO Article Section */}
+      <ToolArticle {...toolArticles['bg-remover']} />
     </div>
   );
 }

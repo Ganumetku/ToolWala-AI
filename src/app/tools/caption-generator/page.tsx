@@ -5,8 +5,10 @@ import { useState, useRef } from 'react';
 import { 
   Type, Sparkles, RefreshCw, Copy, CheckCircle, 
   AlertCircle, Image as ImageIcon, Upload, Trash2, 
-  Settings, MessageSquare, Hash, Clock, BarChart2
+  Settings, MessageSquare, Hash, Clock, BarChart2, ChevronLeft
 } from 'lucide-react';
+import ToolArticle from '@/components/ToolArticle';
+import { toolArticles } from '@/data/toolArticles';
 
 type CaptionData = {
   imageFile: File | null;
@@ -201,71 +203,74 @@ export default function CaptionGenerator() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen py-10">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <Link href="/tools" className="text-sm font-medium text-blue-600 hover:text-blue-700 mb-6 inline-flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Back to all tools
+    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+        <Link href="/tools" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group">
+          <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          Back to Directory
         </Link>
         
         {/* HEADER */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8 mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600 shrink-0">
-                <Type className="w-6 h-6" />
+        <div className="glass rounded-[2.5rem] border border-white/5 p-8 sm:p-10 mb-10">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div className="flex items-center gap-6">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_0_25px_rgba(37,99,235,0.4)] shrink-0">
+                <Type className="w-7 h-7" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">AI Caption Generator</h1>
-                <p className="text-sm text-gray-500 mt-1">Create engaging, highly-optimized captions for any social media platform.</p>
+                <h1 className="text-3xl font-black text-white tracking-tighter">AI Caption Generator</h1>
+                <p className="text-gray-400 font-medium mt-1">Create engaging, highly-optimized captions for any social media platform.</p>
               </div>
             </div>
-            <div className="flex gap-3 shrink-0">
-              <button onClick={resetForm} className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                Reset All
+            <div className="flex flex-wrap gap-4 shrink-0">
+              <button onClick={resetForm} className="px-6 py-3.5 text-[10px] font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all">
+                Clear All
               </button>
             </div>
           </div>
           
           {error && (
-            <div className="mt-6 bg-red-50 text-red-700 p-4 rounded-xl flex items-start gap-3 border border-red-100 animate-fade-in">
-              <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-              <p className="text-sm font-medium">{error}</p>
+            <div className="mt-8 animate-fade-in">
+              <div className="bg-red-500/10 text-red-400 p-5 rounded-[2rem] flex items-start gap-4 border border-red-500/20">
+                <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                <p className="text-sm font-medium">{error}</p>
+              </div>
             </div>
           )}
         </div>
         
-        <div className="flex flex-col xl:flex-row gap-8 relative">
+        <div className="flex flex-col xl:flex-row gap-10 relative items-start">
           
           {/* LEFT: FORM AREA */}
-          <div className="w-full xl:w-[40%] space-y-6">
+          <div className="w-full xl:w-[40%] space-y-8">
             
             {/* Input & Image */}
-            <section className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-              <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-100">
-                <MessageSquare className="w-5 h-5 text-blue-600" />
-                <h2 className="text-lg font-bold text-gray-900">Post Details</h2>
+            <section className="glass rounded-[2rem] border border-white/5 p-8">
+              <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/5">
+                <MessageSquare className="w-5 h-5 text-blue-500" />
+                <h2 className="text-xl font-black text-white tracking-tight">Post Details</h2>
               </div>
               
-              <div className="space-y-5">
+              <div className="space-y-6">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">Upload Image (Optional)</label>
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Visual Context (Optional)</label>
                   {!data.imagePreview ? (
-                    <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors">
-                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                        <ImageIcon className="w-8 h-8 text-gray-400 mb-2" />
-                        <p className="text-sm text-gray-500 font-medium">Click to upload image</p>
+                    <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-white/10 border-dashed rounded-[2rem] cursor-pointer bg-white/5 hover:bg-white/10 transition-all group overflow-hidden relative">
+                      <div className="flex flex-col items-center justify-center relative z-10">
+                        <ImageIcon className="w-8 h-8 text-gray-500 mb-3 group-hover:scale-110 transition-transform" />
+                        <p className="text-sm text-gray-400 font-bold uppercase tracking-widest">Upload Reference</p>
                       </div>
                       <input type="file" ref={fileInputRef} onChange={handleImageUpload} accept="image/*" className="hidden" />
                     </label>
                   ) : (
-                    <div className="relative w-full h-40 rounded-xl overflow-hidden border border-gray-200 group">
+                    <div className="relative w-full h-48 rounded-[2rem] overflow-hidden border border-white/10 group shadow-2xl">
                       <img src={data.imagePreview} alt="Preview" className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <button onClick={removeImage} className="p-2 bg-red-500 text-white rounded-full hover:bg-red-600 shadow-lg transform hover:scale-105 transition-all">
-                          <Trash2 className="w-5 h-5" />
+                      <div className="absolute inset-0 bg-[#030712]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                        <button onClick={removeImage} className="p-4 bg-red-500 text-white rounded-full hover:bg-red-600 shadow-2xl transform hover:scale-110 transition-all">
+                          <Trash2 className="w-6 h-6" />
                         </button>
                       </div>
                     </div>
@@ -273,76 +278,76 @@ export default function CaptionGenerator() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">Topic or Post Description *</label>
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Topic or Description *</label>
                   <textarea 
                     name="topic"
-                    rows={4} 
+                    rows={5} 
                     value={data.topic} 
                     onChange={handleChange} 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm resize-none custom-scrollbar" 
-                    placeholder="Describe what your post is about... (e.g. My morning coffee routine at the beach)" 
+                    className="w-full px-5 py-4 border border-white/10 rounded-2xl bg-white/5 text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 outline-none text-sm font-bold transition-all resize-none custom-scrollbar shadow-2xl" 
+                    placeholder="Describe your post... (e.g. My morning coffee routine at the beach)" 
                   />
                 </div>
               </div>
             </section>
 
             {/* Customization */}
-            <section className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-              <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-100">
-                <Settings className="w-5 h-5 text-blue-600" />
-                <h2 className="text-lg font-bold text-gray-900">Customization</h2>
+            <section className="glass rounded-[2rem] border border-white/5 p-8">
+              <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/5">
+                <Settings className="w-5 h-5 text-blue-500" />
+                <h2 className="text-xl font-black text-white tracking-tight">AI Settings</h2>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-6">
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Platform</label>
-                    <select name="platform" value={data.platform} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm font-medium text-gray-800">
-                      <option>Instagram</option>
-                      <option>YouTube Shorts</option>
-                      <option>LinkedIn</option>
-                      <option>Facebook</option>
-                      <option>Twitter / X</option>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Platform</label>
+                    <select name="platform" value={data.platform} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all appearance-none cursor-pointer">
+                      <option className="bg-slate-900">Instagram</option>
+                      <option className="bg-slate-900">YouTube Shorts</option>
+                      <option className="bg-slate-900">LinkedIn</option>
+                      <option className="bg-slate-900">Facebook</option>
+                      <option className="bg-slate-900">Twitter / X</option>
                     </select>
                   </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Tone</label>
-                    <select name="tone" value={data.tone} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm font-medium text-gray-800">
-                      <option>Viral</option>
-                      <option>Funny</option>
-                      <option>Professional</option>
-                      <option>Emotional</option>
-                      <option>Luxury</option>
-                      <option>Fitness</option>
-                      <option>Motivational</option>
-                      <option>Romantic</option>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Vibe/Tone</label>
+                    <select name="tone" value={data.tone} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all appearance-none cursor-pointer">
+                      <option className="bg-slate-900">Viral</option>
+                      <option className="bg-slate-900">Funny</option>
+                      <option className="bg-slate-900">Professional</option>
+                      <option className="bg-slate-900">Emotional</option>
+                      <option className="bg-slate-900">Luxury</option>
+                      <option className="bg-slate-900">Fitness</option>
+                      <option className="bg-slate-900">Motivational</option>
+                      <option className="bg-slate-900">Romantic</option>
                     </select>
                   </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Language</label>
-                    <select name="language" value={data.language} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm font-medium text-gray-800">
-                      <option>English</option>
-                      <option>Hindi</option>
-                      <option>Hinglish</option>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Language</label>
+                    <select name="language" value={data.language} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all appearance-none cursor-pointer">
+                      <option className="bg-slate-900">English</option>
+                      <option className="bg-slate-900">Hindi</option>
+                      <option className="bg-slate-900">Hinglish</option>
                     </select>
                   </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Length</label>
-                    <select name="length" value={data.length} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm font-medium text-gray-800">
-                      <option>Short</option>
-                      <option>Medium</option>
-                      <option>Long</option>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Length</label>
+                    <select name="length" value={data.length} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all appearance-none cursor-pointer">
+                      <option className="bg-slate-900">Short</option>
+                      <option className="bg-slate-900">Medium</option>
+                      <option className="bg-slate-900">Long</option>
                     </select>
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Hashtag Count</label>
-                  <select name="hashtagCount" value={data.hashtagCount} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm font-medium text-gray-800">
-                    <option value="5">5 Hashtags</option>
-                    <option value="10">10 Hashtags</option>
-                    <option value="15">15 Hashtags</option>
-                    <option value="20">20 Hashtags</option>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Hashtag Density</label>
+                  <select name="hashtagCount" value={data.hashtagCount} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all appearance-none cursor-pointer">
+                    <option value="5" className="bg-slate-900">Low (5 Tags)</option>
+                    <option value="10" className="bg-slate-900">Standard (10 Tags)</option>
+                    <option value="15" className="bg-slate-900">High (15 Tags)</option>
+                    <option value="20" className="bg-slate-900">Viral (20 Tags)</option>
                   </select>
                 </div>
               </div>
@@ -350,116 +355,130 @@ export default function CaptionGenerator() {
               <button 
                 onClick={handleGenerate}
                 disabled={isGenerating}
-                className="w-full mt-6 flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50 shadow-md"
+                className="w-full mt-10 flex items-center justify-center gap-3 px-8 py-5 text-[10px] font-black uppercase tracking-widest text-white bg-blue-600 rounded-[2rem] hover:bg-blue-500 transition-all disabled:opacity-50 shadow-[0_0_30px_rgba(37,99,235,0.4)] active:scale-95 group"
               >
-                {isGenerating ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Sparkles className="w-5 h-5" />}
-                {isGenerating ? 'Analyzing context...' : 'Generate Captions'}
+                {isGenerating ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />}
+                {isGenerating ? 'Analyzing Trends...' : 'Craft Viral Captions'}
               </button>
             </section>
           </div>
 
           {/* RIGHT: GENERATED CONTENT */}
-          <div className="w-full xl:w-[60%] flex flex-col gap-6">
+          <div className="w-full xl:w-[60%] flex flex-col gap-8 relative items-start">
             
             {!result && !isGenerating && (
-              <div className="bg-white rounded-2xl border border-gray-200 shadow-sm h-full flex flex-col items-center justify-center p-12 text-center min-h-[400px]">
-                <div className="bg-blue-50 w-20 h-20 rounded-full flex items-center justify-center mb-4">
-                  <Sparkles className="w-10 h-10 text-blue-500" />
+              <div className="glass rounded-[3rem] border border-white/5 w-full flex flex-col items-center justify-center p-12 sm:p-20 text-center min-h-[600px] shadow-2xl relative overflow-hidden">
+                <div className="absolute inset-0 bg-blue-600/5 blur-[120px] -z-10" />
+                <div className="bg-blue-500/10 w-24 h-24 rounded-[2rem] border border-blue-500/20 flex items-center justify-center mb-8 shadow-2xl rotate-3 group hover:rotate-12 transition-transform">
+                  <Sparkles className="w-12 h-12 text-blue-500" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Ready to create magic</h3>
-                <p className="text-gray-500 max-w-sm">Fill out the post details on the left and hit generate to get 5 highly engaging caption variations tailored for your audience.</p>
+                <h3 className="text-3xl font-black text-white mb-4 tracking-tighter uppercase">AI Ready to Draft</h3>
+                <p className="text-gray-500 max-w-sm font-medium leading-relaxed">Fill out the post details and witness 5 professional caption variations optimized for maximum engagement.</p>
               </div>
             )}
 
             {isGenerating && (
-              <div className="bg-white rounded-2xl border border-gray-200 shadow-sm h-full flex flex-col items-center justify-center p-12 text-center min-h-[400px]">
-                <RefreshCw className="w-12 h-12 text-blue-600 animate-spin mb-4" />
-                <h3 className="text-xl font-bold text-gray-900">Crafting your captions...</h3>
-                <p className="text-gray-500 mt-2">Analyzing your topic and optimizing for {data.platform}.</p>
+              <div className="glass rounded-[3rem] border border-white/5 w-full flex flex-col items-center justify-center p-12 sm:p-20 text-center min-h-[600px] shadow-2xl">
+                <div className="relative mb-8">
+                  <motion.div 
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="absolute inset-0 bg-blue-600 rounded-full blur-2xl" 
+                  />
+                  <RefreshCw className="w-16 h-16 text-white animate-spin relative z-10" />
+                </div>
+                <h3 className="text-2xl font-black text-white mb-2 tracking-tighter">Crafting Engagement...</h3>
+                <p className="text-gray-400 font-medium">Optimizing hooks and hashtags for {data.platform}.</p>
               </div>
             )}
 
             {result && !isGenerating && (
-              <>
+              <div className="w-full space-y-10">
                 {/* Engagement Tips Dashboard */}
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl border border-blue-100 shadow-sm">
-                  <div className="flex items-center gap-2 mb-4">
-                    <BarChart2 className="w-5 h-5 text-blue-600" />
-                    <h3 className="text-lg font-bold text-gray-900">Engagement Strategy</h3>
+                <div className="glass p-8 rounded-[2.5rem] border border-blue-500/20 shadow-[0_0_50px_rgba(37,99,235,0.1)] relative overflow-hidden">
+                  <div className="absolute top-0 right-0 bg-blue-600/20 text-blue-400 text-[10px] font-black uppercase tracking-widest px-5 py-2 rounded-bl-2xl border-l border-b border-white/5">
+                    Insights
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div className="bg-white p-4 rounded-xl border border-blue-50 shadow-sm">
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-blue-600 uppercase tracking-wide mb-1.5">
-                        <Clock className="w-3.5 h-3.5" /> Best Time
+                  <div className="flex items-center gap-3 mb-8">
+                    <BarChart2 className="w-6 h-6 text-blue-500" />
+                    <h3 className="text-xl font-black text-white tracking-tight">Viral Strategy</h3>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="bg-white/5 p-5 rounded-2xl border border-white/5 backdrop-blur-sm">
+                      <div className="flex items-center gap-2 text-[10px] font-black text-blue-400 uppercase tracking-widest mb-2">
+                        <Clock className="w-4 h-4" /> Peak Time
                       </div>
-                      <p className="text-sm font-semibold text-gray-800">{result.tips.time}</p>
+                      <p className="text-sm font-bold text-white leading-tight">{result.tips.time}</p>
                     </div>
-                    <div className="bg-white p-4 rounded-xl border border-blue-50 shadow-sm">
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-indigo-600 uppercase tracking-wide mb-1.5">
-                        <MessageSquare className="w-3.5 h-3.5" /> Suggested Hook
+                    <div className="bg-white/5 p-5 rounded-2xl border border-white/5 backdrop-blur-sm">
+                      <div className="flex items-center gap-2 text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-2">
+                        <MessageSquare className="w-4 h-4" /> Power Hook
                       </div>
-                      <p className="text-sm font-semibold text-gray-800 line-clamp-2">{result.tips.hook}</p>
+                      <p className="text-sm font-bold text-white line-clamp-2 leading-tight">{result.tips.hook}</p>
                     </div>
-                    <div className="bg-white p-4 rounded-xl border border-blue-50 shadow-sm">
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-purple-600 uppercase tracking-wide mb-1.5">
-                        <CheckCircle className="w-3.5 h-3.5" /> Action (CTA)
+                    <div className="bg-white/5 p-5 rounded-2xl border border-white/5 backdrop-blur-sm">
+                      <div className="flex items-center gap-2 text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-2">
+                        <CheckCircle className="w-4 h-4" /> Smart CTA
                       </div>
-                      <p className="text-sm font-semibold text-gray-800 line-clamp-2">{result.tips.cta}</p>
+                      <p className="text-sm font-bold text-white line-clamp-2 leading-tight">{result.tips.cta}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Hashtags */}
-                <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm relative group">
-                  <div className="flex justify-between items-start mb-3">
-                    <div className="flex items-center gap-2">
-                      <Hash className="w-5 h-5 text-blue-600" />
-                      <h3 className="text-base font-bold text-gray-900">Optimized Hashtags ({data.hashtagCount})</h3>
+                <div className="glass p-8 rounded-[2.5rem] border border-white/5 shadow-2xl relative group">
+                  <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6">
+                    <div className="flex items-center gap-3">
+                      <Hash className="w-6 h-6 text-blue-500" />
+                      <h3 className="text-xl font-black text-white tracking-tight">Smart Hashtags</h3>
                     </div>
                     <button 
                       onClick={() => copyToClipboard(result.hashtags, 'tags')}
-                      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-gray-700 bg-gray-100 border border-gray-200 rounded-lg hover:bg-gray-200 transition-colors"
+                      className="flex items-center gap-2 px-6 py-2.5 text-[10px] font-black uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-xl hover:bg-blue-500/20 transition-all active:scale-95"
                     >
-                      {copiedTags ? <CheckCircle className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
-                      {copiedTags ? 'Copied' : 'Copy Tags'}
+                      {copiedTags ? <CheckCircle className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                      {copiedTags ? 'Copied' : 'Copy Set'}
                     </button>
                   </div>
-                  <p className="text-[15px] leading-relaxed text-blue-600 font-medium break-words">
+                  <p className="text-sm leading-relaxed text-blue-400 font-black break-words tracking-wide">
                     {result.hashtags}
                   </p>
                 </div>
 
                 {/* Captions */}
-                <div className="space-y-4">
+                <div className="space-y-6">
                   {result.captions.map((caption, idx) => (
-                    <div key={idx} className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all group relative pl-12">
+                    <div key={idx} className="glass p-8 rounded-[2.5rem] border border-white/5 shadow-2xl hover:border-blue-500/30 transition-all group relative">
                       {/* Variation Badge */}
-                      <div className="absolute left-4 top-5 w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-black">
+                      <div className="absolute -left-3 top-8 w-10 h-10 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-sm font-black shadow-2xl rotate-[-12deg] group-hover:rotate-0 transition-transform">
                         {idx + 1}
                       </div>
                       
-                      <div className="whitespace-pre-wrap text-[15px] text-gray-800 leading-relaxed font-medium mb-4">
+                      <div className="whitespace-pre-wrap text-base text-gray-300 leading-relaxed font-bold mb-8 pl-6">
                         {caption}
                       </div>
                       
-                      <div className="flex justify-end pt-3 border-t border-gray-50">
+                      <div className="flex justify-end pt-6 border-t border-white/5">
                         <button 
                           onClick={() => copyToClipboard(caption, idx)}
-                          className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-lg transition-colors border ${copiedIndex === idx ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100'}`}
+                          className={`flex items-center gap-2 px-6 py-3 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all border ${copiedIndex === idx ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.1)]' : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10 hover:text-white active:scale-95'}`}
                         >
-                          {copiedIndex === idx ? <CheckCircle className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                          {copiedIndex === idx ? 'Copied to clipboard' : 'Copy caption'}
+                          {copiedIndex === idx ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                          {copiedIndex === idx ? 'Copied' : 'Copy Caption'}
                         </button>
                       </div>
                     </div>
                   ))}
                 </div>
-              </>
+              </div>
             )}
 
           </div>
         </div>
       </div>
+
+      {/* SEO Article Section */}
+      <ToolArticle {...toolArticles['caption-generator']} />
     </div>
   );
 }

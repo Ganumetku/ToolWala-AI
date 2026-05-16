@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="bg-[#030712] min-h-screen py-32 relative overflow-hidden">
+    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
       <MeshGradient />
       
       <div className="container mx-auto px-4 max-w-7xl relative z-10">

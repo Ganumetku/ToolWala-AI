@@ -7,8 +7,11 @@ import html2canvas from 'html2canvas';
 import { 
   FileText, Download, Sparkles, Trash2, Plus, AlertCircle, 
   CheckCircle, RefreshCw, Briefcase, GraduationCap, Code, 
-  User, LayoutTemplate, Target, TrendingUp, AlertTriangle
+  User, LayoutTemplate, Target, TrendingUp, AlertTriangle,
+  ChevronLeft
 } from 'lucide-react';
+import ToolArticle from '@/components/ToolArticle';
+import { toolArticles } from '@/data/toolArticles';
 
 type Experience = { id: string, company: string, role: string, start: string, end: string, desc: string };
 type Education = { id: string, degree: string, institute: string, year: string };
@@ -331,35 +334,36 @@ export default function ResumeBuilder() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen py-10">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1400px]">
-        <Link href="/tools" className="text-sm font-medium text-blue-600 hover:text-blue-700 mb-6 inline-flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Back to all tools
+    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1400px] relative z-10">
+        <Link href="/tools" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group">
+          <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          Back to Directory
         </Link>
         
         {/* HEADER */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8 mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600 shrink-0">
-                <FileText className="w-6 h-6" />
+        <div className="glass rounded-[2.5rem] border border-white/5 p-8 sm:p-10 mb-10">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div className="flex items-center gap-6">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_0_25px_rgba(37,99,235,0.4)] shrink-0">
+                <FileText className="w-7 h-7" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">AI Resume Builder & ATS Checker</h1>
-                <p className="text-sm text-gray-500 mt-1">Create an ATS-friendly resume and optimize it against your target job instantly.</p>
+                <h1 className="text-3xl font-black text-white tracking-tighter">AI Resume Builder & ATS Checker</h1>
+                <p className="text-gray-400 font-medium mt-1">Create an ATS-friendly resume and optimize it against your target job instantly.</p>
               </div>
             </div>
-            <div className="flex gap-3 shrink-0">
-              <button onClick={resetForm} className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+            <div className="flex flex-wrap gap-4 shrink-0">
+              <button onClick={resetForm} className="px-6 py-3.5 text-[10px] font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all">
                 Clear All
               </button>
               <button 
                 onClick={downloadPDF}
                 disabled={isDownloading}
-                className="flex items-center gap-2 px-5 py-2 text-sm font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 shadow-sm"
+                className="flex items-center gap-3 px-8 py-3.5 text-[10px] font-black uppercase tracking-widest text-white bg-blue-600 rounded-2xl hover:bg-blue-500 transition-all disabled:opacity-50 shadow-[0_0_20px_rgba(37,99,235,0.3)] active:scale-95"
               >
                 {isDownloading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
                 {isDownloading ? 'Generating PDF...' : 'Download PDF'}
@@ -368,15 +372,15 @@ export default function ResumeBuilder() {
           </div>
           
           {(error || success) && (
-            <div className="mt-6">
+            <div className="mt-8 animate-fade-in">
               {error && (
-                <div className="bg-red-50 text-red-700 p-4 rounded-xl flex items-start gap-3 border border-red-100 animate-fade-in">
+                <div className="bg-red-500/10 text-red-400 p-5 rounded-[2rem] flex items-start gap-4 border border-red-500/20">
                   <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
                   <p className="text-sm font-medium">{error}</p>
                 </div>
               )}
               {success && (
-                <div className="bg-emerald-50 text-emerald-800 p-4 rounded-xl flex items-start gap-3 border border-emerald-100 animate-fade-in">
+                <div className="bg-emerald-500/10 text-emerald-400 p-5 rounded-[2rem] flex items-start gap-4 border border-emerald-500/20">
                   <CheckCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
                   <p className="text-sm font-medium">{success}</p>
                 </div>
@@ -385,175 +389,177 @@ export default function ResumeBuilder() {
           )}
         </div>
         
-        <div className="flex flex-col xl:flex-row gap-8 relative">
+        <div className="flex flex-col xl:flex-row gap-10 relative items-start">
           
           {/* LEFT: FORM AREA */}
-          <div className="w-full xl:w-[45%] lg:h-[calc(100vh-200px)] overflow-y-auto custom-scrollbar pr-0 lg:pr-4 space-y-6 pb-20">
+          <div className="w-full xl:w-[45%] xl:h-[calc(100vh-180px)] overflow-y-auto custom-scrollbar-hidden pr-0 space-y-8 pb-32">
             
             {/* A. Personal Details */}
-            <section className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-              <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-100">
-                <User className="w-5 h-5 text-blue-600" />
-                <h2 className="text-lg font-bold text-gray-900">Personal Details</h2>
+            <section className="glass rounded-[2rem] border border-white/5 p-8">
+              <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/5">
+                <User className="w-5 h-5 text-blue-500" />
+                <h2 className="text-xl font-black text-white tracking-tight">Personal Details</h2>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="col-span-1 sm:col-span-2">
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Full Name *</label>
-                  <input type="text" name="name" value={personal.name} onChange={handlePersonalChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="e.g. Jane Doe" />
-                </div>
-                <div className="col-span-1 sm:col-span-2">
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Job Title</label>
-                  <input type="text" name="title" value={personal.title} onChange={handlePersonalChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="e.g. Product Manager" />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Email *</label>
-                  <input type="email" name="email" value={personal.email} onChange={handlePersonalChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="jane@example.com" />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Phone</label>
-                  <input type="text" name="phone" value={personal.phone} onChange={handlePersonalChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm" placeholder="+1 234 567 8900" />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Location</label>
-                  <input type="text" name="location" value={personal.location} onChange={handlePersonalChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm" placeholder="City, Country" />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">LinkedIn</label>
-                  <input type="text" name="linkedin" value={personal.linkedin} onChange={handlePersonalChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm" placeholder="linkedin.com/in/janedoe" />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Full Name *</label>
+                  <input type="text" name="name" value={personal.name} onChange={handlePersonalChange} className="w-full px-5 py-3.5 border border-white/10 rounded-2xl bg-white/5 text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 outline-none text-sm font-bold transition-all" placeholder="e.g. Alex Morgan" />
                 </div>
                 <div className="col-span-1 sm:col-span-2">
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Portfolio / Website</label>
-                  <input type="text" name="portfolio" value={personal.portfolio} onChange={handlePersonalChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm" placeholder="janedoe.com" />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Job Title</label>
+                  <input type="text" name="title" value={personal.title} onChange={handlePersonalChange} className="w-full px-5 py-3.5 border border-white/10 rounded-2xl bg-white/5 text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 outline-none text-sm font-bold transition-all" placeholder="e.g. Senior Full Stack Engineer" />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Email *</label>
+                  <input type="email" name="email" value={personal.email} onChange={handlePersonalChange} className="w-full px-5 py-3.5 border border-white/10 rounded-2xl bg-white/5 text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 outline-none text-sm font-bold transition-all" placeholder="alex@example.com" />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Phone</label>
+                  <input type="text" name="phone" value={personal.phone} onChange={handlePersonalChange} className="w-full px-5 py-3.5 border border-white/10 rounded-2xl bg-white/5 text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 outline-none text-sm font-bold transition-all" placeholder="+1 (555) 000-0000" />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Location</label>
+                  <input type="text" name="location" value={personal.location} onChange={handlePersonalChange} className="w-full px-5 py-3.5 border border-white/10 rounded-2xl bg-white/5 text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 outline-none text-sm font-bold transition-all" placeholder="San Francisco, CA" />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">LinkedIn</label>
+                  <input type="text" name="linkedin" value={personal.linkedin} onChange={handlePersonalChange} className="w-full px-5 py-3.5 border border-white/10 rounded-2xl bg-white/5 text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 outline-none text-sm font-bold transition-all" placeholder="linkedin.com/in/username" />
+                </div>
+                <div className="col-span-1 sm:col-span-2">
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Portfolio / Website</label>
+                  <input type="text" name="portfolio" value={personal.portfolio} onChange={handlePersonalChange} className="w-full px-5 py-3.5 border border-white/10 rounded-2xl bg-white/5 text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 outline-none text-sm font-bold transition-all" placeholder="portfolio.dev" />
                 </div>
               </div>
             </section>
 
             {/* B. Target Job */}
-            <section className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm relative overflow-hidden">
-              <div className="absolute top-0 right-0 bg-blue-50 text-blue-700 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-bl-lg">ATS Optimization</div>
-              <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-100">
-                <Target className="w-5 h-5 text-blue-600" />
-                <h2 className="text-lg font-bold text-gray-900">Target Job</h2>
+            <section className="glass rounded-[2rem] border border-blue-500/10 p-8 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 bg-blue-600/20 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] px-5 py-2 rounded-bl-[1.5rem] border-l border-b border-white/5">
+                ATS Optimizer
               </div>
-              <div className="space-y-4">
+              <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/5">
+                <Target className="w-5 h-5 text-blue-400" />
+                <h2 className="text-xl font-black text-white tracking-tight">Target Job Info</h2>
+              </div>
+              <div className="space-y-6">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Target Job Title</label>
-                  <input type="text" value={targetJob.title} onChange={e => setTargetJob({...targetJob, title: e.target.value})} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900" placeholder="e.g. Senior Frontend Engineer" />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Job Title</label>
+                  <input type="text" value={targetJob.title} onChange={e => setTargetJob({...targetJob, title: e.target.value})} className="w-full px-5 py-3.5 border border-white/10 rounded-2xl bg-white/5 text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 outline-none text-sm font-bold transition-all" placeholder="e.g. Senior Frontend Engineer" />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Job Description</label>
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Full Job Description</label>
                   <textarea 
-                    rows={4} 
+                    rows={5} 
                     value={targetJob.description} 
                     onChange={e => setTargetJob({...targetJob, description: e.target.value})} 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900 resize-none custom-scrollbar" 
-                    placeholder="Paste the job description here for ATS keyword optimization..." 
+                    className="w-full px-5 py-4 border border-white/10 rounded-2xl bg-white/5 text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 outline-none text-sm font-bold transition-all resize-none custom-scrollbar shadow-2xl" 
+                    placeholder="Paste the target job description here to see real-time ATS keyword match..." 
                   />
-                  <p className="text-[11px] text-gray-500 mt-1.5 font-medium">Paste the job description to get a live ATS keyword match score on the right.</p>
+                  <div className="flex items-start gap-2 mt-4 text-[10px] font-bold text-blue-400/60 uppercase tracking-widest leading-loose">
+                    <Sparkles className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span>Paste description to unlock keyword matching & scoring.</span>
+                  </div>
                 </div>
               </div>
             </section>
 
             {/* C. Professional Summary */}
-            <section className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-              <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
-                <div className="flex items-center gap-2">
-                  <LayoutTemplate className="w-5 h-5 text-blue-600" />
-                  <h2 className="text-lg font-bold text-gray-900">Professional Summary</h2>
+            <section className="glass rounded-[2rem] border border-white/5 p-8">
+              <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/5">
+                <div className="flex items-center gap-3">
+                  <LayoutTemplate className="w-5 h-5 text-blue-500" />
+                  <h2 className="text-xl font-black text-white tracking-tight">Summary</h2>
                 </div>
                 <button 
                   onClick={generateAISummary}
                   disabled={isGenerating}
-                  className="flex items-center gap-2 px-3 py-1.5 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors disabled:opacity-50"
+                  className="flex items-center gap-2 px-5 py-2.5 text-[10px] font-black uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-xl hover:bg-blue-500/20 transition-all disabled:opacity-50 active:scale-95"
                 >
                   {isGenerating ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5" />}
-                  {isGenerating ? 'Generating...' : 'AI Summary'}
+                  {isGenerating ? 'Drafting...' : 'AI Enhance'}
                 </button>
               </div>
               <textarea 
                 rows={4}
                 value={summary}
                 onChange={(e) => setSummary(e.target.value)}
-                placeholder="Write a brief summary of your professional background..."
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-shadow outline-none text-sm placeholder:text-gray-400 text-gray-900 resize-none custom-scrollbar"
+                placeholder="Briefly pitch your professional value..."
+                className="w-full px-5 py-4 border border-white/10 rounded-2xl bg-white/5 text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 outline-none text-sm font-bold transition-all resize-none custom-scrollbar"
               />
             </section>
 
             {/* D. Work Experience */}
-            <section className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-              <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
-                <div className="flex items-center gap-2">
-                  <Briefcase className="w-5 h-5 text-blue-600" />
-                  <h2 className="text-lg font-bold text-gray-900">Work Experience</h2>
+            <section className="glass rounded-[2rem] border border-white/5 p-8">
+              <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/5">
+                <div className="flex items-center gap-3">
+                  <Briefcase className="w-5 h-5 text-blue-500" />
+                  <h2 className="text-xl font-black text-white tracking-tight">Work History</h2>
                 </div>
-                <button onClick={addExperience} className="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-gray-700 bg-gray-100 border border-gray-200 rounded-lg hover:bg-gray-200 transition-colors">
-                  <Plus className="w-3.5 h-3.5" /> Add
+                <button onClick={addExperience} className="flex items-center gap-2 px-5 py-2.5 text-[10px] font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all active:scale-95">
+                  <Plus className="w-3.5 h-3.5" /> Add New
                 </button>
               </div>
               
-              <div className="space-y-6">
-                {experience.length === 0 && <p className="text-sm text-gray-500 text-center py-4">No work experience added yet.</p>}
+              <div className="space-y-10">
+                {experience.length === 0 && <p className="text-sm text-gray-500 text-center py-10 font-bold uppercase tracking-widest opacity-50">No Experience Listed</p>}
                 
                 {experience.map((exp, index) => (
-                  <div key={exp.id} className="relative p-4 border border-gray-200 rounded-xl bg-gray-50/50">
-                    <button onClick={() => removeExperience(exp.id)} className="absolute -top-2 -right-2 bg-white border border-gray-300 text-red-500 hover:text-red-600 hover:bg-red-50 p-1.5 rounded-full shadow-sm transition-colors z-10">
-                      <Trash2 className="w-3.5 h-3.5" />
+                  <div key={exp.id} className="relative p-6 border border-white/5 rounded-[2rem] bg-white/[0.02] group/item">
+                    <button onClick={() => removeExperience(exp.id)} className="absolute -top-3 -right-3 bg-[#030712] border border-white/10 text-gray-500 hover:text-red-400 p-2.5 rounded-full shadow-2xl transition-all z-10 hover:scale-110 active:scale-90">
+                      <Trash2 className="w-4 h-4" />
                     </button>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
-                      <div>
-                        <input type="text" value={exp.role} onChange={e => updateExperience(exp.id, 'role', e.target.value)} placeholder="Role / Job Title" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 bg-white outline-none text-sm font-medium placeholder:text-gray-400 text-gray-900" />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                      <div className="col-span-1 sm:col-span-2">
+                        <input type="text" value={exp.role} onChange={e => updateExperience(exp.id, 'role', e.target.value)} placeholder="Role / Job Title" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
                       </div>
                       <div>
-                        <input type="text" value={exp.company} onChange={e => updateExperience(exp.id, 'company', e.target.value)} placeholder="Company Name" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 bg-white outline-none text-sm placeholder:text-gray-400 text-gray-900" />
+                        <input type="text" value={exp.company} onChange={e => updateExperience(exp.id, 'company', e.target.value)} placeholder="Company Name" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
                       </div>
-                      <div>
-                        <input type="text" value={exp.start} onChange={e => updateExperience(exp.id, 'start', e.target.value)} placeholder="Start Date (e.g. Jan 2021)" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 bg-white outline-none text-sm placeholder:text-gray-400 text-gray-900" />
-                      </div>
-                      <div>
-                        <input type="text" value={exp.end} onChange={e => updateExperience(exp.id, 'end', e.target.value)} placeholder="End Date (e.g. Present)" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 bg-white outline-none text-sm placeholder:text-gray-400 text-gray-900" />
+                      <div className="flex gap-2">
+                        <input type="text" value={exp.start} onChange={e => updateExperience(exp.id, 'start', e.target.value)} placeholder="Start (e.g. Jan 2021)" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
+                        <input type="text" value={exp.end} onChange={e => updateExperience(exp.id, 'end', e.target.value)} placeholder="End (e.g. Present)" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
                       </div>
                     </div>
                     <textarea 
-                      rows={3} 
+                      rows={4} 
                       value={exp.desc} 
                       onChange={e => updateExperience(exp.id, 'desc', e.target.value)} 
-                      placeholder="Bullet points. Start with action verbs like Developed, Built, Led..." 
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 outline-none text-sm resize-none custom-scrollbar" 
+                      placeholder="List achievements. Start with action verbs: Developed, Built, Led..." 
+                      className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-medium resize-none custom-scrollbar" 
                     />
-                    <p className="text-xs text-gray-500 mt-1 font-medium">Tip: Press Enter for new bullet points in the preview.</p>
                   </div>
                 ))}
               </div>
             </section>
 
             {/* E. Education */}
-            <section className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-              <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
-                <div className="flex items-center gap-2">
-                  <GraduationCap className="w-5 h-5 text-blue-600" />
-                  <h2 className="text-lg font-bold text-gray-900">Education</h2>
+            <section className="glass rounded-[2rem] border border-white/5 p-8">
+              <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/5">
+                <div className="flex items-center gap-3">
+                  <GraduationCap className="w-5 h-5 text-blue-500" />
+                  <h2 className="text-xl font-black text-white tracking-tight">Education</h2>
                 </div>
-                <button onClick={addEducation} className="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-gray-700 bg-gray-100 border border-gray-200 rounded-lg hover:bg-gray-200 transition-colors">
-                  <Plus className="w-3.5 h-3.5" /> Add
+                <button onClick={addEducation} className="flex items-center gap-2 px-5 py-2.5 text-[10px] font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all active:scale-95">
+                  <Plus className="w-3.5 h-3.5" /> Add New
                 </button>
               </div>
               
-              <div className="space-y-4">
-                {education.length === 0 && <p className="text-sm text-gray-500 text-center py-4">No education added yet.</p>}
+              <div className="space-y-6">
+                {education.length === 0 && <p className="text-sm text-gray-500 text-center py-10 font-bold uppercase tracking-widest opacity-50">No Education Listed</p>}
                 
                 {education.map(edu => (
-                  <div key={edu.id} className="relative p-4 border border-gray-200 rounded-xl bg-gray-50/50 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <button onClick={() => removeEducation(edu.id)} className="absolute -top-2 -right-2 bg-white border border-gray-300 text-red-500 hover:text-red-600 hover:bg-red-50 p-1.5 rounded-full shadow-sm transition-colors z-10">
-                      <Trash2 className="w-3.5 h-3.5" />
+                  <div key={edu.id} className="relative p-6 border border-white/5 rounded-[2rem] bg-white/[0.02] grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <button onClick={() => removeEducation(edu.id)} className="absolute -top-3 -right-3 bg-[#030712] border border-white/10 text-gray-500 hover:text-red-400 p-2.5 rounded-full shadow-2xl transition-all z-10 hover:scale-110 active:scale-90">
+                      <Trash2 className="w-4 h-4" />
                     </button>
                     <div className="col-span-1 sm:col-span-2">
-                      <input type="text" value={edu.degree} onChange={e => updateEducation(edu.id, 'degree', e.target.value)} placeholder="Degree / Course Name" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 outline-none text-sm font-medium" />
+                      <input type="text" value={edu.degree} onChange={e => updateEducation(edu.id, 'degree', e.target.value)} placeholder="Degree / Program" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
                     </div>
                     <div>
-                      <input type="text" value={edu.institute} onChange={e => updateEducation(edu.id, 'institute', e.target.value)} placeholder="Institute Name" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 outline-none text-sm" />
+                      <input type="text" value={edu.institute} onChange={e => updateEducation(edu.id, 'institute', e.target.value)} placeholder="University / School" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
                     </div>
                     <div>
-                      <input type="text" value={edu.year} onChange={e => updateEducation(edu.id, 'year', e.target.value)} placeholder="Year (e.g. 2018 - 2022)" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 outline-none text-sm" />
+                      <input type="text" value={edu.year} onChange={e => updateEducation(edu.id, 'year', e.target.value)} placeholder="Year (e.g. 2018 - 2022)" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
                     </div>
                   </div>
                 ))}
@@ -561,55 +567,55 @@ export default function ResumeBuilder() {
             </section>
 
             {/* F. Skills */}
-            <section className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-              <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-100">
-                <Code className="w-5 h-5 text-blue-600" />
-                <h2 className="text-lg font-bold text-gray-900">Skills *</h2>
+            <section className="glass rounded-[2rem] border border-white/5 p-8">
+              <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/5">
+                <Code className="w-5 h-5 text-blue-500" />
+                <h2 className="text-xl font-black text-white tracking-tight">Core Competencies *</h2>
               </div>
               <textarea 
                 rows={3}
                 value={skills}
                 onChange={(e) => setSkills(e.target.value)}
                 placeholder="React, TypeScript, Node.js, Project Management..."
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow outline-none text-sm resize-none custom-scrollbar"
+                className="w-full px-5 py-4 border border-white/10 rounded-2xl bg-white/5 text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 outline-none text-sm font-bold transition-all resize-none custom-scrollbar"
               />
-              <p className="text-xs text-gray-500 mt-2 font-medium">Enter your skills separated by commas.</p>
+              <p className="text-[10px] font-bold text-gray-500 mt-4 uppercase tracking-widest ml-1 opacity-60">Separate skills with commas for optimal ATS parsing.</p>
             </section>
 
             {/* G. Projects */}
-            <section className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-              <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
-                <div className="flex items-center gap-2">
-                  <LayoutTemplate className="w-5 h-5 text-blue-600" />
-                  <h2 className="text-lg font-bold text-gray-900">Projects</h2>
+            <section className="glass rounded-[2rem] border border-white/5 p-8">
+              <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/5">
+                <div className="flex items-center gap-3">
+                  <LayoutTemplate className="w-5 h-5 text-blue-500" />
+                  <h2 className="text-xl font-black text-white tracking-tight">Projects</h2>
                 </div>
-                <button onClick={addProject} className="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-gray-700 bg-gray-100 border border-gray-200 rounded-lg hover:bg-gray-200 transition-colors">
-                  <Plus className="w-3.5 h-3.5" /> Add
+                <button onClick={addProject} className="flex items-center gap-2 px-5 py-2.5 text-[10px] font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all active:scale-95">
+                  <Plus className="w-3.5 h-3.5" /> Add New
                 </button>
               </div>
               
-              <div className="space-y-4">
-                {projects.length === 0 && <p className="text-sm text-gray-500 text-center py-4">No projects added yet.</p>}
+              <div className="space-y-6">
+                {projects.length === 0 && <p className="text-sm text-gray-500 text-center py-10 font-bold uppercase tracking-widest opacity-50">No Projects Listed</p>}
                 
                 {projects.map(proj => (
-                  <div key={proj.id} className="relative p-4 border border-gray-200 rounded-xl bg-gray-50/50 space-y-3">
-                    <button onClick={() => removeProject(proj.id)} className="absolute -top-2 -right-2 bg-white border border-gray-300 text-red-500 hover:text-red-600 hover:bg-red-50 p-1.5 rounded-full shadow-sm transition-colors z-10">
-                      <Trash2 className="w-3.5 h-3.5" />
+                  <div key={proj.id} className="relative p-6 border border-white/5 rounded-[2rem] bg-white/[0.02] space-y-4">
+                    <button onClick={() => removeProject(proj.id)} className="absolute -top-3 -right-3 bg-[#030712] border border-white/10 text-gray-500 hover:text-red-400 p-2.5 rounded-full shadow-2xl transition-all z-10 hover:scale-110 active:scale-90">
+                      <Trash2 className="w-4 h-4" />
                     </button>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <input type="text" value={proj.name} onChange={e => updateProject(proj.id, 'name', e.target.value)} placeholder="Project Name" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 outline-none text-sm font-medium" />
+                        <input type="text" value={proj.name} onChange={e => updateProject(proj.id, 'name', e.target.value)} placeholder="Project Name" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
                       </div>
                       <div>
-                        <input type="text" value={proj.tech} onChange={e => updateProject(proj.id, 'tech', e.target.value)} placeholder="Tech Stack (e.g. React, Node.js)" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 outline-none text-sm" />
+                        <input type="text" value={proj.tech} onChange={e => updateProject(proj.id, 'tech', e.target.value)} placeholder="Tech Stack" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
                       </div>
                     </div>
                     <textarea 
-                      rows={2} 
+                      rows={3} 
                       value={proj.desc} 
                       onChange={e => updateProject(proj.id, 'desc', e.target.value)} 
-                      placeholder="Briefly describe the project..." 
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 outline-none text-sm resize-none custom-scrollbar" 
+                      placeholder="Briefly describe the project's impact..." 
+                      className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-medium resize-none custom-scrollbar" 
                     />
                   </div>
                 ))}
@@ -619,163 +625,179 @@ export default function ResumeBuilder() {
           </div>
 
           {/* RIGHT: ATS SCORE & LIVE PREVIEW */}
-          <div className="w-full xl:w-[55%] flex flex-col gap-6">
+          <div className="w-full xl:w-[55%] flex flex-col gap-10 xl:sticky xl:top-6">
             
             {/* ATS Score Dashboard */}
-            <div className={`bg-white p-6 rounded-2xl border ${getScoreBgClass(atsScore.score)} shadow-sm transition-colors duration-500`}>
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                  <TrendingUp className={`w-5 h-5 ${getScoreColorClass(atsScore.score)}`} /> Live ATS Score
+            <div className={`glass rounded-[2.5rem] p-10 border transition-all duration-700 shadow-2xl ${
+              atsScore.score >= 80 ? 'border-emerald-500/20 bg-emerald-500/[0.02]' : 
+              atsScore.score >= 60 ? 'border-amber-500/20 bg-amber-500/[0.02]' : 
+              'border-red-500/20 bg-red-500/[0.02]'
+            }`}>
+              <div className="flex justify-between items-center mb-10">
+                <h2 className="text-xl font-black text-white flex items-center gap-3 tracking-tight">
+                  <TrendingUp className={`w-6 h-6 ${
+                    atsScore.score >= 80 ? 'text-emerald-400' : 
+                    atsScore.score >= 60 ? 'text-amber-400' : 
+                    'text-red-400'
+                  }`} /> Real-time ATS Analysis
                 </h2>
-                <span className="text-xs font-bold bg-white text-gray-700 px-3 py-1.5 rounded-full border border-gray-200 shadow-sm uppercase tracking-wide">
-                  Real-time Analysis
-                </span>
+                <div className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/10 shadow-xl">
+                  <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+                  <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Live Feedback</span>
+                </div>
               </div>
               
-              <div className="flex flex-col sm:flex-row gap-8 items-center sm:items-start">
+              <div className="flex flex-col md:flex-row gap-12 items-center md:items-start">
                 
                 {/* Score Circle */}
-                <div className="relative w-36 h-36 flex-shrink-0">
-                  <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="42" className="text-white drop-shadow-sm" strokeWidth="12" stroke="currentColor" fill="none" />
+                <div className="relative w-44 h-44 flex-shrink-0">
+                  <svg className="w-full h-full transform -rotate-90 filter drop-shadow-[0_0_15px_rgba(37,99,235,0.2)]" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="44" className="text-white/[0.02]" strokeWidth="8" stroke="currentColor" fill="none" />
                     <circle 
-                      cx="50" cy="50" r="42" 
-                      className={getScoreColorClass(atsScore.score)} 
-                      strokeWidth="12" 
-                      strokeDasharray="263.89" 
-                      strokeDashoffset={263.89 - (263.89 * atsScore.score) / 100} 
+                      cx="50" cy="50" r="44" 
+                      className={
+                        atsScore.score >= 80 ? 'text-emerald-400' : 
+                        atsScore.score >= 60 ? 'text-amber-400' : 
+                        'text-red-400'
+                      } 
+                      strokeWidth="8" 
+                      strokeDasharray="276.46" 
+                      strokeDashoffset={276.46 - (276.46 * atsScore.score) / 100} 
                       strokeLinecap="round" 
                       stroke="currentColor" 
                       fill="none" 
-                      style={{ transition: 'stroke-dashoffset 1s ease-in-out, stroke 0.5s ease' }} 
+                      style={{ transition: 'stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.8s ease' }} 
                     />
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <span className="text-4xl font-black text-gray-900">{atsScore.score}</span>
-                    <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mt-0.5">out of 100</span>
+                    <span className="text-5xl font-black text-white tracking-tighter">{atsScore.score}</span>
+                    <span className="text-[10px] uppercase font-black text-gray-500 tracking-[0.2em] mt-1">Score</span>
                   </div>
                 </div>
 
                 {/* Quick Stats & Bars */}
-                <div className="w-full space-y-5">
+                <div className="w-full space-y-8">
                   <div>
-                    <div className="flex justify-between items-end mb-1.5">
-                      <span className="text-xs font-bold text-gray-700 uppercase tracking-wider">Job Keyword Match</span>
-                      <span className="text-sm font-black text-gray-900">{atsScore.keywordMatchPercent}%</span>
+                    <div className="flex justify-between items-end mb-3">
+                      <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Keyword Alignment</span>
+                      <span className="text-base font-black text-white tracking-tight">{atsScore.keywordMatchPercent}% Match</span>
                     </div>
-                    <div className="w-full h-2.5 bg-white rounded-full overflow-hidden border border-gray-200 shadow-inner">
+                    <div className="w-full h-3 bg-white/[0.02] rounded-full overflow-hidden border border-white/5 shadow-2xl">
                       <div 
-                        className={`h-full rounded-full transition-all duration-1000 ${atsScore.keywordMatchPercent > 60 ? 'bg-emerald-500' : atsScore.keywordMatchPercent > 30 ? 'bg-amber-500' : 'bg-red-500'}`} 
+                        className={`h-full rounded-full transition-all duration-1000 shadow-[0_0_15px_rgba(37,99,235,0.3)] ${atsScore.keywordMatchPercent > 60 ? 'bg-emerald-500' : atsScore.keywordMatchPercent > 30 ? 'bg-amber-500' : 'bg-red-500'}`} 
                         style={{ width: `${Math.max(5, atsScore.keywordMatchPercent)}%` }} 
                       />
                     </div>
-                    <p className="text-[11px] text-gray-500 mt-1.5 font-medium">Matching your skills against the Target Job description.</p>
+                    <p className="text-[10px] font-bold text-gray-500 mt-4 leading-relaxed uppercase tracking-widest opacity-60">Syncing with target job description...</p>
                   </div>
                   
-                  <div className="flex flex-wrap gap-2">
-                    <div className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg shadow-sm flex items-center gap-1.5">
-                      <CheckCircle className="w-3.5 h-3.5 text-emerald-500" />
-                      <span className="text-xs font-bold text-gray-700">{atsScore.strengths.length} Strengths</span>
+                  <div className="flex flex-wrap gap-3">
+                    <div className="px-5 py-3 bg-white/[0.03] border border-white/5 rounded-2xl shadow-xl flex items-center gap-3">
+                      <CheckCircle className="w-4 h-4 text-emerald-400" />
+                      <span className="text-xs font-black text-gray-300 uppercase tracking-widest">{atsScore.strengths.length} Wins</span>
                     </div>
-                    <div className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg shadow-sm flex items-center gap-1.5">
-                      <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
-                      <span className="text-xs font-bold text-gray-700">{atsScore.suggestions.length + atsScore.missing.length} Improvements</span>
+                    <div className="px-5 py-3 bg-white/[0.03] border border-white/5 rounded-2xl shadow-xl flex items-center gap-3">
+                      <AlertTriangle className="w-4 h-4 text-amber-400" />
+                      <span className="text-xs font-black text-gray-300 uppercase tracking-widest">{atsScore.suggestions.length + atsScore.missing.length} Gaps</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Detailed Insights */}
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6 border-t border-gray-200/60">
-                <div>
-                  <h4 className="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                    <CheckCircle className="w-4 h-4" /> Strong Points
+              <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-10 pt-10 border-t border-white/5">
+                <div className="space-y-5">
+                  <h4 className="text-[10px] font-black text-emerald-400 uppercase tracking-[0.3em] mb-4 flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4" /> Optimization Wins
                   </h4>
-                  <ul className="text-xs text-gray-700 space-y-2 font-medium">
-                    {atsScore.strengths.length === 0 && <li className="text-gray-500 italic">No strengths identified yet.</li>}
-                    {atsScore.strengths.slice(0, 4).map((s, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="text-emerald-500 font-bold mt-0.5">•</span> 
-                        <span className="leading-tight">{s}</span>
+                  <ul className="text-xs text-gray-300 space-y-3.5 font-bold">
+                    {atsScore.strengths.length === 0 && <li className="text-gray-600 italic tracking-widest font-black uppercase text-[10px]">Awaiting Data...</li>}
+                    {atsScore.strengths.slice(0, 5).map((s, i) => (
+                      <li key={i} className="flex items-start gap-3 bg-emerald-500/5 p-3 rounded-xl border border-emerald-500/10 transition-all hover:bg-emerald-500/10">
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5 shrink-0" /> 
+                        <span className="leading-relaxed opacity-80">{s}</span>
                       </li>
                     ))}
-                    {atsScore.strengths.length > 4 && <li className="text-gray-500 pl-3 italic">+ {atsScore.strengths.length - 4} more</li>}
+                    {atsScore.strengths.length > 5 && <li className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] pl-4">+ {atsScore.strengths.length - 5} more metrics</li>}
                   </ul>
                 </div>
-                <div>
-                  <h4 className="text-xs font-bold text-amber-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                    <AlertTriangle className="w-4 h-4" /> Recommendations
+                <div className="space-y-5">
+                  <h4 className="text-[10px] font-black text-amber-400 uppercase tracking-[0.3em] mb-4 flex items-center gap-2">
+                    <AlertTriangle className="w-4 h-4" /> Growth Areas
                   </h4>
-                  <ul className="text-xs text-gray-700 space-y-2 font-medium">
-                    {atsScore.missing.length === 0 && atsScore.suggestions.length === 0 && <li className="text-gray-500 italic">Resume looks well optimized!</li>}
-                    {[...atsScore.missing, ...atsScore.suggestions].slice(0, 4).map((s, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="text-amber-500 font-bold mt-0.5">•</span> 
-                        <span className="leading-tight">{s}</span>
+                  <ul className="text-xs text-gray-300 space-y-3.5 font-bold">
+                    {atsScore.missing.length === 0 && atsScore.suggestions.length === 0 && <li className="text-gray-600 italic tracking-widest font-black uppercase text-[10px]">Fully Optimized</li>}
+                    {[...atsScore.missing, ...atsScore.suggestions].slice(0, 5).map((s, i) => (
+                      <li key={i} className="flex items-start gap-3 bg-amber-500/5 p-3 rounded-xl border border-amber-500/10 transition-all hover:bg-amber-500/10">
+                        <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0" /> 
+                        <span className="leading-relaxed opacity-80">{s}</span>
                       </li>
                     ))}
-                    {([...atsScore.missing, ...atsScore.suggestions].length > 4) && <li className="text-gray-500 pl-3 italic">+ {([...atsScore.missing, ...atsScore.suggestions].length - 4)} more</li>}
+                    {([...atsScore.missing, ...atsScore.suggestions].length > 5) && <li className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] pl-4">+ {([...atsScore.missing, ...atsScore.suggestions].length - 5)} points</li>}
                   </ul>
                 </div>
               </div>
             </div>
             
             {/* Live Preview Document Wrapper */}
-            <div className="w-full overflow-x-auto max-w-full bg-gray-200/50 p-4 sm:p-6 rounded-2xl border border-gray-200 shadow-inner custom-scrollbar">
+            <div className="w-full overflow-x-auto max-w-full bg-[#030712] p-6 sm:p-12 rounded-[3rem] border border-white/5 shadow-[0_0_50px_rgba(0,0,0,0.5)] custom-scrollbar relative">
+              <div className="absolute top-6 left-1/2 -translate-x-1/2 text-[10px] font-black text-gray-600 uppercase tracking-[0.4em] z-20 pointer-events-none">
+                Interactive Preview
+              </div>
               
               {/* A4 Resume Container */}
               <div 
                 id="resume-preview-container" 
-                className="bg-white mx-auto relative shadow-sm"
+                className="bg-white mx-auto relative shadow-[0_30px_60px_-12px_rgba(0,0,0,0.4)] overflow-hidden"
                 style={{ 
                   width: '100%', 
                   maxWidth: '794px', 
                   minWidth: 'min(794px, 100%)', // Responsive scaling for mobile
                   minHeight: '1123px', // Standard A4 height
-                  padding: 'clamp(20px, 5vw, 50px)',
+                  padding: 'clamp(30px, 6vw, 60px)',
                   fontFamily: '"Inter", "system-ui", sans-serif',
-                  color: '#1f2937' // gray-800
+                  color: '#111827' // gray-900
                 }}
               >
                 {/* Header */}
-                <div className="text-center border-b-2 border-gray-800 pb-5 mb-6">
-                  <h1 className="text-3xl font-black text-gray-900 uppercase tracking-widest">{personal.name || 'Your Name'}</h1>
-                  <p className="text-lg font-medium text-gray-700 mt-1.5 uppercase tracking-wider">{personal.title}</p>
-                  <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 mt-3 text-[13px] text-gray-600 font-medium">
-                    {personal.email && <span>{personal.email}</span>}
+                <div className="text-center border-b-[3px] border-gray-900 pb-8 mb-8">
+                  <h1 className="text-4xl font-black text-gray-900 uppercase tracking-tighter leading-none">{personal.name || 'Your Name'}</h1>
+                  <p className="text-xl font-bold text-gray-700 mt-3 uppercase tracking-[0.15em]">{personal.title}</p>
+                  <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 mt-5 text-[12px] text-gray-500 font-bold uppercase tracking-widest">
+                    {personal.email && <span className="hover:text-blue-600 transition-colors">{personal.email}</span>}
                     {personal.phone && <span>• {personal.phone}</span>}
                     {personal.location && <span>• {personal.location}</span>}
-                    {personal.linkedin && <span>• {personal.linkedin}</span>}
-                    {personal.portfolio && <span>• {personal.portfolio}</span>}
+                    {personal.linkedin && <span className="hover:text-blue-600 transition-colors">• {personal.linkedin}</span>}
+                    {personal.portfolio && <span className="hover:text-blue-600 transition-colors">• {personal.portfolio}</span>}
                   </div>
                 </div>
                 
                 {/* Summary */}
                 {summary && (
-                  <div className="mb-6">
-                    <h2 className="text-[15px] font-bold text-gray-900 uppercase border-b border-gray-300 pb-1 mb-2 tracking-wide">Professional Summary</h2>
-                    <p className="text-[13px] text-gray-800 leading-relaxed text-justify">{summary}</p>
+                  <div className="mb-10">
+                    <h2 className="text-[14px] font-black text-gray-900 uppercase border-b-2 border-gray-100 pb-2 mb-4 tracking-[0.2em]">Professional Profile</h2>
+                    <p className="text-[13px] text-gray-800 leading-relaxed text-justify font-medium">{summary}</p>
                   </div>
                 )}
                 
                 {/* Experience */}
                 {experience.length > 0 && (
-                  <div className="mb-6">
-                    <h2 className="text-[15px] font-bold text-gray-900 uppercase border-b border-gray-300 pb-1 mb-3 tracking-wide">Work Experience</h2>
-                    <div className="space-y-4">
+                  <div className="mb-10">
+                    <h2 className="text-[14px] font-black text-gray-900 uppercase border-b-2 border-gray-100 pb-2 mb-5 tracking-[0.2em]">Professional Experience</h2>
+                    <div className="space-y-8">
                       {experience.map(exp => (
                         <div key={exp.id}>
-                          <div className="flex justify-between items-baseline mb-1">
+                          <div className="flex justify-between items-baseline mb-2">
                             <div>
-                              <h3 className="text-[14px] font-bold text-gray-900">{exp.role}</h3>
-                              <p className="text-[13px] text-gray-700 font-semibold">{exp.company}</p>
+                              <h3 className="text-[15px] font-black text-gray-900 tracking-tight">{exp.role}</h3>
+                              <p className="text-[13px] text-gray-800 font-black uppercase tracking-wider mt-0.5">{exp.company}</p>
                             </div>
-                            <span className="text-[13px] text-gray-600 font-medium whitespace-nowrap">{exp.start} {exp.start && exp.end ? '—' : ''} {exp.end}</span>
+                            <span className="text-[12px] text-gray-500 font-black uppercase tracking-widest whitespace-nowrap bg-gray-50 px-3 py-1 rounded-full">{exp.start} {exp.start && exp.end ? '—' : ''} {exp.end}</span>
                           </div>
                           {exp.desc && (
-                            <ul className="list-disc list-inside text-[13px] text-gray-800 space-y-1 mt-1.5">
+                            <ul className="list-disc list-inside text-[13px] text-gray-700 space-y-2 mt-3 pl-2">
                               {exp.desc.split('\n').filter(line => line.trim() !== '').map((line, i) => (
-                                <li key={i} className="leading-relaxed"><span className="-ml-1">{line.replace(/^- /, '')}</span></li>
+                                <li key={i} className="leading-relaxed"><span className="-ml-1 font-medium">{line.replace(/^- /, '')}</span></li>
                               ))}
                             </ul>
                           )}
@@ -787,66 +809,61 @@ export default function ResumeBuilder() {
                 
                 {/* Projects */}
                 {projects.length > 0 && (
-                  <div className="mb-6">
-                    <h2 className="text-[15px] font-bold text-gray-900 uppercase border-b border-gray-300 pb-1 mb-3 tracking-wide">Projects</h2>
-                    <div className="space-y-3">
+                  <div className="mb-10">
+                    <h2 className="text-[14px] font-black text-gray-900 uppercase border-b-2 border-gray-100 pb-2 mb-5 tracking-[0.2em]">Key Projects</h2>
+                    <div className="space-y-6">
                       {projects.map(proj => (
                         <div key={proj.id}>
-                          <div className="flex items-baseline gap-2 mb-1">
-                            <h3 className="text-[14px] font-bold text-gray-900">{proj.name}</h3>
-                            {proj.tech && <span className="text-[12px] text-gray-600 font-medium border-l border-gray-300 pl-2">{proj.tech}</span>}
+                          <div className="flex items-baseline gap-3 mb-2">
+                            <h3 className="text-[15px] font-black text-gray-900 tracking-tight">{proj.name}</h3>
+                            {proj.tech && <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest bg-gray-50 px-2 py-0.5 rounded border border-gray-100">{proj.tech}</span>}
                           </div>
-                          {proj.desc && <p className="text-[13px] text-gray-800 leading-relaxed">{proj.desc}</p>}
+                          <p className="text-[13px] text-gray-700 leading-relaxed font-medium">{proj.desc}</p>
                         </div>
                       ))}
                     </div>
                   </div>
                 )}
-                
+
+                {/* Skills */}
+                {skills && (
+                  <div className="mb-10">
+                    <h2 className="text-[14px] font-black text-gray-900 uppercase border-b-2 border-gray-100 pb-2 mb-4 tracking-[0.2em]">Skills & Technologies</h2>
+                    <div className="flex flex-wrap gap-2">
+                      {skills.split(',').filter(s => s.trim()).map((skill, i) => (
+                        <span key={i} className="text-[11px] font-black uppercase tracking-widest text-gray-800 bg-gray-100 px-3 py-1.5 rounded-lg border border-gray-200">
+                          {skill.trim()}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {/* Education */}
                 {education.length > 0 && (
-                  <div className="mb-6">
-                    <h2 className="text-[15px] font-bold text-gray-900 uppercase border-b border-gray-300 pb-1 mb-3 tracking-wide">Education</h2>
-                    <div className="space-y-3">
+                  <div>
+                    <h2 className="text-[14px] font-black text-gray-900 uppercase border-b-2 border-gray-100 pb-2 mb-5 tracking-[0.2em]">Academic Background</h2>
+                    <div className="space-y-5">
                       {education.map(edu => (
                         <div key={edu.id} className="flex justify-between items-baseline">
                           <div>
-                            <h3 className="text-[14px] font-bold text-gray-900">{edu.degree}</h3>
-                            <p className="text-[13px] text-gray-700 font-medium">{edu.institute}</p>
+                            <h3 className="text-[14px] font-black text-gray-900 tracking-tight">{edu.degree}</h3>
+                            <p className="text-[13px] text-gray-600 font-bold uppercase tracking-wider mt-0.5">{edu.institute}</p>
                           </div>
-                          <span className="text-[13px] text-gray-600 font-medium whitespace-nowrap">{edu.year}</span>
+                          <span className="text-[12px] text-gray-400 font-black tracking-tighter uppercase">{edu.year}</span>
                         </div>
                       ))}
                     </div>
                   </div>
                 )}
-                
-                {/* Skills */}
-                {skills && (
-                  <div>
-                    <h2 className="text-[15px] font-bold text-gray-900 uppercase border-b border-gray-300 pb-1 mb-2 tracking-wide">Skills</h2>
-                    <p className="text-[13px] text-gray-800 leading-relaxed font-medium">{skills}</p>
-                  </div>
-                )}
-                
               </div>
             </div>
-            
-            {/* Mobile Download Button (Visible only on small screens) */}
-            <div className="xl:hidden mt-2">
-              <button 
-                onClick={downloadPDF}
-                disabled={isDownloading}
-                className="w-full flex items-center justify-center gap-2 px-6 py-4 text-sm font-bold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50 shadow-md"
-              >
-                {isDownloading ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
-                {isDownloading ? 'Generating PDF...' : 'Download Resume PDF'}
-              </button>
-            </div>
-
           </div>
         </div>
       </div>
+
+      {/* SEO Article Section */}
+      <ToolArticle {...toolArticles['resume-builder']} />
     </div>
   );
 }

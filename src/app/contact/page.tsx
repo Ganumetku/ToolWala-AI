@@ -36,19 +36,19 @@ export default function ContactPage() {
                 <ContactItem 
                   icon={<Mail />}
                   title="General Support"
-                  value="support@toolgpt.in"
+                  value="developtechx@gmail.com"
                   desc="For help with tools and general questions."
                 />
                 <ContactItem 
                   icon={<Sparkles />}
                   title="Business Inquiries"
-                  value="partners@toolgpt.in"
+                  value="developtechx@gmail.com"
                   desc="For collaborations and API access."
                 />
                 <ContactItem 
                   icon={<ShieldCheck />}
                   title="Legal & Privacy"
-                  value="legal@toolgpt.in"
+                  value="developtechx@gmail.com"
                   desc="For data requests and legal matters."
                 />
               </div>

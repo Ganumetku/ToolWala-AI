@@ -92,11 +92,11 @@ export default function Footer() {
           <div className="space-y-10">
             <div>
               <h3 className="text-xs font-black text-white uppercase tracking-[0.2em] mb-6">Contact Support</h3>
-              <a href="mailto:support@toolgpt.in" className="flex items-center gap-4 text-gray-300 hover:text-blue-400 font-black transition-all group">
+              <a href="mailto:developtechx@gmail.com" className="flex items-center gap-4 text-gray-300 hover:text-blue-400 font-black transition-all group">
                 <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-blue-600/10 group-hover:border-blue-600/20 transition-all">
                   <Mail className="w-5 h-5" />
                 </div>
-                support@toolgpt.in
+                developtechx@gmail.com
               </a>
             </div>
             

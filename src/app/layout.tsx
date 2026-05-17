@@ -17,8 +17,117 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ToolGPT AI - Free AI Tools for Images, PDF, Resume, Voice & More",
-  description: "Free online AI tools for image compression, passport photos, QR codes, invoices, resumes, captions, text humanizer, voice generator and PDF tools.",
+  title: {
+    default: "ToolGPT AI – Free AI Tools for Images, PDF, Resume, QR & More",
+    template: "%s | ToolGPT AI"
+  },
+  description: "ToolGPT AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.",
+  keywords: [
+    "AI tools",
+    "image tools",
+    "PDF tools",
+    "QR generator",
+    "AI resume builder",
+    "AI caption generator",
+    "image compressor",
+    "background remover",
+    "ToolGPT AI"
+  ],
+  authors: [{ name: "ToolGPT AI" }],
+  creator: "ToolGPT AI",
+  publisher: "ToolGPT AI",
+  metadataBase: new URL("https://toolgpt.in"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://toolgpt.in",
+    siteName: "ToolGPT AI",
+    title: "ToolGPT AI – Free AI Tools for Images, PDF, Resume, QR & More",
+    description: "ToolGPT AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "ToolGPT AI – Free AI Tools for Images, PDF, Resume, QR & More",
+      }
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ToolGPT AI – Free AI Tools for Images, PDF, Resume, QR & More",
+    description: "ToolGPT AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.",
+    images: ["/og-image.png"],
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "32x32" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+  manifest: "/manifest.json",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://toolgpt.in/#organization",
+      "name": "ToolGPT AI",
+      "url": "https://toolgpt.in",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://toolgpt.in/#logo",
+        "url": "https://toolgpt.in/icon-512.png",
+        "contentUrl": "https://toolgpt.in/icon-512.png",
+        "caption": "ToolGPT AI Logo",
+        "inLanguage": "en-US",
+        "width": 512,
+        "height": 512
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://toolgpt.in/#website",
+      "url": "https://toolgpt.in",
+      "name": "ToolGPT AI",
+      "description": "ToolGPT AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.",
+      "publisher": {
+        "@id": "https://toolgpt.in/#organization"
+      },
+      "potentialAction": [
+        {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://toolgpt.in/?search={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      ],
+      "inLanguage": "en-US"
+    }
+  ]
 };
 
 export default function RootLayout({
@@ -46,6 +155,10 @@ export default function RootLayout({
             gtag('config', 'G-KJ7MKF306J');
           `}
         </Script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className="min-h-full flex flex-col font-sans bg-[#030712] text-white">
         <Toaster position="top-center" richColors />

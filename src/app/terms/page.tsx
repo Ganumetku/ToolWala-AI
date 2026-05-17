@@ -79,7 +79,7 @@ export default function TermsPage() {
           <div className="glass p-10 rounded-[3rem] border border-white/5 space-y-6 text-gray-400 font-medium">
              <h4 className="text-white font-black uppercase tracking-widest text-sm">Governing Law</h4>
              <p className="text-sm">These terms are governed by and construed in accordance with international digital service standards. Any disputes shall be handled through arbitration before legal proceedings.</p>
-             <p className="pt-4 border-t border-white/5">Questions about these terms? Contact us at <span className="text-blue-500">legal@toolgpt.in</span></p>
+             <p className="pt-4 border-t border-white/5">Questions about these terms? Contact us at <span className="text-blue-500">developtechx@gmail.com</span></p>
           </div>
         </div>
       </div>

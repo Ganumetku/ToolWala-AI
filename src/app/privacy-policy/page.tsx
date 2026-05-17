@@ -86,7 +86,7 @@ export default function PrivacyPolicyPage() {
               For any privacy-related questions, data deletion requests, or concerns about our processing methods, please contact our dedicated privacy team at:
             </p>
             <div className="flex items-center gap-3 text-blue-400 font-black tracking-wider text-xl">
-              privacy@toolgpt.in
+              developtechx@gmail.com
             </div>
             <p className="text-xs text-gray-600 font-bold uppercase tracking-widest pt-4">
               © 2026 ToolGPT AI. All Rights Reserved.

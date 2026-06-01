@@ -2,8 +2,8 @@ import SectionTitle from '@/components/SectionTitle';
 import { ShieldCheck, Lock, Trash2, EyeOff, Database, Globe, Cookie, UserCheck, Mail } from 'lucide-react';
 
 export const metadata = {
-  title: "Privacy Policy | ToolGPT AI",
-  description: "Learn how ToolGPT AI protects your privacy and handles your data with browser-first technology and secure processing.",
+  title: "Privacy Policy | ToolWala AI",
+  description: "Learn how ToolWala AI protects your privacy and handles your data with browser-first technology and secure processing.",
 };
 
 export default function PrivacyPolicyPage() {
@@ -27,7 +27,7 @@ export default function PrivacyPolicyPage() {
               <h3 className="text-2xl font-black text-white tracking-tight uppercase">Privacy Commitment</h3>
             </div>
             <p className="text-gray-400 font-medium leading-relaxed text-lg">
-              At **ToolGPT AI**, privacy is at the core of our engineering. We believe your data belongs to you. Our platform is designed to provide high-performance AI utilities while maintaining the highest standards of data protection and transparency.
+              At **ToolWala AI**, privacy is at the core of our engineering. We believe your data belongs to you. Our platform is designed to provide high-performance AI utilities while maintaining the highest standards of data protection and transparency.
             </p>
           </div>
 
@@ -89,7 +89,7 @@ export default function PrivacyPolicyPage() {
               developtechx@gmail.com
             </div>
             <p className="text-xs text-gray-600 font-bold uppercase tracking-widest pt-4">
-              © 2026 ToolGPT AI. All Rights Reserved.
+              © 2026 ToolWala AI. All Rights Reserved.
             </p>
           </div>
         </div>

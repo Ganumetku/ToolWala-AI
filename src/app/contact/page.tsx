@@ -2,8 +2,8 @@ import SectionTitle from '@/components/SectionTitle';
 import { Mail, MessageSquare, Globe, MapPin, Send, Clock, ShieldCheck, Sparkles } from 'lucide-react';
 
 export const metadata = {
-  title: "Contact Us | ToolGPT AI",
-  description: "Get in touch with the ToolGPT AI team for support, business inquiries, or legal matters.",
+  title: "Contact Us | ToolWala AI",
+  description: "Get in touch with the ToolWala AI team for support, business inquiries, or legal matters.",
 };
 
 export default function ContactPage() {

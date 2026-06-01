@@ -4,8 +4,8 @@ import { Sparkles, ShieldCheck, Zap, Heart, ChevronRight } from 'lucide-react';
 import { MeshGradient } from '@/components/BackgroundEffects';
 
 export const metadata = {
-  title: "About Our Mission | ToolGPT AI",
-  description: "Learn more about ToolGPT AI and our mission to build powerful AI utility tools.",
+  title: "About Our Mission | ToolWala AI",
+  description: "Learn more about ToolWala AI and our mission to build powerful AI utility tools.",
 };
 
 export default function AboutPage() {
@@ -17,7 +17,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div>
             <SectionTitle 
-              title="About ToolGPT AI" 
+              title="About ToolWala AI" 
               subtitle="Democratizing artificial intelligence through simple, powerful, and secure browser utilities."
             />
             
@@ -30,7 +30,7 @@ export default function AboutPage() {
                   <h3 className="text-xl font-black text-white tracking-tight uppercase">The Vision</h3>
                 </div>
                 <p className="text-gray-400 font-medium leading-relaxed">
-                  ToolGPT AI was born from a frustration with clunky software and expensive subscriptions for simple daily tasks. We envisioned a world where premium AI tools are accessible instantly, without barriers.
+                  ToolWala AI was born from a frustration with clunky software and expensive subscriptions for simple daily tasks. We envisioned a world where premium AI tools are accessible instantly, without barriers.
                 </p>
               </div>
 

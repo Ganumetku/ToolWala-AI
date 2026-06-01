@@ -252,7 +252,7 @@ export default function VoiceGenerator() {
                 value={text} 
                 onChange={e => setText(e.target.value)} 
                 className="w-full flex-1 min-h-[300px] px-6 py-5 bg-white/5 border border-white/5 rounded-[2rem] focus:border-blue-500/50 outline-none text-lg font-medium text-white leading-relaxed resize-none custom-scrollbar transition-all placeholder:text-gray-700 relative z-10 shadow-inner" 
-                placeholder="Type or paste the script you want the AI to speak...&#10;&#10;e.g. 'Welcome to ToolGPT! Today we are thrilled to announce our premium voice synthesis engine...'" 
+                placeholder="Type or paste the script you want the AI to speak...&#10;&#10;e.g. 'Welcome to ToolWala! Today we are thrilled to announce our premium voice synthesis engine...'" 
               />
               
               {/* Voice Presets */}

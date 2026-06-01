@@ -320,7 +320,7 @@ export default function ProfessionalQRCodeGenerator() {
                       value={inputText}
                       onChange={(e) => setInputText(e.target.value)}
                       className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700"
-                      placeholder="e.g. www.toolgpt.in"
+                      placeholder="e.g. www.toolwala.co"
                     />
                   </div>
                 )}

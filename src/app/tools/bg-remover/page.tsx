@@ -120,7 +120,7 @@ export default function BackgroundRemover() {
     if (!resultUrl) return;
     const a = document.createElement('a');
     a.href = resultUrl;
-    a.download = `toolgpt-bg-removed-${Date.now()}.png`;
+    a.download = `toolwala-bg-removed-${Date.now()}.png`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

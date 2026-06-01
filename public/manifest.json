@@ -1,7 +1,7 @@
 {
-  "name": "ToolGPT AI",
-  "short_name": "ToolGPT",
-  "description": "ToolGPT AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more.",
+  "name": "ToolWala AI",
+  "short_name": "ToolWala",
+  "description": "ToolWala AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#030712",

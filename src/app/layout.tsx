@@ -18,10 +18,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "ToolGPT AI – Free AI Tools for Images, PDF, Resume, QR & More",
-    template: "%s | ToolGPT AI"
+    default: "ToolWala AI – Free AI Tools for Images, PDF, Resume, QR & More",
+    template: "%s | ToolWala AI"
   },
-  description: "ToolGPT AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.",
+  description: "ToolWala AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.",
   keywords: [
     "AI tools",
     "image tools",
@@ -31,35 +31,35 @@ export const metadata: Metadata = {
     "AI caption generator",
     "image compressor",
     "background remover",
-    "ToolGPT AI"
+    "ToolWala AI"
   ],
-  authors: [{ name: "ToolGPT AI" }],
-  creator: "ToolGPT AI",
-  publisher: "ToolGPT AI",
-  metadataBase: new URL("https://toolgpt.in"),
+  authors: [{ name: "ToolWala AI" }],
+  creator: "ToolWala AI",
+  publisher: "ToolWala AI",
+  metadataBase: new URL("https://toolwala.co"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://toolgpt.in",
-    siteName: "ToolGPT AI",
-    title: "ToolGPT AI – Free AI Tools for Images, PDF, Resume, QR & More",
-    description: "ToolGPT AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.",
+    url: "https://toolwala.co",
+    siteName: "ToolWala AI",
+    title: "ToolWala AI – Free AI Tools for Images, PDF, Resume, QR & More",
+    description: "ToolWala AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "ToolGPT AI – Free AI Tools for Images, PDF, Resume, QR & More",
+        alt: "ToolWala AI – Free AI Tools for Images, PDF, Resume, QR & More",
       }
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ToolGPT AI – Free AI Tools for Images, PDF, Resume, QR & More",
-    description: "ToolGPT AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.",
+    title: "ToolWala AI – Free AI Tools for Images, PDF, Resume, QR & More",
+    description: "ToolWala AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.",
     images: ["/og-image.png"],
   },
   icons: {
@@ -92,15 +92,15 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://toolgpt.in/#organization",
-      "name": "ToolGPT AI",
-      "url": "https://toolgpt.in",
+      "@id": "https://toolwala.co/#organization",
+      "name": "ToolWala AI",
+      "url": "https://toolwala.co",
       "logo": {
         "@type": "ImageObject",
-        "@id": "https://toolgpt.in/#logo",
-        "url": "https://toolgpt.in/icon-512.png",
-        "contentUrl": "https://toolgpt.in/icon-512.png",
-        "caption": "ToolGPT AI Logo",
+        "@id": "https://toolwala.co/#logo",
+        "url": "https://toolwala.co/icon-512.png",
+        "contentUrl": "https://toolwala.co/icon-512.png",
+        "caption": "ToolWala AI Logo",
         "inLanguage": "en-US",
         "width": 512,
         "height": 512
@@ -108,19 +108,19 @@ const jsonLd = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://toolgpt.in/#website",
-      "url": "https://toolgpt.in",
-      "name": "ToolGPT AI",
-      "description": "ToolGPT AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.",
+      "@id": "https://toolwala.co/#website",
+      "url": "https://toolwala.co",
+      "name": "ToolWala AI",
+      "description": "ToolWala AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.",
       "publisher": {
-        "@id": "https://toolgpt.in/#organization"
+        "@id": "https://toolwala.co/#organization"
       },
       "potentialAction": [
         {
           "@type": "SearchAction",
           "target": {
             "@type": "EntryPoint",
-            "urlTemplate": "https://toolgpt.in/?search={search_term_string}"
+            "urlTemplate": "https://toolwala.co/?search={search_term_string}"
           },
           "query-input": "required name=search_term_string"
         }

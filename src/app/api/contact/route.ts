@@ -68,7 +68,7 @@ export async function POST(req: Request) {
 
     // 4. Send Email
     await transporter.sendMail({
-      from: `"ToolGPT AI" <${smtpEmail}>`,
+      from: `"ToolWala AI" <${smtpEmail}>`,
       to: 'ganeshmetku0901@gmail.com',
       replyTo: email,
       subject: `New Contact Form: ${fullName}`,
@@ -80,7 +80,7 @@ export async function POST(req: Request) {
               <span style="background-color: #2563eb; color: white; padding: 6px 12px; rounded: 12px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 8px;">New Submission</span>
             </div>
             
-            <h2 style="color: #111827; font-size: 24px; font-weight: 800; margin-bottom: 24px; letter-spacing: -0.025em;">You have a new message from ToolGPT AI</h2>
+            <h2 style="color: #111827; font-size: 24px; font-weight: 800; margin-bottom: 24px; letter-spacing: -0.025em;">You have a new message from ToolWala AI</h2>
             
             <div style="background-color: white; border-radius: 16px; padding: 24px; border: 1px solid #f1f5f9;">
               <div style="margin-bottom: 16px;">
@@ -107,7 +107,7 @@ export async function POST(req: Request) {
             </div>
             
             <div style="margin-top: 32px; text-align: center;">
-               <p style="font-size: 12px; color: #94a3b8;">This email was sent via ToolGPT AI SMTP System.</p>
+               <p style="font-size: 12px; color: #94a3b8;">This email was sent via ToolWala AI SMTP System.</p>
             </div>
           </div>
         </div>

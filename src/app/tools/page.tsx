@@ -3,7 +3,7 @@ import ToolsDirectory from '@/components/ToolsDirectory';
 import { MeshGradient } from '@/components/BackgroundEffects';
 
 export const metadata = {
-  title: "AI Tools Directory | ToolGPT AI",
+  title: "AI Tools Directory | ToolWala AI",
   description: "Browse our comprehensive collection of powerful, AI-driven utility tools designed for maximum productivity and privacy.",
 };
 

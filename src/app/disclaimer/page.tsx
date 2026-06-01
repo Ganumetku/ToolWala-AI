@@ -2,8 +2,8 @@ import SectionTitle from '@/components/SectionTitle';
 import { AlertTriangle, Info, ShieldAlert, Cpu, ExternalLink, RefreshCw } from 'lucide-react';
 
 export const metadata = {
-  title: "Disclaimer | ToolGPT AI",
-  description: "Legal disclaimer regarding AI accuracy, tool usage, and service limitations of the ToolGPT AI platform.",
+  title: "Disclaimer | ToolWala AI",
+  description: "Legal disclaimer regarding AI accuracy, tool usage, and service limitations of the ToolWala AI platform.",
 };
 
 export default function DisclaimerPage() {
@@ -27,7 +27,7 @@ export default function DisclaimerPage() {
               <h3 className="text-2xl font-black text-white tracking-tight uppercase">AI Accuracy Notice</h3>
             </div>
             <p className="text-gray-400 font-medium leading-relaxed text-lg">
-              ToolGPT AI utilizes advanced artificial intelligence models to generate content and process data. While we strive for high precision, **AI-generated outputs can occasionally be inaccurate, incomplete, or biased.** Users are advised to exercise professional judgment and verify all critical outputs independently.
+              ToolWala AI utilizes advanced artificial intelligence models to generate content and process data. While we strive for high precision, **AI-generated outputs can occasionally be inaccurate, incomplete, or biased.** Users are advised to exercise professional judgment and verify all critical outputs independently.
             </p>
           </div>
 
@@ -41,7 +41,7 @@ export default function DisclaimerPage() {
             <DisclaimerCard 
               icon={<ShieldAlert />}
               title="Usage at Own Risk"
-              desc="Use of ToolGPT AI is at your sole risk. We are not responsible for any direct or indirect damages, data loss, or business interruptions arising from the use or reliance on our platform's outputs."
+              desc="Use of ToolWala AI is at your sole risk. We are not responsible for any direct or indirect damages, data loss, or business interruptions arising from the use or reliance on our platform's outputs."
             />
             <DisclaimerCard 
               icon={<RefreshCw />}
@@ -62,10 +62,10 @@ export default function DisclaimerPage() {
                Transparency Statement
              </h4>
              <p className="max-w-3xl mx-auto">
-               As the AI landscape evolves, so does ToolGPT AI. We are committed to transparency and will update this disclaimer as our technology matures. If you find any significant inaccuracies in our tool outputs, please help us improve by reporting them to our technical team.
+               As the AI landscape evolves, so does ToolWala AI. We are committed to transparency and will update this disclaimer as our technology matures. If you find any significant inaccuracies in our tool outputs, please help us improve by reporting them to our technical team.
              </p>
              <p className="pt-6 border-t border-white/5 text-xs font-bold uppercase tracking-widest text-gray-600">
-               Last updated: May 16, 2026 • © ToolGPT AI
+               Last updated: May 16, 2026 • © ToolWala AI
              </p>
           </div>
         </div>

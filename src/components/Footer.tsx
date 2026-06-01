@@ -20,7 +20,7 @@ export default function Footer() {
                 T
               </div>
               <span className="text-2xl font-black tracking-tighter text-white">
-                ToolGPT <span className="text-blue-500">AI</span>
+                ToolWala <span className="text-blue-500">AI</span>
               </span>
             </Link>
             <p className="text-gray-400 leading-relaxed font-medium">
@@ -82,7 +82,7 @@ export default function Footer() {
               <li><Link href="/" className="text-gray-400 hover:text-white font-bold transition-colors">Home</Link></li>
               <li><Link href="/tools" className="text-gray-400 hover:text-white font-bold transition-colors">All Tools</Link></li>
               <li><Link href="/pricing" className="text-gray-400 hover:text-white font-bold transition-colors">Pricing</Link></li>
-              <li><Link href="/about" className="text-gray-400 hover:text-white font-bold transition-colors">About ToolGPT</Link></li>
+              <li><Link href="/about" className="text-gray-400 hover:text-white font-bold transition-colors">About ToolWala</Link></li>
               <li><Link href="/contact" className="text-gray-400 hover:text-white font-bold transition-colors">Contact Us</Link></li>
               <li><Link href="/disclaimer" className="text-gray-400 hover:text-white font-bold transition-colors">Disclaimer</Link></li>
             </ul>
@@ -115,7 +115,7 @@ export default function Footer() {
         <div className="mt-24 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
           <div className="space-y-2">
             <p className="text-sm text-gray-500 font-bold">
-              &copy; {currentYear} ToolGPT AI. All rights reserved.
+              &copy; {currentYear} ToolWala AI. All rights reserved.
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-6 text-xs font-bold text-gray-600">
               <Link href="/privacy-policy" className="hover:text-gray-400 transition-colors">Privacy Policy</Link>

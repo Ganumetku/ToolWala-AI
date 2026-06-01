@@ -80,7 +80,7 @@ const ogSvg = `
   </g>
 
   <!-- Branding Text -->
-  <text x="340" y="295" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="75" font-weight="900" fill="url(#textGrad)" letter-spacing="-2px">ToolGPT <tspan fill="url(#accentGrad)">AI</tspan></text>
+  <text x="340" y="295" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="75" font-weight="900" fill="url(#textGrad)" letter-spacing="-2px">ToolWala <tspan fill="url(#accentGrad)">AI</tspan></text>
   <text x="345" y="360" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="800" fill="#60a5fa" letter-spacing="3px">FREE AI UTILITIES SUITE</text>
   <text x="345" y="415" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="500" fill="#94a3b8">Images • PDF • Resume • QR • Captions • Voice &amp; More</text>
 
@@ -89,7 +89,7 @@ const ogSvg = `
   <text x="230" y="489" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="800" fill="#60a5fa" text-anchor="middle" dominant-baseline="middle" letter-spacing="1.5px">100% FREE &amp; SECURE</text>
 
   <!-- URL text on bottom right -->
-  <text x="1080" y="550" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" fill="#475569" text-anchor="end" letter-spacing="1px">toolgpt.in</text>
+  <text x="1080" y="550" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" fill="#475569" text-anchor="end" letter-spacing="1px">toolwala.co</text>
 </svg>
 `;
 

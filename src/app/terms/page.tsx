@@ -2,8 +2,8 @@ import SectionTitle from '@/components/SectionTitle';
 import { FileText, Scale, AlertCircle, RefreshCcw, ShieldAlert, Cpu, UserCheck, Gavel } from 'lucide-react';
 
 export const metadata = {
-  title: "Terms of Service | ToolGPT AI",
-  description: "Terms and conditions for using ToolGPT AI professional services, outlining usage rules and intellectual property rights.",
+  title: "Terms of Service | ToolWala AI",
+  description: "Terms and conditions for using ToolWala AI professional services, outlining usage rules and intellectual property rights.",
 };
 
 export default function TermsPage() {
@@ -26,7 +26,7 @@ export default function TermsPage() {
               <h3 className="text-2xl font-black text-white tracking-tight uppercase">User Agreement</h3>
             </div>
             <p className="text-gray-400 font-medium leading-relaxed text-lg">
-              By accessing or using **ToolGPT AI**, you signify your agreement to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services. We provide a platform for AI-powered productivity, and these rules ensure it remains safe and effective for everyone.
+              By accessing or using **ToolWala AI**, you signify your agreement to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services. We provide a platform for AI-powered productivity, and these rules ensure it remains safe and effective for everyone.
             </p>
           </div>
 
@@ -45,7 +45,7 @@ export default function TermsPage() {
             <TermCard 
               icon={<UserCheck />}
               title="Content Ownership"
-              desc="You retain 100% of the intellectual property rights to the content you generate using our tools. ToolGPT AI does not claim ownership or license over your original creations or processed data."
+              desc="You retain 100% of the intellectual property rights to the content you generate using our tools. ToolWala AI does not claim ownership or license over your original creations or processed data."
             />
             <TermCard 
               icon={<RefreshCcw />}
@@ -59,13 +59,13 @@ export default function TermsPage() {
             <DetailedClause 
               icon={<AlertCircle />}
               title="AI Output Accuracy"
-              content="ToolGPT AI leverages advanced artificial intelligence. While we aim for high accuracy, AI models can produce incorrect or biased information. Users are responsible for verifying all outputs before use in professional or legal contexts."
+              content="ToolWala AI leverages advanced artificial intelligence. While we aim for high accuracy, AI models can produce incorrect or biased information. Users are responsible for verifying all outputs before use in professional or legal contexts."
             />
 
             <DetailedClause 
               icon={<Scale />}
               title="Limitation of Liability"
-              content="ToolGPT AI and its creators shall not be liable for any indirect, incidental, or consequential damages resulting from the use or inability to use our tools, including loss of data or business interruption."
+              content="ToolWala AI and its creators shall not be liable for any indirect, incidental, or consequential damages resulting from the use or inability to use our tools, including loss of data or business interruption."
             />
 
             <DetailedClause 

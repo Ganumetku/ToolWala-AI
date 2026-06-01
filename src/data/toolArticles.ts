@@ -16,7 +16,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
   "ai-logo-maker": {
     title: "AI Logo Maker",
     intro: "Your brand's visual identity starts here. Our AI Logo Maker combines professional design principles with advanced artificial intelligence to help you create stunning, high-resolution logos in seconds—no design degree required.",
-    whatItDoes: "The ToolGPT AI Logo Maker is a sophisticated design engine that understands the nuances of branding. Unlike generic template editors, our tool analyzes your business name, industry, and preferred style to generate a diverse array of logo concepts. It handles the complex work of color theory, typography pairing, and iconography, allowing you to focus on choosing the perfect face for your brand. Whether you need a sleek tech monogram or a classic corporate emblem, the engine adapts to your vision.",
+    whatItDoes: "The ToolWala AI Logo Maker is a sophisticated design engine that understands the nuances of branding. Unlike generic template editors, our tool analyzes your business name, industry, and preferred style to generate a diverse array of logo concepts. It handles the complex work of color theory, typography pairing, and iconography, allowing you to focus on choosing the perfect face for your brand. Whether you need a sleek tech monogram or a classic corporate emblem, the engine adapts to your vision.",
     howToUse: [
       "Enter your business name and an optional tagline or keywords to give the AI context about your brand.",
       "Select your industry and preferred design style (Minimal, Abstract, Tech, etc.) to guide the generation process.",
@@ -36,7 +36,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Total creative control with our easy-to-use customization suite.",
       "No account or signup required to start designing and exploring ideas."
     ],
-    whyChoose: "We built this tool because we believe every entrepreneur deserves a professional identity without the heavy price tag. ToolGPT AI prioritizes clean, modern aesthetics that stand the test of time. Our engine avoids the 'clipart' look common in free tools, focusing instead on professional typography and balanced layouts that make your business look established from day one.",
+    whyChoose: "We built this tool because we believe every entrepreneur deserves a professional identity without the heavy price tag. ToolWala AI prioritizes clean, modern aesthetics that stand the test of time. Our engine avoids the 'clipart' look common in free tools, focusing instead on professional typography and balanced layouts that make your business look established from day one.",
     useCases: [
       "New startups needing a quick but professional visual identity.",
       "Freelancers looking to brand their personal portfolio.",
@@ -44,12 +44,12 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Side projects that need a polished face before launch."
     ],
     faqs: [
-      { question: "Do I own the logos I create?", answer: "Yes, you retain 100% ownership of the logos you design and download using ToolGPT AI. We claim no rights over your creative outputs." },
+      { question: "Do I own the logos I create?", answer: "Yes, you retain 100% ownership of the logos you design and download using ToolWala AI. We claim no rights over your creative outputs." },
       { question: "Can I download my logo for free?", answer: "During our beta period, you can generate and customize logos for free. We aim to keep professional branding accessible to everyone." },
       { question: "What file formats do you provide?", answer: "Currently, we provide high-resolution PNG files which are perfect for web use, social media, and small-scale printing." },
       { question: "Is this really powered by AI?", answer: "Yes! Our custom-built engine uses AI to pair fonts, select icons, and generate layouts based on the data you provide, ensuring each result is contextually relevant." }
     ],
-    conclusion: "Branding doesn't have to be a barrier to entry. With the ToolGPT AI Logo Maker, you can bridge the gap between a great idea and a professional business in minutes. Start experimenting today and see how AI can transform your vision into a visual reality.",
+    conclusion: "Branding doesn't have to be a barrier to entry. With the ToolWala AI Logo Maker, you can bridge the gap between a great idea and a professional business in minutes. Start experimenting today and see how AI can transform your vision into a visual reality.",
     relatedTools: [
       { name: "Image Compressor", href: "/tools/image-compressor" },
       { name: "QR Code Generator", href: "/tools/qr-code-generator" }
@@ -78,7 +78,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Save time—automated isolation that would take a professional designer minutes to do manually.",
       "Completely free to use with no hidden watermarks or daily limits."
     ],
-    whyChoose: "Most online background removers require you to upload your files to their servers, where they might be stored or used for training. ToolGPT AI changes the game by bringing the AI to you. Our tool is for the privacy-conscious professional who needs high-quality results without the security risks associated with cloud-based processing.",
+    whyChoose: "Most online background removers require you to upload your files to their servers, where they might be stored or used for training. ToolWala AI changes the game by bringing the AI to you. Our tool is for the privacy-conscious professional who needs high-quality results without the security risks associated with cloud-based processing.",
     useCases: [
       "E-commerce sellers creating clean product shots for Amazon or eBay.",
       "Social media managers making professional profile pictures or thumbnails.",
@@ -100,7 +100,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
   "qr-code-generator": {
     title: "QR Code Generator",
     intro: "Modern, customizable, and high-resolution QR codes for every occasion. Bridge the gap between physical and digital with our professional branding suite.",
-    whatItDoes: "The ToolGPT QR Code Generator is more than just a simple encoding tool. It's a comprehensive design platform that allows you to create branded QR codes that people actually want to scan. From simple URLs and plain text to complex WiFi configurations and contact cards, we support all major data types. Our engine allows for deep customization, including custom color palettes, logo integration, and stylish frames with 'Scan Me' call-to-actions.",
+    whatItDoes: "The ToolWala QR Code Generator is more than just a simple encoding tool. It's a comprehensive design platform that allows you to create branded QR codes that people actually want to scan. From simple URLs and plain text to complex WiFi configurations and contact cards, we support all major data types. Our engine allows for deep customization, including custom color palettes, logo integration, and stylish frames with 'Scan Me' call-to-actions.",
     howToUse: [
       "Select the type of data you want to encode (URL, WiFi, Email, etc.) from the top navigation.",
       "Enter the required information in the input fields—the preview will update in real-time.",
@@ -120,7 +120,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "High-resolution files that won't blur when printed in large formats.",
       "No registration required—create and download in under 30 seconds."
     ],
-    whyChoose: "Most QR generators hide high-res downloads or logo integration behind a paywall. We believe basic marketing tools should be free. ToolGPT AI provides a premium, ad-free experience that gives you full control over your QR code's aesthetics without any hidden costs or sneaky redirects.",
+    whyChoose: "Most QR generators hide high-res downloads or logo integration behind a paywall. We believe basic marketing tools should be free. ToolWala AI provides a premium, ad-free experience that gives you full control over your QR code's aesthetics without any hidden costs or sneaky redirects.",
     useCases: [
       "Restaurants creating digital menus for their tables.",
       "Business owners adding QR codes to their physical business cards.",
@@ -162,7 +162,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Meet file size requirements for government forms or job applications.",
       "Secure processing—no files are uploaded, so your private photos stay private."
     ],
-    whyChoose: "Speed is a ranking factor for Google, and images are usually the biggest bottleneck. ToolGPT AI provides a simple, ad-free, and professional interface to fix this. We don't limit the number of images you can process, and we never watermark your work. It's just pure, functional utility.",
+    whyChoose: "Speed is a ranking factor for Google, and images are usually the biggest bottleneck. ToolWala AI provides a simple, ad-free, and professional interface to fix this. We don't limit the number of images you can process, and we never watermark your work. It's just pure, functional utility.",
     useCases: [
       "Web developers optimizing assets for a new site launch.",
       "Social media managers preparing high-res photos for faster uploads.",
@@ -184,7 +184,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
   "passport-photo-maker": {
     title: "Passport Photo Maker",
     intro: "Skip the studio and the long lines. Create professional, government-compliant passport and visa photos in your browser using our intelligent head-centering AI.",
-    whatItDoes: "The ToolGPT Passport Photo Maker is designed to take the guesswork out of standardized documentation. It uses advanced face detection to automatically identify your features and align them with international passport standards (like the 2x2 inch US requirement). Our tool doesn't just crop; it intelligently frames your head and shoulders to ensure you meet official guidelines for head size and eye level. Plus, with our background removal integration, you can turn any wall in your home into a professional white studio background.",
+    whatItDoes: "The ToolWala Passport Photo Maker is designed to take the guesswork out of standardized documentation. It uses advanced face detection to automatically identify your features and align them with international passport standards (like the 2x2 inch US requirement). Our tool doesn't just crop; it intelligently frames your head and shoulders to ensure you meet official guidelines for head size and eye level. Plus, with our background removal integration, you can turn any wall in your home into a professional white studio background.",
     howToUse: [
       "Upload a clear portrait photo taken in good lighting against any plain background.",
       "Select your target country or document type to apply the correct dimension and framing rules.",
@@ -204,7 +204,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Total privacy—your sensitive ID photos are processed in-browser and never stored on our servers.",
       "Instant results—go from a selfie to a compliant passport photo in less than a minute."
     ],
-    whyChoose: "Official documents are stressful enough without worrying about your photo being rejected. We've simplified the technical requirements into an automated process that works for everyone. ToolGPT AI provides a clean, professional, and entirely free way to handle your documentation needs without compromising your privacy or your wallet.",
+    whyChoose: "Official documents are stressful enough without worrying about your photo being rejected. We've simplified the technical requirements into an automated process that works for everyone. ToolWala AI provides a clean, professional, and entirely free way to handle your documentation needs without compromising your privacy or your wallet.",
     useCases: [
       "Travelers renewing their passports or applying for new visas.",
       "Students needing ID photos for school or exam registrations.",
@@ -226,7 +226,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
   "pdf-tools": {
     title: "PDF Tools Suite",
     intro: "The only PDF toolkit you'll ever need. Merge, split, compress, and organize your documents with professional-grade tools that run entirely in your browser.",
-    whatItDoes: "PDFs are the backbone of modern documentation, but they can be notoriously difficult to edit. The ToolGPT PDF Suite provides a set of powerful, lightweight utilities to manage your documents without needing expensive Acrobat subscriptions. Whether you need to combine multiple reports into a single file, extract a specific page, or shrink a large PDF for an email attachment, our tools handle it with zero friction. Most importantly, all processing happens locally using the `pdf-lib` engine, so your sensitive documents never leave your device.",
+    whatItDoes: "PDFs are the backbone of modern documentation, but they can be notoriously difficult to edit. The ToolWala PDF Suite provides a set of powerful, lightweight utilities to manage your documents without needing expensive Acrobat subscriptions. Whether you need to combine multiple reports into a single file, extract a specific page, or shrink a large PDF for an email attachment, our tools handle it with zero friction. Most importantly, all processing happens locally using the `pdf-lib` engine, so your sensitive documents never leave your device.",
     howToUse: [
       "Choose the specific tool you need (Merge, Split, Compress, etc.) from our PDF dashboard.",
       "Upload your PDF files—you can select multiple files at once for merging.",
@@ -246,7 +246,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Lightning Fast—skip the upload/download cycle and get results instantly.",
       "Consistent Quality—our engine ensures that fonts, formatting, and high-res images remain intact."
     ],
-    whyChoose: "Most online PDF tools are 'data traps' that store your documents on their servers. ToolGPT AI is built on a 'privacy-first' philosophy. We provide the same high-end features as paid software, but with the added peace of mind that your private information remains strictly under your control.",
+    whyChoose: "Most online PDF tools are 'data traps' that store your documents on their servers. ToolWala AI is built on a 'privacy-first' philosophy. We provide the same high-end features as paid software, but with the added peace of mind that your private information remains strictly under your control.",
     useCases: [
       "Students merging multiple assignment parts into a single submission.",
       "Professionals organizing invoices and receipts for tax season.",
@@ -268,7 +268,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
   "resume-builder": {
     title: "AI Resume Builder",
     intro: "Land your dream job with a resume that stands out. Our AI-powered builder helps you craft professional, ATS-friendly resumes that highlight your unique strengths.",
-    whatItDoes: "The ToolGPT AI Resume Builder is designed to take the stress out of job applications. It's more than just a template—it's a smart assistant that helps you structure your career history for maximum impact. The tool ensures your resume follows modern design standards that are both pleasing to human recruiters and optimized for Applicant Tracking Systems (ATS). It handles all the complex formatting, margins, and typography automatically, so you can focus on telling your story.",
+    whatItDoes: "The ToolWala AI Resume Builder is designed to take the stress out of job applications. It's more than just a template—it's a smart assistant that helps you structure your career history for maximum impact. The tool ensures your resume follows modern design standards that are both pleasing to human recruiters and optimized for Applicant Tracking Systems (ATS). It handles all the complex formatting, margins, and typography automatically, so you can focus on telling your story.",
     howToUse: [
       "Choose a professional template that matches your industry and career level.",
       "Fill in your contact details, experience, and education—the preview updates in real-time.",
@@ -288,7 +288,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Consistent, professional look across all sections of your document.",
       "Completely free to build and download—no hidden 'pay-to-export' tricks."
     ],
-    whyChoose: "We believe your career path shouldn't be limited by your design skills. Our builder levels the playing field, giving every candidate access to professional-grade document design. ToolGPT AI focuses on clarity and impact, helping you build a resume that recruiters will actually read.",
+    whyChoose: "We believe your career path shouldn't be limited by your design skills. Our builder levels the playing field, giving every candidate access to professional-grade document design. ToolWala AI focuses on clarity and impact, helping you build a resume that recruiters will actually read.",
     useCases: [
       "Recent graduates looking to create their first professional resume.",
       "Experienced professionals seeking to refresh their brand for a career move.",
@@ -310,7 +310,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
   "caption-generator": {
     title: "AI Caption Generator",
     intro: "Never run out of things to say. Generate engaging, on-brand captions for Instagram, LinkedIn, and more using our creative AI writing assistant.",
-    whatItDoes: "The ToolGPT AI Caption Generator is your personal social media strategist. It takes your basic ideas or photo descriptions and transforms them into catchy, engaging captions designed to drive interaction. Whether you need a professional tone for LinkedIn, a witty vibe for Instagram, or something purely informational, the AI adapts its voice to match your goals. It even handles hashtags and emojis, so you can go from 'post idea' to 'ready-to-post' in a single click.",
+    whatItDoes: "The ToolWala AI Caption Generator is your personal social media strategist. It takes your basic ideas or photo descriptions and transforms them into catchy, engaging captions designed to drive interaction. Whether you need a professional tone for LinkedIn, a witty vibe for Instagram, or something purely informational, the AI adapts its voice to match your goals. It even handles hashtags and emojis, so you can go from 'post idea' to 'ready-to-post' in a single click.",
     howToUse: [
       "Describe what's in your photo or what your post is about in simple terms.",
       "Select your target platform (Instagram, Twitter, LinkedIn, etc.) to optimize the length and style.",
@@ -330,7 +330,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Increase engagement with captions designed to encourage comments and likes.",
       "Save time on your social media workflow so you can focus on creating better content."
     ],
-    whyChoose: "Social media is fast-paced, and spending an hour on a single caption isn't efficient. Our tool provides high-quality, creative copy that doesn't sound like a robot wrote it. ToolGPT AI focuses on 'human-first' writing that resonates with real audiences and helps you build a genuine community.",
+    whyChoose: "Social media is fast-paced, and spending an hour on a single caption isn't efficient. Our tool provides high-quality, creative copy that doesn't sound like a robot wrote it. ToolWala AI focuses on 'human-first' writing that resonates with real audiences and helps you build a genuine community.",
     useCases: [
       "Influencers looking to keep their content fresh and engaging.",
       "Small business owners managing their own social media marketing.",
@@ -352,7 +352,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
   "text-humanizer": {
     title: "AI Text Humanizer",
     intro: "Bridge the gap between artificial intelligence and human connection. Transform robotic AI-generated text into natural, engaging, and undetectable human-like content.",
-    whatItDoes: "The ToolGPT AI Text Humanizer is a specialized linguistic engine designed to refine and 'humanize' text produced by AI models like ChatGPT. While AI is great at providing information, it often lacks the natural rhythm, varied sentence structure, and subtle nuances of human writing. Our tool analyzes your input and intelligently rewrites it, adding the 'burstiness' and creative flair that makes content feel authentic. It doesn't just swap words; it restructures thoughts to improve flow and emotional resonance while ensuring your message remains intact.",
+    whatItDoes: "The ToolWala AI Text Humanizer is a specialized linguistic engine designed to refine and 'humanize' text produced by AI models like ChatGPT. While AI is great at providing information, it often lacks the natural rhythm, varied sentence structure, and subtle nuances of human writing. Our tool analyzes your input and intelligently rewrites it, adding the 'burstiness' and creative flair that makes content feel authentic. It doesn't just swap words; it restructures thoughts to improve flow and emotional resonance while ensuring your message remains intact.",
     howToUse: [
       "Paste your AI-generated text or any content that feels a bit too rigid into the input field.",
       "Select your desired 'Humanization Intensity' to decide how much rewriting the AI should perform.",
@@ -372,7 +372,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Improve your SEO with content that is high-quality and provides real value to readers.",
       "Save time on manual editing—let the AI handle the heavy lifting of stylistic refinement."
     ],
-    whyChoose: "We believe that AI should assist, not replace, human creativity. Our Text Humanizer is built for writers, marketers, and students who want to use AI as a productivity tool without sacrificing the quality of their final work. ToolGPT AI focuses on the 'art' of writing, ensuring your content has the soul and character that only human-like expression can provide.",
+    whyChoose: "We believe that AI should assist, not replace, human creativity. Our Text Humanizer is built for writers, marketers, and students who want to use AI as a productivity tool without sacrificing the quality of their final work. ToolWala AI focuses on the 'art' of writing, ensuring your content has the soul and character that only human-like expression can provide.",
     useCases: [
       "Bloggers refining AI-generated drafts into publishable, engaging articles.",
       "Students ensuring their essays have a natural and personal academic tone.",
@@ -394,7 +394,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
   "voice-generator": {
     title: "AI Voice Generator",
     intro: "Professional voiceovers at your fingertips. Transform your text into natural-sounding speech with our state-of-the-art AI vocal synthesizer.",
-    whatItDoes: "The ToolGPT AI Voice Generator brings your text to life with high-fidelity, expressive voices. Using advanced text-to-speech (TTS) technology, our engine goes beyond the traditional 'computer voice' to produce speech with realistic intonation, emotion, and clarity. Whether you're creating a narration for a video, an accessibility tool for your website, or a simple greeting for your phone system, our tool provides a library of diverse voices that sound authentic and professional. It's like having a voiceover studio available 24/7 in your browser.",
+    whatItDoes: "The ToolWala AI Voice Generator brings your text to life with high-fidelity, expressive voices. Using advanced text-to-speech (TTS) technology, our engine goes beyond the traditional 'computer voice' to produce speech with realistic intonation, emotion, and clarity. Whether you're creating a narration for a video, an accessibility tool for your website, or a simple greeting for your phone system, our tool provides a library of diverse voices that sound authentic and professional. It's like having a voiceover studio available 24/7 in your browser.",
     howToUse: [
       "Type or paste the text you want to convert into speech into the workspace.",
       "Select your preferred voice from our library, categorized by gender, age, and accent.",
@@ -414,7 +414,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Perfect for accessibility—provide an audio version of your written content for visually impaired users.",
       "Scale your content creation—narrate dozens of videos or articles without leaving your desk."
     ],
-    whyChoose: "Quality audio is often the hardest part of content creation. We've simplified the process, making professional-grade vocal synthesis accessible to everyone. ToolGPT AI focuses on 'vocal warmth' and realism, ensuring your audio content is engaging and easy to listen to, rather than flat and robotic.",
+    whyChoose: "Quality audio is often the hardest part of content creation. We've simplified the process, making professional-grade vocal synthesis accessible to everyone. ToolWala AI focuses on 'vocal warmth' and realism, ensuring your audio content is engaging and easy to listen to, rather than flat and robotic.",
     useCases: [
       "YouTube creators needing voiceovers for their videos and tutorials.",
       "Educators creating audio lessons for their students.",
@@ -422,7 +422,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Small business owners creating professional phone menu greetings."
     ],
     faqs: [
-      { question: "Can I use the audio for commercial projects?", answer: "Yes! The audio you generate with ToolGPT AI can be used for both personal and professional projects without any royalties." },
+      { question: "Can I use the audio for commercial projects?", answer: "Yes! The audio you generate with ToolWala AI can be used for both personal and professional projects without any royalties." },
       { question: "How many voices are available?", answer: "We offer a curated selection of high-quality voices across several different styles and accents to ensure you find the right fit." },
       { question: "Is there a limit on how much I can narrate?", answer: "We recommend processing shorter scripts (up to 500 words) at a time to ensure the best performance and audio quality." },
       { question: "Do I need to install anything?", answer: "No. Everything works directly in your web browser, using modern web audio APIs." }
@@ -436,7 +436,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
   "invoice-generator": {
     title: "Professional Invoice Generator",
     intro: "Get paid faster with beautiful, professional invoices. Create, customize, and download high-quality invoices for your business in seconds.",
-    whatItDoes: "The ToolGPT Invoice Generator is a lightweight but powerful accounting tool designed for freelancers, small business owners, and consultants. It simplifies the billing process by providing a clean, structured template where you can easily input your items, taxes, and payment details. The tool handles all calculations automatically, ensuring your totals are always accurate. With a focus on professional aesthetics, it produces a polished PDF that builds trust with your clients and keeps your business records organized.",
+    whatItDoes: "The ToolWala Invoice Generator is a lightweight but powerful accounting tool designed for freelancers, small business owners, and consultants. It simplifies the billing process by providing a clean, structured template where you can easily input your items, taxes, and payment details. The tool handles all calculations automatically, ensuring your totals are always accurate. With a focus on professional aesthetics, it produces a polished PDF that builds trust with your clients and keeps your business records organized.",
     howToUse: [
       "Enter your business details and your client's information in the header sections.",
       "Add your line items, including descriptions, quantities, and unit prices—the AI handles the math.",
@@ -456,7 +456,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Reduce errors in your billing with automated calculations and clear itemization.",
       "Totally free to use—no subscriptions, no watermarks, and no 'pay-to-download' limits."
     ],
-    whyChoose: "Accounting software can be expensive and overly complicated for simple billing needs. We've stripped away the complexity, leaving you with a fast, intuitive tool that does exactly what you need. ToolGPT AI prioritizes a 'frictionless' billing experience, helping you stay organized and get paid without the headache.",
+    whyChoose: "Accounting software can be expensive and overly complicated for simple billing needs. We've stripped away the complexity, leaving you with a fast, intuitive tool that does exactly what you need. ToolWala AI prioritizes a 'frictionless' billing experience, helping you stay organized and get paid without the headache.",
     useCases: [
       "Freelancers billing for their creative or technical services.",
       "Small business owners sending quick quotes or invoices to customers.",
@@ -478,7 +478,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
   "cover-letter-generator": {
     title: "AI Cover Letter Generator",
     intro: "Make a powerful first impression. Generate personalized, compelling cover letters that highlight your skills and grab the attention of hiring managers.",
-    whatItDoes: "The ToolGPT AI Cover Letter Generator is your personal career advocate. It bridges the gap between your resume and a job description, crafting a narrative that explains exactly why you're the best fit for the role. By analyzing your experience and the specific requirements of the job, the AI produces a structured, professional letter that is tailored to each application. It avoids generic 'to whom it may concern' templates, focusing instead on impact-driven writing that resonates with real people.",
+    whatItDoes: "The ToolWala AI Cover Letter Generator is your personal career advocate. It bridges the gap between your resume and a job description, crafting a narrative that explains exactly why you're the best fit for the role. By analyzing your experience and the specific requirements of the job, the AI produces a structured, professional letter that is tailored to each application. It avoids generic 'to whom it may concern' templates, focusing instead on impact-driven writing that resonates with real people.",
     howToUse: [
       "Paste the job description or title for the position you're applying for.",
       "Upload your resume or paste a summary of your key skills and experiences.",
@@ -498,7 +498,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Ensure your cover letter is always relevant to the specific job you're targeting.",
       "Maintain a professional and consistent brand across all your application materials."
     ],
-    whyChoose: "Applying for jobs is a numbers game, but quality still matters. Our tool allows you to maintain a high standard of personalization without spending hours on every letter. ToolGPT AI focuses on 'persuasive' writing, helping you tell your professional story in a way that gets you through the door and into the interview.",
+    whyChoose: "Applying for jobs is a numbers game, but quality still matters. Our tool allows you to maintain a high standard of personalization without spending hours on every letter. ToolWala AI focuses on 'persuasive' writing, helping you tell your professional story in a way that gets you through the door and into the interview.",
     useCases: [
       "Job seekers applying for multiple roles who need a fast way to personalize.",
       "Candidates transitioning to a new industry needing to explain their move.",

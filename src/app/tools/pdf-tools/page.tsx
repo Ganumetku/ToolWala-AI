@@ -7,7 +7,7 @@ import {
   FileText, Download, UploadCloud, Trash2,
   Files, Scissors, Minimize2, AlertCircle,
   CheckCircle, RefreshCw, Info, FileUp, Shield,
-  ArrowUp, ArrowDown, ChevronLeft
+  ArrowUp, ArrowDown, ChevronLeft, ArrowRight, FilePenLine
 } from 'lucide-react';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
@@ -658,6 +658,44 @@ export default function PdfTools() {
               </div>
             )}
 
+          </div>
+        </div>
+
+        {/* RELATED TOOLS SECTION */}
+        <div className="mb-12 animate-fade-in">
+          <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-6 ml-1">Explore More PDF Tools</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Link 
+              href="/tools/pdf-tools/edit-pdf"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 block w-full h-full glass"
+            >
+              {/* Glow Effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div className="absolute top-4 right-4 flex flex-col gap-2 items-end z-10">
+                <span className="inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-gray-400 border border-white/10 backdrop-blur-md">
+                  PDF
+                </span>
+              </div>
+
+              <div className="relative z-10 mt-2">
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white shadow-2xl border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                  <FilePenLine className="w-6 h-6 text-blue-500" />
+                </div>
+                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">Edit PDF</h3>
+                <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
+                  Add text to PDF, fill PDF forms, and download edited PDF online.
+                </p>
+              </div>
+
+              <div className="relative z-10 mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-500 transition-all group-hover:gap-4">
+                Try Tool
+                <ArrowRight className="w-4 h-4" />
+              </div>
+
+              {/* Decorative corner accent */}
+              <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-br from-transparent to-blue-600/5 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+            </Link>
           </div>
         </div>
       </div>

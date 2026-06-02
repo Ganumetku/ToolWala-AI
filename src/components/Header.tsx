@@ -70,7 +70,7 @@ export default function Header() {
             className="group relative flex items-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-black text-black hover:scale-105 active:scale-95 transition-all shadow-xl hover:shadow-white/10 overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <Rocket className="w-4 h-4 relative z-10" />
+            <Rocket className="w-4 h-4 relative z-10" suppressHydrationWarning />
             <span className="relative z-10">Start Free</span>
           </Link>
         </div>
@@ -84,9 +84,9 @@ export default function Header() {
           >
             <span className="sr-only">Open main menu</span>
             {isMobileMenuOpen ? (
-              <X className="h-6 w-6" aria-hidden="true" />
+              <X className="h-6 w-6" aria-hidden="true" suppressHydrationWarning />
             ) : (
-              <Menu className="h-6 w-6" aria-hidden="true" />
+              <Menu className="h-6 w-6" aria-hidden="true" suppressHydrationWarning />
             )}
           </button>
         </div>
@@ -108,7 +108,7 @@ export default function Header() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}
-                <Sparkles className={`w-5 h-5 ${pathname === item.href ? 'text-blue-500' : 'text-transparent'}`} />
+                <Sparkles className={`w-5 h-5 ${pathname === item.href ? 'text-blue-500' : 'text-transparent'}`} suppressHydrationWarning />
               </Link>
             ))}
             <div className="mt-8 pt-8 border-t border-white/5">
@@ -117,7 +117,7 @@ export default function Header() {
                 className="flex items-center justify-center gap-3 rounded-[1.5rem] bg-blue-600 p-5 text-xl font-black text-white shadow-2xl shadow-blue-500/20 active:scale-[0.98] transition-all"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <Rocket className="w-6 h-6" />
+                <Rocket className="w-6 h-6" suppressHydrationWarning />
                 Get Started Free
               </Link>
             </div>

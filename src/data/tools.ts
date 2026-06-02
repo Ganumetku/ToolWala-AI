@@ -61,6 +61,16 @@ export const toolsData: Tool[] = [
     tags: ["pdf", "merge", "split", "compress", "convert", "document"]
   },
   {
+    id: "edit-pdf",
+    title: "Edit PDF",
+    description: "Add text to PDF, fill PDF forms, and download edited PDF online.",
+    icon: "✍️",
+    href: "/tools/pdf-tools/edit-pdf",
+    category: "PDF",
+    isPopular: true,
+    tags: ["pdf", "edit", "write", "annotate", "text", "form", "document"]
+  },
+  {
     id: "ai-logo-maker",
     title: "AI Logo Maker",
     description: "Generate unique logos for your brand or business using advanced AI.",

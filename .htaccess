@@ -1,0 +1,53 @@
+# ----------------------------------------------------------------------
+# ToolWala AI - Apache / LiteSpeed Web Server Configuration
+# ----------------------------------------------------------------------
+
+# Disable directory listings
+Options -Indexes
+
+# Enable Rewrite Engine
+RewriteEngine On
+RewriteBase /
+
+# ----------------------------------------------------------------------
+# 1. NODE.JS DEPLOYMENT (Phusion Passenger / cPanel Setup Node.js App)
+# If cPanel does not automatically configure Passenger, uncomment these lines 
+# and replace /home/username/public_html with your cPanel directory path:
+# ----------------------------------------------------------------------
+# PassengerAppRoot "/home/bvngzbpv/public_html"
+# PassengerBaseURI "/"
+# PassengerAppStartFile "server.js"
+# PassengerEnabled on
+
+# ----------------------------------------------------------------------
+# 2. STATIC EXPORT ROUTING FALLBACKS
+# If you choose to deploy static files (via output: 'export'), these rules
+# resolve Clean URLs (e.g. /admin/login -> /admin/login.html) and prevent
+# 404 errors when refreshing pages.
+# ----------------------------------------------------------------------
+
+# Redirect index.html to root
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
+RewriteRule ^index\.html$ / [R=301,L]
+
+# Redirect trailing slash to clean URL (except for actual folders)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [R=301,L]
+
+# Resolve clean html files: /about -> /about.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^(.*)$ /$1.html [L]
+
+# Resolve nested index files: /admin/login -> /admin/login/index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+RewriteRule ^(.*)$ /$1/index.html [L]
+
+# SPA fallback: Route all non-existent paths in /admin to the admin shell if compiled as single-page application
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/admin.html -f
+RewriteRule ^admin/(.*)$ /admin.html [L]

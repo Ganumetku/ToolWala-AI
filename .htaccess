@@ -48,6 +48,9 @@ RewriteRule ^index\.html$ / [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)/$ /$1 [R=301,L]
 
+# Direct /admin or /admin/ requests to the physical admin.html file to prevent 403 Forbidden directory indexing errors
+RewriteRule ^admin/?$ /admin.html [L]
+
 # Resolve clean html files: /about -> /about.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

@@ -7,7 +7,7 @@ import ToolFormRenderer from '@/components/ToolFormRenderer';
 import { MeshGradient } from '@/components/BackgroundEffects';
 import FAQAccordion from './FAQAccordion';
 
-export const revalidate = 0; // Disable server cache for instant CMS updates
+export const dynamic = 'force-static';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -238,4 +238,16 @@ export default async function DynamicToolPage({ params }: PageProps) {
       </div>
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  try {
+    const tools = jsonDb.getTools();
+    return tools.map((tool) => ({
+      slug: tool.slug,
+    }));
+  } catch (err) {
+    console.error("Failed to generate static params for tools:", err);
+    return [];
+  }
 }

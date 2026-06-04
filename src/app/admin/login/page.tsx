@@ -21,39 +21,19 @@ export default function AdminLogin() {
 
     setIsLoading(true);
 
-    try {
-      const res = await fetch('/api/admin/auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-      });
-
-      const data = await res.json();
-
-      if (res.ok && data.success) {
-        localStorage.setItem('admin_token', data.token);
+    // Pure client-side static authentication
+    setTimeout(() => {
+      if (username === 'toolwala_admin' && password === 'tg_admin_secure_9845x#') {
+        localStorage.setItem('admin_token', 'mock-admin-token-xyz');
         toast.success('Admin authenticated successfully! Entering console...');
         setTimeout(() => {
           router.replace('/admin');
         }, 1000);
       } else {
-        toast.error(data.message || 'Invalid credentials');
+        toast.error('Invalid username or password credentials');
       }
-    } catch (err) {
-      console.error(err);
-      // Fallback mode for local static/offline configuration
-      if (username === 'toolwala_admin' && password === 'tg_admin_secure_9845x#') {
-        localStorage.setItem('admin_token', 'mock-admin-token-xyz');
-        toast.success('Offline fallback session authenticated.');
-        setTimeout(() => {
-          router.replace('/admin');
-        }, 1000);
-      } else {
-        toast.error('Authentication or connection failed.');
-      }
-    } finally {
       setIsLoading(false);
-    }
+    }, 800);
   };
 
   return (

@@ -5,9 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "start:server": "NODE_ENV=production node server.js",
-    "lint": "eslint"
+    "export": "next build"
   },
   "dependencies": {
     "@imgly/background-removal": "^1.7.0",

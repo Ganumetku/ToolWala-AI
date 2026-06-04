@@ -5,7 +5,7 @@ import { prisma } from '@/lib/db';
 import { jsonDb } from '@/lib/jsonDb';
 import { MeshGradient } from '@/components/BackgroundEffects';
 
-export const revalidate = 0; // Fresh posts on page views
+export const dynamic = 'force-static';
 
 interface BlogPageProps {
   params: Promise<{ slug: string }>;
@@ -124,4 +124,16 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
       </div>
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  try {
+    const blogs = jsonDb.getBlogs();
+    return blogs.map((blog) => ({
+      slug: blog.slug,
+    }));
+  } catch (err) {
+    console.error("Failed to generate static params for blogs:", err);
+    return [];
+  }
 }

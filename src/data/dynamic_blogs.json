@@ -6,7 +6,7 @@
     "content": "Traditional optical character recognition uploads documents to cloud databases. This article outlines the transition to client-side WebAssembly rendering, protecting sensitive data locally.",
     "published": true,
     "seoMetadata": {
-      "title": "Local OCR WebAssembly Data Safety | ToolGPT",
+      "title": "Local OCR WebAssembly Data Safety | ToolWala",
       "description": "Learn why processing character recognition inside the browser context outperforms cloud databases."
     },
     "createdAt": "2026-06-04T05:54:22.719Z",

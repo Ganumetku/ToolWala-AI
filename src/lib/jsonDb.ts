@@ -190,7 +190,7 @@ export const jsonDb = {
       content: 'Traditional optical character recognition uploads documents to cloud databases. This article outlines the transition to client-side WebAssembly rendering, protecting sensitive data locally.',
       published: true,
       seoMetadata: {
-        title: 'Local OCR WebAssembly Data Safety | ToolGPT',
+        title: 'Local OCR WebAssembly Data Safety | ToolWala',
         description: 'Learn why processing character recognition inside the browser context outperforms cloud databases.'
       },
       createdAt: new Date().toISOString(),
@@ -217,7 +217,7 @@ export const jsonDb = {
   saveApiConfigs: (configs: LocalApiConfig[]) => writeJSON('dynamic_api_configs.json', configs),
 
   getSettings: () => readJSON<LocalGlobalSetting[]>('dynamic_settings.json', [
-    { id: 's1', key: 'site_title', value: 'ToolGPT - AI Tools Suite', createdAt: new Date().toISOString() },
+    { id: 's1', key: 'site_title', value: 'ToolWala - AI Tools Suite', createdAt: new Date().toISOString() },
     { id: 's2', key: 'seo_description', value: 'Discover the future of utility tools with our dynamic AI marketplace.', createdAt: new Date().toISOString() }
   ]),
   saveSettings: (settings: LocalGlobalSetting[]) => writeJSON('dynamic_settings.json', settings)

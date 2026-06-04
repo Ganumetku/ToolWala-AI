@@ -781,7 +781,7 @@ export default function ContentCMS() {
                             type="text" 
                             value={seoTitle}
                             onChange={(e) => setSeoTitle(e.target.value)}
-                            placeholder="Defaults to Tool Name | ToolGPT AI"
+                            placeholder="Defaults to Tool Name | ToolWala AI"
                             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs font-bold text-white outline-none focus:border-blue-500/50"
                           />
                         </div>

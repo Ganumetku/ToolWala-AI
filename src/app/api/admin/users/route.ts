@@ -16,7 +16,7 @@ export async function GET() {
 
   // Simulated Database Fallback
   const mockUsers = [
-    { id: '1', email: 'admin@toolgpt.com', role: 'admin', status: 'active', createdAt: '2026-05-01T12:00:00Z' },
+    { id: '1', email: 'admin@toolwala.co', role: 'admin', status: 'active', createdAt: '2026-05-01T12:00:00Z' },
     { id: '2', email: 'akash@technicul.co', role: 'premium', status: 'active', createdAt: '2026-05-15T08:30:00Z' },
     { id: '3', email: 'sam@guestmail.com', role: 'user', status: 'active', createdAt: '2026-06-02T14:45:00Z' },
     { id: '4', email: 'spammer_bot@malicious.xyz', role: 'user', status: 'blocked', createdAt: '2026-06-03T18:22:00Z' }

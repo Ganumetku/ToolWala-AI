@@ -41,15 +41,15 @@ export default function AdminLogin() {
       }
     } catch (err) {
       console.error(err);
-      // Fallback mode for demonstration/local configuration without running server backend
-      if (username === 'admin' && password === 'admin123') {
+      // Fallback mode for local static/offline configuration
+      if (username === 'toolwala_admin' && password === 'tg_admin_secure_9845x#') {
         localStorage.setItem('admin_token', 'mock-admin-token-xyz');
-        toast.success('Development fallback session authenticated.');
+        toast.success('Offline fallback session authenticated.');
         setTimeout(() => {
           router.replace('/admin');
         }, 1000);
       } else {
-        toast.error('Connection failed. For local access try user: admin / pass: admin123');
+        toast.error('Authentication or connection failed.');
       }
     } finally {
       setIsLoading(false);
@@ -71,7 +71,7 @@ export default function AdminLogin() {
           <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_0_30px_rgba(37,99,235,0.5)] mb-6">
             <Terminal className="w-7 h-7" />
           </div>
-          <h1 className="text-2xl font-black tracking-tight text-white uppercase">ToolGPT Admin</h1>
+          <h1 className="text-2xl font-black tracking-tight text-white uppercase">ToolWala Admin</h1>
           <p className="text-gray-500 text-xs font-semibold mt-1 tracking-wide">AUTHENTICATE ADMINISTRATOR PROFILE</p>
         </div>
 
@@ -122,8 +122,7 @@ export default function AdminLogin() {
         </form>
 
         <p className="text-center text-[10px] font-bold text-gray-600 mt-8 leading-relaxed">
-          Authorized personnel only. Access logging is active.<br />
-          For dev mode, use <span className="text-blue-500">admin / admin123</span>
+          Authorized personnel only. Access logging is active.
         </p>
       </motion.div>
     </div>

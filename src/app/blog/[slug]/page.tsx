@@ -27,11 +27,11 @@ export async function generateMetadata({ params }: BlogPageProps) {
 
   if (!blog) {
     return {
-      title: 'Post Not Found | ToolGPT AI'
+      title: 'Post Not Found | ToolWala AI'
     };
   }
 
-  const title = blog.seoMetadata?.title || `${blog.title} | ToolGPT Blog`;
+  const title = blog.seoMetadata?.title || `${blog.title} | ToolWala Blog`;
   const description = blog.seoMetadata?.description || blog.content.substring(0, 160);
 
   return {
@@ -114,7 +114,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
           </div>
 
           <footer className="border-t border-white/5 pt-8 mt-12 flex justify-between items-center text-[10px] font-black uppercase tracking-widest text-gray-500">
-            <span>Author: ToolGPT Editorial</span>
+            <span>Author: ToolWala Editorial</span>
             <span className="flex items-center gap-1 text-emerald-500">
               <Globe className="w-3.5 h-3.5" /> Indexed public route
             </span>

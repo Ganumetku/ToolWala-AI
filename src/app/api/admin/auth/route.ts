@@ -4,8 +4,8 @@ export async function POST(request: Request) {
   try {
     const { username, password } = await request.json();
 
-    const expectedUsername = process.env.ADMIN_USERNAME || 'admin';
-    const expectedPassword = process.env.ADMIN_PASSWORD || 'admin123';
+    const expectedUsername = process.env.ADMIN_USERNAME || 'toolwala_admin';
+    const expectedPassword = process.env.ADMIN_PASSWORD || 'tg_admin_secure_9845x#';
 
     if (username === expectedUsername && password === expectedPassword) {
       // Return a mock JWT admin session token

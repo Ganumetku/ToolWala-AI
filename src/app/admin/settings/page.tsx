@@ -169,7 +169,7 @@ export default function SettingsPage() {
                 type="text"
                 value={siteTitle}
                 onChange={(e) => setSiteTitle(e.target.value)}
-                placeholder="e.g. ToolGPT - The AI SaaS Directory"
+                placeholder="e.g. ToolWala - The AI SaaS Directory"
                 className="w-full bg-white/[0.02] border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-white outline-none focus:border-blue-500/50"
               />
             </div>

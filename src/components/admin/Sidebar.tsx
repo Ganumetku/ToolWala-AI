@@ -54,7 +54,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
               animate={{ opacity: 1, x: 0 }}
               className="text-base font-black tracking-tight text-white uppercase"
             >
-              ToolGPT <span className="text-blue-500">Admin</span>
+              ToolWala <span className="text-blue-500">Admin</span>
             </motion.span>
           )}
         </Link>

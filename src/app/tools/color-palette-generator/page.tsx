@@ -407,7 +407,7 @@ ${palette.map((c, i) => `          ${(i + 1) * 100}: '${c.hex}',`).join('\n')}
   const toolArticleData = {
     title: "AI Color Palette Generator & Harmonizer",
     intro: "Generate harmonious color schemes, extract colors from pictures in-browser, and export styling blueprints in one click.",
-    whatItDoes: "ToolGPT's online Color Palette Generator lets you randomize, adjust, and lock colors using client-side algorithms. It uses a canvas-based grid sampler to automatically extract matching color codes from custom uploads, eliminating privacy concerns by processing your files sandboxed on your local GPU.",
+    whatItDoes: "ToolWala's online Color Palette Generator lets you randomize, adjust, and lock colors using client-side algorithms. It uses a canvas-based grid sampler to automatically extract matching color codes from custom uploads, eliminating privacy concerns by processing your files sandboxed on your local GPU.",
     howToUse: [
       "Select 'Randomize Palette' to trigger standard harmonic colors, or drag/drop an image to extract its dominant scheme.",
       "Select a Harmony Rule like Complementary or Analogous to mathematically align all unlocked swatches.",

@@ -29,11 +29,11 @@ export async function generateMetadata({ params }: PageProps) {
 
   if (!tool) {
     return {
-      title: 'Tool Not Found | ToolGPT AI'
+      title: 'Tool Not Found | ToolWala AI'
     };
   }
 
-  const title = tool.seoMetadata?.title || `${tool.title} | ToolGPT AI`;
+  const title = tool.seoMetadata?.title || `${tool.title} | ToolWala AI`;
   const description = tool.seoMetadata?.description || tool.description;
   const keywords = tool.seoMetadata?.keywords || '';
 

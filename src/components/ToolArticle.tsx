@@ -168,11 +168,11 @@ export default function ToolArticle({
                 </div>
               </div>
 
-              {/* Why ToolGPT */}
+              {/* Why ToolWala */}
               <div className="relative p-10 rounded-[3rem] bg-white/[0.01] border border-white/5 overflow-hidden">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl" />
                 <div className="relative">
-                  <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tight">Why Choose ToolGPT AI?</h3>
+                  <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tight">Why Choose ToolWala AI?</h3>
                   <p className="text-gray-400 leading-relaxed text-lg">
                     {whyChoose}
                   </p>

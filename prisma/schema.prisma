@@ -1,0 +1,250 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String      @id @default(uuid())
+  email     String      @unique
+  role      String      @default("user") // "admin", "user", "premium"
+  status    String      @default("active") // "active", "blocked"
+  createdAt DateTime    @default(now()) @map("created_at")
+  updatedAt DateTime    @updatedAt @map("updated_at")
+  usages    ToolUsage[]
+
+  @@map("users")
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String
+  role      String   @default("admin")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("admins")
+}
+
+model ToolCategory {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  slug      String   @unique
+  tools     Tool[]
+
+  @@map("tool_categories")
+}
+
+model Tool {
+  id             String         @id @default(uuid())
+  slug           String         @unique
+  title          String
+  description    String
+  longDesc       String?        @map("long_desc")
+  categoryId     String         @map("category_id")
+  category       ToolCategory   @relation(fields: [categoryId], references: [id])
+  isPopular      Boolean        @default(false) @map("is_popular")
+  isFeatured     Boolean        @default(false) @map("is_featured")
+  isTrending     Boolean        @default(false) @map("is_trending")
+  published      Boolean        @default(false)
+  icon           String?        @default("🔧")
+  thumbnail      String?
+  
+  // AI execution parameters
+  apiTypeId      String?        @map("api_type_id")
+  apiConfig      ApiConfig?     @relation(fields: [apiTypeId], references: [id])
+  promptTemplate String?        @map("prompt_template")
+  ctaButtonText  String         @default("Generate") @map("cta_button_text")
+  toolType       String         @default("AI Text Tool") @map("tool_type") // AI Text, AI Image, OCR, PDF, etc.
+  
+  inputs         ToolInput[]
+  faqs           ToolFaq[]
+  articles       ToolArticle[]
+  usages         ToolUsage[]
+  seoMetadata    SeoMetadata?
+  
+  createdAt      DateTime       @default(now()) @map("created_at")
+  updatedAt      DateTime       @updatedAt @map("updated_at")
+
+  @@map("tools")
+}
+
+model ToolInput {
+  id           String   @id @default(uuid())
+  toolId       String   @map("tool_id")
+  tool         Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  name         String   // e.g. "writing_style"
+  label        String   // UI label
+  placeholder  String?
+  type         String   // textarea, text, select, toggle, checkbox, file, color, slider, number
+  required     Boolean  @default(false)
+  defaultValue String?  @map("default_value")
+  options      String?  // JSON string or comma-separated options list
+  helperText   String?  @map("helper_text")
+  order        Int      @default(0)
+
+  @@map("tool_inputs")
+}
+
+model ToolFaq {
+  id        String   @id @default(uuid())
+  toolId    String   @map("tool_id")
+  tool      Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  question  String
+  answer    String
+  order     Int      @default(0)
+
+  @@map("tool_faqs")
+}
+
+model ToolArticle {
+  id        String   @id @default(uuid())
+  toolId    String   @map("tool_id")
+  tool      Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  title     String
+  content   String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("tool_articles")
+}
+
+model ToolUsage {
+  id          String   @id @default(uuid())
+  toolId      String   @map("tool_id")
+  tool        Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  userId      String?  @map("user_id")
+  user        User?    @relation(fields: [userId], references: [id])
+  ipAddress   String?  @map("ip_address")
+  device      String?
+  country     String?  @default("Unknown")
+  isAiSuccess Boolean  @default(true) @map("is_ai_success")
+  tokensUsed  Int      @default(0) @map("tokens_used")
+  costEst     Float    @default(0.0) @map("cost_est")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("tool_usage")
+}
+
+model ToolAnalytics {
+  id        String   @id @default(uuid())
+  toolId    String?  @map("tool_id")
+  views     Int      @default(0)
+  clicks    Int      @default(0)
+  date      DateTime @default(now())
+  device    String?
+  country   String?  @default("Unknown")
+  source    String?  @default("Direct")
+
+  @@map("tool_analytics")
+}
+
+model ApiConfig {
+  id           String   @id @default(uuid())
+  name         String   @unique
+  provider     String   // openai, gemini, claude, custom
+  apiKey       String   @map("api_key")
+  baseUrl      String?  @map("base_url")
+  defaultModel String?  @map("default_model")
+  tools        Tool[]
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("api_configs")
+}
+
+model ContactLead {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  message   String
+  status    String   @default("new") // "new", "pending", "resolved"
+  notes     String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("contact_leads")
+}
+
+model Visitor {
+  id        String   @id @default(uuid())
+  sessionId String   @map("session_id")
+  ipAddress String?  @map("ip_address")
+  device    String?
+  country   String?  @default("Unknown")
+  source    String?  @default("Direct")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("visitors")
+}
+
+model AnalyticsEvent {
+  id        String   @id @default(uuid())
+  eventName String   @map("event_name")
+  sessionId String?  @map("session_id")
+  path      String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("analytics_events")
+}
+
+model BlogPost {
+  id          String       @id @default(uuid())
+  slug        String       @unique
+  title       String
+  content     String       @db.Text
+  published   Boolean      @default(false)
+  seoMetadata SeoMetadata?
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  @@map("blog_posts")
+}
+
+model MediaLibrary {
+  id        String   @id @default(uuid())
+  filename  String
+  url       String
+  mimeType  String   @map("mime_type")
+  size      Int
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("media_library")
+}
+
+model SeoMetadata {
+  id          String    @id @default(uuid())
+  toolId      String?   @unique @map("tool_id")
+  tool        Tool?     @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  blogPostId  String?   @unique @map("blog_post_id")
+  blogPost    BlogPost? @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
+  title       String?
+  description String?
+  keywords    String?
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  @@map("seo_metadata")
+}
+
+model GlobalSetting {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("global_settings")
+}
+
+model ActivityLog {
+  id        String   @id @default(uuid())
+  action    String
+  details   String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("activity_logs")
+}

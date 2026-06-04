@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Menu, X, Rocket, Sparkles } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { toolsData } from '@/data/tools';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -17,6 +18,22 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (pathname && pathname.startsWith('/tools')) {
+      const matchedTool = toolsData.find(tool => tool.href === pathname);
+      if (matchedTool) {
+        try {
+          const key = 'recentlyUsedTools';
+          const recent = JSON.parse(localStorage.getItem(key) || '[]');
+          const updated = [matchedTool.id, ...recent.filter((id: string) => id !== matchedTool.id)].slice(0, 4);
+          localStorage.setItem(key, JSON.stringify(updated));
+        } catch (e) {
+          console.error('Error saving recent tools:', e);
+        }
+      }
+    }
+  }, [pathname]);
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -100,7 +117,7 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`flex items-center justify-between p-5 rounded-[1.5rem] text-xl font-black transition-all ${
+                className={`flex items-center justify-between p-5 rounded-2xl text-xl font-black transition-all ${
                   pathname === item.href 
                     ? 'bg-blue-600/10 text-blue-500 border border-blue-500/20' 
                     : 'text-white bg-white/5 border border-white/5'
@@ -114,7 +131,7 @@ export default function Header() {
             <div className="mt-8 pt-8 border-t border-white/5">
               <Link 
                 href="/tools" 
-                className="flex items-center justify-center gap-3 rounded-[1.5rem] bg-blue-600 p-5 text-xl font-black text-white shadow-2xl shadow-blue-500/20 active:scale-[0.98] transition-all"
+                className="flex items-center justify-center gap-3 rounded-2xl bg-blue-600 p-5 text-xl font-black text-white shadow-2xl shadow-blue-500/20 active:scale-[0.98] transition-all"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <Rocket className="w-6 h-6" suppressHydrationWarning />

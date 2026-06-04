@@ -163,3 +163,19 @@ textarea:focus {
   border-color: #3b82f6;
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
 }
+
+/* Responsive Admin Layout Utilities */
+.admin-main-content {
+  padding-top: 112px !important; /* Fully clears the fixed h-20 header with a comfortable 32px gap */
+}
+
+@media (min-width: 768px) {
+  .admin-main-content {
+    padding-left: var(--sidebar-width) !important; /* Aligns margins dynamically based on expanded/collapsed sidebar width */
+  }
+  .admin-header {
+    left: var(--sidebar-width) !important;
+    width: calc(100% - var(--sidebar-width)) !important;
+  }
+}
+

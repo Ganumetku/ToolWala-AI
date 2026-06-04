@@ -15,12 +15,13 @@ export interface ToolCardProps {
 export default function ToolCard({ title, description, icon, href, isPopular, category }: ToolCardProps) {
   return (
     <motion.div
-      whileHover={{ y: -8 }}
+      whileHover={{ y: -6 }}
       transition={{ type: "spring", stiffness: 300 }}
+      className="h-full"
     >
       <Link 
         href={href}
-        className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 block w-full h-full glass"
+        className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 w-full h-full glass"
       >
         {/* Glow Effect */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

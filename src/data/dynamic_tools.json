@@ -1,0 +1,45 @@
+[
+  {
+    "id": "bg-remover",
+    "slug": "bg-remover",
+    "title": "AI Background Remover",
+    "description": "Remove image backgrounds automatically in seconds.",
+    "longDesc": "Our advanced background removal tool leverages neural networks to identify and segment foreground elements, producing transparent PNGs with crisp details and smooth edges.",
+    "categoryName": "Creative & Design",
+    "categorySlug": "creative-design",
+    "isPopular": true,
+    "isFeatured": true,
+    "isTrending": false,
+    "published": true,
+    "icon": "🖼️",
+    "toolType": "AI Image Tool",
+    "ctaButtonText": "Remove Background",
+    "inputs": [
+      {
+        "id": "1-1",
+        "name": "image",
+        "label": "Upload Image",
+        "type": "file",
+        "required": true,
+        "order": 0
+      }
+    ],
+    "faqs": [
+      {
+        "id": "1-f1",
+        "question": "What image formats are supported?",
+        "answer": "We support PNG, JPG, and WebP images up to 10MB in size.",
+        "order": 0
+      }
+    ],
+    "articles": [
+      {
+        "id": "1-a1",
+        "title": "Why background removal matters",
+        "content": "Clean cutouts are essential for commercial product photography, web layouts, and corporate profiles."
+      }
+    ],
+    "createdAt": "2026-06-04T03:58:56.592Z",
+    "updatedAt": "2026-06-04T03:58:56.592Z"
+  }
+]

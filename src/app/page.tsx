@@ -4,7 +4,7 @@ import { useState, useRef, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import ToolCard from '@/components/ToolCard';
-import { toolsData, toolCategories, ToolCategory } from '@/data/tools';
+import { toolsData, toolCategories, ToolCategory, Tool } from '@/data/tools';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
 import { 
   Sparkles, Rocket, ShieldCheck, Zap, 
@@ -16,11 +16,25 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<ToolCategory>("All");
   const [mounted, setMounted] = useState(false);
+  const [recentToolIds, setRecentToolIds] = useState<string[]>([]);
   const toolsSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     setMounted(true);
+    try {
+      const stored = JSON.parse(localStorage.getItem('recentlyUsedTools') || '[]');
+      const validIds = stored.filter((id: string) => toolsData.some(t => t.id === id));
+      setRecentToolIds(validIds);
+    } catch (e) {
+      console.error('Error reading recent tools:', e);
+    }
   }, []);
+
+  const recentTools = useMemo(() => {
+    return recentToolIds
+      .map(id => toolsData.find(t => t.id === id))
+      .filter((t): t is Tool => !!t);
+  }, [recentToolIds]);
 
   const scrollToTools = () => {
     setTimeout(() => {
@@ -60,7 +74,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-[#030712] text-white">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex flex-col items-center justify-center pt-20 pb-24 overflow-hidden">
+      <section className="relative min-h-[90vh] flex flex-col items-center justify-center py-20 md:py-28 overflow-hidden">
         <MeshGradient />
         <FloatingParticles />
         
@@ -75,7 +89,7 @@ export default function Home() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-blue-400 text-xs font-black tracking-widest mb-8 shadow-2xl"
           >
             <span className="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-            <span>AI-POWERED UTILITY PLATFORM</span>
+            <span>🔒 100% Privacy-Assured Edge AI</span>
             <ChevronRight className="w-3 h-3" />
           </motion.div>
 
@@ -85,9 +99,9 @@ export default function Home() {
             transition={{ delay: 0.1 }}
             className="mx-auto max-w-5xl font-black text-5xl md:text-8xl tracking-tighter text-white leading-[0.9] mb-8"
           >
-            Everything you can <br />
+            Supercharge Your Daily <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 animate-gradient">
-              Imagine with AI
+              Workflows with AI
             </span>
           </motion.h1>
           
@@ -97,7 +111,7 @@ export default function Home() {
             transition={{ delay: 0.2 }}
             className="mx-auto max-w-2xl text-lg md:text-xl font-medium text-gray-400 leading-relaxed mb-12"
           >
-            The world's most intuitive playground for AI tools. Generate, edit, and automate your workflows with professional-grade AI models.
+            13+ professional-grade, privacy-first AI utilities that run 100% locally in your browser. No registration, no latency, no server uploads.
           </motion.p>
           
           {/* Hero Search Bar */}
@@ -172,7 +186,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-24 border-y border-white/5 bg-white/[0.01]">
+      <section className="py-20 md:py-28 border-y border-white/5 bg-white/[0.01]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
             <StatCard icon={<Layers />} value="25+" label="AI Tools" color="blue" />
@@ -184,7 +198,7 @@ export default function Home() {
       </section>
 
       {/* All Tools Section */}
-      <section ref={toolsSectionRef} id="tools-section" className="relative pb-32 pt-24 min-h-screen">
+      <section ref={toolsSectionRef} id="tools-section" className="relative py-20 md:py-28 min-h-screen">
         <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -212,6 +226,34 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Recently Used Tray */}
+          {recentTools.length > 0 && (
+            <div className="mb-16 glass p-8 rounded-2xl border border-white/5 relative overflow-hidden bg-white/[0.01] shadow-2xl">
+              <div className="absolute inset-0 bg-blue-600/5 blur-3xl pointer-events-none" />
+              <div className="flex items-center gap-3 mb-6 relative z-10">
+                <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                <h3 className="text-xs font-black uppercase tracking-[0.2em] text-gray-500">Recently Used Utilities</h3>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
+                {recentTools.map((tool) => (
+                  <Link 
+                    key={tool.id} 
+                    href={tool.href}
+                    className="flex items-center gap-4 p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-500/30 hover:bg-blue-600/5 transition-all group"
+                  >
+                    <div className="text-2xl w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform">
+                      {tool.icon}
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-black text-white group-hover:text-blue-400 transition-colors">{tool.title}</h4>
+                      <p className="text-[10px] text-gray-600 font-bold uppercase tracking-wider mt-0.5">{tool.category}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Tools Grid */}
           {filteredTools.length > 0 ? (
             <motion.div 
@@ -234,7 +276,7 @@ export default function Home() {
               </AnimatePresence>
             </motion.div>
           ) : (
-            <div className="text-center py-32 bg-white/5 rounded-[3rem] border border-white/10 border-dashed">
+            <div className="text-center py-32 bg-white/5 rounded-2xl border border-white/10 border-dashed">
               <div className="bg-white/5 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Search className="w-10 h-10 text-gray-700" />
               </div>
@@ -252,7 +294,7 @@ export default function Home() {
       </section>
 
       {/* Trust/Feature Section */}
-      <section className="py-32 bg-[#030712] relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-[#030712] relative overflow-hidden">
         <div className="absolute top-1/2 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] -z-10" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-24 lg:grid-cols-2 items-center">
@@ -298,8 +340,8 @@ export default function Home() {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="absolute -inset-4 bg-gradient-to-br from-blue-600 to-purple-600 rounded-[3rem] blur-2xl opacity-20 animate-pulse-slow" />
-              <div className="relative aspect-square w-full overflow-hidden rounded-[3rem] bg-[#0f172a] shadow-2xl flex items-center justify-center border border-white/10">
+              <div className="absolute -inset-4 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl blur-2xl opacity-20 animate-pulse-slow" />
+              <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-[#0f172a] shadow-2xl flex items-center justify-center border border-white/10">
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
                 <div className="flex flex-col items-center gap-10 text-center px-12 relative z-10">
                   <motion.div 

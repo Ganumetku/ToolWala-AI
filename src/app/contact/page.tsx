@@ -1,5 +1,6 @@
 import SectionTitle from '@/components/SectionTitle';
 import { Mail, MessageSquare, Globe, MapPin, Send, Clock, ShieldCheck, Sparkles } from 'lucide-react';
+import ContactForm from './ContactForm';
 
 export const metadata = {
   title: "Contact Us | ToolWala AI",
@@ -72,54 +73,8 @@ export default function ContactPage() {
 
           {/* Right Side: Contact Form */}
           <div className="lg:col-span-7">
-            <div className="glass p-10 rounded-[3rem] border border-white/5 h-full">
-              <form className="space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-3">
-                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Full Name</label>
-                    <input 
-                      type="text" 
-                      placeholder="John Doe"
-                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-blue-500/50 transition-all font-medium"
-                    />
-                  </div>
-                  <div className="space-y-3">
-                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Email Address</label>
-                    <input 
-                      type="email" 
-                      placeholder="john@example.com"
-                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-blue-500/50 transition-all font-medium"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Subject</label>
-                  <select className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-blue-500/50 transition-all font-medium appearance-none">
-                    <option className="bg-[#0f172a]">General Inquiry</option>
-                    <option className="bg-[#0f172a]">Technical Support</option>
-                    <option className="bg-[#0f172a]">Bug Report</option>
-                    <option className="bg-[#0f172a]">Business/Partnership</option>
-                  </select>
-                </div>
-
-                <div className="space-y-3">
-                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Message</label>
-                  <textarea 
-                    rows={6}
-                    placeholder="Tell us how we can help..."
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-blue-500/50 transition-all font-medium resize-none"
-                  />
-                </div>
-
-                <button 
-                  type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-500 text-white font-black uppercase tracking-widest py-5 rounded-2xl transition-all shadow-[0_0_30px_rgba(37,99,235,0.3)] flex items-center justify-center gap-3 active:scale-[0.98]"
-                >
-                  <Send className="w-5 h-5" />
-                  Send Message
-                </button>
-              </form>
+            <div className="glass rounded-[3rem] border border-white/5 h-full overflow-hidden">
+              <ContactForm />
             </div>
           </div>
 

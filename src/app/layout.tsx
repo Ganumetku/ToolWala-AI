@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import PublicLayoutWrapper from "@/components/PublicLayoutWrapper";
 import { Toaster } from 'sonner';
 import Script from "next/script";
 
@@ -162,9 +161,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col font-sans bg-[#030712] text-white">
         <Toaster position="top-center" richColors />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <PublicLayoutWrapper>{children}</PublicLayoutWrapper>
       </body>
     </html>
   );

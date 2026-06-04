@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useMemo } from 'react';
-import { toolsData, toolCategories, ToolCategory } from '@/data/tools';
+import { useState, useMemo, useEffect } from 'react';
+import { toolsData, toolCategories, ToolCategory, Tool } from '@/data/tools';
 import ToolCard from '@/components/ToolCard';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X } from 'lucide-react';
@@ -21,8 +21,45 @@ export default function ToolsDirectory({
 }: ToolsDirectoryProps) {
   const [internalSearchQuery, setInternalSearchQuery] = useState(initialSearchQuery);
   const [activeCategory, setActiveCategory] = useState<ToolCategory>("All");
+  const [dynamicTools, setDynamicTools] = useState<Tool[]>([]);
 
   const searchQuery = externalSearchQuery !== undefined ? externalSearchQuery : internalSearchQuery;
+
+  // Fetch dynamic tools on mount
+  useEffect(() => {
+    async function fetchDynamicTools() {
+      try {
+        const res = await fetch('/api/admin/tools');
+        const data = await res.json();
+        if (res.ok && data.success && data.tools) {
+          // Format dynamic database tools to match Tool interface
+          const staticSlugs = new Set(toolsData.map(t => t.href.split('/').pop()));
+          
+          const mapped: Tool[] = data.tools
+            .filter((t: any) => t.published && !staticSlugs.has(t.slug))
+            .map((t: any) => ({
+              id: t.id,
+              title: t.title,
+              description: t.description,
+              icon: t.icon || '🔧',
+              href: `/tools/${t.slug}`,
+              category: (t.category?.name || t.categoryName || 'Developer Utilities') as ToolCategory,
+              isPopular: !!t.isPopular,
+              tags: t.seoMetadata?.keywords?.split(',').map((s: string) => s.trim()) || ['ai', t.toolType || 'utility']
+            }));
+          setDynamicTools(mapped);
+        }
+      } catch (err) {
+        console.error('Failed to load dynamic tools:', err);
+      }
+    }
+    fetchDynamicTools();
+  }, []);
+
+  // Merge static and dynamic lists
+  const mergedTools = useMemo(() => {
+    return [...toolsData, ...dynamicTools];
+  }, [dynamicTools]);
 
   const handleSearchChange = (query: string) => {
     if (onSearchChange) {
@@ -33,7 +70,7 @@ export default function ToolsDirectory({
   };
 
   const filteredTools = useMemo(() => {
-    return toolsData.filter(tool => {
+    return mergedTools.filter(tool => {
       const matchesSearch = 
         tool.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         tool.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -44,7 +81,8 @@ export default function ToolsDirectory({
       
       return matchesSearch && matchesCategory;
     });
-  }, [searchQuery, activeCategory]);
+  }, [mergedTools, searchQuery, activeCategory]);
+
 
   return (
     <div className="w-full" id="tools-directory">

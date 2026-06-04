@@ -6,10 +6,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Download, RefreshCw, UploadCloud, 
   ImageIcon, Sparkles, AlertCircle, Maximize2,
-  ChevronLeft, Trash2, ShieldCheck, Zap
+  ChevronLeft, Trash2, ShieldCheck, Zap, Share2
 } from 'lucide-react';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
+import { useAnalytics } from '@/hooks/useAnalytics';
 
 const checkerboardStyle = {
   backgroundImage: 'repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05)), repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 25%, #030712 25%, #030712 75%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05))',
@@ -18,6 +19,7 @@ const checkerboardStyle = {
 };
 
 export default function BackgroundRemover() {
+  const { trackToolRun } = useAnalytics();
   const [mounted, setMounted] = useState(false);
   const [sourceFile, setSourceFile] = useState<File | null>(null);
   const [sourceUrl, setSourceUrl] = useState<string | null>(null);
@@ -96,6 +98,7 @@ export default function BackgroundRemover() {
       
       const url = URL.createObjectURL(blob);
       setResultUrl(url);
+      trackToolRun('background-remover');
     } catch (err) {
       console.error(err);
       setError('Failed to process image. Try a smaller file or a different format.');
@@ -124,6 +127,13 @@ export default function BackgroundRemover() {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+  };
+
+  const shareTool = () => {
+    navigator.clipboard.writeText(window.location.href);
+    import('sonner').then(({ toast }) => {
+      toast.success('Link copied! Share ToolWala with a teammate ⚡');
+    });
   };
 
   if (!mounted) return <div className="min-h-screen bg-[#030712]" />;
@@ -329,6 +339,12 @@ export default function BackgroundRemover() {
                       className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 text-sm font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 hover:text-white transition-all active:scale-[0.98]"
                     >
                       <Trash2 className="w-4 h-4" /> Start Over
+                    </button>
+                    <button 
+                      onClick={shareTool} 
+                      className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 text-sm font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 hover:text-white transition-all active:scale-[0.98]"
+                    >
+                      <Share2 className="w-4 h-4" /> Share Tool
                     </button>
                     <button 
                       onClick={downloadResult} 

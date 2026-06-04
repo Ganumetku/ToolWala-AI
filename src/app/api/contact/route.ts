@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { prisma } from '@/lib/db';
 
 /**
  * Nodemailer API Route for Gmail SMTP
@@ -115,6 +116,24 @@ export async function POST(req: Request) {
     });
 
     console.log('Email sent successfully via Gmail SMTP');
+
+    // Sync lead message to PostgreSQL database
+    if (prisma) {
+      try {
+        await prisma.contactLead.create({
+          data: {
+            name: fullName,
+            email,
+            message,
+            status: 'new'
+          }
+        });
+        console.log('Synchronized contact lead to database successfully.');
+      } catch (dbError) {
+        console.error('Failed to log contact lead to database:', dbError);
+      }
+    }
+
     return NextResponse.json({ success: true });
 
   } catch (error: any) {

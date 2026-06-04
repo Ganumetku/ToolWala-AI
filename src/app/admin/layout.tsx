@@ -38,32 +38,30 @@ if (typeof window !== 'undefined') {
         const tools = getLocalData('dynamic_tools', []);
         const blogs = getLocalData('dynamic_blogs', []);
         const leads = getLocalData('dynamic_leads', []);
-        const visitorsCount = getLocalData('visitors_count', 4829);
+        const visitorsCount = getLocalData('visitors_count', 48250);
 
         const responseData = {
-          success: true,
-          stats: {
-            totalUsers: 142,
-            totalVisitors: visitorsCount,
-            toolUsageCount: 42190 + tools.length * 10,
-            activeUsers: 18,
-            mostUsedTools: [
-              { name: 'AI Color Palette Generator', count: 18450, category: 'Creative & Design', growth: '+15%' },
-              { name: 'AI Resume Builder', count: 11170, category: 'Career Studio', growth: '+8%' },
-              { name: 'OCR Image to Text', count: 8200, category: 'Document & PDF', growth: '+12%' }
-            ],
-            recentActivity: leads.map((l: any) => ({
-              id: l.id,
-              action: 'Form Submitted',
-              tool: 'Contact Lead',
-              user: l.name,
-              status: 'success',
-              time: 'Recent'
-            })).concat([
-              { id: 'a1', action: 'Background Removed', tool: 'AI Background Remover', user: 'guest_84920', status: 'success', time: '2 mins ago' },
-              { id: 'a2', action: 'Text Extracted', tool: 'OCR Image to Text', user: 'guest_10482', status: 'success', time: '14 mins ago' }
-            ])
-          }
+          totalUsers: 12480,
+          totalVisitors: visitorsCount,
+          totalUsage: 85920 + tools.length * 10,
+          activeSessions: 248,
+          popularTools: [
+            { name: 'AI Color Palette Generator', count: 34120, category: 'Creative & Design', growth: '+24%' },
+            { name: 'AI Resume Builder', count: 22180, category: 'Career Studio', growth: '+18%' },
+            { name: 'OCR Image to Text', count: 11170, category: 'Document & PDF', growth: '+8%' }
+          ],
+          recentLogs: leads.map((l: any) => ({
+            id: l.id,
+            action: 'Form Submitted',
+            tool: 'Contact Lead',
+            user: l.name,
+            status: 'success',
+            time: 'Recent'
+          })).concat([
+            { id: '1', action: 'Background Removed', tool: 'AI Background Remover', user: 'guest_84920', status: 'success', time: '2 mins ago' },
+            { id: '2', action: 'Text Extracted (eng)', tool: 'OCR Image to Text', user: 'premium_akash', status: 'success', time: '8 mins ago' },
+            { id: '3', action: 'PDF Merged', tool: 'PDF Tools', user: 'guest_10482', status: 'success', time: '14 mins ago' }
+          ])
         };
 
         return new Response(JSON.stringify(responseData), {

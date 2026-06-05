@@ -516,7 +516,436 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "AI Resume Builder", href: "/tools/resume-builder" },
       { name: "AI Text Humanizer", href: "/tools/text-humanizer" }
     ]
+  },
+  "merge-pdf": {
+    title: "Merge PDF",
+    intro: "Combine multiple PDF files into one in a matter of seconds. No signup, no limits, and absolute privacy since your files never leave your device.",
+    whatItDoes: "Our Merge PDF tool is built for security-conscious professionals who need to join multiple documents together without relying on third-party cloud servers. Traditional online PDF mergers require you to upload your files, exposing sensitive tax documents, contracts, or personal records to external servers. This tool changes that by running entirely within your web browser. Using advanced web technologies, it runs a localized PDF parser that merges your files locally in your system's memory. Whether you have two PDFs or twenty, you can combine them instantly and download the final combined document without any data leakage.",
+    howToUse: [
+      "Drag and drop your PDF files into the secure upload zone, or click to choose them from your files.",
+      "Check the preview cards to see each file's size, page count, and order.",
+      "Use the up and down arrow buttons on the preview cards to reorder your documents into the correct sequence.",
+      "Click the 'Merge PDFs & Download' button to combine the files locally in your browser.",
+      "Watch the success animation, and find your newly merged PDF downloaded automatically to your device."
+    ],
+    keyFeatures: [
+      { title: "Client-Side Processing", desc: "All parsing and merging happens directly in your browser. Your files are never uploaded to a server, ensuring 100% data privacy." },
+      { title: "Interactive Reordering", desc: "Easily change the order of your PDFs before merging. Just click the up/down arrows to get the sequence exactly right." },
+      { title: "Real-Time Document Stats", desc: "Each uploaded PDF card shows critical details, including file size and the exact number of pages, so you know exactly what you are merging." },
+      { title: "Fast and Unlimited", desc: "Merge as many PDF documents as you need without daily file limits, download restrictions, or artificial delays." }
+    ],
+    benefits: [
+      "Complete confidentiality for bank statements, legal contracts, and medical records.",
+      "Blazing fast performance without waiting for file uploads or queue times.",
+      "Highly responsive and mobile-friendly UI that works on phone, tablet, and desktop.",
+      "Completely free to use with no hidden fees or watermark additions."
+    ],
+    whyChoose: "Most free online PDF editors are designed as lead generators or data-harvesting sites. ToolWala AI is different. We believe in providing essential utility tools that respect user privacy. By utilizing client-side computing power, we deliver a premium, ad-free experience that eliminates the server cost for us and the privacy risk for you. It's clean, reliable, and completely private.",
+    useCases: [
+      "Students combining separate assignment sections, essays, or references into a single PDF.",
+      "Freelancers merging monthly invoices, billing receipts, and expense statements for clients.",
+      "Legal professionals joining contract addendums, affidavits, and exhibits for case folders.",
+      "Job applicants consolidating portfolio pieces, letters of recommendation, and certificates."
+    ],
+    faqs: [
+      { question: "Is it safe to merge confidential documents here?", answer: "Yes, it is 100% safe. Unlike other tools that upload your files to external servers, ToolWala AI processes your PDFs locally on your own computer. The files never travel across the internet, meaning your confidential data remains entirely yours." },
+      { question: "Is there a file size limit?", answer: "Since the merging is executed by your web browser, the size limit depends entirely on your device's available memory (RAM). Most modern computers and smartphones can easily merge files totaling up to 100MB or more without performance drops." },
+      { question: "Can I merge scanned images or password-protected PDFs?", answer: "You can merge standard PDFs and scanned PDF documents. However, if a PDF is encrypted or password-protected, you must decrypt or remove the password first, as client-side tools cannot read locked files without the password." },
+      { question: "Do I need to sign up or create an account?", answer: "No signup, registration, or email is required. You can merge your documents immediately and download the result for free, with no strings attached." }
+    ],
+    conclusion: "Managing your documents doesn't require expensive subscriptions or sacrificing your privacy. With ToolWala AI's Merge PDF, you get professional-grade document assembly that is fast, reliable, and entirely secure. Try it today and optimize your workflow.",
+    relatedTools: [
+      { name: "PDF Tools Suite", href: "/tools/pdf-tools" },
+      { name: "Edit PDF", href: "/tools/pdf-tools/edit-pdf" },
+      { name: "OCR Image to Text", href: "/tools/ocr-to-text" }
+    ]
+  },
+  "split-pdf": {
+    title: "Split PDF",
+    intro: "Extract specific pages or separate your PDF documents into multiple files in seconds. Totally free, secure, and completed entirely within your browser.",
+    whatItDoes: "The ToolWala AI Split PDF utility is a professional-grade tool built for separating large document packs. Many standard online split tools force you to upload documents to external databases, which introduces data leaks and security risks for sensitive forms like contracts, tax worksheets, or statement folders. Our Split PDF solution changes this approach. The parsing, visual thumbnail building, and extraction processes run completely on your client system. This means your files never travel over the network. It allows you to select custom page numbers visually from thumbnails, type custom range blocks like '1-3, 5', or break every individual page into its own distinct file instantly.",
+    howToUse: [
+      "Drag and drop your PDF document into the upload workspace, or click to upload one from your computer.",
+      "Watch the thumbnail loader display actual previews of all the pages in your document.",
+      "Choose your preferred split method: click custom page cards, define a custom range, or extract every single page.",
+      "Customize the download name prefix, and click the 'Split PDF & Download' button.",
+      "Find your newly separated PDF files downloaded immediately as clean individual files or combined outputs."
+    ],
+    keyFeatures: [
+      { title: "In-Browser Thumbnails", desc: "We render individual page canvases using client-side libraries. You can visually inspect the page structure before choosing what to extract." },
+      { title: "Flexible Split Modes", desc: "Select specific pages by clicking on their cards, enter custom dash-and-comma ranges, or extract all pages as individual documents in one go." },
+      { title: "Zero Document Uploads", desc: "Complete data security. All compilation and segmenting operations happen in memory inside your browser." },
+      { title: "High Performance Engine", desc: "Splitting is processed natively in milliseconds. No server queue waits or download band throttling." }
+    ],
+    benefits: [
+      "Full data privacy for payroll logs, legal addendums, and confidential assets.",
+      "Interactive page-level toggle selector offers visual assurance before downloading.",
+      "Fast local generation of files with custom filename prefixes.",
+      "No account signup, no email entries, and no daily limits."
+    ],
+    whyChoose: "Traditional utilities charge expensive monthly fees or place heavy limitations on document sizes. At ToolWala AI, we leverage standard client-side computing to deliver high-end document compilation tools. We shift the processing load to your system, allowing us to keep this tool entirely free, fast, and completely secure. Your private worksheets are protected, and you get lightning-fast results.",
+    useCases: [
+      "Extracting single pages from thick textbook manuals for study files.",
+      "Separating consolidated bank statement sheets into monthly individual sheets.",
+      "Splitting legal contracts into separate signature pages and terms files.",
+      "Breaking large scanned document bundles into standalone worksheets."
+    ],
+    faqs: [
+      { question: "Are my files uploaded to a remote server?", answer: "No. The Split PDF tool processes your documents locally. All previews, selections, and file extractions run directly in your browser tab. Your files never touch our servers." },
+      { question: "How do I specify which pages to split?", answer: "You can do this in two ways: click on the page previews to select them, or select 'Page Ranges' and enter page indexes (e.g. '1-3, 5')." },
+      { question: "What is the difference between 'Custom Extraction' and 'Split All'?", answer: "'Custom Extraction' allows you to select specific pages and compile them into a single PDF. 'Split All' separates every single page of the document and downloads them as individual, standalone single-page PDFs." },
+      { question: "Can I split secure or password-locked PDFs?", answer: "No. Due to security rules in web browsers, password-encrypted files must be decrypted before this tool can parse pages. Remove the password before uploading." }
+    ],
+    conclusion: "Take control of your document organization. With ToolWala AI's Split PDF, you get a premium, visual, and highly secure extractor that speeds up your workflow without compromising your privacy. Try it now.",
+    relatedTools: [
+      { name: "PDF Tools Suite", href: "/tools/pdf-tools" },
+      { name: "Merge PDF", href: "/tools/merge-pdf" },
+      { name: "Split PDF", href: "/tools/split-pdf" }
+    ]
+  },
+  "jpg-to-pdf": {
+    title: "JPG to PDF",
+    intro: "Convert your JPG, JPEG, and PNG images into a clean, professional PDF document in seconds. 100% private, client-side conversion, with no file limits.",
+    whatItDoes: "The ToolWala AI JPG to PDF converter is a premium tool designed for combining digital images, receipts, photo sheets, or scans into a single standard PDF. Most web conversion tools upload your files to their cloud servers, which compromises your data security and leaks photos or sensitive documents (like copies of your ID cards, tax receipts, or bank printouts). Our tool runs entirely in your browser using local image processors and PDF rendering engines. All layouts, orientations, margins, and rendering take place in your device's memory. You can upload multiple files, arrange them visually in the grid, rotate individual cards, configure standard page layouts (such as A4 or Letter sizes), and generate a clean PDF instantly.",
+    howToUse: [
+      "Drag and drop your JPG, JPEG, or PNG images into the secure upload area, or browse them from your system.",
+      "Inspect the preview thumbnails of all uploaded images in the workspace grid.",
+      "Use the card controls to swap page sequences (Move Up/Down) or rotate images by 90 degrees.",
+      "Select your page format (A4, Letter, or Auto-fit), orientation (Portrait/Landscape), and page margins.",
+      "Enter a custom document name, click the 'Convert to PDF' button, and download the compiled file."
+    ],
+    keyFeatures: [
+      { title: "Client-Side Processing", desc: "All conversion tasks run directly in your local browser memory. None of your photos, documents, or personal images travel across the internet." },
+      { title: "Flexible Layout Controls", desc: "Configure your output PDF exactly how you want it. Select standard A4 or Letter sizes, switch portrait/landscape orientation, and adjust page borders." },
+      { title: "Visual Image Reordering", desc: "Arrange your page order visually in a grid layout before compiling. Change sequence with quick up/down controls." },
+      { title: "Rotate & Fine-Tune Previews", desc: "Fix upside-down scans or landscape snaps on the fly. Rotate individual files in 90-degree steps before generating the final file." }
+    ],
+    benefits: [
+      "Complete visual control and data privacy for sensitive scans and ID copies.",
+      "Extremely fast conversions with zero queue delays or server load delays.",
+      "Fully responsive and touch-friendly interface that works on mobile, tablet, and desktop.",
+      "No account signup, no watermark additions, and completely free."
+    ],
+    whyChoose: "Other free converters restrict file sizes or degrade image resolution. ToolWala AI provides a premium, developer-grade conversion workspace. By utilizing client-side computing power, we deliver a high-quality outputs with zero image degradation while keeping your files strictly private. It's clean, private, and extremely professional.",
+    useCases: [
+      "Freelancers merging invoice snapshots and billing receipts for expense reporting.",
+      "Applicants consolidating ID scans, recommendation letters, and signature cards into one file.",
+      "Photographers compile collections of digital photographs into a unified portfolio PDF.",
+      "Students converting handwritten notes and scanned assignment pictures into a clean submission."
+    ],
+    faqs: [
+      { question: "Is it safe to convert my ID card or private scans here?", answer: "Yes, absolutely. Unlike typical online tools, ToolWala AI does not upload your files to any cloud server. The entire conversion runs locally inside your browser, ensuring that your private photos and documents remain entirely on your device." },
+      { question: "What image formats are supported?", answer: "We support standard image formats including JPG, JPEG, and PNG. All files can be combined and converted simultaneously." },
+      { question: "Does this tool compress or optimize the generated PDF size?", answer: "Yes. Our engine compresses embedded images to reduce the final file size while preserving high visual clarity, making the PDF perfect for email attachments or official application portals." },
+      { question: "Can I reorder or rotate files after uploading them?", answer: "Yes. The preview workspace displays files as interactive cards. You can drag cards, use the up/down arrows to change page order, and rotate images 90 degrees at a time to correct orientation errors." }
+    ],
+    conclusion: "Converting your images to PDF doesn't have to compromise your personal data security. With ToolWala AI's JPG to PDF converter, you get high-resolution outputs with flexible layouts and complete privacy. Try it now.",
+    relatedTools: [
+      { name: "PDF Tools Suite", href: "/tools/pdf-tools" },
+      { name: "Merge PDF", href: "/tools/merge-pdf" },
+      { name: "Split PDF", href: "/tools/split-pdf" }
+    ]
+  },
+  "pdf-to-jpg": {
+    title: "PDF to JPG Converter",
+    intro: "Convert PDF pages into high-quality JPG/JPEG images in seconds. 100% private, client-side rendering, and free.",
+    whatItDoes: "The ToolWala AI PDF to JPG converter is a professional utility that extracts individual pages from any PDF document and saves them as crisp JPEG files. The entire rendering process runs directly inside your web browser. This means your sensitive business documents, contracts, tax files, or bank statements never touch the internet or external servers. You can load a PDF, select specific pages or convert the entire document, set your preferred rendering quality (Low, Medium, or High DPI), and download the extracted images individually or as a single ZIP file.",
+    howToUse: [
+      "Select a PDF document from your system or drag and drop it into the secure upload area.",
+      "Review the page thumbnails generated by our client-side renderer.",
+      "Choose your conversion quality (Low for fast loads, Medium for balanced clarity, or High for crisp printing).",
+      "Select either 'All Pages' or choose specific page numbers/ranges to convert.",
+      "Click 'Convert to JPG' to render the pages, and click 'Download All' to download them as a ZIP archive, or save individual page images."
+    ],
+    keyFeatures: [
+      { title: "Browser-Side Extraction", desc: "No file transfers occur. Your PDF pages are drawn directly to local canvas buffers, preserving total document privacy." },
+      { title: "High-Resolution DPI", desc: "Choose between standard web resolution, medium quality, or high-fidelity 300 DPI for printing-grade images." },
+      { title: "Visual Page Grid", desc: "Check or uncheck pages in our visual grid to extract only the slides or pages you need, ignoring blanks." },
+      { title: "ZIP Package Exports", desc: "Instantly compile all extracted JPEG images into a single ZIP file for organized saving and sharing." }
+    ],
+    benefits: [
+      "Perfect privacy and security for corporate agreements, payroll slips, or bank statements.",
+      "Blazing-fast page rendering without server upload delays.",
+      "Flexible output quality adjustments for various storage constraints.",
+      "Absolutely free to use with zero registration requirements or watermarks."
+    ],
+    whyChoose: "Many free conversion portals store document copies or limit page counts. ToolWala AI harnesses your browser's local processing capability. We render files cleanly and keep your data secure. You get high-speed outputs, selective extraction, and zip compression for free.",
+    useCases: [
+      "Social media managers converting slide decks or PDF reports into shareable social graphics.",
+      "Designers extracting image components or templates from compiled PDF documents.",
+      "Business professionals converting PDF contracts into image attachments for quick signatures.",
+      "Students converting textbook pages or lecture slides into JPEG files for notes."
+    ],
+    faqs: [
+      { question: "Is my uploaded PDF document private?", answer: "Yes, 100%. We do not upload your PDF to a server. All page rendering, image parsing, and zip files are compiled directly in your web browser." },
+      { question: "What does the quality selector do?", answer: "The quality selector changes the rendering DPI scale. Low is scaled at 1.0x (best for quick previews), Medium is scaled at 1.5x (great for text reading), and High is scaled at 2.5x (high resolution, 300 DPI, best for print and zoom)." },
+      { question: "Can I extract only a single page from a 100-page document?", answer: "Yes. Simply switch the conversion mode to 'Select Specific Pages', then click the checkboxes on the pages you want, or type a custom range. Only those pages will be rendered." },
+      { question: "Why does the conversion of large files take longer?", answer: "Since all rendering happens in your browser's thread, processing very large PDFs or choosing High quality requires more memory and CPU cycles. We render pages sequentially to keep performance smooth." }
+    ],
+    conclusion: "Extracting pages from PDF as images should be fast, private, and painless. Experience high-end local conversion with our PDF to JPG tool.",
+    relatedTools: [
+      { name: "Merge PDF", href: "/tools/merge-pdf" },
+      { name: "Split PDF", href: "/tools/split-pdf" },
+      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" }
+    ]
+  },
+  "protect-pdf": {
+    title: "Protect PDF with Password",
+    intro: "Lock your PDF documents with secure passwords entirely in your browser. 100% private, fast, and free client-side encryption.",
+    whatItDoes: "The ToolWala AI Protect PDF tool is a security utility that encrypts your PDF files and restricts access using a custom user password. Unlike standard web converters that upload your tax returns, corporate agreements, or financial statements to online servers (risking identity theft and security leaks), our tool runs 100% locally. The encryption process uses client-side javascript libraries to write a secure password lock into the PDF byte stream right in your browser. No file data leaves your machine, providing military-grade privacy.",
+    howToUse: [
+      "Select a PDF document or drag and drop it into the secure upload deck.",
+      "Enter a secure password of your choice in the 'New Password' field.",
+      "Re-type the password in the 'Confirm Password' field to verify accuracy.",
+      "Monitor the strength indicator to ensure your password is secure.",
+      "Click 'Encrypt PDF' to lock the document, and download your password-protected file."
+    ],
+    keyFeatures: [
+      { title: "Browser-First Encryption", desc: "Your PDF is locked locally inside your browser memory. We never upload, see, or store your documents or passwords." },
+      { title: "Password Strength Checker", desc: "Get real-time feedback on your password complexity to help prevent brute-force cracking attempts." },
+      { title: "Show/Hide Password Control", desc: "Easily toggle the password visibility to make sure you didn't make a typo before locking the file." },
+      { title: "Universal PDF Compatibility", desc: "The locked PDF outputs follow standard PDF security schemas, making them readable by any standard PDF viewer (Acrobat, Chrome, iOS Safari, etc.) that prompts for the user password." }
+    ],
+    benefits: [
+      "Complete data privacy for business contracts, payslips, or tax transcripts.",
+      "Super-fast local processing with zero wait times or cloud queues.",
+      "Works perfectly on mobile devices, tablets, and desktop computers.",
+      "Totally free to use with no file limits, signups, or subscription fees."
+    ],
+    whyChoose: "Most online tools require trust in their server storage. ToolWala AI removes the server from the equation entirely. By processing encryption directly on your device, we guarantee absolute file security and prevent unauthorized access without compromises.",
+    useCases: [
+      "HR managers locking employee payroll files and tax forms before email distribution.",
+      "Business partners securing confidential contracts and financial disclosures.",
+      "Individuals protecting copies of passports, IDs, or lease agreements for security.",
+      "Developers securing project specifications and client documentation."
+    ],
+    faqs: [
+      { question: "Can ToolWala AI recover my password if I forget it?", answer: "No. Because the encryption is performed 100% client-side and we do not store your passwords or files on our servers, we have absolutely no way to retrieve or reset a forgotten password. Please make sure to save it safely." },
+      { question: "Is the encrypted PDF compatible with other PDF readers?", answer: "Yes. The tool outputs standard, password-protected PDF files. Any compliant viewer (such as Adobe Acrobat, Apple Preview, Google Chrome, Microsoft Edge, or mobile PDF applications) will prompt you for the password and decrypt the document correctly." },
+      { question: "What is the recommended password strength?", answer: "We recommend using a password with at least 8 characters, containing a mix of uppercase letters, numbers, and symbols. The built-in strength indicator will help you evaluate your choice." },
+      { question: "Can I protect a PDF file that is already encrypted?", answer: "If a PDF is already password-locked, you must first decrypt it before applying a new password. Our engine will alert you if the uploaded document is already restricted." }
+    ],
+    conclusion: "Securing your confidential documents doesn't have to be complicated or risky. Keep your PDFs safe and private with ToolWala AI's local Protect PDF tool.",
+    relatedTools: [
+      { name: "Merge PDF", href: "/tools/merge-pdf" },
+      { name: "Split PDF", href: "/tools/split-pdf" },
+      { name: "PDF to JPG", href: "/tools/pdf-to-jpg" }
+    ]
+  },
+  "unlock-pdf": {
+    title: "Unlock PDF Online",
+    intro: "Remove password protection and decryption locks from your PDF files instantly. 100% private, client-side decoding, and free.",
+    whatItDoes: "The ToolWala AI Unlock PDF tool is a utility that removes security restrictions and password locks from protected PDF files. When you receive locked files (like monthly bank statements, credit card printouts, phone bills, or protected contracts) and need to merge or edit them, typing the password every time becomes a hassle. Our tool allows you to upload the document, enter the correct user password once, decrypt the byte stream entirely in your browser, and download a permanently unlocked version. No file contents or security passwords leave your device, ensuring maximum privacy.",
+    howToUse: [
+      "Select a password-protected PDF or drag and drop it into the secure upload area.",
+      "If the document is encrypted, you will be prompted to enter the PDF user password.",
+      "Enter the document password in the input field.",
+      "Toggle the eye icon to review the password characters and prevent typing errors.",
+      "Click 'Unlock PDF' to remove protection, and download your decrypted PDF."
+    ],
+    keyFeatures: [
+      { title: "Browser-Side Decryption", desc: "No file uploads or internet transfers occur. Your password and PDF are processed locally inside your browser memory." },
+      { title: "Instant Password Removal", desc: "Permanently strips password layers from the byte stream, letting you open, print, or edit the PDF directly." },
+      { title: "AES & RC4 Compatibility", desc: "Successfully decodes both legacy 128-bit RC4 encryption and modern high-security AES-256 standard files." },
+      { title: "Smart Upload Filters", desc: "Automatically checks if the uploaded file is encrypted. If the document is already unlocked, it informs you immediately." }
+    ],
+    benefits: [
+      "Complete data confidentiality for sensitive bank transcripts, payroll files, and invoices.",
+      "Extremely fast local calculations with zero upload or download queue wait times.",
+      "Responsive, touch-friendly UI that runs on mobile and desktop browsers alike.",
+      "Absolutely free with no watermarks, registration gates, or file restrictions."
+    ],
+    whyChoose: "Traditional converters require uploading your bank credentials and document bytes to their remote cloud servers. ToolWala AI is built for the privacy-first user. By executing decryption purely in browser-side memory, your security credentials and personal information remain 100% secure. It is fast, clean, and completely private.",
+    useCases: [
+      "Individuals removing password prompts from monthly bank statements and utilities bills for printing.",
+      "Accountants merging encrypted billing receipts and financial ledgers into one file.",
+      "Professionals preparing protected corporate slides or templates for editing.",
+      "Applicants compiling personal ID scans and lock-protected transcripts for applications."
+    ],
+    faqs: [
+      { question: "Do you store or see my document password?", answer: "No. Since the entire decryption process happens inside your browser's thread on your local computer, we never see, upload, or save your passwords or documents. Everything stays on your machine." },
+      { question: "Can I unlock a PDF if I don't know the password?", answer: "No. This tool is designed to remove password prompts from files for which you have authorized access. You must provide the correct password once to decode the PDF byte stream." },
+      { question: "What encryption standards does the tool support?", answer: "We support standard PDF encryption formats, including legacy 40/128-bit RC4 encryption as well as modern 128/256-bit AES encryption." },
+      { question: "Will the decrypted file retain its original layout and formatting?", answer: "Yes, absolutely. The tool only removes the encryption wrapper and permission constraints from the file bytes. All images, layouts, form fields, and text content remain exactly as they were." }
+    ],
+    conclusion: "Tired of typing passwords every time you open a PDF? Unlock your files permanently and securely with ToolWala AI's client-side decrypter.",
+    relatedTools: [
+      { name: "Protect PDF", href: "/tools/protect-pdf" },
+      { name: "Merge PDF", href: "/tools/merge-pdf" },
+      { name: "Split PDF", href: "/tools/split-pdf" }
+    ]
+  },
+  "watermark-pdf": {
+    title: "Add Watermark to PDF Online",
+    intro: "Protect your PDF documents with custom text or image watermarks. 100% private, client-side overlay generator, and free.",
+    whatItDoes: "The ToolWala AI Add Watermark to PDF tool is a professional utility that applies custom text or image stamps onto PDF document pages. Standard watermarking services require you to upload your contracts, portfolios, or draft papers to remote servers, risking leaking private documents. Our tool runs entirely in your web browser. You can load a PDF, enter a custom text watermark or select a logo/image, adjust size, transparency, rotation angle, and position alignment, preview the output instantly on the page layout, and compile the final document locally. Your original files and metadata are preserved securely.",
+    howToUse: [
+      "Upload your PDF file using the secure drag-and-drop zone or system browser.",
+      "Select your watermark type: Text or Image.",
+      "Customize properties: type your text or load a logo image, and adjust opacity, rotation, and font sizes.",
+      "Choose a position preset (such as Center, Top Left, or Tiled Diagonal).",
+      "Specify which pages to watermark, click 'Apply Watermark', and download the stamped PDF."
+    ],
+    keyFeatures: [
+      { title: "Browser-Side Stamping", desc: "No document uploads occur. Your files are processed entirely in browser memory, maintaining absolute security." },
+      { title: "Image & Text Formats", desc: "Overlay text with customized colors and fonts, or upload your corporate brand logo in PNG/JPG formats." },
+      { title: "Real-Time Previewer", desc: "Instantly preview your watermark overlay as you drag sliders and adjust presets, without rebuilding PDF bytes." },
+      { title: "Flexible Geometry Setup", desc: "Fine-tune opacity values, rotate stamps to any angle, change scale dimensions, and select page distributions." }
+    ],
+    benefits: [
+      "Complete data confidentiality for proprietary presentations, legal drafts, and financial quotes.",
+      "Super-responsive sliders and layouts with zero server rendering lag.",
+      "Fits mobile screens, tablets, and desktop workstations.",
+      "Completely free to use with no account log-in, limits, or watermarks of our own."
+    ],
+    whyChoose: "Many free online editors lower document resolution or add their own promotional stamps. ToolWala AI uses client-side drawing frameworks to preserve the original quality of your PDF pages while adding your watermark with professional precision. It's clean, private, and fully customizable.",
+    useCases: [
+      "Photographers stamping digital contact sheets and draft portfolios for client review.",
+      "Lawyers and writers adding 'CONFIDENTIAL' or 'DRAFT' overlays to legal agreements.",
+      "Businesses overlaying brand logos on sales flyers or marketing decks.",
+      "Academics stamping research drafts before sharing with peers."
+    ],
+    faqs: [
+      { question: "Is my document private when adding a watermark?", answer: "Yes, 100%. All PDF drawing, canvas rendering, and page rebuilding run locally in your web browser thread. No files or images are sent to any remote server." },
+      { question: "What image formats are supported for watermarks?", answer: "We support PNG and JPEG/JPG formats. We recommend using transparent PNGs for the best overlay styling." },
+      { question: "Can I choose which pages to watermark?", answer: "Yes. You can choose to apply the watermark to all pages of the document or select specific page numbers (e.g., first page only, or page ranges) under the settings deck." },
+      { question: "Can the watermark be easily removed?", answer: "The tool embeds the watermark text and image directly into the PDF's vector description layer. While advanced PDF editor software might be able to edit page contents, it is securely integrated into the page bytes." }
+    ],
+    conclusion: "Protect your intellectual property securely and customize your PDF presentation. Stamp your files locally using ToolWala AI's Watermark tool.",
+    relatedTools: [
+      { name: "Protect PDF", href: "/tools/protect-pdf" },
+      { name: "Unlock PDF", href: "/tools/unlock-pdf" },
+      { name: "Merge PDF", href: "/tools/merge-pdf" }
+    ]
+  },
+  "organize-pdf": {
+    title: "Organize PDF Pages",
+    intro: "Take complete control of your PDF structure. Rearrange pages, delete unnecessary sheets, rotate crooked scans, and duplicate important layouts in seconds—all locally in your browser.",
+    whatItDoes: "The ToolWala AI PDF Organizer is a visual document workshop that runs entirely inside your web browser. Rather than sending your private PDFs to remote cloud servers, this tool executes all page separations, duplication tasks, and layout rotations on your client-side CPU. By uploading your PDF, you are presented with high-definition visual page cards. You can drag and drop pages to rearrange their sequence, highlight multiple pages for bulk rotations or deletions, and immediately compile the customized result. It preserves original document dimensions, vector qualities, and embedded texts without adding any watermarks or page limits.",
+    howToUse: [
+      "Upload your PDF file by dragging it into the active upload zone or clicking to browse your local computer.",
+      "Once the visual workspace renders, you will see thumbnails of all pages in the PDF document.",
+      "Drag and drop any page thumbnail to change its position in the document sequence.",
+      "Use the toolbar to select multiple pages and apply bulk operations like Rotate (90 degrees), Duplicate, or Delete.",
+      "Hover over any single page to access quick individual controls to delete, duplicate, or rotate.",
+      "Click 'Download Organized PDF' to compile your new document locally and initiate a direct browser download."
+    ],
+    keyFeatures: [
+      { title: "Visual Drag & Drop", desc: "Rearrange page sequence in a grid layout. Just grab a thumbnail and drop it where it belongs." },
+      { title: "Multi-Page Selection", desc: "Select multiple pages at once to delete, duplicate, or rotate them in bulk, saving precious clicks." },
+      { title: "Precision Rotations", desc: "Fix upside-down page orientations or landscape scans instantly by rotating them 90 degrees." },
+      { title: "Instant Page Duplication", desc: "Duplicate target forms, layouts, or sheets in one click to insert copies immediately into the document." }
+    ],
+    benefits: [
+      "100% Client-Side Privacy: Your sensitive business documents are parsed in your browser and never uploaded to remote servers.",
+      "High-Performance Compiles: Rearrange and rotate page sequences instantly without losing original visual qualities or vector rendering.",
+      "Completely Free: Organize documents of any page count without restrictions, signup hurdles, or watermark additions.",
+      "Responsive Mobile Workspace: Reorder and rotate PDF pages easily on mobile phones, tablets, or desktop browsers."
+    ],
+    whyChoose: "Many PDF tools force you to upload documents to external databases, posing security risks and taking ages. ToolWala AI uses browser-first computing to process PDF structures instantly. Your confidential PDFs remain completely on your local device. Combined with our premium visual workspace, you get speed, total security, and complete control over your file structures.",
+    useCases: [
+      "Preparing document presentations by deleting draft pages or notes slides.",
+      "Fixing scanned books or reports where certain sheets were loaded upside down or sideways.",
+      "Reordering reports to place critical summary pages right at the beginning.",
+      "Duplicating form sheets or signature pages to distribute across multiple parts of a contract."
+    ],
+    faqs: [
+      { question: "Is my document private when using the PDF Organizer?", answer: "Yes. The PDF parsing, thumbnail preview rendering, page reordering, and document recompiling run locally in your web browser. No file data is uploaded to our servers, keeping your documents 100% secure and confidential." },
+      { question: "Can I drag and drop pages on mobile devices?", answer: "Yes. Our visual layout supports mobile touch gestures, and we also provide easy-to-use 'Move Left' and 'Move Right' button controls on each card to facilitate reordering on smaller touchscreens." },
+      { question: "Does duplicating or rotating pages reduce PDF quality?", answer: "Not at all. We use pdf-lib to construct the new file structure. Pages are copied and rotated directly at the byte level, ensuring that text clarity, vector elements, and original resolutions are perfectly preserved." },
+      { question: "Is there a limit to the number of pages I can organize?", answer: "There is no software-imposed page limit. For extremely large files (e.g., hundreds of pages), the initial thumbnail rendering phase might take a few seconds as it processes pages in your browser's local memory." }
+    ],
+    conclusion: "Take control of your PDF documents with professional, client-side tools. Reorder, rotate, delete, or duplicate pages in seconds with ToolWala AI's PDF Organizer.",
+    relatedTools: [
+      { name: "Merge PDF", href: "/tools/merge-pdf" },
+      { name: "Split PDF", href: "/tools/split-pdf" },
+      { name: "Add Watermark to PDF", href: "/tools/watermark-pdf" }
+    ]
+  },
+  "pdf-ocr": {
+    title: "PDF OCR Scanner",
+    intro: "Convert scanned PDF documents and images into fully searchable, copyable, and editable text in seconds. No server uploads, 100% private client-side OCR extraction.",
+    whatItDoes: "The ToolWala AI PDF OCR Scanner is a secure, browser-native document digitizer. Rather than uploading confidential business files, invoices, or identity scans to remote servers, our tool initializes a local Optical Character Recognition (OCR) engine inside your browser using WebAssembly. It renders each PDF page as a high-definition image canvas, analyzes the visual layout, translates characters, and presents the extracted text in an editable split-pane workspace. You can preview extraction progress page-by-page, refine the results, and export them directly to TXT or Word DOC formats without compromise.",
+    howToUse: [
+      "Upload your scanned PDF document by dragging it into the active upload box or clicking to browse your device files.",
+      "Select the language of the document's text to optimize the recognition accuracy of the engine.",
+      "Click 'Run OCR Scanner' to initialize client-side character extraction. The progress indicator will track page-by-page parsing.",
+      "Review the extracted copy inside the visual output pane. Toggle between Combined Text and Page-by-Page views.",
+      "Tweak or copy the text output directly, or click 'Export' to download it as a standard TXT or Microsoft Word DOC file."
+    ],
+    keyFeatures: [
+      { title: "Secure Edge OCR", desc: "Extract text entirely inside your web browser. Sensitive files remain completely on your local device." },
+      { title: "Multi-Page PDF Parsing", desc: "Process multi-page documents sequentially. Tracks overall progress and active percentage of each page." },
+      { title: "Word & TXT Exports", desc: "Directly export results as raw text (.txt) files or compile them into Microsoft Word (.doc) structures." },
+      { title: "Multi-Language Matching", desc: "Support for English, Spanish, French, German, Japanese, and Hindi to handle various document types." }
+    ],
+    benefits: [
+      "Complete Document Security: High-security client-side edge parsing means your PDF files are never uploaded to remote databases.",
+      "Preserved Formatting: Recognizes paragraph structures, list sequences, and page breaks to keep the text contextually correct.",
+      "Completely Free to Use: Scan documents of any page count without premium subscriptions, registration forms, or watermarks.",
+      "Split Workspace Design: Edit, formatting-check, and review the extracted content side-by-side with your page counts."
+    ],
+    whyChoose: "Many online scanner sites expose your private invoices, corporate drafts, and identity sheets to cloud data leaks. ToolWala AI combines high-accuracy WebAssembly character digitizers with 100% client-side privacy. The OCR translation tables are compiled locally, ensuring speed, security, and absolute data safety for every user.",
+    useCases: [
+      "Translating printed textbook scans or class PDF handouts into digital notes.",
+      "Digitizing financial reports, receipts, and invoice tables for spreadsheets.",
+      "Extracting contract terms or legal drafts from scanned papers to edit in Word.",
+      "Searching through large volumes of archives by turning flat image PDFs into searchable text."
+    ],
+    faqs: [
+      { question: "Is my PDF file private when scanning text?", answer: "Yes, 100%. All PDF processing, page canvas drawing, and character extraction operate locally on your device's processor using WebAssembly. No files or extracted data are sent to our servers." },
+      { question: "How accurate is the character recognition?", answer: "Accuracy is highly precise for typed and printed characters. Clean, high-resolution scans deliver the best output, while blurry or low-contrast text might require minor visual manual edits in the workspace text editor." },
+      { question: "Can I edit the extracted text before exporting?", answer: "Yes. The output workspace provides an interactive and editable rich text area. You can modify, delete, format, or check the extracted text before exporting it to Word or TXT." },
+      { question: "Does it support image files like JPEG or PNG?", answer: "Yes. If you need to scan single image files, you can upload them directly, or you can use our dedicated 'OCR Image to Text' utility which is specifically optimized for single-image uploads." }
+    ],
+    conclusion: "Convert scans into copyable documents instantly with secure client-side computing. Digitized, parsed, and exported locally using ToolWala AI.",
+    relatedTools: [
+      { name: "OCR Image to Text", href: "/tools/ocr-to-text" },
+      { name: "Merge PDF", href: "/tools/merge-pdf" },
+      { name: "Split PDF", href: "/tools/split-pdf" }
+    ]
+  },
+  "aadhaar-photo-resizer": {
+    title: "Aadhaar Photo Resizer",
+    intro: "Quickly resize, crop, and compress your passport-size photo to official UIDAI specifications for Aadhaar card updates, student cards, and government online applications.",
+    whatItDoes: "The ToolWala AI Aadhaar Photo Resizer is a dedicated image workshop designed for Indian citizens and government form applicants. It helps you prepare official photos matching UIDAI specifications (3.5 cm x 4.5 cm / 354 x 472 px at 300 DPI) completely in your web browser. When you upload any photo—whether it is a selfie, a full-body snapshot, or an existing ID photo—our local subject analysis isolates your pose, centers your face, and crops it to the head-and-shoulders layout needed for official cards. You can toggle background colors to White or Light Blue, tweak visual parameters like contrast and brightness, sharpen the image, and compress the file size down to exact targets (like 20KB or 50KB) to meet upload caps perfectly.",
+    howToUse: [
+      "Upload your portrait, selfie, or full body photo by dragging it into the active upload box or clicking to browse your device.",
+      "Let the browser-local processor analyze your pose. It will isolate the subject and crop to a centered head-and-shoulders frame.",
+      "Select your target background color: White (UIDAI standard), Light Blue, or use the custom color picker for other government forms.",
+      "Fine-tune visual parameters: adjust brightness, contrast, and apply sharpening filters if the image looks blurry.",
+      "Select your target file size (20KB or 50KB cards, or enter a custom KB limit) and click download to get your compliant JPEG or PNG."
+    ],
+    keyFeatures: [
+      { title: "Auto Face Centering", desc: "Analyzes the subject's pose and automatically centers the head and shoulders, preventing random off-center crops." },
+      { title: "UIDAI Standard Sizes", desc: "Applies standard dimensions (35x45 mm) required for Aadhaar cards, passport updates, and official Indian web portals." },
+      { title: "Exact KB Compressor", desc: "Enforces strict file size thresholds (e.g. under 20KB or 50KB) using an iterative quality search algorithm." },
+      { title: "Government Color Backgrounds", desc: "Instantly switch background colors to White or Light Blue, matching standard official guidelines." }
+    ],
+    benefits: [
+      "Standard-Compliant Layouts: Get photos that follow government criteria exactly, preventing form rejections.",
+      "100% Secure Client Processing: Your personal photos and documents are processed locally and never uploaded to any remote server.",
+      "Smart Full-Body Cropping: Intelligently isolates face and shoulders from full-body snapshots or group pictures.",
+      "Interactive Before/After View: Inspect differences side-by-side to review crops and color changes in real-time."
+    ],
+    whyChoose: "Most online resizers crop images crudely, leading to rejected application forms due to bad ratios or incorrect KB sizes. ToolWala AI combines smart subject extraction with exact KB compression. We run all logic inside your browser thread, keeping your personal identity photos secure while delivering professional results for free.",
+    useCases: [
+      "Updating Aadhaar details online through UIDAI portal uploads.",
+      "Uploading candidate photos for government service examinations (SSC, UPSC, Banking).",
+      "Creating passport-size photos for student enrollment cards and college forms.",
+      "Preparing standardized photos for online KYC verifications and bank accounts."
+    ],
+    faqs: [
+      { question: "What is the official photo size for Aadhaar updates?", answer: "The official size is 35mm x 45mm (3.5 cm x 4.5 cm), with the head and shoulders centered and occupying 70% to 80% of the photo area on a white background." },
+      { question: "How does the size compression work?", answer: "Portals like UIDAI often require photos to be strictly under 50KB or 20KB. Our system uses an iterative binary search algorithm to compress the image bytes to fit exactly within your requested KB target." },
+      { question: "Is my uploaded photo private?", answer: "Yes, absolutely. Background removal, face cropping, color replacement, and size compression are executed on your local device. We do not store or transmit your photos." },
+      { question: "Can I use this for other government exams?", answer: "Yes. While optimized for Aadhaar, you can select standard passport dimensions and custom background colors/KB sizes to meet SSC, UPSC, and State exam criteria." }
+    ],
+    conclusion: "Standardize your ID photos, replace background colors, and compress files to compliance limits in one click. Crop your photos securely using ToolWala AI.",
+    relatedTools: [
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
+      { name: "Image Compressor", href: "/tools/image-compressor" },
+      { name: "AI Background Remover", href: "/tools/bg-remover" }
+    ]
   }
 };
-
-

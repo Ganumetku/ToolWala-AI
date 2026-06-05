@@ -37,7 +37,8 @@ export default function Header() {
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'All Tools', href: '/tools' },
+    { name: 'Tools', href: '/tools' },
+    { name: 'Categories', href: '/categories' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
@@ -71,7 +72,7 @@ export default function Header() {
               key={item.name} 
               href={item.href} 
               className={`px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all ${
-                pathname === item.href 
+                pathname === item.href || (item.href !== '/' && pathname?.startsWith(item.href))
                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' 
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
               }`}
@@ -118,7 +119,7 @@ export default function Header() {
                 key={item.name}
                 href={item.href}
                 className={`flex items-center justify-between p-5 rounded-2xl text-xl font-black transition-all ${
-                  pathname === item.href 
+                  pathname === item.href || (item.href !== '/' && pathname?.startsWith(item.href))
                     ? 'bg-blue-600/10 text-blue-500 border border-blue-500/20' 
                     : 'text-white bg-white/5 border border-white/5'
                 }`}

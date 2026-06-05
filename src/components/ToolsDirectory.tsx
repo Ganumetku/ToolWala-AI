@@ -30,11 +30,34 @@ export default function ToolsDirectory({
     async function fetchDynamicTools() {
       try {
         const res = await fetch('/api/admin/tools');
-        const data = await res.json();
-        if (res.ok && data.success && data.tools) {
+        if (!res.ok) {
+          console.warn(`Failed to load dynamic tools: Server responded with status ${res.status}`);
+          return;
+        }
+        const contentType = res.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          console.warn("Failed to load dynamic tools: Response content type is not JSON");
+          return;
+        }
+        const text = await res.text();
+        if (!text.trim().startsWith('{') && !text.trim().startsWith('[')) {
+          console.warn("Failed to load dynamic tools: Response body does not start with JSON characters");
+          return;
+        }
+        const data = JSON.parse(text);
+        if (data.success && data.tools) {
           // Format dynamic database tools to match Tool interface
           const staticSlugs = new Set(toolsData.map(t => t.href.split('/').pop()));
           
+          const categoryMap: Record<string, string> = {
+            'Creative & Design': 'Image Tools',
+            'Document & PDF': 'PDF Tools',
+            'AI Writing': 'AI Tools',
+            'Career Studio': 'Document Tools',
+            'Business Ops': 'Document Tools',
+            'Developer Utilities': 'Utility Tools',
+          };
+
           const mapped: Tool[] = data.tools
             .filter((t: any) => t.published && !staticSlugs.has(t.slug))
             .map((t: any) => ({
@@ -43,14 +66,14 @@ export default function ToolsDirectory({
               description: t.description,
               icon: t.icon || '🔧',
               href: `/tools/${t.slug}`,
-              category: (t.category?.name || t.categoryName || 'Developer Utilities') as ToolCategory,
+              category: (categoryMap[t.category?.name] || categoryMap[t.categoryName] || t.category?.name || t.categoryName || 'Utility Tools') as ToolCategory,
               isPopular: !!t.isPopular,
               tags: t.seoMetadata?.keywords?.split(',').map((s: string) => s.trim()) || ['ai', t.toolType || 'utility']
             }));
           setDynamicTools(mapped);
         }
       } catch (err) {
-        console.error('Failed to load dynamic tools:', err);
+        console.warn('Failed to load dynamic tools:', err);
       }
     }
     fetchDynamicTools();

@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@imgly/background-removal": "^1.7.0",
+    "@pdfsmaller/pdf-decrypt": "^1.0.1",
+    "@pdfsmaller/pdf-encrypt-lite": "^1.0.2",
     "@prisma/client": "^5.22.0",
     "@supabase/supabase-js": "^2.107.0",
     "@tensorflow-models/face-detection": "^1.0.3",
@@ -18,6 +20,7 @@
     "html-to-image": "^1.11.13",
     "html2canvas": "^1.4.1",
     "jspdf": "^4.2.1",
+    "jszip": "^3.10.1",
     "lucide-react": "^1.14.0",
     "next": "16.2.6",
     "nodemailer": "^8.0.7",

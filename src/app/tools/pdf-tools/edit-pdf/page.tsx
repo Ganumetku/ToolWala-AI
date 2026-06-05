@@ -317,7 +317,7 @@ export default function EditPdfPage() {
           return;
         }
         
-        const loadingTask = pdfjs.getDocument({ data: bytes });
+        const loadingTask = pdfjs.getDocument({ data: bytes.slice() });
         const doc = await loadingTask.promise;
         pdfDocRef.current = doc;
         setTotalPages(doc.numPages);

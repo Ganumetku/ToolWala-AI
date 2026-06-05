@@ -4,11 +4,17 @@ import { useState, useEffect } from 'react';
 import { 
   Plus, Search, Edit3, Trash2, Layers, 
   Sparkles, CheckCircle2, Bookmark, Flame, Globe,
-  Settings2, HelpCircle, FileText, Upload, RefreshCw, Copy
+  Settings2, HelpCircle, FileText, Upload, RefreshCw, Copy, Calendar
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import InputBuilder, { FormInputSchema } from '@/components/admin/InputBuilder';
+
+// Importing CMS scheduling components
+import ToolStatusBadge from '@/components/admin/ToolStatusBadge';
+import PublishToggle from '@/components/admin/PublishToggle';
+import ScheduleModal from '@/components/admin/ScheduleModal';
+import ToolSchedulerCard from '@/components/admin/ToolSchedulerCard';
 
 interface ToolCMSItem {
   id: string;
@@ -22,6 +28,9 @@ interface ToolCMSItem {
   isFeatured: boolean;
   isTrending: boolean;
   published: boolean;
+  isPublished?: boolean;
+  publishDate?: string | null;
+  status?: 'draft' | 'scheduled' | 'published' | 'archived';
   icon?: string | null;
   thumbnail?: string | null;
   toolType: string;
@@ -63,6 +72,11 @@ export default function ContentCMS() {
   const [isEditing, setIsEditing] = useState(false);
   const [editingItem, setEditingItem] = useState<ToolCMSItem | null>(null);
   const [activeTab, setActiveTab] = useState<'general' | 'inputs' | 'engine' | 'seo' | 'faqs'>('general');
+  const [currentFilterTab, setCurrentFilterTab] = useState<'all' | 'published' | 'scheduled' | 'drafts' | 'archived'>('all');
+
+  // Scheduling Modal State
+  const [scheduleModalOpen, setScheduleModalOpen] = useState(false);
+  const [schedulingTool, setSchedulingTool] = useState<ToolCMSItem | null>(null);
 
   // Form Fields
   const [title, setTitle] = useState('');
@@ -77,7 +91,9 @@ export default function ContentCMS() {
   const [isPopular, setIsPopular] = useState(false);
   const [isFeatured, setIsFeatured] = useState(false);
   const [isTrending, setIsTrending] = useState(false);
-  const [published, setPublished] = useState(false);
+  const [published, setPublished] = useState(false); // Legacy sync check
+  const [status, setStatus] = useState<'draft' | 'scheduled' | 'published' | 'archived'>('draft');
+  const [publishDate, setPublishDate] = useState<string | null>(null);
 
   // Form inputs schema builder state
   const [inputs, setInputs] = useState<FormInputSchema[]>([]);
@@ -141,6 +157,8 @@ export default function ContentCMS() {
     setIsFeatured(false);
     setIsTrending(false);
     setPublished(false);
+    setStatus('draft');
+    setPublishDate(null);
 
     setInputs([]);
     setPromptTemplate('');
@@ -172,13 +190,16 @@ export default function ContentCMS() {
     setIsPopular(item.isPopular);
     setIsFeatured(item.isFeatured);
     setIsTrending(item.isTrending);
-    setPublished(item.published);
+    
+    const isPub = item.isPublished !== undefined ? item.isPublished : item.published;
+    setPublished(isPub);
+    setStatus(item.status || (isPub ? 'published' : 'draft'));
+    setPublishDate(item.publishDate || null);
 
     setInputs(item.inputs || []);
     setPromptTemplate(item.promptTemplate || '');
     setCtaButtonText(item.ctaButtonText || 'Generate');
     
-    // Auto-map API type config
     setFaqs(item.faqs || []);
     
     const firstArticle = item.articles?.[0];
@@ -202,7 +223,10 @@ export default function ContentCMS() {
           ...item,
           title: `${item.title} (Copy)`,
           slug: duplicatedSlug,
-          published: false, // Force draft
+          published: false,
+          isPublished: false,
+          status: 'draft',
+          publishDate: null,
           categoryName: item.categoryName,
           seoMetadata: item.seoMetadata ? {
             title: `${item.seoMetadata.title} (Copy)`,
@@ -232,6 +256,7 @@ export default function ContentCMS() {
       return;
     }
 
+    const isPub = status === 'published' || status === 'scheduled';
     const payload = {
       title,
       slug,
@@ -244,7 +269,10 @@ export default function ContentCMS() {
       isPopular,
       isFeatured,
       isTrending,
-      published,
+      published: isPub,
+      isPublished: isPub,
+      status,
+      publishDate: status === 'scheduled' ? publishDate : null,
       inputs,
       promptTemplate,
       ctaButtonText,
@@ -325,7 +353,43 @@ export default function ContentCMS() {
     }
   };
 
-  const toggleStatusDirect = async (item: ToolCMSItem, field: 'isPopular' | 'isFeatured' | 'isTrending' | 'published') => {
+  const handleDirectStatusChange = async (
+    id: string, 
+    newStatus: 'draft' | 'scheduled' | 'published' | 'archived', 
+    scheduledDate?: string | null
+  ) => {
+    const item = tools.find(t => t.id === id);
+    if (!item) return;
+
+    const isPub = newStatus === 'published' || newStatus === 'scheduled';
+    const payload = {
+      ...item,
+      status: newStatus,
+      isPublished: isPub,
+      published: isPub,
+      publishDate: newStatus === 'scheduled' ? (scheduledDate || item.publishDate || new Date(Date.now() + 86400000).toISOString()) : null
+    };
+
+    try {
+      const res = await fetch(`/api/admin/tools/${item.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        toast.success(`Tool status updated to ${newStatus}`);
+        fetchTools();
+      } else {
+        toast.error('Failed to update tool status.');
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error('Error updating status.');
+    }
+  };
+
+  const toggleStatusDirect = async (item: ToolCMSItem, field: 'isPopular' | 'isFeatured' | 'isTrending') => {
     try {
       const res = await fetch(`/api/admin/tools/${item.id}`, {
         method: 'PUT',
@@ -337,7 +401,7 @@ export default function ContentCMS() {
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        toast.success(`Toggled status flag successfully.`);
+        toast.success(`Toggled flag successfully.`);
         fetchTools();
       }
     } catch (err) {
@@ -357,10 +421,50 @@ export default function ContentCMS() {
     setFaqs(faqs.filter((_, idx) => idx !== index).map((f, idx) => ({ ...f, order: idx })));
   };
 
-  const filteredTools = tools.filter(t => 
-    t.title.toLowerCase().includes(search.toLowerCase()) || 
-    t.categoryName?.toLowerCase().includes(search.toLowerCase())
-  );
+  // Calculate states for ToolSchedulerCard
+  const scheduledTools = tools.filter(t => {
+    const isPub = t.isPublished !== undefined ? t.isPublished : t.published;
+    const currentStatus = t.status || (isPub ? 'published' : 'draft');
+    return currentStatus === 'scheduled';
+  });
+
+  const totalDrafts = tools.filter(t => {
+    const isPub = t.isPublished !== undefined ? t.isPublished : t.published;
+    const currentStatus = t.status || (isPub ? 'published' : 'draft');
+    return currentStatus === 'draft';
+  }).length;
+
+  const totalPublished = tools.filter(t => {
+    const isPub = t.isPublished !== undefined ? t.isPublished : t.published;
+    const currentStatus = t.status || (isPub ? 'published' : 'draft');
+    return currentStatus === 'published';
+  }).length;
+
+  const totalArchived = tools.filter(t => {
+    const isPub = t.isPublished !== undefined ? t.isPublished : t.published;
+    const currentStatus = t.status || (isPub ? 'published' : 'draft');
+    return currentStatus === 'archived';
+  }).length;
+
+  const filteredTools = tools.filter(t => {
+    // 1. Search Query filter
+    const matchesSearch = 
+      t.title.toLowerCase().includes(search.toLowerCase()) || 
+      t.categoryName?.toLowerCase().includes(search.toLowerCase());
+    
+    if (!matchesSearch) return false;
+
+    // 2. Status Tab Filter
+    const isPub = t.isPublished !== undefined ? t.isPublished : t.published;
+    const currentStatus = t.status || (isPub ? 'published' : 'draft');
+
+    if (currentFilterTab === 'published') return currentStatus === 'published';
+    if (currentFilterTab === 'scheduled') return currentStatus === 'scheduled';
+    if (currentFilterTab === 'drafts') return currentStatus === 'draft';
+    if (currentFilterTab === 'archived') return currentStatus === 'archived';
+
+    return true;
+  });
 
   if (loading) {
     return (
@@ -374,7 +478,15 @@ export default function ContentCMS() {
   return (
     <div className="space-y-10">
       
-      {/* Header and Add button */}
+      {/* 1. Scheduler Card overview */}
+      <ToolSchedulerCard
+        scheduledTools={scheduledTools}
+        totalDrafts={totalDrafts}
+        totalPublished={totalPublished}
+        totalArchived={totalArchived}
+      />
+
+      {/* 2. Header and Add button */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-6 glass p-6 rounded-3xl border border-white/5 bg-white/[0.01]">
         <div className="flex items-center gap-3 bg-white/[0.02] border border-white/5 rounded-2xl px-5 py-3 w-full sm:w-80 focus-within:border-blue-500/50 transition-all">
           <Search className="w-4 h-4 text-gray-500" />
@@ -389,13 +501,36 @@ export default function ContentCMS() {
 
         <button
           onClick={openAddModal}
-          className="flex items-center gap-2 px-5 py-3.5 text-xs font-black uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-500 rounded-2xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] cursor-pointer"
+          className="flex items-center gap-2 px-5 py-3.5 text-xs font-black uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-500 rounded-2xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] cursor-pointer animate-in fade-in"
         >
           <Plus className="w-4 h-4" /> Add New Dynamic Tool
         </button>
       </div>
 
-      {/* Grid List */}
+      {/* 3. Status workflow filter tabs */}
+      <div className="flex flex-wrap gap-2 border-b border-white/5 pb-4">
+        {[
+          { id: 'all', label: `All Tools (${tools.length})` },
+          { id: 'published', label: `Published (${totalPublished})` },
+          { id: 'scheduled', label: `Scheduled (${scheduledTools.length})` },
+          { id: 'drafts', label: `Drafts (${totalDrafts})` },
+          { id: 'archived', label: `Archived (${totalArchived})` }
+        ].map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => setCurrentFilterTab(tab.id as any)}
+            className={`px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-wider border transition-all cursor-pointer ${
+              currentFilterTab === tab.id
+                ? 'border-blue-500/30 bg-blue-600/10 text-blue-400 shadow-[0_0_15px_rgba(37,99,235,0.1)]'
+                : 'border-white/5 bg-white/[0.005] text-gray-500 hover:text-white'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* 4. Table view list */}
       <div className="glass rounded-3xl border border-white/5 bg-white/[0.01] shadow-xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-[900px]">
@@ -437,24 +572,10 @@ export default function ContentCMS() {
                   </td>
 
                   <td className="py-5">
-                    <button
-                      onClick={() => toggleStatusDirect(t, 'published')}
-                      className={`px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest border transition-all cursor-pointer inline-flex items-center gap-1.5 ${
-                        t.published 
-                          ? 'border-emerald-500/20 bg-emerald-500/10 text-emerald-400' 
-                          : 'border-white/5 bg-white/[0.01] text-gray-500 hover:text-white'
-                      }`}
-                    >
-                      {t.published ? (
-                        <>
-                          <Globe className="w-3 h-3 text-emerald-400" /> Published
-                        </>
-                      ) : (
-                        <>
-                          <HelpCircle className="w-3 h-3 text-gray-500" /> Draft
-                        </>
-                      )}
-                    </button>
+                    <ToolStatusBadge 
+                      status={t.status || (t.isPublished ?? t.published ? 'published' : 'draft')} 
+                      publishDate={t.publishDate} 
+                    />
                   </td>
 
                   <td className="py-5">
@@ -500,6 +621,14 @@ export default function ContentCMS() {
                   </td>
 
                   <td className="py-5 pr-6 text-right space-x-2">
+                    <PublishToggle 
+                      status={t.status || (t.isPublished ?? t.published ? 'published' : 'draft')}
+                      onStatusChange={(newStatus) => handleDirectStatusChange(t.id, newStatus)}
+                      onScheduleClick={() => {
+                        setSchedulingTool(t);
+                        setScheduleModalOpen(true);
+                      }}
+                    />
                     <button
                       onClick={() => handleDuplicate(t)}
                       className="p-2.5 border border-white/5 hover:border-white/20 rounded-xl bg-white/[0.01] hover:bg-white/5 text-gray-500 hover:text-white active:scale-95 transition-all inline-flex items-center justify-center cursor-pointer"
@@ -528,6 +657,22 @@ export default function ContentCMS() {
           </table>
         </div>
       </div>
+
+      {/* 5. Schedule Modal Popup */}
+      <ScheduleModal 
+        isOpen={scheduleModalOpen}
+        onClose={() => {
+          setScheduleModalOpen(false);
+          setSchedulingTool(null);
+        }}
+        onSchedule={(dateIso) => {
+          if (schedulingTool) {
+            handleDirectStatusChange(schedulingTool.id, 'scheduled', dateIso);
+          }
+        }}
+        toolTitle={schedulingTool ? schedulingTool.title : ''}
+        initialDate={schedulingTool ? schedulingTool.publishDate : null}
+      />
 
       {/* Edit/Add Modal Overlay */}
       <AnimatePresence>
@@ -694,22 +839,50 @@ export default function ContentCMS() {
                       </div>
                     </div>
 
-                    {/* Status Toggles Grid */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
+                    {/* Publishing Workflow & Status Selector */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 border border-white/5 bg-white/[0.005] rounded-2xl">
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Publishing Status</label>
+                        <select 
+                          value={status}
+                          onChange={(e) => setStatus(e.target.value as any)}
+                          className="w-full bg-[#0a0d17] border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-white outline-none focus:border-blue-500/50 cursor-pointer"
+                        >
+                          <option value="draft" className="bg-slate-950">Draft</option>
+                          <option value="scheduled" className="bg-slate-950">Scheduled</option>
+                          <option value="published" className="bg-slate-950">Published</option>
+                          <option value="archived" className="bg-slate-950">Archived</option>
+                        </select>
+                      </div>
+
+                      {status === 'scheduled' && (
+                        <div className="space-y-2">
+                          <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Schedule Publication Date & Time</label>
+                          <input 
+                            type="datetime-local" 
+                            value={publishDate ? new Date(new Date(publishDate).getTime() - new Date(publishDate).getTimezoneOffset() * 60000).toISOString().slice(0, 16) : ''}
+                            onChange={(e) => {
+                              const iso = e.target.value ? new Date(e.target.value).toISOString() : null;
+                              setPublishDate(iso);
+                            }}
+                            className="w-full bg-[#0a0d17] border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-white outline-none focus:border-blue-500/50 cursor-pointer"
+                          />
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Metadata Flags */}
+                    <div className="grid grid-cols-3 gap-4 pt-2">
                       <label className="flex flex-col items-center gap-2 p-3 bg-white/[0.01] border border-white/5 rounded-2xl cursor-pointer hover:bg-white/[0.02]">
-                        <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Publish tool</span>
-                        <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="rounded text-blue-500 h-4 w-4" />
-                      </label>
-                      <label className="flex flex-col items-center gap-2 p-3 bg-white/[0.01] border border-white/5 rounded-2xl cursor-pointer hover:bg-white/[0.02]">
-                        <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Popular</span>
+                        <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Popular Tool</span>
                         <input type="checkbox" checked={isPopular} onChange={(e) => setIsPopular(e.target.checked)} className="rounded text-blue-500 h-4 w-4" />
                       </label>
                       <label className="flex flex-col items-center gap-2 p-3 bg-white/[0.01] border border-white/5 rounded-2xl cursor-pointer hover:bg-white/[0.02]">
-                        <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Featured</span>
+                        <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Featured Tool</span>
                         <input type="checkbox" checked={isFeatured} onChange={(e) => setIsFeatured(e.target.checked)} className="rounded text-blue-500 h-4 w-4" />
                       </label>
                       <label className="flex flex-col items-center gap-2 p-3 bg-white/[0.01] border border-white/5 rounded-2xl cursor-pointer hover:bg-white/[0.02]">
-                        <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Trending</span>
+                        <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Trending Tool</span>
                         <input type="checkbox" checked={isTrending} onChange={(e) => setIsTrending(e.target.checked)} className="rounded text-blue-500 h-4 w-4" />
                       </label>
                     </div>

@@ -22,6 +22,36 @@ export interface Tool {
   trending: boolean;
   popular: boolean;
   tags: string[];
+  status?: 'draft' | 'scheduled' | 'published' | 'archived';
+  isPublished?: boolean;
+  publishDate?: string | null;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export function isToolVisible(tool: any): boolean {
+  if (!tool) return false;
+  
+  // archived status is completely hidden
+  if (tool.status === 'archived') {
+    return false;
+  }
+  
+  // draft status is completely hidden
+  if (tool.status === 'draft') {
+    return false;
+  }
+  
+  // scheduled status checks current clock
+  if (tool.status === 'scheduled' || tool.publishDate) {
+    if (tool.publishDate) {
+      return new Date(tool.publishDate) <= new Date();
+    }
+  }
+
+  // fallback to isPublished or published flag (default true for hardcoded tools)
+  const isPub = tool.isPublished ?? tool.published ?? true;
+  return isPub;
 }
 
 export const toolsData: Tool[] = [
@@ -349,6 +379,19 @@ export const toolsData: Tool[] = [
     trending: false,
     popular: true,
     tags: ["ocr", "image to text", "extractor", "scan", "screenshot", "read text"]
+  },
+  {
+    id: "password-generator",
+    title: "Password Generator",
+    description: "Generate strong, secure random passwords locally in your browser. Privacy-first offline tool.",
+    icon: "🔑",
+    href: "/tools/password-generator",
+    slug: "password-generator",
+    category: "Utility Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["password", "generator", "security", "random", "privacy", "offline", "safe"]
   }
 ];
 

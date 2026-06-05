@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import ToolCard from '@/components/ToolCard';
 import CategoryCard from '@/components/CategoryCard';
-import { toolsData, Tool, ToolCategory, toolCategories } from '@/data/tools';
+import { toolsData, Tool, ToolCategory, toolCategories, isToolVisible } from '@/data/tools';
 import { categoriesData, getToolsByCategory } from '@/data/categories';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
 
@@ -55,7 +55,7 @@ export default function Home() {
           };
 
           const mapped: Tool[] = data.tools
-            .filter((t: any) => t.published && !staticSlugs.has(t.slug))
+            .filter((t: any) => !staticSlugs.has(t.slug) && isToolVisible(t))
             .map((t: any) => ({
               id: t.id,
               title: t.title,
@@ -64,9 +64,12 @@ export default function Home() {
               href: `/tools/${t.slug}`,
               slug: t.slug,
               category: (categoryMap[t.category?.name] || categoryMap[t.categoryName] || 'Utility Tools') as any,
-              featured: !!t.featured,
-              trending: !!t.trending || !!t.isPopular,
+              featured: !!t.featured || !!t.isFeatured,
+              trending: !!t.trending || !!t.isTrending,
               popular: !!t.isPopular,
+              status: t.status,
+              isPublished: t.isPublished,
+              publishDate: t.publishDate,
               tags: t.seoMetadata?.keywords?.split(',').map((s: string) => s.trim()) || ['ai', t.toolType || 'utility']
             }));
           setDynamicTools(mapped);

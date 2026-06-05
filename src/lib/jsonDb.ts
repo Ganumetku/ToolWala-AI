@@ -47,6 +47,9 @@ export interface LocalTool {
   isFeatured: boolean;
   isTrending: boolean;
   published: boolean;
+  isPublished?: boolean;
+  publishDate?: string | null;
+  status?: 'draft' | 'scheduled' | 'published' | 'archived';
   icon?: string | null;
   thumbnail?: string | null;
   apiType?: string; // openai, gemini, claude, custom
@@ -164,6 +167,9 @@ export const jsonDb = {
       isFeatured: true,
       isTrending: false,
       published: true,
+      isPublished: true,
+      publishDate: null,
+      status: 'published',
       icon: '🖼️',
       toolType: 'AI Image Tool',
       ctaButtonText: 'Remove Background',

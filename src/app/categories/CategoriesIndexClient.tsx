@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Grid, HelpCircle, Layers } from 'lucide-react';
 import { categoriesData } from '@/data/categories';
-import { toolsData, Tool } from '@/data/tools';
+import { toolsData, Tool, isToolVisible } from '@/data/tools';
 import CategoryCard from '@/components/CategoryCard';
 import CategorySearch from '@/components/CategorySearch';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
@@ -38,7 +38,7 @@ export default function CategoriesIndexClient() {
           };
 
           const mapped: Tool[] = data.tools
-            .filter((t: any) => t.published && !staticSlugs.has(t.slug))
+            .filter((t: any) => !staticSlugs.has(t.slug) && isToolVisible(t))
             .map((t: any) => ({
               id: t.id,
               title: t.title,
@@ -46,9 +46,12 @@ export default function CategoriesIndexClient() {
               icon: t.icon || '🔧',
               href: `/tools/${t.slug}`,
               category: (categoryMap[t.category?.name] || categoryMap[t.categoryName] || 'Utility Tools') as any,
-              featured: false,
-              trending: false,
-              popular: false,
+              featured: !!t.featured || !!t.isFeatured,
+              trending: !!t.trending || !!t.isTrending,
+              popular: !!t.isPopular,
+              status: t.status,
+              isPublished: t.isPublished,
+              publishDate: t.publishDate,
               tags: t.seoMetadata?.keywords?.split(',').map((s: string) => s.trim()) || ['ai', t.toolType || 'utility']
             }));
           setDynamicTools(mapped);

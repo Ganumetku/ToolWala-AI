@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from 'react';
-import { toolsData, toolCategories, ToolCategory, Tool } from '@/data/tools';
+import { toolsData, toolCategories, ToolCategory, Tool, isToolVisible } from '@/data/tools';
 import ToolCard from '@/components/ToolCard';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X } from 'lucide-react';
@@ -59,15 +59,21 @@ export default function ToolsDirectory({
           };
 
           const mapped: Tool[] = data.tools
-            .filter((t: any) => t.published && !staticSlugs.has(t.slug))
+            .filter((t: any) => !staticSlugs.has(t.slug) && isToolVisible(t))
             .map((t: any) => ({
               id: t.id,
               title: t.title,
               description: t.description,
               icon: t.icon || '🔧',
               href: `/tools/${t.slug}`,
+              slug: t.slug,
               category: (categoryMap[t.category?.name] || categoryMap[t.categoryName] || t.category?.name || t.categoryName || 'Utility Tools') as ToolCategory,
-              isPopular: !!t.isPopular,
+              featured: !!t.featured || !!t.isFeatured,
+              trending: !!t.trending || !!t.isTrending,
+              popular: !!t.isPopular,
+              status: t.status,
+              isPublished: t.isPublished,
+              publishDate: t.publishDate,
               tags: t.seoMetadata?.keywords?.split(',').map((s: string) => s.trim()) || ['ai', t.toolType || 'utility']
             }));
           setDynamicTools(mapped);

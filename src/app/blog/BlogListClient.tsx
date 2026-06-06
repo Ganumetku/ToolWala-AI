@@ -30,6 +30,14 @@ interface BlogListClientProps {
   initialBlogs: BlogPost[];
 }
 
+const formatDate = (dateString: string) => {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) return "";
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return `${months[date.getUTCMonth()]} ${date.getUTCDate()}`;
+};
+
 const CATEGORIES = [
   "All",
   "AI Tools",
@@ -234,10 +242,7 @@ export default function BlogListClient({ initialBlogs }: BlogListClientProps) {
                           <div className="flex items-center gap-3 text-[9px] font-black uppercase tracking-widest text-gray-500">
                             <span className="flex items-center gap-1">
                               <Calendar className="w-3 h-3" />
-                              {new Date(blog.publishedAt || blog.createdAt).toLocaleDateString(undefined, {
-                                month: "short",
-                                day: "numeric",
-                              })}
+                              {formatDate(blog.publishedAt || blog.createdAt)}
                             </span>
                             <span>•</span>
                             <span className="flex items-center gap-1">

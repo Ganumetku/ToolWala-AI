@@ -33,6 +33,25 @@ interface BlogDetailClientProps {
   allBlogs: BlogPost[];
 }
 
+const formatDateLong = (dateString: string) => {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) return "";
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  return `${months[date.getUTCMonth()]} ${date.getUTCDate()}, ${date.getUTCFullYear()}`;
+};
+
+const formatDateShort = (dateString: string) => {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) return "";
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return `${months[date.getUTCMonth()]} ${date.getUTCDate()}`;
+};
+
 interface TocItem {
   id: string;
   text: string;
@@ -209,11 +228,7 @@ export default function BlogDetailClient({ blog, allBlogs }: BlogDetailClientPro
               <div className="flex items-center gap-4 border-l border-white/10 pl-6 h-8">
                 <span className="flex items-center gap-1.5">
                   <Calendar className="w-4 h-4" />
-                  {new Date(blog.publishedAt || blog.createdAt).toLocaleDateString(undefined, {
-                    month: "long",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
+                  {formatDateLong(blog.publishedAt || blog.createdAt)}
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Clock className="w-4 h-4" />
@@ -299,7 +314,7 @@ export default function BlogDetailClient({ blog, allBlogs }: BlogDetailClientPro
                 <div className="flex items-center gap-3 pt-4 mt-6 border-t border-white/5 text-[9px] font-black uppercase tracking-widest text-gray-500">
                   <span>{rBlog.readingTime}</span>
                   <span>•</span>
-                  <span>{new Date(rBlog.publishedAt || rBlog.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</span>
+                  <span>{formatDateShort(rBlog.publishedAt || rBlog.createdAt)}</span>
                 </div>
               </Link>
             ))}

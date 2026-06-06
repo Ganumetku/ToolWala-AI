@@ -40,6 +40,7 @@ export default function Header() {
     { name: 'Tools', href: '/tools' },
     { name: 'Categories', href: '/categories' },
     { name: 'Pricing', href: '/pricing' },
+    { name: 'Blog', href: '/blog' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
   ];

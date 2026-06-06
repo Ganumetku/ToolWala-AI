@@ -70,14 +70,126 @@ export function initMockApi() {
           id: '1',
           slug: 'why-local-ocr-is-the-future',
           title: 'Why Browser-Native OCR is the Future of Data Safety',
-          content: 'Traditional optical character recognition uploads documents to cloud databases. This article outlines the transition to client-side WebAssembly rendering, protecting sensitive data locally.',
-          published: true,
+          excerpt: 'Traditional optical character recognition uploads documents to cloud databases. This article outlines the transition to client-side WebAssembly rendering, protecting sensitive data locally.',
+          content: 'Traditional optical character recognition (OCR) uploads documents to cloud databases. This article outlines the transition to client-side WebAssembly rendering, protecting sensitive data locally.\n\n### The Problem with Cloud OCR\nEvery time you upload a receipt, ID card, or invoice to a remote OCR server, you risk exposing sensitive information. Cloud services process your file, extract the text, and store it. In many cases, these files are saved for training models or analytics, which could violate privacy standards like GDPR.\n\n### Enter Client-Side WebAssembly\nWith advancements in WebAssembly (WASM), we can run powerful neural network models directly inside the browser. ToolWala AI uses Tesseract.js running locally in your browser sandbox. Your files never leave your computer, ensuring absolute privacy.\n\n### Benefits of Local Processing\n- **100% Privacy:** Your files are processed entirely in memory, with no network uploads.\n- **Zero Server Costs:** Since the user\'s browser does the computation, the service remains free and scaleable.\n- **Offline Capability:** Once the models are cached in the browser, you can scan images offline.',
+          thumbnail: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
+          category: 'PDF Tools',
+          tags: ['Security', 'OCR', 'WebAssembly'],
+          featured: true,
+          status: 'published',
+          publishedAt: '2026-06-04T05:54:22.719Z',
+          createdAt: '2026-06-04T05:54:22.719Z',
+          updatedAt: '2026-06-04T05:54:22.719Z',
+          author: {
+            name: 'ToolWala Editorial',
+            avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+            role: 'Tech Writer'
+          },
           seoMetadata: {
-            title: 'Local OCR WebAssembly Data Safety | ToolWala',
+            title: 'Local OCR WebAssembly Data Safety | ToolWala AI',
             description: 'Learn why processing character recognition inside the browser context outperforms cloud databases.'
           },
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
+          readingTime: '3 min read'
+        },
+        {
+          id: '2',
+          slug: 'mastering-image-compression-balancing-size-and-quality',
+          title: 'Mastering Image Compression: Hitting the Perfect Balance',
+          excerpt: 'How to reduce file size up to 90% without compromising visual clarity. An in-depth guide on modern image formats and client-side optimization algorithms.',
+          content: 'Optimizing image file sizes is critical for fast page speeds and professional SEO indexing. However, finding the right compression ratio can be challenging. Let\'s break down how modern compression works.\n\n### Lossy vs. Lossless Compression\nLossy compression reduces file sizes by permanently removing less important pixel data. Lossless compression, on the other hand, reorganizes file metadata without dropping any visual accuracy.\n\n### The Rise of WebP and AVIF\nTraditional formats like JPEG and PNG are being outpaced by next-generation web image formats:\n- **WebP:** Offers 26% smaller sizes compared to PNG, and 30% smaller sizes compared to JPEG.\n- **AVIF:** Delivers even better quality-to-size performance, though browser rendering is still maturing.\n\n### Doing it Locally\nOur browser image compressor utilizes canvas scaling and output rendering variables inside client threads to save you bandwidth and securely shrink assets without database tracking.',
+          thumbnail: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=800&q=80',
+          category: 'Image Editing',
+          tags: ['Image Compression', 'WebPerformance', 'SEO'],
+          featured: false,
+          status: 'published',
+          publishedAt: '2026-06-05T10:15:00.000Z',
+          createdAt: '2026-06-05T10:15:00.000Z',
+          updatedAt: '2026-06-05T10:15:00.000Z',
+          author: {
+            name: 'Akash Sharma',
+            avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
+            role: 'Creator of ToolWala'
+          },
+          seoMetadata: {
+            title: 'Mastering Image Compression & Optimization | ToolWala AI',
+            description: 'Learn how to optimize web layouts by compressing images. Hitting the perfect balance between quality and speed.'
+          },
+          readingTime: '4 min read'
+        },
+        {
+          id: '3',
+          slug: 'the-rise-of-edge-ai-local-models',
+          title: 'The Rise of Edge AI: Running Models Directly in Your Web Browser',
+          excerpt: 'Edge AI is revolutionizing web apps. Learn how next-generation browser applications run machine learning models client-side with full confidentiality.',
+          content: 'AI computation is shifting from massive centralized data centers down to the user\'s device. This paradigm shift, known as Edge AI, brings unparalleled privacy, reduced latency, and cost-efficiency to web applications.\n\n### How Web-Native AI Works\nModern browser platforms utilize WebGL, WebGPU, and WebAssembly (WASM) to run compiled model configurations. Frameworks like ONNX Runtime Web and TensorFlow.js make it easy to deploy deep learning models directly on client hardware.\n\n### What Tools Can We Run Locally?\n- **Background Removal:** Extracting backgrounds from images using edge segmentation models.\n- **Face Detection:** Cropping passport photos automatically.\n- **Voice Synthesis:** Synthesizing professional voiceovers in-browser.\n- **Text Classification:** Analyzing and humanizing content context layouts locally.\n\nAt ToolWala AI, we are committed to making these edge models accessible to everyone, ensuring your privacy remains intact.',
+          thumbnail: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=800&q=80',
+          category: 'AI Tools',
+          tags: ['Artificial Intelligence', 'EdgeComputing', 'WebDev'],
+          featured: true,
+          status: 'published',
+          publishedAt: '2026-06-06T08:00:00.000Z',
+          createdAt: '2026-06-06T08:00:00.000Z',
+          updatedAt: '2026-06-06T08:00:00.000Z',
+          author: {
+            name: 'ToolWala Editorial',
+            avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+            role: 'Tech Writer'
+          },
+          seoMetadata: {
+            title: 'Rise of Edge AI: Running Models Locally in Browser | ToolWala AI',
+            description: 'Discover how browser-native AI architectures run background removers and voice synthesizers locally without cloud servers.'
+          },
+          readingTime: '5 min read'
+        },
+        {
+          id: '4',
+          slug: 'ats-resume-optimization-secrets',
+          title: 'ATS Resume Optimization: Secrets to Passing the Automated Screen',
+          excerpt: 'Most resumes are discarded by Applicant Tracking Systems before a recruiter even reads them. Learn the secrets of keyword mapping, structural formatting, and templates.',
+          content: 'Preparing resumes for corporate applications can feel like throwing documents into a black hole. Modern HR departments rely heavily on Applicant Tracking Systems (ATS) to scan, filter, and score candidates.\n\n### The Role of ATS Scanners\nATS software acts as an automated gatekeeper. It reads the text structure of your PDF, extracts metadata like job titles and contact info, and matches your skills against the job description.\n\n### Optimization Tips\n- **Simple Formatting:** Avoid multi-column layouts, tables, and graphic elements that parse incorrectly.\n- **Keywords Alignment:** Tailor your experience to use the exact terms from the job posting.\n- **Standard Headings:** Use standard section labels like Experience, Education, and Skills.\n\nOur ATS CV Builder generates compliant layouts to bypass scanner roadblocks automatically.',
+          thumbnail: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80',
+          category: 'Document Tools',
+          tags: ['Resume', 'Career', 'ATS'],
+          featured: false,
+          status: 'draft',
+          publishedAt: '',
+          createdAt: '2026-06-06T09:25:00.000Z',
+          updatedAt: '2026-06-06T09:25:00.000Z',
+          author: {
+            name: 'Akash Sharma',
+            avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
+            role: 'Creator of ToolWala'
+          },
+          seoMetadata: {
+            title: 'ATS Resume Optimization Secrets | ToolWala AI',
+            description: 'Bypass corporate Applicant Tracking Systems with our guide to parsing optimization and keywords.'
+          },
+          readingTime: '3 min read'
+        },
+        {
+          id: '5',
+          slug: 'maximizing-ai-productivity-for-developers',
+          title: 'Maximizing AI Productivity: Practical Prompt Engineering for Developers',
+          excerpt: 'Go beyond basic prompts. Discover how developers leverage structured prompts, system instructions, and sandbox configurations to automate code writing.',
+          content: 'Generative AI is changing how software is built. However, generic queries lead to generic code outputs. To maximize developer velocity, you need a structured prompt engineering methodology.\n\n### Structured Prompting Pattern\nProvide clear context, input values, guidelines, and expected output formats. For instance, define system instructions and constraints clearly before execution.\n\n### Browser-Native Testing\nRunning lightweight models locally allows testing prompts without risking API leaks or incurring usage fees. ToolWala AI is building an integrated prompt studio workspace for offline debugging.',
+          thumbnail: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80',
+          category: 'AI Tools',
+          tags: ['Productivity', 'AI', 'PromptEngineering'],
+          featured: false,
+          status: 'draft',
+          publishedAt: '',
+          createdAt: '2026-06-06T09:25:00.000Z',
+          updatedAt: '2026-06-06T09:25:00.000Z',
+          author: {
+            name: 'ToolWala Editorial',
+            avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+            role: 'Tech Writer'
+          },
+          seoMetadata: {
+            title: 'Practical Developer Prompt Engineering Guide | ToolWala AI',
+            description: 'Learn prompt engineering structures to accelerate coding tasks and build browser integrations.'
+          },
+          readingTime: '4 min read'
         }
       ]);
 

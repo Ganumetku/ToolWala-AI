@@ -139,6 +139,7 @@ export default function BlogListClient({ initialBlogs }: BlogListClientProps) {
             {/* Featured Post Card (Show only when All or AI/PDF matches) */}
             {featuredPost && (
               <motion.div
+                key={`featured-${featuredPost.id}`}
                 layout
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -203,7 +204,7 @@ export default function BlogListClient({ initialBlogs }: BlogListClientProps) {
 
             {/* General Posts Grid */}
             {remainingBlogs.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div key="remaining-grid" className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {remainingBlogs.map((blog) => (
                   <motion.article
                     layout
@@ -278,16 +279,14 @@ export default function BlogListClient({ initialBlogs }: BlogListClientProps) {
                   </motion.article>
                 ))}
               </div>
-            ) : (
-              !featuredPost && (
-                <div className="text-center py-20 border border-white/5 rounded-3xl bg-white/[0.01]">
-                  <Sparkles className="w-8 h-8 text-blue-500/50 mx-auto mb-4 animate-bounce" />
-                  <h3 className="text-sm font-black uppercase tracking-widest text-gray-400">
-                    No articles found matching criteria.
-                  </h3>
-                </div>
-              )
-            )}
+            ) : !featuredPost ? (
+              <div key="no-articles" className="text-center py-20 border border-white/5 rounded-3xl bg-white/[0.01]">
+                <Sparkles className="w-8 h-8 text-blue-500/50 mx-auto mb-4 animate-bounce" />
+                <h3 className="text-sm font-black uppercase tracking-widest text-gray-400">
+                  No articles found matching criteria.
+                </h3>
+              </div>
+            ) : null}
           </AnimatePresence>
         </div>
 

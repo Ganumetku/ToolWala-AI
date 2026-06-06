@@ -101,11 +101,23 @@ export interface LocalBlogPost {
   id: string;
   slug: string;
   title: string;
+  excerpt: string;
   content: string;
-  published: boolean;
-  seoMetadata?: LocalSeoMetadata | null;
+  thumbnail: string;
+  category: string;
+  tags: string[];
+  featured: boolean;
+  status: 'draft' | 'published';
+  publishedAt: string;
   createdAt: string;
   updatedAt: string;
+  author: {
+    name: string;
+    avatar?: string;
+    role?: string;
+  };
+  seoMetadata?: LocalSeoMetadata | null;
+  readingTime: string;
 }
 
 export interface LocalContactLead {
@@ -193,14 +205,26 @@ export const jsonDb = {
       id: '1',
       slug: 'why-local-ocr-is-the-future',
       title: 'Why Browser-Native OCR is the Future of Data Safety',
-      content: 'Traditional optical character recognition uploads documents to cloud databases. This article outlines the transition to client-side WebAssembly rendering, protecting sensitive data locally.',
-      published: true,
+      excerpt: 'Traditional optical character recognition uploads documents to cloud databases. This article outlines the transition to client-side WebAssembly rendering, protecting sensitive data locally.',
+      content: 'Traditional optical character recognition (OCR) uploads documents to cloud databases. This article outlines the transition to client-side WebAssembly rendering, protecting sensitive data locally.\n\n### The Problem with Cloud OCR\nEvery time you upload a receipt, ID card, or invoice to a remote OCR server, you risk exposing sensitive information. Cloud services process your file, extract the text, and store it. In many cases, these files are saved for training models or analytics, which could violate privacy standards like GDPR.\n\n### Enter Client-Side WebAssembly\nWith advancements in WebAssembly (WASM), we can run powerful neural network models directly inside the browser. ToolWala AI uses Tesseract.js running locally in your browser sandbox. Your files never leave your computer, ensuring absolute privacy.',
+      thumbnail: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
+      category: 'PDF Tools',
+      tags: ['Security', 'OCR', 'WebAssembly'],
+      featured: true,
+      status: 'published',
+      publishedAt: '2026-06-04T05:54:22.719Z',
+      createdAt: '2026-06-04T05:54:22.719Z',
+      updatedAt: '2026-06-04T05:54:22.719Z',
+      author: {
+        name: 'ToolWala Editorial',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+        role: 'Tech Writer'
+      },
       seoMetadata: {
         title: 'Local OCR WebAssembly Data Safety | ToolWala',
         description: 'Learn why processing character recognition inside the browser context outperforms cloud databases.'
       },
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      readingTime: '3 min read'
     }
   ]),
   saveBlogs: (blogs: LocalBlogPost[]) => writeJSON('dynamic_blogs.json', blogs),

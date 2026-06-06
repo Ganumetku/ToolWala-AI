@@ -185,7 +185,7 @@ export function getToolsByCategory(categoryId: string, allTools: Tool[]): Tool[]
   switch (categoryId) {
     case 'pdf-tools':
       return allTools.filter(t => 
-        ['merge-pdf', 'split-pdf', 'jpg-to-pdf', 'pdf-to-jpg', 'protect-pdf', 'unlock-pdf', 'watermark-pdf', 'pdf-ocr', 'organize-pdf', 'edit-pdf', 'pdf-tools'].includes(t.id)
+        ['merge-pdf', 'split-pdf', 'jpg-to-pdf', 'pdf-to-jpg', 'protect-pdf', 'unlock-pdf', 'watermark-pdf', 'pdf-ocr', 'organize-pdf', 'edit-pdf', 'pdf-tools', 'pdf-to-word-converter'].includes(t.id)
       );
     case 'image-tools':
       return allTools.filter(t => 

@@ -160,6 +160,36 @@ export function initMockApi() {
           ],
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
+        },
+        {
+          id: 'pdf-to-word-converter',
+          slug: 'pdf-to-word-converter',
+          title: 'PDF to Word Converter',
+          description: 'Convert PDF files into editable Word documents online.',
+          longDesc: 'ToolWala AI PDF to Word Converter extracts text structures, headings, and paragraphs locally to build editable DOCX files.',
+          categoryName: 'Document & PDF',
+          categorySlug: 'pdf-tools',
+          isPopular: true,
+          isFeatured: true,
+          isTrending: true,
+          published: true,
+          isPublished: true,
+          publishDate: null,
+          status: 'published',
+          icon: '📝',
+          toolType: 'PDF Tool',
+          ctaButtonText: 'Convert to Word',
+          inputs: [
+            { id: 'pdf-upload', name: 'pdf', label: 'Upload PDF', type: 'file', required: true, order: 0 }
+          ],
+          faqs: [
+            { id: 'pdf-faq-1', question: 'Is it free?', answer: 'Yes, 100% free online.', order: 0 }
+          ],
+          articles: [
+            { id: 'pdf-art-1', title: 'Editable Word Docs from PDF', content: 'Extract text layout locally.' }
+          ],
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
         }
       ]);
 

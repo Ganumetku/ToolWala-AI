@@ -947,5 +947,52 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "Image Compressor", href: "/tools/image-compressor" },
       { name: "AI Background Remover", href: "/tools/bg-remover" }
     ]
+  },
+  "pdf-to-word-converter": {
+    title: "PDF to Word Converter",
+    intro: "Transform PDF documents into editable Word files instantly and securely. Our browser-based conversion engine preserves text structure, headings, and formatting without uploading your files to any external servers.",
+    whatItDoes: "ToolWala AI PDF to Word Converter uses advanced client-side processing to analyze layout geometry, extract text blocks, and map them into standard Microsoft Word DOCX formats. It identifies text line coordinates, segments paragraphs from headings, and reconstructs multi-page documents locally in your browser sandbox, ensuring absolute data safety for sensitive bank statements, agreements, and personal resumes.",
+    howToUse: [
+      "Upload your PDF document by dragging and dropping it into the conversion zone or clicking Browse File.",
+      "Wait a few seconds while our local engine reads and extracts text structures.",
+      "Review the file summary (total pages, size, file name).",
+      "Click 'Convert to Word' to compile the DOCX output.",
+      "Download your editable Word document instantly to your local storage."
+    ],
+    keyFeatures: [
+      { title: "Secure Browser Execution", desc: "Your files never leave your machine. Conversion runs completely offline inside your browser sandbox." },
+      { title: "Preserved Layouts", desc: "Smart alignment algorithms sort text by coordinates to prevent paragraphs from getting mixed up." },
+      { title: "Multi-Page Document Support", desc: "Extract and convert multiple pages cleanly with automated page breaks in the output DOCX." },
+      { title: "Custom Filenames", desc: "Rename your output Word file directly within the downloader card before saving it." }
+    ],
+    benefits: [
+      "Total file privacy—safe for bank reports, NDA contracts, and certificates.",
+      "Saves time compared to manual retyping or copy-pasting.",
+      "Completely free online converter with unlimited file usage.",
+      "Produce clean, editable DOCX files compatible with Microsoft Word and Google Docs."
+    ],
+    whyChoose: "Most free PDF converters upload your documents to third-party databases, presenting severe security vulnerabilities. ToolWala AI runs the entire extraction process locally inside your browser tab. Your files remain yours alone, processed safely with lightning-fast edge utilities.",
+    useCases: [
+      "Editing read-only bank reports or tax tables.",
+      "Refactoring standard PDF resume templates back to Word format.",
+      "Extracting contract clauses for review and modification.",
+      "Converting scanned ebook pages or essays for revisions."
+    ],
+    faqs: [
+      { question: "How do I convert PDF to Word?", answer: "Upload your PDF file, wait for our local browser engine to analyze the content, and download the compiled DOCX file." },
+      { question: "Is this PDF to Word converter free?", answer: "Yes, it is 100% free with no conversion limits, hidden watermarks, or account registration required." },
+      { question: "Is my converted file secure?", answer: "Yes, absolutely. The conversion process is executed entirely on your client-side browser thread. No files are uploaded to any server." },
+      { question: "Does formatting stay intact?", answer: "Our tool extracts text blocks and preserves paragraphs, headings, and page structures. However, complex multi-column grid layouts may be simplified to standard flow text for better editability." },
+      { question: "Can I convert large PDF files?", answer: "Since the tool runs locally, the limit is bound by your system's memory. Most modern browsers can convert documents up to 50MB with ease." },
+      { question: "Can I edit the output file in Google Docs?", answer: "Yes, the converted file is saved as a standard DOCX format, which is fully compatible with Microsoft Word, Google Docs, LibreOffice, and Pages." },
+      { question: "Do you support scanned PDFs (OCR)?", answer: "Our PDF to Word converter extracts selectable text. For scanned PDFs containing flat image text, you can use our PDF OCR Scanner tool to extract text." }
+    ],
+    conclusion: "Convert your PDF documents to editable Microsoft Word files instantly while maintaining absolute privacy. Get started with ToolWala AI's local PDF suite.",
+    relatedTools: [
+      { name: "Merge PDF", href: "/tools/merge-pdf" },
+      { name: "Split PDF", href: "/tools/split-pdf" },
+      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr" },
+      { name: "PDF to JPG", href: "/tools/pdf-to-jpg" }
+    ]
   }
 };

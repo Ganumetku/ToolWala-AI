@@ -392,6 +392,19 @@ export const toolsData: Tool[] = [
     trending: true,
     popular: true,
     tags: ["password", "generator", "security", "random", "privacy", "offline", "safe"]
+  },
+  {
+    id: "pdf-to-word-converter",
+    title: "PDF to Word Converter",
+    description: "Convert PDF files into editable Word documents online. Safe and fast browser-based conversion.",
+    icon: "📝",
+    href: "/tools/pdf-to-word-converter",
+    slug: "pdf-to-word-converter",
+    category: "PDF Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["pdf", "word", "docx", "convert", "pdf to docx", "document"]
   }
 ];
 

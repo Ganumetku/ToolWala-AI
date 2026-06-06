@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 export const MeshGradient = () => {
@@ -49,6 +50,14 @@ export const MeshGradient = () => {
 };
 
 export const FloatingParticles = () => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
+
   return (
     <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
       {[...Array(20)].map((_, i) => (

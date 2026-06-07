@@ -21,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/disclaimer',
   ];
 
-  const toolRoutes = toolsData.map(tool => tool.href);
+  const toolRoutes = toolsData.filter(tool => tool.status === 'published' && tool.isVisible).map(tool => tool.href);
   const routes = [...staticRoutes, ...toolRoutes];
 
   let dynamicSlugs: string[] = [];

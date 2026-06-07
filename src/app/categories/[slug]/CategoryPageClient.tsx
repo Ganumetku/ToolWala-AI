@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HelpCircle, ChevronDown, Sparkles, TrendingUp, Grid, Search } from 'lucide-react';
 import { toolsData, Tool } from '@/data/tools';
-import { isToolLive } from '@/lib/tools';
+import { isToolLive, getPublicTools } from '@/lib/tools';
 import { categoriesData, getToolsByCategory, CategoryMetadata } from '@/data/categories';
 import ToolCard from '@/components/ToolCard';
 import CategoryHeader from '@/components/CategoryHeader';
@@ -82,9 +82,10 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
 
   // Merge static and dynamic category tools
   const categoryTools = useMemo(() => {
-    const staticTools = getToolsByCategory(category.id, toolsData);
+    const liveStaticTools = mounted ? getPublicTools() : toolsData.filter(isToolLive);
+    const staticTools = getToolsByCategory(category.id, liveStaticTools);
     return [...staticTools, ...dynamicTools];
-  }, [category, dynamicTools]);
+  }, [category, dynamicTools, mounted]);
 
   // Filter tools based on query and tabs
   const filteredTools = useMemo(() => {

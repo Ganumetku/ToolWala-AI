@@ -199,48 +199,44 @@ export const categoriesData: CategoryMetadata[] = [
 ];
 
 export function getToolsByCategory(categoryId: string, allTools: Tool[]): Tool[] {
-  switch (categoryId) {
-    case 'pdf-tools':
-      return allTools.filter(t => 
-        ['merge-pdf', 'split-pdf', 'jpg-to-pdf', 'pdf-to-jpg', 'protect-pdf', 'unlock-pdf', 'watermark-pdf', 'pdf-ocr', 'organize-pdf', 'edit-pdf', 'pdf-tools', 'pdf-to-word-converter'].includes(t.id)
-      );
-    case 'image-tools':
-      return allTools.filter(t => 
-        ['bg-remover', 'passport-photo-maker', 'aadhaar-photo-resizer', 'image-compressor', 'color-palette-generator'].includes(t.id)
-      );
-    case 'ai-tools':
-      return allTools.filter(t => 
-        ['ai-logo-maker', 'resume-builder', 'caption-generator', 'text-humanizer', 'voice-generator', 'cover-letter-generator'].includes(t.id)
-      );
-    case 'document-tools':
-      return allTools.filter(t => 
-        ['invoice-generator', 'resume-builder', 'cover-letter-generator'].includes(t.id)
-      );
-    case 'utility-tools':
-      return allTools.filter(t => 
-        ['ocr-to-text'].includes(t.id)
-      );
-    case 'resume-career':
-      return allTools.filter(t => 
-        ['resume-builder', 'cover-letter-generator'].includes(t.id)
-      );
-    case 'seo-tools':
-      return allTools.filter(t => 
-        ['text-humanizer', 'ocr-to-text', 'caption-generator'].includes(t.id)
-      );
-    case 'developer-tools':
-      return allTools.filter(t => 
-        ['qr-code-generator', 'ocr-to-text'].includes(t.id)
-      );
-    case 'social-media-tools':
-      return allTools.filter(t => 
-        ['caption-generator', 'voice-generator', 'bg-remover', 'youtube-money-calculator'].includes(t.id)
-      );
-    case 'calculator-tools':
-      return allTools.filter(t => 
-        ['age-calculator', 'sip-calculator', 'emi-calculator', 'gst-calculator', 'youtube-money-calculator', 'adsense-revenue-calculator'].includes(t.id)
-      );
-    default:
-      return [];
-  }
+  const idToCategoryMap: Record<string, string> = {
+    'pdf-tools': 'PDF Tools',
+    'image-tools': 'Image Tools',
+    'ai-tools': 'AI Tools',
+    'document-tools': 'Document Tools',
+    'utility-tools': 'Utility Tools',
+    'resume-career': 'Resume & Career',
+    'seo-tools': 'SEO Tools',
+    'developer-tools': 'Developer Tools',
+    'social-media-tools': 'Social Media Tools',
+    'calculator-tools': 'Calculator Tools',
+  };
+
+  const categoryName = idToCategoryMap[categoryId];
+
+  return allTools.filter(t => {
+    // 1. Direct match by category
+    if (categoryName && t.category === categoryName) {
+      return true;
+    }
+    
+    // 2. Fallback cross-mapping to match original behavior
+    if (categoryId === 'resume-career' && ['resume-builder', 'cover-letter-generator'].includes(t.id)) {
+      return true;
+    }
+    if (categoryId === 'seo-tools' && ['text-humanizer', 'ocr-to-text', 'caption-generator'].includes(t.id)) {
+      return true;
+    }
+    if (categoryId === 'developer-tools' && ['qr-code-generator', 'ocr-to-text'].includes(t.id)) {
+      return true;
+    }
+    if (categoryId === 'social-media-tools' && ['caption-generator', 'voice-generator', 'bg-remover', 'youtube-money-calculator'].includes(t.id)) {
+      return true;
+    }
+    if (categoryId === 'calculator-tools' && ['youtube-money-calculator'].includes(t.id)) {
+      return true;
+    }
+    
+    return false;
+  });
 }

@@ -91,7 +91,7 @@ export default function ToolsDirectory({
   useEffect(() => setMounted(true), []);
 
   const mergedTools = useMemo(() => {
-    const liveStaticTools = mounted ? getPublicTools() : toolsData.filter(t => t.status !== 'draft');
+    const liveStaticTools = mounted ? getPublicTools() : toolsData.filter(isToolLive);
     return [...liveStaticTools, ...dynamicTools];
   }, [dynamicTools, mounted]);
 

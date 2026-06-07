@@ -84,7 +84,7 @@ export default function Home() {
 
   const mergedTools = useMemo(() => {
     // Only fetch public tools on client side (including localStorage overrides)
-    const liveStaticTools = mounted ? getPublicTools() : toolsData.filter(t => t.status !== 'draft');
+    const liveStaticTools = mounted ? getPublicTools() : toolsData.filter(isToolLive);
     return [...liveStaticTools, ...dynamicTools];
   }, [dynamicTools, mounted]);
 
@@ -145,30 +145,22 @@ export default function Home() {
     { label: "AI Resume", query: "resume" }
   ];
 
-  // Homepage displays first 6 categories
-  const homepageCategories = useMemo(() => {
-    return categoriesData.slice(0, 6);
-  }, []);
-
   // Map category tool counts dynamically
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {};
     categoriesData.forEach(cat => {
-      let list = mergedTools.filter(t => t.category === cat.title);
-      // Fallback cross-maps
-      if (cat.id === 'resume-career') {
-        list = mergedTools.filter(t => ['resume-builder', 'cover-letter-generator'].includes(t.id));
-      } else if (cat.id === 'seo-tools') {
-        list = mergedTools.filter(t => ['text-humanizer', 'ocr-to-text', 'caption-generator'].includes(t.id));
-      } else if (cat.id === 'developer-tools') {
-        list = mergedTools.filter(t => ['qr-code-generator', 'ocr-to-text'].includes(t.id));
-      } else if (cat.id === 'social-media-tools') {
-        list = mergedTools.filter(t => ['caption-generator', 'voice-generator', 'bg-remover'].includes(t.id));
-      }
+      const list = getToolsByCategory(cat.id, mergedTools);
       counts[cat.id] = list.length;
     });
     return counts;
   }, [mergedTools]);
+
+  // Homepage displays first 6 categories that contain tools
+  const homepageCategories = useMemo(() => {
+    return categoriesData
+      .filter(cat => (categoryCounts[cat.id] || 0) > 0)
+      .slice(0, 6);
+  }, [categoryCounts]);
 
   if (!mounted) return <div className="min-h-screen bg-[#030712]" />;
 

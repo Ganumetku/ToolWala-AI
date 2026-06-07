@@ -6,7 +6,7 @@ export type ToolOverride = Partial<Pick<Tool, 'status' | 'isVisible' | 'featured
 export function getAdminOverrides(): Record<string, ToolOverride> {
   if (typeof window === 'undefined') return {};
   try {
-    return JSON.parse(localStorage.getItem('toolwala_admin_overrides') || '{}');
+    return JSON.parse(localStorage.getItem('toolVisibilityOverrides') || '{}');
   } catch {
     return {};
   }
@@ -16,7 +16,7 @@ export function saveAdminOverride(toolId: string, override: ToolOverride) {
   if (typeof window === 'undefined') return;
   const current = getAdminOverrides();
   current[toolId] = { ...current[toolId], ...override };
-  localStorage.setItem('toolwala_admin_overrides', JSON.stringify(current));
+  localStorage.setItem('toolVisibilityOverrides', JSON.stringify(current));
 }
 
 // Get all tools merged with local admin overrides
@@ -31,20 +31,14 @@ export function getAdminTools(baseTools: Tool[] = toolsData): Tool[] {
 
 // Determine if a tool should be visible to public users
 export function isToolLive(tool: Tool): boolean {
-  if (tool.status === 'draft') return false;
-  if (!tool.isVisible) return false;
-  
-  if (tool.status === 'scheduled') {
-    if (!tool.publishDate) return false;
-    return new Date(tool.publishDate) <= new Date();
-  }
-  
-  return tool.status === 'published';
+  return tool.status === 'published' && tool.isVisible === true;
 }
 
 // Get only live tools
 export function getPublicTools(baseTools: Tool[] = toolsData): Tool[] {
-  return getAdminTools(baseTools).filter(isToolLive);
+  const liveTools = getAdminTools(baseTools).filter(isToolLive);
+  console.log("Live Tools", liveTools);
+  return liveTools;
 }
 
 // Get tools by category

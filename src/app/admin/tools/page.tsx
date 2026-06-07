@@ -51,7 +51,7 @@ export default function AdminToolsDashboard() {
       <div className="container mx-auto px-4 max-w-7xl">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black tracking-widest mb-4">
               <Settings className="w-3.5 h-3.5" />
@@ -64,16 +64,25 @@ export default function AdminToolsDashboard() {
               Manage visibility, publish status, and promotional badges for all ToolWala AI tools. Changes are saved locally to your browser.
             </p>
           </div>
-          
-          <div className="flex gap-4">
-            <div className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-center">
-              <div className="text-2xl font-black text-white">{tools.length}</div>
-              <div className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mt-1">Total Tools</div>
-            </div>
-            <div className="bg-blue-500/5 border border-blue-500/20 rounded-2xl px-6 py-4 text-center">
-              <div className="text-2xl font-black text-blue-400">{tools.filter(t => isToolLive(t)).length}</div>
-              <div className="text-[10px] uppercase tracking-widest text-blue-500/70 font-bold mt-1">Live Public</div>
-            </div>
+        </div>
+
+        {/* Debug Panel */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-center shadow-xl">
+            <div className="text-3xl font-black text-white">{tools.length}</div>
+            <div className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mt-1">Total Tools</div>
+          </div>
+          <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-2xl px-6 py-5 text-center shadow-xl">
+            <div className="text-3xl font-black text-emerald-400">{tools.filter(t => t.status === 'published').length}</div>
+            <div className="text-[10px] uppercase tracking-widest text-emerald-500/70 font-bold mt-1">Published Tools</div>
+          </div>
+          <div className="bg-red-500/5 border border-red-500/20 rounded-2xl px-6 py-5 text-center shadow-xl">
+            <div className="text-3xl font-black text-red-400">{tools.filter(t => !t.isVisible).length}</div>
+            <div className="text-[10px] uppercase tracking-widest text-red-500/70 font-bold mt-1">Hidden Tools</div>
+          </div>
+          <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-2xl px-6 py-5 text-center shadow-xl">
+            <div className="text-3xl font-black text-yellow-400">{tools.filter(t => t.status === 'scheduled').length}</div>
+            <div className="text-[10px] uppercase tracking-widest text-yellow-500/70 font-bold mt-1">Scheduled Tools</div>
           </div>
         </div>
 

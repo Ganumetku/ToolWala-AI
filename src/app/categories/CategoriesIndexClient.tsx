@@ -3,9 +3,9 @@
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Grid, HelpCircle, Layers } from 'lucide-react';
-import { categoriesData } from '@/data/categories';
+import { categoriesData, getToolsByCategory } from '@/data/categories';
 import { toolsData, Tool } from '@/data/tools';
-import { isToolLive } from '@/lib/tools';
+import { isToolLive, getPublicTools } from '@/lib/tools';
 import CategoryCard from '@/components/CategoryCard';
 import CategorySearch from '@/components/CategorySearch';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
@@ -65,37 +65,29 @@ export default function CategoriesIndexClient() {
   }, []);
 
   const mergedTools = useMemo(() => {
-    return [...toolsData, ...dynamicTools];
-  }, [dynamicTools]);
+    const liveStaticTools = mounted ? getPublicTools() : toolsData.filter(isToolLive);
+    return [...liveStaticTools, ...dynamicTools];
+  }, [dynamicTools, mounted]);
 
   // Map category tool counts dynamically
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {};
     categoriesData.forEach(cat => {
-      // Map static/dynamic lists
-      let list = mergedTools.filter(t => t.category === cat.title);
-      // Fallback custom cross-maps inside getToolsByCategory
-      if (cat.id === 'resume-career') {
-        list = mergedTools.filter(t => ['resume-builder', 'cover-letter-generator'].includes(t.id));
-      } else if (cat.id === 'seo-tools') {
-        list = mergedTools.filter(t => ['text-humanizer', 'ocr-to-text', 'caption-generator'].includes(t.id));
-      } else if (cat.id === 'developer-tools') {
-        list = mergedTools.filter(t => ['qr-code-generator', 'ocr-to-text'].includes(t.id));
-      } else if (cat.id === 'social-media-tools') {
-        list = mergedTools.filter(t => ['caption-generator', 'voice-generator', 'bg-remover'].includes(t.id));
-      }
+      const list = getToolsByCategory(cat.id, mergedTools);
       counts[cat.id] = list.length;
     });
     return counts;
   }, [mergedTools]);
 
   const filteredCategories = useMemo(() => {
-    return categoriesData.filter(cat => 
-      cat.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      cat.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      cat.keywords.some(k => k.toLowerCase().includes(searchQuery.toLowerCase()))
-    );
-  }, [searchQuery]);
+    return categoriesData
+      .filter(cat => (categoryCounts[cat.id] || 0) > 0)
+      .filter(cat => 
+        cat.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        cat.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        cat.keywords.some(k => k.toLowerCase().includes(searchQuery.toLowerCase()))
+      );
+  }, [searchQuery, categoryCounts]);
 
   if (!mounted) {
     return <div className="min-h-screen bg-[#030712]" />;

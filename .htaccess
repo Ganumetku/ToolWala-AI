@@ -36,7 +36,7 @@ RewriteBase /
 # ----------------------------------------------------------------------
 # 2. STATIC EXPORT ROUTING FALLBACKS
 # If you choose to deploy static files (via output: 'export'), these rules
-# resolve Clean URLs (e.g. /admin/login -> /admin/login.html) and prevent
+# resolve Clean URLs (e.g. /admin/login -> /admin/login/index.html) and prevent
 # 404 errors when refreshing pages.
 # ----------------------------------------------------------------------
 
@@ -44,27 +44,18 @@ RewriteBase /
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
 RewriteRule ^index\.html$ / [R=301,L]
 
-# Redirect trailing slash to clean URL (except for actual folders)
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)/$ /$1 [R=301,L]
+# Redirect /admin/index.html to /admin/
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /admin/index\.html\ HTTP/
+RewriteRule ^admin/index\.html$ /admin/ [R=301,L]
 
-# Direct /admin or /admin/ requests to the physical admin.html file to prevent 403 Forbidden directory indexing errors
-RewriteRule ^admin/?$ /admin.html [L]
-
-# Resolve clean html files: /about -> /about.html
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{DOCUMENT_ROOT}/$1.html -f
-RewriteRule ^(.*)$ /$1.html [L]
-
-# Resolve nested index files: /admin/login -> /admin/login/index.html
+# Resolve clean html files: /about -> /about/index.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
 RewriteRule ^(.*)$ /$1/index.html [L]
 
-# SPA fallback: Route all non-existent paths in /admin to the admin shell if compiled as single-page application
+# SPA fallback: Route all non-existent paths in /admin to the admin index shell
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{DOCUMENT_ROOT}/admin.html -f
-RewriteRule ^admin/(.*)$ /admin.html [L]
+RewriteCond %{DOCUMENT_ROOT}/admin/index.html -f
+RewriteRule ^admin/(.*)$ /admin/index.html [L]

@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { toolsData, Tool, ToolCategory, toolCategories } from '@/data/tools';
 import { getAdminTools, saveAdminOverride, ToolOverride, isToolLive } from '@/lib/tools';
-import { Search, Eye, EyeOff, Star, TrendingUp, Zap, Calendar, Settings, ShieldCheck, ChevronDown, CheckCircle2, Clock, XCircle, MoreVertical } from 'lucide-react';
+import { Search, Eye, EyeOff, Star, TrendingUp, Zap, Calendar, Settings, CheckCircle2, Clock, XCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 type FilterType = "All" | "Published" | "Draft" | "Scheduled" | "Hidden";
@@ -43,6 +43,41 @@ export default function AdminToolsDashboard() {
       return matchesSearch && matchesFilter;
     });
   }, [tools, searchQuery, filter]);
+
+  const getStatusBadge = (tool: Tool) => {
+    if (!tool.isVisible) {
+      return (
+        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest border bg-red-500/10 border-red-500/20 text-red-400">
+          <EyeOff className="w-3 h-3" />
+          Hidden
+        </div>
+      );
+    }
+    switch (tool.status) {
+      case 'published':
+        return (
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest border bg-emerald-500/10 border-emerald-500/20 text-emerald-400">
+            <CheckCircle2 className="w-3 h-3" />
+            Published
+          </div>
+        );
+      case 'scheduled':
+        return (
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest border bg-yellow-500/10 border-yellow-500/20 text-yellow-400">
+            <Clock className="w-3 h-3" />
+            Scheduled
+          </div>
+        );
+      case 'draft':
+      default:
+        return (
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest border bg-gray-500/10 border-gray-500/20 text-gray-400">
+            <Settings className="w-3 h-3" />
+            Draft
+          </div>
+        );
+    }
+  };
 
   if (!mounted) return null; // Avoid hydration errors
 
@@ -127,6 +162,7 @@ export default function AdminToolsDashboard() {
                   <th className="py-4 px-6 text-center">Status</th>
                   <th className="py-4 px-6 text-center">Visibility</th>
                   <th className="py-4 px-6 text-center">Promotions</th>
+                  <th className="py-4 px-6 text-center">Schedule Date</th>
                   <th className="py-4 px-6 text-right">Actions</th>
                 </tr>
               </thead>
@@ -163,34 +199,21 @@ export default function AdminToolsDashboard() {
                       </td>
 
                       <td className="py-4 px-6 text-center">
-                        <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest border ${
-                          tool.status === 'published' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' :
-                          tool.status === 'scheduled' ? 'bg-yellow-500/10 border-yellow-500/20 text-yellow-400' :
-                          'bg-gray-500/10 border-gray-500/20 text-gray-400'
-                        }`}>
-                          {tool.status === 'published' && <CheckCircle2 className="w-3 h-3" />}
-                          {tool.status === 'scheduled' && <Clock className="w-3 h-3" />}
-                          {tool.status === 'draft' && <Settings className="w-3 h-3" />}
-                          {tool.status}
-                        </div>
-                        {tool.status === 'scheduled' && tool.publishDate && (
-                          <div className="text-[9px] text-yellow-500/60 font-mono mt-1 font-bold">
-                            {new Date(tool.publishDate).toLocaleDateString()}
-                          </div>
-                        )}
+                        {getStatusBadge(tool)}
                       </td>
 
                       <td className="py-4 px-6 text-center">
                         <button
                           onClick={() => handleOverride(tool.id, { isVisible: !tool.isVisible })}
-                          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                            tool.isVisible 
-                              ? 'bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 border border-blue-500/20' 
-                              : 'bg-red-500/10 text-red-400 hover:bg-red-500/20 border border-red-500/20'
+                          className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
+                            tool.isVisible ? 'bg-blue-600' : 'bg-gray-800'
                           }`}
                         >
-                          {tool.isVisible ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-                          {tool.isVisible ? 'Visible' : 'Hidden'}
+                          <span
+                            className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                              tool.isVisible ? 'translate-x-5' : 'translate-x-0'
+                            }`}
+                          />
                         </button>
                       </td>
 
@@ -220,30 +243,55 @@ export default function AdminToolsDashboard() {
                         </div>
                       </td>
 
+                      <td className="py-4 px-6 text-center">
+                        <input
+                          type="date"
+                          value={tool.publishDate || ''}
+                          onChange={(e) => {
+                            const d = e.target.value;
+                            if (d) {
+                              handleOverride(tool.id, {
+                                status: 'scheduled',
+                                publishDate: d,
+                                isVisible: true
+                              });
+                            }
+                          }}
+                          className="bg-[#0f172a] border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-white outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all font-mono"
+                        />
+                      </td>
+
                       <td className="py-4 px-6 text-right">
                         <div className="flex items-center justify-end gap-2">
-                          {tool.status !== 'published' ? (
-                            <button 
-                              onClick={() => handleOverride(tool.id, { status: 'published', isVisible: true })}
-                              className="px-3 py-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase tracking-widest rounded-lg border border-emerald-500/20 transition-colors"
-                            >
-                              Publish
-                            </button>
-                          ) : (
-                            <button 
-                              onClick={() => handleOverride(tool.id, { status: 'draft', isVisible: false })}
-                              className="px-3 py-1.5 bg-gray-500/10 hover:bg-gray-500/20 text-gray-400 text-[10px] font-black uppercase tracking-widest rounded-lg border border-gray-500/20 transition-colors"
-                            >
-                              Unpublish
-                            </button>
-                          )}
+                          <button 
+                            onClick={() => handleOverride(tool.id, { status: 'published', isVisible: true })}
+                            className={`px-3 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-lg border transition-colors ${
+                              tool.status === 'published' && tool.isVisible
+                                ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+                                : 'bg-emerald-500/5 hover:bg-emerald-500/10 text-emerald-500/80 border-emerald-500/10'
+                            }`}
+                          >
+                            Publish
+                          </button>
+                          <button 
+                            onClick={() => handleOverride(tool.id, { status: 'draft', isVisible: false })}
+                            className={`px-3 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-lg border transition-colors ${
+                              tool.status === 'draft' && !tool.isVisible
+                                ? 'bg-gray-500/20 text-gray-400 border-gray-500/30'
+                                : 'bg-gray-500/5 hover:bg-gray-500/10 text-gray-500/80 border-gray-500/10'
+                            }`}
+                          >
+                            Unpublish
+                          </button>
                           <button 
                             onClick={() => {
-                              const d = prompt("Enter future date (YYYY-MM-DD):");
-                              if (d) handleOverride(tool.id, { status: 'scheduled', publishDate: d, isVisible: true });
+                              const d = prompt("Enter future date (YYYY-MM-DD) to schedule:");
+                              if (d) {
+                                handleOverride(tool.id, { status: 'scheduled', publishDate: d, isVisible: true });
+                              }
                             }}
                             className="p-1.5 bg-white/5 hover:bg-white/10 text-gray-400 rounded-lg border border-white/5 transition-colors"
-                            title="Schedule"
+                            title="Schedule Publish"
                           >
                             <Calendar className="w-4 h-4" />
                           </button>

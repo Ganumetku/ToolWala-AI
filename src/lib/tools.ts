@@ -31,7 +31,13 @@ export function getAdminTools(baseTools: Tool[] = toolsData): Tool[] {
 
 // Determine if a tool should be visible to public users
 export function isToolLive(tool: Tool): boolean {
-  return tool.status === 'published' && tool.isVisible === true;
+  if (tool.isVisible !== true) return false;
+  if (tool.status === 'published') return true;
+  if (tool.status === 'scheduled') {
+    if (!tool.publishDate) return false;
+    return new Date(tool.publishDate) <= new Date();
+  }
+  return false;
 }
 
 // Get only live tools
@@ -39,6 +45,16 @@ export function getPublicTools(baseTools: Tool[] = toolsData): Tool[] {
   const liveTools = getAdminTools(baseTools).filter(isToolLive);
   console.log("Live Tools", liveTools);
   return liveTools;
+}
+
+// Get scheduled tools
+export function getScheduledTools(baseTools: Tool[] = toolsData): Tool[] {
+  return getAdminTools(baseTools).filter(t => t.status === 'scheduled');
+}
+
+// Get public featured tools
+export function getFeaturedTools(baseTools: Tool[] = toolsData): Tool[] {
+  return getPublicTools(baseTools).filter(t => t.featured);
 }
 
 // Get tools by category

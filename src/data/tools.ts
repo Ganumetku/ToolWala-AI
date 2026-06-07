@@ -1,14 +1,16 @@
 export type ToolCategory = 
   | "All"
-  | "PDF Tools"
-  | "Image Tools"
   | "AI Tools"
-  | "Document Tools"
+  | "Image Tools"
+  | "PDF Tools"
+  | "Calculator Tools"
   | "Utility Tools"
+  | "Social Media Tools"
+  | "Business Tools"
+  | "Document Tools"
   | "Resume & Career"
   | "SEO Tools"
-  | "Developer Tools"
-  | "Social Media Tools";
+  | "Developer Tools";
 
 export interface Tool {
   id: string;
@@ -405,18 +407,94 @@ export const toolsData: Tool[] = [
     trending: true,
     popular: true,
     tags: ["pdf", "word", "docx", "convert", "pdf to docx", "document"]
+  },
+  {
+    id: "age-calculator",
+    title: "Age Calculator",
+    description: "Calculate exact age in years, months, days and next birthday instantly.",
+    icon: "🧮",
+    href: "/tools/age-calculator",
+    slug: "age-calculator",
+    category: "Calculator Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["age", "calculator", "birthday", "date of birth", "years", "months", "days"]
+  },
+  {
+    id: "sip-calculator",
+    title: "SIP Calculator",
+    description: "Calculate SIP returns, future value, total investment and estimated wealth instantly.",
+    icon: "📈",
+    href: "/tools/sip-calculator",
+    slug: "sip-calculator",
+    category: "Calculator Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["sip", "calculator", "investment", "returns", "mutual fund", "finance", "wealth"]
+  },
+  {
+    id: "emi-calculator",
+    title: "EMI Calculator",
+    description: "Calculate loan EMI, total interest, and total payment instantly for home loan, car loan, personal loan and more.",
+    icon: "🏦",
+    href: "/tools/emi-calculator",
+    slug: "emi-calculator",
+    category: "Calculator Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["emi", "calculator", "loan", "interest", "finance", "mortgage", "payment"]
+  },
+  {
+    id: "gst-calculator",
+    title: "GST Calculator",
+    description: "Calculate GST amount, total price, and reverse GST instantly with free GST Calculator.",
+    icon: "🧾",
+    href: "/tools/gst-calculator",
+    slug: "gst-calculator",
+    category: "Calculator Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["gst", "calculator", "tax", "finance", "invoice", "billing"]
+  },
+  {
+    id: "youtube-money-calculator",
+    title: "YouTube Money Calculator",
+    description: "Estimate YouTube earnings from views, CPM, RPM, niche and monthly traffic instantly.",
+    icon: "▶️",
+    href: "/tools/youtube-money-calculator",
+    slug: "youtube-money-calculator",
+    category: "Social Media Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["youtube", "money", "calculator", "cpm", "rpm", "earnings", "youtube revenue", "adsense", "monetization"]
+  },
+  {
+    id: "adsense-revenue-calculator",
+    title: "AdSense Revenue Calculator",
+    description: "Estimate Google AdSense earnings from page views, CTR, CPC, RPM, country and niche instantly.",
+    icon: "💰",
+    href: "/tools/adsense-revenue-calculator",
+    slug: "adsense-revenue-calculator",
+    category: "Calculator Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["adsense", "revenue", "calculator", "cpc", "ctr", "rpm", "google ads", "blog income", "website monetization"]
   }
 ];
 
 export const toolCategories: ToolCategory[] = [
   "All",
-  "PDF Tools",
-  "Image Tools",
   "AI Tools",
-  "Document Tools",
+  "Image Tools",
+  "PDF Tools",
+  "Calculator Tools",
   "Utility Tools",
-  "Resume & Career",
-  "SEO Tools",
-  "Developer Tools",
-  "Social Media Tools"
+  "Social Media Tools",
+  "Business Tools"
 ];

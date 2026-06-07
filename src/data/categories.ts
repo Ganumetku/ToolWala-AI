@@ -178,6 +178,23 @@ export const categoriesData: CategoryMetadata[] = [
         answer: "Yes, files generated are exported as high-fidelity audio streams suitable for video narration and editing."
       }
     ]
+  },
+  {
+    id: "calculator-tools",
+    slug: "calculator-tools",
+    title: "Calculator Tools",
+    description: "Various handy calculators for age, date, and other daily calculations.",
+    intro: "Fast, accurate, and secure client-side calculators for all your daily needs.",
+    icon: "🧮",
+    seoTitle: "Online Calculators - Age, SIP, EMI & More | ToolWala AI",
+    seoDescription: "Free online calculators for age, finance, and various other metrics. Fast and fully private client-side processing.",
+    keywords: ["calculators", "age calculator", "sip calculator", "emi calculator", "online calculator", "free calculator"],
+    faqs: [
+      {
+        question: "Are these calculators accurate?",
+        answer: "Yes, our calculators use precise mathematical functions and run entirely in your browser for instant and accurate results."
+      }
+    ]
   }
 ];
 
@@ -217,7 +234,11 @@ export function getToolsByCategory(categoryId: string, allTools: Tool[]): Tool[]
       );
     case 'social-media-tools':
       return allTools.filter(t => 
-        ['caption-generator', 'voice-generator', 'bg-remover'].includes(t.id)
+        ['caption-generator', 'voice-generator', 'bg-remover', 'youtube-money-calculator'].includes(t.id)
+      );
+    case 'calculator-tools':
+      return allTools.filter(t => 
+        ['age-calculator', 'sip-calculator', 'emi-calculator', 'gst-calculator', 'adsense-revenue-calculator'].includes(t.id)
       );
     default:
       return [];

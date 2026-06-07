@@ -994,5 +994,52 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "PDF OCR Scanner", href: "/tools/pdf-ocr" },
       { name: "PDF to JPG", href: "/tools/pdf-to-jpg" }
     ]
+  },
+  "ai-image-upscaler": {
+    title: "AI Image Upscaler",
+    intro: "Enhance photo quality, reduce blur, and upscale image resolution up to 8x locally in your browser. No server uploads, 100% private and secure processing.",
+    whatItDoes: "ToolWala AI Image Upscaler uses advanced browser-side canvas interpolation and convolution sharpening matrices to restore fine details, increase pixel density, and clean up blur or compression artifacts. It runs completely offline on your device, allowing you to upscale photos to 2x, 4x, or 8x original size while retaining local privacy for personal, sensitive, or commercial image assets.",
+    howToUse: [
+      "Upload or drag & drop your image (JPEG, PNG, or WebP) into the upload canvas.",
+      "Select your upscale target factor (2x, 4x, or 8x).",
+      "Adjust the sliders to fine-tune Sharpness, Quality/Enhance Details, Blur Reduction, and toggle Face Quality Enhancement.",
+      "Click the 'Upscale Image' button and wait for the local browser canvas to process the filters.",
+      "Inspect original versus processed image quality using the interactive split comparison slider.",
+      "Click 'Download Result' to save your new high-resolution image."
+    ],
+    keyFeatures: [
+      { title: "2x, 4x, & 8x Scale Factors", desc: "Instantly multiply image pixel resolution using high-performance bicubic canvas drawing." },
+      { title: "Convolution Sharpness Matrix", desc: "Apply specialized unsharp mask algorithms to boost edge details without generating pixel halos." },
+      { title: "Contrast & Saturation Boost", desc: "Dynamically adjust highlights and tones to give your images a vibrant, professional aesthetic." },
+      { title: "Privacy-First Edge Scaling", desc: "No uploads, zero server footprints. All operations happen entirely within your local browser sandbox." }
+    ],
+    benefits: [
+      "Preserve absolute security: Your private or sensitive photos never touch external servers.",
+      "Breathe new life into old, pixelated, or compressed graphics.",
+      "Prepare low-resolution thumbnails or assets for high-quality printing or banners.",
+      "Save money: A premium, zero-cost upscaler with no usage caps or subscriptions."
+    ],
+    whyChoose: "Most online AI upscalers charge expensive credit-based fees and require uploading files to the cloud. ToolWala AI runs the complete enhancement stack directly on your device using HTML5 Canvas APIs, bilinear-bicubic resampling, and custom convolution math. Perfect for designers, marketers, and photographers who value speed, privacy, and efficiency.",
+    useCases: [
+      "Upscaling low-res graphic design assets for print media.",
+      "Improving sharpness and quality of blurry web screenshots.",
+      "Enhancing portrait or face photo details for social profiles.",
+      "Restoring older digital photos with low pixel resolutions."
+    ],
+    faqs: [
+      { question: "How does the browser-based AI Image Upscaler work?", answer: "The tool runs fully in your browser. It resamples the image pixels to 200%, 400%, or 800% scale using high-fidelity interpolation, then applies custom matrix convolution kernels to sharpen, reduce blur, and adjust contrast dynamically." },
+      { question: "Is my uploaded image sent to a server?", answer: "No. Absolutely no image data is uploaded. All processing takes place directly in your browser's CPU/GPU thread, ensuring complete privacy." },
+      { question: "Are there any file format or size limits?", answer: "It supports standard image formats like JPG, JPEG, PNG, and WebP. For optimal browser performance, we recommend using input files under 15MB." },
+      { question: "Can I upscale an image to 8x size?", answer: "Yes, you can select between 2x, 4x, and 8x upscale factors. Note that 8x processing on very large images may require a few seconds depending on your device's memory." },
+      { question: "What does the Face Quality Enhancement filter do?", answer: "It runs an edge-preserving bilateral smoothing filter on the image data, smoothing out compression artifacts and digital noise in skin tones while retaining high-contrast features like eyes and hair." },
+      { question: "Can I download the processed image for free?", answer: "Yes, you can download the high-resolution upscaled image instantly at zero cost, without any registration or watermarks." }
+    ],
+    conclusion: "Enlarge and enhance your low-resolution images in seconds. Try ToolWala AI's premium, client-side AI Image Upscaler today.",
+    relatedTools: [
+      { name: "AI Background Remover", href: "/tools/bg-remover" },
+      { name: "Image Compressor", href: "/tools/image-compressor" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
+      { name: "Aadhaar Photo Resizer", href: "/tools/aadhaar-photo-resizer" }
+    ]
   }
 };

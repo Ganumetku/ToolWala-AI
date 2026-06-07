@@ -592,6 +592,23 @@ export const toolsData: Tool[] = [
     isVisible: true,
     createdAt: '2024-01-01T00:00:00Z',
     updatedAt: '2024-01-01T00:00:00Z'
+  },
+  {
+    id: "ai-image-upscaler",
+    title: "AI Image Upscaler",
+    description: "Upscale your photos by 2x, 4x, or 8x with advanced canvas sharpening and quality enhancement algorithms in your browser.",
+    icon: "🔍",
+    href: "/tools/ai-image-upscaler",
+    slug: "ai-image-upscaler",
+    category: "Image Tools",
+    featured: false,
+    trending: false,
+    popular: false,
+    tags: ["image", "upscale", "sharpen", "resolution", "enhance", "quality", "photo"],
+    status: 'draft',
+    isVisible: false,
+    createdAt: '2026-06-07T00:00:00Z',
+    updatedAt: '2026-06-07T00:00:00Z'
   }
 ];
 

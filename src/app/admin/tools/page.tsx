@@ -14,15 +14,23 @@ export default function AdminToolsDashboard() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState<FilterType>("All");
 
+  const loadTools = () => {
+    const rawTools = getAdminTools();
+    const sorted = [...rawTools].sort((a, b) => {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    });
+    setTools(sorted);
+  };
+
   // Initial load
   useEffect(() => {
     setMounted(true);
-    setTools(getAdminTools());
+    loadTools();
   }, []);
 
   const handleOverride = (toolId: string, override: ToolOverride) => {
     saveAdminOverride(toolId, override);
-    setTools(getAdminTools()); // refresh state
+    loadTools(); // refresh state
   };
 
   const filteredTools = useMemo(() => {
@@ -185,9 +193,14 @@ export default function AdminToolsDashboard() {
                             {tool.icon}
                           </div>
                           <div>
-                            <div className="font-bold text-white text-sm flex items-center gap-2">
+                            <div className="font-bold text-white text-sm flex items-center gap-2 flex-wrap">
                               {tool.title}
                               {isToolLive(tool) && <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]" />}
+                              {new Date(tool.createdAt) >= new Date('2026-06-01') && (
+                                <span className="px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[8px] font-black uppercase tracking-widest border border-blue-500/20">
+                                  New
+                                </span>
+                              )}
                             </div>
                             <div className="text-[10px] font-medium text-gray-500 mt-0.5 flex gap-2">
                               <span>{tool.category}</span>

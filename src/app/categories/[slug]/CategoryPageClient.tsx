@@ -3,7 +3,8 @@
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HelpCircle, ChevronDown, Sparkles, TrendingUp, Grid, Search } from 'lucide-react';
-import { toolsData, Tool, isToolVisible } from '@/data/tools';
+import { toolsData, Tool } from '@/data/tools';
+import { isToolLive } from '@/lib/tools';
 import { categoriesData, getToolsByCategory, CategoryMetadata } from '@/data/categories';
 import ToolCard from '@/components/ToolCard';
 import CategoryHeader from '@/components/CategoryHeader';
@@ -49,7 +50,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
 
           const mapped: Tool[] = data.tools
             .filter((t: any) => {
-              if (staticSlugs.has(t.slug) || !isToolVisible(t)) return false;
+              if (staticSlugs.has(t.slug) || !isToolLive(t)) return false;
               const toolCatName = t.category?.name || t.categoryName || '';
               const mappedSlug = t.category?.slug || categoryMap[toolCatName] || 'utility-tools';
               return mappedSlug === slug;

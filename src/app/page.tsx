@@ -10,7 +10,8 @@ import {
 } from 'lucide-react';
 import ToolCard from '@/components/ToolCard';
 import CategoryCard from '@/components/CategoryCard';
-import { toolsData, Tool, ToolCategory, toolCategories, isToolVisible } from '@/data/tools';
+import { toolsData, Tool, ToolCategory, toolCategories } from '@/data/tools';
+import { isToolLive, getPublicTools } from '@/lib/tools';
 import { categoriesData, getToolsByCategory } from '@/data/categories';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
 
@@ -55,7 +56,7 @@ export default function Home() {
           };
 
           const mapped: Tool[] = data.tools
-            .filter((t: any) => !staticSlugs.has(t.slug) && isToolVisible(t))
+            .filter((t: any) => !staticSlugs.has(t.slug) && isToolLive(t))
             .map((t: any) => ({
               id: t.id,
               title: t.title,
@@ -82,8 +83,10 @@ export default function Home() {
   }, []);
 
   const mergedTools = useMemo(() => {
-    return [...toolsData, ...dynamicTools];
-  }, [dynamicTools]);
+    // Only fetch public tools on client side (including localStorage overrides)
+    const liveStaticTools = mounted ? getPublicTools() : toolsData.filter(t => t.status !== 'draft');
+    return [...liveStaticTools, ...dynamicTools];
+  }, [dynamicTools, mounted]);
 
   const recentTools = useMemo(() => {
     return recentToolIds

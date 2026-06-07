@@ -24,36 +24,11 @@ export interface Tool {
   trending: boolean;
   popular: boolean;
   tags: string[];
-  status?: 'draft' | 'scheduled' | 'published' | 'archived';
-  isPublished?: boolean;
-  publishDate?: string | null;
-  createdAt?: string;
-  updatedAt?: string;
-}
-
-export function isToolVisible(tool: any): boolean {
-  if (!tool) return false;
-  
-  // archived status is completely hidden
-  if (tool.status === 'archived') {
-    return false;
-  }
-  
-  // draft status is completely hidden
-  if (tool.status === 'draft') {
-    return false;
-  }
-  
-  // scheduled status checks current clock
-  if (tool.status === 'scheduled' || tool.publishDate) {
-    if (tool.publishDate) {
-      return new Date(tool.publishDate) <= new Date();
-    }
-  }
-
-  // fallback to isPublished or published flag (default true for hardcoded tools)
-  const isPub = tool.isPublished ?? tool.published ?? true;
-  return isPub;
+  status: 'draft' | 'scheduled' | 'published';
+  isVisible: boolean;
+  publishDate?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export const toolsData: Tool[] = [
@@ -68,7 +43,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["photo", "passport", "background removal", "image", "visa", "id"]
+    tags: ["photo", "passport", "background removal", "image", "visa", "id"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "color-palette-generator",
@@ -81,7 +60,11 @@ export const toolsData: Tool[] = [
     featured: false,
     trending: false,
     popular: true,
-    tags: ["color", "palette", "generator", "extract", "harmony", "design", "css", "theme"]
+    tags: ["color", "palette", "generator", "extract", "harmony", "design", "css", "theme"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "image-compressor",
@@ -94,7 +77,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["compress", "image", "size", "reduce", "optimize", "jpg", "png", "webp"]
+    tags: ["compress", "image", "size", "reduce", "optimize", "jpg", "png", "webp"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "qr-code-generator",
@@ -107,7 +94,11 @@ export const toolsData: Tool[] = [
     featured: false,
     trending: false,
     popular: false,
-    tags: ["qr", "code", "generator", "scan", "link", "wifi", "barcode"]
+    tags: ["qr", "code", "generator", "scan", "link", "wifi", "barcode"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "pdf-tools",
@@ -120,7 +111,11 @@ export const toolsData: Tool[] = [
     featured: false,
     trending: false,
     popular: false,
-    tags: ["pdf", "merge", "split", "compress", "convert", "document"]
+    tags: ["pdf", "merge", "split", "compress", "convert", "document"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "edit-pdf",
@@ -133,7 +128,11 @@ export const toolsData: Tool[] = [
     featured: false,
     trending: true,
     popular: true,
-    tags: ["pdf", "edit", "write", "annotate", "text", "form", "document"]
+    tags: ["pdf", "edit", "write", "annotate", "text", "form", "document"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "merge-pdf",
@@ -146,7 +145,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["pdf", "merge", "combine", "join", "document"]
+    tags: ["pdf", "merge", "combine", "join", "document"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "split-pdf",
@@ -159,7 +162,11 @@ export const toolsData: Tool[] = [
     featured: false,
     trending: true,
     popular: true,
-    tags: ["pdf", "split", "extract", "divide", "document"]
+    tags: ["pdf", "split", "extract", "divide", "document"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "jpg-to-pdf",
@@ -172,7 +179,11 @@ export const toolsData: Tool[] = [
     featured: false,
     trending: false,
     popular: true,
-    tags: ["jpg", "pdf", "png", "convert", "image to pdf", "document"]
+    tags: ["jpg", "pdf", "png", "convert", "image to pdf", "document"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "pdf-to-jpg",
@@ -185,7 +196,11 @@ export const toolsData: Tool[] = [
     featured: false,
     trending: false,
     popular: true,
-    tags: ["pdf", "jpg", "convert", "pdf to image", "jpeg", "extract", "document"]
+    tags: ["pdf", "jpg", "convert", "pdf to image", "jpeg", "extract", "document"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "protect-pdf",
@@ -198,7 +213,11 @@ export const toolsData: Tool[] = [
     featured: false,
     trending: true,
     popular: false,
-    tags: ["pdf", "protect", "encrypt", "password", "lock", "security", "document"]
+    tags: ["pdf", "protect", "encrypt", "password", "lock", "security", "document"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "unlock-pdf",
@@ -211,7 +230,11 @@ export const toolsData: Tool[] = [
     featured: false,
     trending: true,
     popular: false,
-    tags: ["pdf", "unlock", "decrypt", "remove password", "security", "document"]
+    tags: ["pdf", "unlock", "decrypt", "remove password", "security", "document"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "watermark-pdf",
@@ -224,7 +247,11 @@ export const toolsData: Tool[] = [
     featured: false,
     trending: true,
     popular: false,
-    tags: ["pdf", "watermark", "edit", "overlay", "stamp", "protect", "document"]
+    tags: ["pdf", "watermark", "edit", "overlay", "stamp", "protect", "document"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "organize-pdf",
@@ -237,7 +264,11 @@ export const toolsData: Tool[] = [
     featured: false,
     trending: true,
     popular: false,
-    tags: ["pdf", "organize", "reorder", "delete page", "rotate pdf", "duplicate page", "document"]
+    tags: ["pdf", "organize", "reorder", "delete page", "rotate pdf", "duplicate page", "document"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "pdf-ocr",
@@ -250,7 +281,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["pdf", "ocr", "scanner", "extract text", "scanned pdf", "image to text", "document"]
+    tags: ["pdf", "ocr", "scanner", "extract text", "scanned pdf", "image to text", "document"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "aadhaar-photo-resizer",
@@ -263,7 +298,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["aadhaar", "photo", "resizer", "crop", "compress", "passport photo", "uidai", "kyc", "image"]
+    tags: ["aadhaar", "photo", "resizer", "crop", "compress", "passport photo", "uidai", "kyc", "image"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "ai-logo-maker",
@@ -276,7 +315,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["logo", "design", "brand", "ai", "business", "icon"]
+    tags: ["logo", "design", "brand", "ai", "business", "icon"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "resume-builder",
@@ -289,7 +332,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["resume", "cv", "career", "job", "ats", "builder"]
+    tags: ["resume", "cv", "career", "job", "ats", "builder"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "caption-generator",
@@ -302,7 +349,11 @@ export const toolsData: Tool[] = [
     featured: false,
     trending: false,
     popular: true,
-    tags: ["caption", "social media", "instagram", "linkedin", "ai", "writing", "post"]
+    tags: ["caption", "social media", "instagram", "linkedin", "ai", "writing", "post"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "text-humanizer",
@@ -315,7 +366,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["text", "humanize", "ai", "writing", "natural", "rewrite"]
+    tags: ["text", "humanize", "ai", "writing", "natural", "rewrite"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "voice-generator",
@@ -328,7 +383,11 @@ export const toolsData: Tool[] = [
     featured: false,
     trending: true,
     popular: true,
-    tags: ["voice", "audio", "speech", "tts", "text to speech", "ai"]
+    tags: ["voice", "audio", "speech", "tts", "text to speech", "ai"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "invoice-generator",
@@ -341,7 +400,11 @@ export const toolsData: Tool[] = [
     featured: false,
     trending: false,
     popular: false,
-    tags: ["invoice", "billing", "receipt", "business", "pdf", "payment"]
+    tags: ["invoice", "billing", "receipt", "business", "pdf", "payment"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "background-remover",
@@ -354,7 +417,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["background", "remove", "transparent", "png", "image", "cutout"]
+    tags: ["background", "remove", "transparent", "png", "image", "cutout"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "cover-letter-generator",
@@ -367,7 +434,11 @@ export const toolsData: Tool[] = [
     featured: false,
     trending: true,
     popular: true,
-    tags: ["cover letter", "career", "job", "application", "writing", "ai"]
+    tags: ["cover letter", "career", "job", "application", "writing", "ai"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "ocr-to-text",
@@ -380,7 +451,11 @@ export const toolsData: Tool[] = [
     featured: false,
     trending: false,
     popular: true,
-    tags: ["ocr", "image to text", "extractor", "scan", "screenshot", "read text"]
+    tags: ["ocr", "image to text", "extractor", "scan", "screenshot", "read text"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "password-generator",
@@ -393,7 +468,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["password", "generator", "security", "random", "privacy", "offline", "safe"]
+    tags: ["password", "generator", "security", "random", "privacy", "offline", "safe"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "pdf-to-word-converter",
@@ -406,7 +485,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["pdf", "word", "docx", "convert", "pdf to docx", "document"]
+    tags: ["pdf", "word", "docx", "convert", "pdf to docx", "document"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "age-calculator",
@@ -419,7 +502,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["age", "calculator", "birthday", "date of birth", "years", "months", "days"]
+    tags: ["age", "calculator", "birthday", "date of birth", "years", "months", "days"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "sip-calculator",
@@ -432,7 +519,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["sip", "calculator", "investment", "returns", "mutual fund", "finance", "wealth"]
+    tags: ["sip", "calculator", "investment", "returns", "mutual fund", "finance", "wealth"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "emi-calculator",
@@ -445,7 +536,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["emi", "calculator", "loan", "interest", "finance", "mortgage", "payment"]
+    tags: ["emi", "calculator", "loan", "interest", "finance", "mortgage", "payment"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "gst-calculator",
@@ -458,7 +553,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["gst", "calculator", "tax", "finance", "invoice", "billing"]
+    tags: ["gst", "calculator", "tax", "finance", "invoice", "billing"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "youtube-money-calculator",
@@ -471,7 +570,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["youtube", "money", "calculator", "cpm", "rpm", "earnings", "youtube revenue", "adsense", "monetization"]
+    tags: ["youtube", "money", "calculator", "cpm", "rpm", "earnings", "youtube revenue", "adsense", "monetization"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   },
   {
     id: "adsense-revenue-calculator",
@@ -484,7 +587,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["adsense", "revenue", "calculator", "cpc", "ctr", "rpm", "google ads", "blog income", "website monetization"]
+    tags: ["adsense", "revenue", "calculator", "cpc", "ctr", "rpm", "google ads", "blog income", "website monetization"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   }
 ];
 

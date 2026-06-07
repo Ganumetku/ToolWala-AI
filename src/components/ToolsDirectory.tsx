@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useMemo, useEffect } from 'react';
-import { toolsData, toolCategories, ToolCategory, Tool, isToolVisible } from '@/data/tools';
+import { toolsData, toolCategories, ToolCategory, Tool } from '@/data/tools';
+import { isToolLive, getPublicTools } from '@/lib/tools';
 import ToolCard from '@/components/ToolCard';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X } from 'lucide-react';
@@ -59,7 +60,7 @@ export default function ToolsDirectory({
           };
 
           const mapped: Tool[] = data.tools
-            .filter((t: any) => !staticSlugs.has(t.slug) && isToolVisible(t))
+            .filter((t: any) => !staticSlugs.has(t.slug) && isToolLive(t))
             .map((t: any) => ({
               id: t.id,
               title: t.title,
@@ -86,9 +87,13 @@ export default function ToolsDirectory({
   }, []);
 
   // Merge static and dynamic lists
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const mergedTools = useMemo(() => {
-    return [...toolsData, ...dynamicTools];
-  }, [dynamicTools]);
+    const liveStaticTools = mounted ? getPublicTools() : toolsData.filter(t => t.status !== 'draft');
+    return [...liveStaticTools, ...dynamicTools];
+  }, [dynamicTools, mounted]);
 
   const handleSearchChange = (query: string) => {
     if (onSearchChange) {

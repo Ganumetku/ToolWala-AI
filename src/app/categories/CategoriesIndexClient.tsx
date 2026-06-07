@@ -4,7 +4,8 @@ import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Grid, HelpCircle, Layers } from 'lucide-react';
 import { categoriesData } from '@/data/categories';
-import { toolsData, Tool, isToolVisible } from '@/data/tools';
+import { toolsData, Tool } from '@/data/tools';
+import { isToolLive } from '@/lib/tools';
 import CategoryCard from '@/components/CategoryCard';
 import CategorySearch from '@/components/CategorySearch';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
@@ -38,7 +39,7 @@ export default function CategoriesIndexClient() {
           };
 
           const mapped: Tool[] = data.tools
-            .filter((t: any) => !staticSlugs.has(t.slug) && isToolVisible(t))
+            .filter((t: any) => !staticSlugs.has(t.slug) && isToolLive(t))
             .map((t: any) => ({
               id: t.id,
               title: t.title,

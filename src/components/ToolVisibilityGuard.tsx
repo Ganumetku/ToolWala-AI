@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Clock, Lock, ArrowLeft, Calendar, FileText } from 'lucide-react';
-import { isToolVisible } from '@/data/tools';
+import { isToolLive } from '@/lib/tools';
 import { MeshGradient } from '@/components/BackgroundEffects';
 
 interface ToolVisibilityGuardProps {
@@ -31,7 +31,7 @@ export default function ToolVisibilityGuard({ slug, children }: ToolVisibilityGu
           const matchedTool = data.tools.find((t: any) => t.slug === slug);
           if (matchedTool) {
             setToolInfo(matchedTool);
-            const isVis = isToolVisible(matchedTool);
+            const isVis = isToolLive(matchedTool);
             setVisible(isVis);
           }
         }

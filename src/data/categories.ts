@@ -183,7 +183,7 @@ export const categoriesData: CategoryMetadata[] = [
     id: "calculator-tools",
     slug: "calculator-tools",
     title: "Calculator Tools",
-    description: "Various handy calculators for age, date, and other daily calculations.",
+    description: "SIP, EMI, GST, Age, YouTube Money, and AdSense revenue calculators.",
     intro: "Fast, accurate, and secure client-side calculators for all your daily needs.",
     icon: "🧮",
     seoTitle: "Online Calculators - Age, SIP, EMI & More | ToolWala AI",
@@ -238,7 +238,7 @@ export function getToolsByCategory(categoryId: string, allTools: Tool[]): Tool[]
       );
     case 'calculator-tools':
       return allTools.filter(t => 
-        ['age-calculator', 'sip-calculator', 'emi-calculator', 'gst-calculator', 'adsense-revenue-calculator'].includes(t.id)
+        ['age-calculator', 'sip-calculator', 'emi-calculator', 'gst-calculator', 'youtube-money-calculator', 'adsense-revenue-calculator'].includes(t.id)
       );
     default:
       return [];

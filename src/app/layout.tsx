@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import PublicLayoutWrapper from "@/components/PublicLayoutWrapper";
 import { Toaster } from 'sonner';
-import Script from "next/script";
+import GoogleAnalytics from "@/components/analytics/google-analytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -141,25 +141,13 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-KJ7MKF306J"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-KJ7MKF306J');
-          `}
-        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body className="min-h-full flex flex-col font-sans bg-[#030712] text-white">
+        <GoogleAnalytics />
         <Toaster position="top-center" richColors />
         <PublicLayoutWrapper>{children}</PublicLayoutWrapper>
       </body>

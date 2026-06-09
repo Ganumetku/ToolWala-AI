@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Sparkles, Save, ShieldAlert, Key, Globe, Mail, Link as LinkIcon, RefreshCw } from 'lucide-react';
 import { toast } from 'sonner';
+import { adminFetch } from '@/lib/admin-fetch';
 
 export default function SettingsPage() {
   const [loading, setLoading] = useState(true);
@@ -26,7 +27,7 @@ export default function SettingsPage() {
   useEffect(() => {
     async function loadSettings() {
       try {
-        const res = await fetch('/api/admin/settings');
+        const res = await adminFetch('/api/admin/settings');
         const data = await res.json();
         if (res.ok && data.success && data.settings) {
           const s = data.settings;
@@ -57,7 +58,7 @@ export default function SettingsPage() {
     setSaving(true);
 
     try {
-      const res = await fetch('/api/admin/settings', {
+      const res = await adminFetch('/api/admin/settings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

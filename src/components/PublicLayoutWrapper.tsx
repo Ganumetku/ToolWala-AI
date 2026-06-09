@@ -5,12 +5,6 @@ import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useAnalytics } from "@/hooks/useAnalytics";
-import { initMockApi } from "@/lib/mockApi";
-
-// Initialize mock API interceptor on public pages for local dynamic tools storage simulation
-if (typeof window !== 'undefined') {
-  initMockApi();
-}
 
 export default function PublicLayoutWrapper({
   children,
@@ -20,6 +14,7 @@ export default function PublicLayoutWrapper({
   const pathname = usePathname();
   const { trackPageView } = useAnalytics();
   const isAdmin = pathname?.startsWith('/admin');
+  const isLogin = pathname === '/login' || pathname === '/login/';
 
   useEffect(() => {
     if (pathname && !pathname.startsWith('/admin')) {
@@ -42,7 +37,7 @@ export default function PublicLayoutWrapper({
     }
   }, [pathname, trackPageView]);
 
-  if (isAdmin) {
+  if (isAdmin || isLogin) {
     return <>{children}</>;
   }
 

@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
+import { adminFetch } from "@/lib/admin-fetch";
 
 interface ArticleItem {
   id: string;
@@ -90,10 +91,12 @@ export default function BlogCMS() {
 
   const fetchBlogs = async () => {
     try {
-      const res = await fetch("/api/admin/blogs");
+      const res = await adminFetch("/api/admin/blogs");
       const data = await res.json();
       if (res.ok && data.success && data.blogs) {
         setArticles(data.blogs);
+      } else {
+        toast.error(data.error || "Could not fetch articles index.");
       }
     } catch (err) {
       console.error(err);
@@ -226,7 +229,7 @@ export default function BlogCMS() {
       const url = editingItem ? `/api/admin/blogs/${editingItem.id}` : "/api/admin/blogs";
       const method = editingItem ? "PUT" : "POST";
 
-      const res = await fetch(url, {
+      const res = await adminFetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -249,7 +252,7 @@ export default function BlogCMS() {
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to permanently delete this blog article?")) return;
     try {
-      const res = await fetch(`/api/admin/blogs/${id}`, { method: "DELETE" });
+      const res = await adminFetch(`/api/admin/blogs/${id}`, { method: "DELETE" });
       const data = await res.json();
       if (res.ok && data.success) {
         toast.success("Blog article deleted successfully.");
@@ -265,7 +268,7 @@ export default function BlogCMS() {
 
   const toggleFeaturedDirect = async (item: ArticleItem) => {
     try {
-      const res = await fetch(`/api/admin/blogs/${item.id}`, {
+      const res = await adminFetch(`/api/admin/blogs/${item.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -286,7 +289,7 @@ export default function BlogCMS() {
   const togglePublishedDirect = async (item: ArticleItem) => {
     const nextStatus = item.status === "published" ? "draft" : "published";
     try {
-      const res = await fetch(`/api/admin/blogs/${item.id}`, {
+      const res = await adminFetch(`/api/admin/blogs/${item.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

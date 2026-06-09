@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HelpCircle, ChevronDown, Sparkles, TrendingUp, Grid, Search } from 'lucide-react';
 import { toolsData, Tool } from '@/data/tools';
-import { isToolLive, getPublicTools } from '@/lib/tools';
+import { fetchPublicTools } from '@/lib/tools';
 import { categoriesData, getToolsByCategory, CategoryMetadata } from '@/data/categories';
 import ToolCard from '@/components/ToolCard';
 import CategoryHeader from '@/components/CategoryHeader';
@@ -20,72 +20,18 @@ interface CategoryPageClientProps {
 export default function CategoryPageClient({ slug, category }: CategoryPageClientProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<'all' | 'popular' | 'trending'>('all');
-  const [dynamicTools, setDynamicTools] = useState<Tool[]>([]);
+  const [publicTools, setPublicTools] = useState<Tool[]>(toolsData);
   const [expandedFaqIndex, setExpandedFaqIndex] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    fetchPublicTools().then(setPublicTools).catch(() => {});
   }, []);
 
-  // Fetch dynamic database tools to count totals and show inside the category
-  useEffect(() => {
-    async function fetchDynamicTools() {
-      try {
-        const res = await fetch('/api/admin/tools');
-        if (!res.ok) return;
-        const data = await res.json();
-        
-        if (data.success && data.tools) {
-          const staticSlugs = new Set(toolsData.map(t => t.href.split('/').pop()));
-          
-          const categoryMap: Record<string, string> = {
-            'Creative & Design': 'image-tools',
-            'Document & PDF': 'pdf-tools',
-            'AI Writing': 'ai-tools',
-            'Career Studio': 'document-tools',
-            'Business Ops': 'document-tools',
-            'Developer Utilities': 'utility-tools',
-          };
-
-          const mapped: Tool[] = data.tools
-            .filter((t: any) => {
-              if (staticSlugs.has(t.slug) || !isToolLive(t)) return false;
-              const toolCatName = t.category?.name || t.categoryName || '';
-              const mappedSlug = t.category?.slug || categoryMap[toolCatName] || 'utility-tools';
-              return mappedSlug === slug;
-            })
-            .map((t: any) => ({
-              id: t.id,
-              title: t.title,
-              description: t.description,
-              icon: t.icon || '🔧',
-              href: `/tools/${t.slug}`,
-              slug: t.slug,
-              category: category.title as any,
-              featured: !!t.featured || !!t.isFeatured,
-              trending: !!t.trending || !!t.isTrending,
-              popular: !!t.isPopular,
-              status: t.status,
-              isPublished: t.isPublished,
-              publishDate: t.publishDate,
-              tags: t.seoMetadata?.keywords?.split(',').map((s: string) => s.trim()) || ['ai', t.toolType || 'utility']
-            }));
-          setDynamicTools(mapped);
-        }
-      } catch (err) {
-        console.warn('Failed loading dynamic tools inside category client:', err);
-      }
-    }
-    fetchDynamicTools();
-  }, [slug, category]);
-
-  // Merge static and dynamic category tools
   const categoryTools = useMemo(() => {
-    const liveStaticTools = mounted ? getPublicTools() : toolsData.filter(isToolLive);
-    const staticTools = getToolsByCategory(category.id, liveStaticTools);
-    return [...staticTools, ...dynamicTools];
-  }, [category, dynamicTools, mounted]);
+    return getToolsByCategory(category.id, publicTools);
+  }, [category, publicTools]);
 
   // Filter tools based on query and tabs
   const filteredTools = useMemo(() => {

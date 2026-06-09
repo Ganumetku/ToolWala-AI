@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
+import { adminFetch } from '@/lib/admin-fetch';
 
 interface User {
   id: string;
@@ -32,7 +33,7 @@ export default function UserManagement() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const res = await fetch('/api/admin/users');
+        const res = await adminFetch('/api/admin/users');
         if (res.ok) {
           const data = await res.json();
           setUsers(data);
@@ -49,7 +50,7 @@ export default function UserManagement() {
   const toggleUserStatus = async (id: string, currentStatus: 'active' | 'blocked') => {
     const nextStatus = currentStatus === 'active' ? 'blocked' : 'active';
     try {
-      const res = await fetch('/api/admin/users', {
+      const res = await adminFetch('/api/admin/users', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id, status: nextStatus })
@@ -67,7 +68,7 @@ export default function UserManagement() {
 
   const updateUserRole = async (id: string, newRole: 'admin' | 'user' | 'premium') => {
     try {
-      const res = await fetch('/api/admin/users', {
+      const res = await adminFetch('/api/admin/users', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id, role: newRole })

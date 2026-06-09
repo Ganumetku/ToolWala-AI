@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import { toolsData, toolCategories, ToolCategory, Tool } from '@/data/tools';
-import { isToolLive, getPublicTools } from '@/lib/tools';
+import { fetchPublicTools } from '@/lib/tools';
 import ToolCard from '@/components/ToolCard';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X } from 'lucide-react';
@@ -22,78 +22,15 @@ export default function ToolsDirectory({
 }: ToolsDirectoryProps) {
   const [internalSearchQuery, setInternalSearchQuery] = useState(initialSearchQuery);
   const [activeCategory, setActiveCategory] = useState<ToolCategory>("All");
-  const [dynamicTools, setDynamicTools] = useState<Tool[]>([]);
+  const [publicTools, setPublicTools] = useState<Tool[]>(toolsData);
 
   const searchQuery = externalSearchQuery !== undefined ? externalSearchQuery : internalSearchQuery;
 
-  // Fetch dynamic tools on mount
   useEffect(() => {
-    async function fetchDynamicTools() {
-      try {
-        const res = await fetch('/api/admin/tools');
-        if (!res.ok) {
-          console.warn(`Failed to load dynamic tools: Server responded with status ${res.status}`);
-          return;
-        }
-        const contentType = res.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-          console.warn("Failed to load dynamic tools: Response content type is not JSON");
-          return;
-        }
-        const text = await res.text();
-        if (!text.trim().startsWith('{') && !text.trim().startsWith('[')) {
-          console.warn("Failed to load dynamic tools: Response body does not start with JSON characters");
-          return;
-        }
-        const data = JSON.parse(text);
-        if (data.success && data.tools) {
-          // Format dynamic database tools to match Tool interface
-          const staticSlugs = new Set(toolsData.map(t => t.href.split('/').pop()));
-          
-          const categoryMap: Record<string, string> = {
-            'Creative & Design': 'Image Tools',
-            'Document & PDF': 'PDF Tools',
-            'AI Writing': 'AI Tools',
-            'Career Studio': 'Document Tools',
-            'Business Ops': 'Document Tools',
-            'Developer Utilities': 'Utility Tools',
-          };
-
-          const mapped: Tool[] = data.tools
-            .filter((t: any) => !staticSlugs.has(t.slug) && isToolLive(t))
-            .map((t: any) => ({
-              id: t.id,
-              title: t.title,
-              description: t.description,
-              icon: t.icon || '🔧',
-              href: `/tools/${t.slug}`,
-              slug: t.slug,
-              category: (categoryMap[t.category?.name] || categoryMap[t.categoryName] || t.category?.name || t.categoryName || 'Utility Tools') as ToolCategory,
-              featured: !!t.featured || !!t.isFeatured,
-              trending: !!t.trending || !!t.isTrending,
-              popular: !!t.isPopular,
-              status: t.status,
-              isPublished: t.isPublished,
-              publishDate: t.publishDate,
-              tags: t.seoMetadata?.keywords?.split(',').map((s: string) => s.trim()) || ['ai', t.toolType || 'utility']
-            }));
-          setDynamicTools(mapped);
-        }
-      } catch (err) {
-        console.warn('Failed to load dynamic tools:', err);
-      }
-    }
-    fetchDynamicTools();
+    fetchPublicTools().then(setPublicTools).catch(() => {});
   }, []);
 
-  // Merge static and dynamic lists
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-  const mergedTools = useMemo(() => {
-    const liveStaticTools = mounted ? getPublicTools() : toolsData.filter(isToolLive);
-    return [...liveStaticTools, ...dynamicTools];
-  }, [dynamicTools, mounted]);
+  const mergedTools = publicTools;
 
   const handleSearchChange = (query: string) => {
     if (onSearchChange) {

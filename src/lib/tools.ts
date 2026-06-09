@@ -1,35 +1,10 @@
 import { toolsData, Tool } from '@/data/tools';
 
-export type ToolOverride = Partial<Pick<Tool, 'status' | 'isVisible' | 'featured' | 'trending' | 'popular' | 'publishDate'>>;
+export type ToolOverride = Partial<
+  Pick<Tool, 'status' | 'isVisible' | 'featured' | 'trending' | 'popular' | 'publishDate'>
+>;
 
-// Get overrides from local storage (Client-side only)
-export function getAdminOverrides(): Record<string, ToolOverride> {
-  if (typeof window === 'undefined') return {};
-  try {
-    return JSON.parse(localStorage.getItem('toolVisibilityOverrides') || '{}');
-  } catch {
-    return {};
-  }
-}
-
-export function saveAdminOverride(toolId: string, override: ToolOverride) {
-  if (typeof window === 'undefined') return;
-  const current = getAdminOverrides();
-  current[toolId] = { ...current[toolId], ...override };
-  localStorage.setItem('toolVisibilityOverrides', JSON.stringify(current));
-}
-
-// Get all tools merged with local admin overrides
-export function getAdminTools(baseTools: Tool[] = toolsData): Tool[] {
-  const overrides = getAdminOverrides();
-  return baseTools.map(tool => {
-    const override = overrides[tool.id];
-    if (!override) return tool;
-    return { ...tool, ...override };
-  });
-}
-
-// Determine if a tool should be visible to public users
+/** LIVE rule: status === published AND isVisible === true (scheduled auto-publishes when date passes) */
 export function isToolLive(tool: Tool): boolean {
   if (tool.isVisible !== true) return false;
   if (tool.status === 'published') return true;
@@ -40,32 +15,85 @@ export function isToolLive(tool: Tool): boolean {
   return false;
 }
 
-// Get only live tools
+/** Client-side: fetch public tools from API with static fallback */
+export async function fetchPublicTools(): Promise<Tool[]> {
+  try {
+    const res = await fetch('/api/tools/public', { next: { revalidate: 60 } } as RequestInit);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success && Array.isArray(data.tools)) return data.tools;
+    }
+  } catch {
+    // fall through to static
+  }
+  return toolsData.filter(isToolLive);
+}
+
+/** Client-side: fetch all tools (admin) from API with static fallback */
+export async function fetchAdminTools(): Promise<Tool[]> {
+  try {
+    const res = await fetch('/api/admin/tools');
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success && Array.isArray(data.tools)) return data.tools;
+    }
+  } catch {
+    // fall through
+  }
+  return toolsData;
+}
+
+/** Client-side: fetch single tool by slug */
+export async function fetchToolBySlug(slug: string): Promise<Tool | null> {
+  try {
+    const res = await fetch(`/api/tools/public?slug=${encodeURIComponent(slug)}`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success && data.tool) return data.tool;
+    }
+  } catch {
+    // fall through
+  }
+  return toolsData.find((t) => t.slug === slug) ?? null;
+}
+
+/** Synchronous helpers using static data (SSR fallback / offline) */
 export function getPublicTools(baseTools: Tool[] = toolsData): Tool[] {
-  const liveTools = getAdminTools(baseTools).filter(isToolLive);
-  console.log("Live Tools", liveTools);
-  return liveTools;
+  return baseTools.filter(isToolLive);
 }
 
-// Get scheduled tools
-export function getScheduledTools(baseTools: Tool[] = toolsData): Tool[] {
-  return getAdminTools(baseTools).filter(t => t.status === 'scheduled');
+export function getAdminTools(baseTools: Tool[] = toolsData): Tool[] {
+  return baseTools;
 }
 
-// Get public featured tools
+export function getToolBySlug(slug: string, baseTools: Tool[] = toolsData): Tool | null {
+  return baseTools.find((t) => t.slug === slug) ?? null;
+}
+
 export function getFeaturedTools(baseTools: Tool[] = toolsData): Tool[] {
-  return getPublicTools(baseTools).filter(t => t.featured);
+  return getPublicTools(baseTools).filter((t) => t.featured);
 }
 
-// Get tools by category
 export function getToolsByCategory(category: string, baseTools: Tool[] = toolsData): Tool[] {
-  const liveTools = getPublicTools(baseTools);
-  if (category === "All") return liveTools;
-  return liveTools.filter(t => t.category === category);
+  const live = getPublicTools(baseTools);
+  if (category === 'All') return live;
+  return live.filter((t) => t.category === category);
 }
 
-// Get related tools by slug
 export function getRelatedTools(slugs: string[], baseTools: Tool[] = toolsData): Tool[] {
-  const liveTools = getPublicTools(baseTools);
-  return liveTools.filter(t => slugs.includes(t.slug));
+  return getPublicTools(baseTools).filter((t) => slugs.includes(t.slug));
+}
+
+export function getScheduledTools(baseTools: Tool[] = toolsData): Tool[] {
+  return baseTools.filter((t) => t.status === 'scheduled');
+}
+
+/** @deprecated Use API-backed admin updates instead */
+export function saveAdminOverride(_toolId: string, _override: ToolOverride) {
+  console.warn('saveAdminOverride is deprecated. Use /api/admin/tools PATCH instead.');
+}
+
+/** @deprecated */
+export function getAdminOverrides(): Record<string, ToolOverride> {
+  return {};
 }

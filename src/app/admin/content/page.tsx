@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
+import { adminFetch } from '@/lib/admin-fetch';
 import InputBuilder, { FormInputSchema } from '@/components/admin/InputBuilder';
 
 // Importing CMS scheduling components
@@ -118,7 +119,7 @@ export default function ContentCMS() {
   // Fetch tools list on mount
   const fetchTools = async () => {
     try {
-      const res = await fetch('/api/admin/tools');
+      const res = await adminFetch('/api/admin/tools');
       const data = await res.json();
       if (res.ok && data.success && data.tools) {
         // Normalizing data shapes
@@ -216,7 +217,7 @@ export default function ContentCMS() {
   const handleDuplicate = async (item: ToolCMSItem) => {
     try {
       const duplicatedSlug = `${item.slug}-copy-${Date.now().toString().slice(-4)}`;
-      const res = await fetch('/api/admin/tools', {
+      const res = await adminFetch('/api/admin/tools', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -312,7 +313,7 @@ export default function ContentCMS() {
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to remove this tool registry entry?')) return;
     try {
-      const res = await fetch(`/api/admin/tools/${id}`, { method: 'DELETE' });
+      const res = await adminFetch(`/api/admin/tools/${id}`, { method: 'DELETE' });
       const data = await res.json();
       if (res.ok && data.success) {
         toast.success("Tool registry entry deleted.");
@@ -335,7 +336,7 @@ export default function ContentCMS() {
 
     try {
       toast.loading('Uploading asset...', { id: 'upload' });
-      const res = await fetch('/api/admin/media', {
+      const res = await adminFetch('/api/admin/media', {
         method: 'POST',
         body: formData
       });
@@ -371,7 +372,7 @@ export default function ContentCMS() {
     };
 
     try {
-      const res = await fetch(`/api/admin/tools/${item.id}`, {
+      const res = await adminFetch(`/api/admin/tools/${item.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -391,7 +392,7 @@ export default function ContentCMS() {
 
   const toggleStatusDirect = async (item: ToolCMSItem, field: 'isPopular' | 'isFeatured' | 'isTrending') => {
     try {
-      const res = await fetch(`/api/admin/tools/${item.id}`, {
+      const res = await adminFetch(`/api/admin/tools/${item.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import StatCard from '@/components/admin/StatCard';
 import ChartOverview from '@/components/admin/ChartOverview';
 import { toast } from 'sonner';
+import { adminFetch } from '@/lib/admin-fetch';
 
 interface DashboardStats {
   totalUsers: number;
@@ -46,7 +47,7 @@ export default function AdminDashboard() {
 
   const fetchStats = async (isManual = false) => {
     try {
-      const res = await fetch('/api/admin/stats');
+      const res = await adminFetch('/api/admin/stats');
       if (res.ok) {
         const data = await res.json();
         setStats(data);

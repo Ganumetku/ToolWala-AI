@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { 
   LayoutDashboard, Mail, BarChart3, Users, 
-  Cpu, Layers, BookOpen, LogOut, ChevronLeft, ChevronRight, Terminal, Settings
+  Cpu, Layers, BookOpen, LogOut, ChevronLeft, ChevronRight, Terminal, Settings, ListChecks
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -16,6 +16,7 @@ interface SidebarProps {
 
 const navItems = [
   { name: 'Overview', href: '/admin', icon: LayoutDashboard },
+  { name: 'Tools Registry', href: '/admin/tools', icon: ListChecks },
   { name: 'Contact Leads', href: '/admin/leads', icon: Mail },
   { name: 'Tool Analytics', href: '/admin/analytics', icon: BarChart3 },
   { name: 'User Management', href: '/admin/users', icon: Users },
@@ -30,10 +31,11 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
 
-  const handleLogout = () => {
-    // Clear admin auth token
-    localStorage.removeItem('admin_token');
-    router.push('/admin/login');
+  const handleLogout = async () => {
+    const { supabase } = await import('@/lib/supabase');
+    await supabase.auth.signOut();
+    router.push('/login');
+    router.refresh();
   };
 
   return (

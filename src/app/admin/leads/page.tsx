@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
+import { adminFetch } from '@/lib/admin-fetch';
 
 interface Lead {
   id: string;
@@ -34,7 +35,7 @@ export default function LeadsManagement() {
   useEffect(() => {
     async function fetchLeads() {
       try {
-        const res = await fetch('/api/admin/leads');
+        const res = await adminFetch('/api/admin/leads');
         if (res.ok) {
           const data = await res.json();
           setLeads(data);
@@ -50,7 +51,7 @@ export default function LeadsManagement() {
 
   const updateStatus = async (id: string, newStatus: 'new' | 'pending' | 'resolved') => {
     try {
-      const res = await fetch('/api/admin/leads', {
+      const res = await adminFetch('/api/admin/leads', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id, status: newStatus })
@@ -68,7 +69,7 @@ export default function LeadsManagement() {
 
   const deleteLead = async (id: string) => {
     try {
-      const res = await fetch(`/api/admin/leads?id=${id}`, { method: 'DELETE' });
+      const res = await adminFetch(`/api/admin/leads?id=${id}`, { method: 'DELETE' });
       if (res.ok) {
         setLeads(leads.filter(l => l.id !== id));
         setSelectedIds(selectedIds.filter(val => val !== id));

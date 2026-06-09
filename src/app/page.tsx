@@ -11,9 +11,18 @@ import {
 import ToolCard from '@/components/ToolCard';
 import CategoryCard from '@/components/CategoryCard';
 import { toolsData, Tool, ToolCategory, toolCategories } from '@/data/tools';
-import { isToolLive, getPublicTools } from '@/lib/tools';
+import { fetchPublicTools } from '@/lib/tools';
 import { categoriesData, getToolsByCategory } from '@/data/categories';
-import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
+import dynamic from 'next/dynamic';
+
+const MeshGradient = dynamic(
+  () => import('@/components/BackgroundEffects').then((m) => m.MeshGradient),
+  { ssr: false }
+);
+const FloatingParticles = dynamic(
+  () => import('@/components/BackgroundEffects').then((m) => m.FloatingParticles),
+  { ssr: false }
+);
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -21,7 +30,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<'featured' | 'trending' | 'recent' | 'all'>('all');
   const [mounted, setMounted] = useState(false);
   const [recentToolIds, setRecentToolIds] = useState<string[]>([]);
-  const [dynamicTools, setDynamicTools] = useState<Tool[]>([]);
+  const [mergedTools, setMergedTools] = useState<Tool[]>(toolsData);
   
   const toolsSectionRef = useRef<HTMLElement | null>(null);
 
@@ -36,57 +45,10 @@ export default function Home() {
     }
   }, []);
 
-  // Fetch dynamic database-loaded tools to include in search and counts
   useEffect(() => {
-    async function fetchDynamicTools() {
-      try {
-        const res = await fetch('/api/admin/tools');
-        if (!res.ok) return;
-        const data = await res.json();
-        if (data.success && data.tools) {
-          const staticSlugs = new Set(toolsData.map(t => t.href.split('/').pop()));
-          
-          const categoryMap: Record<string, string> = {
-            'Creative & Design': 'Image Tools',
-            'Document & PDF': 'PDF Tools',
-            'AI Writing': 'AI Tools',
-            'Career Studio': 'Document Tools',
-            'Business Ops': 'Document Tools',
-            'Developer Utilities': 'Utility Tools',
-          };
-
-          const mapped: Tool[] = data.tools
-            .filter((t: any) => !staticSlugs.has(t.slug) && isToolLive(t))
-            .map((t: any) => ({
-              id: t.id,
-              title: t.title,
-              description: t.description,
-              icon: t.icon || '🔧',
-              href: `/tools/${t.slug}`,
-              slug: t.slug,
-              category: (categoryMap[t.category?.name] || categoryMap[t.categoryName] || 'Utility Tools') as any,
-              featured: !!t.featured || !!t.isFeatured,
-              trending: !!t.trending || !!t.isTrending,
-              popular: !!t.isPopular,
-              status: t.status,
-              isPublished: t.isPublished,
-              publishDate: t.publishDate,
-              tags: t.seoMetadata?.keywords?.split(',').map((s: string) => s.trim()) || ['ai', t.toolType || 'utility']
-            }));
-          setDynamicTools(mapped);
-        }
-      } catch (err) {
-        console.warn('Failed to fetch dynamic tools:', err);
-      }
-    }
-    fetchDynamicTools();
-  }, []);
-
-  const mergedTools = useMemo(() => {
-    // Only fetch public tools on client side (including localStorage overrides)
-    const liveStaticTools = mounted ? getPublicTools() : toolsData.filter(isToolLive);
-    return [...liveStaticTools, ...dynamicTools];
-  }, [dynamicTools, mounted]);
+    if (!mounted) return;
+    fetchPublicTools().then(setMergedTools).catch(() => {});
+  }, [mounted]);
 
   const recentTools = useMemo(() => {
     return recentToolIds

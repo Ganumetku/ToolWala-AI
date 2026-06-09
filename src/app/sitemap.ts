@@ -1,17 +1,19 @@
 import { MetadataRoute } from 'next';
-import { toolsData } from '@/data/tools';
-import { prisma } from '@/lib/db';
+import { getPublicTools } from '@/lib/tools-server';
+import { categoriesData } from '@/data/categories';
 import fs from 'fs';
 import path from 'path';
 
 export const dynamic = 'force-static';
+export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://toolwala.co';
-  
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolwala.co';
+
   const staticRoutes = [
     '',
     '/tools',
+    '/categories',
     '/pricing',
     '/blog',
     '/about',
@@ -21,53 +23,45 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/disclaimer',
   ];
 
-  const toolRoutes = toolsData.filter(tool => tool.status === 'published' && tool.isVisible).map(tool => tool.href);
-  const routes = [...staticRoutes, ...toolRoutes];
+  const categoryRoutes = categoriesData.map((c) => `/categories/${c.slug}`);
 
-  let dynamicSlugs: string[] = [];
-  let dynamicBlogSlugs: string[] = [];
+  let toolRoutes: string[] = [];
+  let blogRoutes: string[] = [];
 
   try {
-    if (prisma) {
-      const dbTools = await prisma.tool.findMany({
-        where: { published: true },
-        select: { slug: true }
-      });
-      dynamicSlugs = dbTools.map(t => `/tools/${t.slug}`);
-
-      const dbBlogs = await prisma.blogPost.findMany({
-        where: { published: true },
-        select: { slug: true }
-      });
-      dynamicBlogSlugs = dbBlogs.map(b => `/blog/${b.slug}`);
-    } else {
-      const filePath = path.join(process.cwd(), 'src/data/dynamic_tools.json');
-      if (fs.existsSync(filePath)) {
-        const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-        if (Array.isArray(data)) {
-          dynamicSlugs = data.filter(t => t.published).map(t => `/tools/${t.slug}`);
-        }
-      }
-
-      const blogPath = path.join(process.cwd(), 'src/data/dynamic_blogs.json');
-      if (fs.existsSync(blogPath)) {
-        const data = JSON.parse(fs.readFileSync(blogPath, 'utf-8'));
-        if (Array.isArray(data)) {
-          dynamicBlogSlugs = data.filter(b => b.published).map(b => `/blog/${b.slug}`);
-        }
-      }
-    }
-  } catch (err) {
-    console.error('Sitemap dynamic generation error fallback:', err);
+    const publicTools = await getPublicTools();
+    toolRoutes = publicTools.map((t) => t.href);
+  } catch {
+    // fallback to static file
+    const { toolsData } = await import('@/data/tools');
+    const { isToolLive } = await import('@/lib/tools');
+    toolRoutes = toolsData.filter(isToolLive).map((t) => t.href);
   }
 
-  const allRoutes = [...routes, ...dynamicSlugs, ...dynamicBlogSlugs];
+  try {
+    const blogPath = path.join(process.cwd(), 'src/data/dynamic_blogs.json');
+    if (fs.existsSync(blogPath)) {
+      const blogs = JSON.parse(fs.readFileSync(blogPath, 'utf-8'));
+      if (Array.isArray(blogs)) {
+        blogRoutes = blogs
+          .filter((b: { status: string }) => b.status === 'published')
+          .map((b: { slug: string }) => `/blog/${b.slug}`);
+      }
+    }
+  } catch {
+    // ignore
+  }
+
+  const allRoutes = [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...blogRoutes];
 
   return allRoutes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: route === '' ? 'daily' : route.startsWith('/tools/') ? 'weekly' : 'monthly',
+    changeFrequency: (route === ''
+      ? 'daily'
+      : route.startsWith('/tools/')
+        ? 'weekly'
+        : 'monthly') as MetadataRoute.Sitemap[number]['changeFrequency'],
     priority: route === '' ? 1.0 : route.startsWith('/tools/') ? 0.8 : 0.5,
   }));
 }
-

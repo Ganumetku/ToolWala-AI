@@ -24,6 +24,9 @@ jobs:
       - name: Build Project
         run: npm run build
 
+      - name: Create deploy test file
+        run: echo "deployed at $(date)" > out/deploy-test.txt
+
       - name: Deploy to cPanel
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

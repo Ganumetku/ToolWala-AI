@@ -31,4 +31,4 @@ jobs:
           username: ${{ secrets.CPANEL_FTP_USERNAME }}
           password: ${{ secrets.CPANEL_FTP_PASSWORD }}
           local-dir: ./out/
-          server-dir: /public_html/toolwala.co/
+          server-dir: /

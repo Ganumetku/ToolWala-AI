@@ -80,16 +80,23 @@ function validateEnv() {
 }
 
 async function runMigration() {
-  console.log('\n📦 Step 1: Running database migration...');
-  const sqlPath = resolve(root, 'supabase/migrations/001_initial_schema.sql');
-  const sql = readFileSync(sqlPath, 'utf-8');
+  console.log('\n📦 Step 1: Running database migrations...');
+  const migrationFiles = [
+    '001_initial_schema.sql',
+    '002_blog_posts.sql',
+  ];
 
   const client = new pg.Client({ connectionString: DATABASE_URL, ssl: { rejectUnauthorized: false } });
   await client.connect();
 
   try {
-    await client.query(sql);
-    console.log('✅ Migration complete (tables, RLS, categories seeded)');
+    for (const file of migrationFiles) {
+      const sqlPath = resolve(root, 'supabase/migrations', file);
+      const sql = readFileSync(sqlPath, 'utf-8');
+      await client.query(sql);
+      console.log(`   ✅ ${file}`);
+    }
+    console.log('✅ All migrations complete');
   } finally {
     await client.end();
   }

@@ -58,3 +58,26 @@ export interface DbScheduledPublish {
   executed_at: string | null;
   created_at: string;
 }
+
+export interface DbBlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  thumbnail: string | null;
+  category: string;
+  tags: string[] | null;
+  featured: boolean;
+  trending: boolean;
+  status: 'draft' | 'published';
+  published_at: string | null;
+  author: Record<string, unknown>;
+  seo_metadata: Record<string, unknown> | null;
+  faqs: unknown;
+  related_tool_slugs: string[] | null;
+  view_count: number;
+  reading_time: string | null;
+  created_at: string;
+  updated_at: string;
+}

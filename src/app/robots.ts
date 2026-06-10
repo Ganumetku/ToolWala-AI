@@ -9,8 +9,18 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
-        allow: '/',
+        allow: ['/', '/blog', '/blog/', '/tools/', '/categories/'],
+        disallow: ['/api/', '/admin/', '/login', '/auth/'],
+      },
+      {
+        userAgent: 'Googlebot',
+        allow: ['/', '/blog', '/blog/', '/tools/', '/categories/'],
         disallow: ['/api/', '/admin/', '/login'],
+      },
+      {
+        userAgent: 'Googlebot-Image',
+        allow: ['/blog/', '/tools/', '/og-image.png'],
+        disallow: ['/admin/'],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

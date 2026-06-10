@@ -107,6 +107,7 @@ export interface LocalBlogPost {
   category: string;
   tags: string[];
   featured: boolean;
+  trending?: boolean;
   status: 'draft' | 'published';
   publishedAt: string;
   createdAt: string;
@@ -117,6 +118,9 @@ export interface LocalBlogPost {
     role?: string;
   };
   seoMetadata?: LocalSeoMetadata | null;
+  faqs?: { id: string; question: string; answer: string; order: number }[];
+  relatedToolSlugs?: string[];
+  viewCount?: number;
   readingTime: string;
 }
 

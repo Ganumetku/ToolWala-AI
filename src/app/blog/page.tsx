@@ -1,40 +1,21 @@
-import { jsonDb } from "@/lib/jsonDb";
 import { MeshGradient, FloatingParticles } from "@/components/BackgroundEffects";
 import BlogListClient from "./BlogListClient";
-import { Metadata } from "next";
+import { getPublicBlogs } from "@/lib/blogs-server";
+import { getTrendingBlogs } from "@/lib/blog-utils";
+import { buildBlogIndexMetadata } from "@/lib/seo";
 
-export const dynamic = "force-static";
+export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: "ToolWala AI Blog – Modern AI, PDF, & Design Insights",
-  description: "Stay ahead with guides on local browser OCR, next-gen image compression, ATS resumes, and high-performance developer utilities on ToolWala AI.",
-  openGraph: {
-    title: "ToolWala AI Blog – Modern AI, PDF, & Design Insights",
-    description: "Stay ahead with guides on local browser OCR, next-gen image compression, ATS resumes, and high-performance developer utilities on ToolWala AI.",
-    url: "https://toolwala.co/blog",
-    siteName: "ToolWala AI",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "ToolWala AI Blog",
-      }
-    ],
-  },
-};
+export const metadata = buildBlogIndexMetadata();
 
-export default async function BlogIndexPage() {
-  const blogs = jsonDb.getBlogs();
-  
-  // Sort blogs: featured first, then published date descending
-  const sortedBlogs = [...blogs]
-    .filter(b => b.status === "published")
-    .sort((a, b) => {
-      if (a.featured && !b.featured) return -1;
-      if (!a.featured && b.featured) return 1;
-      return new Date(b.publishedAt || b.createdAt).getTime() - new Date(a.publishedAt || a.createdAt).getTime();
-    });
+interface BlogIndexPageProps {
+  searchParams: Promise<{ page?: string; q?: string; category?: string }>;
+}
+
+export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps) {
+  const params = await searchParams;
+  const blogs = await getPublicBlogs();
+  const trendingBlogs = getTrendingBlogs(blogs, 5);
 
   return (
     <div className="bg-[#030712] min-h-screen py-20 relative overflow-hidden select-none">
@@ -42,7 +23,6 @@ export default async function BlogIndexPage() {
       <FloatingParticles />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header Hero Section */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-black uppercase tracking-widest text-blue-400 inline-block mb-4 animate-pulse-slow">
             ToolWala Insights
@@ -58,8 +38,13 @@ export default async function BlogIndexPage() {
           </p>
         </div>
 
-        {/* Client-side Search, Category Filter & Card List */}
-        <BlogListClient initialBlogs={sortedBlogs} />
+        <BlogListClient
+          initialBlogs={blogs}
+          trendingBlogs={trendingBlogs}
+          initialPage={Number(params.page) || 1}
+          initialSearch={params.q || ""}
+          initialCategory={params.category || "All"}
+        />
       </div>
     </div>
   );

@@ -9,7 +9,8 @@
     "lint": "next lint",
     "test": "playwright test",
     "test:smoke": "playwright test tests/smoke",
-    "db:setup": "node scripts/setup-supabase.mjs"
+    "db:setup": "node scripts/setup-supabase.mjs",
+    "db:seed-blogs": "node scripts/seed-blogs.mjs"
   },
   "dependencies": {
     "@imgly/background-removal": "^1.7.0",

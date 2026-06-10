@@ -1,14 +1,18 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import {
-  Plus, Search, Edit3, Trash2, FileText, Globe, CheckCircle2,
-  AlertTriangle, Heading, RefreshCw, X, Eye, Code, Bold, Italic,
-  List, Quote, Link, Image, Star, Sparkles, BookOpen, Layers
+  Plus, Search, Edit3, Trash2, Globe,
+  AlertTriangle, Heading, RefreshCw, X, Eye, Code,
+  Star, Sparkles, BookOpen, Layers
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { adminFetch } from "@/lib/admin-fetch";
+import RichTextEditor from "@/components/blog/RichTextEditor";
+import BlogSeoScore from "@/components/blog/BlogSeoScore";
+import { generateSeoSlug, autoGenerateSeoMetadata } from "@/lib/blog-seo";
+import type { BlogFaq } from "@/types/blog";
 
 interface ArticleItem {
   id: string;
@@ -20,6 +24,7 @@ interface ArticleItem {
   category: string;
   tags: string[];
   featured: boolean;
+  trending: boolean;
   status: "draft" | "published";
   publishedAt: string;
   createdAt: string;
@@ -35,6 +40,9 @@ interface ArticleItem {
     description: string;
     keywords?: string;
   } | null;
+  faqs: BlogFaq[];
+  relatedToolSlugs: string[];
+  viewCount: number;
 }
 
 const CATEGORIES = [
@@ -76,7 +84,10 @@ export default function BlogCMS() {
   const [tagsInput, setTagsInput] = useState("");
   const [thumbnail, setThumbnail] = useState("");
   const [featured, setFeatured] = useState(false);
+  const [trending, setTrending] = useState(false);
   const [status, setStatus] = useState<"draft" | "published">("draft");
+  const [faqs, setFaqs] = useState<BlogFaq[]>([]);
+  const [relatedToolSlugsInput, setRelatedToolSlugsInput] = useState("");
   
   // Author fields
   const [authorName, setAuthorName] = useState("ToolWala Editorial");
@@ -86,8 +97,6 @@ export default function BlogCMS() {
   // SEO Fields
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDesc, setSeoDesc] = useState("");
-
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const fetchBlogs = async () => {
     try {
@@ -110,17 +119,33 @@ export default function BlogCMS() {
     fetchBlogs();
   }, []);
 
-  // Sync auto slug generation if creating a new post
+  // Auto-generate SEO-friendly slug from title (new posts only)
   useEffect(() => {
     if (!editingItem && title) {
-      const autoSlug = title
-        .toLowerCase()
-        .replace(/[^a-z0-9 -]/g, "") // remove invalid characters
-        .replace(/\s+/g, "-") // collapse whitespace and replace by -
-        .replace(/-+/g, "-"); // collapse multiple dashes
-      setSlug(autoSlug);
+      setSlug(generateSeoSlug(title));
     }
   }, [title, editingItem]);
+
+  const handleAutoFillSeo = () => {
+    const tags = tagsInput.split(",").map((t) => t.trim()).filter(Boolean);
+    const generated = autoGenerateSeoMetadata({ title, excerpt, tags, category });
+    setSeoTitle(generated.title);
+    setSeoDesc(generated.description);
+    toast.success("SEO metadata auto-filled from title & excerpt.");
+  };
+
+  const draftForSeoScore = {
+    title,
+    slug,
+    excerpt,
+    content,
+    thumbnail,
+    tags: tagsInput.split(",").map((t) => t.trim()).filter(Boolean),
+    category,
+    faqs,
+    seoMetadata: { title: seoTitle, description: seoDesc, keywords: tagsInput },
+    status,
+  };
 
   const openAddModal = () => {
     setEditingItem(null);
@@ -132,7 +157,10 @@ export default function BlogCMS() {
     setTagsInput("");
     setThumbnail(UNSPLASH_SUGGESTIONS[0].url);
     setFeatured(false);
+    setTrending(false);
     setStatus("draft");
+    setFaqs([]);
+    setRelatedToolSlugsInput("");
     setAuthorName("ToolWala Editorial");
     setAuthorAvatar("https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80");
     setAuthorRole("Tech Writer");
@@ -152,7 +180,10 @@ export default function BlogCMS() {
     setTagsInput(item.tags ? item.tags.join(", ") : "");
     setThumbnail(item.thumbnail || UNSPLASH_SUGGESTIONS[0].url);
     setFeatured(item.featured || false);
+    setTrending(item.trending || false);
     setStatus(item.status || "draft");
+    setFaqs(item.faqs || []);
+    setRelatedToolSlugsInput(item.relatedToolSlugs?.join(", ") || "");
     setAuthorName(item.author?.name || "ToolWala Editorial");
     setAuthorAvatar(item.author?.avatar || "");
     setAuthorRole(item.author?.role || "Tech Writer");
@@ -162,24 +193,19 @@ export default function BlogCMS() {
     setIsEditing(true);
   };
 
-  // Insert HTML formatting wrappers inside textarea caret range
-  const insertFormat = (before: string, after: string = "") => {
-    const textarea = textareaRef.current;
-    if (!textarea) return;
+  const addFaq = () => {
+    setFaqs((prev) => [
+      ...prev,
+      { id: crypto.randomUUID(), question: "", answer: "", order: prev.length },
+    ]);
+  };
 
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const text = textarea.value;
-    const selected = text.substring(start, end);
-    const replacement = before + selected + after;
+  const updateFaq = (id: string, field: "question" | "answer", value: string) => {
+    setFaqs((prev) => prev.map((f) => (f.id === id ? { ...f, [field]: value } : f)));
+  };
 
-    setContent(text.substring(0, start) + replacement + text.substring(end));
-
-    // Refocus and re-select selection range
-    setTimeout(() => {
-      textarea.focus();
-      textarea.setSelectionRange(start + before.length, start + before.length + selected.length);
-    }, 50);
+  const removeFaq = (id: string) => {
+    setFaqs((prev) => prev.filter((f) => f.id !== id));
   };
 
   const handleSave = async (e: React.FormEvent) => {
@@ -200,6 +226,11 @@ export default function BlogCMS() {
       .map((t) => t.trim())
       .filter((t) => t.length > 0);
 
+    const relatedToolSlugs = relatedToolSlugsInput
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+
     const payload = {
       title,
       slug,
@@ -209,6 +240,7 @@ export default function BlogCMS() {
       category,
       tags,
       featured,
+      trending,
       status,
       publishedAt: status === "published" ? new Date().toISOString() : "",
       readingTime,
@@ -217,7 +249,8 @@ export default function BlogCMS() {
         avatar: authorAvatar,
         role: authorRole,
       },
-      published: status === "published",
+      faqs: faqs.filter((f) => f.question && f.answer),
+      relatedToolSlugs,
       seoMetadata: {
         title: seoTitle || title,
         description: seoDesc || excerpt,
@@ -319,23 +352,6 @@ export default function BlogCMS() {
 
     return matchesSearch && matchesCategory;
   });
-
-  // Basic SEO Scoring helper
-  const getSeoTitleStatus = () => {
-    const len = seoTitle.length;
-    if (len === 0) return { label: "Empty", color: "text-gray-500" };
-    if (len < 30) return { label: "Too Short", color: "text-amber-500" };
-    if (len <= 60) return { label: "Optimized", color: "text-emerald-500" };
-    return { label: "Too Long", color: "text-red-500" };
-  };
-
-  const getSeoDescStatus = () => {
-    const len = seoDesc.length;
-    if (len === 0) return { label: "Empty", color: "text-gray-500" };
-    if (len < 80) return { label: "Too Short", color: "text-amber-500" };
-    if (len <= 160) return { label: "Optimized", color: "text-emerald-500" };
-    return { label: "Too Long", color: "text-red-500" };
-  };
 
   if (loading) {
     return (
@@ -625,105 +641,57 @@ export default function BlogCMS() {
                         />
                       </div>
 
-                      {/* Rich Editor Panel */}
+                      {/* Rich Text Editor */}
                       <div className="space-y-2">
-                        <div className="flex justify-between items-center">
+                        <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">
+                          Post Content (Rich Editor)
+                        </label>
+                        <RichTextEditor
+                          value={content}
+                          onChange={setContent}
+                          placeholder="Compose your article with headings, lists, CTA blocks, and Try Tool buttons..."
+                        />
+                      </div>
+
+                      {/* FAQ Schema Editor */}
+                      <div className="space-y-3 p-5 border border-white/5 rounded-2xl bg-white/[0.01]">
+                        <div className="flex items-center justify-between">
                           <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">
-                            Post content (HTML format)
+                            FAQ Schema (SEO)
                           </label>
-                          
-                          {/* Formatting toolbar bar */}
-                          <div className="flex items-center gap-1 bg-white/5 border border-white/5 p-1 rounded-xl text-gray-400">
+                          <button
+                            type="button"
+                            onClick={addFaq}
+                            className="text-[9px] font-black uppercase tracking-widest text-blue-400 hover:text-blue-300 cursor-pointer"
+                          >
+                            + Add FAQ
+                          </button>
+                        </div>
+                        {faqs.map((faq) => (
+                          <div key={faq.id} className="space-y-2 p-4 border border-white/5 rounded-xl">
+                            <input
+                              type="text"
+                              value={faq.question}
+                              onChange={(e) => updateFaq(faq.id, "question", e.target.value)}
+                              placeholder="Question"
+                              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs font-bold text-white outline-none"
+                            />
+                            <textarea
+                              value={faq.answer}
+                              onChange={(e) => updateFaq(faq.id, "answer", e.target.value)}
+                              placeholder="Answer"
+                              rows={2}
+                              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white outline-none resize-none"
+                            />
                             <button
                               type="button"
-                              onClick={() => insertFormat("<h2>", "</h2>")}
-                              className="p-2 hover:bg-white/5 hover:text-white rounded-lg transition-colors cursor-pointer"
-                              title="Heading 2"
+                              onClick={() => removeFaq(faq.id)}
+                              className="text-[9px] font-black uppercase text-red-400 cursor-pointer"
                             >
-                              <Heading className="w-3.5 h-3.5" />2
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => insertFormat("<h3>", "</h3>")}
-                              className="p-2 hover:bg-white/5 hover:text-white rounded-lg transition-colors cursor-pointer"
-                              title="Heading 3"
-                            >
-                              <Heading className="w-3.5 h-3.5" />3
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => insertFormat("<strong>", "</strong>")}
-                              className="p-2 hover:bg-white/5 hover:text-white rounded-lg transition-colors cursor-pointer"
-                              title="Bold"
-                            >
-                              <Bold className="w-3.5 h-3.5" />
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => insertFormat("<em>", "</em>")}
-                              className="p-2 hover:bg-white/5 hover:text-white rounded-lg transition-colors cursor-pointer"
-                              title="Italic"
-                            >
-                              <Italic className="w-3.5 h-3.5" />
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => insertFormat("<ul>\n  <li>", "</li>\n</ul>")}
-                              className="p-2 hover:bg-white/5 hover:text-white rounded-lg transition-colors cursor-pointer"
-                              title="Bullet List"
-                            >
-                              <List className="w-3.5 h-3.5" />
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => insertFormat('<blockquote className="border-l-4 border-blue-500 pl-4 py-1 my-4 italic text-gray-400">', "</blockquote>")}
-                              className="p-2 hover:bg-white/5 hover:text-white rounded-lg transition-colors cursor-pointer"
-                              title="Blockquote"
-                            >
-                              <Quote className="w-3.5 h-3.5" />
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => insertFormat('<pre className="bg-white/5 border border-white/5 p-4 rounded-xl font-mono text-xs overflow-x-auto my-4">\n<code>\n', "\n</code>\n</pre>")}
-                              className="p-2 hover:bg-white/5 hover:text-white rounded-lg transition-colors cursor-pointer"
-                              title="Code Block"
-                            >
-                              <Code className="w-3.5 h-3.5" />
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => {
-                                const url = prompt("Enter hyperlink URL:");
-                                if (url) insertFormat(`<a href="${url}" className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">`, "</a>");
-                              }}
-                              className="p-2 hover:bg-white/5 hover:text-white rounded-lg transition-colors cursor-pointer"
-                              title="Add Link"
-                            >
-                              <Link className="w-3.5 h-3.5" />
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => {
-                                const url = prompt("Enter Image Source URL:");
-                                if (url) insertFormat(`<img src="${url}" alt="image Description" className="rounded-2xl border border-white/5 shadow-xl my-6 w-full" />`);
-                              }}
-                              className="p-2 hover:bg-white/5 hover:text-white rounded-lg transition-colors cursor-pointer"
-                              title="Add Image"
-                            >
-                              <Image className="w-3.5 h-3.5" />
+                              Remove
                             </button>
                           </div>
-                        </div>
-
-                        <textarea
-                          ref={textareaRef}
-                          required
-                          value={content}
-                          onChange={(e) => setContent(e.target.value)}
-                          placeholder="Compose article structure..."
-                          rows={14}
-                          className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 text-sm font-medium text-white outline-none focus:border-blue-500/50 resize-y font-sans leading-relaxed"
-                        />
+                        ))}
                       </div>
                     </div>
 
@@ -836,9 +804,23 @@ export default function BlogCMS() {
                             </div>
                           </div>
 
+                          {/* Related tools override */}
+                          <div className="space-y-1">
+                            <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">
+                              Related Tool Slugs (auto if empty)
+                            </label>
+                            <input
+                              type="text"
+                              value={relatedToolSlugsInput}
+                              onChange={(e) => setRelatedToolSlugsInput(e.target.value)}
+                              placeholder="pdf-ocr, image-compressor"
+                              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs font-bold text-white outline-none focus:border-blue-500/50 font-mono"
+                            />
+                          </div>
+
                           {/* Toggles */}
-                          <div className="flex gap-4">
-                            <label className="flex-1 flex items-center gap-2.5 p-3 bg-white/[0.01] border border-white/5 rounded-xl cursor-pointer hover:bg-white/[0.02]">
+                          <div className="flex gap-4 flex-wrap">
+                            <label className="flex-1 flex items-center gap-2.5 p-3 bg-white/[0.01] border border-white/5 rounded-xl cursor-pointer hover:bg-white/[0.02] min-w-[120px]">
                               <input
                                 type="checkbox"
                                 checked={featured}
@@ -848,7 +830,17 @@ export default function BlogCMS() {
                               <span className="text-[10px] font-black uppercase text-white">Featured</span>
                             </label>
 
-                            <div className="flex-1 flex flex-col justify-center">
+                            <label className="flex-1 flex items-center gap-2.5 p-3 bg-white/[0.01] border border-white/5 rounded-xl cursor-pointer hover:bg-white/[0.02] min-w-[120px]">
+                              <input
+                                type="checkbox"
+                                checked={trending}
+                                onChange={(e) => setTrending(e.target.checked)}
+                                className="rounded text-purple-500 h-4 w-4 cursor-pointer"
+                              />
+                              <span className="text-[10px] font-black uppercase text-white">Trending</span>
+                            </label>
+
+                            <div className="flex-1 flex flex-col justify-center min-w-[120px]">
                               <label className="text-[8px] font-bold text-gray-600 uppercase mb-1">State</label>
                               <select
                                 value={status}
@@ -864,40 +856,53 @@ export default function BlogCMS() {
                         </div>
                       </div>
 
-                      {/* SEO Engine */}
+                      {/* SEO Score & Meta Engine */}
+                      <BlogSeoScore blog={draftForSeoScore} />
+
                       <div className="glass rounded-[2rem] border border-white/5 p-6 bg-white/[0.01] space-y-4">
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500 flex items-center gap-2">
-                          <Heading className="w-4 h-4" /> SEO Meta Engine
-                        </span>
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500 flex items-center gap-2">
+                            <Heading className="w-4 h-4" /> SEO Metadata
+                          </span>
+                          <button
+                            type="button"
+                            onClick={handleAutoFillSeo}
+                            className="text-[9px] font-black uppercase tracking-widest text-blue-400 hover:text-blue-300 cursor-pointer"
+                          >
+                            Auto-fill
+                          </button>
+                        </div>
 
                         <div className="space-y-3">
                           <div className="space-y-1">
-                            <div className="flex justify-between items-center text-[8px] font-bold uppercase">
-                              <span className="text-gray-500">Meta Title</span>
-                              <span className={getSeoTitleStatus().color}>{getSeoTitleStatus().label} ({seoTitle.length}/60)</span>
-                            </div>
+                            <label className="text-[8px] font-bold uppercase text-gray-500">
+                              Meta Title ({seoTitle.length}/60)
+                            </label>
                             <input
                               type="text"
                               value={seoTitle}
                               onChange={(e) => setSeoTitle(e.target.value)}
-                              placeholder={title || "Google search header..."}
+                              placeholder={title || "Google search title..."}
                               className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs font-bold text-white outline-none focus:border-blue-500/50"
                             />
                           </div>
 
                           <div className="space-y-1">
-                            <div className="flex justify-between items-center text-[8px] font-bold uppercase">
-                              <span className="text-gray-500">Meta Description</span>
-                              <span className={getSeoDescStatus().color}>{getSeoDescStatus().label} ({seoDesc.length}/160)</span>
-                            </div>
+                            <label className="text-[8px] font-bold uppercase text-gray-500">
+                              Meta Description ({seoDesc.length}/160)
+                            </label>
                             <textarea
                               value={seoDesc}
                               onChange={(e) => setSeoDesc(e.target.value)}
-                              placeholder={excerpt || "150 characters snippets search result..."}
+                              placeholder={excerpt || "SERP snippet description..."}
                               rows={2.5}
                               className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-xs font-semibold text-white outline-none focus:border-blue-500/50 resize-none font-sans"
                             />
                           </div>
+
+                          <p className="text-[9px] text-gray-600 font-mono break-all">
+                            Canonical: /blog/{slug || "your-slug"}
+                          </p>
                         </div>
                       </div>
                     </div>

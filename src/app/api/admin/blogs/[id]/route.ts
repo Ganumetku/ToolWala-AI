@@ -1,42 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { isAdmin } from '@/lib/supabase/server';
-import { jsonDb, type LocalBlogPost } from '@/lib/jsonDb';
+import { buildBlogFromBody, deleteBlog, getAllBlogs, saveBlog } from '@/lib/blogs-server';
 
 export const dynamic = 'force-dynamic';
 
 type RouteContext = { params: Promise<{ id: string }> };
 
-function buildBlogFromBody(body: Record<string, unknown>, existing: LocalBlogPost): LocalBlogPost {
-  const now = new Date().toISOString();
-  const status = (body.status as LocalBlogPost['status']) ?? existing.status;
-  const content = (body.content as string) ?? existing.content;
-  const wordCount = content.split(/\s+/).filter(Boolean).length;
-  const readingTime =
-    (body.readingTime as string) ||
-    existing.readingTime ||
-    `${Math.max(1, Math.ceil(wordCount / 200))} min read`;
-
-  return {
-    ...existing,
-    title: (body.title as string) ?? existing.title,
-    slug: (body.slug as string) ?? existing.slug,
-    excerpt: (body.excerpt as string) ?? existing.excerpt,
-    content,
-    thumbnail: (body.thumbnail as string) ?? existing.thumbnail,
-    category: (body.category as string) ?? existing.category,
-    tags: Array.isArray(body.tags) ? (body.tags as string[]) : existing.tags,
-    featured: body.featured !== undefined ? Boolean(body.featured) : existing.featured,
-    status,
-    publishedAt:
-      status === 'published'
-        ? (body.publishedAt as string) || existing.publishedAt || now
-        : (body.publishedAt as string) ?? existing.publishedAt ?? '',
-    updatedAt: now,
-    author: (body.author as LocalBlogPost['author']) ?? existing.author,
-    seoMetadata:
-      (body.seoMetadata as LocalBlogPost['seoMetadata']) ?? existing.seoMetadata ?? null,
-    readingTime,
-  };
+function revalidateBlogPaths(slug?: string) {
+  revalidatePath('/blog');
+  revalidatePath('/sitemap.xml');
+  if (slug) revalidatePath(`/blog/${slug}`);
 }
 
 export async function PUT(request: NextRequest, context: RouteContext) {
@@ -47,14 +21,14 @@ export async function PUT(request: NextRequest, context: RouteContext) {
   try {
     const { id } = await context.params;
     const body = await request.json();
-    const blogs = jsonDb.getBlogs();
-    const index = blogs.findIndex((b) => b.id === id);
+    const blogs = await getAllBlogs();
+    const existing = blogs.find((b) => b.id === id);
 
-    if (index === -1) {
+    if (!existing) {
       return NextResponse.json({ success: false, error: 'Blog post not found.' }, { status: 404 });
     }
 
-    const nextSlug = (body.slug as string) ?? blogs[index].slug;
+    const nextSlug = (body.slug as string) ?? existing.slug;
     if (blogs.some((b) => b.id !== id && b.slug === nextSlug)) {
       return NextResponse.json(
         { success: false, error: 'A post with this slug already exists.' },
@@ -62,9 +36,9 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       );
     }
 
-    const blog = buildBlogFromBody(body, blogs[index]);
-    blogs[index] = blog;
-    jsonDb.saveBlogs(blogs);
+    const blog = await saveBlog(buildBlogFromBody(body, existing));
+    revalidateBlogPaths(blog.slug);
+    if (existing.slug !== blog.slug) revalidateBlogPaths(existing.slug);
 
     return NextResponse.json({ success: true, blog });
   } catch (err) {
@@ -80,14 +54,15 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
 
   try {
     const { id } = await context.params;
-    const blogs = jsonDb.getBlogs();
-    const filtered = blogs.filter((b) => b.id !== id);
+    const blogs = await getAllBlogs();
+    const existing = blogs.find((b) => b.id === id);
 
-    if (filtered.length === blogs.length) {
+    const ok = await deleteBlog(id);
+    if (!ok) {
       return NextResponse.json({ success: false, error: 'Blog post not found.' }, { status: 404 });
     }
 
-    jsonDb.saveBlogs(filtered);
+    revalidateBlogPaths(existing?.slug);
     return NextResponse.json({ success: true });
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Server error';

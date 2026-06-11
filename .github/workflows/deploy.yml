@@ -43,20 +43,65 @@ jobs:
           echo "deployed at $TIMESTAMP" > deploy-test.txt
           echo "deployed at $TIMESTAMP" > public/deploy-test.txt
 
+      - name: Create Zip Archive
+        run: |
+          sudo apt-get update && sudo apt-get install -y zip
+          # Compress necessary files, excluding node_modules, tests, and caches
+          zip -r deploy.zip .next public prisma src supabase package.json package-lock.json server.js .htaccess next.config.js tsconfig.json deploy-version.json deploy-test.txt -x "**/node_modules/**" "**/.git/**" "**/.github/**"
+
+      - name: Generate Unzip Script
+        run: |
+          TOKEN=$(openssl rand -hex 16)
+          echo "TOKEN=$TOKEN" >> $GITHUB_ENV
+          cat << 'EOF' > unzip.php
+          <?php
+          $token = $_GET['token'] ?? '';
+          $expected_token = 'EXPECTED_TOKEN';
+          if (empty($token) || $token !== $expected_token) {
+              header('HTTP/1.0 403 Forbidden');
+              echo 'Forbidden';
+              exit;
+          }
+          $zipFile = 'deploy.zip';
+          if (!file_exists($zipFile)) {
+              echo 'Error: deploy.zip not found';
+              exit;
+          }
+          $zip = new ZipArchive;
+          $res = $zip->open($zipFile);
+          if ($res === TRUE) {
+              $zip->extractTo(__DIR__);
+              $zip->close();
+              echo 'Success';
+              unlink($zipFile);
+              unlink(__FILE__);
+          } else {
+              echo 'Error: Failed to open zip file, code: ' . $res;
+          }
+          ?>
+          EOF
+          sed -i "s/EXPECTED_TOKEN/$TOKEN/g" unzip.php
+
+      - name: Prepare Upload Folder
+        run: |
+          mkdir deploy-temp
+          mv deploy.zip deploy-temp/
+          mv unzip.php deploy-temp/
+
       - name: Deploy to cPanel
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.CPANEL_FTP_SERVER }}
           username: ${{ secrets.CPANEL_FTP_USERNAME }}
           password: ${{ secrets.CPANEL_FTP_PASSWORD }}
-          local-dir: ./
+          local-dir: ./deploy-temp/
           server-dir: ./
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/.env*
-            **/tests/**
-            **/playwright.config.ts
-            **/generate-assets.js
-            **/.next/cache/**
+
+      - name: Trigger Unzip on Server
+        run: |
+          RESPONSE=$(curl -s "https://toolwala.co/unzip.php?token=${{ env.TOKEN }}")
+          echo "Server Response: $RESPONSE"
+          if [ "$RESPONSE" != "Success" ]; then
+            echo "Failed to extract archive on server: $RESPONSE"
+            exit 1
+          fi

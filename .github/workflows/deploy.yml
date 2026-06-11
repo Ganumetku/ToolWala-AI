@@ -24,8 +24,14 @@ jobs:
       - name: Build Project
         run: npm run build
 
-      - name: Create deploy test file
-        run: echo "deployed at $(date)" > out/deploy-test.txt
+      - name: Create Deploy Verification Tokens
+        run: |
+          TIMESTAMP=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          SHORT_HASH=$(echo "${{ github.sha }}" | cut -c1-7)
+          echo "{\"version\": \"0.1.0\", \"commit\": \"$SHORT_HASH\", \"timestamp\": \"$TIMESTAMP\"}" > deploy-version.json
+          echo "{\"version\": \"0.1.0\", \"commit\": \"$SHORT_HASH\", \"timestamp\": \"$TIMESTAMP\"}" > public/deploy-version.json
+          echo "deployed at $TIMESTAMP" > deploy-test.txt
+          echo "deployed at $TIMESTAMP" > public/deploy-test.txt
 
       - name: Deploy to cPanel
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -33,5 +39,15 @@ jobs:
           server: ${{ secrets.CPANEL_FTP_SERVER }}
           username: ${{ secrets.CPANEL_FTP_USERNAME }}
           password: ${{ secrets.CPANEL_FTP_PASSWORD }}
-          local-dir: ./out/
+          local-dir: ./
           server-dir: /
+          args: --delete
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.env*
+            **/tests/**
+            **/playwright.config.ts
+            **/generate-assets.js
+            **/.next/cache/**

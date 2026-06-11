@@ -41,7 +41,6 @@ jobs:
           password: ${{ secrets.CPANEL_FTP_PASSWORD }}
           local-dir: ./
           server-dir: /
-          args: --delete
           exclude: |
             **/.git*
             **/.git*/**

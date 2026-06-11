@@ -28,10 +28,10 @@ RewriteBase /
 # If cPanel does not automatically configure Passenger, uncomment these lines 
 # and replace /home/username/public_html with your cPanel directory path:
 # ----------------------------------------------------------------------
-# PassengerAppRoot "/home/bvngzbpv/public_html"
-# PassengerBaseURI "/"
-# PassengerAppStartFile "server.js"
-# PassengerEnabled on
+PassengerAppRoot "/home/bvngzbpv/public_html"
+PassengerBaseURI "/"
+PassengerAppStartFile "server.js"
+PassengerEnabled on
 
 # ----------------------------------------------------------------------
 # 2. STATIC EXPORT ROUTING FALLBACKS

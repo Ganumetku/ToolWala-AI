@@ -59,3 +59,16 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{DOCUMENT_ROOT}/admin/index.html -f
 RewriteRule ^admin/(.*)$ /admin/index.html [L]
+
+# ----------------------------------------------------------------------
+# 3. FORCE CACHE INVALIDATION FOR STATIC PAGES & DYNAMIC JSON
+# ----------------------------------------------------------------------
+<FilesMatch "\.(html|htm|json)$">
+    FileETag None
+    <IfModule mod_headers.c>
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires 0
+        Header set X-LiteSpeed-Cache-Control "no-cache"
+    </IfModule>
+</FilesMatch>

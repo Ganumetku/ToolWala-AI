@@ -387,7 +387,7 @@ export async function GET(request: NextRequest) {
       };
     });
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       totalUsers: totalVisitors * 0.3 > 1 ? Math.round(totalVisitors * 0.3) : 1, // Estimate users from sessions
       totalVisitors,
       totalUsage: toolUsages,
@@ -408,6 +408,12 @@ export async function GET(request: NextRequest) {
       recentLogs,
       dailyUsageData
     });
+
+    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
+    response.headers.set('Pragma', 'no-cache');
+    response.headers.set('Expires', '0');
+
+    return response;
 
   } catch (error: any) {
     console.error('Error generating dashboard stats:', error);

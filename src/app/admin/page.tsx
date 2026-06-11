@@ -11,6 +11,7 @@ import StatCard from '@/components/admin/StatCard';
 import ChartOverview from '@/components/admin/ChartOverview';
 import { toast } from 'sonner';
 import { adminFetch } from '@/lib/admin-fetch';
+import versionInfo from '@/data/version.json';
 
 interface DashboardStats {
   totalUsers: number;
@@ -89,6 +90,19 @@ export default function AdminDashboard() {
           <div>
             <h3 className="text-base font-bold text-white tracking-tight">Welcome back to ToolWala Control Center</h3>
             <p className="text-xs text-gray-400 mt-1 font-medium">Production analytics tracking is active. Real-time visitor logs are synchronizing with Supabase.</p>
+            
+            {/* Version Check Badge */}
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mt-3 text-[9px] font-sans font-semibold uppercase tracking-wider">
+              <span className="text-gray-400 flex items-center gap-1 bg-white/5 px-2 py-0.5 rounded border border-white/5">
+                Version: <span className="text-blue-400 font-mono">v{versionInfo.version}</span>
+              </span>
+              <span className="text-gray-400 flex items-center gap-1 bg-white/5 px-2 py-0.5 rounded border border-white/5">
+                Commit: <span className="text-purple-400 font-mono">{versionInfo.commit}</span>
+              </span>
+              <span className="text-gray-400 flex items-center gap-1 bg-white/5 px-2 py-0.5 rounded border border-white/5">
+                Deployed: <span className="text-emerald-400 font-mono">{new Date(versionInfo.deployedAt).toLocaleString(undefined, { dateStyle: 'short', timeStyle: 'short' })}</span>
+              </span>
+            </div>
           </div>
         </div>
         <div className="flex flex-col items-end gap-2 shrink-0">

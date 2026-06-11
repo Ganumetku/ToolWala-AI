@@ -17,37 +17,32 @@ interface DashboardStats {
   totalVisitors: number;
   totalUsage: number;
   activeSessions: number;
+  visitorsChange?: string;
+  usagesChange?: string;
+  activeChange?: string;
   popularTools: Array<{ name: string; count: number; category: string; growth: string }>;
   recentLogs: Array<{ id: string; action: string; tool: string; user: string; status: string; time: string }>;
+  dailyUsageData?: Array<{ name: string; visitors: number; usage: number }>;
 }
 
-const mockStats: DashboardStats = {
-  totalUsers: 12480,
-  totalVisitors: 48250,
-  totalUsage: 85920,
-  activeSessions: 248,
-  popularTools: [
-    { name: 'AI Background Remover', count: 34120, category: 'Creative & Design', growth: '+24%' },
-    { name: 'OCR Image to Text', count: 22180, category: 'Document & PDF', growth: '+18%' },
-    { name: 'AI Resume Builder', count: 18450, category: 'Career Studio', growth: '+15%' },
-    { name: 'Image Compressor', count: 11170, category: 'Creative & Design', growth: '+8%' }
-  ],
-  recentLogs: [
-    { id: '1', action: 'Background Removed', tool: 'AI Background Remover', user: 'guest_84920', status: 'success', time: '2 mins ago' },
-    { id: '2', action: 'Text Extracted (eng)', tool: 'OCR Image to Text', user: 'premium_akash', status: 'success', time: '8 mins ago' },
-    { id: '3', action: 'PDF Merged', tool: 'PDF Tools', user: 'guest_10482', status: 'success', time: '14 mins ago' },
-    { id: '4', action: 'API call limit error', tool: 'AI Voice Generator', user: 'guest_90248', status: 'error', time: '24 mins ago' }
-  ]
+const initialStats: DashboardStats = {
+  totalUsers: 0,
+  totalVisitors: 0,
+  totalUsage: 0,
+  activeSessions: 0,
+  popularTools: [],
+  recentLogs: [],
+  dailyUsageData: []
 };
 
 export default function AdminDashboard() {
-  const [stats, setStats] = useState<DashboardStats>(mockStats);
+  const [stats, setStats] = useState<DashboardStats>(initialStats);
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState<string>('');
 
   const fetchStats = async (isManual = false) => {
     try {
-      const res = await adminFetch('/api/admin/stats');
+      const res = await adminFetch('/api/analytics/dashboard?filter=7days');
       if (res.ok) {
         const data = await res.json();
         setStats(data);
@@ -57,7 +52,7 @@ export default function AdminDashboard() {
         }
       }
     } catch (err) {
-      console.warn("Using simulation mode statistics.", err);
+      console.error("Failed to fetch dashboard statistics", err);
     } finally {
       setLoading(false);
     }
@@ -93,7 +88,7 @@ export default function AdminDashboard() {
           </div>
           <div>
             <h3 className="text-base font-bold text-white tracking-tight">Welcome back to ToolWala Control Center</h3>
-            <p className="text-xs text-gray-400 mt-1 font-medium">Platform analytics are running inside browser-simulated telemetry. All operations are safe and sound.</p>
+            <p className="text-xs text-gray-400 mt-1 font-medium">Production analytics tracking is active. Real-time visitor logs are synchronizing with Supabase.</p>
           </div>
         </div>
         <div className="flex flex-col items-end gap-2 shrink-0">
@@ -117,35 +112,35 @@ export default function AdminDashboard() {
           title="Total Users" 
           value={stats.totalUsers.toLocaleString()} 
           icon={Users} 
-          change="+14.2%" 
-          isPositive={true} 
-          subtitle="vs. previous month"
+          change={stats.visitorsChange || "+0%"} 
+          isPositive={!(stats.visitorsChange || '').startsWith('-')} 
+          subtitle="vs. previous period"
           delay={0.05}
         />
         <StatCard 
           title="Total Visitors" 
           value={stats.totalVisitors.toLocaleString()} 
           icon={Eye} 
-          change="+8.6%" 
-          isPositive={true} 
-          subtitle="vs. previous month"
+          change={stats.visitorsChange || "+0%"} 
+          isPositive={!(stats.visitorsChange || '').startsWith('-')} 
+          subtitle="vs. previous period"
           delay={0.1}
         />
         <StatCard 
           title="Tool Usage" 
           value={stats.totalUsage.toLocaleString()} 
           icon={Activity} 
-          change="+24.8%" 
-          isPositive={true} 
-          subtitle="vs. previous month"
+          change={stats.usagesChange || "+0%"} 
+          isPositive={!(stats.usagesChange || '').startsWith('-')} 
+          subtitle="vs. previous period"
           delay={0.15}
         />
         <StatCard 
           title="Active Users" 
           value={stats.activeSessions.toString()} 
           icon={Cpu} 
-          change="-2.1%" 
-          isPositive={false} 
+          change={stats.activeChange || "+0%"} 
+          isPositive={!(stats.activeChange || '').startsWith('-')} 
           subtitle="active in last 5m"
           delay={0.2}
         />
@@ -156,7 +151,7 @@ export default function AdminDashboard() {
         
         {/* Main Chart */}
         <div className="lg:col-span-8 flex flex-col justify-between">
-          <ChartOverview />
+          <ChartOverview data={stats.dailyUsageData} />
         </div>
 
         {/* Right Sidebar: Quick Actions & Popular Tools */}

@@ -14,17 +14,35 @@ const data = [
   { name: 'Sun', visitors: 4200, usage: 2600 }
 ];
 
-export default function ChartOverview() {
+interface ChartOverviewProps {
+  data?: Array<{ name: string; visitors?: number; views?: number; usage?: number; runs?: number }>;
+}
+
+export default function ChartOverview({ data }: ChartOverviewProps) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
+  const chartData = data?.map(d => ({
+    name: d.name,
+    visitors: d.visitors ?? d.views ?? 0,
+    usage: d.usage ?? d.runs ?? 0
+  })) || [];
+
   if (!isMounted) {
     return (
       <div className="h-80 w-full bg-white/[0.01] border border-white/5 rounded-3xl animate-pulse flex items-center justify-center">
         <span className="text-xs font-black uppercase tracking-widest text-gray-600">Loading charts telemetry...</span>
+      </div>
+    );
+  }
+
+  if (chartData.length === 0) {
+    return (
+      <div className="h-80 w-full bg-white/[0.01] border border-white/5 rounded-3xl flex items-center justify-center">
+        <span className="text-xs font-black uppercase tracking-widest text-gray-500">No chart telemetry available</span>
       </div>
     );
   }
@@ -57,7 +75,7 @@ export default function ChartOverview() {
       <div className="h-80 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
-            data={data}
+            data={chartData}
             margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
           >
             <defs>

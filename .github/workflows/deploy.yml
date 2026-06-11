@@ -47,7 +47,7 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y zip
           # Compress necessary files, excluding node_modules, tests, and caches
-          zip -r deploy.zip .next public prisma src supabase package.json package-lock.json server.js next.config.js tsconfig.json deploy-version.json deploy-test.txt -x "**/node_modules/**" "**/.git/**" "**/.github/**"
+          zip -r deploy.zip .next public prisma src supabase package.json package-lock.json server.js next.config.js tsconfig.json deploy-version.json deploy-test.txt inspect_htaccess.php -x "**/node_modules/**" "**/.git/**" "**/.github/**"
 
       - name: Generate Unzip Script
         run: |

@@ -1,3 +1,6 @@
+const path = require('path');
+module.paths.push(path.resolve(__dirname, 'node_modules'));
+
 const { createServer } = require('http');
 const { parse } = require('url');
 const next = require('next');

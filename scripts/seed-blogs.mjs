@@ -46,26 +46,31 @@ const supabase = createClient(SUPABASE_URL, SERVICE_KEY, {
 const blogsPath = resolve(root, 'src/data/dynamic_blogs.json');
 const blogs = JSON.parse(readFileSync(blogsPath, 'utf-8'));
 
-const rows = blogs.map((b) => ({
-  id: b.id.length === 36 ? b.id : undefined,
-  slug: b.slug,
-  title: b.title,
-  excerpt: b.excerpt,
-  content: b.content,
-  thumbnail: b.thumbnail,
-  category: b.category,
-  tags: b.tags,
-  featured: b.featured,
-  trending: b.trending ?? false,
-  status: b.status,
-  published_at: b.publishedAt || null,
-  author: b.author,
-  seo_metadata: b.seoMetadata,
-  faqs: b.faqs ?? [],
-  related_tool_slugs: b.relatedToolSlugs ?? [],
-  view_count: b.viewCount ?? 0,
-  reading_time: b.readingTime,
-}));
+const rows = blogs.map((b) => {
+  const row = {
+    slug: b.slug,
+    title: b.title,
+    excerpt: b.excerpt,
+    content: b.content,
+    thumbnail: b.thumbnail,
+    category: b.category,
+    tags: b.tags,
+    featured: b.featured,
+    trending: b.trending ?? false,
+    status: b.status,
+    published_at: b.publishedAt || null,
+    author: b.author,
+    seo_metadata: b.seoMetadata,
+    faqs: b.faqs ?? [],
+    related_tool_slugs: b.relatedToolSlugs ?? [],
+    view_count: b.viewCount ?? 0,
+    reading_time: b.readingTime,
+  };
+  if (b.id && b.id.length === 36) {
+    row.id = b.id;
+  }
+  return row;
+});
 
 const { data, error } = await supabase.from('blog_posts').upsert(rows, { onConflict: 'slug' }).select('slug');
 

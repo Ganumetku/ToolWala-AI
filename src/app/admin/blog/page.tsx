@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import {
   Plus, Search, Edit3, Trash2, Globe,
   AlertTriangle, Heading, RefreshCw, X, Eye, Code,
-  Star, Sparkles, BookOpen, Layers
+  Star, Sparkles, BookOpen, Layers, Loader2
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
@@ -69,6 +69,7 @@ export default function BlogCMS() {
   const [search, setSearch] = useState("");
   const [selectedCatFilter, setSelectedCatFilter] = useState("All");
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editingItem, setEditingItem] = useState<ArticleItem | null>(null);
 
@@ -215,6 +216,8 @@ export default function BlogCMS() {
       return;
     }
 
+    setSaving(true);
+
     // Estimate Reading Time (avg 200 wpm)
     const wordCount = content.split(/\s+/).filter(Boolean).length;
     const minutes = Math.max(1, Math.ceil(wordCount / 200));
@@ -279,6 +282,8 @@ export default function BlogCMS() {
     } catch (err) {
       console.error(err);
       toast.error("Network communication failure.");
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -965,15 +970,24 @@ export default function BlogCMS() {
                   <button
                     type="button"
                     onClick={() => setIsEditing(false)}
-                    className="px-6 py-3.5 text-xs font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all cursor-pointer"
+                    disabled={saving}
+                    className="px-6 py-3.5 text-xs font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all cursor-pointer disabled:opacity-50"
                   >
                     Close Canvas
                   </button>
                   <button
                     onClick={handleSave}
-                    className="px-8 py-3.5 text-xs font-black uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-500 rounded-2xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] cursor-pointer"
+                    disabled={saving}
+                    className="px-8 py-3.5 text-xs font-black uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-500 rounded-2xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] cursor-pointer disabled:opacity-50 flex items-center justify-center gap-2"
                   >
-                    {editingItem ? "Save Modifications" : "Publish to DB"}
+                    {saving ? (
+                      <>
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        Saving...
+                      </>
+                    ) : (
+                      editingItem ? "Save Modifications" : "Publish to DB"
+                    )}
                   </button>
                 </div>
               )}

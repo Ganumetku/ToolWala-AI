@@ -71,7 +71,7 @@ export default function ToolFormRenderer({ toolId, slug, inputsSchema, ctaText }
     }
 
     try {
-      const res = await fetch('/api/ai/run', {
+      const res = await fetch('/api/ai/run/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

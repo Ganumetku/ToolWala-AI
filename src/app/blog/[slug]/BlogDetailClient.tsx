@@ -59,7 +59,7 @@ export default function BlogDetailClient({
   const toolsBySlug = Object.fromEntries(relatedTools.map((t) => [t.slug, t]));
 
   useEffect(() => {
-    fetch(`/api/blogs/${blog.slug}/view`, { method: "POST" }).catch(() => {});
+    fetch(`/api/blogs/${blog.slug}/view/`, { method: "POST" }).catch(() => {});
   }, [blog.slug]);
 
   return (

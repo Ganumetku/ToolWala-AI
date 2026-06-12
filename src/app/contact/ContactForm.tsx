@@ -32,7 +32,7 @@ export default function ContactForm() {
     setIsSubmitting(true);
     setStatus('idle');
 
-    const promise = fetch('/api/contact', {
+    const promise = fetch('/api/contact/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),

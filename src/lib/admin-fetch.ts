@@ -17,7 +17,13 @@ export async function adminFetch(
     headers.set('Authorization', `Bearer ${session.access_token}`);
   }
 
-  return fetch(input, {
+  let url = typeof input === 'string' ? input : input.toString();
+  const [path, query] = url.split('?');
+  if (!path.endsWith('/') && !path.includes('.')) {
+    url = path + '/' + (query ? '?' + query : '');
+  }
+
+  return fetch(url, {
     ...init,
     headers,
     credentials: 'include',

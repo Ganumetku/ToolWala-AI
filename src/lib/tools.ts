@@ -18,7 +18,7 @@ export function isToolLive(tool: Tool): boolean {
 /** Client-side: fetch public tools from API with static fallback */
 export async function fetchPublicTools(): Promise<Tool[]> {
   try {
-    const res = await fetch('/api/tools/public', { next: { revalidate: 60 } } as RequestInit);
+    const res = await fetch('/api/tools/public/', { next: { revalidate: 60 } } as RequestInit);
     if (res.ok) {
       const data = await res.json();
       if (data.success && Array.isArray(data.tools)) return data.tools;
@@ -32,7 +32,7 @@ export async function fetchPublicTools(): Promise<Tool[]> {
 /** Client-side: fetch all tools (admin) from API with static fallback */
 export async function fetchAdminTools(): Promise<Tool[]> {
   try {
-    const res = await fetch('/api/admin/tools');
+    const res = await fetch('/api/admin/tools/');
     if (res.ok) {
       const data = await res.json();
       if (data.success && Array.isArray(data.tools)) return data.tools;
@@ -46,7 +46,7 @@ export async function fetchAdminTools(): Promise<Tool[]> {
 /** Client-side: fetch single tool by slug */
 export async function fetchToolBySlug(slug: string): Promise<Tool | null> {
   try {
-    const res = await fetch(`/api/tools/public?slug=${encodeURIComponent(slug)}`);
+    const res = await fetch(`/api/tools/public/?slug=${encodeURIComponent(slug)}`);
     if (res.ok) {
       const data = await res.json();
       if (data.success && data.tool) return data.tool;

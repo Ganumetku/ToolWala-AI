@@ -32,7 +32,7 @@ export function useAnalytics() {
       const sessionId = getSessionId();
       if (!sessionId) return;
 
-      const response = await fetch('/api/analytics/track', {
+      const response = await fetch('/api/analytics/track/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

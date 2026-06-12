@@ -46,7 +46,7 @@ function LoginForm() {
       }
 
       // Verify admin via server API (bypasses client RLS issues)
-      const verifyRes = await fetch('/api/auth/verify-admin', {
+      const verifyRes = await fetch('/api/auth/verify-admin/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ access_token: data.session?.access_token }),

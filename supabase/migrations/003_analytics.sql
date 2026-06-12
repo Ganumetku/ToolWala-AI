@@ -118,35 +118,23 @@ CREATE POLICY "public_select_events" ON analytics_events FOR SELECT USING (true)
 DROP POLICY IF EXISTS "admin_all_sessions" ON visitor_sessions;
 CREATE POLICY "admin_all_sessions" ON visitor_sessions
   FOR ALL USING (
-    EXISTS (
-      SELECT 1 FROM profiles
-      WHERE profiles.id = auth.uid() AND profiles.role = 'admin'
-    )
+    public.is_admin()
   );
 
 DROP POLICY IF EXISTS "admin_all_page_views" ON page_views;
 CREATE POLICY "admin_all_page_views" ON page_views
   FOR ALL USING (
-    EXISTS (
-      SELECT 1 FROM profiles
-      WHERE profiles.id = auth.uid() AND profiles.role = 'admin'
-    )
+    public.is_admin()
   );
 
 DROP POLICY IF EXISTS "admin_all_tool_usage" ON tool_usage;
 CREATE POLICY "admin_all_tool_usage" ON tool_usage
   FOR ALL USING (
-    EXISTS (
-      SELECT 1 FROM profiles
-      WHERE profiles.id = auth.uid() AND profiles.role = 'admin'
-    )
+    public.is_admin()
   );
 
 DROP POLICY IF EXISTS "admin_all_events" ON analytics_events;
 CREATE POLICY "admin_all_events" ON analytics_events
   FOR ALL USING (
-    EXISTS (
-      SELECT 1 FROM profiles
-      WHERE profiles.id = auth.uid() AND profiles.role = 'admin'
-    )
+    public.is_admin()
   );

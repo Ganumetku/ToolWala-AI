@@ -142,6 +142,18 @@ ALTER TABLE tool_analytics ENABLE ROW LEVEL SECURITY;
 ALTER TABLE scheduled_publishes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 
+-- Security Definer function to check if the current user is an admin
+-- This avoids infinite recursion on the profiles table
+CREATE OR REPLACE FUNCTION public.is_admin()
+RETURNS BOOLEAN AS $$
+BEGIN
+  RETURN EXISTS (
+    SELECT 1 FROM public.profiles
+    WHERE id = auth.uid() AND role = 'admin'
+  );
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
 DROP POLICY IF EXISTS "public_read_live_tools" ON tools;
 CREATE POLICY "public_read_live_tools" ON tools
   FOR SELECT USING (
@@ -157,10 +169,7 @@ CREATE POLICY "public_read_live_tools" ON tools
 DROP POLICY IF EXISTS "admin_all_tools" ON tools;
 CREATE POLICY "admin_all_tools" ON tools
   FOR ALL USING (
-    EXISTS (
-      SELECT 1 FROM profiles
-      WHERE profiles.id = auth.uid() AND profiles.role = 'admin'
-    )
+    public.is_admin()
   );
 
 DROP POLICY IF EXISTS "public_read_categories" ON categories;
@@ -170,10 +179,7 @@ CREATE POLICY "public_read_categories" ON categories
 DROP POLICY IF EXISTS "admin_all_categories" ON categories;
 CREATE POLICY "admin_all_categories" ON categories
   FOR ALL USING (
-    EXISTS (
-      SELECT 1 FROM profiles
-      WHERE profiles.id = auth.uid() AND profiles.role = 'admin'
-    )
+    public.is_admin()
   );
 
 DROP POLICY IF EXISTS "public_insert_analytics" ON tool_analytics;
@@ -183,10 +189,7 @@ CREATE POLICY "public_insert_analytics" ON tool_analytics
 DROP POLICY IF EXISTS "admin_read_analytics" ON tool_analytics;
 CREATE POLICY "admin_read_analytics" ON tool_analytics
   FOR SELECT USING (
-    EXISTS (
-      SELECT 1 FROM profiles
-      WHERE profiles.id = auth.uid() AND profiles.role = 'admin'
-    )
+    public.is_admin()
   );
 
 DROP POLICY IF EXISTS "users_read_own_profile" ON profiles;
@@ -196,20 +199,15 @@ CREATE POLICY "users_read_own_profile" ON profiles
 DROP POLICY IF EXISTS "admin_all_profiles" ON profiles;
 CREATE POLICY "admin_all_profiles" ON profiles
   FOR ALL USING (
-    EXISTS (
-      SELECT 1 FROM profiles p
-      WHERE p.id = auth.uid() AND p.role = 'admin'
-    )
+    public.is_admin()
   );
 
 DROP POLICY IF EXISTS "admin_scheduled_publishes" ON scheduled_publishes;
 CREATE POLICY "admin_scheduled_publishes" ON scheduled_publishes
   FOR ALL USING (
-    EXISTS (
-      SELECT 1 FROM profiles
-      WHERE profiles.id = auth.uid() AND profiles.role = 'admin'
-    )
+    public.is_admin()
   );
+
 
 -- ---------------------------------------------------------------------------
 -- Seed default categories

@@ -51,10 +51,7 @@ CREATE POLICY "public_read_published_blogs" ON blog_posts
 
 CREATE POLICY "admin_all_blogs" ON blog_posts
   FOR ALL USING (
-    EXISTS (
-      SELECT 1 FROM profiles
-      WHERE profiles.id = auth.uid() AND profiles.role = 'admin'
-    )
+    public.is_admin()
   );
 
 -- Service role bypasses RLS; anon key uses policies above.

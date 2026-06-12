@@ -160,7 +160,7 @@ export default function Home() {
             >
               Supercharge Your Daily <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 animate-gradient">
-                Ganesh with AI 
+                Workflow with AI 
               </span>
             </motion.h1>
             

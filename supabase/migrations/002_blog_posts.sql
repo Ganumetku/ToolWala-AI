@@ -42,13 +42,15 @@ CREATE TRIGGER blog_posts_updated_at
   FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
 
 -- ---------------------------------------------------------------------------
--- Row Level Security
+-- Row Level Security (RLS) Policies
 -- ---------------------------------------------------------------------------
 ALTER TABLE blog_posts ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "public_read_published_blogs" ON blog_posts;
 CREATE POLICY "public_read_published_blogs" ON blog_posts
   FOR SELECT USING (status = 'published');
 
+DROP POLICY IF EXISTS "admin_all_blogs" ON blog_posts;
 CREATE POLICY "admin_all_blogs" ON blog_posts
   FOR ALL USING (
     public.is_admin()

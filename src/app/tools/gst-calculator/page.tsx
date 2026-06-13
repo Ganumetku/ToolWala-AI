@@ -9,6 +9,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { toolsData } from '@/data/tools';
+import { toolArticles } from '@/data/toolArticles';
+import ToolArticle from '@/components/ToolArticle';
 
 const SEO_TITLE = "Free GST Calculator Online - ToolWala AI";
 const SEO_DESC = "Calculate GST amount, total price, and reverse GST instantly with free GST Calculator.";
@@ -543,6 +545,10 @@ export default function GstCalculatorPage() {
           </section>
 
         </div>
+
+        {toolArticles['gst-calculator'] && (
+          <ToolArticle {...toolArticles['gst-calculator']} />
+        )}
       </div>
     </ToolVisibilityGuard>
   );

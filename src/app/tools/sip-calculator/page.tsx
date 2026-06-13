@@ -9,6 +9,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
+import { toolArticles } from '@/data/toolArticles';
+import ToolArticle from '@/components/ToolArticle';
 
 const SEO_DESC = "Calculate your SIP returns, total investment, estimated gains, and future wealth instantly with our free SIP Calculator.";
 
@@ -710,6 +712,10 @@ export default function SipCalculatorPage() {
           </section>
 
         </div>
+
+        {toolArticles['sip-calculator'] && (
+          <ToolArticle {...toolArticles['sip-calculator']} />
+        )}
       </div>
     </ToolVisibilityGuard>
   );

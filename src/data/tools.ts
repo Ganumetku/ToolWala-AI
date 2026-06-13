@@ -609,6 +609,57 @@ export const toolsData: Tool[] = [
     isVisible: false,
     createdAt: '2026-06-07T00:00:00Z',
     updatedAt: '2026-06-07T00:00:00Z'
+  },
+  {
+    id: "signature-crop-tool",
+    title: "Signature Crop Tool",
+    description: "Crop and resize signature scans to official standards for recruitment, banks, and exams.",
+    icon: "✍️",
+    href: "/tools/signature-crop-tool",
+    slug: "signature-crop-tool",
+    category: "Image Tools",
+    featured: false,
+    trending: false,
+    popular: false,
+    tags: ["signature", "crop", "resize", "image", "exam", "bank"],
+    status: 'draft',
+    isVisible: false,
+    createdAt: '2026-06-13T00:00:00Z',
+    updatedAt: '2026-06-13T00:00:00Z'
+  },
+  {
+    id: "pan-photo-tool",
+    title: "PAN Photo Tool",
+    description: "Format and resize passport photos to official NSDL/UTIITSL PAN card specifications.",
+    icon: "🪪",
+    href: "/tools/pan-photo-tool",
+    slug: "pan-photo-tool",
+    category: "Image Tools",
+    featured: false,
+    trending: false,
+    popular: false,
+    tags: ["pan", "photo", "resize", "crop", "nsdl", "utiitsl", "image"],
+    status: 'draft',
+    isVisible: false,
+    createdAt: '2026-06-13T00:00:00Z',
+    updatedAt: '2026-06-13T00:00:00Z'
+  },
+  {
+    id: "exam-photo-resizer",
+    title: "Exam Photo Resizer",
+    description: "Resize passport photos for competitive exams (SSC, UPSC, IBPS, JEE, NEET).",
+    icon: "📝",
+    href: "/tools/exam-photo-resizer",
+    slug: "exam-photo-resizer",
+    category: "Image Tools",
+    featured: false,
+    trending: false,
+    popular: false,
+    tags: ["exam", "photo", "resize", "crop", "ssc", "upsc", "ibps", "image"],
+    status: 'draft',
+    isVisible: false,
+    createdAt: '2026-06-13T00:00:00Z',
+    updatedAt: '2026-06-13T00:00:00Z'
   }
 ];
 

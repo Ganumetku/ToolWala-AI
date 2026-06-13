@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  FileText, Download, UploadCloud, Trash2,
+  FileText, Download, Trash2,
   Shield, RefreshCw, AlertCircle, CheckCircle,
-  ChevronLeft, ArrowRight, Sparkles, Files, Grid,
+  Files, Grid, Sparkles,
   RotateCw, RotateCcw, Copy, Trash, Check, X,
   ArrowLeft, ArrowRight as ArrowRightIcon
 } from 'lucide-react';
@@ -14,15 +14,13 @@ import { toast } from 'sonner';
 import { PDFDocument, degrees } from 'pdf-lib';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
-import { MeshGradient } from '@/components/BackgroundEffects';
 
-// Helper to slice buffer to avoid Detached/Neutered ArrayBuffer error from PDF.js workers
-const uint8ArrayToArrayBuffer = (bytes: Uint8Array): ArrayBuffer => {
-  return bytes.buffer.slice(
-    bytes.byteOffset,
-    bytes.byteOffset + bytes.byteLength
-  ) as ArrayBuffer;
-};
+import { formatBytes } from '@/lib/utils/format';
+import { uint8ArrayToArrayBuffer } from '@/lib/pdf/pdfUtils';
+import ToolLayout from '@/components/tools/ToolLayout';
+import ToolHero from '@/components/tools/ToolHero';
+import UploadZone from '@/components/tools/UploadZone';
+import RelatedTools from '@/components/tools/RelatedTools';
 
 interface PageItem {
   id: string;            // unique identifier for react key & selection
@@ -46,7 +44,6 @@ export default function OrganizePdf() {
   // Status states
   const [isProcessing, setIsProcessing] = useState(false);
   const [processingMessage, setProcessingMessage] = useState("");
-  const [isDraggingOverUpload, setIsDraggingOverUpload] = useState(false);
   const [success, setSuccess] = useState(false);
   const [resultPdfBytes, setResultPdfBytes] = useState<Uint8Array | null>(null);
 
@@ -74,14 +71,6 @@ export default function OrganizePdf() {
   if (!mounted) {
     return <div className="min-h-screen bg-[#030712]" />;
   }
-
-  const formatBytes = (bytes: number) => {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-  };
 
   // ------------------------------------
   // THUMBNAIL GENERATOR
@@ -393,120 +382,40 @@ export default function OrganizePdf() {
   };
 
   return (
-    <div className="min-h-screen bg-[#030712] text-gray-100 relative overflow-hidden font-sans">
-      <MeshGradient />
-
-      {/* Decorative Glow Grid */}
-      <div className="absolute top-0 left-0 w-full h-[600px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent pointer-events-none z-0" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 relative z-10">
+    <ToolLayout>
+      {/* Main Tool Container */}
+      <div className="glass rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl mb-16">
         
-        {/* Navigation Breadcrumb */}
-        <Link 
-          href="/tools" 
-          className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-gray-500 hover:text-white cursor-pointer transition-colors mb-8 group"
-        >
-          <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-          Back to Directory
-        </Link>
+        {/* Header Banner */}
+        <ToolHero 
+          title="Organize PDF Pages"
+          description="Drag & drop page thumbnails to reorder them. Delete pages, add duplicates, or rotate orientations."
+          icon={<Grid className="w-7 h-7" />}
+        />
 
-        {/* Hero Section */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full bg-blue-500/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-blue-400 border border-blue-500/20 mb-6 shadow-[0_0_15px_rgba(59,130,246,0.1)]"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            100% Client-Side & Secure
-          </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6"
-          >
-            Organize PDF Pages <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
-              Visually in Your Browser
-            </span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-base sm:text-lg text-gray-400 leading-relaxed font-medium"
-          >
-            Drag & drop page thumbnails to reorder them. Delete pages, add duplicates, or rotate orientations. All processing is private and happens on your local device.
-          </motion.p>
-        </div>
-
-        {/* Workspace Console */}
-        <div className="max-w-6xl mx-auto">
+        <div className="p-8 sm:p-10 bg-black/[0.15]">
           {!pdfFile ? (
-            // Upload Area
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className={`glass rounded-[2.5rem] border transition-all duration-500 relative overflow-hidden ${
-                isDraggingOverUpload 
-                  ? 'border-blue-500 bg-blue-600/5 shadow-[0_0_40px_rgba(37,99,235,0.15)]' 
-                  : 'border-white/5 bg-white/[0.02] hover:border-white/10 hover:bg-white/[0.03]'
-              }`}
-              onDragOver={(e) => { e.preventDefault(); setIsDraggingOverUpload(true); }}
-              onDragLeave={() => setIsDraggingOverUpload(false)}
-              onDrop={(e) => {
-                e.preventDefault();
-                setIsDraggingOverUpload(false);
-                const file = e.dataTransfer.files?.[0];
-                if (file && (file.type === 'application/pdf' || file.name.endsWith('.pdf'))) {
-                  handlePdfUpload(file);
-                } else {
-                  toast.error("Please drop a valid PDF file.");
-                }
-              }}
-            >
-              <div className="px-6 py-20 sm:p-24 flex flex-col items-center justify-center text-center">
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handleFileUpload}
-                  accept="application/pdf"
-                  className="hidden"
-                  id="pdf-upload-input"
-                />
-                <label 
-                  htmlFor="pdf-upload-input"
-                  className="group flex flex-col items-center justify-center cursor-pointer"
-                >
-                  <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-[2rem] bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 shadow-xl relative">
-                    <UploadCloud className="w-8 h-8 text-blue-500" />
-                    <div className="absolute inset-0 bg-blue-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  </div>
-                  <h3 className="mb-3 text-2xl font-black tracking-tight text-white">
-                    Drag & Drop PDF document here
-                  </h3>
-                  <p className="mb-8 text-sm text-gray-500 font-semibold tracking-wide uppercase">
-                    or click to browse from files
-                  </p>
-                  
-                  <div className="inline-flex items-center gap-3.5 px-6 py-3.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_25px_rgba(37,99,235,0.4)]">
-                    Choose PDF File
-                  </div>
-                </label>
-              </div>
-
-              {/* Progress Panel */}
+            <div className="relative">
               {isProcessing && processingMessage && (
-                <div className="absolute inset-0 bg-black/80 backdrop-blur-md flex flex-col items-center justify-center z-50">
+                <div className="absolute inset-0 bg-black/80 backdrop-blur-md flex flex-col items-center justify-center z-50 rounded-[3rem]">
                   <RefreshCw className="w-10 h-10 text-blue-500 animate-spin mb-4" />
                   <p className="text-sm font-bold text-gray-300 uppercase tracking-widest animate-pulse">
                     {processingMessage}
                   </p>
                 </div>
               )}
-            </motion.div>
+              <UploadZone
+                onFilesSelected={(selectedFiles) => {
+                  if (selectedFiles && selectedFiles.length > 0) {
+                    handlePdfUpload(selectedFiles[0]);
+                  }
+                }}
+                accept="application/pdf"
+                multiple={false}
+                title="Upload a PDF to Organize"
+                description="Drag and drop your PDF here, or click to choose from your device. Files remain strictly inside your browser."
+              />
+            </div>
           ) : (
             // Active Visual Workspace
             <div className="space-y-6">
@@ -781,6 +690,7 @@ export default function OrganizePdf() {
             </div>
           )}
         </div>
+      </div>
 
         {/* Feature Highlights Grid */}
         <div className="mt-32 max-w-5xl mx-auto border-t border-white/5 pt-24">
@@ -815,111 +725,13 @@ export default function OrganizePdf() {
           </div>
         </div>
 
-        {/* SEO Deep-Dive Article Section */}
-        {toolArticles['organize-pdf'] && (
-          <ToolArticle {...toolArticles['organize-pdf']} />
-        )}
+      {/* RELATED TOOLS LIST */}
+      <RelatedTools currentSlug="organize-pdf" />
 
-        {/* Related Utilities cards */}
-        <div className="mt-32 border-t border-white/5 pt-24 max-w-6xl mx-auto">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10">
-            <div>
-              <h2 className="text-2xl font-black text-white tracking-tight sm:text-3xl">Related Tools</h2>
-              <p className="text-sm text-gray-400 mt-1 font-medium">Discover more professional document operations tools.</p>
-            </div>
-            <Link 
-              href="/tools" 
-              className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-blue-500 hover:text-blue-400 transition-colors group cursor-pointer"
-            >
-              All Tools
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            
-            {/* Merge PDF Card */}
-            <Link 
-              href="/tools/merge-pdf"
-              className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 glass"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute top-4 right-4 flex flex-col gap-2 items-end z-10">
-                <span className="inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-gray-400 border border-white/10 backdrop-blur-md">
-                  PDF
-                </span>
-              </div>
-              <div className="relative z-10 mt-2">
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
-                  <Files className="w-5 h-5 text-blue-500" />
-                </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">Merge PDF</h3>
-                <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
-                  Combine multiple distinct PDF documents into a single professional-grade file quickly and securely.
-                </p>
-              </div>
-              <div className="relative z-10 mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-500 transition-all group-hover:gap-4">
-                Launch Utility
-                <ArrowRight className="w-4 h-4" />
-              </div>
-            </Link>
-
-            {/* Split PDF Card */}
-            <Link 
-              href="/tools/split-pdf"
-              className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 glass"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute top-4 right-4 flex flex-col gap-2 items-end z-10">
-                <span className="inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-gray-400 border border-white/10 backdrop-blur-md">
-                  PDF
-                </span>
-              </div>
-              <div className="relative z-10 mt-2">
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
-                  <FileText className="w-5 h-5 text-blue-500" />
-                </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">Split PDF</h3>
-                <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
-                  Extract specific pages or ranges from your PDF files into individual documents instantly.
-                </p>
-              </div>
-              <div className="relative z-10 mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-500 transition-all group-hover:gap-4">
-                Launch Utility
-                <ArrowRight className="w-4 h-4" />
-              </div>
-            </Link>
-
-            {/* Add Watermark Card */}
-            <Link 
-              href="/tools/watermark-pdf"
-              className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 glass"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute top-4 right-4 flex flex-col gap-2 items-end z-10">
-                <span className="inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-gray-400 border border-white/10 backdrop-blur-md">
-                  PDF
-                </span>
-              </div>
-              <div className="relative z-10 mt-2">
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
-                  <Sparkles className="w-5 h-5 text-blue-500" />
-                </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">Add Watermark</h3>
-                <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
-                  Overlay text or image watermarks with customized opacity, rotation, and alignment.
-                </p>
-              </div>
-              <div className="relative z-10 mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-500 transition-all group-hover:gap-4">
-                Launch Utility
-                <ArrowRight className="w-4 h-4" />
-              </div>
-            </Link>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
+      {/* SEO Deep-Dive Article Section */}
+      {toolArticles['organize-pdf'] && (
+        <ToolArticle {...toolArticles['organize-pdf']} />
+      )}
+    </ToolLayout>
   );
 }

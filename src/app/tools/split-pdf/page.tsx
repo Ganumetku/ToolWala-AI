@@ -5,15 +5,20 @@ import { useState, useRef, useEffect } from 'react';
 import { PDFDocument } from 'pdf-lib';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  FileText, Download, UploadCloud, Trash2,
+  FileText, Download, Trash2,
   Files, AlertCircle, CheckCircle, RefreshCw,
-  ChevronLeft, ArrowRight, Shield, FileUp, Sparkles,
   Scissors, Grid, Layers, CheckSquare
 } from 'lucide-react';
 import { toast } from 'sonner';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
-import { MeshGradient } from '@/components/BackgroundEffects';
+
+import { formatBytes } from '@/lib/utils/format';
+import { uint8ArrayToArrayBuffer } from '@/lib/pdf/pdfUtils';
+import ToolLayout from '@/components/tools/ToolLayout';
+import ToolHero from '@/components/tools/ToolHero';
+import UploadZone from '@/components/tools/UploadZone';
+import RelatedTools from '@/components/tools/RelatedTools';
 
 interface ThumbnailState {
   pageIndex: number;
@@ -21,13 +26,6 @@ interface ThumbnailState {
 }
 
 type SplitMode = 'custom' | 'ranges' | 'all';
-
-const uint8ArrayToArrayBuffer = (bytes: Uint8Array): ArrayBuffer => {
-  return bytes.buffer.slice(
-    bytes.byteOffset,
-    bytes.byteOffset + bytes.byteLength
-  ) as ArrayBuffer;
-};
 
 export default function SplitPdf() {
   const [pdfjs, setPdfjs] = useState<any>(null);
@@ -45,7 +43,6 @@ export default function SplitPdf() {
   // Progress & Alert States
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [isDraggingOverUpload, setIsDraggingOverUpload] = useState(false);
   const [success, setSuccess] = useState(false);
   const [downloadCount, setDownloadCount] = useState(0);
 
@@ -66,14 +63,6 @@ export default function SplitPdf() {
     };
     loadPdfjs();
   }, []);
-
-  const formatBytes = (bytes: number) => {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-  };
 
   // ------------------------------------
   // PREVIEW THUMBNAILS GENERATOR
@@ -343,138 +332,66 @@ export default function SplitPdf() {
     }
   };
 
-  // Drag-and-drop workspace triggers
-  const handleDragOverUpload = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDraggingOverUpload(true);
-  };
-
-  const handleDragLeaveUpload = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDraggingOverUpload(false);
-  };
-
-  const handleDropUpload = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDraggingOverUpload(false);
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      const file = e.dataTransfer.files[0];
-      if (file.type === 'application/pdf' || file.name.endsWith('.pdf')) {
-        handlePdfUpload(file);
-      } else {
-        toast.error("Drop PDF documents only.");
-      }
-    }
-  };
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
-      <MeshGradient />
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+    <ToolLayout>
+      {/* Main Tool Container */}
+      <div className="glass rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl mb-16">
         
-        {/* Navigation Link */}
-        <Link href="/tools" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group">
-          <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          Back to Directory
-        </Link>
+        {/* Header Banner */}
+        <ToolHero 
+          title="Split PDF"
+          description="Extract specific page segments or break PDFs into individual files securely."
+          icon={<Scissors className="w-7 h-7" />}
+        />
 
-        {/* Main Tool Container */}
-        <div className="glass rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl mb-16">
+        <div className="p-8 sm:p-10 bg-black/[0.15]">
           
-          {/* Header Banner */}
-          <div className="p-8 sm:p-10 border-b border-white/5 bg-white/[0.02]">
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
-              <div className="flex items-center gap-6">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_0_25px_rgba(37,99,235,0.4)]">
-                  <Scissors className="w-7 h-7" />
-                </div>
-                <div>
-                  <h1 className="text-3xl font-black text-white tracking-tighter uppercase">Split PDF</h1>
-                  <p className="text-gray-400 font-medium mt-1">Extract specific page segments or break PDFs into individual files securely.</p>
-                </div>
+          {/* Success alert message */}
+          {success && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="mb-8 p-8 border border-emerald-500/20 bg-emerald-500/5 rounded-[2rem] text-center"
+            >
+              <div className="w-16 h-16 bg-emerald-500/25 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.2)]">
+                <CheckCircle className="w-8 h-8" />
               </div>
-              <div className="flex items-center gap-3 bg-emerald-500/10 px-4 py-2 rounded-xl border border-emerald-500/20 h-fit">
-                <Shield className="w-4 h-4 text-emerald-400" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">Secure Processing</span>
+              <h3 className="text-2xl font-black text-white tracking-tight mb-2">Split Completed!</h3>
+              <p className="text-sm text-gray-400 mb-6 max-w-md mx-auto">
+                Your PDF was successfully split into {downloadCount} file(s). Downloading triggered automatically.
+              </p>
+              <div className="flex flex-wrap gap-4 justify-center">
+                <button 
+                  onClick={processSplit} 
+                  className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-emerald-500 transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)]"
+                >
+                  <Download className="w-4 h-4" /> Download Segments Again
+                </button>
+                <button 
+                  onClick={resetAll} 
+                  className="px-6 py-3 bg-white/5 border border-white/10 text-gray-300 text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-white/10 transition-all"
+                >
+                  Split New File
+                </button>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          )}
 
-          <div className="p-8 sm:p-10 bg-black/[0.15]">
-            
-            {/* Success alert message */}
-            {success && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="mb-8 p-8 border border-emerald-500/20 bg-emerald-500/5 rounded-[2rem] text-center"
-              >
-                <div className="w-16 h-16 bg-emerald-500/25 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.2)]">
-                  <CheckCircle className="w-8 h-8" />
-                </div>
-                <h3 className="text-2xl font-black text-white tracking-tight mb-2">Split Completed!</h3>
-                <p className="text-sm text-gray-400 mb-6 max-w-md mx-auto">
-                  Your PDF was successfully split into {downloadCount} file(s). Downloading triggered automatically.
-                </p>
-                <div className="flex flex-wrap gap-4 justify-center">
-                  <button 
-                    onClick={processSplit} 
-                    className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-emerald-500 transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)]"
-                  >
-                    <Download className="w-4 h-4" /> Download Segments Again
-                  </button>
-                  <button 
-                    onClick={resetAll} 
-                    className="px-6 py-3 bg-white/5 border border-white/10 text-gray-300 text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-white/10 transition-all"
-                  >
-                    Split New File
-                  </button>
-                </div>
-              </motion.div>
-            )}
-
-            {/* Layout Split */}
-            {!pdfFile ? (
-              
-              /* Upload zone */
-              <div
-                onDragOver={handleDragOverUpload}
-                onDragLeave={handleDragLeaveUpload}
-                onDrop={handleDropUpload}
-                onClick={() => fileInputRef.current?.click()}
-                className={`border-2 border-dashed rounded-[3rem] p-12 sm:p-24 text-center transition-all cursor-pointer group relative overflow-hidden
-                  ${isDraggingOverUpload 
-                    ? 'border-blue-500 bg-blue-500/10 scale-[1.01] shadow-[0_0_30px_rgba(59,130,246,0.1)]' 
-                    : 'border-white/10 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/20'
-                  }
-                `}
-              >
-                <input 
-                  type="file" 
-                  ref={fileInputRef} 
-                  onChange={handleFileUpload} 
-                  accept="application/pdf" 
-                  className="hidden" 
-                />
-                
-                {/* Decorative glow background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-
-                <div className="relative z-10">
-                  <div className="w-20 h-20 mx-auto mb-8 rounded-2xl bg-white/5 flex items-center justify-center text-gray-500 border border-white/5 group-hover:text-blue-400 group-hover:bg-blue-500/10 group-hover:scale-110 transition-all duration-300 shadow-2xl">
-                    <UploadCloud className="w-10 h-10" />
-                  </div>
-                  <h3 className="text-2xl font-black text-white tracking-tight mb-3">Upload a PDF to Split</h3>
-                  <p className="text-sm text-gray-500 mb-10 max-w-sm mx-auto font-medium leading-relaxed">
-                    Drag and drop your PDF here, or click to choose from your device. Files remain strictly inside your browser.
-                  </p>
-                  <button className="rounded-xl bg-white text-black px-8 py-3.5 text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-[0_4px_20px_rgba(255,255,255,0.1)]">
-                    Browse File
-                  </button>
-                </div>
-              </div>
-            ) : (
+          {/* Layout Split */}
+          {!pdfFile ? (
+            <UploadZone
+              onFilesSelected={(selectedFiles) => {
+                if (selectedFiles && selectedFiles.length > 0) {
+                  handlePdfUpload(selectedFiles[0]);
+                }
+              }}
+              accept="application/pdf"
+              multiple={false}
+              title="Upload a PDF to Split"
+              description="Drag and drop your PDF here, or click to choose from your device. Files remain strictly inside your browser."
+            />
+          ) : (
               
               /* Interactive Split Workspace */
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -747,72 +664,13 @@ export default function SplitPdf() {
           </div>
         </div>
 
-        {/* RELATED TOOLS LIST */}
-        <div className="mb-12 animate-fade-in">
-          <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-6 ml-1">Explore PDF Workspace</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            {/* Merge PDF Card */}
-            <Link 
-              href="/tools/merge-pdf"
-              className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 glass"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute top-4 right-4 flex flex-col gap-2 items-end z-10">
-                <span className="inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-gray-400 border border-white/10 backdrop-blur-md">
-                  PDF
-                </span>
-              </div>
-              <div className="relative z-10 mt-2">
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
-                  <Files className="w-5 h-5 text-blue-500" />
-                </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">Merge PDF</h3>
-                <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
-                  Combine multiple distinct PDF documents into a single professional-grade file quickly and securely.
-                </p>
-              </div>
-              <div className="relative z-10 mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-500 transition-all group-hover:gap-4">
-                Launch Utility
-                <ArrowRight className="w-4 h-4" />
-              </div>
-            </Link>
-
-            {/* Edit PDF Card */}
-            <Link 
-              href="/tools/pdf-tools/edit-pdf"
-              className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 glass"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute top-4 right-4 flex flex-col gap-2 items-end z-10">
-                <span className="inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-gray-400 border border-white/10 backdrop-blur-md">
-                  PDF
-                </span>
-              </div>
-              <div className="relative z-10 mt-2">
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
-                  <FileText className="w-5 h-5 text-blue-500" />
-                </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">Edit PDF</h3>
-                <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
-                  Add text annotations, fill complex PDF forms, write on documents, and download online.
-                </p>
-              </div>
-              <div className="relative z-10 mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-500 transition-all group-hover:gap-4">
-                Launch Utility
-                <ArrowRight className="w-4 h-4" />
-              </div>
-            </Link>
-
-          </div>
-        </div>
-
-      </div>
+      {/* RELATED TOOLS LIST */}
+      <RelatedTools currentSlug="split-pdf" />
 
       {/* SEO Deep-Dive Article Section */}
       {toolArticles['split-pdf'] && (
         <ToolArticle {...toolArticles['split-pdf']} />
       )}
-    </div>
+    </ToolLayout>
   );
 }

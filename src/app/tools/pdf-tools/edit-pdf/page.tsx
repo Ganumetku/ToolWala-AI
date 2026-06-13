@@ -10,6 +10,8 @@ import {
   ChevronLeft, Type, Plus, Minus, Shield, X,
   ZoomIn, ZoomOut, Edit3, PlusCircle
 } from 'lucide-react';
+import { toolArticles } from '@/data/toolArticles';
+import ToolArticle from '@/components/ToolArticle';
 
 const FONT_SIZES = [8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 48, 60, 72];
 const ZOOM_LEVELS = [0.5, 0.75, 1.0, 1.25, 1.5, 2.0];
@@ -853,7 +855,7 @@ export default function EditPdfPage() {
       {/* 2. CORE WORKSPACE */}
       {!pdfFile ? (
         // File Upload Panel
-        <div className="flex-1 flex flex-col items-center justify-center p-8 bg-slate-50 relative">
+        <div className="flex-1 flex flex-col items-center justify-start p-8 bg-slate-50 relative overflow-y-auto pt-16">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-blue-600/2 blur-[80px] -z-10" />
           
           <div className="max-w-2xl w-full text-center space-y-8">
@@ -891,6 +893,12 @@ export default function EditPdfPage() {
               </button>
             </div>
           </div>
+
+          {toolArticles['edit-pdf'] && (
+            <div className="w-full max-w-5xl mt-16 bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm">
+              <ToolArticle {...toolArticles['edit-pdf']} />
+            </div>
+          )}
         </div>
       ) : (
         // Document Editor Panel

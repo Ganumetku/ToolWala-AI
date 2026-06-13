@@ -1041,5 +1041,529 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
       { name: "Aadhaar Photo Resizer", href: "/tools/aadhaar-photo-resizer" }
     ]
+  },
+  "signature-crop-tool": {
+    title: "Signature Crop Tool",
+    intro: "Resize, crop, and compress signature scans to official standards instantly. Get print-ready layouts and clean transparent/white background signatures for exams, recruitment boards, and bank portals.",
+    whatItDoes: "ToolWala AI Signature Crop Tool helps you format signature uploads to match stringent recruitment guidelines (like SSC, IBPS, and State Public Service Commissions). It offers precise aspect ratios (2:1, 4:1, 7:3) and custom crop dimensions. Users can adjust alignment, rotate scans, apply contrast/brightness filters to make text legible, and limit files to under 20KB client-side.",
+    howToUse: [
+      "Upload a clear photo of your signature on white paper.",
+      "Select your target exam or banking template from the layout presets.",
+      "Use the interactive workspace to drag and frame your signature inside the crop box.",
+      "Fine-tune the contrast and brightness sliders to make the signature ink pop.",
+      "Export and download your compliant, compressed signature file instantly."
+    ],
+    keyFeatures: [
+      { title: "Exam Specific Presets", desc: "Includes official aspect ratios and dimension specifications for SSC, UPSC, and IBPS boards." },
+      { title: "Binary-Search Compressor", desc: "Guarantees signature size stays strictly under the maximum 20KB cap to avoid portal rejections." },
+      { title: "Contrast & Ink Boost", desc: "Filters to clear background shadows and enhance signature visibility." },
+      { title: "Client-Side Privacy", desc: "Your signature scans never touch our servers. Everything is processed offline in your browser cache." }
+    ],
+    benefits: [
+      "Eliminate recruitment form rejections due to blurred or oversized signatures.",
+      "Process signatures locally on your device for absolute personal safety.",
+      "Free tools with zero limits, watermarks, or account registration.",
+      "Highly responsive mobile touch dragging and pinch zoom."
+    ],
+    whyChoose: "Recruitment and banking portals are extremely strict about signature file sizes and dimensions. Standard cropping tools blur text or output files that exceed size limits. Our Signature Crop Tool combines coordinates positioning with a binary-search quality compressor, guaranteeing compliance under 20KB in seconds.",
+    useCases: [
+      "Applicants submitting online recruitment forms for SSC, UPSC, and IBPS.",
+      "Account holders uploading signatures for mobile banking authorization.",
+      "Professionals adding signature cards to digital PDF contracts."
+    ],
+    faqs: [
+      { question: "How do I crop my signature online?", answer: "Upload an image of your signature, select your target aspect ratio, drag the crop window, and download the compressed output." },
+      { question: "What is the standard size for SSC signatures?", answer: "The official Staff Selection Commission (SSC) standard is 6.0 cm x 3.0 cm (aspect ratio 2:1), with a file size limit between 10KB and 20KB." },
+      { question: "Can I remove background shadows?", answer: "Yes, you can use our built-in brightness and contrast filters to whiten paper backgrounds and make ink lines pop." }
+    ],
+    conclusion: "Format and compress your signature scans for government and recruitment forms safely. Start using ToolWala AI's signature resizer.",
+    relatedTools: [
+      { name: "Aadhaar Photo Resizer", href: "/tools/aadhaar-photo-resizer" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
+      { name: "PAN Photo Tool", href: "/tools/pan-photo-tool" }
+    ]
+  },
+  "pan-photo-tool": {
+    title: "PAN Photo Tool",
+    intro: "Resize, crop, and format passport photos to official NSDL and UTIITSL PAN card specifications. Keep head spacing, check background rules, and stay under the 50KB limit.",
+    whatItDoes: "The PAN Photo Tool automatically standardizes your profile photos for online NSDL/UTIITSL application forms. It applies a strict 1:1 aspect ratio (213 x 213 px) and whiteness filters to match requirements. The built-in compressor ensures the output file sits safely below 50KB to pass validation tests.",
+    howToUse: [
+      "Upload a portrait photo from your device.",
+      "Choose the NSDL or UTIITSL standard preset.",
+      "Use the interactive controls to center your face and keep your shoulders visible.",
+      "Select a white, blue, or red background color to comply with PAN guidelines.",
+      "Download the compressed, compliant JPG file instantly."
+    ],
+    keyFeatures: [
+      { title: "NSDL / UTIITSL Presets", desc: "Pre-configured templates matching the official 213x213 pixels PAN specifications." },
+      { title: "Draggable Crop Window", desc: "Full manual override to center eyes, hair, and shoulders safely." },
+      { title: "Compliant BG Replacements", desc: "Easily switch backgrounds to official white or royal blue colors." },
+      { title: "Local Browser Sandbox", desc: "100% private. UIDAI and income tax document photos are never sent to external servers." }
+    ],
+    benefits: [
+      "Saves time and money spent on photo studios or complex editors.",
+      "Guarantees acceptance on Indian tax portal uploads.",
+      "Intuitive mobile touch drag and zoom overlays.",
+      "Completely free to use without registration."
+    ],
+    whyChoose: "PAN card applications are frequently rejected because of incorrect image coordinates or sizes. Our PAN Photo Tool applies exact coordinate scales and formats backgrounds client-side, making compliance simple for everyone.",
+    useCases: [
+      "Indian citizens applying for new PAN cards online.",
+      "Applicants updating existing PAN card details.",
+      "Tax consultants formatting applicant documentation bundles."
+    ],
+    faqs: [
+      { question: "What is the photo size for PAN card applications?", answer: "The official photo size required by NSDL and UTIITSL portals is 3.5cm x 2.5cm, which translates to exactly 213 x 213 pixels (1:1 ratio) at 300 DPI." },
+      { question: "What background color is compliant for PAN card photos?", answer: "A white or light-colored plain background is strictly recommended for PAN card applications." },
+      { question: "Does it work on smartphones?", answer: "Yes. Our tool is optimized for mobile touch screens, including pinch gestures and drags." }
+    ],
+    conclusion: "Format your passport photo for PAN card NSDL/UTIITSL uploads instantly. Try our secure, browser-based PAN photo tool.",
+    relatedTools: [
+      { name: "Aadhaar Photo Resizer", href: "/tools/aadhaar-photo-resizer" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
+      { name: "Signature Crop Tool", href: "/tools/signature-crop-tool" }
+    ]
+  },
+  "exam-photo-resizer": {
+    title: "Exam Photo Resizer",
+    intro: "Resize and compress photos for competitive exams and recruitment portals (SSC, UPSC, IBPS, NEET, JEE). Meet pixel ratios and target KB limits in one click.",
+    whatItDoes: "Exam Photo Resizer formats applicant portrait photos for various national and state recruitment portals. It includes presets for SSC (3.5x4.5cm, 20-50KB), UPSC, IBPS, and NEET. The tool ensures proper head positioning, whiteness checks, and uses binary-search compression to match size brackets.",
+    howToUse: [
+      "Upload your passport-style portrait photo.",
+      "Select your target recruitment board or portal preset.",
+      "Center your face within the crop box guidelines, ensuring hair is not cut.",
+      "Adjust brightness/contrast if needed to ensure clear facial features.",
+      "Download the portal-ready, optimized photo under the required KB limit."
+    ],
+    keyFeatures: [
+      { title: "National Portal Presets", desc: "Configured templates for Staff Selection, banking boards (IBPS), UPSC, and medical/engineering entry tests." },
+      { title: "Draggable Alignment", desc: "Direct drag and pinch-to-zoom support for perfect head and shoulder framing." },
+      { title: "Pixel & Size Compilers", desc: "Outputs photos at precise width/height dimensions under standard 50KB limits." },
+      { title: "Edge Security", desc: "Process your photos offline. Safe for students and government applicants." }
+    ],
+    benefits: [
+      "Avoid exam form rejections due to non-compliant photo ratios.",
+      "Get perfect photo framing in seconds on your mobile or PC.",
+      "Unlimited free processing with no signups or watermark overlays.",
+      "Includes a compliance checklist before downloading."
+    ],
+    whyChoose: "Recruitment portals run automated checks that immediately reject photos that are blurry, incorrectly framed, or have incorrect file sizes. Our Exam Photo Resizer provides pre-tested template filters, making sure your application moves forward.",
+    useCases: [
+      "Students registering for JEE, NEET, or GATE tests.",
+      "Job seekers applying for SSC, IBPS, or state government jobs.",
+      "Parents formatting children's application credentials."
+    ],
+    faqs: [
+      { question: "What is the photo size for SSC and bank exams?", answer: "Most exams require a 3.5 cm x 4.5 cm passport photo, which is approximately 354 x 472 pixels, and a file size between 20KB and 50KB." },
+      { question: "Should shoulders be visible in exam photos?", answer: "Yes, official specs require your head and shoulders to be clearly visible, taking up 70% to 80% of the photo frame." },
+      { question: "Is my photo secure?", answer: "Yes, our tool runs fully in your browser memory. Your personal documents are never uploaded to any servers." }
+    ],
+    conclusion: "Format your exam registration photos cleanly and securely. Get compliant files instantly with ToolWala AI.",
+    relatedTools: [
+      { name: "Aadhaar Photo Resizer", href: "/tools/aadhaar-photo-resizer" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
+      { name: "Signature Crop Tool", href: "/tools/signature-crop-tool" }
+    ]
+  },
+  "password-generator": {
+    title: "Secure Password Generator",
+    intro: "Generate cryptographically secure, randomized passwords locally in your browser. Maintain absolute privacy for your credentials with customizable length and character filters.",
+    whatItDoes: "The ToolWala Password Generator creates strong, unpredictable passwords using your web browser's native cryptography API. Because it runs entirely inside your client browser sandbox, the generated keys never travel across the network, ensuring zero exposure to third-party databases.",
+    howToUse: [
+      "Adjust the password length slider to your desired character count (recommended 16+).",
+      "Toggle checkboxes to include uppercase letters, numbers, and special symbols.",
+      "Click the 'Generate' button to compute a cryptographically random combination.",
+      "Review the visual password strength rating and check entropy values.",
+      "Click 'Copy' to store it to your clipboard for instant application."
+    ],
+    keyFeatures: [
+      { title: "Client-Side Cryptography", desc: "Uses window.crypto.getRandomValues to guarantee true mathematical randomness locally." },
+      { title: "Strength Evaluator", desc: "Calculates entropy and estimates crack times to ensure high-entropy defense." },
+      { title: "Custom Filter Presets", desc: "Exclude confusing characters like l, 1, O, 0, or custom characters as needed." }
+    ],
+    benefits: [
+      "Protects accounts against brute-force attacks and credential stuffing.",
+      "Ensures zero server logs, databases, or cookies hold your new credentials.",
+      "Saves time thinking of unique and strong patterns manually.",
+      "100% free and functional without internet access."
+    ],
+    whyChoose: "Generic generators often transmit passwords over the network or use simple math algorithms that are easy to reverse-engineer. ToolWala AI uses your system's hardware entropy and operates strictly offline, guaranteeing security and unpredictability.",
+    useCases: [
+      "Securing new email, banking, and e-commerce profiles.",
+      "Creating high-strength passwords for system administrators.",
+      "Generating bulk password logs for password managers.",
+      "Setting up secure database credentials."
+    ],
+    faqs: [
+      { question: "Are my generated passwords stored?", answer: "No. All passwords are created inside your browser cache and are wiped as soon as you close or reload the tab." },
+      { question: "What is a cryptographically secure password?", answer: "A password generated using system hardware entropy rather than standard pseudo-random functions, making it mathematically unpredictable." },
+      { question: "Why should I use special characters?", answer: "Including symbols increases entropy, expanding the search space exponentially and making brute-force cracking mathematically infeasible." }
+    ],
+    conclusion: "Secure your digital footprint without compromise. Generate your next uncrackable password locally with ToolWala.",
+    relatedTools: [
+      { name: "Protect PDF", href: "/tools/protect-pdf" },
+      { name: "Unlock PDF", href: "/tools/unlock-pdf" }
+    ]
+  },
+  "color-palette-generator": {
+    title: "AI Color Palette Generator",
+    intro: "Unlock your creative vision with our advanced AI Color Palette Generator. Create curated, harmonious color schemes, extract tone blocks, and export style templates instantly.",
+    whatItDoes: "Our AI Color Palette Generator uses color theory logic to compose harmonic design themes. Whether you are building a website, designing an app, or sketching a brand logo, the generator provides custom tone matches, contrast score analysis, and instant styling templates.",
+    howToUse: [
+      "Click the 'Generate' button to fetch new random harmonious palettes.",
+      "Click on any color block to lock it in place, allowing adjacent colors to regenerate harmoniously.",
+      "Import a custom photo to extract natural palettes directly from image color structures.",
+      "Verify color contrast scores to ensure readability compliance for design accessibility.",
+      "Export your palette values as HEX, RGB, or CSS variables for immediate coding."
+    ],
+    keyFeatures: [
+      { title: "Harmony Algorithm", desc: "Generates complementary, split-complementary, triad, and monochromatic color schemes." },
+      { title: "Image Extraction", desc: "Drag and drop any photograph to extract the dominant color blocks and matching palettes." },
+      { title: "Contrast Analyzer", desc: "Ensures compliance with Web Content Accessibility Guidelines (WCAG) contrast ratios." }
+    ],
+    benefits: [
+      "Accelerates branding and design brainstorming processes.",
+      "Guarantees visually balanced and professional color combinations.",
+      "Saves time formatting design tokens for web projects.",
+      "Provides color contrast warnings before starting development."
+    ],
+    whyChoose: "Unlike basic generators that shuffle random values, our Color Palette Generator integrates WCAG compliance checks and professional color theory algorithms, making your design choices highly accessible and aesthetically premium.",
+    useCases: [
+      "Graphic designers drafting color boards for corporate brands.",
+      "Frontend developers importing cohesive CSS theme variables.",
+      "UX architects auditing text-to-background contrast accessibility.",
+      "Content creators setting unified color filters for social feeds."
+    ],
+    faqs: [
+      { question: "Can I generate templates from images?", answer: "Yes, you can upload any photo scan, and the local compiler extracts primary, secondary, and accent colors instantly." },
+      { question: "What contrast standards are verified?", answer: "We check the contrast ratio between foreground text and background colors based on the WCAG AA and AAA rules." },
+      { question: "How do I save my palettes?", answer: "You can copy HEX code strings, download palette maps, or grab ready-made CSS styling files directly." }
+    ],
+    conclusion: "Elevate your design identity with scientifically balanced layouts. Create beautiful palettes locally on ToolWala.",
+    relatedTools: [
+      { name: "AI Logo Maker", href: "/tools/ai-logo-maker" },
+      { name: "Image Compressor", href: "/tools/image-compressor" }
+    ]
+  },
+  "edit-pdf": {
+    title: "Edit PDF",
+    intro: "Fill forms, add text layers, and edit PDF documents securely in your browser. Privacy-first, offline editing with zero cloud uploads.",
+    whatItDoes: "ToolWala Edit PDF lets you overlay text elements and compile modifications onto PDF documents entirely client-side. Utilizing WebAssembly libraries, it enables local rendering of pdf assets, keeping your private and financial records inside your local memory.",
+    howToUse: [
+      "Drag and drop your PDF document into our visual workspace.",
+      "Click the page area where you want to fill details or append comments.",
+      "Type text, select font scale, and position text fields precisely.",
+      "Add digital checkmarks or cross lines for form registration items.",
+      "Click the 'Save and Download' button to export your edited file instantly."
+    ],
+    keyFeatures: [
+      { title: "Client-Side Processing", desc: "Edit financial, tax, or registration forms securely without uploading to cloud servers." },
+      { title: "Text Overlay Layering", desc: "Easy placement, sizing, and color styling of text fields over document surfaces." },
+      { title: "Scale Compression", desc: "Maintains original resolution without introducing size inflation." }
+    ],
+    benefits: [
+      "Maximum file security for tax forms, banking declarations, and personal IDs.",
+      "Zero registration or subscription fees common with PDF editors.",
+      "Sub-second compilation and download speeds.",
+      "Retains vector precision of fonts and layers."
+    ],
+    whyChoose: "Most online PDF editors upload documents to external databases, posing security risks. ToolWala AI uses secure local memory sandbox to compile edits, guaranteeing your records remain private.",
+    useCases: [
+      "Filling out registration, tax, or recruitment application sheets.",
+      "Adding annotations, remarks, or notes to study materials.",
+      "Signing scanned files with custom initials locally.",
+      "Redacting sensitive areas in personal receipts."
+    ],
+    faqs: [
+      { question: "Is my edited document safe?", answer: "Yes, all edit calculations and exports are processed locally inside your web browser. Nothing is ever uploaded." },
+      { question: "Can I fill forms online?", answer: "Yes, our tool lets you draw custom text blocks over any part of the document structure." },
+      { question: "Does it support high-resolution PDFs?", answer: "Yes, it compiles and preserves vector assets, ensuring clean quality at any resolution." }
+    ],
+    conclusion: "Fill out and update documents securely and privately. Edit your PDFs locally on ToolWala AI.",
+    relatedTools: [
+      { name: "PDF Tools Suite", href: "/tools/pdf-tools" },
+      { name: "Merge PDF", href: "/tools/merge-pdf" },
+      { name: "Split PDF", href: "/tools/split-pdf" }
+    ]
+  },
+  "ocr-to-text": {
+    title: "OCR Image to Text Converter",
+    intro: "Extract editable text from photographs, receipts, and document scans instantly. Zero server latency, offline OCR processing in your browser.",
+    whatItDoes: "Our OCR Image to Text utility uses local optical character recognition engines to process pictures and documents. Since it runs client-side using JavaScript, it converts image characters to digital text structures without transmitting documents over the web.",
+    howToUse: [
+      "Drag and drop your document scan or snapshot (JPG, PNG, WebP) into the drop target.",
+      "Select target language filters if processing multi-language pages.",
+      "Wait a few seconds while our local OCR engine scans and transcribes characters.",
+      "Review the parsed text, copy it, or download it as a raw TXT file.",
+      "Click 'Reset' to clean browser memory and start processing the next file."
+    ],
+    keyFeatures: [
+      { title: "Browser OCR Engine", desc: "Runs character detection directly in browser cache for 100% data confidentiality." },
+      { title: "Multi-Language Filters", desc: "Supports character sets across international languages for accurate transcriptions." },
+      { title: "TXT Code Compiler", desc: "Download parsed outputs as clean raw text files in one click." }
+    ],
+    benefits: [
+      "Protects sensitive records against cloud storage intercepts.",
+      "No daily rate limits or paid account barriers.",
+      "Instant copy-paste access to document contents.",
+      "Works without an active internet connection."
+    ],
+    whyChoose: "Typical web converters require uploading file assets, which may expose private metadata. ToolWala AI performs OCR locally, keeping files within your device memory.",
+    useCases: [
+      "Transcribing study notes, book pages, or hand-written drafts.",
+      "Extracting invoice details, serial keys, and table lists.",
+      "Converting visual receipts to digital text registers.",
+      "Translating snapshot structures into editable templates."
+    ],
+    faqs: [
+      { question: "Is my image uploaded?", answer: "No, all OCR models are loaded into your browser cache, and image processing runs entirely on your local CPU." },
+      { question: "What image formats are supported?", answer: "We support PNG, JPEG, JPG, and WebP, as well as screenshot paste events." },
+      { question: "Does it preserve indentation?", answer: "Yes, the OCR model preserves paragraph breaks and line structures as closely as possible." }
+    ],
+    conclusion: "Convert scans to editable documents with complete privacy. Extract text locally using ToolWala AI.",
+    relatedTools: [
+      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr" },
+      { name: "Aadhaar Photo Resizer", href: "/tools/aadhaar-photo-resizer" }
+    ]
+  },
+  "age-calculator": {
+    title: "Age Calculator",
+    intro: "Compute your exact age down to months, weeks, and days. Determine days remaining until your next birthday instantly.",
+    whatItDoes: "Our Age Calculator provides accurate date arithmetic calculations. By comparing your date of birth with target dates, it displays age metrics, milestone grids, and countdowns.",
+    howToUse: [
+      "Select your date of birth using our local calendar input.",
+      "Specify the target calculation date (defaults to today's date).",
+      "Click 'Calculate' to run the date difference logic.",
+      "Review your age in years, months, weeks, days, hours, and minutes.",
+      "Check the milestone indicator for your next birthday schedule."
+    ],
+    keyFeatures: [
+      { title: "Date Arithmetic", desc: "Handles leap years and variable month lengths for precision calculation." },
+      { title: "Milestone Countdown", desc: "Displays exactly how many months and days remain until your next birthday." },
+      { title: "Alternative Units", desc: "Converts your total lifespan into weeks, days, hours, minutes, and seconds." }
+    ],
+    benefits: [
+      "Quick calculations for eligibility requirements on official forms.",
+      "Helps schedule birthday planners and milestone timelines.",
+      "100% private date calculations with no tracking cookies.",
+      "Instant loading and responsive layout adjustments."
+    ],
+    whyChoose: "Our calculator incorporates precise calendar rules, including leap years, to ensure error-free age summaries.",
+    useCases: [
+      "Filling out job application forms requiring exact age inputs.",
+      "Checking retirement milestones and maturity dates.",
+      "Planning birthday events and party countdowns.",
+      "Verifying legal eligibility dates for licensing."
+    ],
+    faqs: [
+      { question: "How does it handle leap years?", answer: "The calculator calculates date differences using calendar logic, automatically factoring in extra leap days." },
+      { question: "Are my input dates stored?", answer: "No, all date inputs are processed locally in your browser, keeping your data confidential." },
+      { question: "Can I calculate age for historical dates?", answer: "Yes, you can set the calculation target date to any date in the past or future." }
+    ],
+    conclusion: "Calculate chronological records instantly. Verify milestone details securely on ToolWala AI.",
+    relatedTools: [
+      { name: "SIP Calculator", href: "/tools/sip-calculator" },
+      { name: "EMI Calculator", href: "/tools/emi-calculator" }
+    ]
+  },
+  "sip-calculator": {
+    title: "SIP Calculator",
+    intro: "Calculate SIP returns and estimate future wealth. Plan investments with detailed monthly reports and visual charts.",
+    whatItDoes: "The ToolWala SIP Calculator estimates mutual fund growth using systematic investment planning metrics. By inputting monthly investments, interest rates, and duration, you get instant compound summaries.",
+    howToUse: [
+      "Input your monthly SIP investment amount using the input field.",
+      "Set the expected annual return rate (compounded annually).",
+      "Specify the investment duration in years.",
+      "Review the total invested amount, estimated earnings, and final value.",
+      "Explore the interactive growth chart and detailed maturity tables."
+    ],
+    keyFeatures: [
+      { title: "Compound Formula", desc: "Applies SIP compounding math to output accurate future wealth values." },
+      { title: "Visual Charts", desc: "Generates intuitive graphs showing the growth of investments over time." },
+      { title: "Maturity Tables", desc: "Breaks down total investments vs interest accumulation year-by-year." }
+    ],
+    benefits: [
+      "Helps select targets for retirement, education, or house funds.",
+      "Shows the power of compounding over long-term plans.",
+      "Enables instant comparisons of investment parameters.",
+      "No tracking or advertising popups—pure calculation utility."
+    ],
+    whyChoose: "Our SIP Calculator combines compound calculation modules with accessible visual dashboards, helping you estimate returns and plan finances easily.",
+    useCases: [
+      "Planning personal finance targets and retirement strategies.",
+      "Comparing SIP growth parameters against fixed deposits.",
+      "Drafting savings goals for buying homes or vehicles.",
+      "Teaching students color-coded concepts of wealth compound math."
+    ],
+    faqs: [
+      { question: "What is the formula for SIP?", answer: "SIP uses the future value formula: FV = P * [((1 + i)^n - 1) / i] * (1 + i), where P is monthly deposit, i is interest rate per period, and n is total periods." },
+      { question: "Are actual returns guaranteed?", answer: "No, this is an estimate. Actual mutual fund returns vary based on market performance." },
+      { question: "Can I copy the amortization table?", answer: "Yes, you can copy the values directly into Google Sheets or Excel." }
+    ],
+    conclusion: "Plan your financial future with precision compound math. Estimate your investments on ToolWala AI.",
+    relatedTools: [
+      { name: "EMI Calculator", href: "/tools/emi-calculator" },
+      { name: "GST Calculator", href: "/tools/gst-calculator" }
+    ]
+  },
+  "emi-calculator": {
+    title: "EMI Calculator",
+    intro: "Calculate home loan, car loan, and personal loan EMIs. Review total interest schedules and amortization schedules instantly.",
+    whatItDoes: "Our EMI Calculator provides loan planning calculations. By inputting principal, interest rates, and loan terms, it outputs monthly payment metrics, interest structures, and yearly amortization data.",
+    howToUse: [
+      "Input the total loan amount (principal) you wish to borrow.",
+      "Set the annual interest rate (reducing balance).",
+      "Specify the loan tenure in years or months.",
+      "Analyze the monthly payment, total interest, and overall cost.",
+      "Review the amortization table for principal vs interest breakdowns."
+    ],
+    keyFeatures: [
+      { title: "Reducing Balance Math", desc: "Calculates loan EMI payments based on standard reducing balance math." },
+      { title: "Amortization Table", desc: "Shows exactly how much of each payment goes toward the principal vs interest." },
+      { title: "Pie Chart Visuals", desc: "Generates clear graphs showing total interest vs principal ratios." }
+    ],
+    benefits: [
+      "Helps determine loan eligibility before speaking with banks.",
+      "Shows how prepayments can reduce interest burdens.",
+      "Provides clear data on overall interest costs.",
+      "100% private calculations with zero credit-check tracking."
+    ],
+    whyChoose: "Our calculator includes detailed monthly amortization tables and visual charts, helping you compare loan parameters easily.",
+    useCases: [
+      "Calculating home loan EMI plans and overall payment timelines.",
+      "Planning personal or student loan payments.",
+      "Analyzing car loan options before dealership meetings.",
+      "Comparing different interest rate offers from banks."
+    ],
+    faqs: [
+      { question: "How is EMI calculated?", answer: "EMI is calculated using: EMI = [P x R x (1+R)^N]/[((1+R)^N)-1], where P is principal, R is monthly interest rate, and N is tenure in months." },
+      { question: "Can I adjust tenure in months?", answer: "Yes, the calculator supports inputting tenure in either years or months." },
+      { question: "What is reducing balance?", answer: "It means interest is calculated only on the remaining unpaid principal balance, not the original amount." }
+    ],
+    conclusion: "Understand your loan repayment schedules completely. Calculate your EMI on ToolWala AI.",
+    relatedTools: [
+      { name: "SIP Calculator", href: "/tools/sip-calculator" },
+      { name: "GST Calculator", href: "/tools/gst-calculator" }
+    ]
+  },
+  "gst-calculator": {
+    title: "GST Calculator",
+    intro: "Calculate GST and reverse GST values. Easily compute net prices, tax rates, and total amounts instantly.",
+    whatItDoes: "Our GST Calculator simplifies tax calculations by adding or removing GST percentages. It helps business owners, accountants, and shoppers determine SGST, CGST, IGST, and final prices in seconds.",
+    howToUse: [
+      "Input the initial price (inclusive or exclusive of tax).",
+      "Select the tax rate percentage (e.g. 5%, 12%, 18%, 28%).",
+      "Select 'Add GST' or 'Remove GST' depending on your calculation.",
+      "Review the tax value, SGST, CGST, and final price output.",
+      "Use the calculation history stack for multiple listings."
+    ],
+    keyFeatures: [
+      { title: "Add/Remove GST", desc: "Toggle between adding GST or extracting it from total prices." },
+      { title: "SGST & CGST Split", desc: "Automatically splits tax into State and Central tax segments." },
+      { title: "Tax Bracket Presets", desc: "Includes standard presets for quick calculations." }
+    ],
+    benefits: [
+      "Ensures error-free tax calculations on invoicing.",
+      "Speeds up receipt and accounts audits.",
+      "Helps shoppers verify hidden tax charges.",
+      "No tracking or ads—safe for financial audits."
+    ],
+    whyChoose: "Our GST Calculator handles both regular and reverse tax math, providing a clear split of tax segments for billing compliance.",
+    useCases: [
+      "Merchants drafting invoices with accurate tax segments.",
+      "Shoppers calculating overall discounts on taxable items.",
+      "Accountants filing monthly tax worksheets.",
+      "Freelancers calculating client billings with tax rates."
+    ],
+    faqs: [
+      { question: "What is reverse GST calculation?", answer: "It extracts the tax amount from a total price. Formula: GST = Original Cost - [Original Cost * (100 / (100 + GST%))]." },
+      { question: "Does it support local state tax?", answer: "Yes, it automatically splits the total tax into SGST (50%) and CGST (50%)." },
+      { question: "Can I input custom rates?", answer: "Yes, you can type any custom percentage rate to calculate taxes." }
+    ],
+    conclusion: "Compute product taxes and invoice splits instantly. Calculate GST values on ToolWala AI.",
+    relatedTools: [
+      { name: "Invoice Generator", href: "/tools/invoice-generator" },
+      { name: "EMI Calculator", href: "/tools/emi-calculator" }
+    ]
+  },
+  "youtube-money-calculator": {
+    title: "YouTube Money Calculator",
+    intro: "Estimate your YouTube channel revenue. Enter daily view counts, niche categories, and CPM rates to predict growth.",
+    whatItDoes: "Our YouTube Money Calculator estimates channel earnings using RPM and CPM metrics. It helps video creators estimate potential daily, monthly, and yearly income based on views and ad parameters.",
+    howToUse: [
+      "Input your estimated daily video views count.",
+      "Set the estimated CPM rate (cost per thousand views).",
+      "Select your channel niche to refine CPM suggestions.",
+      "Review estimated daily, monthly, and yearly income.",
+      "Check the milestone goals grid to plan content."
+    ],
+    keyFeatures: [
+      { title: "CPM & RPM Sliders", desc: "Custom sliders to test potential earnings at different rate brackets." },
+      { title: "Niche Modifiers", desc: "Provides CPM presets based on high-paying categories like finance and tech." },
+      { title: "Earning Calendars", desc: "Projects daily estimates into monthly and yearly cumulative milestones." }
+    ],
+    benefits: [
+      "Helps estimate potential earnings for new channel ideas.",
+      "Guides creators toward high-value niche topics.",
+      "Calculates views needed to meet income targets.",
+      "100% private estimate calculations."
+    ],
+    whyChoose: "Our calculator includes CPM data for different content niches, giving you more realistic revenue projections.",
+    useCases: [
+      "Video creators planning content categories.",
+      "Marketers calculating potential return on channel sponsorships.",
+      "Beginner creators evaluating monetization targets.",
+      "Sponsors estimating ad cost-per-view metrics."
+    ],
+    faqs: [
+      { question: "What is CPM vs RPM?", answer: "CPM is what advertisers pay per 1,000 views. RPM is what creators earn per 1,000 views after YouTube's revenue share." },
+      { question: "How does YouTube take share?", answer: "Google generally retains 45% of ad revenues, paying out 55% to partners." },
+      { question: "Does category affect CPM?", answer: "Yes, finance, business, and tech topics have significantly higher CPMs than gaming or vlog categories." }
+    ],
+    conclusion: "Plan your content strategy and estimate channel revenue. Calculate earnings on ToolWala AI.",
+    relatedTools: [
+      { name: "AdSense Revenue Calculator", href: "/tools/adsense-revenue-calculator" },
+      { name: "AI Caption Generator", href: "/tools/caption-generator" }
+    ]
+  },
+  "adsense-revenue-calculator": {
+    title: "Google AdSense Revenue Calculator",
+    intro: "Estimate your blog or website earnings. Compute potential revenue using page views, click-through rates (CTR), and CPC inputs.",
+    whatItDoes: "Our AdSense Revenue Calculator estimates website earnings based on traffic metrics. By entering traffic volume, click percentages, and cost-per-click values, it projects revenue targets.",
+    howToUse: [
+      "Input your estimated daily, monthly, or yearly page views count.",
+      "Set the average page Click-Through Rate (CTR) percentage.",
+      "Enter the estimated Cost Per Click (CPC) value.",
+      "Review the projected daily, monthly, and annual earnings.",
+      "Adjust traffic parameters to plan site scaling milestones."
+    ],
+    keyFeatures: [
+      { title: "CTR & CPC Modifiers", desc: "Fine-tune click and rate parameters to test different monetization models." },
+      { title: "Traffic Scales", desc: "Easily switch calculations between daily, monthly, and annual metrics." },
+      { title: "Growth Milestones", desc: "Estimates the traffic needed to reach specific monthly income goals." }
+    ],
+    benefits: [
+      "Helps evaluate the potential return on niche content sites.",
+      "Provides targets for traffic generation and SEO plans.",
+      "Shows the value of improving ad placement and page click rates.",
+      "100% private calculations with zero tracking."
+    ],
+    whyChoose: "Our calculator utilizes ad pricing models to deliver clear, realistic revenue projections based on traffic variables.",
+    useCases: [
+      "Bloggers planning niche content strategies.",
+      "Publishers estimating revenue for web properties.",
+      "SEO strategists calculating the ROI of targeted keywords.",
+      "App developers estimating ad revenue potential."
+    ],
+    faqs: [
+      { question: "What is AdSense CPC?", answer: "Cost Per Click is the amount you earn each time a user clicks on an ad displayed on your page." },
+      { question: "How do I calculate page RPM?", answer: "RPM = (Estimated Earnings / Page Views) * 1,000. It shows your average earnings per 1,000 views." },
+      { question: "Does traffic region matter?", answer: "Yes, traffic from Tier-1 countries (US, UK, Canada) generally has much higher CPCs than Tier-3 regions." }
+    ],
+    conclusion: "Plan your site's monetization and estimate ad revenue. Calculate earnings on ToolWala AI.",
+    relatedTools: [
+      { name: "YouTube Money Calculator", href: "/tools/youtube-money-calculator" },
+      { name: "Invoice Generator", href: "/tools/invoice-generator" }
+    ]
   }
 };

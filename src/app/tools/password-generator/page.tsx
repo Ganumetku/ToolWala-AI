@@ -11,6 +11,8 @@ import {
 import { toast } from 'sonner';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
+import { toolArticles } from '@/data/toolArticles';
+import ToolArticle from '@/components/ToolArticle';
 
 // SEO details
 const SEO_TITLE = "Free Password Generator – Secure Random Password Creator | ToolWala AI";
@@ -646,6 +648,10 @@ export default function PasswordGeneratorPage() {
         </section>
 
       </div>
+
+      {toolArticles['password-generator'] && (
+        <ToolArticle {...toolArticles['password-generator']} />
+      )}
     </div>
     </ToolVisibilityGuard>
   );

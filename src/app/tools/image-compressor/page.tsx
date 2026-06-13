@@ -5,6 +5,7 @@ import { useState, useRef } from 'react';
 import imageCompression from 'browser-image-compression';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
+import { formatBytes } from '@/lib/utils/format';
 
 export default function ImageCompressor() {
   const [originalFile, setOriginalFile] = useState<File | null>(null);
@@ -18,14 +19,6 @@ export default function ImageCompressor() {
   const [warningMessage, setWarningMessage] = useState<string | null>(null);
   
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const formatSize = (bytes: number) => {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-  };
 
   const calculateReduction = () => {
     if (!originalFile || !compressedFile) return 0;
@@ -261,7 +254,7 @@ export default function ImageCompressor() {
                   <div className="glass rounded-[2rem] border border-white/5 overflow-hidden flex flex-col shadow-2xl relative group">
                     <div className="absolute top-4 right-4 z-20">
                       <span className="text-[10px] font-black uppercase tracking-widest text-white/50 bg-black/60 px-4 py-2 rounded-xl backdrop-blur-md border border-white/10">
-                        {formatSize(originalFile.size)}
+                        {formatBytes(originalFile.size)}
                       </span>
                     </div>
                     <div className="bg-white/5 p-4 border-b border-white/5 flex justify-between items-center">
@@ -283,7 +276,7 @@ export default function ImageCompressor() {
                         </span>
                       )}
                       <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 bg-blue-500/20 px-4 py-2 rounded-xl backdrop-blur-md border border-blue-500/20 shadow-[0_0_20px_rgba(37,99,235,0.2)]">
-                        {compressedFile ? formatSize(compressedFile.size) : 'Ready'}
+                        {compressedFile ? formatBytes(compressedFile.size) : 'Ready'}
                       </span>
                     </div>
                     <div className="bg-blue-600/5 p-4 border-b border-white/5 flex justify-between items-center">

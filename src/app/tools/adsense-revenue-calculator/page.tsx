@@ -16,6 +16,8 @@ import {
 import { MeshGradient, FloatingParticles } from "@/components/BackgroundEffects";
 import ToolVisibilityGuard from "@/components/ToolVisibilityGuard";
 import { toolsData } from "@/data/tools";
+import { toolArticles } from "@/data/toolArticles";
+import ToolArticle from "@/components/ToolArticle";
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -1027,6 +1029,10 @@ export default function AdSenseRevenueCalculatorPage() {
           </section>
 
         </div>
+
+        {toolArticles['adsense-revenue-calculator'] && (
+          <ToolArticle {...toolArticles['adsense-revenue-calculator']} />
+        )}
       </div>
     </ToolVisibilityGuard>
   );

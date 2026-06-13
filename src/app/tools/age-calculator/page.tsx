@@ -9,6 +9,8 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
+import { toolArticles } from '@/data/toolArticles';
+import ToolArticle from '@/components/ToolArticle';
 
 const SEO_DESC = "Calculate your exact age in years, months, days, total weeks and next birthday instantly with ToolWala AI.";
 
@@ -503,6 +505,10 @@ export default function AgeCalculatorPage() {
           </section>
 
         </div>
+
+        {toolArticles['age-calculator'] && (
+          <ToolArticle {...toolArticles['age-calculator']} />
+        )}
       </div>
     </ToolVisibilityGuard>
   );

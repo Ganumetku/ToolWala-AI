@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { HelpCircle, ChevronDown, Sparkles, TrendingUp, Grid, Search } from 'lucide-react';
+import { HelpCircle, ChevronDown, Sparkles, TrendingUp, Grid, Search, ArrowRight } from 'lucide-react';
 import { toolsData, Tool } from '@/data/tools';
 import { fetchPublicTools } from '@/lib/tools';
 import { categoriesData, getToolsByCategory, CategoryMetadata } from '@/data/categories';
@@ -11,6 +11,7 @@ import CategoryHeader from '@/components/CategoryHeader';
 import CategorySidebar from '@/components/CategorySidebar';
 import CategorySearch from '@/components/CategorySearch';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
+import Link from 'next/link';
 
 interface CategoryPageClientProps {
   slug: string;
@@ -36,6 +37,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
   // Filter tools based on query and tabs
   const filteredTools = useMemo(() => {
     let result = categoryTools.filter(tool => {
+      if (!tool.isVisible) return false;
       const query = searchQuery.toLowerCase();
       return (
         tool.title.toLowerCase().includes(query) ||
@@ -55,7 +57,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
 
   // Separate trending tools in this category for the dedicated trending shelf
   const trendingShelfTools = useMemo(() => {
-    return categoryTools.filter(t => t.trending).slice(0, 3);
+    return categoryTools.filter(t => t.trending && t.isVisible).slice(0, 3);
   }, [categoryTools]);
 
   if (!mounted) {
@@ -124,7 +126,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
                       activeFilter === 'all' ? 'bg-white/5 text-white' : 'text-gray-500 hover:text-white'
                     }`}
                   >
-                    All ({categoryTools.length})
+                    All ({categoryTools.filter(t => t.isVisible).length})
                   </button>
                   <button
                     onClick={() => setActiveFilter('popular')}
@@ -132,7 +134,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
                       activeFilter === 'popular' ? 'bg-white/5 text-white' : 'text-gray-500 hover:text-white'
                     }`}
                   >
-                    Popular ({categoryTools.filter(t => t.popular).length})
+                    Popular ({categoryTools.filter(t => t.popular && t.isVisible).length})
                   </button>
                   <button
                     onClick={() => setActiveFilter('trending')}
@@ -176,7 +178,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
               </div>
 
               {/* FAQs Accordion */}
-              {category.faqs.length > 0 && (
+              {category.faqs && category.faqs.length > 0 && (
                 <div className="border-t border-white/5 pt-12">
                   <div className="flex items-center gap-2 mb-8">
                     <HelpCircle className="w-4.5 h-4.5 text-blue-400" />
@@ -206,7 +208,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
                                 exit={{ height: 0, opacity: 0 }}
                                 transition={{ duration: 0.2, ease: "easeInOut" }}
                               >
-                                <div className="px-5.5 pb-5.5 pt-0.5 border-t border-white/5 text-xs text-gray-400 leading-relaxed font-semibold">
+                                <div className="px-5.5 pb-5.5 pt-0.5 border-t border-white/5 text-xs text-gray-400 leading-relaxed font-semibold font-sans">
                                   {faq.answer}
                                 </div>
                               </motion.div>
@@ -218,6 +220,32 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
                   </div>
                 </div>
               )}
+
+              {/* Related Categories Grid */}
+              <div className="border-t border-white/5 pt-12 text-left">
+                <div className="flex items-center gap-2 mb-8">
+                  <Grid className="w-4.5 h-4.5 text-blue-500" />
+                  <h3 className="text-xs font-black uppercase tracking-widest text-white">Explore Other Folders</h3>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {categoriesData
+                    .filter(c => c.slug !== slug)
+                    .slice(0, 4)
+                    .map((cat) => (
+                      <Link
+                        key={cat.id}
+                        href={`/categories/${cat.slug}/`}
+                        className="p-5 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 transition-all group flex items-center justify-between"
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="text-xl">{cat.icon}</span>
+                          <span className="text-xs font-black text-gray-300 group-hover:text-white uppercase truncate">{cat.title}</span>
+                        </div>
+                        <ArrowRight className="w-3.5 h-3.5 text-gray-600 group-hover:text-blue-500 transition-colors shrink-0" />
+                      </Link>
+                    ))}
+                </div>
+              </div>
 
             </div>
 

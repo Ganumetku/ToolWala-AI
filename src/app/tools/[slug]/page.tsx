@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ChevronLeft, ShieldCheck, Sparkles, HelpCircle, Layers, ChevronDown } from 'lucide-react';
+import { ChevronLeft, ShieldCheck, Sparkles, HelpCircle, Layers, ChevronDown, ArrowRight } from 'lucide-react';
 import { prisma } from '@/lib/db';
 import { jsonDb } from '@/lib/jsonDb';
 import ToolFormRenderer from '@/components/ToolFormRenderer';
 import { MeshGradient } from '@/components/BackgroundEffects';
 import FAQAccordion from './FAQAccordion';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
+import ShareButtons from '@/components/ShareButtons';
 
 export const dynamic = 'force-static';
 
@@ -132,7 +133,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
           {/* Navigation link */}
           <Link 
             href="/tools" 
-            className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group"
+            className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group cursor-pointer"
           >
             <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             Back to Directory
@@ -151,6 +152,11 @@ export default async function DynamicToolPage({ params }: PageProps) {
                   <div>
                     <h1 className="text-3xl font-black text-white tracking-tighter uppercase">{tool.title}</h1>
                     <p className="text-gray-400 font-medium mt-1 font-sans">{tool.description}</p>
+                    
+                    {/* Reusable share component */}
+                    <div className="mt-4">
+                      <ShareButtons title={tool.title} />
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -221,16 +227,22 @@ export default async function DynamicToolPage({ params }: PageProps) {
 
           {/* Dynamic Related Tools list */}
           {relatedTools.length > 0 && (
-            <section className="py-16 border-t border-white/5 text-center">
-              <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em] mb-10">Recommended Category Utilities</h4>
-              <div className="flex flex-wrap justify-center gap-4">
+            <section className="py-16 border-t border-white/5">
+              <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em] mb-10 text-center select-none">Recommended Category Utilities</h4>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
                 {relatedTools.map((rt: any, i: number) => (
                   <Link 
                     key={i} 
-                    href={`/tools/${rt.slug}`}
-                    className="px-8 py-4 rounded-2xl bg-white/[0.02] border border-white/5 text-xs font-black uppercase tracking-widest text-gray-400 hover:text-white hover:bg-blue-600 hover:border-blue-600 hover:shadow-[0_0_20px_rgba(37,99,235,0.3)] transition-all transform hover:-translate-y-1"
+                    href={`/tools/${rt.slug}/`}
+                    className="p-5 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 hover:shadow-[0_0_20px_rgba(37,99,235,0.1)] transition-all flex flex-col justify-between group h-32 text-left"
                   >
-                    {rt.title}
+                    <span className="text-xs sm:text-sm font-black text-gray-300 group-hover:text-white transition-colors uppercase leading-tight">
+                      {rt.title}
+                    </span>
+                    <span className="text-[9px] font-black text-blue-500 uppercase tracking-widest flex items-center gap-1 select-none">
+                      Try Tool
+                      <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                    </span>
                   </Link>
                 ))}
               </div>

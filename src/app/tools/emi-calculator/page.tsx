@@ -10,6 +10,8 @@ import { PieChart, Pie, Cell, Tooltip as RechartsTooltip, ResponsiveContainer } 
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { toolsData } from '@/data/tools';
+import { toolArticles } from '@/data/toolArticles';
+import ToolArticle from '@/components/ToolArticle';
 
 const SEO_DESC = "Calculate loan EMI, total interest, and total payment instantly for home loan, car loan, personal loan and more.";
 
@@ -724,6 +726,10 @@ export default function EmiCalculatorPage() {
           </section>
 
         </div>
+
+        {toolArticles['emi-calculator'] && (
+          <ToolArticle {...toolArticles['emi-calculator']} />
+        )}
       </div>
     </ToolVisibilityGuard>
   );

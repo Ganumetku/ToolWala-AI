@@ -152,6 +152,7 @@ END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 -- Public: read live tools only
+DROP POLICY IF EXISTS "public_read_live_tools" ON tools;
 CREATE POLICY "public_read_live_tools" ON tools
   FOR SELECT USING (
     status = 'published' AND is_visible = true
@@ -164,39 +165,47 @@ CREATE POLICY "public_read_live_tools" ON tools
   );
 
 -- Admins: full access to tools
+DROP POLICY IF EXISTS "admin_all_tools" ON tools;
 CREATE POLICY "admin_all_tools" ON tools
   FOR ALL USING (
     public.is_admin()
   );
 
 -- Public: read categories
+DROP POLICY IF EXISTS "public_read_categories" ON categories;
 CREATE POLICY "public_read_categories" ON categories
   FOR SELECT USING (true);
 
+DROP POLICY IF EXISTS "admin_all_categories" ON categories;
 CREATE POLICY "admin_all_categories" ON categories
   FOR ALL USING (
     public.is_admin()
   );
 
 -- Analytics: anyone can insert (tracking), admins read
+DROP POLICY IF EXISTS "public_insert_analytics" ON tool_analytics;
 CREATE POLICY "public_insert_analytics" ON tool_analytics
   FOR INSERT WITH CHECK (true);
 
+DROP POLICY IF EXISTS "admin_read_analytics" ON tool_analytics;
 CREATE POLICY "admin_read_analytics" ON tool_analytics
   FOR SELECT USING (
     public.is_admin()
   );
 
 -- Profiles: users read own, admins read all
+DROP POLICY IF EXISTS "users_read_own_profile" ON profiles;
 CREATE POLICY "users_read_own_profile" ON profiles
   FOR SELECT USING (auth.uid() = id);
 
+DROP POLICY IF EXISTS "admin_all_profiles" ON profiles;
 CREATE POLICY "admin_all_profiles" ON profiles
   FOR ALL USING (
     public.is_admin()
   );
 
 -- Scheduled publishes: admin only
+DROP POLICY IF EXISTS "admin_scheduled_publishes" ON scheduled_publishes;
 CREATE POLICY "admin_scheduled_publishes" ON scheduled_publishes
   FOR ALL USING (
     public.is_admin()

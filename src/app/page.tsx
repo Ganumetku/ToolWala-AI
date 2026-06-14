@@ -3,8 +3,8 @@
 import { useState, useRef, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Sparkles, Rocket, ShieldCheck, Zap, 
+import {
+  Sparkles, Rocket, ShieldCheck, Zap,
   Search, Star, ChevronRight,
   Layers, Users, TrendingUp, Clock, Grid, ArrowRight, MousePointerClick,
   Shield, Lock, FolderLock, FileText, CheckCircle2, Award
@@ -41,7 +41,7 @@ export default function Home() {
   const [loadEffects, setLoadEffects] = useState(false);
   const [recentToolIds, setRecentToolIds] = useState<string[]>([]);
   const [mergedTools, setMergedTools] = useState<Tool[]>(toolsData);
-  
+
   const toolsSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!mounted) return;
-    fetchPublicTools().then(setMergedTools).catch(() => {});
+    fetchPublicTools().then(setMergedTools).catch(() => { });
   }, [mounted]);
 
   const recentTools = useMemo(() => {
@@ -102,14 +102,14 @@ export default function Home() {
   const filteredTools = useMemo(() => {
     return mergedTools.filter(tool => {
       if (!tool.isVisible) return false;
-      const matchesSearch = 
+      const matchesSearch =
         tool.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         tool.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         tool.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
         tool.category.toLowerCase().includes(searchQuery.toLowerCase());
-        
+
       const matchesCategory = activeCategory === "All" || tool.category === activeCategory;
-      
+
       return matchesSearch && matchesCategory;
     });
   }, [mergedTools, searchQuery, activeCategory]);
@@ -144,19 +144,19 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-[#030712] text-white relative overflow-hidden">
-      
+
       {/* 1. Hero Section */}
       <section className="relative min-h-[90vh] flex flex-col items-center justify-center py-24 md:py-32 overflow-hidden">
         {loadEffects && <MeshGradient />}
         {loadEffects && <FloatingParticles />}
-        
+
         {/* Background Radial Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-blue-600/5 rounded-full blur-[140px] pointer-events-none" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          
+
           {/* Glowing Badge */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-blue-400 text-xs font-black tracking-widest mb-8 shadow-2xl hover:border-blue-500/30 transition-colors cursor-pointer select-none"
@@ -167,7 +167,7 @@ export default function Home() {
             <ChevronRight className="w-3.5 h-3.5 text-gray-500" />
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -175,11 +175,11 @@ export default function Home() {
           >
             Supercharge Your Daily <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 animate-gradient">
-              Workflow with AI 
+              Workflow with AI
             </span>
           </motion.h1>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -187,9 +187,9 @@ export default function Home() {
           >
             Free AI utilities that run 100% locally in your browser. No registration, no latency, no server uploads. Your data stays entirely on your device.
           </motion.p>
-          
+
           {/* Interactive Hero Search */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3 }}
@@ -208,7 +208,7 @@ export default function Home() {
                   className="block w-full border-0 bg-transparent py-4.5 pl-4 pr-4 text-white placeholder:text-gray-500 focus:ring-0 text-base sm:text-lg font-bold outline-none"
                   placeholder="Search 25+ offline utilities..."
                 />
-                <button 
+                <button
                   onClick={scrollToTools}
                   className="hidden md:flex items-center gap-2 rounded-[1.5rem] bg-blue-600 hover:bg-blue-500 px-8 py-4.5 text-xs font-black uppercase tracking-widest text-white shadow-xl active:scale-95 transition-all"
                 >
@@ -238,11 +238,11 @@ export default function Home() {
               </button>
             ))}
           </motion.div>
-          
+
         </div>
 
         {/* Scroll Indicator */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
@@ -251,7 +251,7 @@ export default function Home() {
         >
           <span className="text-[9px] font-black uppercase tracking-[0.3em] text-gray-600 group-hover:text-blue-500 transition-colors">Start Discovering</span>
           <div className="w-5 h-8 border-2 border-white/10 rounded-full flex justify-center p-1">
-            <motion.div 
+            <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
               className="w-1 h-1 bg-blue-500 rounded-full"
@@ -263,13 +263,13 @@ export default function Home() {
       {/* 2. Stats & Trust Section */}
       <section className="py-24 border-y border-white/5 bg-white/[0.01] relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* Animated Counters Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 max-w-6xl mx-auto">
-            <StatCard icon={<Users />} value="50K+" label="Total Users" color="purple" />
-            <StatCard icon={<Zap />} value="1.2M+" label="Tools Generated" color="blue" />
-            <StatCard icon={<FileText />} value="850K+" label="PDFs Processed" color="amber" />
-            <StatCard icon={<Sparkles />} value="2.4M+" label="Images Edited" color="emerald" />
+            <StatCard icon={<Users />} value="1k+" label="Total Users" color="purple" />
+            <StatCard icon={<Zap />} value="70+" label="Tools Generated" color="blue" />
+            <StatCard icon={<FileText />} value="20+" label="PDFs Processed" color="amber" />
+            <StatCard icon={<Sparkles />} value="15+" label="Images Edited" color="emerald" />
           </div>
 
           {/* Premium Trust Badges */}
@@ -311,7 +311,7 @@ export default function Home() {
       {/* 3. Popular Categories Section */}
       <section className="py-24 relative overflow-hidden bg-black/20 border-b border-white/5">
         <div className="absolute top-1/2 left-0 w-96 h-96 bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
-        
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-[10px] font-black uppercase tracking-widest border border-purple-500/20 mb-4">
@@ -335,7 +335,7 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-12">
-            <Link 
+            <Link
               href="/categories"
               className="inline-flex items-center gap-2 px-6 py-3.5 border border-white/5 hover:border-blue-500/30 bg-white/[0.02] hover:bg-white/[0.05] text-[10px] font-black uppercase tracking-widest text-gray-300 hover:text-white rounded-xl transition-all active:scale-95 shadow-xl cursor-pointer"
             >
@@ -418,33 +418,33 @@ export default function Home() {
                 The ToolWala Edge
               </div>
               <h2 className="text-4xl md:text-5xl font-black text-white leading-tight tracking-tight mb-8">
-                Professional tools, <br /> 
+                Professional tools, <br />
                 <span className="text-blue-500">Zero complexity.</span>
               </h2>
               <p className="text-base text-gray-400 font-medium leading-relaxed mb-12">
                 We bridge the gap between complex AI models and everyday utility. No confusing interfaces, no subscription traps—just powerful AI that works for you.
               </p>
-              
+
               <div className="grid gap-10">
-                <FeatureItem 
-                  icon={<Zap />} 
-                  title="Edge Processing" 
-                  desc="Most tools run directly in your browser, ensuring lightning-fast results without server delays." 
+                <FeatureItem
+                  icon={<Zap />}
+                  title="Edge Processing"
+                  desc="Most tools run directly in your browser, ensuring lightning-fast results without server delays."
                 />
-                <FeatureItem 
-                  icon={<ShieldCheck />} 
-                  title="Encrypted Data" 
-                  desc="Your files never leave your device. We use end-to-end encryption for any cloud-based processing." 
+                <FeatureItem
+                  icon={<ShieldCheck />}
+                  title="Encrypted Data"
+                  desc="Your files never leave your device. We use end-to-end encryption for any cloud-based processing."
                 />
-                <FeatureItem 
-                  icon={<Star />} 
-                  title="Curated Models" 
-                  desc="We select and fine-tune the best AI models specifically for each tool's unique purpose." 
+                <FeatureItem
+                  icon={<Star />}
+                  title="Curated Models"
+                  desc="We select and fine-tune the best AI models specifically for each tool's unique purpose."
                 />
               </div>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -454,7 +454,7 @@ export default function Home() {
               <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-[#0f172a] shadow-2xl flex items-center justify-center border border-white/10">
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
                 <div className="flex flex-col items-center gap-10 text-center px-12 relative z-10">
-                  <motion.div 
+                  <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                     className="w-40 h-40 rounded-full border-4 border-dashed border-blue-500/30 flex items-center justify-center p-8"
@@ -467,11 +467,11 @@ export default function Home() {
                     <h3 className="text-3xl font-black text-white uppercase tracking-tighter">AI Processing <br /> Engine 2.0</h3>
                     <div className="flex justify-center gap-3">
                       {[...Array(3)].map((_, i) => (
-                        <motion.div 
+                        <motion.div
                           key={i}
                           animate={{ scale: [1, 1.5, 1], opacity: [0.3, 1, 0.3] }}
                           transition={{ duration: 2, repeat: Infinity, delay: i * 0.4 }}
-                          className="w-3 h-3 rounded-full bg-blue-500" 
+                          className="w-3 h-3 rounded-full bg-blue-500"
                         />
                       ))}
                     </div>
@@ -492,9 +492,9 @@ export default function Home() {
       {/* Interactive Tool Search Overlay Area */}
       <section ref={toolsSectionRef} id="tools-section" className="relative py-24 min-h-screen">
         <div className="absolute inset-0 bg-grid-pattern opacity-[0.015] pointer-events-none" />
-        
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          
+
           <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6 mb-16 border-b border-white/5 pb-10">
             <div>
               <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight">Tools Directory</h2>
@@ -505,44 +505,40 @@ export default function Home() {
             <div className="flex flex-wrap gap-2 p-1.5 bg-black/40 border border-white/5 rounded-2xl w-full xl:w-auto overflow-x-auto">
               <button
                 onClick={() => { setActiveTab('all'); setActiveCategory('All'); }}
-                className={`flex-1 xl:flex-initial flex items-center gap-2 justify-center px-5 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer ${
-                  activeTab === 'all'
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' 
-                    : 'text-gray-500 hover:text-white'
-                }`}
+                className={`flex-1 xl:flex-initial flex items-center gap-2 justify-center px-5 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer ${activeTab === 'all'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
+                  : 'text-gray-500 hover:text-white'
+                  }`}
               >
                 <Grid className="w-3.5 h-3.5" />
                 All Utilities ({filteredTools.length})
               </button>
               <button
                 onClick={() => setActiveTab('featured')}
-                className={`flex-1 xl:flex-initial flex items-center gap-2 justify-center px-5 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer ${
-                  activeTab === 'featured'
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' 
-                    : 'text-gray-500 hover:text-white'
-                }`}
+                className={`flex-1 xl:flex-initial flex items-center gap-2 justify-center px-5 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer ${activeTab === 'featured'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
+                  : 'text-gray-500 hover:text-white'
+                  }`}
               >
                 <Star className="w-3.5 h-3.5" />
                 Featured Flagships
               </button>
               <button
                 onClick={() => setActiveTab('trending')}
-                className={`flex-1 xl:flex-initial flex items-center gap-2 justify-center px-5 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer ${
-                  activeTab === 'trending'
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' 
-                    : 'text-gray-500 hover:text-white'
-                }`}
+                className={`flex-1 xl:flex-initial flex items-center gap-2 justify-center px-5 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer ${activeTab === 'trending'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
+                  : 'text-gray-500 hover:text-white'
+                  }`}
               >
                 <TrendingUp className="w-3.5 h-3.5" />
                 Trending Hot
               </button>
               <button
                 onClick={() => setActiveTab('recent')}
-                className={`flex-1 xl:flex-initial flex items-center gap-2 justify-center px-5 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer ${
-                  activeTab === 'recent'
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' 
-                    : 'text-gray-500 hover:text-white'
-                }`}
+                className={`flex-1 xl:flex-initial flex items-center gap-2 justify-center px-5 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer ${activeTab === 'recent'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
+                  : 'text-gray-500 hover:text-white'
+                  }`}
               >
                 <Clock className="w-3.5 h-3.5" />
                 Recently Added
@@ -581,11 +577,10 @@ export default function Home() {
                       <button
                         key={category}
                         onClick={() => setActiveCategory(category)}
-                        className={`whitespace-nowrap px-4.5 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-wider transition-all duration-200 cursor-pointer ${
-                          activeCategory === category 
-                            ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20' 
-                            : 'bg-white/5 text-gray-500 hover:text-white border border-white/5'
-                        }`}
+                        className={`whitespace-nowrap px-4.5 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-wider transition-all duration-200 cursor-pointer ${activeCategory === category
+                          ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
+                          : 'bg-white/5 text-gray-500 hover:text-white border border-white/5'
+                          }`}
                       >
                         {category}
                       </button>
@@ -603,8 +598,8 @@ export default function Home() {
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
                       {recentTools.map((tool) => (
-                        <Link 
-                          key={tool.id} 
+                        <Link
+                          key={tool.id}
                           href={tool.href}
                           className="flex items-center gap-3.5 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-blue-500/30 hover:bg-blue-600/5 transition-all group"
                         >
@@ -625,9 +620,9 @@ export default function Home() {
                 {filteredTools.length > 0 ? (
                   <div className="grid grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-3 xl:grid-cols-4">
                     {filteredTools.map((tool) => (
-                      <ToolCard 
-                        key={tool.id} 
-                        {...tool} 
+                      <ToolCard
+                        key={tool.id}
+                        {...tool}
                         isPopular={tool.popular}
                         isTrending={tool.trending}
                       />
@@ -640,7 +635,7 @@ export default function Home() {
                     </div>
                     <h3 className="text-2xl font-black text-white mb-2 tracking-tight">No tools found</h3>
                     <p className="text-gray-500 max-w-sm mx-auto text-sm font-medium">Try checking tag queries or clear filters to view all directories.</p>
-                    <button 
+                    <button
                       onClick={() => { setSearchQuery(""); setActiveCategory("All"); }}
                       className="mt-6 px-6 py-3 rounded-xl bg-blue-600 text-white font-black uppercase tracking-widest text-xs hover:bg-blue-500 transition-all shadow-md"
                     >

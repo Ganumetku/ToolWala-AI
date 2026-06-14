@@ -199,8 +199,11 @@ function parseTable(tblNode: Element): ParsedTable {
     const directTcNodes: Element[] = [];
     for (let i = 0; i < trNode.childNodes.length; i++) {
       const child = trNode.childNodes[i];
-      if (child.nodeType === 1 && (child.nodeName === 'w:tc' || child.localName === 'tc')) {
-        directTcNodes.push(child as Element);
+      if (child.nodeType === 1) {
+        const el = child as Element;
+        if (el.nodeName === 'w:tc' || el.localName === 'tc') {
+          directTcNodes.push(el);
+        }
       }
     }
 

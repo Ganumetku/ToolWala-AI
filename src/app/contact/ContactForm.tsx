@@ -35,7 +35,12 @@ export default function ContactForm() {
     const promise = fetch('/api/contact/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({
+        name: `${formData.firstName} ${formData.lastName}`.trim(),
+        email: formData.email,
+        message: formData.message,
+        honeypot: formData.honeypot,
+      }),
     }).then(async (response) => {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Something went wrong');

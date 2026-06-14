@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FileText, Download, UploadCloud,
@@ -32,7 +32,27 @@ export default function WordToPdf() {
   const [outputName, setOutputName] = useState("converted_document");
   const [isDraggingOverUpload, setIsDraggingOverUpload] = useState(false);
 
+  const [pdfjs, setPdfjs] = useState<any>(null);
+  const [thumbnailUrls, setThumbnailUrls] = useState<string[]>([]);
+  const [isGeneratingPreviews, setIsGeneratingPreviews] = useState(false);
+  const [totalPages, setTotalPages] = useState<number>(0);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Initialize and load PDF.js dynamically using unpkg worker source for stable Next.js/Turbopack compatibility
+  useEffect(() => {
+    const loadPdfjs = async () => {
+      try {
+        const lib = await import('pdfjs-dist');
+        lib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${lib.version}/build/pdf.worker.min.mjs`;
+        setPdfjs(lib);
+      } catch (err) {
+        console.error("Failed to load pdfjs-dist:", err);
+        toast.error("Failed to initialize document preview engine.");
+      }
+    };
+    loadPdfjs();
+  }, []);
 
   const formatBytes = (bytes: number) => {
     if (bytes === 0) return '0 Bytes';
@@ -58,6 +78,8 @@ export default function WordToPdf() {
     setIsConverting(false);
     setIsCompleted(false);
     setConvertedFile(null);
+    setThumbnailUrls([]);
+    setTotalPages(0);
     setProgress(0);
     setError(null);
     setErrorMsg("");
@@ -67,8 +89,53 @@ export default function WordToPdf() {
       const arrayBuffer = await file.arrayBuffer();
       setDocxBytes(arrayBuffer);
       setIsUploading(false);
+
+      // Perform background conversion for preview
+      if (pdfjs) {
+        setIsGeneratingPreviews(true);
+        try {
+          const pdfBlob = await convertDocxToPdf(arrayBuffer);
+          setConvertedFile(pdfBlob);
+
+          const pdfData = new Uint8Array(await pdfBlob.arrayBuffer());
+          const loadingTask = pdfjs.getDocument({ data: pdfData });
+          const doc = await loadingTask.promise;
+          setTotalPages(doc.numPages);
+
+          const urls: string[] = [];
+          const pagesToRender = Math.min(doc.numPages, 8);
+          for (let i = 1; i <= pagesToRender; i++) {
+            try {
+              const page = await doc.getPage(i);
+              const viewport = page.getViewport({ scale: 0.25 });
+              const canvas = document.createElement('canvas');
+              canvas.width = viewport.width;
+              canvas.height = viewport.height;
+              const context = canvas.getContext('2d');
+              if (context) {
+                context.fillStyle = '#ffffff';
+                context.fillRect(0, 0, canvas.width, canvas.height);
+                await page.render({
+                  canvasContext: context,
+                  viewport: viewport,
+                }).promise;
+                urls.push(canvas.toDataURL('image/jpeg', 0.85));
+              }
+            } catch (err) {
+              console.error(`Thumbnail failed for page ${i}`, err);
+              urls.push('');
+            }
+          }
+          setThumbnailUrls(urls);
+        } catch (previewErr) {
+          console.error("Preview generation failed:", previewErr);
+        } finally {
+          setIsGeneratingPreviews(false);
+        }
+      }
     } catch (err: any) {
       setIsUploading(false);
+      setIsGeneratingPreviews(false);
       console.error("Failed to load Word file:", err);
       setError("Failed to parse Word document. It may be corrupted or unsupported.");
       toast.error("Failed to parse Word document.");
@@ -92,6 +159,8 @@ export default function WordToPdf() {
     setDocxFile(null);
     setDocxBytes(null);
     setConvertedFile(null);
+    setThumbnailUrls([]);
+    setTotalPages(0);
     setOutputName("converted_document");
     setProgress(0);
     setIsUploading(false);
@@ -131,8 +200,8 @@ export default function WordToPdf() {
         });
       }, 150);
 
-      // Perform DOCX to PDF conversion
-      const pdfBlob = await convertDocxToPdf(docxBytes);
+      // Perform DOCX to PDF conversion (using background converted file if available)
+      const pdfBlob = convertedFile || await convertDocxToPdf(docxBytes);
       
       clearInterval(progressInterval);
       setProgress(100);
@@ -332,7 +401,10 @@ export default function WordToPdf() {
                         </div>
                         <div className="overflow-hidden">
                           <p className="text-sm font-bold text-white truncate max-w-xs sm:max-w-md">{docxFile.name}</p>
-                          <p className="text-xs text-gray-500 mt-0.5 font-medium font-sans">{formatBytes(docxFile.size)}</p>
+                          <p className="text-xs text-gray-500 mt-0.5 font-medium font-sans">
+                            {formatBytes(docxFile.size)}
+                            {totalPages > 0 && ` • ${totalPages} pages`}
+                          </p>
                         </div>
                       </div>
                       <button 
@@ -357,6 +429,43 @@ export default function WordToPdf() {
                       <TrustBadge icon="⚙️" title="Local Processing" desc="Executed on device" />
                       <TrustBadge icon="⏳" title="Fast Conversion" desc="Completed in seconds" />
                       <TrustBadge icon="💸" title="Free Forever" desc="No limits or caps" />
+                    </div>
+
+                    {/* PDF Page Previews Grid */}
+                    <div className="space-y-3 pt-2">
+                      <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">
+                        Document Page Previews {totalPages > 8 && `(First 8 of ${totalPages} pages)`}
+                      </h4>
+
+                      {isGeneratingPreviews || (docxFile && thumbnailUrls.length === 0) ? (
+                        <div className="flex flex-col items-center justify-center p-12 bg-white/[0.01] border border-white/5 rounded-3xl gap-4">
+                          <RefreshCw className="w-5 h-5 text-blue-500 animate-spin" />
+                          <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Generating page previews...</p>
+                        </div>
+                      ) : (
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-h-[360px] overflow-y-auto pr-2 custom-scrollbar">
+                          {thumbnailUrls.map((url, idx) => {
+                            const pageNum = idx + 1;
+                            return (
+                              <div 
+                                key={idx}
+                                className="relative border border-white/5 rounded-2xl overflow-hidden aspect-[3/4] bg-white/[0.02] flex flex-col justify-between transition-all group hover:border-white/10"
+                              >
+                                <div className="flex-1 flex items-center justify-center p-2 relative overflow-hidden bg-white/5">
+                                  {url ? (
+                                    <img src={url} alt={`Page ${pageNum}`} className="max-h-full max-w-full object-contain rounded shadow-md transition-transform group-hover:scale-[1.02]" />
+                                  ) : (
+                                    <div className="text-center text-[10px] text-gray-600 font-bold uppercase">Page {pageNum}</div>
+                                  )}
+                                </div>
+                                <div className="p-2 text-center text-[9px] font-black uppercase tracking-widest bg-[#030712] border-t border-white/5 text-gray-500">
+                                  Page {pageNum}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
                   </div>
 

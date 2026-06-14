@@ -34,7 +34,14 @@ interface ParsedTable {
   rows: ParsedTableRow[];
 }
 
-type ParsedElement = ParsedParagraph | ParsedTable;
+interface ParsedImage {
+  type: 'image';
+  rId: string;
+  widthPt: number;
+  heightPt: number;
+}
+
+type ParsedElement = ParsedParagraph | ParsedTable | ParsedImage;
 
 // Helper to get element's children namespace-agnostically
 function getElementsByLocalName(parent: Element, localName: string): Element[] {
@@ -185,6 +192,62 @@ function parseParagraph(pNode: Element): ParsedParagraph {
   return { type, alignment, indent, bullet, numbering, words, isPageBreak };
 }
 
+function parseDrawing(drawingNode: Element): ParsedImage | null {
+  const blips = getElementsByLocalName(drawingNode, 'blip');
+  if (blips.length === 0) return null;
+  const blip = blips[0];
+  
+  let rId = '';
+  for (let j = 0; j < blip.attributes.length; j++) {
+    const attr = blip.attributes[j];
+    if (attr.localName === 'embed') {
+      rId = attr.value;
+      break;
+    }
+  }
+  if (!rId) return null;
+
+  const extents = getElementsByLocalName(drawingNode, 'extent');
+  let widthPt = 400; // default width
+  let heightPt = 300; // default height
+  if (extents.length > 0) {
+    const extent = extents[0];
+    const cx = parseInt(extent.getAttribute('cx') || '', 10);
+    const cy = parseInt(extent.getAttribute('cy') || '', 10);
+    if (!isNaN(cx) && !isNaN(cy)) {
+      widthPt = cx / 12700;
+      heightPt = cy / 12700;
+    }
+  }
+
+  return {
+    type: 'image',
+    rId,
+    widthPt,
+    heightPt
+  };
+}
+
+function parseParagraphNode(pNode: Element): ParsedElement[] {
+  const drawings = getElementsByLocalName(pNode, 'drawing');
+  if (drawings.length > 0) {
+    const parsedElements: ParsedElement[] = [];
+    for (const drawing of drawings) {
+      const img = parseDrawing(drawing);
+      if (img) {
+        parsedElements.push(img);
+      }
+    }
+    const textNodes = getElementsByLocalName(pNode, 't');
+    if (textNodes.length > 0) {
+      parsedElements.push(parseParagraph(pNode));
+    }
+    return parsedElements;
+  }
+  
+  return [parseParagraph(pNode)];
+}
+
 function parseTable(tblNode: Element): ParsedTable {
   const rows: ParsedTableRow[] = [];
   const trNodes = getElementsByLocalName(tblNode, 'tr');
@@ -216,7 +279,7 @@ function parseTable(tblNode: Element): ParsedTable {
         if (child.nodeType === 1) {
           const el = child as Element;
           if (el.localName === 'p') {
-            elements.push(parseParagraph(el));
+            elements.push(...parseParagraphNode(el));
           } else if (el.localName === 'tbl') {
             elements.push(parseTable(el));
           }
@@ -260,6 +323,53 @@ export async function convertDocxToPdf(arrayBuffer: ArrayBuffer): Promise<Blob> 
     throw new Error('Invalid DOCX: missing body structure');
   }
 
+  // Parse relationship ID mappings
+  const relsXmlText = await zip.file('word/_rels/document.xml.rels')?.async('text');
+  const imageRels: Record<string, string> = {};
+  if (relsXmlText) {
+    const relsDoc = parser.parseFromString(relsXmlText, 'application/xml');
+    const relationships = getElementsByLocalName(relsDoc.documentElement, 'Relationship');
+    for (const rel of relationships) {
+      const id = rel.getAttribute('Id');
+      const type = rel.getAttribute('Type');
+      const target = rel.getAttribute('Target');
+      if (id && target && type?.includes('relationships/image')) {
+        imageRels[id] = target;
+      }
+    }
+  }
+
+  // Extract images from zip into base64 strings
+  const loadedImages: Record<string, { dataUrl: string; format: string }> = {};
+  for (const [rId, target] of Object.entries(imageRels)) {
+    let targetPath = target;
+    if (!targetPath.startsWith('word/')) {
+      if (targetPath.startsWith('/word/')) {
+        targetPath = targetPath.substring(1);
+      } else {
+        targetPath = 'word/' + targetPath;
+      }
+    }
+    const imageFile = zip.file(targetPath);
+    if (imageFile) {
+      try {
+        const base64Data = await imageFile.async('base64');
+        const extension = targetPath.split('.').pop()?.toLowerCase() || 'png';
+        let format = 'PNG';
+        if (['jpg', 'jpeg'].includes(extension)) format = 'JPEG';
+        else if (extension === 'gif') format = 'GIF';
+        else if (extension === 'webp') format = 'WEBP';
+
+        loadedImages[rId] = {
+          dataUrl: `data:image/${extension === 'jpg' ? 'jpeg' : extension};base64,${base64Data}`,
+          format
+        };
+      } catch (err) {
+        console.error(`Failed to load image for rId ${rId}:`, err);
+      }
+    }
+  }
+
   // Parse elements sequentially
   const elements: ParsedElement[] = [];
   for (let i = 0; i < body.childNodes.length; i++) {
@@ -267,7 +377,7 @@ export async function convertDocxToPdf(arrayBuffer: ArrayBuffer): Promise<Blob> 
     if (child.nodeType === 1) {
       const el = child as Element;
       if (el.localName === 'p') {
-        elements.push(parseParagraph(el));
+        elements.push(...parseParagraphNode(el));
       } else if (el.localName === 'tbl') {
         elements.push(parseTable(el));
       }
@@ -409,16 +519,25 @@ export async function convertDocxToPdf(arrayBuffer: ArrayBuffer): Promise<Blob> 
     const colWidth = contentWidth / numCols;
 
     for (const row of table.rows) {
-      // Step 1: Wrap cell paragraphs separately to determine total row height
+      // Step 1: Wrap cell paragraphs/images separately to determine total row height
       const cellHeights: number[] = [];
       
       for (let colIdx = 0; colIdx < row.cells.length; colIdx++) {
         const cell = row.cells[colIdx];
         let cellYTemp = 0;
         
-        // Temporarily render text elements to measure size height
         for (const element of cell.elements) {
-          if ('words' in element) {
+          if (element.type === 'image') {
+            const img = element as ParsedImage;
+            let displayWidth = img.widthPt;
+            let displayHeight = img.heightPt;
+            const maxCellWidth = colWidth - 16;
+            if (displayWidth > maxCellWidth) {
+              const ratio = maxCellWidth / displayWidth;
+              displayHeight = displayHeight * ratio;
+            }
+            cellYTemp += displayHeight + 6;
+          } else if ('words' in element) {
             // Render paragraph in a virtual height block (no drawing)
             const lines: RichWord[][] = [];
             let currentLine: RichWord[] = [];
@@ -468,15 +587,34 @@ export async function convertDocxToPdf(arrayBuffer: ArrayBuffer): Promise<Blob> 
         doc.setLineWidth(0.8);
         doc.rect(cellX, y, colWidth, rowHeight);
 
-        // Draw Cell Paragraphs inside cell borders
+        // Draw Cell Content inside cell borders
         let innerY = y + 6;
         const savedY = y;
         
         // Redirect y temporarily
         y = innerY;
         for (const element of cell.elements) {
-          if ('words' in element) {
-            y = drawParagraph(element, cellX + 8, colWidth - 16);
+          if (element.type === 'image') {
+            const img = element as ParsedImage;
+            const loadedImg = loadedImages[img.rId];
+            if (loadedImg) {
+              let displayWidth = img.widthPt;
+              let displayHeight = img.heightPt;
+              const maxCellWidth = colWidth - 16;
+              if (displayWidth > maxCellWidth) {
+                const ratio = maxCellWidth / displayWidth;
+                displayWidth = maxCellWidth;
+                displayHeight = displayHeight * ratio;
+              }
+              try {
+                doc.addImage(loadedImg.dataUrl, loadedImg.format, cellX + 8, y, displayWidth, displayHeight);
+              } catch (err) {
+                console.error("Failed to add cell image:", err);
+              }
+              y += displayHeight + 6;
+            }
+          } else if ('words' in element) {
+            y = drawParagraph(element as ParsedParagraph, cellX + 8, colWidth - 16);
           }
         }
         // Restore y
@@ -489,10 +627,40 @@ export async function convertDocxToPdf(arrayBuffer: ArrayBuffer): Promise<Blob> 
     }
   };
 
+  const drawImage = (img: ParsedImage): number => {
+    const loadedImg = loadedImages[img.rId];
+    if (!loadedImg) return y;
+
+    let displayWidth = img.widthPt;
+    let displayHeight = img.heightPt;
+    if (displayWidth > contentWidth) {
+      const ratio = contentWidth / displayWidth;
+      displayWidth = contentWidth;
+      displayHeight = displayHeight * ratio;
+    }
+
+    if (y + displayHeight > bottomThreshold) {
+      doc.addPage();
+      pageNumber++;
+      y = margin;
+    }
+
+    const imageX = margin + (contentWidth - displayWidth) / 2;
+    try {
+      doc.addImage(loadedImg.dataUrl, loadedImg.format, imageX, y, displayWidth, displayHeight);
+    } catch (err) {
+      console.error("Failed to add image to jsPDF:", err);
+    }
+
+    return y + displayHeight + 12;
+  };
+
   // Process all main parsed layout elements
   for (const element of elements) {
-    if ('type' in element && element.type === 'table') {
+    if (element.type === 'table') {
       drawTable(element as ParsedTable);
+    } else if (element.type === 'image') {
+      y = drawImage(element as ParsedImage);
     } else {
       const para = element as ParsedParagraph;
       

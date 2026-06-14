@@ -492,6 +492,23 @@ export const toolsData: Tool[] = [
     updatedAt: '2024-01-01T00:00:00Z'
   },
   {
+    id: "word-to-pdf-converter",
+    title: "Word to PDF Converter",
+    description: "Convert Word documents (.docx) into PDF files locally and securely.",
+    icon: "📄",
+    href: "/tools/word-to-pdf-converter",
+    slug: "word-to-pdf-converter",
+    category: "PDF Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["word", "pdf", "docx", "convert", "docx to pdf", "document"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2026-06-14T00:00:00Z',
+    updatedAt: '2026-06-14T00:00:00Z'
+  },
+  {
     id: "age-calculator",
     title: "Age Calculator",
     description: "Calculate exact age in years, months, days and next birthday instantly.",

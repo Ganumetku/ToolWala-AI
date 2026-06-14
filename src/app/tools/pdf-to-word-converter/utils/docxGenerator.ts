@@ -7,7 +7,11 @@ import {
   HeadingLevel,
   ImageRun,
   PageBreak,
-  BorderStyle
+  BorderStyle,
+  HorizontalPositionRelativeFrom,
+  HorizontalPositionAlign,
+  VerticalPositionRelativeFrom,
+  VerticalPositionAlign
 } from 'docx';
 import { ExtractedPage, ExtractedLine, ConversionMode } from '../types';
 
@@ -85,11 +89,24 @@ export async function generateDocx(
             children: [
               new ImageRun({
                 data: imageBytes,
+                type: 'png',
                 transformation: {
-                  width: page.pageWidth,
-                  height: page.pageHeight
+                  width: page.pageWidth * (96 / 72),
+                  height: page.pageHeight * (96 / 72)
+                },
+                floating: {
+                  horizontalPosition: {
+                    relative: HorizontalPositionRelativeFrom.PAGE,
+                    align: HorizontalPositionAlign.LEFT
+                  },
+                  verticalPosition: {
+                    relative: VerticalPositionRelativeFrom.PAGE,
+                    align: VerticalPositionAlign.TOP
+                  },
+                  behindDocument: true,
+                  allowOverlap: true
                 }
-              } as any)
+              })
             ]
           })
         ]

@@ -90,5 +90,51 @@
     ],
     "createdAt": "2026-06-06T19:39:37.000Z",
     "updatedAt": "2026-06-06T19:39:37.000Z"
+  },
+  {
+    "id": "word-to-pdf-converter",
+    "slug": "word-to-pdf-converter",
+    "title": "Word to PDF Converter",
+    "description": "Convert Word documents (.docx) into PDF files locally and securely.",
+    "longDesc": "ToolWala AI Word to PDF Converter parses paragraphs, formatting, headings, and lists locally on your device to build high-quality PDF documents.",
+    "categoryName": "Document & PDF",
+    "categorySlug": "pdf-tools",
+    "isPopular": true,
+    "isFeatured": true,
+    "isTrending": true,
+    "published": true,
+    "isPublished": true,
+    "publishDate": null,
+    "status": "published",
+    "icon": "📄",
+    "toolType": "PDF Tool",
+    "ctaButtonText": "Convert to PDF",
+    "inputs": [
+      {
+        "id": "docx-upload",
+        "name": "docx",
+        "label": "Upload Word Document",
+        "type": "file",
+        "required": true,
+        "order": 0
+      }
+    ],
+    "faqs": [
+      {
+        "id": "docx-faq-1",
+        "question": "Is it secure to upload my documents?",
+        "answer": "Yes, our tools process files entirely client-side. Your documents are never uploaded to any server.",
+        "order": 0
+      }
+    ],
+    "articles": [
+      {
+        "id": "docx-art-1",
+        "title": "Secure Client-Side DOCX to PDF",
+        "content": "Our parser reads and wraps text elements inside the browser, rendering high-fidelity PDFs instantly."
+      }
+    ],
+    "createdAt": "2026-06-14T00:00:00.000Z",
+    "updatedAt": "2026-06-14T00:00:00.000Z"
   }
 ]

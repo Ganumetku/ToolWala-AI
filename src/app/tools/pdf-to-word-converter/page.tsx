@@ -44,6 +44,8 @@ export default function PdfToWord() {
   const [isPasswordProtected, setIsPasswordProtected] = useState(false);
   const [isEmptyPdf, setIsEmptyPdf] = useState(false);
   const [isDraggingOverUpload, setIsDraggingOverUpload] = useState(false);
+  const [thumbnailUrls, setThumbnailUrls] = useState<string[]>([]);
+  const [isGeneratingPreviews, setIsGeneratingPreviews] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -124,6 +126,15 @@ export default function PdfToWord() {
       }
 
       setIsUploading(false);
+
+      // Generate thumbnails asynchronously
+      try {
+        const loadingTask = pdfjs.getDocument({ data: safeBuffer.slice(0) });
+        const doc = await loadingTask.promise;
+        generateThumbnails(doc);
+      } catch (thumbErr) {
+        console.error("Failed to generate previews:", thumbErr);
+      }
     } catch (err: any) {
       setIsUploading(false);
       if (err.name === 'PasswordException' || err.message?.includes('password')) {
@@ -136,6 +147,40 @@ export default function PdfToWord() {
         setPdfFile(null);
       }
     }
+  };
+
+  const generateThumbnails = async (doc: any) => {
+    setThumbnailUrls([]);
+    setIsGeneratingPreviews(true);
+    const urls: string[] = [];
+    const pagesToRender = Math.min(doc.numPages, 8);
+    
+    for (let i = 1; i <= pagesToRender; i++) {
+      try {
+        const page = await doc.getPage(i);
+        const viewport = page.getViewport({ scale: 0.25 });
+        
+        const canvas = document.createElement('canvas');
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        const context = canvas.getContext('2d');
+        
+        if (context) {
+          context.fillStyle = '#ffffff';
+          context.fillRect(0, 0, canvas.width, canvas.height);
+          await page.render({
+            canvasContext: context,
+            viewport: viewport,
+          }).promise;
+          urls.push(canvas.toDataURL('image/jpeg', 0.85));
+        }
+      } catch (err) {
+        console.error(`Thumbnail failed for page ${i}`, err);
+        urls.push(''); // blank placeholder fallback
+      }
+    }
+    setThumbnailUrls(urls);
+    setIsGeneratingPreviews(false);
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -155,6 +200,8 @@ export default function PdfToWord() {
     setPdfBytes(null);
     setConvertedFile(null);
     setTotalPages(0);
+    setThumbnailUrls([]);
+    setIsGeneratingPreviews(false);
     setOutputName("converted_document");
     setProgress(0);
     setIsUploading(false);
@@ -455,6 +502,43 @@ export default function PdfToWord() {
                       <TrustBadge icon="⚙️" title="Local Processing" desc="Executed on device" />
                       <TrustBadge icon="⏳" title="Fast Conversion" desc="Completed in seconds" />
                       <TrustBadge icon="💸" title="Free Forever" desc="No limits or caps" />
+                    </div>
+
+                    {/* PDF Page Previews Grid */}
+                    <div className="space-y-3 pt-2">
+                      <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">
+                        PDF Page Previews {totalPages > 8 && `(First 8 of ${totalPages} pages)`}
+                      </h4>
+
+                      {isGeneratingPreviews || thumbnailUrls.length === 0 ? (
+                        <div className="flex flex-col items-center justify-center p-12 bg-white/[0.01] border border-white/5 rounded-3xl gap-4">
+                          <RefreshCw className="w-5 h-5 text-blue-500 animate-spin" />
+                          <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Generating page previews...</p>
+                        </div>
+                      ) : (
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-h-[360px] overflow-y-auto pr-2 custom-scrollbar">
+                          {thumbnailUrls.map((url, idx) => {
+                            const pageNum = idx + 1;
+                            return (
+                              <div 
+                                key={idx}
+                                className="relative border border-white/5 rounded-2xl overflow-hidden aspect-[3/4] bg-white/[0.02] flex flex-col justify-between transition-all group hover:border-white/10"
+                              >
+                                <div className="flex-1 flex items-center justify-center p-2 relative overflow-hidden bg-white/5">
+                                  {url ? (
+                                    <img src={url} alt={`Page ${pageNum}`} className="max-h-full max-w-full object-contain rounded shadow-md transition-transform group-hover:scale-[1.02]" />
+                                  ) : (
+                                    <div className="text-center text-[10px] text-gray-600 font-bold uppercase">Page {pageNum}</div>
+                                  )}
+                                </div>
+                                <div className="p-2 text-center text-[9px] font-black uppercase tracking-widest bg-[#030712] border-t border-white/5 text-gray-500">
+                                  Page {pageNum}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
                   </div>
 

@@ -27,10 +27,10 @@ const FloatingParticles = dynamic(
 );
 
 // Dynamic Import of Premium Hubs/Sections
-import GovernmentToolHub from '@/components/GovernmentToolHub';
-import HomepageTestimonials from '@/components/HomepageTestimonials';
-import HomepageFAQ from '@/components/HomepageFAQ';
-import BlogPreview from '@/components/BlogPreview';
+const GovernmentToolHub = dynamic(() => import('@/components/GovernmentToolHub'), { ssr: false });
+const HomepageTestimonials = dynamic(() => import('@/components/HomepageTestimonials'), { ssr: false });
+const HomepageFAQ = dynamic(() => import('@/components/HomepageFAQ'), { ssr: false });
+const BlogPreview = dynamic(() => import('@/components/BlogPreview'), { ssr: false });
 import AnimatedCounter from '@/components/AnimatedCounter';
 
 export default function Home() {
@@ -38,6 +38,7 @@ export default function Home() {
   const [activeCategory, setActiveCategory] = useState<ToolCategory>("All");
   const [activeTab, setActiveTab] = useState<'featured' | 'trending' | 'recent' | 'all'>('all');
   const [mounted, setMounted] = useState(false);
+  const [loadEffects, setLoadEffects] = useState(false);
   const [recentToolIds, setRecentToolIds] = useState<string[]>([]);
   const [mergedTools, setMergedTools] = useState<Tool[]>(toolsData);
   
@@ -53,6 +54,13 @@ export default function Home() {
       console.error('Error reading recent tools:', e);
     }
   }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      const timer = setTimeout(() => setLoadEffects(true), 1200);
+      return () => clearTimeout(timer);
+    }
+  }, [mounted]);
 
   useEffect(() => {
     if (!mounted) return;
@@ -139,8 +147,8 @@ export default function Home() {
       
       {/* 1. Hero Section */}
       <section className="relative min-h-[90vh] flex flex-col items-center justify-center py-24 md:py-32 overflow-hidden">
-        <MeshGradient />
-        <FloatingParticles />
+        {loadEffects && <MeshGradient />}
+        {loadEffects && <FloatingParticles />}
         
         {/* Background Radial Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-blue-600/5 rounded-full blur-[140px] pointer-events-none" />

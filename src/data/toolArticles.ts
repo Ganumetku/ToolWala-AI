@@ -1246,40 +1246,48 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "edit-pdf": {
-    title: "Edit PDF",
-    intro: "Fill forms, add text layers, and edit PDF documents securely in your browser. Privacy-first, offline editing with zero cloud uploads.",
-    whatItDoes: "ToolWala Edit PDF lets you overlay text elements and compile modifications onto PDF documents entirely client-side. Utilizing WebAssembly libraries, it enables local rendering of pdf assets, keeping your private and financial records inside your local memory.",
+    title: "Edit PDF Online",
+    intro: "Modify PDF text, fill forms, draw shapes, and sign documents securely directly in your browser. Experience a smooth, professional online PDF editor that runs 100% locally on your device with no software installations and no server uploads.",
+    whatItDoes: "The ToolWala PDF text editor is a state-of-the-art, browser-first application designed to let you edit PDF without Adobe and without compromising your document's privacy. Unlike other cloud-based services, this tool brings the editing power directly into your browser using advanced client-side WebAssembly technology.\n\nYou can select any existing text node, modify PDF text directly, append new paragraphs, and draw annotations like boxes, circles, and highlight markers. The editor automatically detects the font size and matches the style, creating a seamless editing experience. Once you are done making changes, the tool generates a high-resolution, pixel-perfect output document. Whether you are dealing with professional invoices, government tax certificates, or academic papers, our free PDF editor ensures your layout remains sharp, uncorrupted, and perfectly styled.",
     howToUse: [
-      "Drag and drop your PDF document into our visual workspace.",
-      "Click the page area where you want to fill details or append comments.",
-      "Type text, select font scale, and position text fields precisely.",
-      "Add digital checkmarks or cross lines for form registration items.",
-      "Click the 'Save and Download' button to export your edited file instantly."
+      "Upload your document: Drag and drop your file or select it from your local storage to load it instantly into our online PDF editor.",
+      "Select edit-text mode: Turn on the text tool in the toolbar to automatically make the existing text fields selectable and editable.",
+      "Modify PDF text: Click directly on any text character or field, type your changes (e.g. updating names, numbers, or dates), and watch it dynamically match the style.",
+      "Add shapes, highlight or sign: Use the freehand brush, highlighter, or shapes tools to draw custom annotations, or open the signature modal to sign your paperwork.",
+      "Save and Export: Click 'Save Changes' to compile your modifications. Your new, flattened vector PDF will download instantly to your device."
     ],
     keyFeatures: [
-      { title: "Client-Side Processing", desc: "Edit financial, tax, or registration forms securely without uploading to cloud servers." },
-      { title: "Text Overlay Layering", desc: "Easy placement, sizing, and color styling of text fields over document surfaces." },
-      { title: "Scale Compression", desc: "Maintains original resolution without introducing size inflation." }
+      { title: "Client-Side Security", desc: "Your data remains 100% confidential. Because our editor runs on your local machine, sensitive financial statements, banking forms, and personal contracts are never sent to external servers." },
+      { title: "Direct Text Editing", desc: "Say goodbye to complex workarounds. You can edit text directly inside PDF, modify existing letters, or add completely new text boxes with custom sizes, colors, and alignments." },
+      { title: "Pixel-Perfect Color Matching", desc: "Our smart engine automatically samples the background canvas to detect the exact hex color of the original text, applying the identical shade to your new edits automatically." },
+      { title: "Table Border Protection", desc: "Our smart whiteout masks automatically shrink vertically to avoid grid line erasure. Your tables, cell boxes, and official layout outlines remain fully intact after editing." },
+      { title: "Horizontal Auto-Expansion", desc: "As you type longer names or words, the text boxes auto-grow horizontally rather than wrapping. This makes form filling smooth and natural." },
+      { title: "Global Keyboard Shortcuts", desc: "Edit documents faster with native support for standard keyboard shortcuts. Undo edits using Cmd+Z / Ctrl+Z, redo with Cmd+Shift+Z / Ctrl+Y, or quickly delete elements with the Backspace key." }
     ],
     benefits: [
-      "Maximum file security for tax forms, banking declarations, and personal IDs.",
-      "Zero registration or subscription fees common with PDF editors.",
-      "Sub-second compilation and download speeds.",
-      "Retains vector precision of fonts and layers."
+      "Edit PDF without Adobe Acrobat subscriptions or expensive payment paywalls.",
+      "Maintain 100% data privacy with local client-side offline processing.",
+      "Enjoy a smooth editing experience with instant visual rendering and zero server lag.",
+      "Save time on formatting with smart font size alignment and color detection.",
+      "Avoid pixelation or layout corruption—retains vector page clarity for professional documents.",
+      "No account registration, login, or installation required to start editing."
     ],
-    whyChoose: "Most online PDF editors upload documents to external databases, posing security risks. ToolWala AI uses secure local memory sandbox to compile edits, guaranteeing your records remain private.",
+    whyChoose: "ToolWala provides a premium, modern SaaS-style utility built on a client-first philosophy. Traditional PDF editors force you to upload documents to cloud databases where they could be logged, processed, or exposed to security threats. We believe your documentation belongs to you. Our PDF editor for documents uses high-performance in-memory processing to compile your modifications. This guarantees maximum security while delivering crisp, professional-grade vector exports at lightning speed. It's the cleanest, most efficient way to change text in PDF online.",
     useCases: [
-      "Filling out registration, tax, or recruitment application sheets.",
-      "Adding annotations, remarks, or notes to study materials.",
-      "Signing scanned files with custom initials locally.",
-      "Redacting sensitive areas in personal receipts."
+      "Correcting typos or modifying PDF text inside official certificates, business invoices, and receipts.",
+      "Filling out structured registration forms, job applications, and declarations directly in-browser.",
+      "Signing agreements, NDA forms, and contracts with your custom drawn initials locally.",
+      "Annotating study materials, redacting sensitive IDs, and adding notes to e-books.",
+      "Updating business templates, price quotes, and resumes with new details."
     ],
     faqs: [
-      { question: "Is my edited document safe?", answer: "Yes, all edit calculations and exports are processed locally inside your web browser. Nothing is ever uploaded." },
-      { question: "Can I fill forms online?", answer: "Yes, our tool lets you draw custom text blocks over any part of the document structure." },
-      { question: "Does it support high-resolution PDFs?", answer: "Yes, it compiles and preserves vector assets, ensuring clean quality at any resolution." }
+      { question: "Is my document uploaded to a server?", answer: "Absolutely not. ToolWala operates entirely client-side. The file processing libraries run inside your local browser cache, meaning your document files never leave your computer or network." },
+      { question: "Can I change text in PDF without layout issues?", answer: "Yes! The tool lets you edit text directly inside PDF. The textbox automatically matches the font size, scales, and expands horizontally as you type, preserving alignment." },
+      { question: "How does color matching work?", answer: "When you click to modify PDF text, our tool samples the pixels of the original text from the background to detect the exact hex code, applying it to your edits automatically." },
+      { question: "Does this online PDF editor support multi-page files?", answer: "Yes, the editor dynamically loads and displays all pages of your PDF. Unmodified pages are copied as vector pages to ensure the download file size remains optimized and small." },
+      { question: "Do I need to install any software?", answer: "No software installation or browser extensions are required. Our free PDF editor works directly in any modern web browser across desktop and mobile devices." }
     ],
-    conclusion: "Fill out and update documents securely and privately. Edit your PDFs locally on ToolWala AI.",
+    conclusion: "Whether you need to modify PDF text for a resume, sign an official agreement, or fill out tax registration forms, ToolWala offers the ultimate privacy-first solution. Ditch the costly subscriptions and insecure server-upload tools. Take control of your documents, enjoy a fast and smooth editing experience, and start using our free PDF editor for documents online today.",
     relatedTools: [
       { name: "PDF Tools Suite", href: "/tools/pdf-tools" },
       { name: "Merge PDF", href: "/tools/merge-pdf" },

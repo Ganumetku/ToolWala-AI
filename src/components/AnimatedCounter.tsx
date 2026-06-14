@@ -28,14 +28,14 @@ export default function AnimatedCounter({ value }: AnimatedCounterProps) {
     const suffix = value.replace(match[1], "");
 
     let start = 0;
-    const duration = 1500; // 1.5 seconds
-    const startTime = performance.now();
+    const duration = 1200; // 1.2 seconds
+    const steps = 25; // 25 updates total (visually smooth but low CPU impact)
+    const stepDuration = duration / steps;
+    let currentStep = 0;
 
-    const updateCounter = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      
-      // Easing out quad
+    const timer = setInterval(() => {
+      currentStep++;
+      const progress = Math.min(currentStep / steps, 1);
       const easeProgress = progress * (2 - progress);
       const currentVal = start + (targetNum - start) * easeProgress;
 
@@ -45,12 +45,12 @@ export default function AnimatedCounter({ value }: AnimatedCounterProps) {
         setDisplayValue(`${Math.floor(currentVal)}${suffix}`);
       }
 
-      if (progress < 1) {
-        requestAnimationFrame(updateCounter);
+      if (currentStep >= steps) {
+        clearInterval(timer);
       }
-    };
+    }, stepDuration);
 
-    requestAnimationFrame(updateCounter);
+    return () => clearInterval(timer);
   }, [isInView, value]);
 
   return (

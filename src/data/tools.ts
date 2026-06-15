@@ -677,6 +677,23 @@ export const toolsData: Tool[] = [
     isVisible: false,
     createdAt: '2026-06-13T00:00:00Z',
     updatedAt: '2026-06-13T00:00:00Z'
+  },
+  {
+    id: "invoice-cropper",
+    title: "Invoice Cropper",
+    description: "Crop invoice images or PDFs, auto-detect document edges, clean backgrounds, and download cropped documents locally.",
+    icon: "🧾",
+    href: "/tools/invoice-cropper",
+    slug: "invoice-cropper",
+    category: "Document Tools",
+    featured: false,
+    trending: false,
+    popular: false,
+    tags: ["invoice cropper", "crop invoice online", "receipt cropper", "invoice scanner", "document crop tool", "crop receipt image", "invoice editor online"],
+    status: 'draft',
+    isVisible: false,
+    createdAt: '2026-06-15T00:00:00Z',
+    updatedAt: '2026-06-15T00:00:00Z'
   }
 ];
 

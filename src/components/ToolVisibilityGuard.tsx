@@ -20,6 +20,12 @@ export default function ToolVisibilityGuard({ slug, children }: ToolVisibilityGu
   const [toolInfo, setToolInfo] = useState<Tool | null>(null);
 
   useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      setVisible(true);
+      setChecking(false);
+      return;
+    }
+
     async function checkVisibility() {
       try {
         const res = await fetch(`/api/tools/public?slug=${encodeURIComponent(slug)}`);

@@ -1612,5 +1612,49 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "Merge PDF", href: "/tools/merge-pdf" },
       { name: "Split PDF", href: "/tools/split-pdf" }
     ]
+  },
+  "invoice-cropper": {
+    title: "Invoice Cropper",
+    intro: "Crop invoice images or PDFs, auto-detect document edges, clean backgrounds, and download cropped documents locally. Completely private, client-side document layout optimizer.",
+    whatItDoes: "The ToolWala AI Invoice Cropper is designed to standardize scanned or photographed invoices, receipts, and agreements. It automatically identifies the borders of your document against textured backgrounds and aligns the crop margins perfectly. It includes client-side binarization to Whiten background gray shadows and enhance text contrast, delivering a clean printable document. PDF page parsing is built in, meaning you can convert and crop page boundaries from digital PDFs.",
+    howToUse: [
+      "Upload your invoice image (JPG, PNG, WEBP) or PDF file directly to the workspace.",
+      "Use 'Auto Detect' to automatically scan pixel projections and align crop borders around the document edges.",
+      "Adjust the crop boundary overlay manually, rotate the canvas, or zoom to align page headers.",
+      "Toggle 'Clean Background' to automatically whiten dark shadows, gray backdrops, and enhance contrast.",
+      "Select your export format (JPG, PNG, or PDF) and download your cropped document instantly."
+    ],
+    keyFeatures: [
+      { title: "Auto Edge Detection", desc: "Gradient-variance scanner analyzes layout structure to snap crop borders directly to document edges." },
+      { title: "PDF Page Parsing", desc: "Client-side PDF.js rendering renders document pages to canvas for instant cropping." },
+      { title: "Whitening Filter", desc: "Whiten gray backgrounds, erase scanning shadows, and sharpen text lines to make documents look clean." },
+      { title: "Multi-Format Export", desc: "Save your final outputs as standard JPEG, PNG, or document-ready PDFs using local compilers." }
+    ],
+    benefits: [
+      "Total security for business invoices, financial statements, and receipts—nothing leaves your device.",
+      "Erase messy backgrounds, table surfaces, or scanning shadows in one click.",
+      "Fast client-side compilation without server load or monthly subscription fees."
+    ],
+    whyChoose: "Standard crop tools upload your private financial invoices to remote cloud servers. ToolWala AI processes image grids and compiles PDF structures entirely within your local browser sandbox, giving you premium editing features with absolute privacy.",
+    useCases: [
+      "Standardizing invoice photo scans for accounting records.",
+      "Trimming messy receipt boundaries to submit for business expense claims.",
+      "Converting multi-page PDF records into clean cropped single sheets."
+    ],
+    faqs: [
+      { question: "How does Invoice Cropper work?", answer: "It uses local canvas analysis to detect document margins. It scans the pixel gradients to identify where the invoice boundaries transition away from the background." },
+      { question: "Is my invoice secure?", answer: "Yes. All processing is completed inside your browser's local sandbox memory. No files are uploaded to any server, making it 100% private." },
+      { question: "Can I crop PDF invoices?", answer: "Yes, our engine supports PDF uploads and renders the page locally into a high-res image so you can crop and export it." },
+      { question: "Does it work on mobile?", answer: "Yes! The tool is mobile responsive and supports touch drag and pinch zoom on mobile browsers." },
+      { question: "Is the tool free?", answer: "Absolutely. Like all ToolWala AI utilities, the Invoice Cropper is completely free to use with no hidden fees or limitations." }
+    ],
+    conclusion: "Format, crop, and clean your business invoices and receipt scans locally. Start editing with ToolWala AI.",
+    relatedTools: [
+      { name: "PDF Compressor", href: "/tools/pdf-tools" },
+      { name: "Image Compressor", href: "/tools/image-compressor" },
+      { name: "PDF to JPG", href: "/tools/pdf-to-jpg" },
+      { name: "Signature Crop Tool", href: "/tools/signature-crop-tool" },
+      { name: "OCR Image to Text", href: "/tools/ocr-to-text" }
+    ]
   }
 };

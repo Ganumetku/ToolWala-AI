@@ -100,13 +100,14 @@ export default function Home() {
 
   // Master filtered tools list
   const filteredTools = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
     return mergedTools.filter(tool => {
       if (!tool.isVisible) return false;
       const matchesSearch =
-        tool.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tool.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tool.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        tool.category.toLowerCase().includes(searchQuery.toLowerCase());
+        tool.title.toLowerCase().includes(query) ||
+        tool.description.toLowerCase().includes(query) ||
+        tool.tags.some(tag => tag.toLowerCase().includes(query)) ||
+        tool.category.toLowerCase().includes(query);
 
       const matchesCategory = activeCategory === "All" || tool.category === activeCategory;
 

@@ -36,9 +36,9 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
 
   // Filter tools based on query and tabs
   const filteredTools = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
     let result = categoryTools.filter(tool => {
       if (!tool.isVisible) return false;
-      const query = searchQuery.toLowerCase();
       return (
         tool.title.toLowerCase().includes(query) ||
         tool.description.toLowerCase().includes(query) ||

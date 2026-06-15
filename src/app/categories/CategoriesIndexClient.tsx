@@ -31,12 +31,13 @@ export default function CategoriesIndexClient() {
   }, [mergedTools]);
 
   const filteredCategories = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
     return categoriesData
       .filter(cat => (categoryCounts[cat.id] || 0) > 0)
       .filter(cat => 
-        cat.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        cat.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        cat.keywords.some(k => k.toLowerCase().includes(searchQuery.toLowerCase()))
+        cat.title.toLowerCase().includes(query) ||
+        cat.description.toLowerCase().includes(query) ||
+        cat.keywords.some(k => k.toLowerCase().includes(query))
       );
   }, [searchQuery, categoryCounts]);
 

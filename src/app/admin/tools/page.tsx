@@ -174,11 +174,12 @@ export default function AdminToolsDashboard() {
   };
 
   const filteredTools = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
     return tools.filter(tool => {
       const matchesSearch =
-        tool.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tool.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tool.category.toLowerCase().includes(searchQuery.toLowerCase());
+        tool.title.toLowerCase().includes(query) ||
+        tool.slug.toLowerCase().includes(query) ||
+        tool.category.toLowerCase().includes(query);
 
       let matchesFilter = true;
       if (filter === "Published") matchesFilter = tool.status === "published";

@@ -694,6 +694,23 @@ export const toolsData: Tool[] = [
     isVisible: false,
     createdAt: '2026-06-15T00:00:00Z',
     updatedAt: '2026-06-15T00:00:00Z'
+  },
+  {
+    id: "aadhaar-masking-tool",
+    title: "Aadhaar Masking Tool",
+    description: "Automatically detect and mask the first 8 digits of your Aadhaar card for secure privacy protection.",
+    icon: "🪪",
+    href: "/tools/aadhaar-masking-tool",
+    slug: "aadhaar-masking-tool",
+    category: "Document Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["aadhaar masking tool", "mask aadhaar online", "aadhaar mask pdf", "aadhaar privacy tool", "mask aadhaar number", "aadhaar masking solution", "secure aadhaar upload", "aadhaar pdf masking", "uidai masking tool", "hide aadhaar number", "aadhaar OCR masking", "aadhaar redaction tool"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2026-06-16T00:00:00Z',
+    updatedAt: '2026-06-16T00:00:00Z'
   }
 ];
 

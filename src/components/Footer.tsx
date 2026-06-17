@@ -29,12 +29,12 @@ export default function Footer() {
   ];
 
   const topTools = [
+    { name: "Aadhaar Masking Tool", href: "/tools/aadhaar-masking-tool/" },
     { name: "Aadhaar Photo Resizer", href: "/tools/aadhaar-photo-resizer/" },
     { name: "Background Remover", href: "/tools/bg-remover/" },
     { name: "Image Compressor", href: "/tools/image-compressor/" },
     { name: "Passport Photo Maker", href: "/tools/passport-photo-maker/" },
-    { name: "AI Resume Builder", href: "/tools/resume-builder/" },
-    { name: "AI Text Humanizer", href: "/tools/text-humanizer/" }
+    { name: "AI Resume Builder", href: "/tools/resume-builder/" }
   ];
 
   const sitemap = [

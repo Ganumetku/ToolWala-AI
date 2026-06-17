@@ -1656,5 +1656,51 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "Signature Crop Tool", href: "/tools/signature-crop-tool" },
       { name: "OCR Image to Text", href: "/tools/ocr-to-text" }
     ]
+  },
+  "aadhaar-masking-tool": {
+    title: "Aadhaar Masking Tool",
+    intro: "Secure your identity instantly. Mask the first 8 digits of your Aadhaar card online using browser-native AI—no data uploads, 100% private, works offline.",
+    whatItDoes: "The ToolWala AI Aadhaar Masking Tool automatically detects and redacts the first 8 digits of your Aadhaar number, leaving only the last 4 digits visible as per UIDAI privacy guidelines (e.g. XXXX XXXX 1234). Operating entirely client-side, the tool uses high-accuracy local OCR to scan your document layout and cover sensitive numbers. It also supports manual masking, custom blurs for QR codes or photos, watermarks, and multi-format exports (PDF, PNG, JPG)—ensuring absolute privacy for bank updates, SIM registrations, and rental agreements.",
+    howToUse: [
+      "Upload your Aadhaar card image (JPG, PNG, WEBP) or drop a scanned PDF file directly into the workspace.",
+      "The local OCR engine will automatically run a secure scan to locate your Aadhaar number, overlaying a masking box.",
+      "Fine-tune the results by adding custom manual redaction or blur zones to hide other sensitive fields like QR codes or portrait photos.",
+      "Toggle the watermark option to overlay a secure, transparent 'SECURE MASKED COPY' text for safety.",
+      "Select your export format (PNG, JPG, or PDF) and download your protected Aadhaar document instantly."
+    ],
+    keyFeatures: [
+      { title: "Client-Side OCR Scanning", desc: "Local Tesseract.js WASM engine reads character arrays directly in browser memory without database uploads." },
+      { title: "Interactive Redact & Blur", desc: "Drag to highlight any additional sensitive areas to apply custom pixelated blur or solid color redaction overlays." },
+      { title: "UIDAI Compliance Mask", desc: "Strict masking formats (XXXX XXXX 1234) automatically applied to detected numbers, preserving formatting layouts." },
+      { title: "Dynamic Before vs After", desc: "Interactive sliding comparison panel to audit masked areas against the original document before exporting." }
+    ],
+    benefits: [
+      "100% Privacy-First: Your sensitive government document never leaves your device's browser memory.",
+      "Prevent Identity Theft: Share safe, redacted document files with banks, landlords, or telecommunication providers.",
+      "Multi-Page PDF Support: Load multi-page scanned PDF cards, mask them sequentially, and export them back as standard PDF structures."
+    ],
+    whyChoose: "Most online mask tools require uploading your sensitive Aadhaar document to a remote server. ToolWala AI processes image pixels and parses characters entirely within your browser's local sandbox, giving you premium document safety and compliance with absolute data sovereignty.",
+    useCases: [
+      "Providing secure identity scans for mobile SIM card applications.",
+      "Submitting compliant KYC verification files for banking or loan accounts.",
+      "Sharing privacy-masked document proofs with landlords or rental portals."
+    ],
+    faqs: [
+      { question: "What is Aadhaar Masking?", answer: "Aadhaar masking replaces the first 8 digits of your 12-digit Aadhaar number with cross marks (e.g., XXXX XXXX 1234). This obscures your unique identifier while keeping the last 4 digits visible for verification, preventing misuse." },
+      { question: "Is Aadhaar masking secure?", answer: "Yes, our Aadhaar Masking Tool runs entirely client-side. The OCR engine and image modifications occur strictly within your web browser sandbox. No file data, texts, or metadata are ever transmitted to our servers." },
+      { question: "Does this tool upload my Aadhaar?", answer: "No. All scanning, character detection, and image manipulation are completed locally inside your browser cache. The tool can be run completely offline after loading the initial page layout." },
+      { question: "Can I mask Aadhaar PDF?", answer: "Yes! Our engine rendering pipeline supports scanned PDF cards, rendering page views into clean images so you can apply auto or manual mask configurations." },
+      { question: "Is Aadhaar masking mandatory?", answer: "Yes. The Unique Identification Authority of India (UIDAI) and regulatory authorities like RBI recommend sharing masked Aadhaar cards instead of unmasked ones to prevent identity theft." },
+      { question: "How does automatic masking work?", answer: "Our tool employs a local WebAssembly-based Tesseract OCR library to parse text bounding boxes. If a 12-digit format or a consecutive grouping of three 4-digit numbers is found, a mask is automatically overlayed." },
+      { question: "Can I blur QR code?", answer: "Yes! You can toggle the 'Blur QR Code' option or draw a custom manual blur region to pixelate and hide the QR code grid and prevent unauthorized barcode scanning." },
+      { question: "Does this work on mobile?", answer: "Absolutely. The editor is optimized for mobile touch viewports, allowing you to pinch-zoom and drag mask layers smoothly on any smartphone or tablet." }
+    ],
+    conclusion: "Protect your identity and comply with UIDAI guidelines. Mask your Aadhaar cards safely in the browser with ToolWala AI.",
+    relatedTools: [
+      { name: "Invoice Cropper", href: "/tools/invoice-cropper" },
+      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr" },
+      { name: "OCR Image to Text", href: "/tools/ocr-to-text" },
+      { name: "Image Compressor", href: "/tools/image-compressor" }
+    ]
   }
 };

@@ -15,6 +15,15 @@ const govTools = [
     dim: "354 x 472 px"
   },
   {
+    title: "Aadhaar Masking Tool",
+    desc: "Automatically detect and redact the first 8 digits of your Aadhaar card for privacy protection.",
+    icon: <span className="text-2xl select-none" role="img" aria-label="Aadhaar Mask">🪪</span>,
+    href: "/tools/aadhaar-masking-tool/",
+    badge: "Secure Privacy Mask",
+    kb: "Original Size",
+    dim: "Auto-Detect"
+  },
+  {
     title: "PAN Card Photo Crop",
     desc: "Standardize photo layout for online NSDL/UTIITSL application forms.",
     icon: <span className="text-2xl select-none" role="img" aria-label="PAN Card">🪪</span>,

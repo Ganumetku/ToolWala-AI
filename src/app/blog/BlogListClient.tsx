@@ -302,6 +302,41 @@ export default function BlogListClient({
             </div>
           </div>
 
+          <div className="glass rounded-[2rem] border border-white/5 p-6 sm:p-8 space-y-4">
+            <h3 className="text-xs font-black uppercase tracking-widest text-white border-b border-white/5 pb-3">
+              Try Featured Tools
+            </h3>
+            <div className="space-y-3">
+              <Link
+                href="/tools/pdf-tools/edit-pdf"
+                className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all group"
+              >
+                <span className="text-lg">✍️</span>
+                <span className="text-xs font-black text-white uppercase group-hover:text-blue-400 line-clamp-1">
+                  Edit PDF Online
+                </span>
+              </Link>
+              <Link
+                href="/tools/pdf-ocr"
+                className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all group"
+              >
+                <span className="text-lg">🔍</span>
+                <span className="text-xs font-black text-white uppercase group-hover:text-blue-400 line-clamp-1">
+                  PDF OCR Scanner
+                </span>
+              </Link>
+              <Link
+                href="/tools/image-compressor"
+                className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all group"
+              >
+                <span className="text-lg">📉</span>
+                <span className="text-xs font-black text-white uppercase group-hover:text-blue-400 line-clamp-1">
+                  Image Compressor
+                </span>
+              </Link>
+            </div>
+          </div>
+
           <BlogNewsletter />
         </div>
       </div>

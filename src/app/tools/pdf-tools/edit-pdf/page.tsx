@@ -39,6 +39,11 @@ interface TextBoxInfo {
   originalPdfFontSize: number;
   replacedText?: string;
   replacedColor?: string;
+  fontFamily?: string;
+  fontWeight?: string;
+  fontStyle?: string;
+  angle?: number;
+  detectedBgColor?: string;
 }
 
 // Utility: convert rgba string back to hex
@@ -170,6 +175,190 @@ const detectTextColorFromCanvas = (canvas: HTMLCanvasElement | null, box: any, s
   } catch (e) {
     console.error("Failed to detect text color from canvas", e);
     return '#0b2c8c';
+  }
+};
+
+// Helper to extract background color from background canvas
+const detectBackgroundColorFromCanvas = (canvas: HTMLCanvasElement | null, box: any, scale: number): string => {
+  if (!canvas) return '#ffffff';
+  try {
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return '#ffffff';
+
+    const x = box.x * scale;
+    const y = box.y * scale;
+    const w = box.width * scale;
+    const h = box.height * scale;
+
+    const pixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
+    const renderScale = Math.max(2.0, pixelRatio);
+
+    const colorCounts: Record<string, number> = {};
+    const steps = 10;
+    
+    for (let i = 1; i < steps; i++) {
+      for (let j = 1; j < steps; j++) {
+        const px = x + (w * i) / steps;
+        const py = y + (h * j) / steps;
+        
+        const bitmapX = Math.floor(px * renderScale);
+        const bitmapY = Math.floor(py * renderScale);
+
+        if (bitmapX >= 0 && bitmapX < canvas.width && bitmapY >= 0 && bitmapY < canvas.height) {
+          const imgData = ctx.getImageData(bitmapX, bitmapY, 1, 1).data;
+          const r = imgData[0];
+          const g = imgData[1];
+          const b = imgData[2];
+          const a = imgData[3];
+          if (a > 0) {
+            // Group colors slightly to handle small compression noise/anti-aliasing
+            const roundedR = Math.round(r / 8) * 8;
+            const roundedG = Math.round(g / 8) * 8;
+            const roundedB = Math.round(b / 8) * 8;
+            
+            const toHex = (c: number) => {
+              const hex = Math.min(255, Math.max(0, c)).toString(16);
+              return hex.length === 1 ? '0' + hex : hex;
+            };
+            const hex = `#${toHex(roundedR)}${toHex(roundedG)}${toHex(roundedB)}`;
+            colorCounts[hex] = (colorCounts[hex] || 0) + 1;
+          }
+        }
+      }
+    }
+
+    const entries = Object.entries(colorCounts);
+    if (entries.length === 0) return '#ffffff';
+
+    entries.sort((a, b) => b[1] - a[1]);
+    return entries[0][0];
+  } catch (e) {
+    console.error("Failed to detect background color from canvas", e);
+    return '#ffffff';
+  }
+};
+
+// Helper to map PDF subsetted fonts to standard web fonts
+const mapPdfFontToWebFont = (fontName: string, resolvedFontFamily?: string): string => {
+  const name = `${fontName || ''} ${resolvedFontFamily || ''}`.toLowerCase();
+  if (name.includes('times') || name.includes('serif') || name.includes('cambria') || name.includes('georgia') || name.includes('minion')) {
+    return 'Times New Roman';
+  }
+  if (name.includes('courier') || name.includes('mono') || name.includes('consolas') || name.includes('courier new')) {
+    return 'Courier';
+  }
+  return 'Arial';
+};
+
+// Helper to resolve the actual loaded CSS font family name from PDF.js
+const mapPdfFontToLoadedFont = (fontName: string, resolvedFontFamily?: string): string => {
+  if (!fontName) return '';
+  
+  // PDF.js internal loaded font pattern: g_d{doc}_f{font} -> g_d{doc}_sf{font+1}
+  const match = fontName.match(/^g_d(\d+)_f(\d+)$/);
+  if (match) {
+    const docId = match[1];
+    const fontId = parseInt(match[2], 10);
+    const loadedFontFamily = `g_d${docId}_sf${fontId + 1}`;
+    
+    // Check if the browser document has actually loaded this font family
+    if (typeof document !== 'undefined' && document.fonts) {
+      let isLoaded = false;
+      document.fonts.forEach(f => {
+        if (f.family === loadedFontFamily) {
+          isLoaded = true;
+        }
+      });
+      if (isLoaded) {
+        return loadedFontFamily;
+      }
+    }
+    
+    // Return the predicted loaded name as fallback
+    return loadedFontFamily;
+  }
+
+  // Fallback to resolvedFontFamily if it's not a generic fallback like sans-serif
+  if (resolvedFontFamily && !['sans-serif', 'serif', 'monospace', 'cursive', 'fantasy'].includes(resolvedFontFamily.toLowerCase())) {
+    return resolvedFontFamily;
+  }
+  
+  return '';
+};
+
+// Helper to determine if an original PDF textbox has been edited or styled differently
+const isOriginalTextEdited = (obj: any): boolean => {
+  if (!obj || !obj.isOriginalText) return false;
+  const orig = obj.originalTextData;
+  if (!orig) return false;
+
+  return !!(
+    obj.isDeletedOriginal ||
+    obj.text !== orig.text ||
+    Math.abs(obj.left - orig.x) > 0.5 ||
+    Math.abs(obj.top - orig.y) > 0.5 ||
+    obj.fontSize !== orig.fontSize ||
+    obj.fontFamily !== orig.fontFamily ||
+    obj.fontWeight !== orig.fontWeight ||
+    obj.fontStyle !== orig.fontStyle ||
+    (obj.fill !== 'transparent' && obj.fill !== orig.detectedColor)
+  );
+};
+
+
+
+// Helper to extract text weight from background canvas using pixel stroke density
+const detectTextWeightFromCanvas = (canvas: HTMLCanvasElement | null, box: any, scale: number): 'bold' | 'normal' => {
+  if (!canvas) return 'normal';
+  try {
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return 'normal';
+
+    const x = box.x * scale;
+    const y = box.y * scale;
+    const w = box.width * scale;
+    const h = box.height * scale;
+
+    const pixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
+    const renderScale = Math.max(2.0, pixelRatio);
+
+    let textPixelCount = 0;
+    let totalPixelCount = 0;
+    const steps = 10; // 100 sample points
+    
+    for (let i = 1; i < steps; i++) {
+      for (let j = 1; j < steps; j++) {
+        const px = x + (w * i) / steps;
+        const py = y + (h * j) / steps;
+        
+        const bitmapX = Math.floor(px * renderScale);
+        const bitmapY = Math.floor(py * renderScale);
+
+        if (bitmapX >= 0 && bitmapX < canvas.width && bitmapY >= 0 && bitmapY < canvas.height) {
+          const imgData = ctx.getImageData(bitmapX, bitmapY, 1, 1).data;
+          const r = imgData[0];
+          const g = imgData[1];
+          const b = imgData[2];
+          const a = imgData[3];
+          if (a > 0) {
+            const L = 0.299 * r + 0.587 * g + 0.114 * b;
+            if (L < 220) { // text stroke pixel
+              textPixelCount++;
+            }
+            totalPixelCount++;
+          }
+        }
+      }
+    }
+
+    if (totalPixelCount === 0) return 'normal';
+    const density = textPixelCount / totalPixelCount;
+    
+    // Bold text typically has a density > 0.22 (22% of the box area is filled by strokes)
+    return density > 0.22 ? 'bold' : 'normal';
+  } catch (e) {
+    console.error("Failed to detect text weight from canvas", e);
+    return 'normal';
   }
 };
 
@@ -644,12 +833,20 @@ export default function EditPdfPage() {
       const rawItems = textContent.items as any[];
       const validItems = rawItems
         .filter(item => item && typeof item.str === 'string' && item.str.trim().length > 0)
-        .map(item => ({
-          str: item.str,
-          transform: item.transform,
-          width: item.width || 0,
-          height: item.height || item.transform[3] || 10
-        }));
+        .map(item => {
+          const a = item.transform[0];
+          const b = item.transform[1];
+          const c = item.transform[2];
+          const d = item.transform[3];
+          const calculatedFontSize = Math.sqrt(c * c + d * d) || Math.sqrt(a * a + b * b) || 10;
+          return {
+            str: item.str,
+            transform: item.transform,
+            fontName: item.fontName || '',
+            width: item.width || 0,
+            height: item.height || calculatedFontSize || 10
+          };
+        });
 
       if (validItems.length === 0) return [];
 
@@ -661,16 +858,27 @@ export default function EditPdfPage() {
         const item = validItems[i];
         const currT = current.transform;
         const itemT = item.transform;
+
+        const currA = currT[0];
+        const currB = currT[1];
+        const currC = currT[2];
+        const currD = currT[3];
+        const currFontSize = Math.sqrt(currC * currC + currD * currD) || Math.sqrt(currA * currA + currB * currB) || 12;
+
+        const itemA = itemT[0];
+        const itemB = itemT[1];
+        const itemC = itemT[2];
+        const itemD = itemT[3];
+        const itemFontSize = Math.sqrt(itemC * itemC + itemD * itemD) || Math.sqrt(itemA * itemA + itemB * itemB) || 12;
         
         const sameLine = Math.abs(currT[5] - itemT[5]) < 2;
         const prevEndX = currT[4] + current.width;
         const distance = itemT[4] - prevEndX;
-        const fontSize = currT[3];
-        const closeHorizontally = distance >= -3 && distance < fontSize * 1.25;
-        const sameFontSize = Math.abs(currT[3] - itemT[3]) < 1.5;
+        const closeHorizontally = distance >= -3 && distance < currFontSize * 1.25;
+        const sameFontSize = Math.abs(currFontSize - itemFontSize) < 1.5;
 
         if (sameLine && closeHorizontally && sameFontSize) {
-          const hasSpace = distance > fontSize * 0.15 && !current.str.endsWith(' ') && !item.str.startsWith(' ');
+          const hasSpace = distance > currFontSize * 0.15 && !current.str.endsWith(' ') && !item.str.startsWith(' ');
           current.str += (hasSpace ? ' ' : '') + item.str;
           current.width = (itemT[4] - currT[4]) + item.width;
         } else {
@@ -684,13 +892,39 @@ export default function EditPdfPage() {
       return merged.map((item, idx) => {
         const tx = item.transform[4];
         const ty = item.transform[5];
-        const fontSizePdf = item.transform[3];
+        const a = item.transform[0];
+        const b = item.transform[1];
+        const c = item.transform[2];
+        const d = item.transform[3];
+        const fontSizePdf = Math.sqrt(c * c + d * d) || Math.sqrt(a * a + b * b) || 12;
+        const angle = Math.atan2(b, a) * (180 / Math.PI);
         const widthPdf = item.width;
 
         // Viewport scale 1.0 translates
         const [vx, vy] = viewport.convertToViewportPoint(tx, ty);
         const boxHeight = fontSizePdf;
         const boxWidth = widthPdf > 0 ? widthPdf : (fontSizePdf * 0.55 * item.str.length);
+
+        // Fetch font styles
+        const fontStyleObj = textContent.styles ? textContent.styles[item.fontName] : null;
+        const resolvedFontFamily = fontStyleObj ? fontStyleObj.fontFamily : '';
+
+        const fName = (item.fontName || '').toLowerCase();
+        const resFontFamily = (resolvedFontFamily || '').toLowerCase();
+        
+        const isBold = fName.includes('bold') || fName.includes('black') || fName.includes('heavy') || fName.includes('semibold') || fName.includes('medium') || fName.includes('w700') || fName.includes('w600') || fName.includes('w-700') || fName.includes('w-600') ||
+                       resFontFamily.includes('bold') || resFontFamily.includes('black') || resFontFamily.includes('heavy') || resFontFamily.includes('semibold') || resFontFamily.includes('medium') || resFontFamily.includes('w700') || resFontFamily.includes('w600') || resFontFamily.includes('w-700') || resFontFamily.includes('w-600');
+                       
+        const isItalic = fName.includes('italic') || fName.includes('oblique') ||
+                         resFontFamily.includes('italic') || resFontFamily.includes('oblique');
+
+        const webFontFamily = mapPdfFontToWebFont(item.fontName, resolvedFontFamily);
+        const loadedFontFamily = mapPdfFontToLoadedFont(item.fontName, resolvedFontFamily);
+        const activeFontFamily = loadedFontFamily
+          ? `"${loadedFontFamily}", ${webFontFamily}, sans-serif`
+          : resolvedFontFamily
+          ? `"${resolvedFontFamily}", ${webFontFamily}, sans-serif`
+          : `${webFontFamily}, sans-serif`;
 
         return {
           id: `orig_${pageNum}_${idx}_${Date.now()}`,
@@ -700,6 +934,10 @@ export default function EditPdfPage() {
           width: boxWidth,
           height: boxHeight * 1.15,
           fontSize: fontSizePdf,
+          angle: angle,
+          fontWeight: isBold ? 'bold' : 'normal',
+          fontStyle: isItalic ? 'italic' : 'normal',
+          fontFamily: activeFontFamily,
           originalPdfX: tx,
           originalPdfY: ty,
           originalPdfWidth: widthPdf > 0 ? widthPdf : (fontSizePdf * 0.55 * item.str.length),
@@ -1241,12 +1479,7 @@ export default function EditPdfPage() {
           const objects = state.objects || [];
           for (const obj of objects) {
             if (obj.isOriginalText) {
-              const isEdited = obj.isDeletedOriginal || 
-                               obj.text !== obj.originalTextData.text ||
-                               Math.abs(obj.left - obj.originalTextData.x) > 0.5 ||
-                               Math.abs(obj.top - obj.originalTextData.y) > 0.5 ||
-                               obj.fontSize !== obj.originalTextData.fontSize;
-              if (isEdited) {
+              if (isOriginalTextEdited(obj)) {
                 hasChanges = true;
                 break;
               }
@@ -1285,18 +1518,36 @@ export default function EditPdfPage() {
           }).promise;
         }
 
-        if (liveCanvas) {
-          // 3a. Set correct visibility and styles for original text boxes on the live canvas
-          liveCanvas.forEachObject((obj: any) => {
+        // Initialize active canvas (either live canvas or a temporary one in-memory if unmounted)
+        let activeCanvas = liveCanvas;
+        let tempFabricCanvas: any = null;
+
+        if (!activeCanvas && state) {
+          const canvasEl = document.createElement('canvas');
+          canvasEl.width = width * zoomScale;
+          canvasEl.height = height * zoomScale;
+          activeCanvas = new fabricLib.Canvas(canvasEl, {
+            width: width * zoomScale,
+            height: height * zoomScale,
+            backgroundColor: 'transparent'
+          });
+          
+          await new Promise<void>((resolve) => {
+            activeCanvas.loadFromJSON(state, () => {
+              activeCanvas.renderAll();
+              resolve();
+            });
+          });
+          tempFabricCanvas = activeCanvas;
+        }
+
+        if (activeCanvas) {
+          // 3a. Set correct visibility and styles for original text boxes on the canvas
+          activeCanvas.forEachObject((obj: any) => {
             if (obj.isOriginalText) {
-              const isEdited = obj.isDeletedOriginal || 
-                               obj.text !== obj.originalTextData.text ||
-                               Math.abs(obj.left - obj.originalTextData.x) > 0.5 ||
-                               Math.abs(obj.top - obj.originalTextData.y) > 0.5 ||
-                               obj.fontSize !== obj.originalTextData.fontSize;
               if (obj.isDeletedOriginal) {
                 obj.set({ opacity: 0 }); // hide completely
-              } else if (isEdited) {
+              } else if (isOriginalTextEdited(obj)) {
                 obj.set({
                   fill: obj.fill === 'transparent' ? (obj.originalTextData?.detectedColor || '#0b2c8c') : obj.fill,
                   backgroundColor: 'transparent', // transparent because background is whited out
@@ -1311,36 +1562,33 @@ export default function EditPdfPage() {
               }
             }
           });
-          liveCanvas.requestRenderAll();
+          if (!tempFabricCanvas) {
+            activeCanvas.requestRenderAll();
+          }
 
           // 3b. Erase original text areas on the PDF canvas context directly first
-          liveCanvas.forEachObject((obj: any) => {
+          activeCanvas.forEachObject((obj: any) => {
             if (obj.isOriginalText) {
-              const isEdited = obj.isDeletedOriginal || 
-                               obj.text !== obj.originalTextData.text ||
-                               Math.abs(obj.left - obj.originalTextData.x) > 0.5 ||
-                               Math.abs(obj.top - obj.originalTextData.y) > 0.5 ||
-                               obj.fontSize !== obj.originalTextData.fontSize;
-              if (isEdited) {
+              if (isOriginalTextEdited(obj)) {
                 const orig = obj.originalTextData;
-                const padX = 1; // horizontal padding
-                const shrinkY = 1.5; // shrink vertically to prevent grid line erasure
+                const padX = 2; // horizontal padding
+                const padY = 2; // vertical padding (full coverage, no shrinking)
                 if (tempPdfCtx) {
-                  tempPdfCtx.fillStyle = '#ffffff'; // erase with page background color (white)
+                  tempPdfCtx.fillStyle = orig.detectedBgColor || '#ffffff';
                   tempPdfCtx.fillRect(
                     (orig.x - padX) * renderScale,
-                    (orig.y + shrinkY) * renderScale,
+                    (orig.y - padY) * renderScale,
                     (orig.width + padX * 2) * renderScale,
-                    (orig.height - shrinkY * 2) * renderScale
+                    (orig.height + padY * 2) * renderScale
                   );
                 }
               }
             }
           });
 
-          // 3c. Get high-resolution data URL of the Fabric overlay directly from liveCanvas
+          // 3c. Get high-resolution data URL of the Fabric overlay directly from activeCanvas
           const multiplier = renderScale / zoomScale;
-          const overlayDataUrl = liveCanvas.toDataURL({
+          const overlayDataUrl = activeCanvas.toDataURL({
             format: 'png',
             multiplier: multiplier
           });
@@ -1357,7 +1605,7 @@ export default function EditPdfPage() {
           }
 
           // 3e. Restore original texts transparent state in the editor UI
-          liveCanvas.forEachObject((obj: any) => {
+          activeCanvas.forEachObject((obj: any) => {
             if (obj.isOriginalText && !obj.isDeletedOriginal && obj.text === obj.originalTextData.text) {
               obj.set({
                 fill: 'transparent',
@@ -1366,7 +1614,12 @@ export default function EditPdfPage() {
               });
             }
           });
-          liveCanvas.requestRenderAll();
+          
+          if (tempFabricCanvas) {
+            tempFabricCanvas.dispose();
+          } else {
+            activeCanvas.requestRenderAll();
+          }
         }
 
         // 5. Convert to high-quality JPEG (95% quality) and add to PDF
@@ -1457,7 +1710,7 @@ export default function EditPdfPage() {
     setSelectedObjectInfo(null);
   };
 
-  if (!isMounted) {
+  if (!isMounted || !pdfjs || !fabricLib) {
     return (
       <div className="bg-slate-950 min-h-screen flex items-center justify-center text-white">
         <div className="flex flex-col items-center gap-4">
@@ -2007,6 +2260,11 @@ export default function EditPdfPage() {
                               onChange={(e) => changeSelectedProperty('fontFamily', e.target.value)}
                               className="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-blue-500"
                             >
+                              {selectedObjectInfo.fontFamily && !['Helvetica', 'Times New Roman', 'Courier'].includes(selectedObjectInfo.fontFamily) && (
+                                <option value={selectedObjectInfo.fontFamily}>
+                                  Original PDF Font ({selectedObjectInfo.fontFamily.split(',')[0].replace(/"/g, '')})
+                                </option>
+                              )}
                               <option value="Helvetica">Helvetica (Sans-Serif)</option>
                               <option value="Times New Roman">Times New Roman (Serif)</option>
                               <option value="Courier">Courier (Monospace)</option>
@@ -2120,17 +2378,19 @@ export default function EditPdfPage() {
                                   : 'border-transparent hover:scale-105'
                               }`}
                               style={{ backgroundColor: selectedObjectInfo.originalTextData.detectedColor }}
-                              title={`Auto-matched Color (${selectedObjectInfo.originalTextData.detectedColor})`}
+                                title={`Auto-matched Color (${selectedObjectInfo.originalTextData.detectedColor})`}
                             >
                               <Sparkles className="w-3.5 h-3.5 text-white mix-blend-difference" />
                             </button>
                           )}
                           {[
+                            { hex: '#0b2c8c', label: 'GST Navy Blue' },
+                            { hex: '#000099', label: 'Classic Navy Blue' },
+                            { hex: '#000000', label: 'Black' },
+                            { hex: '#3b82f6', label: 'Light Blue' },
                             { hex: '#fbbf24', label: 'Yellow' },
                             { hex: '#22c55e', label: 'Green' },
-                            { hex: '#3b82f6', label: 'Blue' },
                             { hex: '#ef4444', label: 'Red' },
-                            { hex: '#000000', label: 'Black' },
                             { hex: '#ffffff', label: 'White' },
                           ].map((color) => (
                             <button
@@ -2472,15 +2732,17 @@ const PageRenderer = ({
       if (!pdfDoc || !pdfCanvasRef.current) return;
       try {
         const page = await pdfDoc.getPage(originalPageNum);
-        const viewport = page.getViewport({ scale: zoomScale });
         
         if (!active || !pdfCanvasRef.current) return;
         const canvas = pdfCanvasRef.current;
         const pixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
         const renderScale = Math.max(2.0, pixelRatio);
 
-        canvas.width = viewport.width * renderScale;
-        canvas.height = viewport.height * renderScale;
+        // Render PDF directly to a high-res viewport instead of stretching with canvas transform
+        const highResViewport = page.getViewport({ scale: zoomScale * renderScale });
+
+        canvas.width = highResViewport.width;
+        canvas.height = highResViewport.height;
         const ctx = canvas.getContext('2d');
         
         if (ctx) {
@@ -2488,8 +2750,7 @@ const PageRenderer = ({
           ctx.fillRect(0, 0, canvas.width, canvas.height);
           await page.render({
             canvasContext: ctx,
-            viewport: viewport,
-            transform: [renderScale, 0, 0, renderScale, 0, 0]
+            viewport: highResViewport
           }).promise;
           setIsBackgroundRendered(true);
         }
@@ -2508,15 +2769,27 @@ const PageRenderer = ({
   useEffect(() => {
     if (!fabricLib || !fabricCanvasRef.current || !isBackgroundRendered) return;
 
+    // Enforce high-DPI scaling explicitly on the client to override Next.js/SSR defaults of 1
+    const pixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
+    fabricLib.devicePixelRatio = pixelRatio;
+
+    const fbWidth = Math.round(width * zoomScale);
+    const fbHeight = Math.round(height * zoomScale);
+
     // Create Fabric Canvas
     const fbCanvas = new fabricLib.Canvas(fabricCanvasRef.current, {
-      width: width * zoomScale,
-      height: height * zoomScale,
+      width: fbWidth,
+      height: fbHeight,
       backgroundColor: 'transparent',
-      selection: editMode === 'select'
+      selection: editMode === 'select',
+      enableRetinaScaling: true,
+      imageSmoothingEnabled: true
     });
 
     fabricCanvasInstance.current = fbCanvas;
+    if (typeof window !== 'undefined') {
+      (window as any).fabricCanvas = fbCanvas;
+    }
     if (registerCanvasInstance) {
       registerCanvasInstance(pageId, fbCanvas);
     }
@@ -2524,8 +2797,8 @@ const PageRenderer = ({
     // Apply zoom
     fbCanvas.setZoom(zoomScale);
     fbCanvas.setDimensions({
-      width: width * zoomScale,
-      height: height * zoomScale
+      width: fbWidth,
+      height: fbHeight
     });
 
     // Smart Snapping implementation
@@ -2571,8 +2844,8 @@ const PageRenderer = ({
       fbCanvas.loadFromJSON(stateCopy, () => {
         fbCanvas.setZoom(zoomScale);
         fbCanvas.setDimensions({
-          width: width * zoomScale,
-          height: height * zoomScale
+          width: Math.round(width * zoomScale),
+          height: Math.round(height * zoomScale)
         });
         fbCanvas.renderAll();
       });
@@ -2580,11 +2853,15 @@ const PageRenderer = ({
       const textBoxesForPage = originalTexts[originalPageNum] || [];
       if (textBoxesForPage.length > 0) {
         textBoxesForPage.forEach((box: any) => {
-          // Detect color from background canvas
+          // Detect properties from background canvas
           const detectedColor = detectTextColorFromCanvas(pdfCanvasRef.current, box, zoomScale);
+          const detectedBgColor = detectBackgroundColorFromCanvas(pdfCanvasRef.current, box, zoomScale);
+          const detectedWeight = detectTextWeightFromCanvas(pdfCanvasRef.current, box, zoomScale);
 
           const isReplaced = box.replacedText !== undefined;
           const displayText = isReplaced ? box.replacedText : box.text;
+
+          const activeWeight = (box.fontWeight === 'bold' || detectedWeight === 'bold') ? 'bold' : 'normal';
 
           const textbox = new fabricLib.Textbox(displayText, {
             id: box.id,
@@ -2593,7 +2870,12 @@ const PageRenderer = ({
             width: box.width,
             height: box.height,
             fontSize: box.fontSize,
-            fontFamily: 'Helvetica',
+            angle: box.angle || 0,
+            fontWeight: activeWeight,
+            fontStyle: box.fontStyle || 'normal',
+            fontFamily: box.fontFamily || 'Helvetica',
+            padding: 0,
+            lineHeight: 1.0,
             fill: isReplaced ? (box.replacedColor || detectedColor) : 'transparent',
             backgroundColor: isReplaced ? 'transparent' : 'rgba(255, 255, 255, 0.001)', // invisible but registers clicks perfectly
             isOriginalText: true,
@@ -2604,7 +2886,12 @@ const PageRenderer = ({
               width: box.width,
               height: box.height,
               fontSize: box.fontSize,
-              detectedColor: detectedColor
+              angle: box.angle || 0,
+              fontWeight: activeWeight,
+              fontStyle: box.fontStyle || 'normal',
+              fontFamily: box.fontFamily || 'Helvetica',
+              detectedColor: detectedColor,
+              detectedBgColor: detectedBgColor
             },
             selectable: true,
             editable: true,
@@ -2620,9 +2907,19 @@ const PageRenderer = ({
             strokeWidth: 1
           });
 
-          // Revert back to transparent if losing focus and unchanged
-          textbox.on('deselected', () => {
-            if (textbox.text === textbox.originalTextData.text && !textbox.isDeletedOriginal) {
+          // Hook editing events directly on the textbox to manage fill transparency
+          textbox.on('editing:entered', () => {
+            const detectedColor = textbox.originalTextData?.detectedColor || '#0b2c8c';
+            textbox.set({
+              fill: textbox.fill === 'transparent' ? detectedColor : textbox.fill,
+              backgroundColor: 'transparent', // Transparent background
+              stroke: 'transparent'
+            });
+            fbCanvas.requestRenderAll();
+          });
+
+          textbox.on('editing:exited', () => {
+            if (!isOriginalTextEdited(textbox)) {
               textbox.set({
                 fill: 'transparent',
                 backgroundColor: 'rgba(255, 255, 255, 0.001)',
@@ -2652,22 +2949,18 @@ const PageRenderer = ({
       
       fbCanvas.forEachObject((obj: any) => {
         if (obj.isOriginalText) {
-          const isActive = fbCanvas.getActiveObject() === obj;
-          const isEdited = obj.isDeletedOriginal || 
-                           obj.text !== obj.originalTextData.text ||
-                           Math.abs(obj.left - obj.originalTextData.x) > 0.5 ||
-                           Math.abs(obj.top - obj.originalTextData.y) > 0.5 ||
-                           obj.fontSize !== obj.originalTextData.fontSize;
-          if (isEdited || isActive) {
+          const isEdited = isOriginalTextEdited(obj);
+          const isEditing = obj.isEditing;
+          if (isEdited || isEditing) {
             const orig = obj.originalTextData;
-            const padX = 1;
-            const shrinkY = 1.5; // shrink vertically to prevent grid line erasure
-            ctx.fillStyle = '#ffffff';
+            const padX = 2;
+            const padY = 2; // full coverage, no shrinking
+            ctx.fillStyle = orig.detectedBgColor || '#ffffff';
             ctx.fillRect(
               orig.x - padX,
-              orig.y + shrinkY,
+              orig.y - padY,
               orig.width + padX * 2,
-              orig.height - shrinkY * 2
+              orig.height + padY * 2
             );
           }
         }
@@ -2683,23 +2976,6 @@ const PageRenderer = ({
       const activeObj = fbCanvas.getActiveObject();
       if (activeObj) {
         onObjectSelected(pageId, activeObj);
-        
-        // Single-click to select all and type instantly
-        if ((activeObj.type === 'textbox' || activeObj.type === 'i-text') && (editMode === 'edit-text' || editMode === 'select')) {
-          const detectedColor = activeObj.originalTextData?.detectedColor || '#0b2c8c';
-          activeObj.set({
-            fill: activeObj.fill === 'transparent' ? detectedColor : activeObj.fill,
-            backgroundColor: 'transparent', // Transparent background
-            stroke: 'transparent'
-          });
-          fbCanvas.requestRenderAll();
-
-          setTimeout(() => {
-            activeObj.enterEditing();
-            activeObj.selectAll();
-            fbCanvas.requestRenderAll();
-          }, 50);
-        }
       } else {
         onObjectCleared();
       }
@@ -2709,43 +2985,21 @@ const PageRenderer = ({
     fbCanvas.on('selection:updated', handleSelection);
     fbCanvas.on('selection:cleared', () => {
       fbCanvas.forEachObject((obj: any) => {
-        if (obj.isOriginalText && obj.text === obj.originalTextData.text && !obj.isDeletedOriginal) {
-          obj.set({
-            fill: 'transparent',
-            backgroundColor: 'rgba(255, 255, 255, 0.001)',
-            stroke: 'transparent'
-          });
+        if (obj.isOriginalText) {
+          if (!isOriginalTextEdited(obj)) {
+            obj.set({
+              fill: 'transparent',
+              backgroundColor: 'rgba(255, 255, 255, 0.001)',
+              stroke: 'transparent'
+            });
+          }
         }
       });
       fbCanvas.requestRenderAll();
       onObjectCleared();
     });
 
-    fbCanvas.on('editing:entered', (options: any) => {
-      const obj = options.target;
-      if (obj && obj.isOriginalText) {
-        const detectedColor = obj.originalTextData?.detectedColor || '#0b2c8c';
-        obj.set({
-          fill: obj.fill === 'transparent' ? detectedColor : obj.fill,
-          backgroundColor: 'transparent', // Transparent background
-          stroke: 'transparent'
-        });
-        fbCanvas.requestRenderAll();
-      }
-    });
-
-    fbCanvas.on('editing:exited', (options: any) => {
-      const obj = options.target;
-      if (obj && obj.isOriginalText) {
-        if (obj.text === obj.originalTextData.text && !obj.isDeletedOriginal) {
-          obj.set({
-            fill: 'transparent',
-            backgroundColor: 'rgba(255, 255, 255, 0.001)'
-          });
-          fbCanvas.requestRenderAll();
-        }
-      }
-    });
+    // Handled via object-level editing:entered and editing:exited listeners
 
     // Hover bounding box outlines for guides
     fbCanvas.on('mouse:over', (e: any) => {
@@ -2875,7 +3129,7 @@ const PageRenderer = ({
 
   return (
     <div className="absolute inset-0 w-full h-full select-none rounded-2xl">
-      <canvas ref={pdfCanvasRef} className="absolute inset-0 pointer-events-none rounded-2xl bg-white" />
+      <canvas ref={pdfCanvasRef} className="absolute inset-0 w-full h-full pointer-events-none rounded-2xl bg-white" />
       <div className="absolute inset-0 z-10 rounded-2xl">
         <canvas ref={fabricCanvasRef} />
       </div>

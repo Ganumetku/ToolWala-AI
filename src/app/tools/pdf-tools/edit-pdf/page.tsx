@@ -11,7 +11,7 @@ import {
   MousePointer, Image as ImageIcon, Paintbrush, Highlighter,
   Square, Circle, ArrowUpRight, CheckSquare, Settings,
   AlignLeft, AlignCenter, AlignRight, Bold, Italic, Underline,
-  Copy, Eye, Trash, Sparkles
+  Copy, Eye, Trash, Sparkles, Search, ChevronRight
 } from 'lucide-react';
 import { toolArticles } from '@/data/toolArticles';
 import ToolArticle from '@/components/ToolArticle';
@@ -19,7 +19,6 @@ import SignatureModal from './SignatureModal';
 
 const ZOOM_LEVELS = [0.5, 0.75, 1.0, 1.25, 1.5, 2.0, 2.5];
 const FONT_SIZES = [8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 48, 60, 72];
-
 interface PageItem {
   id: string; // unique virtual page ID
   originalPageNum: number; // 1-based index mapping to PDF.js page
@@ -38,7 +37,23 @@ interface TextBoxInfo {
   originalPdfWidth: number;
   originalPdfHeight: number;
   originalPdfFontSize: number;
+  replacedText?: string;
+  replacedColor?: string;
 }
+
+// Utility: convert rgba string back to hex
+const rgbaToHex = (rgbaStr: string): string => {
+  try {
+    const match = rgbaStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+    if (!match) return '#fbbf24';
+    const r = parseInt(match[1]).toString(16).padStart(2, '0');
+    const g = parseInt(match[2]).toString(16).padStart(2, '0');
+    const b = parseInt(match[3]).toString(16).padStart(2, '0');
+    return `#${r}${g}${b}`;
+  } catch (e) {
+    return '#fbbf24';
+  }
+};
 
 // Utility: convert hex to rgb
 const hexToRgb = (hex: string) => {
@@ -198,6 +213,20 @@ export default function EditPdfPage() {
   // Selected Object Properties
   const [selectedObjectInfo, setSelectedObjectInfo] = useState<any | null>(null);
 
+  // Search & Replace States
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [replaceQuery, setReplaceQuery] = useState<string>('');
+  const [searchResults, setSearchResults] = useState<{
+    pageId: string;
+    originalPageNum: number;
+    boxId: string;
+    text: string;
+    index: number;
+  }[]>([]);
+  const [currentMatchIndex, setCurrentMatchIndex] = useState<number>(-1);
+  const [activeSidebarTab, setActiveSidebarTab] = useState<'properties' | 'search'>('properties');
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState<string>('');
+
   // UI state
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [processingStatus, setProcessingStatus] = useState<string>('');
@@ -224,6 +253,298 @@ export default function EditPdfPage() {
     };
     initLibraries();
   }, []);
+
+  // Debounce search query
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchQuery(searchQuery);
+    }, 300);
+    return () => clearTimeout(handler);
+  }, [searchQuery]);
+
+  // Search logic
+  useEffect(() => {
+    if (!debouncedSearchQuery.trim() || pageList.length === 0) {
+      setSearchResults([]);
+      setCurrentMatchIndex(-1);
+      return;
+    }
+
+    const matches: any[] = [];
+    const query = debouncedSearchQuery.toLowerCase();
+
+    pageList.forEach((pageItem) => {
+      // 1. Check if canvas state is already loaded/saved
+      const state = canvasStates[pageItem.id];
+      if (state && state.objects) {
+        state.objects.forEach((obj: any) => {
+          if ((obj.type === 'textbox' || obj.type === 'i-text') && obj.text) {
+            const txt = obj.text.toLowerCase();
+            let idx = txt.indexOf(query);
+            while (idx !== -1) {
+              matches.push({
+                pageId: pageItem.id,
+                originalPageNum: pageItem.originalPageNum,
+                boxId: obj.id,
+                text: obj.text,
+                index: idx
+              });
+              idx = txt.indexOf(query, idx + 1);
+            }
+          }
+        });
+      } else {
+        // 2. Check originalTexts
+        const boxes = originalTexts[pageItem.originalPageNum] || [];
+        boxes.forEach((box: any) => {
+          const displayText = box.replacedText !== undefined ? box.replacedText : box.text;
+          if (displayText) {
+            const txt = displayText.toLowerCase();
+            let idx = txt.indexOf(query);
+            while (idx !== -1) {
+              matches.push({
+                pageId: pageItem.id,
+                originalPageNum: pageItem.originalPageNum,
+                boxId: box.id,
+                text: displayText,
+                index: idx
+              });
+              idx = txt.indexOf(query, idx + 1);
+            }
+          }
+        });
+      }
+    });
+
+    setSearchResults(matches);
+    setCurrentMatchIndex(matches.length > 0 ? 0 : -1);
+  }, [debouncedSearchQuery, canvasStates, originalTexts, pageList]);
+
+  const focusMatch = (match: any) => {
+    const { pageId, boxId } = match;
+    handlePageThumbClick(pageId);
+
+    setTimeout(() => {
+      const canvas = canvasInstances.current[pageId];
+      if (canvas) {
+        const obj = canvas.getObjects().find((o: any) => o.id === boxId);
+        if (obj) {
+          canvas.setActiveObject(obj);
+          canvas.requestRenderAll();
+        }
+      }
+    }, 200);
+  };
+
+  const handleNextMatch = () => {
+    if (searchResults.length === 0) return;
+    const nextIdx = (currentMatchIndex + 1) % searchResults.length;
+    setCurrentMatchIndex(nextIdx);
+    focusMatch(searchResults[nextIdx]);
+  };
+
+  const handlePrevMatch = () => {
+    if (searchResults.length === 0) return;
+    const prevIdx = (currentMatchIndex - 1 + searchResults.length) % searchResults.length;
+    setCurrentMatchIndex(prevIdx);
+    focusMatch(searchResults[prevIdx]);
+  };
+
+  const handleReplace = () => {
+    if (currentMatchIndex === -1 || searchResults.length === 0) return;
+    const match = searchResults[currentMatchIndex];
+    const { pageId, originalPageNum, boxId } = match;
+
+    const regex = new RegExp(debouncedSearchQuery, 'i');
+    const newText = match.text.replace(regex, replaceQuery);
+
+    const canvas = canvasInstances.current[pageId];
+    if (canvas) {
+      const obj = canvas.getObjects().find((o: any) => o.id === boxId);
+      if (obj) {
+        obj.set('text', newText);
+        if (obj.isOriginalText) {
+          const detectedColor = obj.originalTextData?.detectedColor || '#0b2c8c';
+          obj.set({
+            fill: obj.fill === 'transparent' ? detectedColor : obj.fill,
+            backgroundColor: 'transparent',
+            stroke: 'transparent'
+          });
+        }
+        canvas.requestRenderAll();
+        canvas.fire('object:modified');
+      }
+    } else {
+      const state = canvasStates[pageId];
+      if (state && state.objects) {
+        const updatedObjects = state.objects.map((obj: any) => {
+          if (obj.id === boxId) {
+            const isOriginal = obj.isOriginalText;
+            const detectedColor = obj.originalTextData?.detectedColor || '#0b2c8c';
+            return {
+              ...obj,
+              text: newText,
+              fill: isOriginal ? (obj.fill === 'transparent' ? detectedColor : obj.fill) : obj.fill,
+              backgroundColor: 'transparent'
+            };
+          }
+          return obj;
+        });
+        const updatedState = { ...state, objects: updatedObjects };
+        setCanvasStates((prev) => ({ ...prev, [pageId]: updatedState }));
+      } else {
+        setOriginalTexts((prev) => {
+          const pageBoxes = prev[originalPageNum] || [];
+          const updatedBoxes = pageBoxes.map((box: any) => {
+            if (box.id === boxId) {
+              return {
+                ...box,
+                replacedText: newText
+              };
+            }
+            return box;
+          });
+          return { ...prev, [originalPageNum]: updatedBoxes };
+        });
+      }
+    }
+
+    setSuccess("Replaced match successfully.");
+    setTimeout(() => setSuccess(null), 3000);
+  };
+
+  const handleReplaceAll = () => {
+    if (searchResults.length === 0) return;
+    setIsProcessing(true);
+    setProcessingStatus('Performing replace all...');
+
+    const query = debouncedSearchQuery.toLowerCase();
+    const regex = new RegExp(debouncedSearchQuery, 'gi');
+
+    const matchesByPage: Record<string, any[]> = {};
+    searchResults.forEach((m) => {
+      if (!matchesByPage[m.pageId]) matchesByPage[m.pageId] = [];
+      matchesByPage[m.pageId].push(m);
+    });
+
+    setOriginalTexts((prevOriginal) => {
+      const updatedOriginal = { ...prevOriginal };
+
+      setCanvasStates((prevStates) => {
+        const updatedStates = { ...prevStates };
+
+        pageList.forEach((pageItem) => {
+          const pageMatches = matchesByPage[pageItem.id];
+          if (!pageMatches) return;
+
+          const canvas = canvasInstances.current[pageItem.id];
+          if (canvas) {
+            let canvasModified = false;
+            canvas.getObjects().forEach((obj: any) => {
+              if ((obj.type === 'textbox' || obj.type === 'i-text') && obj.text) {
+                if (obj.text.toLowerCase().includes(query)) {
+                  const updatedText = obj.text.replace(regex, replaceQuery);
+                  obj.set('text', updatedText);
+                  if (obj.isOriginalText) {
+                    const detectedColor = obj.originalTextData?.detectedColor || '#0b2c8c';
+                    obj.set({
+                      fill: obj.fill === 'transparent' ? detectedColor : obj.fill,
+                      backgroundColor: 'transparent',
+                      stroke: 'transparent'
+                    });
+                  }
+                  canvasModified = true;
+                }
+              }
+            });
+            if (canvasModified) {
+              canvas.requestRenderAll();
+              const state = canvas.toJSON(['id', 'isOriginalText', 'originalTextData', 'isDeletedOriginal']);
+              updatedStates[pageItem.id] = state;
+            }
+          } else {
+            const state = updatedStates[pageItem.id];
+            if (state && state.objects) {
+              const updatedObjects = state.objects.map((obj: any) => {
+                if ((obj.type === 'textbox' || obj.type === 'i-text') && obj.text && obj.text.toLowerCase().includes(query)) {
+                  const isOriginal = obj.isOriginalText;
+                  const detectedColor = obj.originalTextData?.detectedColor || '#0b2c8c';
+                  return {
+                    ...obj,
+                    text: obj.text.replace(regex, replaceQuery),
+                    fill: isOriginal ? (obj.fill === 'transparent' ? detectedColor : obj.fill) : obj.fill,
+                    backgroundColor: 'transparent'
+                  };
+                }
+                return obj;
+              });
+              updatedStates[pageItem.id] = { ...state, objects: updatedObjects };
+            } else {
+              const pageBoxes = updatedOriginal[pageItem.originalPageNum] || [];
+              const updatedBoxes = pageBoxes.map((box: any) => {
+                const textToCheck = box.replacedText !== undefined ? box.replacedText : box.text;
+                if (textToCheck && textToCheck.toLowerCase().includes(query)) {
+                  return {
+                    ...box,
+                    replacedText: textToCheck.replace(regex, replaceQuery)
+                  };
+                }
+                return box;
+              });
+              updatedOriginal[pageItem.originalPageNum] = updatedBoxes;
+            }
+          }
+        });
+
+        return updatedStates;
+      });
+
+      return updatedOriginal;
+    });
+
+    setIsProcessing(false);
+    setSuccess(`Successfully replaced all ${searchResults.length} occurrences.`);
+    setTimeout(() => setSuccess(null), 4000);
+  };
+
+  const handleHighlightSelectedText = () => {
+    const canvas = getActiveCanvas();
+    if (!canvas) return;
+    const activeObj = canvas.getActiveObject();
+    if (!activeObj) return;
+
+    const left = activeObj.left;
+    const top = activeObj.top;
+    const width = activeObj.width * (activeObj.scaleX || 1);
+    const height = activeObj.height * (activeObj.scaleY || 1);
+    const angle = activeObj.angle || 0;
+
+    const highlightBox = new fabricLib.Rect({
+      left: left,
+      top: top,
+      width: width,
+      height: height,
+      angle: angle,
+      fill: hexToRgbaStr(strokeColor || '#fbbf24', 0.4),
+      stroke: 'transparent',
+      strokeWidth: 0,
+      isHighlight: true,
+      borderColor: '#3b82f6',
+      cornerColor: '#3b82f6',
+      cornerSize: 8,
+      transparentCorners: false
+    });
+
+    canvas.add(highlightBox);
+    highlightBox.sendToBack();
+    canvas.discardActiveObject();
+    canvas.setActiveObject(highlightBox);
+    canvas.requestRenderAll();
+    canvas.fire('object:modified');
+
+    setSuccess("Selected text highlighted.");
+    setTimeout(() => setSuccess(null), 3000);
+  };
 
   // Global keyboard shortcuts (Undo, Redo, Delete)
   useEffect(() => {
@@ -549,7 +870,7 @@ export default function EditPdfPage() {
     setEditMode('select');
   };
 
-  const handleAddShape = (shapeType: 'rect' | 'circle' | 'line' | 'arrow') => {
+  const handleAddShape = (shapeType: 'rect' | 'circle' | 'line' | 'arrow' | 'highlight') => {
     if (!fabricLib) return;
     let shape: any;
     
@@ -598,8 +919,21 @@ export default function EditPdfPage() {
         cornerSize: 8,
         transparentCorners: false
       });
+    } else if (shapeType === 'highlight') {
+      shape = new fabricLib.Rect({
+        width: 120,
+        height: 24,
+        fill: hexToRgbaStr(strokeColor || '#fbbf24', 0.4),
+        stroke: 'transparent',
+        strokeWidth: 0,
+        isHighlight: true,
+        borderColor: '#3b82f6',
+        cornerColor: '#3b82f6',
+        cornerSize: 8,
+        transparentCorners: false
+      });
     }
-
+    
     if (shape) {
       insertObjectOnActiveCanvas(shape);
       setEditMode('select');
@@ -705,7 +1039,29 @@ export default function EditPdfPage() {
     const activeObj = canvas.getActiveObject();
     if (!activeObj) return;
 
-    activeObj.set(key, value);
+    if (key === 'fill' && activeObj.isHighlight) {
+      const cleanHex = value.startsWith('#') ? value : '#fbbf24';
+      let op = 0.4;
+      if (activeObj.fill && activeObj.fill.startsWith('rgba')) {
+        const match = activeObj.fill.match(/rgba?\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/);
+        if (match) op = parseFloat(match[4]);
+      }
+      activeObj.set(key, hexToRgbaStr(cleanHex, op));
+    } else if (key === 'opacity' && activeObj.isHighlight) {
+      activeObj.set('opacity', 1.0);
+      if (activeObj.fill && activeObj.fill.startsWith('rgba')) {
+        const match = activeObj.fill.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+        if (match) {
+          const r = match[1], g = match[2], b = match[3];
+          activeObj.set('fill', `rgba(${r}, ${g}, ${b}, ${value})`);
+        }
+      } else {
+        const hex = activeObj.fill || '#fbbf24';
+        activeObj.set('fill', hexToRgbaStr(hex, value));
+      }
+    } else {
+      activeObj.set(key, value);
+    }
     canvas.requestRenderAll();
     canvas.fire('object:modified');
 
@@ -1068,6 +1424,7 @@ export default function EditPdfPage() {
   };
 
   const handleObjectSelected = (pageId: string, activeObj: any) => {
+    setActiveSidebarTab('properties');
     setSelectedObjectInfo({
       id: activeObj.id || 'annot',
       type: activeObj.type,
@@ -1084,6 +1441,7 @@ export default function EditPdfPage() {
       opacity: activeObj.opacity || 1,
       angle: activeObj.angle || 0,
       isOriginalText: activeObj.isOriginalText || false,
+      isHighlight: activeObj.isHighlight || false,
       pageId
     });
   };
@@ -1171,9 +1529,20 @@ export default function EditPdfPage() {
             <button
               onClick={() => setEditMode('highlight-free')}
               className={`p-2 rounded-xl transition-all ${editMode === 'highlight-free' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-400 hover:text-white hover:bg-slate-800'}`}
-              title="Highlighter Tool"
+              title="Freehand Highlighter"
             >
               <Highlighter className="w-4 h-4" />
+            </button>
+
+            <button
+              onClick={() => handleAddShape('highlight')}
+              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
+              title="Highlight Box (Rectangle)"
+            >
+              <div className="relative">
+                <Highlighter className="w-4 h-4 text-yellow-450" />
+                <div className="absolute -bottom-0.5 -right-0.5 w-1.5 h-1.5 bg-yellow-500 rounded-sm" />
+              </div>
             </button>
 
             <div className="w-px h-5 bg-slate-800 mx-1" />
@@ -1478,228 +1847,382 @@ export default function EditPdfPage() {
 
           {/* RIGHT COLUMN: Sidebar properties panel */}
           <aside className="w-80 bg-slate-950 border-l border-slate-900 flex flex-col overflow-hidden select-none z-20">
-            <div className="p-4 border-b border-slate-900 flex items-center justify-between bg-slate-900/20">
-              <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">Properties</span>
-              <span className="text-xs font-bold text-slate-400">{selectedObjectInfo ? "Selected Object" : "No Selection"}</span>
+            <div className="flex bg-slate-950 border-b border-slate-900 p-1.5 bg-slate-900/10">
+              <button
+                onClick={() => setActiveSidebarTab('properties')}
+                className={`flex-1 py-2.5 text-center text-[10px] font-black uppercase tracking-widest transition-all rounded-xl ${
+                  activeSidebarTab === 'properties' ? 'bg-slate-900 text-white shadow border border-slate-800' : 'text-slate-500 hover:text-slate-350'
+                }`}
+              >
+                Properties
+              </button>
+              <button
+                onClick={() => setActiveSidebarTab('search')}
+                className={`flex-1 py-2.5 text-center text-[10px] font-black uppercase tracking-widest transition-all rounded-xl ${
+                  activeSidebarTab === 'search' ? 'bg-slate-900 text-white shadow border border-slate-800' : 'text-slate-500 hover:text-slate-350'
+                }`}
+              >
+                Search & Replace
+              </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-5 space-y-6 custom-scrollbar">
-              {selectedObjectInfo ? (
-                <div className="space-y-6 animate-in fade-in duration-200">
-                  {/* Selected Object type indicator */}
-                  <div className="bg-slate-900/50 p-4 rounded-2xl border border-slate-900">
-                    <span className="text-[9px] font-black uppercase tracking-wider text-slate-500 block mb-0.5">Selection Type</span>
-                    <span className="text-xs font-bold text-slate-300 capitalize">
-                      {selectedObjectInfo.type === 'i-text' || selectedObjectInfo.type === 'textbox' ? "Text Box" : selectedObjectInfo.type}
-                    </span>
+            <div className="flex-1 overflow-y-auto custom-scrollbar">
+              {activeSidebarTab === 'search' ? (
+                <div className="p-5 space-y-6">
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Find Text</label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          placeholder="Search text in PDF..."
+                          className="w-full bg-slate-900 border border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-650 outline-none focus:border-blue-500 transition-colors"
+                        />
+                        <Search className="w-3.5 h-3.5 text-slate-600 absolute left-3 top-3.5" />
+                        {searchQuery && (
+                          <button onClick={() => setSearchQuery('')} className="absolute right-3 top-3 text-slate-600 hover:text-slate-400">
+                            <X className="w-3.5 h-3.5" />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Replace With</label>
+                      <input
+                        type="text"
+                        value={replaceQuery}
+                        onChange={(e) => setReplaceQuery(e.target.value)}
+                        placeholder="Replacement text..."
+                        className="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-650 outline-none focus:border-blue-500 transition-colors"
+                      />
+                    </div>
                   </div>
 
-                  {/* Text Properties controls */}
-                  {(selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text') && (
-                    <div className="space-y-4 border-t border-slate-900 pt-4">
-                      {/* Font options */}
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Font Family</label>
-                        <select
-                          value={selectedObjectInfo.fontFamily}
-                          onChange={(e) => changeSelectedProperty('fontFamily', e.target.value)}
-                          className="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-blue-500"
-                        >
-                          <option value="Helvetica">Helvetica (Sans-Serif)</option>
-                          <option value="Times New Roman">Times New Roman (Serif)</option>
-                          <option value="Courier">Courier (Monospace)</option>
-                        </select>
-                      </div>
+                  {debouncedSearchQuery && (
+                    <div className="space-y-4 pt-4 border-t border-slate-900">
+                      {searchResults.length > 0 ? (
+                        <div className="space-y-4">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[11px] font-bold text-slate-400">
+                              {searchResults.length} {searchResults.length === 1 ? 'match' : 'matches'} found
+                            </span>
+                            <div className="flex items-center gap-1.5">
+                              <span className="text-[10px] text-slate-500 font-bold">
+                                {currentMatchIndex + 1} of {searchResults.length}
+                              </span>
+                              <div className="flex items-center bg-slate-900 border border-slate-800 rounded-lg p-0.5">
+                                <button
+                                  onClick={handlePrevMatch}
+                                  className="p-1 rounded text-slate-400 hover:text-white hover:bg-slate-800"
+                                  title="Previous Match"
+                                >
+                                  <ChevronLeft className="w-3.5 h-3.5" />
+                                </button>
+                                <button
+                                  onClick={handleNextMatch}
+                                  className="p-1 rounded text-slate-400 hover:text-white hover:bg-slate-800"
+                                  title="Next Match"
+                                >
+                                  <ChevronRight className="w-3.5 h-3.5" />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
 
-                      {/* Font Size controls */}
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Font Size</label>
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => changeSelectedProperty('fontSize', Math.max(6, selectedObjectInfo.fontSize - 1))}
-                            className="p-2.5 bg-slate-900 border border-slate-800 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white"
-                          >
-                            <Minus className="w-4 h-4" />
-                          </button>
-                          
-                          <select
-                            value={selectedObjectInfo.fontSize}
-                            onChange={(e) => changeSelectedProperty('fontSize', parseInt(e.target.value))}
-                            className="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-blue-500 text-center"
-                          >
-                            {FONT_SIZES.map((sz) => (
-                              <option key={sz} value={sz}>{sz} px</option>
-                            ))}
-                          </select>
-
-                          <button
-                            onClick={() => changeSelectedProperty('fontSize', Math.min(100, selectedObjectInfo.fontSize + 1))}
-                            className="p-2.5 bg-slate-900 border border-slate-800 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white"
-                          >
-                            <Plus className="w-4 h-4" />
-                          </button>
+                          <div className="grid grid-cols-2 gap-2 pt-2">
+                            <button
+                              onClick={handleReplace}
+                              className="py-2.5 bg-blue-600/10 hover:bg-blue-600/25 border border-blue-600/20 text-blue-400 text-xs font-bold uppercase rounded-xl transition-all"
+                            >
+                              Replace
+                            </button>
+                            <button
+                              onClick={handleReplaceAll}
+                              className="py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold uppercase rounded-xl transition-all shadow-md shadow-blue-500/10"
+                            >
+                              Replace All
+                            </button>
+                          </div>
                         </div>
-                      </div>
-
-                      {/* Text Style toggles */}
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Text Style</label>
-                        <div className="grid grid-cols-4 gap-1.5">
-                          <button
-                            onClick={() => changeSelectedProperty('fontWeight', selectedObjectInfo.fontWeight === 'bold' ? 'normal' : 'bold')}
-                            className={`p-2.5 rounded-xl border text-xs font-bold transition-all ${
-                              selectedObjectInfo.fontWeight === 'bold' ? 'bg-blue-600 border-blue-500 text-white' : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
-                            }`}
-                          >
-                            <Bold className="w-3.5 h-3.5 mx-auto" />
-                          </button>
-                          <button
-                            onClick={() => changeSelectedProperty('fontStyle', selectedObjectInfo.fontStyle === 'italic' ? 'normal' : 'italic')}
-                            className={`p-2.5 rounded-xl border text-xs font-bold transition-all ${
-                              selectedObjectInfo.fontStyle === 'italic' ? 'bg-blue-600 border-blue-500 text-white' : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
-                            }`}
-                          >
-                            <Italic className="w-3.5 h-3.5 mx-auto" />
-                          </button>
-                          <button
-                            onClick={() => changeSelectedProperty('underline', !selectedObjectInfo.underline)}
-                            className={`p-2.5 rounded-xl border text-xs font-bold transition-all ${
-                              selectedObjectInfo.underline ? 'bg-blue-600 border-blue-500 text-white' : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
-                            }`}
-                          >
-                            <Underline className="w-3.5 h-3.5 mx-auto" />
-                          </button>
-                          <button
-                            onClick={() => {
-                              const aligns = ['left', 'center', 'right'];
-                              const nextIdx = (aligns.indexOf(selectedObjectInfo.textAlign) + 1) % aligns.length;
-                              changeSelectedProperty('textAlign', aligns[nextIdx]);
-                            }}
-                            className="p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-slate-400 hover:text-white text-xs font-bold"
-                          >
-                            {selectedObjectInfo.textAlign === 'left' && <AlignLeft className="w-3.5 h-3.5 mx-auto" />}
-                            {selectedObjectInfo.textAlign === 'center' && <AlignCenter className="w-3.5 h-3.5 mx-auto" />}
-                            {selectedObjectInfo.textAlign === 'right' && <AlignRight className="w-3.5 h-3.5 mx-auto" />}
-                          </button>
+                      ) : (
+                        <div className="text-center py-6">
+                          <p className="text-xs font-bold text-slate-500">No matches found</p>
                         </div>
-                      </div>
+                      )}
                     </div>
                   )}
 
-                  {/* Colors parameters */}
-                  <div className="space-y-3 border-t border-slate-900 pt-4">
-                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">
-                      {selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text' ? "Font Color" : "Stroke Color"}
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {/* Auto-Match Detected Color */}
-                      {selectedObjectInfo.originalTextData?.detectedColor && (
-                        <button
-                          key="auto-match"
-                          onClick={() => {
-                            const detColor = selectedObjectInfo.originalTextData.detectedColor;
-                            if (selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text') {
-                              changeSelectedProperty('fill', detColor);
-                            } else {
-                              changeSelectedProperty('stroke', detColor);
-                            }
-                          }}
-                          className={`w-7 h-7 rounded-full border-2 flex items-center justify-center transition-all ${
-                            (selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text' ? selectedObjectInfo.fill : selectedObjectInfo.stroke) === selectedObjectInfo.originalTextData.detectedColor
-                              ? 'border-blue-500 scale-110 shadow-md shadow-blue-500/10'
-                              : 'border-transparent hover:scale-105'
-                          }`}
-                          style={{ backgroundColor: selectedObjectInfo.originalTextData.detectedColor }}
-                          title={`Auto-matched Color (${selectedObjectInfo.originalTextData.detectedColor})`}
-                        >
-                          <Sparkles className="w-3.5 h-3.5 text-white mix-blend-difference" />
-                        </button>
-                      )}
-                      {[
-                        { hex: '#000000', label: 'Black' },
-                        { hex: '#0b2c8c', label: 'Navy' },
-                        { hex: '#334155', label: 'Gray' },
-                        { hex: '#1d4ed8', label: 'Blue' },
-                        { hex: '#ef4444', label: 'Red' },
-                        { hex: '#ffffff', label: 'White' },
-                      ].map((color) => (
-                        <button
-                          key={color.hex}
-                          onClick={() => {
-                            if (selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text') {
-                              changeSelectedProperty('fill', color.hex);
-                            } else {
-                              changeSelectedProperty('stroke', color.hex);
-                            }
-                          }}
-                          className={`w-7 h-7 rounded-full border-2 transition-all ${
-                            (selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text' ? selectedObjectInfo.fill : selectedObjectInfo.stroke) === color.hex
-                              ? 'border-blue-500 scale-110 shadow-md shadow-blue-500/10'
-                              : 'border-transparent hover:scale-105'
-                          }`}
-                          style={{ backgroundColor: color.hex }}
-                          title={color.label}
-                        />
-                      ))}
-                      {/* Native Custom Color Picker */}
-                      <div className="relative w-7 h-7 rounded-full border border-slate-800 flex items-center justify-center bg-slate-900 hover:bg-slate-800 cursor-pointer overflow-hidden transition-all hover:scale-105" title="Custom Eyedropper Color">
-                        <Paintbrush className="w-3.5 h-3.5 text-slate-400 pointer-events-none" />
-                        <input
-                          type="color"
-                          value={selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text' ? (selectedObjectInfo.fill === 'transparent' ? (selectedObjectInfo.originalTextData?.detectedColor || '#0b2c8c') : selectedObjectInfo.fill) : selectedObjectInfo.stroke}
-                          onChange={(e) => {
-                            if (selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text') {
-                              changeSelectedProperty('fill', e.target.value);
-                            } else {
-                              changeSelectedProperty('stroke', e.target.value);
-                            }
-                          }}
-                          className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-                        />
+                  {!debouncedSearchQuery && (
+                    <div className="text-center py-8 space-y-3">
+                      <div className="bg-slate-900 w-10 h-10 rounded-full flex items-center justify-center mx-auto border border-slate-800 text-slate-600">
+                        <Search className="w-4 h-4" />
                       </div>
+                      <p className="text-[10px] font-medium text-slate-500 leading-normal px-2">
+                        Find and replace words in original text boxes or custom annotations.
+                      </p>
                     </div>
-                  </div>
-
-                  {/* Shape parameters (Opacity and Thickness) */}
-                  <div className="space-y-4 border-t border-slate-900 pt-4">
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Opacity</label>
-                        <span className="text-[10px] font-bold text-slate-400">{Math.round(selectedObjectInfo.opacity * 100)}%</span>
+                  )}
+                </div>
+              ) : (
+                <div className="p-5 space-y-6">
+                  {selectedObjectInfo ? (
+                    <div className="space-y-6 animate-in fade-in duration-200">
+                      {/* Selected Object type indicator */}
+                      <div className="bg-slate-900/50 p-4 rounded-2xl border border-slate-900">
+                        <span className="text-[9px] font-black uppercase tracking-wider text-slate-500 block mb-0.5">Selection Type</span>
+                        <span className="text-xs font-bold text-slate-300 capitalize">
+                          {selectedObjectInfo.type === 'i-text' || selectedObjectInfo.type === 'textbox'
+                            ? (selectedObjectInfo.isHighlight ? "Highlight Shape" : "Text Box")
+                            : selectedObjectInfo.type}
+                        </span>
                       </div>
-                      <input
-                        type="range"
-                        min="0.1"
-                        max="1.0"
-                        step="0.05"
-                        value={selectedObjectInfo.opacity}
-                        onChange={(e) => changeSelectedProperty('opacity', parseFloat(e.target.value))}
-                        className="w-full h-1 bg-slate-900 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                      />
-                    </div>
 
-                    {selectedObjectInfo.type !== 'textbox' && selectedObjectInfo.type !== 'i-text' && selectedObjectInfo.type !== 'image' && (
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Border Thickness</label>
-                          <span className="text-[10px] font-bold text-slate-400">{selectedObjectInfo.strokeWidth}px</span>
+                      {/* Text Properties controls */}
+                      {(selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text') && (
+                        <div className="space-y-4 border-t border-slate-900 pt-4">
+                          {/* Quick Action Highlight */}
+                          <button
+                            onClick={handleHighlightSelectedText}
+                            className="w-full flex items-center justify-center gap-2 bg-yellow-600/10 hover:bg-yellow-600/20 border border-yellow-500/25 text-yellow-400 py-2.5 rounded-xl text-xs font-bold transition-all"
+                          >
+                            <Highlighter className="w-4 h-4 text-yellow-450" />
+                            Highlight Text Box
+                          </button>
+
+                          {/* Font options */}
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Font Family</label>
+                            <select
+                              value={selectedObjectInfo.fontFamily}
+                              onChange={(e) => changeSelectedProperty('fontFamily', e.target.value)}
+                              className="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-blue-500"
+                            >
+                              <option value="Helvetica">Helvetica (Sans-Serif)</option>
+                              <option value="Times New Roman">Times New Roman (Serif)</option>
+                              <option value="Courier">Courier (Monospace)</option>
+                            </select>
+                          </div>
+
+                          {/* Font Size controls */}
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Font Size</label>
+                            <div className="flex items-center gap-2">
+                              <button
+                                onClick={() => changeSelectedProperty('fontSize', Math.max(6, selectedObjectInfo.fontSize - 1))}
+                                className="p-2.5 bg-slate-900 border border-slate-800 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white"
+                              >
+                                <Minus className="w-4 h-4" />
+                              </button>
+                              
+                              <select
+                                value={selectedObjectInfo.fontSize}
+                                onChange={(e) => changeSelectedProperty('fontSize', parseInt(e.target.value))}
+                                className="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-blue-500 text-center"
+                              >
+                                {FONT_SIZES.map((sz) => (
+                                  <option key={sz} value={sz}>{sz} px</option>
+                                ))}
+                              </select>
+
+                              <button
+                                onClick={() => changeSelectedProperty('fontSize', Math.min(100, selectedObjectInfo.fontSize + 1))}
+                                className="p-2.5 bg-slate-900 border border-slate-800 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white"
+                              >
+                                <Plus className="w-4 h-4" />
+                              </button>
+                            </div>
+                          </div>
+
+                          {/* Text Style toggles */}
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Text Style</label>
+                            <div className="grid grid-cols-4 gap-1.5">
+                              <button
+                                onClick={() => changeSelectedProperty('fontWeight', selectedObjectInfo.fontWeight === 'bold' ? 'normal' : 'bold')}
+                                className={`p-2.5 rounded-xl border text-xs font-bold transition-all ${
+                                  selectedObjectInfo.fontWeight === 'bold' ? 'bg-blue-600 border-blue-500 text-white' : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
+                                }`}
+                              >
+                                <Bold className="w-3.5 h-3.5 mx-auto" />
+                              </button>
+                              <button
+                                onClick={() => changeSelectedProperty('fontStyle', selectedObjectInfo.fontStyle === 'italic' ? 'normal' : 'italic')}
+                                className={`p-2.5 rounded-xl border text-xs font-bold transition-all ${
+                                  selectedObjectInfo.fontStyle === 'italic' ? 'bg-blue-600 border-blue-500 text-white' : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
+                                }`}
+                              >
+                                <Italic className="w-3.5 h-3.5 mx-auto" />
+                              </button>
+                              <button
+                                onClick={() => changeSelectedProperty('underline', !selectedObjectInfo.underline)}
+                                className={`p-2.5 rounded-xl border text-xs font-bold transition-all ${
+                                  selectedObjectInfo.underline ? 'bg-blue-600 border-blue-500 text-white' : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
+                                }`}
+                              >
+                                <Underline className="w-3.5 h-3.5 mx-auto" />
+                              </button>
+                              <button
+                                onClick={() => {
+                                  const aligns = ['left', 'center', 'right'];
+                                  const nextIdx = (aligns.indexOf(selectedObjectInfo.textAlign) + 1) % aligns.length;
+                                  changeSelectedProperty('textAlign', aligns[nextIdx]);
+                                }}
+                                className="p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-slate-400 hover:text-white text-xs font-bold"
+                              >
+                                {selectedObjectInfo.textAlign === 'left' && <AlignLeft className="w-3.5 h-3.5 mx-auto" />}
+                                {selectedObjectInfo.textAlign === 'center' && <AlignCenter className="w-3.5 h-3.5 mx-auto" />}
+                                {selectedObjectInfo.textAlign === 'right' && <AlignRight className="w-3.5 h-3.5 mx-auto" />}
+                              </button>
+                            </div>
+                          </div>
                         </div>
-                        <input
-                          type="range"
-                          min="1"
-                          max="15"
-                          step="1"
-                          value={selectedObjectInfo.strokeWidth}
-                          onChange={(e) => changeSelectedProperty('strokeWidth', parseInt(e.target.value))}
-                          className="w-full h-1 bg-slate-900 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                        />
-                      </div>
-                    )}
-                  </div>
+                      )}
 
-                  {/* Layer controls */}
-                  <div className="space-y-2 border-t border-slate-900 pt-4">
-                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Layer Controls</label>
+                      {/* Colors parameters */}
+                      <div className="space-y-3 border-t border-slate-900 pt-4">
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">
+                          {selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text'
+                            ? "Font Color"
+                            : selectedObjectInfo.isHighlight
+                            ? "Highlight Color"
+                            : "Stroke Color"}
+                        </label>
+                        <div className="flex flex-wrap gap-2">
+                          {/* Auto-Match Detected Color */}
+                          {selectedObjectInfo.originalTextData?.detectedColor && (
+                            <button
+                              key="auto-match"
+                              onClick={() => {
+                                const detColor = selectedObjectInfo.originalTextData.detectedColor;
+                                if (selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text' || selectedObjectInfo.isHighlight) {
+                                  changeSelectedProperty('fill', detColor);
+                                } else {
+                                  changeSelectedProperty('stroke', detColor);
+                                }
+                              }}
+                              className={`w-7 h-7 rounded-full border-2 flex items-center justify-center transition-all ${
+                                (selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text'
+                                  ? selectedObjectInfo.fill
+                                  : selectedObjectInfo.isHighlight
+                                  ? (selectedObjectInfo.fill.startsWith('rgba') ? rgbaToHex(selectedObjectInfo.fill) : selectedObjectInfo.fill)
+                                  : selectedObjectInfo.stroke) === selectedObjectInfo.originalTextData.detectedColor
+                                  ? 'border-blue-500 scale-110 shadow-md shadow-blue-500/10'
+                                  : 'border-transparent hover:scale-105'
+                              }`}
+                              style={{ backgroundColor: selectedObjectInfo.originalTextData.detectedColor }}
+                              title={`Auto-matched Color (${selectedObjectInfo.originalTextData.detectedColor})`}
+                            >
+                              <Sparkles className="w-3.5 h-3.5 text-white mix-blend-difference" />
+                            </button>
+                          )}
+                          {[
+                            { hex: '#fbbf24', label: 'Yellow' },
+                            { hex: '#22c55e', label: 'Green' },
+                            { hex: '#3b82f6', label: 'Blue' },
+                            { hex: '#ef4444', label: 'Red' },
+                            { hex: '#000000', label: 'Black' },
+                            { hex: '#ffffff', label: 'White' },
+                          ].map((color) => (
+                            <button
+                              key={color.hex}
+                              onClick={() => {
+                                if (selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text' || selectedObjectInfo.isHighlight) {
+                                  changeSelectedProperty('fill', color.hex);
+                                } else {
+                                  changeSelectedProperty('stroke', color.hex);
+                                }
+                              }}
+                              className={`w-7 h-7 rounded-full border-2 transition-all ${
+                                (selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text'
+                                  ? selectedObjectInfo.fill
+                                  : selectedObjectInfo.isHighlight
+                                  ? (selectedObjectInfo.fill.startsWith('rgba') ? rgbaToHex(selectedObjectInfo.fill) : selectedObjectInfo.fill)
+                                  : selectedObjectInfo.stroke) === color.hex
+                                  ? 'border-blue-500 scale-110 shadow-md shadow-blue-500/10'
+                                  : 'border-transparent hover:scale-105'
+                              }`}
+                              style={{ backgroundColor: color.hex }}
+                              title={color.label}
+                            />
+                          ))}
+                          {/* Native Custom Color Picker */}
+                          <div className="relative w-7 h-7 rounded-full border border-slate-800 flex items-center justify-center bg-slate-900 hover:bg-slate-800 cursor-pointer overflow-hidden transition-all hover:scale-105" title="Custom Eyedropper Color">
+                            <Paintbrush className="w-3.5 h-3.5 text-slate-400 pointer-events-none" />
+                            <input
+                              type="color"
+                              value={
+                                selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text'
+                                  ? (selectedObjectInfo.fill === 'transparent' ? (selectedObjectInfo.originalTextData?.detectedColor || '#0b2c8c') : selectedObjectInfo.fill)
+                                  : selectedObjectInfo.isHighlight
+                                  ? (selectedObjectInfo.fill.startsWith('rgba') ? rgbaToHex(selectedObjectInfo.fill) : selectedObjectInfo.fill)
+                                  : selectedObjectInfo.stroke
+                              }
+                              onChange={(e) => {
+                                if (selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text' || selectedObjectInfo.isHighlight) {
+                                  changeSelectedProperty('fill', e.target.value);
+                                } else {
+                                  changeSelectedProperty('stroke', e.target.value);
+                                }
+                              }}
+                              className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Shape parameters (Opacity and Thickness) */}
+                      <div className="space-y-4 border-t border-slate-900 pt-4">
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Opacity</label>
+                            <span className="text-[10px] font-bold text-slate-400">
+                              {selectedObjectInfo.isHighlight
+                                ? Math.round((selectedObjectInfo.fill.startsWith('rgba')
+                                  ? parseFloat(selectedObjectInfo.fill.match(/rgba?\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/)?.[4] || '0.4')
+                                  : 1) * 100)
+                                : Math.round(selectedObjectInfo.opacity * 100)}%
+                            </span>
+                          </div>
+                          <input
+                            type="range"
+                            min="0.1"
+                            max="1.0"
+                            step="0.05"
+                            value={
+                              selectedObjectInfo.isHighlight
+                                ? parseFloat(selectedObjectInfo.fill.match(/rgba?\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/)?.[4] || '0.4')
+                                : selectedObjectInfo.opacity
+                            }
+                            onChange={(e) => changeSelectedProperty('opacity', parseFloat(e.target.value))}
+                            className="w-full h-1 bg-slate-900 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                          />
+                        </div>
+
+                        {selectedObjectInfo.type !== 'textbox' && selectedObjectInfo.type !== 'i-text' && selectedObjectInfo.type !== 'image' && !selectedObjectInfo.isHighlight && (
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                              <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Border Thickness</label>
+                              <span className="text-[10px] font-bold text-slate-400">{selectedObjectInfo.strokeWidth}px</span>
+                            </div>
+                            <input
+                              type="range"
+                              min="1"
+                              max="15"
+                              step="1"
+                              value={selectedObjectInfo.strokeWidth}
+                              onChange={(e) => changeSelectedProperty('strokeWidth', parseInt(e.target.value))}
+                              className="w-full h-1 bg-slate-900 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                            />
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Layer controls */}
+                      <div className="space-y-2 border-t border-slate-900 pt-4">
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Layer Controls</label>
                     <div className="grid grid-cols-2 gap-2">
                       <button
                         onClick={() => adjustLayer('front')}
@@ -1740,6 +2263,8 @@ export default function EditPdfPage() {
                 </div>
               )}
             </div>
+          )}
+        </div>
 
             {/* Quick helper Guide */}
             <div className="p-5 bg-slate-900/10 border-t border-slate-900 select-none">
@@ -2047,7 +2572,10 @@ const PageRenderer = ({
           // Detect color from background canvas
           const detectedColor = detectTextColorFromCanvas(pdfCanvasRef.current, box, zoomScale);
 
-          const textbox = new fabricLib.Textbox(box.text, {
+          const isReplaced = box.replacedText !== undefined;
+          const displayText = isReplaced ? box.replacedText : box.text;
+
+          const textbox = new fabricLib.Textbox(displayText, {
             id: box.id,
             left: box.x,
             top: box.y,
@@ -2055,8 +2583,8 @@ const PageRenderer = ({
             height: box.height,
             fontSize: box.fontSize,
             fontFamily: 'Helvetica',
-            fill: 'transparent', // transparent on load
-            backgroundColor: 'rgba(255, 255, 255, 0.001)', // invisible but registers clicks perfectly
+            fill: isReplaced ? (box.replacedColor || detectedColor) : 'transparent',
+            backgroundColor: isReplaced ? 'transparent' : 'rgba(255, 255, 255, 0.001)', // invisible but registers clicks perfectly
             isOriginalText: true,
             originalTextData: {
               text: box.text,

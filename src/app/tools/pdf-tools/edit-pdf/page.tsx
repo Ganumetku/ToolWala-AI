@@ -114,11 +114,14 @@ const detectTextColorFromCanvas = (canvas: HTMLCanvasElement | null, box: any, s
     const ctx = canvas.getContext('2d');
     if (!ctx) return '#0b2c8c';
 
-    // Bounding box in canvas pixels
+    // Bounding box in logical coordinates
     const x = box.x * scale;
     const y = box.y * scale;
     const w = box.width * scale;
     const h = box.height * scale;
+
+    const pixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
+    const renderScale = Math.max(2.0, pixelRatio);
 
     // Sample a grid of pixels inside the box
     const samplePoints: { r: number; g: number; b: number; L: number }[] = [];
@@ -127,8 +130,12 @@ const detectTextColorFromCanvas = (canvas: HTMLCanvasElement | null, box: any, s
       for (let j = 1; j < steps; j++) {
         const px = x + (w * i) / steps;
         const py = y + (h * j) / steps;
-        if (px >= 0 && px < canvas.width && py >= 0 && py < canvas.height) {
-          const imgData = ctx.getImageData(Math.floor(px), Math.floor(py), 1, 1).data;
+        
+        const bitmapX = Math.floor(px * renderScale);
+        const bitmapY = Math.floor(py * renderScale);
+
+        if (bitmapX >= 0 && bitmapX < canvas.width && bitmapY >= 0 && bitmapY < canvas.height) {
+          const imgData = ctx.getImageData(bitmapX, bitmapY, 1, 1).data;
           const r = imgData[0];
           const g = imgData[1];
           const b = imgData[2];
@@ -2469,8 +2476,11 @@ const PageRenderer = ({
         
         if (!active || !pdfCanvasRef.current) return;
         const canvas = pdfCanvasRef.current;
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
+        const pixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
+        const renderScale = Math.max(2.0, pixelRatio);
+
+        canvas.width = viewport.width * renderScale;
+        canvas.height = viewport.height * renderScale;
         const ctx = canvas.getContext('2d');
         
         if (ctx) {
@@ -2479,6 +2489,7 @@ const PageRenderer = ({
           await page.render({
             canvasContext: ctx,
             viewport: viewport,
+            transform: [renderScale, 0, 0, renderScale, 0, 0]
           }).promise;
           setIsBackgroundRendered(true);
         }

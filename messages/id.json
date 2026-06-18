@@ -1,0 +1,155 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "tools": "Alat",
+    "categories": "Kategori",
+    "pricing": "Harga",
+    "blog": "Blog",
+    "about": "Tentang",
+    "contact": "Hubungi Kami",
+    "start_free": "Mulai Gratis",
+    "get_started_free": "Mulai Secara Gratis"
+  },
+  "footer": {
+    "copyright": "© 2026 ToolWala AI. Hak cipta dilindungi undang-undang.",
+    "tagline": "Temukan masa depan alat utilitas dengan direktori AI interaktif kami.",
+    "tools": "Alat",
+    "company": "Perusahaan",
+    "legal": "Hukum",
+    "privacy": "Kebijakan Privasi",
+    "terms": "Ketentuan Layanan",
+    "disclaimer": "Penafian",
+    "about": "Tentang Kami",
+    "contact": "Kontak"
+  },
+  "home": {
+    "badge": "🔒 100% Pemrosesan AI Lokal di Sisi Klien",
+    "hero_title_1": "Tingkatkan Produktivitas",
+    "hero_title_2": "Kerja Anda dengan AI",
+    "hero_subtitle": "Utilitas AI gratis yang berjalan 100% secara lokal di browser Anda. Tanpa registrasi, tanpa latensi, tanpa unggahan ke server. Data Anda sepenuhnya tetap di perangkat Anda.",
+    "search_placeholder": "Cari lebih dari 25 utilitas offline...",
+    "search_btn": "Cari Alat",
+    "suggestions_label": "Saran:",
+    "browse_categories": "Telusuri berdasarkan Kategori",
+    "browse_categories_sub": "Jelajahi direktori lokal yang berisi utilitas browser yang aman dan patuh.",
+    "view_all_categories": "Lihat Semua Kategori",
+    "trending_title": "Alat yang Tren",
+    "trending_subtitle": "Alat lokal paling populer yang paling sering digunakan saat ini.",
+    "recent_title": "Baru Ditambahkan",
+    "recent_subtitle": "Alat sisi klien baru yang dirancang untuk kebutuhan pemrosesan modern.",
+    "edge_title": "Keunggulan ToolWala",
+    "edge_subtitle_1": "Alat profesional,",
+    "edge_subtitle_2": "Tanpa kerumitan.",
+    "edge_desc": "Kami menjembatani kesenjangan antara model AI yang kompleks dan utilitas sehari-hari. Tanpa antarmuka yang membingungkan, tanpa jebakan langganan — hanya AI kuat yang bekerja untuk Anda.",
+    "feat1_title": "Pemrosesan Tepi",
+    "feat1_desc": "Sebagian besar alat berjalan langsung di browser Anda, memastikan hasil secepat kilat tanpa penundaan server.",
+    "feat2_title": "Data Terenkripsi",
+    "feat2_desc": "File Anda tidak pernah meninggalkan perangkat Anda. Kami menggunakan enkripsi ujung-ke-ujung untuk pemrosesan berbasis cloud apa pun.",
+    "feat3_title": "Model Terpilih",
+    "feat3_desc": "Kami memilih dan menyempurnakan model AI terbaik khusus untuk tujuan unik masing-masing alat.",
+    "recent_visited": "Utilitas yang Baru Saja Dikunjungi",
+    "no_tools_found": "Alat tidak ditemukan",
+    "no_tools_sub": "Coba periksa kata kunci atau bersihkan filter untuk melihat semua direktori.",
+    "reset_directory": "Atur Ulang Tampilan",
+    "open_tool": "Buka Alat",
+    "instant_run": "Jalankan Instan",
+    "all_utilities": "Semua Utilitas",
+    "featured_flagships": "Unggulan",
+    "trending_hot": "Terpopuler",
+    "stats": {
+      "users": "Total Pengguna",
+      "tools": "Alat Dibuat",
+      "pdfs": "PDF Diproses",
+      "images": "Gambar Diedit"
+    }
+  },
+  "categories": {
+    "All": "Semua",
+    "AI Tools": "Alat AI",
+    "Image Tools": "Alat Gambar",
+    "PDF Tools": "Alat PDF",
+    "Calculator Tools": "Alat Kalkulator",
+    "Utility Tools": "Utilitaris",
+    "Social Media Tools": "Media Sosial",
+    "Business Tools": "Alat Bisnis",
+    "Document Tools": "Dokumen",
+    "Resume & Career": "Resume & Karir",
+    "SEO Tools": "Alat SEO",
+    "Developer Tools": "Alat Pengembang"
+  },
+  "tools": {
+    "image-compressor": {
+      "title": "Kompresor Gambar",
+      "description": "Kompres gambar hingga 90% tanpa kehilangan kualitas visual. Cepat dan aman.",
+      "meta_title": "Kompresor Gambar Online Gratis – Kompres PNG & JPG",
+      "meta_description": "Kurangi ukuran file gambar tanpa kehilangan kualitas. Kompres gambar PNG, JPG, dan WebP dengan cepat dan aman di browser Anda."
+    },
+    "pdf-tools": {
+      "title": "Alat PDF",
+      "description": "Gabungkan, pisahkan, kompres, dan konversi file PDF dengan mudah dan aman.",
+      "meta_title": "Alat PDF Gratis – Gabung, Pisah & Edit PDF Online",
+      "meta_description": "Gunakan utilitas PDF berbasis browser gratis untuk menggabungkan, memisahkan, mengenkripsi, atau mendekripsi file dengan aman."
+    },
+    "edit-pdf": {
+      "title": "Edit PDF",
+      "description": "Tambahkan teks ke PDF, isi formulir PDF, dan unduh PDF yang diedit secara online.",
+      "meta_title": "Edit PDF Online – Editor & Anotator PDF Gratis",
+      "meta_description": "Anotasi, tulis teks, dan edit dokumen PDF langsung di browser Anda. Aman dan gratis."
+    },
+    "merge-pdf": {
+      "title": "Gabungkan PDF",
+      "description": "Gabungkan beberapa dokumen PDF menjadi satu file tingkat profesional dengan cepat dan aman.",
+      "meta_title": "Gabungkan PDF Online – Gabung File PDF Gratis",
+      "meta_description": "Gabungkan beberapa file PDF menjadi satu dokumen dengan cepat. Tidak diperlukan instalasi perangkat lunak."
+    },
+    "split-pdf": {
+      "title": "Pisahkan PDF",
+      "description": "Ekstrak halaman tertentu atau pisahkan dokumen PDF Anda menjadi beberapa file secara instan.",
+      "meta_title": "Pisahkan PDF Online – Ekstrak Halaman PDF Gratis",
+      "meta_description": "Bagi file PDF menjadi halaman-halaman individual atau ekstrak bagian tertentu dalam hitungan detik."
+    },
+    "jpg-to-pdf": {
+      "title": "JPG ke PDF",
+      "description": "Konversikan gambar JPG, JPEG, dan PNG menjadi satu dokumen PDF dengan cepat dan aman.",
+      "meta_title": "Konversi JPG ke PDF Online – Gambar ke PDF Gratis",
+      "meta_description": "Ubah gambar (JPG, PNG, WebP) menjadi file PDF berkualitas tinggi secara instan. Pemrosesan sisi klien."
+    },
+    "pdf-to-jpg": {
+      "title": "PDF ke JPG",
+      "description": "Konversikan dokumen PDF menjadi gambar JPG berkualitas tinggi langsung di browser Anda. Cepat, aman, dan gratis.",
+      "meta_title": "Konversi PDF ke JPG Online – Ekstrak Gambar Gratis",
+      "meta_description": "Konversikan halaman PDF menjadi gambar JPG atau PNG secara instan. Aman dan asli dari browser."
+    },
+    "passport-photo-maker": {
+      "title": "Pembuat Foto Paspor",
+      "description": "Buat foto paspor dengan ukuran sempurna untuk negara mana pun dengan penghapusan latar belakang AI.",
+      "meta_title": "Pembuat Foto Paspor AI Online – Gratis Pembuat Foto Visa",
+      "meta_description": "Ubah selfie menjadi foto paspor yang sesuai standar. Hapus latar belakang, potong sesuai ukuran, dan unduh."
+    },
+    "bg-remover": {
+      "title": "Penghapus Latar Belakang AI",
+      "description": "Hapus latar belakang gambar secara otomatis dalam hitungan detik dengan presisi tinggi.",
+      "meta_title": "Penghapus Latar Belakang AI Online – Hapus BG Gratis",
+      "meta_description": "Hapus latar belakang dari gambar secara otomatis dalam satu klik. Pemrosesan lokal sepenuhnya."
+    },
+    "resume-builder": {
+      "title": "Pembuat Resume AI",
+      "description": "Buat resume profesional yang ramah ATS dalam hitungan menit dengan bantuan AI.",
+      "meta_title": "Pembuat Resume AI – Buat Resume Ramah ATS Gratis",
+      "meta_description": "Hasilkan CV dan resume profesional standar yang dioptimalkan untuk sistem ATS dengan bantuan AI."
+    },
+    "aadhaar-masking-tool": {
+      "title": "Alat Masking Aadhaar",
+      "description": "Deteksi dan mask 8 digit pertama kartu Aadhaar Anda secara otomatis untuk perlindungan privasi yang aman.",
+      "meta_title": "Alat Masking Aadhaar Online – Mask PDF Gratis",
+      "meta_description": "Amankan privasi kartu Aadhaar Anda dengan menyembunyikan 8 digit pertama kartu UIDAI secara otomatis."
+    }
+  },
+  "blogs": {
+    "why-local-ocr-is-the-future": {
+      "title": "Mengapa OCR Asli Browser Adalah Masa Depan Keamanan Data",
+      "excerpt": "Pengenalan karakter optik tradisional mengunggah dokumen ke database cloud. Artikel ini menguraikan transisi ke rendering WebAssembly sisi klien, melindungi data sensitif secara lokal.",
+      "content": "Pengenalan karakter optik (OCR) tradisional mengunggah dokumen ke database cloud. Artikel ini menguraikan transisi ke rendering WebAssembly sisi klien, melindungi data sensitif secara lokal.\n\n### Masalah dengan Cloud OCR\nSetiap kali Anda mengunggah tanda terima, kartu identitas, atau faktur ke server OCR jarak jauh, Anda berisiko mengekspos informasi sensitif. Layanan cloud memproses file Anda, mengekstrak teks, dan menyimpannya. Dalam banyak kasus, file-file ini disimpan untuk melatih model atau analitik, yang dapat melanggar standar privasi seperti GDPR.\n\n### Masuk ke WebAssembly Sisi Klien\nDengan kemajuan di WebAssembly (WASM), kita dapat menjalankan model jaringan saraf yang kuat langsung di dalam browser. ToolWala AI menggunakan Tesseract.js yang berjalan secara lokal di kotak pasir browser Anda. File Anda tidak pernah meninggalkan komputer Anda, memastikan privasi mutlak."
+    }
+  }
+}

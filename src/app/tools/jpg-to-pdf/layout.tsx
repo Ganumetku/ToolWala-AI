@@ -1,24 +1,15 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { generateToolMetadataHelper } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: "Convert JPG to PDF Online - Free Image to PDF | ToolWala AI",
-  description: "Convert JPG, JPEG, and PNG images into a single professional PDF document in seconds. Customize page layout sizes, orientation, margins, and reorder files instantly. 100% secure.",
-  keywords: ["convert jpg to pdf", "image to pdf converter", "png to pdf online", "free jpeg to pdf", "combine photos to pdf", "toolwala ai"],
-  alternates: {
-    canonical: "/tools/jpg-to-pdf",
-  },
-  openGraph: {
-    title: "Convert JPG to PDF Online - Free Image to PDF | ToolWala AI",
-    description: "Convert JPG, JPEG, and PNG images into a single professional PDF document in seconds. Customize page layout sizes, orientation, margins, and reorder files instantly. 100% secure.",
-    url: "https://toolwala.co/tools/jpg-to-pdf",
-    type: "website",
-  }
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return generateToolMetadataHelper(
+    'jpg-to-pdf',
+    'Convert JPG to PDF Online - Free Image to PDF | ToolWala AI',
+    'Convert JPG, JPEG, and PNG images into a single professional PDF document in seconds. Customize page layout sizes, orientation, margins, and reorder files instantly. 100% secure.',
+    '/tools/jpg-to-pdf'
+  );
+}
 
-export default function JpgToPdfLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return children;
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }

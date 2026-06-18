@@ -1,15 +1,15 @@
 import type { Metadata } from 'next';
+import { generateToolMetadataHelper } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Free AdSense Revenue Calculator Online - ToolWala AI',
-  description: 'Estimate Google AdSense earnings from page views, CTR, CPC, RPM, country and niche with our free AdSense Revenue Calculator.',
-  keywords: ['adsense calculator', 'adsense revenue calculator', 'google adsense earnings', 'cpc calculator', 'ctr calculator', 'website revenue estimator', 'toolwala ai'],
-  openGraph: {
-    title: 'Free AdSense Revenue Calculator Online - ToolWala AI',
-    description: 'Estimate Google AdSense earnings from page views, CTR, CPC, RPM, country and niche.',
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return generateToolMetadataHelper(
+    'adsense-revenue-calculator',
+    'Free AdSense Revenue Calculator Online - ToolWala AI',
+    'Estimate Google AdSense earnings from page views, CTR, CPC, RPM, country and niche with our free AdSense Revenue Calculator.',
+    '/tools/adsense-revenue-calculator'
+  );
+}
 
-export default function AdSenseLayout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }

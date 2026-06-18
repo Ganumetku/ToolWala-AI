@@ -1,0 +1,166 @@
+import { NextResponse, type NextRequest } from 'next/server';
+import { updateSession } from '@/lib/supabase/middleware';
+import { getSupabaseAdmin } from '@/lib/supabase-admin';
+
+const PROTECTED_ADMIN_PREFIXES = ['/admin', '/api/admin'];
+const LOCALES = ['hi', 'es', 'fr', 'de', 'pt', 'ar', 'id'];
+
+export async function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  console.log(`[Proxy] Pathname: ${pathname}`);
+
+  // Redirect legacy admin login to /login
+  if (pathname === '/admin/login' || pathname === '/admin/login/') {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+
+  // 1. Detect if pathname starts with a locale prefix (e.g. /hi/, /es/)
+  const pathnameParts = pathname.split('/');
+  const localeCandidate = pathnameParts[1];
+  const isLocalePrefix = LOCALES.includes(localeCandidate);
+  const locale = isLocalePrefix ? localeCandidate : 'en';
+
+  console.log(`[Proxy] localeCandidate: ${localeCandidate}, isLocalePrefix: ${isLocalePrefix}, locale: ${locale}`);
+
+  // Compute rewritten pathname (without the locale prefix if present)
+  let rewrittenPathname = pathname;
+  if (isLocalePrefix) {
+    rewrittenPathname = '/' + pathnameParts.slice(2).join('/');
+    console.log(`[Proxy] Raw rewrittenPathname: ${rewrittenPathname}`);
+    if (!rewrittenPathname.endsWith('/') && request.nextUrl.pathname.endsWith('/')) {
+      rewrittenPathname += '/';
+    }
+  }
+
+  // 2. Handle saved language redirect on root "/"
+  if (pathname === '/' && !isLocalePrefix) {
+    const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
+    if (cookieLocale && cookieLocale !== 'en' && LOCALES.includes(cookieLocale)) {
+      const userAgent = request.headers.get('user-agent') || '';
+      const isBot = /bot|googlebot|crawler|spider|robot|crawling/i.test(userAgent);
+      if (!isBot) {
+        return NextResponse.redirect(new URL(`/${cookieLocale}/`, request.url));
+      }
+    }
+  }
+
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-locale', locale);
+  requestHeaders.set('x-original-pathname', pathname);
+
+  const supabaseConfigured =
+    !!process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseConfigured) {
+    if (rewrittenPathname.startsWith('/admin') || rewrittenPathname.startsWith('/api/admin')) {
+      console.warn('[ToolWala] Supabase not configured — admin routes are unprotected.');
+    }
+    
+    // Non-supabase development fallback rewrite/next
+    let response: NextResponse;
+    if (isLocalePrefix) {
+      const rewriteUrl = new URL(rewrittenPathname + request.nextUrl.search, request.url);
+      console.log(`[Proxy] (Non-Supabase) Rewriting ${pathname} to ${rewriteUrl.toString()} with locale ${locale}`);
+      response = NextResponse.rewrite(rewriteUrl, {
+        request: { headers: requestHeaders }
+      });
+    } else {
+      response = NextResponse.next({
+        request: { headers: requestHeaders }
+      });
+    }
+    return response;
+  }
+
+  // Run Supabase session updates
+  const { supabaseResponse, user, supabase } = await updateSession(request);
+
+  const isProtected = PROTECTED_ADMIN_PREFIXES.some(
+    (prefix) => rewrittenPathname === prefix || rewrittenPathname.startsWith(`${prefix}/`)
+  );
+
+  if (!isProtected) {
+    let response: NextResponse;
+    if (isLocalePrefix) {
+      const rewriteUrl = new URL(rewrittenPathname + request.nextUrl.search, request.url);
+      console.log(`[Proxy] (Supabase Enabled) Rewriting ${pathname} to ${rewriteUrl.toString()} with locale ${locale}`);
+      response = NextResponse.rewrite(rewriteUrl, {
+        request: { headers: requestHeaders }
+      });
+    } else {
+      response = NextResponse.next({
+        request: { headers: requestHeaders }
+      });
+    }
+    
+    // Sync Supabase cookies
+    supabaseResponse.cookies.getAll().forEach((cookie) => {
+      response.cookies.set(cookie.name, cookie.value);
+    });
+    return response;
+  }
+
+  // Admin protection logic
+  if (!user) {
+    const loginUrl = new URL('/login', request.url);
+    loginUrl.searchParams.set('redirect', pathname);
+    const response = NextResponse.redirect(loginUrl);
+    supabaseResponse.cookies.getAll().forEach((cookie) => {
+      response.cookies.set(cookie.name, cookie.value);
+    });
+    return response;
+  }
+
+  let profile: { role: string; status: string } | null = null;
+  try {
+    const admin = getSupabaseAdmin();
+    const { data } = await admin
+      .from('profiles')
+      .select('role, status')
+      .eq('id', user.id)
+      .maybeSingle();
+    profile = data;
+  } catch {
+    const { data } = await supabase
+      .from('profiles')
+      .select('role, status')
+      .eq('id', user.id)
+      .maybeSingle();
+    profile = data;
+  }
+
+  if (!profile || profile.role !== 'admin' || profile.status !== 'active') {
+    const loginUrl = new URL('/login', request.url);
+    loginUrl.searchParams.set('error', 'unauthorized');
+    const response = NextResponse.redirect(loginUrl);
+    supabaseResponse.cookies.getAll().forEach((cookie) => {
+      response.cookies.set(cookie.name, cookie.value);
+    });
+    return response;
+  }
+
+  // Authorized Admin access response
+  let response: NextResponse;
+  if (isLocalePrefix) {
+    const rewriteUrl = new URL(rewrittenPathname + request.nextUrl.search, request.url);
+    console.log(`[Proxy] (Supabase Enabled) Rewriting ${pathname} to ${rewriteUrl.toString()} with locale ${locale}`);
+    response = NextResponse.rewrite(rewriteUrl, {
+      request: { headers: requestHeaders }
+    });
+  } else {
+    response = NextResponse.next({
+      request: { headers: requestHeaders }
+    });
+  }
+  supabaseResponse.cookies.getAll().forEach((cookie) => {
+    response.cookies.set(cookie.name, cookie.value);
+  });
+  return response;
+}
+
+export const config = {
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|icon.png|icon-192.png|icon-512.png|apple-touch-icon.png|manifest.json|robots.txt|sitemap.xml).*)',
+  ],
+};

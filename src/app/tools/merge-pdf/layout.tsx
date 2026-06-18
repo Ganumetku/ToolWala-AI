@@ -1,24 +1,15 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { generateToolMetadataHelper } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: "Merge PDF Online - Free PDF Combiner | ToolWala AI",
-  description: "Combine multiple PDF documents into a single file online. Free, 100% secure client-side merging. Reorder pages and files instantly.",
-  keywords: ["merge pdf", "combine pdf", "join pdf files", "pdf merger online", "free pdf combiner", "toolwala ai"],
-  alternates: {
-    canonical: "/tools/merge-pdf",
-  },
-  openGraph: {
-    title: "Merge PDF Online - Free PDF Combiner | ToolWala AI",
-    description: "Combine multiple PDF documents into a single file online. Free, 100% secure client-side merging. Reorder pages and files instantly.",
-    url: "https://toolwala.co/tools/merge-pdf",
-    type: "website",
-  }
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return generateToolMetadataHelper(
+    'merge-pdf',
+    'Merge PDF Online - Free PDF Combiner | ToolWala AI',
+    'Combine multiple PDF documents into a single file online. Free, 100% secure client-side merging. Reorder pages and files instantly.',
+    '/tools/merge-pdf'
+  );
+}
 
-export default function MergePdfLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return children;
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }

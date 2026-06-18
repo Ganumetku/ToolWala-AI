@@ -1,36 +1,15 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { generateToolMetadataHelper } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Free Age Calculator Online - ToolWala AI',
-  description: 'Calculate your exact age in years, months, days, total weeks and next birthday instantly with ToolWala AI.',
-  keywords: [
-    'age calculator',
-    'exact age calculator',
-    'chronological age calculator',
-    'date of birth calculator',
-    'birthday calculator',
-    'days lived calculator'
-  ],
-  alternates: {
-    canonical: '/tools/age-calculator'
-  },
-  openGraph: {
-    title: 'Free Age Calculator Online - ToolWala AI',
-    description: 'Calculate your exact age in years, months, days, total weeks and next birthday instantly with ToolWala AI.',
-    url: 'https://toolwala.co/tools/age-calculator',
-    type: 'website'
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Free Age Calculator Online - ToolWala AI',
-    description: 'Calculate your exact age in years, months, days, total weeks and next birthday instantly with ToolWala AI.'
-  }
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return generateToolMetadataHelper(
+    'age-calculator',
+    'Free Age Calculator Online - ToolWala AI',
+    'Calculate your exact age in years, months, days, total weeks and next birthday instantly with ToolWala AI.',
+    '/tools/age-calculator'
+  );
+}
 
-export default function AgeCalculatorLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }

@@ -1,24 +1,15 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { generateToolMetadataHelper } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: "Split PDF Online - Free PDF Page Extractor | ToolWala AI",
-  description: "Split PDF files online in seconds. Extract specific pages or divide documents into custom ranges. Free, 100% secure client-side processing.",
-  keywords: ["split pdf", "extract pages pdf", "divide pdf online", "pdf page extractor", "free pdf splitter", "toolwala ai"],
-  alternates: {
-    canonical: "/tools/split-pdf",
-  },
-  openGraph: {
-    title: "Split PDF Online - Free PDF Page Extractor | ToolWala AI",
-    description: "Split PDF files online in seconds. Extract specific pages or divide documents into custom ranges. Free, 100% secure client-side processing.",
-    url: "https://toolwala.co/tools/split-pdf",
-    type: "website",
-  }
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return generateToolMetadataHelper(
+    'split-pdf',
+    'Split PDF Online - Free PDF Page Extractor | ToolWala AI',
+    'Split PDF files online in seconds. Extract specific pages or divide documents into custom ranges. Free, 100% secure client-side processing.',
+    '/tools/split-pdf'
+  );
+}
 
-export default function SplitPdfLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return children;
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }

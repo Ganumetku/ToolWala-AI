@@ -248,3 +248,21 @@ model ActivityLog {
 
   @@map("activity_logs")
 }
+
+model ToolTranslation {
+  id             String   @id @default(uuid())
+  toolSlug       String   @map("tool_slug")
+  locale         String
+  title          String
+  description    String
+  faq            Json?    // Array of { question: string, answer: string }
+  seoTitle       String?  @map("seo_title")
+  seoDescription String?  @map("seo_description")
+
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@unique([toolSlug, locale])
+  @@map("tool_translations")
+}
+

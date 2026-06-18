@@ -1,0 +1,155 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "tools": "Tools",
+    "categories": "Kategorien",
+    "pricing": "Preise",
+    "blog": "Blog",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "start_free": "Kostenlos starten",
+    "get_started_free": "Kostenlos loslegen"
+  },
+  "footer": {
+    "copyright": "© 2026 ToolWala AI. Alle Rechte vorbehalten.",
+    "tagline": "Entdecken Sie die Zukunft der Utility-Tools mit unserem dynamischen KI-Marktplatz.",
+    "tools": "Tools",
+    "company": "Unternehmen",
+    "legal": "Rechtliches",
+    "privacy": "Datenschutzerklärung",
+    "terms": "Nutzungsbedingungen",
+    "disclaimer": "Haftungsausschluss",
+    "about": "Über Uns",
+    "contact": "Kontakt"
+  },
+  "home": {
+    "badge": "🔒 100 % clientseitige lokale KI-Verarbeitung",
+    "hero_title_1": "Optimieren Sie Ihren",
+    "hero_title_2": "Workflow mit KI",
+    "hero_subtitle": "Kostenlose KI-Dienstprogramme, die zu 100 % lokal in Ihrem Browser ausgeführt werden. Keine Registrierung, keine Latenz, keine Server-Uploads. Ihre Daten bleiben vollständig auf Ihrem Gerät.",
+    "search_placeholder": "Durchsuchen Sie über 25 Offline-Utilities...",
+    "search_btn": "Suchen",
+    "suggestions_label": "Vorschläge:",
+    "browse_categories": "Nach Kategorie durchsuchen",
+    "browse_categories_sub": "Erkunden Sie lokale Verzeichnisse, die konforme Browser-Dienstprogramme enthalten.",
+    "view_all_categories": "Alle Kategorien anzeigen",
+    "trending_title": "Beliebte Tools",
+    "trending_subtitle": "Die beliebtesten, hochgradig berechneten lokalen Tools, die derzeit aktiv genutzt werden.",
+    "recent_title": "Kürzlich hinzugefügt",
+    "recent_subtitle": "Neue clientseitige Tools zur Lösung moderner Verarbeitungsanforderungen.",
+    "edge_title": "Der ToolWala-Vorteil",
+    "edge_subtitle_1": "Professionelle Tools,",
+    "edge_subtitle_2": "Null Komplexität.",
+    "edge_desc": "Wir schließen die Lücke zwischen komplexen KI-Modellen und dem täglichen Nutzen. Keine verwirrenden Benutzeroberflächen, keine Abonnementfallen – einfach leistungsstarke KI, die für Sie arbeitet.",
+    "feat1_title": "Edge-Verarbeitung",
+    "feat1_desc": "Die meisten Tools werden direkt in Ihrem Browser ausgeführt und gewährleisten blitzschnelle Ergebnisse ohne Serververzögerungen.",
+    "feat2_title": "Verschlüsselte Daten",
+    "feat2_desc": "Ihre Dateien verlassen Ihr Gerät nie. Wir verwenden eine End-to-End-Verschlüsselung für jegliche cloudbasierte Verarbeitung.",
+    "feat3_title": "Kuratierte Modelle",
+    "feat3_desc": "Wir wählen die besten KI-Modelle aus und passen sie speziell an den einzigartigen Zweck jedes Tools an.",
+    "recent_visited": "Kürzlich besuchte Utilities",
+    "no_tools_found": "Keine Tools gefunden",
+    "no_tools_sub": "Überprüfen Sie Tag-Abfragen oder löschen Sie Filter, um alle Verzeichnisse anzuzeigen.",
+    "reset_directory": "Ansicht zurücksetzen",
+    "open_tool": "Tool öffnen",
+    "instant_run": "Sofort ausführen",
+    "all_utilities": "Alle Dienstprogramme",
+    "featured_flagships": "Vorgestellt",
+    "trending_hot": "Beliebt",
+    "stats": {
+      "users": "Benutzer Gesamt",
+      "tools": "Erstellte Tools",
+      "pdfs": "Verarbeitete PDFs",
+      "images": "Bearbeitete Bilder"
+    }
+  },
+  "categories": {
+    "All": "Alle",
+    "AI Tools": "KI-Tools",
+    "Image Tools": "Bild-Tools",
+    "PDF Tools": "PDF-Tools",
+    "Calculator Tools": "Rechner-Tools",
+    "Utility Tools": "Dienstprogramme",
+    "Social Media Tools": "Social Media",
+    "Business Tools": "Business-Tools",
+    "Document Tools": "Dokumente",
+    "Resume & Career": "Lebenslauf & Karriere",
+    "SEO Tools": "SEO-Tools",
+    "Developer Tools": "Entwickler-Tools"
+  },
+  "tools": {
+    "image-compressor": {
+      "title": "Bildkomprimierer",
+      "description": "Komprimieren Sie Bilder um bis zu 90 % ohne sichtbaren Qualitätsverlust. Schnell und sicher.",
+      "meta_title": "Kostenloser Online-Bildkomprimierer – PNG & JPG komprimieren",
+      "meta_description": "Bilddateigröße ohne Qualitätsverlust reduzieren. Komprimieren Sie PNG-, JPG- und WebP-Bilder schnell und sicher in Ihrem Browser."
+    },
+    "pdf-tools": {
+      "title": "PDF-Tools",
+      "description": "Fügen Sie PDF-Dateien einfach und sicher zusammen, teilen, komprimieren und konvertieren Sie sie.",
+      "meta_title": "Kostenlose PDF-Tools – PDF online zusammenfügen, teilen & bearbeiten",
+      "meta_description": "Verwenden Sie kostenlose browserbasierte PDF-Dienstprogramme, um Dateien sicher zusammenzufügen, zu teilen, zu verschlüsseln oder zu entschlüsseln."
+    },
+    "edit-pdf": {
+      "title": "PDF bearbeiten",
+      "description": "Fügen Sie Text zu PDF hinzu, füllen Sie PDF-Formulare aus und laden Sie das bearbeitete PDF online herunter.",
+      "meta_title": "PDF online bearbeiten – Kostenloser PDF-Editor & Annotator",
+      "meta_description": "Annotieren, schreiben Sie Text und bearbeiten Sie PDF-Dokumente direkt in Ihrem Browser. Sicher und kostenlos."
+    },
+    "merge-pdf": {
+      "title": "PDF zusammenfügen",
+      "description": "Kombinieren Sie mehrere PDF-Dokumente schnell und sicher in einer einzigen professionellen Datei.",
+      "meta_title": "PDF online zusammenfügen – PDF-Dateien kostenlos kombinieren",
+      "meta_description": "Kombinieren Sie schnell mehrere PDF-Dateien zu einem Dokument. Keine Softwareinstallation erforderlich."
+    },
+    "split-pdf": {
+      "title": "PDF teilen",
+      "description": "Extrahieren Sie bestimmte Seiten oder teilen Sie Ihre PDF-Dokumente sofort in mehrere Dateien auf.",
+      "meta_title": "PDF online teilen – PDF-Seiten kostenlos extrahieren",
+      "meta_description": "Teilen Sie eine PDF-Datei in einzelne Seiten auf oder extrahieren Sie bestimmte Abschnitte in Sekundenschnelle."
+    },
+    "jpg-to-pdf": {
+      "title": "JPG in PDF",
+      "description": "Konvertieren Sie JPG-, JPEG- und PNG-Bilder schnell und sicher in ein einziges PDF-Dokument.",
+      "meta_title": "JPG in PDF online konvertieren – Bild in PDF kostenlos",
+      "meta_description": "Verwandeln Sie Bilder (JPG, PNG, WebP) sofort in hochwertige PDF-Dateien. Clientseitige Verarbeitung."
+    },
+    "pdf-to-jpg": {
+      "title": "PDF in JPG",
+      "description": "Konvertieren Sie PDF-Dokumente direkt in Ihrem Browser in hochwertige JPG-Bilder. Schnell, sicher und kostenlos.",
+      "meta_title": "PDF in JPG online konvertieren – Bilder kostenlos extrahieren",
+      "meta_description": "Konvertieren Sie PDF-Seiten sofort in JPG- oder PNG-Bilder. Sicher und browsernativ."
+    },
+    "passport-photo-maker": {
+      "title": "Passbild-Ersteller",
+      "description": "Erstellen Sie perfekt dimensionierte Passfotos für jedes Land mit KI-Hintergrundentfernung.",
+      "meta_title": "KI-Passbild-Ersteller online – Kostenloser Visumpassbild-Ersteller",
+      "meta_description": "Konvertieren Sie Selfies in konforme Passfotos. Hintergrund entfernen, auf Größe zuschneiden und herunterladen."
+    },
+    "bg-remover": {
+      "title": "KI-Hintergrundentferner",
+      "description": "Entfernen Sie Bildhintergründe automatisch in Sekunden mit hoher Präzision.",
+      "meta_title": "KI-Hintergrundentferner online – BG kostenlos entfernen",
+      "meta_description": "Entfernen Sie den Hintergrund von Bildern automatisch mit einem Klick. Vollständig lokale Verarbeitung."
+    },
+    "resume-builder": {
+      "title": "KI-Lebenslauf-Ersteller",
+      "description": "Erstellen Sie mit KI-Unterstützung in wenigen Minuten einen ATS-freundlichen, professionellen Lebenslauf.",
+      "meta_title": "KI-Lebenslauf-Ersteller – ATS-freundliche Lebensläufe kostenlos erstellen",
+      "meta_description": "Erstellen Sie mit Hilfe von KI professionelle Standard-Lebensläufe, die für ATS-Systeme optimiert sind."
+    },
+    "aadhaar-masking-tool": {
+      "title": "Aadhaar-Maskierungstool",
+      "description": "Erkennen und maskieren Sie automatisch die ersten 8 Ziffern Ihrer Aadhaar-Karte zum sicheren Schutz der Privatsphäre.",
+      "meta_title": "Aadhaar-Maskierungstool online – Aadhaar-PDF kostenlos maskieren",
+      "meta_description": "Sichern Sie die Privatsphäre Ihrer Aadhaar-Karte, indem Sie die ersten 8 Ziffern der UIDAI-Karten automatisch maskieren."
+    }
+  },
+  "blogs": {
+    "why-local-ocr-is-the-future": {
+      "title": "Warum browsernatives OCR die Zukunft der Datensicherheit ist",
+      "excerpt": "Die herkömmliche optische Zeichenerkennung lädt Dokumente in Cloud-Datenbanken hoch. Dieser Artikel beschreibt den Übergang zum clientseitigen WebAssembly-Rendering, das sensible Daten lokal schützt.",
+      "content": "Die herkömmliche optische Zeichenerkennung (OCR) lädt Dokumente in Cloud-Datenbanken hoch. Dieser Artikel beschreibt den Übergang zum clientseitigen WebAssembly-Rendering, das sensible Daten lokal schützt.\n\n### Das Problem mit Cloud-OCR\nJedes Mal, wenn Sie einen Beleg, einen Personalausweis oder eine Rechnung auf einen Remote-OCR-Server hochladen, riskieren Sie die Offenlegung sensibler Informationen. Cloud-Dienste verarbeiten Ihre Datei, extrahieren den Text und speichern ihn. In vielen Fällen werden diese Dateien für Trainingsmodelle oder Analysen gespeichert, was gegen Datenschutzstandards wie die DSGVO verstoßen könnte.\n\n### Clientseitige WebAssembly\nMit den Fortschritten in WebAssembly (WASM) können wir leistungsstarke neuronale Netzwerkmodelle direkt im Browser ausführen. ToolWala AI verwendet Tesseract.js, das lokal in Ihrer Browser-Sandbox ausgeführt wird. Ihre Dateien verlassen Ihren Computer nie, was absolute Privatsphäre garantiert."
+    }
+  }
+}

@@ -7,8 +7,9 @@ import { getBlogBySlug, getPublicBlogs, resolveRelatedToolSlugs } from "@/lib/bl
 import { getPublicTools } from "@/lib/tools-server";
 import { buildBlogMetadata, buildBlogStructuredData, getSiteUrl } from "@/lib/seo";
 import { buildBlogBreadcrumbs, extractTableOfContents } from "@/lib/blog-seo";
+import { headers } from "next/headers";
 
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 interface BlogPageProps {
   params: Promise<{ slug: string }>;
@@ -22,7 +23,16 @@ export async function generateMetadata({ params }: BlogPageProps) {
     return { title: "Post Not Found", robots: { index: false, follow: false } };
   }
 
-  return buildBlogMetadata(blog);
+  let locale = "en";
+  try {
+    const headerList = await headers();
+    locale = headerList.get("x-locale") || "en";
+  } catch (e) {}
+
+  const { getBlogTranslationWithFallback } = await import("@/lib/blog-translation-service");
+  const translatedBlog = await getBlogTranslationWithFallback(blog, locale);
+
+  return buildBlogMetadata(translatedBlog);
 }
 
 export default async function BlogDetailPage({ params }: BlogPageProps) {
@@ -33,13 +43,25 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
     notFound();
   }
 
+  let locale = "en";
+  try {
+    const headerList = await headers();
+    locale = headerList.get("x-locale") || "en";
+  } catch (e) {}
+
+  const { getBlogTranslationWithFallback } = await import("@/lib/blog-translation-service");
+  const translatedBlog = await getBlogTranslationWithFallback(blog, locale);
+
   const [activeBlogs, allTools] = await Promise.all([getPublicBlogs(), getPublicTools()]);
-  const relatedSlugs = await resolveRelatedToolSlugs(blog);
+  const relatedSlugs = await resolveRelatedToolSlugs(translatedBlog);
   const relatedTools = allTools.filter((t) => relatedSlugs.includes(t.slug));
-  const pageUrl = getSiteUrl(`/blog/${slug}`);
-  const structuredData = buildBlogStructuredData(blog);
-  const breadcrumbs = buildBlogBreadcrumbs(blog);
-  const tocItems = extractTableOfContents(blog.content);
+  
+  // Localize page URLs
+  const pageUrl = getSiteUrl(locale === 'en' ? `/blog/${slug}` : `/${locale}/blog/${slug}`);
+  
+  const structuredData = await buildBlogStructuredData(translatedBlog);
+  const breadcrumbs = buildBlogBreadcrumbs(translatedBlog);
+  const tocItems = extractTableOfContents(translatedBlog.content);
 
   return (
     <>
@@ -55,11 +77,11 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
           <BlogBreadcrumbs items={breadcrumbs} />
 
-          {blog.thumbnail && (
+          {translatedBlog.thumbnail && (
             <div className="w-full aspect-[21/9] rounded-[2.5rem] overflow-hidden border border-white/5 shadow-2xl relative mb-12">
               <LazyBlogImage
-                src={blog.thumbnail}
-                alt={blog.title}
+                src={translatedBlog.thumbnail}
+                alt={translatedBlog.title}
                 priority
                 className="absolute inset-0 w-full h-full object-cover"
                 aspectRatio="w-full h-full"
@@ -69,7 +91,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
           )}
 
           <BlogDetailClient
-            blog={blog}
+            blog={translatedBlog}
             allBlogs={activeBlogs}
             relatedTools={relatedTools}
             allTools={allTools}

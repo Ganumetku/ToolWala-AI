@@ -8,8 +8,11 @@ import { MeshGradient } from '@/components/BackgroundEffects';
 import FAQAccordion from './FAQAccordion';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import ShareButtons from '@/components/ShareButtons';
+import { headers } from 'next/headers';
+import { getToolTranslationWithFallback } from '@/lib/tool-translation-service';
+import { generateToolMetadataHelper } from '@/lib/seo';
 
-export const dynamic = 'force-static';
+export const dynamic = 'force-dynamic';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -35,28 +38,10 @@ export async function generateMetadata({ params }: PageProps) {
     };
   }
 
-  const title = tool.seoMetadata?.title || `${tool.title} | ToolWala AI`;
-  const description = tool.seoMetadata?.description || tool.description;
-  const keywords = tool.seoMetadata?.keywords || '';
+  const fallbackTitle = tool.seoMetadata?.title || `${tool.title} | ToolWala AI`;
+  const fallbackDesc = tool.seoMetadata?.description || tool.description;
 
-  return {
-    title,
-    description,
-    keywords,
-    openGraph: {
-      title,
-      description,
-      type: 'website',
-      url: `https://toolwala.co/tools/${slug}`,
-      images: tool.thumbnail ? [{ url: tool.thumbnail }] : []
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: tool.thumbnail ? [tool.thumbnail] : []
-    }
-  };
+  return generateToolMetadataHelper(slug, fallbackTitle, fallbackDesc, `/tools/${slug}`);
 }
 
 export default async function DynamicToolPage({ params }: PageProps) {
@@ -99,6 +84,19 @@ export default async function DynamicToolPage({ params }: PageProps) {
 
   if (!tool) {
     notFound();
+  }
+
+  let locale = 'en';
+  try {
+    const headerList = await headers();
+    locale = headerList.get('x-locale') || 'en';
+  } catch (e) {}
+
+  const translation = await getToolTranslationWithFallback(slug, locale);
+  tool.title = translation.title || tool.title;
+  tool.description = translation.description || tool.description;
+  if (translation.faq && translation.faq.length > 0) {
+    tool.faqs = translation.faq;
   }
 
   // Schema Markup (LD-JSON)

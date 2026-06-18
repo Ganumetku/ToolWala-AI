@@ -4,6 +4,10 @@ import type { BlogPost } from '@/types/blog';
 import type { BreadcrumbItem } from '@/lib/blog-seo';
 import { buildFaqJsonLd } from '@/lib/blog-utils';
 import { buildBlogBreadcrumbs } from '@/lib/blog-seo';
+import { getTranslationServer } from '@/lib/i18n-server';
+import { getEnabledLocales } from '@/lib/languages';
+import { headers } from 'next/headers';
+import { getToolTranslationWithFallback } from '@/lib/tool-translation-service';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolwala.co';
 const SITE_NAME = 'ToolWala AI';
@@ -192,10 +196,20 @@ export function buildBreadcrumbJsonLd(items: BreadcrumbItem[]) {
   };
 }
 
-export function buildArticleJsonLd(blog: BlogPost) {
-  const url = getSiteUrl(`/blog/${blog.slug}`);
+export async function buildArticleJsonLd(blog: BlogPost) {
+  let locale = 'en';
+  try {
+    const headerList = await headers();
+    locale = headerList.get('x-locale') || 'en';
+  } catch (e) {
+    // fallback
+  }
+
+  const url = getSiteUrl(locale === 'en' ? `/blog/${blog.slug}` : `/${locale}/blog/${blog.slug}`);
   const image = blog.thumbnail || `${SITE_URL}/og-image.png`;
   const wordCount = blog.content.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+
+  const localeLang = locale === 'hi' ? 'hi-IN' : locale === 'en' ? 'en-US' : `${locale}-${locale.toUpperCase()}`;
 
   return {
     '@type': 'Article',
@@ -224,19 +238,20 @@ export function buildArticleJsonLd(blog: BlogPost) {
     keywords: blog.tags.join(', '),
     articleSection: blog.category,
     wordCount,
-    inLanguage: 'en-US',
+    inLanguage: localeLang,
   };
 }
 
-export function buildBlogPostingJsonLd(blog: BlogPost) {
-  const article = buildArticleJsonLd(blog);
+export async function buildBlogPostingJsonLd(blog: BlogPost) {
+  const article = await buildArticleJsonLd(blog);
   return { ...article, '@type': 'BlogPosting' };
 }
 
-export function buildBlogStructuredData(blog: BlogPost) {
+export async function buildBlogStructuredData(blog: BlogPost) {
   const breadcrumbs = buildBlogBreadcrumbs(blog);
+  const articleNode = await buildArticleJsonLd(blog);
   const graph: Record<string, unknown>[] = [
-    buildArticleJsonLd(blog),
+    articleNode,
     buildBreadcrumbJsonLd(breadcrumbs),
   ];
 
@@ -275,5 +290,68 @@ export function buildWebsiteJsonLd() {
         },
       },
     ],
+  };
+}
+
+export async function generateToolMetadataHelper(
+  toolId: string,
+  fallbackTitle: string,
+  fallbackDesc: string,
+  path: string
+): Promise<Metadata> {
+  let locale = 'en';
+  let originalPathname = path;
+  try {
+    const headerList = await headers();
+    locale = headerList.get('x-locale') || 'en';
+    originalPathname = headerList.get('x-original-pathname') || path;
+  } catch (e) {
+    // fallback
+  }
+
+  const dbTranslation = await getToolTranslationWithFallback(toolId, locale);
+  const title = dbTranslation.seoTitle || dbTranslation.title || fallbackTitle;
+  const description = dbTranslation.seoDescription || dbTranslation.description || fallbackDesc;
+
+  const siteUrl = "https://toolwala.co";
+  const parts = originalPathname.split('/');
+  const cleanPath = ['hi', 'es', 'fr', 'de', 'pt', 'ar', 'id'].includes(parts[1])
+    ? '/' + parts.slice(2).join('/')
+    : originalPathname;
+  
+  const cleanPathNoSlash = cleanPath.replace(/\/$/, '');
+  
+  const languages: Record<string, string> = {
+    'x-default': `${siteUrl}${cleanPathNoSlash}/`,
+    'en': `${siteUrl}${cleanPathNoSlash}/`
+  };
+  
+  const enabledLocales = getEnabledLocales();
+  enabledLocales.forEach((loc) => {
+    if (loc !== 'en') {
+      languages[loc] = `${siteUrl}/${loc}${cleanPathNoSlash}/`;
+    }
+  });
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `${siteUrl}${originalPathname.endsWith('/') ? originalPathname : originalPathname + '/'}`,
+      languages
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${siteUrl}${originalPathname}`,
+      siteName: "ToolWala AI",
+      type: "website",
+      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    }
   };
 }

@@ -15,6 +15,7 @@ import { toolsData, Tool, ToolCategory, toolCategories } from '@/data/tools';
 import { fetchPublicTools } from '@/lib/tools';
 import { categoriesData, getToolsByCategory } from '@/data/categories';
 import dynamic from 'next/dynamic';
+import { useTranslation } from '@/components/I18nContext';
 
 // Dynamic Import of Background Effects
 const MeshGradient = dynamic(
@@ -34,6 +35,7 @@ const BlogPreview = dynamic(() => import('@/components/BlogPreview'), { ssr: fal
 import AnimatedCounter from '@/components/AnimatedCounter';
 
 export default function Home() {
+  const { t, localizeHref } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<ToolCategory>("All");
   const [activeTab, setActiveTab] = useState<'featured' | 'trending' | 'recent' | 'all'>('all');
@@ -116,12 +118,12 @@ export default function Home() {
   }, [mergedTools, searchQuery, activeCategory]);
 
   const popularSuggestionChips = [
-    { label: "Remove Background", query: "background" },
-    { label: "Passport Photo", query: "passport" },
-    { label: "Compress JPEG", query: "compress" },
-    { label: "Merge PDF", query: "merge" },
-    { label: "Aadhaar Resizer", query: "aadhaar" },
-    { label: "AI Resume", query: "resume" }
+    { label: t('tools.bg-remover.title', 'Remove Background'), query: "background" },
+    { label: t('tools.passport-photo-maker.title', 'Passport Photo'), query: "passport" },
+    { label: t('tools.image-compressor.title', 'Compress Image'), query: "compress" },
+    { label: t('tools.merge-pdf.title', 'Merge PDF'), query: "merge" },
+    { label: t('tools.aadhaar-photo-resizer.title', 'Aadhaar Resizer'), query: "aadhaar" },
+    { label: t('tools.resume-builder.title', 'AI Resume'), query: "resume" }
   ];
 
   // Map category tool counts dynamically
@@ -164,7 +166,7 @@ export default function Home() {
             onClick={scrollToTools}
           >
             <span className="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-            <span>🔒 100% Client-Side Local AI Processing</span>
+            <span>{t('home.badge', '🔒 100% Client-Side Local AI Processing')}</span>
             <ChevronRight className="w-3.5 h-3.5 text-gray-500" />
           </motion.div>
 
@@ -174,9 +176,9 @@ export default function Home() {
             transition={{ delay: 0.1 }}
             className="mx-auto max-w-5xl font-black text-5xl sm:text-7xl md:text-8xl tracking-tight text-white leading-[0.95] mb-8 uppercase"
           >
-            Supercharge Your Daily <br />
+            {t('home.hero_title_1', 'Supercharge Your Daily')} <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 animate-gradient">
-              Workflow with AI
+              {t('home.hero_title_2', 'Workflow with AI')}
             </span>
           </motion.h1>
 
@@ -186,7 +188,7 @@ export default function Home() {
             transition={{ delay: 0.2 }}
             className="mx-auto max-w-2xl text-base sm:text-lg md:text-xl font-medium text-gray-400 leading-relaxed mb-12"
           >
-            Free AI utilities that run 100% locally in your browser. No registration, no latency, no server uploads. Your data stays entirely on your device.
+            {t('home.hero_subtitle', 'Free AI utilities that run 100% locally in your browser. No registration, no latency, no server uploads. Your data stays entirely on your device.')}
           </motion.p>
 
           {/* Interactive Hero Search */}
@@ -207,13 +209,13 @@ export default function Home() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={scrollToTools}
                   className="block w-full border-0 bg-transparent py-4.5 pl-4 pr-4 text-white placeholder:text-gray-500 focus:ring-0 text-base sm:text-lg font-bold outline-none"
-                  placeholder="Search 25+ offline utilities..."
+                  placeholder={t('home.search_placeholder', 'Search 25+ offline utilities...')}
                 />
                 <button
                   onClick={scrollToTools}
                   className="hidden md:flex items-center gap-2 rounded-[1.5rem] bg-blue-600 hover:bg-blue-500 px-8 py-4.5 text-xs font-black uppercase tracking-widest text-white shadow-xl active:scale-95 transition-all"
                 >
-                  Search Utilities
+                  {t('home.search_btn', 'Search Utilities')}
                 </button>
               </div>
             </div>
@@ -227,7 +229,7 @@ export default function Home() {
             className="flex flex-wrap justify-center items-center gap-2 max-w-2xl mx-auto mb-16"
           >
             <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 mr-2 flex items-center gap-1">
-              <MousePointerClick className="w-3.5 h-3.5 text-blue-500" /> Suggestions:
+              <MousePointerClick className="w-3.5 h-3.5 text-blue-500" /> {t('home.suggestions_label', 'Suggestions:')}
             </span>
             {popularSuggestionChips.map((chip) => (
               <button
@@ -267,10 +269,10 @@ export default function Home() {
 
           {/* Animated Counters Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 max-w-6xl mx-auto">
-            <StatCard icon={<Users />} value="1k+" label="Total Users" color="purple" />
-            <StatCard icon={<Zap />} value="70+" label="Tools Generated" color="blue" />
-            <StatCard icon={<FileText />} value="20+" label="PDFs Processed" color="amber" />
-            <StatCard icon={<Sparkles />} value="15+" label="Images Edited" color="emerald" />
+            <StatCard icon={<Users />} value="1k+" label={t('home.stats.users', 'Total Users')} color="purple" />
+            <StatCard icon={<Zap />} value="70+" label={t('home.stats.tools', 'Tools Generated')} color="blue" />
+            <StatCard icon={<FileText />} value="20+" label={t('home.stats.pdfs', 'PDFs Processed')} color="amber" />
+            <StatCard icon={<Sparkles />} value="15+" label={t('home.stats.images', 'Images Edited')} color="emerald" />
           </div>
 
           {/* Premium Trust Badges */}
@@ -319,8 +321,8 @@ export default function Home() {
               <Grid className="w-3.5 h-3.5" />
               Categories Deck
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">Browse by Category</h2>
-            <p className="text-gray-500 mt-3 font-medium">Explore local directories containing compliant browser utilities.</p>
+            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">{t('home.browse_categories', 'Browse by Category')}</h2>
+            <p className="text-gray-500 mt-3 font-medium">{t('home.browse_categories_sub', 'Explore local directories containing compliant browser utilities.')}</p>
           </div>
 
           {/* Categories Grid (2 columns on mobile!) */}
@@ -337,10 +339,10 @@ export default function Home() {
 
           <div className="text-center mt-12">
             <Link
-              href="/categories"
+              href={localizeHref('/categories')}
               className="inline-flex items-center gap-2 px-6 py-3.5 border border-white/5 hover:border-blue-500/30 bg-white/[0.02] hover:bg-white/[0.05] text-[10px] font-black uppercase tracking-widest text-gray-300 hover:text-white rounded-xl transition-all active:scale-95 shadow-xl cursor-pointer"
             >
-              View All Categories
+              {t('home.view_all_categories', 'View All Categories')}
               <ArrowRight className="w-4 h-4 text-blue-500" />
             </Link>
           </div>
@@ -356,10 +358,10 @@ export default function Home() {
               HOT & TRENDING
             </div>
             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
-              Trending Utilities
+              {t('home.trending_title', 'Trending Utilities')}
             </h2>
             <p className="text-gray-500 mt-3 font-medium">
-              The most popular, highly computed local tools in active use right now.
+              {t('home.trending_subtitle', 'The most popular, highly computed local tools in active use right now.')}
             </p>
           </div>
 
@@ -383,10 +385,10 @@ export default function Home() {
               LATEST RELEASES
             </div>
             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
-              Recently Added Tools
+              {t('home.recent_title', 'Recently Added Tools')}
             </h2>
             <p className="text-gray-500 mt-3 font-medium">
-              Fresh, client-side tools designed to solve modern processing needs.
+              {t('home.recent_subtitle', 'Fresh, client-side tools designed to solve modern processing needs.')}
             </p>
           </div>
 
@@ -416,31 +418,31 @@ export default function Home() {
             >
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20 mb-6">
                 <Sparkles className="w-3.5 h-3.5 fill-blue-400" />
-                The ToolWala Edge
+                {t('home.edge_title', 'The ToolWala Edge')}
               </div>
               <h2 className="text-4xl md:text-5xl font-black text-white leading-tight tracking-tight mb-8">
-                Professional tools, <br />
-                <span className="text-blue-500">Zero complexity.</span>
+                {t('home.edge_subtitle_1', 'Professional tools,')} <br />
+                <span className="text-blue-500">{t('home.edge_subtitle_2', 'Zero complexity.')}</span>
               </h2>
               <p className="text-base text-gray-400 font-medium leading-relaxed mb-12">
-                We bridge the gap between complex AI models and everyday utility. No confusing interfaces, no subscription traps—just powerful AI that works for you.
+                {t('home.edge_desc', 'We bridge the gap between complex AI models and everyday utility. No confusing interfaces, no subscription traps—just powerful AI that works for you.')}
               </p>
 
               <div className="grid gap-10">
                 <FeatureItem
                   icon={<Zap />}
-                  title="Edge Processing"
-                  desc="Most tools run directly in your browser, ensuring lightning-fast results without server delays."
+                  title={t('home.feat1_title', 'Edge Processing')}
+                  desc={t('home.feat1_desc', 'Most tools run directly in your browser, ensuring lightning-fast results without server delays.')}
                 />
                 <FeatureItem
                   icon={<ShieldCheck />}
-                  title="Encrypted Data"
-                  desc="Your files never leave your device. We use end-to-end encryption for any cloud-based processing."
+                  title={t('home.feat2_title', 'Encrypted Data')}
+                  desc={t('home.feat2_desc', 'Your files never leave your device. We use end-to-end encryption for any cloud-based processing.')}
                 />
                 <FeatureItem
                   icon={<Star />}
-                  title="Curated Models"
-                  desc="We select and fine-tune the best AI models specifically for each tool's unique purpose."
+                  title={t('home.feat3_title', 'Curated Models')}
+                  desc={t('home.feat3_desc', 'We select and fine-tune the best AI models specifically for each tool\'s unique purpose.')}
                 />
               </div>
             </motion.div>
@@ -512,7 +514,7 @@ export default function Home() {
                   }`}
               >
                 <Grid className="w-3.5 h-3.5" />
-                All Utilities ({filteredTools.length})
+                {t('home.all_utilities', 'All Utilities')} ({filteredTools.length})
               </button>
               <button
                 onClick={() => setActiveTab('featured')}
@@ -522,7 +524,7 @@ export default function Home() {
                   }`}
               >
                 <Star className="w-3.5 h-3.5" />
-                Featured Flagships
+                {t('home.featured_flagships', 'Featured Flagships')}
               </button>
               <button
                 onClick={() => setActiveTab('trending')}
@@ -532,7 +534,7 @@ export default function Home() {
                   }`}
               >
                 <TrendingUp className="w-3.5 h-3.5" />
-                Trending Hot
+                {t('home.trending_hot', 'Trending Hot')}
               </button>
               <button
                 onClick={() => setActiveTab('recent')}
@@ -542,7 +544,7 @@ export default function Home() {
                   }`}
               >
                 <Clock className="w-3.5 h-3.5" />
-                Recently Added
+                {t('home.recently_added', 'Recently Added')}
               </button>
             </div>
           </div>
@@ -569,7 +571,7 @@ export default function Home() {
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="block w-full rounded-2xl border border-white/5 bg-black/40 py-3.5 pl-12 pr-4 text-white placeholder:text-gray-600 focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/10 text-xs font-bold outline-none transition-all shadow-inner"
-                      placeholder="Live filter by keyword or tag..."
+                      placeholder={t('home.search_placeholder_filter', 'Live filter by keyword or tag...')}
                     />
                   </div>
 
@@ -583,7 +585,7 @@ export default function Home() {
                           : 'bg-white/5 text-gray-500 hover:text-white border border-white/5'
                           }`}
                       >
-                        {category}
+                        {t('categories.' + category, category)}
                       </button>
                     ))}
                   </div>
@@ -595,24 +597,28 @@ export default function Home() {
                     <div className="absolute inset-0 bg-blue-600/[0.02] blur-3xl pointer-events-none" />
                     <div className="flex items-center gap-2.5 mb-6 relative z-10">
                       <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                      <h3 className="text-[10px] font-black uppercase tracking-widest text-gray-500">Recently Visited Utilities</h3>
+                      <h3 className="text-[10px] font-black uppercase tracking-widest text-gray-500">{t('home.recent_visited', 'Recently Visited Utilities')}</h3>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
-                      {recentTools.map((tool) => (
-                        <Link
-                          key={tool.id}
-                          href={tool.href}
-                          className="flex items-center gap-3.5 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-blue-500/30 hover:bg-blue-600/5 transition-all group"
-                        >
-                          <div className="text-xl w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/5 group-hover:scale-110 transition-transform">
-                            {tool.icon}
-                          </div>
-                          <div className="overflow-hidden">
-                            <h4 className="text-xs font-black text-white group-hover:text-blue-400 transition-colors truncate">{tool.title}</h4>
-                            <p className="text-[9px] text-gray-600 font-bold uppercase tracking-wider mt-0.5">{tool.category}</p>
-                          </div>
-                        </Link>
-                      ))}
+                      {recentTools.map((tool) => {
+                        const displayTitle = t(`tools.${tool.id}.title`, tool.title);
+                        const displayCategory = t(`categories.${tool.category}`, tool.category);
+                        return (
+                          <Link
+                            key={tool.id}
+                            href={localizeHref(tool.href)}
+                            className="flex items-center gap-3.5 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-blue-500/30 hover:bg-blue-600/5 transition-all group"
+                          >
+                            <div className="text-xl w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/5 group-hover:scale-110 transition-transform">
+                              {tool.icon}
+                            </div>
+                            <div className="overflow-hidden">
+                              <h4 className="text-xs font-black text-white group-hover:text-blue-400 transition-colors truncate">{displayTitle}</h4>
+                              <p className="text-[9px] text-gray-600 font-bold uppercase tracking-wider mt-0.5">{displayCategory}</p>
+                            </div>
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 )}
@@ -634,13 +640,13 @@ export default function Home() {
                     <div className="bg-white/5 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6">
                       <Search className="w-10 h-10 text-gray-700" />
                     </div>
-                    <h3 className="text-2xl font-black text-white mb-2 tracking-tight">No tools found</h3>
-                    <p className="text-gray-500 max-w-sm mx-auto text-sm font-medium">Try checking tag queries or clear filters to view all directories.</p>
+                    <h3 className="text-2xl font-black text-white mb-2 tracking-tight">{t('home.no_tools_found', 'No tools found')}</h3>
+                    <p className="text-gray-500 max-w-sm mx-auto text-sm font-medium">{t('home.no_tools_sub', 'Try checking tag queries or clear filters to view all directories.')}</p>
                     <button
                       onClick={() => { setSearchQuery(""); setActiveCategory("All"); }}
                       className="mt-6 px-6 py-3 rounded-xl bg-blue-600 text-white font-black uppercase tracking-widest text-xs hover:bg-blue-500 transition-all shadow-md"
                     >
-                      Reset Directory View
+                      {t('home.reset_directory', 'Reset Directory View')}
                     </button>
                   </div>
                 )}

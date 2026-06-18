@@ -6,6 +6,9 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import ShareButtons from './ShareButtons';
 import { toolsData } from '@/data/tools';
+import { useTranslation } from '@/components/I18nContext';
+import { getTranslation } from '@/lib/i18n';
+import Breadcrumbs from './Breadcrumbs';
 
 interface FAQ {
   question: string;
@@ -37,9 +40,61 @@ export default function ToolArticle({
   useCases,
   faqs,
   conclusion,
-  relatedTools = []
-}: ToolArticleProps) {
+  relatedTools = [],
+  toolId
+}: ToolArticleProps & { toolId?: string }) {
   
+  const { t, locale, messages } = useTranslation();
+
+  // Automatically resolve toolId if not passed
+  const resolvedToolId = useMemo(() => {
+    if (toolId) return toolId;
+    const found = toolsData.find(t => 
+      t.title.toLowerCase().includes(title.toLowerCase()) || 
+      title.toLowerCase().includes(t.title.toLowerCase())
+    );
+    return found ? found.id : null;
+  }, [toolId, title]);
+
+  // Try to load translated values from messages for this tool
+  const translatedTitle = resolvedToolId ? t(`tools.${resolvedToolId}.title`, title) : title;
+  const translatedIntro = resolvedToolId ? t(`tools.${resolvedToolId}.intro`, intro) : intro;
+  const translatedWhatItDoes = resolvedToolId ? t(`tools.${resolvedToolId}.whatItDoes`, whatItDoes) : whatItDoes;
+  
+  const translatedHowToUse = useMemo(() => {
+    if (!resolvedToolId) return howToUse;
+    const val = getTranslation(messages, `tools.${resolvedToolId}.howToUse`);
+    return Array.isArray(val) ? val : howToUse;
+  }, [messages, resolvedToolId, howToUse]);
+
+  const translatedKeyFeatures = useMemo(() => {
+    if (!resolvedToolId) return keyFeatures;
+    const val = getTranslation(messages, `tools.${resolvedToolId}.keyFeatures`);
+    return Array.isArray(val) ? val : keyFeatures;
+  }, [messages, resolvedToolId, keyFeatures]);
+
+  const translatedBenefits = useMemo(() => {
+    if (!resolvedToolId) return benefits;
+    const val = getTranslation(messages, `tools.${resolvedToolId}.benefits`);
+    return Array.isArray(val) ? val : benefits;
+  }, [messages, resolvedToolId, benefits]);
+
+  const translatedWhyChoose = resolvedToolId ? t(`tools.${resolvedToolId}.whyChoose`, whyChoose) : whyChoose;
+
+  const translatedUseCases = useMemo(() => {
+    if (!resolvedToolId) return useCases;
+    const val = getTranslation(messages, `tools.${resolvedToolId}.useCases`);
+    return Array.isArray(val) ? val : useCases;
+  }, [messages, resolvedToolId, useCases]);
+
+  const translatedFaqs = useMemo(() => {
+    if (!resolvedToolId) return faqs;
+    const val = getTranslation(messages, `tools.${resolvedToolId}.faqs`);
+    return Array.isArray(val) ? val : faqs;
+  }, [messages, resolvedToolId, faqs]);
+
+  const translatedConclusion = resolvedToolId ? t(`tools.${resolvedToolId}.conclusion`, conclusion) : conclusion;
+
   // Resolve related tools dynamically from toolsData if none provided
   const resolvedRelatedTools = useMemo(() => {
     if (relatedTools && relatedTools.length > 0) return relatedTools;
@@ -65,13 +120,80 @@ export default function ToolArticle({
       .map(t => ({ name: t.title, href: t.href }));
   }, [title, relatedTools]);
 
+  // Construct structured JSON-LD schemas
+  const softwareAppSchema = useMemo(() => ({
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    'name': translatedTitle,
+    'description': translatedIntro || translatedWhatItDoes,
+    'applicationCategory': 'BusinessApplication',
+    'operatingSystem': 'All',
+    'offers': {
+      '@type': 'Offer',
+      'price': '0',
+      'priceCurrency': 'USD'
+    }
+  }), [translatedTitle, translatedIntro, translatedWhatItDoes]);
+
+  const howToSchema = useMemo(() => (translatedHowToUse && translatedHowToUse.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    'name': `How to use ${translatedTitle}`,
+    'description': translatedIntro,
+    'step': translatedHowToUse.map((step, idx) => ({
+      '@type': 'HowToStep',
+      'position': idx + 1,
+      'text': step
+    }))
+  } : null), [translatedTitle, translatedIntro, translatedHowToUse]);
+
+  const faqSchema = useMemo(() => (translatedFaqs && translatedFaqs.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': translatedFaqs.map((faq) => ({
+      '@type': 'Question',
+      'name': faq.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': faq.answer
+      }
+    }))
+  } : null), [translatedFaqs]);
+
+  const breadcrumbItems = useMemo(() => [
+    { label: t('nav.tools', 'Tools'), href: '/tools' },
+    { label: translatedTitle }
+  ], [t, translatedTitle]);
+
   return (
     <section className="py-24 relative overflow-hidden bg-[#030712] border-t border-white/5">
+      {/* Dynamic structured data */}
+      {softwareAppSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppSchema) }}
+        />
+      )}
+      {howToSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+        />
+      )}
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+
       {/* Background Glows */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <Breadcrumbs items={breadcrumbItems} />
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -83,7 +205,9 @@ export default function ToolArticle({
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
             <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
               <Sparkles className="w-4 h-4 text-blue-400" />
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400">Deep Dive Guide</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400">
+                {t('article.deepDiveGuide', 'Deep Dive Guide')}
+              </span>
             </div>
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
           </div>
@@ -92,17 +216,17 @@ export default function ToolArticle({
             {/* Header */}
             <div className="text-center mb-16 space-y-6">
               <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-4 leading-[1.1] uppercase">
-                Mastering the <br />
+                {t('article.mastering', 'Mastering the')} <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
-                  {title}
+                  {translatedTitle}
                 </span>
               </h2>
               <p className="text-lg text-gray-400 leading-relaxed font-medium max-w-3xl mx-auto italic">
-                "{intro}"
+                "{translatedIntro}"
               </p>
               
               <div className="flex justify-center pt-4">
-                <ShareButtons title={title} />
+                <ShareButtons title={translatedTitle} />
               </div>
             </div>
 
@@ -114,10 +238,10 @@ export default function ToolArticle({
                 <div className="relative">
                   <h3 className="text-2xl font-black text-white mb-6 flex items-center gap-3 uppercase tracking-tight">
                     <span className="w-8 h-8 rounded-lg bg-blue-600/20 flex items-center justify-center text-blue-400 text-sm">01</span>
-                    What is {title}?
+                    {t('article.whatIs', 'What is {title}?').replace('{title}', translatedTitle)}
                   </h3>
                   <p className="text-gray-400 leading-relaxed text-base font-sans">
-                    {whatItDoes}
+                    {translatedWhatItDoes}
                   </p>
                 </div>
               </div>
@@ -126,10 +250,10 @@ export default function ToolArticle({
               <div>
                 <h3 className="text-2xl font-black text-white mb-8 flex items-center gap-3 uppercase tracking-tight">
                   <span className="w-8 h-8 rounded-lg bg-blue-600/20 flex items-center justify-center text-blue-400 text-sm">02</span>
-                  How to use {title}
+                  {t('article.howToUse', 'How to use {title}').replace('{title}', translatedTitle)}
                 </h3>
                 <div className="grid gap-4">
-                  {howToUse.map((step, i) => (
+                  {translatedHowToUse.map((step, i) => (
                     <motion.div 
                       key={i}
                       whileHover={{ x: 6 }}
@@ -148,10 +272,10 @@ export default function ToolArticle({
               <div>
                 <h3 className="text-2xl font-black text-white mb-10 flex items-center gap-3 uppercase tracking-tight">
                   <span className="w-8 h-8 rounded-lg bg-blue-600/20 flex items-center justify-center text-blue-400 text-sm">03</span>
-                  Key Features
+                  {t('article.keyFeatures', 'Key Features')}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {keyFeatures.map((feature, i) => (
+                  {translatedKeyFeatures.map((feature, i) => (
                     <div key={i} className="p-8 rounded-[2rem] bg-white/[0.01] border border-white/5 hover:border-blue-500/20 hover:bg-white/[0.03] transition-all group relative overflow-hidden">
                       <div className="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-opacity">
                          <Sparkles className="w-12 h-12 text-white" />
@@ -173,10 +297,10 @@ export default function ToolArticle({
                 <div>
                   <h3 className="text-2xl font-black text-white mb-8 flex items-center gap-3 uppercase tracking-tight">
                     <span className="w-8 h-8 rounded-lg bg-blue-600/20 flex items-center justify-center text-blue-400 text-sm">04</span>
-                    Benefits
+                    {t('article.benefits', 'Benefits')}
                   </h3>
                   <ul className="space-y-4 list-none p-0">
-                    {benefits.map((benefit, i) => (
+                    {translatedBenefits.map((benefit, i) => (
                       <li key={i} className="flex items-start gap-4 text-gray-400 font-medium font-sans text-sm sm:text-base">
                         <CheckCircle2 className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
                         {benefit}
@@ -187,10 +311,10 @@ export default function ToolArticle({
                 <div>
                   <h3 className="text-2xl font-black text-white mb-8 flex items-center gap-3 uppercase tracking-tight">
                     <span className="w-8 h-8 rounded-lg bg-blue-600/20 flex items-center justify-center text-blue-400 text-sm">05</span>
-                    Use Cases
+                    {t('article.useCases', 'Use Cases')}
                   </h3>
                   <ul className="space-y-3 list-none p-0">
-                    {useCases.map((useCase, i) => (
+                    {translatedUseCases.map((useCase, i) => (
                       <li key={i} className="bg-white/[0.01] px-6 py-4 rounded-2xl border border-white/5 text-gray-300 text-xs sm:text-sm font-bold flex items-center justify-between group hover:bg-white/[0.03] transition-all">
                          <span className="font-sans leading-relaxed">{useCase}</span>
                          <ArrowRight className="w-4 h-4 text-gray-600 group-hover:text-blue-500 transition-colors" />
@@ -204,25 +328,29 @@ export default function ToolArticle({
               <div className="relative p-8 sm:p-10 rounded-[2rem] bg-white/[0.01] border border-white/5 overflow-hidden">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
                 <div className="relative">
-                  <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tight">Why Choose ToolWala AI?</h3>
+                  <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tight">
+                    {t('article.whyChoose', 'Why Choose ToolWala AI?')}
+                  </h3>
                   <p className="text-gray-400 leading-relaxed text-base font-sans">
-                    {whyChoose}
+                    {translatedWhyChoose}
                   </p>
                 </div>
               </div>
 
               {/* FAQs */}
-              {faqs && faqs.length > 0 && (
+              {translatedFaqs && translatedFaqs.length > 0 && (
                 <div>
                   <div className="text-center mb-12">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-4">
                       <HelpCircle className="w-3.5 h-3.5" />
-                      Support Center
+                      {t('article.supportCenter', 'Support Center')}
                     </div>
-                    <h3 className="text-3xl font-black text-white tracking-tighter uppercase">Common Questions</h3>
+                    <h3 className="text-3xl font-black text-white tracking-tighter uppercase">
+                      {t('article.commonQuestions', 'Common Questions')}
+                    </h3>
                   </div>
                   <div className="space-y-4 max-w-3xl mx-auto">
-                    {faqs.map((faq, i) => (
+                    {translatedFaqs.map((faq, i) => (
                       <FAQItem key={i} question={faq.question} answer={faq.answer} />
                     ))}
                   </div>
@@ -232,16 +360,20 @@ export default function ToolArticle({
               {/* Conclusion */}
               <div className="p-8 sm:p-12 rounded-[2rem] bg-gradient-to-br from-blue-600/10 via-transparent to-transparent border border-blue-500/15 text-center relative overflow-hidden group">
                 <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" />
-                <h3 className="text-3xl font-black text-white mb-6 uppercase tracking-tight">Final Verdict</h3>
+                <h3 className="text-3xl font-black text-white mb-6 uppercase tracking-tight">
+                  {t('article.finalVerdict', 'Final Verdict')}
+                </h3>
                 <p className="text-gray-300 leading-relaxed text-base sm:text-lg font-medium max-w-2xl mx-auto relative z-10 font-sans">
-                  {conclusion}
+                  {translatedConclusion}
                 </p>
               </div>
 
               {/* Related Tools Engine */}
               {resolvedRelatedTools.length > 0 && (
                 <div className="pt-20 border-t border-white/5">
-                  <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em] mb-10 text-center select-none">Recommended Utilities</h4>
+                  <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em] mb-10 text-center select-none">
+                    {t('article.recommendedUtilities', 'Recommended Utilities')}
+                  </h4>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                     {resolvedRelatedTools.map((tool, i) => (
                       <Link 
@@ -253,7 +385,7 @@ export default function ToolArticle({
                           {tool.name}
                         </span>
                         <span className="text-[9px] font-black text-blue-500 uppercase tracking-widest flex items-center gap-1 select-none">
-                          Try Tool
+                          {t('article.tryTool', 'Try Tool')}
                           <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                         </span>
                       </Link>

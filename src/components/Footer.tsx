@@ -2,21 +2,75 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { Mail, ShieldCheck, Heart, Sparkles, Send, Globe, Map } from 'lucide-react';
+import { Mail, ShieldCheck, Heart, Sparkles, Send, Globe } from 'lucide-react';
 import { toast } from 'sonner';
+import { useTranslation } from '@/components/I18nContext';
+
+const LANGUAGES = [
+  { code: 'en', name: 'English', flag: '🇺🇸' },
+  { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' },
+  { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+  { code: 'pt', name: 'Português', flag: '🇵🇹' },
+  { code: 'ar', name: 'العربية', flag: '🇸🇦' },
+  { code: 'id', name: 'Bahasa Indonesia', flag: '🇮🇩' },
+];
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState("");
+  
+  const { t, locale, enabledLocales, localizeHref } = useTranslation();
+
+  const activeLanguages = LANGUAGES.filter(lang => enabledLocales.includes(lang.code));
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes("@")) {
-      toast.error("Please enter a valid email address.");
+      toast.error(t('footer.subscribe_error', 'Please enter a valid email address.'));
       return;
     }
-    toast.success("Subscribed successfully! Welcome to the ToolWala community ⚡");
+    toast.success(t('footer.subscribe_success', 'Subscribed successfully! Welcome to the ToolWala community ⚡'));
     setEmail("");
+  };
+
+  const handleLanguageChange = (newLocale: string) => {
+    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+    localStorage.setItem('preferredLocale', newLocale);
+
+    const currentPathname = window.location.pathname;
+    const pathnameParts = currentPathname.split('/');
+    const currentLocalePrefix = pathnameParts[1];
+    const ALL_LOCALES = ['hi', 'es', 'fr', 'de', 'pt', 'ar', 'id'];
+    const isCurrentLocalePrefixed = ALL_LOCALES.includes(currentLocalePrefix);
+
+    let newPathname = currentPathname;
+    if (newLocale === 'en') {
+      if (isCurrentLocalePrefixed) {
+        newPathname = '/' + pathnameParts.slice(2).join('/');
+      }
+    } else {
+      if (isCurrentLocalePrefixed) {
+        pathnameParts[1] = newLocale;
+        newPathname = pathnameParts.join('/');
+      } else {
+        newPathname = `/${newLocale}${currentPathname}`;
+      }
+    }
+
+    if (!newPathname.endsWith('/') && currentPathname.endsWith('/')) {
+      newPathname += '/';
+    }
+    if (newPathname.endsWith('/') && !currentPathname.endsWith('/')) {
+      newPathname = newPathname.slice(0, -1);
+    }
+    if (newPathname === '') {
+      newPathname = '/';
+    }
+
+    const search = window.location.search;
+    window.location.href = newPathname + search;
   };
 
   const categories = [
@@ -45,18 +99,46 @@ export default function Footer() {
     { name: "Platform Guide", href: "/about/" }
   ];
 
+  const localizedCategories = categories.map((cat) => ({
+    name: t(`categories.${cat.name}`, cat.name),
+    href: localizeHref(cat.href)
+  }));
+
+  const localizedTopTools = topTools.map((tool) => {
+    const match = tool.href.match(/\/tools\/([^\/]+)\/?/);
+    const key = match ? match[1] : '';
+    const name = key ? t(`tools.${key}.title`, tool.name) : tool.name;
+    return {
+      name,
+      href: localizeHref(tool.href)
+    };
+  });
+
+  const localizedSitemap = sitemap.map((item) => {
+    let key = '';
+    if (item.href === '/tools/') key = 'nav.tools';
+    else if (item.href === '/categories/') key = 'nav.categories';
+    else if (item.href === '/pricing/') key = 'nav.pricing';
+    else if (item.href === '/blog/') key = 'nav.blog';
+    else if (item.href === '/about/') key = 'nav.about';
+    
+    const name = key ? t(key, item.name) : item.name;
+    return {
+      name,
+      href: localizeHref(item.href)
+    };
+  });
+
   return (
     <footer className="bg-[#030712] border-t border-white/5 pt-24 pb-12 relative overflow-hidden">
-      {/* Visual background enhancements */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
       <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-blue-950/10 to-transparent -z-10 pointer-events-none" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 lg:gap-12">
           
-          {/* Column 1: Branding & Pitch (Col span 4) */}
           <div className="lg:col-span-4 space-y-8">
-            <Link href="/" className="flex items-center gap-3 group select-none">
+            <Link href={localizeHref('/')} className="flex items-center gap-3 group select-none">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white font-black text-2xl shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-transform group-hover:scale-110 group-hover:rotate-3">
                 T
               </div>
@@ -66,12 +148,11 @@ export default function Footer() {
             </Link>
             
             <p className="text-gray-400 leading-relaxed font-medium text-sm">
-              Free AI utilities that run 100% locally in your browser. No registration, no latency, no server uploads. Experience privacy-first processing.
+              {t('footer.tagline', 'Free AI utilities that run 100% locally in your browser. No registration, no latency, no server uploads. Experience privacy-first processing.')}
             </p>
 
-            {/* Newsletter Subscription */}
             <div className="space-y-3">
-              <h4 className="text-xs font-black uppercase tracking-wider text-white">Subscribe to Releases</h4>
+              <h4 className="text-xs font-black uppercase tracking-wider text-white">{t('footer.subscribe_releases', 'Subscribe to Releases')}</h4>
               <form onSubmit={handleSubscribe} className="flex max-w-sm rounded-xl overflow-hidden bg-white/5 border border-white/10 p-1.5 focus-within:border-blue-500/50 transition-colors">
                 <input 
                   type="email" 
@@ -93,20 +174,19 @@ export default function Footer() {
             <div className="flex flex-wrap gap-2.5">
               <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-emerald-400 bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/20">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                Browser-Native
+                {t('footer.browser_native', 'Browser-Native')}
               </div>
               <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-blue-400 bg-blue-500/10 px-4 py-2 rounded-full border border-blue-500/20">
                 <Sparkles className="w-3.5 h-3.5 fill-blue-400" />
-                GDPR Compliant
+                {t('footer.gdpr_compliant', 'GDPR Compliant')}
               </div>
             </div>
           </div>
           
-          {/* Column 2: Categories (Col span 2) */}
           <div className="lg:col-span-2 space-y-6">
-            <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">Categories</h3>
+            <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">{t('nav.categories', 'Categories')}</h3>
             <ul className="space-y-4">
-              {categories.map((cat) => (
+              {localizedCategories.map((cat) => (
                 <li key={cat.name}>
                   <Link 
                     href={cat.href} 
@@ -119,11 +199,10 @@ export default function Footer() {
             </ul>
           </div>
           
-          {/* Column 3: Top Tools (Col span 2) */}
           <div className="lg:col-span-2 space-y-6">
-            <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">Top Tools</h3>
+            <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">{t('footer.tools', 'Top Tools')}</h3>
             <ul className="space-y-4">
-              {topTools.map((tool) => (
+              {localizedTopTools.map((tool) => (
                 <li key={tool.name}>
                   <Link 
                     href={tool.href} 
@@ -136,11 +215,10 @@ export default function Footer() {
             </ul>
           </div>
           
-          {/* Column 4: Navigation (Col span 2) */}
           <div className="lg:col-span-2 space-y-6">
-            <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">Sitemap</h3>
+            <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">{t('footer.sitemap', 'Sitemap')}</h3>
             <ul className="space-y-4">
-              {sitemap.map((item) => (
+              {localizedSitemap.map((item) => (
                 <li key={item.name}>
                   <Link 
                     href={item.href} 
@@ -153,18 +231,17 @@ export default function Footer() {
             </ul>
           </div>
           
-          {/* Column 5: Support & Info (Col span 2) */}
           <div className="lg:col-span-2 space-y-6">
-            <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">Contact</h3>
+            <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">{t('footer.contact_header', 'Contact')}</h3>
             <a href="mailto:developtechx@gmail.com" className="flex items-center gap-2 text-gray-300 hover:text-blue-400 text-xs font-black transition-all group">
               <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-blue-600/10 group-hover:border-blue-600/20 transition-all shrink-0">
                 <Mail className="w-4 h-4" />
               </div>
               <span className="truncate">developtechx@gmail.com</span>
             </a>
-
+ 
             <div className="space-y-3.5 pt-4">
-              <h4 className="text-[10px] font-black uppercase tracking-wider text-gray-500">Social Connect</h4>
+              <h4 className="text-[10px] font-black uppercase tracking-wider text-gray-500">{t('footer.social_connect', 'Social Connect')}</h4>
               <div className="flex gap-2">
                 <SocialLink href="#" icon={<TwitterIcon className="w-4 h-4" />} label="Twitter" />
                 <SocialLink href="#" icon={<GithubIcon className="w-4 h-4" />} label="GitHub" />
@@ -174,22 +251,40 @@ export default function Footer() {
           </div>
         </div>
         
-        {/* Bottom Bar */}
         <div className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left select-none">
-          <div className="space-y-2">
+          <div className="space-y-4">
             <p className="text-xs text-gray-500 font-bold">
-              &copy; {currentYear} ToolWala AI. All rights reserved.
+              &copy; {currentYear} ToolWala AI. {t('footer.copyright_notice', 'All rights reserved.')}
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-4.5 text-[10px] font-black uppercase tracking-wider text-gray-600">
-              <Link href="/privacy-policy" className="hover:text-gray-400 transition-colors">Privacy Policy</Link>
-              <Link href="/terms" className="hover:text-gray-400 transition-colors">Terms of Service</Link>
-              <Link href="/disclaimer" className="hover:text-gray-400 transition-colors">Disclaimer</Link>
-              <Link href="/contact" className="hover:text-gray-400 transition-colors">Contact Support</Link>
+              <Link href={localizeHref('/privacy-policy')} className="hover:text-gray-400 transition-colors">{t('footer.privacy', 'Privacy Policy')}</Link>
+              <Link href={localizeHref('/terms')} className="hover:text-gray-400 transition-colors">{t('footer.terms', 'Terms of Service')}</Link>
+              <Link href={localizeHref('/disclaimer')} className="hover:text-gray-400 transition-colors">{t('footer.disclaimer', 'Disclaimer')}</Link>
+              <Link href={localizeHref('/contact')} className="hover:text-gray-400 transition-colors">{t('footer.contact', 'Contact Support')}</Link>
+            </div>
+            
+            {/* Horizontal Footer Language Selector Grid */}
+            <div className="flex flex-wrap gap-4.5 justify-center md:justify-start items-center pt-2">
+              <Globe className="w-3.5 h-3.5 text-gray-600" />
+              {activeLanguages.map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={() => handleLanguageChange(lang.code)}
+                  translate="no"
+                  className={`text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer ${
+                    locale === lang.code
+                      ? 'text-blue-400'
+                      : 'text-gray-600 hover:text-gray-400'
+                  }`}
+                >
+                  {lang.flag} {lang.name}
+                </button>
+              ))}
             </div>
           </div>
           
           <p className="flex items-center gap-2 text-xs text-gray-500 font-bold">
-            Made with <Heart className="w-3.5 h-3.5 fill-red-500 text-red-500 animate-pulse" /> for the AI community
+            {t('footer.made_with', 'Made with')} <Heart className="w-3.5 h-3.5 fill-red-500 text-red-500 animate-pulse" /> {t('footer.for_community', 'for the AI community')}
           </p>
         </div>
       </div>
@@ -209,7 +304,6 @@ function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode
   );
 }
 
-// Inline SVGs for brand icons
 function TwitterIcon(props: any) {
   return (
     <svg {...props} suppressHydrationWarning xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

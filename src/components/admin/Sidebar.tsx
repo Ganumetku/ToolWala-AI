@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { 
   LayoutDashboard, Mail, BarChart3, Users, 
-  Cpu, Layers, BookOpen, LogOut, ChevronLeft, ChevronRight, Terminal, Settings, ListChecks
+  Cpu, Layers, BookOpen, LogOut, ChevronLeft, ChevronRight, Terminal, Settings, ListChecks, Globe
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -23,6 +23,7 @@ const navItems = [
   { name: 'AI Usage', href: '/admin/ai-monitoring', icon: Cpu },
   { name: 'Tools CMS', href: '/admin/content', icon: Layers },
   { name: 'Blog CMS', href: '/admin/blog', icon: BookOpen },
+  { name: 'Languages', href: '/admin/languages', icon: Globe },
   { name: 'Global Settings', href: '/admin/settings', icon: Settings },
 ];
 

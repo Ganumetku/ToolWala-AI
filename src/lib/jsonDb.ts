@@ -91,6 +91,19 @@ export interface LocalToolArticle {
   content: string;
 }
 
+export interface LocalToolTranslation {
+  id: string;
+  toolSlug: string;
+  locale: string;
+  title: string;
+  description: string;
+  faq: { question: string; answer: string }[];
+  seoTitle?: string | null;
+  seoDescription?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface LocalSeoMetadata {
   title?: string | null;
   description?: string | null;
@@ -254,5 +267,8 @@ export const jsonDb = {
     { id: 's1', key: 'site_title', value: 'ToolWala - AI Tools Suite', createdAt: new Date().toISOString() },
     { id: 's2', key: 'seo_description', value: 'Discover the future of utility tools with our dynamic AI marketplace.', createdAt: new Date().toISOString() }
   ]),
-  saveSettings: (settings: LocalGlobalSetting[]) => writeJSON('dynamic_settings.json', settings)
+  saveSettings: (settings: LocalGlobalSetting[]) => writeJSON('dynamic_settings.json', settings),
+
+  getToolTranslations: () => readJSON<LocalToolTranslation[]>('tool_translations.json', []),
+  saveToolTranslations: (translations: LocalToolTranslation[]) => writeJSON('tool_translations.json', translations)
 };

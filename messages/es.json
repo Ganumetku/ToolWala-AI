@@ -1,0 +1,155 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "tools": "Herramientas",
+    "categories": "Categorías",
+    "pricing": "Precios",
+    "blog": "Blog",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "start_free": "Iniciar Gratis",
+    "get_started_free": "Empezar Gratis"
+  },
+  "footer": {
+    "copyright": "© 2026 ToolWala AI. Todos los derechos reservados.",
+    "tagline": "Descubra el futuro de las herramientas de utilidad con nuestro mercado dinámico de IA.",
+    "tools": "Herramientas",
+    "company": "Compañía",
+    "legal": "Legal",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio",
+    "disclaimer": "Descargo de Responsabilidad",
+    "about": "Nosotros",
+    "contact": "Contacto"
+  },
+  "home": {
+    "badge": "🔒 Procesamiento de IA local 100% del lado del cliente",
+    "hero_title_1": "Optimice su Flujo de",
+    "hero_title_2": "Trabajo con IA",
+    "hero_subtitle": "Utilidades de IA gratuitas que se ejecutan 100% localmente en su navegador. Sin registro, sin latencia, sin cargas al servidor. Sus datos permanecen completamente en su dispositivo.",
+    "search_placeholder": "Buscar más de 25 utilidades sin conexión...",
+    "search_btn": "Buscar",
+    "suggestions_label": "Sugerencias:",
+    "browse_categories": "Buscar por Categoría",
+    "browse_categories_sub": "Explore directorios locales que contienen utilidades de navegador compatibles.",
+    "view_all_categories": "Ver Todas las Categorías",
+    "trending_title": "Herramientas de Tendencia",
+    "trending_subtitle": "Las herramientas locales más populares y computadas en uso activo en este momento.",
+    "recent_title": "Agregado Recientemente",
+    "recent_subtitle": "Nuevas herramientas del lado del cliente diseñadas para resolver necesidades de procesamiento modernas.",
+    "edge_title": "La Ventaja de ToolWala",
+    "edge_subtitle_1": "Herramientas profesionales,",
+    "edge_subtitle_2": "Cero complejidad.",
+    "edge_desc": "Cerramos la brecha entre los modelos de IA complejos y la utilidad cotidiana. Sin interfaces confusas, sin trampas de suscripción, solo una potente IA que funciona para usted.",
+    "feat1_title": "Procesamiento en el Borde",
+    "feat1_desc": "La mayoría de las herramientas se ejecutan directamente en su navegador, lo que garantiza resultados ultrarrápidos sin demoras del servidor.",
+    "feat2_title": "Datos Encriptados",
+    "feat2_desc": "Sus archivos nunca salen de su dispositivo. Usamos cifrado de extremo a extremo para cualquier procesamiento basado en la nube.",
+    "feat3_title": "Modelos Curados",
+    "feat3_desc": "Seleccionamos y ajustamos los mejores modelos de IA específicamente para el propósito único de cada herramienta.",
+    "recent_visited": "Utilidades Visitadas Recientemente",
+    "no_tools_found": "No se encontraron herramientas",
+    "no_tools_sub": "Intente verificar las consultas de etiquetas o borre los filtros para ver todos los directorios.",
+    "reset_directory": "Restablecer Vista",
+    "open_tool": "Abrir Herramienta",
+    "instant_run": "Ejecución Instantánea",
+    "all_utilities": "Todas las Utilidades",
+    "featured_flagships": "Destacadas",
+    "trending_hot": "Populares",
+    "stats": {
+      "users": "Usuarios Totales",
+      "tools": "Herramientas Generadas",
+      "pdfs": "PDF Procesados",
+      "images": "Imágenes Editadas"
+    }
+  },
+  "categories": {
+    "All": "Todo",
+    "AI Tools": "Herramientas de IA",
+    "Image Tools": "Herramientas de Imagen",
+    "PDF Tools": "Herramientas de PDF",
+    "Calculator Tools": "Calculadoras",
+    "Utility Tools": "Herramientas de Utilidad",
+    "Social Media Tools": "Redes Sociales",
+    "Business Tools": "Negocios",
+    "Document Tools": "Documentos",
+    "Resume & Career": "Currículum y Carrera",
+    "SEO Tools": "Herramientas SEO",
+    "Developer Tools": "Desarrolladores"
+  },
+  "tools": {
+    "image-compressor": {
+      "title": "Compresor de Imágenes",
+      "description": "Comprima imágenes hasta un 90% sin perder calidad visible. Rápido y seguro.",
+      "meta_title": "Compresor de Imágenes en Línea Gratis – Comprimir PNG y JPG",
+      "meta_description": "Reduzca el tamaño del archivo de imagen sin perder calidad. Comprima imágenes PNG, JPG y WebP de forma rápida y segura en su navegador."
+    },
+    "pdf-tools": {
+      "title": "Herramientas PDF",
+      "description": "Combine, divida, comprima y convierta archivos PDF de forma fácil y segura.",
+      "meta_title": "Herramientas PDF Gratis – Unir, Dividir y Editar PDF Online",
+      "meta_description": "Utilice utilidades PDF gratuitas basadas en navegador para unir, dividir, cifrar o descifrar archivos de forma segura."
+    },
+    "edit-pdf": {
+      "title": "Editar PDF",
+      "description": "Agregue texto a PDF, complete formularios PDF y descargue el PDF editado en línea.",
+      "meta_title": "Editar PDF Online – Editor y Anotador de PDF Gratis",
+      "meta_description": "Anote, escriba texto y edite documentos PDF directamente en su navegador. Seguro y gratis."
+    },
+    "merge-pdf": {
+      "title": "Unir PDF",
+      "description": "Combine múltiples documentos PDF en un solo archivo de calidad profesional de forma rápida y segura.",
+      "meta_title": "Unir PDF Online – Combinar Archivos PDF Gratis",
+      "meta_description": "Combine varios archivos PDF en un solo documento rápidamente. No se requiere instalación de software."
+    },
+    "split-pdf": {
+      "title": "Dividir PDF",
+      "description": "Extraiga páginas específicas o divida sus documentos PDF en varios archivos al instante.",
+      "meta_title": "Dividir PDF Online – Extraer Páginas de PDF Gratis",
+      "meta_description": "Divida un archivo PDF en páginas individuales o extraiga secciones específicas en segundos."
+    },
+    "jpg-to-pdf": {
+      "title": "JPG a PDF",
+      "description": "Convierta imágenes JPG, JPEG y PNG en un solo documento PDF de forma rápida y segura.",
+      "meta_title": "Convertir JPG a PDF Online – Imagen a PDF Gratis",
+      "meta_description": "Convierta imágenes (JPG, PNG, WebP) en archivos PDF de alta calidad al instante. Procesamiento del lado del cliente."
+    },
+    "pdf-to-jpg": {
+      "title": "PDF a JPG",
+      "description": "Convierta documentos PDF en imágenes JPG de alta calidad directamente en su navegador. Rápido, seguro y gratis.",
+      "meta_title": "Convertir PDF a JPG Online – Extraer Imágenes Gratis",
+      "meta_description": "Convierta páginas de PDF a imágenes JPG o PNG al instante. Seguro y nativo del navegador."
+    },
+    "passport-photo-maker": {
+      "title": "Creador de Fotos de Pasaporte",
+      "description": "Cree fotos de pasaporte del tamaño perfecto para cualquier país con eliminación de fondo por IA.",
+      "meta_title": "Creador de Fotos de Pasaporte con IA Online – Gratis",
+      "meta_description": "Convierta selfies en fotos de pasaporte que cumplan con las normas. Elimine fondos, recorte al tamaño y descargue."
+    },
+    "bg-remover": {
+      "title": "Eliminador de Fondos por IA",
+      "description": "Elimine fondos de imágenes automáticamente en segundos con alta precisión.",
+      "meta_title": "Eliminador de Fondos por IA Online – Quitar Fondo Gratis",
+      "meta_description": "Elimine el fondo de las imágenes automáticamente en un clic. Procesamiento completamente local."
+    },
+    "resume-builder": {
+      "title": "Creador de Currículum por IA",
+      "description": "Cree un currículum profesional y compatible con ATS en minutos con asistencia de IA.",
+      "meta_title": "Creador de Currículum por IA – Cree Currículums ATS Gratis",
+      "meta_description": "Genere CV y currículums profesionales estándar optimizados para sistemas ATS con la ayuda de IA."
+    },
+    "aadhaar-masking-tool": {
+      "title": "Herramienta de Enmascaramiento de Aadhaar",
+      "description": "Detecte y enmascare automáticamente los primeros 8 dígitos de su tarjeta Aadhaar para una protección segura de la privacidad.",
+      "meta_title": "Herramienta de Enmascaramiento de Aadhaar Online – Enmascarar PDF Gratis",
+      "meta_description": "Proteja la privacidad de su tarjeta Aadhaar ocultando los primeros 8 dígitos de las tarjetas UIDAI automáticamente."
+    }
+  },
+  "blogs": {
+    "why-local-ocr-is-the-future": {
+      "title": "Por qué el OCR nativo del navegador es el futuro de la seguridad de los datos",
+      "excerpt": "El reconocimiento óptico de caracteres tradicional carga documentos en bases de datos en la nube. Este artículo describe la transición a la renderización WebAssembly del lado del cliente, protegiendo los datos confidenciales localmente.",
+      "content": "El reconocimiento óptico de caracteres (OCR) tradicional carga documentos en bases de datos en la nube. Este artículo describe la transición a la renderización WebAssembly del lado del cliente, protegiendo los datos confidenciales localmente.\n\n### El problema con el OCR en la nube\nCada vez que carga un recibo, tarjeta de identificación o factura en un servidor OCR remoto, corre el riesgo de exponer información confidencial. Los servicios en la nube procesan su archivo, extraen el texto y lo almacenan. En muchos casos, estos archivos se guardan para entrenar modelos o realizar análisis, lo que podría violar estándares de privacidad como el RGPD.\n\n### Ingrese a WebAssembly del lado del cliente\nCon los avances en WebAssembly (WASM), podemos ejecutar potentes modelos de redes neuronales directamente dentro del navegador. ToolWala AI utiliza Tesseract.js que se ejecuta localmente en la zona de pruebas de su navegador. Sus archivos nunca salen de su computadora, lo que garantiza una privacidad absoluta."
+    }
+  }
+}

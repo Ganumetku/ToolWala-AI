@@ -1,31 +1,15 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { generateToolMetadataHelper } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: "Unlock PDF Online - Remove Password Protection from PDF | ToolWala AI",
-  description: "Remove password protection and unlock encrypted PDF files online instantly. Fully client-side secure decryption. 100% free, private, and easy to use.",
-  alternates: {
-    canonical: "/tools/unlock-pdf",
-  },
-  keywords: [
-    "Unlock PDF",
-    "remove password from PDF",
-    "decrypt PDF online",
-    "PDF password remover",
-    "free PDF decrypter",
-    "strip PDF password"
-  ],
-  openGraph: {
-    title: "Unlock PDF Online - Remove Password Protection from PDF",
-    description: "Remove password protection and unlock encrypted PDF files online instantly. Fully client-side secure decryption. 100% free, private, and easy to use.",
-    url: "https://toolwala.co/tools/unlock-pdf",
-    type: "website"
-  }
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return generateToolMetadataHelper(
+    'unlock-pdf',
+    'Unlock PDF Online - Remove Password Protection from PDF | ToolWala AI',
+    'Remove password protection and unlock encrypted PDF files online instantly. Fully client-side secure decryption. 100% free, private, and easy to use.',
+    '/tools/unlock-pdf'
+  );
+}
 
-export default function UnlockPdfLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return children;
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }

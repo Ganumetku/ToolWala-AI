@@ -132,7 +132,7 @@ export default function Header() {
           : 'bg-transparent py-6'
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 gap-8">
         <div className="flex items-center gap-2">
           <Link href={localizeHref('/')} className="flex items-center gap-3 group whitespace-nowrap shrink-0">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white font-black text-2xl transition-all group-hover:scale-110 group-hover:rotate-3 shadow-[0_0_20px_rgba(37,99,235,0.4)] relative overflow-hidden">
@@ -146,7 +146,7 @@ export default function Header() {
         </div>
         
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1 bg-white/5 p-1 rounded-full border border-white/10 backdrop-blur-md">
+        <nav className="hidden lg:flex items-center gap-1 bg-white/5 p-1 rounded-full border border-white/10 backdrop-blur-md">
           {navigation.map((item) => {
             const localizedHrefValue = localizeHref(item.href);
             const isActive = pathname === localizedHrefValue || 
@@ -167,7 +167,7 @@ export default function Header() {
           })}
         </nav>
  
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-4">
           {/* Custom Premium Language Dropdown */}
           <div className="relative" ref={langDropdownRef}>
             <button
@@ -220,7 +220,7 @@ export default function Header() {
         </div>
  
         {/* Mobile menu button */}
-        <div className="md:hidden flex items-center gap-3">
+        <div className="lg:hidden flex items-center gap-3">
           {/* Quick Lang Indicator for mobile */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -246,7 +246,7 @@ export default function Header() {
  
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 top-[72px] bottom-0 z-50 bg-[#030712]/98 backdrop-blur-2xl animate-fade-in border-t border-white/5 overflow-y-auto pb-10">
+        <div className="lg:hidden fixed inset-0 top-[72px] bottom-0 z-50 bg-[#030712]/98 backdrop-blur-2xl animate-fade-in border-t border-white/5 overflow-y-auto pb-10">
           <div className="flex flex-col p-6 gap-4">
             {navigation.map((item) => {
               const localizedHrefValue = localizeHref(item.href);

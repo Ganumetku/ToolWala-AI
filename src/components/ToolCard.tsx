@@ -49,13 +49,13 @@ export default function ToolCard({ title, description, icon, href, isPopular, is
           {isPopular && (
             <span className="inline-flex items-center gap-1 rounded-full bg-blue-500/10 px-2.5 py-1 text-[9px] font-black uppercase tracking-widest text-blue-400 border border-blue-500/20 backdrop-blur-md shadow-lg">
               <Sparkles className="w-2.5 h-2.5" />
-              Popular
+              {t('home.popular', 'Popular')}
             </span>
           )}
           {isTrending && (
             <span className="inline-flex items-center gap-1 rounded-full bg-purple-500/10 px-2.5 py-1 text-[9px] font-black uppercase tracking-widest text-purple-400 border border-purple-500/20 backdrop-blur-md shadow-lg">
               <TrendingUp className="w-2.5 h-2.5" />
-              Trending
+              {t('home.trending', 'Trending')}
             </span>
           )}
           {category && (

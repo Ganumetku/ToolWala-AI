@@ -26,6 +26,9 @@
     "browser_native": "Browser-Native",
     "gdpr_compliant": "GDPR Compliant",
     "social_connect": "Social Connect",
+    "sitemap": "Sitemap",
+    "contact_header": "Contact",
+    "copyright_notice": "All rights reserved.",
     "made_with": "Made with",
     "for_community": "for the AI community",
     "subscribe_success": "Subscribed successfully! Welcome to the ToolWala community ⚡",
@@ -69,8 +72,33 @@
       "users": "Total Users",
       "tools": "Tools Generated",
       "pdfs": "PDFs Processed",
-      "images": "Images Edited"
-    }
+      "images": "Images Edited",
+      "users_val": "1k+",
+      "tools_val": "70+",
+      "pdfs_val": "20+",
+      "images_val": "15+"
+    },
+    "start_discovering": "Start Discovering",
+    "standards_title": "Security & Experience Standards",
+    "standards": {
+      "browser_based": "100% Browser Based",
+      "no_upload": "No Upload Required",
+      "fast_processing": "Fast Processing",
+      "privacy_focused": "Privacy Focused",
+      "free_tools": "Free Tools",
+      "secure_utilities": "Secure Utilities"
+    },
+    "categories_deck": "Categories Deck",
+    "hot_trending": "HOT & TRENDING",
+    "latest_releases": "LATEST RELEASES",
+    "engine_title_1": "AI Processing",
+    "engine_title_2": "Engine 2.0",
+    "directory_title": "Tools Directory",
+    "directory_subtitle": "Instant-run local utilities. Search by keywords or filter by tags.",
+    "search_placeholder_filter": "Live filter by keyword or tag...",
+    "recently_added": "Recently Added",
+    "popular": "Popular",
+    "trending": "Trending"
   },
   "categories": {
     "All": "All",
@@ -85,7 +113,139 @@
     "Resume & Career": "Resume & Career",
     "SEO Tools": "SEO Tools",
     "Developer Tools": "Developer Tools",
-    "local_utilities": "Local Utilities"
+    "local_utilities": "Local Utilities",
+    "sidebar_title": "Categories",
+    "view_all_folders": "View All Folders",
+    "explore_category": "Explore Category",
+    "explore_other_folders": "Explore Other Folders",
+    "tool": "tool",
+    "tools_plural": "tools",
+    "trending_utilities": "Trending Utilities",
+    "search_placeholder": "Search tools inside this folder...",
+    "no_tools_match": "No tools match criteria",
+    "no_tools_sub": "Try checking description filters or reset active tabs.",
+    "reset_view": "Reset Directory View",
+    "faq_title": "Frequently Asked Questions",
+    "Popular": "Popular",
+    "Trending": "Trending",
+    "hub_badge": "Categorized Hub",
+    "title_main": "Browse Categories",
+    "title_sub": "ToolWala Directory",
+    "search_folders_placeholder": "Search category folder titles...",
+    "no_folders_found": "No categories found",
+    "no_folders_sub": "No directories matched \"{query}\". Try broad keywords.",
+    "clear_search": "Clear search",
+    "pdf-tools": {
+      "desc": "Professional PDF suite to merge, split, compress, watermark, and convert documents locally.",
+      "intro": "A collection of 9+ high-performance PDF manipulation utilities designed to streamline your document workflows with complete security.",
+      "faq": {
+        "q1": "Are my PDF files secure on ToolWala AI?",
+        "a1": "Yes. All processing is executed 100% locally in your browser. Your documents never touch our servers or any cloud database.",
+        "q2": "Is this PDF toolkit completely free?",
+        "a2": "Absolutely. All document conversion, page sorting, split, and compression operations are fully free with no download caps."
+      },
+      "seoTitle": "PDF Tools - Free Online PDF Editor, Splitter & Compressor | ToolWala AI",
+      "seoDescription": "Edit, merge, split, compress, watermark, protect, and scan PDF files locally. No subscription, no server uploads. Your data stays private."
+    },
+    "image-tools": {
+      "desc": "Automated background remover, passport photo resizer, and image optimizer.",
+      "intro": "Create standardized ID photos, extract subject cutouts, generate QR codes, and compress image file sizes instantly.",
+      "faq": {
+        "q1": "Does the AI background remover run locally?",
+        "a1": "Yes. It leverages edge WebAssembly models from @imgly/background-removal inside your browser. No server uploads are required.",
+        "q2": "What formats does the Image Compressor support?",
+        "a2": "It supports JPG, JPEG, PNG, and WebP formats, compressing images up to 90% without losing visual clarity."
+      },
+      "seoTitle": "Image Tools & Photo Editors Online | ToolWala AI",
+      "seoDescription": "Standardize passport photos, crop Aadhaar cards, remove image backgrounds, and compress photos with local browser engines."
+    },
+    "ai-tools": {
+      "desc": "Premium AI resume constructor, voice reader, and social caption generators.",
+      "intro": "Leverage advanced localized AI models to build ATS resumes, humanize text, and create engaging social media copy.",
+      "faq": {
+        "q1": "Is the AI Resume Builder ATS-compliant?",
+        "a1": "Yes. All templates generated are structured specifically to be easily parsed and scored by Applicant Tracking Systems (ATS).",
+        "q2": "How does the AI Text Humanizer work?",
+        "a2": "It scans AI-generated text structures to simplify vocabulary and adjust syntax, helping the text read more naturally and sound human-written."
+      },
+      "seoTitle": "AI Tools - AI Logo Maker, Resume Builder & Text Humanizer | ToolWala AI",
+      "seoDescription": "Supercharge your career and content creation with local AI logo generators, resume builders, and voice creators."
+    },
+    "document-tools": {
+      "desc": "Invoice editors, cover letters, and standard business utilities.",
+      "intro": "Prepare templates, client invoices, and job applications with standardized document layout formats.",
+      "faq": {
+        "q1": "Can I download invoices as professional PDFs?",
+        "a1": "Yes. Invoices compile instantly into standard print-ready PDF formats containing custom line items and tax templates."
+      },
+      "seoTitle": "Document Tools - Invoice & Resume Builders | ToolWala AI",
+      "seoDescription": "Create professional business invoices, custom cover letters, and ATS resumes online in seconds."
+    },
+    "utility-tools": {
+      "desc": "Secure data extraction engines, converters, and other helpers.",
+      "intro": "Process OCR document scans and utility scripts instantly with secure client-side code.",
+      "faq": {
+        "q1": "How does secure local OCR scan my files?",
+        "a1": "It runs Tesseract.js WASM engine entirely inside your local sandbox, keeping scanned image details protected."
+      },
+      "seoTitle": "Utility Tools - Online OCR & Secure Scanners | ToolWala AI",
+      "seoDescription": "Extract metadata and scan image files without sending anything to remote servers."
+    },
+    "resume-career": {
+      "desc": "ATS Resume constructors, cover letters, and application creators.",
+      "intro": "Create ATS-compliant layouts and custom cover letters to stand out in hiring pipelines.",
+      "faq": {
+        "q1": "Is my personal career details stored?",
+        "a1": "Never. All fields typed are stored in local sandbox memory, ensuring absolute security and privacy."
+      },
+      "seoTitle": "Resume & Career - CV Builder & Cover Letter Creator | ToolWala AI",
+      "seoDescription": "Construct clean, ATS-scorable resumes and write custom job cover letters easily and for free."
+    },
+    "seo-tools": {
+      "desc": "Content optimizer helpers, OCR text parsers, and tag scanners.",
+      "intro": "Optimize tags and humanize blog copy for search engines and readabilities.",
+      "faq": {
+        "q1": "Can I rewrite AI copy for SEO optimization?",
+        "a1": "Yes, the AI Text Humanizer parses sentence flows to increase readability score and avoid generic phrasing patterns."
+      },
+      "seoTitle": "SEO Tools - AI Text Humanizer & Text Scanners | ToolWala AI",
+      "seoDescription": "Improve search rankings by humanizing AI structures and scanning document texts."
+    },
+    "developer-tools": {
+      "desc": "QR Code generators, script utilities, and helper tools.",
+      "intro": "Create vector QR codes and parse screenshots directly on client-side threads.",
+      "faq": {
+        "q1": "Do generated QR codes have expiration caps?",
+        "a1": "No. The static vector files generated do not expire and will remain permanently active."
+      },
+      "seoTitle": "Developer Tools - QR Code Generator & local OCR | ToolWala AI",
+      "seoDescription": "Create static vector QR codes and translate images to editable code structures."
+    },
+    "social-media-tools": {
+      "desc": "Platform caption makers, AI voices, and background remover clips.",
+      "intro": "Create engaging social caption drafts and voice files for reels/shorts creators.",
+      "faq": {
+        "q1": "Can I use generated AI voices in videos?",
+        "a1": "Yes, files generated are exported as high-fidelity audio streams suitable for video narration and editing."
+      },
+      "seoTitle": "Social Media Tools - AI Voice Reader & Captions | ToolWala AI",
+      "seoDescription": "Design premium reel/shorts voice narrations and platform-optimized caption lines."
+    },
+    "calculator-tools": {
+      "desc": "SIP, EMI, GST, Age, YouTube Money, and AdSense revenue calculators.",
+      "intro": "Fast, accurate, and secure client-side calculators for all your daily needs.",
+      "faq": {
+        "q1": "Are these calculators accurate?",
+        "a1": "Yes, our calculators use precise mathematical functions and run entirely in your browser for instant and accurate results."
+      },
+      "seoTitle": "Online Calculators - Age, SIP, EMI & More | ToolWala AI",
+      "seoDescription": "Free online calculators for age, finance, and various other metrics. Fast and fully private client-side processing."
+    },
+    "Image Editing": "Image Editing",
+    "Productivity": "Productivity",
+    "SEO": "SEO",
+    "Tutorials": "Tutorials",
+    "Online Utilities": "Online Utilities"
   },
   "gov_hub": {
     "badge": "INDIAN PORTAL COMPLIANCE",
@@ -137,7 +297,12 @@
     "recommended_utilities": "Recommended Category Utilities",
     "try_tool": "Try Tool",
     "badge_client_side": "100% Client-Side & Secure",
-    "related_tools_desc": "Discover more professional document operations tools."
+    "related_tools_desc": "Discover more professional document operations tools.",
+    "search_placeholder_filter": "Filter by name, tag or category...",
+    "found_count": "Found {count} tools for \"{query}\"",
+    "in_category": " in {category}",
+    "no_tools_sub": "Try broadening your search or exploring a different category.",
+    "clear_filters": "Clear Filters"
   },
   "form": {
     "copied_success": "Copied generation to clipboard!",
@@ -176,11 +341,28 @@
     "newsletter_failed": "Subscription failed. Please try again.",
     "newsletter_error": "Something went wrong.",
     "trending_badge": "Trending",
+    "badge": "LATEST INSIGHTS",
+    "title": "From the ToolWala Blog",
+    "subtitle": "Explore advanced concepts in browser-native processing, data security, and productivity hacks.",
+    "read_all": "Read All Articles",
     "minutes_read": "{count} min read",
     "previous": "Previous",
     "next": "Next",
     "related_insights": "Related Insights",
-    "try_tools": "Try These Tools"
+    "try_tools": "Try These Tools",
+    "insights_badge": "ToolWala Insights",
+    "insights_title": "Tech, AI & Design",
+    "insights_subtitle": "Without the Servers",
+    "insights_desc": "Explore advanced concepts in browser-native processing, data confidentiality, and digital efficiency.",
+    "seo_title": "ToolWala AI Blog – Modern AI, PDF & Design Insights",
+    "seo_desc": "Stay ahead with guides on local browser OCR, image compression, ATS resumes, and high-performance developer utilities on ToolWala AI.",
+    "search_placeholder": "Search articles & tags...",
+    "featured_badge": "Featured",
+    "writer_role": "Writer",
+    "read_post": "Read Post",
+    "no_articles_found": "No articles found matching criteria.",
+    "trending_topics": "Trending Topics",
+    "try_featured_tools": "Try Featured Tools"
   },
   "blogs": {
     "why-local-ocr-is-the-future": {
@@ -226,5 +408,195 @@
     "feat_download_desc": "Download results as raw text (.txt) files or compile them directly into editable Microsoft Word (.doc) layouts.",
     "feat_privacy_title": "Zero Data Cloud Exposure",
     "feat_privacy_desc": "Parsed, rendered, and extracted locally using secure local workers. Complete privacy for sensitive invoices."
+  },
+  "faq": {
+    "support_center": "SUPPORT CENTER",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to common questions regarding local processing, file security, and specifications.",
+    "q1": "How does ToolWala AI process files without uploading them?",
+    "a1": "ToolWala AI uses modern browser-native technologies like WebAssembly (WASM), WebGL, and JavaScript canvas operations. When you select an image or a PDF, the file is read directly from your local disk into your browser's private sandbox memory. The computation (like cropping, compressing, or background removal) runs on your local CPU/GPU threads, meaning your files never leave your computer.",
+    "q2": "Can I use these tools offline?",
+    "a2": "Yes! Once you have loaded a tool page (like the Background Remover or Aadhaar Resizer) while online, the assets and models are cached by your browser. You can disconnect from the internet and continue using the core processing features offline, as no server communication is required.",
+    "q3": "Is ToolWala AI completely free to use?",
+    "a3": "ToolWala AI is currently in free beta. All tools, generators, and compressors are available at zero cost, without registration, limits, or subscription traps.",
+    "q4": "Are my documents secure and compliant with data laws?",
+    "a4": "Because we process all files locally in your browser memory and do not upload them to external cloud servers, we are inherently GDPR compliant and follow the highest standards of data safety. Your private documents (resumes, signatures, Aadhaar photos, invoices) are completely confidential.",
+    "q5": "How do I standardise my passport/Aadhaar photos under target sizes?",
+    "a5": "Simply upload your photo into the Resizer. Our algorithm locates the face, aligns it to standard ID crop positions, and lets you select official templates. When downloading, you can choose to compress the output dynamically under 20KB, 50KB, or 100KB limits."
+  },
+  "testimonials": {
+    "badge": "USER REVIEWS",
+    "title": "Loved by 50,000+ Professionals",
+    "subtitle": "See why freelancers, developers, and daily internet users trust ToolWala AI to speed up their everyday workflows.",
+    "quote1": "Aadhaar Resizer is an absolute lifesaver. I was trying to upload my photo to the official portal for hours, and ToolWala formatted it correctly in 5 seconds. The best part is it runs offline!",
+    "author1": "Rahul Verma",
+    "role1": "Government Exam Aspirant",
+    "location1": "New Delhi",
+    "quote2": "As a product manager, I deal with PDFs and sensitive customer documents daily. Knowing that ToolWala processes everything client-side without server uploads gives me total peace of mind.",
+    "author2": "Priya Sharma",
+    "role2": "Senior Product Manager",
+    "location2": "Bengaluru",
+    "quote3": "The Background Remover is faster than half of the paid utilities I used to subscribe to. The edge sharpening convolution details are incredibly sharp. Highly recommend it!",
+    "author3": "Devendra Patil",
+    "role3": "Freelance UI Designer",
+    "location3": "Mumbai",
+    "quote4": "I use the AI Text Humanizer and PDF OCR engines daily. ToolWala AI has completely replaced my set of browser bookmarklets. Simply top-tier engineering.",
+    "author4": "Ananya Iyer",
+    "role4": "Content Strategist",
+    "location4": "Chennai",
+    "verified": "Verified"
+  },
+  "about": {
+    "title": "About ToolWala AI",
+    "subtitle": "Democratizing artificial intelligence through simple, powerful, and secure browser utilities.",
+    "vision_title": "The Vision",
+    "vision_desc": "ToolWala AI was born from a frustration with clunky software and expensive subscriptions for simple daily tasks. We envisioned a world where premium AI tools are accessible instantly, without barriers.",
+    "privacy_title": "Privacy Guarantee",
+    "privacy_desc": "We process as much as possible directly in your browser. Your data is your own. We never train our models on your files, and we never store your personal content on our servers.",
+    "speed_title": "Built for Speed",
+    "speed_desc": "Our platform is optimized for performance. By leveraging WebAssembly and Edge AI, we deliver results in milliseconds, not minutes.",
+    "explore_btn": "Explore our tools",
+    "stats_title": "Users Empowered Monthly"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Have questions or feedback? Our team is here to help you scale your productivity.",
+    "channels_title": "Contact Channels",
+    "channels_desc": "We aim to respond to all inquiries within 24-48 business hours. For urgent technical support, please use the support email below.",
+    "general_support": "General Support",
+    "general_support_desc": "For help with tools and general questions.",
+    "business_inquiries": "Business Inquiries",
+    "business_inquiries_desc": "For collaborations and API access.",
+    "legal_privacy": "Legal & Privacy",
+    "legal_privacy_desc": "For data requests and legal matters.",
+    "response_time": "Response Time",
+    "availability": "Availability",
+    "avail_days": "Mon - Fri",
+    "form_received_title": "Message Received",
+    "form_received_desc": "We've successfully received your transmission. Our team will analyze and respond within 24 standard business hours.",
+    "form_send_another": "Send Another Transmission",
+    "form_first_name": "First Name",
+    "form_last_name": "Last Name",
+    "form_email": "Email Address",
+    "form_message": "Message Content",
+    "form_message_placeholder": "How can we help you achieve your AI goals?",
+    "form_btn_send": "Send Message",
+    "form_btn_sending": "Transmitting...",
+    "form_secure_protocol": "Secure Protocol",
+    "form_human_support": "Human Support",
+    "form_error": "Transmission Failure. Check connection and retry.",
+    "form_toast_sending": "Transmitting your message...",
+    "form_toast_success": "Message sent successfully!",
+    "form_toast_error": "Failed to send message"
+  },
+  "pricing": {
+    "beta_badge": "Beta Early Access Phase",
+    "title_1": "AI for Everyone.",
+    "title_2": "Currently 100% Free.",
+    "subtitle": "We're building the future of utility. During our beta phase, every tool is open and free to help us refine the experience.",
+    "free_title": "Beta Explorer",
+    "free_sub": "Help us shape the future",
+    "free_period": "/ forever beta",
+    "free_btn": "Start Creating Now",
+    "pro_title": "Pro Creator",
+    "pro_sub": "Advanced features for power users",
+    "pro_period": "/ monthly",
+    "pro_btn": "Waitlist Opening Soon",
+    "coming_soon": "Coming Soon",
+    "features_title": "What's included in Free Beta?",
+    "free_features": {
+      "bg_removal": "Unlimited AI Background Removal",
+      "humanizer": "Full AI Text Humanizer Access",
+      "logo": "Logo Design Studio (High Res)",
+      "support": "Beta Priority Support",
+      "releases": "Early access to new releases"
+    },
+    "pro_features": {
+      "bulk": "Bulk Image Processing",
+      "api": "API Access for Developers",
+      "custom": "Custom AI Model Training",
+      "team": "Team Collaboration Tools",
+      "commercial": "Commercial Usage Rights"
+    },
+    "beta_features_list": {
+      "bg": "AI BG Removal",
+      "humanizer": "Text Humanizer",
+      "logo": "Logo Studio",
+      "voice": "Voice Lab",
+      "qr": "QR Art",
+      "upscaler": "AI Upscaler",
+      "interview": "AI Interview",
+      "chatbot": "AI Chatbot",
+      "builder": "Website Builder",
+      "clone": "Voice Clone"
+    }
+  },
+  "privacy": {
+    "seo_title": "Privacy Policy | ToolWala AI",
+    "seo_desc": "Learn how ToolWala AI protects your privacy and handles your data with browser-first technology and secure processing.",
+    "title": "Privacy Policy",
+    "effective_date": "Effective Date: May 16, 2026",
+    "commitment_title": "Privacy Commitment",
+    "commitment_desc": "At ToolWala AI, privacy is at the core of our engineering. We believe your data belongs to you. Our platform is designed to provide high-performance AI utilities while maintaining the highest standards of data protection and transparency.",
+    "browser_first_title": "Browser-First Processing",
+    "browser_first_desc": "Most of our tools utilize WebAssembly to process data entirely on your local device. Your images, text, and files never leave your browser unless explicitly required for cloud-based AI generation.",
+    "collection_title": "Data Collection",
+    "collection_desc": "We do not require account creation for basic tool usage. We only collect minimal information when you interact with our contact forms or opt-in for our premium waitlist.",
+    "stateless_title": "Stateless Architecture",
+    "stateless_desc": "For tools that require our cloud AI models, data is processed in volatile memory and immediately purged upon completion. We do not store your original inputs or outputs.",
+    "no_training_title": "No Model Training",
+    "no_training_desc": "Your data is never used to train, retrain, or improve our AI models. We use enterprise-grade APIs that guarantee data isolation for all user sessions.",
+    "analytics_title": "Analytics and Tracking",
+    "analytics_desc": "We use privacy-centric analytics (like Google Analytics with IP anonymization) to understand site traffic and improve our tools. We do not track individual user behavior or share data with advertising networks.",
+    "cookies_title": "Cookie Usage",
+    "cookies_desc": "We use essential cookies to remember your tool preferences (like dark mode or language settings). These cookies are functional only and do not contain personal identifiers.",
+    "rights_title": "User Rights (GDPR & CCPA)",
+    "rights_desc": "Regardless of your location, you have the right to access, rectify, or delete any personal information we may hold. Since we store minimal data, most requests are handled instantly by clearing your browser's local storage.",
+    "inquiries_title": "Privacy Inquiries",
+    "inquiries_desc": "For any privacy-related questions, data deletion requests, or concerns about our processing methods, please contact our dedicated privacy team at:"
+  },
+  "terms": {
+    "seo_title": "Terms of Service | ToolWala AI",
+    "seo_desc": "Terms and conditions for using ToolWala AI professional services, outlining usage rules and intellectual property rights.",
+    "title": "Terms of Service",
+    "last_updated": "Last updated: May 16, 2026",
+    "agreement_title": "User Agreement",
+    "agreement_desc": "By accessing or using ToolWala AI, you signify your agreement to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services. We provide a platform for AI-powered productivity, and these rules ensure it remains safe and effective for everyone.",
+    "license_title": "Usage License",
+    "license_desc": "We grant you a personal, non-exclusive, non-transferable license to use our tools. Commercial use is permitted for outputs generated (e.g., resumes, logos), but redistribution of our underlying software or API access is strictly prohibited.",
+    "conduct_title": "Prohibited Conduct",
+    "conduct_desc": "You agree not to use our tools for any illegal purposes, including the generation of harmful, deceptive, or infringing content. Automated scraping or bot-driven requests to our platform are strictly forbidden.",
+    "ownership_title": "Content Ownership",
+    "ownership_desc": "You retain 100% of the intellectual property rights to the content you generate using our tools. ToolWala AI does not claim ownership or license over your original creations or processed data.",
+    "modifications_title": "Service Modifications",
+    "modifications_desc": "As a platform in continuous development, we reserve the right to modify, suspend, or discontinue any feature or tool without prior notice. We strive for stability but do not guarantee 100% uptime.",
+    "accuracy_title": "AI Output Accuracy",
+    "accuracy_desc": "ToolWala AI leverages advanced artificial intelligence. While we aim for high accuracy, AI models can produce incorrect or biased information. Users are responsible for verifying all outputs before use in professional or legal contexts.",
+    "liability_title": "Limitation of Liability",
+    "liability_desc": "ToolWala AI and its creators shall not be liable for any indirect, incidental, or consequential damages resulting from the use or inability to use our tools, including loss of data or business interruption.",
+    "beta_title": "Beta Features",
+    "beta_desc": "Some tools are marked as 'Beta'. These are provided for testing purposes and may contain bugs. Use of beta features is at the user's own risk.",
+    "law_title": "Governing Law",
+    "law_desc": "These terms are governed by and construed in accordance with international digital service standards. Any disputes shall be handled through arbitration before legal proceedings.",
+    "questions": "Questions about these terms? Contact us at {email}"
+  },
+  "disclaimer": {
+    "seo_title": "Disclaimer | ToolWala AI",
+    "seo_desc": "Legal disclaimer regarding AI accuracy, tool usage, and service limitations of the ToolWala AI platform.",
+    "title": "Disclaimer",
+    "subtitle": "Please read this legal notice carefully before using our tools.",
+    "notice_title": "AI Accuracy Notice",
+    "notice_desc": "ToolWala AI utilizes advanced artificial intelligence models to generate content and process data. While we strive for high precision, AI-generated outputs can occasionally be inaccurate, incomplete, or biased. Users are advised to exercise professional judgment and verify all critical outputs independently.",
+    "no_advice_title": "No Professional Advice",
+    "no_advice_desc": "The content generated by our tools (including legal-style text, resumes, or business logos) does not constitute professional, legal, or financial advice. We recommend consulting with qualified professionals for important decisions.",
+    "risk_title": "Usage at Own Risk",
+    "risk_desc": "Use of ToolWala AI is at your sole risk. We are not responsible for any direct or indirect damages, data loss, or business interruptions arising from the use or reliance on our platform's outputs.",
+    "uptime_title": "Service Uptime",
+    "uptime_desc": "We provide our services on an 'as-is' and 'as-available' basis. We do not guarantee uninterrupted access and may perform maintenance or updates that cause temporary service suspensions.",
+    "third_party_title": "Third-Party Content",
+    "third_party_desc": "Our tools may occasionally integrate with or link to third-party APIs and services. We do not control or endorse the content or privacy practices of these external providers.",
+    "transparency_title": "Transparency Statement",
+    "transparency_desc": "As the AI landscape evolves, so does ToolWala AI. We are committed to transparency and will update this disclaimer as our technology matures. If you find any significant inaccuracies in our tool outputs, please help us improve by reporting them to our technical team.",
+    "last_updated": "Last updated: May 16, 2026 • © ToolWala AI"
   }
 }

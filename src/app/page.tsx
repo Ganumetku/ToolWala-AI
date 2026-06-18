@@ -143,8 +143,6 @@ export default function Home() {
       .slice(0, 6);
   }, [categoryCounts]);
 
-  if (!mounted) return <div className="min-h-screen bg-[#030712]" />;
-
   return (
     <div className="flex flex-col min-h-screen bg-[#030712] text-white relative overflow-hidden">
 
@@ -252,7 +250,7 @@ export default function Home() {
           className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 cursor-pointer group"
           onClick={scrollToTools}
         >
-          <span className="text-[9px] font-black uppercase tracking-[0.3em] text-gray-600 group-hover:text-blue-500 transition-colors">Start Discovering</span>
+          <span className="text-[9px] font-black uppercase tracking-[0.3em] text-gray-600 group-hover:text-blue-500 transition-colors">{t('home.start_discovering', 'Start Discovering')}</span>
           <div className="w-5 h-8 border-2 border-white/10 rounded-full flex justify-center p-1">
             <motion.div
               animate={{ y: [0, 8, 0] }}
@@ -269,41 +267,41 @@ export default function Home() {
 
           {/* Animated Counters Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 max-w-6xl mx-auto">
-            <StatCard icon={<Users />} value="1k+" label={t('home.stats.users', 'Total Users')} color="purple" />
-            <StatCard icon={<Zap />} value="70+" label={t('home.stats.tools', 'Tools Generated')} color="blue" />
-            <StatCard icon={<FileText />} value="20+" label={t('home.stats.pdfs', 'PDFs Processed')} color="amber" />
-            <StatCard icon={<Sparkles />} value="15+" label={t('home.stats.images', 'Images Edited')} color="emerald" />
+            <StatCard icon={<Users />} value={t('home.stats.users_val', '1k+')} label={t('home.stats.users', 'Total Users')} color="purple" />
+            <StatCard icon={<Zap />} value={t('home.stats.tools_val', '70+')} label={t('home.stats.tools', 'Tools Generated')} color="blue" />
+            <StatCard icon={<FileText />} value={t('home.stats.pdfs_val', '20+')} label={t('home.stats.pdfs', 'PDFs Processed')} color="amber" />
+            <StatCard icon={<Sparkles />} value={t('home.stats.images_val', '15+')} label={t('home.stats.images', 'Images Edited')} color="emerald" />
           </div>
 
           {/* Premium Trust Badges */}
           <div className="mt-20 pt-16 border-t border-white/5 max-w-6xl mx-auto">
             <div className="text-center mb-10">
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Security & Experience Standards</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">{t('home.standards_title', 'Security & Experience Standards')}</span>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
               <div className="premium-card p-5 hover:border-blue-500/20 text-center flex flex-col items-center justify-center">
                 <Shield className="w-6 h-6 text-blue-500 mb-3" />
-                <span className="text-[10px] font-black uppercase tracking-wider text-gray-300">100% Browser Based</span>
+                <span className="text-[10px] font-black uppercase tracking-wider text-gray-300">{t('home.standards.browser_based', '100% Browser Based')}</span>
               </div>
               <div className="premium-card p-5 hover:border-purple-500/20 text-center flex flex-col items-center justify-center">
                 <Lock className="w-6 h-6 text-purple-500 mb-3" />
-                <span className="text-[10px] font-black uppercase tracking-wider text-gray-300">No Upload Required</span>
+                <span className="text-[10px] font-black uppercase tracking-wider text-gray-300">{t('home.standards.no_upload', 'No Upload Required')}</span>
               </div>
               <div className="premium-card p-5 hover:border-amber-500/20 text-center flex flex-col items-center justify-center">
                 <Zap className="w-6 h-6 text-amber-500 mb-3" />
-                <span className="text-[10px] font-black uppercase tracking-wider text-gray-300">Fast Processing</span>
+                <span className="text-[10px] font-black uppercase tracking-wider text-gray-300">{t('home.standards.fast_processing', 'Fast Processing')}</span>
               </div>
               <div className="premium-card p-5 hover:border-emerald-500/20 text-center flex flex-col items-center justify-center">
                 <FolderLock className="w-6 h-6 text-emerald-500 mb-3" />
-                <span className="text-[10px] font-black uppercase tracking-wider text-gray-300">Privacy Focused</span>
+                <span className="text-[10px] font-black uppercase tracking-wider text-gray-300">{t('home.standards.privacy_focused', 'Privacy Focused')}</span>
               </div>
               <div className="premium-card p-5 hover:border-rose-500/20 text-center flex flex-col items-center justify-center">
                 <Award className="w-6 h-6 text-rose-500 mb-3" />
-                <span className="text-[10px] font-black uppercase tracking-wider text-gray-300">Free Tools</span>
+                <span className="text-[10px] font-black uppercase tracking-wider text-gray-300">{t('home.standards.free_tools', 'Free Tools')}</span>
               </div>
               <div className="premium-card p-5 hover:border-sky-500/20 text-center flex flex-col items-center justify-center">
                 <CheckCircle2 className="w-6 h-6 text-sky-500 mb-3" />
-                <span className="text-[10px] font-black uppercase tracking-wider text-gray-300">Secure Utilities</span>
+                <span className="text-[10px] font-black uppercase tracking-wider text-gray-300">{t('home.standards.secure_utilities', 'Secure Utilities')}</span>
               </div>
             </div>
           </div>
@@ -319,7 +317,7 @@ export default function Home() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-[10px] font-black uppercase tracking-widest border border-purple-500/20 mb-4">
               <Grid className="w-3.5 h-3.5" />
-              Categories Deck
+              {t('home.categories_deck', 'Categories Deck')}
             </div>
             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">{t('home.browse_categories', 'Browse by Category')}</h2>
             <p className="text-gray-500 mt-3 font-medium">{t('home.browse_categories_sub', 'Explore local directories containing compliant browser utilities.')}</p>
@@ -355,7 +353,7 @@ export default function Home() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20 mb-4 animate-pulse-slow">
               <TrendingUp className="w-3.5 h-3.5" />
-              HOT & TRENDING
+              {t('home.hot_trending', 'HOT & TRENDING')}
             </div>
             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
               {t('home.trending_title', 'Trending Utilities')}
@@ -382,7 +380,7 @@ export default function Home() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 text-amber-400 text-[10px] font-black uppercase tracking-widest border border-amber-500/20 mb-4">
               <Clock className="w-3.5 h-3.5" />
-              LATEST RELEASES
+              {t('home.latest_releases', 'LATEST RELEASES')}
             </div>
             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
               {t('home.recent_title', 'Recently Added Tools')}
@@ -467,7 +465,7 @@ export default function Home() {
                     </div>
                   </motion.div>
                   <div className="space-y-4">
-                    <h3 className="text-3xl font-black text-white uppercase tracking-tighter">AI Processing <br /> Engine 2.0</h3>
+                    <h3 className="text-3xl font-black text-white uppercase tracking-tighter">{t('home.engine_title_1', 'AI Processing')} <br /> {t('home.engine_title_2', 'Engine 2.0')}</h3>
                     <div className="flex justify-center gap-3">
                       {[...Array(3)].map((_, i) => (
                         <motion.div
@@ -500,8 +498,8 @@ export default function Home() {
 
           <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6 mb-16 border-b border-white/5 pb-10">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight">Tools Directory</h2>
-              <p className="text-gray-500 mt-2 font-medium font-sans">Instant-run local utilities. Search by keywords or filter by tags.</p>
+              <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight">{t('home.directory_title', 'Tools Directory')}</h2>
+              <p className="text-gray-500 mt-2 font-medium font-sans">{t('home.directory_subtitle', 'Instant-run local utilities. Search by keywords or filter by tags.')}</p>
             </div>
 
             {/* Dashboard Tabs Toggle */}
@@ -592,7 +590,7 @@ export default function Home() {
                 </div>
 
                 {/* Recently Used Tray */}
-                {recentTools.length > 0 && (
+                {mounted && recentTools.length > 0 && (
                   <div className="glass p-7 rounded-[2rem] border border-white/5 relative overflow-hidden bg-white/[0.01] shadow-2xl">
                     <div className="absolute inset-0 bg-blue-600/[0.02] blur-3xl pointer-events-none" />
                     <div className="flex items-center gap-2.5 mb-6 relative z-10">

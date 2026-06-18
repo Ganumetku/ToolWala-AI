@@ -202,7 +202,19 @@ export default async function RootLayout({
   const { getEnabledLocales } = await import('@/lib/languages');
   const enabledLocales = getEnabledLocales();
   if (locale !== 'en' && !enabledLocales.includes(locale)) {
-    locale = 'en';
+    let originalPathname = "/";
+    try {
+      const headerList = await headers();
+      originalPathname = headerList.get('x-original-pathname') || '/';
+    } catch (e) {
+      // fallback
+    }
+    const parts = originalPathname.split('/');
+    const cleanPath = '/' + parts.slice(2).join('/');
+    const redirectUrl = cleanPath.endsWith('/') ? cleanPath : `${cleanPath}/`;
+    
+    const { permanentRedirect } = await import('next/navigation');
+    permanentRedirect(redirectUrl);
   }
 
   return (

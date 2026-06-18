@@ -6,6 +6,7 @@ import { fetchPublicTools } from '@/lib/tools';
 import ToolCard from '@/components/ToolCard';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X } from 'lucide-react';
+import { useTranslation } from '@/components/I18nContext';
 
 interface ToolsDirectoryProps {
   initialSearchQuery?: string;
@@ -20,6 +21,7 @@ export default function ToolsDirectory({
   onSearchChange,
   hideSearch = false 
 }: ToolsDirectoryProps) {
+  const { t } = useTranslation();
   const [internalSearchQuery, setInternalSearchQuery] = useState(initialSearchQuery);
   const [activeCategory, setActiveCategory] = useState<ToolCategory>("All");
   const [publicTools, setPublicTools] = useState<Tool[]>(toolsData);
@@ -70,7 +72,7 @@ export default function ToolsDirectory({
               value={searchQuery}
               onChange={(e) => handleSearchChange(e.target.value)}
               className="block w-full rounded-2xl border border-white/5 bg-white/[0.03] py-5 pl-14 pr-12 text-white placeholder:text-gray-600 focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/10 sm:text-lg font-bold outline-none transition-all shadow-2xl backdrop-blur-md"
-              placeholder="Filter by name, tag or category..."
+              placeholder={t('tools.search_placeholder_filter', 'Filter by name, tag or category...')}
             />
             {searchQuery && (
               <button 
@@ -96,7 +98,7 @@ export default function ToolsDirectory({
                 : 'bg-white/5 text-gray-500 border border-white/10 hover:border-white/20 hover:text-white'
             }`}
           >
-            {category}
+            {t('categories.' + category, category)}
           </button>
         ))}
       </div>
@@ -108,9 +110,9 @@ export default function ToolsDirectory({
           animate={{ opacity: 1, y: 0 }}
           className="mb-12 text-center"
         >
-          <p className="text-gray-500 font-medium">
-            Found <span className="text-white font-black">{filteredTools.length}</span> tools for <span className="text-blue-500 font-black">"{searchQuery}"</span>
-            {activeCategory !== "All" && <span className="text-gray-500 font-medium"> in <span className="text-white font-black">{activeCategory}</span></span>}
+          <p className="text-gray-500 font-medium font-sans">
+            {t('tools.found_count', 'Found {count} tools for "{query}"').replace('{count}', String(filteredTools.length)).replace('{query}', searchQuery)}
+            {activeCategory !== "All" && <span className="text-gray-500 font-medium"> {t('tools.in_category', ' in {category}').replace('{category}', t('categories.' + activeCategory, activeCategory))}</span>}
           </p>
         </motion.div>
       )}
@@ -141,13 +143,13 @@ export default function ToolsDirectory({
           <div className="bg-white/5 w-24 h-24 rounded-[2rem] flex items-center justify-center mx-auto mb-8 border border-white/5 shadow-inner">
             <Search className="w-12 h-12 text-gray-700" />
           </div>
-          <h3 className="text-3xl font-black text-white mb-3 tracking-tighter">No tools found</h3>
-          <p className="text-gray-500 max-w-sm mx-auto font-medium">Try broadening your search or exploring a different category.</p>
+          <h3 className="text-3xl font-black text-white mb-3 tracking-tighter">{t('home.no_tools_found', 'No tools found')}</h3>
+          <p className="text-gray-500 max-w-sm mx-auto font-medium">{t('tools.no_tools_sub', 'Try broadening your search or exploring a different category.')}</p>
           <button 
             onClick={() => { handleSearchChange(""); setActiveCategory("All"); }}
             className="mt-10 px-8 py-4 rounded-2xl bg-blue-600 text-white font-black uppercase tracking-widest text-sm hover:bg-blue-500 transition-all active:scale-95 shadow-2xl"
           >
-            Clear Filters
+            {t('tools.clear_filters', 'Clear Filters')}
           </button>
         </div>
       )}

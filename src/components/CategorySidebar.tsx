@@ -3,17 +3,20 @@
 import Link from 'next/link';
 import { categoriesData } from '@/data/categories';
 import { Grid, Sparkles } from 'lucide-react';
+import { useTranslation } from '@/components/I18nContext';
 
 interface CategorySidebarProps {
   activeSlug: string;
 }
 
 export default function CategorySidebar({ activeSlug }: CategorySidebarProps) {
+  const { t, localizeHref } = useTranslation();
+
   return (
     <aside className="glass border border-white/5 bg-white/[0.01] p-6.5 rounded-[2rem] space-y-6 sticky top-28 hidden lg:block w-72">
       <div className="flex items-center gap-2 border-b border-white/5 pb-4">
         <Grid className="w-4.5 h-4.5 text-blue-500" />
-        <h3 className="text-xs font-black uppercase tracking-widest text-white">Categories</h3>
+        <h3 className="text-xs font-black uppercase tracking-widest text-white">{t('categories.sidebar_title', 'Categories')}</h3>
       </div>
 
       <nav className="space-y-1.5">
@@ -22,7 +25,7 @@ export default function CategorySidebar({ activeSlug }: CategorySidebarProps) {
           return (
             <Link
               key={cat.id}
-              href={`/categories/${cat.slug}`}
+              href={localizeHref(`/categories/${cat.slug}`)}
               className={`flex items-center justify-between px-4.5 py-3 rounded-xl text-xs font-black uppercase tracking-wider transition-all group ${
                 isActive 
                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25' 
@@ -31,7 +34,7 @@ export default function CategorySidebar({ activeSlug }: CategorySidebarProps) {
             >
               <span className="flex items-center gap-2.5">
                 <span className={`text-base transition-transform group-hover:scale-110 duration-300`}>{cat.icon}</span>
-                <span>{cat.title}</span>
+                <span>{t('categories.' + cat.title, cat.title)}</span>
               </span>
               {isActive && <Sparkles className="w-3.5 h-3.5 text-white" />}
             </Link>
@@ -41,10 +44,10 @@ export default function CategorySidebar({ activeSlug }: CategorySidebarProps) {
       
       <div className="border-t border-white/5 pt-4 text-center">
         <Link 
-          href="/categories"
+          href={localizeHref('/categories')}
           className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-blue-500 hover:text-blue-400"
         >
-          View All Folders →
+          {t('categories.view_all_folders', 'View All Folders')} →
         </Link>
       </div>
     </aside>

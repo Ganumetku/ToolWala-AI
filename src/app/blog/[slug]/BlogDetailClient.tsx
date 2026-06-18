@@ -131,7 +131,7 @@ export default function BlogDetailClient({
                   <div>
                     <span className="text-white block">{blog.author.name}</span>
                     <span className="text-[9px] text-gray-500 font-bold block mt-0.5">
-                      {blog.author.role || "Writer"}
+                      {blog.author.role || t('blog.writer_role', 'Writer')}
                     </span>
                   </div>
                 </div>

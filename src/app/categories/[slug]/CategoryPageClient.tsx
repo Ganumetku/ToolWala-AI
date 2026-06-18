@@ -20,7 +20,7 @@ interface CategoryPageClientProps {
 }
 
 export default function CategoryPageClient({ slug, category }: CategoryPageClientProps) {
-  const { t, locale } = useTranslation();
+  const { t, locale, localizeHref } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<'all' | 'popular' | 'trending'>('all');
   const [publicTools, setPublicTools] = useState<Tool[]>(toolsData);
@@ -80,7 +80,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
           <CategoryHeader 
             title={category.title}
             icon={category.icon}
-            description={category.intro}
+            description={t('categories.' + category.id + '.intro', category.intro)}
           />
 
           {/* Grid Layout: Left Sidebar Navigation & Right Content Dashboard */}
@@ -197,7 +197,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
                             className="w-full flex items-center justify-between p-5.5 text-left focus:outline-none cursor-pointer"
                           >
                             <span className="text-xs sm:text-sm font-black text-white hover:text-blue-400 transition-colors">
-                              {faq.question}
+                              {t('categories.' + category.id + '.faq.q' + (index + 1), faq.question)}
                             </span>
                             <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform duration-300 flex-shrink-0 ml-4 ${isExpanded ? 'rotate-180 text-blue-400' : ''}`} />
                           </button>
@@ -211,7 +211,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
                                 transition={{ duration: 0.2, ease: "easeInOut" }}
                               >
                                 <div className="px-5.5 pb-5.5 pt-0.5 border-t border-white/5 text-xs text-gray-400 leading-relaxed font-semibold font-sans">
-                                  {faq.answer}
+                                  {t('categories.' + category.id + '.faq.a' + (index + 1), faq.answer)}
                                 </div>
                               </motion.div>
                             )}
@@ -236,12 +236,12 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
                     .map((cat) => (
                       <Link
                         key={cat.id}
-                        href={`/categories/${cat.slug}/`}
+                        href={localizeHref(`/categories/${cat.slug}`)}
                         className="p-5 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 transition-all group flex items-center justify-between"
                       >
                         <div className="flex items-center gap-3">
                           <span className="text-xl">{cat.icon}</span>
-                          <span className="text-xs font-black text-gray-300 group-hover:text-white uppercase truncate">{cat.title}</span>
+                          <span className="text-xs font-black text-gray-300 group-hover:text-white uppercase truncate">{t('categories.' + cat.title, cat.title)}</span>
                         </div>
                         <ArrowRight className="w-3.5 h-3.5 text-gray-600 group-hover:text-blue-500 transition-colors shrink-0" />
                       </Link>

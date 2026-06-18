@@ -9,8 +9,10 @@ import { fetchPublicTools } from '@/lib/tools';
 import CategoryCard from '@/components/CategoryCard';
 import CategorySearch from '@/components/CategorySearch';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
+import { useTranslation } from '@/components/I18nContext';
 
 export default function CategoriesIndexClient() {
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
   const [mounted, setMounted] = useState(false);
   const [mergedTools, setMergedTools] = useState<Tool[]>(toolsData);
@@ -60,16 +62,16 @@ export default function CategoriesIndexClient() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-xs font-black uppercase tracking-widest border border-blue-500/20 mb-6">
               <Grid className="w-3.5 h-3.5" />
-              Categorized Hub
+              {t('categories.hub_badge', 'Categorized Hub')}
             </div>
             <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6 uppercase leading-none">
-              Browse Categories <br />
+              {t('categories.title_main', 'Browse Categories')} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
-                ToolWala Directory
+                {t('categories.title_sub', 'ToolWala Directory')}
               </span>
             </h1>
             <p className="text-base sm:text-lg text-gray-400 leading-relaxed font-medium">
-              Explore our comprehensive, categorized directory of 25+ browser-local AI utilities. Secure, private, and sub-second fast.
+              {t('categories.subtitle', 'Explore our comprehensive, categorized directory of 25+ browser-local AI utilities. Secure, private, and sub-second fast.')}
             </p>
           </div>
 
@@ -78,7 +80,7 @@ export default function CategoriesIndexClient() {
             <CategorySearch 
               value={searchQuery}
               onChange={setSearchQuery}
-              placeholder="Search category folder titles..."
+              placeholder={t('categories.search_folders_placeholder', 'Search category folder titles...')}
             />
           </div>
 
@@ -113,13 +115,13 @@ export default function CategoriesIndexClient() {
                 <div className="bg-white/5 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/5">
                   <Layers className="w-10 h-10 text-gray-700" />
                 </div>
-                <h3 className="text-2xl font-black text-white mb-2 tracking-tight">No categories found</h3>
-                <p className="text-gray-500 max-w-xs mx-auto text-sm font-medium">No directories matched "{searchQuery}". Try broad keywords.</p>
+                <h3 className="text-2xl font-black text-white mb-2 tracking-tight">{t('categories.no_folders_found', 'No categories found')}</h3>
+                <p className="text-gray-500 max-w-xs mx-auto text-sm font-medium">{t('categories.no_folders_sub', 'No directories matched "{query}". Try broad keywords.').replace('{query}', searchQuery)}</p>
                 <button 
                   onClick={() => setSearchQuery("")}
                   className="mt-6 px-6 py-3 rounded-xl bg-blue-600 text-white font-black uppercase tracking-widest text-xs hover:bg-blue-500 transition-all active:scale-95 shadow-md"
                 >
-                  Clear search
+                  {t('categories.clear_search', 'Clear search')}
                 </button>
               </div>
             )}

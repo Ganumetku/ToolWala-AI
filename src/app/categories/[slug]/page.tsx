@@ -23,16 +23,37 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  let locale = "en";
+  try {
+    const { headers } = await import('next/headers');
+    const headerList = await headers();
+    locale = headerList.get('x-locale') || 'en';
+  } catch (e) {}
+
+  let seoTitle = category.seoTitle;
+  let seoDescription = category.seoDescription;
+
+  try {
+    const fs = await import('fs');
+    const path = await import('path');
+    const messagesPath = path.join(process.cwd(), 'messages', `${locale}.json`);
+    const messages = JSON.parse(fs.readFileSync(messagesPath, 'utf8'));
+    if (messages.categories?.[category.id]) {
+      seoTitle = messages.categories[category.id].seoTitle || seoTitle;
+      seoDescription = messages.categories[category.id].seoDescription || seoDescription;
+    }
+  } catch (e) {}
+
   return {
-    title: category.seoTitle,
-    description: category.seoDescription,
+    title: seoTitle,
+    description: seoDescription,
     keywords: category.keywords.join(', '),
     alternates: {
       canonical: `https://toolwala.co/categories/${category.slug}`,
     },
     openGraph: {
-      title: category.seoTitle,
-      description: category.seoDescription,
+      title: seoTitle,
+      description: seoDescription,
       url: `https://toolwala.co/categories/${category.slug}`,
       type: 'website',
     }

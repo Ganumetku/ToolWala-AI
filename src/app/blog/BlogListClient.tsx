@@ -10,6 +10,7 @@ import { BLOG_CATEGORIES, BLOG_PAGE_SIZE } from "@/types/blog";
 import { paginate, searchBlogs } from "@/lib/blog-utils";
 import BlogNewsletter from "@/components/blog/BlogNewsletter";
 import BlogPagination from "@/components/blog/BlogPagination";
+import { useTranslation } from "@/components/I18nContext";
 
 interface BlogListClientProps {
   initialBlogs: BlogPost[];
@@ -42,6 +43,7 @@ export default function BlogListClient({
   hideFeatured = false,
   title,
 }: BlogListClientProps) {
+  const { t, localizeHref } = useTranslation();
   const router = useRouter();
   const [search, setSearch] = useState(initialSearch);
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
@@ -115,7 +117,7 @@ export default function BlogListClient({
                   : "text-gray-400 hover:text-white hover:bg-white/5"
               }`}
             >
-              {cat}
+              {t('categories.' + cat, cat)}
             </button>
           ))}
         </div>
@@ -129,7 +131,7 @@ export default function BlogListClient({
               setSearch(e.target.value);
               setPage(1);
             }}
-            placeholder="Search articles & tags..."
+            placeholder={t('blog.search_placeholder', 'Search articles & tags...')}
             className="bg-transparent text-sm border-none outline-none text-white w-full placeholder-gray-600 font-semibold"
             aria-label="Search blog articles"
           />
@@ -148,7 +150,7 @@ export default function BlogListClient({
                 exit={{ opacity: 0, scale: 0.95 }}
                 className="group relative overflow-hidden rounded-[2.5rem] border border-white/5 bg-white/[0.01] hover:bg-white/[0.02] shadow-2xl transition-all duration-300 card-glow"
               >
-                <Link href={`/blog/${featuredPost.slug}`} className="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 sm:p-8">
+                <Link href={localizeHref(`/blog/${featuredPost.slug}`)} className="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 sm:p-8">
                   <div className="md:col-span-7 rounded-[2rem] overflow-hidden relative min-h-[260px] max-h-[350px]">
                     <img
                       src={featuredPost.thumbnail}
@@ -159,23 +161,23 @@ export default function BlogListClient({
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-80" />
                     <span className="absolute top-5 left-5 px-3 py-1 rounded-lg bg-blue-600 text-[10px] font-black uppercase tracking-widest text-white shadow-lg shadow-blue-500/30">
-                      Featured
+                      {t('blog.featured_badge', 'Featured')}
                     </span>
                   </div>
 
                   <div className="md:col-span-5 flex flex-col justify-between py-2">
                     <div className="space-y-4">
                       <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-blue-500">
-                        <span>{featuredPost.category}</span>
+                        <span>{t('categories.' + featuredPost.category, featuredPost.category)}</span>
                         <span className="text-gray-600">•</span>
-                        <span className="flex items-center gap-1 text-gray-500">
-                          <Clock className="w-3 h-3" /> {featuredPost.readingTime}
+                        <span className="flex items-center gap-1 text-gray-500 font-sans">
+                          <Clock className="w-3 h-3" /> {t('blog.minutes_read', '{count} min read').replace('{count}', featuredPost.readingTime.replace(/[^0-9]/g, ''))}
                         </span>
                       </div>
                       <h2 className="text-2xl sm:text-3xl font-black text-white leading-tight uppercase group-hover:text-blue-400 transition-colors">
                         {featuredPost.title}
                       </h2>
-                      <p className="text-gray-400 text-sm font-semibold leading-relaxed line-clamp-3">
+                      <p className="text-gray-400 text-sm font-semibold leading-relaxed line-clamp-3 font-sans">
                         {featuredPost.excerpt}
                       </p>
                     </div>
@@ -189,8 +191,8 @@ export default function BlogListClient({
                       )}
                       <div>
                         <span className="text-xs font-black text-white block">{featuredPost.author.name}</span>
-                        <span className="text-[10px] text-gray-500 font-bold block">
-                          {featuredPost.author.role || "Writer"}
+                        <span className="text-[10px] text-gray-500 font-bold block uppercase tracking-wider">
+                          {featuredPost.author.role || t('blog.writer_role', 'Writer')}
                         </span>
                       </div>
                     </div>
@@ -210,7 +212,7 @@ export default function BlogListClient({
                     key={blog.id}
                     className="group flex flex-col justify-between rounded-[2rem] border border-white/5 bg-white/[0.01] hover:bg-white/[0.02] shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden relative card-glow"
                   >
-                    <Link href={`/blog/${blog.slug}`} className="flex flex-col h-full">
+                    <Link href={localizeHref(`/blog/${blog.slug}`)} className="flex flex-col h-full">
                       <div className="relative aspect-video overflow-hidden">
                         <img
                           src={blog.thumbnail}
@@ -221,26 +223,26 @@ export default function BlogListClient({
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-gray-950/40 via-transparent to-transparent" />
                         <span className="absolute bottom-4 left-4 px-2.5 py-1 rounded bg-blue-500/10 border border-blue-500/20 text-[9px] font-black uppercase tracking-widest text-blue-400">
-                          {blog.category}
+                          {t('categories.' + blog.category, blog.category)}
                         </span>
                       </div>
 
                       <div className="p-6 flex flex-col flex-1 justify-between space-y-6">
                         <div className="space-y-3">
-                          <div className="flex items-center gap-3 text-[9px] font-black uppercase tracking-widest text-gray-500">
+                          <div className="flex items-center gap-3 text-[9px] font-black uppercase tracking-widest text-gray-500 font-sans">
                             <span className="flex items-center gap-1">
                               <Calendar className="w-3 h-3" />
                               {formatDate(blog.publishedAt || blog.createdAt)}
                             </span>
                             <span>•</span>
                             <span className="flex items-center gap-1">
-                              <Clock className="w-3 h-3" /> {blog.readingTime}
+                              <Clock className="w-3 h-3" /> {t('blog.minutes_read', '{count} min read').replace('{count}', blog.readingTime.replace(/[^0-9]/g, ''))}
                             </span>
                           </div>
                           <h3 className="text-lg font-black text-white uppercase tracking-tight leading-snug group-hover:text-blue-400 transition-colors line-clamp-2">
                             {blog.title}
                           </h3>
-                          <p className="text-gray-400 text-xs font-semibold leading-relaxed line-clamp-3">
+                          <p className="text-gray-400 text-xs font-semibold leading-relaxed line-clamp-3 font-sans">
                             {blog.excerpt}
                           </p>
                         </div>
@@ -248,7 +250,7 @@ export default function BlogListClient({
                         <div className="flex items-center justify-between pt-4 border-t border-white/5 mt-auto">
                           <span className="text-[10px] font-black text-white">{blog.author.name}</span>
                           <span className="text-[9px] font-black uppercase tracking-widest text-blue-500 group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                            Read Post <ArrowRight className="w-3 h-3" />
+                            {t('blog.read_post', 'Read Post')} <ArrowRight className="w-3 h-3" />
                           </span>
                         </div>
                       </div>
@@ -260,7 +262,7 @@ export default function BlogListClient({
               <div key="no-articles" className="text-center py-20 border border-white/5 rounded-3xl bg-white/[0.01]">
                 <Sparkles className="w-8 h-8 text-blue-500/50 mx-auto mb-4 animate-bounce" />
                 <h3 className="text-sm font-black uppercase tracking-widest text-gray-400">
-                  No articles found matching criteria.
+                  {t('blog.no_articles_found', 'No articles found matching criteria.')}
                 </h3>
               </div>
             ) : null}
@@ -277,21 +279,21 @@ export default function BlogListClient({
         <div className="lg:col-span-4 space-y-10">
           <div className="glass rounded-[2rem] border border-white/5 p-6 sm:p-8 space-y-6">
             <h3 className="text-xs font-black uppercase tracking-widest text-white flex items-center gap-2">
-              <TrendingUp className="w-4 h-4 text-blue-500" /> Trending Topics
+              <TrendingUp className="w-4 h-4 text-blue-500" /> {t('blog.trending_topics', 'Trending Topics')}
             </h3>
             <div className="space-y-6 divide-y divide-white/5">
               {trendingBlogs.map((trending, idx) => (
                 <Link
-                  href={`/blog/${trending.slug}`}
+                  href={localizeHref(`/blog/${trending.slug}`)}
                   key={trending.id}
                   className="flex gap-4 group pt-5 first:pt-0"
                 >
-                  <span className="text-3xl font-black text-white/10 group-hover:text-blue-500/20 transition-colors leading-none shrink-0">
+                  <span className="text-3xl font-black text-white/10 group-hover:text-blue-500/20 transition-colors leading-none shrink-0 font-sans">
                     0{idx + 1}
                   </span>
                   <div className="space-y-1">
                     <span className="text-[9px] font-black uppercase tracking-widest text-blue-500">
-                      {trending.category}
+                      {t('categories.' + trending.category, trending.category)}
                     </span>
                     <h4 className="text-sm font-black text-white uppercase leading-snug group-hover:text-blue-400 transition-colors line-clamp-2">
                       {trending.title}
@@ -304,34 +306,34 @@ export default function BlogListClient({
 
           <div className="glass rounded-[2rem] border border-white/5 p-6 sm:p-8 space-y-4">
             <h3 className="text-xs font-black uppercase tracking-widest text-white border-b border-white/5 pb-3">
-              Try Featured Tools
+              {t('blog.try_featured_tools', 'Try Featured Tools')}
             </h3>
             <div className="space-y-3">
               <Link
-                href="/tools/pdf-tools/edit-pdf"
+                href={localizeHref('/tools/pdf-tools/edit-pdf')}
                 className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all group"
               >
                 <span className="text-lg">✍️</span>
                 <span className="text-xs font-black text-white uppercase group-hover:text-blue-400 line-clamp-1">
-                  Edit PDF Online
+                  {t('tools.edit-pdf.title', 'Edit PDF Online')}
                 </span>
               </Link>
               <Link
-                href="/tools/pdf-ocr"
+                href={localizeHref('/tools/pdf-ocr')}
                 className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all group"
               >
                 <span className="text-lg">🔍</span>
                 <span className="text-xs font-black text-white uppercase group-hover:text-blue-400 line-clamp-1">
-                  PDF OCR Scanner
+                  {t('tools.pdf-ocr.title', 'PDF OCR Scanner')}
                 </span>
               </Link>
               <Link
-                href="/tools/image-compressor"
+                href={localizeHref('/tools/image-compressor')}
                 className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all group"
               >
                 <span className="text-lg">📉</span>
                 <span className="text-xs font-black text-white uppercase group-hover:text-blue-400 line-clamp-1">
-                  Image Compressor
+                  {t('tools.image-compressor.title', 'Image Compressor')}
                 </span>
               </Link>
             </div>

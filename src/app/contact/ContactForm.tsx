@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { Loader2, CheckCircle, AlertCircle, Send, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from '@/components/I18nContext';
 
 export default function ContactForm() {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -48,22 +50,22 @@ export default function ContactForm() {
     });
 
     toast.promise(promise, {
-      loading: 'Transmitting your message...',
+      loading: t('contact.form_toast_sending', 'Transmitting your message...'),
       success: () => {
         setStatus('success');
         setFormData({ firstName: '', lastName: '', email: '', message: '', honeypot: '' });
-        return 'Message sent successfully!';
+        return t('contact.form_toast_success', 'Message sent successfully!');
       },
       error: (err) => {
         setStatus('error');
-        return err.message || 'Failed to send message';
+        return err.message || t('contact.form_toast_error', 'Failed to send message');
       },
       finally: () => setIsSubmitting(false),
     });
   };
 
   return (
-    <div className="bg-[#0f172a]/50 p-8 sm:p-12 backdrop-blur-xl">
+    <div className="bg-[#0f172a]/50 p-8 sm:p-12 backdrop-blur-xl font-sans">
       <AnimatePresence mode="wait">
         {status === 'success' ? (
           <motion.div 
@@ -75,15 +77,15 @@ export default function ContactForm() {
             <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-[2rem] bg-emerald-500/10 text-emerald-500 mb-8 border border-emerald-500/20 shadow-[0_0_40px_rgba(16,185,129,0.2)]">
               <CheckCircle className="h-10 w-10" />
             </div>
-            <h3 className="text-3xl font-black text-white mb-4 tracking-tighter uppercase">Message Received</h3>
+            <h3 className="text-3xl font-black text-white mb-4 tracking-tighter uppercase">{t('contact.form_received_title', 'Message Received')}</h3>
             <p className="text-gray-400 font-medium mb-10 max-w-sm mx-auto leading-relaxed">
-              We've successfully received your transmission. Our team will analyze and respond within 24 standard business hours.
+              {t('contact.form_received_desc', "We've successfully received your transmission. Our team will analyze and respond within 24 standard business hours.")}
             </p>
             <button
               onClick={() => setStatus('idle')}
               className="text-blue-500 font-black uppercase tracking-[0.2em] text-[10px] hover:text-blue-400 transition-colors"
             >
-              Send Another Transmission
+              {t('contact.form_send_another', 'Send Another Transmission')}
             </button>
           </motion.div>
         ) : (
@@ -108,7 +110,7 @@ export default function ContactForm() {
 
             <div className="space-y-3">
               <label htmlFor="firstName" className="block text-[10px] font-black uppercase tracking-widest text-gray-500 ml-1">
-                First Name
+                {t('contact.form_first_name', 'First Name')}
               </label>
               <input
                 type="text"
@@ -124,7 +126,7 @@ export default function ContactForm() {
             </div>
             <div className="space-y-3">
               <label htmlFor="lastName" className="block text-[10px] font-black uppercase tracking-widest text-gray-500 ml-1">
-                Last Name
+                {t('contact.form_last_name', 'Last Name')}
               </label>
               <input
                 type="text"
@@ -140,7 +142,7 @@ export default function ContactForm() {
             </div>
             <div className="sm:col-span-2 space-y-3">
               <label htmlFor="email" className="block text-[10px] font-black uppercase tracking-widest text-gray-500 ml-1">
-                Email Address
+                {t('contact.form_email', 'Email Address')}
               </label>
               <input
                 type="email"
@@ -156,7 +158,7 @@ export default function ContactForm() {
             </div>
             <div className="sm:col-span-2 space-y-3">
               <label htmlFor="message" className="block text-[10px] font-black uppercase tracking-widest text-gray-500 ml-1">
-                Message Content
+                {t('contact.form_message', 'Message Content')}
               </label>
               <textarea
                 name="message"
@@ -165,7 +167,7 @@ export default function ContactForm() {
                 rows={4}
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="How can we help you achieve your AI goals?"
+                placeholder={t('contact.form_message_placeholder', 'How can we help you achieve your AI goals?')}
                 className="block w-full rounded-2xl bg-white/5 border border-white/5 px-6 py-4 text-white font-bold focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700 resize-none"
                 disabled={isSubmitting}
               />
@@ -179,25 +181,25 @@ export default function ContactForm() {
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>Transmitting...</span>
+                    <span>{t('contact.form_btn_sending', 'Transmitting...')}</span>
                   </>
                 ) : (
                   <>
                     <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    <span>Send Message</span>
+                    <span>{t('contact.form_btn_send', 'Send Message')}</span>
                   </>
                 )}
               </button>
               <div className="mt-8 flex items-center justify-center gap-6 text-[8px] font-black uppercase tracking-[0.3em] text-gray-600">
-                <div className="flex items-center gap-2"><Sparkles className="w-3 h-3 text-blue-500" /> Secure Protocol</div>
-                <div className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-emerald-500" /> Human Support</div>
+                <div className="flex items-center gap-2"><Sparkles className="w-3 h-3 text-blue-500" /> {t('contact.form_secure_protocol', 'Secure Protocol')}</div>
+                <div className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-emerald-500" /> {t('contact.form_human_support', 'Human Support')}</div>
               </div>
             </div>
 
             {status === 'error' && (
               <div className="sm:col-span-2 mt-4 flex items-center gap-2 text-red-500 text-[10px] font-black uppercase tracking-widest animate-pulse">
                 <AlertCircle className="w-4 h-4" />
-                <span>Transmission Failure. Check connection and retry.</span>
+                <span>{t('contact.form_error', 'Transmission Failure. Check connection and retry.')}</span>
               </div>
             )}
           </motion.form>

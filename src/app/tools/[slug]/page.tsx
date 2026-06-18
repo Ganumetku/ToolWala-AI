@@ -88,6 +88,11 @@ export default async function DynamicToolPage({ params }: PageProps) {
   }
 
   const { t, locale } = await getTranslationServer();
+  const localizeHref = (href: string) => {
+    if (locale === 'en') return href;
+    const cleanHref = href.startsWith('/') ? href : '/' + href;
+    return `/${locale}${cleanHref}`;
+  };
 
   const translation = await getToolTranslationWithFallback(slug, locale);
   tool.title = translation.title || tool.title;
@@ -127,7 +132,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
           
           {/* Navigation link */}
           <Link 
-            href="/tools" 
+            href={localizeHref('/tools')} 
             className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group cursor-pointer"
           >
             <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -228,7 +233,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
                 {relatedTools.map((rt: any, i: number) => (
                   <Link 
                     key={i} 
-                    href={`/tools/${rt.slug}/`}
+                    href={localizeHref(`/tools/${rt.slug}/`)}
                     className="p-5 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 hover:shadow-[0_0_20px_rgba(37,99,235,0.1)] transition-all flex flex-col justify-between group h-32 text-left"
                   >
                     <span className="text-xs sm:text-sm font-black text-gray-300 group-hover:text-white transition-colors uppercase leading-tight">

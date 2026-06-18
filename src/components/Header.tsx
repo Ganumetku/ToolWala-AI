@@ -134,12 +134,12 @@ export default function Header() {
     >
       <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-2">
-          <Link href={localizeHref('/')} className="flex items-center gap-3 group">
+          <Link href={localizeHref('/')} className="flex items-center gap-3 group whitespace-nowrap shrink-0">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white font-black text-2xl transition-all group-hover:scale-110 group-hover:rotate-3 shadow-[0_0_20px_rgba(37,99,235,0.4)] relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
               T
             </div>
-            <span className="text-2xl font-black tracking-tighter text-white">
+            <span className="text-2xl font-black tracking-tighter text-white whitespace-nowrap">
               ToolWala <span className="text-blue-500">AI</span>
             </span>
           </Link>
@@ -155,7 +155,7 @@ export default function Header() {
               <Link 
                 key={item.name} 
                 href={localizedHrefValue} 
-                className={`px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all ${
+                className={`px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all whitespace-nowrap ${
                   isActive
                     ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' 
                     : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -172,10 +172,10 @@ export default function Header() {
           <div className="relative" ref={langDropdownRef}>
             <button
               onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-              className="flex items-center gap-2.5 rounded-full bg-white/5 hover:bg-white/10 px-4 py-2.5 text-xs font-bold text-gray-300 hover:text-white border border-white/10 hover:border-blue-500/30 transition-all select-none cursor-pointer"
+              className="flex items-center gap-2.5 rounded-full bg-white/5 hover:bg-white/10 px-4 py-2.5 text-xs font-bold text-gray-300 hover:text-white border border-white/10 hover:border-blue-500/30 transition-all select-none cursor-pointer whitespace-nowrap shrink-0"
             >
               <Globe className="w-3.5 h-3.5 text-blue-500" />
-              <span translate="no">{currentLanguage.flag} {currentLanguage.name}</span>
+              <span translate="no" className="whitespace-nowrap">{currentLanguage.flag} {currentLanguage.name}</span>
               <ChevronDown className={`w-3.5 h-3.5 text-gray-500 transition-transform duration-300 ${isLangDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
 
@@ -211,11 +211,11 @@ export default function Header() {
 
           <Link 
             href={localizeHref('/tools')} 
-            className="group relative flex items-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-black text-black hover:scale-105 active:scale-95 transition-all shadow-xl hover:shadow-white/10 overflow-hidden"
+            className="group relative flex items-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-black text-black hover:scale-105 active:scale-95 transition-all shadow-xl hover:shadow-white/10 overflow-hidden whitespace-nowrap shrink-0"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             <Rocket className="w-4 h-4 relative z-10" suppressHydrationWarning />
-            <span className="relative z-10">{t('nav.start_free', 'Start Free')}</span>
+            <span className="relative z-10 whitespace-nowrap">{t('nav.start_free', 'Start Free')}</span>
           </Link>
         </div>
  

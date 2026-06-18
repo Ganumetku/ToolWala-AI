@@ -246,7 +246,12 @@ export const jsonDb = {
   ]),
   saveBlogs: (blogs: LocalBlogPost[]) => writeJSON('dynamic_blogs.json', blogs),
 
-  getLeads: () => readJSON<LocalContactLead[]>('dynamic_leads.json', []),
+  getLeads: () => readJSON<LocalContactLead[]>('dynamic_leads.json', [
+    { id: 'lead-1', name: 'John Doe', email: 'john@example.com', message: 'Hello, I would love to integrate your background remover into our corporate HR toolkit. Do you offer custom API pricing tiers?', status: 'new', createdAt: '2026-06-03T14:24:00Z' },
+    { id: 'lead-2', name: 'Jane Smith', email: 'jane@startup.co', message: 'The OCR engine failed on a vertical text screenshot. Is vertical Japanese character detection supported?', status: 'pending', createdAt: '2026-06-02T09:12:00Z' },
+    { id: 'lead-3', name: 'Mark Wilson', email: 'mark@designagency.net', message: 'I loved using the passport photo maker. Extremely clean cuts on hair edges! Shared with 10 teammates.', status: 'resolved', createdAt: '2026-06-01T17:40:00Z' },
+    { id: 'lead-4', name: 'Sarah Connor', email: 'sarah@resistance.org', message: 'AI cost calculations seem off. Is it calculated dynamically based on input tokens?', status: 'new', createdAt: '2026-06-01T08:05:00Z' }
+  ]),
   saveLeads: (leads: LocalContactLead[]) => writeJSON('dynamic_leads.json', leads),
 
   getUsers: () => readJSON<LocalUser[]>('dynamic_users.json', [

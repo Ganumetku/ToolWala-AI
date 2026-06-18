@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServiceClient } from '@/lib/supabase/server';
+import { jsonDb } from '@/lib/jsonDb';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,6 +16,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Save in local jsonDb
+    const leads = jsonDb.getLeads() || [];
+    const newLead = {
+      id: 'lead-' + Math.random().toString(36).substring(2, 9),
+      name,
+      email,
+      message,
+      status: 'new' as const,
+      createdAt: new Date().toISOString()
+    };
+    leads.push(newLead);
+    jsonDb.saveLeads(leads);
+
     const supabase = createServiceClient();
     if (supabase) {
       // Store in tool_analytics as contact event (leads table can be added later)
@@ -27,7 +41,9 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ success: true, message: 'Message sent!' });
-  } catch {
+  } catch (err) {
+    console.error('Contact submit error:', err);
     return NextResponse.json({ success: false, error: 'Server error' }, { status: 500 });
   }
 }
+

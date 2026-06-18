@@ -3,12 +3,14 @@
 import { useState } from "react";
 import { Mail } from "lucide-react";
 import { toast } from "sonner";
+import { useTranslation } from "@/components/I18nContext";
 
 interface BlogNewsletterProps {
   compact?: boolean;
 }
 
 export default function BlogNewsletter({ compact = false }: BlogNewsletterProps) {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -27,13 +29,13 @@ export default function BlogNewsletter({ compact = false }: BlogNewsletterProps)
         }),
       });
       if (res.ok) {
-        toast.success("Welcome to ToolWala Insights!");
+        toast.success(t('blog.newsletter_success', 'Welcome to ToolWala Insights!'));
         setEmail("");
       } else {
-        toast.error("Subscription failed. Please try again.");
+        toast.error(t('blog.newsletter_failed', 'Subscription failed. Please try again.'));
       }
     } catch {
-      toast.error("Something went wrong.");
+      toast.error(t('blog.newsletter_error', 'Something went wrong.'));
     } finally {
       setLoading(false);
     }
@@ -49,10 +51,10 @@ export default function BlogNewsletter({ compact = false }: BlogNewsletterProps)
       <div className="space-y-4 relative z-10">
         <Mail className="w-8 h-8 text-blue-500" />
         <h3 className={`font-black text-white uppercase tracking-tight leading-none ${compact ? "text-base" : "text-lg"}`}>
-          Subscribe to ToolWala Insights
+          {t('blog.newsletter_heading', 'Subscribe to ToolWala Insights')}
         </h3>
         <p className="text-xs text-gray-400 font-semibold leading-relaxed">
-          Get browser-native AI updates, new tool launches, and deep-dive guides. No spam.
+          {t('blog.newsletter_sub', 'Get browser-native AI updates, new tool launches, and deep-dive guides. No spam.')}
         </p>
         <form onSubmit={handleSubmit} className="space-y-3 pt-2">
           <input
@@ -60,7 +62,7 @@ export default function BlogNewsletter({ compact = false }: BlogNewsletterProps)
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@email.com"
+            placeholder={t('blog.newsletter_placeholder', 'you@email.com')}
             className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-xs font-bold text-white outline-none focus:border-blue-500/50 placeholder-gray-600"
           />
           <button
@@ -68,7 +70,7 @@ export default function BlogNewsletter({ compact = false }: BlogNewsletterProps)
             disabled={loading}
             className="w-full py-3.5 text-[10px] font-black uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-500 rounded-2xl transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)] cursor-pointer disabled:opacity-50"
           >
-            {loading ? "Joining..." : "Join Newsletter"}
+            {loading ? t('blog.newsletter_joining', 'Joining...') : t('blog.newsletter_join', 'Join Newsletter')}
           </button>
         </form>
       </div>

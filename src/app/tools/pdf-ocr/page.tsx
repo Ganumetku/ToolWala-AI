@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
+import { useTranslation } from '@/components/I18nContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FileText, Download, UploadCloud, Trash2,
@@ -34,6 +35,7 @@ const LANGUAGES = [
 ];
 
 export default function PdfOcrScanner() {
+  const { t, locale, localizeHref } = useTranslation();
   const [mounted, setMounted] = useState(false);
   const [pdfjs, setPdfjs] = useState<any>(null);
   const [pdfFile, setPdfFile] = useState<File | null>(null);
@@ -363,27 +365,27 @@ export default function PdfOcrScanner() {
         
         {/* Navigation Breadcrumb */}
         <Link 
-          href="/tools" 
+          href={localizeHref("/tools")} 
           className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-gray-500 hover:text-white cursor-pointer transition-colors mb-8 group"
         >
           <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-          Back to Directory
+          {t('tools.back_to_directory', 'Back to Directory')}
         </Link>
 
         {/* Hero Section */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 rounded-full bg-blue-500/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-blue-400 border border-blue-500/20 mb-6 shadow-[0_0_15px_rgba(59,130,246,0.1)]">
             <Sparkles className="w-3.5 h-3.5" />
-            100% Secure Client Edge Processing
+            {t('pdf_ocr.badge_secure', '100% Secure Client Edge Processing')}
           </div>
           <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6 uppercase">
-            PDF OCR Scanner <br />
+            {t('tools.pdf-ocr.title', 'PDF OCR Scanner')} <br />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
-              Digitize scanned files
+              {t('pdf_ocr.digitize_title', 'Digitize scanned files')}
             </span>
           </h1>
           <p className="text-base sm:text-lg text-gray-400 leading-relaxed font-medium">
-            Convert scanned documents, images, and flat PDFs into copyable, searchable text layouts instantly. Your private files never touch a remote server.
+            {t('tools.pdf-ocr.description', 'Convert scanned documents, images, and flat PDFs into copyable, searchable text layouts instantly. Your private files never touch a remote server.')}
           </p>
         </div>
 
@@ -428,14 +430,14 @@ export default function PdfOcrScanner() {
                     <div className="absolute inset-0 bg-blue-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
                   <h3 className="mb-3 text-2xl font-black tracking-tight text-white">
-                    Drag & Drop scanned PDF here
+                    {t('pdf_ocr.drag_drop_pdf', 'Drag & Drop scanned PDF here')}
                   </h3>
                   <p className="mb-8 text-sm text-gray-500 font-semibold tracking-wide uppercase">
-                    or click to browse from files
+                    {t('pdf_ocr.click_to_browse', 'or click to browse from files')}
                   </p>
                   
                   <div className="inline-flex items-center gap-3.5 px-6 py-3.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)]">
-                    Choose PDF File
+                    {t('pdf_ocr.choose_pdf', 'Choose PDF File')}
                   </div>
                 </label>
               </div>
@@ -453,14 +455,14 @@ export default function PdfOcrScanner() {
                   <div>
                     <h4 className="text-sm font-black text-white line-clamp-1">{pdfFile.name}</h4>
                     <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider mt-0.5">
-                      Size: {formatBytes(pdfFile.size)} • Total: {totalPages} Pages
+                      {t('pdf_ocr.size', 'Size')}: {formatBytes(pdfFile.size)} • {t('pdf_ocr.total', 'Total')}: {totalPages} {t('pdf_ocr.pages', 'Pages')}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-3">
-                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Language</label>
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{t('pdf_ocr.language', 'Language')}</label>
                     <select
                       value={selectedLanguage}
                       onChange={(e) => setSelectedLanguage(e.target.value)}
@@ -481,7 +483,7 @@ export default function PdfOcrScanner() {
                       disabled={isProcessing}
                       className="px-4 py-2.5 border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/10 text-gray-400 hover:text-white text-[10px] font-black uppercase tracking-widest rounded-xl cursor-pointer transition-all"
                     >
-                      Remove PDF
+                      {t('pdf_ocr.remove_pdf', 'Remove PDF')}
                     </button>
                   </div>
                 </div>
@@ -496,14 +498,14 @@ export default function PdfOcrScanner() {
                   {/* Process Status Deck */}
                   <div className="glass p-7 rounded-[2rem] border border-white/5 bg-white/[0.01] flex flex-col justify-between flex-1 min-h-[300px]">
                     <div>
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-600 block mb-4">Scanner Status</span>
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-600 block mb-4">{t('pdf_ocr.scanner_status', 'Scanner Status')}</span>
                       
                       {!isProcessing && !success ? (
                         <div className="space-y-4">
                           <div className="p-4 rounded-2xl bg-blue-500/5 border border-blue-500/10 flex items-start gap-3">
                             <AlertCircle className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
                             <p className="text-xs text-gray-400 leading-relaxed font-medium">
-                              Ready to scan. Press the action below to download dictionary tables and extract characters.
+                              {t('pdf_ocr.ready_to_scan', 'Ready to scan. Press the action below to download dictionary tables and extract characters.')}
                             </p>
                           </div>
                         </div>
@@ -511,12 +513,12 @@ export default function PdfOcrScanner() {
                         <div className="space-y-6">
                           <div className="flex items-center gap-3">
                             <RefreshCw className="w-5 h-5 text-blue-500 animate-spin" />
-                            <h4 className="text-sm font-black text-white uppercase tracking-wider">Extracting Characters</h4>
+                            <h4 className="text-sm font-black text-white uppercase tracking-wider">{t('pdf_ocr.extracting_characters', 'Extracting Characters')}</h4>
                           </div>
 
                           <div className="space-y-2">
                             <div className="flex justify-between text-xs text-gray-400">
-                              <span className="font-bold">Progress (Page {processingPage} of {totalPages})</span>
+                              <span className="font-bold">{t('pdf_ocr.progress', 'Progress')} (Page {processingPage} of {totalPages})</span>
                               <span className="font-mono font-bold text-blue-400">{pageProgress}%</span>
                             </div>
                             <div className="w-full bg-white/5 border border-white/5 h-2.5 rounded-full overflow-hidden relative">
@@ -528,7 +530,7 @@ export default function PdfOcrScanner() {
                           </div>
 
                           <p className="text-[10px] text-gray-500 font-semibold tracking-wide leading-relaxed">
-                            Status: <span className="text-gray-300">{loadingText}</span>
+                            {t('pdf_ocr.status', 'Status')}: <span className="text-gray-300">{loadingText}</span>
                           </p>
                         </div>
                       ) : (
@@ -536,9 +538,9 @@ export default function PdfOcrScanner() {
                           <div className="p-4 rounded-2xl bg-emerald-500/5 border border-emerald-500/10 flex items-start gap-3">
                             <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
                             <div>
-                              <h5 className="text-xs font-black text-emerald-400 uppercase tracking-widest">Extraction Complete</h5>
+                              <h5 className="text-xs font-black text-emerald-400 uppercase tracking-widest">{t('form.executed_success', 'Extraction Complete')}</h5>
                               <p className="text-xs text-gray-400 leading-relaxed font-medium mt-1">
-                                Extracted text is fully editable and ready for copy or document export.
+                                {t('form.awaiting_execution', 'Extracted text is fully editable and ready for copy or document export.')}
                               </p>
                             </div>
                           </div>
@@ -552,7 +554,7 @@ export default function PdfOcrScanner() {
                           onClick={runOcrScanner}
                           className="w-full flex items-center justify-center gap-2.5 px-6 py-4.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] cursor-pointer"
                         >
-                          <Sparkles className="w-4 h-4" /> Run OCR Scanner
+                          <Sparkles className="w-4 h-4" /> {t('pdf_ocr.run_ocr', 'Run OCR Scanner')}
                         </button>
                       )}
 
@@ -561,7 +563,7 @@ export default function PdfOcrScanner() {
                           onClick={resetAll}
                           className="w-full flex items-center justify-center gap-2.5 px-6 py-4.5 border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/10 text-gray-400 hover:text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all cursor-pointer"
                         >
-                          <RefreshCw className="w-4 h-4" /> Scan Another PDF
+                          <RefreshCw className="w-4 h-4" /> {t('pdf_ocr.scan_another', 'Scan Another PDF')}
                         </button>
                       )}
                     </div>
@@ -571,8 +573,8 @@ export default function PdfOcrScanner() {
                   <div className="glass p-5 rounded-2xl border border-white/5 bg-white/[0.01] flex items-center gap-3">
                     <ShieldCheck className="w-5 h-5 text-emerald-500" />
                     <div className="text-[10px] text-gray-500 font-semibold tracking-wide">
-                      <span className="text-white block font-bold uppercase mb-0.5">Browser Sandbox Secure</span>
-                      Files are processed via local WebAssembly instance without server exposure.
+                      <span className="text-white block font-bold uppercase mb-0.5">{t('pdf_ocr.sandbox_secure_title', 'Browser Sandbox Secure')}</span>
+                      {t('pdf_ocr.sandbox_secure_desc', 'Files are processed via local WebAssembly instance without server exposure.')}
                     </div>
                   </div>
                 </div>
@@ -594,7 +596,7 @@ export default function PdfOcrScanner() {
                               : 'text-gray-500 hover:text-gray-300'
                           }`}
                         >
-                          Combined Text
+                          {t('pdf_ocr.combined_text', 'Combined Text')}
                         </button>
                         <button
                           disabled={pagesText.length === 0}
@@ -605,7 +607,7 @@ export default function PdfOcrScanner() {
                               : 'text-gray-500 hover:text-gray-300'
                           }`}
                         >
-                          View by Page
+                          {t('pdf_ocr.view_by_page', 'View by Page')}
                         </button>
                       </div>
 
@@ -617,7 +619,7 @@ export default function PdfOcrScanner() {
                             className="p-2.5 bg-white/5 hover:bg-blue-600/10 border border-white/5 rounded-xl text-gray-400 hover:text-white cursor-pointer transition-colors flex items-center gap-2 text-[10px] font-black uppercase tracking-widest"
                           >
                             {isCopied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
-                            {isCopied ? 'Copied' : 'Copy'}
+                            {isCopied ? t('pdf_ocr.copied', 'Copied') : t('pdf_ocr.copy', 'Copy')}
                           </button>
                           
                           <div className="w-px h-5 bg-white/10" />
@@ -654,7 +656,7 @@ export default function PdfOcrScanner() {
                             >
                               <ChevronLeft className="w-4 h-4" />
                             </button>
-                            <span>Page {currentPageView} of {totalPages}</span>
+                            <span>{t('pdf_ocr.page_navigation', 'Page {current} of {total}').replace('{current}', String(currentPageView)).replace('{total}', String(totalPages))}</span>
                             <button
                               disabled={currentPageView === totalPages}
                               onClick={() => setCurrentPageView(prev => Math.min(prev + 1, totalPages))}
@@ -670,14 +672,14 @@ export default function PdfOcrScanner() {
                             value={combinedText}
                             onChange={(e) => handleCombinedTextEdit(e.target.value)}
                             className="flex-grow w-full min-h-[300px] bg-black/40 border border-white/5 rounded-2xl p-5 text-gray-300 font-mono text-sm leading-relaxed outline-none resize-none focus:border-white/10"
-                            placeholder="Editing combined extraction content..."
+                            placeholder={t('pdf_ocr.edit_combined_placeholder', 'Editing combined extraction content...')}
                           />
                         ) : (
                           <textarea
                             value={pagesText[currentPageView - 1] || ""}
                             onChange={(e) => handlePageTextEdit(e.target.value, currentPageView - 1)}
                             className="flex-grow w-full min-h-[300px] bg-black/40 border border-white/5 rounded-2xl p-5 text-gray-300 font-mono text-sm leading-relaxed outline-none resize-none focus:border-white/10"
-                            placeholder={`Editing page ${currentPageView} content...`}
+                            placeholder={t('pdf_ocr.edit_page_placeholder', 'Editing page {current} content...').replace('{current}', String(currentPageView))}
                           />
                         )}
 
@@ -685,9 +687,9 @@ export default function PdfOcrScanner() {
                     ) : (
                       <div className="flex-1 border border-white/5 border-dashed rounded-2xl bg-black/20 flex flex-col items-center justify-center p-12 text-center text-gray-600">
                         <FileText className="w-12 h-12 mb-4 opacity-30" />
-                        <p className="text-sm font-bold text-gray-500 uppercase tracking-wider">Workspace Ready</p>
+                        <p className="text-sm font-bold text-gray-500 uppercase tracking-wider">{t('pdf_ocr.workspace_ready', 'Workspace Ready')}</p>
                         <p className="text-xs font-semibold max-w-xs mt-1 text-gray-600 leading-relaxed">
-                          Configure selected document language options on the left and trigger OCR Scanner.
+                          {t('pdf_ocr.workspace_ready_desc', 'Configure selected document language options on the left and trigger OCR Scanner.')}
                         </p>
                       </div>
                     )}
@@ -708,27 +710,27 @@ export default function PdfOcrScanner() {
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
                 <Zap className="w-5.5 h-5.5" />
               </div>
-              <h4 className="text-lg font-black text-white mb-2">Multi-Page OCR Scanner</h4>
+              <h4 className="text-lg font-black text-white mb-2">{t('pdf_ocr.feat_multipage_title', 'Multi-Page OCR Scanner')}</h4>
               <p className="text-sm text-gray-400 leading-relaxed font-medium">
-                Digitize multi-sheet PDF structures sequentially, optimizing browser processing loops and preventing leaks.
+                {t('pdf_ocr.feat_multipage_desc', 'Digitize multi-sheet PDF structures sequentially, optimizing browser processing loops and preventing leaks.')}
               </p>
             </div>
             <div className="glass p-7 rounded-[2rem] border border-white/5 bg-white/[0.01]">
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
                 <FileDown className="w-5.5 h-5.5" />
               </div>
-              <h4 className="text-lg font-black text-white mb-2">Word & TXT Compiles</h4>
+              <h4 className="text-lg font-black text-white mb-2">{t('pdf_ocr.feat_download_title', 'Word & TXT Compiles')}</h4>
               <p className="text-sm text-gray-400 leading-relaxed font-medium">
-                Download results as raw text (.txt) files or compile them directly into editable Microsoft Word (.doc) layouts.
+                {t('pdf_ocr.feat_download_desc', 'Download results as raw text (.txt) files or compile them directly into editable Microsoft Word (.doc) layouts.')}
               </p>
             </div>
             <div className="glass p-7 rounded-[2rem] border border-white/5 bg-white/[0.01]">
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
                 <ShieldCheck className="w-5.5 h-5.5" />
               </div>
-              <h4 className="text-lg font-black text-white mb-2">Zero Data Cloud Exposure</h4>
+              <h4 className="text-lg font-black text-white mb-2">{t('pdf_ocr.feat_privacy_title', 'Zero Data Cloud Exposure')}</h4>
               <p className="text-sm text-gray-400 leading-relaxed font-medium">
-                Parsed, rendered, and extracted locally using secure local workers. Complete privacy for sensitive invoices.
+                {t('pdf_ocr.feat_privacy_desc', 'Parsed, rendered, and extracted locally using secure local workers. Complete privacy for sensitive invoices.')}
               </p>
             </div>
           </div>
@@ -743,14 +745,14 @@ export default function PdfOcrScanner() {
         <div className="mt-32 border-t border-white/5 pt-24 max-w-6xl mx-auto">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10">
             <div>
-              <h2 className="text-2xl font-black text-white tracking-tight sm:text-3xl">Related Tools</h2>
-              <p className="text-sm text-gray-400 mt-1 font-medium">Discover more professional document operations tools.</p>
+              <h2 className="text-2xl font-black text-white tracking-tight sm:text-3xl">{t('blog.related_tools', 'Related Tools')}</h2>
+              <p className="text-sm text-gray-400 mt-1 font-medium">{t('tools.related_tools_desc', 'Discover more professional document operations tools.')}</p>
             </div>
             <Link 
-              href="/tools" 
+              href={localizeHref("/tools")} 
               className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-blue-500 hover:text-blue-400 transition-colors group cursor-pointer"
             >
-              All Tools
+              {t('nav.tools', 'All Tools')}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
@@ -759,7 +761,7 @@ export default function PdfOcrScanner() {
             
             {/* Image OCR Card */}
             <Link 
-              href="/tools/ocr-to-text"
+              href={localizeHref("/tools/ocr-to-text")}
               className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 glass"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -772,20 +774,20 @@ export default function PdfOcrScanner() {
                 <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   <Sparkles className="w-5 h-5 text-blue-500" />
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">OCR Image to Text</h3>
+                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">{t('tools.ocr-to-text.title', 'OCR Image to Text')}</h3>
                 <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
-                  Extract text from images, screenshots, and scans instantly using client-side OCR.
+                  {t('tools.ocr-to-text.description', 'Extract text from images, screenshots, and scans instantly using client-side OCR.')}
                 </p>
               </div>
               <div className="relative z-10 mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-500 transition-all group-hover:gap-4">
-                Launch Utility
+                {t('tools.try_tool', 'Launch Utility')}
                 <ArrowRight className="w-4 h-4" />
               </div>
             </Link>
 
             {/* Merge PDF Card */}
             <Link 
-              href="/tools/merge-pdf"
+              href={localizeHref("/tools/merge-pdf")}
               className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 glass"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -798,20 +800,20 @@ export default function PdfOcrScanner() {
                 <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   <Files className="w-5 h-5 text-blue-500" />
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">Merge PDF</h3>
+                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">{t('tools.merge-pdf.title', 'Merge PDF')}</h3>
                 <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
-                  Combine multiple distinct PDF documents into a single professional-grade file quickly and securely.
+                  {t('tools.merge-pdf.description', 'Combine multiple distinct PDF documents into a single professional-grade file quickly and securely.')}
                 </p>
               </div>
               <div className="relative z-10 mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-500 transition-all group-hover:gap-4">
-                Launch Utility
+                {t('tools.try_tool', 'Launch Utility')}
                 <ArrowRight className="w-4 h-4" />
               </div>
             </Link>
 
             {/* Split PDF Card */}
             <Link 
-              href="/tools/split-pdf"
+              href={localizeHref("/tools/split-pdf")}
               className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 glass"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -824,13 +826,13 @@ export default function PdfOcrScanner() {
                 <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   <FileText className="w-5 h-5 text-blue-500" />
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">Split PDF</h3>
+                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">{t('tools.split-pdf.title', 'Split PDF')}</h3>
                 <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
-                  Extract specific pages or ranges from your PDF files into individual documents instantly.
+                  {t('tools.split-pdf.description', 'Extract specific pages or ranges from your PDF files into individual documents instantly.')}
                 </p>
               </div>
               <div className="relative z-10 mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-500 transition-all group-hover:gap-4">
-                Launch Utility
+                {t('tools.try_tool', 'Launch Utility')}
                 <ArrowRight className="w-4 h-4" />
               </div>
             </Link>

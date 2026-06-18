@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Sparkles, Copy, Check, AlertCircle, RefreshCw, Eye, EyeOff, Upload } from 'lucide-react';
 import { toast } from 'sonner';
+import { useTranslation } from '@/components/I18nContext';
 
 export interface FormFieldSchema {
   id?: string;
@@ -25,6 +26,7 @@ interface ToolFormRendererProps {
 }
 
 export default function ToolFormRenderer({ toolId, slug, inputsSchema, ctaText }: ToolFormRendererProps) {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [output, setOutput] = useState('');
@@ -51,7 +53,7 @@ export default function ToolFormRenderer({ toolId, slug, inputsSchema, ctaText }
     if (!output) return;
     navigator.clipboard.writeText(output);
     setCopied(true);
-    toast.success('Copied generation to clipboard!');
+    toast.success(t('form.copied_success', 'Copied generation to clipboard!'));
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -64,7 +66,7 @@ export default function ToolFormRenderer({ toolId, slug, inputsSchema, ctaText }
     // Validate required fields
     for (const inp of inputsSchema) {
       if (inp.required && !formData[inp.name]) {
-        toast.error(`Please complete the required field: ${inp.label}`);
+        toast.error(t('form.required_field_missing', 'Please complete the required field: {field}').replace('{field}', inp.label));
         setIsLoading(false);
         return;
       }
@@ -88,13 +90,13 @@ export default function ToolFormRenderer({ toolId, slug, inputsSchema, ctaText }
           latencyMs: data.latencyMs,
           tokens: data.tokens
         });
-        toast.success('Utility executed successfully!');
+        toast.success(t('form.executed_success', 'Utility executed successfully!'));
       } else {
-        toast.error(data.error || 'Execution handler failed.');
+        toast.error(data.error || t('form.execution_failed', 'Execution handler failed.'));
       }
     } catch (err) {
       console.error(err);
-      toast.error('Unable to establish connection to execution servers.');
+      toast.error(t('form.connection_failed', 'Unable to establish connection to execution servers.'));
     } finally {
       setIsLoading(false);
     }
@@ -108,7 +110,7 @@ export default function ToolFormRenderer({ toolId, slug, inputsSchema, ctaText }
         <div className="absolute top-0 right-10 h-[1px] w-24 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
         
         <h3 className="text-sm font-black uppercase tracking-widest text-white mb-8 flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-blue-500" /> Command Console
+          <Sparkles className="w-4 h-4 text-blue-500" /> {t('form.command_console', 'Command Console')}
         </h3>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -132,7 +134,7 @@ export default function ToolFormRenderer({ toolId, slug, inputsSchema, ctaText }
                     type="text"
                     value={formData[field.name] || ''}
                     onChange={(e) => handleChange(field.name, e.target.value)}
-                    placeholder={field.placeholder || `Enter ${field.label.toLowerCase()}...`}
+                    placeholder={field.placeholder || t('form.enter_placeholder', 'Enter {field}...').replace('{field}', field.label.toLowerCase())}
                     required={field.required}
                     className="w-full bg-white/[0.02] border border-white/5 focus:border-blue-500/50 rounded-2xl px-5 py-4 text-white text-sm font-semibold outline-none transition-all focus:ring-4 focus:ring-blue-500/10 placeholder-gray-600"
                   />
@@ -144,7 +146,7 @@ export default function ToolFormRenderer({ toolId, slug, inputsSchema, ctaText }
                     id={id}
                     value={formData[field.name] || ''}
                     onChange={(e) => handleChange(field.name, e.target.value)}
-                    placeholder={field.placeholder || `Enter instructions...`}
+                    placeholder={field.placeholder || t('form.enter_instructions', 'Enter instructions...')}
                     required={field.required}
                     rows={4}
                     className="w-full bg-white/[0.02] border border-white/5 focus:border-blue-500/50 rounded-2xl p-5 text-white text-sm font-semibold outline-none transition-all focus:ring-4 focus:ring-blue-500/10 placeholder-gray-600 resize-none"
@@ -160,7 +162,7 @@ export default function ToolFormRenderer({ toolId, slug, inputsSchema, ctaText }
                     required={field.required}
                     className="w-full bg-[#090d16] border border-white/5 focus:border-blue-500/50 rounded-2xl px-5 py-4 text-white text-sm font-bold outline-none transition-all focus:ring-4 focus:ring-blue-500/10 cursor-pointer"
                   >
-                    <option value="" className="text-gray-600">-- Select Choice --</option>
+                    <option value="" className="text-gray-600">{t('form.select_choice', '-- Select Choice --')}</option>
                     {(field.options || '').split(',').map((opt) => {
                       const trimmed = opt.trim();
                       return (
@@ -183,7 +185,7 @@ export default function ToolFormRenderer({ toolId, slug, inputsSchema, ctaText }
                       className="rounded text-blue-500 h-4.5 w-4.5 cursor-pointer"
                     />
                     <div>
-                      <span className="text-xs font-bold text-white block">{field.label} Enable</span>
+                      <span className="text-xs font-bold text-white block">{t('form.enable_field', 'Enable {field}').replace('{field}', field.label)}</span>
                     </div>
                   </label>
                 )}
@@ -198,7 +200,7 @@ export default function ToolFormRenderer({ toolId, slug, inputsSchema, ctaText }
                       onChange={(e) => handleChange(field.name, e.target.checked)}
                       className="rounded text-blue-500 h-4.5 w-4.5 cursor-pointer"
                     />
-                    <span className="text-xs font-semibold text-gray-300">{field.placeholder || 'Enable verification'}</span>
+                    <span className="text-xs font-semibold text-gray-300">{field.placeholder || t('form.enable_verification', 'Enable verification')}</span>
                   </label>
                 )}
 
@@ -206,8 +208,8 @@ export default function ToolFormRenderer({ toolId, slug, inputsSchema, ctaText }
                 {field.type === 'slider' && (
                   <div className="space-y-2 p-4 bg-white/[0.01] border border-white/5 rounded-2xl">
                     <div className="flex justify-between text-xs font-bold text-gray-500">
-                      <span>Value: {formData[field.name] || 0}</span>
-                      <span>Range: 0 - 100</span>
+                      <span>{t('form.value_label', 'Value')}: {formData[field.name] || 0}</span>
+                      <span>{t('form.range_label', 'Range: 0 - 100')}</span>
                     </div>
                     <input
                       id={id}
@@ -266,9 +268,9 @@ export default function ToolFormRenderer({ toolId, slug, inputsSchema, ctaText }
                     />
                     <Upload className="w-8 h-8 text-gray-500 mx-auto mb-3" />
                     <span className="text-xs font-bold text-white block">
-                      {formData[field.name] || 'Drag & drop image/document or Browse'}
+                      {formData[field.name] || t('form.drag_drop_browse', 'Drag & drop image/document or Browse')}
                     </span>
-                    <span className="text-[10px] text-gray-600 font-bold block mt-1">Supports file types up to 10MB</span>
+                    <span className="text-[10px] text-gray-600 font-bold block mt-1">{t('form.max_file_size', 'Supports file types up to 10MB')}</span>
                   </div>
                 )}
               </div>
@@ -282,11 +284,11 @@ export default function ToolFormRenderer({ toolId, slug, inputsSchema, ctaText }
           >
             {isLoading ? (
               <>
-                <RefreshCw className="w-4 h-4 animate-spin" /> Generating...
+                <RefreshCw className="w-4 h-4 animate-spin" /> {t('form.generating', 'Generating...')}
               </>
             ) : (
               <>
-                <Sparkles className="w-4 h-4 text-blue-200" /> {ctaText}
+                <Sparkles className="w-4 h-4 text-blue-200" /> {t('tools.' + slug + '.cta', ctaText)}
               </>
             )}
           </button>
@@ -300,7 +302,7 @@ export default function ToolFormRenderer({ toolId, slug, inputsSchema, ctaText }
         <div>
           <div className="flex justify-between items-center border-b border-white/5 pb-4 mb-6">
             <h3 className="text-sm font-black uppercase tracking-widest text-gray-400">
-              Output Generation Panel
+              {t('form.output_panel', 'Output Generation Panel')}
             </h3>
             {output && (
               <button
@@ -308,7 +310,7 @@ export default function ToolFormRenderer({ toolId, slug, inputsSchema, ctaText }
                 className="flex items-center gap-1.5 px-3 py-1.5 border border-white/5 hover:border-white/10 rounded-xl bg-white/[0.02] text-[10px] font-black uppercase tracking-wider text-gray-400 hover:text-white transition-all cursor-pointer"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                Copy Response
+                {copied ? t('form.copied', 'Copied!') : t('form.copy_response', 'Copy Response')}
               </button>
             )}
           </div>
@@ -327,17 +329,17 @@ export default function ToolFormRenderer({ toolId, slug, inputsSchema, ctaText }
           ) : (
             <div className="text-center py-20 text-gray-600">
               <AlertCircle className="w-10 h-10 text-gray-700 mx-auto mb-4" />
-              <p className="text-xs font-black uppercase tracking-widest">Awaiting execution run</p>
-              <p className="text-[10px] font-semibold text-gray-700 mt-1 max-w-[200px] mx-auto">Fill dynamic parameters in the console and hit execute.</p>
+              <p className="text-xs font-black uppercase tracking-widest">{t('form.awaiting_execution', 'Awaiting execution run')}</p>
+              <p className="text-[10px] font-semibold text-gray-700 mt-1 max-w-[200px] mx-auto">{t('form.fill_parameters', 'Fill dynamic parameters in the console and hit execute.')}</p>
             </div>
           )}
         </div>
 
         {runStats && (
           <div className="border-t border-white/5 pt-4 mt-6 flex justify-between text-[9px] font-black uppercase tracking-widest text-gray-500">
-            <span>Server Response: <strong className="text-gray-400">{runStats.latencyMs}ms</strong></span>
+            <span>{t('form.server_response', 'Server Response:')} <strong className="text-gray-400">{runStats.latencyMs}ms</strong></span>
             {runStats.tokens > 0 && (
-              <span>Model Weight: <strong className="text-gray-400">{runStats.tokens} tokens</strong></span>
+              <span>{t('form.model_weight', 'Model Weight:')} <strong className="text-gray-400">{runStats.tokens} tokens</strong></span>
             )}
           </div>
         )}

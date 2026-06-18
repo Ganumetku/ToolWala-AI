@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { TocItem } from "@/lib/blog-seo";
+import { useTranslation } from "@/components/I18nContext";
 
 interface BlogTableOfContentsProps {
   items: TocItem[];
@@ -15,6 +16,7 @@ export default function BlogTableOfContents({
   syncFromDom = true,
   contentKey,
 }: BlogTableOfContentsProps) {
+  const { t } = useTranslation();
   const [items, setItems] = useState(initialItems);
   const [activeId, setActiveId] = useState(initialItems[0]?.id ?? "");
 
@@ -58,7 +60,7 @@ export default function BlogTableOfContents({
   return (
     <div className="glass rounded-[2rem] border border-white/5 p-6 space-y-4">
       <h3 className="text-xs font-black uppercase tracking-widest text-white border-b border-white/5 pb-3">
-        Table of Contents
+        {t('blog.table_of_contents', 'Table of Contents')}
       </h3>
       <ul className="space-y-3 text-xs font-bold tracking-wide max-h-[50vh] overflow-y-auto">
         {items.map((item) => (

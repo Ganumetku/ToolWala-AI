@@ -1,16 +1,19 @@
 import Link from "next/link";
 import type { Tool } from "@/data/tools";
+import { useTranslation } from "@/components/I18nContext";
 
 interface RelatedToolsProps {
   tools: Tool[];
 }
 
 export default function RelatedTools({ tools }: RelatedToolsProps) {
+  const { t } = useTranslation();
+
   if (!tools.length) return null;
 
   return (
     <section className="space-y-6 pt-6 animate-fade-in">
-      <h3 className="text-lg font-black text-white uppercase tracking-widest">Related Tools</h3>
+      <h3 className="text-lg font-black text-white uppercase tracking-widest">{t('blog.related_tools', 'Related Tools')}</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {tools.map((tool) => (
           <Link

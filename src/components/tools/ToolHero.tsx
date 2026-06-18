@@ -1,7 +1,8 @@
 "use client";
 
 import React from 'react';
-import { Shield, Sparkles } from 'lucide-react';
+import { Shield } from 'lucide-react';
+import { useTranslation } from '@/components/I18nContext';
 
 interface ToolHeroProps {
   title: string;
@@ -13,9 +14,12 @@ interface ToolHeroProps {
 export default function ToolHero({
   title,
   description,
-  badgeText = "100% Client-Side & Secure",
+  badgeText,
   icon
 }: ToolHeroProps) {
+  const { t } = useTranslation();
+  const displayBadgeText = badgeText || t('tools.badge_client_side', '100% Client-Side & Secure');
+
   return (
     <div className="p-8 sm:p-10 border-b border-white/5 bg-white/[0.02] flex flex-col sm:flex-row sm:items-start justify-between gap-6">
       <div className="flex items-center gap-6">
@@ -31,7 +35,7 @@ export default function ToolHero({
       </div>
       <div className="flex items-center gap-3 bg-emerald-500/10 px-4 py-2 rounded-xl border border-emerald-500/20 h-fit self-start">
         <Shield className="w-4 h-4 text-emerald-400" />
-        <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">{badgeText}</span>
+        <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">{displayBadgeText}</span>
       </div>
     </div>
   );

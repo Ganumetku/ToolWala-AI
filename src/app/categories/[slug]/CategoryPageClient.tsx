@@ -12,6 +12,7 @@ import CategorySidebar from '@/components/CategorySidebar';
 import CategorySearch from '@/components/CategorySearch';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
 import Link from 'next/link';
+import { useTranslation } from '@/components/I18nContext';
 
 interface CategoryPageClientProps {
   slug: string;
@@ -19,6 +20,7 @@ interface CategoryPageClientProps {
 }
 
 export default function CategoryPageClient({ slug, category }: CategoryPageClientProps) {
+  const { t, locale } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<'all' | 'popular' | 'trending'>('all');
   const [publicTools, setPublicTools] = useState<Tool[]>(toolsData);
@@ -95,7 +97,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
                 <div className="space-y-4 animate-in fade-in duration-300">
                   <div className="flex items-center gap-2">
                     <TrendingUp className="w-4 h-4 text-purple-400" />
-                    <h3 className="text-[11px] font-black uppercase tracking-widest text-purple-400">Trending Utilities</h3>
+                    <h3 className="text-[11px] font-black uppercase tracking-widest text-purple-400">{t('categories.trending_utilities', 'Trending Utilities')}</h3>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {trendingShelfTools.map((tool) => (
@@ -114,7 +116,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
                   <CategorySearch 
                     value={searchQuery}
                     onChange={setSearchQuery}
-                    placeholder="Search tools inside this folder..."
+                    placeholder={t('categories.search_placeholder', 'Search tools inside this folder...')}
                   />
                 </div>
 
@@ -126,7 +128,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
                       activeFilter === 'all' ? 'bg-white/5 text-white' : 'text-gray-500 hover:text-white'
                     }`}
                   >
-                    All ({categoryTools.filter(t => t.isVisible).length})
+                    {t('categories.All', 'All')} ({categoryTools.filter(t => t.isVisible).length})
                   </button>
                   <button
                     onClick={() => setActiveFilter('popular')}
@@ -134,7 +136,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
                       activeFilter === 'popular' ? 'bg-white/5 text-white' : 'text-gray-500 hover:text-white'
                     }`}
                   >
-                    Popular ({categoryTools.filter(t => t.popular && t.isVisible).length})
+                    {t('categories.Popular', 'Popular')} ({categoryTools.filter(t => t.popular && t.isVisible).length})
                   </button>
                   <button
                     onClick={() => setActiveFilter('trending')}
@@ -142,7 +144,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
                       activeFilter === 'trending' ? 'bg-white/5 text-white' : 'text-gray-500 hover:text-white'
                     }`}
                   >
-                    Trending
+                    {t('categories.Trending', 'Trending')}
                   </button>
                 </div>
               </div>
@@ -165,13 +167,13 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
                     <div className="bg-white/5 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/5">
                       <Search className="w-8 h-8 text-gray-700" />
                     </div>
-                    <h4 className="text-lg font-black text-white mb-2 uppercase tracking-tight">No tools match criteria</h4>
-                    <p className="text-xs text-gray-500 max-w-xs mx-auto font-medium">Try checking description filters or reset active tabs.</p>
+                    <h4 className="text-lg font-black text-white mb-2 uppercase tracking-tight">{t('categories.no_tools_match', 'No tools match criteria')}</h4>
+                    <p className="text-xs text-gray-500 max-w-xs mx-auto font-medium">{t('categories.no_tools_sub', 'Try checking description filters or reset active tabs.')}</p>
                     <button
                       onClick={() => { setSearchQuery(""); setActiveFilter('all'); }}
-                      className="mt-5 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black uppercase tracking-widest text-[10px] shadow-md"
+                      className="mt-5 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black uppercase tracking-widest text-[10px] shadow-md animate-fade-in"
                     >
-                      Reset Directory View
+                      {t('categories.reset_view', 'Reset Directory View')}
                     </button>
                   </div>
                 )}
@@ -182,7 +184,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
                 <div className="border-t border-white/5 pt-12">
                   <div className="flex items-center gap-2 mb-8">
                     <HelpCircle className="w-4.5 h-4.5 text-blue-400" />
-                    <h3 className="text-xs font-black uppercase tracking-widest text-white">Frequently Asked Questions</h3>
+                    <h3 className="text-xs font-black uppercase tracking-widest text-white">{t('categories.faq_title', 'Frequently Asked Questions')}</h3>
                   </div>
 
                   <div className="space-y-4.5">
@@ -225,7 +227,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
               <div className="border-t border-white/5 pt-12 text-left">
                 <div className="flex items-center gap-2 mb-8">
                   <Grid className="w-4.5 h-4.5 text-blue-500" />
-                  <h3 className="text-xs font-black uppercase tracking-widest text-white">Explore Other Folders</h3>
+                  <h3 className="text-xs font-black uppercase tracking-widest text-white">{t('categories.explore_other_folders', 'Explore Other Folders')}</h3>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {categoriesData

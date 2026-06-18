@@ -11,6 +11,7 @@ import ShareButtons from '@/components/ShareButtons';
 import { headers } from 'next/headers';
 import { getToolTranslationWithFallback } from '@/lib/tool-translation-service';
 import { generateToolMetadataHelper } from '@/lib/seo';
+import { getTranslationServer } from '@/lib/i18n-server';
 
 export const dynamic = 'force-dynamic';
 
@@ -86,11 +87,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
     notFound();
   }
 
-  let locale = 'en';
-  try {
-    const headerList = await headers();
-    locale = headerList.get('x-locale') || 'en';
-  } catch (e) {}
+  const { t, locale } = await getTranslationServer();
 
   const translation = await getToolTranslationWithFallback(slug, locale);
   tool.title = translation.title || tool.title;
@@ -134,7 +131,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
             className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group cursor-pointer"
           >
             <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            Back to Directory
+            {t('tools.back_to_directory', 'Back to Directory')}
           </Link>
           
           {/* Main Tool Container */}
@@ -159,8 +156,8 @@ export default async function DynamicToolPage({ params }: PageProps) {
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="flex flex-col items-end">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">Secure Processing</span>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">100% Server Managed</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">{t('tools.secure_processing', 'Secure Processing')}</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">{t('tools.server_managed', '100% Server Managed')}</span>
                   </div>
                   <ShieldCheck className="w-8 h-8 text-emerald-500/50" />
                 </div>
@@ -186,7 +183,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
                   <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
                   <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
                     <Sparkles className="w-4 h-4 text-blue-400" />
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400">Tutorial & Overview</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400">{t('tools.tutorial_overview', 'Tutorial & Overview')}</span>
                   </div>
                   <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
                 </div>
@@ -209,9 +206,9 @@ export default async function DynamicToolPage({ params }: PageProps) {
               <div className="max-w-3xl mx-auto space-y-8">
                 <div className="text-center">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-4">
-                    <HelpCircle className="w-3.5 h-3.5" /> Support Center
+                    <HelpCircle className="w-3.5 h-3.5" /> {t('tools.support_center', 'Support Center')}
                   </div>
-                  <h3 className="text-3xl font-black text-white tracking-tighter uppercase">Frequently Asked Questions</h3>
+                  <h3 className="text-3xl font-black text-white tracking-tighter uppercase">{t('tools.faq_title', 'Frequently Asked Questions')}</h3>
                 </div>
 
                 <div className="space-y-4">
@@ -226,7 +223,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
           {/* Dynamic Related Tools list */}
           {relatedTools.length > 0 && (
             <section className="py-16 border-t border-white/5">
-              <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em] mb-10 text-center select-none">Recommended Category Utilities</h4>
+              <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em] mb-10 text-center select-none">{t('tools.recommended_utilities', 'Recommended Category Utilities')}</h4>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
                 {relatedTools.map((rt: any, i: number) => (
                   <Link 
@@ -238,7 +235,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
                       {rt.title}
                     </span>
                     <span className="text-[9px] font-black text-blue-500 uppercase tracking-widest flex items-center gap-1 select-none">
-                      Try Tool
+                      {t('tools.try_tool', 'Try Tool')}
                       <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </Link>

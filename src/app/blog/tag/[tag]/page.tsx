@@ -24,11 +24,19 @@ export async function generateMetadata({ params }: TagPageProps) {
   const { tag } = await params;
   const label = formatTagLabel(tag);
 
+  let locale = "en";
+  try {
+    const { headers } = await import('next/headers');
+    const headerList = await headers();
+    locale = headerList.get("x-locale") || "en";
+  } catch (e) {}
+
   return buildBlogArchiveMetadata(
     `#${label} Articles`,
     `Articles tagged with ${label} on ToolWala AI.`,
     `/blog/tag/${tag}`,
-    [label, "blog", "ToolWala AI"]
+    [label, "blog", "ToolWala AI"],
+    locale
   );
 }
 

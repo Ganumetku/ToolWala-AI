@@ -11,7 +11,6 @@ import {
   LockKeyholeOpen, Files, Grid, Layers
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { PDFDocument } from 'pdf-lib';
 import { decryptPDF } from '@pdfsmaller/pdf-decrypt';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
@@ -67,6 +66,7 @@ export default function UnlockPdf() {
         
         // Verify document is password locked
         try {
+          const { PDFDocument } = await import('pdf-lib');
           await PDFDocument.load(bytes);
           // If it loads without throwing, the PDF is NOT locked
           toast.info("This PDF is already unlocked and does not require password removal.");

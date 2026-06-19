@@ -202,21 +202,28 @@ export function buildBlogArchiveMetadata(
   title: string,
   description: string,
   path: string,
-  keywords: string[] = []
+  keywords: string[] = [],
+  locale: string = 'en'
 ): Metadata {
-  const url = getSiteUrl(path);
+  const canonical = getLocalizedCanonicalUrl(path, locale);
+  const languages = getAlternateLanguages(path);
+  const url = getSiteUrl(locale === 'en' ? path : `/${locale}${path}`);
+
   return {
     title: `${title} | ${SITE_NAME}`,
     description,
     keywords,
-    alternates: { canonical: url },
+    alternates: {
+      canonical,
+      languages
+    },
     openGraph: {
       title,
       description,
       url,
       siteName: SITE_NAME,
       type: 'website',
-      locale: 'en_US',
+      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
       images: [{ url: `${SITE_URL}/og-image.png`, width: 1200, height: 630, alt: title }],
     },
     twitter: { card: 'summary_large_image', title, description },

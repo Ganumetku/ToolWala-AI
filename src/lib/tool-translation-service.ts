@@ -11,87 +11,112 @@ export interface ToolTranslationData {
   seoDescription?: string | null;
 }
 
+const singleTranslationCache: Record<string, { data: ToolTranslationData | null; timestamp: number }> = {};
+const getAllTranslationsCache: Record<string, { data: Record<string, any>; timestamp: number }> = {};
+const CACHE_TIMEOUT = 60000; // 60 seconds
+
 export async function getToolTranslation(slug: string, locale: string): Promise<ToolTranslationData | null> {
-  if (prisma) {
-    try {
-      const record = await prisma.toolTranslation.findUnique({
-        where: {
-          toolSlug_locale: {
-            toolSlug: slug,
-            locale
+  const cacheKey = `${slug}_${locale}`;
+  const now = Date.now();
+  if (singleTranslationCache[cacheKey] && (now - singleTranslationCache[cacheKey].timestamp < CACHE_TIMEOUT)) {
+    return singleTranslationCache[cacheKey].data;
+  }
+
+  const queryFn = async () => {
+    if (prisma) {
+      try {
+        const record = await prisma.toolTranslation.findUnique({
+          where: {
+            toolSlug_locale: {
+              toolSlug: slug,
+              locale
+            }
           }
+        });
+        if (record) {
+          return {
+            toolSlug: record.toolSlug,
+            locale: record.locale,
+            title: record.title,
+            description: record.description,
+            faq: record.faq as any || [],
+            seoTitle: record.seoTitle,
+            seoDescription: record.seoDescription
+          };
         }
-      });
-      if (record) {
-        return {
-          toolSlug: record.toolSlug,
-          locale: record.locale,
-          title: record.title,
-          description: record.description,
-          faq: record.faq as any || [],
-          seoTitle: record.seoTitle,
-          seoDescription: record.seoDescription
-        };
+      } catch (err) {
+        console.error(`Error querying tool translation from Prisma db:`, err);
       }
-    } catch (err) {
-      console.error(`Error querying tool translation from Prisma db:`, err);
     }
-  }
 
-  // Fallback to jsonDb
-  const translations = jsonDb.getToolTranslations();
-  const record = translations.find(t => t.toolSlug === slug && t.locale === locale);
-  if (record) {
-    return {
-      toolSlug: record.toolSlug,
-      locale: record.locale,
-      title: record.title,
-      description: record.description,
-      faq: record.faq || [],
-      seoTitle: record.seoTitle,
-      seoDescription: record.seoDescription
-    };
-  }
+    // Fallback to jsonDb
+    const translations = jsonDb.getToolTranslations();
+    const record = translations.find(t => t.toolSlug === slug && t.locale === locale);
+    if (record) {
+      return {
+        toolSlug: record.toolSlug,
+        locale: record.locale,
+        title: record.title,
+        description: record.description,
+        faq: record.faq || [],
+        seoTitle: record.seoTitle,
+        seoDescription: record.seoDescription
+      };
+    }
+    return null;
+  };
 
-  return null;
+  const result = await queryFn();
+  singleTranslationCache[cacheKey] = { data: result, timestamp: now };
+  return result;
 }
-
 export async function getAllToolTranslations(locale: string): Promise<Record<string, any>> {
-  const result: Record<string, any> = {};
-  if (prisma) {
-    try {
-      const records = await prisma.toolTranslation.findMany({
-        where: { locale }
-      });
-      for (const record of records) {
-        result[record.toolSlug] = {
-          title: record.title,
-          description: record.description,
-          intro: record.description,
-          faqs: record.faq || [],
-          meta_title: record.seoTitle,
-          meta_description: record.seoDescription
-        };
-      }
-      return result;
-    } catch (err) {
-      console.error(`Error querying all tool translations from Prisma db:`, err);
-    }
+  const now = Date.now();
+  if (getAllTranslationsCache[locale] && (now - getAllTranslationsCache[locale].timestamp < CACHE_TIMEOUT)) {
+    return getAllTranslationsCache[locale].data;
   }
 
-  // Fallback to jsonDb
-  const translations = jsonDb.getToolTranslations();
-  const localeTranslations = translations.filter(t => t.locale === locale);
-  for (const record of localeTranslations) {
-    result[record.toolSlug] = {
-      title: record.title,
-      description: record.description,
-      intro: record.description,
-      faqs: record.faq || [],
-      meta_title: record.seoTitle,
-      meta_description: record.seoDescription
-    };
-  }
+  const queryFn = async () => {
+    const result: Record<string, any> = {};
+    if (prisma) {
+      try {
+        const records = await prisma.toolTranslation.findMany({
+          where: { locale }
+        });
+        for (const record of records) {
+          result[record.toolSlug] = {
+            title: record.title,
+            description: record.description,
+            intro: record.description,
+            faqs: record.faq || [],
+            meta_title: record.seoTitle,
+            meta_description: record.seoDescription
+          };
+        }
+        return result;
+      } catch (err) {
+        console.error(`Error querying all tool translations from Prisma db:`, err);
+      }
+    }
+
+    // Fallback to jsonDb
+    const translations = jsonDb.getToolTranslations();
+    const localeTranslations = translations.filter(t => t.locale === locale);
+    for (const record of localeTranslations) {
+      result[record.toolSlug] = {
+        title: record.title,
+        description: record.description,
+        intro: record.description,
+        faqs: record.faq || [],
+        meta_title: record.seoTitle,
+        meta_description: record.seoDescription
+      };
+    }
+    return result;
+  };
+
+  const result = await queryFn();
+  getAllTranslationsCache[locale] = { data: result, timestamp: now };
   return result;
 }
 

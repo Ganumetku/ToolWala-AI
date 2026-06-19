@@ -26,10 +26,12 @@ import CategorySearch from '@/components/CategorySearch';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
 import Link from 'next/link';
 import { useTranslation } from '@/components/I18nContext';
+import type { BlogPost } from '@/types/blog';
 
 interface CategoryPageClientProps {
   slug: string;
   category: CategoryMetadata;
+  relatedBlogs?: BlogPost[];
 }
 
 // Markdown parser helper for inline links
@@ -69,7 +71,7 @@ function parseMarkdownLinks(text: string, localizeHref: (h: string) => string) {
   return parts.length > 0 ? parts : text;
 }
 
-export default function CategoryPageClient({ slug, category }: CategoryPageClientProps) {
+export default function CategoryPageClient({ slug, category, relatedBlogs = [] }: CategoryPageClientProps) {
   const { t, locale, localizeHref } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<'all' | 'popular' | 'trending'>('all');
@@ -446,6 +448,58 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
                             )}
                           </AnimatePresence>
                         </div>
+                      );
+                    })}
+                  </div>
+                </section>
+              )}
+
+              {/* Related Blogs Section */}
+              {relatedBlogs && relatedBlogs.length > 0 && (
+                <section className="border-t border-white/5 pt-12 text-left">
+                  <div className="flex items-center gap-2 mb-8">
+                    <Sparkles className="w-4.5 h-4.5 text-blue-400" />
+                    <h3 className="text-xs font-black uppercase tracking-widest text-white">
+                      {t('categories.related_blogs_title', 'Related Blog Insights')}
+                    </h3>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {relatedBlogs.map((rBlog, idx) => {
+                      const formatReadingTime = (readingTime: string) => {
+                        const match = readingTime.match(/(\d+)\s*min\s*read/i);
+                        if (match) {
+                          const mins = match[1];
+                          return t('blog.minutes_read', `${mins} min read`).replace('{count}', mins);
+                        }
+                        return readingTime;
+                      };
+                      return (
+                        <Link
+                          key={rBlog.id}
+                          href={localizeHref(`/blog/${rBlog.slug}`)}
+                          className="p-6 rounded-[2rem] bg-white/[0.01] border border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 hover:shadow-[0_0_20px_rgba(37,99,235,0.1)] transition-all flex flex-col justify-between group h-52 text-left"
+                        >
+                          <div>
+                            <span className="text-[9px] font-black uppercase tracking-widest text-blue-500">
+                              {t(`categories.${rBlog.category}`, rBlog.category)}
+                            </span>
+                            <h4 className="text-sm font-black text-white uppercase group-hover:text-blue-400 transition-colors line-clamp-2 mt-2 leading-tight">
+                              {rBlog.title}
+                            </h4>
+                            <p className="text-gray-400 text-xs font-medium line-clamp-2 mt-2 font-sans leading-relaxed">
+                              {rBlog.excerpt}
+                            </p>
+                          </div>
+                          <div className="flex items-center justify-between pt-4 mt-4 border-t border-white/5">
+                            <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">
+                              {formatReadingTime(rBlog.readingTime)}
+                            </span>
+                            <span className="text-[9px] font-black text-blue-500 uppercase tracking-widest flex items-center gap-1 select-none">
+                              {t('blog.read_post', 'Read Post')}
+                              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                            </span>
+                          </div>
+                        </Link>
                       );
                     })}
                   </div>

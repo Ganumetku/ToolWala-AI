@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
-import { PDFDocument } from 'pdf-lib';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FileText, Download, Trash2,
@@ -239,6 +238,7 @@ export default function SplitPdf() {
     setSuccess(false);
 
     try {
+      const { PDFDocument } = await import('pdf-lib');
       const arrayBuffer = await pdfFile.arrayBuffer();
       const parentPdf = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
       const prefix = outputPrefix.trim() ? outputPrefix.trim() : "split_document";

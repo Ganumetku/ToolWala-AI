@@ -11,7 +11,6 @@ import {
   ChevronRight, AlignCenter, Lock, Unlock
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { PDFDocument, rgb, degrees, StandardFonts } from 'pdf-lib';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { MeshGradient } from '@/components/BackgroundEffects';
@@ -216,14 +215,6 @@ export default function WatermarkPdf() {
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
-  // Hex color to rgb helper
-  const hexToRgb = (hex: string) => {
-    const r = parseInt(hex.slice(1, 3), 16) / 255;
-    const g = parseInt(hex.slice(3, 5), 16) / 255;
-    const b = parseInt(hex.slice(5, 7), 16) / 255;
-    return rgb(r, g, b);
-  };
-
   // ------------------------------------
   // APPLY WATERMARK IN PDF-LIB
   // ------------------------------------
@@ -236,6 +227,16 @@ export default function WatermarkPdf() {
 
     setIsProcessing(true);
     try {
+      const { PDFDocument, rgb, degrees, StandardFonts } = await import('pdf-lib');
+      
+      // Hex color to rgb helper
+      const hexToRgb = (hex: string) => {
+        const r = parseInt(hex.slice(1, 3), 16) / 255;
+        const g = parseInt(hex.slice(3, 5), 16) / 255;
+        const b = parseInt(hex.slice(5, 7), 16) / 255;
+        return rgb(r, g, b);
+      };
+
       const pdfDoc = await PDFDocument.load(pdfBytes);
       const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
       const color = hexToRgb(textColor);

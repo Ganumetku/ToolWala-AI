@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useState, useRef } from 'react';
-import { PDFDocument } from 'pdf-lib';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FileText, Download, Trash2,
@@ -150,6 +149,7 @@ export default function MergePdf() {
     setProgress(0);
 
     try {
+      const { PDFDocument } = await import('pdf-lib');
       const mergedPdf = await PDFDocument.create();
 
       for (let i = 0; i < files.length; i++) {

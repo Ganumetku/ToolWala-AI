@@ -17,18 +17,19 @@ export default function robots(): MetadataRoute.Robots {
 
   const baseDisallow = ['/api/', '/admin/', '/login', '/auth/'];
   const allDisallow = [...baseDisallow, ...disabledLocalePaths];
+  const queryParamDisallow = ['/*?*'];
 
   return {
     rules: [
       {
         userAgent: '*',
         allow: ['/', '/blog', '/blog/', '/tools/', '/categories/'],
-        disallow: allDisallow,
+        disallow: [...allDisallow, ...queryParamDisallow],
       },
       {
         userAgent: 'Googlebot',
         allow: ['/', '/blog', '/blog/', '/tools/', '/categories/'],
-        disallow: allDisallow,
+        disallow: [...allDisallow, ...queryParamDisallow],
       },
       {
         userAgent: 'Googlebot-Image',

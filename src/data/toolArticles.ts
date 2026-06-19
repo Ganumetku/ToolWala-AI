@@ -1702,5 +1702,157 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "OCR Image to Text", href: "/tools/ocr-to-text" },
       { name: "Image Compressor", href: "/tools/image-compressor" }
     ]
+  },
+  "compress-pdf": {
+    title: "Compress PDF",
+    intro: "Reduce the file size of your PDF documents without losing visual quality. Our local optimizer runs entirely in your browser sandbox, keeping your documents 100% secure.",
+    whatItDoes: "ToolWala AI's Compress PDF tool optimizes document structures. It parses PDF streams, strips redundant metadata, cleans unreferenced font records, and optimizes internal tables to shrink file sizes. By utilizing local WebAssembly technology, the entire compression process executes right inside your browser session, meaning you can shrink huge documents instantly without waiting for cloud uploads.",
+    howToUse: [
+      "Select or drag and drop your PDF document into the compression box.",
+      "Our local script parses the document structure instantly on your device.",
+      "Click the 'Optimize PDF' button to start client-side optimization.",
+      "Review the new size, reduction percentage, and click download to save your optimized PDF."
+    ],
+    keyFeatures: [
+      { title: "Browser-Native Speed", desc: "No uploads or downloads required. The optimization executes directly on your device CPU." },
+      { title: "Visual Integrity Preservation", desc: "Our compression algorithm preserves text vectors, standard fonts, and drawing paths perfectly." },
+      { title: "Data Sovereignty", desc: "Because files never leave your device, it remains fully compliant with GDPR, HIPAA, and CCPA standards." }
+    ],
+    benefits: [
+      "Send documents via email easily by reducing size limits.",
+      "Saves device storage spaces on desktop or mobile.",
+      "Works offline—perfect for remote workers and travelers."
+    ],
+    whyChoose: "Most online PDF compressors upload your sensitive documents to their servers, creating major security risks. ToolWala AI processes your pages directly on your device, ensuring complete data confidentiality.",
+    useCases: [
+      "Optimizing tax returns and invoices before portal submissions.",
+      "Shrinking academic theses or reports for emails.",
+      "Compressing corporate presentations for seamless mobile reading."
+    ],
+    faqs: [
+      { question: "Is Compress PDF secure?", answer: "Absolutely. All optimization runs locally inside your browser memory. Your documents never touch our servers." },
+      { question: "Does it work on password-protected PDFs?", answer: "No, you must unlock password-protected PDFs first before our compressor can parse and optimize their internal structures." },
+      { question: "Is there a limit on file sizes?", answer: "Since compression runs inside your browser tab memory, we recommend using files under 100MB for optimal system stability." }
+    ],
+    conclusion: "Optimize file sizes while preserving complete document clarity with ToolWala AI's Compress PDF.",
+    relatedTools: [
+      { name: "Merge PDF", href: "/tools/merge-pdf" },
+      { name: "Split PDF", href: "/tools/split-pdf" },
+      { name: "Protect PDF", href: "/tools/protect-pdf" }
+    ]
+  },
+  "crop-pdf": {
+    title: "Crop PDF",
+    intro: "Trim page margins, adjust visible borders, and crop PDF sheets locally and securely in your web browser.",
+    whatItDoes: "ToolWala AI's Crop PDF tool allows you to modify the display boundaries (CropBox and MediaBox) of your documents. Whether you need to crop out header margins, remove scanned black edges, or fit pages to standard printing dimensions, you can adjust percentage or pixel crop offsets directly. The conversion engine renders change commands in real-time, executing locally to keep your private records safe.",
+    howToUse: [
+      "Upload your PDF document by dragging it into the crop panel or choosing browse.",
+      "Configure crop margins (top, bottom, left, right offsets) or select a standard preset.",
+      "Click the 'Crop PDF' button to rewrite page dimensions locally.",
+      "Download the cropped PDF file to your local storage instantly."
+    ],
+    keyFeatures: [
+      { title: "Custom Offsets", desc: "Precisely define crop distances for top, bottom, left, and right borders separately." },
+      { title: "Client-Side Processing", desc: "No remote databases or file storage are used. The operations happen strictly in active RAM." },
+      { title: "Standard Format Fit", desc: "Easily adjust layouts for legal filings, invoices, and standard formats." }
+    ],
+    benefits: [
+      "Remove unwanted black scanning lines or borders from scanned PDFs.",
+      "Create clean presentation slides by cropping unnecessary page gaps.",
+      "100% confidential and safe for legal, financial, or personal documents."
+    ],
+    whyChoose: "Our Crop PDF utility uses high-performance PDF manipulation layers that run client-side in the browser. You don't need to install any complex software or sign up for account registration.",
+    useCases: [
+      "Cropping legal files to fit court formatting requirements.",
+      "Removing border lines from scanned receipts and invoices.",
+      "Preparing clean pages for eBook readers or digital tablets."
+    ],
+    faqs: [
+      { question: "Does cropping a PDF change its actual data?", answer: "Cropping modifies the visible boundaries (CropBox) of the PDF page, so conforming readers hide the cropped areas. The text and layers remain within the file for standard recovery unless flattened." },
+      { question: "Can I crop single pages or all pages?", answer: "Currently, our tool crops all pages uniformly to ensure consistent layout outputs." },
+      { question: "Is this tool free?", answer: "Yes! ToolWala AI's Crop PDF is completely free, secure, and has no daily usage limits." }
+    ],
+    conclusion: "Clean up page margins and customize your document layouts with ToolWala's secure Crop PDF tool.",
+    relatedTools: [
+      { name: "Organize PDF Pages", href: "/tools/organize-pdf" },
+      { name: "Rotate PDF", href: "/tools/rotate-pdf" },
+      { name: "Remove PDF Pages", href: "/tools/remove-pages" }
+    ]
+  },
+  "rotate-pdf": {
+    title: "Rotate PDF",
+    intro: "Rotate PDF pages by 90, 180, or 270 degrees. Change page orientations locally and securely in your web browser.",
+    whatItDoes: "ToolWala AI's Rotate PDF tool lets you fix inverted or sideways page scans instantly. Using client-side JavaScript, the tool modifies the /Rotate parameter of individual or all pages inside the PDF file structure. Your documents never leave your browser context, giving you fast execution speeds without any data exposure risks.",
+    howToUse: [
+      "Drag and drop your PDF document or click to upload.",
+      "Choose to rotate pages clockwise (+90°), counter-clockwise (-90°), or fully upside down (180°).",
+      "Click the 'Rotate PDF' button to adjust orientation vectors locally.",
+      "Download the rotated PDF instantly."
+    ],
+    keyFeatures: [
+      { title: "Rotation Controls", desc: "Choose exactly how to rotate your pages—90°, 180°, or 270° clockwise." },
+      { title: "On-Device Processing", desc: "No server latency. All page parameter updates are calculated locally." },
+      { title: "Lossless Rendering", desc: "Rotating pages does not re-compress images or text layers, preserving original file quality." }
+    ],
+    benefits: [
+      "Quickly fix scanning orientation errors on documents.",
+      "Easy and simple user interface suitable for all devices.",
+      "Absolute confidentiality for tax sheets and contracts."
+    ],
+    whyChoose: "Our Rotate PDF tool is optimized for lightning-fast, client-side edits. No network uploads are required, meaning you can fix document rotations offline anytime.",
+    useCases: [
+      "Fixing sideways scanned pages on tax records or statements.",
+      "Rotating blueprint grids and landscape slides for clear viewing.",
+      "Aligning eBook pages before reading on portable devices."
+    ],
+    faqs: [
+      { question: "Can I rotate specific pages?", answer: "Yes, you can rotate pages visually using our 'Organize PDF Pages' tool. This dedicated Rotate PDF tool applies rotation to all pages in the document." },
+      { question: "Will rotating decrease PDF quality?", answer: "No, rotation is a lossless metadata parameter change. It simply instructs the PDF viewer to display the pages at a different angle." },
+      { question: "Does this work on mobile phone browsers?", answer: "Yes, it is fully responsive and works smoothly on Safari, Chrome, and all mobile viewports." }
+    ],
+    conclusion: "Correct page orientations instantly with ToolWala's secure client-side Rotate PDF tool.",
+    relatedTools: [
+      { name: "Organize PDF Pages", href: "/tools/organize-pdf" },
+      { name: "Split PDF", href: "/tools/split-pdf" },
+      { name: "Remove PDF Pages", href: "/tools/remove-pages" }
+    ]
+  },
+  "remove-pages": {
+    title: "Remove PDF Pages",
+    intro: "Delete unnecessary pages from your PDF files. Create cleaner, optimized documents locally in your browser sandbox.",
+    whatItDoes: "ToolWala AI's Remove PDF Pages tool extracts page indices, filters out unwanted pages, and compiles a clean, new PDF file structure. You can enter specific pages (e.g., page 3, 5) or page ranges (e.g., 6-10) to remove. The entire file copy operation runs entirely within active memory, meaning your document files are never transmitted to cloud databases.",
+    howToUse: [
+      "Select and upload the PDF file you want to modify.",
+      "Enter the page numbers or page ranges you want to delete.",
+      "Click the 'Remove Pages' button to create a new PDF without the deleted sheets.",
+      "Download the modified, clean document to your device."
+    ],
+    keyFeatures: [
+      { title: "Targeted Page Deletion", desc: "Specify individual pages or complete page ranges to remove in a single click." },
+      { title: "Browser Memory Execution", desc: "Your file remains completely private. No uploads or server logs are created." },
+      { title: "Metadata Preservation", desc: "Keeps original fonts, text formatting, and layout styles intact." }
+    ],
+    benefits: [
+      "Remove blank pages or draft versions from final documents.",
+      "Clean up large PDFs to share only relevant page sections.",
+      "Fast, secure, and works 100% offline."
+    ],
+    whyChoose: "We put privacy first. Rather than uploading your files to third-party servers, our Remove Pages tool handles all document extraction inside your browser cache, giving you complete data security.",
+    useCases: [
+      "Removing duplicate pages from invoice lists.",
+      "Filtering out unneeded chapters from eBooks or guides.",
+      "Cleaning up bank statements to share only required sections."
+    ],
+    faqs: [
+      { question: "How do I specify pages to delete?", answer: "You can enter page numbers separated by commas (e.g., 2, 5) or specify ranges using dashes (e.g., 3-7)." },
+      { question: "Does this delete the original file on my computer?", answer: "No, our tool does not modify files on your computer. It generates a new, modified copy which you download to your device." },
+      { question: "Is there a limit to how many pages I can delete?", answer: "No, you can remove as many pages as you like, as long as at least one page remains in the final document." }
+    ],
+    conclusion: "Clean up your documents and remove unwanted PDF pages securely with ToolWala AI.",
+    relatedTools: [
+      { name: "Split PDF", href: "/tools/split-pdf" },
+      { name: "Organize PDF Pages", href: "/tools/organize-pdf" },
+      { name: "Crop PDF", href: "/tools/crop-pdf" }
+    ]
   }
 };

@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import React, { useState, useRef, useEffect } from 'react';
-import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import {
   FileText, Download, UploadCloud, Trash2,
   AlertCircle, CheckCircle, RefreshCw, Info,
@@ -57,19 +56,6 @@ const rgbaToHex = (rgbaStr: string): string => {
     return `#${r}${g}${b}`;
   } catch (e) {
     return '#fbbf24';
-  }
-};
-
-// Utility: convert hex to rgb
-const hexToRgb = (hex: string) => {
-  try {
-    const cleanHex = hex.startsWith('#') ? hex.slice(1) : hex;
-    const r = parseInt(cleanHex.slice(0, 2), 16) / 255;
-    const g = parseInt(cleanHex.slice(2, 4), 16) / 255;
-    const b = parseInt(cleanHex.slice(4, 6), 16) / 255;
-    return rgb(isNaN(r) ? 0 : r, isNaN(g) ? 0 : g, isNaN(b) ? 0 : b);
-  } catch (e) {
-    return rgb(0, 0, 0);
   }
 };
 
@@ -1452,6 +1438,7 @@ export default function EditPdfPage() {
     };
 
     try {
+      const { PDFDocument } = await import('pdf-lib');
       const newDoc = await PDFDocument.create();
       // Load original PDF using pdf-lib to copy unedited pages
       const originalPdfDoc = await PDFDocument.load(pdfBytes);

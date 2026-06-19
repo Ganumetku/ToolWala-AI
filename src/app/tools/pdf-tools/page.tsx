@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useState, useRef } from 'react';
-import { PDFDocument } from 'pdf-lib';
 import {
   FileText, Download, UploadCloud, Trash2,
   Files, Scissors, Minimize2, AlertCircle,
@@ -194,6 +193,7 @@ export default function PdfTools() {
     clearMessages();
 
     try {
+      const { PDFDocument } = await import('pdf-lib');
       const mergedPdf = await PDFDocument.create();
       for (const file of mergeFiles) {
         const arrayBuffer = await file.arrayBuffer();
@@ -255,6 +255,7 @@ export default function PdfTools() {
     clearMessages();
 
     try {
+      const { PDFDocument } = await import('pdf-lib');
       const arrayBuffer = await splitFile.arrayBuffer();
       const pdfDoc = await PDFDocument.load(arrayBuffer);
       const totalPages = pdfDoc.getPageCount();
@@ -298,6 +299,7 @@ export default function PdfTools() {
     clearMessages();
 
     try {
+      const { PDFDocument } = await import('pdf-lib');
       const arrayBuffer = await compressFile.arrayBuffer();
       const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
       const pdfBytes = await pdfDoc.save({ useObjectStreams: false });

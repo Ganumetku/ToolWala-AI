@@ -100,7 +100,6 @@ export default function Header() {
         newPathname = `/${newLocale}${currentPathname}`;
       }
     }
-    
     // Maintain trailing slash config (trailingSlash: true)
     if (!newPathname.endsWith('/') && currentPathname.endsWith('/')) {
       newPathname += '/';
@@ -116,15 +115,56 @@ export default function Header() {
     window.location.href = newPathname + search;
   };
 
+  const pdfSuiteTools = [
+    { name: 'Merge PDF', href: '/tools/merge-pdf', icon: '🔀' },
+    { name: 'Split PDF', href: '/tools/split-pdf', icon: '✂️' },
+    { name: 'Compress PDF', href: '/tools/compress-pdf', icon: '📉' },
+    { name: 'PDF to JPG', href: '/tools/pdf-to-jpg', icon: '🖼️' },
+    { name: 'JPG to PDF', href: '/tools/jpg-to-pdf', icon: '🖼️' },
+    { name: 'Word to PDF', href: '/tools/word-to-pdf-converter', icon: '📄' },
+    { name: 'PDF to Word', href: '/tools/pdf-to-word-converter', icon: '📝' },
+    { name: 'Crop PDF', href: '/tools/crop-pdf', icon: '✂️' },
+    { name: 'Rotate PDF', href: '/tools/rotate-pdf', icon: '🔄' },
+    { name: 'Watermark PDF', href: '/tools/watermark-pdf', icon: '🎨' },
+    { name: 'Unlock PDF', href: '/tools/unlock-pdf', icon: '🔓' },
+    { name: 'Protect PDF', href: '/tools/protect-pdf', icon: '🔒' },
+    { name: 'Remove Pages', href: '/tools/remove-pages', icon: '🗑️' },
+    { name: 'Organize PDF', href: '/tools/organize-pdf', icon: '🧩' },
+    { name: 'OCR PDF', href: '/tools/pdf-ocr', icon: '🔍' },
+  ];
+
   const navigation = [
     { name: t('nav.home', 'Home'), href: '/' },
     { name: t('nav.tools', 'Tools'), href: '/tools' },
+    { 
+      name: t('nav.pdf_suite', 'PDF Suite'), 
+      href: '#', 
+      submenu: pdfSuiteTools 
+    },
     { name: t('nav.categories', 'Categories'), href: '/categories' },
     { name: t('nav.pricing', 'Pricing'), href: '/pricing' },
     { name: t('nav.blog', 'Blog'), href: '/blog' },
     { name: t('nav.about', 'About'), href: '/about' },
     { name: t('nav.contact', 'Contact Us'), href: '/contact' },
   ];
+
+  const [isPdfDropdownOpen, setIsPdfDropdownOpen] = useState(false);
+  const [isMobilePdfOpen, setIsMobilePdfOpen] = useState(false);
+  const pdfDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (langDropdownRef.current && !langDropdownRef.current.contains(event.target as Node)) {
+        setIsLangDropdownOpen(false);
+      }
+      if (pdfDropdownRef.current && !pdfDropdownRef.current.contains(event.target as Node)) {
+        setIsPdfDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <header 
@@ -150,6 +190,46 @@ export default function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-1 bg-white/5 p-1 rounded-full border border-white/10 backdrop-blur-md">
           {navigation.map((item) => {
+            if (item.submenu) {
+              const hasActiveSub = item.submenu.some(sub => pathname === localizeHref(sub.href));
+              return (
+                <div className="relative" key={item.name} ref={pdfDropdownRef}>
+                  <button
+                    onClick={() => setIsPdfDropdownOpen(!isPdfDropdownOpen)}
+                    className={`px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all whitespace-nowrap flex items-center gap-1 cursor-pointer select-none ${
+                      isPdfDropdownOpen || hasActiveSub
+                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' 
+                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    {item.name}
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isPdfDropdownOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {isPdfDropdownOpen && (
+                    <div className="absolute left-1/2 -translate-x-1/2 mt-4 w-[600px] rounded-3xl border border-white/10 bg-[#090d16]/98 p-6 shadow-[0_10px_50px_rgba(0,0,0,0.8)] backdrop-blur-xl animate-fade-in z-50 grid grid-cols-3 gap-3">
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[1px] w-24 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+                      {item.submenu.map((sub) => {
+                        const slug = sub.href.split('/').pop() || '';
+                        return (
+                          <Link
+                            key={sub.href}
+                            href={localizeHref(sub.href)}
+                            onClick={() => setIsPdfDropdownOpen(false)}
+                            className="flex items-center gap-2.5 p-3 rounded-xl hover:bg-white/5 transition-all group"
+                          >
+                            <span className="text-base group-hover:scale-110 transition-transform">{sub.icon}</span>
+                            <span className="text-[10px] font-black text-gray-300 group-hover:text-blue-400 transition-colors uppercase truncate">
+                              {t(`tools.${slug}.title`, sub.name)}
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
             const localizedHrefValue = localizeHref(item.href);
             const isActive = pathname === localizedHrefValue || 
               (item.href !== '/' && pathname?.startsWith(localizedHrefValue));
@@ -168,7 +248,7 @@ export default function Header() {
             );
           })}
         </nav>
- 
+
         <div className="hidden lg:flex items-center gap-4">
           {/* Custom Premium Language Dropdown */}
           <div className="relative" ref={langDropdownRef}>
@@ -251,6 +331,43 @@ export default function Header() {
         <div className="lg:hidden fixed inset-0 top-[72px] bottom-0 z-50 bg-[#030712]/98 backdrop-blur-2xl animate-fade-in border-t border-white/5 overflow-y-auto pb-10">
           <div className="flex flex-col p-6 gap-4">
             {navigation.map((item) => {
+              if (item.submenu) {
+                return (
+                  <div className="space-y-2" key={item.name}>
+                    <button
+                      onClick={() => setIsMobilePdfOpen(!isMobilePdfOpen)}
+                      className="w-full flex items-center justify-between p-4.5 rounded-2xl text-lg font-black bg-white/5 border border-white/5 text-white"
+                    >
+                      <span>{item.name}</span>
+                      <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${isMobilePdfOpen ? 'rotate-180 text-blue-500' : ''}`} />
+                    </button>
+                    {isMobilePdfOpen && (
+                      <div className="grid grid-cols-2 gap-2 p-2 bg-black/20 border border-white/5 rounded-2xl animate-fade-in">
+                        {item.submenu.map((sub) => {
+                          const slug = sub.href.split('/').pop() || '';
+                          return (
+                            <Link
+                              key={sub.href}
+                              href={localizeHref(sub.href)}
+                              onClick={() => {
+                                setIsMobileMenuOpen(false);
+                                setIsMobilePdfOpen(false);
+                              }}
+                              className="flex items-center gap-2.5 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all"
+                            >
+                              <span className="text-base">{sub.icon}</span>
+                              <span className="text-xs font-black text-gray-300 uppercase truncate">
+                                {t(`tools.${slug}.title`, sub.name)}
+                              </span>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
               const localizedHrefValue = localizeHref(item.href);
               const isActive = pathname === localizedHrefValue || 
                 (item.href !== '/' && pathname?.startsWith(localizedHrefValue));

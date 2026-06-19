@@ -9,7 +9,8 @@
     "contact": "Contact Us",
     "start_free": "Start Free",
     "get_started_free": "Get Started Free",
-    "select_language": "Select Language"
+    "select_language": "Select Language",
+    "pdf_suite": "PDF Suite"
   },
   "footer": {
     "copyright": "© 2026 ToolWala AI. All rights reserved.",
@@ -136,6 +137,7 @@
     "view_all_folders": "View All Folders",
     "explore_category": "Explore Category",
     "explore_other_folders": "Explore Other Folders",
+    "related_blogs_title": "Related Blog Insights",
     "tool": "tool",
     "tools_plural": "tools",
     "trending_utilities": "Trending Utilities",
@@ -662,6 +664,7 @@
     "tutorial_overview": "Tutorial & Overview",
     "support_center": "Support Center",
     "faq_title": "Frequently Asked Questions",
+    "related_blog_insights": "Related Blog Insights",
     "recommended_utilities": "Recommended Category Utilities",
     "try_tool": "Try Tool",
     "badge_client_side": "100% Client-Side & Secure",
@@ -670,7 +673,67 @@
     "found_count": "Found {count} tools for \"{query}\"",
     "in_category": " in {category}",
     "no_tools_sub": "Try broadening your search or exploring a different category.",
-    "clear_filters": "Clear Filters"
+    "clear_filters": "Clear Filters",
+    "merge-pdf": {
+      "title": "Merge PDF",
+      "description": "Combine multiple PDF documents into a single file quickly and securely."
+    },
+    "split-pdf": {
+      "title": "Split PDF",
+      "description": "Extract specific pages or split your PDF documents into multiple files instantly."
+    },
+    "compress-pdf": {
+      "title": "Compress PDF",
+      "description": "Reduce PDF file size while maintaining optimal document quality."
+    },
+    "pdf-to-jpg": {
+      "title": "PDF to JPG",
+      "description": "Convert PDF pages into high-quality JPG images directly in your browser."
+    },
+    "jpg-to-pdf": {
+      "title": "JPG to PDF",
+      "description": "Convert JPG, JPEG, and PNG images into a PDF document easily."
+    },
+    "word-to-pdf-converter": {
+      "title": "Word to PDF",
+      "description": "Convert Word documents (.docx) to PDF format locally."
+    },
+    "pdf-to-word-converter": {
+      "title": "PDF to Word",
+      "description": "Convert PDF files back to editable Word documents."
+    },
+    "crop-pdf": {
+      "title": "Crop PDF",
+      "description": "Trim PDF margins and adjust page dimensions visually."
+    },
+    "rotate-pdf": {
+      "title": "Rotate PDF",
+      "description": "Rotate PDF pages by 90, 180, or 270 degrees easily."
+    },
+    "watermark-pdf": {
+      "title": "Watermark PDF",
+      "description": "Add secure text or image watermarks to your PDF files."
+    },
+    "unlock-pdf": {
+      "title": "Unlock PDF",
+      "description": "Remove passwords and security restrictions from your PDFs."
+    },
+    "protect-pdf": {
+      "title": "Protect PDF",
+      "description": "Encrypt your PDF files with a secure password."
+    },
+    "remove-pages": {
+      "title": "Remove PDF Pages",
+      "description": "Delete specific unwanted pages from your PDF files."
+    },
+    "organize-pdf": {
+      "title": "Organize PDF Pages",
+      "description": "Reorder, rotate, or duplicate PDF pages visually."
+    },
+    "pdf-ocr": {
+      "title": "PDF OCR Scanner",
+      "description": "Extract text from scanned PDFs locally using secure OCR."
+    }
   },
   "form": {
     "copied_success": "Copied generation to clipboard!",
@@ -717,6 +780,8 @@
     "previous": "Previous",
     "next": "Next",
     "related_insights": "Related Insights",
+    "related_categories": "Related Categories",
+    "explore_categories_title": "Explore Related Categories",
     "try_tools": "Try These Tools",
     "insights_badge": "ToolWala Insights",
     "insights_title": "Tech, AI & Design",

@@ -11,7 +11,6 @@ import {
   ArrowLeft, ArrowRight as ArrowRightIcon
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { PDFDocument, degrees } from 'pdf-lib';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 
@@ -82,6 +81,7 @@ export default function OrganizePdf() {
     // Temporary load for rotation extraction using pdf-lib
     let tempPdfDoc: any = null;
     try {
+      const { PDFDocument } = await import('pdf-lib');
       tempPdfDoc = await PDFDocument.load(rawBytes.slice());
     } catch (e) {
       console.warn("Failed to load PDF in pdf-lib for rotation checks:", e);
@@ -342,6 +342,7 @@ export default function OrganizePdf() {
     setIsProcessing(true);
     setProcessingMessage("Generating organized PDF document...");
     try {
+      const { PDFDocument, degrees } = await import('pdf-lib');
       // Pass a clone of pdfBytes to prevent neutering
       const srcPdf = await PDFDocument.load(pdfBytes.slice());
       const newPdf = await PDFDocument.create();

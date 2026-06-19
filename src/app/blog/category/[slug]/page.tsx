@@ -26,11 +26,19 @@ export async function generateMetadata({ params }: CategoryPageProps) {
   const category = slugToCategory(slug);
   if (!category) return { title: "Category Not Found", robots: { index: false } };
 
+  let locale = "en";
+  try {
+    const { headers } = await import('next/headers');
+    const headerList = await headers();
+    locale = headerList.get("x-locale") || "en";
+  } catch (e) {}
+
   return buildBlogArchiveMetadata(
     `${category} Articles`,
     `Browse ${category} guides, tutorials, and insights on ToolWala AI.`,
     `/blog/category/${slug}`,
-    [category, "blog", "ToolWala AI"]
+    [category, "blog", "ToolWala AI"],
+    locale
   );
 }
 

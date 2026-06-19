@@ -171,6 +171,24 @@ export async function generateMetadata(): Promise<Metadata> {
   };
   const descriptionStr = finalDesc || defaultDesc;
 
+  const shouldNoindex = cleanPathNoSlash.startsWith('/admin') ||
+                        cleanPathNoSlash.startsWith('/login') ||
+                        cleanPathNoSlash.startsWith('/auth');
+
+  const robotsRule = shouldNoindex
+    ? { index: false, follow: false }
+    : {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          "max-video-preview": -1,
+          "max-image-preview": "large" as const,
+          "max-snippet": -1,
+        },
+      };
+
   return {
     title: titleObj,
     description: descriptionStr,
@@ -227,17 +245,7 @@ export async function generateMetadata(): Promise<Metadata> {
       ],
     },
     manifest: "/manifest.json",
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
-    },
+    robots: robotsRule,
   };
 }
 
@@ -289,13 +297,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Lazy background cache sync check
-  try {
-    const { syncLanguagesDbToJSON } = await import('@/lib/languages');
-    await syncLanguagesDbToJSON();
-  } catch (e) {
-    console.error('Failed to sync languages from DB in RootLayout:', e);
-  }
+  // Trigger language DB sync in the background so it does not block page delivery
+  import('@/lib/languages')
+    .then(({ syncLanguagesDbToJSON }) => syncLanguagesDbToJSON())
+    .catch((e) => console.error('Failed to sync languages from DB in background:', e));
 
   let locale = "en";
   try {

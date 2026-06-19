@@ -11,6 +11,8 @@ import {
   getLocalizedCanonicalUrl 
 } from '@/lib/seo';
 import { getTranslationServer } from '@/lib/i18n-server';
+import { getPublicBlogs } from '@/lib/blogs-server';
+import { getBlogTranslationWithFallback } from '@/lib/blog-translation-service';
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -90,6 +92,18 @@ export default async function Page({ params }: PageProps) {
 
   const categoryTools = getToolsByCategory(category.id, toolsData).filter(t => t.isVisible);
   
+  // Find related public blog posts for this category
+  const allBlogs = await getPublicBlogs();
+  const matchedBlogs = allBlogs.filter(blog => 
+    blog.category.toLowerCase() === category.title.toLowerCase() ||
+    categoryTools.some(tool => blog.relatedToolSlugs?.includes(tool.slug)) ||
+    blog.tags.some(tag => category.keywords.some(kw => kw.toLowerCase() === tag.toLowerCase()))
+  ).slice(0, 3);
+
+  const translatedBlogs = await Promise.all(
+    matchedBlogs.map(b => getBlogTranslationWithFallback(b, locale))
+  );
+  
   const collectionPageSchema = {
     '@type': 'CollectionPage',
     '@id': `${categoryUrl}#collection`,
@@ -144,7 +158,7 @@ export default async function Page({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <CategoryPageClient slug={resolvedParams.slug} category={category} />
+      <CategoryPageClient slug={resolvedParams.slug} category={category} relatedBlogs={translatedBlogs} />
     </>
   );
 }

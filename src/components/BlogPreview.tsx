@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { BookOpen, Clock, ArrowRight } from "lucide-react";
 import blogsData from "@/data/dynamic_blogs.json";
 import { useTranslation } from "@/components/I18nContext";
+import LazyBlogImage from "./blog/LazyBlogImage";
 
 export default function BlogPreview() {
   const { t, locale, localizeHref } = useTranslation();
@@ -83,7 +84,7 @@ export default function BlogPreview() {
                   {/* Thumbnail */}
                   <div className="h-52 w-full overflow-hidden relative border-b border-white/5">
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 to-transparent z-10" />
-                    <img 
+                    <LazyBlogImage 
                       src={blog.thumbnail || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80"} 
                       alt={blogTitle}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -121,9 +122,9 @@ export default function BlogPreview() {
                 {/* Author & Read More */}
                 <div className="px-6.5 pb-6.5 pt-4 border-t border-white/5 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <img 
+                    <LazyBlogImage 
                       src={blog.author?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"}
-                      alt={blog.author?.name}
+                      alt={blog.author?.name || "Author"}
                       className="w-7 h-7 rounded-full border border-white/10"
                     />
                     <div>

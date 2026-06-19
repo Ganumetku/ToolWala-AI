@@ -9,7 +9,8 @@
     "contact": "Contacto",
     "start_free": "Comience gratis",
     "get_started_free": "Comience gratis",
-    "select_language": "Seleccionar idioma"
+    "select_language": "Seleccionar idioma",
+    "pdf_suite": "Suite PDF"
   },
   "footer": {
     "copyright": "© 2026 ToolWala AI. Todos los derechos reservados.",
@@ -136,6 +137,7 @@
     "view_all_folders": "Ver todas las carpetas",
     "explore_category": "Explorar categoría",
     "explore_other_folders": "Explorar otras carpetas",
+    "related_blogs_title": "Artículos de blog relacionados",
     "tool": "herramienta",
     "tools_plural": "herramientas",
     "trending_utilities": "Utilidades de tendencia",
@@ -662,6 +664,7 @@
     "tutorial_overview": "Tutorial y descripción general",
     "support_center": "Centro de soporte",
     "faq_title": "Preguntas frecuentes",
+    "related_blog_insights": "Artículos de blog relacionados",
     "recommended_utilities": "Categoría recomendada Utilidades",
     "try_tool": "Pruebe la herramienta",
     "badge_client_side": "100% del lado del cliente y seguro",
@@ -670,7 +673,67 @@
     "found_count": "Se encontraron {count} herramientas para \"{query}\"",
     "in_category": " in {category}",
     "no_tools_sub": "Intente ampliar su búsqueda o explorar una categoría diferente.",
-    "clear_filters": "Borrar filtros"
+    "clear_filters": "Borrar filtros",
+    "merge-pdf": {
+      "title": "Unir PDF",
+      "description": "Combine múltiples documentos PDF en un solo archivo de forma rápida y segura."
+    },
+    "split-pdf": {
+      "title": "Dividir PDF",
+      "description": "Extraiga páginas específicas o divida sus documentos PDF en varios archivos."
+    },
+    "compress-pdf": {
+      "title": "Comprimir PDF",
+      "description": "Reduzca el tamaño de sus archivos PDF manteniendo la calidad óptima."
+    },
+    "pdf-to-jpg": {
+      "title": "PDF a JPG",
+      "description": "Convierta páginas PDF en imágenes JPG de alta calidad en su navegador."
+    },
+    "jpg-to-pdf": {
+      "title": "JPG a PDF",
+      "description": "Convierta imágenes JPG, JPEG y PNG en un documento PDF fácilmente."
+    },
+    "word-to-pdf-converter": {
+      "title": "Word a PDF",
+      "description": "Convierta documentos Word (.docx) a formato PDF localmente."
+    },
+    "pdf-to-word-converter": {
+      "title": "PDF a Word",
+      "description": "Convierta archivos PDF de nuevo a documentos Word editables."
+    },
+    "crop-pdf": {
+      "title": "Recortar PDF",
+      "description": "Recorte los márgenes de PDF y ajuste las dimensiones de la página visualmente."
+    },
+    "rotate-pdf": {
+      "title": "Rotar PDF",
+      "description": "Rote páginas PDF 90, 180 o 270 grados fácilmente."
+    },
+    "watermark-pdf": {
+      "title": "Marca de agua PDF",
+      "description": "Agregue marcas de agua de texto o imagen seguras a sus archivos PDF."
+    },
+    "unlock-pdf": {
+      "title": "Desbloquear PDF",
+      "description": "Elimine contraseñas y restricciones de seguridad de sus archivos PDF."
+    },
+    "protect-pdf": {
+      "title": "Proteger PDF",
+      "description": "Cifre sus archivos PDF con una contraseña segura."
+    },
+    "remove-pages": {
+      "title": "Eliminar páginas PDF",
+      "description": "Elimine páginas específicas no deseadas de sus archivos PDF."
+    },
+    "organize-pdf": {
+      "title": "Organizar páginas PDF",
+      "description": "Reordene, rote o duplique páginas PDF visualmente."
+    },
+    "pdf-ocr": {
+      "title": "Escáner OCR PDF",
+      "description": "Extraiga texto de PDF escaneados localmente usando OCR seguro."
+    }
   },
   "form": {
     "copied_success": "¡Generación copiada al portapapeles!",
@@ -717,6 +780,8 @@
     "previous": "Anterior",
     "next": "Siguiente",
     "related_insights": "Información relacionada",
+    "related_categories": "Categorías relacionadas",
+    "explore_categories_title": "Explorar categorías relacionadas",
     "try_tools": "Pruebe estas herramientas",
     "insights_badge": "ToolWala Perspectivas",
     "insights_title": "Tecnología, IA y diseño",

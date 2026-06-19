@@ -15,18 +15,32 @@ export function isToolLive(tool: Tool): boolean {
   return false;
 }
 
+let publicToolsCachePromise: Promise<Tool[]> | null = null;
+let publicToolsCacheTimestamp = 0;
+const CLIENT_CACHE_TTL = 30000; // 30 seconds
+
 /** Client-side: fetch public tools from API with static fallback */
 export async function fetchPublicTools(): Promise<Tool[]> {
-  try {
-    const res = await fetch('/api/tools/public/', { next: { revalidate: 60 } } as RequestInit);
-    if (res.ok) {
-      const data = await res.json();
-      if (data.success && Array.isArray(data.tools)) return data.tools;
-    }
-  } catch {
-    // fall through to static
+  const now = Date.now();
+  if (publicToolsCachePromise && (now - publicToolsCacheTimestamp < CLIENT_CACHE_TTL)) {
+    return publicToolsCachePromise;
   }
-  return toolsData.filter(isToolLive);
+
+  publicToolsCachePromise = (async () => {
+    try {
+      const res = await fetch('/api/tools/public/', { next: { revalidate: 60 } } as RequestInit);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && Array.isArray(data.tools)) return data.tools;
+      }
+    } catch {
+      // fall through to static
+    }
+    return toolsData.filter(isToolLive);
+  })();
+
+  publicToolsCacheTimestamp = now;
+  return publicToolsCachePromise;
 }
 
 /** Client-side: fetch all tools (admin) from API with static fallback */
@@ -43,18 +57,30 @@ export async function fetchAdminTools(): Promise<Tool[]> {
   return toolsData;
 }
 
+const toolBySlugCache: Record<string, { promise: Promise<Tool | null>; timestamp: number }> = {};
+
 /** Client-side: fetch single tool by slug */
 export async function fetchToolBySlug(slug: string): Promise<Tool | null> {
-  try {
-    const res = await fetch(`/api/tools/public/?slug=${encodeURIComponent(slug)}`);
-    if (res.ok) {
-      const data = await res.json();
-      if (data.success && data.tool) return data.tool;
-    }
-  } catch {
-    // fall through
+  const now = Date.now();
+  if (toolBySlugCache[slug] && (now - toolBySlugCache[slug].timestamp < CLIENT_CACHE_TTL)) {
+    return toolBySlugCache[slug].promise;
   }
-  return toolsData.find((t) => t.slug === slug) ?? null;
+
+  const promise = (async () => {
+    try {
+      const res = await fetch(`/api/tools/public/?slug=${encodeURIComponent(slug)}`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && data.tool) return data.tool;
+      }
+    } catch {
+      // fall through
+    }
+    return toolsData.find((t) => t.slug === slug) ?? null;
+  })();
+
+  toolBySlugCache[slug] = { promise, timestamp: now };
+  return promise;
 }
 
 /** Synchronous helpers using static data (SSR fallback / offline) */

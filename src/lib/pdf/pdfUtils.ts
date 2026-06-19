@@ -1,5 +1,3 @@
-import { PDFDocument } from 'pdf-lib';
-
 export function uint8ArrayToArrayBuffer(bytes: Uint8Array): ArrayBuffer {
   return bytes.buffer.slice(
     bytes.byteOffset,
@@ -10,6 +8,7 @@ export function uint8ArrayToArrayBuffer(bytes: Uint8Array): ArrayBuffer {
 export async function getPdfPageCount(file: File): Promise<number> {
   try {
     const arrayBuffer = await file.arrayBuffer();
+    const { PDFDocument } = await import('pdf-lib');
     const pdfDoc = await PDFDocument.load(arrayBuffer, {
       updateMetadata: false,
       ignoreEncryption: true

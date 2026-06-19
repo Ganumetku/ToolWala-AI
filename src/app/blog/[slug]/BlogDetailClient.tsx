@@ -15,6 +15,7 @@ import RelatedTools from "@/components/blog/RelatedTools";
 import BlogNewsletter from "@/components/blog/BlogNewsletter";
 import BlogTableOfContents from "@/components/blog/BlogTableOfContents";
 import { useTranslation } from "@/components/I18nContext";
+import { categoriesData } from "@/data/categories";
 
 const formatDateLong = (dateString: string, locale: string) => {
   if (!dateString) return "";
@@ -55,6 +56,14 @@ export default function BlogDetailClient({
   const nextPost = currentIndex < allBlogs.length - 1 ? allBlogs[currentIndex + 1] : null;
 
   const toolsBySlug = Object.fromEntries(relatedTools.map((t) => [t.slug, t]));
+
+  const relatedCategories = useMemo(() => {
+    return categoriesData.filter(cat => 
+      cat.title.toLowerCase() === blog.category.toLowerCase() ||
+      relatedTools.some(tool => tool.category === cat.title) ||
+      blog.tags.some(tag => cat.keywords.some(kw => kw.toLowerCase() === tag.toLowerCase()) || cat.title.toLowerCase().includes(tag.toLowerCase()))
+    ).slice(0, 3);
+  }, [blog.category, blog.tags, relatedTools]);
 
   useEffect(() => {
     fetch(`/api/blogs/${blog.slug}/view/`, { method: "POST" }).catch(() => {});
@@ -184,6 +193,31 @@ export default function BlogDetailClient({
                 ))}
               </div>
             )}
+
+            {relatedCategories.length > 0 && (
+              <div className="pt-8 mt-8 border-t border-white/5">
+                <h4 className="text-xs font-black uppercase tracking-widest text-gray-400 mb-4">
+                  {t('blog.related_categories', 'Related Categories')}
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {relatedCategories.map((cat) => (
+                    <Link
+                      key={cat.slug}
+                      href={localizeHref(`/categories/${cat.slug}`)}
+                      className="p-4 rounded-xl bg-white/[0.01] border border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 transition-all flex items-center justify-between group"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg shrink-0">{cat.icon}</span>
+                        <span className="text-xs font-black text-gray-300 group-hover:text-white uppercase truncate">
+                          {t(`categories.${cat.title}`, cat.title)}
+                        </span>
+                      </div>
+                      <ArrowRight className="w-3.5 h-3.5 text-gray-600 group-hover:text-blue-500 transition-colors shrink-0" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </article>
 
           <RelatedTools tools={relatedTools} />
@@ -267,6 +301,31 @@ export default function BlogDetailClient({
                     <span className="text-xs font-black text-white uppercase group-hover:text-blue-400 line-clamp-2">
                       {t(`tools.${tool.slug}.title`, tool.title)}
                     </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {relatedCategories.length > 0 && (
+            <div className="glass rounded-[2rem] border border-white/5 p-6 space-y-4">
+              <h3 className="text-xs font-black uppercase tracking-widest text-white border-b border-white/5 pb-3">
+                {t('blog.explore_categories_title', 'Explore Related Categories')}
+              </h3>
+              <div className="space-y-3">
+                {relatedCategories.map((cat) => (
+                  <Link
+                    key={cat.slug}
+                    href={localizeHref(`/categories/${cat.slug}`)}
+                    className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all group"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-lg shrink-0">{cat.icon}</span>
+                      <span className="text-xs font-black text-white uppercase group-hover:text-blue-400 truncate">
+                        {t(`categories.${cat.title}`, cat.title)}
+                      </span>
+                    </div>
+                    <ArrowRight className="w-3.5 h-3.5 text-gray-500 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all" />
                   </Link>
                 ))}
               </div>

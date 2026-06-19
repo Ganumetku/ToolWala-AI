@@ -10,7 +10,6 @@ import {
   Sparkles, KeyRound, ShieldAlert, Files, Grid, Layers
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { PDFDocument } from 'pdf-lib';
 import { encryptPDF } from '@pdfsmaller/pdf-encrypt-lite';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
@@ -92,6 +91,7 @@ export default function ProtectPdf() {
         
         // Verify document is not already encrypted
         try {
+          const { PDFDocument } = await import('pdf-lib');
           await PDFDocument.load(bytes);
         } catch (loadErr: any) {
           if (

@@ -12,7 +12,6 @@ import {
   Share2, ChevronRight, Files
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { PDFDocument } from 'pdf-lib';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { MeshGradient } from '@/components/BackgroundEffects';

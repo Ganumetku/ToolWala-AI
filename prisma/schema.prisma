@@ -266,3 +266,16 @@ model ToolTranslation {
   @@map("tool_translations")
 }
 
+model Language {
+  id           String   @id @default(uuid())
+  languageName String   @map("language_name")
+  languageCode String   @unique @map("language_code")
+  enabled      Boolean  @default(false)
+  seoEnabled   Boolean  @default(false) @map("seo_enabled")
+  displayOrder Int      @default(0) @map("display_order")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("languages")
+}
+

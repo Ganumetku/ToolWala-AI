@@ -39,7 +39,17 @@ export default async function BlogCategoryPage({ params }: CategoryPageProps) {
   const category = slugToCategory(slug);
   if (!category) notFound();
 
-  const allBlogs = await getPublicBlogs();
+  let locale = "en";
+  try {
+    const { headers } = await import('next/headers');
+    const headerList = await headers();
+    locale = headerList.get("x-locale") || "en";
+  } catch (e) {}
+
+  const rawBlogs = await getPublicBlogs();
+  const { getBlogTranslationWithFallback } = await import("@/lib/blog-translation-service");
+  const allBlogs = await Promise.all(rawBlogs.map(b => getBlogTranslationWithFallback(b, locale)));
+
   const categoryBlogs = allBlogs.filter((b) => b.category === category);
   const trendingBlogs = getTrendingBlogs(allBlogs, 5);
   const breadcrumbs = buildCategoryBreadcrumbs(category, slug);

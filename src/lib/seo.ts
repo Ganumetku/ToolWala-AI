@@ -5,7 +5,7 @@ import type { BreadcrumbItem } from '@/lib/blog-seo';
 import { buildFaqJsonLd } from '@/lib/blog-utils';
 import { buildBlogBreadcrumbs } from '@/lib/blog-seo';
 import { getTranslationServer } from '@/lib/i18n-server';
-import { getEnabledLocales } from '@/lib/languages';
+import { getEnabledLocales, getLanguagesConfig } from '@/lib/languages';
 import { headers } from 'next/headers';
 import { getToolTranslationWithFallback } from '@/lib/tool-translation-service';
 
@@ -16,6 +16,46 @@ export function getSiteUrl(path = ''): string {
   const base = SITE_URL.replace(/\/$/, '');
   const p = path.startsWith('/') ? path : `/${path}`;
   return `${base}${p}`;
+}
+
+export function getAlternateLanguages(pathname: string): Record<string, string> {
+  const siteUrl = "https://toolwala.co";
+  const parts = pathname.split('/');
+  const cleanPath = ['hi', 'es', 'fr', 'de', 'pt', 'ar', 'id'].includes(parts[1])
+    ? '/' + parts.slice(2).join('/')
+    : pathname;
+  
+  const cleanPathNoSlash = cleanPath.replace(/\/$/, '');
+  
+  const languages: Record<string, string> = {
+    'x-default': `${siteUrl}${cleanPathNoSlash}/`,
+    'en': `${siteUrl}${cleanPathNoSlash}/`
+  };
+  
+  const enabledLocales = getEnabledLocales();
+  const config = getLanguagesConfig();
+  enabledLocales.forEach((loc) => {
+    if (loc !== 'en' && config[loc]?.seo_enabled) {
+      languages[loc] = `${siteUrl}/${loc}${cleanPathNoSlash}/`;
+    }
+  });
+  
+  return languages;
+}
+
+export function getLocalizedCanonicalUrl(pathname: string, locale: string): string {
+  const siteUrl = "https://toolwala.co";
+  const parts = pathname.split('/');
+  const cleanPath = ['hi', 'es', 'fr', 'de', 'pt', 'ar', 'id'].includes(parts[1])
+    ? '/' + parts.slice(2).join('/')
+    : pathname;
+  
+  const cleanPathNoSlash = cleanPath.replace(/\/$/, '');
+  
+  if (locale === 'en') {
+    return `${siteUrl}${cleanPathNoSlash}/`;
+  }
+  return `${siteUrl}/${locale}${cleanPathNoSlash}/`;
 }
 
 export function buildToolMetadata(tool: Tool): Metadata {
@@ -49,15 +89,30 @@ export function buildCategoryMetadata(
   title: string,
   description: string,
   slug: string,
-  keywords: string[] = []
+  keywords: string[] = [],
+  locale: string = 'en'
 ): Metadata {
-  const url = getSiteUrl(`/categories/${slug}`);
+  const path = `/categories/${slug}`;
+  const canonical = getLocalizedCanonicalUrl(path, locale);
+  const languages = getAlternateLanguages(path);
+  const url = getSiteUrl(locale === 'en' ? `/categories/${slug}` : `/${locale}/categories/${slug}`);
+
   return {
     title,
     description,
     keywords,
-    alternates: { canonical: `/categories/${slug}` },
-    openGraph: { title, description, url, siteName: SITE_NAME, type: 'website' },
+    alternates: {
+      canonical,
+      languages
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: SITE_NAME,
+      type: 'website',
+      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
+    },
     twitter: { card: 'summary_large_image', title, description },
   };
 }
@@ -84,7 +139,7 @@ export function buildToolJsonLd(tool: Tool) {
   };
 }
 
-export function buildBlogMetadata(blog: BlogPost): Metadata {
+export function buildBlogMetadata(blog: BlogPost, locale: string = 'en'): Metadata {
   const title = blog.seoMetadata?.title || `${blog.title} | ${SITE_NAME}`;
   const description =
     blog.seoMetadata?.description ||
@@ -92,7 +147,11 @@ export function buildBlogMetadata(blog: BlogPost): Metadata {
     blog.content.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().slice(0, 160);
   const keywords =
     blog.seoMetadata?.keywords?.split(',').map((k) => k.trim()).filter(Boolean) || blog.tags;
-  const url = getSiteUrl(`/blog/${blog.slug}`);
+  
+  const path = `/blog/${blog.slug}`;
+  const canonical = getLocalizedCanonicalUrl(path, locale);
+  const languages = getAlternateLanguages(path);
+  const url = getSiteUrl(locale === 'en' ? `/blog/${blog.slug}` : `/${locale}/blog/${blog.slug}`);
   const image = blog.thumbnail || `${SITE_URL}/og-image.png`;
   const isPublished = blog.status === 'published';
 
@@ -100,14 +159,17 @@ export function buildBlogMetadata(blog: BlogPost): Metadata {
     title,
     description,
     keywords,
-    alternates: { canonical: url },
+    alternates: {
+      canonical,
+      languages
+    },
     openGraph: {
       title,
       description,
       type: 'article',
       url,
       siteName: SITE_NAME,
-      locale: 'en_US',
+      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
       publishedTime: blog.publishedAt || blog.createdAt,
       modifiedTime: blog.updatedAt,
       authors: [blog.author.name],
@@ -327,8 +389,9 @@ export async function generateToolMetadataHelper(
   };
   
   const enabledLocales = getEnabledLocales();
+  const config = getLanguagesConfig();
   enabledLocales.forEach((loc) => {
-    if (loc !== 'en') {
+    if (loc !== 'en' && config[loc]?.seo_enabled) {
       languages[loc] = `${siteUrl}/${loc}${cleanPathNoSlash}/`;
     }
   });

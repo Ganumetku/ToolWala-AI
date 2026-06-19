@@ -27,8 +27,10 @@ export default function Header() {
   const pathname = usePathname();
   const { t, locale, enabledLocales, localizeHref } = useTranslation();
 
-  // Filter languages to only show the enabled ones
-  const activeLanguages = LANGUAGES.filter(lang => enabledLocales.includes(lang.code));
+  // Filter languages to only show the enabled ones in priority order
+  const activeLanguages = enabledLocales
+    .map(code => LANGUAGES.find(lang => lang.code === code))
+    .filter((lang): lang is typeof LANGUAGES[0] => !!lang);
   const currentLanguage = LANGUAGES.find(lang => lang.code === locale) || LANGUAGES[0];
 
   useEffect(() => {
@@ -134,13 +136,13 @@ export default function Header() {
     >
       <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 gap-8">
         <div className="flex items-center gap-2">
-          <Link href={localizeHref('/')} className="flex items-center gap-3 group whitespace-nowrap shrink-0">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white font-black text-2xl transition-all group-hover:scale-110 group-hover:rotate-3 shadow-[0_0_20px_rgba(37,99,235,0.4)] relative overflow-hidden">
+          <Link href={localizeHref('/')} translate="no" data-no-translate className="flex items-center gap-3 group whitespace-nowrap shrink-0 no-translate notranslate">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white font-black text-2xl transition-all group-hover:scale-110 group-hover:rotate-3 shadow-[0_0_20px_rgba(37,99,235,0.4)] relative overflow-hidden no-translate notranslate" translate="no" data-no-translate>
               <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
               T
             </div>
-            <span className="text-2xl font-black tracking-tighter text-white whitespace-nowrap">
-              ToolWala <span className="text-blue-500">AI</span>
+            <span translate="no" data-no-translate className="text-2xl font-black tracking-tighter text-white whitespace-nowrap no-translate notranslate">
+              ToolWala <span translate="no" data-no-translate className="text-blue-500 no-translate notranslate">AI</span>
             </span>
           </Link>
         </div>

@@ -3,7 +3,7 @@ import { getPublicTools } from '@/lib/tools-server';
 import { getPublicBlogs, slugifyTag } from '@/lib/blogs-server';
 import { categoriesData } from '@/data/categories';
 import { BLOG_CATEGORIES } from '@/types/blog';
-import { getEnabledLocales } from '@/lib/languages';
+import { getEnabledLocales, getLanguagesConfig } from '@/lib/languages';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
@@ -14,6 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
   // Get currently enabled locales
   const enabledLocales = getEnabledLocales();
+  const config = getLanguagesConfig();
 
   // Helper to build a sitemap item with alternates
   const buildItem = (
@@ -33,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     };
     
     enabledLocales.forEach((loc) => {
-      if (loc !== 'en') {
+      if (loc !== 'en' && config[loc]?.seo_enabled) {
         languages[loc] = `${baseUrl}/${loc}${cleanPath}`;
       }
     });

@@ -155,6 +155,33 @@ export async function getToolTranslationWithFallback(slug: string, locale: strin
     }
   }
 
+  // If locale is Spanish, ensure we don't return English strings
+  if (locale === 'es') {
+    const enData = await getToolTranslation(slug, 'en');
+    const isUntranslated = !data || (enData && data.title === enData.title && data.description === enData.description);
+    if (isUntranslated) {
+      const baseEn = enData || await getToolTranslationWithFallback(slug, 'en');
+      const esTitle = await translateText(baseEn.title, 'es');
+      const esDesc = await translateText(baseEn.description, 'es');
+      const esFaqs = await translateFaqs(baseEn.faq, 'es');
+      const esSeoTitle = await translateText(baseEn.seoTitle || '', 'es');
+      const esSeoDesc = await translateText(baseEn.seoDescription || '', 'es');
+
+      const translatedData: ToolTranslationData = {
+        toolSlug: slug,
+        locale: 'es',
+        title: esTitle,
+        description: esDesc,
+        faq: esFaqs,
+        seoTitle: esSeoTitle,
+        seoDescription: esSeoDesc
+      };
+
+      await saveToolTranslation(translatedData);
+      return translatedData;
+    }
+  }
+
   if (data) return data;
 
   // Fallback to English

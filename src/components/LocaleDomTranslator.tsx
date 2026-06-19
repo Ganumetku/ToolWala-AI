@@ -8,12 +8,52 @@ const hasDevanagari = (str: string) => /[\u0900-\u097F]/.test(str || '');
 const hasEnglish = (str: string) => /[a-zA-Z]/.test(str || '');
 
 export default function LocaleDomTranslator({ children }: { children: React.ReactNode }) {
-  const { locale } = useTranslation();
+  const { locale, messages } = useTranslation();
   const observerRef = useRef<MutationObserver | null>(null);
   const isTranslatingRef = useRef(false);
 
   useEffect(() => {
-    if (locale !== 'hi') return;
+    if (locale === 'en') return;
+
+    const knownTranslationsSet = new Set<string>();
+
+    const collectAllValues = (obj: any) => {
+      if (!obj) return;
+      if (typeof obj === 'string') {
+        const trimmed = obj.trim();
+        if (trimmed) {
+          knownTranslationsSet.add(trimmed);
+          knownTranslationsSet.add(trimmed.toLowerCase());
+        }
+      } else if (typeof obj === 'object') {
+        for (const key in obj) {
+          if (Object.prototype.hasOwnProperty.call(obj, key)) {
+            collectAllValues(obj[key]);
+          }
+        }
+      }
+    };
+
+    collectAllValues(messages);
+
+    const isTranslationExcluded = (node: Node): boolean => {
+      let current: Node | null = node;
+      while (current) {
+        if (current.nodeType === Node.ELEMENT_NODE) {
+          const el = current as Element;
+          if (
+            el.hasAttribute('data-no-translate') ||
+            el.getAttribute('translate') === 'no' ||
+            el.classList.contains('no-translate') ||
+            el.classList.contains('notranslate')
+          ) {
+            return true;
+          }
+        }
+        current = current.parentNode;
+      }
+      return false;
+    };
 
     const translateNodes = async (nodes: Node[]) => {
       if (isTranslatingRef.current) return;
@@ -24,6 +64,10 @@ export default function LocaleDomTranslator({ children }: { children: React.Reac
       const textsToTranslateSet = new Set<string>();
 
       const traverse = (node: Node) => {
+        if (isTranslationExcluded(node)) {
+          return;
+        }
+
         // Exclude specific elements
         if (node.nodeType === Node.ELEMENT_NODE) {
           const el = node as Element;
@@ -32,17 +76,13 @@ export default function LocaleDomTranslator({ children }: { children: React.Reac
             if ((el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') && el.hasAttribute('placeholder')) {
               const ph = el.getAttribute('placeholder') || '';
               if (ph && hasEnglish(ph) && !hasDevanagari(ph)) {
+                if (knownTranslationsSet.has(ph) || knownTranslationsSet.has(ph.toLowerCase())) {
+                  return;
+                }
                 placeholderMap.set(el, ph);
                 textsToTranslateSet.add(ph);
               }
             }
-            return;
-          }
-          if (
-            el.hasAttribute('data-no-translate') ||
-            el.getAttribute('translate') === 'no' ||
-            el.classList.contains('no-translate')
-          ) {
             return;
           }
         }
@@ -51,6 +91,9 @@ export default function LocaleDomTranslator({ children }: { children: React.Reac
           const content = node.nodeValue || '';
           const trimmed = content.trim();
           if (trimmed && hasEnglish(trimmed) && !hasDevanagari(trimmed)) {
+            if (knownTranslationsSet.has(trimmed) || knownTranslationsSet.has(trimmed.toLowerCase())) {
+              return;
+            }
             textMap.set(node, trimmed);
             textsToTranslateSet.add(trimmed);
           }
@@ -70,7 +113,7 @@ export default function LocaleDomTranslator({ children }: { children: React.Reac
         const res = await fetch('/api/translate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ texts: Array.from(textsToTranslateSet), targetLang: 'hi' }),
+          body: JSON.stringify({ texts: Array.from(textsToTranslateSet), targetLang: locale }),
         });
 
         if (res.ok) {
@@ -83,6 +126,8 @@ export default function LocaleDomTranslator({ children }: { children: React.Reac
             const translated = translations[trimmed];
             if (translated) {
               node.nodeValue = translated;
+              knownTranslationsSet.add(translated);
+              knownTranslationsSet.add(translated.toLowerCase());
             }
           });
 
@@ -90,6 +135,8 @@ export default function LocaleDomTranslator({ children }: { children: React.Reac
             const translated = translations[ph];
             if (translated) {
               el.setAttribute('placeholder', translated);
+              knownTranslationsSet.add(translated);
+              knownTranslationsSet.add(translated.toLowerCase());
             }
           });
 
@@ -133,7 +180,7 @@ export default function LocaleDomTranslator({ children }: { children: React.Reac
     return () => {
       observerRef.current?.disconnect();
     };
-  }, [locale]);
+  }, [locale, messages]);
 
   return <>{children}</>;
 }

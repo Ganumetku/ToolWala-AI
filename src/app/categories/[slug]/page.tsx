@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { categoriesData } from '@/data/categories';
 import CategoryPageClient from './CategoryPageClient';
+import { buildCategoryMetadata } from '@/lib/seo';
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -44,20 +45,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
   } catch (e) {}
 
-  return {
-    title: seoTitle,
-    description: seoDescription,
-    keywords: category.keywords.join(', '),
-    alternates: {
-      canonical: `https://toolwala.co/categories/${category.slug}`,
-    },
-    openGraph: {
-      title: seoTitle,
-      description: seoDescription,
-      url: `https://toolwala.co/categories/${category.slug}`,
-      type: 'website',
-    }
-  };
+  return buildCategoryMetadata(seoTitle, seoDescription, category.slug, category.keywords, locale);
 }
 
 export default async function Page({ params }: PageProps) {

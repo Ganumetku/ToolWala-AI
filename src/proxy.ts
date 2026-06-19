@@ -25,6 +25,26 @@ export async function proxy(request: NextRequest) {
   // Compute rewritten pathname (without the locale prefix if present)
   let rewrittenPathname = pathname;
   if (isLocalePrefix) {
+    const { getEnabledLocales } = require('@/lib/languages');
+    const enabledLocales = getEnabledLocales();
+    
+    // 301 Redirect to English equivalent if locale is disabled
+    if (!enabledLocales.includes(localeCandidate)) {
+      const targetPath = '/' + pathnameParts.slice(2).join('/');
+      let redirectPath = targetPath;
+      if (!redirectPath.startsWith('/')) {
+        redirectPath = '/' + redirectPath;
+      }
+      if (pathname.endsWith('/') && !redirectPath.endsWith('/')) {
+        redirectPath += '/';
+      }
+      const redirectUrl = new URL(redirectPath + request.nextUrl.search, request.url);
+      console.log(`[Proxy] Locale "${localeCandidate}" is disabled. Redirecting 301 to English and resetting cookie: ${redirectUrl.toString()}`);
+      const response = NextResponse.redirect(redirectUrl, { status: 301 });
+      response.cookies.set('NEXT_LOCALE', 'en', { path: '/' });
+      return response;
+    }
+
     rewrittenPathname = '/' + pathnameParts.slice(2).join('/');
     console.log(`[Proxy] Raw rewrittenPathname: ${rewrittenPathname}`);
     if (!rewrittenPathname.endsWith('/') && request.nextUrl.pathname.endsWith('/')) {
@@ -36,10 +56,14 @@ export async function proxy(request: NextRequest) {
   if (pathname === '/' && !isLocalePrefix) {
     const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
     if (cookieLocale && cookieLocale !== 'en' && LOCALES.includes(cookieLocale)) {
-      const userAgent = request.headers.get('user-agent') || '';
-      const isBot = /bot|googlebot|crawler|spider|robot|crawling/i.test(userAgent);
-      if (!isBot) {
-        return NextResponse.redirect(new URL(`/${cookieLocale}/`, request.url));
+      const { getEnabledLocales } = require('@/lib/languages');
+      const enabledLocales = getEnabledLocales();
+      if (enabledLocales.includes(cookieLocale)) {
+        const userAgent = request.headers.get('user-agent') || '';
+        const isBot = /bot|googlebot|crawler|spider|robot|crawling/i.test(userAgent);
+        if (!isBot) {
+          return NextResponse.redirect(new URL(`/${cookieLocale}/`, request.url));
+        }
       }
     }
   }

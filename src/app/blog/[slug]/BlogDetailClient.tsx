@@ -87,7 +87,7 @@ export default function BlogDetailClient({
     <>
       <ReadingProgressBar />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12" data-no-translate>
         <div className="lg:col-span-1 lg:sticky lg:top-32 h-fit hidden lg:block">
           <BlogShareButtons title={translatedTitle} url={pageUrl} layout="vertical" />
         </div>

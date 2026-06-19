@@ -86,6 +86,7 @@ async function runMigration() {
     '002_blog_posts.sql',
     '003_analytics.sql',
     '004_tool_translations.sql',
+    '005_languages.sql',
   ];
 
   const client = new pg.Client({ connectionString: DATABASE_URL, ssl: { rejectUnauthorized: false } });

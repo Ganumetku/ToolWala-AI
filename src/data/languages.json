@@ -2,41 +2,57 @@
   "en": {
     "enabled": true,
     "name": "English",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "seo_enabled": true,
+    "display_order": 1
   },
   "hi": {
     "enabled": true,
     "name": "हिन्दी",
-    "flag": "🇮🇳"
+    "flag": "🇮🇳",
+    "seo_enabled": true,
+    "display_order": 2
   },
   "es": {
-    "enabled": false,
+    "enabled": true,
     "name": "Español",
-    "flag": "🇪🇸"
+    "flag": "🇪🇸",
+    "seo_enabled": true,
+    "display_order": 3
+  },
+  "pt": {
+    "enabled": true,
+    "name": "Português",
+    "flag": "🇧🇷",
+    "seo_enabled": true,
+    "display_order": 4
   },
   "fr": {
     "enabled": false,
     "name": "Français",
-    "flag": "🇫🇷"
+    "flag": "🇫🇷",
+    "seo_enabled": false,
+    "display_order": 5
   },
   "de": {
     "enabled": false,
     "name": "Deutsch",
-    "flag": "🇩🇪"
-  },
-  "pt": {
-    "enabled": false,
-    "name": "Português",
-    "flag": "🇵🇹"
-  },
-  "ar": {
-    "enabled": false,
-    "name": "العربية",
-    "flag": "🇸🇦"
+    "flag": "🇩🇪",
+    "seo_enabled": false,
+    "display_order": 6
   },
   "id": {
     "enabled": false,
     "name": "Bahasa Indonesia",
-    "flag": "🇮🇩"
+    "flag": "🇮🇩",
+    "seo_enabled": false,
+    "display_order": 7
+  },
+  "ar": {
+    "enabled": false,
+    "name": "العربية",
+    "flag": "🇸🇦",
+    "seo_enabled": false,
+    "display_order": 8
   }
 }

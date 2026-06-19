@@ -138,12 +138,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 lg:gap-12">
           
           <div className="lg:col-span-4 space-y-8">
-            <Link href={localizeHref('/')} className="flex items-center gap-3 group select-none">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white font-black text-2xl shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-transform group-hover:scale-110 group-hover:rotate-3">
+            <Link href={localizeHref('/')} translate="no" data-no-translate className="flex items-center gap-3 group select-none no-translate notranslate">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white font-black text-2xl shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-transform group-hover:scale-110 group-hover:rotate-3 no-translate notranslate" translate="no" data-no-translate>
                 T
               </div>
-              <span className="text-2xl font-black tracking-tighter text-white">
-                ToolWala <span className="text-blue-500">AI</span>
+              <span translate="no" data-no-translate className="text-2xl font-black tracking-tighter text-white no-translate notranslate">
+                ToolWala <span translate="no" data-no-translate className="text-blue-500 no-translate notranslate">AI</span>
               </span>
             </Link>
             
@@ -254,7 +254,7 @@ export default function Footer() {
         <div className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left select-none">
           <div className="space-y-4">
             <p className="text-xs text-gray-500 font-bold">
-              &copy; {currentYear} ToolWala AI. {t('footer.copyright_notice', 'All rights reserved.')}
+              &copy; {currentYear} <span translate="no" data-no-translate className="no-translate notranslate">ToolWala AI</span>. {t('footer.copyright_notice', 'All rights reserved.')}
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-4.5 text-[10px] font-black uppercase tracking-wider text-gray-600">
               <Link href={localizeHref('/privacy-policy')} className="hover:text-gray-400 transition-colors">{t('footer.privacy', 'Privacy Policy')}</Link>

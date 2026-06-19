@@ -34,11 +34,22 @@ export async function generateMetadata({ params }: TagPageProps) {
 
 export default async function BlogTagPage({ params }: TagPageProps) {
   const { tag } = await params;
-  const tagBlogs = await getBlogsByTag(tag);
+  const rawTagBlogs = await getBlogsByTag(tag);
 
-  if (!tagBlogs.length) notFound();
+  if (!rawTagBlogs.length) notFound();
 
-  const allBlogs = await getPublicBlogs();
+  let locale = "en";
+  try {
+    const { headers } = await import('next/headers');
+    const headerList = await headers();
+    locale = headerList.get("x-locale") || "en";
+  } catch (e) {}
+
+  const { getBlogTranslationWithFallback } = await import("@/lib/blog-translation-service");
+  const tagBlogs = await Promise.all(rawTagBlogs.map(b => getBlogTranslationWithFallback(b, locale)));
+
+  const rawAllBlogs = await getPublicBlogs();
+  const allBlogs = await Promise.all(rawAllBlogs.map(b => getBlogTranslationWithFallback(b, locale)));
   const trendingBlogs = getTrendingBlogs(allBlogs, 5);
   const label = formatTagLabel(tag);
   const breadcrumbs = buildTagBreadcrumbs(label, tag);

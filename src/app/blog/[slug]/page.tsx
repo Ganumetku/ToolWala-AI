@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: BlogPageProps) {
   const { getBlogTranslationWithFallback } = await import("@/lib/blog-translation-service");
   const translatedBlog = await getBlogTranslationWithFallback(blog, locale);
 
-  return buildBlogMetadata(translatedBlog);
+  return buildBlogMetadata(translatedBlog, locale);
 }
 
 export default async function BlogDetailPage({ params }: BlogPageProps) {
@@ -52,7 +52,8 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
   const { getBlogTranslationWithFallback } = await import("@/lib/blog-translation-service");
   const translatedBlog = await getBlogTranslationWithFallback(blog, locale);
 
-  const [activeBlogs, allTools] = await Promise.all([getPublicBlogs(), getPublicTools()]);
+  const [rawActiveBlogs, allTools] = await Promise.all([getPublicBlogs(), getPublicTools()]);
+  const activeBlogs = await Promise.all(rawActiveBlogs.map(b => getBlogTranslationWithFallback(b, locale)));
   const relatedSlugs = await resolveRelatedToolSlugs(translatedBlog);
   const relatedTools = allTools.filter((t) => relatedSlugs.includes(t.slug));
   

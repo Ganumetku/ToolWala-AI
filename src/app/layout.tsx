@@ -45,11 +45,12 @@ export async function generateMetadata(): Promise<Metadata> {
     'en': `${siteUrl}${cleanPathNoSlash}/`
   };
   
-  const { getEnabledLocales } = await import('@/lib/languages');
+  const { getEnabledLocales, getLanguagesConfig } = await import('@/lib/languages');
   const enabledLocales = getEnabledLocales();
+  const config = getLanguagesConfig();
   
   enabledLocales.forEach((loc) => {
-    if (loc !== 'en') {
+    if (loc !== 'en' && config[loc]?.seo_enabled) {
       languages[loc] = `${siteUrl}/${loc}${cleanPathNoSlash}/`;
     }
   });
@@ -175,6 +176,14 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Lazy background cache sync check
+  try {
+    const { syncLanguagesDbToJSON } = await import('@/lib/languages');
+    await syncLanguagesDbToJSON();
+  } catch (e) {
+    console.error('Failed to sync languages from DB in RootLayout:', e);
+  }
+
   let locale = "en";
   try {
     const headerList = await headers();

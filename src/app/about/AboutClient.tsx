@@ -19,6 +19,7 @@ export default function AboutClient() {
             <SectionTitle 
               title={t('about.title', 'About ToolWala AI')} 
               subtitle={t('about.subtitle', 'Democratizing artificial intelligence through simple, powerful, and secure browser utilities.')}
+              as="h1"
             />
             
             <div className="space-y-10">

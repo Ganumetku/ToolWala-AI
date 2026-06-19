@@ -2,14 +2,16 @@ interface SectionTitleProps {
   title: string;
   subtitle?: string;
   centered?: boolean;
+  as?: 'h1' | 'h2';
 }
 
-export default function SectionTitle({ title, subtitle, centered = false }: SectionTitleProps) {
+export default function SectionTitle({ title, subtitle, centered = false, as = 'h2' }: SectionTitleProps) {
+  const Heading = as;
   return (
     <div className={`mb-16 max-w-4xl ${centered ? 'mx-auto text-center' : ''}`}>
-      <h2 className="mb-6 text-4xl font-black tracking-tighter text-white md:text-6xl uppercase">
+      <Heading className="mb-6 text-4xl font-black tracking-tighter text-white md:text-6xl uppercase">
         {title}
-      </h2>
+      </Heading>
       {subtitle && (
         <p className="text-xl text-gray-400 font-medium leading-relaxed">
           {subtitle}
@@ -18,3 +20,4 @@ export default function SectionTitle({ title, subtitle, centered = false }: Sect
     </div>
   );
 }
+

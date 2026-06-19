@@ -10,7 +10,14 @@ import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import ShareButtons from '@/components/ShareButtons';
 import { headers } from 'next/headers';
 import { getToolTranslationWithFallback } from '@/lib/tool-translation-service';
-import { generateToolMetadataHelper } from '@/lib/seo';
+import { 
+  generateToolMetadataHelper, 
+  buildBreadcrumbJsonLd, 
+  buildEnrichedToolJsonLd, 
+  buildWebPageSchema, 
+  buildFAQSchema,
+  getLocalizedCanonicalUrl 
+} from '@/lib/seo';
 import { getTranslationServer } from '@/lib/i18n-server';
 
 export const dynamic = 'force-dynamic';
@@ -102,18 +109,29 @@ export default async function DynamicToolPage({ params }: PageProps) {
   }
 
   // Schema Markup (LD-JSON)
+  const toolUrl = getLocalizedCanonicalUrl(`/tools/${slug}`, locale);
+  const categoryName = tool.category?.title || tool.categoryName || 'Utilities';
+  
+  const breadcrumbItems = [
+    { name: t('nav.home', 'Home'), href: locale === 'en' ? '/' : `/${locale}` },
+    { name: t('nav.tools', 'Tools'), href: localizeHref('/tools') },
+    { name: tool.title, href: localizeHref(`/tools/${slug}`) }
+  ];
+
+  const graph: any[] = [
+    buildEnrichedToolJsonLd(tool, toolUrl, categoryName),
+    buildWebPageSchema(tool.title, tool.description, toolUrl, locale),
+    buildBreadcrumbJsonLd(breadcrumbItems)
+  ];
+
+  const faqSchema = buildFAQSchema(tool.faqs);
+  if (faqSchema) {
+    graph.push(faqSchema);
+  }
+
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    'name': tool.title,
-    'description': tool.description,
-    'applicationCategory': 'BusinessApplication',
-    'operatingSystem': 'All',
-    'offers': {
-      '@type': 'Offer',
-      'price': '0',
-      'priceCurrency': 'USD'
-    }
+    '@graph': graph
   };
 
   return (

@@ -27,7 +27,11 @@ const DEV_COUNTRIES = ['US', 'IN', 'GB', 'CA', 'DE', 'AU', 'FR', 'BR', 'JP', 'ZA
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const bodyText = await request.text();
+    if (!bodyText.trim()) {
+      return NextResponse.json({ success: false, error: 'Request body is empty' }, { status: 400 });
+    }
+    const body = JSON.parse(bodyText);
     const { type, sessionId, eventName, toolId, toolName: bodyToolName, route: bodyRoute, referrer: bodyReferrer, metadata = {} } = body;
 
     if (!sessionId) {

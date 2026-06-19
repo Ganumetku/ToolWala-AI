@@ -38,11 +38,11 @@ export async function generateMetadata(): Promise<Metadata> {
     ? '/' + parts.slice(2).join('/')
     : originalPathname;
   
-  const cleanPathNoSlash = cleanPath.replace(/\/$/, '');
+  const cleanPathNoSlash = cleanPath.replace(/\/$/, '') || '/';
   
   const languages: Record<string, string> = {
-    'x-default': `${siteUrl}${cleanPathNoSlash}/`,
-    'en': `${siteUrl}${cleanPathNoSlash}/`
+    'x-default': `${siteUrl}${cleanPathNoSlash === '/' ? '' : cleanPathNoSlash}/`,
+    'en': `${siteUrl}${cleanPathNoSlash === '/' ? '' : cleanPathNoSlash}/`
   };
   
   const { getEnabledLocales, getLanguagesConfig } = await import('@/lib/languages');
@@ -51,16 +51,129 @@ export async function generateMetadata(): Promise<Metadata> {
   
   enabledLocales.forEach((loc) => {
     if (loc !== 'en' && config[loc]?.seo_enabled) {
-      languages[loc] = `${siteUrl}/${loc}${cleanPathNoSlash}/`;
+      languages[loc] = `${siteUrl}/${loc}${cleanPathNoSlash === '/' ? '' : cleanPathNoSlash}/`;
     }
   });
 
+  // Dynamic Metadata overrides for Client Pages that cannot export metadata
+  let toolTitle = "";
+  let toolDesc = "";
+  
+  if (cleanPathNoSlash.startsWith('/tools/')) {
+    try {
+      const { toolsData } = await import('@/data/tools');
+      const matchedStaticTool = toolsData.find(t => t.href.replace(/\/$/, '') === cleanPathNoSlash);
+      
+      if (matchedStaticTool) {
+        const { getToolTranslationWithFallback } = await import('@/lib/tool-translation-service');
+        const translation = await getToolTranslationWithFallback(matchedStaticTool.slug, locale);
+        toolTitle = translation.seoTitle || translation.title || `${matchedStaticTool.title} | ToolWala AI`;
+        toolDesc = translation.seoDescription || translation.description || matchedStaticTool.description;
+      } else {
+        // Dynamic database tool page lookup
+        const slug = cleanPathNoSlash.split('/').pop() || "";
+        if (slug) {
+          const { prisma } = await import('@/lib/db');
+          let dbTool: any = null;
+          if (prisma) {
+            dbTool = await prisma.tool.findUnique({
+              where: { slug: slug },
+              include: { seoMetadata: true }
+            });
+          }
+          if (!dbTool) {
+            const { jsonDb } = await import('@/lib/jsonDb');
+            const tools = jsonDb.getTools();
+            dbTool = tools.find((t: any) => t.slug === slug);
+          }
+          if (dbTool) {
+            const { getToolTranslationWithFallback } = await import('@/lib/tool-translation-service');
+            const translation = await getToolTranslationWithFallback(slug, locale);
+            toolTitle = translation.seoTitle || translation.title || dbTool.seoMetadata?.title || `${dbTool.title} | ToolWala AI`;
+            toolDesc = translation.seoDescription || translation.description || dbTool.seoMetadata?.description || dbTool.description;
+          }
+        }
+      }
+    } catch (e) {
+      console.error("Error generating dynamic layout metadata for tools:", e);
+    }
+  }
+
+  let pricingTitle = "";
+  let pricingDesc = "";
+  if (cleanPathNoSlash === '/pricing') {
+    if (locale === 'hi') {
+      pricingTitle = "मूल्य निर्धारण योजनाएं | टूलवाला AI";
+      pricingDesc = "टूलवाला AI मूल्य निर्धारण योजनाएं देखें। हमारे प्रारंभिक बीटा चरण के दौरान हर उपकरण 100% मुफ़्त है।";
+    } else if (locale === 'es') {
+      pricingTitle = "Planes de precios | ToolWala AI";
+      pricingDesc = "Vea los planes de precios de ToolWala AI. Cada herramienta es 100% gratuita durante nuestra fase beta de acceso anticipado.";
+    } else if (locale === 'pt') {
+      pricingTitle = "Planos de Preço | ToolWala AI";
+      pricingDesc = "Veja os planos de preços da ToolWala AI. Cada ferramenta é 100% gratuita durante nossa fase beta de acesso antecipado.";
+    } else if (locale === 'fr') {
+      pricingTitle = "Plans tarifaires | ToolWala AI";
+      pricingDesc = "Consultez les tarifs de ToolWala AI. Chaque outil est 100% gratuit pendant notre phase bêta d'accès anticipé.";
+    } else if (locale === 'de') {
+      pricingTitle = "Preise & Tarife | ToolWala AI";
+      pricingDesc = "Sehen Sie sich die Preispläne von ToolWala AI an. Jedes Tool ist während unserer Early-Access-Beta-Phase zu 100 % kostenlos.";
+    } else if (locale === 'id') {
+      pricingTitle = "Paket Harga | ToolWala AI";
+      pricingDesc = "Lihat paket harga ToolWala AI. Setiap alat 100% gratis selama fase beta akses awal kami.";
+    } else if (locale === 'ar') {
+      pricingTitle = "خطط الأسعار | ToolWala AI";
+      pricingDesc = "عرض خطط أسعار ToolWala AI. كل أداة مجانية بنسبة 100% خلال مرحلة الوصول المبكر التجريبية.";
+    } else {
+      pricingTitle = "Pricing Plans | ToolWala AI";
+      pricingDesc = "View ToolWala AI pricing plans. Every tool is 100% free during our early access beta phase.";
+    }
+  }
+
+  let loginTitle = "";
+  let loginDesc = "";
+  if (cleanPathNoSlash === '/login') {
+    if (locale === 'hi') {
+      loginTitle = "लॉगिन करें | टूलवाला AI";
+      loginDesc = "अपने टूलवाला AI खाते में लॉग इन करें।";
+    } else if (locale === 'es') {
+      loginTitle = "Iniciar sesión | ToolWala AI";
+      loginDesc = "Inicie sesión en su cuenta de ToolWala AI.";
+    } else if (locale === 'pt') {
+      loginTitle = "Entrar | ToolWala AI";
+      loginDesc = "Faça login em sua conta ToolWala AI.";
+    } else if (locale === 'fr') {
+      loginTitle = "Connexion | ToolWala AI";
+      loginDesc = "Connectez-vous à votre compte ToolWala AI.";
+    } else if (locale === 'de') {
+      loginTitle = "Anmelden | ToolWala AI";
+      loginDesc = "Melden Sie sich bei Ihrem ToolWala AI-Konto an.";
+    } else if (locale === 'id') {
+      loginTitle = "Masuk | ToolWala AI";
+      loginDesc = "Masuk ke akun ToolWala AI Anda.";
+    } else if (locale === 'ar') {
+      loginTitle = "تسجيل الدخول | ToolWala AI";
+      loginDesc = "سجل الدخول إلى حسابك في ToolWala AI.";
+    } else {
+      loginTitle = "Sign In | ToolWala AI";
+      loginDesc = "Log in to your ToolWala AI account.";
+    }
+  }
+
+  const finalTitle = toolTitle || pricingTitle || loginTitle || "";
+  const finalDesc = toolDesc || pricingDesc || loginDesc || "";
+
+  const defaultTitle = "ToolWala AI – Free AI Tools for Images, PDF, Resume, QR & More";
+  const defaultDesc = "ToolWala AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.";
+
+  const titleObj = finalTitle ? { default: finalTitle, template: "%s | ToolWala AI" } : {
+    default: defaultTitle,
+    template: "%s | ToolWala AI"
+  };
+  const descriptionStr = finalDesc || defaultDesc;
+
   return {
-    title: {
-      default: "ToolWala AI – Free AI Tools for Images, PDF, Resume, QR & More",
-      template: "%s | ToolWala AI"
-    },
-    description: "ToolWala AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.",
+    title: titleObj,
+    description: descriptionStr,
     keywords: [
       "AI tools",
       "image tools",
@@ -85,21 +198,21 @@ export async function generateMetadata(): Promise<Metadata> {
       locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
       url: `${siteUrl}${originalPathname}`,
       siteName: "ToolWala AI",
-      title: "ToolWala AI – Free AI Tools for Images, PDF, Resume, QR & More",
-      description: "ToolWala AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.",
+      title: finalTitle || defaultTitle,
+      description: descriptionStr,
       images: [
         {
           url: "/og-image.png",
           width: 1200,
           height: 630,
-          alt: "ToolWala AI – Free AI Tools for Images, PDF, Resume, QR & More",
+          alt: finalTitle || defaultTitle,
         }
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: "ToolWala AI – Free AI Tools for Images, PDF, Resume, QR & More",
-      description: "ToolWala AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.",
+      title: finalTitle || defaultTitle,
+      description: descriptionStr,
       images: ["/og-image.png"],
     },
     icons: {

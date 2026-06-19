@@ -110,7 +110,7 @@ export default function LocaleDomTranslator({ children }: { children: React.Reac
       }
 
       try {
-        const res = await fetch('/api/translate', {
+        const res = await fetch('/api/translate/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ texts: Array.from(textsToTranslateSet), targetLang: locale }),

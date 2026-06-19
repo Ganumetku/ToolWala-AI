@@ -261,9 +261,9 @@ export default function InvoiceGenerator() {
             {data.logoUrl ? (
               <img src={data.logoUrl} alt="Business Logo" className="max-h-20 max-w-[200px] object-contain mb-4" />
             ) : (
-              <h1 className="text-3xl font-black mb-2" style={{ color: isMinimal ? '#111827' : data.themeColor }}>
+              <div className="text-3xl font-black mb-2" style={{ color: isMinimal ? '#111827' : data.themeColor }}>
                 {data.businessName || 'Business Name'}
-              </h1>
+              </div>
             )}
             <div className="text-gray-500 text-sm whitespace-pre-wrap">{data.businessAddress}</div>
             <div className="text-gray-500 text-sm mt-1">

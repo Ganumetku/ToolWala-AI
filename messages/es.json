@@ -98,7 +98,25 @@
     "search_placeholder_filter": "Filtro en vivo por palabra clave o etiqueta...",
     "recently_added": "Agregado recientemente",
     "popular": "populares",
-    "trending": "Tendencia"
+    "trending": "Tendencia",
+    "trust_banner": {
+      "title": "VERIFICACIONES DE CONFIANZA Y SEGURIDAD",
+      "gdpr": "RGPD y CCPA Privado",
+      "local": "Procesamiento 100% de borde",
+      "no_upload": "Sin registros de bases de datos en la nube",
+      "free": "Beta siempre gratuita"
+    },
+    "popular_shelf_title": "Herramientas populares cuidadosamente seleccionadas",
+    "why_use_title": "Por qué los profesionales eligen ToolWala AI",
+    "how_it_works_title": "Cómo funciona ToolWala",
+    "sandbox_diagram": {
+      "title": "Sandbox del navegador en el dispositivo frente a cargas en la nube",
+      "subtitle": "Las herramientas tradicionales copian sus datos a bases de datos remotas. ToolWala aísla todas las operaciones dentro del subproceso de su CPU local.",
+      "local_browser": "Zona de pruebas del navegador local",
+      "local_desc": "Sus documentos permanecen en la memoria RAM activa y se compilan localmente mediante WebAssembly. 0% de cargas de red.",
+      "cloud_db": "Servicio de nube tradicional",
+      "cloud_desc": "Los archivos se transmiten a servidores de bases de datos, exponiéndolos a fugas de red, registros de almacenamiento y accesos no seguros."
+    }
   },
   "categories": {
     "All": "Todos",
@@ -145,7 +163,42 @@
         "a2": "Absolutamente. Todas las operaciones de conversión de documentos, clasificación de páginas, división y compresión son totalmente gratuitas y sin límites de descarga."
       },
       "seoTitle": "PDF Herramientas - Gratis en línea PDF Editor, divisor y compresor | ToolWala AI",
-      "seoDescription": "Edite, combine, divida, comprima, coloque marcas de agua, proteja y escanee archivos PDF localmente. Sin suscripción, sin cargas de servidor. Tus datos permanecen privados."
+      "seoDescription": "Edite, combine, divida, comprima, coloque marcas de agua, proteja y escanee archivos PDF localmente. Sin suscripción, sin cargas de servidor. Tus datos permanecen privados.",
+      "longDescription": "El formato de documento portátil (PDF) se ha convertido en el estándar mundial para el intercambio de documentos en los sectores empresarial, educativo y jurídico. Sin embargo, modificar estos archivos normalmente obliga a los usuarios a elegir entre comprar costosas licencias de software de escritorio o cargar registros confidenciales en servidores en la nube no verificados. El conjunto de herramientas PDF de ToolWala AI resuelve este dilema al ofrecer un conjunto de herramientas integral y de nivel profesional que se ejecuta completamente en el lado del cliente dentro de la zona de pruebas de su navegador web. Ya sea que necesites [Editar PDF](/tools/pdf-tools/edit-pdf) formas, [Fusionar PDF](/tools/merge-pdf) páginas en un solo informe, o [Dividir PDF](/tools/split-pdf) archivos para extraer capítulos específicos, nuestras herramientas realizan todos los cálculos directamente en su dispositivo local. Aprovechamos los binarios compilados por WebAssembly de motores PDF de alto rendimiento que se ejecutan dentro de los subprocesos de la CPU de su navegador, lo que garantiza una ejecución casi instantánea sin demoras del lado del servidor. Esta ejecución local significa que incluso si tiene archivos grandes, no hay límites de velocidad de carga o descarga que ralenticen su flujo de trabajo. La seguridad está integrada en el núcleo: usted puede de forma segura [Proteger PDF](/tools/protect-pdf) archivos con contraseñas estándar, [Desbloquear PDF](/tools/unlock-pdf) archivos eliminando restricciones de autorización, o sellar la marca corporativa usando nuestra costumbre [PDF de marca de agua](/tools/watermark-pdf) utilidad. Además, puede convertir sin problemas formatos de archivos localmente, convirtiendo imágenes en capas de documentos con [JPG a PDF](/tools/jpg-to-pdf) o restaurar estructuras de edición estándar usando [Word a PDF](/tools/word-to-pdf-converter) . Debido a que sus documentos nunca salen de su navegador, sus informes de impuestos, hojas financieras y contratos legales permanecen 100% privados. Esta soberanía absoluta de los datos garantiza el cumplimiento de estrictas pautas de protección de datos como CCPA, HIPAA y GDPR. Al eliminar la comunicación con el servidor, nuestras herramientas PDF también funcionan perfectamente sin conexión, lo que le permite editar y administrar documentos en cualquier lugar sin conexión a Internet. Experimente un control completo de los documentos sin comprometer su privacidad, tarifas o rendimiento del sistema.",
+      "whyUse": [
+        {
+          "title": "Zona de pruebas local 100% segura",
+          "desc": "Los documentos se procesan en la memoria activa del navegador. No se envían datos a servidores externos, lo que protege los archivos confidenciales.",
+          "icon": "🔒"
+        },
+        {
+          "title": "Compresión visualmente sin pérdidas",
+          "desc": "Optimice el tamaño de los archivos mientras conserva las fuentes, los vectores y la claridad de las imágenes utilizando motores de compresión locales avanzados.",
+          "icon": "📉"
+        },
+        {
+          "title": "Soporte de formato completo",
+          "desc": "Convierta documentos fácilmente desde [Word a PDF](/tools/word-to-pdf-converter) o [JPG a PDF](/tools/jpg-to-pdf) instantáneamente.",
+          "icon": "📂"
+        }
+      ],
+      "howItWorks": [
+        {
+          "step": "1",
+          "title": "Seleccionar herramienta",
+          "desc": "Elija una operación de PDF de nuestro directorio, como Fusionar, Dividir, Editar o Comprimir."
+        },
+        {
+          "step": "2",
+          "title": "Cargar archivo",
+          "desc": "Arrastra y suelta tu documento. Se cargará instantáneamente ya que no es necesario cargarlo."
+        },
+        {
+          "step": "3",
+          "title": "Procesar y descargar",
+          "desc": "Aplique cambios (como anotar o convertir) y haga clic en Descargar para guardar el PDF modificado."
+        }
+      ]
     },
     "image-tools": {
       "desc": "Eliminador de fondo automatizado, redimensionador de fotografías de pasaporte y optimizador de imágenes.",
@@ -157,7 +210,42 @@
         "a2": "Admite los formatos JPG, JPEG, PNG y WebP, comprimiendo imágenes hasta en un 90% sin perder claridad visual."
       },
       "seoTitle": "Herramientas de imagen y editores de fotografías en línea | ToolWala AI",
-      "seoDescription": "Estandarice fotografías de pasaporte, recorte tarjetas Aadhaar, elimine fondos de imágenes y comprima fotografías con motores de navegador locales."
+      "seoDescription": "Estandarice fotografías de pasaporte, recorte tarjetas Aadhaar, elimine fondos de imágenes y comprima fotografías con motores de navegador locales.",
+      "longDescription": "La optimización de los medios digitales es esencial para los sitios web modernos, las aplicaciones profesionales y las presentaciones en portales gubernamentales oficiales. El conjunto de herramientas de imagen de ToolWala AI proporciona un potente conjunto de utilidades de edición y cambio de tamaño automatizadas impulsadas por tecnologías avanzadas del lado del cliente. Los usuarios que preparan formularios de solicitud oficiales pueden aprovechar fácilmente las herramientas de cumplimiento de nuestro portal indio especializado. Utilice el [Cambio de tamaño de fotos de Aadhaar](/tools/aadhaar-photo-resizer) para recortar y dimensionar imágenes de identidad de acuerdo con las especificaciones UIDAI, escalar fotografías utilizando el [Herramienta de fotografía PAN](/tools/pan-photo-tool) para formatos NSDL, o construir tarjetas biométricas estándar con el [Creador de fotografías de pasaporte](/tools/passport-photo-maker) . Si está diseñando gráficos o contenido de redes sociales, nuestro avanzado [Eliminador de fondo](/tools/bg-remover) aísla automáticamente los sujetos en primer plano en segundos. Al ejecutar redes neuronales localmente en su dispositivo, procesamos archivos de imágenes sin cargarlos en servidores externos en la nube, garantizando absoluta privacidad para sus documentos de identidad personales. Para optimizar el rendimiento y la velocidad de carga de la página, el [Compresor de imagen](/tools/image-compressor) reduce el tamaño de los archivos hasta en un 90% manteniendo una calidad visual nítida. Esto se logra eliminando metadatos innecesarios y aplicando algoritmos de compresión visualmente sin pérdidas. Todas las operaciones, colores y recortes del lienzo se calculan localmente en la memoria de la pestaña activa. Esta estructura local garantiza que sus archivos privados permanezcan completamente confidenciales, lo que convierte a ToolWala AI en la opción más segura para la edición de imágenes segura. Puede cambiar el tamaño, convertir, comprimir y mejorar imágenes sin registrar una cuenta ni arriesgar el acceso de terceros.",
+      "whyUse": [
+        {
+          "title": "Motor de IA del lado del cliente",
+          "desc": "Aproveche los modelos de borde para eliminar fondos y mejorar imágenes al instante sin demoras en el servidor.",
+          "icon": "⚡"
+        },
+        {
+          "title": "Cumplimiento de especificaciones oficiales",
+          "desc": "Recorte y escale fotografías a las dimensiones exactas requeridas por las especificaciones UIDAI, NSDL y visa.",
+          "icon": "📏"
+        },
+        {
+          "title": "Preservación de la calidad visual",
+          "desc": "Los algoritmos de lienzo avanzados comprimen el tamaño de los archivos y mantienen las texturas y las líneas nítidas.",
+          "icon": "🎨"
+        }
+      ],
+      "howItWorks": [
+        {
+          "step": "1",
+          "title": "Elija utilidad",
+          "desc": "Seleccione una herramienta de edición de imágenes, como Background Remover o Aadhaar Photo Resizer."
+        },
+        {
+          "step": "2",
+          "title": "Importar imagen",
+          "desc": "Seleccione su fotografía de su almacenamiento local. La herramienta lo analiza instantáneamente en su dispositivo."
+        },
+        {
+          "step": "3",
+          "title": "Personalizar y guardar",
+          "desc": "Personalice el tamaño, el KB de destino o los parámetros de recorte y descargue la imagen procesada."
+        }
+      ]
     },
     "ai-tools": {
       "desc": "Creador de currículums con IA premium, lector de voz y generadores de subtítulos sociales.",
@@ -169,7 +257,42 @@
         "a2": "Escanea estructuras de texto generadas por IA para simplificar el vocabulario y ajustar la sintaxis, lo que ayuda a que el texto se lea de forma más natural y suene escrito por humanos."
       },
       "seoTitle": "Herramientas de IA: creador de logotipos de IA, creador de currículums y humanizador de texto | ToolWala AI",
-      "seoDescription": "Potencia tu carrera y creación de contenido con generadores de logotipos, creadores de currículums y creadores de voces de IA locales."
+      "seoDescription": "Potencia tu carrera y creación de contenido con generadores de logotipos, creadores de currículums y creadores de voces de IA locales.",
+      "longDescription": "La inteligencia artificial está transformando la forma en que elaboramos currículums, generamos narraciones de audio y optimizamos el contenido escrito. El directorio de herramientas de inteligencia artificial de ToolWala AI democratiza el acceso a interfaces de modelos premium mediante la ejecución de procesos dentro de entornos de navegador seguros y puntos finales optimizados del lado del cliente. Para quienes buscan empleo, nuestro avanzado [Creador de currículums](/tools/resume-builder) proporciona diseños estructurados y optimizaciones de palabras clave para garantizar que su historial profesional pase los filtros de los sistemas de seguimiento de candidatos (ATS). Si está creando contenido o artículos en línea y necesita mejorar la legibilidad, utilice el [Humanizador de texto](/tools/text-humanizer) para analizar flujos de oraciones, simplificar vocabulario complejo y eliminar patrones mecánicos repetitivos. Además, los creadores visuales pueden generar logotipos vectoriales instantáneamente usando nuestro [Creador de logotipos con IA](/tools/ai-logo-maker) , mientras que los desarrolladores y productores de audio pueden aprovechar el local [Generador de voz](/tools/voice-generator) para convertir texto escrito en archivos de voz con sonido natural. No se requieren suscripciones costosas, registros de cuentas ni tarifas ocultas para utilizar estas herramientas premium. Al centrarse en el procesamiento localizado y las API directas, sus datos personales y sus borradores nunca se almacenan ni se utilizan para entrenar modelos de IA de terceros. Mejore su flujo de trabajo con modernas herramientas de inteligencia artificial que priorizan la privacidad y la velocidad del usuario. Puede crear fácilmente CV, humanizar contenido, crear gráficos y generar voz directamente desde la zona de pruebas de su navegador.",
+      "whyUse": [
+        {
+          "title": "Optimización ATS",
+          "desc": "Los currículums se generan utilizando un formato compatible y palabras clave semánticas para pasar las pantallas de los reclutadores.",
+          "icon": "📝"
+        },
+        {
+          "title": "Salida humanizada",
+          "desc": "Simplifique el vocabulario y elimine los patrones de la máquina para optimizar la legibilidad y las puntuaciones de participación.",
+          "icon": "👤"
+        },
+        {
+          "title": "Activos de marca personalizados",
+          "desc": "Genere recursos de logotipos vectoriales y archivos de audio de narración de alta fidelidad en segundos.",
+          "icon": "🎯"
+        }
+      ],
+      "howItWorks": [
+        {
+          "step": "1",
+          "title": "Asistente de selección",
+          "desc": "Elija la herramienta AI Resume Builder, Text Humanizer o Voice Generator."
+        },
+        {
+          "step": "2",
+          "title": "Detalles de entrada",
+          "desc": "Escriba sus datos, copie o cargue un borrador de currículum en los campos de la consola."
+        },
+        {
+          "step": "3",
+          "title": "Generar y exportar",
+          "desc": "Haga clic en ejecutar para generar el texto o audio y exportarlo a su portapapeles o dispositivo."
+        }
+      ]
     },
     "document-tools": {
       "desc": "Editores de facturas, cartas de presentación y utilidades comerciales estándar.",
@@ -179,7 +302,42 @@
         "a1": "Sí. Las facturas se compilan instantáneamente en formatos PDF estándar listos para imprimir que contienen partidas personalizadas y plantillas de impuestos."
       },
       "seoTitle": "Herramientas de documentos: creadores de facturas y currículums | ToolWala AI",
-      "seoDescription": "Cree facturas comerciales profesionales, cartas de presentación personalizadas y currículums ATS en línea en segundos."
+      "seoDescription": "Cree facturas comerciales profesionales, cartas de presentación personalizadas y currículums ATS en línea en segundos.",
+      "longDescription": "Las plantillas de documentos profesionales y las utilidades de facturación son cruciales para autónomos, propietarios de pequeñas empresas, consultores y creadores de contenido. El conjunto de herramientas de documentos de ToolWala AI proporciona generadores de diseño sin servidor de alto rendimiento diseñados para compilar archivos corporativos limpios en segundos. Cree rápidamente recibos de clientes y formularios de facturación utilizando nuestro [Generador de facturas](/tools/invoice-generator) , o recortar hojas de documentación escaneadas con el [Recortador de facturas](/tools/invoice-cropper) para extraer recibos limpios. Si está preparando paquetes de solicitud para nuevas oportunidades laborales, utilice el [Generador de cartas de presentación](/tools/cover-letter-generator) para escribir cartas de presentación personalizadas y específicas que coincidan con descripciones de trabajo específicas. Todos los campos que escribe se mantienen estrictamente en la memoria de su pestaña local, lo que elimina el riesgo de fuga de datos. Una vez preparados, sus documentos se compilan instantáneamente en archivos PDF estándar listos para imprimir que contienen estilos, tablas y líneas corporativas personalizados. Puede imprimirlos directamente desde su navegador o descargarlos localmente. Al ejecutar todos los algoritmos de compilación de documentos en el lado del cliente, ToolWala AI garantiza que los detalles confidenciales del cliente, las tasas financieras y los resúmenes profesionales permanezcan confidenciales y seguros en su dispositivo. No es necesario registrarse en un servicio, cargar información financiera ni comprar suscripciones costosas para crear garantía corporativa.",
+      "whyUse": [
+        {
+          "title": "Plantillas profesionales",
+          "desc": "Las estructuras de diseño cumplen con los estándares modernos de facturación y comunicación corporativa.",
+          "icon": "💼"
+        },
+        {
+          "title": "Herramientas comerciales 100% gratuitas",
+          "desc": "Genere facturas de facturación y cartas de presentación ilimitadas sin barreras de pago premium ni trampas de suscripción.",
+          "icon": "🆓"
+        },
+        {
+          "title": "Confidencialidad de los datos",
+          "desc": "Mantenga los costos de los artículos de la factura, los nombres de los clientes y los datos bancarios completamente seguros en su máquina.",
+          "icon": "🔒"
+        }
+      ],
+      "howItWorks": [
+        {
+          "step": "1",
+          "title": "Seleccionar formulario",
+          "desc": "Abra el Generador de facturas, el Generador de cartas de presentación o la herramienta de recorte."
+        },
+        {
+          "step": "2",
+          "title": "Llenar variables",
+          "desc": "Complete los campos de la plantilla (montos, artículos, habilidades, direcciones) en los campos."
+        },
+        {
+          "step": "3",
+          "title": "Descargar Documento",
+          "desc": "Descargue archivos PDF listos para imprimir o copie textos compilados para uso directo."
+        }
+      ]
     },
     "utility-tools": {
       "desc": "Motores de extracción de datos seguros, convertidores y otras ayudas.",
@@ -189,7 +347,42 @@
         "a1": "Ejecuta el motor Tesseract.js WASM completamente dentro de su entorno de pruebas local, manteniendo protegidos los detalles de la imagen escaneada."
       },
       "seoTitle": "Herramientas de utilidad: OCR en línea y escáneres seguros | ToolWala AI",
-      "seoDescription": "Extraiga metadatos y escanee archivos de imágenes sin enviar nada a servidores remotos."
+      "seoDescription": "Extraiga metadatos y escanee archivos de imágenes sin enviar nada a servidores remotos.",
+      "longDescription": "Extraer rápidamente texto de documentos y generar claves seguras del sistema son requisitos diarios comunes para los trabajadores de oficina y los desarrolladores web. La carpeta Herramientas de utilidad de ToolWala AI contiene ayudas nativas del navegador optimizadas que realizan cálculos localmente en su dispositivo. Extraiga texto editable de imágenes escaneadas, recibos o capturas de pantalla utilizando nuestro sistema seguro [OCR a texto](/tools/ocr-to-text) herramienta. El lector de OCR ejecuta subprocesos de Tesseract.js WebAssembly directamente dentro de la memoria caché de su navegador, lo que significa que sus archivos escaneados se procesan en la CPU de su dispositivo en lugar de enviarse a bases de datos externas. Esto es vital a la hora de digitalizar hojas con información personal o datos financieros. Además, puede crear contraseñas criptográficamente seguras con nuestro [Generador de contraseñas](/tools/password-generator) para proteger cuentas en línea. Cada hash, cadena y carácter se calcula localmente, por lo que ningún sistema externo puede interceptar sus claves. Experimente la comodidad de las utilidades de alto rendimiento que funcionan sin conexión y respetan su privacidad. Al ejecutar todos los scripts en el cliente, ToolWala AI garantiza cero exposición de datos, lo que le ayuda a digitalizar documentos y proteger sus aplicaciones con facilidad.",
+      "whyUse": [
+        {
+          "title": "OCR local seguro",
+          "desc": "Digitalice imágenes y documentos sin exposición al servidor mediante el reconocimiento óptico de caracteres en el dispositivo.",
+          "icon": "👁️"
+        },
+        {
+          "title": "Funcionalidad sin conexión",
+          "desc": "Acceda a las funciones principales sin una conexión a Internet activa una vez que se carga la página, ya que no se requiere API de servidor.",
+          "icon": "🔌"
+        },
+        {
+          "title": "Ayudantes de desarrollador",
+          "desc": "Genere contraseñas de alta entropía, analice estructuras de archivos y administre diseños de forma segura.",
+          "icon": "🛠️"
+        }
+      ],
+      "howItWorks": [
+        {
+          "step": "1",
+          "title": "Abrir utilidad",
+          "desc": "Abra el escáner OCR o la herramienta de contraseña desde la plataforma de categorías."
+        },
+        {
+          "step": "2",
+          "title": "Seleccionar entrada",
+          "desc": "Importe una captura de pantalla, seleccione el idioma de la imagen o configure los parámetros de los caracteres."
+        },
+        {
+          "step": "3",
+          "title": "Extraer y usar",
+          "desc": "Copie los textos extraídos o los hashes generados directamente a su portapapeles."
+        }
+      ]
     },
     "resume-career": {
       "desc": "ATS Constructores de currículums, cartas de presentación y creadores de aplicaciones.",
@@ -199,7 +392,42 @@
         "a1": "Nunca. Todos los campos escritos se almacenan en la memoria local de la zona de pruebas, lo que garantiza absoluta seguridad y privacidad."
       },
       "seoTitle": "Currículum vitae y carrera profesional: creador de CV y ​​carta de presentación | ToolWala AI",
-      "seoDescription": "Cree currículums limpios y calificables ATS y ​​escriba cartas de presentación de trabajo personalizadas de forma fácil y gratuita."
+      "seoDescription": "Cree currículums limpios y calificables ATS y ​​escriba cartas de presentación de trabajo personalizadas de forma fácil y gratuita.",
+      "longDescription": "Destacar en los canales de contratación modernos requiere diseños limpios y profesionales que estén optimizados para los algoritmos de escaneo de currículums. La carpeta Currículum y carrera de ToolWala AI contiene utilidades especializadas diseñadas para ayudar a los solicitantes de empleo a crear carteras optimizadas para la búsqueda. Nuestro [Creador de currículums](/tools/resume-builder) utiliza tablas estructuradas, fuentes compatibles con ATS y jerarquías semánticas claras para garantizar que los sistemas de seguimiento de candidatos puedan analizar y calificar fácilmente sus calificaciones. Para complementar su solicitud, el [Generador de cartas de presentación](/tools/cover-letter-generator) le ayuda a redactar cartas de presentación personalizadas que destacan las habilidades relevantes. Debido a que estas herramientas se ejecutan 100% localmente en la sesión de su navegador, sus datos de contacto, historial laboral y registros educativos están completamente seguros. No necesita registrar una cuenta ni preocuparse de que bases de datos de terceros recopilen su información. Genere y descargue documentos PDF limpios de una sola página al instante para postularse a su próxima oportunidad profesional con confianza. Haga que su proceso de solicitud sea fluido con herramientas de diseño seguras y optimizadas para ATS que mantienen su información personal completamente privada.",
+      "whyUse": [
+        {
+          "title": "Puntuación ATS optimizada",
+          "desc": "Estructurar capas de texto y encabezados específicamente para una alta legibilidad del sistema de seguimiento de candidatos.",
+          "icon": "📈"
+        },
+        {
+          "title": "CV locales privados",
+          "desc": "Mantenga contactos personales confidenciales, credenciales e historiales laborales a salvo de bases de datos de terceros.",
+          "icon": "🔒"
+        },
+        {
+          "title": "Personalización instantánea del formato",
+          "desc": "Adapte diseños de currículum y borradores de cartas con un solo clic para adaptarlos a las vacantes objetivo.",
+          "icon": "✨"
+        }
+      ],
+      "howItWorks": [
+        {
+          "step": "1",
+          "title": "Seleccionar plantilla",
+          "desc": "Abra el creador de currículums o el asistente de cartas de presentación desde el panel."
+        },
+        {
+          "step": "2",
+          "title": "Complete los detalles profesionales",
+          "desc": "Ingrese detalles de contacto, experiencias laborales, habilidades y parámetros laborales objetivo."
+        },
+        {
+          "step": "3",
+          "title": "Exportar PDF listo para imprimir",
+          "desc": "Descargue archivos PDF limpios, de una sola página, listos para imprimir y comience a presentar la solicitud."
+        }
+      ]
     },
     "seo-tools": {
       "desc": "Ayudantes del optimizador de contenido, OCR analizadores de texto y escáneres de etiquetas.",
@@ -209,7 +437,42 @@
         "a1": "Sí, AI Text Humanizer analiza los flujos de oraciones para aumentar la puntuación de legibilidad y evitar patrones de fraseo genéricos."
       },
       "seoTitle": "Herramientas SEO: humanizador de texto con IA y escáneres de texto | ToolWala AI",
-      "seoDescription": "Mejore las clasificaciones de búsqueda humanizando las estructuras de IA y escaneando textos de documentos."
+      "seoDescription": "Mejore las clasificaciones de búsqueda humanizando las estructuras de IA y escaneando textos de documentos.",
+      "longDescription": "Mejorar la visibilidad en los motores de búsqueda requiere una combinación de redacción legible, palabras clave optimizadas y contenido estructurado. El conjunto de herramientas SEO de ToolWala AI ofrece utilidades localizadas basadas en navegador para ayudar a los redactores de contenido y webmasters a optimizar sus blogs. Analice y mejore el flujo de oraciones utilizando nuestro [Humanizador de texto](/tools/text-humanizer) para simplificar frases complejas, aumentar las puntuaciones de legibilidad y garantizar que el texto se lea de forma natural. Para digitalizar referencias, libros o notas impresas sin necesidad de escribir manualmente, utilice nuestro sitio web local. [OCR a texto](/tools/ocr-to-text) escáner. Extrae capas de texto instantáneamente utilizando motores OCR del lado del cliente. Para la optimización de las redes sociales, el [Generador de subtítulos](/tools/caption-generator) crea subtítulos listos para la plataforma completos con hashtags relevantes. Al ejecutar estas optimizaciones localmente, su contenido permanece privado y nunca se carga en bases de datos externas. Cree clasificaciones de búsqueda y genere tráfico con utilidades de SEO privadas y de alto rendimiento. Puede modificar copiar, escanear texto y generar etiquetas de forma segura sin preocuparse por el entrenamiento de modelos o los raspadores de contenido.",
+      "whyUse": [
+        {
+          "title": "Aumento de legibilidad",
+          "desc": "Ajuste el flujo de oraciones y los patrones de fraseo para mejorar la claridad del artículo y obtener una puntuación más alta en las pruebas de legibilidad.",
+          "icon": "✍️"
+        },
+        {
+          "title": "Extractor de texto limpio",
+          "desc": "Escanee referencias impresas y extraiga texto de párrafo limpio sin escribir manualmente.",
+          "icon": "📄"
+        },
+        {
+          "title": "Privacidad garantizada",
+          "desc": "Modifique la copia de forma segura sin que se filtren datos a bases de datos externas o servidores de entrenamiento de modelos.",
+          "icon": "🔒"
+        }
+      ],
+      "howItWorks": [
+        {
+          "step": "1",
+          "title": "Seleccionar utilidad",
+          "desc": "Abra Text Humanizer o el escáner OCR desde la barra lateral."
+        },
+        {
+          "step": "2",
+          "title": "Pegar Copiar",
+          "desc": "Pegue el texto de su artículo o arrastre la imagen escaneada del documento."
+        },
+        {
+          "step": "3",
+          "title": "Proceso SEO",
+          "desc": "Convierte texto o humaniza frases con un solo clic."
+        }
+      ]
     },
     "developer-tools": {
       "desc": "Generadores de códigos QR, utilidades de scripts y herramientas de ayuda.",
@@ -219,7 +482,42 @@
         "a1": "No. Los archivos vectoriales estáticos generados no caducan y permanecerán permanentemente activos."
       },
       "seoTitle": "Herramientas para desarrolladores: generador de códigos QR y OCR local | ToolWala AI",
-      "seoDescription": "Cree códigos QR vectoriales estáticos y traduzca imágenes a estructuras de código editables."
+      "seoDescription": "Cree códigos QR vectoriales estáticos y traduzca imágenes a estructuras de código editables.",
+      "longDescription": "Los desarrolladores requieren utilidades rápidas y seguras que se ejecuten sin latencia de red ni dependencias externas. El conjunto de herramientas para desarrolladores de ToolWala AI presenta soluciones del lado del cliente que se ejecutan en los subprocesos de la CPU de su navegador. Genere códigos QR vectoriales estáticos utilizando nuestro [Generador de códigos QR](/tools/qr-code-generator) , que incluye niveles de corrección de errores ajustables y estilo personalizable. Si necesita copiar bloques de código de maquetas de diseño o capturas de pantalla, utilice el [OCR a texto](/tools/ocr-to-text) herramienta para convertir imágenes en caracteres editables localmente. La herramienta utiliza bibliotecas compiladas de WebAssembly para procesar imágenes en tiempo real. Al mantener sus datos del lado del cliente, sus claves API, cadenas de configuración y fragmentos de código nunca se envían a servidores externos. Optimice su flujo de trabajo de desarrollo con herramientas ligeras y seguras diseñadas para creadores modernos. Cree códigos QR, convierta texto de imágenes y analice configuraciones sin conexión y con total seguridad.",
+      "whyUse": [
+        {
+          "title": "Salidas vectoriales SVG",
+          "desc": "Descargue códigos QR generados en formatos vectoriales limpios y de alta resolución.",
+          "icon": "🎨"
+        },
+        {
+          "title": "Escáneres WASM OCR",
+          "desc": "Analice capturas de pantalla y maquetas en estructuras de código editables directamente en subprocesos del lado del cliente.",
+          "icon": "🖥️"
+        },
+        {
+          "title": "100% sin servidor",
+          "desc": "Mantenga las configuraciones del proyecto y los hashes confidenciales completamente seguros dentro del entorno limitado del navegador.",
+          "icon": "🔒"
+        }
+      ],
+      "howItWorks": [
+        {
+          "step": "1",
+          "title": "Abrir herramienta de desarrollo",
+          "desc": "Abra el generador de códigos QR o el extractor de texto OCR."
+        },
+        {
+          "step": "2",
+          "title": "Pegar código/datos",
+          "desc": "Ingrese la URL de destino o cargue su captura de pantalla simulada."
+        },
+        {
+          "step": "3",
+          "title": "Exportar activos brutos",
+          "desc": "Copie el código generado, descargue gráficos vectoriales o guarde texto."
+        }
+      ]
     },
     "social-media-tools": {
       "desc": "Creadores de subtítulos de plataforma, voces de IA y clips para eliminar fondos.",
@@ -229,7 +527,42 @@
         "a1": "Sí, los archivos generados se exportan como transmisiones de audio de alta fidelidad adecuadas para la narración y edición de videos."
       },
       "seoTitle": "Herramientas de redes sociales: lector de voz y subtítulos con IA | ToolWala AI",
-      "seoDescription": "Diseñe narraciones de voz premium en carretes/cortos y líneas de subtítulos optimizadas para la plataforma."
+      "seoDescription": "Diseñe narraciones de voz premium en carretes/cortos y líneas de subtítulos optimizadas para la plataforma.",
+      "longDescription": "La creación de contenido para plataformas como Instagram, YouTube y TikTok exige una edición multimedia rápida y una redacción atractiva. El conjunto de herramientas de redes sociales de ToolWala AI proporciona a los creadores utilidades seguras que se ejecutan directamente en el navegador. Genere archivos de audio de narración profesional utilizando nuestro [Generador de voz](/tools/voice-generator) , que convierte texto a voz localmente sin latencia del servidor. Para optimizar sus recursos visuales, utilice el [Eliminador de fondo](/tools/bg-remover) para crear recortes PNG transparentes para miniaturas y publicaciones. También puedes redactar subtítulos atractivos con ganchos y hashtags usando el [Generador de subtítulos](/tools/caption-generator) , o estimar las ganancias de contenido con nuestro [Calculadora de dinero de YouTube](/tools/youtube-money-calculator) . Todos los cálculos y la representación de medios se manejan en su dispositivo local. Esto garantiza que los borradores de contenido, las fotografías y los análisis se mantengan seguros, lo que facilita la creación de activos de alta calidad de forma segura. Aumente su presencia en línea con herramientas para creadores locales que respeten sus derechos digitales y mantengan la privacidad de sus archivos.",
+      "whyUse": [
+        {
+          "title": "Audio de alta fidelidad",
+          "desc": "Guarde archivos de narración como transmisiones MP3 de alta fidelidad optimizadas para videoclips cortos.",
+          "icon": "🎙️"
+        },
+        {
+          "title": "Recortes BG transparentes",
+          "desc": "Genere recortes PNG sin fondo para folletos y miniaturas.",
+          "icon": "🖼️"
+        },
+        {
+          "title": "Borradores de subtítulos atractivos",
+          "desc": "Genere borradores optimizados completos con ganchos y hashtags sugeridos.",
+          "icon": "💬"
+        }
+      ],
+      "howItWorks": [
+        {
+          "step": "1",
+          "title": "Elija la herramienta Creador",
+          "desc": "Abra el Generador de voz o el Eliminador de fondo desde el panel de la barra lateral."
+        },
+        {
+          "step": "2",
+          "title": "Importar contenido",
+          "desc": "Ingrese el texto de su guión o cargue su fotografía sin editar."
+        },
+        {
+          "step": "3",
+          "title": "Exportar activo",
+          "desc": "Descargue archivos de imágenes de alta resolución o archivos de audio claros."
+        }
+      ]
     },
     "calculator-tools": {
       "desc": "SIP, EMI, GST, calculadoras de edad, dinero de YouTube y ingresos de AdSense.",
@@ -239,7 +572,42 @@
         "a1": "Sí, nuestras calculadoras utilizan funciones matemáticas precisas y se ejecutan completamente en su navegador para obtener resultados instantáneos y precisos."
       },
       "seoTitle": "Calculadoras en línea: edad, SIP, EMI y ​​más | ToolWala AI",
-      "seoDescription": "Calculadoras en línea gratuitas para edad, finanzas y otras métricas. Procesamiento del lado del cliente rápido y totalmente privado."
+      "seoDescription": "Calculadoras en línea gratuitas para edad, finanzas y otras métricas. Procesamiento del lado del cliente rápido y totalmente privado.",
+      "longDescription": "La planificación financiera y los cálculos diarios requieren interfaces precisas, receptivas y privadas. El conjunto de herramientas de calculadora de ToolWala AI proporciona calculadoras del lado del cliente para ayudarlo a administrar sus finanzas y métricas. Estime el interés compuesto y los rendimientos de la inversión utilizando el [Calculadora SIP](/tools/sip-calculator) , o calcular los pagos mensuales de préstamos y los calendarios de amortización con el [Calculadora de EMI](/tools/emi-calculator) . Si tiene una empresa o administra cuentas, utilice el [Calculadora de IVA](/tools/gst-calculator) para agregar o eliminar rápidamente porcentajes de impuestos. También puede calcular los valores de edad exactos y las diferencias de fechas utilizando el [Calculadora de edad](/tools/age-calculator) . Para los creadores en línea, ofrecemos herramientas como [Calculadora de dinero de YouTube](/tools/youtube-money-calculator) para estimar las ganancias del vídeo. Todas las operaciones matemáticas se ejecutan localmente en su dispositivo, lo que garantiza que sus cifras financieras, entradas de ingresos y cálculos permanezcan completamente privados. Administre sus presupuestos, obligaciones fiscales y planificación patrimonial de forma segura sin ninguna transmisión de datos a servidores en la nube.",
+      "whyUse": [
+        {
+          "title": "Matemáticas del navegador instantáneo",
+          "desc": "Los cálculos se ejecutan localmente en subprocesos JS del lado del cliente para una capacidad de respuesta en tiempo real.",
+          "icon": "⚡"
+        },
+        {
+          "title": "Cuadrículas financieras detalladas",
+          "desc": "Obtenga amplios cronogramas de amortización de préstamos y proyecciones de riqueza compuestas al instante.",
+          "icon": "📊"
+        },
+        {
+          "title": "Operaciones seguras",
+          "desc": "Calcule métricas de nómina, facturas y deuda de forma segura sin enviar valores a bases de datos remotas.",
+          "icon": "🔒"
+        }
+      ],
+      "howItWorks": [
+        {
+          "step": "1",
+          "title": "Seleccionar Calculadora",
+          "desc": "Abra la calculadora EMI, SIP, GST o Edad."
+        },
+        {
+          "step": "2",
+          "title": "Ajustar parámetros",
+          "desc": "Ingrese variables (monto del préstamo, tasas de capital, rangos de interés o cadenas de fechas)."
+        },
+        {
+          "step": "3",
+          "title": "Analizar proyecciones",
+          "desc": "Inspeccione programas compuestos, desgloses de impuestos o valores de edad al instante."
+        }
+      ]
     },
     "Image Editing": "Edición de imágenes",
     "Productivity": "Productividad",

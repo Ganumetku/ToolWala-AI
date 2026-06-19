@@ -16,6 +16,7 @@ export default function PrivacyPolicyClient() {
           title={t('privacy.title', 'Privacy Policy')} 
           subtitle={t('privacy.effective_date', 'Effective Date: May 16, 2026')}
           centered
+          as="h1"
         />
         
         <div className="mt-20 space-y-16">

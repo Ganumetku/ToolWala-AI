@@ -75,6 +75,7 @@ export default async function BlogTagPage({ params }: TagPageProps) {
             basePath={`/blog/tag/${tag}`}
             hideFeatured
             title={`#${label}`}
+            as="h1"
           />
         </div>
       </div>

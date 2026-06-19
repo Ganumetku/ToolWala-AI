@@ -16,6 +16,7 @@ export default function TermsClient() {
           title={t('terms.title', 'Terms of Service')} 
           subtitle={t('terms.last_updated', 'Last updated: May 16, 2026')}
           centered
+          as="h1"
         />
         
         <div className="mt-20 space-y-16">

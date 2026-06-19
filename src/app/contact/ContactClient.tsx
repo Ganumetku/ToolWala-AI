@@ -17,6 +17,7 @@ export default function ContactClient() {
           title={t('contact.title', 'Get in Touch')} 
           subtitle={t('contact.subtitle', 'Have questions or feedback? Our team is here to help you scale your productivity.')}
           centered
+          as="h1"
         />
         
         <div className="mt-20 grid grid-cols-1 lg:grid-cols-12 gap-12">

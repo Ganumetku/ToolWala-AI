@@ -76,6 +76,7 @@ export default async function BlogCategoryPage({ params }: CategoryPageProps) {
             basePath={`/blog/category/${slug}`}
             hideFeatured
             title={`${category} Articles`}
+            as="h1"
           />
         </div>
       </div>

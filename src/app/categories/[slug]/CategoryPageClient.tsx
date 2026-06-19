@@ -2,7 +2,20 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { HelpCircle, ChevronDown, Sparkles, TrendingUp, Grid, Search, ArrowRight } from 'lucide-react';
+import { 
+  HelpCircle, 
+  ChevronDown, 
+  Sparkles, 
+  TrendingUp, 
+  Grid, 
+  Search, 
+  ArrowRight, 
+  Clock, 
+  ShieldCheck, 
+  Zap, 
+  Layers,
+  Cpu
+} from 'lucide-react';
 import { toolsData, Tool } from '@/data/tools';
 import { fetchPublicTools } from '@/lib/tools';
 import { categoriesData, getToolsByCategory, CategoryMetadata } from '@/data/categories';
@@ -17,6 +30,43 @@ import { useTranslation } from '@/components/I18nContext';
 interface CategoryPageClientProps {
   slug: string;
   category: CategoryMetadata;
+}
+
+// Markdown parser helper for inline links
+function parseMarkdownLinks(text: string, localizeHref: (h: string) => string) {
+  if (!text) return null;
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    const matchIndex = match.index;
+    const linkText = match[1];
+    const linkHref = match[2];
+
+    if (matchIndex > lastIndex) {
+      parts.push(text.substring(lastIndex, matchIndex));
+    }
+
+    parts.push(
+      <Link
+        key={matchIndex}
+        href={localizeHref(linkHref)}
+        className="text-blue-400 hover:text-blue-300 font-extrabold underline decoration-blue-500/50 hover:decoration-blue-400 transition-colors"
+      >
+        {linkText}
+      </Link>
+    );
+
+    lastIndex = regex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : text;
 }
 
 export default function CategoryPageClient({ slug, category }: CategoryPageClientProps) {
@@ -57,10 +107,31 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
     return result;
   }, [categoryTools, searchQuery, activeFilter]);
 
-  // Separate trending tools in this category for the dedicated trending shelf
-  const trendingShelfTools = useMemo(() => {
-    return categoryTools.filter(t => t.trending && t.isVisible).slice(0, 3);
+  // Popular Tools Section (max 4 tools)
+  const popularToolsList = useMemo(() => {
+    return categoryTools.filter(tool => tool.popular && tool.isVisible).slice(0, 4);
   }, [categoryTools]);
+
+  // Recently Added Tools Section (sorted by createdAt, max 3 tools)
+  const recentlyAddedToolsList = useMemo(() => {
+    return [...categoryTools]
+      .filter(tool => tool.isVisible)
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      .slice(0, 3);
+  }, [categoryTools]);
+
+  // Localized long description, whyUse, howItWorks
+  const localizedLongDesc = useMemo(() => {
+    return t(`categories.${category.id}.longDescription`, category.longDescription);
+  }, [category, t]);
+
+  const whyUseList = useMemo(() => {
+    return t(`categories.${category.id}.whyUse`, category.whyUse);
+  }, [category, t]);
+
+  const howItWorksSteps = useMemo(() => {
+    return t(`categories.${category.id}.howItWorks`, category.howItWorks);
+  }, [category, t]);
 
   if (!mounted) {
     return <div className="min-h-screen bg-[#030712]" />;
@@ -76,7 +147,7 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-24 relative z-10">
           
-          {/* Modular Reusable Header Component */}
+          {/* Modular Reusable Header Component with H1 */}
           <CategoryHeader 
             title={category.title}
             icon={category.icon}
@@ -86,105 +157,263 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
           {/* Grid Layout: Left Sidebar Navigation & Right Content Dashboard */}
           <div className="flex flex-col lg:flex-row gap-8 items-start mt-10">
             
-            {/* Modular Reusable Sidebar Navigation */}
+            {/* Sidebar Navigation */}
             <CategorySidebar activeSlug={slug} />
 
             {/* Content Deck */}
-            <div className="flex-1 w-full space-y-12">
-              
-              {/* Dedicated Trending Cards Shelf */}
-              {trendingShelfTools.length > 0 && !searchQuery && (
-                <div className="space-y-4 animate-in fade-in duration-300">
-                  <div className="flex items-center gap-2">
-                    <TrendingUp className="w-4 h-4 text-purple-400" />
-                    <h3 className="text-[11px] font-black uppercase tracking-widest text-purple-400">{t('categories.trending_utilities', 'Trending Utilities')}</h3>
+            <div className="flex-1 w-full space-y-16">
+
+              {/* 1. Category H1/SEO Long Description Section with Stats Card */}
+              <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start bg-white/[0.02] border border-white/5 p-6 sm:p-8 rounded-[2.5rem] glass">
+                <div className="lg:col-span-2 space-y-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20">
+                    <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+                    <span className="text-[10px] font-black uppercase tracking-widest text-blue-400">
+                      {t('categories.hub_badge', 'Categorized Hub')}
+                    </span>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {trendingShelfTools.map((tool) => (
-                      <div key={tool.id} className="relative group/glow">
-                        <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500/20 via-indigo-500/20 to-purple-500/20 rounded-2xl blur-md opacity-0 group-hover/glow:opacity-100 transition-opacity pointer-events-none" />
-                        <ToolCard {...tool} isTrending={true} />
+                  <h1 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white">
+                    {t(`categories.${category.id}.seoTitle`, category.seoTitle)}
+                  </h1>
+                  <div className="text-xs sm:text-sm text-gray-400 leading-relaxed font-medium space-y-3">
+                    <p className="whitespace-pre-line">
+                      {parseMarkdownLinks(localizedLongDesc, localizeHref)}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Key Quick Stats Card */}
+                <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-5 w-full">
+                  <h4 className="text-[11px] font-black uppercase tracking-widest text-gray-400 border-b border-white/5 pb-3">
+                    {t('categories.folder_stats', 'Folder Quick Facts')}
+                  </h4>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-xs text-gray-400">
+                        <Layers className="w-3.5 h-3.5 text-blue-400" />
+                        <span>Total Tools</span>
                       </div>
+                      <span className="text-xs font-black text-white">{categoryTools.length} Tools</span>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-xs text-gray-400">
+                        <ShieldCheck className="w-3.5 h-3.5 text-green-400" />
+                        <span>Security Status</span>
+                      </div>
+                      <span className="text-xs font-black text-green-400">100% Local</span>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-xs text-gray-400">
+                        <Clock className="w-3.5 h-3.5 text-purple-400" />
+                        <span>Execution Speed</span>
+                      </div>
+                      <span className="text-xs font-black text-purple-400">&lt; 120ms</span>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-xs text-gray-400">
+                        <Cpu className="w-3.5 h-3.5 text-yellow-400" />
+                        <span>Privacy Level</span>
+                      </div>
+                      <span className="text-xs font-black text-yellow-400">No Server Uploads</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* 2. Popular Tools Shelf */}
+              {popularToolsList.length > 0 && !searchQuery && (
+                <section className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-yellow-400" />
+                    <h2 className="text-sm font-black uppercase tracking-widest text-white">
+                      {t('categories.popular_shelf_title', 'Popular Utilities')}
+                    </h2>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                    {popularToolsList.map((tool) => (
+                      <ToolCard 
+                        key={tool.id} 
+                        {...tool} 
+                        isPopular={true}
+                      />
                     ))}
                   </div>
-                </div>
+                </section>
               )}
 
-              {/* Main Directory Search & Filters Panel */}
-              <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white/[0.01] border border-white/5 p-4 rounded-[2rem] glass">
-                <div className="w-full md:max-w-md">
-                  <CategorySearch 
-                    value={searchQuery}
-                    onChange={setSearchQuery}
-                    placeholder={t('categories.search_placeholder', 'Search tools inside this folder...')}
-                  />
-                </div>
-
-                {/* Switch Filters Tab */}
-                <div className="flex gap-1.5 p-1 bg-black/40 border border-white/5 rounded-2xl w-full md:w-auto overflow-x-auto">
-                  <button
-                    onClick={() => setActiveFilter('all')}
-                    className={`flex-1 md:flex-initial px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-wider transition-colors cursor-pointer ${
-                      activeFilter === 'all' ? 'bg-white/5 text-white' : 'text-gray-500 hover:text-white'
-                    }`}
-                  >
-                    {t('categories.All', 'All')} ({categoryTools.filter(t => t.isVisible).length})
-                  </button>
-                  <button
-                    onClick={() => setActiveFilter('popular')}
-                    className={`flex-1 md:flex-initial px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-wider transition-colors cursor-pointer ${
-                      activeFilter === 'popular' ? 'bg-white/5 text-white' : 'text-gray-500 hover:text-white'
-                    }`}
-                  >
-                    {t('categories.Popular', 'Popular')} ({categoryTools.filter(t => t.popular && t.isVisible).length})
-                  </button>
-                  <button
-                    onClick={() => setActiveFilter('trending')}
-                    className={`flex-1 md:flex-initial px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-wider transition-colors cursor-pointer ${
-                      activeFilter === 'trending' ? 'bg-white/5 text-white' : 'text-gray-500 hover:text-white'
-                    }`}
-                  >
-                    {t('categories.Trending', 'Trending')}
-                  </button>
-                </div>
-              </div>
-
-              {/* Tools Responsive Grid (2 columns on mobile!) */}
-              <div className="w-full">
-                {filteredTools.length > 0 ? (
-                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-6">
-                    {filteredTools.map((tool) => (
+              {/* 3. Recently Added Tools Shelf */}
+              {recentlyAddedToolsList.length > 0 && !searchQuery && (
+                <section className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-teal-400" />
+                    <h2 className="text-sm font-black uppercase tracking-widest text-white">
+                      {t('categories.recently_added_title', 'Recently Added')}
+                    </h2>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    {recentlyAddedToolsList.map((tool) => (
                       <ToolCard 
                         key={tool.id} 
                         {...tool}
-                        isPopular={tool.popular}
                         isTrending={tool.trending}
                       />
                     ))}
                   </div>
-                ) : (
-                  <div className="text-center py-20 glass rounded-[2.5rem] border border-white/5 border-dashed">
-                    <div className="bg-white/5 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/5">
-                      <Search className="w-8 h-8 text-gray-700" />
-                    </div>
-                    <h4 className="text-lg font-black text-white mb-2 uppercase tracking-tight">{t('categories.no_tools_match', 'No tools match criteria')}</h4>
-                    <p className="text-xs text-gray-500 max-w-xs mx-auto font-medium">{t('categories.no_tools_sub', 'Try checking description filters or reset active tabs.')}</p>
+                </section>
+              )}
+
+              {/* 4. Why Use These Tools Section */}
+              {whyUseList && whyUseList.length > 0 && (
+                <section className="space-y-6">
+                  <div className="text-center md:text-left">
+                    <h2 className="text-lg font-black uppercase tracking-tight text-white">
+                      {t('categories.why_use_title', `Why Use These ${category.title}`)}
+                    </h2>
+                    <p className="text-xs text-gray-500 font-semibold mt-1">
+                      Designed with security, speed, and standard compliance in mind.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {whyUseList.map((benefit: any, idx: number) => (
+                      <div 
+                        key={idx} 
+                        className="p-6 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-white/10 transition-all hover:bg-white/[0.02]"
+                      >
+                        <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-xl mb-4 border border-white/5">
+                          {benefit.icon}
+                        </div>
+                        <h4 className="text-sm font-black text-white uppercase tracking-wide mb-2">
+                          {benefit.title}
+                        </h4>
+                        <p className="text-xs text-gray-400 leading-relaxed font-semibold">
+                          {parseMarkdownLinks(benefit.desc, localizeHref)}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* 5. How It Works Steps Component */}
+              {howItWorksSteps && howItWorksSteps.length > 0 && (
+                <section className="space-y-8 bg-white/[0.01] border border-white/5 p-6 sm:p-8 rounded-[2.5rem] glass">
+                  <div>
+                    <h2 className="text-lg font-black uppercase tracking-tight text-white">
+                      {t('categories.how_it_works_title', 'How It Works')}
+                    </h2>
+                    <p className="text-xs text-gray-500 font-semibold mt-1">
+                      Start using tools inside this directory in three simple steps.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                    {/* Horizontal connecting line for desktop */}
+                    <div className="hidden md:block absolute top-12 left-[15%] right-[15%] h-[1px] bg-dashed bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none z-0" />
+
+                    {howItWorksSteps.map((step: any, idx: number) => (
+                      <div key={idx} className="flex flex-col items-center text-center relative z-10 space-y-3">
+                        <div className="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 font-black text-sm flex items-center justify-center shadow-lg shadow-blue-500/5">
+                          {step.step || (idx + 1)}
+                        </div>
+                        <h4 className="text-sm font-black text-white uppercase tracking-wide">
+                          {step.title}
+                        </h4>
+                        <p className="text-xs text-gray-400 leading-relaxed font-semibold max-w-xs">
+                          {step.desc}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* 6. Tools Deck Panel */}
+              <section className="space-y-6">
+                <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white/[0.01] border border-white/5 p-4 rounded-[2rem] glass">
+                  <div className="w-full md:max-w-md">
+                    <CategorySearch 
+                      value={searchQuery}
+                      onChange={setSearchQuery}
+                      placeholder={t('categories.search_placeholder', 'Search tools inside this folder...')}
+                    />
+                  </div>
+
+                  {/* Switch Filters Tab */}
+                  <div className="flex gap-1.5 p-1 bg-black/40 border border-white/5 rounded-2xl w-full md:w-auto overflow-x-auto">
                     <button
-                      onClick={() => { setSearchQuery(""); setActiveFilter('all'); }}
-                      className="mt-5 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black uppercase tracking-widest text-[10px] shadow-md animate-fade-in"
+                      onClick={() => setActiveFilter('all')}
+                      className={`flex-1 md:flex-initial px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-wider transition-colors cursor-pointer ${
+                        activeFilter === 'all' ? 'bg-white/5 text-white' : 'text-gray-500 hover:text-white'
+                      }`}
                     >
-                      {t('categories.reset_view', 'Reset Directory View')}
+                      {t('categories.All', 'All')} ({categoryTools.filter(t => t.isVisible).length})
+                    </button>
+                    <button
+                      onClick={() => setActiveFilter('popular')}
+                      className={`flex-1 md:flex-initial px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-wider transition-colors cursor-pointer ${
+                        activeFilter === 'popular' ? 'bg-white/5 text-white' : 'text-gray-500 hover:text-white'
+                      }`}
+                    >
+                      {t('categories.Popular', 'Popular')} ({categoryTools.filter(t => t.popular && t.isVisible).length})
+                    </button>
+                    <button
+                      onClick={() => setActiveFilter('trending')}
+                      className={`flex-1 md:flex-initial px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-wider transition-colors cursor-pointer ${
+                        activeFilter === 'trending' ? 'bg-white/5 text-white' : 'text-gray-500 hover:text-white'
+                      }`}
+                    >
+                      {t('categories.Trending', 'Trending')}
                     </button>
                   </div>
-                )}
-              </div>
+                </div>
 
-              {/* FAQs Accordion */}
+                {/* Grid layout (2 columns on mobile) */}
+                <div className="w-full">
+                  {filteredTools.length > 0 ? (
+                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-6">
+                      {filteredTools.map((tool) => (
+                        <ToolCard 
+                          key={tool.id} 
+                          {...tool}
+                          isPopular={tool.popular}
+                          isTrending={tool.trending}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-20 glass rounded-[2.5rem] border border-white/5 border-dashed">
+                      <div className="bg-white/5 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/5">
+                        <Search className="w-8 h-8 text-gray-700" />
+                      </div>
+                      <h4 className="text-lg font-black text-white mb-2 uppercase tracking-tight">
+                        {t('categories.no_tools_match', 'No tools match criteria')}
+                      </h4>
+                      <p className="text-xs text-gray-500 max-w-xs mx-auto font-medium">
+                        {t('categories.no_tools_sub', 'Try checking description filters or reset active tabs.')}
+                      </p>
+                      <button
+                        onClick={() => { setSearchQuery(""); setActiveFilter('all'); }}
+                        className="mt-5 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black uppercase tracking-widest text-[10px] shadow-md animate-fade-in cursor-pointer"
+                      >
+                        {t('categories.reset_view', 'Reset Directory View')}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </section>
+
+              {/* 7. FAQs Accordion */}
               {category.faqs && category.faqs.length > 0 && (
-                <div className="border-t border-white/5 pt-12">
+                <section className="border-t border-white/5 pt-12">
                   <div className="flex items-center gap-2 mb-8">
                     <HelpCircle className="w-4.5 h-4.5 text-blue-400" />
-                    <h3 className="text-xs font-black uppercase tracking-widest text-white">{t('categories.faq_title', 'Frequently Asked Questions')}</h3>
+                    <h3 className="text-xs font-black uppercase tracking-widest text-white">
+                      {t('categories.faq_title', 'Frequently Asked Questions')}
+                    </h3>
                   </div>
 
                   <div className="space-y-4.5">
@@ -220,14 +449,16 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
                       );
                     })}
                   </div>
-                </div>
+                </section>
               )}
 
-              {/* Related Categories Grid */}
-              <div className="border-t border-white/5 pt-12 text-left">
+              {/* 8. Related Categories Grid */}
+              <section className="border-t border-white/5 pt-12 text-left">
                 <div className="flex items-center gap-2 mb-8">
                   <Grid className="w-4.5 h-4.5 text-blue-500" />
-                  <h3 className="text-xs font-black uppercase tracking-widest text-white">{t('categories.explore_other_folders', 'Explore Other Folders')}</h3>
+                  <h3 className="text-xs font-black uppercase tracking-widest text-white">
+                    {t('categories.explore_other_folders', 'Explore Other Folders')}
+                  </h3>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {categoriesData
@@ -241,13 +472,15 @@ export default function CategoryPageClient({ slug, category }: CategoryPageClien
                       >
                         <div className="flex items-center gap-3">
                           <span className="text-xl">{cat.icon}</span>
-                          <span className="text-xs font-black text-gray-300 group-hover:text-white uppercase truncate">{t('categories.' + cat.title, cat.title)}</span>
+                          <span className="text-xs font-black text-gray-300 group-hover:text-white uppercase truncate">
+                            {t('categories.' + cat.title, cat.title)}
+                          </span>
                         </div>
                         <ArrowRight className="w-3.5 h-3.5 text-gray-600 group-hover:text-blue-500 transition-colors shrink-0" />
                       </Link>
                     ))}
                 </div>
-              </div>
+              </section>
 
             </div>
 

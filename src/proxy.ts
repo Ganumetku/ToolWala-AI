@@ -9,6 +9,12 @@ export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   console.log(`[Proxy] Pathname: ${pathname}`);
 
+  // Bypass proxy for all public API routes to preserve POST request bodies
+  const isAdminApi = pathname.startsWith('/api/admin') || pathname.startsWith('/api/admin/');
+  if (pathname.startsWith('/api') && !isAdminApi) {
+    return NextResponse.next();
+  }
+
   // Redirect legacy admin login to /login
   if (pathname === '/admin/login' || pathname === '/admin/login/') {
     return NextResponse.redirect(new URL('/login', request.url));

@@ -418,3 +418,70 @@ export async function generateToolMetadataHelper(
     }
   };
 }
+
+export function buildFAQSchema(faqs: { question: string; answer: string }[]) {
+  if (!faqs || faqs.length === 0) return null;
+  return {
+    '@type': 'FAQPage',
+    'mainEntity': faqs.map(faq => ({
+      '@type': 'Question',
+      'name': faq.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': faq.answer
+      }
+    }))
+  };
+}
+
+export function buildWebPageSchema(title: string, description: string, url: string, locale: string = 'en') {
+  return {
+    '@type': 'WebPage',
+    '@id': `${url}#webpage`,
+    'url': url,
+    'name': title,
+    'description': description,
+    'inLanguage': locale === 'en' ? 'en-US' : `${locale}-${locale.toUpperCase()}`,
+    'isPartOf': {
+      '@type': 'WebSite',
+      '@id': 'https://toolwala.co/#website',
+      'url': 'https://toolwala.co',
+      'name': 'ToolWala AI'
+    }
+  };
+}
+
+export function buildEnrichedToolJsonLd(tool: any, url: string, categoryName: string) {
+  const applicationCategory = 
+    categoryName === 'Image Tools' ? 'MultimediaApplication' :
+    categoryName === 'PDF Tools' ? 'DesignApplication' :
+    'UtilitiesApplication';
+
+  return {
+    '@type': 'SoftwareApplication',
+    '@id': `${url}#software`,
+    name: tool.title,
+    description: tool.description,
+    url: url,
+    applicationCategory: applicationCategory,
+    operatingSystem: 'Web Browser',
+    browserRequirements: 'Requires HTML5 compatible web browser',
+    featureList: [
+      '100% Client-Side Processing',
+      'No Signups required',
+      'GDPR & CCPA Private (Local Only)'
+    ],
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    provider: {
+      '@type': 'Organization',
+      '@id': 'https://toolwala.co/#organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+  };
+}
+

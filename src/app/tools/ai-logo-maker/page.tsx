@@ -284,7 +284,7 @@ export default function ProfessionalLogoMaker() {
                 <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center">
                   <Palette className="w-6 h-6" />
                 </div>
-                <h3 className="font-black uppercase tracking-widest text-sm">Logo Designer</h3>
+                <h1 className="font-black uppercase tracking-widest text-sm">Logo Designer</h1>
               </div>
 
               <form onSubmit={generateLogos} className="space-y-8">

@@ -16,6 +16,7 @@ export default function DisclaimerClient() {
           title={t('disclaimer.title', 'Disclaimer')} 
           subtitle={t('disclaimer.subtitle', 'Please read this legal notice carefully before using our tools.')}
           centered
+          as="h1"
         />
         
         <div className="mt-20 space-y-16">

@@ -104,7 +104,11 @@ async function translateTextsBatch(texts: string[], targetLang = 'hi'): Promise<
 
 export async function POST(request: Request) {
   try {
-    const { texts, targetLang = 'hi' } = await request.json();
+    const bodyText = await request.text();
+    if (!bodyText.trim()) {
+      return NextResponse.json({ error: 'Request body is empty' }, { status: 400 });
+    }
+    const { texts, targetLang = 'hi' } = JSON.parse(bodyText);
     if (!Array.isArray(texts)) {
       return NextResponse.json({ error: 'texts must be an array of strings' }, { status: 400 });
     }

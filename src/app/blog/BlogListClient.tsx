@@ -21,7 +21,9 @@ interface BlogListClientProps {
   basePath?: string;
   hideFeatured?: boolean;
   title?: string;
+  as?: 'h1' | 'h2';
 }
+
 
 const formatDate = (dateString: string) => {
   if (!dateString) return "";
@@ -42,6 +44,7 @@ export default function BlogListClient({
   basePath = "/blog",
   hideFeatured = false,
   title,
+  as = 'h2',
 }: BlogListClientProps) {
   const { t, localizeHref } = useTranslation();
   const router = useRouter();
@@ -102,7 +105,11 @@ export default function BlogListClient({
   return (
     <div className="space-y-12">
       {title && (
-        <h2 className="text-2xl font-black text-white uppercase tracking-tight text-center">{title}</h2>
+        as === 'h1' ? (
+          <h1 className="text-2xl font-black text-white uppercase tracking-tight text-center">{title}</h1>
+        ) : (
+          <h2 className="text-2xl font-black text-white uppercase tracking-tight text-center">{title}</h2>
+        )
       )}
 
       <div className="flex flex-col md:flex-row gap-6 justify-between items-center bg-white/[0.01] border border-white/5 p-6 rounded-3xl backdrop-blur-md">

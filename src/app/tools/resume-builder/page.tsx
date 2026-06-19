@@ -761,7 +761,7 @@ export default function ResumeBuilder() {
               >
                 {/* Header */}
                 <div className="text-center border-b-[3px] border-gray-900 pb-8 mb-8">
-                  <h1 className="text-4xl font-black text-gray-900 uppercase tracking-tighter leading-none">{personal.name || 'Your Name'}</h1>
+                  <div className="text-4xl font-black text-gray-900 uppercase tracking-tighter leading-none">{personal.name || 'Your Name'}</div>
                   <p className="text-xl font-bold text-gray-700 mt-3 uppercase tracking-[0.15em]">{personal.title}</p>
                   <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 mt-5 text-[12px] text-gray-500 font-bold uppercase tracking-widest">
                     {personal.email && <span className="hover:text-blue-600 transition-colors">{personal.email}</span>}

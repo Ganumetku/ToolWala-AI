@@ -18,6 +18,7 @@ export default function ToolsClient() {
           title={t('home.directory_title', 'Tools Directory')} 
           subtitle={t('home.directory_subtitle', 'Explore our full collection of professional AI utilities. No signup required, zero cost during beta, and 100% privacy focused.')}
           centered
+          as="h1"
         />
         
         <div className="mt-20">

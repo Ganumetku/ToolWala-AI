@@ -3,10 +3,10 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
-    'signature-crop-tool',
-    'Signature Crop Tool Online - Resize & Compress Signature | ToolWala AI',
-    'Crop, resize, and compress signature scans to official dimensions for recruitment, banking, exam forms (SSC, IBPS), and contracts. Completely client-side.',
-    '/tools/signature-crop-tool'
+    'ssc-photo-resize',
+    'SSC Photo Resizer Online - CGL, CHSL, MTS Dimensions | ToolWala AI',
+    'Resize and crop your passport photo to official Staff Selection Commission (SSC) guidelines (3.5 cm x 4.5 cm) under 50KB limit locally. Safe, private, and 100% in-browser.',
+    '/tools/ssc-photo-resize'
   );
 }
 

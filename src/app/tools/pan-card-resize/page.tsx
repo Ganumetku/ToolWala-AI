@@ -8,67 +8,41 @@ import { MeshGradient } from "@/components/BackgroundEffects";
 import ToolVisibilityGuard from "@/components/ToolVisibilityGuard";
 import ImageCropperEngine, { CropperPreset } from "@/components/ImageCropperEngine";
 
-const EXAM_PRESETS: CropperPreset[] = [
+const PAN_PRESETS: CropperPreset[] = [
   {
-    id: "ssc-photo",
-    label: "SSC Exam Photo (3.5x4.5 cm)",
-    width: 354,
-    height: 472, // ~7:9 aspect ratio
+    id: "nsdl-pan",
+    label: "NSDL PAN Card Photo (3.5x2.5 cm)",
+    width: 213,
+    height: 213,
     targetKb: 50,
     allowBgRemoval: true,
     bgColors: [
       { name: "White", hex: "#ffffff" },
       { name: "Light Blue", hex: "#eff6ff" },
+      { name: "Off White", hex: "#fafafa" },
     ],
-    description: "Official Staff Selection Commission (SSC) guidelines.",
-    specs: "3.5 x 4.5 cm, Target size: 20KB - 50KB",
+    description: "Official NSDL portal photo specifications.",
+    specs: "3.5 x 2.5 cm (213 x 213 px), Target size: < 50KB",
   },
   {
-    id: "ibps-photo",
-    label: "IBPS Bank Exam Photo",
-    width: 354,
-    height: 472,
-    targetKb: 50,
+    id: "utiitsl-pan",
+    label: "UTIITSL PAN Card Photo",
+    width: 213,
+    height: 213,
+    targetKb: 30,
     allowBgRemoval: true,
     bgColors: [
       { name: "White", hex: "#ffffff" },
       { name: "Light Blue", hex: "#eff6ff" },
     ],
-    description: "Official IBPS / Banking exam guidelines.",
-    specs: "4.5 x 3.5 cm (vertical portrait), Target size: 20KB - 50KB",
-  },
-  {
-    id: "upsc-photo",
-    label: "UPSC Registration Photo",
-    width: 350,
-    height: 350, // 1:1 aspect ratio
-    targetKb: 40,
-    allowBgRemoval: true,
-    bgColors: [
-      { name: "White", hex: "#ffffff" },
-      { name: "Light Blue", hex: "#eff6ff" },
-    ],
-    description: "Official Union Public Service Commission specifications.",
-    specs: "350 x 350 px, Target size: 20KB - 40KB",
-  },
-  {
-    id: "neet-photo",
-    label: "NEET / NTA Photo (Postcard Size)",
-    width: 480,
-    height: 720, // 4:6 aspect ratio
-    targetKb: 200,
-    allowBgRemoval: true,
-    bgColors: [
-      { name: "White", hex: "#ffffff" },
-    ],
-    description: "NEET / NTA postcard photo guidelines.",
-    specs: "4 x 6 inch postcard ratio, Target size: 50KB - 200KB",
+    description: "Official UTIITSL portal photo specifications.",
+    specs: "213 x 213 px, Target size: 10KB - 30KB",
   }
 ];
 
-export default function ExamPhotoResizer() {
+export default function PANCardResize() {
   return (
-    <ToolVisibilityGuard slug="exam-photo-resizer">
+    <ToolVisibilityGuard slug="pan-card-resize">
       <div className="min-h-screen bg-[#030712] text-gray-100 relative overflow-hidden font-sans">
         <MeshGradient />
 
@@ -92,27 +66,27 @@ export default function ExamPhotoResizer() {
               100% Client-Side Processing
             </div>
             <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6 uppercase">
-              Exam Photo Resizer <br />
+              PAN Card Resize <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
-                National Exam Standard
+                NSDL & UTIITSL Specs
               </span>
             </h1>
             <p className="text-base sm:text-lg text-gray-400 leading-relaxed font-medium">
-              Resize and format passport photos for competitive exam portals. Centering checks prevent head or shoulder cutoffs, complying with strict SSC, UPSC, IBPS, and NEET requirements.
+              Resize and format passport photos to official Indian PAN card specifications. Automatically isolate subjects, replace backgrounds with compliant colors, and compress under 50KB safely.
             </p>
           </div>
 
           {/* Main Cropper Console */}
           <div className="max-w-6xl mx-auto">
             <ImageCropperEngine
-              toolSlug="exam-photo-resizer"
-              title="Exam Photo Resizer"
-              description="Resize passport photos for competitive exams (SSC, UPSC, IBPS, JEE, NEET)."
-              presets={EXAM_PRESETS}
+              toolSlug="pan-card-resize"
+              title="PAN Card Resize"
+              description="Format and resize passport photos to official NSDL/UTIITSL PAN card specifications."
+              presets={PAN_PRESETS}
               seoArticle={
-                toolArticles["exam-photo-resizer"] && (
+                toolArticles["pan-card-resize"] && (
                   <div className="mt-24 border-t border-white/5 pt-20">
-                    <ToolArticle {...toolArticles["exam-photo-resizer"]} />
+                    <ToolArticle {...toolArticles["pan-card-resize"]} />
                   </div>
                 )
               }

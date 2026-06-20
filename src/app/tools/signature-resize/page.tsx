@@ -53,9 +53,9 @@ const SIGNATURE_PRESETS: CropperPreset[] = [
   }
 ];
 
-export default function SignatureCropTool() {
+export default function SignatureResize() {
   return (
-    <ToolVisibilityGuard slug="signature-crop-tool">
+    <ToolVisibilityGuard slug="signature-resize">
       <div className="min-h-screen bg-[#030712] text-gray-100 relative overflow-hidden font-sans">
         <MeshGradient />
 
@@ -79,7 +79,7 @@ export default function SignatureCropTool() {
               100% Client-Side Processing
             </div>
             <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6 uppercase">
-              Signature Crop Tool <br />
+              Signature Resize <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
                 Official Portal Specs
               </span>
@@ -92,14 +92,14 @@ export default function SignatureCropTool() {
           {/* Main Cropper Console */}
           <div className="max-w-6xl mx-auto">
             <ImageCropperEngine
-              toolSlug="signature-crop-tool"
-              title="Signature Crop Tool"
+              toolSlug="signature-resize"
+              title="Signature Resize"
               description="Crop and resize signature scans to official standards for recruitment, banks, and exams."
               presets={SIGNATURE_PRESETS}
               seoArticle={
-                toolArticles["signature-crop-tool"] && (
+                toolArticles["signature-resize"] && (
                   <div className="mt-24 border-t border-white/5 pt-20">
-                    <ToolArticle {...toolArticles["signature-crop-tool"]} />
+                    <ToolArticle {...toolArticles["signature-resize"]} />
                   </div>
                 )
               }

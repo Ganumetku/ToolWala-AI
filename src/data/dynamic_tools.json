@@ -136,5 +136,67 @@
     ],
     "createdAt": "2026-06-14T00:00:00.000Z",
     "updatedAt": "2026-06-14T00:00:00.000Z"
+  },
+  {
+    "id": "pdf-summarizer",
+    "slug": "pdf-summarizer",
+    "title": "AI PDF Summarizer",
+    "description": "Summarize large PDF documents locally in your browser. Fast, private, and secure.",
+    "longDesc": "The AI PDF Summarizer reads the text content of your PDF files locally on your device using browser-native parsers and generates a concise, readable summary. Your document content is never sent to external servers or used for training AI models.",
+    "categoryName": "Document & PDF",
+    "categorySlug": "pdf-tools",
+    "isPopular": true,
+    "isFeatured": false,
+    "isTrending": true,
+    "published": true,
+    "isPublished": true,
+    "publishDate": null,
+    "status": "published",
+    "icon": "🤖",
+    "toolType": "AI PDF Tool",
+    "ctaButtonText": "Generate Summary",
+    "inputs": [
+      {
+        "id": "pdf-file",
+        "name": "pdf",
+        "label": "Upload PDF file",
+        "type": "file",
+        "required": true,
+        "order": 0
+      },
+      {
+        "id": "summary-length",
+        "name": "length",
+        "label": "Summary Length",
+        "type": "select",
+        "required": true,
+        "defaultValue": "medium",
+        "options": "short:Short (Key Bullet Points),medium:Medium (Standard Summary),long:Long (Detailed Analysis)",
+        "order": 1
+      }
+    ],
+    "faqs": [
+      {
+        "id": "pdf-sum-faq-1",
+        "question": "Is my uploaded PDF document private?",
+        "answer": "Yes. Our AI PDF Summarizer operates entirely client-side. The text is parsed directly in your browser memory and is never uploaded to any remote database.",
+        "order": 0
+      },
+      {
+        "id": "pdf-sum-faq-2",
+        "question": "What is the maximum file size supported?",
+        "answer": "You can process PDF documents up to 50MB in size since all operations run in local memory.",
+        "order": 1
+      }
+    ],
+    "articles": [
+      {
+        "id": "pdf-sum-art-1",
+        "title": "How On-Device PDF Summarization Works",
+        "content": "Our engine extracts the text layer from your document, performs keyword and semantic filtering locally, and formats it into structured highlights."
+      }
+    ],
+    "createdAt": "2026-06-20T00:00:00.000Z",
+    "updatedAt": "2026-06-20T00:00:00.000Z"
   }
 ]

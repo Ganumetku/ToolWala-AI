@@ -135,9 +135,7 @@ export default function CategoryPageClient({ slug, category, relatedBlogs = [] }
     return t(`categories.${category.id}.howItWorks`, category.howItWorks);
   }, [category, t]);
 
-  if (!mounted) {
-    return <div className="min-h-screen bg-[#030712]" />;
-  }
+  // Enabled server-side pre-rendering by default so crawlers see full details
 
   return (
     <>
@@ -408,7 +406,7 @@ export default function CategoryPageClient({ slug, category, relatedBlogs = [] }
                 </div>
               </section>
 
-              {/* 7. FAQs Accordion */}
+              {/* 7. FAQs Accordion (details-based interactive HTML accordion for crawlability) */}
               {category.faqs && category.faqs.length > 0 && (
                 <section className="border-t border-white/5 pt-12">
                   <div className="flex items-center gap-2 mb-8">
@@ -418,38 +416,23 @@ export default function CategoryPageClient({ slug, category, relatedBlogs = [] }
                     </h3>
                   </div>
 
-                  <div className="space-y-4.5">
-                    {category.faqs.map((faq, index) => {
-                      const isExpanded = expandedFaqIndex === index;
-                      return (
-                        <div key={index} className="glass rounded-2xl border border-white/5 bg-white/[0.01] overflow-hidden">
-                          <button
-                            onClick={() => setExpandedFaqIndex(isExpanded ? null : index)}
-                            className="w-full flex items-center justify-between p-5.5 text-left focus:outline-none cursor-pointer"
-                          >
-                            <span className="text-xs sm:text-sm font-black text-white hover:text-blue-400 transition-colors">
-                              {t('categories.' + category.id + '.faq.q' + (index + 1), faq.question)}
-                            </span>
-                            <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform duration-300 flex-shrink-0 ml-4 ${isExpanded ? 'rotate-180 text-blue-400' : ''}`} />
-                          </button>
-
-                          <AnimatePresence initial={false}>
-                            {isExpanded && (
-                              <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.2, ease: "easeInOut" }}
-                              >
-                                <div className="px-5.5 pb-5.5 pt-0.5 border-t border-white/5 text-xs text-gray-400 leading-relaxed font-semibold font-sans">
-                                  {t('categories.' + category.id + '.faq.a' + (index + 1), faq.answer)}
-                                </div>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
+                  <div className="space-y-4">
+                    {category.faqs.map((faq, index) => (
+                      <details 
+                        key={index} 
+                        className="group border border-white/5 bg-white/[0.01] rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden"
+                      >
+                        <summary className="flex items-center justify-between p-5.5 text-left cursor-pointer focus:outline-none select-none">
+                          <span className="text-xs sm:text-sm font-black text-white group-open:text-blue-400 hover:text-blue-400 transition-colors">
+                            {t('categories.' + category.id + '.faq.q' + (index + 1), faq.question)}
+                          </span>
+                          <ChevronDown className="w-4 h-4 text-gray-500 transition-transform duration-300 group-open:rotate-180 group-open:text-blue-400" />
+                        </summary>
+                        <div className="px-5.5 pb-5.5 pt-0.5 border-t border-white/5 text-xs text-gray-400 leading-relaxed font-semibold">
+                          {t('categories.' + category.id + '.faq.a' + (index + 1), faq.answer)}
                         </div>
-                      );
-                    })}
+                      </details>
+                    ))}
                   </div>
                 </section>
               )}

@@ -16,6 +16,15 @@ const govTools = [
     dim: "354 x 472 px"
   },
   {
+    title: "Aadhaar PDF Compressor",
+    desc: "Compress e-Aadhaar PDF attachments under the official UIDAI 300KB upload limit.",
+    icon: <span className="text-2xl select-none" role="img" aria-label="Aadhaar PDF">📄</span>,
+    href: "/tools/aadhaar-pdf-compressor/",
+    badge: "UIDAI < 300KB",
+    kb: "Under 300KB",
+    dim: "Optimized"
+  },
+  {
     title: "Aadhaar Masking Tool",
     desc: "Automatically detect and redact the first 8 digits of your Aadhaar card for privacy protection.",
     icon: <span className="text-2xl select-none" role="img" aria-label="Aadhaar Mask">🪪</span>,
@@ -25,19 +34,19 @@ const govTools = [
     dim: "Auto-Detect"
   },
   {
-    title: "PAN Card Photo Crop",
-    desc: "Standardize photo layout for online NSDL/UTIITSL application forms.",
+    title: "PAN Card Resize",
+    desc: "Standardize passport photo layout to official NSDL/UTIITSL specifications.",
     icon: <span className="text-2xl select-none" role="img" aria-label="PAN Card">🪪</span>,
-    href: "/tools/pan-photo-tool/",
+    href: "/tools/pan-card-resize/",
     badge: "NSDL / UTIITSL Ready",
     kb: "Under 50KB",
     dim: "213 x 213 px"
   },
   {
-    title: "Signature Resizer",
+    title: "Signature Resize",
     desc: "Compress and scale signature scans for official banking, passport, and exam uploads.",
     icon: <span className="text-2xl select-none" role="img" aria-label="Signature">✍️</span>,
-    href: "/tools/signature-crop-tool/",
+    href: "/tools/signature-resize/",
     badge: "SSC / IBPS Compliant",
     kb: "10KB - 20KB",
     dim: "256 x 64 px"
@@ -52,31 +61,31 @@ const govTools = [
     dim: "3.5 x 4.5 cm"
   },
   {
-    title: "Exam Photo Resize",
-    desc: "Resize photos for competitive exams including SSC, UPSC, IBPS, NEET and JEE.",
-    icon: <span className="text-2xl select-none" role="img" aria-label="Exam Photo">📝</span>,
-    href: "/tools/exam-photo-resizer/",
-    badge: "National Portals",
+    title: "SSC Photo Resize",
+    desc: "Resize passport photos to official Staff Selection Commission guidelines under 50KB.",
+    icon: <span className="text-2xl select-none" role="img" aria-label="SSC Photo">📝</span>,
+    href: "/tools/ssc-photo-resize/",
+    badge: "SSC Portal Spec",
     kb: "20KB - 50KB",
     dim: "3.5 x 4.5 cm"
   },
   {
-    title: "JPG to PDF Converter",
-    desc: "Convert document photo scans into a single secure PDF file for portal submission.",
-    icon: <span className="text-2xl select-none" role="img" aria-label="JPG to PDF">🖼️</span>,
-    href: "/tools/jpg-to-pdf/",
-    badge: "Multi-Scan Join",
-    kb: "Under 2MB",
-    dim: "A4 Standard"
+    title: "UPSC Photo Resize",
+    desc: "Resize passport photos to official UPSC registration guidelines under 40KB.",
+    icon: <span className="text-2xl select-none" role="img" aria-label="UPSC Photo">🎓</span>,
+    href: "/tools/upsc-photo-resize/",
+    badge: "UPSC OTR Spec",
+    kb: "20KB - 40KB",
+    dim: "350 x 350 px"
   },
   {
-    title: "PDF Compressor",
-    desc: "Compress government application attachments under standard portal size limits.",
+    title: "Government Form PDF Compressor",
+    desc: "Compress government application PDF attachments under standard portal size limits.",
     icon: <span className="text-2xl select-none" role="img" aria-label="PDF Compressor">🗜️</span>,
-    href: "/tools/pdf-tools/",
-    badge: "WASM Local Engine",
-    kb: "Under 100KB",
-    dim: "Optimized Quality"
+    href: "/tools/gov-form-pdf-compressor/",
+    badge: "Portal Presets",
+    kb: "Selectable KB",
+    dim: "Custom Scale"
   }
 ];
 

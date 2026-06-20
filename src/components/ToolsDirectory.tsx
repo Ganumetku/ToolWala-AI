@@ -29,6 +29,10 @@ export default function ToolsDirectory({
   const searchQuery = externalSearchQuery !== undefined ? externalSearchQuery : internalSearchQuery;
 
   useEffect(() => {
+    setInternalSearchQuery(initialSearchQuery);
+  }, [initialSearchQuery]);
+
+  useEffect(() => {
     fetchPublicTools().then(setPublicTools).catch(() => {});
   }, []);
 

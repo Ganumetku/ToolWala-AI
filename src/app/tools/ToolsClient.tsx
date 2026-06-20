@@ -1,9 +1,17 @@
 "use client";
 
+import { Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import SectionTitle from '@/components/SectionTitle';
 import ToolsDirectory from '@/components/ToolsDirectory';
 import { MeshGradient } from '@/components/BackgroundEffects';
 import { useTranslation } from '@/components/I18nContext';
+
+function ToolsSearch() {
+  const searchParams = useSearchParams();
+  const search = searchParams?.get('search') || '';
+  return <ToolsDirectory initialSearchQuery={search} />;
+}
 
 export default function ToolsClient() {
   const { t } = useTranslation();
@@ -22,9 +30,16 @@ export default function ToolsClient() {
         />
         
         <div className="mt-20">
-          <ToolsDirectory />
+          <Suspense fallback={
+            <div className="flex justify-center py-20">
+              <div className="h-8 w-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+            </div>
+          }>
+            <ToolsSearch />
+          </Suspense>
         </div>
       </div>
     </div>
   );
 }
+

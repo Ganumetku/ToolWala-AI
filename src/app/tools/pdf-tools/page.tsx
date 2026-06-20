@@ -22,40 +22,39 @@ export default async function Page() {
     {
       title: t('pdf_dashboard.organize', 'Organize PDF'),
       icon: '🧩',
-      description: t('pdf_dashboard.organize_desc', 'Merge, split, rotate, delete, or organize pages in your PDF files visually.'),
-      toolIds: ['merge-pdf', 'split-pdf', 'organize-pdf', 'remove-pages', 'rotate-pdf']
-    },
-    {
-      title: t('pdf_dashboard.optimize', 'Optimize PDF'),
-      icon: '📉',
-      description: t('pdf_dashboard.optimize_desc', 'Compress, crop, and adjust page dimensions of your PDF documents locally.'),
-      toolIds: ['compress-pdf', 'crop-pdf']
+      description: t('pdf_dashboard.organize_desc', 'Merge, split, remove pages, or organize PDF files visually.'),
+      toolIds: ['merge-pdf', 'split-pdf', 'remove-pages', 'organize-pdf', 'rotate-pdf']
     },
     {
       title: t('pdf_dashboard.convert', 'Convert PDF'),
       icon: '📂',
       description: t('pdf_dashboard.convert_desc', 'Convert document layouts to PDF, or convert PDF pages to standard formats.'),
-      toolIds: ['jpg-to-pdf', 'pdf-to-jpg', 'word-to-pdf-converter', 'pdf-to-word-converter']
+      toolIds: ['pdf-to-jpg', 'jpg-to-pdf', 'pdf-to-word-converter', 'word-to-pdf-converter']
     },
     {
-      title: t('pdf_dashboard.edit', 'Edit PDF'),
-      icon: '✍️',
-      description: t('pdf_dashboard.edit_desc', 'Add text overlays, fill out document forms, or stamp custom watermarks.'),
-      toolIds: ['edit-pdf', 'watermark-pdf']
-    },
-    {
-      title: t('pdf_dashboard.security', 'PDF Security'),
+      title: t('pdf_dashboard.secure', 'Secure PDF'),
       icon: '🔒',
-      description: t('pdf_dashboard.security_desc', 'Protect your files with password encryption or unlock secure restrictions.'),
-      toolIds: ['protect-pdf', 'unlock-pdf']
+      description: t('pdf_dashboard.secure_desc', 'Protect your files with password encryption, unlock, or add watermarks.'),
+      toolIds: ['protect-pdf', 'unlock-pdf', 'watermark-pdf']
     },
     {
-      title: t('pdf_dashboard.intelligence', 'PDF Intelligence'),
-      icon: '🔍',
-      description: t('pdf_dashboard.intelligence_desc', 'Leverage secure, edge-run OCR to extract searchable text from scanned pages.'),
-      toolIds: ['pdf-ocr']
+      title: t('pdf_dashboard.ai_ocr', 'AI & OCR'),
+      icon: '🤖',
+      description: t('pdf_dashboard.ai_ocr_desc', 'Extract text from scanned documents or summarize PDFs locally with AI.'),
+      toolIds: ['pdf-ocr', 'pdf-summarizer']
+    },
+    {
+      title: t('pdf_dashboard.optimize_edit', 'Optimize & Edit'),
+      icon: '⚙️',
+      description: t('pdf_dashboard.optimize_edit_desc', 'Compress file sizes, crop page margins, and edit layouts locally.'),
+      toolIds: ['compress-pdf', 'crop-pdf', 'edit-pdf']
     }
   ];
+
+  const popularToolIds = ['merge-pdf', 'compress-pdf', 'split-pdf', 'pdf-ocr'];
+  const popularTools = popularToolIds
+    .map(id => toolsData.find(t => t.id === id))
+    .filter((t): t is typeof toolsData[0] => !!t);
 
   const categoryUrl = getLocalizedCanonicalUrl('/tools/pdf-tools', locale);
 
@@ -139,6 +138,37 @@ export default async function Page() {
                 <div className="flex items-center gap-3 bg-emerald-500/10 px-4 py-2 rounded-xl border border-emerald-500/20 self-start">
                   <Shield className="w-4 h-4 text-emerald-400" />
                   <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">100% Client-Side</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-8 sm:p-10 bg-black/[0.05] border-b border-white/5">
+              {/* Popular Tools Tray */}
+              <div className="mb-8">
+                <h2 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-6 flex items-center gap-2 text-left">
+                  <Sparkles className="w-3.5 h-3.5 text-blue-500 animate-pulse" />
+                  {t('pdf_dashboard.popular_tools', 'Popular PDF Utilities')}
+                </h2>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {popularTools.map((tool) => {
+                    const displayTitle = t(`tools.${tool.id}.title`, tool.title);
+                    const displayDesc = t(`tools.${tool.id}.description`, tool.description);
+                    return (
+                      <Link
+                        key={tool.id}
+                        href={localizeHref(tool.href)}
+                        className="flex items-center gap-3.5 p-4 rounded-xl bg-white/[0.01] border border-white/5 hover:border-blue-500/30 hover:bg-blue-600/5 hover:shadow-[0_0_15px_rgba(37,99,235,0.08)] transition-all group cursor-pointer text-left"
+                      >
+                        <div className="text-xl w-10 h-10 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center group-hover:scale-110 transition-transform">
+                          {tool.icon}
+                        </div>
+                        <div className="overflow-hidden">
+                          <h4 className="text-xs font-black text-white group-hover:text-blue-400 transition-colors truncate">{displayTitle}</h4>
+                          <p className="text-[9px] text-gray-500 font-semibold mt-0.5 truncate leading-relaxed">{displayDesc}</p>
+                        </div>
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
             </div>

@@ -3,10 +3,10 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
-    'pan-photo-tool',
-    'PAN Photo Tool Online - Resize Photo for PAN card | ToolWala AI',
-    'Resize and format passport photos to official NSDL and UTIITSL PAN card requirements (213 x 213 px, under 50KB). Real-time cropping with background removal.',
-    '/tools/pan-photo-tool'
+    'signature-resize',
+    'Signature Resize & Crop Online - SSC, Bank & Portal Specs | ToolWala AI',
+    'Crop, resize, and compress signature scans online. Preconfigured templates for banks (4:1), SSC (6x3 cm), and government forms. Instant local background cleanup.',
+    '/tools/signature-resize'
   );
 }
 

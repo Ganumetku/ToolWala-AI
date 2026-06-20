@@ -1042,127 +1042,248 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "Aadhaar Photo Resizer", href: "/tools/aadhaar-photo-resizer" }
     ]
   },
-  "signature-crop-tool": {
-    title: "Signature Crop Tool",
-    intro: "Resize, crop, and compress signature scans to official standards instantly. Get print-ready layouts and clean transparent/white background signatures for exams, recruitment boards, and bank portals.",
-    whatItDoes: "ToolWala AI Signature Crop Tool helps you format signature uploads to match stringent recruitment guidelines (like SSC, IBPS, and State Public Service Commissions). It offers precise aspect ratios (2:1, 4:1, 7:3) and custom crop dimensions. Users can adjust alignment, rotate scans, apply contrast/brightness filters to make text legible, and limit files to under 20KB client-side.",
+  "signature-resize": {
+    title: "Signature Resize Online",
+    intro: "Resize, crop, and compress signature scans to official Indian portal standards instantly. Generate clean signatures for recruitment boards, public service exams, and banking applications without uploading files to external servers.",
+    whatItDoes: "The Signature Resize tool helps applicants format signature uploads to match the strict requirements of recruitment and banking portals. It offers custom aspect ratios (4:1, 2:1, 7:3) and visual enhancement tools to clean up background noise. You can adjust contrast and brightness to make the ink stand out clearly, and automatically compress the output file to stay under standard size limits (like 20KB for SSC and IBPS portals).",
     howToUse: [
-      "Upload a clear photo of your signature on white paper.",
-      "Select your target exam or banking template from the layout presets.",
-      "Use the interactive workspace to drag and frame your signature inside the crop box.",
-      "Fine-tune the contrast and brightness sliders to make the signature ink pop.",
-      "Export and download your compliant, compressed signature file instantly."
+      "Upload a clear photo of your signature written on plain white paper using dark ink.",
+      "Select your target portal specification preset (e.g., SSC Exam, IBPS Bank, or General Signature).",
+      "Drag and adjust the crop boundaries to center your signature cleanly inside the guideline box.",
+      "Use the image adjustment sliders to enhance contrast, removing any grey background shadows.",
+      "Click download to save your optimized, compliant signature image locally in JPG or PNG format."
     ],
     keyFeatures: [
-      { title: "Exam Specific Presets", desc: "Includes official aspect ratios and dimension specifications for SSC, UPSC, and IBPS boards." },
-      { title: "Binary-Search Compressor", desc: "Guarantees signature size stays strictly under the maximum 20KB cap to avoid portal rejections." },
-      { title: "Contrast & Ink Boost", desc: "Filters to clear background shadows and enhance signature visibility." },
-      { title: "Client-Side Privacy", desc: "Your signature scans never touch our servers. Everything is processed offline in your browser cache." }
+      { title: "Standard Aspect Ratios", desc: "Built-in aspect ratios matching official guidelines (e.g. 6.0 x 3.0 cm for SSC, 140 x 60 pixels for IBPS)." },
+      { title: "Binary Size Optimizer", desc: "Automatically scales quality metrics to guarantee your file stays strictly below the maximum 20KB limit." },
+      { title: "Contrast & Ink Filters", desc: "Brings out signature lines while whitening the paper background for high readability." },
+      { title: "100% Client-Side Privacy", desc: "No uploads or network transitions are required. All image modifications compile directly in browser memory." }
     ],
     benefits: [
-      "Eliminate recruitment form rejections due to blurred or oversized signatures.",
-      "Process signatures locally on your device for absolute personal safety.",
+      "Eliminate candidate form rejections caused by blurred, dark, or oversized signature scans.",
+      "Completely free to use with no hidden subscription packages, account registration, or download caps.",
+      "Full mobile capability with touch drag handles and responsive crop scaling.",
+      "Ensures signature coordinates are aligned correctly according to official portals specifications."
+    ],
+    whyChoose: "Indian banking and recruitment portals enforce strict automated checks that immediately reject signatures that are poorly illuminated or exceed file size caps. Our Signature Resize tool solves this by providing pre-tested aspect ratio templates and a local compression loop that delivers compliant files in seconds.",
+    useCases: [
+      "Applicants uploading signatures for SSC, IBPS, UPSC, and state-level recruitment portal forms.",
+      "Taxpayers submitting signature copies to NSDL/UTIITSL portals.",
+      "Signees creating clean, transparent PNG signatures for contract signing utilities."
+    ],
+    faqs: [
+      { question: "What is the official signature size for SSC exams?", answer: "The Staff Selection Commission (SSC) requires signature dimensions of 6.0 cm width x 3.0 cm height (ratio 2:1) and a file size strictly between 10KB and 20KB." },
+      { question: "What ink color should I use for official signatures?", answer: "Most government portals recommend signing with black ink on plain white paper for high-contrast scanning and validation." },
+      { question: "Is my signature photo secure?", answer: "Yes. All cropping, filtering, and compression happen entirely client-side. Your signature image is processed locally and never uploaded to our servers." }
+    ],
+    conclusion: "Format and compress signature scans securely to meet portal guidelines. Start optimizing your files with ToolWala AI's signature resize tool.",
+    relatedTools: [
+      { name: "Aadhaar Photo Resize", href: "/tools/aadhaar-photo-resizer" },
+      { name: "PAN Card Resize", href: "/tools/pan-card-resize" },
+      { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize" }
+    ]
+  },
+  "pan-card-resize": {
+    title: "PAN Card Resize Online",
+    intro: "Format, crop, and resize passport photos to official NSDL and UTIITSL PAN card specifications. Complies with the mandatory 213 x 213 pixels dimension and whiteness checks.",
+    whatItDoes: "The PAN Card Resize tool is designed to automate portal photo compatibility for Indian PAN card applications. It crop-locks your photo to a 1:1 aspect ratio, scales it to exactly 213 x 213 pixels at 300 DPI, and applies binary-search compression to ensure the output remains under the strict 50KB limit required by NSDL and UTIITSL portals.",
+    howToUse: [
+      "Select and upload your passport-style portrait photograph.",
+      "Choose the target spec preset (NSDL PAN card or UTIITSL PAN card).",
+      "Drag, scale, and center your head and shoulders inside the crop window.",
+      "Apply light blue or off-white background fills if your original image background is not compliant.",
+      "Download the portal-ready, compressed JPG file to your local storage."
+    ],
+    keyFeatures: [
+      { title: "NSDL & UTIITSL Compliant", desc: "Configured templates matching the official 1:1 aspect ratio (213 x 213 px) guidelines." },
+      { title: "One-Click Background Replacer", desc: "Easily replace original backgrounds with official light blue or plain white fills." },
+      { title: "Binary Quality Compressing", desc: "Optimizes image file sizes client-side to ensure they stay strictly under the 50KB limit." },
+      { title: "Private Execution Cache", desc: "Your identity files and photos are processed in active browser memory and never uploaded to any database." }
+    ],
+    benefits: [
+      "Prevents PAN application delays and photo mismatch query notices.",
+      "Saves money on commercial photo studios and desktop software suites.",
+      "User-friendly mobile interface supporting responsive touch interactions.",
+      "Completely free to use with zero registration, login, or watermark overlays."
+    ],
+    whyChoose: "PAN card portals run automatic validations that reject photos that have incorrect dimensions or exceed size limits. Our PAN Card Resize tool applies exact pixel mappings and compression filters locally, ensuring your photo passes all NSDL and UTIITSL criteria.",
+    useCases: [
+      "Applicants submitting forms online for new PAN cards.",
+      "Citizens correcting or updating their photo credentials on their existing PAN card.",
+      "E-governance operators resizing document batches for applicants."
+    ],
+    faqs: [
+      { question: "What is the photo dimension for PAN card online?", answer: "The official photo size required for PAN card applications is 3.5 cm x 2.5 cm, which translates to exactly 213 x 213 pixels at 300 DPI (1:1 aspect ratio)." },
+      { question: "What is the maximum file size for PAN card photos?", answer: "Both NSDL and UTIITSL portals require photo files to be in JPEG format and strictly under 50KB in size." },
+      { question: "Do I need to sign up to use this tool?", answer: "No, ToolWala AI is fully open. You can edit and download compliant photos instantly without registering an account." }
+    ],
+    conclusion: "Format your photo for PAN card NSDL and UTIITSL applications instantly. Try our secure, browser-based PAN Card Resize tool.",
+    relatedTools: [
+      { name: "Aadhaar Photo Resize", href: "/tools/aadhaar-photo-resizer" },
+      { name: "Signature Resize", href: "/tools/signature-resize" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
+    ]
+  },
+  "ssc-photo-resize": {
+    title: "SSC Photo Resize Online",
+    intro: "Resize, crop, and compress passport photos to official Staff Selection Commission (SSC) guidelines. Generate 3.5 x 4.5 cm photos under 50KB with correct date formats easily.",
+    whatItDoes: "The SSC Photo Resize tool formats applicant photographs for SSC registration portals (CGL, CHSL, MTS, CPO, GD). It applies the required aspect ratio (approximately 7:9), scales the crop to 3.5 x 4.5 cm, and compresses the JPEG file to stay strictly between 20KB and 50KB. The tool checks for proper head-to-shoulder ratio to avoid form rejections.",
+    howToUse: [
+      "Upload your passport portrait photo.",
+      "Frame your head and shoulders inside the guideline crop window.",
+      "Make sure both ears are visible and the facial expression is neutral.",
+      "Use our brightness slider to clean up any shadows and make the background white.",
+      "Download the compliant, optimized JPEG file to complete your SSC application."
+    ],
+    keyFeatures: [
+      { title: "SSC Portal Preset", desc: "Predefined dimensions matching the official 3.5 x 4.5 cm (354 x 472 pixels) layout rules." },
+      { title: "KB Limit Safety Loop", desc: "Automated binary compressor that keeps files within the required 20KB - 50KB range." },
+      { title: "Compliant White Background", desc: "Integrated canvas filters to whiten backgrounds and optimize illumination levels." },
+      { title: "Zero Data Transmission", desc: "100% client-side operation ensures your personal identification photo remains private on your device." }
+    ],
+    benefits: [
+      "Avoid candidate registration failures due to incorrect aspect ratios or oversized files.",
+      "Process photos on any mobile device or tablet using simple touchscreen controls.",
+      "Always free, without account registrations or watermarks.",
+      "Ensures the photo complies with the strict 70-80% face coverage guidelines."
+    ],
+    whyChoose: "The SSC portal uses automated image checking that rejects applications with blurred features or incorrect photo ratios. Our SSC Photo Resize tool ensures your photo meets all official requirements, helping your registration succeed.",
+    useCases: [
+      "Job seekers applying for SSC CGL, CHSL, MTS, CPO, or GD exams.",
+      "Candidates updating their official SSC profile portfolios.",
+      "Coaching centers batch-processing photos for students."
+    ],
+    faqs: [
+      { question: "What is the photo size for SSC applications?", answer: "The Staff Selection Commission requires passport photos to be 3.5 cm width x 4.5 cm height, which is approximately 354 x 472 pixels, saved in JPEG format." },
+      { question: "What is the size limit for SSC photos?", answer: "Photos must have a file size between 20KB and 50KB to be accepted on the SSC online portal." },
+      { question: "Should my photo have the date printed on it?", answer: "In recent SSC notices, printing the date of the photo is no longer universally mandatory unless explicitly specified in the active recruitment notification. Please check the current notification guidelines." }
+    ],
+    conclusion: "Format your Staff Selection Commission application photo in seconds. Try our secure, browser-native SSC Photo Resize tool today.",
+    relatedTools: [
+      { name: "UPSC Photo Resize", href: "/tools/upsc-photo-resize" },
+      { name: "Signature Resize", href: "/tools/signature-resize" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
+    ]
+  },
+  "upsc-photo-resize": {
+    title: "UPSC Photo Resize Online",
+    intro: "Format and resize passport photos for Union Public Service Commission (UPSC) online application registration. Complies with the mandatory 350 x 350 pixels dimension and white background rules.",
+    whatItDoes: "The UPSC Photo Resize tool formats candidate photos specifically for the UPSC OTR (One Time Registration) portal. It locks the crop window to a 1:1 aspect ratio, scales the photo to exactly 350 x 350 pixels, and compresses the JPEG file to fall between the required 20KB and 40KB size limits, ensuring compliance with UPSC rules.",
+    howToUse: [
+      "Upload your passport portrait photo.",
+      "Center your face inside the square crop window.",
+      "Check that both eyes are level and your expression is neutral.",
+      "Switch the background fill to clean white or light grey.",
+      "Download the compliant JPEG photo and upload it directly to the UPSC portal."
+    ],
+    keyFeatures: [
+      { title: "UPSC OTR Preset", desc: "Pre-configured templates matching the official 350 x 350 pixels (1:1 ratio) specifications." },
+      { title: "Precise Size Compressor", desc: "Binary compressor that keeps the output image size within the strict 20KB - 40KB limits." },
+      { title: "Standard White BG Fill", desc: "Integrated canvas filters to apply a plain white background, as required by UPSC rules." },
+      { title: "On-Device Processing", desc: "100% client-side execution means your registration photo never leaves your device." }
+    ],
+    benefits: [
+      "Avoid UPSC OTR registration delays due to non-compliant photo formats.",
+      "Process photos on any mobile device or tablet with simple controls.",
+      "Unlimited free processing with no signups, logins, or watermarks.",
+      "Ensures the photo complies with the strict 70-80% face coverage guidelines."
+    ],
+    whyChoose: "UPSC applications are frequently rejected because of incorrect image coordinates or sizes. Our UPSC Photo Resize tool applies exact coordinate scales and formats backgrounds client-side, making compliance simple for everyone.",
+    useCases: [
+      "Candidates registering for Civil Services (CSE), NDA, CDS, and other UPSC exams.",
+      "Applicants updating their official UPSC profile portfolios.",
+      "Coaching centers batch-processing photos for students."
+    ],
+    faqs: [
+      { question: "What is the photo size for UPSC CSE?", answer: "UPSC requires photos to be exactly 350 pixels width x 350 pixels height (aspect ratio 1:1), with a file size between 20KB and 40KB." },
+      { question: "What background color is compliant for UPSC photos?", answer: "UPSC guidelines recommend a plain white background for all passport photo uploads." },
+      { question: "Is my registration photo secure?", answer: "Yes, our tool runs fully in your browser memory. Your personal documents are never uploaded to any servers." }
+    ],
+    conclusion: "Format your photo for UPSC Civil Services applications instantly. Try our secure, browser-based UPSC Photo Resize tool.",
+    relatedTools: [
+      { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize" },
+      { name: "Signature Resize", href: "/tools/signature-resize" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
+    ]
+  },
+  "aadhaar-pdf-compressor": {
+    title: "Aadhaar PDF Compressor Online",
+    intro: "Compress e-Aadhaar PDF files under the official UIDAI 300KB upload limit securely. Optimize your identity verification documents locally in your browser sandbox.",
+    whatItDoes: "The Aadhaar PDF Compressor optimizes e-Aadhaar PDF files to meet the strict file size limits of online portals. It uses client-side libraries to strip out unneeded metadata, optimize font subsets, and compress embedded graphics, keeping the file under the standard 300KB limit for UIDAI updates without losing text clarity.",
+    howToUse: [
+      "Select and upload the e-Aadhaar PDF file you want to compress.",
+      "If the PDF is password-protected, enter the standard password (name uppercase + birth year) to unlock it.",
+      "Click the 'Compress PDF' button to optimize the file.",
+      "Download the compressed, compliant Aadhaar PDF to complete your submission."
+    ],
+    keyFeatures: [
+      { title: "300KB Size Limit Optimization", desc: "Designed to compress e-Aadhaar documents under the official UIDAI 300KB upload limit." },
+      { title: "Local Memory Execution", desc: "Your identity files remain private. No data is sent to external servers." },
+      { title: "Layout Preservation", desc: "Keeps original fonts, text formatting, and barcodes legible for scanning." },
+      { title: "Password Unlock Support", desc: "Allows processing password-protected files securely in your browser." }
+    ],
+    benefits: [
+      "Avoid registration failures due to oversized e-Aadhaar documents.",
+      "Process sensitive identity documents locally on your device for absolute safety.",
       "Free tools with zero limits, watermarks, or account registration.",
-      "Highly responsive mobile touch dragging and pinch zoom."
+      "Ensures the PDF complies with the strict 300KB limit."
     ],
-    whyChoose: "Recruitment and banking portals are extremely strict about signature file sizes and dimensions. Standard cropping tools blur text or output files that exceed size limits. Our Signature Crop Tool combines coordinates positioning with a binary-search quality compressor, guaranteeing compliance under 20KB in seconds.",
+    whyChoose: "UIDAI and other e-KYC portals are extremely strict about PDF file sizes. Standard compressors often compress text to the point of being unreadable, resulting in portal rejections. Our Aadhaar PDF Compressor optimizes document structures locally, ensuring text remains sharp while keeping the file under 300KB.",
     useCases: [
-      "Applicants submitting online recruitment forms for SSC, UPSC, and IBPS.",
-      "Account holders uploading signatures for mobile banking authorization.",
-      "Professionals adding signature cards to digital PDF contracts."
+      "Applicants uploading e-Aadhaar PDFs for official government portal updates.",
+      "Citizens submitting identity verification documents for bank accounts or SIM cards.",
+      "HR teams batch-processing identity documents for employee onboarding."
     ],
     faqs: [
-      { question: "How do I crop my signature online?", answer: "Upload an image of your signature, select your target aspect ratio, drag the crop window, and download the compressed output." },
-      { question: "What is the standard size for SSC signatures?", answer: "The official Staff Selection Commission (SSC) standard is 6.0 cm x 3.0 cm (aspect ratio 2:1), with a file size limit between 10KB and 20KB." },
-      { question: "Can I remove background shadows?", answer: "Yes, you can use our built-in brightness and contrast filters to whiten paper backgrounds and make ink lines pop." }
+      { question: "What is the standard password for e-Aadhaar PDFs?", answer: "The standard password is a combination of the first four letters of your name in CAPITAL letters, followed by your birth year (e.g., KART1990)." },
+      { question: "What is the file size limit for Aadhaar uploads?", answer: "The official UIDAI portal and most e-KYC platforms require Aadhaar PDF files to be under 300KB in size." },
+      { question: "Is my Aadhaar document secure?", answer: "Yes. All processing is executed 100% locally in your browser. Your documents never touch our servers or any cloud database." }
     ],
-    conclusion: "Format and compress your signature scans for government and recruitment forms safely. Start using ToolWala AI's signature resizer.",
+    conclusion: "Compress your e-Aadhaar PDF files securely. Start optimizing your files with ToolWala AI.",
     relatedTools: [
-      { name: "Aadhaar Photo Resizer", href: "/tools/aadhaar-photo-resizer" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-      { name: "PAN Photo Tool", href: "/tools/pan-photo-tool" }
+      { name: "Government Form PDF Compressor", href: "/tools/gov-form-pdf-compressor" },
+      { name: "Aadhaar Photo Resize", href: "/tools/aadhaar-photo-resizer" },
+      { name: "Aadhaar Masking Tool", href: "/tools/aadhaar-masking-tool" }
     ]
   },
-  "pan-photo-tool": {
-    title: "PAN Photo Tool",
-    intro: "Resize, crop, and format passport photos to official NSDL and UTIITSL PAN card specifications. Keep head spacing, check background rules, and stay under the 50KB limit.",
-    whatItDoes: "The PAN Photo Tool automatically standardizes your profile photos for online NSDL/UTIITSL application forms. It applies a strict 1:1 aspect ratio (213 x 213 px) and whiteness filters to match requirements. The built-in compressor ensures the output file sits safely below 50KB to pass validation tests.",
+  "gov-form-pdf-compressor": {
+    title: "Government Form PDF Compressor Online",
+    intro: "Compress government application PDF attachments under standard portal size limits. Select target size brackets (100KB, 200KB, 300KB, 500KB) to match EPFO, NSDL, SSC, and UPSC requirements.",
+    whatItDoes: "The Government Form PDF Compressor is designed to optimize document attachments for various Indian portal portals. It optimizes PDF structure, strips redundant components, and adjusts image quality client-side, ensuring the output fits within your selected target KB limit.",
     howToUse: [
-      "Upload a portrait photo from your device.",
-      "Choose the NSDL or UTIITSL standard preset.",
-      "Use the interactive controls to center your face and keep your shoulders visible.",
-      "Select a white, blue, or red background color to comply with PAN guidelines.",
-      "Download the compressed, compliant JPG file instantly."
+      "Select and upload the PDF file you want to compress.",
+      "Choose your target size preset (e.g. under 100KB for EPFO, under 300KB for UPSC, under 500KB for NSDL).",
+      "Click the 'Compress PDF' button to optimize the file.",
+      "Download the compressed, compliant PDF to complete your submission."
     ],
     keyFeatures: [
-      { title: "NSDL / UTIITSL Presets", desc: "Pre-configured templates matching the official 213x213 pixels PAN specifications." },
-      { title: "Draggable Crop Window", desc: "Full manual override to center eyes, hair, and shoulders safely." },
-      { title: "Compliant BG Replacements", desc: "Easily switch backgrounds to official white or royal blue colors." },
-      { title: "Local Browser Sandbox", desc: "100% private. UIDAI and income tax document photos are never sent to external servers." }
+      { title: "Target Size Brackets", desc: "Selectable presets matching official portal limits (100KB, 200KB, 300KB, 500KB, 1MB)." },
+      { title: "WASM Local Engine", desc: "Process your documents offline. Safe for sensitive personal records." },
+      { title: "Text Integrity Protection", desc: "Keeps fonts, tables, and signatures crisp even at high compression ratios." },
+      { title: "EPFO & NSDL Compliant", desc: "Designed to meet the strict validation rules of various Indian portals." }
     ],
     benefits: [
-      "Saves time and money spent on photo studios or complex editors.",
-      "Guarantees acceptance on Indian tax portal uploads.",
-      "Intuitive mobile touch drag and zoom overlays.",
-      "Completely free to use without registration."
+      "Avoid registration failures due to oversized document attachments.",
+      "Process sensitive financial and personal files locally for absolute safety.",
+      "Free tools with zero limits, watermarks, or account registration.",
+      "Ensures the PDF complies with the strict size limits."
     ],
-    whyChoose: "PAN card applications are frequently rejected because of incorrect image coordinates or sizes. Our PAN Photo Tool applies exact coordinate scales and formats backgrounds client-side, making compliance simple for everyone.",
+    whyChoose: "Government portals run automated checks that immediately reject PDF files that are too large or have incorrect formatting. Our Government Form PDF Compressor optimizes document structures locally, ensuring files pass all validation criteria.",
     useCases: [
-      "Indian citizens applying for new PAN cards online.",
-      "Applicants updating existing PAN card details.",
-      "Tax consultants formatting applicant documentation bundles."
+      "Applicants uploading PDF attachments for EPFO, NSDL, SSC, and UPSC forms.",
+      "Taxpayers submitting financial documents to the Income Tax portal.",
+      "Candidates uploading certificate bundles for competitive exam registrations."
     ],
     faqs: [
-      { question: "What is the photo size for PAN card applications?", answer: "The official photo size required by NSDL and UTIITSL portals is 3.5cm x 2.5cm, which translates to exactly 213 x 213 pixels (1:1 ratio) at 300 DPI." },
-      { question: "What background color is compliant for PAN card photos?", answer: "A white or light-colored plain background is strictly recommended for PAN card applications." },
-      { question: "Does it work on smartphones?", answer: "Yes. Our tool is optimized for mobile touch screens, including pinch gestures and drags." }
+      { question: "What is the PDF size limit for EPFO uploads?", answer: "The Employees' Provident Fund Organisation (EPFO) portal typically requires PDF attachments (like joint declarations or bank passbooks) to be under 100KB or 200KB in size." },
+      { question: "Will my PDF signature remain valid after compression?", answer: "Yes, our optimizer preserves text and signature layers without rasterizing them, ensuring digital signatures remain valid." },
+      { question: "Is my document secure?", answer: "Yes, all processing is executed 100% locally in your browser. Your documents never touch our servers or any cloud database." }
     ],
-    conclusion: "Format your passport photo for PAN card NSDL/UTIITSL uploads instantly. Try our secure, browser-based PAN photo tool.",
+    conclusion: "Compress your government application PDFs securely. Try our secure, browser-based Government Form PDF Compressor.",
     relatedTools: [
-      { name: "Aadhaar Photo Resizer", href: "/tools/aadhaar-photo-resizer" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-      { name: "Signature Crop Tool", href: "/tools/signature-crop-tool" }
-    ]
-  },
-  "exam-photo-resizer": {
-    title: "Exam Photo Resizer",
-    intro: "Resize and compress photos for competitive exams and recruitment portals (SSC, UPSC, IBPS, NEET, JEE). Meet pixel ratios and target KB limits in one click.",
-    whatItDoes: "Exam Photo Resizer formats applicant portrait photos for various national and state recruitment portals. It includes presets for SSC (3.5x4.5cm, 20-50KB), UPSC, IBPS, and NEET. The tool ensures proper head positioning, whiteness checks, and uses binary-search compression to match size brackets.",
-    howToUse: [
-      "Upload your passport-style portrait photo.",
-      "Select your target recruitment board or portal preset.",
-      "Center your face within the crop box guidelines, ensuring hair is not cut.",
-      "Adjust brightness/contrast if needed to ensure clear facial features.",
-      "Download the portal-ready, optimized photo under the required KB limit."
-    ],
-    keyFeatures: [
-      { title: "National Portal Presets", desc: "Configured templates for Staff Selection, banking boards (IBPS), UPSC, and medical/engineering entry tests." },
-      { title: "Draggable Alignment", desc: "Direct drag and pinch-to-zoom support for perfect head and shoulder framing." },
-      { title: "Pixel & Size Compilers", desc: "Outputs photos at precise width/height dimensions under standard 50KB limits." },
-      { title: "Edge Security", desc: "Process your photos offline. Safe for students and government applicants." }
-    ],
-    benefits: [
-      "Avoid exam form rejections due to non-compliant photo ratios.",
-      "Get perfect photo framing in seconds on your mobile or PC.",
-      "Unlimited free processing with no signups or watermark overlays.",
-      "Includes a compliance checklist before downloading."
-    ],
-    whyChoose: "Recruitment portals run automated checks that immediately reject photos that are blurry, incorrectly framed, or have incorrect file sizes. Our Exam Photo Resizer provides pre-tested template filters, making sure your application moves forward.",
-    useCases: [
-      "Students registering for JEE, NEET, or GATE tests.",
-      "Job seekers applying for SSC, IBPS, or state government jobs.",
-      "Parents formatting children's application credentials."
-    ],
-    faqs: [
-      { question: "What is the photo size for SSC and bank exams?", answer: "Most exams require a 3.5 cm x 4.5 cm passport photo, which is approximately 354 x 472 pixels, and a file size between 20KB and 50KB." },
-      { question: "Should shoulders be visible in exam photos?", answer: "Yes, official specs require your head and shoulders to be clearly visible, taking up 70% to 80% of the photo frame." },
-      { question: "Is my photo secure?", answer: "Yes, our tool runs fully in your browser memory. Your personal documents are never uploaded to any servers." }
-    ],
-    conclusion: "Format your exam registration photos cleanly and securely. Get compliant files instantly with ToolWala AI.",
-    relatedTools: [
-      { name: "Aadhaar Photo Resizer", href: "/tools/aadhaar-photo-resizer" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-      { name: "Signature Crop Tool", href: "/tools/signature-crop-tool" }
+      { name: "Aadhaar PDF Compressor", href: "/tools/aadhaar-pdf-compressor" },
+      { name: "Compress PDF", href: "/tools/compress-pdf" },
+      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" }
     ]
   },
   "password-generator": {

@@ -8,41 +8,26 @@ import { MeshGradient } from "@/components/BackgroundEffects";
 import ToolVisibilityGuard from "@/components/ToolVisibilityGuard";
 import ImageCropperEngine, { CropperPreset } from "@/components/ImageCropperEngine";
 
-const PAN_PRESETS: CropperPreset[] = [
+const UPSC_PRESETS: CropperPreset[] = [
   {
-    id: "nsdl-pan",
-    label: "NSDL PAN Card Photo (3.5x2.5 cm)",
-    width: 213,
-    height: 213, // 1:1 aspect ratio
-    targetKb: 50,
-    allowBgRemoval: true,
-    bgColors: [
-      { name: "White", hex: "#ffffff" },
-      { name: "Light Blue", hex: "#eff6ff" },
-      { name: "Off White", hex: "#fafafa" },
-    ],
-    description: "Official NSDL portal photo specifications.",
-    specs: "3.5 x 2.5 cm (213 x 213 px), Target size: < 50KB",
-  },
-  {
-    id: "utiitsl-pan",
-    label: "UTIITSL PAN Card Photo",
-    width: 213,
-    height: 213, // 1:1 aspect ratio
-    targetKb: 30,
+    id: "upsc-photo",
+    label: "UPSC Registration Photo",
+    width: 350,
+    height: 350, // 1:1 aspect ratio
+    targetKb: 40,
     allowBgRemoval: true,
     bgColors: [
       { name: "White", hex: "#ffffff" },
       { name: "Light Blue", hex: "#eff6ff" },
     ],
-    description: "Official UTIITSL portal photo specifications.",
-    specs: "213 x 213 px, Target size: 10KB - 30KB",
+    description: "Official Union Public Service Commission specifications.",
+    specs: "350 x 350 px, Target size: 20KB - 40KB",
   }
 ];
 
-export default function PANPhotoTool() {
+export default function UPSCPhotoResize() {
   return (
-    <ToolVisibilityGuard slug="pan-photo-tool">
+    <ToolVisibilityGuard slug="upsc-photo-resize">
       <div className="min-h-screen bg-[#030712] text-gray-100 relative overflow-hidden font-sans">
         <MeshGradient />
 
@@ -66,27 +51,27 @@ export default function PANPhotoTool() {
               100% Client-Side Processing
             </div>
             <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6 uppercase">
-              PAN Photo Tool <br />
+              UPSC Photo Resize <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
-                NSDL & UTIITSL specs
+                Official UPSC specs
               </span>
             </h1>
             <p className="text-base sm:text-lg text-gray-400 leading-relaxed font-medium">
-              Resize and format passport photos to official Indian PAN card specifications. Automatically isolate subjects, replace backgrounds with compliant colors, and compress under 50KB safely.
+              Resize and format passport photos for Union Public Service Commission (UPSC) OTR registrations. Centering alignment controls check head proportions to prevent cuts.
             </p>
           </div>
 
           {/* Main Cropper Console */}
           <div className="max-w-6xl mx-auto">
             <ImageCropperEngine
-              toolSlug="pan-photo-tool"
-              title="PAN Photo Tool"
-              description="Format and resize passport photos to official NSDL/UTIITSL PAN card specifications."
-              presets={PAN_PRESETS}
+              toolSlug="upsc-photo-resize"
+              title="UPSC Photo Resize"
+              description="Format and resize passport photos to official Union Public Service Commission (UPSC) guidelines."
+              presets={UPSC_PRESETS}
               seoArticle={
-                toolArticles["pan-photo-tool"] && (
+                toolArticles["upsc-photo-resize"] && (
                   <div className="mt-24 border-t border-white/5 pt-20">
-                    <ToolArticle {...toolArticles["pan-photo-tool"]} />
+                    <ToolArticle {...toolArticles["upsc-photo-resize"]} />
                   </div>
                 )
               }

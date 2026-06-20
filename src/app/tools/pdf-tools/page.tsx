@@ -23,7 +23,7 @@ export default async function Page() {
       title: t('pdf_dashboard.organize', 'Organize PDF'),
       icon: '🧩',
       description: t('pdf_dashboard.organize_desc', 'Merge, split, remove pages, or organize PDF files visually.'),
-      toolIds: ['merge-pdf', 'split-pdf', 'remove-pages', 'organize-pdf', 'rotate-pdf']
+      toolIds: ['merge-pdf', 'split-pdf', 'remove-pages', 'organize-pdf', 'add-page-numbers-to-pdf', 'rotate-pdf']
     },
     {
       title: t('pdf_dashboard.convert', 'Convert PDF'),
@@ -32,22 +32,22 @@ export default async function Page() {
       toolIds: ['pdf-to-jpg', 'jpg-to-pdf', 'pdf-to-word-converter', 'word-to-pdf-converter']
     },
     {
-      title: t('pdf_dashboard.secure', 'Secure PDF'),
-      icon: '🔒',
-      description: t('pdf_dashboard.secure_desc', 'Protect your files with password encryption, unlock, or add watermarks.'),
-      toolIds: ['protect-pdf', 'unlock-pdf', 'watermark-pdf']
+      title: t('pdf_dashboard.optimize', 'Optimize PDF'),
+      icon: '⚙️',
+      description: t('pdf_dashboard.optimize_desc', 'Compress file sizes, crop page margins, and edit layouts locally.'),
+      toolIds: ['compress-pdf', 'crop-pdf', 'edit-pdf']
     },
     {
-      title: t('pdf_dashboard.ai_ocr', 'AI & OCR'),
+      title: t('pdf_dashboard.secure', 'Security'),
+      icon: '🔒',
+      description: t('pdf_dashboard.secure_desc', 'Protect your files, sign documents, unlock password protection, or add watermarks.'),
+      toolIds: ['protect-pdf', 'unlock-pdf', 'watermark-pdf', 'sign-pdf']
+    },
+    {
+      title: t('pdf_dashboard.ai_ocr', 'OCR & AI'),
       icon: '🤖',
       description: t('pdf_dashboard.ai_ocr_desc', 'Extract text from scanned documents or summarize PDFs locally with AI.'),
       toolIds: ['pdf-ocr', 'pdf-summarizer']
-    },
-    {
-      title: t('pdf_dashboard.optimize_edit', 'Optimize & Edit'),
-      icon: '⚙️',
-      description: t('pdf_dashboard.optimize_edit_desc', 'Compress file sizes, crop page margins, and edit layouts locally.'),
-      toolIds: ['compress-pdf', 'crop-pdf', 'edit-pdf']
     }
   ];
 

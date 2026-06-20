@@ -1975,5 +1975,84 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "Organize PDF Pages", href: "/tools/organize-pdf" },
       { name: "Crop PDF", href: "/tools/crop-pdf" }
     ]
+  },
+  "add-page-numbers-to-pdf": {
+    title: "Add Page Numbers to PDF",
+    intro: "Add page numbers to your PDF documents locally in your browser. Customize pagination formats, positions, offset margins, and styling details easily and securely.",
+    whatItDoes: "ToolWala AI's Add Page Numbers to PDF tool allows you to paginate PDF documents on-device. The utility reads page geometry using WebAssembly, maps numbering offsets, and stamps custom page numbers at bottom or top presets (left, center, right) in various formats like 'Page X of Y' or simply 'X'. Since the calculation runs entirely client-side, your files are never uploaded to remote databases.",
+    howToUse: [
+      "Select and upload the PDF document you want to number.",
+      "Choose a numbering format, position alignment, starting number, and margin offset.",
+      "Check the live visual preview to see how the pagination page stamp will render.",
+      "Click the 'Add Page Numbers' button to stamp the pages on your device.",
+      "Download the paginated document locally."
+    ],
+    keyFeatures: [
+      { title: "Multiple Positioning Presets", desc: "Select from top-left, top-center, top-right, bottom-left, bottom-center, or bottom-right options." },
+      { title: "Crawlable Pagination", desc: "Select custom number ranges, pagination offsets, and skip the cover page easily." },
+      { title: "Browser Memory Security", desc: "Process your documents entirely locally in active memory. Your data never touches a server." }
+    ],
+    benefits: [
+      "Add professional numbering structures to research reports, eBooks, or legal forms.",
+      "Skip title or cover pages to start numbering exactly on the page content.",
+      "100% free and works fully offline once the application hydrates."
+    ],
+    whyChoose: "Traditional pagination utilities copy your PDF files to cloud databases, raising security and privacy concerns. ToolWala AI's client-side architecture guarantees absolute privacy by processing document pagination strictly within your browser sandbox.",
+    useCases: [
+      "Adding page numbers to legal contracts and briefs.",
+      "Formatting eBooks or reports for printing and indexing.",
+      "Organizing student papers and assignments."
+    ],
+    faqs: [
+      { question: "Can I skip numbering on the first page?", answer: "Yes, you can check the 'Skip Cover Page' option to skip pagination on page 1 and start numbering from page 2." },
+      { question: "Are my files stored on your servers?", answer: "Never. All pagination tasks run inside your local browser memory. No files are transmitted to external databases." },
+      { question: "What pagination formats are available?", answer: "You can choose from 'Page X of Y', 'Page X', 'X of Y', or raw numbers 'X'." }
+    ],
+    conclusion: "Structure your PDF files with customizable, secure page numbering using ToolWala AI.",
+    relatedTools: [
+      { name: "Merge PDF", href: "/tools/merge-pdf" },
+      { name: "Organize PDF Pages", href: "/tools/organize-pdf" },
+      { name: "Sign PDF", href: "/tools/sign-pdf" }
+    ]
+  },
+  "sign-pdf": {
+    title: "Sign PDF",
+    intro: "Sign PDF documents online. Draw, type, or upload your signature to place on pages locally and securely.",
+    whatItDoes: "ToolWala AI's Sign PDF tool is a local document signing utility that runs entirely in your browser memory. You can draw your signature, type it in elegant handwriting fonts, or upload an image of your signature. Once created, you can select any page in your PDF document, click to position the signature on the visual page preview, and stamp it locally onto the PDF using pdf-lib.",
+    howToUse: [
+      "Upload the PDF document you need to sign.",
+      "Create your signature by drawing on the pad, typing in styled cursive fonts, or uploading a transparent PNG signature.",
+      "Navigate to the target page and click on the visual preview canvas to place the signature stamp.",
+      "Adjust size and click 'Apply Signature' to merge it onto your PDF page.",
+      "Download your signed document instantly."
+    ],
+    keyFeatures: [
+      { title: "Cursive typed signatures", desc: "Type your name and select from multiple styled handwriting scripts for professional-looking signatures." },
+      { title: "Signature pad drawing", desc: "Draw your signature directly with your mouse or stylus on the touch-friendly canvas pad." },
+      { title: "Interactive coordinate mapping", desc: "Simply click on the visual preview page to place the signature exactly where you want it." },
+      { title: "Browser-native processing", desc: "No uploads or cloud databases. Your signatures and PDF documents stay entirely secure on your machine." }
+    ],
+    benefits: [
+      "Sign contracts, invoices, and NDAs without downloading desktop software or purchasing subscriptions.",
+      "Save signature templates in active session memory to sign multiple document areas quickly.",
+      "GDPR and CCPA compliant because files never leave your device."
+    ],
+    whyChoose: "Most signing services store your digital signature and sensitive contracts in their databases, presenting security risks. ToolWala AI bypasses cloud storage entirely, letting you sign contracts locally in complete privacy.",
+    useCases: [
+      "Signing freelance contracts and client NDAs.",
+      "Approving business proposals and purchase orders.",
+      "Completing government applications and rental agreements."
+    ],
+    faqs: [
+      { question: "Is my signature saved on ToolWala?", answer: "No, your signature and document data are processed strictly in your active browser memory. They are discarded as soon as you close the tab." },
+      { question: "Can I add multiple signatures to the same PDF?", answer: "Yes, you can place signatures at different positions on the pages before compiling and downloading the final PDF." },
+      { question: "What file types can I upload as a signature?", answer: "You can upload JPEG, JPG, and PNG image files. Transparent PNG files are recommended for best visual results." }
+    ],
+    conclusion: "Sign documents securely and respect your data sovereignty with ToolWala's browser-local Sign PDF tool.",
+    relatedTools: [
+      { name: "Protect PDF", href: "/tools/protect-pdf" },
+      { name: "Watermark PDF", href: "/tools/watermark-pdf" },
+      { name: "Add Page Numbers to PDF", href: "/tools/add-page-numbers-to-pdf" }
+    ]
   }
 };

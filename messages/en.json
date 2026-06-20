@@ -768,6 +768,14 @@
     "gov-form-pdf-compressor": {
       "title": "Government Form PDF Compressor",
       "description": "Compress government application PDF attachments under standard portal size limits."
+    },
+    "add-page-numbers-to-pdf": {
+      "title": "Add Page Numbers to PDF",
+      "description": "Add page numbers to your PDF documents. Customize format, position, margin, and fonts locally."
+    },
+    "sign-pdf": {
+      "title": "Sign PDF",
+      "description": "Sign PDF documents online. Draw, type, or upload your signature to place on pages locally."
     }
   },
   "form": {

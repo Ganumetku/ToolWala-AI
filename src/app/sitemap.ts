@@ -62,6 +62,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/privacy-policy',
     '/terms',
     '/disclaimer',
+    '/tools/add-page-numbers-to-pdf',
+    '/tools/sign-pdf',
+    '/tools/compress-pdf-to-100kb',
+    '/tools/compress-pdf-to-200kb',
+    '/tools/aadhaar-photo-resize',
+    '/tools/gov-form-image-compressor',
   ];
 
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.flatMap((route) => {

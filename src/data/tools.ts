@@ -847,6 +847,40 @@ export const toolsData: Tool[] = [
     isVisible: true,
     createdAt: '2026-06-19T00:00:00Z',
     updatedAt: '2026-06-19T00:00:00Z'
+  },
+  {
+    id: "add-page-numbers-to-pdf",
+    title: "Add Page Numbers to PDF",
+    description: "Add page numbers to your PDF documents. Customize format, position, margin, and fonts locally.",
+    icon: "🔢",
+    href: "/tools/add-page-numbers-to-pdf",
+    slug: "add-page-numbers-to-pdf",
+    category: "PDF Tools",
+    featured: false,
+    trending: true,
+    popular: false,
+    tags: ["pdf", "page numbers", "add page numbers", "paginate pdf", "document"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2026-06-20T00:00:00Z',
+    updatedAt: '2026-06-20T00:00:00Z'
+  },
+  {
+    id: "sign-pdf",
+    title: "Sign PDF",
+    description: "Sign PDF documents online. Draw, type, or upload your signature to place on pages locally.",
+    icon: "✍️",
+    href: "/tools/sign-pdf",
+    slug: "sign-pdf",
+    category: "PDF Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["pdf", "sign", "signature", "e-sign", "digital signature", "document"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2026-06-20T00:00:00Z',
+    updatedAt: '2026-06-20T00:00:00Z'
   }
 ];
 

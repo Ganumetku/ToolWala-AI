@@ -17,7 +17,7 @@ import { uint8ArrayToArrayBuffer } from '@/lib/pdf/pdfUtils';
 import ToolLayout from '@/components/tools/ToolLayout';
 import ToolHero from '@/components/tools/ToolHero';
 import UploadZone from '@/components/tools/UploadZone';
-import RelatedTools from '@/components/tools/RelatedTools';
+
 
 interface ThumbnailState {
   pageIndex: number;
@@ -664,8 +664,7 @@ export default function SplitPdf() {
           </div>
         </div>
 
-      {/* RELATED TOOLS LIST */}
-      <RelatedTools currentSlug="split-pdf" />
+
 
       {/* SEO Deep-Dive Article Section */}
       {toolArticles['split-pdf'] && (

@@ -14,7 +14,6 @@ import { toast } from 'sonner';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { MeshGradient } from '@/components/BackgroundEffects';
-import RelatedTools from '@/components/tools/RelatedTools';
 import ToolLayout from '@/components/tools/ToolLayout';
 
 const uint8ArrayToArrayBuffer = (bytes: Uint8Array): ArrayBuffer => {

@@ -17,7 +17,7 @@ import { uint8ArrayToArrayBuffer, getPdfPageCount } from '@/lib/pdf/pdfUtils';
 import ToolLayout from '@/components/tools/ToolLayout';
 import ToolHero from '@/components/tools/ToolHero';
 import UploadZone from '@/components/tools/UploadZone';
-import RelatedTools from '@/components/tools/RelatedTools';
+
 
 interface LoadedPdf {
   id: string;
@@ -448,8 +448,7 @@ export default function MergePdf() {
         </div>
       </div>
 
-      {/* RELATED TOOLS LIST */}
-      <RelatedTools currentSlug="merge-pdf" />
+
 
       {/* SEO Deep-Dive Article Section */}
       {toolArticles['merge-pdf'] && (

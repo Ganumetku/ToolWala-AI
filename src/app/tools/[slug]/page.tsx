@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ChevronLeft, ShieldCheck, Sparkles, HelpCircle, Layers, ChevronDown, ArrowRight } from 'lucide-react';
-import { prisma } from '@/lib/db';
-import { jsonDb } from '@/lib/jsonDb';
+import { findToolBySlugServer } from '@/lib/tools-server';
 import ToolFormRenderer from '@/components/ToolFormRenderer';
 import { MeshGradient } from '@/components/BackgroundEffects';
 import FAQAccordion from './FAQAccordion';
@@ -28,17 +27,7 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
-  let tool: any = null;
-
-  if (prisma) {
-    tool = await prisma.tool.findUnique({
-      where: { slug },
-      include: { seoMetadata: true }
-    });
-  } else {
-    const tools = jsonDb.getTools();
-    tool = tools.find(t => t.slug === slug);
-  }
+  const tool = await findToolBySlugServer(slug);
 
   if (!tool) {
     return {
@@ -54,41 +43,7 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function DynamicToolPage({ params }: PageProps) {
   const { slug } = await params;
-  let tool: any = null;
-  let relatedTools: any[] = [];
-
-  if (prisma) {
-    tool = await prisma.tool.findUnique({
-      where: { slug },
-      include: {
-        inputs: { orderBy: { order: 'asc' } },
-        faqs: { orderBy: { order: 'asc' } },
-        articles: true,
-        category: true
-      }
-    });
-
-    if (tool) {
-      relatedTools = await prisma.tool.findMany({
-        where: {
-          categoryId: tool.categoryId,
-          NOT: { id: tool.id },
-          published: true
-        },
-        take: 4,
-        select: { title: true, slug: true }
-      });
-    }
-  } else {
-    const tools = jsonDb.getTools();
-    tool = tools.find(t => t.slug === slug);
-    if (tool) {
-      relatedTools = tools
-        .filter(t => t.categorySlug === tool.categorySlug && t.id !== tool.id && t.published)
-        .slice(0, 4)
-        .map(t => ({ title: t.title, slug: t.slug }));
-    }
-  }
+  const tool = await findToolBySlugServer(slug, true);
 
   if (!tool) {
     notFound();
@@ -180,7 +135,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
                 <div className="flex items-center gap-4">
                   <div className="flex flex-col items-end">
                     <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">{t('tools.secure_processing', 'Secure Processing')}</span>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">{t('tools.server_managed', '100% Server Managed')}</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">{t('tools.local_managed', '100% On-Device')}</span>
                   </div>
                   <ShieldCheck className="w-8 h-8 text-emerald-500/50" />
                 </div>
@@ -243,29 +198,6 @@ export default async function DynamicToolPage({ params }: PageProps) {
             </section>
           )}
 
-          {/* Dynamic Related Tools list */}
-          {relatedTools.length > 0 && (
-            <section className="py-16 border-t border-white/5">
-              <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em] mb-10 text-center select-none">{t('tools.recommended_utilities', 'Recommended Category Utilities')}</h4>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
-                {relatedTools.map((rt: any, i: number) => (
-                  <Link 
-                    key={i} 
-                    href={localizeHref(`/tools/${rt.slug}/`)}
-                    className="p-5 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 hover:shadow-[0_0_20px_rgba(37,99,235,0.1)] transition-all flex flex-col justify-between group h-32 text-left"
-                  >
-                    <span className="text-xs sm:text-sm font-black text-gray-300 group-hover:text-white transition-colors uppercase leading-tight">
-                      {rt.title}
-                    </span>
-                    <span className="text-[9px] font-black text-blue-500 uppercase tracking-widest flex items-center gap-1 select-none">
-                      {t('tools.try_tool', 'Try Tool')}
-                      <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          )}
 
         </div>
       </div>
@@ -275,6 +207,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
 
 export async function generateStaticParams() {
   try {
+    const { jsonDb } = await import('@/lib/jsonDb');
     const tools = jsonDb.getTools();
     return tools.map((tool) => ({
       slug: tool.slug,

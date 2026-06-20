@@ -69,23 +69,11 @@ export async function generateMetadata(): Promise<Metadata> {
         const translation = await getToolTranslationWithFallback(matchedStaticTool.slug, locale);
         toolTitle = translation.seoTitle || translation.title || `${matchedStaticTool.title} | ToolWala AI`;
         toolDesc = translation.seoDescription || translation.description || matchedStaticTool.description;
-      } else {
         // Dynamic database tool page lookup
         const slug = cleanPathNoSlash.split('/').pop() || "";
         if (slug) {
-          const { prisma } = await import('@/lib/db');
-          let dbTool: any = null;
-          if (prisma) {
-            dbTool = await prisma.tool.findUnique({
-              where: { slug: slug },
-              include: { seoMetadata: true }
-            });
-          }
-          if (!dbTool) {
-            const { jsonDb } = await import('@/lib/jsonDb');
-            const tools = jsonDb.getTools();
-            dbTool = tools.find((t: any) => t.slug === slug);
-          }
+          const { findToolBySlugServer } = await import('@/lib/tools-server');
+          const dbTool = await findToolBySlugServer(slug);
           if (dbTool) {
             const { getToolTranslationWithFallback } = await import('@/lib/tool-translation-service');
             const translation = await getToolTranslationWithFallback(slug, locale);

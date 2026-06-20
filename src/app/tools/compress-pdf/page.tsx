@@ -7,7 +7,6 @@ import { toast } from 'sonner';
 import ToolLayout from '@/components/tools/ToolLayout';
 import ToolHero from '@/components/tools/ToolHero';
 import UploadZone from '@/components/tools/UploadZone';
-import RelatedTools from '@/components/tools/RelatedTools';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { formatBytes } from '@/lib/utils/format';
@@ -169,7 +168,7 @@ export default function CompressPdf() {
         </div>
       </div>
 
-      <RelatedTools currentSlug="compress-pdf" />
+
 
       {toolArticles['compress-pdf'] && (
         <ToolArticle {...toolArticles['compress-pdf']} />

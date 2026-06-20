@@ -1,5 +1,8 @@
 import { toolsData, Tool } from '@/data/tools';
 import { dbToTool as dbToolToTool } from '@/lib/tool-service';
+import { prisma } from '@/lib/db';
+import { jsonDb } from '@/lib/jsonDb';
+
 import {
   fetchToolsAdmin,
   processScheduledPublishesAdmin,
@@ -91,3 +94,48 @@ export async function seedStaticTools(): Promise<{ seeded: number; errors: strin
     return { seeded: 0, errors: [err instanceof Error ? err.message : 'Seed failed'] };
   }
 }
+
+export async function findToolBySlugServer(slug: string, includeFull = false) {
+  let tool: any = null;
+  if (prisma) {
+    tool = await prisma.tool.findUnique({
+      where: { slug },
+      include: includeFull ? {
+        inputs: { orderBy: { order: 'asc' } },
+        faqs: { orderBy: { order: 'asc' } },
+        articles: true,
+        category: true,
+        seoMetadata: true
+      } : {
+        seoMetadata: true
+      }
+    });
+  } else {
+    const tools = jsonDb.getTools();
+    tool = tools.find((t: any) => t.slug === slug);
+  }
+  return tool;
+}
+
+export async function getRelatedToolsServer(tool: any) {
+  if (!tool) return [];
+  if (prisma) {
+    return await prisma.tool.findMany({
+      where: {
+        categoryId: tool.categoryId,
+        NOT: { id: tool.id },
+        published: true
+      },
+      take: 4,
+      select: { title: true, slug: true }
+    });
+  } else {
+    const tools = jsonDb.getTools();
+    const catSlug = tool.categorySlug || tool.category?.slug;
+    return tools
+      .filter(t => (t.categorySlug === catSlug || t.categoryName === tool.categoryName) && t.id !== tool.id && t.published)
+      .slice(0, 4)
+      .map(t => ({ title: t.title, slug: t.slug }));
+  }
+}
+

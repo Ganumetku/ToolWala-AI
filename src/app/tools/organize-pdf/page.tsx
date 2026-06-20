@@ -19,7 +19,7 @@ import { uint8ArrayToArrayBuffer } from '@/lib/pdf/pdfUtils';
 import ToolLayout from '@/components/tools/ToolLayout';
 import ToolHero from '@/components/tools/ToolHero';
 import UploadZone from '@/components/tools/UploadZone';
-import RelatedTools from '@/components/tools/RelatedTools';
+
 
 interface PageItem {
   id: string;            // unique identifier for react key & selection
@@ -726,8 +726,7 @@ export default function OrganizePdf() {
           </div>
         </div>
 
-      {/* RELATED TOOLS LIST */}
-      <RelatedTools currentSlug="organize-pdf" />
+
 
       {/* SEO Deep-Dive Article Section */}
       {toolArticles['organize-pdf'] && (

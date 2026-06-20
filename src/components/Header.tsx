@@ -143,6 +143,7 @@ export default function Header() {
     },
     { name: t('nav.categories', 'Categories'), href: '/categories' },
     { name: t('nav.pricing', 'Pricing'), href: '/pricing' },
+    { name: t('nav.privacy', 'Privacy Hub'), href: '/privacy' },
     { name: t('nav.blog', 'Blog'), href: '/blog' },
     { name: t('nav.about', 'About'), href: '/about' },
     { name: t('nav.contact', 'Contact Us'), href: '/contact' },

@@ -10,7 +10,8 @@
     "start_free": "Start Free",
     "get_started_free": "Get Started Free",
     "select_language": "Select Language",
-    "pdf_suite": "PDF Suite"
+    "pdf_suite": "PDF Suite",
+    "privacy": "Privacy Hub"
   },
   "footer": {
     "copyright": "© 2026 ToolWala AI. All rights reserved.",
@@ -1185,5 +1186,62 @@
     "transparency_title": "Transparency Statement",
     "transparency_desc": "As the AI landscape evolves, so does ToolWala AI. We are committed to transparency and will update this disclaimer as our technology matures. If you find any significant inaccuracies in our tool outputs, please help us improve by reporting them to our technical team.",
     "last_updated": "Last updated: May 16, 2026 • © ToolWala AI"
+  },
+  "privacy_hub": {
+    "badge_title": "PRIVACY-FIRST ASSURANCE",
+    "hero_title": "Privacy by Default. Security by Design.",
+    "hero_desc": "Unlike traditional web utilities that upload your sensitive documents to remote servers, ToolWala processes everything directly on your device. Zero cloud uploads, zero latency, complete peace of mind.",
+    "cta_explore": "Explore Secure Utilities",
+    "badges": {
+      "on_device_title": "100% On-Device",
+      "on_device_desc": "All parsing, compressing, and editing are executed on your machine.",
+      "no_account_title": "No Account Wall",
+      "no_account_desc": "Use every feature immediately without giving away your email or personal info.",
+      "offline_title": "Offline Functional",
+      "offline_desc": "Disconnect from the internet completely; our core tools keep running.",
+      "wasm_title": "WASM Sandboxed",
+      "wasm_desc": "C++/Rust code compiled to WebAssembly runs in an isolated browser thread.",
+      "zero_logs_title": "Zero Telemetry & Logs",
+      "zero_logs_desc": "No database logs, no tracking of document names or private data.",
+      "regulatory_title": "GDPR & HIPAA Ready",
+      "regulatory_desc": "By design, no client information is collected or processed on third-party servers."
+    },
+    "comparison": {
+      "title": "How ToolWala Redefines Trust",
+      "subtitle": "A direct comparison between browser-native processing and traditional cloud-hosted software.",
+      "col_feature": "Security Feature",
+      "col_toolwala": "ToolWala AI",
+      "col_traditional": "Cloud Online Tools",
+      "f1_name": "Data Transmission",
+      "f1_toolwala": "0% Uploaded (Stays in local RAM)",
+      "f1_traditional": "100% Uploaded to remote databases",
+      "f2_name": "Execution Method",
+      "f2_toolwala": "Browser-Native WebAssembly / CPU",
+      "f2_traditional": "Remote server farm execution",
+      "f3_name": "Offline Mode",
+      "f3_toolwala": "Fully Supported (Works offline)",
+      "f3_traditional": "Not Available (Requires internet connection)",
+      "f4_name": "Database Logging & Retention",
+      "f4_toolwala": "None (Purged when you close tab)",
+      "f4_traditional": "1 hour to several days of storage logs",
+      "f5_name": "File Size & Usage Limits",
+      "f5_toolwala": "Unlimited (Constrained only by your system)",
+      "f5_traditional": "Strict bandwidth/pricing paywalls",
+      "f6_name": "Security Risk Profile",
+      "f6_toolwala": "Zero network exposure / Zero risk",
+      "f6_traditional": "Subject to API leaks & server hacking"
+    },
+    "pipeline": {
+      "title": "On-Device Sandbox Pipeline",
+      "subtitle": "Click through each stage to see how files are isolated and processed entirely inside your active tab context.",
+      "step1_title": "1. Local File Import",
+      "step1_desc": "You select your files. The browser loads them into local memory (RAM) directly inside the tab. No network packets are sent to the internet.",
+      "step2_title": "2. WebAssembly Load",
+      "step2_desc": "Heavy compilation engines (written in C++ or Rust) load directly as WebAssembly (WASM) modules. They execute locally on your processor.",
+      "step3_title": "3. Sandboxed Execution",
+      "step3_desc": "The processing runs inside the browser's isolated tab thread, completely separated from other tabs and your operating system's files.",
+      "step4_title": "4. Native Local Download",
+      "step4_desc": "The output file is written directly from RAM back to your device. The connection is instant and requires zero server queues."
+    }
   }
 }

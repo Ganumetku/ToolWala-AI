@@ -95,6 +95,7 @@ export default function Footer() {
     { name: "All Utilities", href: "/tools/" },
     { name: "Browse Folders", href: "/categories/" },
     { name: "Pricing Beta", href: "/pricing/" },
+    { name: "Privacy Hub", href: "/privacy/" },
     { name: "Insights Blog", href: "/blog/" },
     { name: "Platform Guide", href: "/about/" }
   ];
@@ -119,6 +120,7 @@ export default function Footer() {
     if (item.href === '/tools/') key = 'nav.tools';
     else if (item.href === '/categories/') key = 'nav.categories';
     else if (item.href === '/pricing/') key = 'nav.pricing';
+    else if (item.href === '/privacy/') key = 'nav.privacy';
     else if (item.href === '/blog/') key = 'nav.blog';
     else if (item.href === '/about/') key = 'nav.about';
     
@@ -257,10 +259,10 @@ export default function Footer() {
               &copy; {currentYear} <span translate="no" data-no-translate className="no-translate notranslate">ToolWala AI</span>. {t('footer.copyright_notice', 'All rights reserved.')}
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-4.5 text-[10px] font-black uppercase tracking-wider text-gray-600">
-              <Link href={localizeHref('/privacy-policy')} className="hover:text-gray-400 transition-colors">{t('footer.privacy', 'Privacy Policy')}</Link>
-              <Link href={localizeHref('/terms')} className="hover:text-gray-400 transition-colors">{t('footer.terms', 'Terms of Service')}</Link>
-              <Link href={localizeHref('/disclaimer')} className="hover:text-gray-400 transition-colors">{t('footer.disclaimer', 'Disclaimer')}</Link>
-              <Link href={localizeHref('/contact')} className="hover:text-gray-400 transition-colors">{t('footer.contact', 'Contact Support')}</Link>
+              <Link href={localizeHref('/privacy-policy')} prefetch={false} className="hover:text-gray-400 transition-colors">{t('footer.privacy', 'Privacy Policy')}</Link>
+              <Link href={localizeHref('/terms')} prefetch={false} className="hover:text-gray-400 transition-colors">{t('footer.terms', 'Terms of Service')}</Link>
+              <Link href={localizeHref('/disclaimer')} prefetch={false} className="hover:text-gray-400 transition-colors">{t('footer.disclaimer', 'Disclaimer')}</Link>
+              <Link href={localizeHref('/contact')} prefetch={false} className="hover:text-gray-400 transition-colors">{t('footer.contact', 'Contact Support')}</Link>
             </div>
             
             {/* Horizontal Footer Language Selector Grid */}

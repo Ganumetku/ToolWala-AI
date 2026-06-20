@@ -11,6 +11,8 @@ import { paginate, searchBlogs } from "@/lib/blog-utils";
 import BlogNewsletter from "@/components/blog/BlogNewsletter";
 import BlogPagination from "@/components/blog/BlogPagination";
 import { useTranslation } from "@/components/I18nContext";
+import Image from "next/image";
+import LazyBlogImage from "@/components/blog/LazyBlogImage";
 
 interface BlogListClientProps {
   initialBlogs: BlogPost[];
@@ -159,12 +161,12 @@ export default function BlogListClient({
               >
                 <Link href={localizeHref(`/blog/${featuredPost.slug}`)} className="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 sm:p-8">
                   <div className="md:col-span-7 rounded-[2rem] overflow-hidden relative min-h-[260px] max-h-[350px]">
-                    <img
+                    <LazyBlogImage
                       src={featuredPost.thumbnail}
                       alt={featuredPost.title}
-                      loading="lazy"
-                      decoding="async"
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      priority
+                      aspectRatio="absolute inset-0 w-full h-full"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-80" />
                     <span className="absolute top-5 left-5 px-3 py-1 rounded-lg bg-blue-600 text-[10px] font-black uppercase tracking-widest text-white shadow-lg shadow-blue-500/30">
@@ -190,9 +192,11 @@ export default function BlogListClient({
                     </div>
                     <div className="flex items-center gap-3 mt-6 pt-6 border-t border-white/5">
                       {featuredPost.author.avatar && (
-                        <img
+                        <Image
                           src={featuredPost.author.avatar}
                           alt={featuredPost.author.name}
+                          width={32}
+                          height={32}
                           className="w-8 h-8 rounded-full border border-white/10 shrink-0"
                         />
                       )}
@@ -221,11 +225,10 @@ export default function BlogListClient({
                   >
                     <Link href={localizeHref(`/blog/${blog.slug}`)} className="flex flex-col h-full">
                       <div className="relative aspect-video overflow-hidden">
-                        <img
+                        <LazyBlogImage
                           src={blog.thumbnail}
                           alt={blog.title}
-                          loading="lazy"
-                          decoding="async"
+                          aspectRatio="w-full h-full"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-gray-950/40 via-transparent to-transparent" />

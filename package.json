@@ -42,6 +42,7 @@
     "recharts": "^3.8.1",
     "resend": "^6.12.3",
     "sonner": "^2.0.7",
+    "sharp": "^0.34.5",
     "tesseract.js": "^7.0.0"
   },
   "devDependencies": {
@@ -57,7 +58,6 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "prisma": "^5.22.0",
-    "sharp": "^0.34.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

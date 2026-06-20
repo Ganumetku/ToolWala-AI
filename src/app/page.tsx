@@ -195,19 +195,19 @@ export default function Home() {
               href={localizeHref('/categories/pdf-tools')}
               className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-red-500/10 hover:bg-red-600/20 border border-red-500/20 text-xs font-black uppercase tracking-wider text-red-400 hover:text-white transition-all duration-300 active:scale-95 shadow-lg"
             >
-              📄 {t('categories.pdf-tools', 'PDF Tools')}
+              📄 {t('categories.PDF Tools', 'PDF Tools')}
             </Link>
             <Link
               href={localizeHref('/categories/image-tools')}
               className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-blue-500/10 hover:bg-blue-600/20 border border-blue-500/20 text-xs font-black uppercase tracking-wider text-blue-400 hover:text-white transition-all duration-300 active:scale-95 shadow-lg"
             >
-              🖼️ {t('categories.image-tools', 'Image Tools')}
+              🖼️ {t('categories.Image Tools', 'Image Tools')}
             </Link>
             <Link
               href={localizeHref('/categories/ai-tools')}
               className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-purple-500/10 hover:bg-purple-600/20 border border-purple-500/20 text-xs font-black uppercase tracking-wider text-purple-400 hover:text-white transition-all duration-300 active:scale-95 shadow-lg"
             >
-              🤖 {t('categories.ai-tools', 'AI Tools')}
+              🤖 {t('categories.AI Tools', 'AI Tools')}
             </Link>
           </motion.div>
 

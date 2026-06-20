@@ -9,6 +9,8 @@ import { toolsData } from '@/data/tools';
 import { useTranslation } from '@/components/I18nContext';
 import { getTranslation } from '@/lib/i18n';
 import Breadcrumbs from './Breadcrumbs';
+import { categoriesData } from '@/data/categories';
+import blogsData from '@/data/dynamic_blogs.json';
 
 interface FAQ {
   question: string;
@@ -44,7 +46,7 @@ export default function ToolArticle({
   toolId
 }: ToolArticleProps & { toolId?: string }) {
   
-  const { t, locale, messages } = useTranslation();
+  const { t, locale, messages, localizeHref } = useTranslation();
 
   // Automatically resolve toolId if not passed
   const resolvedToolId = useMemo(() => {
@@ -95,30 +97,65 @@ export default function ToolArticle({
 
   const translatedConclusion = resolvedToolId ? t(`tools.${resolvedToolId}.conclusion`, conclusion) : conclusion;
 
-  // Resolve related tools dynamically from toolsData if none provided
-  const resolvedRelatedTools = useMemo(() => {
-    if (relatedTools && relatedTools.length > 0) return relatedTools;
-    
-    // Attempt to locate matching tool category
-    const currentTool = toolsData.find(t => 
+  const currentTool = useMemo(() => {
+    return toolsData.find(t => 
+      t.id === resolvedToolId ||
       t.title.toLowerCase().includes(title.toLowerCase()) || 
       title.toLowerCase().includes(t.title.toLowerCase())
     );
-    
-    const category = currentTool?.category;
-    if (!category) {
-      // Fallback: take popular tools
+  }, [resolvedToolId, title]);
+
+  const parentCategory = useMemo(() => {
+    if (!currentTool) return null;
+    return categoriesData.find(cat => 
+      cat.title.toLowerCase() === currentTool.category.toLowerCase()
+    );
+  }, [currentTool]);
+
+  // Resolve related tools dynamically from toolsData if none provided (exactly 5 related tools)
+  const resolvedRelatedTools = useMemo(() => {
+    if (relatedTools && relatedTools.length > 0) return relatedTools;
+    if (!currentTool) {
       return toolsData
         .filter(t => t.popular && t.isVisible)
-        .slice(0, 4)
+        .slice(0, 5)
         .map(t => ({ name: t.title, href: t.href }));
     }
 
-    return toolsData
-      .filter(t => t.category === category && t.isVisible && !t.title.toLowerCase().includes(title.toLowerCase()))
-      .slice(0, 4)
-      .map(t => ({ name: t.title, href: t.href }));
-  }, [title, relatedTools]);
+    const sameCategoryTools = toolsData.filter(t => 
+      t.category === currentTool.category && 
+      t.isVisible && 
+      t.id !== currentTool.id
+    );
+
+    let related = [...sameCategoryTools];
+    if (related.length < 5) {
+      const popularTools = toolsData.filter(t => 
+        t.popular && 
+        t.isVisible && 
+        t.id !== currentTool.id &&
+        !sameCategoryTools.some(st => st.id === t.id)
+      );
+      related = [...related, ...popularTools];
+    }
+
+    return related.slice(0, 5).map(t => ({ name: t.title, href: t.href }));
+  }, [currentTool, relatedTools]);
+
+  const relevantBlogs = useMemo(() => {
+    if (!currentTool) return [];
+    const activeBlogs = blogsData.filter(b => b.status === 'published');
+    const matched = activeBlogs.filter(blog => {
+      if (blog.relatedToolSlugs?.includes(currentTool.slug)) return true;
+      if (blog.category.toLowerCase() === currentTool.category.toLowerCase()) return true;
+      if (blog.tags?.some(tag => currentTool.tags?.some(t => t.toLowerCase() === tag.toLowerCase()))) return true;
+      return false;
+    });
+    if (matched.length === 0) {
+      return activeBlogs.slice(0, 3);
+    }
+    return matched.slice(0, 3);
+  }, [currentTool]);
 
   // Construct structured JSON-LD schemas
   const softwareAppSchema = useMemo(() => ({
@@ -160,10 +197,20 @@ export default function ToolArticle({
     }))
   } : null), [translatedFaqs]);
 
-  const breadcrumbItems = useMemo(() => [
-    { label: t('nav.tools', 'Tools'), href: '/tools' },
-    { label: translatedTitle }
-  ], [t, translatedTitle]);
+  const breadcrumbItems = useMemo(() => {
+    const items: { label: string; href?: string }[] = [
+      { label: t('nav.home', 'Home'), href: locale === 'en' ? '/' : `/${locale}` },
+      { label: t('nav.tools', 'Tools'), href: locale === 'en' ? '/tools' : `/${locale}/tools` }
+    ];
+    if (parentCategory) {
+      items.push({
+        label: t(`categories.${parentCategory.title}`, parentCategory.title),
+        href: locale === 'en' ? `/categories/${parentCategory.slug}` : `/${locale}/categories/${parentCategory.slug}`
+      });
+    }
+    items.push({ label: translatedTitle });
+    return items;
+  }, [t, translatedTitle, parentCategory, locale]);
 
   return (
     <section className="py-24 relative overflow-hidden bg-[#030712] border-t border-white/5">
@@ -215,6 +262,16 @@ export default function ToolArticle({
           <div className="max-w-4xl mx-auto">
             {/* Header */}
             <div className="text-center mb-16 space-y-6">
+              {parentCategory && (
+                <div className="flex justify-center mb-2">
+                  <Link
+                    href={localizeHref(`/categories/${parentCategory.slug}`)}
+                    className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-[10px] font-black uppercase tracking-widest text-blue-400 hover:bg-blue-500/20 transition-all active:scale-95"
+                  >
+                    📂 {t(`categories.${parentCategory.title}`, parentCategory.title)}
+                  </Link>
+                </div>
+              )}
               <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-4 leading-[1.1] uppercase">
                 {t('article.mastering', 'Mastering the')} <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
@@ -368,13 +425,52 @@ export default function ToolArticle({
                 </p>
               </div>
 
+              {/* Relevant Blogs Section */}
+              {relevantBlogs.length > 0 && (
+                <div className="pt-20 border-t border-white/5">
+                  <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em] mb-10 text-center select-none">
+                    {t('blog.related_insights', 'Related Insights & Tutorials')}
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    {relevantBlogs.map((rBlog) => (
+                      <Link
+                        key={rBlog.id}
+                        href={localizeHref(`/blog/${rBlog.slug}`)}
+                        className="p-6 rounded-[2rem] bg-white/[0.01] border border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 hover:shadow-[0_0_20px_rgba(37,99,235,0.1)] transition-all flex flex-col justify-between group h-48 text-left"
+                      >
+                        <div>
+                          <span className="text-[9px] font-black uppercase tracking-widest text-blue-500">
+                            {t(`categories.${rBlog.category}`, rBlog.category)}
+                          </span>
+                          <h4 className="text-xs font-black text-white uppercase group-hover:text-blue-400 transition-colors line-clamp-2 mt-2 leading-tight">
+                            {t(`blogs.${rBlog.slug}.title`, rBlog.title)}
+                          </h4>
+                          <p className="text-gray-500 text-[10px] font-medium line-clamp-2 mt-2 leading-relaxed font-sans">
+                            {t(`blogs.${rBlog.slug}.excerpt`, rBlog.excerpt)}
+                          </p>
+                        </div>
+                        <div className="flex items-center justify-between pt-4 border-t border-white/5">
+                          <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">
+                            {rBlog.readingTime}
+                          </span>
+                          <span className="text-[9px] font-black text-blue-500 uppercase tracking-widest flex items-center gap-1 select-none">
+                            {t('blog.read_post', 'Read Post')}
+                            <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Related Tools Engine */}
               {resolvedRelatedTools.length > 0 && (
                 <div className="pt-20 border-t border-white/5">
                   <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em] mb-10 text-center select-none">
                     {t('article.recommendedUtilities', 'Recommended Utilities')}
                   </h4>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                     {resolvedRelatedTools.map((tool, i) => (
                       <Link 
                         key={i} 
@@ -382,7 +478,7 @@ export default function ToolArticle({
                         className="p-5 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 hover:shadow-[0_0_20px_rgba(37,99,235,0.1)] transition-all flex flex-col justify-between group h-32"
                       >
                         <span className="text-xs sm:text-sm font-black text-gray-300 group-hover:text-white transition-colors uppercase leading-tight">
-                          {tool.name}
+                           {tool.name}
                         </span>
                         <span className="text-[9px] font-black text-blue-500 uppercase tracking-widest flex items-center gap-1 select-none">
                           {t('article.tryTool', 'Try Tool')}

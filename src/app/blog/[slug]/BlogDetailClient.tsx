@@ -16,6 +16,7 @@ import BlogNewsletter from "@/components/blog/BlogNewsletter";
 import BlogTableOfContents from "@/components/blog/BlogTableOfContents";
 import { useTranslation } from "@/components/I18nContext";
 import { categoriesData } from "@/data/categories";
+import Image from "next/image";
 
 const formatDateLong = (dateString: string, locale: string) => {
   if (!dateString) return "";
@@ -125,11 +126,11 @@ export default function BlogDetailClient({
               <div className="flex flex-wrap items-center gap-6 pt-4 text-xs font-black uppercase tracking-widest text-gray-500">
                 <div className="flex items-center gap-2">
                   {blog.author.avatar ? (
-                    <img
+                    <Image
                       src={blog.author.avatar}
                       alt={blog.author.name}
-                      loading="lazy"
-                      decoding="async"
+                      width={32}
+                      height={32}
                       className="w-8 h-8 rounded-full border border-white/10 shrink-0"
                     />
                   ) : (

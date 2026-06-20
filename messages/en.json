@@ -836,6 +836,126 @@
       "title": "Why Browser-Native OCR is the Future of Data Safety",
       "excerpt": "Traditional optical character recognition uploads documents to cloud databases. This article outlines the transition to client-side WebAssembly rendering, protecting sensitive data locally.",
       "content": "Traditional optical character recognition (OCR) uploads documents to cloud databases. This article outlines the transition to client-side WebAssembly rendering, protecting sensitive data locally.\n\n### The Problem with Cloud OCR\nEvery time you upload a receipt, ID card, or invoice to a remote OCR server, you risk exposing sensitive information. Cloud services process your file, extract the text, and store it. In many cases, these files are saved for training models or analytics, which could violate privacy standards like GDPR.\n\n### Enter Client-Side WebAssembly\nWith advancements in WebAssembly (WASM), we can run powerful neural network models directly inside the browser. ToolWala AI uses Tesseract.js running locally in your browser sandbox. Your files never leave your computer, ensuring absolute privacy."
+    },
+    "how-to-merge-pdf": {
+      "title": "How to Merge PDF Files Online: The Complete Free Guide",
+      "excerpt": "Learn how to combine multiple PDF documents into a single file quickly, securely, and completely free in your web browser.",
+      "content": "Combining multiple documents is one of the most common tasks. Learn how to merge PDFs online using ToolWala AI's local browser tools.\n\n### Why Merge PDFs?\nMerging files simplifies document management, makes emailing multiple attachments easier, and allows compiling reports into a single, cohesive file.\n\n### How to Merge PDFs on ToolWala AI\n1. Visit the [Merge PDF Tool](/tools/merge-pdf).\n2. Drag and drop your PDF files into the upload area.\n3. Arrange the files in your preferred order.\n4. Click the Merge button to compile the files.\n5. Download your merged PDF document immediately.\n\n### Secure Local Processing\nToolWala AI uses client-side WebAssembly to compile documents. Your PDFs are never sent to a cloud database, keeping your data confidential.\n\n[cta tool=\"merge-pdf\" title=\"Merge PDFs Online Free\" description=\"Combine multiple PDF files into one document instantly in your browser.\"]",
+      "faqs": {
+        "0": {
+          "question": "Can I merge PDF files offline?",
+          "answer": "Yes, once the ToolWala AI application is loaded, the PDF merging process runs entirely locally in your browser sandbox, allowing you to merge files even without active internet connection."
+        },
+        "1": {
+          "question": "Is there a limit on the number of PDFs I can merge?",
+          "answer": "There are no arbitrary software limits. Since the merging runs on your local machine, you can combine as many documents as your browser's system memory allows."
+        }
+      }
+    },
+    "compress-pdf-without-losing-quality": {
+      "title": "How to Compress PDF Files Without Losing Quality",
+      "excerpt": "Discover how to shrink your PDF file size while preserving crystal-clear image quality and text formatting.",
+      "content": "Reducing file sizes is key for uploading files to government portals. Learn how to optimize PDFs without losing quality.\n\n### Hitting the Perfect Size\nPortals like UIDAI require files to be under 300KB. ToolWala AI's compressors adjust pixel density and clean redundant metadata to reduce sizes visually losslessly.\n\n### How to Compress PDF\n1. Go to the [PDF Compressor](/tools/compress-pdf).\n2. Drop your PDF file.\n3. Select compression intensity.\n4. Download the compressed file.\n\n[cta tool=\"compress-pdf\" title=\"Compress PDF Free\" description=\"Shrink your PDF documents locally without losing clarity.\"]",
+      "faqs": {
+        "0": {
+          "question": "How does lossless PDF compression work?",
+          "answer": "It extracts and recompresses embedded images using modern WebP formats, flattens overlapping vector paths, and strips unused fonts and system metadata from the document payload."
+        },
+        "1": {
+          "question": "Is it safe to compress private Aadhaar documents?",
+          "answer": "Absolutely. Processing is 100% browser-native. No files are uploaded to any external server databases."
+        }
+      }
+    },
+    "pdf-to-jpg-guide": {
+      "title": "The Ultimate PDF to JPG Conversion Guide",
+      "excerpt": "A complete step-by-step guide to extract high-quality JPG image pages from any PDF document.",
+      "content": "Converting PDF pages into individual images is useful for presentations and social media. Let's check how to convert PDFs to JPG.\n\n### Extracting Images Easily\nPDF files store pages in vector format. To view them on standard photo galleries, you must convert them to JPGs.\n\n### Steps to Convert PDF to JPG\n1. Open the [PDF to JPG Converter](/tools/pdf-to-jpg).\n2. Upload your PDF file.\n3. The engine renders each page on an image canvas.\n4. Click Download to save all pages as a zip of JPG images.\n\n[cta tool=\"pdf-to-jpg\" title=\"Convert PDF to JPG\" description=\"Extract high-resolution images from any PDF locally in seconds.\"]",
+      "faqs": {
+        "0": {
+          "question": "Can I convert multiple pages at once?",
+          "answer": "Yes, our client-side converter processes all pages in your PDF document simultaneously and packages them into a single zip download."
+        },
+        "1": {
+          "question": "Are the exported images of high resolution?",
+          "answer": "Yes, our converter renders pages at standard web density to ensure all text and image structures remain highly legible."
+        }
+      }
+    },
+    "pdf-security-guide": {
+      "title": "PDF Security Guide: How to Protect and Unlock PDF Files",
+      "excerpt": "Learn the best practices to encrypt, protect, and unlock PDF files to keep your confidential documents safe.",
+      "content": "Protecting sensitive documents with passwords prevents unauthorized access. Learn how to secure and unlock PDF files.\n\n### Encryption Standards\nToolWala AI allows local password encryption using standard browser APIs, ensuring your documents remain private.\n\n### Steps to Protect a PDF\n1. Navigate to [Protect PDF](/tools/protect-pdf).\n2. Choose your document.\n3. Enter a secure password.\n4. Download your encrypted PDF.\n\n[cta tool=\"protect-pdf\" title=\"Encrypt PDF Online\" description=\"Secure your files with strong local password encryption.\"]",
+      "faqs": {
+        "0": {
+          "question": "Is local PDF unlocking secure?",
+          "answer": "Yes, decryption happens entirely inside your browser's sandboxed memory context. Your passwords and data files are never sent over the network."
+        },
+        "1": {
+          "question": "What happens if I forget my PDF password?",
+          "answer": "For security, our local tools cannot recover forgotten passwords, as we do not store, scan, or log any passwords on our servers."
+        }
+      }
+    },
+    "best-image-compressor": {
+      "title": "Best Image Compressor: How to Shrink PNG & JPG Files",
+      "excerpt": "A detailed comparison of modern image compression techniques to speed up your web layout loads.",
+      "content": "Speed up your web layouts by optimizing images. Learn how browser-native compression shrinks files up to 90%.\n\n### WebP and AVIF Ratios\nModern image compression balances pixel clarity with byte sizes. ToolWala AI helps you convert PNG/JPG to WebP format easily.\n\n### How to Compress Images\n1. Open the [Image Compressor](/tools/image-compressor).\n2. Drag and drop your image.\n3. Adjust quality settings.\n4. Download optimized files.\n\n[cta tool=\"image-compressor\" title=\"Compress Images Now\" description=\"Reduce image sizes visually losslessly in WebP and JPG formats.\"]",
+      "faqs": {
+        "0": {
+          "question": "Why should I convert images to WebP?",
+          "answer": "WebP offers superior compression ratios, providing file sizes that are on average 30% smaller than JPEGs while retaining high visual clarity."
+        },
+        "1": {
+          "question": "Is image quality compromised during compression?",
+          "answer": "Our engine uses adaptive quality algorithms that compress pixel structures selectively, leaving the visual output virtually indistinguishable."
+        }
+      }
+    },
+    "resize-images-for-government-forms": {
+      "title": "How to Resize Images for Indian Government Forms",
+      "excerpt": "Official photo and signature dimensions guide for NSDL PAN, UPSC, and SSC online application portal uploads.",
+      "content": "Struggling with upload limits on portal forms? This guide details how to resize images for official government forms.\n\n### Indian Portal Specifications\n- **NSDL PAN:** 3.5 x 2.5 cm photo, under 50KB.\n- **SSC Exams:** 3.5 x 4.5 cm photo, under 50KB.\n- **UPSC Exams:** 350x350 pixels, under 40KB.\n\n### How to Resize Online\nUse ToolWala's dedicated templates to crop and format passport photos in seconds.\n\n[cta tool=\"ssc-photo-resize\" title=\"SSC Photo Resizer\" description=\"Format and resize passport photos to official SSC specifications.\"]",
+      "faqs": {
+        "0": {
+          "question": "What is the NSDL PAN signature spec?",
+          "answer": "NSDL requires a signature scan cropped to 2x4.5 cm (or ~256x64 px) with a file size strictly under 20KB in JPEG format."
+        },
+        "1": {
+          "question": "How do I compress my photos under 50KB?",
+          "answer": "Our government portal resizers have built-in size targeting parameters that automatically adjust output image density to stay below target KB specs."
+        }
+      }
+    },
+    "ai-caption-generator": {
+      "title": "AI Caption Generator: How to Write Social Media Captions with AI",
+      "excerpt": "Create engaging social media captions, hashtags, and subtitles using client-side AI templates instantly.",
+      "content": "Write high-converting captions for Instagram, LinkedIn, and YouTube. Learn how to generate subtitles using AI.\n\n### Writing Compelling Copy\nA good caption includes a strong hook, structured body, call to action, and context-relevant hashtags.\n\n### Steps to Write Captions\n1. Open [AI Caption Generator](/tools/caption-generator).\n2. Input target topics and tone.\n3. Copy generated captions.\n\n[cta tool=\"caption-generator\" title=\"Generate AI Captions\" description=\"Create catchy, high-engagement captions for social media with AI.\"]",
+      "faqs": {
+        "0": {
+          "question": "Can I customize the caption tone?",
+          "answer": "Yes, you can choose from multiple tone settings such as Professional, Playful, Informative, or Minimalistic to match your brand style."
+        },
+        "1": {
+          "question": "Are the captions optimized for search algorithms?",
+          "answer": "Yes, our templates automatically structure key terms and hashtags to maximize organic reach and searchability."
+        }
+      }
+    },
+    "ai-content-tools": {
+      "title": "Top AI Content Tools to Boost Your Daily Writing Productivity",
+      "excerpt": "Boost your daily productivity with AI assistants for text humanization, summarizing, and cover letters.",
+      "content": "Leverage AI engines to speed up document drafting. Discover local utility assistants for ATS resumes and summarizing.\n\n### Top AI Content Utilities\n- **AI PDF Summarizer:** Summarize large documents locally.\n- **Text Humanizer:** Refine text layout structures.\n- **Cover Letter Generator:** Build tailored job application letters.\n\n[cta tool=\"text-humanizer\" title=\"Humanize AI Text\" description=\"Refine AI generated copy to sound natural and pass detector scans.\"]",
+      "faqs": {
+        "0": {
+          "question": "Can these AI tools bypass ATS scanners?",
+          "answer": "Yes, our Text Humanizer and Resume Builders format content cleanly using standard keyword densities that parse correctly through candidate screen filters."
+        },
+        "1": {
+          "question": "Does ToolWala AI store my text prompts?",
+          "answer": "No, your text input data is processed locally inside your active browser session. We do not store or track text uploads."
+        }
+      }
     }
   },
   "pdf_ocr": {

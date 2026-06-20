@@ -11,26 +11,32 @@ import CategorySearch from '@/components/CategorySearch';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
 import { useTranslation } from '@/components/I18nContext';
 
-export default function CategoriesIndexClient() {
+interface CategoriesIndexClientProps {
+  initialCategoryCounts: Record<string, number>;
+  initialMergedTools: Tool[];
+}
+
+export default function CategoriesIndexClient({
+  initialCategoryCounts,
+  initialMergedTools,
+}: CategoriesIndexClientProps) {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
-  const [mounted, setMounted] = useState(false);
-  const [mergedTools, setMergedTools] = useState<Tool[]>(toolsData);
+  const [mergedTools, setMergedTools] = useState<Tool[]>(initialMergedTools);
 
   useEffect(() => {
-    setMounted(true);
     fetchPublicTools().then(setMergedTools).catch(() => {});
   }, []);
 
   // Map category tool counts dynamically
   const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = {};
+    const counts: Record<string, number> = { ...initialCategoryCounts };
     categoriesData.forEach(cat => {
       const list = getToolsByCategory(cat.id, mergedTools);
       counts[cat.id] = list.length;
     });
     return counts;
-  }, [mergedTools]);
+  }, [mergedTools, initialCategoryCounts]);
 
   const filteredCategories = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
@@ -42,10 +48,6 @@ export default function CategoriesIndexClient() {
         cat.keywords.some(k => k.toLowerCase().includes(query))
       );
   }, [searchQuery, categoryCounts]);
-
-  if (!mounted) {
-    return <div className="min-h-screen bg-[#030712]" />;
-  }
 
   return (
     <>

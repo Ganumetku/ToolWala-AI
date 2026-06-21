@@ -1567,388 +1567,408 @@
     "id": "31",
     "slug": "photo-resize-to-20kb",
     "title": "Photo Resize to 20KB Online: How to Format and Compress Images for Official Applications",
-    "excerpt": "Using a dedicated local tool like [ToolWala's Exam Photo Resizer](https://toolwala.co/tools/exam-photo-resizer) helps you achieve the correct balance between si...",
-    "content": "## 2. Why This Matters: The Reason Behind the 20KB Limit\nFor candidates applying to positions in Staff Selection Commission (SSC), railway recruitment boards (RRB), or state police departments, the 20KB limit can be confusing. Why do portals enforce such small file sizes?\n\n### Technical Database Constraints\nGovernment portals handle millions of applications during recruitment cycles. To process, load, and store this volume of records, systems enforce strict size limits. Keeping photos under 20KB saves server bandwidth and storage, and ensures the portal loads quickly even in rural areas with slower internet speeds.\n\n### Biometric Verification Needs\nWhile the file size must be small, biometric markers must still be legible. The system requires sharp contrast on eyes, nose, and facial borders. If your photo is compressed using basic tools, details blur, leading to application rejections.\n\nUsing a dedicated local tool like [ToolWala's Exam Photo Resizer](https://toolwala.co/tools/exam-photo-resizer) helps you achieve the correct balance between size and quality.\n\n---\n\n## 3. Step-by-Step Guide to Resizing Photo to 20KB\nHere is how to compress your photo under 20KB:\n\n### Step 1: Capture or Scan a High-Quality Source Photo\nA common mistake is starting with a low-resolution photo. Always start with a high-resolution, clear photo:\n1. **Source Image**: Use a clear, well-lit photo of yourself against a plain backdrop.\n2. **Clear Features**: Make sure both ears are visible, there are no shadows on your face, and you are not wearing glasses, hats, or masks.\n\n### Step 2: Upload to ToolWala\n1. Navigate to [ToolWala's Exam Photo Resizer](https://toolwala.co/tools/exam-photo-resizer).\n2. Upload your source photo.\n3. Select your portal preset. For example, select **SSC (3.5x4.5 cm)**.\n4. The tool automatically applies the correct aspect ratio crop boundary. Adjust the box to align your head in the center.\n\n### Step 3: Compress to 20KB\n1. Use the **Target Size Slider** to set the compression target to **20KB**.\n2. ToolWala's client-side algorithms adjust compression levels locally in your browser memory until the output matches your target.\n3. Click **Download** to save the optimized JPEG.\n\n---\n\n## 4. Dimension Guide for Common 20KB Portals\nThe table below lists dimension and file size guidelines for portals requiring 20KB uploads:\n\n| Portal/Examination | Required Dimensions (cm) | Required Dimensions (Pixels) | Accepted File Size Range | accepted File Format |\n| :--- | :--- | :--- | :--- | :--- |\n| **SSC (Staff Selection Commission)** | 3.5 x 4.5 cm | 354 x 472 px | 20 KB to 50 KB (Photos) | JPG / JPEG |\n| **SSC Signature Upload** | 6.0 x 3.0 cm | 250 x 125 px | 10 KB to 20 KB | JPG / JPEG |\n| **Police Bharti (State Levels)** | 3.5 x 4.5 cm | 354 x 472 px | 10 KB to 20 KB | JPG / JPEG |\n| **Post Office GDS Recruitment** | 3.5 x 4.5 cm | 354 x 472 px | Under 20 KB | JPG / JPEG |\n| **UPSSSC Applications** | 3.5 x 4.5 cm | 354 x 472 px | 10 KB to 20 KB | JPG / JPEG |\n\n---\n\n## 5. Common Problems & Solutions\nWhen resizing photos under 20KB, candidates often run into these issues:\n\n- **Problem 1: Photo looks extremely blurry after compression**\n  - *Solution*: Do not crop the photo too close before uploading. Upload a high-resolution portrait, apply the preset, and let ToolWala handle the compression. It uses smart optimization to keep facial details sharp.\n\n- **Problem 2: Upload fails with \"Invalid Aspect Ratio\"**\n  - *Solution*: Government portals match pixel ratios (usually 3.5x4.5 cm or 7:9 aspect ratio). If you crop manually without a tool, your aspect ratio will mismatch. Select the correct preset on ToolWala to ensure compliance.\n\n- **Problem 3: Upload fails with \"File Size Out of Range\"**\n  - *Solution*: Set the slider on ToolWala to 18KB or 19KB. This keeps the file safely under the 20KB cap without triggering threshold errors.\n\n---\n\n## 6. Benefits of Using ToolWala's Compressor\n- **100% Client-Side Processing**: Your personal photos are processed locally on your device, protecting your privacy.\n- **Accurate Target Compressions**: Our tool calculates size parameters locally in your browser, ensuring files fit limits exactly.\n- **Portal-Specific Presets**: Crop and size photos for NSDL, SSC, UPSC, and state portals instantly.\n- **Zero Fees**: No subscriptions, signups, or watermarks.\n\n---\n\n## 7. Frequently Asked Questions (10 FAQs)\n\n### Q1: Why does my photo resize to 20KB fail on the portal?\nIf the file size is correct, check the aspect ratio (must be 3.5x4.5 cm) and format (must be JPEG). Our resizer handles both settings automatically.\n\n### Q2: Does compressing to 20KB reduce print quality?\nYes, compression reduces resolution. However, ToolWala's algorithm keeps eyes, nose, and facial outlines sharp so they remain recognizable.\n\n### Q3: Is it safe to upload my photo here?\nYes. ToolWala processes files locally in your browser memory, with no server uploads.\n\n### Q4: Can I convert a PNG to a 20KB JPEG?\nYes, our tool accepts PNG files and automatically exports them as optimized JPEGs.\n\n### Q5: What is the pixel size for a 20KB photo?\nAt 300 DPI, a 3.5x4.5 cm photo corresponds to 354 x 472 pixels.\n\n### Q6: Can I use this tool on my smartphone?\nYes, our tool is responsive and compatible with all mobile browsers.\n\n### Q7: Why do recruitment boards use a 20KB cap?\nIt reduces server bandwidth requirements and speeds up database loading.\n\n### Q8: What background color is required for exam photos?\nMost exam boards require a solid white or light-colored background.\n\n### Q9: Can I wear glasses in the photo?\nRegulations generally forbid glasses, caps, or headwear to ensure clear biometric mapping.\n\n### Q10: How do I remove shadows from my background?\nUse window lighting for uniform coverage, and turn on the background removal toggle on ToolWala.\n\n---\n\n## 8. Related ToolWala Tools\n- [Signature Resizer](https://toolwala.co/tools/signature-resize): Crop and compress signatures to under 20KB.\n- [SSC Photo Resizer](https://toolwala.co/tools/ssc-photo-resize): Format passport photos to official Staff Selection Commission specifications.\n- [AI Background Remover](https://toolwala.co/tools/bg-remover): Strip backgrounds and set solid white backdrops.\n- [Government Form PDF Compressor](https://toolwala.co/tools/gov-form-pdf-compressor): Compress document PDFs under standard upload limits.\n\n---\n\n## 9. Internal Linking Suggestions\n- Link to this article from the `/landing/photo-resize-to-20kb/` page.\n- Link from this article to our [SSC Signature Resizer Guide](/blog/resize-scanned-signature-ssc-cgl-portal) and [Why SSC Rejected Your Application Photo Solutions Guide](/blog/why-ssc-rejected-application-photo-solutions).\n\n---\n\n## 10. Conclusion\nFormatting passport photos to meet a strict 20KB limit can be tricky. However, by using a local, preset-based compressor like [ToolWala's Exam Photo Resizer](https://toolwala.co/tools/exam-photo-resizer), you can easily generate compliant JPEGs right from your browser.\n\n---\n\n## 11. Call-to-Action\nReady to resize? Open [ToolWala's Exam Photo Resizer](https://toolwala.co/tools/exam-photo-resizer) and compress your photo under 20KB instantly!\n\n---\n\n## SEO Meta Overview\n- **Focus Keyword**: photo resize to 20kb\n- **Suggested Category**: Image Tools\n- **Suggested Tags**: Image Compression, Exam Preparation, Passport Photo, SSC, Online Tools",
+    "excerpt": "Government recruitment portals like SSC, state police bharti, and railway exams require passport photos under 20KB. Learn how to resize and compress your photos to exact specifications using ToolWala's free browser-based photo resizer.",
+    "content": "## Why Government Portals Enforce a 20KB Photo Limit\n\nWhen the Staff Selection Commission (SSC) opens CGL, CHSL, or MTS registration, millions of candidates rush to submit applications within tight deadlines. Each application includes a passport photograph and a signature scan. If every photo were a full-resolution smartphone image (3–10MB), the portal's servers would buckle under the load.\n\nTo prevent this, recruitment portals enforce strict file size limits — typically between 10KB and 20KB for passport photographs. This constraint forces candidates to compress and resize their photos before uploading.\n\nThe problem is that aggressive compression can destroy facial details, causing manual verification officers to reject applications. This guide shows you how to format photos correctly using [ToolWala's Exam Photo Resizer](https://toolwala.co/tools/exam-photo-resizer), achieving the right balance between file size and image clarity.\n\n---\n\n## Step-by-Step Guide to Resize Photo Under 20KB\n\n### Step 1: Capture a Good Source Photo\n\nThe quality of your final 20KB image depends entirely on the quality of your starting photo:\n\n1. **Find Natural Lighting**: Stand facing a window with soft, diffused daylight. Avoid harsh overhead lights that create shadows under your eyes, nose, and chin.\n2. **Use a Plain Background**: Stand against a clean white or light-coloured wall. Keep 1–2 feet of distance from the wall to prevent your body shadow from appearing in the shot.\n3. **Frame Correctly**: Ask someone to take your photo from chest level. Your head should occupy roughly 70–80% of the vertical frame.\n4. **Neutral Expression**: Keep your face relaxed. Both eyes must be open and clearly visible. Do not smile, tilt your head, or wear sunglasses.\n\n### Step 2: Upload and Resize with ToolWala\n\n1. Open [ToolWala's Exam Photo Resizer](https://toolwala.co/tools/exam-photo-resizer).\n2. Upload your source photograph (any format: JPEG, PNG, or WebP).\n3. Select the appropriate exam preset from the dropdown:\n   - **SSC CGL/CHSL/MTS**: 3.5cm x 4.5cm, 10–20KB\n   - **Railway (RRB)**: 3.5cm x 4.5cm, 20–50KB\n   - **State Police Bharti**: 3.5cm x 4.5cm, 10–20KB\n4. Align the crop guides over your face. The tool's edge-detection boundaries help you position your head at the correct coverage ratio.\n5. Set the **target file size** slider to **20KB**.\n6. Click **Download** to save your optimized JPEG.\n\n### Step 3: Verify Before Uploading\n\nBefore submitting to the portal:\n- Open the downloaded file and confirm your face is clearly visible\n- Check the file size in your file manager (it should show 15–20KB)\n- Verify the format is JPEG (not PNG)\n\n---\n\n## Dimension Requirements by Portal\n\nDifferent exams and portals enforce slightly different specifications:\n\n| Exam / Portal | Photo Dimensions | File Size Range | Format | Background |\n| :--- | :--- | :--- | :--- | :--- |\n| **SSC CGL / CHSL / MTS** | 3.5cm x 4.5cm | 10–20KB | JPEG | White |\n| **SSC GD Constable** | 3.5cm x 4.5cm | 10–20KB | JPEG | White |\n| **Railway RRB ALP** | 3.5cm x 4.5cm | 20–50KB | JPEG | White / Light |\n| **State Police Bharti** | 3.5cm x 4.5cm | 10–20KB | JPEG | White |\n| **IBPS Bank Exams** | 4.5cm x 3.5cm | 20–50KB | JPEG | White |\n| **UPSC CSE** | 3.5cm x 4.5cm | 20–300KB | JPEG | White |\n\nFor SSC-specific formatting, visit our [SSC Photo Resizer](/tools/ssc-photo-resize/) or the [SSC Exam Utilities Hub](/hubs/ssc-exam-utilities/).\n\n---\n\n## How Compression Works Without Losing Quality\n\nReducing a photo from 500KB to 20KB requires removing 96% of the file data. How does ToolWala do this without destroying your face?\n\n### Dimension Reduction\nA smartphone photo might be 4000x3000 pixels (12 megapixels). Government portals only need about 200x250 pixels. Resizing to the correct dimensions accounts for most of the file size reduction — from megabytes to tens of kilobytes.\n\n### JPEG Quality Optimization\nJPEG compression works by grouping pixels into 8x8 blocks and discarding high-frequency visual details that the human eye is less sensitive to. Our engine applies this compression selectively: background regions receive higher compression, while the face region (detected by edge analysis) receives gentler treatment.\n\n### Metadata Stripping\nCamera photos contain EXIF metadata — GPS coordinates, camera model, ISO settings, timestamps. This metadata can be 10–50KB alone. Stripping it reduces file size significantly without any visual change.\n\n### Colour Profile Optimization\nConverting from wide-gamut colour spaces (like Adobe RGB) to sRGB reduces colour data size while maintaining visual appearance for web display.\n\n---\n\n## Common Photo Rejection Reasons and Solutions\n\nEven with correct file size, photos get rejected for these reasons:\n\n- **Shadows on face**: Hard shadows from overhead lights distort biometric markers. Use front-facing natural light instead.\n- **Glasses glare**: Reflections on spectacle lenses hide your eyes. Remove glasses for the photo.\n- **Head tilt**: Even a slight tilt can trigger automated rejection. Keep your head perfectly straight and level.\n- **Excessive compression artifacts**: If the photo looks pixelated or blocky, increase the quality slider slightly and verify the file still fits under 20KB.\n- **Wrong background**: Coloured or patterned backgrounds are rejected. Use ToolWala's background removal feature for a clean white backdrop.\n\n---\n\n## Privacy and Security\n\nPassport photographs are sensitive biometric data. Cloud-based photo editors upload your face to remote servers for processing, creating privacy risks. ToolWala operates entirely differently:\n\n- **Zero server uploads**: All crop, resize, and compression operations execute in your browser's JavaScript engine.\n- **Works offline**: Once the page loads, you can disconnect your internet and continue processing.\n- **No data retention**: Your photos exist only in browser memory and are cleared when you close the tab.\n\n---\n\n## Related Resources\n\nComplete your exam application form with these companion tools:\n\n- [Signature Resize to 20KB](/landing/signature-resize-to-20kb/) — Format your scanned signature for SSC and exam portals\n- [SSC Photo Resizer](/tools/ssc-photo-resize/) — Dedicated SSC photo formatting presets\n- [Image Compressor](/tools/image-compressor/) — General-purpose image compression for any size target\n- [Photo Resize to 50KB](/landing/photo-resize-to-50kb/) — For portals with higher size limits\n- [SSC Exam Utilities Hub](/hubs/ssc-exam-utilities/) — Complete toolkit for SSC application preparation\n\nFor portal-specific upload guides, read [How to Upload Photo and Signature in SSC Application](/blog/upload-photo-signature-ssc-application) and [RRB ALP Photo and Signature Guidelines](/blog/rrb-alp-photo-signature-size-guidelines).\n\n---\n\n## Conclusion\n\nResizing a photo to 20KB is a balance between file size and visual clarity. Start with a well-lit source photo, use the correct dimension preset, and let ToolWala's smart compression handle the rest. The tool's client-side processing guarantees your biometric data stays private.\n\nOpen the [Exam Photo Resizer](https://toolwala.co/tools/exam-photo-resizer) now and format your application photo in under a minute.",
     "thumbnail": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=800&q=80",
     "category": "Image Tools",
     "tags": [
-      "Image Compression",
-      "Exam Preparation",
+      "Photo Resize",
+      "20KB Limit",
+      "SSC Photo",
+      "Exam Form",
       "Passport Photo",
-      "SSC",
-      "Online Tools"
+      "Image Compression",
+      "Government Forms"
     ],
     "featured": false,
     "status": "published",
     "publishedAt": "2026-06-21T04:39:56.647Z",
     "createdAt": "2026-06-21T04:39:56.647Z",
-    "updatedAt": "2026-06-21T04:39:56.647Z",
+    "updatedAt": "2026-06-21T05:42:49.192Z",
     "author": {
       "name": "ToolWala Editorial",
       "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
       "role": "Tech Writer"
     },
     "seoMetadata": {
-      "title": "Photo Resize to 20KB Online - Compress Exam Photos",
-      "description": "Resize and compress passport photos under 20KB online for free. Fits requirements for SSC, state recruitment portals, and police applications."
+      "title": "Photo Resize to 20KB Online Free – Exam Form Photo Compressor",
+      "description": "Resize and compress passport photos under 20KB online for free. Meets SSC, UPSC, state police bharti, and railway exam photo upload requirements.",
+      "keywords": "photo resize to 20kb, compress photo under 20kb, ssc photo size, exam form photo, passport photo compressor"
     },
     "readingTime": "6 min read",
     "faqs": [
       {
-        "id": "photo-resize-to-20kb-faq-1",
-        "question": "Why does my photo resize to 20KB fail on the portal?",
-        "answer": "If the file size is correct, check the aspect ratio (must be 3.5x4.5 cm) and format (must be JPEG). Our resizer handles both settings automatically.",
+        "id": "photo-resize-20kb-faq-1",
+        "question": "Why do government forms require photos under 20KB?",
+        "answer": "Recruitment portals like SSC, state police bharti, and railway exams use legacy databases with strict file size caps to handle millions of applications efficiently. Photos larger than 20KB cause upload validation errors.",
         "order": 1
       },
       {
-        "id": "photo-resize-to-20kb-faq-2",
-        "question": "Does compressing to 20KB reduce print quality?",
-        "answer": "Yes, compression reduces resolution. However, ToolWala's algorithm keeps eyes, nose, and facial outlines sharp so they remain recognizable.",
+        "id": "photo-resize-20kb-faq-2",
+        "question": "Does compressing to 20KB make my photo blurry?",
+        "answer": "Not when done correctly. ToolWala's compression engine balances JPEG quality and pixel dimensions to preserve facial details while meeting the size limit. The key is starting with a well-lit, properly framed photo.",
         "order": 2
       },
       {
-        "id": "photo-resize-to-20kb-faq-3",
-        "question": "Is it safe to upload my photo here?",
-        "answer": "Yes. ToolWala processes files locally in your browser memory, with no server uploads.",
+        "id": "photo-resize-20kb-faq-3",
+        "question": "What dimensions should my 20KB photo be?",
+        "answer": "Most government portals require 3.5cm x 4.5cm (approximately 200x250 pixels at 150 DPI). SSC specifically requires this dimension with JPEG format between 10KB and 20KB.",
         "order": 3
       },
       {
-        "id": "photo-resize-to-20kb-faq-4",
-        "question": "Can I convert a PNG to a 20KB JPEG?",
-        "answer": "Yes, our tool accepts PNG files and automatically exports them as optimized JPEGs.",
+        "id": "photo-resize-20kb-faq-4",
+        "question": "Can I use a phone camera photo?",
+        "answer": "Yes. Modern smartphone cameras produce excellent results. Take your photo against a plain white wall with good natural lighting, then crop and compress using our resizer.",
         "order": 4
       },
       {
-        "id": "photo-resize-to-20kb-faq-5",
-        "question": "What is the pixel size for a 20KB photo?",
-        "answer": "At 300 DPI, a 3.5x4.5 cm photo corresponds to 354 x 472 pixels.",
+        "id": "photo-resize-20kb-faq-5",
+        "question": "What background color is required?",
+        "answer": "Most Indian government forms require a plain white background. Some accept light grey. ToolWala includes a background removal feature to replace busy backgrounds with clean white.",
         "order": 5
       },
       {
-        "id": "photo-resize-to-20kb-faq-6",
-        "question": "Can I use this tool on my smartphone?",
-        "answer": "Yes, our tool is responsive and compatible with all mobile browsers.",
+        "id": "photo-resize-20kb-faq-6",
+        "question": "My photo is 500KB. How do I get it to 20KB?",
+        "answer": "Upload to ToolWala's Exam Photo Resizer, select the SSC/exam preset (3.5x4.5cm), set the target size to 20KB, and download. The tool handles all dimension and compression adjustments automatically.",
         "order": 6
       },
       {
-        "id": "photo-resize-to-20kb-faq-7",
-        "question": "Why do recruitment boards use a 20KB cap?",
-        "answer": "It reduces server bandwidth requirements and speeds up database loading.",
+        "id": "photo-resize-20kb-faq-7",
+        "question": "Is this tool safe for my passport photo?",
+        "answer": "Absolutely. All processing happens locally in your browser. Your biometric photo is never uploaded to any server, ensuring complete privacy.",
         "order": 7
       },
       {
-        "id": "photo-resize-to-20kb-faq-8",
-        "question": "What background color is required for exam photos?",
-        "answer": "Most exam boards require a solid white or light-colored background.",
+        "id": "photo-resize-20kb-faq-8",
+        "question": "Can I resize PNG photos to 20KB?",
+        "answer": "Yes. Our tool accepts PNG files but outputs optimized JPEGs, which is the mandatory format for all government portals. JPEG provides better compression for photographs.",
         "order": 8
       },
       {
-        "id": "photo-resize-to-20kb-faq-9",
-        "question": "Can I wear glasses in the photo?",
-        "answer": "Regulations generally forbid glasses, caps, or headwear to ensure clear biometric mapping.",
+        "id": "photo-resize-20kb-faq-9",
+        "question": "What if the portal says my photo is too small?",
+        "answer": "Some portals enforce a minimum size (e.g., 10KB). If your compressed photo is below the minimum, slightly increase the quality slider in the resizer until the file sits between the minimum and maximum limits.",
         "order": 9
       },
       {
-        "id": "photo-resize-to-20kb-faq-10",
-        "question": "How do I remove shadows from my background?",
-        "answer": "Use window lighting for uniform coverage, and turn on the background removal toggle on ToolWala.",
+        "id": "photo-resize-20kb-faq-10",
+        "question": "Can I also resize my signature with this tool?",
+        "answer": "For signatures, use our dedicated Signature Resizer tool which has specific presets for signature dimensions (6.0cm x 3.0cm for SSC). Visit the Signature Resize to 20KB guide for detailed instructions.",
         "order": 10
       }
     ],
     "relatedToolSlugs": [
       "exam-photo-resizer",
-      "image-compressor"
+      "image-compressor",
+      "ssc-photo-resize",
+      "signature-resize"
     ]
   },
   {
     "id": "32",
     "slug": "signature-resize-to-20kb",
     "title": "Signature Resize to 20KB Online: Sizing Scanned Signatures for Online Applications",
-    "excerpt": "If your signature scan is blurry, dark, or cropped incorrectly:\n- Application Rejection: Verification engines will reject applications with invalid signatures....",
-    "content": "## 2. Why This Matters: The Importance of a Compliant Signature\nA signature is a key legal marker of identity. When you upload your scanned signature to a portal, it is stored in your profile and printed on your admit cards and certificates.\n\nIf your signature scan is blurry, dark, or cropped incorrectly:\n- **Application Rejection**: Verification engines will reject applications with invalid signatures.\n- **Identity Mismatches**: If your signature on the admit card is illegible, you may face issues at the exam center.\n- **Wasted Time**: Upload failures delay the submission process.\n\nUsing a local crop utility like [ToolWala's Signature Resizer](https://toolwala.co/tools/signature-resize) ensures your signature is formatted correctly.\n\n---\n\n## 3. Step-by-Step Guide to Resizing a Signature to 20KB\nHere is how to crop and compress your signature scan:\n\n### Step 1: Sign on Plain White Paper\n1. Use unruled, plain white paper. Do not sign on lined paper, as ruled lines can interfere with biometric checking.\n2. Sign clearly using black ink. Black ink provides the highest contrast for scanner engines.\n\n### Step 2: Capture a Clear Photo\n1. Place the paper in a well-lit area. Avoid shadows across your signature.\n2. Hold your phone flat above the paper and take a close-up photo.\n\n### Step 3: Crop and Compress Using ToolWala\n1. Navigate to [ToolWala's Signature Resizer](https://toolwala.co/tools/signature-resize).\n2. Upload your signature image.\n3. Select the **SSC preset** (6.0cm x 3.0cm).\n4. Adjust the crop boundary to frame the signature close, removing excess white space.\n5. Set the **Target Size Slider** to **20KB**.\n6. Download the optimized JPEG.\n\n---\n\n## 4. Dimension Guide for Common Signature Portals\nThe table below lists signature dimension and size requirements for common portals:\n\n| Examination Board | Size in Centimeters | Sizing in Pixels (at 300 DPI) | Allowed File Size Range | ink Color Recommendation |\n| :--- | :--- | :--- | :--- | :--- |\n| **SSC (Staff Selection Commission)** | 6.0 x 3.0 cm | 250 x 125 px | 10 KB to 20 KB | Black Ink (Mandatory) |\n| **IBPS Banking Exams** | 4.5 x 2.0 cm | 140 x 60 px | 10 KB to 20 KB | Black Ink (Mandatory) |\n| **SBI Clerk/PO Recruitment** | 4.5 x 2.0 cm | 140 x 60 px | 10 KB to 20 KB | Black Ink (Mandatory) |\n| **UPSSSC Applications** | 3.5 x 1.5 cm | 280 x 80 px | Under 20 KB | Black Ink |\n| **Railway (RRB) Exams** | 4.5 x 2.0 cm | 140 x 60 px | 10 KB to 20 KB | Black Ink |\n\n---\n\n## 5. Common Problems & Solutions\n- **Problem 1: Background looks grey or yellow**\n  - *Why it fails*: Poor lighting makes background paper look dark, triggering automatic rejections.\n  - *Solution*: Turn up the contrast or use ToolWala's signature clean-up settings to convert the background to clean white.\n\n- **Problem 2: Signature details look faint or broken**\n  - *Why it fails*: Faint signatures can fail manual verification.\n  - *Solution*: Always use a dark gel pen or marker on plain white paper.\n\n- **Problem 3: Aspect ratio matches but file size exceeds 20KB**\n  - *Solution*: Use the compression slider on ToolWala to adjust JPEG quality until the output is safely under 20KB (e.g. 15-18KB).\n\n---\n\n## 6. Benefits of ToolWala's Signature Resizer\n- **100% Secure**: Processing runs locally in your browser memory, keeping your signature private.\n- **Accurate Aspect Ratios**: Automated templates match portal dimensions (6x3 cm or 4.5x2 cm) exactly.\n- **Clean White Output**: Restores grey scans to high-contrast black text on a clean white background.\n- **Free & Unlimited**: No charges, no watermarks, and no signup checks.\n\n---\n\n## 7. Frequently Asked Questions (10 FAQs)\n\n### Q1: Can I use blue ink for my signature scan?\nWhile some boards accept blue ink, black ink is recommended because it provides the highest contrast for scanner engines.\n\n### Q2: What is the pixel size for an SSC signature?\nThe official pixel dimensions are 250 x 125 pixels.\n\n### Q3: Why does the portal reject my signature scan?\nCommon rejection reasons include blurry images, lined paper background, incorrect aspect ratios, or exceeding the 20KB limit.\n\n### Q4: Is it safe to process my signature on ToolWala?\nYes. ToolWala runs locally in your browser, and your files are never uploaded to our servers.\n\n### Q5: Can I upload a PNG signature?\nYes, our tool converts your PNG upload to the mandatory JPEG format automatically.\n\n### Q6: Can I crop my signature on a mobile phone?\nYes, our signature editor works on all mobile screens.\n\n### Q7: Why do portals require signatures to be under 20KB?\nTo save database bandwidth and storage.\n\n### Q8: What type of paper should I sign on?\nUse clean, unruled white printer paper. Avoid ruled notebook paper.\n\n### Q9: Can I write my name in capital letters instead of signing?\nNo. Most portals explicitly state that signatures in capital letters will be rejected.\n\n### Q10: How do I remove grey background from signature photo?\nUse our signature clean-up settings to boost contrast and make the background white.\n\n---\n\n## 8. Related ToolWala Tools\n- [Photo Resizer to 20KB](https://toolwala.co/tools/exam-photo-resizer): Compress passport photographs under 20KB.\n- [SSC Photo Resizer](https://toolwala.co/tools/ssc-photo-resize): Format passport photos to Staff Selection Commission guidelines.\n- [AI Background Remover](https://toolwala.co/tools/bg-remover): Clean up image backdrops instantly.\n- [Government Form PDF Compressor](https://toolwala.co/tools/gov-form-pdf-compressor): Compress document PDFs under standard upload limits.\n\n---\n\n## 9. Internal Linking Suggestions\n- Link to this article from the `/landing/signature-resize-to-20kb/` page.\n- Link from this article to our [How to Upload Photo and Signature in SSC Application Form Guide](/blog/upload-photo-signature-ssc-application) and [Why SSC Rejected Your Application Photo Solutions Guide](/blog/why-ssc-rejected-application-photo-solutions).\n\n---\n\n## 10. Conclusion\nFormatting scanned signatures to fit 20KB limits is simple with local editors. By using [ToolWala's Signature Resizer](https://toolwala.co/tools/signature-resize), you can crop and compress your signature safely and quickly.\n\n---\n\n## 11. Call-to-Action\nReady to format your signature? Open [ToolWala's Signature Resizer](https://toolwala.co/tools/signature-resize) and crop it under 20KB instantly!\n\n---\n\n## SEO Meta Overview\n- **Focus Keyword**: signature resize to 20kb\n- **Suggested Category**: Image Tools\n- **Suggested Tags**: Signature Crop, Image Compression, Document Formatting, SSC CGL, Free Online Tools",
+    "excerpt": "SSC, railway, and bank exam portals require signature scans between 10KB and 20KB in specific dimensions. Learn how to crop, resize, and compress your scanned signature using ToolWala's free signature resizer.",
+    "content": "## Why Portals Require Signatures Under 20KB\n\nRecruitment portals like SSC, railway boards, and banking exams require candidates to upload a scanned signature alongside their passport photograph. While the photograph identifies the candidate visually, the signature serves as a legal verification mark that appears on admit cards, answer sheets, and appointment letters.\n\nTo manage server resources across millions of applications, these portals enforce strict file size limits. The Staff Selection Commission (SSC) mandates signature files between 10KB and 20KB in JPEG format with specific dimensions of 6.0cm x 3.0cm.\n\nThis guide walks you through the complete process of scanning, cropping, and compressing your signature using [ToolWala's Signature Resizer](https://toolwala.co/tools/signature-resize).\n\n---\n\n## How to Create a Perfect Signature Scan\n\n### Step 1: Sign on Clean White Paper\n\nThe quality of your digital signature depends on your physical source:\n\n1. **Use Plain White Paper**: Take a fresh, unruled sheet of white paper. Ruled paper, graph paper, or coloured paper will create lines and marks that interfere with the scan.\n2. **Use Black Ink**: Sign with a black ball pen (0.7mm or 1.0mm point). Black ink provides the highest contrast against white paper and compresses most efficiently. Blue ink is acceptable but tends to appear lighter after JPEG compression.\n3. **Sign Naturally**: Write your signature at normal size — not too large, not too small. The signature should fit within approximately 6cm x 3cm of space on the paper.\n4. **Leave White Space**: Keep at least 1cm of margin around your signature. You will crop this later, but having space prevents accidental clipping of signature strokes.\n\n### Step 2: Scan or Photograph Your Signature\n\nYou have two options:\n\n**Using a Scanner**:\n- Set resolution to 200 DPI (sufficient for signatures)\n- Scan as colour or greyscale JPEG\n- Place paper flat against the scanner glass\n\n**Using a Phone Camera** (equally effective):\n- Place the signed paper on a flat, well-lit surface\n- Position your phone directly above (not at an angle)\n- Ensure even lighting with no shadows across the paper\n- Tap to focus on the signature before capturing\n\n### Step 3: Crop and Compress with ToolWala\n\n1. Open [ToolWala's Signature Resizer](https://toolwala.co/tools/signature-resize).\n2. Upload your signature scan or photo.\n3. Select the **SSC preset** from the dropdown menu:\n   - Dimensions: 6.0cm x 3.0cm (250 x 125 pixels)\n   - Target size: 10–20KB\n   - Format: JPEG\n4. Adjust the **crop box** around your signature to trim excess whitespace.\n5. Set the **target file size** slider to **20KB**.\n6. Click **Download** to save your compliant JPEG file.\n\n---\n\n## Signature Specifications by Exam Portal\n\nDifferent portals enforce different dimension and size requirements:\n\n| Exam / Portal | Signature Dimensions | File Size Range | Format | Ink Colour |\n| :--- | :--- | :--- | :--- | :--- |\n| **SSC CGL / CHSL / MTS** | 6.0cm x 3.0cm | 10–20KB | JPEG | Black / Blue |\n| **SSC GD Constable** | 6.0cm x 3.0cm | 10–20KB | JPEG | Black / Blue |\n| **Railway RRB ALP** | 3.5cm x 1.5cm | 10–20KB | JPEG | Black |\n| **IBPS Bank Exams** | 3.5cm x 1.5cm | 10–20KB | JPEG | Black |\n| **UPSC CSE OTR** | 350x350 px (square) | 20–300KB | JPEG | Black / Blue |\n| **State Police Bharti** | 6.0cm x 3.0cm | 10–20KB | JPEG | Black |\n\nFor UPSC-specific formatting, visit our [Signature Resize to 50KB](/landing/signature-resize-to-50kb/) guide or the [UPSC Exam Utilities Hub](/hubs/upsc-exam-utilities/).\n\n---\n\n## The Science Behind Signature Compression\n\nCompressing a signature from a 200KB scan to under 20KB requires removing over 90% of the file data. Here's how ToolWala achieves this without destroying legibility:\n\n### Background Flattening\nThe most effective technique for signature compression is background optimization. A white paper background should be uniformly white (RGB 255,255,255). Scans often capture slight paper texture, lighting gradients, and grey tones. Our engine normalizes the background to pure white, which compresses extremely efficiently in JPEG format.\n\n### Stroke Preservation\nWhile the background is aggressively compressed, signature strokes (the dark ink lines) receive different treatment. The engine detects high-contrast edges and preserves their sharpness, ensuring your signature remains clearly readable.\n\n### Dimension Reduction\nA phone camera captures signatures at 4000+ pixels wide. Government portals only need 250 pixels. This single step reduces file size by over 90%. ToolWala handles this downscaling with anti-aliasing to keep strokes smooth.\n\n### Metadata Removal\nCamera photos include EXIF data (GPS, timestamps, device info) that can add 10–50KB. Stripping this metadata reduces file size without any visual change.\n\n---\n\n## Common Signature Rejection Reasons\n\nAvoid these mistakes that cause portal rejections:\n\n- **Ruled paper lines visible**: Lines from notebook paper appear in the scan and trigger automated rejection. Always use unruled white paper.\n- **Shadows across the signature**: Uneven lighting when photographing creates dark patches. Use overhead daylight or a desk lamp angled from the front.\n- **Signature too small after cropping**: If your crop is too tight, the signature may not be clearly visible at the portal's display size. Leave a small margin around the strokes.\n- **File too small (under 10KB)**: Some portals enforce a minimum size. If your file is under 10KB, slightly increase the quality slider.\n- **Wrong aspect ratio**: SSC expects a 2:1 width-to-height ratio. Uploading a square signature will cause it to appear stretched on the admit card.\n\n---\n\n## Privacy and Security\n\nScanned signatures are legally binding biometric data. If your signature is leaked, it could be used to forge documents, sign contracts, or commit identity fraud. Cloud-based signature editors that upload your scans to remote servers create serious privacy risks.\n\nToolWala processes everything locally:\n- **No server uploads**: Your signature stays in your browser memory\n- **Works offline**: Disconnect your internet after the page loads\n- **No data retention**: Files are cleared when you close the tab\n\n---\n\n## Related Resources\n\nComplete your application form with these companion tools:\n\n- [Photo Resize to 20KB](/landing/photo-resize-to-20kb/) — Format your passport photo for exam portals\n- [SSC Photo Resizer](/tools/ssc-photo-resize/) — Dedicated SSC photo formatting presets\n- [Image Compressor](/tools/image-compressor/) — General-purpose image compression\n- [SSC Exam Utilities Hub](/hubs/ssc-exam-utilities/) — Complete toolkit for SSC applications\n\nFor detailed upload guides, read [How to Upload Photo and Signature in SSC Application](/blog/upload-photo-signature-ssc-application) and [How to Resize Scanned Signature for SSC CGL Portal](/blog/resize-scanned-signature-ssc-cgl-portal).\n\n---\n\n## Conclusion\n\nFormatting a scanned signature to 20KB requires clean source material (white paper, black ink), proper scanning technique, and intelligent compression. ToolWala's Signature Resizer handles the technical complexity — dimension resizing, background normalization, and JPEG optimization — while keeping your biometric data completely private.\n\nOpen the [Signature Resizer](https://toolwala.co/tools/signature-resize) and prepare your signature in under a minute.",
     "thumbnail": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=800&q=80",
     "category": "Image Tools",
     "tags": [
-      "Signature Crop",
-      "Image Compression",
+      "Signature Resize",
+      "20KB Limit",
+      "SSC Signature",
+      "Exam Forms",
+      "Scanned Signature",
       "Document Formatting",
-      "SSC CGL",
-      "Free Online Tools"
+      "Free Tools"
     ],
     "featured": false,
     "status": "published",
     "publishedAt": "2026-06-21T04:39:56.648Z",
     "createdAt": "2026-06-21T04:39:56.648Z",
-    "updatedAt": "2026-06-21T04:39:56.648Z",
+    "updatedAt": "2026-06-21T05:42:49.192Z",
     "author": {
       "name": "ToolWala Editorial",
       "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
       "role": "Tech Writer"
     },
     "seoMetadata": {
-      "title": "Signature Resize to 20KB Online - SSC Scanned Sign Editor",
-      "description": "Crop and compress signature scans under 20KB online for free. Format signatures to SSC guidelines (6.0x3.0 cm) with zero server uploads."
+      "title": "Signature Resize to 20KB Online Free – SSC Signature Cropper",
+      "description": "Crop and compress scanned signatures under 20KB online for free. Format signatures to SSC, UPSC, railway, and bank exam specifications.",
+      "keywords": "signature resize to 20kb, ssc signature size, compress signature online, exam signature upload, scanned signature cropper"
     },
     "readingTime": "6 min read",
     "faqs": [
       {
-        "id": "signature-resize-to-20kb-faq-1",
-        "question": "Can I use blue ink for my signature scan?",
-        "answer": "While some boards accept blue ink, black ink is recommended because it provides the highest contrast for scanner engines.",
+        "id": "sig-resize-20kb-faq-1",
+        "question": "What is the signature file size limit for SSC?",
+        "answer": "SSC requires signature uploads to be in JPEG format between 10KB and 20KB, with dimensions of 6.0cm width x 3.0cm height (approximately 250x125 pixels).",
         "order": 1
       },
       {
-        "id": "signature-resize-to-20kb-faq-2",
-        "question": "What is the pixel size for an SSC signature?",
-        "answer": "The official pixel dimensions are 250 x 125 pixels.",
+        "id": "sig-resize-20kb-faq-2",
+        "question": "Should I sign in black or blue ink?",
+        "answer": "Both are accepted by most portals, but black ink is recommended for higher contrast and better visibility after compression. Blue ink can appear faded on low-quality scans.",
         "order": 2
       },
       {
-        "id": "signature-resize-to-20kb-faq-3",
-        "question": "Why does the portal reject my signature scan?",
-        "answer": "Common rejection reasons include blurry images, lined paper background, incorrect aspect ratios, or exceeding the 20KB limit.",
+        "id": "sig-resize-20kb-faq-3",
+        "question": "Can I use a photo of my signature from my phone?",
+        "answer": "Yes. Take a photo of your signature on plain white paper in good lighting. ToolWala's background removal will clean up any shadows or paper texture.",
         "order": 3
       },
       {
-        "id": "signature-resize-to-20kb-faq-4",
-        "question": "Is it safe to process my signature on ToolWala?",
-        "answer": "Yes. ToolWala runs locally in your browser, and your files are never uploaded to our servers.",
+        "id": "sig-resize-20kb-faq-4",
+        "question": "What paper should I use for my signature?",
+        "answer": "Use plain, unruled white paper. Ruled lines, graph paper marks, or coloured paper will interfere with the signature scan and may cause rejection.",
         "order": 4
       },
       {
-        "id": "signature-resize-to-20kb-faq-5",
-        "question": "Can I upload a PNG signature?",
-        "answer": "Yes, our tool converts your PNG upload to the mandatory JPEG format automatically.",
+        "id": "sig-resize-20kb-faq-5",
+        "question": "My signature scan is 200KB. How do I get it to 20KB?",
+        "answer": "Upload to ToolWala's Signature Resizer, apply the SSC preset (6.0cm x 3.0cm), set the target to 20KB, and download. The tool handles cropping, resizing, and compression automatically.",
         "order": 5
       },
       {
-        "id": "signature-resize-to-20kb-faq-6",
-        "question": "Can I crop my signature on a mobile phone?",
-        "answer": "Yes, our signature editor works on all mobile screens.",
+        "id": "sig-resize-20kb-faq-6",
+        "question": "What dimensions does UPSC require for signatures?",
+        "answer": "UPSC OTR requires signatures at minimum 350x350 pixels in square format, with file size between 20KB and 300KB. Use our 50KB signature preset for UPSC.",
         "order": 6
       },
       {
-        "id": "signature-resize-to-20kb-faq-7",
-        "question": "Why do portals require signatures to be under 20KB?",
-        "answer": "To save database bandwidth and storage.",
+        "id": "sig-resize-20kb-faq-7",
+        "question": "Is this tool safe for my scanned signature?",
+        "answer": "Yes. ToolWala processes your signature entirely in your browser memory. Nothing is uploaded to any server. Scanned signatures are sensitive biometric data, and our client-side approach ensures complete privacy.",
         "order": 7
       },
       {
-        "id": "signature-resize-to-20kb-faq-8",
-        "question": "What type of paper should I sign on?",
-        "answer": "Use clean, unruled white printer paper. Avoid ruled notebook paper.",
+        "id": "sig-resize-20kb-faq-8",
+        "question": "Can I crop my signature to remove whitespace?",
+        "answer": "Yes. The tool includes a crop box that you can adjust to trim excess whitespace around your signature, which also helps reduce file size.",
         "order": 8
       },
       {
-        "id": "signature-resize-to-20kb-faq-9",
-        "question": "Can I write my name in capital letters instead of signing?",
-        "answer": "No. Most portals explicitly state that signatures in capital letters will be rejected.",
+        "id": "sig-resize-20kb-faq-9",
+        "question": "What if my signature is too thin or too thick?",
+        "answer": "Use a medium-point pen (0.7mm or 1.0mm ball pen) for the best scan results. Thin signatures may become invisible after compression, while very thick signatures may appear as blobs.",
         "order": 9
       },
       {
-        "id": "signature-resize-to-20kb-faq-10",
-        "question": "How do I remove grey background from signature photo?",
-        "answer": "Use our signature clean-up settings to boost contrast and make the background white.",
+        "id": "sig-resize-20kb-faq-10",
+        "question": "Can I also resize my passport photo with this tool?",
+        "answer": "For passport photos, use our dedicated Exam Photo Resizer which has specific presets for photo dimensions and face coverage ratios. See our Photo Resize to 20KB guide.",
         "order": 10
       }
     ],
     "relatedToolSlugs": [
       "signature-resize",
-      "image-compressor"
+      "image-compressor",
+      "ssc-photo-resize",
+      "exam-photo-resizer"
     ]
   },
   {
     "id": "33",
     "slug": "compress-pdf-to-100kb",
     "title": "Compress PDF to 100KB Online: Sizing Certificates for Government Portals",
-    "excerpt": "Using a local, private tool like [ToolWala's PDF Compressor](https://toolwala.co/tools/compress-pdf) ensures your documents are optimized securely....",
-    "content": "## 2. Why This Matters: The Importance of Document Legibility\nGovernment validation engines review uploaded PDFs to verify names, roll numbers, grades, and birth dates. If compression is too aggressive:\n- **Application Hold/Rejection**: Portals will flag and hold applications with blurry or illegible certificates.\n- **Data Theft Risks**: Uploading files containing personal identification numbers to unknown online converters exposes you to privacy risks.\n- **Delays**: Correcting rejected uploads can take weeks, causing you to miss deadlines.\n\nUsing a local, private tool like [ToolWala's PDF Compressor](https://toolwala.co/tools/compress-pdf) ensures your documents are optimized securely.\n\n---\n\n## 3. Step-by-Step Guide to compressing PDF under 100KB\nHere is how to compress your PDFs:\n\n### Step 1: Prepare a Clean scan\nStart with a high-quality scan:\n1. **Scan at 150 DPI**: If scanning manually, set the DPI (Dots Per Inch) to 150. This provides the best compromise between file size and text clarity.\n2. **Crop Margins**: Remove blank margins from the document borders to reduce file size.\n\n### Step 2: Upload to ToolWala\n1. Navigate to [ToolWala's PDF Compressor](https://toolwala.co/tools/compress-pdf).\n2. Drag and drop your PDF document or browse your files locally.\n3. Your PDF loads instantly inside the browser memory.\n\n### Step 3: Compress and Save\n1. Set the compression level or select the **100KB target preset**.\n2. Our tool subsets embedded fonts and scales image resolutions locally on your CPU.\n3. Click **Download** to save the optimized PDF.\n\n---\n\n## 4. Sizing Guides for Common PDF Portals\nThe table below lists PDF document requirements for common platforms:\n\n| Target Platform / Portal | Document Types Required | Maximum Allowed Size | Required File Format | Sizing Resolution |\n| :--- | :--- | :--- | :--- | :--- |\n| **EPFO Member Portal** | Member Passbook Scan / Cheque Leaf | Under 100 KB | PDF / JPEG | Clear Legible Text |\n| **UPSC Applications** | Category / Age Proof Certificates | Under 300 KB | PDF | Minimum 150 DPI |\n| **NSDL PAN Applications** | Identity & Address Proofs | Under 300 KB / 500 KB | PDF | Sized to fit |\n| **Passport Seva PSK** | Date of Birth / Address Proofs | Under 1.0 MB (1000KB) | PDF | 150 - 200 DPI |\n| **State Government PSCs** | Graduation Certificates | 100 KB to 200 KB | PDF | Sized to fit |\n\n---\n\n## 5. Common Problems & Solutions\n- **Problem 1: PDF is under 100KB but text looks blurry**\n  - *Solution*: Start with a grey-scale scan rather than full-color scan. Grey-scale files compress much better, allowing you to maintain higher resolutions under the 100KB cap.\n\n- **Problem 2: PDF is still larger than 100KB after compression**\n  - *Solution*: Use ToolWala's **Organize PDF** tool to remove blank pages or redundant pages, then run the compression again.\n\n- **Problem 3: EPFO portal throws \"Upload Fails - Invalid Format\"**\n  - *Solution*: Make sure the file extension is `.pdf` and the file is not password-protected.\n\n---\n\n## 6. Benefits of ToolWala's PDF Compressor\n- **100% Private**: Your documents are processed entirely in your browser cache, keeping your personal data secure.\n- **WASM Acceleration**: High-performance WebAssembly engines compress PDFs locally on your device in seconds.\n- **DPI Sizing**: Optimizes image layers and removes redundant metadata to reduce file size without losing text legibility.\n- **Free & No Account Wall**: Compress unlimited files for free without registration.\n\n---\n\n## 7. Frequently Asked Questions (10 FAQs)\n\n### Q1: Can I compress a password-protected PDF under 100KB?\nYes, ToolWala will prompt you to enter the password to unlock the document locally before compressing it.\n\n### Q2: Why do government portals require PDFs under 100KB?\nIt optimizes server storage and speeds up portal load times for reviewers.\n\n### Q3: Does compressing to 100KB alter my original document?\nNo, the tool exports a new compressed copy while keeping your original file untouched.\n\n### Q4: Is it safe to compress my bank statement here?\nYes. ToolWala runs locally in your browser cache, and your files are never uploaded to our servers.\n\n### Q5: Can I convert multiple JPG scans into a single 100KB PDF?\nYes. Use our JPG to PDF tool to merge the files, then run the output through the compressor.\n\n### Q6: What is the best DPI for document scans?\n150 DPI is recommended for document scans; it keeps text clear while keeping file size small.\n\n### Q7: Can I use ToolWala on mobile?\nYes, our PDF compressor is compatible with all mobile browsers.\n\n### Q8: Does compression affect digital signatures?\nYes, modifying a digitally signed PDF will invalidate the signature. Compress the file before applying digital signatures.\n\n### Q9: Can I extract specific pages before compressing?\nYes, use our Split PDF tool to extract the pages you need, then run the compression.\n\n### Q10: How do I know if my PDF is under 100KB?\nCheck the file properties after downloading; it should list a size of 99KB or less.\n\n---\n\n## 8. Related ToolWala Tools\n- [Government Form PDF Compressor](https://toolwala.co/tools/gov-form-pdf-compressor): Compress PDF attachments to match specific portal guidelines.\n- [Aadhaar PDF Compressor](https://toolwala.co/tools/aadhaar-pdf-compressor): Optimize UIDAI Aadhaar PDFs under 300KB.\n- [Merge PDF](https://toolwala.co/tools/merge-pdf): Combine multiple documents into a single PDF.\n- [Sign PDF](https://toolwala.co/tools/sign-pdf): Place electronic signatures on PDF pages.\n\n---\n\n## 9. Internal Linking Suggestions\n- Link to this article from the `/landing/compress-pdf-to-100kb/` page.\n- Link from this article to our [How to Compress e-Aadhaar PDF File Under 300KB Guide](/blog/compress-eaadhaar-pdf-under-300kb) and [NSDL PAN Card Document Specifications Guide](/blog/nsdl-pan-card-document-specifications).\n\n---\n\n## 10. Conclusion\nShrinking certificate PDFs under 100KB is simple with browser-native tools. By using [ToolWala's PDF Compressor](https://toolwala.co/tools/compress-pdf), you can compress your documents safely and quickly.\n\n---\n\n## 11. Call-to-Action\nReady to compress? Open [ToolWala's PDF Compressor](https://toolwala.co/tools/compress-pdf) and optimize your PDF under 100KB instantly!\n\n---\n\n## SEO Meta Overview\n- **Focus Keyword**: compress pdf to 100kb\n- **Suggested Category**: PDF Tools\n- **Suggested Tags**: PDF Compressor, Document Sizing, EPFO, Certificate Format, Free PDF Tools",
+    "excerpt": "Government portals like EPFO, SSC, and state recruitment boards enforce strict PDF file size limits. Learn how to compress certificates, marksheets, and identity documents under 100KB using ToolWala's secure browser-based compressor.",
+    "content": "## Why Government Portals Enforce 100KB PDF Limits\n\nGovernment portals across India handle millions of applications simultaneously. When every applicant uploads a 3MB certificate scan, server infrastructure buckles under the load. To prevent this, portals like EPFO, state recruitment boards, and scholarship platforms enforce strict file size caps — commonly 100KB for supporting documents.\n\nThe challenge for candidates is straightforward but frustrating: how do you compress a high-resolution certificate scan from 2MB down to 100KB without making the text illegible? If compression is too aggressive, the document becomes unreadable, and manual verification officers will reject it.\n\nThis guide walks you through the entire process using [ToolWala's PDF Compressor](https://toolwala.co/tools/compress-pdf), a free, privacy-first tool that runs entirely in your browser.\n\n---\n\n## Step-by-Step Guide to Compress PDF Under 100KB\n\n### Step 1: Prepare a Clean Scan\n\nStart with the highest quality source document you can obtain:\n\n1. **Scan at 150–200 DPI**: Set your scanner or phone app to capture at 150 to 200 Dots Per Inch. Higher DPI produces sharper text but larger files. 150 DPI is the sweet spot for government uploads.\n2. **Crop Margins**: Remove blank borders around your document. Extra whitespace adds unnecessary file weight without contributing useful information.\n3. **Flatten the Document**: If your certificate has multiple overlapping layers (from editing software), flatten it into a single-layer PDF before compressing.\n\n### Step 2: Upload to ToolWala\n\n1. Navigate to [ToolWala's PDF Compressor](https://toolwala.co/tools/compress-pdf).\n2. Drag and drop your PDF or browse your local files.\n3. Your document loads instantly inside the browser cache — nothing is uploaded to any server.\n\n### Step 3: Configure Compression Settings\n\n1. Select the **100KB target preset** from the compression options.\n2. The tool automatically adjusts image resolution, strips unused font subsets, and removes metadata profiles (EXIF headers, embedded thumbnails).\n3. Preview the compressed output to verify that names, dates, and registration numbers are clearly legible.\n\n### Step 4: Download\n\nClick **Download** to save your optimized PDF. Verify the file size is under 100KB before uploading to the portal.\n\n---\n\n## Which Portals Require PDFs Under 100KB?\n\nUnderstanding where these limits apply helps you prepare documents in advance:\n\n| Portal / Platform | Documents Required | Maximum Size | Format |\n| :--- | :--- | :--- | :--- |\n| **EPFO Member Portal** | Passbook Scan, Cheque Leaf | 100KB | PDF / JPEG |\n| **UPSSSC (Uttar Pradesh)** | Caste Certificate, Domicile | 100KB | PDF |\n| **HSSC (Haryana)** | Category Certificate, ID Proof | 100KB | PDF |\n| **RPSC (Rajasthan)** | Experience Certificate | 100KB | PDF |\n| **State Police Bharti** | Character Certificate | 50–100KB | PDF |\n| **NSP Scholarship Portal** | Income Certificate, Marksheet | 100KB | PDF |\n\nFor portals requiring larger limits like 200KB or 300KB, visit our [Compress PDF to 200KB](/landing/compress-pdf-to-200kb/) or [Compress PDF to 300KB](/landing/compress-pdf-to-300kb/) guides.\n\n---\n\n## How the Compression Engine Works\n\nToolWala's PDF compressor uses a multi-layered approach to reduce file size while maintaining document integrity:\n\n### Image Layer Optimization\nScanned PDFs are essentially images wrapped in a PDF container. Our engine identifies these raster layers and applies targeted JPEG compression. Background areas (white paper, margins) receive aggressive compression, while text regions receive gentler treatment to preserve character edges.\n\n### Font Subsetting\nMany PDFs embed entire font families (thousands of glyphs) when only a fraction are used. Our engine strips unused characters, reducing font data from 200KB+ to just a few kilobytes.\n\n### Metadata Stripping\nPDF files often contain hidden metadata: creator software information, edit history, embedded thumbnails, and color profiles. Removing these non-essential elements can save 10–30KB without affecting the visible content.\n\n### Stream Compression\nPDF internal data streams can be recompressed using more efficient algorithms. Our engine repackages these streams for maximum space savings.\n\n---\n\n## Common Mistakes That Cause Rejections\n\nEven after compressing, your PDF can be rejected if you make these common errors:\n\n- **Scanning at too high a DPI**: A 600 DPI scan produces enormous files. Unless specifically required, 150 DPI is sufficient for government uploads.\n- **Leaving borders and margins**: Extra whitespace around your document inflates file size. Always crop to content edges.\n- **Not verifying after compression**: Always open the compressed file and verify that text is legible before uploading to the portal.\n- **Using the wrong format**: Some portals accept only PDF, others accept JPEG. Verify the required format before uploading.\n- **Compressing an already-compressed file**: Multiple rounds of compression degrade quality exponentially. Start from the original scan each time.\n\n---\n\n## Privacy and Security\n\nGovernment certificates contain sensitive personal information — names, dates of birth, Aadhaar numbers, caste details, and registration IDs. Uploading these to cloud-based compression websites exposes you to:\n\n- **Data harvesting**: Some services retain copies of uploaded files for analytics or resale.\n- **Identity theft**: Personal details extracted from your certificates could be used for fraudulent applications.\n- **GDPR and IT Act violations**: Processing personal documents on foreign servers may violate data protection regulations.\n\nToolWala eliminates these risks entirely. Every compression operation executes locally in your browser's JavaScript engine. Your files never touch a remote server. You can even disconnect your internet after the page loads and continue working offline.\n\n---\n\n## Related ToolWala Resources\n\nExpand your document preparation toolkit with these related utilities:\n\n- [Government Form PDF Compressor](/tools/gov-form-pdf-compressor/) — Specialized compression presets for Indian government portals\n- [Merge PDF](/tools/merge-pdf/) — Combine multiple certificates into a single PDF before compressing\n- [Sign PDF](/tools/sign-pdf/) — Add digital signatures to your compressed documents\n- [Compress PDF to 200KB](/landing/compress-pdf-to-200kb/) — For portals with 200KB limits\n- [Compress PDF to 300KB](/landing/compress-pdf-to-300kb/) — For e-Aadhaar and UPSC uploads\n- [Aadhaar Utilities Hub](/hubs/aadhaar-utilities/) — Complete toolkit for Aadhaar-related document processing\n\nFor detailed portal-specific guides, read our articles on [How to Compress e-Aadhaar PDF Under 300KB](/blog/compress-eaadhaar-pdf-under-300kb) and [How to Upload Documents on Government Portals](/blog/upload-documents-government-portals).\n\n---\n\n## Conclusion\n\nCompressing PDFs to 100KB doesn't have to compromise document quality. With the right scanning practices (150 DPI, cropped margins) and ToolWala's intelligent compression engine, you can produce portal-ready documents that pass both automated validation and manual review.\n\nThe key advantage of ToolWala over cloud-based alternatives is absolute privacy — your certificates never leave your device. Open the [PDF Compressor](https://toolwala.co/tools/compress-pdf) and prepare your documents in under a minute.",
     "thumbnail": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=800&q=80",
     "category": "PDF Tools",
     "tags": [
       "PDF Compressor",
-      "Document Sizing",
+      "Government Forms",
       "EPFO",
-      "Certificate Format",
-      "Free PDF Tools"
+      "SSC",
+      "Certificate Upload",
+      "Document Compression",
+      "Free Tools"
     ],
     "featured": false,
     "status": "published",
     "publishedAt": "2026-06-21T04:39:56.648Z",
     "createdAt": "2026-06-21T04:39:56.648Z",
-    "updatedAt": "2026-06-21T04:39:56.648Z",
+    "updatedAt": "2026-06-21T05:42:49.192Z",
     "author": {
       "name": "ToolWala Editorial",
       "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
       "role": "Tech Writer"
     },
     "seoMetadata": {
-      "title": "Compress PDF to 100KB Online - Free PDF Size Reducer",
-      "description": "Compress PDF documents under 100KB online for free. Clean local processing for EPFO, government portals, and recruitment platforms."
+      "title": "Compress PDF to 100KB Online Free – Government Portal PDF Reducer",
+      "description": "Compress PDF files under 100KB online for free. Secure client-side processing for EPFO, SSC, UPSC, and state recruitment portal uploads. No server uploads.",
+      "keywords": "compress pdf to 100kb, pdf compressor online free, reduce pdf size, epfo pdf upload, government portal pdf limit"
     },
     "readingTime": "6 min read",
     "faqs": [
       {
         "id": "compress-pdf-to-100kb-faq-1",
-        "question": "Can I compress a password-protected PDF under 100KB?",
-        "answer": "Yes, ToolWala will prompt you to enter the password to unlock the document locally before compressing it.",
+        "question": "How can I compress a PDF to exactly 100KB?",
+        "answer": "Upload your PDF to ToolWala's compressor, select the 100KB target preset, and the tool will automatically adjust image resolution and font subsetting to bring your file under the limit while keeping text legible.",
         "order": 1
       },
       {
         "id": "compress-pdf-to-100kb-faq-2",
-        "question": "Why do government portals require PDFs under 100KB?",
-        "answer": "It optimizes server storage and speeds up portal load times for reviewers.",
+        "question": "Is my document safe when compressing online?",
+        "answer": "Yes. ToolWala processes everything locally in your browser memory using JavaScript. Your PDF never leaves your device and is never uploaded to any server.",
         "order": 2
       },
       {
         "id": "compress-pdf-to-100kb-faq-3",
-        "question": "Does compressing to 100KB alter my original document?",
-        "answer": "No, the tool exports a new compressed copy while keeping your original file untouched.",
+        "question": "Does compressing to 100KB make text unreadable?",
+        "answer": "No. Our smart compression engine scales down background graphics and image layers while preserving text vectors and sharp font outlines, ensuring text remains clear and legible.",
         "order": 3
       },
       {
         "id": "compress-pdf-to-100kb-faq-4",
-        "question": "Is it safe to compress my bank statement here?",
-        "answer": "Yes. ToolWala runs locally in your browser cache, and your files are never uploaded to our servers.",
+        "question": "Which government portals require PDFs under 100KB?",
+        "answer": "EPFO Member Portal, many state recruitment boards (UPSSSC, HSSC, RPSC), police bharti portals, and some scholarship application systems enforce a 100KB upload limit for certificates.",
         "order": 4
       },
       {
         "id": "compress-pdf-to-100kb-faq-5",
-        "question": "Can I convert multiple JPG scans into a single 100KB PDF?",
-        "answer": "Yes. Use our JPG to PDF tool to merge the files, then run the output through the compressor.",
+        "question": "Can I compress a scanned PDF under 100KB?",
+        "answer": "Yes. Scanned PDFs contain raster images, which are the primary target of our compression engine. The tool reduces image resolution to 150 DPI and optimizes JPEG quality to shrink file size effectively.",
         "order": 5
       },
       {
         "id": "compress-pdf-to-100kb-faq-6",
-        "question": "What is the best DPI for document scans?",
-        "answer": "150 DPI is recommended for document scans; it keeps text clear while keeping file size small.",
+        "question": "What is the best DPI for government PDF uploads?",
+        "answer": "150 DPI provides the best balance between file size and text clarity for government portal uploads. Our tool automatically optimizes to this resolution.",
         "order": 6
       },
       {
         "id": "compress-pdf-to-100kb-faq-7",
-        "question": "Can I use ToolWala on mobile?",
-        "answer": "Yes, our PDF compressor is compatible with all mobile browsers.",
+        "question": "Can I compress password-protected PDFs?",
+        "answer": "Yes. ToolWala will prompt you to enter the password locally. The PDF is decrypted in your browser memory, compressed, and you can download the optimized file.",
         "order": 7
       },
       {
         "id": "compress-pdf-to-100kb-faq-8",
-        "question": "Does compression affect digital signatures?",
-        "answer": "Yes, modifying a digitally signed PDF will invalidate the signature. Compress the file before applying digital signatures.",
+        "question": "Does this tool work on mobile phones?",
+        "answer": "Yes. ToolWala's PDF compressor is fully responsive and works on Android and iOS browsers. No app installation is required.",
         "order": 8
       },
       {
         "id": "compress-pdf-to-100kb-faq-9",
-        "question": "Can I extract specific pages before compressing?",
-        "answer": "Yes, use our Split PDF tool to extract the pages you need, then run the compression.",
+        "question": "Can I merge multiple PDFs and then compress them?",
+        "answer": "Yes. Use ToolWala's Merge PDF tool to combine your documents first, then compress the merged file to under 100KB using the compressor.",
         "order": 9
       },
       {
         "id": "compress-pdf-to-100kb-faq-10",
-        "question": "How do I know if my PDF is under 100KB?",
-        "answer": "Check the file properties after downloading; it should list a size of 99KB or less.",
+        "question": "How is ToolWala different from other online PDF compressors?",
+        "answer": "Unlike cloud-based compressors that upload your files to remote servers, ToolWala processes everything locally in your browser. Your sensitive documents never leave your computer, ensuring complete privacy.",
         "order": 10
       }
     ],
     "relatedToolSlugs": [
       "compress-pdf",
-      "gov-form-pdf-compressor"
+      "gov-form-pdf-compressor",
+      "merge-pdf",
+      "sign-pdf"
     ]
   },
   {
     "id": "34",
     "slug": "aadhaar-photo-resize-online",
     "title": "Aadhaar Photo Resize Online: How to Format Photos for UIDAI Card Updates",
-    "excerpt": "If your photo has shadows, incorrect dimensions, or low contrast:\n- Application Rejection: The portal will reject non-compliant photos automatically.\n- Delayed...",
-    "content": "## 2. Why This Matters: The Importance of Biometric Compliance\nUIDAI uses biometric verification systems to protect identity data. The photo on your card must be clear enough for biometric scanner algorithms to recognize your facial structure.\n\nIf your photo has shadows, incorrect dimensions, or low contrast:\n- **Application Rejection**: The portal will reject non-compliant photos automatically.\n- **Delayed Processing**: Rejections delay the issuance of your updated Aadhaar card.\n- **Verification Failures**: Poor-quality photos can lead to verification issues at banks or security checkpoints.\n\nUsing a local crop utility like [ToolWala's Aadhaar Photo Resizer](https://toolwala.co/tools/aadhaar-photo-resizer) ensures your photo is formatted correctly.\n\n---\n\n## 3. Step-by-Step Guide to Resizing Photo for Aadhaar\nHere is how to crop and compress your photo for Aadhaar updates:\n\n### Step 1: Capture a Compliant Portrait\n1. Stand against a solid, light-colored wall (preferably white or off-white).\n2. Face the camera directly with a neutral facial expression. Avoid tilting your head.\n3. Ensure both eyes and ears are clearly visible. Remove caps, sunglasses, or bulky headphones.\n\n### Step 2: Upload to ToolWala\n1. Navigate to [ToolWala's Aadhaar Photo Resizer](https://toolwala.co/tools/aadhaar-photo-resizer).\n2. Upload your photo.\n3. The tool automatically applies the UIDAI preset crop box (3.5 x 4.5 cm).\n4. Center your face between the visual guides, keeping your shoulders level.\n\n### Step 3: Compress and Save\n1. Set the target file size slider to **50KB**.\n2. Click **Download** to save your optimized JPEG.\n\n---\n\n## 4. Dimension Guide for Aadhaar Uploads\nThe table below lists UIDAI specifications for photo uploads:\n\n| Parameter | Required Specification | Recommended Resolution |\n| :--- | :--- | :--- |\n| **Physical Dimensions** | 3.5 cm width x 4.5 cm height | Standard passport photo ratio |\n| **Pixel Dimensions** | 354 x 472 pixels | Calculated at 300 DPI resolution |\n| **Accepted Size Range** | 20 KB to 50 KB | Set to 45KB for best compliance |\n| **File Format** | JPEG / JPG | PNG files will be rejected |\n| **Background Color** | Solid White or Light Grey | No patterns or shadows |\n\n---\n\n## 5. Common Problems & Solutions\n- **Problem 1: Photo has shadows on face or background**\n  - *Why it fails*: Shadows distort biometric face matching.\n  - *Solution*: Use front-facing window lighting, and stand a few feet away from the wall to avoid casting shadows behind you.\n\n- **Problem 2: Glare on prescription glasses**\n  - *Why it fails*: Eyes must be completely visible.\n  - *Solution*: Remove your glasses before taking the photo. Most verification portals prefer photos without glasses to avoid reflections.\n\n- **Problem 3: Upload fails with \"File Size Out of Limit\"**\n  - *Solution*: Adjust the compression slider on ToolWala to target 40-45KB, keeping the file safely under the 50KB cap.\n\n---\n\n## 6. Benefits of ToolWala's Aadhaar Photo Resizer\n- **100% Secure**: Processing runs locally in your browser memory, keeping your personal details private.\n- **Accurate Presets**: Crop and size photos to UIDAI specifications (3.5x4.5 cm) instantly.\n- **Background Removal**: Redact busy backgrounds and set clean white backdrops in one click.\n- **Free & Unlimited**: No subscriptions, signups, or watermarks.\n\n---\n\n## 7. Frequently Asked Questions (10 FAQs)\n\n### Q1: What is the official photo size for Aadhaar card online?\nThe official dimension is 3.5cm x 4.5cm (35mm x 45mm) with a solid white or light-colored background.\n\n### Q2: What is the file size limit for Aadhaar photos?\nThe file size must be between 20 KB and 50 KB.\n\n### Q3: Can I update my Aadhaar photo online?\nYes, you can initiate a detail update request on the UIDAI MyAadhaar portal and upload your formatted photo.\n\n### Q4: Is it safe to upload my photo to ToolWala?\nYes. ToolWala processes files locally in your browser memory, with no server uploads.\n\n### Q5: Can I upload a PNG photo?\nNo, the UIDAI portal requires uploads to be in JPEG format. ToolWala converts PNG files to JPEG automatically.\n\n### Q6: Can I use my phone to take the photo?\nYes, provided it is clear, well-lit, and cropped using our formatting presets.\n\n### Q7: Why do portals use a 50KB cap?\nIt reduces database storage requirements and speeds up portal load times.\n\n### Q8: Can I wear a head covering in the photo?\nYes, head coverings worn for religious reasons are permitted, but they must not cover or cast shadows on any part of your face.\n\n### Q9: What is the pixel dimensions for Aadhaar photos at 300 DPI?\nAt 300 DPI, a 3.5x4.5 cm photo corresponds to 354 x 472 pixels.\n\n### Q10: How do I remove shadows from my background?\nUse uniform front-facing lighting, and turn on the background removal toggle on ToolWala.\n\n---\n\n## 8. Related ToolWala Tools\n- [Aadhaar PDF Compressor](https://toolwala.co/tools/aadhaar-pdf-compressor): Compress e-Aadhaar PDFs under 300KB.\n- [Aadhaar Masking Tool](https://toolwala.co/tools/aadhaar-masking-tool): Mask the first 8 digits of your Aadhaar card for privacy.\n- [Signature Resizer](https://toolwala.co/tools/signature-resize): Crop and compress signatures to under 20KB.\n- [Government Form PDF Compressor](https://toolwala.co/tools/gov-form-pdf-compressor): Compress document PDFs under standard upload limits.\n\n---\n\n## 9. Internal Linking Suggestions\n- Link to this article from the `/landing/aadhaar-photo-resize/` page.\n- Link from this article to our [How to Compress e-Aadhaar PDF File Under 300KB Guide](/blog/compress-eaadhaar-pdf-under-300kb) and [Aadhaar Masking Tool Overview](/blog/why-local-ocr-is-the-future).\n\n---\n\n## 10. Conclusion\nFormatting passport photos to meet the UIDAI 50KB limit is simple with local editors. By using [ToolWala's Aadhaar Photo Resizer](https://toolwala.co/tools/aadhaar-photo-resizer), you can crop and compress your photo safely and quickly.\n\n---\n\n## 11. Call-to-Action\nReady to format your photo? Open [ToolWala's Aadhaar Photo Resizer](https://toolwala.co/tools/aadhaar-photo-resizer) and format it under 50KB instantly!\n\n---\n\n## SEO Meta Overview\n- **Focus Keyword**: Aadhaar Photo Resize Online\n- **Suggested Category**: Image Tools\n- **Suggested Tags**: Aadhaar Card, UIDAI Update, Photo Crop, Image Sizing, Free Online Tools",
+    "excerpt": "UIDAI requires Aadhaar card photos to be 3.5cm x 4.5cm with a white background and under 50KB. Learn how to resize, crop, and format your photo for Aadhaar enrollment and update applications using ToolWala's free online tool.",
+    "content": "## Why Aadhaar Photo Specifications Matter\n\nYour Aadhaar card is India's most critical identity document. Linked to your bank accounts, mobile numbers, PAN card, and government benefits, the photograph on your Aadhaar card serves as a primary biometric identifier. UIDAI uses facial recognition algorithms to verify your identity across government systems, making photo quality and compliance essential.\n\nWhen you apply for a new Aadhaar enrollment or update your existing photo through the myaadhaar.uidai.gov.in portal, the system validates your uploaded image against strict biometric specifications. Photos that fail these checks — wrong dimensions, poor lighting, incorrect background — are automatically rejected, delaying your application.\n\nThis guide covers everything you need to know about formatting Aadhaar photos correctly using [ToolWala's Aadhaar Photo Resizer](https://toolwala.co/tools/aadhaar-photo-resizer).\n\n---\n\n## Official UIDAI Photo Specifications\n\nUIDAI enforces these technical requirements for Aadhaar card photographs:\n\n| Parameter | Specification |\n| :--- | :--- |\n| **Dimensions** | 3.5cm x 4.5cm (35mm x 45mm) |\n| **Pixel Size (at 300 DPI)** | 413 x 531 pixels |\n| **File Size** | Under 50KB |\n| **Format** | JPEG only |\n| **Background** | Plain white or off-white |\n| **Face Coverage** | 70% to 80% of frame |\n| **Expression** | Neutral, mouth closed |\n| **Eyes** | Both eyes open, clearly visible |\n| **Head Position** | Straight, no tilt |\n| **Glasses** | Preferably removed |\n\nThese specifications align with international ICAO biometric standards and are designed for automated facial recognition processing.\n\n---\n\n## Step-by-Step Guide to Resize Aadhaar Photo\n\n### Step 1: Take a Proper Source Photo\n\nThe quality of your Aadhaar photo starts with the source image:\n\n1. **Use Good Lighting**: Stand facing a window with soft natural light. Avoid overhead lights, camera flash, or backlighting. The goal is even illumination across your entire face.\n2. **Plain White Background**: Stand against a clean white or light grey wall. Keep 1–2 feet of distance to avoid casting a shadow on the wall behind you.\n3. **Proper Distance**: Have someone photograph you from at least 1 metre away. Close-up selfies distort facial proportions and fail biometric checks.\n4. **Neutral Expression**: Keep your face relaxed with a neutral expression. Both eyes must be wide open. Do not smile, frown, or tilt your head.\n5. **Clothing**: Wear a dark-coloured shirt or top to contrast against the white background. Avoid white clothing which blends into the backdrop.\n\n### Step 2: Upload and Resize with ToolWala\n\n1. Open [ToolWala's Aadhaar Photo Resizer](https://toolwala.co/tools/aadhaar-photo-resizer).\n2. Upload your photograph (JPEG, PNG, or any image format).\n3. The tool automatically applies the **UIDAI preset** (3.5cm x 4.5cm).\n4. Adjust the **face alignment guides** to ensure your face covers 70–80% of the frame.\n5. If needed, toggle **Remove Background** to replace a busy background with clean white.\n6. Set the **target file size** slider to **50KB** or lower.\n7. Click **Download** to save your compliant JPEG photo.\n\n### Step 3: Verify Before Uploading\n\nBefore submitting to the UIDAI portal:\n- Open the file and verify your face is clearly visible and properly centred\n- Check that the background is uniformly white\n- Confirm the file size is under 50KB (check in file properties)\n- Ensure the file format is JPEG\n\n---\n\n## When Do You Need to Update Your Aadhaar Photo?\n\nUIDAI recommends updating your Aadhaar photo in these situations:\n\n- **Children**: UIDAI requires mandatory biometric updates at ages 5 and 15, as facial features change significantly during childhood.\n- **Significant Appearance Change**: If you have undergone major changes (weight loss/gain, aging, medical procedures), updating your photo ensures continued identity verification.\n- **Old or Damaged Photo**: If your current Aadhaar card has a low-quality or damaged photo, updating it improves verification accuracy.\n- **Photo Mismatch Issues**: If your current photo causes issues during eKYC or Aadhaar-based authentication at banks or government offices.\n\nThe update process costs ₹50 through the myaadhaar portal and can be completed online for address, name, photo, and other biometric updates.\n\n---\n\n## Common Aadhaar Photo Rejection Reasons\n\nUnderstanding why photos get rejected helps you avoid repeating mistakes:\n\n### Lighting Issues\n- **Shadows on face**: Hard shadows under your nose, eyes, or chin confuse facial recognition algorithms. Use diffused front-facing light.\n- **Overexposure**: Too much brightness washes out facial details. Move away from direct light sources.\n- **Underexposure**: Dark, poorly lit photos lack the contrast needed for biometric mapping.\n\n### Framing Issues\n- **Face too small**: If your face occupies less than 70% of the frame, the biometric scanner cannot extract sufficient facial data points.\n- **Face too large**: If your face is cropped (chin or forehead cut off), the photo fails completeness checks.\n- **Head tilt**: Even a 5-degree tilt can misalign facial landmarks used for recognition.\n\n### Background Issues\n- **Coloured backgrounds**: Only white or very light grey is accepted.\n- **Patterned backgrounds**: Textures, curtains, or furniture visible behind you will trigger rejection.\n- **Shadows on background**: Your body shadow on the wall behind you can cause the background check to fail.\n\n### Format Issues\n- **File too large**: Photos over 50KB are rejected by the upload system.\n- **Wrong format**: PNG, BMP, or TIFF files are not accepted. Only JPEG is valid.\n- **Low resolution**: Photos below the minimum pixel dimensions may appear blurry and fail quality checks.\n\n---\n\n## Privacy Considerations\n\nYour Aadhaar photo is directly linked to your 12-digit identity number, which connects to your bank accounts, tax records, and government benefit disbursals. Uploading your Aadhaar photo to cloud-based editing tools creates serious privacy risks:\n\n- **Identity theft**: Your photo combined with other Aadhaar details could be used for fraudulent eKYC.\n- **Data leaks**: Cloud services may store copies of your uploaded images.\n- **Unauthorised biometric enrollment**: Your facial data could potentially be misused for fake Aadhaar enrollments.\n\nToolWala addresses these concerns with a strict privacy-first architecture:\n- All processing runs locally in your browser's JavaScript engine\n- Zero data is transmitted over the network\n- You can work fully offline after the page loads\n- No cookies, no tracking, no data retention\n\n---\n\n## Related ToolWala Resources\n\nComplete your Aadhaar document workflow with these related tools:\n\n- [Aadhaar Masking Tool](/tools/aadhaar-masking-tool/) — Mask the first 8 digits of your Aadhaar for safe sharing\n- [Aadhaar PDF Compressor](/tools/aadhaar-pdf-compressor/) — Compress e-Aadhaar PDFs for portal uploads\n- [Aadhaar Photo Resize Landing Page](/landing/aadhaar-photo-resize/) — Quick-access formatting tool\n- [Aadhaar Utilities Hub](/hubs/aadhaar-utilities/) — Complete Aadhaar document toolkit\n- [Background Remover](/tools/bg-remover/) — Replace photo backgrounds with white\n\nFor related guides, read [How to Crop Aadhaar Card Photo to UIDAI Specs](/blog/crop-aadhaar-card-photo-uidai-specs) and [How to Mask Aadhaar Card Online](/blog/how-to-mask-aadhaar-card-online).\n\n---\n\n## Conclusion\n\nFormatting an Aadhaar-compliant photo is straightforward when you follow UIDAI's specifications: 3.5cm x 4.5cm dimensions, white background, neutral expression, and under 50KB in JPEG format. ToolWala's Aadhaar Photo Resizer handles all technical formatting while keeping your biometric data completely private.\n\nOpen the [Aadhaar Photo Resizer](https://toolwala.co/tools/aadhaar-photo-resizer) and format your photo in under a minute.",
     "thumbnail": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=800&q=80",
     "category": "Image Tools",
     "tags": [
       "Aadhaar Card",
-      "UIDAI Update",
-      "Photo Crop",
-      "Image Sizing",
-      "Free Online Tools"
+      "UIDAI",
+      "Photo Resize",
+      "Biometric Photo",
+      "Government ID",
+      "Image Crop",
+      "Free Tools"
     ],
     "featured": false,
     "status": "published",
     "publishedAt": "2026-06-21T04:39:56.648Z",
     "createdAt": "2026-06-21T04:39:56.648Z",
-    "updatedAt": "2026-06-21T04:39:56.648Z",
+    "updatedAt": "2026-06-21T05:42:49.192Z",
     "author": {
       "name": "ToolWala Editorial",
       "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
       "role": "Tech Writer"
     },
     "seoMetadata": {
-      "title": "Aadhaar Photo Resize Online - UIDAI Photo Sizer",
-      "description": "Resize and crop photos to official UIDAI specifications (3.5cm x 4.5cm) under 50KB online for free. Clean local processing with zero server uploads."
+      "title": "Aadhaar Photo Resize Online Free – UIDAI Photo Sizer & Cropper",
+      "description": "Resize and crop photos to official UIDAI Aadhaar specifications (3.5cm x 4.5cm) under 50KB. 100% client-side processing for complete privacy.",
+      "keywords": "aadhaar photo resize, uidai photo size, aadhaar card photo dimensions, resize photo for aadhaar update, aadhaar photo cropper"
     },
     "readingTime": "6 min read",
     "faqs": [
       {
-        "id": "aadhaar-photo-resize-online-faq-1",
-        "question": "What is the official photo size for Aadhaar card online?",
-        "answer": "The official dimension is 3.5cm x 4.5cm (35mm x 45mm) with a solid white or light-colored background.",
+        "id": "aadhaar-photo-faq-1",
+        "question": "What is the official Aadhaar photo size?",
+        "answer": "UIDAI requires photos to be 3.5cm x 4.5cm (35mm x 45mm), which corresponds to approximately 413 x 531 pixels at 300 DPI. The file must be in JPEG format under 50KB.",
         "order": 1
       },
       {
-        "id": "aadhaar-photo-resize-online-faq-2",
-        "question": "What is the file size limit for Aadhaar photos?",
-        "answer": "The file size must be between 20 KB and 50 KB.",
+        "id": "aadhaar-photo-faq-2",
+        "question": "Can I update my Aadhaar photo online?",
+        "answer": "Yes. UIDAI allows Aadhaar photo updates through the official myaadhaar.uidai.gov.in portal. You need to upload a compliant photo that meets their biometric specifications.",
         "order": 2
       },
       {
-        "id": "aadhaar-photo-resize-online-faq-3",
-        "question": "Can I update my Aadhaar photo online?",
-        "answer": "Yes, you can initiate a detail update request on the UIDAI MyAadhaar portal and upload your formatted photo.",
+        "id": "aadhaar-photo-faq-3",
+        "question": "Is my Aadhaar photo safe with this tool?",
+        "answer": "Absolutely. ToolWala processes everything in your browser memory. Your biometric photo is never uploaded to any server. You can even disconnect your internet after the page loads.",
         "order": 3
       },
       {
-        "id": "aadhaar-photo-resize-online-faq-4",
-        "question": "Is it safe to upload my photo to ToolWala?",
-        "answer": "Yes. ToolWala processes files locally in your browser memory, with no server uploads.",
+        "id": "aadhaar-photo-faq-4",
+        "question": "What background colour is required for Aadhaar photos?",
+        "answer": "UIDAI requires a plain white or off-white background. ToolWala includes a background removal feature to replace busy backgrounds with a clean white backdrop.",
         "order": 4
       },
       {
-        "id": "aadhaar-photo-resize-online-faq-5",
-        "question": "Can I upload a PNG photo?",
-        "answer": "No, the UIDAI portal requires uploads to be in JPEG format. ToolWala converts PNG files to JPEG automatically.",
+        "id": "aadhaar-photo-faq-5",
+        "question": "How much does Aadhaar photo update cost?",
+        "answer": "Online Aadhaar photo update through the UIDAI portal costs ₹50 including GST. Updates at Aadhaar Seva Kendras cost ₹50 per field update.",
         "order": 5
       },
       {
-        "id": "aadhaar-photo-resize-online-faq-6",
-        "question": "Can I use my phone to take the photo?",
-        "answer": "Yes, provided it is clear, well-lit, and cropped using our formatting presets.",
+        "id": "aadhaar-photo-faq-6",
+        "question": "Can I use a selfie for my Aadhaar card?",
+        "answer": "Selfies are generally not recommended because they distort facial proportions due to the close camera distance. Use a photo taken from at least 1 metre away for accurate biometric measurements.",
         "order": 6
       },
       {
-        "id": "aadhaar-photo-resize-online-faq-7",
-        "question": "Why do portals use a 50KB cap?",
-        "answer": "It reduces database storage requirements and speeds up portal load times.",
+        "id": "aadhaar-photo-faq-7",
+        "question": "What is the face coverage requirement?",
+        "answer": "Your face must cover 70% to 80% of the photo frame. This means from your chin to the top of your head should occupy most of the vertical space in the photo.",
         "order": 7
       },
       {
-        "id": "aadhaar-photo-resize-online-faq-8",
-        "question": "Can I wear a head covering in the photo?",
-        "answer": "Yes, head coverings worn for religious reasons are permitted, but they must not cover or cast shadows on any part of your face.",
+        "id": "aadhaar-photo-faq-8",
+        "question": "Can I wear glasses in my Aadhaar photo?",
+        "answer": "It is recommended to remove glasses to avoid glare and reflections that can obscure your eyes. If you must wear prescription glasses, ensure there is no lens glare.",
         "order": 8
       },
       {
-        "id": "aadhaar-photo-resize-online-faq-9",
-        "question": "What is the pixel dimensions for Aadhaar photos at 300 DPI?",
-        "answer": "At 300 DPI, a 3.5x4.5 cm photo corresponds to 354 x 472 pixels.",
+        "id": "aadhaar-photo-faq-9",
+        "question": "What format does UIDAI accept?",
+        "answer": "UIDAI accepts JPEG format only. Our tool automatically converts and saves your photo as an optimized JPEG file.",
         "order": 9
       },
       {
-        "id": "aadhaar-photo-resize-online-faq-10",
-        "question": "How do I remove shadows from my background?",
-        "answer": "Use uniform front-facing lighting, and turn on the background removal toggle on ToolWala.",
+        "id": "aadhaar-photo-faq-10",
+        "question": "Can I also process my e-Aadhaar PDF with ToolWala?",
+        "answer": "Yes. Use our Aadhaar PDF Compressor to compress downloaded e-Aadhaar PDFs to meet portal upload limits, and our Aadhaar Masking Tool to hide the first 8 digits for safe sharing.",
         "order": 10
       }
     ],
     "relatedToolSlugs": [
       "exam-photo-resizer",
-      "image-compressor"
+      "image-compressor",
+      "aadhaar-masking-tool",
+      "aadhaar-pdf-compressor"
     ]
   }
 ]

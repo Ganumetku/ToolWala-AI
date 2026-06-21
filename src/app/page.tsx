@@ -172,7 +172,7 @@ export default function Home() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="block w-full border-0 bg-transparent py-4 pl-4 pr-4 text-white placeholder:text-gray-500 focus:ring-0 text-sm sm:text-base font-bold outline-none"
-                  placeholder={t('home.search_placeholder', 'Search 25+ offline utilities...')}
+                  placeholder={t('home.search_placeholder', 'Search 25+ offline utilities...').replace('25+', `${mergedTools.length}+`).replace('25', mergedTools.length.toString())}
                 />
                 <button
                   type="submit"
@@ -243,7 +243,7 @@ export default function Home() {
               href={localizeHref('/tools')}
               className="relative group inline-flex items-center gap-3.5 px-9 py-4.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl text-xs font-black uppercase tracking-widest text-white shadow-[0_0_30px_rgba(37,99,235,0.3)] hover:shadow-[0_0_40px_rgba(37,99,235,0.5)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
             >
-              <span>Explore All 25+ Tools</span>
+              <span>{t('home.explore_all_tools', 'Explore All 25+ Tools').replace('25+', `${mergedTools.length}+`).replace('25', mergedTools.length.toString())}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </motion.div>
@@ -701,7 +701,7 @@ export default function Home() {
               </div>
               <h4 className="text-sm font-black text-white uppercase tracking-wide">Choose Utility</h4>
               <p className="text-xs text-gray-400 leading-relaxed font-semibold max-w-xs">
-                Select from 25+ specialized browser-native PDF, image, or AI tools.
+                {t('home.select_from_tools_desc', 'Select from 25+ specialized browser-native PDF, image, or AI tools.').replace('25+', `${mergedTools.length}+`).replace('25', mergedTools.length.toString())}
               </p>
             </div>
 

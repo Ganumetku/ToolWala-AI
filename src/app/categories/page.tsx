@@ -25,17 +25,19 @@ export async function generateMetadata(): Promise<Metadata> {
     locale = headerList.get('x-locale') || 'en';
   } catch (e) {}
 
+  const liveToolsCount = toolsData.filter(t => t.isVisible && t.status === 'published').length;
+
   let title = "Browse Free Online Tools by Category | ToolWala AI";
-  let description = "Browse categorized directories of 25+ browser-local design, PDF, AI, document, resume, and developer tools. Fast, secure, and GDPR compliant.";
+  let description = `Browse categorized directories of ${liveToolsCount}+ browser-local design, PDF, AI, document, resume, and developer tools. Fast, secure, and GDPR compliant.`;
   let ogDescription = "Secure browser-local AI utilities. Browse categorized directories for fast document processing, image optimization, and content creations.";
 
   if (locale === 'hi') {
-    title = "सभी श्रेणियां ब्राउज़ करें - 25+ स्थानीय एआई टूल्स | टूलवाला AI";
-    description = "25+ ब्राउज़र-स्थानीय डिज़ाइन, पीडीएफ, एआई, दस्तावेज़, रिज्यूमे और डेवलपर टूल की वर्गीकृत निर्देशिकाएं ब्राउज़ करें। तेज़, सुरक्षित और जीडीपीआर अनुपालन।";
+    title = `सभी श्रेणियां ब्राउज़ करें - ${liveToolsCount}+ स्थानीय एआई टूल्स | टूलवाला AI`;
+    description = `${liveToolsCount}+ ब्राउज़र-स्थानीय डिज़ाइन, पीडीएफ, एआई, दस्तावेज़, रिज्यूमे और डेवलपर टूल की वर्गीकृत निर्देशिकाएं ब्राउज़ करें। तेज़, सुरक्षित और जीडीपीआर अनुपालन।`;
     ogDescription = "सुरक्षित ब्राउज़र-स्थानीय एआई उपयोगिताएँ। तेज़ दस्तावेज़ प्रसंस्करण, छवि अनुकूलन और सामग्री निर्माण के लिए वर्गीकृत निर्देशिकाएं ब्राउज़ करें।";
   } else if (locale === 'es') {
-    title = "Explorar todas las categorías - Más de 25 utilidades locales de IA | ToolWala AI";
-    description = "Explore directorios categorizados de más de 25 herramientas de diseño, PDF, IA, documentos, currículos y desarrollo locales en el navegador. Rápido, seguro y cumple con GDPR.";
+    title = `Explorar todas las categorías - Más de ${liveToolsCount} utilidades locales de IA | ToolWala AI`;
+    description = `Explore directorios categorizados de más de ${liveToolsCount} herramientas de diseño, PDF, IA, documentos, currículos y desarrollo locales en el navegador. Rápido, seguro y cumple con GDPR.`;
     ogDescription = "Utilidades de IA seguras locales en el navegador. Explore directorios categorizados para un procesamiento rápido de documentos, optimización de imagens y creación de contenido.";
   }
 
@@ -86,7 +88,7 @@ export default async function CategoriesIndexPage() {
     '@id': `${canonicalUrl}#collection`,
     'url': canonicalUrl,
     'name': t('categories.seo_title', 'Browse Free Online Tools by Category | ToolWala AI'),
-    'description': t('categories.seo_desc', 'Browse categorized directories of 25+ browser-local design, PDF, AI, document, resume, and developer tools. Fast, secure, and GDPR compliant.'),
+    'description': t('categories.seo_desc', 'Browse categorized directories of 25+ browser-local design, PDF, AI, document, resume, and developer tools. Fast, secure, and GDPR compliant.').replace('25+', `${initialMergedTools.length}+`).replace('25', initialMergedTools.length.toString()),
     'isPartOf': {
       '@type': 'WebSite',
       '@id': 'https://toolwala.co/#website',
@@ -132,7 +134,7 @@ export default async function CategoriesIndexPage() {
     '@graph': [
       buildWebPageSchema(
         t('categories.seo_title', 'Browse Free Online Tools by Category | ToolWala AI'),
-        t('categories.seo_desc', 'Browse categorized directories of 25+ browser-local design, PDF, AI, document, resume, and developer tools. Fast, secure, and GDPR compliant.'),
+        t('categories.seo_desc', 'Browse categorized directories of 25+ browser-local design, PDF, AI, document, resume, and developer tools. Fast, secure, and GDPR compliant.').replace('25+', `${initialMergedTools.length}+`).replace('25', initialMergedTools.length.toString()),
         canonicalUrl,
         locale
       ),
@@ -188,7 +190,7 @@ export default async function CategoriesIndexPage() {
               </span>
             </h1>
             <p className="text-base sm:text-lg text-gray-400 leading-relaxed font-medium">
-              Explore our comprehensive, categorized directory of 25+ browser-local AI utilities. Secure, private, and sub-second fast.
+              {t('categories.subtitle', 'Explore our comprehensive, categorized directory of 25+ browser-local AI utilities. Secure, private, and sub-second fast.').replace('25+', `${initialMergedTools.length}+`).replace('25', initialMergedTools.length.toString())}
             </p>
           </div>
 

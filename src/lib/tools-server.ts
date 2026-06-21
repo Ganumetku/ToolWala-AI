@@ -46,7 +46,7 @@ export async function getAdminTools(): Promise<Tool[]> {
 }
 
 export async function getToolBySlug(slug: string): Promise<Tool | null> {
-  if (slug === 'pan-photo-tool') return null;
+  if (slug === 'pan-photo-tool' || slug === 'signature-crop-tool') return null;
   try {
     const { data } = await supabaseAdmin
       .from('tools')
@@ -97,7 +97,7 @@ export async function seedStaticTools(): Promise<{ seeded: number; errors: strin
 }
 
 export async function findToolBySlugServer(slug: string, includeFull = false) {
-  if (slug === 'pan-photo-tool') return null;
+  if (slug === 'pan-photo-tool' || slug === 'signature-crop-tool') return null;
   let tool: any = null;
   if (prisma) {
     tool = await prisma.tool.findUnique({

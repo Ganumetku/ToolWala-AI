@@ -73,7 +73,7 @@ export default function CategoriesIndexClient({
               </span>
             </h1>
             <p className="text-base sm:text-lg text-gray-400 leading-relaxed font-medium">
-              {t('categories.subtitle', 'Explore our comprehensive, categorized directory of 25+ browser-local AI utilities. Secure, private, and sub-second fast.')}
+              {t('categories.subtitle', 'Explore our comprehensive, categorized directory of 25+ browser-local AI utilities. Secure, private, and sub-second fast.').replace('25+', `${mergedTools.length}+`).replace('25', mergedTools.length.toString())}
             </p>
           </div>
 

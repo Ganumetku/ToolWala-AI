@@ -67,6 +67,14 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(redirectUrl, { status: 301 });
   }
 
+  // 301 redirect legacy tool /tools/signature-crop-tool/ to /tools/signature-resize/
+  if (normalizedRewritten === '/tools/signature-crop-tool/') {
+    const targetPath = isLocalePrefix ? `/${locale}/tools/signature-resize/` : '/tools/signature-resize/';
+    const redirectUrl = new URL(targetPath + request.nextUrl.search, request.url);
+    console.log(`[Proxy] Redirecting 301 duplicate/legacy tool ${pathname} to ${redirectUrl.toString()}`);
+    return NextResponse.redirect(redirectUrl, { status: 301 });
+  }
+
   // 2. Handle saved language redirect on root "/"
   if (pathname === '/' && !isLocalePrefix) {
     const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;

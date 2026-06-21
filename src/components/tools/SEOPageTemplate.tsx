@@ -31,6 +31,23 @@ export default function SEOPageTemplate({ slug }: SEOPageTemplateProps) {
   ];
 
   // Build JSON-LD schemas
+  const localeLang = locale === 'hi' ? 'hi-IN' : locale === 'en' ? 'en-US' : `${locale}-${locale.toUpperCase()}`;
+  
+  const webpageJsonLd = {
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    'url': pageUrl,
+    'name': pageData.title,
+    'description': pageData.metaDescription,
+    'inLanguage': localeLang,
+    'isPartOf': {
+      '@type': 'WebSite',
+      '@id': 'https://toolwala.co/#website',
+      'url': 'https://toolwala.co',
+      'name': 'ToolWala AI'
+    }
+  };
+
   const breadcrumbJsonLd = {
     '@type': 'BreadcrumbList',
     'itemListElement': breadcrumbItems.map((item, index) => ({
@@ -56,6 +73,7 @@ export default function SEOPageTemplate({ slug }: SEOPageTemplateProps) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
+      webpageJsonLd,
       breadcrumbJsonLd,
       ...(faqJsonLd ? [faqJsonLd] : [])
     ]

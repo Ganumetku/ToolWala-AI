@@ -1774,7 +1774,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "PDF Compressor", href: "/tools/pdf-tools" },
       { name: "Image Compressor", href: "/tools/image-compressor" },
       { name: "PDF to JPG", href: "/tools/pdf-to-jpg" },
-      { name: "Signature Crop Tool", href: "/tools/signature-crop-tool" },
+      { name: "Signature Resize", href: "/tools/signature-resize" },
       { name: "OCR Image to Text", href: "/tools/ocr-to-text" }
     ]
   },

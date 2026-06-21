@@ -439,7 +439,7 @@ export default function PrivacyHubPage() {
             Ready to Experience True Data Sovereignty?
           </h2>
           <p className="text-gray-400 font-medium leading-relaxed max-w-2xl mx-auto mb-10 text-sm sm:text-base">
-            Start using 25+ browser-native, secure, and fast utilities. No account registrations, no email requirements.
+            {t('privacy_hub.cta_desc', 'Start using 50+ browser-native, secure, and fast utilities. No account registrations, no email requirements.')}
           </p>
           <Link
             href={localizeHref('/tools')}

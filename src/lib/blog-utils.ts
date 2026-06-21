@@ -1,5 +1,6 @@
 import type { Tool } from '@/data/tools';
 import type { BlogFaq, BlogPost } from '@/types/blog';
+import { marked } from 'marked';
 
 /** Estimate reading time from HTML or plain text content */
 export function computeReadingTime(content: string): string {
@@ -21,46 +22,51 @@ export function slugify(text: string): string {
     .trim();
 }
 
+// Configure marked for blog content
+const renderer = new marked.Renderer();
 
-/** Convert markdown-style ### headings to HTML h2/h3 with anchor ids */
+// Add slugified IDs to headings for TOC anchoring
+renderer.heading = ({ text, depth }: { text: string; depth: number }) => {
+  const id = slugify(text.replace(/<[^>]+>/g, ''));
+  return `<h${depth} id="${id}">${text}</h${depth}>`;
+};
+
+// Open external links in new tab, keep internal links as-is
+renderer.link = ({ href, title, text }: { href: string; title?: string | null; text: string }) => {
+  const isExternal = href && (href.startsWith('http://') || href.startsWith('https://'));
+  const titleAttr = title ? ` title="${title}"` : '';
+  if (isExternal) {
+    return `<a href="${href}"${titleAttr} target="_blank" rel="noopener noreferrer">${text}</a>`;
+  }
+  return `<a href="${href}"${titleAttr}>${text}</a>`;
+};
+
+marked.setOptions({
+  renderer,
+  breaks: false,
+  gfm: true,
+});
+
+/** Convert markdown content to HTML with shortcode support */
 export function normalizeBlogContent(raw: string): string {
-  let html = raw;
-
-  // Legacy markdown ### headings → h3
-  html = html.replace(/^### (.+)$/gm, (_, title: string) => {
-    const id = slugify(title);
-    return `<h3 id="${id}">${title}</h3>`;
-  });
-
-  // Legacy ## headings → h2
-  html = html.replace(/^## (.+)$/gm, (_, title: string) => {
-    const id = slugify(title);
-    return `<h2 id="${id}">${title}</h2>`;
-  });
+  let content = raw;
 
   // Shortcode: [cta tool="slug" title="..." description="..."]
-  html = html.replace(
+  content = content.replace(
     /\[cta\s+tool="([^"]+)"(?:\s+title="([^"]*)")?(?:\s+description="([^"]*)")?\]/gi,
     (_, slug, title, description) =>
       `<div data-blog-cta data-tool-slug="${slug}" data-title="${title || ''}" data-description="${description || ''}"></div>`
   );
 
   // Shortcode: [tool slug="pdf-ocr" label="Try PDF OCR"]
-  html = html.replace(
+  content = content.replace(
     /\[tool\s+slug="([^"]+)"(?:\s+label="([^"]*)")?\]/gi,
     (_, slug, label) =>
       `<div data-try-tool data-tool-slug="${slug}" data-label="${label || 'Try Tool'}"></div>`
   );
 
-  // Plain newlines → paragraphs when content isn't already HTML-heavy
-  if (!/<(p|h[1-6]|ul|ol|div|blockquote)/i.test(html)) {
-    html = html
-      .split(/\n\n+/)
-      .map((block) => block.trim())
-      .filter(Boolean)
-      .map((block) => `<p>${block.replace(/\n/g, '<br/>')}</p>`)
-      .join('\n');
-  }
+  // Convert markdown to HTML using marked
+  const html = marked.parse(content, { async: false }) as string;
 
   return html;
 }

@@ -93,6 +93,38 @@ export async function getAllToolTranslations(locale: string): Promise<Record<str
             meta_description: record.seoDescription
           };
         }
+
+        // Auto-translate any missing tools in this locale
+        if (locale !== 'en') {
+          const { toolsData } = require('@/data/tools');
+          const missingSlugs = toolsData
+            .filter((t: any) => t.isVisible && t.status === 'published')
+            .map((t: any) => t.slug)
+            .filter((slug: string) => {
+              const existing = result[slug];
+              if (!existing) return true;
+              if (locale === 'hi' && !/[\u0900-\u097F]/.test(existing.title || '')) return true;
+              return false;
+            });
+          if (missingSlugs.length > 0) {
+            const translatedList = await Promise.all(
+              missingSlugs.map((slug: string) => getToolTranslationWithFallback(slug, locale))
+            );
+            for (const trans of translatedList) {
+              if (trans) {
+                result[trans.toolSlug] = {
+                  title: trans.title,
+                  description: trans.description,
+                  intro: trans.description,
+                  faqs: trans.faq || [],
+                  meta_title: trans.seoTitle,
+                  meta_description: trans.seoDescription
+                };
+              }
+            }
+          }
+        }
+
         return result;
       } catch (err) {
         console.error(`Error querying all tool translations from Prisma db:`, err);
@@ -112,6 +144,38 @@ export async function getAllToolTranslations(locale: string): Promise<Record<str
         meta_description: record.seoDescription
       };
     }
+
+    // Auto-translate any missing tools in this locale (fallback)
+    if (locale !== 'en') {
+      const { toolsData } = require('@/data/tools');
+      const missingSlugs = toolsData
+        .filter((t: any) => t.isVisible && t.status === 'published')
+        .map((t: any) => t.slug)
+        .filter((slug: string) => {
+          const existing = result[slug];
+          if (!existing) return true;
+          if (locale === 'hi' && !/[\u0900-\u097F]/.test(existing.title || '')) return true;
+          return false;
+        });
+      if (missingSlugs.length > 0) {
+        const translatedList = await Promise.all(
+          missingSlugs.map((slug: string) => getToolTranslationWithFallback(slug, locale))
+        );
+        for (const trans of translatedList) {
+          if (trans) {
+            result[trans.toolSlug] = {
+              title: trans.title,
+              description: trans.description,
+              intro: trans.description,
+              faqs: trans.faq || [],
+              meta_title: trans.seoTitle,
+              meta_description: trans.seoDescription
+            };
+          }
+        }
+      }
+    }
+
     return result;
   };
 
@@ -151,55 +215,28 @@ export async function getToolTranslationWithFallback(slug: string, locale: strin
   // Try requested locale
   let data = await getToolTranslation(slug, locale);
 
-  // If locale is Hindi, ensure we don't return English strings
-  if (locale === 'hi') {
-    const isUntranslated = !data || (!hasDevanagari(data.title) && !hasDevanagari(data.description));
-    if (isUntranslated) {
-      // Load English version as base for translation
-      const enData = await getToolTranslationWithFallback(slug, 'en');
-      
-      const hiTitle = await translateText(enData.title, 'hi');
-      const hiDesc = await translateText(enData.description, 'hi');
-      const hiFaqs = await translateFaqs(enData.faq, 'hi');
-      const hiSeoTitle = await translateText(enData.seoTitle || '', 'hi');
-      const hiSeoDesc = await translateText(enData.seoDescription || '', 'hi');
-
-      const translatedData: ToolTranslationData = {
-        toolSlug: slug,
-        locale: 'hi',
-        title: hiTitle,
-        description: hiDesc,
-        faq: hiFaqs,
-        seoTitle: hiSeoTitle,
-        seoDescription: hiSeoDesc
-      };
-
-      // Save translation so it's cached for future requests
-      await saveToolTranslation(translatedData);
-      return translatedData;
-    }
-  }
-
-  // If locale is Spanish, ensure we don't return English strings
-  if (locale === 'es') {
+  // If locale is not English, ensure we don't return English strings or empty translations
+  if (locale !== 'en') {
     const enData = await getToolTranslation(slug, 'en');
     const isUntranslated = !data || (enData && data.title === enData.title && data.description === enData.description);
-    if (isUntranslated) {
+    const isHindiUntranslated = locale === 'hi' && (!data || (!hasDevanagari(data.title) && !hasDevanagari(data.description)));
+
+    if (isUntranslated || isHindiUntranslated) {
       const baseEn = enData || await getToolTranslationWithFallback(slug, 'en');
-      const esTitle = await translateText(baseEn.title, 'es');
-      const esDesc = await translateText(baseEn.description, 'es');
-      const esFaqs = await translateFaqs(baseEn.faq, 'es');
-      const esSeoTitle = await translateText(baseEn.seoTitle || '', 'es');
-      const esSeoDesc = await translateText(baseEn.seoDescription || '', 'es');
+      const translatedTitle = await translateText(baseEn.title, locale);
+      const translatedDesc = await translateText(baseEn.description, locale);
+      const translatedFaqs = await translateFaqs(baseEn.faq, locale);
+      const translatedSeoTitle = await translateText(baseEn.seoTitle || '', locale);
+      const translatedSeoDesc = await translateText(baseEn.seoDescription || '', locale);
 
       const translatedData: ToolTranslationData = {
         toolSlug: slug,
-        locale: 'es',
-        title: esTitle,
-        description: esDesc,
-        faq: esFaqs,
-        seoTitle: esSeoTitle,
-        seoDescription: esSeoDesc
+        locale: locale,
+        title: translatedTitle,
+        description: translatedDesc,
+        faq: translatedFaqs,
+        seoTitle: translatedSeoTitle,
+        seoDescription: translatedSeoDesc
       };
 
       await saveToolTranslation(translatedData);

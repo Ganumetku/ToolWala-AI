@@ -4,7 +4,8 @@ import ToolArticle from "@/components/ToolArticle";
 import { toolArticles } from "@/data/toolArticles";
 import { MeshGradient } from "@/components/BackgroundEffects";
 import ToolVisibilityGuard from "@/components/ToolVisibilityGuard";
-import ImageCropperEngine, { CropperPreset } from "@/components/ImageCropperEngine";
+import { CropperPreset } from "@/components/ImageCropperEngine";
+import ImageCropperClientWrapper from "@/components/ImageCropperClientWrapper";
 import {
   buildFAQSchema,
   buildWebPageSchema,
@@ -132,20 +133,20 @@ export default function ExamPhotoResizerPage() {
 
           {/* Main Cropper Console */}
           <div className="max-w-6xl mx-auto">
-            <ImageCropperEngine
+            <ImageCropperClientWrapper
               toolSlug="exam-photo-resizer"
               title="Exam Photo Resizer"
               description="Resize and format passport photos for SSC, UPSC, and banking online application portals."
               presets={EXAM_PRESETS}
-              seoArticle={
-                toolArticles["exam-photo-resizer"] && (
-                  <div className="mt-24 border-t border-white/5 pt-20">
-                    <ToolArticle {...toolArticles["exam-photo-resizer"]} />
-                  </div>
-                )
-              }
             />
           </div>
+
+          {/* SEO Article */}
+          {toolArticles["exam-photo-resizer"] && (
+            <div className="mt-24 border-t border-white/5 pt-20 max-w-6xl mx-auto">
+              <ToolArticle {...toolArticles["exam-photo-resizer"]} />
+            </div>
+          )}
         </div>
       </div>
     </ToolVisibilityGuard>

@@ -4,7 +4,8 @@ import ToolArticle from "@/components/ToolArticle";
 import { toolArticles } from "@/data/toolArticles";
 import { MeshGradient } from "@/components/BackgroundEffects";
 import ToolVisibilityGuard from "@/components/ToolVisibilityGuard";
-import ImageCropperEngine, { CropperPreset } from "@/components/ImageCropperEngine";
+import { CropperPreset } from "@/components/ImageCropperEngine";
+import ImageCropperClientWrapper from "@/components/ImageCropperClientWrapper";
 import {
   buildFAQSchema,
   buildWebPageSchema,
@@ -119,20 +120,20 @@ export default function PANPhotoToolPage() {
 
           {/* Main Cropper Console */}
           <div className="max-w-6xl mx-auto">
-            <ImageCropperEngine
+            <ImageCropperClientWrapper
               toolSlug="pan-photo-tool"
               title="PAN Photo Tool"
               description="Format and resize passport photos to official NSDL/UTIITSL PAN card specifications."
               presets={PAN_PRESETS}
-              seoArticle={
-                toolArticles["pan-photo-tool"] && (
-                  <div className="mt-24 border-t border-white/5 pt-20">
-                    <ToolArticle {...toolArticles["pan-photo-tool"]} />
-                  </div>
-                )
-              }
             />
           </div>
+
+          {/* SEO Article */}
+          {toolArticles["pan-photo-tool"] && (
+            <div className="mt-24 border-t border-white/5 pt-20 max-w-6xl mx-auto">
+              <ToolArticle {...toolArticles["pan-photo-tool"]} />
+            </div>
+          )}
         </div>
       </div>
     </ToolVisibilityGuard>

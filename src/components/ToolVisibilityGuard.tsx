@@ -15,14 +15,12 @@ interface ToolVisibilityGuardProps {
 
 export default function ToolVisibilityGuard({ slug, children }: ToolVisibilityGuardProps) {
   const router = useRouter();
-  const [checking, setChecking] = useState(true);
   const [visible, setVisible] = useState(true);
   const [toolInfo, setToolInfo] = useState<Tool | null>(null);
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
       setVisible(true);
-      setChecking(false);
       return;
     }
 
@@ -30,7 +28,6 @@ export default function ToolVisibilityGuard({ slug, children }: ToolVisibilityGu
       try {
         const res = await fetch(`/api/tools/public?slug=${encodeURIComponent(slug)}`);
         if (!res.ok) {
-          setChecking(false);
           return;
         }
         const data = await res.json();
@@ -40,26 +37,10 @@ export default function ToolVisibilityGuard({ slug, children }: ToolVisibilityGu
         }
       } catch (err) {
         console.warn('Failed to verify tool visibility:', err);
-      } finally {
-        setChecking(false);
       }
     }
     checkVisibility();
   }, [slug]);
-
-  if (checking) {
-    return (
-      <div className="min-h-screen bg-[#030712] flex items-center justify-center relative">
-        <MeshGradient />
-        <div className="flex flex-col items-center gap-4 relative z-10">
-          <div className="h-10 w-10 border-t-2 border-r-2 border-blue-500 rounded-full animate-spin" />
-          <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 animate-pulse">
-            Checking scheduling locks...
-          </span>
-        </div>
-      </div>
-    );
-  }
 
   if (!visible && toolInfo) {
     const status = toolInfo.status || 'draft';

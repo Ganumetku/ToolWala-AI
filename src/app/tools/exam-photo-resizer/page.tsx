@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { ChevronLeft, Sparkles } from "lucide-react";
 import ToolArticle from "@/components/ToolArticle";
@@ -7,6 +5,12 @@ import { toolArticles } from "@/data/toolArticles";
 import { MeshGradient } from "@/components/BackgroundEffects";
 import ToolVisibilityGuard from "@/components/ToolVisibilityGuard";
 import ImageCropperEngine, { CropperPreset } from "@/components/ImageCropperEngine";
+import {
+  buildFAQSchema,
+  buildWebPageSchema,
+  buildEnrichedToolJsonLd,
+  buildBreadcrumbJsonLd
+} from "@/lib/seo";
 
 const EXAM_PRESETS: CropperPreset[] = [
   {
@@ -54,8 +58,45 @@ const EXAM_PRESETS: CropperPreset[] = [
 ];
 
 export default function ExamPhotoResizerPage() {
+  const article = toolArticles["exam-photo-resizer"];
+  const faqs = article?.faqs || [];
+  const faqSchema = buildFAQSchema(faqs);
+  const toolUrl = "https://toolwala.co/tools/exam-photo-resizer/";
+
+  const breadcrumbItems = [
+    { name: "Home", href: "/" },
+    { name: "Tools", href: "/tools" },
+    { name: "Exam Photo Resizer", href: "/tools/exam-photo-resizer" }
+  ];
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      buildEnrichedToolJsonLd(
+        {
+          title: "Exam Photo Resizer Online",
+          description: "Resize, crop, and compress passport photos to official guidelines for various exam portals like SSC, UPSC, and IBPS banking exams."
+        },
+        toolUrl,
+        "Image Tools"
+      ),
+      buildWebPageSchema(
+        "Exam Photo Resizer Online",
+        "Resize, crop, and compress passport photos to official guidelines for various exam portals like SSC, UPSC, and IBPS banking exams.",
+        toolUrl,
+        "en"
+      ),
+      buildBreadcrumbJsonLd(breadcrumbItems),
+      ...(faqSchema ? [faqSchema] : [])
+    ]
+  };
+
   return (
     <ToolVisibilityGuard slug="exam-photo-resizer">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="min-h-screen bg-[#030712] text-gray-100 relative overflow-hidden font-sans">
         <MeshGradient />
 

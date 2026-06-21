@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { ChevronLeft, Sparkles } from "lucide-react";
 import ToolArticle from "@/components/ToolArticle";
@@ -7,6 +5,12 @@ import { toolArticles } from "@/data/toolArticles";
 import { MeshGradient } from "@/components/BackgroundEffects";
 import ToolVisibilityGuard from "@/components/ToolVisibilityGuard";
 import ImageCropperEngine, { CropperPreset } from "@/components/ImageCropperEngine";
+import {
+  buildFAQSchema,
+  buildWebPageSchema,
+  buildEnrichedToolJsonLd,
+  buildBreadcrumbJsonLd
+} from "@/lib/seo";
 
 const PAN_PRESETS: CropperPreset[] = [
   {
@@ -41,8 +45,45 @@ const PAN_PRESETS: CropperPreset[] = [
 ];
 
 export default function PANPhotoToolPage() {
+  const article = toolArticles["pan-photo-tool"];
+  const faqs = article?.faqs || [];
+  const faqSchema = buildFAQSchema(faqs);
+  const toolUrl = "https://toolwala.co/tools/pan-photo-tool/";
+
+  const breadcrumbItems = [
+    { name: "Home", href: "/" },
+    { name: "Tools", href: "/tools" },
+    { name: "PAN Photo Tool", href: "/tools/pan-photo-tool" }
+  ];
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      buildEnrichedToolJsonLd(
+        {
+          title: "PAN Photo Tool Online",
+          description: "Resize, crop, and format passport photos to official NSDL and UTIITSL PAN card specifications. Keep head spacing, check background rules, and stay under the 50KB limit."
+        },
+        toolUrl,
+        "Image Tools"
+      ),
+      buildWebPageSchema(
+        "PAN Photo Tool Online",
+        "Resize, crop, and format passport photos to official NSDL and UTIITSL PAN card specifications. Keep head spacing, check background rules, and stay under the 50KB limit.",
+        toolUrl,
+        "en"
+      ),
+      buildBreadcrumbJsonLd(breadcrumbItems),
+      ...(faqSchema ? [faqSchema] : [])
+    ]
+  };
+
   return (
     <ToolVisibilityGuard slug="pan-photo-tool">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="min-h-screen bg-[#030712] text-gray-100 relative overflow-hidden font-sans">
         <MeshGradient />
 

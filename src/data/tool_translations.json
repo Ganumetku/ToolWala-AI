@@ -9078,5 +9078,953 @@
     ],
     "createdAt": "2026-06-19T02:04:41.183Z",
     "updatedAt": "2026-06-19T02:16:40.985Z"
+  },
+  {
+    "id": "igodnds",
+    "toolSlug": "pdf-summarizer",
+    "locale": "es",
+    "title": "Resumidor PDF AI",
+    "description": "Resuma documentos PDF grandes localmente en su navegador. Rápido, privado y seguro.",
+    "faq": [],
+    "seoTitle": "Resumidor PDF AI",
+    "seoDescription": "Resuma documentos PDF grandes localmente en su navegador. Rápido, privado y seguro.",
+    "createdAt": "2026-06-21T08:05:03.200Z",
+    "updatedAt": "2026-06-21T08:05:03.200Z"
+  },
+  {
+    "id": "qpok7nv",
+    "toolSlug": "pdf-summarizer",
+    "locale": "hi",
+    "title": "एआई पीडीएफ सारांश",
+    "description": "अपने ब्राउज़र में स्थानीय रूप से बड़े पीडीएफ दस्तावेज़ों का सारांश बनाएं। तेज़, निजी और सुरक्षित।",
+    "faq": [],
+    "seoTitle": "एआई पीडीएफ सारांश",
+    "seoDescription": "अपने ब्राउज़र में स्थानीय रूप से बड़े पीडीएफ दस्तावेज़ों का सारांश बनाएं। तेज़, निजी और सुरक्षित।",
+    "createdAt": "2026-06-21T08:05:03.945Z",
+    "updatedAt": "2026-06-21T08:05:03.945Z"
+  },
+  {
+    "id": "615s8ul",
+    "toolSlug": "crop-pdf",
+    "locale": "hi",
+    "title": "पीडीएफ को काटें",
+    "description": "पेज मार्जिन को ट्रिम करें, दृश्य सीमाओं को समायोजित करें, और अपने वेब ब्राउज़र में स्थानीय और सुरक्षित रूप से पीडीएफ शीट को क्रॉप करें।",
+    "faq": [
+      {
+        "question": "क्या पीडीएफ को क्रॉप करने से उसका वास्तविक डेटा बदल जाता है?",
+        "answer": "क्रॉप करने से पीडीएफ पेज की दृश्यमान सीमाएं (क्रॉपबॉक्स) संशोधित हो जाती हैं, इसलिए अनुरूप पाठक क्रॉप किए गए क्षेत्रों को छिपा देते हैं। पाठ और परतें मानक पुनर्प्राप्ति के लिए फ़ाइल के भीतर तब तक रहती हैं जब तक कि चपटा न हो जाए।"
+      },
+      {
+        "question": "क्या मैं एकल पृष्ठ या सभी पृष्ठ काट सकता हूँ?",
+        "answer": "वर्तमान में, हमारा टूल लगातार लेआउट आउटपुट सुनिश्चित करने के लिए सभी पृष्ठों को समान रूप से क्रॉप करता है।"
+      },
+      {
+        "question": "क्या यह टूल मुफ़्त है?",
+        "answer": "हाँ! टूलवाला एआई का क्रॉप पीडीएफ पूरी तरह से मुफ़्त, सुरक्षित है और इसकी कोई दैनिक उपयोग सीमा नहीं है।"
+      }
+    ],
+    "seoTitle": "पीडीएफ को काटें",
+    "seoDescription": "पेज मार्जिन को ट्रिम करें, दृश्य सीमाओं को समायोजित करें, और अपने वेब ब्राउज़र में स्थानीय और सुरक्षित रूप से पीडीएफ शीट को क्रॉप करें।",
+    "createdAt": "2026-06-21T08:05:06.273Z",
+    "updatedAt": "2026-06-21T08:05:06.273Z"
+  },
+  {
+    "id": "wi4d8g5",
+    "toolSlug": "compress-pdf",
+    "locale": "hi",
+    "title": "पीडीएफ को कंप्रेस करें",
+    "description": "दृश्य गुणवत्ता खोए बिना अपने पीडीएफ दस्तावेज़ों का फ़ाइल आकार कम करें। हमारा स्थानीय ऑप्टिमाइज़र पूरी तरह से आपके ब्राउज़र सैंडबॉक्स में चलता है, जिससे आपके दस्तावेज़ 100% सुरक्षित रहते हैं।",
+    "faq": [
+      {
+        "question": "क्या कंप्रेस पीडीएफ सुरक्षित है?",
+        "answer": "बिल्कुल। सभी अनुकूलन आपके ब्राउज़र मेमोरी के अंदर स्थानीय रूप से चलते हैं। आपके दस्तावेज़ कभी भी हमारे सर्वर को नहीं छूते।"
+      },
+      {
+        "question": "क्या यह पासवर्ड से सुरक्षित पीडीएफ़ पर काम करता है?",
+        "answer": "नहीं, इससे पहले कि हमारा कंप्रेसर उनकी आंतरिक संरचनाओं को पार्स और अनुकूलित कर सके, आपको पासवर्ड से सुरक्षित पीडीएफ को अनलॉक करना होगा।"
+      },
+      {
+        "question": "क्या फ़ाइल आकार की कोई सीमा है?",
+        "answer": "चूँकि कम्प्रेशन आपके ब्राउज़र टैब मेमोरी के अंदर चलता है, हम इष्टतम सिस्टम स्थिरता के लिए 100 एमबी से कम की फ़ाइलों का उपयोग करने की सलाह देते हैं।"
+      }
+    ],
+    "seoTitle": "पीडीएफ को कंप्रेस करें",
+    "seoDescription": "दृश्य गुणवत्ता खोए बिना अपने पीडीएफ दस्तावेज़ों का फ़ाइल आकार कम करें। हमारा स्थानीय ऑप्टिमाइज़र पूरी तरह से आपके ब्राउज़र सैंडबॉक्स में चलता है, जिससे आपके दस्तावेज़ 100% सुरक्षित रहते हैं।",
+    "createdAt": "2026-06-21T08:05:07.217Z",
+    "updatedAt": "2026-06-21T08:05:07.217Z"
+  },
+  {
+    "id": "6c81hm1",
+    "toolSlug": "remove-pages",
+    "locale": "hi",
+    "title": "पीडीएफ पेज हटाएं",
+    "description": "अपनी पीडीएफ फाइलों से अनावश्यक पेज हटा दें। अपने ब्राउज़र सैंडबॉक्स में स्थानीय रूप से स्वच्छ, अनुकूलित दस्तावेज़ बनाएं।",
+    "faq": [
+      {
+        "question": "मैं हटाने के लिए पेज कैसे निर्दिष्ट करूं?",
+        "answer": "आप अल्पविराम से अलग किए गए पृष्ठ संख्याएं दर्ज कर सकते हैं (उदाहरण के लिए, 2, 5) या डैश का उपयोग करके श्रेणियां निर्दिष्ट कर सकते हैं (उदाहरण के लिए, 3-7)।"
+      },
+      {
+        "question": "क्या इससे मेरे कंप्यूटर पर मूल फ़ाइल नष्ट हो जाती है?",
+        "answer": "नहीं, हमारा टूल आपके कंप्यूटर पर फ़ाइलों को संशोधित नहीं करता है। यह एक नई, संशोधित प्रतिलिपि तैयार करता है जिसे आप अपने डिवाइस पर डाउनलोड करते हैं।"
+      },
+      {
+        "question": "क्या इसकी कोई सीमा है कि मैं कितने पेज हटा सकता हूँ?",
+        "answer": "नहीं, आप जितने चाहें उतने पेज हटा सकते हैं, जब तक कि अंतिम दस्तावेज़ में कम से कम एक पेज बचा रहे।"
+      }
+    ],
+    "seoTitle": "पीडीएफ पेज हटाएं",
+    "seoDescription": "अपनी पीडीएफ फाइलों से अनावश्यक पेज हटा दें। अपने ब्राउज़र सैंडबॉक्स में स्थानीय रूप से स्वच्छ, अनुकूलित दस्तावेज़ बनाएं।",
+    "createdAt": "2026-06-21T08:05:07.232Z",
+    "updatedAt": "2026-06-21T08:05:07.232Z"
+  },
+  {
+    "id": "lz4xhtd",
+    "toolSlug": "pdf-summarizer",
+    "locale": "pt",
+    "title": "Resumidor de PDF AI",
+    "description": "Resuma documentos PDF grandes localmente em seu navegador. Rápido, privado e seguro.",
+    "faq": [],
+    "seoTitle": "Resumidor de PDF AI",
+    "seoDescription": "Resuma documentos PDF grandes localmente em seu navegador. Rápido, privado e seguro.",
+    "createdAt": "2026-06-21T08:05:07.315Z",
+    "updatedAt": "2026-06-21T08:05:07.315Z"
+  },
+  {
+    "id": "fofh7t1",
+    "toolSlug": "upsc-photo-resize",
+    "locale": "hi",
+    "title": "यूपीएससी फोटो का ऑनलाइन आकार बदलें",
+    "description": "संघ लोक सेवा आयोग (यूपीएससी) ऑनलाइन आवेदन पंजीकरण के लिए पासपोर्ट फोटो का प्रारूप और आकार बदलें। अनिवार्य 350 x 350 पिक्सेल आयाम और सफेद पृष्ठभूमि नियमों का अनुपालन करता है।",
+    "faq": [
+      {
+        "question": "यूपीएससी सीएसई के लिए फोटो का आकार क्या है?",
+        "answer": "यूपीएससी के लिए आवश्यक है कि फोटो ठीक 350 पिक्सेल चौड़ाई x 350 पिक्सेल ऊंचाई (पहलू अनुपात 1:1) होनी चाहिए, फ़ाइल का आकार 20KB और 40KB के बीच होना चाहिए।"
+      },
+      {
+        "question": "यूपीएससी फोटो के लिए कौन सा पृष्ठभूमि रंग उपयुक्त है?",
+        "answer": "यूपीएससी दिशानिर्देश सभी पासपोर्ट फोटो अपलोड के लिए एक सादे सफेद पृष्ठभूमि की सिफारिश करते हैं।"
+      },
+      {
+        "question": "क्या मेरा पंजीकरण फोटो सुरक्षित है?",
+        "answer": "हां, हमारा टूल आपके ब्राउज़र मेमोरी में पूरी तरह से चलता है। आपके व्यक्तिगत दस्तावेज़ कभी भी किसी सर्वर पर अपलोड नहीं किए जाते हैं।"
+      }
+    ],
+    "seoTitle": "यूपीएससी फोटो का ऑनलाइन आकार बदलें",
+    "seoDescription": "संघ लोक सेवा आयोग (यूपीएससी) ऑनलाइन आवेदन पंजीकरण के लिए पासपोर्ट फोटो का प्रारूप और आकार बदलें। अनिवार्य 350 x 350 पिक्सेल आयाम और सफेद पृष्ठभूमि नियमों का अनुपालन करता है।",
+    "createdAt": "2026-06-21T08:05:07.385Z",
+    "updatedAt": "2026-06-21T08:05:07.385Z"
+  },
+  {
+    "id": "yst8oa8",
+    "toolSlug": "sign-pdf",
+    "locale": "hi",
+    "title": "पीडीएफ पर हस्ताक्षर करें",
+    "description": "पीडीएफ दस्तावेजों पर ऑनलाइन हस्ताक्षर करें। स्थानीय और सुरक्षित रूप से पृष्ठों पर रखने के लिए अपना हस्ताक्षर बनाएं, टाइप करें या अपलोड करें।",
+    "faq": [
+      {
+        "question": "क्या मेरा हस्ताक्षर टूलवाला पर सहेजा गया है?",
+        "answer": "नहीं, आपके हस्ताक्षर और दस्तावेज़ डेटा को आपकी सक्रिय ब्राउज़र मेमोरी में सख्ती से संसाधित किया जाता है। जैसे ही आप टैब बंद करते हैं वे हटा दिए जाते हैं।"
+      },
+      {
+        "question": "क्या मैं एक ही पीडीएफ में एकाधिक हस्ताक्षर जोड़ सकता हूँ?",
+        "answer": "हां, आप अंतिम पीडीएफ को संकलित करने और डाउनलोड करने से पहले पृष्ठों पर विभिन्न स्थानों पर हस्ताक्षर कर सकते हैं।"
+      },
+      {
+        "question": "मैं हस्ताक्षर के रूप में किस फ़ाइल प्रकार को अपलोड कर सकता हूँ?",
+        "answer": "आप JPEG, JPG और PNG छवि फ़ाइलें अपलोड कर सकते हैं। सर्वोत्तम दृश्य परिणामों के लिए पारदर्शी पीएनजी फ़ाइलों की अनुशंसा की जाती है।"
+      }
+    ],
+    "seoTitle": "पीडीएफ पर हस्ताक्षर करें",
+    "seoDescription": "पीडीएफ दस्तावेजों पर ऑनलाइन हस्ताक्षर करें। स्थानीय और सुरक्षित रूप से पृष्ठों पर रखने के लिए अपना हस्ताक्षर बनाएं, टाइप करें या अपलोड करें।",
+    "createdAt": "2026-06-21T08:05:07.406Z",
+    "updatedAt": "2026-06-21T08:05:07.406Z"
+  },
+  {
+    "id": "jd9106m",
+    "toolSlug": "aadhaar-pdf-compressor",
+    "locale": "es",
+    "title": "Compresor de PDF Aadhaar en línea",
+    "description": "Comprima archivos PDF de e-Aadhaar de forma segura bajo el límite de carga oficial de 300 KB de UIDAI. Optimice sus documentos de verificación de identidad localmente en la zona de pruebas de su navegador.",
+    "faq": [
+      {
+        "question": "¿Cuál es la contraseña estándar para los archivos PDF de e-Aadhaar?",
+        "answer": "La contraseña estándar es una combinación de las primeras cuatro letras de su nombre en MAYÚSCULAS, seguidas de su año de nacimiento (por ejemplo, KART1990)."
+      },
+      {
+        "question": "¿Cuál es el límite de tamaño de archivo para las cargas de Aadhaar?",
+        "answer": "El portal oficial UIDAI y la mayoría de las plataformas e-KYC requieren que los archivos PDF de Aadhaar tengan un tamaño inferior a 300 KB."
+      },
+      {
+        "question": "¿Está seguro mi documento de Aadhaar?",
+        "answer": "Sí. Todo el procesamiento se ejecuta 100% localmente en su navegador. Sus documentos nunca tocan nuestros servidores ni ninguna base de datos en la nube."
+      }
+    ],
+    "seoTitle": "Compresor de PDF Aadhaar en línea",
+    "seoDescription": "Comprima archivos PDF de e-Aadhaar de forma segura bajo el límite de carga oficial de 300 KB de UIDAI. Optimice sus documentos de verificación de identidad localmente en la zona de pruebas de su navegador.",
+    "createdAt": "2026-06-21T08:05:07.615Z",
+    "updatedAt": "2026-06-21T08:05:07.615Z"
+  },
+  {
+    "id": "f4ug16x",
+    "toolSlug": "remove-pages",
+    "locale": "es",
+    "title": "Eliminar páginas PDF",
+    "description": "Elimine páginas innecesarias de sus archivos PDF. Cree documentos más limpios y optimizados localmente en la zona de pruebas de su navegador.",
+    "faq": [
+      {
+        "question": "¿Cómo especifico las páginas para eliminar?",
+        "answer": "Puede ingresar números de página separados por comas (por ejemplo, 2, 5) o especificar rangos usando guiones (por ejemplo, 3-7)."
+      },
+      {
+        "question": "¿Esto elimina el archivo original en mi computadora?",
+        "answer": "No, nuestra herramienta no modifica archivos en su computadora. Genera una copia nueva y modificada que descargas en tu dispositivo."
+      },
+      {
+        "question": "¿Existe un límite en la cantidad de páginas que puedo eliminar?",
+        "answer": "No, puedes eliminar tantas páginas como quieras, siempre y cuando quede al menos una página en el documento final."
+      }
+    ],
+    "seoTitle": "Eliminar páginas PDF",
+    "seoDescription": "Elimine páginas innecesarias de sus archivos PDF. Cree documentos más limpios y optimizados localmente en la zona de pruebas de su navegador.",
+    "createdAt": "2026-06-21T08:05:07.742Z",
+    "updatedAt": "2026-06-21T08:05:07.742Z"
+  },
+  {
+    "id": "e81l6ao",
+    "toolSlug": "gov-form-pdf-compressor",
+    "locale": "hi",
+    "title": "सरकारी फॉर्म पीडीएफ कंप्रेसर ऑनलाइन",
+    "description": "मानक पोर्टल आकार सीमा के अंतर्गत सरकारी एप्लिकेशन पीडीएफ अनुलग्नकों को संपीड़ित करें। ईपीएफओ, एनएसडीएल, एसएससी और यूपीएससी आवश्यकताओं से मेल खाने के लिए लक्ष्य आकार ब्रैकेट (100 केबी, 200 केबी, 300 केबी, 500 केबी) का चयन करें।",
+    "faq": [
+      {
+        "question": "ईपीएफओ अपलोड के लिए पीडीएफ आकार की सीमा क्या है?",
+        "answer": "कर्मचारी भविष्य निधि संगठन (ईपीएफओ) पोर्टल के लिए आमतौर पर पीडीएफ अटैचमेंट (जैसे संयुक्त घोषणाएं या बैंक पासबुक) का आकार 100KB या 200KB से कम होना आवश्यक है।"
+      },
+      {
+        "question": "क्या मेरा पीडीएफ हस्ताक्षर संपीड़न के बाद भी वैध रहेगा?",
+        "answer": "हां, हमारा ऑप्टिमाइज़र टेक्स्ट और हस्ताक्षर परतों को रैस्टराइज़ किए बिना संरक्षित करता है, यह सुनिश्चित करता है कि डिजिटल हस्ताक्षर वैध रहें।"
+      },
+      {
+        "question": "क्या मेरा दस्तावेज़ सुरक्षित है?",
+        "answer": "हां, सभी प्रोसेसिंग आपके ब्राउज़र में 100% स्थानीय रूप से निष्पादित होती है। आपके दस्तावेज़ कभी भी हमारे सर्वर या किसी क्लाउड डेटाबेस को नहीं छूते।"
+      }
+    ],
+    "seoTitle": "सरकारी फॉर्म पीडीएफ कंप्रेसर ऑनलाइन",
+    "seoDescription": "मानक पोर्टल आकार सीमा के अंतर्गत सरकारी एप्लिकेशन पीडीएफ अनुलग्नकों को संपीड़ित करें। ईपीएफओ, एनएसडीएल, एसएससी और यूपीएससी आवश्यकताओं से मेल खाने के लिए लक्ष्य आकार ब्रैकेट (100 केबी, 200 केबी, 300 केबी, 500 केबी) का चयन करें।",
+    "createdAt": "2026-06-21T08:05:07.844Z",
+    "updatedAt": "2026-06-21T08:05:07.844Z"
+  },
+  {
+    "id": "dtigiho",
+    "toolSlug": "signature-resize",
+    "locale": "hi",
+    "title": "हस्ताक्षर का आकार ऑनलाइन बदलें",
+    "description": "आधिकारिक भारतीय पोर्टल मानकों पर तुरंत हस्ताक्षर स्कैन का आकार बदलें, काटें और संपीड़ित करें। बाहरी सर्वर पर फ़ाइलें अपलोड किए बिना भर्ती बोर्डों, सार्वजनिक सेवा परीक्षाओं और बैंकिंग अनुप्रयोगों के लिए स्वच्छ हस्ताक्षर उत्पन्न करें।",
+    "faq": [
+      {
+        "question": "SSC परीक्षा के लिए आधिकारिक हस्ताक्षर का आकार क्या है?",
+        "answer": "कर्मचारी चयन आयोग (एसएससी) को 6.0 सेमी चौड़ाई x 3.0 सेमी ऊंचाई (अनुपात 2:1) के हस्ताक्षर आयाम और 10 केबी और 20 केबी के बीच फ़ाइल आकार की आवश्यकता होती है।"
+      },
+      {
+        "question": "आधिकारिक हस्ताक्षरों के लिए मुझे किस रंग की स्याही का उपयोग करना चाहिए?",
+        "answer": "अधिकांश सरकारी पोर्टल उच्च-कंट्रास्ट स्कैनिंग और सत्यापन के लिए सादे सफेद कागज पर काली स्याही से हस्ताक्षर करने की सलाह देते हैं।"
+      },
+      {
+        "question": "क्या मेरा हस्ताक्षरित फोटो सुरक्षित है?",
+        "answer": "हाँ। सभी क्रॉपिंग, फ़िल्टरिंग और कंप्रेशन पूरी तरह से क्लाइंट-साइड पर होते हैं। आपकी हस्ताक्षर छवि स्थानीय रूप से संसाधित की जाती है और हमारे सर्वर पर कभी अपलोड नहीं की जाती है।"
+      }
+    ],
+    "seoTitle": "हस्ताक्षर का आकार ऑनलाइन बदलें",
+    "seoDescription": "आधिकारिक भारतीय पोर्टल मानकों पर तुरंत हस्ताक्षर स्कैन का आकार बदलें, काटें और संपीड़ित करें। बाहरी सर्वर पर फ़ाइलें अपलोड किए बिना भर्ती बोर्डों, सार्वजनिक सेवा परीक्षाओं और बैंकिंग अनुप्रयोगों के लिए स्वच्छ हस्ताक्षर उत्पन्न करें।",
+    "createdAt": "2026-06-21T08:05:07.871Z",
+    "updatedAt": "2026-06-21T08:05:07.871Z"
+  },
+  {
+    "id": "flhyn39",
+    "toolSlug": "rotate-pdf",
+    "locale": "hi",
+    "title": "पीडीएफ घुमाएँ",
+    "description": "पीडीएफ पृष्ठों को 90, 180, या 270 डिग्री तक घुमाएँ। अपने वेब ब्राउज़र में पेज ओरिएंटेशन को स्थानीय और सुरक्षित रूप से बदलें।",
+    "faq": [
+      {
+        "question": "क्या मैं विशिष्ट पृष्ठ घुमा सकता हूँ?",
+        "answer": "हां, आप हमारे 'पीडीएफ पेज व्यवस्थित करें' टूल का उपयोग करके पृष्ठों को दृश्य रूप से घुमा सकते हैं। यह समर्पित रोटेट पीडीएफ टूल दस्तावेज़ के सभी पृष्ठों पर रोटेशन लागू करता है।"
+      },
+      {
+        "question": "क्या घुमाने से पीडीएफ गुणवत्ता कम हो जाएगी?",
+        "answer": "नहीं, रोटेशन एक दोषरहित मेटाडेटा पैरामीटर परिवर्तन है। यह बस पीडीएफ व्यूअर को पृष्ठों को एक अलग कोण पर प्रदर्शित करने का निर्देश देता है।"
+      },
+      {
+        "question": "क्या यह मोबाइल फ़ोन ब्राउज़र पर काम करता है?",
+        "answer": "हां, यह पूरी तरह उत्तरदायी है और सफारी, क्रोम और सभी मोबाइल व्यूपोर्ट पर आसानी से काम करता है।"
+      }
+    ],
+    "seoTitle": "पीडीएफ घुमाएँ",
+    "seoDescription": "पीडीएफ पृष्ठों को 90, 180, या 270 डिग्री तक घुमाएँ। अपने वेब ब्राउज़र में पेज ओरिएंटेशन को स्थानीय और सुरक्षित रूप से बदलें।",
+    "createdAt": "2026-06-21T08:05:07.892Z",
+    "updatedAt": "2026-06-21T08:05:07.892Z"
+  },
+  {
+    "id": "v6pggfn",
+    "toolSlug": "rotate-pdf",
+    "locale": "es",
+    "title": "Girar PDF",
+    "description": "Gire las páginas PDF 90, 180 o 270 grados. Cambie las orientaciones de las páginas de forma local y segura en su navegador web.",
+    "faq": [
+      {
+        "question": "¿Puedo rotar páginas específicas?",
+        "answer": "Sí, puede rotar páginas visualmente utilizando nuestra herramienta 'Organizar páginas PDF'. Esta herramienta dedicada a Rotar PDF aplica la rotación a todas las páginas del documento."
+      },
+      {
+        "question": "¿La rotación disminuirá la calidad del PDF?",
+        "answer": "No, la rotación es un cambio de parámetro de metadatos sin pérdidas. Simplemente le indica al visor de PDF que muestre las páginas en un ángulo diferente."
+      },
+      {
+        "question": "¿Funciona esto en los navegadores de teléfonos móviles?",
+        "answer": "Sí, responde completamente y funciona sin problemas en Safari, Chrome y todas las ventanas gráficas móviles."
+      }
+    ],
+    "seoTitle": "Girar PDF",
+    "seoDescription": "Gire las páginas PDF 90, 180 o 270 grados. Cambie las orientaciones de las páginas de forma local y segura en su navegador web.",
+    "createdAt": "2026-06-21T08:05:08.023Z",
+    "updatedAt": "2026-06-21T08:05:08.023Z"
+  },
+  {
+    "id": "e3f2vk4",
+    "toolSlug": "crop-pdf",
+    "locale": "es",
+    "title": "Recortar PDF",
+    "description": "Recorte los márgenes de las páginas, ajuste los bordes visibles y recorte hojas PDF de forma local y segura en su navegador web.",
+    "faq": [
+      {
+        "question": "¿Recortar un PDF cambia sus datos reales?",
+        "answer": "Recortar modifica los límites visibles (CropBox) de la página PDF, por lo que los lectores conformes ocultan las áreas recortadas. El texto y las capas permanecen dentro del archivo para una recuperación estándar a menos que se aplanen."
+      },
+      {
+        "question": "¿Puedo recortar páginas individuales o todas las páginas?",
+        "answer": "Actualmente, nuestra herramienta recorta todas las páginas de manera uniforme para garantizar resultados de diseño consistentes."
+      },
+      {
+        "question": "¿Esta herramienta es gratuita?",
+        "answer": "¡Sí! Crop PDF de ToolWala AI es completamente gratuito, seguro y no tiene límites de uso diario."
+      }
+    ],
+    "seoTitle": "Recortar PDF",
+    "seoDescription": "Recorte los márgenes de las páginas, ajuste los bordes visibles y recorte hojas PDF de forma local y segura en su navegador web.",
+    "createdAt": "2026-06-21T08:05:08.045Z",
+    "updatedAt": "2026-06-21T08:05:08.045Z"
+  },
+  {
+    "id": "htu9cof",
+    "toolSlug": "aadhaar-pdf-compressor",
+    "locale": "hi",
+    "title": "आधार पीडीएफ कंप्रेसर ऑनलाइन",
+    "description": "आधिकारिक UIDAI 300KB अपलोड सीमा के तहत ई-आधार पीडीएफ फाइलों को सुरक्षित रूप से संपीड़ित करें। अपने ब्राउज़र सैंडबॉक्स में अपने पहचान सत्यापन दस्तावेज़ों को स्थानीय रूप से अनुकूलित करें।",
+    "faq": [
+      {
+        "question": "ई-आधार पीडीएफ के लिए मानक पासवर्ड क्या है?",
+        "answer": "मानक पासवर्ड आपके नाम के पहले चार अक्षरों को बड़े अक्षरों में, उसके बाद आपके जन्म वर्ष (उदाहरण के लिए, KART1990) का एक संयोजन है।"
+      },
+      {
+        "question": "आधार अपलोड के लिए फ़ाइल आकार सीमा क्या है?",
+        "answer": "आधिकारिक यूआईडीएआई पोर्टल और अधिकांश ई-केवाईसी प्लेटफार्मों के लिए आधार पीडीएफ फाइलों का आकार 300KB से कम होना आवश्यक है।"
+      },
+      {
+        "question": "क्या मेरा आधार दस्तावेज़ सुरक्षित है?",
+        "answer": "हाँ। सभी प्रोसेसिंग आपके ब्राउज़र में 100% स्थानीय रूप से निष्पादित होती है। आपके दस्तावेज़ कभी भी हमारे सर्वर या किसी क्लाउड डेटाबेस को नहीं छूते।"
+      }
+    ],
+    "seoTitle": "आधार पीडीएफ कंप्रेसर ऑनलाइन",
+    "seoDescription": "आधिकारिक UIDAI 300KB अपलोड सीमा के तहत ई-आधार पीडीएफ फाइलों को सुरक्षित रूप से संपीड़ित करें। अपने ब्राउज़र सैंडबॉक्स में अपने पहचान सत्यापन दस्तावेज़ों को स्थानीय रूप से अनुकूलित करें।",
+    "createdAt": "2026-06-21T08:05:08.081Z",
+    "updatedAt": "2026-06-21T08:05:08.081Z"
+  },
+  {
+    "id": "1kwplk5",
+    "toolSlug": "compress-pdf",
+    "locale": "es",
+    "title": "Comprimir PDF",
+    "description": "Reduzca el tamaño de archivo de sus documentos PDF sin perder calidad visual. Nuestro optimizador local se ejecuta completamente en la zona de pruebas de su navegador, manteniendo sus documentos 100% seguros.",
+    "faq": [
+      {
+        "question": "¿Es seguro comprimir PDF?",
+        "answer": "Absolutamente. Toda la optimización se ejecuta localmente dentro de la memoria de su navegador. Sus documentos nunca tocan nuestros servidores."
+      },
+      {
+        "question": "¿Funciona en archivos PDF protegidos con contraseña?",
+        "answer": "No, primero debe desbloquear los archivos PDF protegidos con contraseña antes de que nuestro compresor pueda analizar y optimizar sus estructuras internas."
+      },
+      {
+        "question": "¿Existe un límite en el tamaño de los archivos?",
+        "answer": "Dado que la compresión se ejecuta dentro de la memoria de la pestaña de su navegador, recomendamos utilizar archivos de menos de 100 MB para una estabilidad óptima del sistema."
+      }
+    ],
+    "seoTitle": "Comprimir PDF",
+    "seoDescription": "Reduzca el tamaño de archivo de sus documentos PDF sin perder calidad visual. Nuestro optimizador local se ejecuta completamente en la zona de pruebas de su navegador, manteniendo sus documentos 100% seguros.",
+    "createdAt": "2026-06-21T08:05:08.109Z",
+    "updatedAt": "2026-06-21T08:05:08.109Z"
+  },
+  {
+    "id": "fewsqxu",
+    "toolSlug": "add-page-numbers-to-pdf",
+    "locale": "es",
+    "title": "Agregar números de página a PDF",
+    "description": "Agregue números de página a sus documentos PDF localmente en su navegador. Personalice formatos de paginación, posiciones, márgenes desplazados y detalles de estilo de forma fácil y segura.",
+    "faq": [
+      {
+        "question": "¿Puedo saltarme la numeración en la primera página?",
+        "answer": "Sí, puede marcar la opción 'Omitir portada' para omitir la paginación en la página 1 y comenzar a numerar desde la página 2."
+      },
+      {
+        "question": "¿Están mis archivos almacenados en sus servidores?",
+        "answer": "Nunca. Todas las tareas de paginación se ejecutan dentro de la memoria de su navegador local. No se transmiten archivos a bases de datos externas."
+      },
+      {
+        "question": "¿Qué formatos de paginación están disponibles?",
+        "answer": "Puede elegir entre 'Página X de Y', 'Página X', 'X de Y' o números sin formato 'X'."
+      }
+    ],
+    "seoTitle": "Agregar números de página a PDF",
+    "seoDescription": "Agregue números de página a sus documentos PDF localmente en su navegador. Personalice formatos de paginación, posiciones, márgenes desplazados y detalles de estilo de forma fácil y segura.",
+    "createdAt": "2026-06-21T08:05:08.131Z",
+    "updatedAt": "2026-06-21T08:05:08.131Z"
+  },
+  {
+    "id": "ugrwqhu",
+    "toolSlug": "gov-form-pdf-compressor",
+    "locale": "es",
+    "title": "Compresor de PDF de formulario gubernamental en línea",
+    "description": "Comprima los archivos adjuntos en PDF de aplicaciones gubernamentales dentro de los límites de tamaño del portal estándar. Seleccione rangos de tamaño objetivo (100 KB, 200 KB, 300 KB, 500 KB) para cumplir con los requisitos de EPFO, NSDL, SSC y UPSC.",
+    "faq": [
+      {
+        "question": "¿Cuál es el límite de tamaño de PDF para cargas EPFO?",
+        "answer": "El portal de la Organización del Fondo de Previsión de los Empleados (EPFO) normalmente requiere que los archivos adjuntos en formato PDF (como declaraciones conjuntas o libretas bancarias) tengan un tamaño inferior a 100 KB o 200 KB."
+      },
+      {
+        "question": "¿Mi firma en PDF seguirá siendo válida después de la compresión?",
+        "answer": "Sí, nuestro optimizador conserva las capas de texto y firma sin rasterizarlas, lo que garantiza que las firmas digitales sigan siendo válidas."
+      },
+      {
+        "question": "¿Mi documento está seguro?",
+        "answer": "Sí, todo el procesamiento se ejecuta 100% localmente en su navegador. Sus documentos nunca tocan nuestros servidores ni ninguna base de datos en la nube."
+      }
+    ],
+    "seoTitle": "Compresor de PDF de formulario gubernamental en línea",
+    "seoDescription": "Comprima los archivos adjuntos en PDF de aplicaciones gubernamentales dentro de los límites de tamaño del portal estándar. Seleccione rangos de tamaño objetivo (100 KB, 200 KB, 300 KB, 500 KB) para cumplir con los requisitos de EPFO, NSDL, SSC y UPSC.",
+    "createdAt": "2026-06-21T08:05:08.262Z",
+    "updatedAt": "2026-06-21T08:05:10.112Z"
+  },
+  {
+    "id": "udkme3r",
+    "toolSlug": "add-page-numbers-to-pdf",
+    "locale": "hi",
+    "title": "पीडीएफ में पेज नंबर जोड़ें",
+    "description": "अपने ब्राउज़र में स्थानीय रूप से अपने पीडीएफ दस्तावेज़ों में पेज नंबर जोड़ें। पेजिनेशन प्रारूप, स्थिति, ऑफसेट मार्जिन और स्टाइलिंग विवरण को आसानी से और सुरक्षित रूप से अनुकूलित करें।",
+    "faq": [
+      {
+        "question": "क्या मैं पहले पृष्ठ पर क्रमांकन छोड़ सकता हूँ?",
+        "answer": "हां, आप पेज 1 पर पेजिनेशन छोड़ने और पेज 2 से नंबरिंग शुरू करने के लिए 'कवर पेज छोड़ें' विकल्प की जांच कर सकते हैं।"
+      },
+      {
+        "question": "क्या मेरी फ़ाइलें आपके सर्वर पर संग्रहीत हैं?",
+        "answer": "कभी नहीं। सभी पेजिनेशन कार्य आपकी स्थानीय ब्राउज़र मेमोरी के अंदर चलते हैं। कोई भी फाइल बाहरी डेटाबेस में प्रेषित नहीं की जाती है।"
+      },
+      {
+        "question": "कौन से पृष्ठांकन प्रारूप उपलब्ध हैं?",
+        "answer": "आप 'Y का पेज X', 'पेज X', 'Y का X', या कच्चे नंबर 'X' में से चुन सकते हैं।"
+      }
+    ],
+    "seoTitle": "पीडीएफ में पेज नंबर जोड़ें",
+    "seoDescription": "अपने ब्राउज़र में स्थानीय रूप से अपने पीडीएफ दस्तावेज़ों में पेज नंबर जोड़ें। पेजिनेशन प्रारूप, स्थिति, ऑफसेट मार्जिन और स्टाइलिंग विवरण को आसानी से और सुरक्षित रूप से अनुकूलित करें।",
+    "createdAt": "2026-06-21T08:05:08.544Z",
+    "updatedAt": "2026-06-21T08:05:08.544Z"
+  },
+  {
+    "id": "x8x9yog",
+    "toolSlug": "ssc-photo-resize",
+    "locale": "es",
+    "title": "Cambiar el tamaño de la foto SSC en línea",
+    "description": "Cambie el tamaño, recorte y comprima fotografías de pasaporte según las pautas oficiales de la Comisión de Selección de Personal (SSC). Genere fácilmente fotografías de 3,5 x 4,5 cm de menos de 50 KB con los formatos de fecha correctos.",
+    "faq": [
+      {
+        "question": "¿Cuál es el tamaño de la foto para las aplicaciones SSC?",
+        "answer": "La Comisión de Selección de Personal exige que las fotografías de pasaporte midan 3,5 cm de ancho x 4,5 cm de alto, lo que equivale aproximadamente a 354 x 472 píxeles, y se guarden en formato JPEG."
+      },
+      {
+        "question": "¿Cuál es el límite de tamaño para las fotos SSC?",
+        "answer": "Las fotos deben tener un tamaño de archivo de entre 20 KB y 50 KB para ser aceptadas en el portal en línea del SSC."
+      },
+      {
+        "question": "¿Mi foto debería tener la fecha impresa?",
+        "answer": "En avisos recientes del SSC, imprimir la fecha de la fotografía ya no es universalmente obligatorio a menos que se especifique explícitamente en la notificación de reclutamiento activo. Consulte las pautas de notificación actuales."
+      }
+    ],
+    "seoTitle": "Cambiar el tamaño de la foto SSC en línea",
+    "seoDescription": "Cambie el tamaño, recorte y comprima fotografías de pasaporte según las pautas oficiales de la Comisión de Selección de Personal (SSC). Genere fácilmente fotografías de 3,5 x 4,5 cm de menos de 50 KB con los formatos de fecha correctos.",
+    "createdAt": "2026-06-21T08:05:08.559Z",
+    "updatedAt": "2026-06-21T08:05:10.240Z"
+  },
+  {
+    "id": "wd3l0ub",
+    "toolSlug": "signature-resize",
+    "locale": "es",
+    "title": "Cambiar el tamaño de la firma en línea",
+    "description": "Cambie el tamaño, recorte y comprima escaneos de firmas según los estándares oficiales del portal indio al instante. Genere firmas limpias para juntas de reclutamiento, exámenes de servicio público y aplicaciones bancarias sin cargar archivos en servidores externos.",
+    "faq": [
+      {
+        "question": "¿Cuál es el tamaño de firma oficial para los exámenes SSC?",
+        "answer": "La Comisión de Selección de Personal (SSC) requiere dimensiones de firma de 6,0 cm de ancho x 3,0 cm de alto (proporción 2:1) y un tamaño de archivo estrictamente entre 10 KB y 20 KB."
+      },
+      {
+        "question": "¿Qué color de tinta debo utilizar para las firmas oficiales?",
+        "answer": "La mayoría de los portales gubernamentales recomiendan firmar con tinta negra sobre papel blanco normal para escanear y validar con alto contraste."
+      },
+      {
+        "question": "¿Está segura mi foto de firma?",
+        "answer": "Sí. Todo el recorte, filtrado y compresión se realiza completamente en el lado del cliente. La imagen de su firma se procesa localmente y nunca se carga en nuestros servidores."
+      }
+    ],
+    "seoTitle": "Cambiar el tamaño de la firma en línea",
+    "seoDescription": "Cambie el tamaño, recorte y comprima escaneos de firmas según los estándares oficiales del portal indio al instante. Genere firmas limpias para juntas de reclutamiento, exámenes de servicio público y aplicaciones bancarias sin cargar archivos en servidores externos.",
+    "createdAt": "2026-06-21T08:05:08.690Z",
+    "updatedAt": "2026-06-21T08:05:10.214Z"
+  },
+  {
+    "id": "v2kvtt6",
+    "toolSlug": "upsc-photo-resize",
+    "locale": "es",
+    "title": "Cambio de tamaño de fotos UPSC en línea",
+    "description": "Formatee y cambie el tamaño de las fotografías de pasaporte para el registro de la solicitud en línea de la Comisión de Servicios Públicos de la Unión (UPSC). Cumple con las reglas obligatorias de dimensión de 350 x 350 píxeles y fondo blanco.",
+    "faq": [
+      {
+        "question": "¿Cuál es el tamaño de la foto para UPSC CSE?",
+        "answer": "UPSC requiere que las fotos tengan exactamente 350 píxeles de ancho x 350 píxeles de alto (relación de aspecto 1:1), con un tamaño de archivo de entre 20 KB y 40 KB."
+      },
+      {
+        "question": "¿Qué color de fondo es compatible con las fotografías UPSC?",
+        "answer": "Las pautas de UPSC recomiendan un fondo blanco para todas las cargas de fotografías de pasaporte."
+      },
+      {
+        "question": "¿Está segura mi foto de registro?",
+        "answer": "Sí, nuestra herramienta se ejecuta completamente en la memoria de su navegador. Sus documentos personales nunca se cargan en ningún servidor."
+      }
+    ],
+    "seoTitle": "Cambio de tamaño de fotos UPSC en línea",
+    "seoDescription": "Formatee y cambie el tamaño de las fotografías de pasaporte para el registro de la solicitud en línea de la Comisión de Servicios Públicos de la Unión (UPSC). Cumple con las reglas obligatorias de dimensión de 350 x 350 píxeles y fondo blanco.",
+    "createdAt": "2026-06-21T08:05:09.051Z",
+    "updatedAt": "2026-06-21T08:05:10.178Z"
+  },
+  {
+    "id": "jf0aaq0",
+    "toolSlug": "sign-pdf",
+    "locale": "es",
+    "title": "Firmar PDF",
+    "description": "Firme documentos PDF en línea. Dibuja, escribe o carga tu firma para colocarla en las páginas de forma local y segura.",
+    "faq": [
+      {
+        "question": "¿Mi firma está guardada en ToolWala?",
+        "answer": "No, su firma y los datos de sus documentos se procesan estrictamente en la memoria activa de su navegador. Se descartan tan pronto como cierras la pestaña."
+      },
+      {
+        "question": "¿Puedo agregar varias firmas al mismo PDF?",
+        "answer": "Sí, puede colocar firmas en diferentes posiciones de las páginas antes de compilar y descargar el PDF final."
+      },
+      {
+        "question": "¿Qué tipos de archivos puedo cargar como firma?",
+        "answer": "Puede cargar archivos de imagen JPEG, JPG y PNG. Se recomiendan archivos PNG transparentes para obtener mejores resultados visuales."
+      }
+    ],
+    "seoTitle": "Firmar PDF",
+    "seoDescription": "Firme documentos PDF en línea. Dibuja, escribe o carga tu firma para colocarla en las páginas de forma local y segura.",
+    "createdAt": "2026-06-21T08:05:09.328Z",
+    "updatedAt": "2026-06-21T08:05:10.143Z"
+  },
+  {
+    "id": "j7icruc",
+    "toolSlug": "ssc-photo-resize",
+    "locale": "hi",
+    "title": "एसएससी फोटो का ऑनलाइन आकार बदलें",
+    "description": "कर्मचारी चयन आयोग (एसएससी) के आधिकारिक दिशानिर्देशों के अनुसार पासपोर्ट फ़ोटो का आकार बदलें, काटें और संपीड़ित करें। आसानी से सही दिनांक प्रारूप के साथ 50 केबी के अंतर्गत 3.5 x 4.5 सेमी फ़ोटो बनाएं।",
+    "faq": [
+      {
+        "question": "SSC आवेदनों के लिए फोटो का आकार क्या है?",
+        "answer": "कर्मचारी चयन आयोग को पासपोर्ट फोटो की आवश्यकता 3.5 सेमी चौड़ाई x 4.5 सेमी ऊंचाई, जो लगभग 354 x 472 पिक्सल है, जेपीईजी प्रारूप में सहेजी गई है।"
+      },
+      {
+        "question": "SSC फ़ोटो के लिए आकार सीमा क्या है?",
+        "answer": "एसएससी ऑनलाइन पोर्टल पर स्वीकार किए जाने के लिए तस्वीरों का फ़ाइल आकार 20KB और 50KB के बीच होना चाहिए।"
+      },
+      {
+        "question": "क्या मेरी फोटो पर तारीख छपी होनी चाहिए?",
+        "answer": "हाल के एसएससी नोटिस में, फोटो की तारीख प्रिंट करना अब सार्वभौमिक रूप से अनिवार्य नहीं है जब तक कि सक्रिय भर्ती अधिसूचना में स्पष्ट रूप से निर्दिष्ट न किया गया हो। कृपया वर्तमान अधिसूचना दिशानिर्देश जांचें।"
+      }
+    ],
+    "seoTitle": "एसएससी फोटो का ऑनलाइन आकार बदलें",
+    "seoDescription": "कर्मचारी चयन आयोग (एसएससी) के आधिकारिक दिशानिर्देशों के अनुसार पासपोर्ट फ़ोटो का आकार बदलें, काटें और संपीड़ित करें। आसानी से सही दिनांक प्रारूप के साथ 50 केबी के अंतर्गत 3.5 x 4.5 सेमी फ़ोटो बनाएं।",
+    "createdAt": "2026-06-21T08:05:09.830Z",
+    "updatedAt": "2026-06-21T08:05:09.830Z"
+  },
+  {
+    "id": "p28gk6h",
+    "toolSlug": "bg-remover",
+    "locale": "hi",
+    "title": "एआई बैकग्राउंड रिमूवर",
+    "description": "आपके ब्राउज़र में प्रोफेशनल-ग्रेड छवि अलगाव। हमारे एज-कंप्यूटिंग एआई का उपयोग करके सर्जिकल परिशुद्धता के साथ पृष्ठभूमि हटाएं - कोई डेटा अपलोड नहीं, 100% गोपनीयता।",
+    "faq": [
+      {
+        "question": "क्या यह सचमुच निजी है?",
+        "answer": "हाँ। अन्य टूल के विपरीत, हम आपकी फ़ाइल को 'अपलोड' नहीं करते हैं। AI मॉडल आपके ब्राउज़र पर डाउनलोड हो जाता है और स्थानीय रूप से चलता है। आपका डेटा आपकी मशीन पर रहता है."
+      },
+      {
+        "question": "क्या यह जटिल पृष्ठभूमि पर काम करता है?",
+        "answer": "हमारा एआई व्यस्त पृष्ठभूमि को संभालने में अत्यधिक सक्षम है, हालांकि विषय और पृष्ठभूमि के बीच कुछ अंतर होने पर परिणाम हमेशा सर्वोत्तम होते हैं।"
+      },
+      {
+        "question": "क्या फ़ाइल आकार की कोई सीमा है?",
+        "answer": "यह टूल आपके ब्राउज़र की मेमोरी में सुचारू प्रदर्शन सुनिश्चित करने के लिए 10 एमबी से कम की छवियों के साथ सबसे अच्छा काम करता है।"
+      },
+      {
+        "question": "क्या मुझे साइन अप करने की आवश्यकता है?",
+        "answer": "नहीं, आप खाता बनाए बिना या कोई व्यक्तिगत जानकारी प्रदान किए बिना तुरंत टूल का उपयोग कर सकते हैं।"
+      }
+    ],
+    "seoTitle": "एआई बैकग्राउंड रिमूवर",
+    "seoDescription": "आपके ब्राउज़र में प्रोफेशनल-ग्रेड छवि अलगाव। हमारे एज-कंप्यूटिंग एआई का उपयोग करके सर्जिकल परिशुद्धता के साथ पृष्ठभूमि हटाएं - कोई डेटा अपलोड नहीं, 100% गोपनीयता।",
+    "createdAt": "2026-06-21T08:05:10.367Z",
+    "updatedAt": "2026-06-21T08:05:10.367Z"
+  },
+  {
+    "id": "mz1wui5",
+    "toolSlug": "bg-remover",
+    "locale": "es",
+    "title": "Eliminador de fondo de IA",
+    "description": "Aislamiento de imágenes de nivel profesional en su navegador. Elimine fondos con precisión quirúrgica utilizando nuestra IA de computación de vanguardia: sin carga de datos, 100 % de privacidad.",
+    "faq": [
+      {
+        "question": "¿Es realmente privado?",
+        "answer": "Sí. A diferencia de otras herramientas, no \"cargamos\" su archivo. El modelo de IA se descarga en su navegador y se ejecuta localmente. Sus datos permanecen en su máquina."
+      },
+      {
+        "question": "¿Funciona en fondos complejos?",
+        "answer": "Nuestra IA es muy capaz de manejar fondos ocupados, aunque los resultados siempre son mejores cuando hay cierto contraste entre el sujeto y el fondo."
+      },
+      {
+        "question": "¿Existe un límite de tamaño de archivo?",
+        "answer": "La herramienta funciona mejor con imágenes de menos de 10 MB para garantizar un rendimiento fluido en la memoria de su navegador."
+      },
+      {
+        "question": "¿Necesito registrarme?",
+        "answer": "No. Puede utilizar la herramienta al instante sin crear una cuenta ni proporcionar ninguna información personal."
+      }
+    ],
+    "seoTitle": "Eliminador de fondo de IA",
+    "seoDescription": "Aislamiento de imágenes de nivel profesional en su navegador. Elimine fondos con precisión quirúrgica utilizando nuestra IA de computación de vanguardia: sin carga de datos, 100 % de privacidad.",
+    "createdAt": "2026-06-21T08:05:10.784Z",
+    "updatedAt": "2026-06-21T08:05:11.001Z"
+  },
+  {
+    "id": "1oyp4vo",
+    "toolSlug": "rotate-pdf",
+    "locale": "pt",
+    "title": "Girar PDF",
+    "description": "Gire as páginas do PDF em 90, 180 ou 270 graus. Altere as orientações das páginas localmente e com segurança em seu navegador.",
+    "faq": [
+      {
+        "question": "Posso girar páginas específicas?",
+        "answer": "Sim, você pode girar páginas visualmente usando nossa ferramenta 'Organizar páginas PDF'. Esta ferramenta dedicada Girar PDF aplica rotação a todas as páginas do documento."
+      },
+      {
+        "question": "A rotação diminuirá a qualidade do PDF?",
+        "answer": "Não, a rotação é uma alteração de parâmetro de metadados sem perdas. Simplesmente instrui o visualizador de PDF a exibir as páginas em um ângulo diferente."
+      },
+      {
+        "question": "Isso funciona em navegadores de celulares?",
+        "answer": "Sim, é totalmente responsivo e funciona perfeitamente no Safari, Chrome e em todas as janelas de visualização móveis."
+      }
+    ],
+    "seoTitle": "Girar PDF",
+    "seoDescription": "Gire as páginas do PDF em 90, 180 ou 270 graus. Altere as orientações das páginas localmente e com segurança em seu navegador.",
+    "createdAt": "2026-06-21T08:05:12.340Z",
+    "updatedAt": "2026-06-21T08:05:12.340Z"
+  },
+  {
+    "id": "f07frgk",
+    "toolSlug": "aadhaar-pdf-compressor",
+    "locale": "pt",
+    "title": "Compressor de PDF Aadhaar on-line",
+    "description": "Compacte arquivos PDF do e-Aadhaar sob o limite oficial de upload de 300 KB do UIDAI com segurança. Otimize seus documentos de verificação de identidade localmente na sandbox do seu navegador.",
+    "faq": [
+      {
+        "question": "Qual é a senha padrão para PDFs e-Aadhaar?",
+        "answer": "A senha padrão é uma combinação das primeiras quatro letras do seu nome em MAIÚSCULAS, seguidas do seu ano de nascimento (por exemplo, KART1990)."
+      },
+      {
+        "question": "Qual é o limite de tamanho de arquivo para uploads do Aadhaar?",
+        "answer": "O portal oficial UIDAI e a maioria das plataformas e-KYC exigem que os arquivos PDF Aadhaar tenham menos de 300 KB."
+      },
+      {
+        "question": "Meu documento Aadhaar está seguro?",
+        "answer": "Sim. Todo o processamento é executado 100% localmente no seu navegador. Seus documentos nunca tocam em nossos servidores ou em qualquer banco de dados em nuvem."
+      }
+    ],
+    "seoTitle": "Compressor de PDF Aadhaar on-line",
+    "seoDescription": "Compacte arquivos PDF do e-Aadhaar sob o limite oficial de upload de 300 KB do UIDAI com segurança. Otimize seus documentos de verificação de identidade localmente na sandbox do seu navegador.",
+    "createdAt": "2026-06-21T08:05:12.484Z",
+    "updatedAt": "2026-06-21T08:05:12.484Z"
+  },
+  {
+    "id": "bukpj7j",
+    "toolSlug": "add-page-numbers-to-pdf",
+    "locale": "pt",
+    "title": "Adicionar números de página ao PDF",
+    "description": "Adicione números de página aos seus documentos PDF localmente no seu navegador. Personalize formatos de paginação, posições, margens de deslocamento e detalhes de estilo com facilidade e segurança.",
+    "faq": [
+      {
+        "question": "Posso pular a numeração na primeira página?",
+        "answer": "Sim, você pode marcar a opção 'Pular folha de rosto' para pular a paginação na página 1 e começar a numerar a partir da página 2."
+      },
+      {
+        "question": "Meus arquivos estão armazenados em seus servidores?",
+        "answer": "Nunca. Todas as tarefas de paginação são executadas na memória local do navegador. Nenhum arquivo é transmitido para bancos de dados externos."
+      },
+      {
+        "question": "Quais formatos de paginação estão disponíveis?",
+        "answer": "Você pode escolher entre 'Página X de Y', 'Página X', 'X de Y' ou números brutos 'X'."
+      }
+    ],
+    "seoTitle": "Adicionar números de página ao PDF",
+    "seoDescription": "Adicione números de página aos seus documentos PDF localmente no seu navegador. Personalize formatos de paginação, posições, margens de deslocamento e detalhes de estilo com facilidade e segurança.",
+    "createdAt": "2026-06-21T08:05:12.524Z",
+    "updatedAt": "2026-06-21T08:05:12.524Z"
+  },
+  {
+    "id": "dvu4wc3",
+    "toolSlug": "crop-pdf",
+    "locale": "pt",
+    "title": "Cortar PDF",
+    "description": "Apare margens de páginas, ajuste bordas visíveis e recorte folhas PDF localmente e com segurança em seu navegador.",
+    "faq": [
+      {
+        "question": "Cortar um PDF altera seus dados reais?",
+        "answer": "O corte modifica os limites visíveis (CropBox) da página PDF, de modo que os leitores em conformidade ocultam as áreas cortadas. O texto e as camadas permanecem no arquivo para recuperação padrão, a menos que sejam nivelados."
+      },
+      {
+        "question": "Posso cortar páginas únicas ou todas as páginas?",
+        "answer": "Atualmente, nossa ferramenta corta todas as páginas uniformemente para garantir resultados de layout consistentes."
+      },
+      {
+        "question": "Esta ferramenta é gratuita?",
+        "answer": "Sim! O Crop PDF do ToolWala AI é totalmente gratuito, seguro e não tem limites de uso diário."
+      }
+    ],
+    "seoTitle": "Cortar PDF",
+    "seoDescription": "Apare margens de páginas, ajuste bordas visíveis e recorte folhas PDF localmente e com segurança em seu navegador.",
+    "createdAt": "2026-06-21T08:05:12.589Z",
+    "updatedAt": "2026-06-21T08:05:12.589Z"
+  },
+  {
+    "id": "cfh66ce",
+    "toolSlug": "ssc-photo-resize",
+    "locale": "pt",
+    "title": "Redimensionamento de fotos SSC on-line",
+    "description": "Redimensione, corte e comprima fotos de passaporte de acordo com as diretrizes oficiais da Comissão de Seleção de Pessoal (SSC). Gere facilmente fotos de 3,5 x 4,5 cm com menos de 50 KB com formatos de data corretos.",
+    "faq": [
+      {
+        "question": "Qual é o tamanho da foto para aplicações SSC?",
+        "answer": "A Comissão de Seleção de Pessoal exige que as fotos para passaporte tenham 3,5 cm de largura x 4,5 cm de altura, o que equivale a aproximadamente 354 x 472 pixels, salvas em formato JPEG."
+      },
+      {
+        "question": "Qual é o limite de tamanho para fotos SSC?",
+        "answer": "As fotos devem ter tamanho de arquivo entre 20 KB e 50 KB para serem aceitas no portal online do SSC."
+      },
+      {
+        "question": "Minha foto deve ter a data impressa?",
+        "answer": "Em avisos recentes do SSC, a impressão da data da fotografia já não é universalmente obrigatória, a menos que seja explicitamente especificada na notificação de recrutamento ativa. Verifique as diretrizes de notificação atuais."
+      }
+    ],
+    "seoTitle": "Redimensionamento de fotos SSC on-line",
+    "seoDescription": "Redimensione, corte e comprima fotos de passaporte de acordo com as diretrizes oficiais da Comissão de Seleção de Pessoal (SSC). Gere facilmente fotos de 3,5 x 4,5 cm com menos de 50 KB com formatos de data corretos.",
+    "createdAt": "2026-06-21T08:05:13.496Z",
+    "updatedAt": "2026-06-21T08:05:14.981Z"
+  },
+  {
+    "id": "0icbutz",
+    "toolSlug": "compress-pdf",
+    "locale": "pt",
+    "title": "Compactar PDF",
+    "description": "Reduza o tamanho dos seus documentos PDF sem perder a qualidade visual. Nosso otimizador local é executado inteiramente na sandbox do seu navegador, mantendo seus documentos 100% seguros.",
+    "faq": [
+      {
+        "question": "Compactar PDF é seguro?",
+        "answer": "Absolutamente. Toda a otimização é executada localmente na memória do seu navegador. Seus documentos nunca chegam aos nossos servidores."
+      },
+      {
+        "question": "Funciona em PDFs protegidos por senha?",
+        "answer": "Não, você deve primeiro desbloquear PDFs protegidos por senha antes que nosso compressor possa analisar e otimizar suas estruturas internas."
+      },
+      {
+        "question": "Existe um limite para o tamanho dos arquivos?",
+        "answer": "Como a compactação é executada na memória da guia do navegador, recomendamos o uso de arquivos com menos de 100 MB para obter a estabilidade ideal do sistema."
+      }
+    ],
+    "seoTitle": "Compactar PDF",
+    "seoDescription": "Reduza o tamanho dos seus documentos PDF sem perder a qualidade visual. Nosso otimizador local é executado inteiramente na sandbox do seu navegador, mantendo seus documentos 100% seguros.",
+    "createdAt": "2026-06-21T08:05:13.539Z",
+    "updatedAt": "2026-06-21T08:05:18.951Z"
+  },
+  {
+    "id": "pqr41o8",
+    "toolSlug": "signature-resize",
+    "locale": "pt",
+    "title": "Redimensionamento de assinatura on-line",
+    "description": "Redimensione, corte e compacte digitalizações de assinaturas de acordo com os padrões oficiais do portal indiano instantaneamente. Gere assinaturas limpas para painéis de recrutamento, concursos de serviço público e aplicativos bancários sem fazer upload de arquivos para servidores externos.",
+    "faq": [
+      {
+        "question": "Qual é o tamanho oficial da assinatura para exames SSC?",
+        "answer": "A Comissão de Seleção de Pessoal (SSC) exige dimensões de assinatura de 6,0 cm de largura x 3,0 cm de altura (proporção 2:1) e um tamanho de arquivo estritamente entre 10 KB e 20 KB."
+      },
+      {
+        "question": "Que cor de tinta devo usar para assinaturas oficiais?",
+        "answer": "A maioria dos portais governamentais recomenda assinar com tinta preta em papel branco comum para digitalização e validação de alto contraste."
+      },
+      {
+        "question": "A minha foto de assinatura é segura?",
+        "answer": "Sim. Todo o corte, filtragem e compactação acontecem inteiramente no lado do cliente. A imagem da sua assinatura é processada localmente e nunca carregada em nossos servidores."
+      }
+    ],
+    "seoTitle": "Redimensionamento de assinatura on-line",
+    "seoDescription": "Redimensione, corte e compacte digitalizações de assinaturas de acordo com os padrões oficiais do portal indiano instantaneamente. Gere assinaturas limpas para painéis de recrutamento, concursos de serviço público e aplicativos bancários sem fazer upload de arquivos para servidores externos.",
+    "createdAt": "2026-06-21T08:05:13.614Z",
+    "updatedAt": "2026-06-21T08:05:18.733Z"
+  },
+  {
+    "id": "655rlma",
+    "toolSlug": "gov-form-pdf-compressor",
+    "locale": "pt",
+    "title": "Compressor de PDF de formulário governamental on-line",
+    "description": "Compacte anexos PDF de aplicativos governamentais dentro dos limites padrão de tamanho do portal. Selecione colchetes de tamanho alvo (100 KB, 200 KB, 300 KB, 500 KB) para atender aos requisitos EPFO, NSDL, SSC e UPSC.",
+    "faq": [
+      {
+        "question": "Qual é o limite de tamanho de PDF para uploads de EPFO?",
+        "answer": "O portal da Employees' Provident Fund Organization (EPFO) normalmente exige que os anexos em PDF (como declarações conjuntas ou cadernetas bancárias) tenham tamanho inferior a 100 KB ou 200 KB."
+      },
+      {
+        "question": "Minha assinatura PDF permanecerá válida após a compactação?",
+        "answer": "Sim, nosso otimizador preserva camadas de texto e assinatura sem rasterizá-las, garantindo que as assinaturas digitais permaneçam válidas."
+      },
+      {
+        "question": "Meu documento está seguro?",
+        "answer": "Sim, todo o processamento é executado 100% localmente no seu navegador. Seus documentos nunca tocam em nossos servidores ou em qualquer banco de dados em nuvem."
+      }
+    ],
+    "seoTitle": "Compressor de PDF de formulário governamental on-line",
+    "seoDescription": "Compacte anexos PDF de aplicativos governamentais dentro dos limites padrão de tamanho do portal. Selecione colchetes de tamanho alvo (100 KB, 200 KB, 300 KB, 500 KB) para atender aos requisitos EPFO, NSDL, SSC e UPSC.",
+    "createdAt": "2026-06-21T08:05:13.710Z",
+    "updatedAt": "2026-06-21T08:05:18.838Z"
+  },
+  {
+    "id": "vqgzoj4",
+    "toolSlug": "sign-pdf",
+    "locale": "pt",
+    "title": "Assinar PDF",
+    "description": "Assine documentos PDF online. Desenhe, digite ou carregue sua assinatura para colocá-la nas páginas de forma local e segura.",
+    "faq": [
+      {
+        "question": "Minha assinatura é salva no ToolWala?",
+        "answer": "Não, a sua assinatura e os dados do documento são processados ​​estritamente na memória ativa do seu navegador. Eles são descartados assim que você fecha a aba."
+      },
+      {
+        "question": "Posso adicionar várias assinaturas ao mesmo PDF?",
+        "answer": "Sim, você pode colocar assinaturas em diferentes posições nas páginas antes de compilar e baixar o PDF final."
+      },
+      {
+        "question": "Que tipos de arquivo posso enviar como assinatura?",
+        "answer": "Você pode fazer upload de arquivos de imagem JPEG, JPG e PNG. Arquivos PNG transparentes são recomendados para melhores resultados visuais."
+      }
+    ],
+    "seoTitle": "Assinar PDF",
+    "seoDescription": "Assine documentos PDF online. Desenhe, digite ou carregue sua assinatura para colocá-la nas páginas de forma local e segura.",
+    "createdAt": "2026-06-21T08:05:13.741Z",
+    "updatedAt": "2026-06-21T08:05:18.678Z"
+  },
+  {
+    "id": "2ainw9v",
+    "toolSlug": "remove-pages",
+    "locale": "pt",
+    "title": "Remover páginas PDF",
+    "description": "Exclua páginas desnecessárias de seus arquivos PDF. Crie documentos mais limpos e otimizados localmente na sandbox do seu navegador.",
+    "faq": [
+      {
+        "question": "Como especifico páginas a serem excluídas?",
+        "answer": "Você pode inserir números de página separados por vírgulas (por exemplo, 2, 5) ou especificar intervalos usando travessões (por exemplo, 3-7)."
+      },
+      {
+        "question": "Isso exclui o arquivo original do meu computador?",
+        "answer": "Não, nossa ferramenta não modifica arquivos no seu computador. Ele gera uma cópia nova e modificada que você baixa para o seu dispositivo."
+      },
+      {
+        "question": "Existe um limite de quantas páginas posso excluir?",
+        "answer": "Não, você pode remover quantas páginas quiser, desde que pelo menos uma página permaneça no documento final."
+      }
+    ],
+    "seoTitle": "Remover páginas PDF",
+    "seoDescription": "Exclua páginas desnecessárias de seus arquivos PDF. Crie documentos mais limpos e otimizados localmente na sandbox do seu navegador.",
+    "createdAt": "2026-06-21T08:05:14.573Z",
+    "updatedAt": "2026-06-21T08:05:18.898Z"
+  },
+  {
+    "id": "6c26gwe",
+    "toolSlug": "upsc-photo-resize",
+    "locale": "pt",
+    "title": "Redimensionamento de fotos UPSC on-line",
+    "description": "Formate e redimensione fotos de passaporte para registro de inscrição on-line da Union Public Service Commission (UPSC). Cumpre as regras obrigatórias de dimensão 350 x 350 pixels e fundo branco.",
+    "faq": [
+      {
+        "question": "Qual é o tamanho da foto para UPSC CSE?",
+        "answer": "O UPSC exige que as fotos tenham exatamente 350 pixels de largura x 350 pixels de altura (proporção 1:1), com tamanho de arquivo entre 20 KB e 40 KB."
+      },
+      {
+        "question": "Qual cor de fundo é compatível com fotos UPSC?",
+        "answer": "As diretrizes da UPSC recomendam um fundo branco simples para todos os uploads de fotos para passaporte."
+      },
+      {
+        "question": "Minha foto de registro é segura?",
+        "answer": "Sim, nossa ferramenta roda totalmente na memória do seu navegador. Seus documentos pessoais nunca são carregados em nenhum servidor."
+      }
+    ],
+    "seoTitle": "Redimensionamento de fotos UPSC on-line",
+    "seoDescription": "Formate e redimensione fotos de passaporte para registro de inscrição on-line da Union Public Service Commission (UPSC). Cumpre as regras obrigatórias de dimensão 350 x 350 pixels e fundo branco.",
+    "createdAt": "2026-06-21T08:05:14.637Z",
+    "updatedAt": "2026-06-21T08:05:15.030Z"
+  },
+  {
+    "id": "11w4176",
+    "toolSlug": "bg-remover",
+    "locale": "pt",
+    "title": "Removedor de fundo AI",
+    "description": "Isolamento de imagem de nível profissional em seu navegador. Remova fundos com precisão cirúrgica usando nossa IA de computação de ponta — sem upload de dados, 100% de privacidade.",
+    "faq": [
+      {
+        "question": "É realmente privado?",
+        "answer": "Sim. Ao contrário de outras ferramentas, não “carregamos” o seu arquivo. O modelo de IA é baixado no seu navegador e executado localmente. Seus dados permanecem em sua máquina."
+      },
+      {
+        "question": "Funciona em fundos complexos?",
+        "answer": "Nossa IA é altamente capaz de lidar com fundos movimentados, embora os resultados sejam sempre melhores quando há algum contraste entre o assunto e o fundo."
+      },
+      {
+        "question": "Existe um limite de tamanho de arquivo?",
+        "answer": "A ferramenta funciona melhor com imagens com menos de 10 MB para garantir um bom desempenho na memória do seu navegador."
+      },
+      {
+        "question": "Preciso me inscrever?",
+        "answer": "Não. Você pode usar a ferramenta instantaneamente sem criar uma conta ou fornecer qualquer informação pessoal."
+      }
+    ],
+    "seoTitle": "Removedor de fundo AI",
+    "seoDescription": "Isolamento de imagem de nível profissional em seu navegador. Remova fundos com precisão cirúrgica usando nossa IA de computação de ponta — sem upload de dados, 100% de privacidade.",
+    "createdAt": "2026-06-21T08:05:19.967Z",
+    "updatedAt": "2026-06-21T08:05:20.087Z"
   }
 ]

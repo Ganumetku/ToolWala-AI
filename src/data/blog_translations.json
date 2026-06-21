@@ -949,5 +949,245 @@
         "order": 12
       }
     ]
+  },
+  "es:photo-resize-to-20kb": {
+    "title": "",
+    "excerpt": "El uso de una herramienta local dedicada como [Exam Photo Resizer de ToolWala](https://toolwala.co/tools/exam-photo-resizer) le ayuda a lograr el equilibrio correcto entre si...",
+    "content": "## 2. Por qué esto es importante: la razón detrás del límite de 20 KB\nPara los candidatos que solicitan puestos en la Comisión de Selección de Personal (SSC), las juntas de reclutamiento ferroviario (RRB) o los departamentos de policía estatales, el límite de 20 KB puede resultar confuso. ¿Por qué los portales imponen tamaños de archivos tan pequeños?\n\n### Restricciones técnicas de la base de datos\nLos portales gubernamentales manejan millones de solicitudes durante los ciclos de contratación. Para procesar, cargar y almacenar este volumen de registros, los sistemas imponen límites de tamaño estrictos. Mantener las fotos por debajo de 20 KB ahorra ancho de banda y almacenamiento del servidor y garantiza que el portal se cargue rápidamente incluso en áreas rurales con velocidades de Internet más lentas.\n\n### Necesidades de verificación biométrica\nSi bien el tamaño del archivo debe ser pequeño, los marcadores biométricos deben ser legibles. El sistema requiere un contraste nítido en los ojos, la nariz y los bordes faciales. Si su foto se comprime con herramientas básicas, los detalles se vuelven borrosos, lo que provoca rechazos de solicitudes.\n\nUsing a dedicated local tool like [Cambiador de tamaño de fotos de examen de ToolWala](https://toolwala.co/tools/exam-photo-resizer) helps you achieve the correct balance between size and quality.\n\n---\n\n## 3. Guía paso a paso para cambiar el tamaño de una foto a 20 KB\nA continuación se explica cómo comprimir su foto a menos de 20 KB:\n\n### Paso 1: capturar o escanear una fotografía original de alta calidad\nUn error común es comenzar con una fotografía de baja resolución. Comience siempre con una foto clara y de alta resolución:\n1. **Imagen de origen**: Utilice una fotografía suya clara y bien iluminada sobre un fondo liso.\n2. **Características claras**: asegúrese de que ambas orejas sean visibles, que no haya sombras en su rostro y que no esté usando anteojos, sombreros o máscaras.\n\n### Paso 2: Subir a ToolWala\n1. Navegue hasta [Resizer de fotos de examen de ToolWala] (https://toolwala.co/tools/exam-photo-resizer).\n2. Sube tu foto de origen.\n3. Seleccione su portal preestablecido. Por ejemplo, seleccione **SSC (3,5x4,5 cm)**.\n4. La herramienta aplica automáticamente el límite de recorte de relación de aspecto correcta. Ajuste la caja para alinear su cabeza en el centro.\n\n### Paso 3: comprimir a 20 KB\n1. Utilice el **Control deslizante de tamaño de destino** para establecer el objetivo de compresión en **20 KB**.\n2. Los algoritmos del lado del cliente de ToolWala ajustan los niveles de compresión localmente en la memoria de su navegador hasta que la salida coincida con su objetivo.\n3. Haga clic en **Descargar** para guardar el JPEG optimizado.\n\n---\n\n## 4. Guía de dimensiones para portales comunes de 20 KB\nLa siguiente tabla enumera las pautas de dimensiones y tamaño de archivo para portales que requieren cargas de 20 KB:\n\n| Portal/Examen | Dimensiones requeridas (cm) | Dimensiones requeridas (píxeles) | Rango de tamaño de archivo aceptado | Formato de archivo aceptado |\n| :--- | :--- | :--- | :--- | :--- |\n| **SSC (Comisión de Selección de Personal)** | 3,5 x 4,5 cm | 354 x 472 píxeles | 20 KB a 50 KB (Fotos) | JPEG/JPEG |\n| **Carga de firma SSC** | 6,0 x 3,0 cm | 250 x 125 píxeles | 10 KB a 20 KB | JPEG/JPEG |\n| **Policía Bharti (niveles estatales)** | 3,5 x 4,5 cm | 354 x 472 píxeles | 10 KB a 20 KB | JPEG/JPEG |\n| **Reclutamiento GDS de la oficina de correos** | 3,5 x 4,5 cm | 354 x 472 píxeles | Menos de 20 KB | JPEG/JPEG |\n| **Aplicaciones UPSSSC** | 3,5 x 4,5 cm | 354 x 472 píxeles | 10 KB a 20 KB | JPEG/JPEG |\n\n---\n\n## 5. Problemas y soluciones comunes\nAl cambiar el tamaño de fotografías de menos de 20 KB, los candidatos suelen encontrarse con estos problemas:\n\n- **Problema 1: La foto se ve extremadamente borrosa después de la compresión**\n  - *Solución*: No recortes la foto demasiado antes de subirla. Cargue un retrato de alta resolución, aplique el ajuste preestablecido y deje que ToolWala se encargue de la compresión. Utiliza optimización inteligente para mantener nítidos los detalles faciales.\n\n- **Problema 2: La carga falla con \"Relación de aspecto no válida\"**\n  - *Solución*: Los portales gubernamentales coinciden con las proporciones de píxeles (normalmente 3,5x4,5 cm o relación de aspecto 7:9). Si recorta manualmente sin una herramienta, su relación de aspecto no coincidirá. Seleccione el ajuste preestablecido correcto en ToolWala para garantizar el cumplimiento.\n\n- **Problema 3: La carga falla con \"Tamaño de archivo fuera de rango\"**\n  - *Solución*: Establezca el control deslizante en ToolWala en 18 KB o 19 KB. Esto mantiene el archivo de forma segura por debajo del límite de 20 KB sin provocar errores de umbral.\n\n---\n\n## 6. Beneficios de utilizar el compresor de ToolWala\n- **Procesamiento 100% del lado del cliente**: Tus fotos personales se procesan localmente en tu dispositivo, protegiendo tu privacidad.\n- **Compresiones objetivo precisas**: nuestra herramienta calcula los parámetros de tamaño localmente en su navegador, lo que garantiza que los archivos se ajusten exactamente a los límites.\n- **Preajustes específicos del portal**: recorte y dimensione fotografías para NSDL, SSC, UPSC y portales estatales al instante.\n- **Cero tarifas**: sin suscripciones, registros ni marcas de agua.\n\n---\n\n## 7. Preguntas frecuentes (10 preguntas frecuentes)\n\n### P1: ¿Por qué falla el cambio de tamaño de mi foto a 20 KB en el portal?\nSi el tamaño del archivo es correcto, verifique la relación de aspecto (debe ser 3,5x4,5 cm) y el formato (debe ser JPEG). Nuestro redimensionador maneja ambas configuraciones automáticamente.\n\n### P2: ¿Comprimir a 20 KB reduce la calidad de impresión?\nSí, la compresión reduce la resolución. Sin embargo, el algoritmo de ToolWala mantiene nítidos los contornos de los ojos, la nariz y el rostro para que sigan siendo reconocibles.\n\n### P3: ¿Es seguro subir mi foto aquí?\nSí. ToolWala procesa archivos localmente en la memoria de su navegador, sin cargas en el servidor.\n\n### P4: ¿Puedo convertir un PNG a un JPEG de 20 KB?\nSí, nuestra herramienta acepta archivos PNG y los exporta automáticamente como JPEG optimizados.\n\n### P5: ¿Cuál es el tamaño de píxel de una foto de 20 KB?\nA 300 DPI, una fotografía de 3,5x4,5 cm corresponde a 354 x 472 píxeles.\n\n### P6: ¿Puedo usar esta herramienta en mi teléfono inteligente?\nSí, nuestra herramienta responde y es compatible con todos los navegadores móviles.\n\n### P7: ¿Por qué las juntas de reclutamiento utilizan un límite de 20 KB?\nReduce los requisitos de ancho de banda del servidor y acelera la carga de la base de datos.\n\n### P8: ¿Qué color de fondo se requiere para las fotografías de examen?\nLa mayoría de los tableros de examen requieren un fondo blanco sólido o de color claro.\n\n### P9: ¿Puedo usar gafas en la foto?\nLas regulaciones generalmente prohíben gafas, gorras o sombreros para garantizar un mapeo biométrico claro.\n\n### P10: ¿Cómo elimino las sombras de mi fondo?\nUtilice la iluminación de la ventana para una cobertura uniforme y active la opción de eliminación de fondo en ToolWala.\n\n---\n\n## 8. Herramientas relacionadasHerramientas Wala\n- [Signature Resizer](https://toolwala.co/tools/signature-resize): recorta y comprime firmas a menos de 20 KB.\n- [SSC Photo Resizer](https://toolwala.co/tools/ssc-photo-resize): Formatee las fotografías de pasaporte según las especificaciones oficiales de la Comisión de Selección de Personal.\n- [Eliminador de fondo AI](https://toolwala.co/tools/bg-remover): elimine los fondos y establezca fondos blancos sólidos.\n- [Compresor de PDF de formularios gubernamentales] (https://toolwala.co/tools/gov-form-pdf-compressor): comprime documentos PDF según los límites de carga estándar.\n\n---\n\n## 9. Sugerencias de enlaces internos\n- Enlace a este artículo desde la página `/landing/photo-resize-to-20kb/`.\n- Enlace desde este artículo a nuestra [Guía SSC Signature Resizer](/blog/resize-scanned-signature-ssc-cgl-portal) y [Por qué SSC rechazó la guía de soluciones fotográficas de su aplicación](/blog/why-ssc-rejected-application-photo-solutions).\n\n---\n\n## 10. Conclusión\nFormatting passport photos to meet a strict 20KB limit can be tricky. However, by using a local, preset-based compressor like [Cambiador de tamaño de fotos de examen de ToolWala](https://toolwala.co/tools/exam-photo-resizer), you can easily generate compliant JPEGs right from your browser.\n\n---\n\n## 11. Llamado a la acción\nReady to resize? Open [Cambiador de tamaño de fotos de examen de ToolWala](https://toolwala.co/tools/exam-photo-resizer) and compress your photo under 20KB instantly!\n\n---\n\n## Descripción general de la meta SEO\n- **Palabra clave de enfoque**: cambiar el tamaño de la foto a 20 kb\n- **Categoría sugerida**: Herramientas de imagen\n- **Etiquetas sugeridas**: Compresión de imágenes, preparación de exámenes, fotografía de pasaporte, SSC, herramientas en línea",
+    "seoMetadata": {
+      "title": "Cambiar el tamaño de la foto a 20 KB en línea: comprimir fotos del examen",
+      "description": "Cambie el tamaño y comprima fotografías de pasaporte de menos de 20 KB en línea de forma gratuita. Se ajusta a los requisitos del SSC, los portales de contratación estatales y las aplicaciones policiales.",
+      "keywords": "Compresión de imágenes, preparación de exámenes, fotografía de pasaporte, SSC, herramientas en línea"
+    },
+    "faqs": [
+      {
+        "id": "photo-resize-to-20kb-faq-1",
+        "question": "¿Por qué falla el cambio de tamaño de mi foto a 20 KB en el portal?",
+        "answer": "Si el tamaño del archivo es correcto, verifique la relación de aspecto (debe ser 3,5x4,5 cm) y el formato (debe ser JPEG). Nuestro redimensionador maneja ambas configuraciones automáticamente.",
+        "order": 1
+      },
+      {
+        "id": "photo-resize-to-20kb-faq-2",
+        "question": "¿Comprimir a 20 KB reduce la calidad de impresión?",
+        "answer": "Sí, la compresión reduce la resolución. Sin embargo, el algoritmo de ToolWala mantiene nítidos los contornos de los ojos, la nariz y el rostro para que sigan siendo reconocibles.",
+        "order": 2
+      },
+      {
+        "id": "photo-resize-to-20kb-faq-3",
+        "question": "¿Es seguro subir mi foto aquí?",
+        "answer": "Sí. ToolWala procesa archivos localmente en la memoria de su navegador, sin cargas en el servidor.",
+        "order": 3
+      },
+      {
+        "id": "photo-resize-to-20kb-faq-4",
+        "question": "¿Puedo convertir un PNG a un JPEG de 20 KB?",
+        "answer": "Sí, nuestra herramienta acepta archivos PNG y los exporta automáticamente como JPEG optimizados.",
+        "order": 4
+      },
+      {
+        "id": "photo-resize-to-20kb-faq-5",
+        "question": "¿Cuál es el tamaño de píxel de una foto de 20 KB?",
+        "answer": "A 300 DPI, una fotografía de 3,5x4,5 cm corresponde a 354 x 472 píxeles.",
+        "order": 5
+      },
+      {
+        "id": "photo-resize-to-20kb-faq-6",
+        "question": "¿Puedo utilizar esta herramienta en mi teléfono inteligente?",
+        "answer": "Sí, nuestra herramienta responde y es compatible con todos los navegadores móviles.",
+        "order": 6
+      },
+      {
+        "id": "photo-resize-to-20kb-faq-7",
+        "question": "¿Por qué las juntas de reclutamiento utilizan un límite de 20 KB?",
+        "answer": "Reduce los requisitos de ancho de banda del servidor y acelera la carga de la base de datos.",
+        "order": 7
+      },
+      {
+        "id": "photo-resize-to-20kb-faq-8",
+        "question": "¿Qué color de fondo se requiere para las fotografías de examen?",
+        "answer": "La mayoría de los tableros de examen requieren un fondo blanco sólido o de color claro.",
+        "order": 8
+      },
+      {
+        "id": "photo-resize-to-20kb-faq-9",
+        "question": "¿Puedo usar gafas en la foto?",
+        "answer": "Las regulaciones generalmente prohíben gafas, gorras o sombreros para garantizar un mapeo biométrico claro.",
+        "order": 9
+      },
+      {
+        "id": "photo-resize-to-20kb-faq-10",
+        "question": "¿Cómo elimino las sombras de mi fondo?",
+        "answer": "Utilice la iluminación de la ventana para una cobertura uniforme y active la opción de eliminación de fondo en ToolWala.",
+        "order": 10
+      }
+    ]
+  },
+  "pt:passport-size-photo-maker-online-free": {
+    "title": "",
+    "excerpt": "Se sua foto tiver sombras, fundo escuro ou dimensões incorretas, esses scanners biométricos não conseguirão isolar sua estrutura facial. Isso leva à rejeição....",
+    "content": "## 2. Por que isso é importante: a importância da conformidade biométrica\nA biometria mudou a forma como os governos gerem a segurança nas fronteiras e nos portais. As fotos padrão do passaporte não são mais apenas identificação visual; eles são modelos estruturais processados ​​por algoritmos para mapear suas coordenadas faciais exclusivas (a distância entre os olhos, o formato do nariz e a linha da mandíbula).\n\nSe sua foto tiver sombras, fundo escuro ou dimensões incorretas, esses scanners biométricos não conseguirão isolar sua estrutura facial. Isso leva à rejeição.\n\n### O custo das rejeições\nUma foto incorreta no tamanho do passaporte pode levar a:\n- **Rejeição de aplicativos**: Portais como o Passport Seva Kendra (PSK) na Índia ou o login do Visa dos EUA sinalizarão automaticamente uploads não conformes.\n- **Cronogramas atrasados**: pode levar semanas para descobrir que sua foto foi rejeitada, atrasando planos de viagem ou marcações de visto.\n- **Perda financeira**: Pagar por repetidas visitas ao estúdio, imprimir folhas e taxas de reaplicação de visto aumenta rapidamente.\n\nUsing a dedicated local tool like [Criador de fotos para passaporte do ToolWala](https://toolwala.co/tools/passport-photo-maker) helps you avoid these issues, allowing you to crop and format photos to exact specifications locally on your device.\n\n---\n\n## 3. Guia passo a passo para criar fotos para passaporte em casa\nCriar uma foto oficial para passaporte em casa é simples se você seguir estas etapas:\n\n### Etapa 1: capturar o retrato bruto\nVocê não precisa de uma câmera DSLR profissional; um smartphone moderno é mais do que capaz.\n1. **Encontre uma boa iluminação**: Fique em frente a uma janela com luz natural. Evite iluminação superior, que cria sombras escuras sob os olhos e nariz.\n2. **Configure o plano de fundo**: Fique contra uma parede sólida e de cor clara (de preferência branca ou cinza claro). Mantenha uma distância de 30 a 60 centímetros da parede para evitar projetar sombra sobre ela.\n3. **Postura e expressão**: fique em pé, mantenha os ombros nivelados e olhe diretamente para a lente da câmera. Mantenha sua expressão neutra – não sorria, franzir a testa ou inclinar a cabeça. Ambos os olhos devem estar abertos e claramente visíveis.\n\n### Etapa 2: cortar e redimensionar usando ToolWala\n1. Navegue até [Criador de fotos para passaporte do ToolWala](https://toolwala.co/tools/passport-photo-maker).\n2. Carregue seu retrato bruto.\n3. Selecione a predefinição do país de destino no menu. Por exemplo, selecione **Passaporte da Índia (3,5x4,5 cm)**.\n4. Alinhe as diretrizes visuais sobre seu rosto. A cabeça deve ocupar de 70% a 80% do quadro.\n5. Ative o botão **Remover plano de fundo** para limpar os detalhes e definir um fundo branco puro.\n\n### Etapa 3: imprimir e salvar\n1. Baixe o único JPEG otimizado para o seu dispositivo.\n2. Se precisar de impressões físicas, baixe a folha de layout para impressão (por exemplo, modelo de 4 x 6 polegadas) que organiza várias cópias da foto lado a lado.\n3. Imprima usando papel fotográfico brilhante de alta qualidade em casa ou em uma papelaria local.\n\n---\n\n## 4. Principais especificações de dimensionamento biométrico\nDiferentes portais e embaixadas impõem regras de dimensões distintas. A tabela abaixo lista as especificações padrão de passaporte e visto:\n\n| País/Portal | Tamanho em milímetros | Tamanho em polegadas/pixels | Cor de fundo | Regra de cobertura facial |\n| :--- | :--- | :--- | :--- | :--- |\n| **Passaporte da Índia** | 35x45mm | 1,38\" x 1,77\" (413x531 px) | Branco Sólido | 70% - 80% do quadro |\n| **Visto e passaporte dos EUA** | 51x51mm | 2\" x 2\" (600x600 px) | Branco Sólido | 50% - 69% do quadro |\n| **Visto Schengen** | 35x45mm | 1,38\" x 1,77\" (413x531 px) | Cinza Claro / Branco | 70% - 80% do quadro |\n| **Cartão OCI (Índia)** | 51x51mm | 2\" x 2\" (600x600 px) | Branco Sólido | 80% do quadro |\n| **Passaporte do Canadá** | 50x70mm | 2\" x 2,75\" (590x826 px) | Branco Sólido | 50% - 70% do quadro |\n\n---\n\n## 5. Problemas e soluções comuns\nMesmo com ferramentas, os candidatos cometem pequenos erros que levam a rejeições. Aqui estão os problemas comuns e como resolvê-los:\n\n- **Problema 1: Sombras no rosto ou no fundo**\n  - *Por que falha*: As sombras distorcem os marcadores biométricos.\n  - *Solução*: Use iluminação difusa voltada para a frente. Fique a alguns metros de distância da parede para evitar sombras atrás de você e use o removedor de fundo do ToolWala para substituir o pano de fundo.\n\n- **Problema 2: Brilho nos óculos**\n  - *Por que falha*: Os olhos devem estar completamente visíveis.\n  - *Solução*: Remova seus óculos. Mesmo se você usar lentes graduadas, os escritórios de passaportes preferem fotos sem elas para evitar reflexos e rejeições de tonalidade das lentes.\n\n- **Problema 3: Efeito de olhos vermelhos**\n  - *Por que falha*: Altera as métricas da cor dos olhos.\n  - *Solução*: Evite usar o flash da câmera. Atenha-se à iluminação natural das janelas.\n\n- **Problema 4: o rosto ocupa muito pouco ou muito espaço no quadro**\n  - *Por que falha*: Os modelos biométricos exigem proporções rígidas entre rosto e quadro (geralmente 70-80%).\n  - *Solução*: Use a grade de alinhamento na caixa de corte do ToolWala para centralizar seu rosto entre as guias.\n\n---\n\n## 6. Benefícios de usar o editor online gratuito do ToolWala\nO Passport Size Photo Maker da ToolWala foi projetado para tornar a preparação de documentos rápida e segura:\n- **100% processamento do lado do cliente**: Ao contrário de outros editores online, o ToolWala é executado inteiramente no cache do seu navegador. Suas fotos nunca são enviadas para nenhum servidor remoto, mantendo seus dados biométricos pessoais seguros.\n- **Predefinições pré-configuradas**: Ignore os cálculos manuais. Selecione seu país ou portal de destino (NSDL, SSC, UPSC, OCI) e a ferramenta formata automaticamente a caixa de corte correta.\n- **Remoção avançada de fundo**: edite fundos ocupados e defina fundos brancos limpos instantaneamente.\n- **Saída de alto DPI**: Salve fotos em 300 DPI (pontos por polegada) para garantir uma qualidade de impressão nítida.\n\n---\n\n## 7. Perguntas frequentes (10 perguntas frequentes)\n\n### Q1: Este criador de fotos para passaporte é totalmente gratuito?\nSim. O Passport Photo Maker da ToolWala é 100% gratuito, sem inscrições, assinaturas ou marcas d'água.\n\n### Q2: Qual é o tamanho oficial da foto do passaporte na Índia?\nO requisito de foto para passaporte indiano é de 3,5 cm x 4,5 cm (35 mm x 45 mm) com fundo branco sólido. O rosto deve cobrir 70-80% da foto.\n\n### Q3: Posso sorrir na foto do meu passaporte?\nNão. Os regulamentos padrão exigem uma expressão facial neutra, com os olhos abertos e a boca fechada. Sorrir pode alterar suas medidas biométricas.\n\n### Q4: As fotos tiradas com um telefone celular são aceitáveis?\nSim, desde que sejam nítidos, tirados com boa iluminação e cortados nas dimensões corretas usando nossas predefinições de formatação.\n\n### Q5: É seguro enviar minha foto para o ToolWala?\nSim. ToolWala usa processamento do lado do cliente, o que significa que suas imagens são modificadas diretamente no seu navegador e nunca enviadas para nossos servidores.\n\n### Q6: Posso manter meus óculos para a foto do passaporte?\nÉ altamente recomendável remover os óculos para evitar reflexos, sombras na armação ou tonalidades das lentes, que podem desencadear rejeições automáticas.\n\n### Q7: Posso usar uma cobertura para a cabeça ou hijab?\nSim. Coberturas para a cabeça usadas por motivos religiosos são permitidas, mas não devem cobrir ou projetar sombras em nenhuma parte do rosto (do queixo ao topo da testa).\n\n### Q8: Qual DPI devo usar para impressão?\nVocê deve imprimir suas fotos de passaporte com no mínimo 300 DPI para evitar borrões. ToolWala exporta automaticamente fotos em alta resolução.\n\n### Q9: Qual é a especificação da foto do cartão OCI?\nO requisito de foto do Cidadão Estrangeiro da Índia (OCI) é 2x2 polegadas (51x51 mm) em formato quadrado, com fundo branco e o rosto cobrindo cerca de 80% do quadro.\n\n### P10: Como imprimo várias fotos para passaporte em uma folha?\nSelecione a opção de layout \"Folha de impressão de múltiplas cópias\" no ToolWala, escolha o tamanho do papel (como papel fotográfico 4 \"x6\") e imprima o arquivo salvo.\n\n---\n\n## 8. Ferramentas relacionadas ao Wala\nPara finalizar seu pacote de upload de documentos, você pode usar estes utilitários relacionados:\n- [Aadhaar Photo Resizer](https://toolwala.co/tools/aadhaar-photo-resizer): Corte fotos para portais UIDAI Aadhaar.\n- [Removedor de fundo AI](https://toolwala.co/tools/bg-remover): Remova os fundos de qualquer retrato.\n- [Signature Resizer](https://toolwala.co/tools/signature-resize): Dimensione e comprima digitalizações de assinaturas abaixo de 20 KB.\n- [Compressor de PDF de formulário governamental](https://toolwala.co/tools/gov-form-pdf-compressor): compacta PDFs de documentos para atender aos limites do portal.\n\n---\n\n## 9. Sugestões de links internos\nPara impulsionar o contexto de SEO:\n- Link para este artigo na página `/landing/passport-size-photo-maker-online-free/`.\n- Link deste artigo para nosso [Guia oficial de especificações de foto de passaporte indiano](/blog/official-indian-passport-photo-specifications) e [Como redimensionar foto para guia de aplicação de cartão PAN](/blog/resize-photo-signature-pan-card-application).\n\n---\n\n## 10. Conclusão\nFormatting compliant passport photos does not have to be difficult or expensive. With [Criador de fotos em tamanho de passaporte do ToolWala](https://toolwala.co/tools/passport-photo-maker), you can edit your portrait, remove the background, and crop it to exact dimensions right from your browser. \n\nEvite atrasos e rejeições de aplicações utilizando dimensões corretas, iluminação natural e uma expressão neutra. \n\n---\n\n## 11. Frase de chamariz\nReady to format your photo? Open [Criador de fotos em tamanho de passaporte do ToolWala](https://toolwala.co/tools/passport-photo-maker) and create a compliant biometric photo in under a minute!\n\n---\n\n## Visão geral do meta SEO\n- **Palavra-chave de foco**: criador de fotos tamanho passaporte online grátis\n- **Categoria sugerida**: Ferramentas de imagem\n- **Tags sugeridas**: foto para passaporte, dimensionamento de imagem, biometria, preparação de documentos, ferramentas gratuitas",
+    "seoMetadata": {
+      "title": "Criador de fotos em tamanho de passaporte online grátis - Crie fotos compatíveis",
+      "description": "Crie fotos tamanho passaporte prontas para impressão online gratuitamente. Ajuste as dimensões para passaporte indiano, visto dos EUA e Schengen sem nenhum upload de servidor.",
+      "keywords": "Foto de passaporte, dimensionamento de imagem, biometria, preparação de documentos, ferramentas gratuitas"
+    },
+    "faqs": [
+      {
+        "id": "passport-size-photo-maker-online-free-faq-1",
+        "question": "Este criador de fotos para passaporte é totalmente gratuito?",
+        "answer": "Sim. O Passport Photo Maker da ToolWala é 100% gratuito, sem inscrições, assinaturas ou marcas d'água.",
+        "order": 1
+      },
+      {
+        "id": "passport-size-photo-maker-online-free-faq-2",
+        "question": "Qual é o tamanho oficial da foto do passaporte na Índia?",
+        "answer": "O requisito de foto para passaporte indiano é de 3,5 cm x 4,5 cm (35 mm x 45 mm) com fundo branco sólido. O rosto deve cobrir 70-80% da foto.",
+        "order": 2
+      },
+      {
+        "id": "passport-size-photo-maker-online-free-faq-3",
+        "question": "Posso sorrir na foto do meu passaporte?",
+        "answer": "Não. Os regulamentos padrão exigem uma expressão facial neutra, com os olhos abertos e a boca fechada. Sorrir pode alterar suas medidas biométricas.",
+        "order": 3
+      },
+      {
+        "id": "passport-size-photo-maker-online-free-faq-4",
+        "question": "As fotos tiradas com um telefone celular são aceitáveis?",
+        "answer": "Sim, desde que sejam nítidos, tirados com boa iluminação e cortados nas dimensões corretas usando nossas predefinições de formatação.",
+        "order": 4
+      },
+      {
+        "id": "passport-size-photo-maker-online-free-faq-5",
+        "question": "É seguro enviar minha foto para o ToolWala?",
+        "answer": "Sim. ToolWala usa processamento do lado do cliente, o que significa que suas imagens são modificadas diretamente no seu navegador e nunca enviadas para nossos servidores.",
+        "order": 5
+      },
+      {
+        "id": "passport-size-photo-maker-online-free-faq-6",
+        "question": "Posso manter meus óculos para a foto do passaporte?",
+        "answer": "É altamente recomendável remover os óculos para evitar reflexos, sombras na armação ou tonalidades das lentes, que podem desencadear rejeições automáticas.",
+        "order": 6
+      },
+      {
+        "id": "passport-size-photo-maker-online-free-faq-7",
+        "question": "Posso usar uma cobertura para a cabeça ou hijab?",
+        "answer": "Sim. Coberturas para a cabeça usadas por motivos religiosos são permitidas, mas não devem cobrir ou projetar sombras em nenhuma parte do rosto (do queixo ao topo da testa).",
+        "order": 7
+      },
+      {
+        "id": "passport-size-photo-maker-online-free-faq-8",
+        "question": "Qual DPI devo usar para impressão?",
+        "answer": "Você deve imprimir suas fotos de passaporte com no mínimo 300 DPI para evitar borrões. ToolWala exporta automaticamente fotos em alta resolução.",
+        "order": 8
+      },
+      {
+        "id": "passport-size-photo-maker-online-free-faq-9",
+        "question": "Qual é a especificação de foto do cartão OCI?",
+        "answer": "O requisito de foto do Cidadão Estrangeiro da Índia (OCI) é 2x2 polegadas (51x51 mm) em formato quadrado, com fundo branco e o rosto cobrindo cerca de 80% do quadro.",
+        "order": 9
+      },
+      {
+        "id": "passport-size-photo-maker-online-free-faq-10",
+        "question": "Como imprimo várias fotos para passaporte em uma folha?",
+        "answer": "Selecione a opção de layout \"Folha de impressão de múltiplas cópias\" no ToolWala, escolha o tamanho do papel (como papel fotográfico 4 \"x6\") e imprima o arquivo salvo.",
+        "order": 10
+      }
+    ]
+  },
+  "es:pdf-to-jpg-guide": {
+    "title": "La guía definitiva para la conversión de PDF a JPG",
+    "excerpt": "Una guía completa paso a paso para extraer páginas de imágenes JPG de alta calidad de cualquier documento PDF.",
+    "content": "Convertir páginas PDF en imágenes individuales es útil para presentaciones y redes sociales. Veamos cómo convertir archivos PDF a JPG.\n\n### Extraer imágenes fácilmente\nLos archivos PDF almacenan páginas en formato vectorial. Para verlos en galerías de fotos estándar, debe convertirlos a JPG.\n\n### Pasos para convertir PDF a JPG\n1. Abra el [Convertidor de PDF a JPG](/tools/pdf-to-jpg).\n2. Sube tu archivo PDF.\n3. El motor representa cada página en un lienzo de imagen.\n4. Haga clic en Descargar para guardar todas las páginas como un zip de imágenes JPG.\n\n[cta tool=\"pdf-to-jpg\" title=\"Convertir PDF a JPG\" descripción=\"Extraiga imágenes de alta resolución de cualquier PDF localmente en segundos.\"]",
+    "seoMetadata": {
+      "title": "Convierta PDF a JPG en línea gratis | HerramientaWala AI",
+      "description": "Extraiga todas las páginas de su archivo PDF en imágenes JPG de alta calidad al instante utilizando la representación del lienzo local.",
+      "keywords": "PDF, PDF a JPG, Conversión, Herramientas de imagen"
+    },
+    "faqs": [
+      {
+        "id": "faq-9-1",
+        "question": "¿Puedo convertir varias páginas a la vez?",
+        "answer": "Sí, nuestro conversor del lado del cliente procesa todas las páginas de su documento PDF simultáneamente y las empaqueta en una única descarga zip.",
+        "order": 1
+      },
+      {
+        "id": "faq-9-2",
+        "question": "¿Las imágenes exportadas son de alta resolución?",
+        "answer": "Sí, nuestro conversor representa páginas con densidad web estándar para garantizar que todas las estructuras de texto e imágenes sigan siendo altamente legibles.",
+        "order": 2
+      }
+    ]
+  },
+  "pt:aadhaar-photo-resize-online": {
+    "title": "",
+    "excerpt": "Se sua foto tiver sombras, dimensões incorretas ou baixo contraste:\n- Rejeição de inscrição: O portal rejeitará automaticamente fotos não conformes.\n- Atrasado...",
+    "content": "## 2. Por que isso é importante: a importância da conformidade biométrica\nA UIDAI utiliza sistemas de verificação biométrica para proteger os dados de identidade. A foto no seu cartão deve ser nítida o suficiente para que os algoritmos do scanner biométrico reconheçam sua estrutura facial.\n\nSe sua foto tiver sombras, dimensões incorretas ou baixo contraste:\n- **Rejeição de inscrição**: O portal rejeitará automaticamente fotos não conformes.\n- **Processamento atrasado**: As rejeições atrasam a emissão do seu cartão Aadhaar atualizado.\n- **Falhas na verificação**: fotos de baixa qualidade podem levar a problemas de verificação em bancos ou pontos de verificação de segurança.\n\nUsing a local crop utility like [Redimensionador de fotos Aadhaar do ToolWala](https://toolwala.co/tools/aadhaar-photo-resizer) ensures your photo is formatted correctly.\n\n---\n\n## 3. Guia passo a passo para redimensionar fotos para Aadhaar\nVeja como cortar e compactar sua foto para atualizações do Aadhaar:\n\n### Etapa 1: capturar um retrato compatível\n1. Fique contra uma parede sólida e de cor clara (de preferência branca ou esbranquiçada).\n2. Olhe diretamente para a câmera com uma expressão facial neutra. Evite inclinar a cabeça.\n3. Certifique-se de que os olhos e os ouvidos estejam claramente visíveis. Remova bonés, óculos de sol ou fones de ouvido volumosos.\n\n### Etapa 2: fazer upload para ToolWala\n1. Navegue até [Redimensionador de fotos Aadhaar do ToolWala](https://toolwala.co/tools/aadhaar-photo-resizer).\n2. Carregue sua foto.\n3. A ferramenta aplica automaticamente a caixa de corte predefinida UIDAI (3,5 x 4,5 cm).\n4. Centralize o rosto entre as guias visuais, mantendo os ombros nivelados.\n\n### Etapa 3: compactar e salvar\n1. Defina o controle deslizante de tamanho do arquivo de destino para **50 KB**.\n2. Clique em **Download** para salvar seu JPEG otimizado.\n\n---\n\n## 4. Guia de dimensão para uploads Aadhaar\nA tabela abaixo lista as especificações UIDAI para upload de fotos:\n\n| Parâmetro | Especificação necessária | Resolução recomendada |\n| :--- | :--- | :--- |\n| **Dimensões Físicas** | 3,5 cm de largura x 4,5 cm de altura | Proporção padrão de fotos para passaporte |\n| **Dimensões em pixels** | 354 x 472 pixels | Calculado com resolução de 300 DPI |\n| **Faixa de tamanho aceita** | 20 KB a 50 KB | Defina como 45 KB para melhor conformidade |\n| **Formato de arquivo** | JPEG/JPG | Arquivos PNG serão rejeitados |\n| **Cor de fundo** | Branco Sólido ou Cinza Claro | Sem padrões ou sombras |\n\n---\n\n## 5. Problemas e soluções comuns\n- **Problema 1: a foto tem sombras no rosto ou no fundo**\n  - *Por que falha*: As sombras distorcem a correspondência biométrica de rostos.\n  - *Solução*: Use iluminação de janela voltada para a frente e fique a alguns metros de distância da parede para evitar sombras atrás de você.\n\n- **Problema 2: Brilho em óculos graduados**\n  - *Por que falha*: Os olhos devem estar completamente visíveis.\n  - *Solução*: Retire os óculos antes de tirar a foto. A maioria dos portais de verificação prefere fotos sem óculos para evitar reflexos.\n\n- **Problema 3: O upload falha com \"Tamanho do arquivo fora do limite\"**\n  - *Solução*: Ajuste o controle deslizante de compactação no ToolWala para atingir 40-45 KB, mantendo o arquivo com segurança abaixo do limite de 50 KB.\n\n---\n\n## 6. Benefícios do Aadhaar Photo Resizer da ToolWala\n- **100% Seguro**: O processamento é executado localmente na memória do seu navegador, mantendo a privacidade dos seus dados pessoais.\n- **Predefinições precisas**: Corte e dimensione fotos de acordo com as especificações UIDAI (3,5x4,5 cm) instantaneamente.\n- **Remoção de fundo**: edite fundos ocupados e defina fundos brancos limpos com um clique.\n- **Gratuito e Ilimitado**: Sem assinaturas, inscrições ou marcas d'água.\n\n---\n\n## 7. Perguntas frequentes (10 perguntas frequentes)\n\n### Q1: Qual é o tamanho oficial da foto do cartão Aadhaar online?\nA dimensão oficial é 3,5 cm x 4,5 cm (35 mm x 45 mm) com fundo sólido branco ou de cor clara.\n\n### Q2: Qual é o limite de tamanho de arquivo para fotos Aadhaar?\nO tamanho do arquivo deve estar entre 20 KB e 50 KB.\n\n### Q3: Posso atualizar minha foto Aadhaar online?\nSim, você pode iniciar uma solicitação de atualização de detalhes no portal UIDAI MyAadhaar e enviar sua foto formatada.\n\n### Q4: É seguro enviar minha foto para o ToolWala?\nSim. ToolWala processa arquivos localmente na memória do seu navegador, sem uploads do servidor.\n\n### Q5: Posso fazer upload de uma foto PNG?\nNão, o portal UIDAI exige que os uploads sejam no formato JPEG. ToolWala converte arquivos PNG para JPEG automaticamente.\n\n### Q6: Posso usar meu telefone para tirar a foto?\nSim, desde que esteja nítido, bem iluminado e cortado usando nossas predefinições de formatação.\n\n### Q7: Por que os portais usam um limite de 50 KB?\nReduz os requisitos de armazenamento de banco de dados e acelera o tempo de carregamento do portal.\n\n### Q8: Posso usar uma cobertura para a cabeça na foto?\nSim, coberturas para a cabeça usadas por motivos religiosos são permitidas, mas não devem cobrir ou projetar sombras em nenhuma parte do seu rosto.\n\n### Q9: Quais são as dimensões em pixels para fotos Aadhaar a 300 DPI?\nA 300 DPI, uma foto de 3,5x4,5 cm corresponde a 354 x 472 pixels.\n\n### Q10: Como removo sombras do meu plano de fundo?\nUse iluminação frontal uniforme e ative o botão de remoção de fundo no ToolWala.\n\n---\n\n## 8. Ferramentas relacionadas ao Wala\n- [Compressor de PDF Aadhaar](https://toolwala.co/tools/aadhaar-pdf-compressor): compacta PDFs e-Aadhaar com menos de 300 KB.\n- [Ferramenta de mascaramento Aadhaar](https://toolwala.co/tools/aadhaar-masking-tool): Mascare os primeiros 8 dígitos do seu cartão Aadhaar para privacidade.\n- [Signature Resizer](https://toolwala.co/tools/signature-resize): Corte e comprima assinaturas para menos de 20 KB.\n- [Compressor de PDF de formulário governamental](https://toolwala.co/tools/gov-form-pdf-compressor): compacta PDFs de documentos sob limites de upload padrão.\n\n---\n\n## 9. Sugestões de links internos\n- Link para este artigo na página `/landing/aadhaar-photo-resize/`.\n- Link deste artigo para nosso [Guia sobre como compactar arquivo PDF e-Aadhaar com menos de 300 KB](/blog/compress-eaadhaar-pdf-under-300kb) e [Visão geral da ferramenta de mascaramento Aadhaar](/blog/why-local-ocr-is-the-future).\n\n---\n\n## 10. Conclusão\nFormatting passport photos to meet the UIDAI 50KB limit is simple with local editors. By using [Redimensionador de fotos Aadhaar do ToolWala](https://toolwala.co/tools/aadhaar-photo-resizer), you can crop and compress your photo safely and quickly.\n\n---\n\n## 11. Frase de chamariz\nReady to format your photo? Open [Redimensionador de fotos Aadhaar do ToolWala](https://toolwala.co/tools/aadhaar-photo-resizer) and format it under 50KB instantly!\n\n---\n\n## Visão geral do meta SEO\n- ** Palavra-chave de foco **: Redimensionamento de fotos Aadhaar online\n- **Categoria sugerida**: Ferramentas de imagem\n- **Tags sugeridas**: cartão Aadhaar, atualização UIDAI, corte de fotos, dimensionamento de imagens, ferramentas online gratuitas",
+    "seoMetadata": {
+      "title": "Redimensionamento de fotos Aadhaar online - UIDAI Photo Sizer",
+      "description": "Redimensione e recorte fotos de acordo com as especificações oficiais da UIDAI (3,5 cm x 4,5 cm) com menos de 50 KB online gratuitamente. Processamento local limpo com zero uploads de servidor.",
+      "keywords": "Cartão Aadhaar, atualização UIDAI, corte de fotos, dimensionamento de imagens, ferramentas online gratuitas"
+    },
+    "faqs": [
+      {
+        "id": "aadhaar-photo-resize-online-faq-1",
+        "question": "Qual é o tamanho oficial da foto do cartão Aadhaar online?",
+        "answer": "A dimensão oficial é 3,5 cm x 4,5 cm (35 mm x 45 mm) com fundo sólido branco ou de cor clara.",
+        "order": 1
+      },
+      {
+        "id": "aadhaar-photo-resize-online-faq-2",
+        "question": "Qual é o limite de tamanho de arquivo para fotos Aadhaar?",
+        "answer": "O tamanho do arquivo deve estar entre 20 KB e 50 KB.",
+        "order": 2
+      },
+      {
+        "id": "aadhaar-photo-resize-online-faq-3",
+        "question": "Posso atualizar minha foto Aadhaar online?",
+        "answer": "Sim, você pode iniciar uma solicitação de atualização de detalhes no portal UIDAI MyAadhaar e enviar sua foto formatada.",
+        "order": 3
+      },
+      {
+        "id": "aadhaar-photo-resize-online-faq-4",
+        "question": "É seguro enviar minha foto para o ToolWala?",
+        "answer": "Sim. ToolWala processa arquivos localmente na memória do seu navegador, sem uploads do servidor.",
+        "order": 4
+      },
+      {
+        "id": "aadhaar-photo-resize-online-faq-5",
+        "question": "Posso fazer upload de uma foto PNG?",
+        "answer": "Não, o portal UIDAI exige que os uploads sejam no formato JPEG. ToolWala converte arquivos PNG para JPEG automaticamente.",
+        "order": 5
+      },
+      {
+        "id": "aadhaar-photo-resize-online-faq-6",
+        "question": "Posso usar meu telefone para tirar a foto?",
+        "answer": "Sim, desde que esteja nítido, bem iluminado e cortado usando nossas predefinições de formatação.",
+        "order": 6
+      },
+      {
+        "id": "aadhaar-photo-resize-online-faq-7",
+        "question": "Por que os portais usam um limite de 50 KB?",
+        "answer": "Reduz os requisitos de armazenamento de banco de dados e acelera o tempo de carregamento do portal.",
+        "order": 7
+      },
+      {
+        "id": "aadhaar-photo-resize-online-faq-8",
+        "question": "Posso usar uma cobertura para a cabeça na foto?",
+        "answer": "Sim, coberturas para a cabeça usadas por motivos religiosos são permitidas, mas não devem cobrir ou projetar sombras em nenhuma parte do seu rosto.",
+        "order": 8
+      },
+      {
+        "id": "aadhaar-photo-resize-online-faq-9",
+        "question": "Quais são as dimensões em pixels das fotos Aadhaar a 300 DPI?",
+        "answer": "A 300 DPI, uma foto de 3,5x4,5 cm corresponde a 354 x 472 pixels.",
+        "order": 9
+      },
+      {
+        "id": "aadhaar-photo-resize-online-faq-10",
+        "question": "Como removo sombras do meu plano de fundo?",
+        "answer": "Use iluminação frontal uniforme e ative o botão de remoção de fundo no ToolWala.",
+        "order": 10
+      }
+    ]
   }
 }

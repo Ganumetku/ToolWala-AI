@@ -4,6 +4,8 @@ import { getPublicBlogs, slugifyTag } from '@/lib/blogs-server';
 import { categoriesData } from '@/data/categories';
 import { BLOG_CATEGORIES } from '@/types/blog';
 import { getEnabledLocales, getLanguagesConfig } from '@/lib/languages';
+import { hubsData } from '@/data/hubs';
+import { landingPagesData } from '@/data/landingPages';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
@@ -84,6 +86,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     seoLocales.map((loc) => buildItem(`/blog/category/${c.toLowerCase().replace(/\s+/g, '-')}`, now, 'weekly', 0.65, loc))
   );
 
+  const hubEntries: MetadataRoute.Sitemap = hubsData.flatMap((h) =>
+    seoLocales.map((loc) => buildItem(`/hubs/${h.slug}`, now, 'weekly', 0.8, loc))
+  );
+
+  const landingPageEntries: MetadataRoute.Sitemap = landingPagesData.flatMap((lp) =>
+    seoLocales.map((loc) => buildItem(`/tools/${lp.slug}`, now, 'weekly', 0.8, loc))
+  );
+
   let toolEntries: MetadataRoute.Sitemap = [];
   let blogEntries: MetadataRoute.Sitemap = [];
   let tagEntries: MetadataRoute.Sitemap = [];
@@ -129,5 +139,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...toolEntries,
     ...blogEntries,
     ...tagEntries,
+    ...hubEntries,
+    ...landingPageEntries,
   ];
 }

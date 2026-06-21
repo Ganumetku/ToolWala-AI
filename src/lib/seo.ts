@@ -8,6 +8,7 @@ import { getTranslationServer } from '@/lib/i18n-server';
 import { getEnabledLocales, getLanguagesConfig } from '@/lib/languages';
 import { headers } from 'next/headers';
 import { getToolTranslationWithFallback } from '@/lib/tool-translation-service';
+import { landingPagesData } from '@/data/landingPages';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolwala.co';
 const SITE_NAME = 'ToolWala AI';
@@ -43,20 +44,9 @@ export function getAlternateLanguages(pathname: string): Record<string, string> 
   return languages;
 }
 
-export function getLocalizedCanonicalUrl(pathname: string, locale: string): string {
-  const siteUrl = "https://toolwala.co";
-  const parts = pathname.split('/');
-  const cleanPath = ['hi', 'es', 'fr', 'de', 'pt', 'ar', 'id'].includes(parts[1])
-    ? '/' + parts.slice(2).join('/')
-    : pathname;
-  
-  const cleanPathNoSlash = cleanPath.replace(/\/$/, '');
-  
-  if (locale === 'en') {
-    return `${siteUrl}${cleanPathNoSlash}/`;
-  }
-  return `${siteUrl}/${locale}${cleanPathNoSlash}/`;
-}
+import { getLocalizedCanonicalUrl } from './seo-client';
+export { getLocalizedCanonicalUrl };
+
 
 export function buildToolMetadata(tool: Tool): Metadata {
   const title = `${tool.title} – Free Online Tool`;
@@ -379,8 +369,18 @@ export async function generateToolMetadataHelper(
   }
 
   const dbTranslation = await getToolTranslationWithFallback(toolId, locale);
-  const title = dbTranslation.seoTitle || dbTranslation.title || fallbackTitle;
-  const description = dbTranslation.seoDescription || dbTranslation.description || fallbackDesc;
+  const landingPage = landingPagesData.find(lp => lp.slug === toolId);
+  const title = (dbTranslation.seoTitle && dbTranslation.seoTitle !== toolId) ? dbTranslation.seoTitle : 
+    (landingPage ? landingPage.title : (dbTranslation.title && dbTranslation.title !== toolId ? dbTranslation.title : fallbackTitle));
+  const description = (dbTranslation.seoDescription && dbTranslation.seoDescription !== "") ? dbTranslation.seoDescription : 
+    (landingPage ? landingPage.metaDescription : (dbTranslation.description || fallbackDesc));
+  try {
+    const fs = require('fs');
+    const pathLib = require('path');
+    fs.appendFileSync(pathLib.join(process.cwd(), 'scratch/seo_debug.log'), `toolId=${toolId} dbTranslation=${JSON.stringify(dbTranslation)} lpFound=${!!landingPage} lpTitle=${landingPage?.title} resolvedTitle=${title}\n`);
+  } catch (e) {
+    // ignore
+  }
 
   const siteUrl = "https://toolwala.co";
   const parts = originalPathname.split('/');

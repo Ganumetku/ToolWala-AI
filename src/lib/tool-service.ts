@@ -61,7 +61,8 @@ export function toolToDbRow(
 }
 
 export function mergeToolsWithCatalog(dbTools: DbTool[]): Tool[] {
-  const dbMap = new Map(dbTools.map((t) => [t.slug, dbToTool(t)]));
+  const filteredDbTools = dbTools.filter((t) => t.slug !== 'pan-photo-tool');
+  const dbMap = new Map(filteredDbTools.map((t) => [t.slug, dbToTool(t)]));
   const merged: Tool[] = [];
 
   for (const staticTool of toolsData) {

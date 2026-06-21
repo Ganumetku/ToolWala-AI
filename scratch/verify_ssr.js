@@ -12,8 +12,8 @@ function fetchUrl(url) {
 
 async function runVerification() {
   const targets = [
-    { name: 'PAN Card Resize', url: 'http://localhost:3009/tools/pan-card-resize/' },
-    { name: 'Exam Photo Resizer', url: 'http://localhost:3009/tools/exam-photo-resizer/' }
+    { name: 'PAN Card Resize', url: 'http://localhost:3000/tools/pan-card-resize/' },
+    { name: 'Exam Photo Resizer', url: 'http://localhost:3000/tools/exam-photo-resizer/' }
   ];
 
   for (const target of targets) {

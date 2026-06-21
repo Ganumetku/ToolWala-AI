@@ -558,5 +558,60 @@ Official portals require text to be clear and readable. Our compressor is design
 ### Upload Sizing Guidelines
 - **Photos**: 3.5cm x 4.5 cm (354 x 472 pixels) | Target size: 20-50KB.
 - **Signatures**: 140 x 60 pixels | Target size: 10-20KB.`
+  },
+  {
+    slug: "aadhaar-photo-resize",
+    title: "Aadhaar Photo Resize Online - UIDAI Biometric Photo Editor",
+    metaDescription: "Resize and crop photos to official UIDAI Aadhaar specifications (3.5cm x 4.5cm) under 50KB. 100% client-side processing for privacy.",
+    h1: "Aadhaar Card Photo Resizer Online (Free)",
+    badgeText: "UIDAI Biometric Specs",
+    description: "Crop and resize passport photographs to official UIDAI Aadhaar card specifications. Adjust dimensions to 3.5x4.5 cm, compress under 50KB, and remove backgrounds — all locally in your browser.",
+    ctaText: "Go to Aadhaar Photo Resizer",
+    ctaHref: "/tools/aadhaar-photo-resizer",
+    category: "Image Tools",
+    relatedTools: ["aadhaar-masking-tool", "aadhaar-pdf-compressor", "image-compressor"],
+    relatedBlogs: [
+      { title: "Aadhaar Photo Resize Online: How to Format Photos for UIDAI Card Updates", slug: "aadhaar-photo-resize-online" },
+      { title: "How to Crop Aadhaar Card Photo to UIDAI Specs", slug: "crop-aadhaar-card-photo-uidai-specs" }
+    ],
+    faqs: [
+      { question: "What is the official Aadhaar photo size?", answer: "UIDAI requires photos to be 3.5 cm x 4.5 cm (35mm x 45mm) with a plain white background and file size under 50KB in JPEG format." },
+      { question: "Is my Aadhaar photo safe with this tool?", answer: "Yes. All processing runs locally in your browser memory. Your biometric photos are never uploaded to any server." },
+      { question: "Can I remove the background from my Aadhaar photo?", answer: "Yes, use the integrated background removal toggle to replace any busy background with a clean white backdrop." },
+      { question: "What file format does UIDAI accept?", answer: "UIDAI accepts JPEG format only. Our tool automatically converts and saves your photo as an optimized JPEG file." }
+    ],
+    content: `Updating your Aadhaar card details or applying for a new Aadhaar enrollment requires submitting a photograph that meets strict UIDAI biometric specifications. If your photo has incorrect dimensions, a non-white background, or exceeds the file size limit, the UIDAI portal will reject your upload automatically.
+
+### How to Resize Photo for Aadhaar Card Online
+Follow these steps to format your Aadhaar photo:
+1. Click the **Go to Aadhaar Photo Resizer** button above.
+2. Upload your passport-style photograph.
+3. The tool automatically applies the UIDAI preset (3.5 cm x 4.5 cm).
+4. Adjust the face alignment guides to ensure 70-80% face coverage.
+5. Toggle **Remove Background** for a clean white backdrop.
+6. Set the target file size slider to **50KB** or lower.
+7. Download your compliant JPEG photo.
+
+### UIDAI Photo Specifications
+- **Dimensions**: 3.5 cm x 4.5 cm (35 mm x 45 mm)
+- **Pixel Size**: 413 x 531 pixels at 300 DPI
+- **File Size**: Under 50KB in JPEG format
+- **Background**: Solid white or off-white
+- **Face Coverage**: 70% to 80% of the frame
+- **Expression**: Neutral, eyes open, mouth closed
+
+### Common Aadhaar Photo Rejection Reasons
+- **Shadows on face or background**: Use front-facing natural light and stand away from the wall.
+- **Low resolution or blurry image**: Use a smartphone camera with at least 5MP resolution.
+- **Incorrect dimensions**: Use our preset to auto-crop to exact UIDAI specifications.
+- **File size too large**: Our compressor brings the file under 50KB while maintaining clarity.
+
+### Privacy-First Processing
+Since Aadhaar photos are sensitive biometric data linked to your unique identity number, privacy is critical. Our tool processes everything locally in your browser cache — no data is ever sent to external servers. You can even disconnect your internet after the page loads and continue processing offline.
+
+### Related UIDAI Services
+- **Aadhaar Masking**: Hide the first 8 digits of your Aadhaar number for safe sharing.
+- **e-Aadhaar PDF Compression**: Compress downloaded e-Aadhaar PDFs to meet portal upload limits.
+- **Photo Background Removal**: Strip busy backgrounds and set clean white backdrops for official compliance.`
   }
 ];

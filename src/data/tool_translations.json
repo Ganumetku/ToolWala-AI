@@ -4028,10 +4028,10 @@
     "updatedAt": "2026-06-19T02:10:41.648Z"
   },
   {
-    "id": "trans-144-pan-photo-tool-en",
-    "toolSlug": "pan-photo-tool",
+    "id": "trans-144-pan-card-resize-en",
+    "toolSlug": "pan-card-resize",
     "locale": "en",
-    "title": "PAN Photo Tool",
+    "title": "PAN Card Resize",
     "description": "Resize, crop, and format passport photos to official NSDL and UTIITSL PAN card specifications. Keep head spacing, check background rules, and stay under the 50KB limit.",
     "faq": [
       {
@@ -4047,16 +4047,16 @@
         "answer": "Yes. Our tool is optimized for mobile touch screens, including pinch gestures and drags."
       }
     ],
-    "seoTitle": "PAN Photo Tool – Free Online Tool",
+    "seoTitle": "PAN Card Resize – Free Online Tool",
     "seoDescription": "Format and resize passport photos to official NSDL/UTIITSL PAN card specifications.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-18T02:01:06.127Z"
   },
   {
-    "id": "trans-145-pan-photo-tool-hi",
-    "toolSlug": "pan-photo-tool",
+    "id": "trans-145-pan-card-resize-hi",
+    "toolSlug": "pan-card-resize",
     "locale": "hi",
-    "title": "पैन फोटो उपकरण",
+    "title": "पैन कार्ड रीसाइज़र",
     "description": "आधिकारिक एनएसडीएल और यूटीआईआईटीएसएल पैन कार्ड विनिर्देशों के अनुसार पासपोर्ट फोटो का आकार बदलें, काटें और प्रारूपित करें। सिरों के बीच अंतर रखें, पृष्ठभूमि नियमों की जांच करें और 50KB सीमा के अंतर्गत रहें।",
     "faq": [
       {
@@ -4072,16 +4072,16 @@
         "answer": "हाँ। हमारा टूल मोबाइल टच स्क्रीन के लिए अनुकूलित है, जिसमें पिंच जेस्चर और ड्रैग शामिल हैं।"
       }
     ],
-    "seoTitle": "PAN Photo Tool – मुफ़्त ऑनलाइन टूल",
+    "seoTitle": "पैन कार्ड रीसाइज़र – मुफ़्त ऑनलाइन टूल",
     "seoDescription": "आधिकारिक एनएसडीएल/यूटीआईआईटीएसएल पैन कार्ड विनिर्देशों के अनुसार पासपोर्ट फोटो को प्रारूपित करें और उनका आकार बदलें।",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-18T02:18:51.554Z"
   },
   {
-    "id": "trans-146-pan-photo-tool-es",
-    "toolSlug": "pan-photo-tool",
+    "id": "trans-146-pan-card-resize-es",
+    "toolSlug": "pan-card-resize",
     "locale": "es",
-    "title": "Herramienta de fotografía PAN",
+    "title": "Cambio de tamaño de tarjeta PAN",
     "description": "Cambie el tamaño, recorte y formatee las fotografías de pasaporte según las especificaciones oficiales de las tarjetas PAN NSDL y UTIITSL. Mantenga el espacio entre cabezas, verifique las reglas de fondo y manténgase por debajo del límite de 50 KB.",
     "faq": [
       {
@@ -4097,16 +4097,16 @@
         "answer": "Sí. Nuestra herramienta está optimizada para pantallas táctiles móviles, incluidos gestos de pellizco y arrastre."
       }
     ],
-    "seoTitle": "Herramienta fotográfica PAN: herramienta gratuita en línea",
+    "seoTitle": "Cambio de tamaño de tarjeta PAN: herramienta gratuita en línea",
     "seoDescription": "Formatee y cambie el tamaño de las fotografías de pasaporte según las especificaciones oficiales de la tarjeta NSDL/UTIITSL PAN.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-19T01:06:50.261Z"
   },
   {
-    "id": "trans-147-pan-photo-tool-fr",
-    "toolSlug": "pan-photo-tool",
+    "id": "trans-147-pan-card-resize-fr",
+    "toolSlug": "pan-card-resize",
     "locale": "fr",
-    "title": "Outil photo PAN",
+    "title": "Redimensionnement de la carte PAN",
     "description": "Redimensionnez, recadrez et formatez les photos d'identité selon les spécifications officielles des cartes NSDL et UTIITSL PAN. Gardez l’espacement des têtes, vérifiez les règles d’arrière-plan et restez sous la limite de 50 Ko.",
     "faq": [
       {
@@ -4122,7 +4122,7 @@
         "answer": "Oui. Notre outil est optimisé pour les écrans tactiles mobiles, y compris les gestes de pincement et de glissement."
       }
     ],
-    "seoTitle": "Outil photo PAN – Outil en ligne gratuit",
+    "seoTitle": "Redimensionnement de la carte PAN – Outil en ligne gratuit",
     "seoDescription": "Formatez et redimensionnez les photos d'identité selon les spécifications officielles de la carte PAN NSDL/UTIITSL.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-19T02:10:41.648Z"
@@ -5547,12 +5547,12 @@
     "updatedAt": "2026-06-19T01:42:18.427Z"
   },
   {
-    "id": "trans-pan-photo-tool-pt",
-    "toolSlug": "pan-photo-tool",
+    "id": "trans-pan-card-resize-pt",
+    "toolSlug": "pan-card-resize",
     "locale": "pt",
-    "title": "Ferramenta de foto PAN",
+    "title": "Redimensionamento de cartão PAN",
     "description": "Redimensione, recorte e formate fotos de passaporte de acordo com as especificações oficiais dos cartões PAN NSDL e UTIITSL. Mantenha o espaçamento entre cabeçalhos, verifique as regras de segundo plano e fique abaixo do limite de 50 KB.",
-    "seoTitle": "Ferramenta PAN Photo – Ferramenta online gratuita",
+    "seoTitle": "Redimensionamento de cartão PAN – Ferramenta online gratuita",
     "seoDescription": "Formate e redimensione fotos de passaporte de acordo com as especificações oficiais do cartão PAN NSDL/UTIITSL.",
     "faq": [
       {
@@ -6682,12 +6682,12 @@
     "updatedAt": "2026-06-19T02:12:47.176Z"
   },
   {
-    "id": "trans-pan-photo-tool-de",
-    "toolSlug": "pan-photo-tool",
+    "id": "trans-pan-card-resize-de",
+    "toolSlug": "pan-card-resize",
     "locale": "de",
-    "title": "PAN-Fototool",
+    "title": "PAN-Karten-Größenänderung",
     "description": "Passfotos entsprechend den offiziellen PAN-Kartenspezifikationen NSDL und UTIITSL skalieren, zuschneiden und formatieren. Halten Sie den Kopfabstand ein, überprüfen Sie die Hintergrundregeln und bleiben Sie unter der 50-KB-Grenze.",
-    "seoTitle": "PAN Photo Tool – Kostenloses Online-Tool",
+    "seoTitle": "PAN-Karten-Größenänderung – Kostenloses Online-Tool",
     "seoDescription": "Formatieren und skalieren Sie Passfotos entsprechend den offiziellen NSDL/UTIITSL PAN-Kartenspezifikationen.",
     "faq": [
       {
@@ -7817,12 +7817,12 @@
     "updatedAt": "2026-06-19T02:14:31.317Z"
   },
   {
-    "id": "trans-pan-photo-tool-id",
-    "toolSlug": "pan-photo-tool",
+    "id": "trans-pan-card-resize-id",
+    "toolSlug": "pan-card-resize",
     "locale": "id",
-    "title": "Alat Foto PAN",
+    "title": "Ubah Ukuran Kartu PAN",
     "description": "Ubah ukuran, potong, dan format foto paspor ke spesifikasi resmi kartu NSDL dan UTIITSL PAN. Pertahankan jarak kepala, periksa aturan latar belakang, dan tetap di bawah batas 50 KB.",
-    "seoTitle": "Alat Foto PAN – Alat Online Gratis",
+    "seoTitle": "Ubah Ukuran Kartu PAN – Alat Online Gratis",
     "seoDescription": "Format dan ubah ukuran foto paspor ke spesifikasi resmi kartu NSDL/UTIITSL PAN.",
     "faq": [
       {
@@ -8952,12 +8952,12 @@
     "updatedAt": "2026-06-19T02:16:40.985Z"
   },
   {
-    "id": "trans-pan-photo-tool-ar",
-    "toolSlug": "pan-photo-tool",
+    "id": "trans-pan-card-resize-ar",
+    "toolSlug": "pan-card-resize",
     "locale": "ar",
-    "title": "أداة الصور PAN",
+    "title": "أداة تغيير حجم صورة بطاقة PAN",
     "description": "قم بتغيير حجم صور جواز السفر واقتصاصها وتنسيقها وفقًا للمواصفات الرسمية لبطاقة NSDL وUTIITSL PAN. حافظ على تباعد الرأس، وتحقق من قواعد الخلفية، وابق ضمن الحد الأقصى البالغ 50 كيلو بايت.",
-    "seoTitle": "أداة PAN Photo Tool – أداة مجانية على الإنترنت",
+    "seoTitle": "أداة تغيير حجم صورة بطاقة PAN – أداة مجانية على الإنترنت",
     "seoDescription": "قم بتنسيق صور جواز السفر وتغيير حجمها وفقًا لمواصفات بطاقة PAN الرسمية NSDL/UTIITSL.",
     "faq": [
       {

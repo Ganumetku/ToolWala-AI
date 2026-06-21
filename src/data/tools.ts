@@ -713,23 +713,6 @@ export const toolsData: Tool[] = [
     updatedAt: '2026-06-20T00:00:00Z'
   },
   {
-    id: "pan-photo-tool",
-    title: "PAN Photo Tool",
-    description: "Resize, crop, and format passport photos to official NSDL and UTIITSL PAN card specifications.",
-    icon: "🪪",
-    href: "/tools/pan-photo-tool",
-    slug: "pan-photo-tool",
-    category: "Image Tools",
-    featured: true,
-    trending: true,
-    popular: true,
-    tags: ["pan", "photo", "resize", "crop", "nsdl", "utiitsl", "image"],
-    status: 'published',
-    isVisible: true,
-    createdAt: '2026-06-20T00:00:00Z',
-    updatedAt: '2026-06-20T00:00:00Z'
-  },
-  {
     id: "exam-photo-resizer",
     title: "Exam Photo Resizer",
     description: "Resize and format passport photos for SSC, UPSC, and banking online application portals.",

@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 async function main() {
   try {
     const ptool = await prisma.tool.findUnique({
-      where: { slug: 'pan-photo-tool' },
+      where: { slug: 'pan-card-resize' },
       include: {
         inputs: true,
         faqs: true,
@@ -14,7 +14,7 @@ async function main() {
         seoMetadata: true
       }
     });
-    console.log("PAN Photo Tool:");
+    console.log("PAN Card Resize:");
     console.log(JSON.stringify(ptool, null, 2));
 
     const etool = await prisma.tool.findUnique({

@@ -259,7 +259,7 @@
     "badges": {
       "aadhaar-photo-resizer": "المواصفات الرسمية UIDAI",
       "aadhaar-masking-tool": "قناع الخصوصية الآمن",
-      "pan-photo-tool": "NSDL / UTIITSL جاهز",
+      "pan-card-resize": "NSDL / UTIITSL جاهز",
       "signature-crop-tool": "SSC / IBPS متوافق",
       "passport-photo-maker": "مواصفات تأشيرة شنغن والولايات المتحدة",
       "exam-photo-resizer": "البوابات الوطنية",
@@ -269,7 +269,7 @@
     "kb": {
       "aadhaar-photo-resizer": "20 كيلو بايت - 50 كيلو بايت",
       "aadhaar-masking-tool": "الحجم الأصلي",
-      "pan-photo-tool": "أقل من 50 كيلو بايت",
+      "pan-card-resize": "أقل من 50 كيلو بايت",
       "signature-crop-tool": "10 كيلو بايت - 20 كيلو بايت",
       "passport-photo-maker": "أقل من 100 كيلو بايت",
       "exam-photo-resizer": "20 كيلو بايت - 50 كيلو بايت",
@@ -279,7 +279,7 @@
     "dim": {
       "aadhaar-photo-resizer": "354 × 472 بكسل",
       "aadhaar-masking-tool": "الكشف التلقائي",
-      "pan-photo-tool": "213 × 213 بيكسل",
+      "pan-card-resize": "213 × 213 بيكسل",
       "signature-crop-tool": "256 × 64 بيكسل",
       "passport-photo-maker": "3.5 × 4.5 سم",
       "exam-photo-resizer": "3.5 × 4.5 سم",

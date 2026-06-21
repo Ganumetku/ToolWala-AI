@@ -259,7 +259,7 @@
     "badges": {
       "aadhaar-photo-resizer": "Spesifikasi UIDAI Resmi",
       "aadhaar-masking-tool": "Masker Privasi Aman",
-      "pan-photo-tool": "NSDL / UTIITSL Siap",
+      "pan-card-resize": "NSDL / UTIITSL Siap",
       "signature-crop-tool": "SSC / IBPS Sesuai",
       "passport-photo-maker": "Spesifikasi Visa Schengen & AS",
       "exam-photo-resizer": "Portal Nasional",
@@ -269,7 +269,7 @@
     "kb": {
       "aadhaar-photo-resizer": "20KB - 50KB",
       "aadhaar-masking-tool": "Ukuran Asli",
-      "pan-photo-tool": "Di bawah 50KB",
+      "pan-card-resize": "Di bawah 50KB",
       "signature-crop-tool": "10KB - 20KB",
       "passport-photo-maker": "Di bawah 100KB",
       "exam-photo-resizer": "20KB - 50KB",
@@ -279,7 +279,7 @@
     "dim": {
       "aadhaar-photo-resizer": "354x472 piksel",
       "aadhaar-masking-tool": "Deteksi Otomatis",
-      "pan-photo-tool": "213x213 piksel",
+      "pan-card-resize": "213x213 piksel",
       "signature-crop-tool": "256x64 piksel",
       "passport-photo-maker": "3,5x4,5cm",
       "exam-photo-resizer": "3,5x4,5cm",

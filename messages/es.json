@@ -213,7 +213,7 @@
       },
       "seoTitle": "Herramientas de imagen y editores de fotografías en línea | ToolWala AI",
       "seoDescription": "Estandarice fotografías de pasaporte, recorte tarjetas Aadhaar, elimine fondos de imágenes y comprima fotografías con motores de navegador locales.",
-      "longDescription": "La optimización de los medios digitales es esencial para los sitios web modernos, las aplicaciones profesionales y las presentaciones en portales gubernamentales oficiales. El conjunto de herramientas de imagen de ToolWala AI proporciona un potente conjunto de utilidades de edición y cambio de tamaño automatizadas impulsadas por tecnologías avanzadas del lado del cliente. Los usuarios que preparan formularios de solicitud oficiales pueden aprovechar fácilmente las herramientas de cumplimiento de nuestro portal indio especializado. Utilice el [Cambio de tamaño de fotos de Aadhaar](/tools/aadhaar-photo-resizer) para recortar y dimensionar imágenes de identidad de acuerdo con las especificaciones UIDAI, escalar fotografías utilizando el [Herramienta de fotografía PAN](/tools/pan-photo-tool) para formatos NSDL, o construir tarjetas biométricas estándar con el [Creador de fotografías de pasaporte](/tools/passport-photo-maker) . Si está diseñando gráficos o contenido de redes sociales, nuestro avanzado [Eliminador de fondo](/tools/bg-remover) aísla automáticamente los sujetos en primer plano en segundos. Al ejecutar redes neuronales localmente en su dispositivo, procesamos archivos de imágenes sin cargarlos en servidores externos en la nube, garantizando absoluta privacidad para sus documentos de identidad personales. Para optimizar el rendimiento y la velocidad de carga de la página, el [Compresor de imagen](/tools/image-compressor) reduce el tamaño de los archivos hasta en un 90% manteniendo una calidad visual nítida. Esto se logra eliminando metadatos innecesarios y aplicando algoritmos de compresión visualmente sin pérdidas. Todas las operaciones, colores y recortes del lienzo se calculan localmente en la memoria de la pestaña activa. Esta estructura local garantiza que sus archivos privados permanezcan completamente confidenciales, lo que convierte a ToolWala AI en la opción más segura para la edición de imágenes segura. Puede cambiar el tamaño, convertir, comprimir y mejorar imágenes sin registrar una cuenta ni arriesgar el acceso de terceros.",
+      "longDescription": "La optimización de los medios digitales es esencial para los sitios web modernos, las aplicaciones profesionales y las presentaciones en portales gubernamentales oficiales. El conjunto de herramientas de imagen de ToolWala AI proporciona un potente conjunto de utilidades de edición y cambio de tamaño automatizadas impulsadas por tecnologías avanzadas del lado del cliente. Los usuarios que preparan formularios de solicitud oficiales pueden aprovechar fácilmente las herramientas de cumplimiento de nuestro portal indio especializado. Utilice el [Cambio de tamaño de fotos de Aadhaar](/tools/aadhaar-photo-resizer) para recortar y dimensionar imágenes de identidad de acuerdo con las especificaciones UIDAI, escalar fotografías utilizando el [Cambio de tamaño de tarjeta PAN](/tools/pan-card-resize) para formatos NSDL, o construir tarjetas biométricas estándar con el [Creador de fotografías de pasaporte](/tools/passport-photo-maker) . Si está diseñando gráficos o contenido de redes sociales, nuestro avanzado [Eliminador de fondo](/tools/bg-remover) aísla automáticamente los sujetos en primer plano en segundos. Al ejecutar redes neuronales localmente en su dispositivo, procesamos archivos de imágenes sin cargarlos en servidores externos en la nube, garantizando absoluta privacidad para sus documentos de identidad personales. Para optimizar el rendimiento y la velocidad de carga de la página, el [Compresor de imagen](/tools/image-compressor) reduce el tamaño de los archivos hasta en un 90% manteniendo una calidad visual nítida. Esto se logra eliminando metadatos innecesarios y aplicando algoritmos de compresión visualmente sin pérdidas. Todas las operaciones, colores y recortes del lienzo se calculan localmente en la memoria de la pestaña activa. Esta estructura local garantiza que sus archivos privados permanezcan completamente confidenciales, lo que convierte a ToolWala AI en la opción más segura para la edición de imágenes segura. Puede cambiar el tamaño, convertir, comprimir y mejorar imágenes sin registrar una cuenta ni arriesgar el acceso de terceros.",
       "whyUse": [
         {
           "title": "Motor de IA del lado del cliente",
@@ -629,7 +629,7 @@
     "badges": {
       "aadhaar-photo-resizer": "Especificaciones oficiales UIDAI",
       "aadhaar-masking-tool": "Máscara de privacidad segura",
-      "pan-photo-tool": "NSDL / UTIITSL Listo",
+      "pan-card-resize": "NSDL / UTIITSL Listo",
       "signature-crop-tool": "SSC / IBPS Cumple",
       "passport-photo-maker": "Especificaciones de visas Schengen y EE. UU.",
       "exam-photo-resizer": "Portales Nacionales",
@@ -639,7 +639,7 @@
     "kb": {
       "aadhaar-photo-resizer": "20 KB - 50 KB",
       "aadhaar-masking-tool": "Tamaño original",
-      "pan-photo-tool": "Menos de 50 KB",
+      "pan-card-resize": "Menos de 50 KB",
       "signature-crop-tool": "10 KB - 20 KB",
       "passport-photo-maker": "Menos de 100 KB",
       "exam-photo-resizer": "20 KB - 50 KB",
@@ -649,7 +649,7 @@
     "dim": {
       "aadhaar-photo-resizer": "354 x 472 píxeles",
       "aadhaar-masking-tool": "Detección automática",
-      "pan-photo-tool": "213 x 213 píxeles",
+      "pan-card-resize": "213 x 213 píxeles",
       "signature-crop-tool": "256 x 64 píxeles",
       "passport-photo-maker": "3,5 x 4,5 cm",
       "exam-photo-resizer": "3,5 x 4,5 cm",

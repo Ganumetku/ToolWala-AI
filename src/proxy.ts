@@ -58,6 +58,15 @@ export async function proxy(request: NextRequest) {
     }
   }
 
+  // 301 redirect duplicate tool /tools/pan-photo-tool/ to /tools/pan-card-resize/
+  const normalizedRewritten = rewrittenPathname.endsWith('/') ? rewrittenPathname : rewrittenPathname + '/';
+  if (normalizedRewritten === '/tools/pan-photo-tool/') {
+    const targetPath = isLocalePrefix ? `/${locale}/tools/pan-card-resize/` : '/tools/pan-card-resize/';
+    const redirectUrl = new URL(targetPath + request.nextUrl.search, request.url);
+    console.log(`[Proxy] Redirecting 301 duplicate tool ${pathname} to ${redirectUrl.toString()}`);
+    return NextResponse.redirect(redirectUrl, { status: 301 });
+  }
+
   // 2. Handle saved language redirect on root "/"
   if (pathname === '/' && !isLocalePrefix) {
     const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;

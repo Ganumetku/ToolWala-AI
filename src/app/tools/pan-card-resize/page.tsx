@@ -1,12 +1,17 @@
-"use client";
-
 import Link from "next/link";
 import { ChevronLeft, Sparkles } from "lucide-react";
 import ToolArticle from "@/components/ToolArticle";
 import { toolArticles } from "@/data/toolArticles";
 import { MeshGradient } from "@/components/BackgroundEffects";
 import ToolVisibilityGuard from "@/components/ToolVisibilityGuard";
-import ImageCropperEngine, { CropperPreset } from "@/components/ImageCropperEngine";
+import { CropperPreset } from "@/components/ImageCropperEngine";
+import ImageCropperClientWrapper from "@/components/ImageCropperClientWrapper";
+import {
+  buildFAQSchema,
+  buildWebPageSchema,
+  buildEnrichedToolJsonLd,
+  buildBreadcrumbJsonLd
+} from "@/lib/seo";
 
 const PAN_PRESETS: CropperPreset[] = [
   {
@@ -40,9 +45,46 @@ const PAN_PRESETS: CropperPreset[] = [
   }
 ];
 
-export default function PANCardResize() {
+export default function PANCardResizePage() {
+  const article = toolArticles["pan-card-resize"];
+  const faqs = article?.faqs || [];
+  const faqSchema = buildFAQSchema(faqs);
+  const toolUrl = "https://toolwala.co/tools/pan-card-resize/";
+
+  const breadcrumbItems = [
+    { name: "Home", href: "/" },
+    { name: "Tools", href: "/tools" },
+    { name: "PAN Card Resize", href: "/tools/pan-card-resize" }
+  ];
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      buildEnrichedToolJsonLd(
+        {
+          title: "PAN Card Resize Online",
+          description: "Format, crop, and resize passport photos to official NSDL and UTIITSL PAN card specifications. Complies with the mandatory 213 x 213 pixels dimension and whiteness checks."
+        },
+        toolUrl,
+        "Image Tools"
+      ),
+      buildWebPageSchema(
+        "PAN Card Resize Online",
+        "Format, crop, and resize passport photos to official NSDL and UTIITSL PAN card specifications. Complies with the mandatory 213 x 213 pixels dimension and whiteness checks.",
+        toolUrl,
+        "en"
+      ),
+      buildBreadcrumbJsonLd(breadcrumbItems),
+      ...(faqSchema ? [faqSchema] : [])
+    ]
+  };
+
   return (
     <ToolVisibilityGuard slug="pan-card-resize">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="min-h-screen bg-[#030712] text-gray-100 relative overflow-hidden font-sans">
         <MeshGradient />
 
@@ -78,20 +120,20 @@ export default function PANCardResize() {
 
           {/* Main Cropper Console */}
           <div className="max-w-6xl mx-auto">
-            <ImageCropperEngine
+            <ImageCropperClientWrapper
               toolSlug="pan-card-resize"
               title="PAN Card Resize"
               description="Format and resize passport photos to official NSDL/UTIITSL PAN card specifications."
               presets={PAN_PRESETS}
-              seoArticle={
-                toolArticles["pan-card-resize"] && (
-                  <div className="mt-24 border-t border-white/5 pt-20">
-                    <ToolArticle {...toolArticles["pan-card-resize"]} />
-                  </div>
-                )
-              }
             />
           </div>
+
+          {/* SEO Article */}
+          {toolArticles["pan-card-resize"] && (
+            <div className="mt-24 border-t border-white/5 pt-20 max-w-6xl mx-auto">
+              <ToolArticle {...toolArticles["pan-card-resize"]} />
+            </div>
+          )}
         </div>
       </div>
     </ToolVisibilityGuard>

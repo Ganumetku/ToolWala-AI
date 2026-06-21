@@ -259,7 +259,7 @@
     "badges": {
       "aadhaar-photo-resizer": "Offizielle UIDAI Spezifikation",
       "aadhaar-masking-tool": "Sichere Datenschutzmaske",
-      "pan-photo-tool": "NSDL / UTIITSL Bereit",
+      "pan-card-resize": "NSDL / UTIITSL Bereit",
       "signature-crop-tool": "SSC / IBPS Konform",
       "passport-photo-maker": "Spezifikationen für Schengen- und US-Visa",
       "exam-photo-resizer": "Nationale Portale",
@@ -269,7 +269,7 @@
     "kb": {
       "aadhaar-photo-resizer": "20 KB - 50 KB",
       "aadhaar-masking-tool": "Originalgröße",
-      "pan-photo-tool": "Unter 50 KB",
+      "pan-card-resize": "Unter 50 KB",
       "signature-crop-tool": "10 KB - 20 KB",
       "passport-photo-maker": "Unter 100 KB",
       "exam-photo-resizer": "20 KB - 50 KB",
@@ -279,7 +279,7 @@
     "dim": {
       "aadhaar-photo-resizer": "354 x 472 Pixel",
       "aadhaar-masking-tool": "Automatische Erkennung",
-      "pan-photo-tool": "213 x 213 Pixel",
+      "pan-card-resize": "213 x 213 Pixel",
       "signature-crop-tool": "256 x 64 Pixel",
       "passport-photo-maker": "3,5 x 4,5 cm",
       "exam-photo-resizer": "3,5 x 4,5 cm",

@@ -42,17 +42,25 @@ export default function BlogTableOfContents({
 
     if (domItems.length > 0) setItems(domItems);
 
-    const handleScroll = () => {
-      let current = "";
-      for (const h of headings) {
-        if (h.getBoundingClientRect().top <= 120) current = h.id;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: "-120px 0px -75% 0px",
+        threshold: 0,
       }
-      setActiveId(current || domItems[0]?.id || "");
-    };
+    );
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    headings.forEach((h) => observer.observe(h));
+
+    return () => {
+      observer.disconnect();
+    };
   }, [syncFromDom, contentKey]);
 
   if (!items.length) return null;

@@ -14,6 +14,7 @@ interface BlogRichContentProps {
   allTools?: Tool[];
   allBlogs?: BlogPost[];
   currentSlug?: string;
+  processedHtml?: string;
 }
 
 type ContentSegment =
@@ -65,11 +66,13 @@ export default function BlogRichContent({
   allTools = [],
   allBlogs = [],
   currentSlug,
+  processedHtml,
 }: BlogRichContentProps) {
   const processedContent = useMemo(() => {
+    if (processedHtml) return processedHtml;
     const normalized = normalizeBlogContent(content);
     return optimizeBlogContent(normalized, allTools, allBlogs, currentSlug);
-  }, [content, allTools, allBlogs, currentSlug]);
+  }, [content, allTools, allBlogs, currentSlug, processedHtml]);
 
   const segments = useMemo(() => parseContent(processedContent), [processedContent]);
 

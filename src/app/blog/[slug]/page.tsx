@@ -64,6 +64,12 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
   const breadcrumbs = buildBlogBreadcrumbs(translatedBlog);
   const tocItems = extractTableOfContents(translatedBlog.content);
 
+  // Pre-process markdown and auto-link optimization on the server
+  const { normalizeBlogContent } = await import("@/lib/blog-utils");
+  const { optimizeBlogContent } = await import("@/lib/blog-seo");
+  const normalized = normalizeBlogContent(translatedBlog.content);
+  const processedHtml = optimizeBlogContent(normalized, allTools, activeBlogs, translatedBlog.slug);
+
   return (
     <>
       <script
@@ -98,6 +104,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
             allTools={allTools}
             pageUrl={pageUrl}
             tocItems={tocItems}
+            processedHtml={processedHtml}
           />
         </div>
       </div>

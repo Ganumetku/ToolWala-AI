@@ -120,31 +120,64 @@ export function injectInternalLinks(
   blogs: Pick<BlogPost, 'slug' | 'title'>[],
   currentSlug?: string
 ): string {
-  let result = html;
+  // 1. Map lowercase titles to link configurations to avoid duplicate loops
+  const termMap = new Map<string, { href: string; title: string }>();
 
-  // Link tool titles (longest first to avoid partial matches)
-  const sortedTools = [...tools].sort((a, b) => b.title.length - a.title.length);
-  for (const tool of sortedTools) {
-    const escaped = tool.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(`(?<!<a[^>]*>)(\\b${escaped}\\b)(?![^<]*<\\/a>)`, 'gi');
-    result = result.replace(regex, `<a href="${tool.href}" class="text-blue-400 hover:underline" title="${tool.title}">$1</a>`);
-  }
-
-  // Link blog titles
+  // Add blogs first, then tools so tools overwrite blogs if titles match (tools are higher priority)
   const sortedBlogs = blogs
     .filter((b) => b.slug !== currentSlug)
     .sort((a, b) => b.title.length - a.title.length);
 
   for (const blog of sortedBlogs) {
-    const escaped = blog.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(`(?<!<a[^>]*>)(\\b${escaped}\\b)(?![^<]*<\\/a>)`, 'gi');
-    result = result.replace(
-      regex,
-      `<a href="/blog/${blog.slug}" class="text-blue-400 hover:underline" title="${blog.title}">$1</a>`
-    );
+    termMap.set(blog.title.toLowerCase(), {
+      href: `/blog/${blog.slug}`,
+      title: blog.title,
+    });
   }
 
-  return result;
+  const sortedTools = [...tools].sort((a, b) => b.title.length - a.title.length);
+  for (const tool of sortedTools) {
+    termMap.set(tool.title.toLowerCase(), {
+      href: tool.href,
+      title: tool.title,
+    });
+  }
+
+  const keys = Array.from(termMap.keys()).sort((a, b) => b.length - a.length);
+  if (keys.length === 0) return html;
+
+  // Compile a single linear alternation regex matching any of the titles
+  const escapedTerms = keys.map((k) => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  const regex = new RegExp(`\\b(${escapedTerms.join('|')})\\b`, 'gi');
+
+  // Split HTML by tags to isolate text nodes and prevent double linking inside tags or anchor elements
+  const parts = html.split(/(<[^>]+>)/g);
+  let insideLink = false;
+
+  const resultParts = parts.map((part) => {
+    if (part.startsWith('<')) {
+      if (part.match(/^<a\b/i)) {
+        insideLink = true;
+      } else if (part.match(/^<\/a>/i)) {
+        insideLink = false;
+      }
+      return part;
+    } else {
+      if (insideLink || !part.trim()) {
+        return part;
+      }
+      // Single-pass replace on the text node
+      return part.replace(regex, (match) => {
+        const info = termMap.get(match.toLowerCase());
+        if (info) {
+          return `<a href="${info.href}" class="text-blue-400 hover:underline" title="${info.title}">${match}</a>`;
+        }
+        return match;
+      });
+    }
+  });
+
+  return resultParts.join('');
 }
 
 /** Prepare blog HTML for publish: ids, lazy images, internal links */

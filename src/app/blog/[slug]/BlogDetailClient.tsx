@@ -39,6 +39,7 @@ interface BlogDetailClientProps {
   allTools: Tool[];
   pageUrl: string;
   tocItems: TocItem[];
+  processedHtml?: string;
 }
 
 export default function BlogDetailClient({
@@ -48,6 +49,7 @@ export default function BlogDetailClient({
   allTools,
   pageUrl,
   tocItems,
+  processedHtml,
 }: BlogDetailClientProps) {
   const { t, locale, localizeHref } = useTranslation();
 
@@ -176,6 +178,7 @@ export default function BlogDetailClient({
                 allTools={allTools}
                 allBlogs={allBlogs}
                 currentSlug={blog.slug}
+                processedHtml={processedHtml}
               />
             </div>
 

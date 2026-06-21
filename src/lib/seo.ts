@@ -365,15 +365,93 @@ export async function generateToolMetadataHelper(
     locale = headerList.get('x-locale') || 'en';
     originalPathname = headerList.get('x-original-pathname') || path;
   } catch (e) {
-    // fallback
+    if (typeof global !== 'undefined' && (global as any).mockLocale) {
+      locale = (global as any).mockLocale;
+      originalPathname = (global as any).mockPathname || path;
+    }
   }
 
   const dbTranslation = await getToolTranslationWithFallback(toolId, locale);
   const landingPage = landingPagesData.find(lp => lp.slug === toolId);
-  const title = (dbTranslation.seoTitle && dbTranslation.seoTitle !== toolId) ? dbTranslation.seoTitle : 
-    (landingPage ? landingPage.title : (dbTranslation.title && dbTranslation.title !== toolId ? dbTranslation.title : fallbackTitle));
-  const description = (dbTranslation.seoDescription && dbTranslation.seoDescription !== "") ? dbTranslation.seoDescription : 
-    (landingPage ? landingPage.metaDescription : (dbTranslation.description || fallbackDesc));
+  const baseEn = await getToolTranslationWithFallback(toolId, 'en');
+
+  let title = '';
+  let description = '';
+
+  if (locale === 'en') {
+    title = (dbTranslation.seoTitle && dbTranslation.seoTitle !== toolId) ? dbTranslation.seoTitle : 
+      (landingPage ? landingPage.title : (dbTranslation.title && dbTranslation.title !== toolId ? dbTranslation.title : fallbackTitle));
+    description = (dbTranslation.seoDescription && dbTranslation.seoDescription !== "") ? dbTranslation.seoDescription : 
+      (landingPage ? landingPage.metaDescription : (dbTranslation.description || fallbackDesc));
+  } else {
+    // Non-English locale. Build SEO title/description safely.
+    let toolTitle = dbTranslation.title && dbTranslation.title !== toolId ? dbTranslation.title : '';
+    if (!toolTitle) {
+      const enTitle = baseEn.title && baseEn.title !== toolId ? baseEn.title : (landingPage ? landingPage.title : fallbackTitle);
+      const { getToolTranslationWithFallback: getFallback } = await import('@/lib/tool-translation-service');
+      const translatedData = await getFallback(toolId, locale);
+      toolTitle = translatedData.title;
+    }
+
+    let toolDesc = dbTranslation.description || '';
+    if (!toolDesc) {
+      const enDesc = baseEn.description || (landingPage ? landingPage.metaDescription : fallbackDesc);
+      const { getToolTranslationWithFallback: getFallback } = await import('@/lib/tool-translation-service');
+      const translatedData = await getFallback(toolId, locale);
+      toolDesc = translatedData.description;
+    }
+
+    // Try to get clean seoTitle
+    let rawSeoTitle = (dbTranslation.seoTitle && dbTranslation.seoTitle !== toolId) ? dbTranslation.seoTitle : '';
+    
+    if (rawSeoTitle) {
+      title = rawSeoTitle;
+    } else {
+      // Construct SEO title cleanly based on locale
+      if (locale === 'hi') {
+        title = `${toolTitle} - मुफ्त ऑनलाइन टूल`;
+      } else if (locale === 'es') {
+        title = `${toolTitle} - Herramienta Gratuita`;
+      } else if (locale === 'pt') {
+        title = `${toolTitle} - Ferramenta Gratuita`;
+      } else if (locale === 'fr') {
+        title = `${toolTitle} - Outil en ligne gratuit`;
+      } else if (locale === 'de') {
+        title = `${toolTitle} - Kostenloses Online-Tool`;
+      } else if (locale === 'id') {
+        title = `${toolTitle} - Alat Online Gratis`;
+      } else if (locale === 'ar') {
+        title = `${toolTitle} - أداة مجانية على الإنترنت`;
+      } else {
+        title = `${toolTitle} - Free Online Tool`;
+      }
+    }
+
+    // Replace English proper nouns / tool titles inside the seoTitle and seoDescription if they were not translated
+    if (baseEn && baseEn.title && toolTitle) {
+      const englishName = baseEn.title;
+      const escapedEnglishName = englishName.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+      const regex = new RegExp(escapedEnglishName, 'gi');
+      title = title.replace(regex, toolTitle);
+      
+      if (dbTranslation.seoDescription) {
+        description = dbTranslation.seoDescription.replace(regex, toolTitle);
+      } else {
+        description = toolDesc.replace(regex, toolTitle);
+      }
+    } else {
+      description = dbTranslation.seoDescription || toolDesc;
+    }
+
+    // Ensure proper casing & translation of AI -> IA for Romance languages, and AI -> एआई for Hindi
+    if (['es', 'pt', 'fr'].includes(locale)) {
+      title = title.replace(/\bAI\b/gi, 'IA');
+      description = description.replace(/\bAI\b/gi, 'IA');
+    } else if (locale === 'hi') {
+      title = title.replace(/\bAI\b/gi, 'एआई');
+      description = description.replace(/\bAI\b/gi, 'एआई');
+    }
+  }
   try {
     const fs = require('fs');
     const pathLib = require('path');

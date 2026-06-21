@@ -103,7 +103,6 @@ export async function getAllToolTranslations(locale: string): Promise<Record<str
             .filter((slug: string) => {
               const existing = result[slug];
               if (!existing) return true;
-              if (locale === 'hi' && !/[\u0900-\u097F]/.test(existing.title || '')) return true;
               return false;
             });
           if (missingSlugs.length > 0) {
@@ -154,7 +153,6 @@ export async function getAllToolTranslations(locale: string): Promise<Record<str
         .filter((slug: string) => {
           const existing = result[slug];
           if (!existing) return true;
-          if (locale === 'hi' && !/[\u0900-\u097F]/.test(existing.title || '')) return true;
           return false;
         });
       if (missingSlugs.length > 0) {
@@ -184,7 +182,7 @@ export async function getAllToolTranslations(locale: string): Promise<Record<str
   return result;
 }
 
-async function translateText(text: string, targetLang = 'hi'): Promise<string> {
+export async function translateText(text: string, targetLang = 'hi'): Promise<string> {
   if (!text || !text.trim()) return '';
   try {
     const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
@@ -217,17 +215,41 @@ export async function getToolTranslationWithFallback(slug: string, locale: strin
 
   // If locale is not English, ensure we don't return English strings or empty translations
   if (locale !== 'en') {
-    const enData = await getToolTranslation(slug, 'en');
-    const isUntranslated = !data || (enData && data.title === enData.title && data.description === enData.description);
-    const isHindiUntranslated = locale === 'hi' && (!data || (!hasDevanagari(data.title) && !hasDevanagari(data.description)));
+    const isUntranslated = !data;
 
-    if (isUntranslated || isHindiUntranslated) {
+    if (isUntranslated) {
+      const enData = await getToolTranslation(slug, 'en');
       const baseEn = enData || await getToolTranslationWithFallback(slug, 'en');
-      const translatedTitle = await translateText(baseEn.title, locale);
-      const translatedDesc = await translateText(baseEn.description, locale);
+      let translatedTitle = await translateText(baseEn.title, locale);
+      let translatedDesc = await translateText(baseEn.description, locale);
       const translatedFaqs = await translateFaqs(baseEn.faq, locale);
-      const translatedSeoTitle = await translateText(baseEn.seoTitle || '', locale);
-      const translatedSeoDesc = await translateText(baseEn.seoDescription || '', locale);
+      let translatedSeoTitle = await translateText(baseEn.seoTitle || '', locale);
+      let translatedSeoDesc = await translateText(baseEn.seoDescription || '', locale);
+
+      // Post-process to fix mixed languages / untranslated proper nouns
+      if (baseEn.title && translatedTitle) {
+        const englishName = baseEn.title;
+        const escapedEnglishName = englishName.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        const regex = new RegExp(escapedEnglishName, 'gi');
+        
+        translatedTitle = translatedTitle.replace(regex, translatedTitle);
+        translatedSeoTitle = translatedSeoTitle.replace(regex, translatedTitle);
+        translatedSeoDesc = translatedSeoDesc.replace(regex, translatedTitle);
+        translatedDesc = translatedDesc.replace(regex, translatedTitle);
+      }
+
+      // Convert "AI" -> "IA" or "एआई"
+      if (['es', 'pt', 'fr'].includes(locale)) {
+        translatedTitle = translatedTitle.replace(/\bAI\b/gi, 'IA');
+        translatedSeoTitle = translatedSeoTitle.replace(/\bAI\b/gi, 'IA');
+        translatedSeoDesc = translatedSeoDesc.replace(/\bAI\b/gi, 'IA');
+        translatedDesc = translatedDesc.replace(/\bAI\b/gi, 'IA');
+      } else if (locale === 'hi') {
+        translatedTitle = translatedTitle.replace(/\bAI\b/gi, 'एआई');
+        translatedSeoTitle = translatedSeoTitle.replace(/\bAI\b/gi, 'एआई');
+        translatedSeoDesc = translatedSeoDesc.replace(/\bAI\b/gi, 'एआई');
+        translatedDesc = translatedDesc.replace(/\bAI\b/gi, 'एआई');
+      }
 
       const translatedData: ToolTranslationData = {
         toolSlug: slug,

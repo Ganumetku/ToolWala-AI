@@ -31,9 +31,47 @@ export async function generateMetadata({ params }: TagPageProps) {
     locale = headerList.get("x-locale") || "en";
   } catch (e) {}
 
+  let title = '';
+  let description = '';
+
+  if (locale === 'hi') {
+    title = `#${label} लेख`;
+    description = `टूलवाला AI पर ${label} टैग किए गए लेख।`;
+  } else if (locale === 'es') {
+    title = `Artículos etiquetados con #${label}`;
+    description = `Artículos etiquetados con ${label} en ToolWala AI.`;
+  } else if (locale === 'pt') {
+    title = `Artigos marcados com #${label}`;
+    description = `Artigos marcados com ${label} no ToolWala AI.`;
+  } else if (locale === 'fr') {
+    title = `Articles marqués avec #${label}`;
+    description = `Articles marqués avec ${label} sur ToolWala AI.`;
+  } else if (locale === 'de') {
+    title = `Artikel mit dem Tag #${label}`;
+    description = `Artikel mit dem Tag ${label} auf ToolWala AI.`;
+  } else if (locale === 'id') {
+    title = `Artikel dengan tag #${label}`;
+    description = `Artikel dengan tag ${label} di ToolWala AI.`;
+  } else if (locale === 'ar') {
+    title = `المقالات التي تحمل الوسم #${label}`;
+    description = `المقالات التي تحمل الوسم ${label} على ToolWala AI.`;
+  } else {
+    title = `#${label} Articles`;
+    description = `Articles tagged with ${label} on ToolWala AI.`;
+  }
+
+  // Handle "AI" -> "IA" or "एआई"
+  if (['es', 'pt', 'fr'].includes(locale)) {
+    title = title.replace(/\bAI\b/gi, 'IA');
+    description = description.replace(/\bAI\b/gi, 'IA');
+  } else if (locale === 'hi') {
+    title = title.replace(/\bAI\b/gi, 'एआई');
+    description = description.replace(/\bAI\b/gi, 'एआई');
+  }
+
   return buildBlogArchiveMetadata(
-    `#${label} Articles`,
-    `Articles tagged with ${label} on ToolWala AI.`,
+    title,
+    description,
     `/blog/tag/${tag}`,
     [label, "blog", "ToolWala AI"],
     locale

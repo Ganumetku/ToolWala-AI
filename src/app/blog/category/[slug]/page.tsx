@@ -33,11 +33,53 @@ export async function generateMetadata({ params }: CategoryPageProps) {
     locale = headerList.get("x-locale") || "en";
   } catch (e) {}
 
+  const { loadTranslations, getTranslation } = await import('@/lib/i18n');
+  const messages = await loadTranslations(locale);
+  const localizedCategory = getTranslation(messages, `categories.${category}`) || category;
+
+  let title = '';
+  let description = '';
+
+  if (locale === 'hi') {
+    title = `${localizedCategory} लेख`;
+    description = `टूलवाला AI पर ${localizedCategory} गाइड, ट्यूटोरियल और अंतर्दृष्टि ब्राउज़ करें।`;
+  } else if (locale === 'es') {
+    title = `Artículos de ${localizedCategory}`;
+    description = `Explore guías, tutoriales e ideas sobre ${localizedCategory} en ToolWala AI.`;
+  } else if (locale === 'pt') {
+    title = `Artigos de ${localizedCategory}`;
+    description = `Navegue por guias, tutoriais e insights de ${localizedCategory} no ToolWala AI.`;
+  } else if (locale === 'fr') {
+    title = `Articles sur ${localizedCategory}`;
+    description = `Parcourez les guides, tutoriels et informations sur ${localizedCategory} sur ToolWala AI.`;
+  } else if (locale === 'de') {
+    title = `${localizedCategory} Artikel`;
+    description = `Durchsuchen Sie Anleitungen, Tutorials und Einblicke zu ${localizedCategory} auf ToolWala AI.`;
+  } else if (locale === 'id') {
+    title = `Artikel ${localizedCategory}`;
+    description = `Telusuri panduan, tutorial, dan wawasan ${localizedCategory} di ToolWala AI.`;
+  } else if (locale === 'ar') {
+    title = `مقالات ${localizedCategory}`;
+    description = `تصفح أدلة وبرامج تعليمية ورؤى ${localizedCategory} على ToolWala AI.`;
+  } else {
+    title = `${localizedCategory} Articles`;
+    description = `Browse ${localizedCategory} guides, tutorials, and insights on ToolWala AI.`;
+  }
+
+  // Handle "AI" -> "IA" or "एआई"
+  if (['es', 'pt', 'fr'].includes(locale)) {
+    title = title.replace(/\bAI\b/gi, 'IA');
+    description = description.replace(/\bAI\b/gi, 'IA');
+  } else if (locale === 'hi') {
+    title = title.replace(/\bAI\b/gi, 'एआई');
+    description = description.replace(/\bAI\b/gi, 'एआई');
+  }
+
   return buildBlogArchiveMetadata(
-    `${category} Articles`,
-    `Browse ${category} guides, tutorials, and insights on ToolWala AI.`,
+    title,
+    description,
     `/blog/category/${slug}`,
-    [category, "blog", "ToolWala AI"],
+    [localizedCategory, "blog", "ToolWala AI"],
     locale
   );
 }

@@ -103,7 +103,7 @@ export default function PrivacyHubPage() {
     {
       feature: t('privacy_hub.comparison.f3_name', 'Offline Mode'),
       toolwala: t('privacy_hub.comparison.f3_toolwala', 'Fully Supported (Works offline)'),
-      traditional: t('privacy_hub.comparison.f3_traditional', 'Not Available (Requires internet connection)'),
+      traditional: t('privacy_hub.comparison.f3_traditional', 'Processing Works Offline After Initial Page Load'),
       secure: true
     },
     {

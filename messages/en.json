@@ -1228,7 +1228,7 @@
       "f2_traditional": "Remote server farm execution",
       "f3_name": "Offline Mode",
       "f3_toolwala": "Fully Supported (Works offline)",
-      "f3_traditional": "Not Available (Requires internet connection)",
+      "f3_traditional": "Processing Works Offline After Initial Page Load",
       "f4_name": "Database Logging & Retention",
       "f4_toolwala": "None (Purged when you close tab)",
       "f4_traditional": "1 hour to several days of storage logs",

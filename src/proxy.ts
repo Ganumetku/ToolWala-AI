@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { updateSession } from '@/lib/supabase/middleware';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
+import { landingPagesData } from '@/data/landingPages';
 
 const PROTECTED_ADMIN_PREFIXES = ['/admin', '/api/admin'];
 const LOCALES = ['hi', 'es', 'fr', 'de', 'pt', 'ar', 'id'];
@@ -73,6 +74,18 @@ export async function proxy(request: NextRequest) {
     const redirectUrl = new URL(targetPath + request.nextUrl.search, request.url);
     console.log(`[Proxy] Redirecting 301 duplicate/legacy tool ${pathname} to ${redirectUrl.toString()}`);
     return NextResponse.redirect(redirectUrl, { status: 301 });
+  }
+
+  // 301 redirect landing pages from /tools/[slug]/ to /landing/[slug]/
+  if (rewrittenPathname.startsWith('/tools/')) {
+    const parts = rewrittenPathname.split('/');
+    const slug = parts[2];
+    if (slug && landingPagesData.some(lp => lp.slug === slug)) {
+      const targetPath = isLocalePrefix ? `/${locale}/landing/${slug}/` : `/landing/${slug}/`;
+      const redirectUrl = new URL(targetPath + request.nextUrl.search, request.url);
+      console.log(`[Proxy] Redirecting 301 landing page ${pathname} to ${redirectUrl.toString()}`);
+      return NextResponse.redirect(redirectUrl, { status: 301 });
+    }
   }
 
   // 2. Handle saved language redirect on root "/"

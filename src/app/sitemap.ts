@@ -66,8 +66,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/disclaimer',
     '/tools/add-page-numbers-to-pdf',
     '/tools/sign-pdf',
-    '/tools/compress-pdf-to-100kb',
-    '/tools/compress-pdf-to-200kb',
+    '/landing/compress-pdf-to-100kb',
+    '/landing/compress-pdf-to-200kb',
     '/tools/aadhaar-photo-resize',
     '/tools/gov-form-image-compressor',
   ];
@@ -91,7 +91,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
 
   const landingPageEntries: MetadataRoute.Sitemap = landingPagesData.flatMap((lp) =>
-    seoLocales.map((loc) => buildItem(`/tools/${lp.slug}`, now, 'weekly', 0.8, loc))
+    seoLocales.map((loc) => buildItem(`/landing/${lp.slug}`, now, 'weekly', 0.8, loc))
   );
 
   let toolEntries: MetadataRoute.Sitemap = [];

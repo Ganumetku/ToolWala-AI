@@ -38,7 +38,8 @@ export const landingPagesData: LandingPageMetadata[] = [
     faqs: [
       { question: "Is this passport photo maker completely free?", answer: "Yes. ToolWala's Passport Photo Maker is 100% free with no signups, subscriptions, or watermarks. You can generate unlimited print-ready layouts at no cost." },
       { question: "What is the official passport photo size in India?", answer: "The Indian passport specification requires a 3.5cm x 4.5cm photo (35mm x 45mm) with a plain white background, and the face must cover 70-80% of the frame." },
-      { question: "Is it safe to upload my photo here?", answer: "Yes, our tool runs client-side. The image crop and background removal are processed directly inside your browser cache. We never upload or save your photos." }
+      { question: "Is it safe to upload my photo here?", answer: "Yes, our tool runs client-side. The image crop and background removal are processed directly inside your browser cache. We never upload or save your photos." },
+      { question: "Can I print the passport photos at home?", answer: "Yes, you can download a printable sheet preset (like 4x6 inches or A4) containing multiple copies of your passport photo aligned perfectly for immediate home or shop printing." }
     ],
     content: `Need a passport photo quickly for a visa application, passport renewal, or identity card? Skip the studio and avoid print shop wait times. With our free online passport size photo maker, you can easily create compliant document photos from your home.
 
@@ -58,7 +59,13 @@ To get a passport photo that passes official government reviews, follow these ba
 - **DPI Quality**: Minimum 300 DPI for sharp printing.
 
 ### Complete Biometric Guidelines
-To avoid application rejection, make sure you look straight at the lens, avoid head tilts, and keep a neutral facial expression. Avoid wearing white shirts (which blend into the white background); instead, wear dark colors for clear contrast.`
+To avoid application rejection, make sure you look straight at the lens, avoid head tilts, and keep a neutral facial expression. Avoid wearing white shirts (which blend into the white background); instead, wear dark colors for clear contrast.
+
+### Why Quality and Contrast Matter
+Biometric scanners at passport offices and embassies are sensitive to shadows, low resolution, and poor contrast. If your photo has harsh shadow details under your nose or chin, it may fail automated checks. Our editor lets you preview and adjust dimensions to ensure uniform exposure.
+
+### Saving Time and Money with Online Tools
+Traditional photo studios charge hefty premiums for a simple sheet of passport photos. By using ToolWala's client-side generator, you can snap a clean photo using your smartphone, align it to exact dimensions, strip out distracting background clutter, and save it to your local device. Once saved, you can print a sheet at any local stationery store for pennies, or upload the digital copy straight to UIDAI, Passport Seva, or Visa consoles.`
   },
   {
     slug: "passport-photo-size-online",
@@ -94,7 +101,13 @@ Our online passport sizing tool automatically handles the math for you:
 2. Upload your portrait scan.
 3. Select your target country preset from the drop-down menu.
 4. The crop boundaries adjust to the required width, height, and aspect ratio.
-5. Save the cropped image at the correct resolution (300 DPI) for print or digital upload.`
+5. Save the cropped image at the correct resolution (300 DPI) for print or digital upload.
+
+### The Science of Biometric Document Alignment
+Unlike ordinary portrait photos, official documents have strict framing guides. Biometric standards dictate that your chin, nose, and eyes must align within a specific zone. If your face is cropped too close or is positioned too far in the background, your photo will fail automated validation checks. ToolWala overlays visual guidelines on top of your photo, making face positioning effortless and accurate.
+
+### Dynamic Resolution Calculations
+When converting physical dimensions to pixel dimensions, you must account for the print resolution (DPI). For digital uploads on passport portals, a common requirement is 300 DPI, which yields 413x531 pixels for Indian passport photos. Our resizer uses advanced canvas algorithms to guarantee that your image is saved with the exact metadata tagging required by validation checkers, preventing common aspect-ratio rejection issues.`
   },
   {
     slug: "photo-resize-to-20kb",
@@ -113,9 +126,10 @@ Our online passport sizing tool automatically handles the math for you:
     ],
     faqs: [
       { question: "Why do government forms require photos under 20KB?", answer: "Many recruitment portals use legacy file databases with strict size caps to optimize bandwidth. Uploading photos larger than 20KB will cause an upload error." },
-      { question: "Does compressing to 20KB make the photo blurry?", answer: "Our tool balances resolution and JPEG compression levels to ensure that your face details remain legible even at small file sizes." }
+      { question: "Does compressing to 20KB make the photo blurry?", answer: "Our tool balances resolution and JPEG compression levels to ensure that your face details remain legible even at small file sizes." },
+      { question: "Can I resize PNG photos to 20KB?", answer: "Yes, our tool accepts PNG files but automatically outputs them as optimized JPEGs, which is the mandatory format for government portals." }
     ],
-    content: `Uploading a passport photograph to government portals like SSC or state exam boards often requires the file size to be under 20KB. If your file is too large, the system throws a validation error, preventing you from submitting your form.
+    content: `Uploading a passport photograph to government portals like SSC, state boards, or police bharti often requires the file size to be under 20KB. If your file is too large, the system throws a validation error, preventing you from submitting your application form. ToolWala's client-side optimization toolkit is designed specifically to resolve this issue, allowing you to crop and compress your photos to under 20KB while preserving necessary biometric details.
 
 ### How to Resize a Photo to 20KB Online
 ToolWala makes it easy to compress your photos to the required size limit:
@@ -128,7 +142,13 @@ ToolWala makes it easy to compress your photos to the required size limit:
 ### Tips for Formatting Small Images
 - **Check Aspect Ratio**: Ensure the width-to-height ratio matches your form requirements (usually 3.5 x 4.5 cm).
 - **Remove Background**: Use the background removal feature to strip background details, which reduces file size and improves clarity.
-- **Save as JPEG**: JPEG format provides the best compression for photographs, allowing you to fit clean images under the 20KB limit.`
+- **Save as JPEG**: JPEG format provides the best compression for photographs, allowing you to fit clean images under the 20KB limit.
+
+### Understanding the 20KB Constraint
+Portals like the Staff Selection Commission (SSC) and various state level exam systems (like UPSSSC, HSSC, and state police recruitment sites) enforce strict file limits (often 10KB to 20KB). The main reason is data constraints; hosting millions of applicant records requires optimization of server-side resources. However, compression shouldn't make the face unrecognizable. If compression is too aggressive, your photo will be rejected during manual checking phases. Our advanced algorithm uses local quantizations to compress the background heavily while maintaining sharp contrast on eyes, nose, and facial borders.
+
+### Safety and Compliance Features
+Security is our utmost priority. Since passport photographs are sensitive biometric details, ToolWala ensures that all crop and compression operations execute entirely within your browser memory. We never store or upload your images to third-party databases, ensuring your absolute privacy. You can even disconnect your internet connection once the page is loaded and run the resizer completely offline.`
   },
   {
     slug: "photo-resize-to-50kb",
@@ -147,9 +167,10 @@ ToolWala makes it easy to compress your photos to the required size limit:
     ],
     faqs: [
       { question: "What portals require photos under 50KB?", answer: "NSDL PAN card uploads, IBPS PO/Clerk applications, and state recruitment portals often enforce a 50KB limit." },
-      { question: "Will my photo quality decrease?", answer: "No. The tool optimizes the image dimensions and compression parameters to keep details clear while fitting the 50KB limit." }
+      { question: "Will my photo quality decrease?", answer: "No. The tool optimizes the image dimensions and compression parameters to keep details clear while fitting the 50KB limit." },
+      { question: "What is the official pixel dimensions for NSDL PAN cards?", answer: "The official dimension is 213x213 pixels, representing 3.5x2.5 cm at 300 DPI, and the file must be between 10KB and 50KB." }
     ],
-    content: `When applying for bank exams (IBPS/SBI) or updates (NSDL PAN card), the uploaded photograph file size must be between 20 KB and 50 KB. Uploading images larger than 50KB will cause registration failures.
+    content: `When applying for bank exams (IBPS/SBI) or updates (NSDL PAN card), the uploaded photograph file size must be between 20 KB and 50 KB. Uploading images larger than 50KB will cause registration failures. Using ToolWala's 50KB Photo Compiler, you can format your scanned photo or phone portrait to match these specifications in seconds.
 
 ### How to Compress Your Photo Under 50KB
 Follow these steps to format your photo:
@@ -162,7 +183,13 @@ Follow these steps to format your photo:
 ### Sizing and Dimension Requirements
 - **Bank Exams (IBPS/SBI)**: 4.5 cm height x 3.5 cm width, target size: 20-50KB.
 - **PAN Card (NSDL/UTIITSL)**: 3.5 cm x 2.5 cm (or 213x213 pixels), target size: 10-50KB.
-- **Central Government Jobs**: Usually 3.5 cm x 4.5 cm, target size: 20-50KB.`
+- **Central Government Jobs**: Usually 3.5 cm x 4.5 cm, target size: 20-50KB.
+
+### The Role of 50KB Target Optimizations
+Many systems, including the NSDL portal and SBI Clerk/PO portals, use strict filters that automatically validate file attributes. If a file is even 50.1KB, the upload console will prompt an error. Our tool ensures that the generated image falls securely below the limit (typically targetting 45-48KB) to guarantee compliance while maximizing image resolution. By adjusting image quality coefficients dynamically in client-side Javascript, we avoid the trial-and-error of using offline software.
+
+### Offline and Browser-Native Engine
+This resizer runs entirely on your local machine, without contacting any cloud servers. This protects candidates from identity leaks, since government forms require genuine biometric scans. You get a fast, private, and fully secure workflow that satisfies NSDL, UTIITSL, and bank exam regulations.`
   },
   {
     slug: "photo-resize-to-100kb",
@@ -195,7 +222,10 @@ Follow these steps to format your photo:
 ### Quality and Compliance Tips
 - **Use High-Resolution Inputs**: Start with a high-resolution photo to keep the final output crisp.
 - **Adjust Contrast**: Ensure proper lighting so your features remain visible at smaller file sizes.
-- **Secure Processing**: The tool runs entirely in your browser cache, keeping your personal photos private.`
+- **Secure Processing**: The tool runs entirely in your browser cache, keeping your personal photos private.
+
+### When do you need a 100KB file limit?
+Many international visa submission systems, national scholarship portals (like National Scholarship Portal - NSP), and central university admissions (like CUET) require photos to be under 100KB. This limit is large enough to preserve high-fidelity details, but still requires compression from modern smartphone cameras that capture photos at 3MB to 10MB. Our local compression engine strips out metadata profiles (such as EXIF camera headers) and reduces structural noise, ensuring that you achieve a 95KB file size with almost no visual compromise.`
   },
   {
     slug: "signature-resize-to-20kb",
@@ -214,9 +244,10 @@ Follow these steps to format your photo:
     ],
     faqs: [
       { question: "What is the signature file size limit for SSC?", answer: "SSC requires signature uploads to be in JPEG format and between 10 KB and 20 KB." },
-      { question: "Can I sign in blue ink?", answer: "SSC accepts both black and blue ink, but black ink is recommended for higher contrast and better legibility." }
+      { question: "Can I sign in blue ink?", answer: "SSC accepts both black and blue ink, but black ink is recommended for higher contrast and better legibility." },
+      { question: "What is the physical size for SSC signatures?", answer: "The dimensions are 6.0 cm width x 3.0 cm height, which corresponds to an aspect ratio of 2:1." }
     ],
-    content: `Applying for SSC CGL, CHSL, or MTS requires uploading a scanned signature between 10KB and 20KB. If your signature scan is too large or cropped incorrectly, the upload system will reject the file.
+    content: `Applying for SSC CGL, CHSL, or MTS requires uploading a scanned signature between 10KB and 20KB. If your signature scan is too large or cropped incorrectly, the upload system will reject the file. Our local signature resizer formats your signature scans to meet SSC requirements instantly.
 
 ### How to Resize a Signature to 20KB
 Format your signature scan quickly with these steps:
@@ -229,7 +260,13 @@ Format your signature scan quickly with these steps:
 ### Best Practices for Scanned Signatures
 - **Use Plain White Paper**: Sign on unruled, clean white paper. Ruled lines will cause rejections.
 - **Maintain High Contrast**: Use black ink to ensure the signature is clear and legible.
-- **Align and Crop**: Trim unnecessary white space around the signature to keep the file size small.`
+- **Align and Crop**: Trim unnecessary white space around the signature to keep the file size small.
+
+### Technical Parameters for SSC Signature Uploads
+Staff Selection Commission (SSC) has automated validators that inspect the resolution and size of the uploaded files. The mandatory range is 10-20KB, and the dimension must be 6.0cm x 3.0cm. In pixel terms, this equates to 250 x 125 pixels. If you take a high-resolution scan or photo of your signature, it will easily be over 200KB. Simply uploading that will result in a validation failure. By cropping out empty white borders and converting the image format to an optimized JPEG profile, our tool makes compliance simple.
+
+### Client-Side Security Assurance
+Scanned signatures are highly private biometric details that can be misused if leaked. Our signature resizer processes everything locally in your browser memory. No data is sent over the network, keeping your signature completely safe. Once loaded, you can even turn off your internet connection and proceed offline.`
   },
   {
     slug: "signature-resize-to-50kb",
@@ -261,7 +298,10 @@ Format your signature scan quickly with these steps:
 
 ### Sizing Guidelines
 - **UPSC forms**: Minimum 350x350 pixels, target size: 20-300KB (under 50KB recommended).
-- **Bank forms**: 140 x 60 pixels, target size: 10-20KB (some state banks accept up to 50KB).`
+- **Bank forms**: 140 x 60 pixels, target size: 10-20KB (some state banks accept up to 50KB).
+
+### Why UPSC Guidelines Require Equal Aspect Ratios
+The Union Public Service Commission (UPSC) uses a specific system design that requires signatures and photos to be uploaded in square boxes (minimum 350x350 pixels, maximum 1000x1000 pixels). If you upload a signature with a wide aspect ratio, it will stretch or look compressed, resulting in application holds. Our tool lets you crop your signature into a square ratio while centering the active signature content, ensuring the final output displays perfectly inside the UPSC OTR dashboard.`
   },
   {
     slug: "image-resize-in-kb",
@@ -292,6 +332,77 @@ Format your signature scan quickly with these steps:
 
 ### Quality and File Size Balance
 Reducing file size requires finding a balance between resolution and compression. Our tool adjusts these parameters to shrink your file while keeping text and face details sharp and readable.`
+  },
+  {
+    slug: "compress-pdf-to-100kb",
+    title: "Compress PDF to 100KB Online - Free PDF Size Reducer",
+    metaDescription: "Compress PDF files under 100KB online for free. Clean local processing for Indian government recruitment, EPFO portals, and recruitment portals.",
+    h1: "Compress PDF to 100KB Online",
+    badgeText: "100KB Portal Limit",
+    description: "Reduce PDF document size under 100KB locally in your browser. Perfect for official recruitment forms, EPFO portals, and state board uploads.",
+    ctaText: "Go to PDF Compressor",
+    ctaHref: "/tools/compress-pdf",
+    category: "PDF Tools",
+    relatedTools: ["gov-form-pdf-compressor", "merge-pdf", "sign-pdf"],
+    relatedBlogs: [
+      { title: "Standard Document Sizes for Indian Government Schemes", slug: "indian-government-scheme-document-sizes" },
+      { title: "How to Upload Documents on Government Portals Without Rejection", slug: "upload-documents-government-portals" }
+    ],
+    faqs: [
+      { question: "How can I compress PDF to 100KB without losing text quality?", answer: "Our tool adjusts raster images inside the PDF, subsets fonts, and removes unneeded streams to shrink your PDF file size under 100KB while keeping text vectors sharp." },
+      { question: "Is my document secure?", answer: "Yes, our tool runs 100% locally in your browser memory. We never copy, upload, or process your files on our servers." },
+      { question: "Does it support scanned PDFs?", answer: "Yes, the tool optimizes scanned images inside the PDF to fit under the 100KB limit, but ensure the original scan is clear." }
+    ],
+    content: `Uploading certificates, marks sheets, or identity proofs to portals like EPFO (Employees' Provident Fund Organisation), state education boards, and recruitment portals requires PDF attachments to be under 100KB. This limit can be difficult to hit because scanned files are often larger than 1MB. Using ToolWala's client-side PDF compressor, you can shrink your documents under 100KB safely and quickly.
+
+### How to Compress PDF to 100KB
+1. Click the **Go to PDF Compressor** button above to open the main optimizer tool.
+2. Drag and drop your PDF document or browse your files locally.
+3. Select the target compression parameters to automatically lower resolutions and strip unused font subsets.
+4. Download the resulting file under 100KB instantly.
+
+### Why 100KB Upload Caps Exist
+Portals enforce strict file size caps to handle millions of uploads efficiently. If every applicant uploaded a 5MB certificate scan, it would slow down servers and consume massive storage. By enforcing a 100KB limit, portals ensure fast uploads, but candidates must optimize files. Our resizer resolves this problem locally on your device.
+
+### Keeping Text Legible at 100KB
+A major challenge when compressing under 100KB is keeping text legible. Our engine uses smart compression to scale down background colors and graphics while keeping text clean, ensuring that your application is not rejected due to unreadable details.
+
+### Security and Privacy Assurance
+Since certificates contain personal details (names, dates of birth, registration numbers), uploading them to online converters poses privacy risks. Our PDF compressor processes files entirely in your browser cache, ensuring your data never leaves your computer.`
+  },
+  {
+    slug: "compress-pdf-to-200kb",
+    title: "Compress PDF to 200KB Online - Free PDF Size Optimizer",
+    metaDescription: "Compress PDF files under 200KB online for free. Local browser-native optimization for UPSC, state PSC exams, and EPFO certificate uploads.",
+    h1: "Compress PDF to 200KB Online",
+    badgeText: "200KB Upload Limit",
+    description: "Reduce PDF document size under 200KB locally in your browser. Fits requirements for UPSC certificates, state PSC forms, and bank exams.",
+    ctaText: "Go to PDF Compressor",
+    ctaHref: "/tools/compress-pdf",
+    category: "PDF Tools",
+    relatedTools: ["gov-form-pdf-compressor", "merge-pdf", "protect-pdf"],
+    relatedBlogs: [
+      { title: "UPSC Photo and Signature Resize Specifications: Complete Steps", slug: "upsc-photo-signature-resize-specifications" },
+      { title: "How to Compress UPSC PDF Documents Under 300KB", slug: "compress-upsc-pdf-documents-under-300kb" }
+    ],
+    faqs: [
+      { question: "Why do recruitment forms require PDFs under 200KB?", answer: "Portals cap file sizes to manage server loads. Files under 200KB strike a balance between readability and file size." },
+      { question: "Is this tool compatible with mobile browsers?", answer: "Yes, our browser-native tool is fully responsive and works on both Android and iOS devices." },
+      { question: "Can I compress password-locked PDFs?", answer: "Yes, the tool will prompt you to enter the password locally to decrypt and compress the file in browser memory." }
+    ],
+    content: `Many central and state government recruitment portals (like UPSC, GPSC, MPSC, and banking portals) require applicants to upload proof of eligibility, caste certificates, or experience sheets as PDFs under 200KB. ToolWala's browser-native compressor handles this local conversion instantly.
+
+### How to Compress PDF to 200KB
+1. Click the **Go to PDF Compressor** button above.
+2. Drag and drop your PDF document or browse your files locally.
+3. Apply optimized compression settings to shrink image layers.
+4. Save your optimized PDF under 200KB instantly.
+
+### Balancing Resolution and File Size
+A 200KB file limit provides enough room to maintain clear text and scans. However, raw scans are often much larger. Our tool reduces image resolutions (down to 150 DPI) and compresses structural streams, keeping text crisp while bringing the file size within limits.
+
+### Privacy-First Client-Side Processing
+Uploading personal certificates to online converters exposes sensitive information to data scrapers. ToolWala runs entirely in your browser cache, meaning your documents never touch our servers. This ensures complete privacy and compliance with data security practices.`
   },
   {
     slug: "compress-pdf-to-300kb",

@@ -5,6 +5,7 @@ import { getTranslationServer } from '@/lib/i18n-server';
 import { MeshGradient } from '@/components/BackgroundEffects';
 import FAQAccordion from '@/app/tools/[slug]/FAQAccordion';
 import { hubsData } from '@/data/hubs';
+import { landingPagesData } from '@/data/landingPages';
 import { 
   buildWebPageSchema, 
   buildBreadcrumbJsonLd, 
@@ -164,16 +165,20 @@ export default async function HubPage({ params }: HubPageProps) {
               <section className="space-y-6 pt-6 border-t border-white/5">
                 <h2 className="text-xs font-black uppercase tracking-[0.2em] text-gray-500">Related Application Helpers</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {hub.landingPages.map((lp) => (
-                    <Link 
-                      key={lp.slug} 
-                      href={localizeHref(`/tools/${lp.slug}`)}
-                      className="p-5 rounded-2xl border border-white/5 bg-[#0b0f19]/40 hover:border-blue-500/20 hover:bg-blue-500/[0.01] transition-all group flex items-center justify-between cursor-pointer"
-                    >
-                      <span className="text-xs font-black text-white group-hover:text-blue-400 transition-colors uppercase tracking-tight line-clamp-1">{lp.title}</span>
-                      <ArrowRight className="w-4 h-4 text-gray-500 group-hover:text-white group-hover:translate-x-0.5 transition-all flex-shrink-0" />
-                    </Link>
-                  ))}
+                  {hub.landingPages.map((lp) => {
+                    const isLanding = landingPagesData.some(item => item.slug === lp.slug);
+                    const targetHref = isLanding ? `/landing/${lp.slug}` : `/tools/${lp.slug}`;
+                    return (
+                      <Link 
+                        key={lp.slug} 
+                        href={localizeHref(targetHref)}
+                        className="p-5 rounded-2xl border border-white/5 bg-[#0b0f19]/40 hover:border-blue-500/20 hover:bg-blue-500/[0.01] transition-all group flex items-center justify-between cursor-pointer"
+                      >
+                        <span className="text-xs font-black text-white group-hover:text-blue-400 transition-colors uppercase tracking-tight line-clamp-1">{lp.title}</span>
+                        <ArrowRight className="w-4 h-4 text-gray-500 group-hover:text-white group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+                      </Link>
+                    );
+                  })}
                 </div>
               </section>
             )}

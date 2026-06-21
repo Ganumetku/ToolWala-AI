@@ -21,7 +21,7 @@ export default function SEOPageTemplate({ slug }: SEOPageTemplateProps) {
   const pageData = landingPagesData.find(lp => lp.slug === slug);
   if (!pageData) return null;
 
-  const pageUrl = getLocalizedCanonicalUrl(`/tools/${slug}`, locale);
+  const pageUrl = getLocalizedCanonicalUrl(`/landing/${slug}`, locale);
 
   // Setup breadcrumbs
   const breadcrumbItems = [

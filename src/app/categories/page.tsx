@@ -9,6 +9,8 @@ import { categoriesData, getToolsByCategory } from '@/data/categories';
 import { toolsData } from '@/data/tools';
 import { getTranslationServer } from '@/lib/i18n-server';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
+import { hubsData } from '@/data/hubs';
+import { landingPagesData } from '@/data/landingPages';
 import { 
   buildBreadcrumbJsonLd, 
   buildFAQSchema, 
@@ -314,6 +316,76 @@ export default async function CategoriesIndexPage() {
             </div>
 
           </div>
+
+          {/* Government Portal & Exam Compliance Hubs */}
+          <section className="glass rounded-[2.5rem] border border-white/5 p-8 sm:p-14 bg-white/[0.01] shadow-2xl mb-16 text-left">
+            <div className="max-w-3xl mb-10">
+              <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white mb-4 flex items-center gap-2.5">
+                <Layers className="w-6 h-6 text-blue-400" /> Government & Exam Compliance Hubs
+              </h2>
+              <p className="text-sm text-gray-400 leading-relaxed font-sans">
+                Are you preparing documents for Indian recruitment systems, biometric updates, or passport applications? Explore our dedicated compliance hubs containing tools and guidelines customized to meet official specifications.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {hubsData.map((hub) => (
+                <Link
+                  key={hub.slug}
+                  href={locale === 'en' ? `/hubs/${hub.slug}` : `/${locale}/hubs/${hub.slug}`}
+                  className="p-6 rounded-2xl border border-white/5 bg-[#0b0f19]/40 hover:border-blue-500/20 hover:bg-blue-500/[0.01] transition-all group flex flex-col justify-between cursor-pointer animate-in fade-in"
+                >
+                  <div>
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600/10 border border-blue-500/10 text-xl mb-4 group-hover:scale-110 transition-transform">
+                      {hub.icon}
+                    </div>
+                    <h3 className="text-sm font-black text-white group-hover:text-blue-400 uppercase tracking-tight mb-2 transition-colors">
+                      {hub.title.split(' | ')[0].split(' - ')[0]}
+                    </h3>
+                    <p className="text-xs text-gray-500 font-medium leading-relaxed mb-4 line-clamp-2">
+                      {hub.description}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-blue-400 group-hover:text-white transition-colors pt-2 border-t border-white/5">
+                    Explore Hub
+                    <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-all" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* Quick Sizing & Format Landing Pages */}
+          <section className="glass rounded-[2.5rem] border border-white/5 p-8 sm:p-14 bg-white/[0.01] shadow-2xl mb-16 text-left">
+            <div className="max-w-3xl mb-10">
+              <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white mb-4 flex items-center gap-2.5">
+                <Sparkles className="w-6 h-6 text-amber-400" /> Specialized Sizing & Format Guides
+              </h2>
+              <p className="text-sm text-gray-400 leading-relaxed font-sans">
+                Quickly resize and format your passport photos, scanned signatures, and PDF certificates to target limits (20KB, 50KB, 100KB, 200KB, 300KB, 500KB, 1MB) online for free.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {landingPagesData.map((lp) => (
+                <Link
+                  key={lp.slug}
+                  href={locale === 'en' ? `/landing/${lp.slug}` : `/${locale}/landing/${lp.slug}`}
+                  className="p-4 rounded-xl border border-white/5 bg-[#0b0f19]/30 hover:border-blue-500/20 hover:bg-blue-500/[0.01] transition-all group flex items-center justify-between cursor-pointer"
+                >
+                  <div className="text-left pr-4">
+                    <span className="text-xs font-black text-white group-hover:text-blue-400 uppercase tracking-tight line-clamp-1 transition-colors">
+                      {lp.h1}
+                    </span>
+                    <span className="text-[9px] text-gray-500 font-bold block mt-1 uppercase tracking-wider">
+                      {lp.badgeText}
+                    </span>
+                  </div>
+                  <ChevronRight className="w-3.5 h-3.5 text-gray-600 group-hover:translate-x-0.5 group-hover:text-white transition-all flex-shrink-0" />
+                </Link>
+              ))}
+            </div>
+          </section>
 
           {/* Privacy First Section (Table comparing ToolWala vs cloud alternatives) */}
           <section className="glass rounded-[2.5rem] border border-white/5 p-8 sm:p-14 bg-white/[0.01] shadow-2xl mb-16 text-left">

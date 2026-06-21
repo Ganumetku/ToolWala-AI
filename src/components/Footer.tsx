@@ -91,6 +91,14 @@ export default function Footer() {
     { name: "AI Resume Builder", href: "/tools/resume-builder/" }
   ];
 
+  const govHubs = [
+    { name: "UPSC Exam Hub", href: "/hubs/upsc-exam-utilities/" },
+    { name: "SSC Exam Hub", href: "/hubs/ssc-exam-utilities/" },
+    { name: "Aadhaar Card Hub", href: "/hubs/aadhaar-utilities/" },
+    { name: "PAN Card Hub", href: "/hubs/pan-card-utilities/" },
+    { name: "Passport Seva Hub", href: "/hubs/passport-seva-utilities/" }
+  ];
+
   const sitemap = [
     { name: "All Utilities", href: "/tools/" },
     { name: "Browse Folders", href: "/categories/" },
@@ -114,6 +122,11 @@ export default function Footer() {
       href: localizeHref(tool.href)
     };
   });
+
+  const localizedGovHubs = govHubs.map((hub) => ({
+    name: t(`hubs.${hub.name}`, hub.name),
+    href: localizeHref(hub.href)
+  }));
 
   const localizedSitemap = sitemap.map((item) => {
     let key = '';
@@ -139,7 +152,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 lg:gap-12">
           
-          <div className="lg:col-span-4 space-y-8">
+          <div className="lg:col-span-3 space-y-8">
             <Link href={localizeHref('/')} translate="no" data-no-translate className="flex items-center gap-3 group select-none no-translate notranslate">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white font-black text-2xl shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-transform group-hover:scale-110 group-hover:rotate-3 no-translate notranslate" translate="no" data-no-translate>
                 T
@@ -216,8 +229,24 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-          
+
           <div className="lg:col-span-2 space-y-6">
+            <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">{t('footer.gov_hubs', 'Gov Hubs')}</h3>
+            <ul className="space-y-4">
+              {localizedGovHubs.map((hub) => (
+                <li key={hub.name}>
+                  <Link 
+                    href={hub.href} 
+                    className="text-gray-400 hover:text-white text-xs font-bold transition-colors block"
+                  >
+                    {hub.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          
+          <div className="lg:col-span-1 space-y-6">
             <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">{t('footer.sitemap', 'Sitemap')}</h3>
             <ul className="space-y-4">
               {localizedSitemap.map((item) => (

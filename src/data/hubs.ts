@@ -47,7 +47,7 @@ With ToolWala's UPSC Hub, you can optimize all these files directly on your comp
     ],
     landingPages: [
       { title: "UPSC Photo Resizer", slug: "upsc-photo-resize" },
-      { title: "Signature Resize for UPSC", slug: "signature-resize-for-upsc" },
+      { title: "Signature Resize for UPSC", slug: "signature-resize-to-50kb" },
       { title: "Compress PDF to 300KB", slug: "compress-pdf-to-300kb" }
     ],
     faqs: [
@@ -92,7 +92,7 @@ Our SSC optimization hub provides dedicated resizers designed around these rules
     ],
     landingPages: [
       { title: "SSC Photo Resizer", slug: "ssc-photo-resize" },
-      { title: "Signature Resize for SSC", slug: "signature-resize-for-ssc" },
+      { title: "Signature Resize for SSC", slug: "signature-resize-to-20kb" },
       { title: "Photo Resize to 20KB", slug: "photo-resize-to-20kb" }
     ],
     faqs: [
@@ -130,7 +130,7 @@ ToolWala's Aadhaar Hub runs 100% locally inside your web browser. The **Aadhaar 
       { title: "Aadhaar Photo Resizer", slug: "aadhaar-photo-resizer", icon: "📸" }
     ],
     landingPages: [
-      { title: "Aadhaar Photo Resize", slug: "aadhaar-photo-resize" },
+      { title: "Aadhaar Photo Resize", slug: "aadhaar-photo-resizer" },
       { title: "Compress PDF to 300KB", slug: "compress-pdf-to-300kb" },
       { title: "Aadhaar Masking Tool", slug: "aadhaar-masking-tool" }
     ],

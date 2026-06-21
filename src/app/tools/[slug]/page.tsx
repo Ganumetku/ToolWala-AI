@@ -19,8 +19,6 @@ import {
   getLocalizedCanonicalUrl 
 } from '@/lib/seo';
 import { getTranslationServer } from '@/lib/i18n-server';
-import { landingPagesData } from '@/data/landingPages';
-import SEOPageTemplate from '@/components/tools/SEOPageTemplate';
 
 export const dynamic = 'force-dynamic';
 
@@ -30,12 +28,6 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
-
-  // Intercept and return custom metadata for landing pages
-  const landingPage = landingPagesData.find(lp => lp.slug === slug);
-  if (landingPage) {
-    return generateToolMetadataHelper(slug, landingPage.title, landingPage.metaDescription, `/tools/${slug}`);
-  }
 
   const tool = await findToolBySlugServer(slug);
 
@@ -53,12 +45,6 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function DynamicToolPage({ params }: PageProps) {
   const { slug } = await params;
-
-  // Intercept and render SEOPageTemplate directly if the slug is a landing page
-  const landingPage = landingPagesData.find(lp => lp.slug === slug);
-  if (landingPage) {
-    return <SEOPageTemplate slug={slug} />;
-  }
 
   const tool = await findToolBySlugServer(slug, true);
 

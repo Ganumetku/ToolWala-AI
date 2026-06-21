@@ -282,12 +282,12 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left select-none">
+        <div className="mt-20 pt-10 border-t border-white/5 flex flex-col lg:flex-row items-center justify-between gap-8 text-center lg:text-left select-none">
           <div className="space-y-4">
             <p className="text-xs text-gray-500 font-bold">
               &copy; {currentYear} <span translate="no" data-no-translate className="no-translate notranslate">ToolWala AI</span>. {t('footer.copyright_notice', 'All rights reserved.')}
             </p>
-            <div className="flex flex-wrap justify-center md:justify-start gap-4.5 text-[10px] font-black uppercase tracking-wider text-gray-600">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-4.5 text-[10px] font-black uppercase tracking-wider text-gray-600">
               <Link href={localizeHref('/privacy-policy')} prefetch={false} className="hover:text-gray-400 transition-colors">{t('footer.privacy', 'Privacy Policy')}</Link>
               <Link href={localizeHref('/terms')} prefetch={false} className="hover:text-gray-400 transition-colors">{t('footer.terms', 'Terms of Service')}</Link>
               <Link href={localizeHref('/disclaimer')} prefetch={false} className="hover:text-gray-400 transition-colors">{t('footer.disclaimer', 'Disclaimer')}</Link>
@@ -295,7 +295,7 @@ export default function Footer() {
             </div>
             
             {/* Horizontal Footer Language Selector Grid */}
-            <div className="flex flex-wrap gap-4.5 justify-center md:justify-start items-center pt-2">
+            <div className="flex flex-wrap gap-4.5 justify-center lg:justify-start items-center pt-2">
               <Globe className="w-3.5 h-3.5 text-gray-600" />
               {activeLanguages.map((lang) => (
                 <button

@@ -189,7 +189,7 @@ export default function Header() {
         </div>
         
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-1 bg-white/5 p-1 rounded-full border border-white/10 backdrop-blur-md">
+        <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 bg-white/5 p-1 rounded-full border border-white/10 backdrop-blur-md">
           {navigation.map((item) => {
             if (item.submenu) {
               const hasActiveSub = item.submenu.some(sub => pathname === localizeHref(sub.href));
@@ -197,14 +197,14 @@ export default function Header() {
                 <div className="relative" key={item.name} ref={pdfDropdownRef}>
                   <button
                     onClick={() => setIsPdfDropdownOpen(!isPdfDropdownOpen)}
-                    className={`px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all whitespace-nowrap flex items-center gap-1 cursor-pointer select-none ${
+                    className={`px-3 xl:px-5 py-2 rounded-full text-[10px] xl:text-xs font-black uppercase tracking-wider xl:tracking-widest transition-all whitespace-nowrap flex items-center gap-1 cursor-pointer select-none ${
                       isPdfDropdownOpen || hasActiveSub
                         ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' 
                         : 'text-gray-400 hover:text-white hover:bg-white/5'
                     }`}
                   >
                     {item.name}
-                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isPdfDropdownOpen ? 'rotate-180' : ''}`} />
+                    <ChevronDown className={`w-3 h-3 xl:w-3.5 xl:h-3.5 transition-transform duration-300 ${isPdfDropdownOpen ? 'rotate-180' : ''}`} />
                   </button>
                   {isPdfDropdownOpen && (
                     <div className="absolute left-1/2 -translate-x-1/2 mt-4 w-[600px] rounded-3xl border border-white/10 bg-[#090d16]/98 p-6 shadow-[0_10px_50px_rgba(0,0,0,0.8)] backdrop-blur-xl animate-fade-in z-50 grid grid-cols-3 gap-3">
@@ -238,7 +238,7 @@ export default function Header() {
               <Link 
                 key={item.name} 
                 href={localizedHrefValue} 
-                className={`px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all whitespace-nowrap ${
+                className={`px-3 xl:px-5 py-2 rounded-full text-[10px] xl:text-xs font-black uppercase tracking-wider xl:tracking-widest transition-all whitespace-nowrap ${
                   isActive
                     ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' 
                     : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -250,16 +250,16 @@ export default function Header() {
           })}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-2 xl:gap-4">
           {/* Custom Premium Language Dropdown */}
           <div className="relative" ref={langDropdownRef}>
             <button
               onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-              className="flex items-center gap-2.5 rounded-full bg-white/5 hover:bg-white/10 px-4 py-2.5 text-xs font-bold text-gray-300 hover:text-white border border-white/10 hover:border-blue-500/30 transition-all select-none cursor-pointer whitespace-nowrap shrink-0"
+              className="flex items-center gap-1.5 xl:gap-2.5 rounded-full bg-white/5 hover:bg-white/10 px-2.5 xl:px-4 py-2 xl:py-2.5 text-[10px] xl:text-xs font-bold text-gray-300 hover:text-white border border-white/10 hover:border-blue-500/30 transition-all select-none cursor-pointer whitespace-nowrap shrink-0"
             >
-              <Globe className="w-3.5 h-3.5 text-blue-500" />
+              <Globe className="w-3 xl:w-3.5 xl:h-3.5 h-3.5 text-blue-500" />
               <span translate="no" className="whitespace-nowrap">{currentLanguage.flag} {currentLanguage.name}</span>
-              <ChevronDown className={`w-3.5 h-3.5 text-gray-500 transition-transform duration-300 ${isLangDropdownOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-3 xl:w-3.5 xl:h-3.5 h-3.5 text-gray-500 transition-transform duration-300 ${isLangDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {isLangDropdownOpen && (
@@ -294,10 +294,10 @@ export default function Header() {
 
           <Link 
             href={localizeHref('/tools')} 
-            className="group relative flex items-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-black text-black hover:scale-105 active:scale-95 transition-all shadow-xl hover:shadow-white/10 overflow-hidden whitespace-nowrap shrink-0"
+            className="group relative flex items-center gap-1.5 xl:gap-2 rounded-full bg-white px-4 xl:px-7 py-2 xl:py-3 text-[11px] xl:text-sm font-black text-black hover:scale-105 active:scale-95 transition-all shadow-xl hover:shadow-white/10 overflow-hidden whitespace-nowrap shrink-0"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <Rocket className="w-4 h-4 relative z-10" suppressHydrationWarning />
+            <Rocket className="w-3.5 h-3.5 xl:w-4 xl:h-4 relative z-10" suppressHydrationWarning />
             <span className="relative z-10 whitespace-nowrap">{t('nav.start_free', 'Start Free')}</span>
           </Link>
         </div>

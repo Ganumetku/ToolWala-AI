@@ -2054,5 +2054,87 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "Watermark PDF", href: "/tools/watermark-pdf" },
       { name: "Add Page Numbers to PDF", href: "/tools/add-page-numbers-to-pdf" }
     ]
+  },
+  "pan-photo-tool": {
+    title: "PAN Photo Tool Online",
+    intro: "Resize, crop, and format passport photos to official NSDL and UTIITSL PAN card specifications. Keep head spacing, check background rules, and stay under the 50KB limit.",
+    whatItDoes: "The PAN Photo Tool is designed to automate portal photo compatibility for Indian PAN card applications. It crop-locks your photo to a 1:1 aspect ratio, scales it to exactly 213 x 213 pixels at 300 DPI, and applies binary-search compression to ensure the output remains under the strict 50KB limit required by NSDL and UTIITSL portals.",
+    howToUse: [
+      "Select and upload your passport-style portrait photograph.",
+      "Choose the target spec preset (NSDL PAN card or UTIITSL PAN card).",
+      "Drag, scale, and center your head and shoulders inside the crop window.",
+      "Apply light blue or off-white background fills if your original image background is not compliant.",
+      "Download the portal-ready, compressed JPG file to your local storage."
+    ],
+    keyFeatures: [
+      { title: "NSDL & UTIITSL Compliant", desc: "Configured templates matching the official 1:1 aspect ratio (213 x 213 px) guidelines." },
+      { title: "One-Click Background Replacer", desc: "Easily replace original backgrounds with official light blue or plain white fills." },
+      { title: "Binary Quality Compressing", desc: "Optimizes image file sizes client-side to ensure they stay strictly under the 50KB limit." },
+      { title: "Private Execution Cache", desc: "Your identity files and photos are processed in active browser memory and never uploaded to any database." }
+    ],
+    benefits: [
+      "Prevents PAN application delays and photo mismatch query notices.",
+      "Saves money on commercial photo studios and desktop software suites.",
+      "User-friendly mobile interface supporting responsive touch interactions.",
+      "Completely free to use with zero registration, login, or watermark overlays."
+    ],
+    whyChoose: "PAN card portals run automatic validations that reject photos that have incorrect dimensions or exceed size limits. Our PAN Photo Tool applies exact pixel mappings and compression filters locally, ensuring your photo passes all NSDL and UTIITSL criteria.",
+    useCases: [
+      "Applicants submitting forms online for new PAN cards.",
+      "Citizens correcting or updating their photo credentials on their existing PAN card.",
+      "E-governance operators resizing document batches for applicants."
+    ],
+    faqs: [
+      { question: "What is the photo dimension for PAN card online?", answer: "The official photo size required for PAN card applications is 3.5 cm x 2.5 cm, which translates to exactly 213 x 213 pixels at 300 DPI (1:1 aspect ratio)." },
+      { question: "What is the maximum file size for PAN card photos?", answer: "Both NSDL and UTIITSL portals require photo files to be in JPEG format and strictly under 50KB in size." },
+      { question: "Do I need to sign up to use this tool?", answer: "No, ToolWala AI is fully open. You can edit and download compliant photos instantly without registering an account." }
+    ],
+    conclusion: "Format your photo for PAN card NSDL and UTIITSL applications instantly. Try our secure, browser-based PAN Photo Tool.",
+    relatedTools: [
+      { name: "Aadhaar Photo Resize", href: "/tools/aadhaar-photo-resizer" },
+      { name: "Signature Resize", href: "/tools/signature-resize" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
+    ]
+  },
+  "exam-photo-resizer": {
+    title: "Exam Photo Resizer Online",
+    intro: "Resize, crop, and compress passport photos to official guidelines for various exam portals like SSC, UPSC, and IBPS banking exams.",
+    whatItDoes: "The Exam Photo Resizer formats applicant photographs for competitive exam portals. It applies target presets matching official requirements, scales the crop dimensions to the correct layout (e.g. 3.5 x 4.5 cm for SSC/UPSC), and compresses the output file to stay strictly within size caps (e.g. 20KB - 50KB or under 300KB).",
+    howToUse: [
+      "Upload your passport portrait photo.",
+      "Select your target exam preset (SSC, UPSC, IBPS, etc.).",
+      "Frame your head and shoulders inside the guideline crop window.",
+      "Use our brightness slider to clean up any shadows and make the background white.",
+      "Download the compliant, optimized JPEG file to complete your application."
+    ],
+    keyFeatures: [
+      { title: "Exam Portal Presets", desc: "Predefined dimensions matching the official SSC, UPSC, and IBPS layout rules." },
+      { title: "KB Limit Safety Loop", desc: "Automated binary compressor that keeps files within target application ranges." },
+      { title: "Compliant White Background", desc: "Integrated canvas filters to whiten backgrounds and optimize illumination levels." },
+      { title: "Zero Data Transmission", desc: "100% client-side operation ensures your personal identification photo remains private on your device." }
+    ],
+    benefits: [
+      "Avoid candidate registration failures due to incorrect aspect ratios or oversized files.",
+      "Process photos on any mobile device or tablet using simple touchscreen controls.",
+      "Always free, without account registrations or watermarks.",
+      "Ensures the photo complies with the strict 70-80% face coverage guidelines."
+    ],
+    whyChoose: "Exam portals use automated image checking that rejects applications with blurred features or incorrect photo ratios. Our Exam Photo Resizer tool ensures your photo meets all official requirements, helping your registration succeed.",
+    useCases: [
+      "Applicants uploading signatures for SSC, IBPS, UPSC, and state-level recruitment portal forms.",
+      "Citizens correcting or updating their photo credentials.",
+      "E-governance operators resizing document batches for applicants."
+    ],
+    faqs: [
+      { question: "What is the photo size for competitive exams?", answer: "Most exams like SSC and UPSC require passport dimensions of 3.5 cm x 4.5 cm with file size caps strictly between 20KB and 50KB." },
+      { question: "What background color is compliant?", answer: "A white or light-colored plain background is strictly recommended for PAN card and competitive exam applications." },
+      { question: "Is my passport photo secure?", answer: "Yes. All cropping, filtering, and compression happen entirely client-side. Your photo is processed locally and never uploaded to our servers." }
+    ],
+    conclusion: "Format your photo for competitive exam portals instantly. Try our secure, browser-based Exam Photo Resizer.",
+    relatedTools: [
+      { name: "Aadhaar Photo Resize", href: "/tools/aadhaar-photo-resizer" },
+      { name: "PAN Photo Tool", href: "/tools/pan-photo-tool" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
+    ]
   }
 };

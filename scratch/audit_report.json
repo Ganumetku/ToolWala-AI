@@ -1,0 +1,1423 @@
+[
+  {
+    "slug": "passport-photo-maker",
+    "url": "http://localhost:3000/tools/passport-photo-maker/",
+    "status": 200,
+    "time": 1878,
+    "title": {
+      "ok": true,
+      "text": "AI Passport Photo Maker Online – Free Visa Photo Maker | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Convert selfies into compliant passport photos. Remove backgrounds, crop to size, and download."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/passport-photo-maker/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "color-palette-generator",
+    "url": "http://localhost:3000/tools/color-palette-generator/",
+    "status": 200,
+    "time": 789,
+    "title": {
+      "ok": true,
+      "text": "AI Color Palette Generator – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Generate color schemes, extract palettes from custom photos, lock tones, and export style templates."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/color-palette-generator/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "image-compressor",
+    "url": "http://localhost:3000/tools/image-compressor/",
+    "status": 200,
+    "time": 185,
+    "title": {
+      "ok": true,
+      "text": "Free Online Image Compressor – Compress PNG &amp; JPG | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Reduce image file size without losing quality. Compress PNG, JPG, and WebP images quickly and securely in your browser."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/image-compressor/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "qr-code-generator",
+    "url": "http://localhost:3000/tools/qr-code-generator/",
+    "status": 200,
+    "time": 872,
+    "title": {
+      "ok": true,
+      "text": "QR Code Generator – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Create custom QR codes for URLs, text, WiFi, and more with your logo."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/qr-code-generator/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "pdf-tools",
+    "url": "http://localhost:3000/tools/pdf-tools/",
+    "status": 200,
+    "time": 843,
+    "title": {
+      "ok": true,
+      "text": "Free PDF Tools – Merge, Split &amp; Edit PDF Online | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Use free browser-based PDF utilities to merge, split, encrypt, or decrypt files securely."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/pdf-tools/"
+    },
+    "schema": {
+      "breadcrumb": true,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "merge-pdf",
+    "url": "http://localhost:3000/tools/merge-pdf/",
+    "status": 200,
+    "time": 193,
+    "title": {
+      "ok": true,
+      "text": "Merge PDF Online – Combine PDF Files Free | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Combine multiple PDF files into one document quickly. No software installation required."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/merge-pdf/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "split-pdf",
+    "url": "http://localhost:3000/tools/split-pdf/",
+    "status": 200,
+    "time": 1376,
+    "title": {
+      "ok": true,
+      "text": "Split PDF Online – Extract PDF Pages Free | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Divide a PDF file into individual pages or extract specific sections in seconds."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/split-pdf/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "jpg-to-pdf",
+    "url": "http://localhost:3000/tools/jpg-to-pdf/",
+    "status": 200,
+    "time": 1049,
+    "title": {
+      "ok": true,
+      "text": "Convert JPG to PDF Online – Image to PDF Free | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Turn images (JPG, PNG, WebP) into high-quality PDF files instantly. Client-side processing."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/jpg-to-pdf/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "pdf-to-jpg",
+    "url": "http://localhost:3000/tools/pdf-to-jpg/",
+    "status": 200,
+    "time": 1403,
+    "title": {
+      "ok": true,
+      "text": "Convert PDF to JPG Online – Extract Images Free | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Convert PDF pages to JPG or PNG images instantly. Safe and browser-native."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/pdf-to-jpg/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "protect-pdf",
+    "url": "http://localhost:3000/tools/protect-pdf/",
+    "status": 200,
+    "time": 1192,
+    "title": {
+      "ok": true,
+      "text": "Protect PDF – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Password-protect your PDF files with secure client-side encryption. Keep your documents private."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/protect-pdf/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "unlock-pdf",
+    "url": "http://localhost:3000/tools/unlock-pdf/",
+    "status": 200,
+    "time": 1566,
+    "title": {
+      "ok": true,
+      "text": "Unlock PDF – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Remove passwords and security restrictions from your PDF files instantly. 100% private."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/unlock-pdf/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "watermark-pdf",
+    "url": "http://localhost:3000/tools/watermark-pdf/",
+    "status": 200,
+    "time": 1484,
+    "title": {
+      "ok": true,
+      "text": "Add Watermark to PDF – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Add text or image watermarks to your PDF files. Customize opacity, rotation, size, and positions."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/watermark-pdf/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "organize-pdf",
+    "url": "http://localhost:3000/tools/organize-pdf/",
+    "status": 200,
+    "time": 1459,
+    "title": {
+      "ok": true,
+      "text": "Organize PDF Pages – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Reorder, rotate, duplicate, or delete pages in your PDF documents visually and securely."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/organize-pdf/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "pdf-ocr",
+    "url": "http://localhost:3000/tools/pdf-ocr/",
+    "status": 200,
+    "time": 1171,
+    "title": {
+      "ok": true,
+      "text": "PDF OCR Scanner – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Extract text from scanned PDF files and images locally in your browser using secure OCR."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/pdf-ocr/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "pdf-summarizer",
+    "url": "http://localhost:3000/tools/pdf-summarizer/",
+    "status": 200,
+    "time": 1526,
+    "title": {
+      "ok": true,
+      "text": "AI PDF Summarizer | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Summarize large PDF documents locally in your browser. Fast, private, and secure."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/pdf-summarizer/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "aadhaar-photo-resizer",
+    "url": "http://localhost:3000/tools/aadhaar-photo-resizer/",
+    "status": 200,
+    "time": 1378,
+    "title": {
+      "ok": true,
+      "text": "Aadhaar Photo Resizer – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Resize, crop, and compress passport photos for Aadhaar, UIDAI, and official government updates."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/aadhaar-photo-resizer/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "ai-logo-maker",
+    "url": "http://localhost:3000/tools/ai-logo-maker/",
+    "status": 200,
+    "time": 1169,
+    "title": {
+      "ok": true,
+      "text": "AI Logo Maker – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Generate unique logos for your brand or business using advanced AI."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/ai-logo-maker/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "resume-builder",
+    "url": "http://localhost:3000/tools/resume-builder/",
+    "status": 200,
+    "time": 2443,
+    "title": {
+      "ok": true,
+      "text": "AI Resume Builder – Create ATS-Friendly Resumes Free | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Generate standard professional CVs and resumes optimized for ATS systems with AI help."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/resume-builder/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "caption-generator",
+    "url": "http://localhost:3000/tools/caption-generator/",
+    "status": 200,
+    "time": 333,
+    "title": {
+      "ok": true,
+      "text": "AI Caption Generator – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Create engaging, platform-optimized captions with AI. Perfect for Instagram, LinkedIn, and more."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/caption-generator/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "text-humanizer",
+    "url": "http://localhost:3000/tools/text-humanizer/",
+    "status": 200,
+    "time": 1478,
+    "title": {
+      "ok": true,
+      "text": "AI Text Humanizer – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Make AI text sound more natural, clear, and human-friendly in seconds."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/text-humanizer/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "voice-generator",
+    "url": "http://localhost:3000/tools/voice-generator/",
+    "status": 200,
+    "time": 857,
+    "title": {
+      "ok": true,
+      "text": "AI Voice Generator – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Transform text into lifelike speech with premium AI voices."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/voice-generator/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "invoice-generator",
+    "url": "http://localhost:3000/tools/invoice-generator/",
+    "status": 200,
+    "time": 1100,
+    "title": {
+      "ok": true,
+      "text": "Invoice Generator – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Create professional invoices in seconds. Download as PDF or send directly to clients."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/invoice-generator/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "bg-remover",
+    "url": "http://localhost:3000/tools/bg-remover/",
+    "status": 200,
+    "time": 245,
+    "title": {
+      "ok": true,
+      "text": "AI Background Remover | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Professional-grade image isolation in your browser. Remove backgrounds with surgical precision using our edge-computing AI—no data uploads, 100% privacy."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/bg-remover/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "cover-letter-generator",
+    "url": "http://localhost:3000/tools/cover-letter-generator/",
+    "status": 200,
+    "time": 1536,
+    "title": {
+      "ok": true,
+      "text": "AI Cover Letter Generator – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Generate tailored, professional cover letters optimized for any job application."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/cover-letter-generator/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "ocr-to-text",
+    "url": "http://localhost:3000/tools/ocr-to-text/",
+    "status": 200,
+    "time": 248,
+    "title": {
+      "ok": true,
+      "text": "OCR Image to Text – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Extract text from images, screenshots, and scanned documents instantly using client-side OCR."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/ocr-to-text/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "password-generator",
+    "url": "http://localhost:3000/tools/password-generator/",
+    "status": 200,
+    "time": 1474,
+    "title": {
+      "ok": true,
+      "text": "Password Generator – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Generate strong, secure random passwords locally in your browser. Privacy-first offline tool."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/password-generator/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "pdf-to-word-converter",
+    "url": "http://localhost:3000/tools/pdf-to-word-converter/",
+    "status": 200,
+    "time": 1895,
+    "title": {
+      "ok": true,
+      "text": "PDF to Word Converter – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Convert PDF files into editable Word documents online. Safe and fast browser-based conversion."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/pdf-to-word-converter/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "word-to-pdf-converter",
+    "url": "http://localhost:3000/tools/word-to-pdf-converter/",
+    "status": 200,
+    "time": 2178,
+    "title": {
+      "ok": true,
+      "text": "Word to PDF Converter – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Convert Word documents (.docx) into PDF files locally and securely."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/word-to-pdf-converter/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "age-calculator",
+    "url": "http://localhost:3000/tools/age-calculator/",
+    "status": 200,
+    "time": 1608,
+    "title": {
+      "ok": true,
+      "text": "Age Calculator – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Calculate exact age in years, months, days and next birthday instantly."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/age-calculator/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "sip-calculator",
+    "url": "http://localhost:3000/tools/sip-calculator/",
+    "status": 200,
+    "time": 2580,
+    "title": {
+      "ok": true,
+      "text": "SIP Calculator – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Calculate SIP returns, future value, total investment and estimated wealth instantly."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/sip-calculator/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "emi-calculator",
+    "url": "http://localhost:3000/tools/emi-calculator/",
+    "status": 200,
+    "time": 382,
+    "title": {
+      "ok": true,
+      "text": "EMI Calculator – Free Online Tool"
+    },
+    "description": {
+      "ok": true,
+      "text": "Calculate loan EMI, total interest, and total payment instantly for home loan, car loan, personal loan and more."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/emi-calculator/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "gst-calculator",
+    "url": "http://localhost:3000/tools/gst-calculator/",
+    "status": 200,
+    "time": 1516,
+    "title": {
+      "ok": true,
+      "text": "GST Calculator – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Calculate GST amount, total price, and reverse GST instantly with free GST Calculator."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/gst-calculator/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "youtube-money-calculator",
+    "url": "http://localhost:3000/tools/youtube-money-calculator/",
+    "status": 200,
+    "time": 2145,
+    "title": {
+      "ok": true,
+      "text": "YouTube Money Calculator – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Estimate YouTube earnings from views, CPM, RPM, niche and monthly traffic instantly."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/youtube-money-calculator/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "adsense-revenue-calculator",
+    "url": "http://localhost:3000/tools/adsense-revenue-calculator/",
+    "status": 200,
+    "time": 3732,
+    "title": {
+      "ok": true,
+      "text": "AdSense Revenue Calculator – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Estimate Google AdSense earnings from page views, CTR, CPC, RPM, country and niche instantly."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/adsense-revenue-calculator/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "ai-image-upscaler",
+    "url": "http://localhost:3000/tools/ai-image-upscaler/",
+    "status": 200,
+    "time": 1713,
+    "title": {
+      "ok": true,
+      "text": "AI Image Upscaler – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Upscale your photos by 2x, 4x, or 8x with advanced canvas sharpening and quality enhancement algorithms in your browser."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/ai-image-upscaler/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "signature-resize",
+    "url": "http://localhost:3000/tools/signature-resize/",
+    "status": 200,
+    "time": 1983,
+    "title": {
+      "ok": true,
+      "text": "Signature Resize Online | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Resize, crop, and compress signature scans to official Indian portal standards instantly. Generate clean signatures for recruitment boards, public service exams, and banking applications without uploading files to external servers."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/signature-resize/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "pan-card-resize",
+    "url": "http://localhost:3000/tools/pan-card-resize/",
+    "status": 200,
+    "time": 2244,
+    "title": {
+      "ok": true,
+      "text": "PAN Card Resize Online | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Format, crop, and resize passport photos to official NSDL and UTIITSL PAN card specifications. Complies with the mandatory 213 x 213 pixels dimension and whiteness checks."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/pan-card-resize/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "ssc-photo-resize",
+    "url": "http://localhost:3000/tools/ssc-photo-resize/",
+    "status": 200,
+    "time": 532,
+    "title": {
+      "ok": true,
+      "text": "SSC Photo Resize Online | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Resize, crop, and compress passport photos to official Staff Selection Commission (SSC) guidelines. Generate 3.5 x 4.5 cm photos under 50KB with correct date formats easily."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/ssc-photo-resize/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "upsc-photo-resize",
+    "url": "http://localhost:3000/tools/upsc-photo-resize/",
+    "status": 200,
+    "time": 3584,
+    "title": {
+      "ok": true,
+      "text": "UPSC Photo Resize Online | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Format and resize passport photos for Union Public Service Commission (UPSC) online application registration. Complies with the mandatory 350 x 350 pixels dimension and white background rules."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/upsc-photo-resize/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "aadhaar-pdf-compressor",
+    "url": "http://localhost:3000/tools/aadhaar-pdf-compressor/",
+    "status": 200,
+    "time": 3271,
+    "title": {
+      "ok": true,
+      "text": "Aadhaar PDF Compressor Online | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Compress e-Aadhaar PDF files under the official UIDAI 300KB upload limit securely. Optimize your identity verification documents locally in your browser sandbox."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/aadhaar-pdf-compressor/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "gov-form-pdf-compressor",
+    "url": "http://localhost:3000/tools/gov-form-pdf-compressor/",
+    "status": 200,
+    "time": 2230,
+    "title": {
+      "ok": true,
+      "text": "Government Form PDF Compressor Online | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Compress government application PDF attachments under standard portal size limits. Select target size brackets (100KB, 200KB, 300KB, 500KB) to match EPFO, NSDL, SSC, and UPSC requirements."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/gov-form-pdf-compressor/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "invoice-cropper",
+    "url": "http://localhost:3000/tools/invoice-cropper/",
+    "status": 200,
+    "time": 3068,
+    "title": {
+      "ok": true,
+      "text": "Invoice Cropper – Free Online Tool | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Crop invoice images or PDFs, auto-detect document edges, clean backgrounds, and download cropped documents locally."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/invoice-cropper/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "aadhaar-masking-tool",
+    "url": "http://localhost:3000/tools/aadhaar-masking-tool/",
+    "status": 200,
+    "time": 3937,
+    "title": {
+      "ok": true,
+      "text": "Aadhaar Masking Tool Online – Mask Aadhaar PDF Free"
+    },
+    "description": {
+      "ok": true,
+      "text": "Secure your Aadhaar card privacy by masking the first 8 digits of UIDAI cards automatically."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/aadhaar-masking-tool/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": false,
+      "app": false
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "compress-pdf",
+    "url": "http://localhost:3000/tools/compress-pdf/",
+    "status": 200,
+    "time": 4172,
+    "title": {
+      "ok": true,
+      "text": "Compress PDF | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Reduce the file size of your PDF documents without losing visual quality. Our local optimizer runs entirely in your browser sandbox, keeping your documents 100% secure."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/compress-pdf/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "crop-pdf",
+    "url": "http://localhost:3000/tools/crop-pdf/",
+    "status": 200,
+    "time": 2035,
+    "title": {
+      "ok": true,
+      "text": "Crop PDF | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Trim page margins, adjust visible borders, and crop PDF sheets locally and securely in your web browser."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/crop-pdf/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "rotate-pdf",
+    "url": "http://localhost:3000/tools/rotate-pdf/",
+    "status": 200,
+    "time": 2493,
+    "title": {
+      "ok": true,
+      "text": "Rotate PDF | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Rotate PDF pages by 90, 180, or 270 degrees. Change page orientations locally and securely in your web browser."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/rotate-pdf/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "remove-pages",
+    "url": "http://localhost:3000/tools/remove-pages/",
+    "status": 200,
+    "time": 2697,
+    "title": {
+      "ok": true,
+      "text": "Remove PDF Pages | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Delete unnecessary pages from your PDF files. Create cleaner, optimized documents locally in your browser sandbox."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/remove-pages/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "add-page-numbers-to-pdf",
+    "url": "http://localhost:3000/tools/add-page-numbers-to-pdf/",
+    "status": 200,
+    "time": 2819,
+    "title": {
+      "ok": true,
+      "text": "Add Page Numbers to PDF | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Add page numbers to your PDF documents locally in your browser. Customize pagination formats, positions, offset margins, and styling details easily and securely."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/add-page-numbers-to-pdf/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  },
+  {
+    "slug": "sign-pdf",
+    "url": "http://localhost:3000/tools/sign-pdf/",
+    "status": 200,
+    "time": 2540,
+    "title": {
+      "ok": true,
+      "text": "Sign PDF | ToolWala AI"
+    },
+    "description": {
+      "ok": true,
+      "text": "Sign PDF documents online. Draw, type, or upload your signature to place on pages locally and securely."
+    },
+    "canonical": {
+      "ok": true,
+      "text": "https://toolwala.co/tools/sign-pdf/"
+    },
+    "schema": {
+      "breadcrumb": false,
+      "faq": true,
+      "app": true
+    },
+    "relatedTools": {
+      "ok": true,
+      "count": 0
+    },
+    "internalLinksCount": 0,
+    "errors": []
+  }
+]

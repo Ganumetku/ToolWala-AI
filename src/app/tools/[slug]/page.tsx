@@ -9,6 +9,7 @@ import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import ShareButtons from '@/components/ShareButtons';
 import { headers } from 'next/headers';
 import { getToolTranslationWithFallback } from '@/lib/tool-translation-service';
+import WorkflowRecommendations from '@/components/tools/WorkflowRecommendations';
 import { 
   generateToolMetadataHelper, 
   buildBreadcrumbJsonLd, 
@@ -177,6 +178,9 @@ export default async function DynamicToolPage({ params }: PageProps) {
               </div>
             </section>
           )}
+
+          {/* Dynamic Workflow Recommendations */}
+          <WorkflowRecommendations slug={slug} />
 
           {/* Dynamic FAQ List */}
           {tool.faqs && tool.faqs.length > 0 && (

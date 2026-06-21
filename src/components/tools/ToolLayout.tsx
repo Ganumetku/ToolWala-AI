@@ -5,6 +5,8 @@ import { ChevronLeft } from 'lucide-react';
 import { MeshGradient } from '@/components/BackgroundEffects';
 import React from 'react';
 import { useTranslation } from '@/components/I18nContext';
+import { usePathname } from 'next/navigation';
+import WorkflowRecommendations from '@/components/tools/WorkflowRecommendations';
 
 interface ToolLayoutProps {
   children: React.ReactNode;
@@ -12,6 +14,12 @@ interface ToolLayoutProps {
 
 export default function ToolLayout({ children }: ToolLayoutProps) {
   const { t, localizeHref } = useTranslation();
+  const pathname = usePathname();
+
+  // Extract the active tool slug from pathname (works for localized routes and subpaths)
+  const parts = pathname.split('/').filter(Boolean);
+  const slug = parts[parts.length - 1] || '';
+  const isToolPage = slug && slug !== 'tools' && slug !== 'categories';
 
   return (
     <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans">
@@ -31,6 +39,11 @@ export default function ToolLayout({ children }: ToolLayoutProps) {
         </Link>
 
         {children}
+
+        {/* Dynamic Workflow Recommendations */}
+        {isToolPage && (
+          <WorkflowRecommendations slug={slug} />
+        )}
       </div>
     </div>
   );

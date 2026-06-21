@@ -7,6 +7,7 @@ import { toolArticles } from '@/data/toolArticles';
 import { MeshGradient } from '@/components/BackgroundEffects';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import AadhaarMaskingEngine from '@/components/AadhaarMaskingEngine';
+import WorkflowRecommendations from '@/components/tools/WorkflowRecommendations';
 
 export default function AadhaarMaskingTool() {
   return (
@@ -59,6 +60,8 @@ export default function AadhaarMaskingTool() {
                 )
               }
             />
+            {/* Workflow Recommendations */}
+            <WorkflowRecommendations slug="aadhaar-masking-tool" />
           </div>
 
         </div>

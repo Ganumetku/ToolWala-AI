@@ -6,6 +6,7 @@ import { MeshGradient } from "@/components/BackgroundEffects";
 import ToolVisibilityGuard from "@/components/ToolVisibilityGuard";
 import { CropperPreset } from "@/components/ImageCropperEngine";
 import ImageCropperClientWrapper from "@/components/ImageCropperClientWrapper";
+import WorkflowRecommendations from "@/components/tools/WorkflowRecommendations";
 import {
   buildFAQSchema,
   buildWebPageSchema,
@@ -134,6 +135,9 @@ export default function PANCardResizePage() {
               <ToolArticle {...toolArticles["pan-card-resize"]} />
             </div>
           )}
+
+          {/* Workflow Recommendations */}
+          <WorkflowRecommendations slug="pan-card-resize" />
         </div>
       </div>
     </ToolVisibilityGuard>

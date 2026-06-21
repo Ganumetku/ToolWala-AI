@@ -7,6 +7,7 @@ import { toolArticles } from "@/data/toolArticles";
 import { MeshGradient } from "@/components/BackgroundEffects";
 import ToolVisibilityGuard from "@/components/ToolVisibilityGuard";
 import ImageCropperEngine, { CropperPreset } from "@/components/ImageCropperEngine";
+import WorkflowRecommendations from "@/components/tools/WorkflowRecommendations";
 
 const UPSC_PRESETS: CropperPreset[] = [
   {
@@ -76,6 +77,8 @@ export default function UPSCPhotoResize() {
                 )
               }
             />
+            {/* Workflow Recommendations */}
+            <WorkflowRecommendations slug="upsc-photo-resize" />
           </div>
         </div>
       </div>

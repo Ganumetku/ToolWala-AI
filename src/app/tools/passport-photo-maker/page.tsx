@@ -7,6 +7,7 @@ import { toolArticles } from '@/data/toolArticles';
 import { MeshGradient } from '@/components/BackgroundEffects';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import ImageCropperEngine, { CropperPreset } from '@/components/ImageCropperEngine';
+import WorkflowRecommendations from '@/components/tools/WorkflowRecommendations';
 
 const PASSPORT_PRESETS: CropperPreset[] = [
   {
@@ -124,6 +125,8 @@ export default function PassportPhotoMaker() {
                 )
               }
             />
+            {/* Workflow Recommendations */}
+            <WorkflowRecommendations slug="passport-photo-maker" />
           </div>
 
         </div>

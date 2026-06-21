@@ -7,6 +7,7 @@ import { toolArticles } from '@/data/toolArticles';
 import { MeshGradient } from '@/components/BackgroundEffects';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import ImageCropperEngine, { CropperPreset } from '@/components/ImageCropperEngine';
+import WorkflowRecommendations from '@/components/tools/WorkflowRecommendations';
 
 const AADHAAR_PRESETS: CropperPreset[] = [
   {
@@ -78,6 +79,8 @@ export default function AadhaarPhotoResizer() {
                 )
               }
             />
+            {/* Workflow Recommendations */}
+            <WorkflowRecommendations slug="aadhaar-photo-resizer" />
           </div>
 
         </div>

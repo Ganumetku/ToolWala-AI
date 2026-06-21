@@ -7,6 +7,7 @@ import { toolArticles } from "@/data/toolArticles";
 import { MeshGradient } from "@/components/BackgroundEffects";
 import ToolVisibilityGuard from "@/components/ToolVisibilityGuard";
 import ImageCropperEngine, { CropperPreset } from "@/components/ImageCropperEngine";
+import WorkflowRecommendations from "@/components/tools/WorkflowRecommendations";
 
 const SIGNATURE_PRESETS: CropperPreset[] = [
   {
@@ -104,6 +105,8 @@ export default function SignatureResize() {
                 )
               }
             />
+            {/* Workflow Recommendations */}
+            <WorkflowRecommendations slug="signature-resize" />
           </div>
         </div>
       </div>

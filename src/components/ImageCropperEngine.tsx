@@ -18,6 +18,7 @@ import {
   Unlock,
   Layers,
   RotateCw,
+  Printer,
 } from "lucide-react";
 import { toast } from "sonner";
 import { formatBytes } from "@/lib/utils/format";
@@ -187,6 +188,8 @@ export default function ImageCropperEngine({
 
   // Live output data URL
   const [previewPhotoUrl, setPreviewPhotoUrl] = useState<string | null>(null);
+  const [gridSize, setGridSize] = useState<"4x4" | "6x6" | "8x8" | null>(null);
+  const [previewSheetUrl, setPreviewSheetUrl] = useState<string | null>(null);
 
   const handleReset = () => {
     setImgZoom(1.0);
@@ -408,6 +411,70 @@ export default function ImageCropperEngine({
     targetKbMode,
     customTargetKb,
   ]);
+
+  const compilePrintSheet = useCallback((photoUrl: string, size: "4x4" | "6x6" | "8x8") => {
+    return new Promise<string>((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        if (!ctx) {
+          resolve("");
+          return;
+        }
+
+        let cols = 4;
+        let rows = 4;
+        if (size === "6x6") {
+          cols = 6;
+          rows = 6;
+        } else if (size === "8x8") {
+          cols = 8;
+          rows = 8;
+        }
+
+        const photoW = activePreset.width;
+        const photoH = isLocked ? activePreset.height : Math.round(activePreset.width * (cropH / cropW));
+        const gap = 12; // gap in px
+
+        const padding = 24;
+        const canvasW = cols * photoW + (cols - 1) * gap + padding * 2;
+        const canvasH = rows * photoH + (rows - 1) * gap + padding * 2;
+
+        canvas.width = canvasW;
+        canvas.height = canvasH;
+
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvasW, canvasH);
+
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            const x = padding + c * (photoW + gap);
+            const y = padding + r * (photoH + gap);
+
+            ctx.strokeStyle = "#e2e8f0";
+            ctx.lineWidth = 1;
+            ctx.strokeRect(x - 1, y - 1, photoW + 2, photoH + 2);
+
+            ctx.drawImage(img, x, y, photoW, photoH);
+          }
+        }
+
+        resolve(canvas.toDataURL("image/jpeg", 0.95));
+      };
+      img.src = photoUrl;
+    });
+  }, [activePreset, isLocked, cropW, cropH]);
+
+  useEffect(() => {
+    if (previewPhotoUrl && gridSize) {
+      compilePrintSheet(previewPhotoUrl, gridSize).then((url) => {
+        setPreviewSheetUrl(url);
+      });
+    } else {
+      setPreviewSheetUrl(null);
+    }
+  }, [previewPhotoUrl, gridSize, compilePrintSheet]);
 
   // Render loop
   useEffect(() => {
@@ -702,15 +769,17 @@ export default function ImageCropperEngine({
   };
 
   const handleDownload = () => {
-    if (!previewPhotoUrl || !uploadedFile) return;
+    const downloadUrl = (gridSize && previewSheetUrl) ? previewSheetUrl : previewPhotoUrl;
+    if (!downloadUrl || !uploadedFile) return;
 
     const a = document.createElement("a");
-    a.href = previewPhotoUrl;
-    a.download = `${uploadedFile.name.replace(/\.[^/.]+$/, "")}_crop.${format}`;
+    a.href = downloadUrl;
+    const suffix = gridSize ? `_sheet_${gridSize}` : `_crop`;
+    a.download = `${uploadedFile.name.replace(/\.[^/.]+$/, "")}${suffix}.${format}`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    toast.success("Cropped photo exported successfully!");
+    toast.success(gridSize ? `Passport sheet (${gridSize}) downloaded successfully!` : "Cropped photo exported successfully!");
   };
 
   const resetAll = () => {
@@ -720,6 +789,8 @@ export default function ImageCropperEngine({
     setBgRemovedImgUrl(null);
     setActiveImgElement(null);
     setPreviewPhotoUrl(null);
+    setGridSize(null);
+    setPreviewSheetUrl(null);
     setBrightness(100);
     setContrast(100);
     setSharpness(0);
@@ -1065,6 +1136,51 @@ export default function ImageCropperEngine({
               </div>
             </div>
 
+            {/* Passport Grid Print Sheet options */}
+            <div className="glass p-6 rounded-[2rem] border border-white/5 bg-white/[0.01] space-y-4">
+              <div className="flex items-center gap-2 border-b border-white/5 pb-3">
+                <Printer className="w-4 h-4 text-blue-500" />
+                <span className="text-xs font-black text-white uppercase tracking-wider">
+                  Passport Print Grid
+                </span>
+              </div>
+
+              <div className="grid grid-cols-4 gap-1.5 bg-black/40 border border-white/5 p-1 rounded-xl">
+                <button
+                  onClick={() => setGridSize(null)}
+                  className={`py-2 text-[8px] font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer ${
+                    gridSize === null ? "bg-white/5 text-white" : "text-gray-500 hover:text-gray-300"
+                  }`}
+                >
+                  Single
+                </button>
+                <button
+                  onClick={() => setGridSize("4x4")}
+                  className={`py-2 text-[8px] font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer ${
+                    gridSize === "4x4" ? "bg-white/5 text-white" : "text-gray-500 hover:text-gray-300"
+                  }`}
+                >
+                  4x4 Grid
+                </button>
+                <button
+                  onClick={() => setGridSize("6x6")}
+                  className={`py-2 text-[8px] font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer ${
+                    gridSize === "6x6" ? "bg-white/5 text-white" : "text-gray-500 hover:text-gray-300"
+                  }`}
+                >
+                  6x6 Grid
+                </button>
+                <button
+                  onClick={() => setGridSize("8x8")}
+                  className={`py-2 text-[8px] font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer ${
+                    gridSize === "8x8" ? "bg-white/5 text-white" : "text-gray-500 hover:text-gray-300"
+                  }`}
+                >
+                  8x8 Grid
+                </button>
+              </div>
+            </div>
+
             {/* Optional AI background cleanup toggle */}
             {activePreset.allowBgRemoval && (
               <div className="glass p-6 rounded-[2rem] border border-white/5 bg-white/[0.01] space-y-3">
@@ -1293,6 +1409,28 @@ export default function ImageCropperEngine({
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Print Sheet Preview */}
+      {step === "editor" && gridSize && previewSheetUrl && (
+        <div className="mt-12 max-w-5xl mx-auto glass rounded-[2.5rem] border border-white/5 p-8 text-center animate-fade-up animate-duration-500">
+          <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 mb-2 block">
+            Print Sheet Preview
+          </span>
+          <h3 className="text-xl font-black text-white mb-6 uppercase tracking-tight">
+            Passport Grid Layout ({gridSize})
+          </h3>
+          <div className="inline-block border border-white/10 rounded-2xl overflow-hidden shadow-2xl bg-white max-w-lg p-3">
+            <img
+              src={previewSheetUrl}
+              alt="Grid Sheet print"
+              className="max-w-full h-auto object-contain rounded-lg shadow-inner"
+            />
+          </div>
+          <p className="text-xs text-gray-500 mt-6 leading-relaxed max-w-md mx-auto">
+            This printable sheet layout packs {gridSize === "4x4" ? "16" : gridSize === "6x6" ? "36" : "64"} copies of your cropped photo on a clean white page with thin boundaries.
+          </p>
         </div>
       )}
 

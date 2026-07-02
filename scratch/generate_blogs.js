@@ -39,7 +39,7 @@ const newBlogs = [
     title: "UPSC Photo and Signature Resize Specifications: Complete Steps",
     excerpt: "Avoid UPSC form rejections. Our complete guide walks you through dimensions and ratios for IAS, NDA, and CDS exams.",
     content: "The Union Public Service Commission (UPSC) enforces a strict file verification filter on its application portal. If your passport photo or signature scan does not meet the specified dimensions, the upload fails immediately.\n\n### UPSC Sizing Rules\nCandidates must format their image files to meet these criteria:\n- **Photo Resolution**: Between 350x350 and 1000x1000 pixels (aspect ratio 1:1).\n- **Photo Size**: 20 KB to 300 KB.\n- **Signature Resolution**: 350x350 to 1000x1000 pixels (square format).\n- **Signature Size**: 20 KB to 300 KB.\n\nUse the UPSC Photo Resizer tool to crop and convert your files to compliant formats. Additionally, all category and eligibility certificates must be formatted as PDFs under 300 KB.",
-    thumbnail: "https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/UPSCImage.png",
     category: "Image Tools",
     tags: ["UPSC", "Photo Resize", "Civil Services"],
     featured: true,

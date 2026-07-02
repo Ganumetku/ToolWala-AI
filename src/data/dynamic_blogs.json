@@ -898,7 +898,7 @@
     "metaDescription": "Understand the Ministry of External Affairs' guidelines for passport photo background colors, sizing, and facial expressions.",
     "excerpt": "Learn the official guidelines for passport photo backgrounds, dimensions, and framing for Indian passport applications.",
     "content": "Indian passport applications are subject to strict review by the Ministry of External Affairs. Using a photo with a colored background, shadows, or incorrect framing will cause rejections.\n\n### Official Indian Passport Photo Specifications\n- **Dimensions**: 3.5 cm x 4.5 cm (35 mm x 45 mm).\n- **Face Coverage**: Face must cover 70-80% of the image (32 mm to 36 mm from top of head to chin).\n- **Background**: Solid white background with no shadows or borders.\n- **File size**: 20 KB to 50 KB in JPEG format.\n\nUse our Passport Photo Maker to center your face automatically and remove backgrounds. All rendering runs client-side to keep your personal photos secure.",
-    "thumbnail": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+    "thumbnail": "/passportMakerImage.png",
     "category": "Image Tools",
     "tags": [
       "Passport",

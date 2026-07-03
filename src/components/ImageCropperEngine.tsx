@@ -108,6 +108,245 @@ const compressToKbLimit = (
   });
 };
 
+const orderPoints = (pts: { x: number; y: number }[]) => {
+  const sum = pts.map((p) => p.x + p.y);
+  const diff = pts.map((p) => p.x - p.y);
+
+  const tl = pts[sum.indexOf(Math.min(...sum))];
+  const br = pts[sum.indexOf(Math.max(...sum))];
+  const tr = pts[diff.indexOf(Math.max(...diff))];
+  const bl = pts[diff.indexOf(Math.min(...diff))];
+
+  return { tl, tr, br, bl };
+};
+
+const detectAndWarpAadhaar = async (
+  imgElement: HTMLImageElement,
+  cv: any
+): Promise<string> => {
+  // Downscale for faster processing
+  const maxDim = 800;
+  const origW = imgElement.naturalWidth || imgElement.width;
+  const origH = imgElement.naturalHeight || imgElement.height;
+
+  let scale = 1;
+  let dstW = origW;
+  let dstH = origH;
+  if (origW > maxDim || origH > maxDim) {
+    if (origW > origH) {
+      scale = origW / maxDim;
+      dstW = maxDim;
+      dstH = Math.round(origH / scale);
+    } else {
+      scale = origH / maxDim;
+      dstH = maxDim;
+      dstW = Math.round(origW / scale);
+    }
+  }
+
+  const canvas = document.createElement("canvas");
+  canvas.width = dstW;
+  canvas.height = dstH;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("Could not get 2d context for downscaled canvas");
+  ctx.drawImage(imgElement, 0, 0, dstW, dstH);
+
+  let src: any = null;
+  let gray: any = null;
+  let blurred: any = null;
+  let edges: any = null;
+  let dilated: any = null;
+  let contours: any = null;
+  let hierarchy: any = null;
+  let M_dilate: any = null;
+  let docContour: any = null;
+
+  let srcOrig: any = null;
+  let srcTri: any = null;
+  let dstTri: any = null;
+  let M: any = null;
+  let warped: any = null;
+  let cropped: any = null;
+
+  try {
+    src = cv.imread(canvas);
+    gray = new cv.Mat();
+    blurred = new cv.Mat();
+    edges = new cv.Mat();
+
+    // Grayscale
+    cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY);
+
+    // Blur to reduce noise
+    cv.GaussianBlur(gray, blurred, new cv.Size(5, 5), 0);
+
+    // Canny edge detection
+    cv.Canny(blurred, edges, 75, 200);
+
+    // Dilation to join gaps in edges
+    M_dilate = cv.Mat.ones(3, 3, cv.CV_8U);
+    dilated = new cv.Mat();
+    cv.dilate(edges, dilated, M_dilate);
+
+    // Find contours
+    contours = new cv.MatVector();
+    hierarchy = new cv.Mat();
+    cv.findContours(
+      dilated,
+      contours,
+      hierarchy,
+      cv.RETR_EXTERNAL,
+      cv.CHAIN_APPROX_SIMPLE
+    );
+
+    let maxArea = 0;
+    const minArea = dstW * dstH * 0.05; // 5% of total area
+
+    // Step 1: Search for the largest 4-point contour
+    for (let i = 0; i < contours.size(); i++) {
+      const cnt = contours.get(i);
+      const area = cv.contourArea(cnt);
+      if (area < minArea) continue;
+
+      const perimeter = cv.arcLength(cnt, true);
+      const approx = new cv.Mat();
+      cv.approxPolyDP(cnt, approx, 0.02 * perimeter, true);
+
+      if (approx.rows === 4 && area > maxArea) {
+        if (docContour) docContour.delete();
+        docContour = approx;
+        maxArea = area;
+      } else {
+        approx.delete();
+      }
+    }
+
+    let warpedUrl: string | null = null;
+
+    if (docContour) {
+      // Extract points
+      const points = [];
+      for (let i = 0; i < 4; i++) {
+        points.push({
+          x: docContour.data32S[i * 2],
+          y: docContour.data32S[i * 2 + 1],
+        });
+      }
+
+      // Scale points back to high-res coordinates
+      const scaledPoints = points.map((p) => ({
+        x: p.x * scale,
+        y: p.y * scale,
+      }));
+
+      const ordered = orderPoints(scaledPoints);
+
+      // Math helper for distance
+      const dist = (p1: { x: number; y: number }, p2: { x: number; y: number }) =>
+        Math.hypot(p1.x - p2.x, p1.y - p2.y);
+
+      const w1 = dist(ordered.br, ordered.bl);
+      const w2 = dist(ordered.tr, ordered.tl);
+      const targetW = Math.max(w1, w2);
+
+      const h1 = dist(ordered.br, ordered.tr);
+      const h2 = dist(ordered.bl, ordered.tl);
+      const targetH = Math.max(h1, h2);
+
+      // Perspective Transform on the original high-resolution image
+      srcOrig = cv.imread(imgElement);
+
+      srcTri = cv.matFromArray(4, 1, cv.CV_32FC2, [
+        ordered.tl.x, ordered.tl.y,
+        ordered.tr.x, ordered.tr.y,
+        ordered.br.x, ordered.br.y,
+        ordered.bl.x, ordered.bl.y,
+      ]);
+
+      dstTri = cv.matFromArray(4, 1, cv.CV_32FC2, [
+        0, 0,
+        targetW, 0,
+        targetW, targetH,
+        0, targetH,
+      ]);
+
+      M = cv.getPerspectiveTransform(srcTri, dstTri);
+      warped = new cv.Mat();
+      cv.warpPerspective(srcOrig, warped, M, new cv.Size(targetW, targetH));
+
+      const warpedCanvas = document.createElement("canvas");
+      warpedCanvas.width = targetW;
+      warpedCanvas.height = targetH;
+      cv.imshow(warpedCanvas, warped);
+      warpedUrl = warpedCanvas.toDataURL("image/jpeg", 0.95);
+    } else {
+      // Fallback 1: Find the largest contour and crop its bounding rectangle
+      let largestContour: any = null;
+      let maxAreaB = 0;
+
+      for (let i = 0; i < contours.size(); i++) {
+        const cnt = contours.get(i);
+        const area = cv.contourArea(cnt);
+        if (area > maxAreaB && area > minArea) {
+          largestContour = cnt;
+          maxAreaB = area;
+        }
+      }
+
+      if (largestContour) {
+        const rect = cv.boundingRect(largestContour);
+        const rx = rect.x * scale;
+        const ry = rect.y * scale;
+        const rw = rect.width * scale;
+        const rh = rect.height * scale;
+
+        srcOrig = cv.imread(imgElement);
+
+        // Ensure bounding box fits inside original image boundaries
+        const origWidth = imgElement.naturalWidth || imgElement.width;
+        const origHeight = imgElement.naturalHeight || imgElement.height;
+        const safeX = Math.max(0, Math.min(origWidth - 1, rx));
+        const safeY = Math.max(0, Math.min(origHeight - 1, ry));
+        const safeW = Math.max(1, Math.min(origWidth - safeX, rw));
+        const safeH = Math.max(1, Math.min(origHeight - safeY, rh));
+
+        const rectOrig = new cv.Rect(safeX, safeY, safeW, safeH);
+        cropped = srcOrig.roi(rectOrig);
+
+        const cropCanvas = document.createElement("canvas");
+        cropCanvas.width = safeW;
+        cropCanvas.height = safeH;
+        cv.imshow(cropCanvas, cropped);
+        warpedUrl = cropCanvas.toDataURL("image/jpeg", 0.95);
+      }
+    }
+
+    if (!warpedUrl) {
+      throw new Error("No clear card shape detected");
+    }
+
+    return warpedUrl;
+  } finally {
+    // Prevent Memory Leaks in WebAssembly heap
+    if (src) src.delete();
+    if (gray) gray.delete();
+    if (blurred) blurred.delete();
+    if (edges) edges.delete();
+    if (dilated) dilated.delete();
+    if (contours) contours.delete();
+    if (hierarchy) hierarchy.delete();
+    if (M_dilate) M_dilate.delete();
+    if (docContour) docContour.delete();
+
+    if (srcOrig) srcOrig.delete();
+    if (srcTri) srcTri.delete();
+    if (dstTri) dstTri.delete();
+    if (M) M.delete();
+    if (warped) warped.delete();
+    if (cropped) cropped.delete();
+  }
+};
+
 export interface CropperPreset {
   id: string;
   label: string;
@@ -150,6 +389,12 @@ export default function ImageCropperEngine({
   const [bgRemovedImgUrl, setBgRemovedImgUrl] = useState<string | null>(null);
   const [activeImgElement, setActiveImgElement] = useState<HTMLImageElement | null>(null);
   const [hasBgError, setHasBgError] = useState(false);
+
+  // Aadhaar auto-crop states
+  const [cvInstance, setCvInstance] = useState<any>(null);
+  const [cvLoading, setCvLoading] = useState<boolean>(false);
+  const [cropMode, setCropMode] = useState<"auto" | "manual">("manual");
+  const [autoCroppedImgUrl, setAutoCroppedImgUrl] = useState<string | null>(null);
 
   // Config States
   const [selectedBgHex, setSelectedBgHex] = useState(
@@ -259,6 +504,50 @@ export default function ImageCropperEngine({
     setImgRotate(0);
     initCropBox(activePreset);
   }, [activePreset, initCropBox]);
+
+  // Preload OpenCV.js
+  useEffect(() => {
+    if (toolSlug === "aadhaar-photo-resizer" && !cvInstance && !cvLoading) {
+      setCvLoading(true);
+      const loadOpenCV = () => {
+        return new Promise<any>((resolve, reject) => {
+          if ((window as any).cv) {
+            resolve((window as any).cv);
+            return;
+          }
+          const script = document.createElement("script");
+          script.src = "/opencv.js";
+          script.async = true;
+          script.onload = () => {
+            const cvObj = (window as any).cv;
+            if (cvObj.onRuntimeInitialized) {
+              cvObj.onRuntimeInitialized = () => resolve(cvObj);
+            } else {
+              const interval = setInterval(() => {
+                if ((window as any).cv && (window as any).cv.Mat) {
+                  clearInterval(interval);
+                  resolve((window as any).cv);
+                }
+              }, 100);
+            }
+          };
+          script.onerror = () => reject(new Error("Failed to load OpenCV.js"));
+          document.body.appendChild(script);
+        });
+      };
+
+      loadOpenCV()
+        .then((cvObj) => {
+          setCvInstance(cvObj);
+          setCvLoading(false);
+          console.log("OpenCV.js loaded successfully");
+        })
+        .catch((err) => {
+          console.error("OpenCV.js load error:", err);
+          setCvLoading(false);
+        });
+    }
+  }, [toolSlug, cvInstance, cvLoading]);
 
   // Load fit scale on image element change
   useEffect(() => {
@@ -508,7 +797,6 @@ export default function ImageCropperEngine({
   const processUploadedImage = async (file: File) => {
     try {
       setStep("processing");
-      setLoadingText("Reading image credentials...");
       setUploadedFile(file);
       setBgRemovedImgUrl(null);
       setAiBgCleanup(false);
@@ -529,13 +817,153 @@ export default function ImageCropperEngine({
       setImgRotate(0);
       initCropBox(activePreset);
 
-      setActiveImgElement(img);
+      if (toolSlug === "aadhaar-photo-resizer") {
+        setLoadingText("Detecting Aadhaar card...");
+        
+        let cv = cvInstance;
+        if (!cv) {
+          setLoadingText("Initializing image processor (OpenCV)...");
+          let checkCount = 0;
+          while (!(window as any).cv || !(window as any).cv.Mat) {
+            await new Promise((r) => setTimeout(r, 100));
+            checkCount++;
+            if (checkCount > 150) { // 15 seconds timeout
+              break;
+            }
+          }
+          cv = (window as any).cv;
+        }
+
+        if (cv && cv.Mat) {
+          setLoadingText("Detecting document borders...");
+          try {
+            const warpedUrl = await detectAndWarpAadhaar(img, cv);
+            setAutoCroppedImgUrl(warpedUrl);
+            setCropMode("auto");
+
+            const warpedImg = new Image();
+            await new Promise((resolve, reject) => {
+              warpedImg.onload = resolve;
+              warpedImg.onerror = reject;
+              warpedImg.src = warpedUrl;
+            });
+            setActiveImgElement(warpedImg);
+            toast.success("Aadhaar card detected and cropped automatically!");
+          } catch (detectErr) {
+            console.warn("Aadhaar detection failed:", detectErr);
+            toast.error("Couldn't detect the Aadhaar card clearly. Please adjust manually.");
+            setCropMode("manual");
+            setActiveImgElement(img);
+          }
+        } else {
+          console.warn("OpenCV.js was not available");
+          toast.error("Couldn't load image processor. Please adjust manually.");
+          setCropMode("manual");
+          setActiveImgElement(img);
+        }
+      } else {
+        setLoadingText("Reading image credentials...");
+        setActiveImgElement(img);
+      }
+
       setStep("editor");
-      toast.success("Photo uploaded successfully.");
     } catch (err) {
       console.error(err);
       toast.error("Failed to parse photo dimensions.");
       setStep("upload");
+    }
+  };
+
+  const switchToAutoCrop = async () => {
+    if (!autoCroppedImgUrl) {
+      if (originalImgUrl) {
+        setStep("processing");
+        setLoadingText("Running auto detection...");
+        try {
+          const img = new Image();
+          await new Promise((resolve, reject) => {
+            img.onload = resolve;
+            img.onerror = reject;
+            img.src = originalImgUrl;
+          });
+
+          const cv = cvInstance || (window as any).cv;
+          if (cv && cv.Mat) {
+            const warpedUrl = await detectAndWarpAadhaar(img, cv);
+            setAutoCroppedImgUrl(warpedUrl);
+            setCropMode("auto");
+
+            const warpedImg = new Image();
+            await new Promise((resolve, reject) => {
+              warpedImg.onload = resolve;
+              warpedImg.onerror = reject;
+              warpedImg.src = warpedUrl;
+            });
+            setActiveImgElement(warpedImg);
+            setImgZoom(1.0);
+            setImgPan({ x: 0, y: 0 });
+            setImgRotate(0);
+            initCropBox(activePreset);
+            toast.success("Aadhaar card detected and cropped automatically!");
+          } else {
+            toast.error("Image processor is not loaded yet.");
+          }
+        } catch (err) {
+          console.warn("Aadhaar detection failed:", err);
+          toast.error("Couldn't detect the Aadhaar card clearly. Please adjust manually.");
+        } finally {
+          setStep("editor");
+        }
+      }
+      return;
+    }
+
+    setCropMode("auto");
+    setStep("processing");
+    setLoadingText("Loading cropped view...");
+    try {
+      const img = new Image();
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = autoCroppedImgUrl;
+      });
+      setActiveImgElement(img);
+      setImgZoom(1.0);
+      setImgPan({ x: 0, y: 0 });
+      setImgRotate(0);
+      initCropBox(activePreset);
+      toast.success("Switched to auto cropped Aadhaar view.");
+    } catch (err) {
+      toast.error("Failed to load auto cropped image.");
+    } finally {
+      setStep("editor");
+    }
+  };
+
+  const switchToManualCrop = async () => {
+    if (!originalImgUrl) return;
+
+    setCropMode("manual");
+    setStep("processing");
+    setLoadingText("Loading manual adjustment view...");
+    try {
+      const img = new Image();
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = originalImgUrl;
+      });
+      setActiveImgElement(img);
+      setImgZoom(1.0);
+      setImgPan({ x: 0, y: 0 });
+      setImgRotate(0);
+      initCropBox(activePreset);
+      toast.success("Switched to original full image. You can adjust the crop manually.");
+    } catch (err) {
+      toast.error("Failed to load original image.");
+    } finally {
+      setStep("editor");
     }
   };
 
@@ -756,18 +1184,7 @@ export default function ImageCropperEngine({
     setIsDragging(false);
   };
 
-  // Desktop Scroll Wheel Zoom
-  const handleWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
-    const factor = 1.05;
-    let newZoom = imgZoom;
-    if (e.deltaY < 0) {
-      newZoom = Math.min(10, imgZoom * factor);
-    } else {
-      newZoom = Math.max(0.1, imgZoom / factor);
-    }
-    setImgZoom(newZoom);
-  };
+
 
   const handleDownload = () => {
     const downloadUrl = (gridSize && previewSheetUrl) ? previewSheetUrl : previewPhotoUrl;
@@ -799,6 +1216,8 @@ export default function ImageCropperEngine({
     setImgZoom(1.0);
     setImgPan({ x: 0, y: 0 });
     setImgRotate(0);
+    setAutoCroppedImgUrl(null);
+    setCropMode("manual");
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
@@ -920,6 +1339,52 @@ export default function ImageCropperEngine({
                 </div>
               </div>
 
+              {/* Aadhaar Scanner Controls Toolbar */}
+              {toolSlug === "aadhaar-photo-resizer" && (
+                <div className="w-full flex flex-wrap justify-center gap-2.5 mb-5 border-t border-b border-white/5 py-4 px-2">
+                  <button
+                    type="button"
+                    onClick={switchToAutoCrop}
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer ${
+                      cropMode === "auto"
+                        ? "bg-blue-600 border-blue-500 text-white shadow-md shadow-blue-500/25"
+                        : "bg-white/5 border-white/5 text-gray-400 hover:text-white hover:bg-white/[0.08]"
+                    }`}
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    Auto Crop
+                  </button>
+                  <button
+                    type="button"
+                    onClick={switchToManualCrop}
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer ${
+                      cropMode === "manual"
+                        ? "bg-blue-600 border-blue-500 text-white shadow-md shadow-blue-500/25"
+                        : "bg-white/5 border-white/5 text-gray-400 hover:text-white hover:bg-white/[0.08]"
+                    }`}
+                  >
+                    <Crop className="w-3.5 h-3.5" />
+                    Manual Adjust
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleReset}
+                    className="flex items-center gap-2 px-4 py-2.5 bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/5 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer"
+                  >
+                    <RefreshCw className="w-3.5 h-3.5" />
+                    Reset
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleDownload}
+                    className="flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white border border-emerald-500 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer shadow-md shadow-emerald-500/25"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    Download
+                  </button>
+                </div>
+              )}
+
               {/* Main Crop Viewport wrapper */}
               <div
                 ref={workspaceRef}
@@ -937,7 +1402,6 @@ export default function ImageCropperEngine({
                 onTouchStart={handlePointerDown}
                 onTouchMove={handlePointerMove}
                 onTouchEnd={handlePointerUp}
-                onWheel={handleWheel}
               >
                 {/* 1. Underlying Transformed Image */}
                 {originalImgUrl && (
@@ -1047,7 +1511,7 @@ export default function ImageCropperEngine({
               {/* Instructions below editor */}
               <div className="w-full flex justify-between text-[10px] text-gray-500 font-bold px-2 mt-4 uppercase">
                 <span>Drag crop corners or edges to resize</span>
-                <span>Drag image to pan • Wheel to zoom</span>
+                <span>Drag image to pan</span>
               </div>
             </div>
 

@@ -1,5 +1,6 @@
 "use client";
 
+// ImageCropperEngine: Component handling image crop and adjustments
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import {
   Download,

@@ -175,7 +175,7 @@ export default function Header() {
           : 'bg-transparent py-6'
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 gap-8">
+      <div className="container mx-auto flex items-center justify-between px-4 lg:px-4 xl:px-6 gap-2 xl:gap-4 2xl:gap-8">
         <div className="flex items-center gap-2">
           <Link href={localizeHref('/')} translate="no" data-no-translate className="flex items-center gap-3 group whitespace-nowrap shrink-0 no-translate notranslate">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white font-black text-2xl transition-all group-hover:scale-110 group-hover:rotate-3 shadow-[0_0_20px_rgba(37,99,235,0.4)] relative overflow-hidden no-translate notranslate" translate="no" data-no-translate>
@@ -189,7 +189,7 @@ export default function Header() {
         </div>
         
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 bg-white/5 p-1 rounded-full border border-white/10 backdrop-blur-md">
+        <nav className="hidden lg:flex items-center gap-0.5 2xl:gap-1 bg-white/5 p-1 rounded-full border border-white/10 backdrop-blur-md">
           {navigation.map((item) => {
             if (item.submenu) {
               const hasActiveSub = item.submenu.some(sub => pathname === localizeHref(sub.href));
@@ -197,7 +197,7 @@ export default function Header() {
                 <div className="relative" key={item.name} ref={pdfDropdownRef}>
                   <button
                     onClick={() => setIsPdfDropdownOpen(!isPdfDropdownOpen)}
-                    className={`px-3 xl:px-5 py-2 rounded-full text-[10px] xl:text-xs font-black uppercase tracking-wider xl:tracking-widest transition-all whitespace-nowrap flex items-center gap-1 cursor-pointer select-none ${
+                    className={`px-2 xl:px-3 2xl:px-5 py-2 rounded-full text-[9px] min-[1100px]:text-[10px] 2xl:text-xs font-black uppercase tracking-wider 2xl:tracking-widest transition-all whitespace-nowrap flex items-center gap-1 cursor-pointer select-none ${
                       isPdfDropdownOpen || hasActiveSub
                         ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' 
                         : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -238,7 +238,7 @@ export default function Header() {
               <Link 
                 key={item.name} 
                 href={localizedHrefValue} 
-                className={`px-3 xl:px-5 py-2 rounded-full text-[10px] xl:text-xs font-black uppercase tracking-wider xl:tracking-widest transition-all whitespace-nowrap ${
+                className={`px-2 xl:px-3 2xl:px-5 py-2 rounded-full text-[9px] min-[1100px]:text-[10px] 2xl:text-xs font-black uppercase tracking-wider 2xl:tracking-widest transition-all whitespace-nowrap ${
                   isActive
                     ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' 
                     : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -250,12 +250,12 @@ export default function Header() {
           })}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-2 xl:gap-4">
+        <div className="hidden lg:flex items-center gap-1.5 xl:gap-2 2xl:gap-4">
           {/* Custom Premium Language Dropdown */}
           <div className="relative" ref={langDropdownRef}>
             <button
               onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-              className="flex items-center gap-1.5 xl:gap-2.5 rounded-full bg-white/5 hover:bg-white/10 px-2.5 xl:px-4 py-2 xl:py-2.5 text-[10px] xl:text-xs font-bold text-gray-300 hover:text-white border border-white/10 hover:border-blue-500/30 transition-all select-none cursor-pointer whitespace-nowrap shrink-0"
+              className="flex items-center gap-1 xl:gap-1.5 2xl:gap-2.5 rounded-full bg-white/5 hover:bg-white/10 px-2 xl:px-2.5 2xl:px-4 py-2 text-[9px] min-[1100px]:text-[10px] 2xl:text-xs font-bold text-gray-300 hover:text-white border border-white/10 hover:border-blue-500/30 transition-all select-none cursor-pointer whitespace-nowrap shrink-0"
             >
               <Globe className="w-3 xl:w-3.5 xl:h-3.5 h-3.5 text-blue-500" />
               <span translate="no" className="whitespace-nowrap">{currentLanguage.flag} {currentLanguage.name}</span>
@@ -294,7 +294,7 @@ export default function Header() {
 
           <Link 
             href={localizeHref('/tools')} 
-            className="group relative flex items-center gap-1.5 xl:gap-2 rounded-full bg-white px-4 xl:px-7 py-2 xl:py-3 text-[11px] xl:text-sm font-black text-black hover:scale-105 active:scale-95 transition-all shadow-xl hover:shadow-white/10 overflow-hidden whitespace-nowrap shrink-0"
+            className="group relative flex items-center gap-1 xl:gap-1.5 2xl:gap-2 rounded-full bg-white px-2.5 xl:px-4 2xl:px-7 py-2 text-[10px] min-[1100px]:text-[11px] 2xl:text-sm font-black text-black hover:scale-105 active:scale-95 transition-all shadow-xl hover:shadow-white/10 overflow-hidden whitespace-nowrap shrink-0"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             <Rocket className="w-3.5 h-3.5 xl:w-4 xl:h-4 relative z-10" suppressHydrationWarning />

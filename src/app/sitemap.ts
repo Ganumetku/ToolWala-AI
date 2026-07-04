@@ -100,24 +100,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     const publicTools = await getPublicTools();
-    toolEntries = publicTools.flatMap((t) =>
-      seoLocales.map((loc) => buildItem(t.href, t.updatedAt ? new Date(t.updatedAt) : now, 'weekly', 0.8, loc))
-    );
+    toolEntries = publicTools.flatMap((t) => {
+      const localesToUse = t.slug === 'exam-marks-calculator'
+        ? seoLocales.filter((loc) => loc === 'en' || loc === 'hi')
+        : seoLocales;
+      return localesToUse.map((loc) => buildItem(t.href, t.updatedAt ? new Date(t.updatedAt) : now, 'weekly', 0.8, loc));
+    });
   } catch {
     const { toolsData } = await import('@/data/tools');
     const { isToolLive } = await import('@/lib/tools');
-    toolEntries = toolsData.filter(isToolLive).flatMap((t) =>
-      seoLocales.map((loc) => buildItem(t.href, now, 'weekly', 0.8, loc))
-    );
+    toolEntries = toolsData.filter(isToolLive).flatMap((t) => {
+      const localesToUse = t.slug === 'exam-marks-calculator'
+        ? seoLocales.filter((loc) => loc === 'en' || loc === 'hi')
+        : seoLocales;
+      return localesToUse.map((loc) => buildItem(t.href, now, 'weekly', 0.8, loc));
+    });
   }
 
   try {
     const blogs = await getPublicBlogs();
-    blogEntries = blogs.flatMap((b) =>
-      seoLocales.map((loc) =>
+    blogEntries = blogs.flatMap((b) => {
+      const localesToUse = b.slug === 'how-to-calculate-exam-percentage-easily'
+        ? seoLocales.filter((loc) => loc === 'en' || loc === 'hi')
+        : seoLocales;
+      return localesToUse.map((loc) =>
         buildItem(`/blog/${b.slug}`, new Date(b.updatedAt || b.publishedAt || b.createdAt), 'weekly', b.featured ? 0.75 : 0.7, loc)
-      )
-    );
+      );
+    });
 
     const tags = new Set<string>();
     for (const blog of blogs) {

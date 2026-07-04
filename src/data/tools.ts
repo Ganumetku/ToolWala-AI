@@ -898,6 +898,23 @@ export const toolsData: Tool[] = [
     isVisible: true,
     createdAt: '2026-06-20T00:00:00Z',
     updatedAt: '2026-06-20T00:00:00Z'
+  },
+  {
+    id: "exam-marks-calculator",
+    title: "Exam Marks Calculator",
+    description: "Calculate your exam marks percentage, average, grades, and GPA with detailed statistics.",
+    icon: "🎓",
+    href: "/tools/exam-marks-calculator",
+    slug: "exam-marks-calculator",
+    category: "Calculator Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["exam", "marks", "calculator", "percentage", "grade", "gpa", "average"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2026-07-04T19:42:31Z',
+    updatedAt: '2026-07-04T19:42:31Z'
   }
 ];
 

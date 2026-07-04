@@ -49,6 +49,11 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
     locale = headerList.get("x-locale") || "en";
   } catch (e) {}
 
+  if (slug === 'how-to-calculate-exam-percentage-easily' && locale !== 'en' && locale !== 'hi') {
+    const { redirect } = await import('next/navigation');
+    redirect('/blog/how-to-calculate-exam-percentage-easily/');
+  }
+
   const { getBlogTranslationWithFallback } = await import("@/lib/blog-translation-service");
   const translatedBlog = await getBlogTranslationWithFallback(blog, locale);
 

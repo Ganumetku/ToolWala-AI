@@ -2095,5 +2095,45 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "PAN Card Resize", href: "/tools/pan-card-resize" },
       { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
     ]
+  },
+  "exam-marks-calculator": {
+    title: "Exam Marks Calculator",
+    intro: "Calculate marks percentage, average, grade, and GPA instantly. The best offline-capable, private Exam Marks Calculator designed for students, teachers, and parents.",
+    whatItDoes: "The ToolWala Exam Marks Calculator is a comprehensive academic analysis tool. By inputting obtained and maximum marks for multiple subjects, it computes overall percentage, average marks, highest/lowest subject scores, pass/fail status, and assigns letter grades based on customizable grading scales. All processing is executed client-side, ensuring absolute data privacy.",
+    howToUse: [
+      "Select your custom passing percentage threshold (default is 35%).",
+      "Configure or adjust the grading system range values to match your school board.",
+      "Enter Obtained Marks and Maximum Marks for each subject. Subject Names are optional.",
+      "Click 'Add Subject' to add more rows, or use the duplicate/delete buttons to manage subjects.",
+      "View your results instantly in the animated statistics dashboard, then download as a PDF, print, or share."
+    ],
+    keyFeatures: [
+      { title: "Unlimited Subjects", desc: "Add as many subject rows as needed for complex board examinations." },
+      { title: "Custom Grade System", desc: "Tailor the grading scale thresholds (e.g., A+, A, B, etc.) and passing standards in real-time." },
+      { title: "On-Device Calculations", desc: "No data is sent to external servers, providing 100% security for student records." },
+      { title: "Interactive Dashboards", desc: "Visual circular progress trackers, pass/fail status badges, and aggregate summary cards." }
+    ],
+    benefits: [
+      "Completely free to use with zero advertisements or subscription barriers.",
+      "Supports decimal marks and large aggregates for all global education boards.",
+      "Download a structured report of your mark sheet as a clean PDF or print directly.",
+      "Enter key navigation and auto-focus for swift and responsive user experiences."
+    ],
+    whyChoose: "Traditional calculators only compute simple ratios. Our Exam Marks Calculator functions like a mini Student Information System, generating detailed stats like grade classification, average performance index, and distribution cards. Because it operates strictly inside your browser, it remains fully functional offline.",
+    useCases: [
+      "Students calculating their final term percentage and checking class grade thresholds.",
+      "Teachers compiling report cards and analyzing class-wide maximum and minimum marks.",
+      "Parents evaluating term-wise subject progress and storing digital mark sheet PDFs."
+    ],
+    faqs: [
+      { question: "How is the exam marks percentage calculated?", answer: "The tool adds up the obtained marks of all subjects, divides by the sum of maximum marks, and multiplies by 100 to get the exact percentage." },
+      { question: "Can I customize the passing percentage?", answer: "Yes. You can adjust the passing criteria from 30% to 50% or higher. Grades and pass/fail states adapt instantly to your choice." },
+      { question: "Is this calculator free to print and download reports?", answer: "Yes, you can copy, print, or download your results card as a formatted PDF document with one click." }
+    ],
+    conclusion: "Assess academic marks and verify grades instantly. Try our secure, private Exam Marks Calculator today.",
+    relatedTools: [
+      { name: "Percentage Calculator", href: "/tools/percentage-calculator" },
+      { name: "Age Calculator", href: "/tools/age-calculator" }
+    ]
   }
 };

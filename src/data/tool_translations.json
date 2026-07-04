@@ -10026,5 +10026,55 @@
     "seoDescription": "Isolamento de imagem de nível profissional em seu navegador. Remova fundos com precisão cirúrgica usando nossa IA de computação de ponta — sem upload de dados, 100% de privacidade.",
     "createdAt": "2026-06-21T08:05:19.967Z",
     "updatedAt": "2026-06-21T08:05:20.087Z"
+  },
+  {
+    "id": "trans-exam-marks-calculator-en",
+    "toolSlug": "exam-marks-calculator",
+    "locale": "en",
+    "title": "Exam Marks Calculator",
+    "description": "Calculate marks percentage, average, grades, and GPA with detailed statistics.",
+    "faq": [
+      {
+        "question": "How is the exam marks percentage calculated?",
+        "answer": "The tool adds up the obtained marks of all subjects, divides by the sum of maximum marks, and multiplies by 100 to get the exact percentage."
+      },
+      {
+        "question": "Can I customize the passing percentage?",
+        "answer": "Yes. You can adjust the passing criteria from 30% to 50% or higher. Grades and pass/fail states adapt instantly to your choice."
+      },
+      {
+        "question": "Is this calculator free to print and download reports?",
+        "answer": "Yes, you can copy, print, or download your results card as a formatted PDF document with one click."
+      }
+    ],
+    "seoTitle": "Exam Marks Calculator - Calculate Percentage & Grades",
+    "seoDescription": "Free Exam Marks Calculator. Enter subject marks to calculate total percentage, grades, GPA, average, and download visual reports. Print and PDF support.",
+    "createdAt": "2026-07-04T19:42:31Z",
+    "updatedAt": "2026-07-04T19:42:31Z"
+  },
+  {
+    "id": "trans-exam-marks-calculator-hi",
+    "toolSlug": "exam-marks-calculator",
+    "locale": "hi",
+    "title": "परीक्षा अंक कैलकुलेटर",
+    "description": "विस्तृत आँकड़ों के साथ परीक्षा के अंकों के प्रतिशत, औसत, ग्रेड और जीपीए की गणना करें।",
+    "faq": [
+      {
+        "question": "परीक्षा के अंकों के प्रतिशत की गणना कैसे की जाती है?",
+        "answer": "यह कैलकुलेटर सभी विषयों के प्राप्त अंकों को जोड़ता है, उसे कुल अधिकतम अंकों के योग से विभाजित करता है, और सटीक प्रतिशत प्राप्त करने के लिए 100 से गुणा करता है।"
+      },
+      {
+        "question": "क्या मैं उत्तीर्ण प्रतिशत (passing percentage) को बदल सकता हूँ?",
+        "answer": "हाँ। आप उत्तीर्ण प्रतिशत को 30%, 33%, 35%, 40% या 50% पर सेट कर सकते हैं। ग्रेड और पास/फेल स्थिति तुरंत आपके चयन के अनुसार बदल जाएगी।"
+      },
+      {
+        "question": "क्या इस कैलकुलेटर से रिपोर्ट प्रिंट और डाउनलोड करना मुफ्त है?",
+        "answer": "हाँ, आप एक क्लिक में अपने परिणाम कार्ड को कॉपी कर सकते हैं, प्रिंट कर सकते हैं या एक सुव्यवस्थित पीडीएफ दस्तावेज़ के रूप में डाउनलोड कर सकते हैं।"
+      }
+    ],
+    "seoTitle": "परीक्षा अंक कैलकुलेटर - परीक्षा प्रतिशत और ग्रेड की गणना करें",
+    "seoDescription": "मुफ्त परीक्षा अंक कैलकुलेटर। विषयों के अंक दर्ज करें और कुल प्रतिशत, ग्रेड, औसत और विवरणात्मक रिपोर्ट प्राप्त करें। पीडीएफ डाउनलोड और प्रिंट सपोर्ट।",
+    "createdAt": "2026-07-04T19:42:31Z",
+    "updatedAt": "2026-07-04T19:42:31Z"
   }
 ]

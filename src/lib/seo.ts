@@ -35,8 +35,13 @@ export function getAlternateLanguages(pathname: string): Record<string, string> 
   
   const enabledLocales = getEnabledLocales();
   const config = getLanguagesConfig();
+  const isExamMarksOrBlog = cleanPathNoSlash.includes('exam-marks-calculator') || cleanPathNoSlash.includes('how-to-calculate-exam-percentage-easily');
+  
   enabledLocales.forEach((loc) => {
     if (loc !== 'en' && config[loc]?.seo_enabled) {
+      if (isExamMarksOrBlog && loc !== 'hi') {
+        return;
+      }
       languages[loc] = `${siteUrl}/${loc}${cleanPathNoSlash}/`;
     }
   });

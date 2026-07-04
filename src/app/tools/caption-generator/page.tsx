@@ -10,6 +10,7 @@ import {
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { motion, AnimatePresence } from 'framer-motion';
+import { toast } from 'sonner';
 
 type CaptionData = {
   imageFile: File | null;
@@ -188,7 +189,7 @@ export default function CaptionGenerator() {
     };
   };
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     if (!data.topic.trim() && !data.imageFile) {
       setError("Please either enter a topic or upload an image.");
       return;
@@ -197,10 +198,84 @@ export default function CaptionGenerator() {
     setError(null);
     setIsGenerating(true);
     
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/ai/run/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          slug: 'caption-generator',
+          inputs: {
+            topic: data.topic,
+            platform: data.platform,
+            tone: data.tone,
+            language: data.language,
+            length: data.length,
+            hashtagCount: data.hashtagCount
+          },
+          promptTemplate: `You are an expert social media copywriter. Generate high-converting captions based on these parameters:
+Topic/Description: {{topic}}
+Platform: {{platform}}
+Tone/Vibe: {{tone}}
+Language: {{language}} (Note: If language is Hinglish, write the caption text using Hindi words in Latin/English script)
+Length: {{length}}
+Hashtags Count: {{hashtagCount}}
+
+Respond ONLY with a valid JSON object matching this schema (do not include markdown formatting or backticks around the JSON):
+{
+  "captions": [
+    "Caption 1...",
+    "Caption 2...",
+    "Caption 3...",
+    "Caption 4...",
+    "Caption 5..."
+  ],
+  "hashtags": "#tag1 #tag2 ...",
+  "tips": {
+    "time": "Best posting time for this category",
+    "cta": "Recommended CTA to drive comments/shares",
+    "hook": "Suggested hook sentence to start"
+  }
+}`
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('API request failed');
+      }
+
+      const resData = await response.json();
+      if (!resData.success || !resData.output) {
+        throw new Error(resData.error || 'Invalid AI output');
+      }
+
+      let cleanText = resData.output.trim();
+      if (cleanText.startsWith('```')) {
+        cleanText = cleanText.replace(/^```[a-zA-Z]*\n/, '').replace(/\n```$/, '').trim();
+      }
+
+      const parsed = JSON.parse(cleanText) as GeneratedResult;
+      
+      if (!Array.isArray(parsed.captions) || parsed.captions.length === 0) {
+        throw new Error('Malformed captions output');
+      }
+
+      setResult({
+        captions: parsed.captions.slice(0, 5),
+        hashtags: parsed.hashtags || '',
+        tips: {
+          time: parsed.tips?.time || 'Suitable general hours',
+          cta: parsed.tips?.cta || 'Encourage users to comment below',
+          hook: parsed.tips?.hook || 'Start with an opening question'
+        }
+      });
+      toast.success("AI generated successfully!");
+    } catch (err) {
+      console.warn("AI generation failed or key exhausted, falling back to local simulation:", err);
       setResult(generateMockContent(data));
+      toast.info("Fallback local generator triggered");
+    } finally {
       setIsGenerating(false);
-    }, 1200);
+    }
   };
 
   return (

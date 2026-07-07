@@ -356,6 +356,23 @@ export const toolsData: Tool[] = [
     updatedAt: '2024-01-01T00:00:00Z'
   },
   {
+    id: "ats-resume-checker",
+    title: "ATS Resume Checker",
+    description: "Audit your resume for compatibility with modern Applicant Tracking Systems (ATS). Detect formatting errors, scan keyword matches against job descriptions, and get actionable suggestions.",
+    icon: "🔍",
+    href: "/tools/ats-resume-checker",
+    slug: "ats-resume-checker",
+    category: "Resume & Career",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["resume", "cv", "career", "job", "ats", "checker", "scanner", "compatibility"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
+  },
+  {
     id: "caption-generator",
     title: "AI Caption Generator",
     description: "Create engaging, platform-optimized captions with AI. Perfect for Instagram, LinkedIn, and more.",

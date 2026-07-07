@@ -2001,6 +2001,35 @@
     "updatedAt": "2026-06-18T02:01:06.127Z"
   },
   {
+    "id": "trans-ats-resume-checker-en",
+    "toolSlug": "ats-resume-checker",
+    "locale": "en",
+    "title": "ATS Resume Checker",
+    "description": "Audit your resume for compatibility with modern Applicant Tracking Systems (ATS). Detect formatting errors, scan keyword matches against job descriptions, and get actionable suggestions.",
+    "faq": [
+      {
+        "question": "How does the ATS Resume Checker evaluate my CV?",
+        "answer": "The tool uses browser-native parsers to extract the text layer. It then runs layout geometry tests to flag tables, text boxes, and columns. It audits terms against a dictionary of technical skills and counts action verbs. If you provide a job description, it maps matching and missing keywords."
+      },
+      {
+        "question": "Is my resume private and secure?",
+        "answer": "Yes, 100%. Unlike other platforms, all processing occurs directly in your browser. No files are uploaded to our servers, and no personal information is permanently stored."
+      },
+      {
+        "question": "What file formats and sizes are supported?",
+        "answer": "We support PDF, DOCX, and TXT files up to 10MB. Files must contain a selectable text layer (scanned image PDFs require text layers)."
+      },
+      {
+        "question": "Can I download my score report?",
+        "answer": "Yes, you can click 'Download ATS Report' to print or save a professionally formatted multi-page PDF summary of the results."
+      }
+    ],
+    "seoTitle": "Free ATS Resume Checker – Optimize Your Resume Online",
+    "seoDescription": "Simulate Applicant Tracking Systems (ATS) scanning your resume. Get a detailed score, missing keywords, and layout warnings locally and securely.",
+    "createdAt": "2026-06-18T02:01:06.127Z",
+    "updatedAt": "2026-06-18T02:01:06.127Z"
+  },
+  {
     "id": "trans-69-resume-builder-hi",
     "toolSlug": "resume-builder",
     "locale": "hi",

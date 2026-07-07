@@ -307,6 +307,48 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "AI Text Humanizer", href: "/tools/text-humanizer" }
     ]
   },
+  "ats-resume-checker": {
+    title: "ATS Resume Checker",
+    intro: "Optimize your resume for automated screening algorithms. Scan format compatibility, analyze keyword density against job roles, and secure more interview invites.",
+    whatItDoes: "The ToolWala AI ATS Resume Checker simulates how modern Applicant Tracking Systems (ATS) evaluate candidate resumes. By analyzing your resume locally in your browser memory, it grades sections, checks contact details, extracts active verbs, and scores skills relevance. When a job description is provided, it performs semantic matching to reveal matching keywords, missing vocabulary, and density metrics. This gives you exact details on how a recruiter's software sees your application.",
+    howToUse: [
+      "Upload your resume in PDF, DOCX, or TXT format.",
+      "Optionally enter your target role and paste the job description text or upload a job description file.",
+      "Wait for our browser-native analyzer to parse and evaluate the document locally.",
+      "Review your overall ATS compatibility score and the breakdowns for formatting, keywords, experience, and readability.",
+      "Apply the actionable recommendations, add missing skills, fix formatting errors, and download the full analysis report."
+    ],
+    keyFeatures: [
+      { title: "Privacy-First Audits", desc: "No file uploads to servers. The parsing, scoring, and analysis run 100% locally in browser memory." },
+      { title: "Dynamic Keyword Matching", desc: "Compares your CV directly against any job description to identify crucial keywords and missing technical/soft skills." },
+      { title: "Formatting Warnings", desc: "Detects elements that crash ATS systems, including complex multi-column layouts, tables, textboxes, icons, and special characters." },
+      { title: "Detailed Metric Insights", desc: "Grades action verbs, checks page counts, estimates readability, and estimates career level experience automatically." }
+    ],
+    benefits: [
+      "Avoid the 'black hole' of automated recruitment software filters.",
+      "Identify missing high-value technical keywords instantly.",
+      "Get actionable improvements on structure, readability, and content metrics.",
+      "Free to use, 100% private, with instant printable PDF reports."
+    ],
+    whyChoose: "Most online resume checkers store your work history and personal details in databases to sell them or target advertisements. ToolWala AI is built on local sandboxed execution. Your resume stays completely in your browser, keeping your previous salaries, phone number, and address private while giving you scoring algorithms that match premium recruiters' software.",
+    useCases: [
+      "Candidates applying for corporate positions with heavy automated screening filters.",
+      "Professionals updating resumes to align with a career pivot or new industry keywords.",
+      "Graduates wanting to ensure their CV formatting is clean, readable, and standard.",
+      "Freelancers tailoring resumes for specific high-value target client requirements."
+    ],
+    faqs: [
+      { question: "How does the ATS Resume Checker evaluate my CV?", answer: "The tool uses browser-native parsers to extract the text layer. It then runs layout geometry tests to flag tables, text boxes, and columns. It audits terms against a dictionary of technical skills and counts action verbs. If you provide a job description, it maps matching and missing keywords." },
+      { question: "Is my resume private and secure?", answer: "Yes, 100%. Unlike other platforms, all processing occurs directly in your browser. No files are uploaded to our servers, and no personal information is permanently stored." },
+      { question: "What file formats and sizes are supported?", answer: "We support PDF, DOCX, and TXT files up to 10MB. Files must contain a selectable text layer (scanned image PDFs require text layers)." },
+      { question: "Can I download my score report?", answer: "Yes, you can click 'Download ATS Report' to print or save a professionally formatted multi-page PDF summary of the results." }
+    ],
+    conclusion: "Don't let a bad parser stand between you and your dream job. Run your resume through our local ATS auditor, apply the suggestions, and submit your application with complete confidence.",
+    relatedTools: [
+      { name: "AI Resume Builder", href: "/tools/resume-builder" },
+      { name: "AI Cover Letter Generator", href: "/tools/cover-letter-generator" }
+    ]
+  },
   "caption-generator": {
     title: "AI Caption Generator",
     intro: "Never run out of things to say. Generate engaging, on-brand captions for Instagram, LinkedIn, and more using our creative AI writing assistant.",

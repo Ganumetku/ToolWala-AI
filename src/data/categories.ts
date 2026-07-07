@@ -574,7 +574,7 @@ export function getToolsByCategory(categoryId: string, allTools: Tool[]): Tool[]
     }
     
     // 2. Fallback cross-mapping to match original behavior
-    if (categoryId === 'resume-career' && ['resume-builder', 'cover-letter-generator'].includes(t.id)) {
+    if (categoryId === 'resume-career' && ['resume-builder', 'cover-letter-generator', 'ats-resume-checker'].includes(t.id)) {
       return true;
     }
     if (categoryId === 'seo-tools' && ['text-humanizer', 'ocr-to-text', 'caption-generator'].includes(t.id)) {

@@ -10105,5 +10105,142 @@
     "seoDescription": "मुफ्त परीक्षा अंक कैलकुलेटर। विषयों के अंक दर्ज करें और कुल प्रतिशत, ग्रेड, औसत और विवरणात्मक रिपोर्ट प्राप्त करें। पीडीएफ डाउनलोड और प्रिंट सपोर्ट।",
     "createdAt": "2026-07-04T19:42:31Z",
     "updatedAt": "2026-07-04T19:42:31Z"
+  },
+  {
+    "id": "tdd1r9x",
+    "toolSlug": "ats-resume-checker",
+    "locale": "hi",
+    "title": "एटीएस बायोडाटा चेकर",
+    "description": "आधुनिक आवेदक ट्रैकिंग सिस्टम (एटीएस) के साथ अनुकूलता के लिए अपने बायोडाटा का ऑडिट करें। फ़ॉर्मेटिंग त्रुटियों का पता लगाएं, नौकरी विवरण के विरुद्ध कीवर्ड मिलान को स्कैन करें, और कार्रवाई योग्य सुझाव प्राप्त करें।",
+    "faq": [
+      {
+        "question": "एटीएस रेज़्यूमे चेकर मेरे सीवी का मूल्यांकन कैसे करता है?",
+        "answer": "टूल टेक्स्ट लेयर को निकालने के लिए ब्राउज़र-नेटिव पार्सर्स का उपयोग करता है। इसके बाद यह टेबल, टेक्स्ट बॉक्स और कॉलम को फ़्लैग करने के लिए लेआउट ज्यामिति परीक्षण चलाता है। यह तकनीकी कौशल के शब्दकोश के अनुसार शब्दों का ऑडिट करता है और क्रिया क्रियाओं की गणना करता है। यदि आप नौकरी का विवरण प्रदान करते हैं, तो यह मेल खाने वाले और गायब कीवर्ड को मैप करता है।"
+      },
+      {
+        "question": "क्या मेरा बायोडाटा निजी और सुरक्षित है?",
+        "answer": "हाँ, 100%। अन्य प्लेटफ़ॉर्म के विपरीत, सभी प्रोसेसिंग सीधे आपके ब्राउज़र में होती है। हमारे सर्वर पर कोई फ़ाइल अपलोड नहीं की जाती है, और कोई भी व्यक्तिगत जानकारी स्थायी रूप से संग्रहीत नहीं की जाती है।"
+      },
+      {
+        "question": "कौन से फ़ाइल स्वरूप और आकार समर्थित हैं?",
+        "answer": "हम 10MB तक की PDF, DOCX और TXT फ़ाइलों का समर्थन करते हैं। फ़ाइलों में एक चयन योग्य टेक्स्ट परत होनी चाहिए (स्कैन की गई छवि पीडीएफ को टेक्स्ट परतों की आवश्यकता होती है)।"
+      },
+      {
+        "question": "क्या मैं अपनी स्कोर रिपोर्ट डाउनलोड कर सकता हूँ?",
+        "answer": "हां, आप परिणामों के पेशेवर रूप से स्वरूपित बहु-पृष्ठ पीडीएफ सारांश को प्रिंट या सहेजने के लिए 'एटीएस रिपोर्ट डाउनलोड करें' पर क्लिक कर सकते हैं।"
+      }
+    ],
+    "seoTitle": "निःशुल्क एटीएस बायोडाटा चेकर - अपना बायोडाटा ऑनलाइन अनुकूलित करें",
+    "seoDescription": "आपके बायोडाटा को स्कैन करने वाले आवेदक ट्रैकिंग सिस्टम (एटीएस) का अनुकरण करें। स्थानीय और सुरक्षित रूप से विस्तृत स्कोर, छूटे हुए कीवर्ड और लेआउट चेतावनियाँ प्राप्त करें।",
+    "createdAt": "2026-07-08T03:03:00.373Z",
+    "updatedAt": "2026-07-08T03:03:00.373Z"
+  },
+  {
+    "id": "ec7pikq",
+    "toolSlug": "exam-marks-calculator",
+    "locale": "es",
+    "title": "Calculadora de notas de examen",
+    "description": "Calcule el porcentaje de calificaciones, el promedio, las calificaciones y el GPA con estadísticas detalladas.",
+    "faq": [
+      {
+        "question": "¿Cómo se calcula el porcentaje de notas del examen?",
+        "answer": "La herramienta suma las notas obtenidas de todas las materias, las divide por la suma de las notas máximas y las multiplica por 100 para obtener el porcentaje exacto."
+      },
+      {
+        "question": "¿Puedo personalizar el porcentaje de aprobación?",
+        "answer": "Sí. Puede ajustar los criterios de aprobación del 30% al 50% o más. Las calificaciones y los estados de aprobado/reprobado se adaptan instantáneamente a su elección."
+      },
+      {
+        "question": "¿Esta calculadora es gratuita para imprimir y descargar informes?",
+        "answer": "Sí, puedes copiar, imprimir o descargar tu tarjeta de resultados como un documento PDF formateado con un solo clic."
+      }
+    ],
+    "seoTitle": "Calculadora de calificaciones de exámenes: calcular porcentajes y calificaciones",
+    "seoDescription": "Calculadora gratuita de notas de exámenes. Ingrese las calificaciones de las materias para calcular el porcentaje total, las calificaciones, el GPA, el promedio y descargue informes visuales. Soporte para impresión y PDF.",
+    "createdAt": "2026-07-08T03:03:02.638Z",
+    "updatedAt": "2026-07-08T03:03:04.079Z"
+  },
+  {
+    "id": "5hrewzl",
+    "toolSlug": "exam-marks-calculator",
+    "locale": "pt",
+    "title": "Calculadora de notas de exame",
+    "description": "Calcule porcentagem de notas, média, notas e GPA com estatísticas detalhadas.",
+    "faq": [
+      {
+        "question": "Como é calculada a porcentagem de notas do exame?",
+        "answer": "A ferramenta soma as notas obtidas em todas as disciplinas, divide pela soma das notas máximas e multiplica por 100 para obter o percentual exato."
+      },
+      {
+        "question": "Posso personalizar a porcentagem de aprovação?",
+        "answer": "Sim. Você pode ajustar os critérios de aprovação de 30% a 50% ou mais. As notas e os estados de aprovação/reprovação se adaptam instantaneamente à sua escolha."
+      },
+      {
+        "question": "Esta calculadora é gratuita para imprimir e baixar relatórios?",
+        "answer": "Sim, você pode copiar, imprimir ou baixar seu cartão de resultados como um documento PDF formatado com um clique."
+      }
+    ],
+    "seoTitle": "Calculadora de notas de exames - Calcular porcentagem e notas",
+    "seoDescription": "Calculadora de notas de exame grátis. Insira notas nas disciplinas para calcular porcentagem total, notas, GPA, média e baixar relatórios visuais. Suporte para impressão e PDF.",
+    "createdAt": "2026-07-08T03:03:04.347Z",
+    "updatedAt": "2026-07-08T03:03:04.347Z"
+  },
+  {
+    "id": "0r9fpek",
+    "toolSlug": "ats-resume-checker",
+    "locale": "es",
+    "title": "Comprobador de currículum ATS",
+    "description": "Audite su currículum para comprobar la compatibilidad con los modernos sistemas de seguimiento de candidatos (ATS). Detecte errores de formato, analice coincidencias de palabras clave con descripciones de puestos y obtenga sugerencias prácticas.",
+    "faq": [
+      {
+        "question": "¿Cómo evalúa el ATS Resume Checker mi CV?",
+        "answer": "La herramienta utiliza analizadores nativos del navegador para extraer la capa de texto. Luego ejecuta pruebas de geometría de diseño para marcar tablas, cuadros de texto y columnas. Audita términos comparándolos con un diccionario de habilidades técnicas y cuenta verbos de acción. Si proporciona una descripción del trabajo, asigna palabras clave coincidentes y faltantes."
+      },
+      {
+        "question": "¿Mi currículum es privado y seguro?",
+        "answer": "Sí, 100%. A diferencia de otras plataformas, todo el procesamiento se produce directamente en su navegador. No se cargan archivos en nuestros servidores y no se almacena información personal de forma permanente."
+      },
+      {
+        "question": "¿Qué formatos y tamaños de archivos son compatibles?",
+        "answer": "Admitimos archivos PDF, DOCX y TXT de hasta 10 MB. Los archivos deben contener una capa de texto seleccionable (los archivos PDF de imágenes escaneadas requieren capas de texto)."
+      },
+      {
+        "question": "¿Puedo descargar mi informe de puntuación?",
+        "answer": "Sí, puede hacer clic en 'Descargar informe ATS' para imprimir o guardar un resumen de los resultados en formato PDF de varias páginas con formato profesional."
+      }
+    ],
+    "seoTitle": "Comprobador de currículum ATS gratuito: optimice su currículum en línea",
+    "seoDescription": "Simule los sistemas de seguimiento de candidatos (ATS) escaneando su currículum. Obtenga una puntuación detallada, palabras clave faltantes y advertencias de diseño de forma local y segura.",
+    "createdAt": "2026-07-08T03:03:05.222Z",
+    "updatedAt": "2026-07-08T03:03:06.034Z"
+  },
+  {
+    "id": "1od6gyv",
+    "toolSlug": "ats-resume-checker",
+    "locale": "pt",
+    "title": "Verificador de currículo ATS",
+    "description": "Audite seu currículo para verificar a compatibilidade com os modernos Sistemas de Rastreamento de Candidatos (ATS). Detecte erros de formatação, verifique correspondências de palavras-chave em descrições de cargos e obtenha sugestões práticas.",
+    "faq": [
+      {
+        "question": "Como o ATS Resume Checker avalia meu currículo?",
+        "answer": "A ferramenta usa analisadores nativos do navegador para extrair a camada de texto. Em seguida, ele executa testes de geometria de layout para sinalizar tabelas, caixas de texto e colunas. Ele audita os termos em um dicionário de habilidades técnicas e conta verbos de ação. Se você fornecer uma descrição do cargo, ela mapeará palavras-chave correspondentes e ausentes."
+      },
+      {
+        "question": "Meu currículo é privado e seguro?",
+        "answer": "Sim, 100%. Ao contrário de outras plataformas, todo o processamento ocorre diretamente no seu navegador. Nenhum arquivo é carregado em nossos servidores e nenhuma informação pessoal é armazenada permanentemente."
+      },
+      {
+        "question": "Quais formatos e tamanhos de arquivo são suportados?",
+        "answer": "Suportamos arquivos PDF, DOCX e TXT de até 10 MB. Os arquivos devem conter uma camada de texto selecionável (PDFs de imagens digitalizadas exigem camadas de texto)."
+      },
+      {
+        "question": "Posso baixar meu relatório de pontuação?",
+        "answer": "Sim, você pode clicar em 'Baixar Relatório ATS' para imprimir ou salvar um resumo dos resultados em PDF de várias páginas formatado profissionalmente."
+      }
+    ],
+    "seoTitle": "Verificador de currículo ATS gratuito – Otimize seu currículo online",
+    "seoDescription": "Simule Sistemas de Rastreamento de Candidatos (ATS) digitalizando seu currículo. Obtenha uma pontuação detalhada, palavras-chave ausentes e avisos de layout de forma local e segura.",
+    "createdAt": "2026-07-08T03:03:09.937Z",
+    "updatedAt": "2026-07-08T03:03:11.683Z"
   }
 ]

@@ -126,7 +126,7 @@ export async function proxy(request: NextRequest) {
         request: { headers: requestHeaders }
       });
     } else {
-      response = NextResponse.next({
+      response = NextResponse.rewrite(request.nextUrl, {
         request: { headers: requestHeaders }
       });
     }
@@ -149,7 +149,7 @@ export async function proxy(request: NextRequest) {
         request: { headers: requestHeaders }
       });
     } else {
-      response = NextResponse.next({
+      response = NextResponse.rewrite(request.nextUrl, {
         request: { headers: requestHeaders }
       });
     }

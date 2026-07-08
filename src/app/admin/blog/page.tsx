@@ -89,6 +89,46 @@ export default function BlogCMS() {
   const [status, setStatus] = useState<"draft" | "published">("draft");
   const [faqs, setFaqs] = useState<BlogFaq[]>([]);
   const [relatedToolSlugsInput, setRelatedToolSlugsInput] = useState("");
+  const [uploading, setUploading] = useState(false);
+
+  const handleThumbnailUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      toast.error('Only image files are allowed.');
+      return;
+    }
+
+    setUploading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.error || 'Upload failed');
+      }
+
+      const data = await res.json();
+      if (data.success && data.url) {
+        setThumbnail(data.url);
+        toast.success('Thumbnail uploaded successfully!');
+      } else {
+        throw new Error(data.error || 'Upload failed');
+      }
+    } catch (err: any) {
+      console.error('Upload error:', err);
+      toast.error(`Upload failed: ${err.message}`);
+    } finally {
+      setUploading(false);
+    }
+  };
   
   // Author fields
   const [authorName, setAuthorName] = useState("ToolWala Editorial");
@@ -743,14 +783,42 @@ export default function BlogCMS() {
 
                           {/* Thumbnail */}
                           <div className="space-y-2">
-                            <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">
-                              Thumbnail Image URL
-                            </label>
+                            <div className="flex items-center justify-between">
+                              <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">
+                                Thumbnail Image URL
+                              </label>
+                              <div className="relative">
+                                <input
+                                  type="file"
+                                  id="thumbnail-upload"
+                                  accept="image/*"
+                                  onChange={handleThumbnailUpload}
+                                  className="hidden"
+                                  disabled={uploading}
+                                />
+                                <label
+                                  htmlFor="thumbnail-upload"
+                                  className={`flex items-center gap-1.5 px-3 py-1.5 border border-white/10 rounded-lg text-[9px] font-black uppercase tracking-wider text-white hover:bg-white/5 transition-all cursor-pointer ${uploading ? 'opacity-50 pointer-events-none' : ''}`}
+                                >
+                                  {uploading ? (
+                                    <>
+                                      <Loader2 className="w-3 h-3 animate-spin" />
+                                      Uploading...
+                                    </>
+                                  ) : (
+                                    <>
+                                      <Plus className="w-3 h-3" />
+                                      Upload Image
+                                    </>
+                                  )}
+                                </label>
+                              </div>
+                            </div>
                             <input
                               type="text"
                               value={thumbnail}
                               onChange={(e) => setThumbnail(e.target.value)}
-                              placeholder="Unsplash URL or path..."
+                              placeholder="Unsplash URL, local path, or upload a new one..."
                               className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs font-bold text-white outline-none focus:border-blue-500/50 font-mono"
                             />
                             

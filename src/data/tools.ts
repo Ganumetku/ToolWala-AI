@@ -1,3 +1,4 @@
+// ToolWala AI Tools Config - Force Vercel Webhook Trigger
 export type ToolCategory = 
   | "All"
   | "AI Tools"

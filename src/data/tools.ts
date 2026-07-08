@@ -932,6 +932,23 @@ export const toolsData: Tool[] = [
     isVisible: true,
     createdAt: '2026-07-04T19:42:31Z',
     updatedAt: '2026-07-04T19:42:31Z'
+  },
+  {
+    id: "resume-bullet-generator",
+    title: "Resume Bullet Generator",
+    description: "Generate professional, recruiter-approved, achievement-focused resume bullet points using local AI.",
+    icon: "🎯",
+    href: "/tools/resume-bullet-generator",
+    slug: "resume-bullet-generator",
+    category: "Resume & Career",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["resume", "bullet", "generator", "cv", "career", "jobs", "ats", "ai"],
+    status: 'draft',
+    isVisible: true,
+    createdAt: '2026-07-08T11:24:00Z',
+    updatedAt: '2026-07-08T11:24:00Z'
   }
 ];
 

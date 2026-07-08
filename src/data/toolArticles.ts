@@ -2177,5 +2177,46 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "Percentage Calculator", href: "/tools/percentage-calculator" },
       { name: "Age Calculator", href: "/tools/age-calculator" }
     ]
+  },
+  "resume-bullet-generator": {
+    title: "AI Resume Bullet Generator",
+    intro: "Transform simple task descriptions into high-impact, recruiter-approved, and ATS-optimized resume bullet points using advanced AI.",
+    whatItDoes: "The ToolWala AI Resume Bullet Generator is a professional SaaS writing engine designed specifically to bypass modern Applicant Tracking Systems (ATS) and impress hiring managers. Instead of weak, passive phrases like 'Responsible for website maintenance', the AI uses the Google X-Y-Z formula to rewrite your experience as: 'Optimized web application infrastructure, reducing page load speed by 35% and increasing active user retention.' The tool automatically suggests missing industry keywords, estimates ATS scores, identifies action verbs, and lets you copy or export your results instantly.",
+    howToUse: [
+      "Select your Job Title from the dynamic autocomplete list or type your own.",
+      "Enter your Experience Level and the Industry your business belongs to.",
+      "Type a brief list of responsibilities or tasks you performed (e.g. 'wrote Python scripts').",
+      "Select a Writing Style (Professional, Technical, Achievement Focused, etc.) and hit Generate.",
+      "Review generated bullets along with estimated ATS Scores, suggested keywords, and save or copy your favorites!"
+    ],
+    keyFeatures: [
+      { title: "Google X-Y-Z Formula", desc: "Every bullet is engineered to state exactly what you accomplished, how it was measured, and what tools you used." },
+      { title: "Recruiter-Approved Verbs", desc: "Replaces passive phrases with powerful action verbs like 'Engineered', 'Spearheaded', and 'Streamlined'." },
+      { title: "ATS Keyword Match", desc: "Scans your target job role and suggests missing technical and soft skills to improve keyword matching density." },
+      { title: "AI Rewrite / Improve Mode", desc: "Paste your existing bullets to instantly rewrite them into results-driven achievements." }
+    ],
+    benefits: [
+      "Instantly boost your resume's search visibility in recruitment software (ATS).",
+      "Convert boring responsibilities into quantifiable business achievements.",
+      "Sound like a professional copywriter and resume consultant.",
+      "100% free, private, and secure edge-based processing."
+    ],
+    whyChoose: "We designed the Resume Bullet Generator because generic bullets are the #1 reason resumes get filtered out. A recruiter spends an average of 6 seconds screening a resume; a bullet starting with a weak action verb or lacking quantifiable results will fail. Our generator optimizes keyword density, removes passive language, and pairs technical skills with active accomplishments to help you secure interviews.",
+    useCases: [
+      "Job seekers updating their resume for competitive tech or corporate roles.",
+      "Recent college graduates converting class projects into professional achievements.",
+      "Senior executives needing leadership-focused, results-driven descriptions.",
+      "Freelancers packaging gig work as structured project milestones."
+    ],
+    faqs: [
+      { question: "What is the Google X-Y-Z formula?", answer: "Developed by Google recruiters, the formula states: 'Accomplished [X] as measured by [Y], by doing [Z]'. It guarantees that every bullet contains action, measurement, and context." },
+      { question: "Are my inputs saved or shared?", answer: "No. All inputs are processed securely using edge endpoints and are not stored in any database. Your details are private." },
+      { question: "How does the ATS score work?", answer: "The AI evaluates your bullet point for the presence of strong action verbs, readability, and key skills. A score of 80+ is ideal." }
+    ],
+    conclusion: "Upgrade your resume today. Use our AI Bullet Point Generator to stand out, beat the ATS filters, and land your next career milestone.",
+    relatedTools: [
+      { name: "ATS Resume Checker", href: "/tools/ats-resume-checker" },
+      { name: "AI Cover Letter Generator", href: "/tools/cover-letter-generator" }
+    ]
   }
 };

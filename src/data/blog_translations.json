@@ -494,5 +494,173 @@
         "order": 10
       }
     ]
+  },
+  "es:ai-caption-generator": {
+    "title": "Generador de subtítulos con IA: cómo escribir subtítulos para redes sociales con IA",
+    "excerpt": "Cree títulos, hashtags y subtítulos atractivos para las redes sociales utilizando plantillas de IA del lado del cliente al instante.",
+    "content": "Escriba subtítulos de alta conversión para Instagram, LinkedIn y YouTube. Aprenda a generar subtítulos usando IA.\n\n### Redactar un texto convincente\nUn buen título incluye un gancho fuerte, un cuerpo estructurado, un llamado a la acción y hashtags relevantes para el contexto.\n\n### Pasos para escribir subtítulos\n1. Abra [Generador de subtítulos AI](/tools/caption-generator).\n2. Ingrese los temas y el tono de destino.\n3. Copie los subtítulos generados.\n\n[cta tool=\"caption-generator\" title=\"Generar subtítulos con IA\" descripción=\"Crea subtítulos atractivos y atractivos para las redes sociales con IA.\"]",
+    "seoMetadata": {
+      "title": "Generador de subtítulos y subtítulos AI en línea | HerramientaWala AI",
+      "description": "Genere subtítulos, leyendas y hashtags de redes sociales de alta conversión al instante con nuestro motor de redacción publicitaria de IA.",
+      "keywords": "Herramientas de inteligencia artificial, generador de subtítulos, redes sociales"
+    },
+    "faqs": [
+      {
+        "id": "faq-13-1",
+        "question": "¿Puedo personalizar el tono de los subtítulos?",
+        "answer": "Sí, puede elegir entre varias configuraciones de tono, como Profesional, Divertida, Informativa o Minimalista, para que coincida con el estilo de su marca.",
+        "order": 1
+      },
+      {
+        "id": "faq-13-2",
+        "question": "¿Están los subtítulos optimizados para los algoritmos de búsqueda?",
+        "answer": "Sí, nuestras plantillas estructuran automáticamente términos clave y hashtags para maximizar el alcance orgánico y la capacidad de búsqueda.",
+        "order": 2
+      }
+    ]
+  },
+  "pt:photo-resize-to-20kb": {
+    "title": "Redimensionamento de fotos para 20 KB online: como formatar e compactar imagens para aplicativos oficiais",
+    "excerpt": "Portais de recrutamento governamental como SSC, polícia estadual bharti e exames ferroviários exigem fotos de passaporte com menos de 20 KB. Aprenda como redimensionar e compactar suas fotos de acordo com as especificações exatas usando o redimensionador de fotos gratuito baseado em navegador do ToolWala.",
+    "content": "## Por que os portais governamentais impõem um limite de fotos de 20 KB\n\nQuando a Comissão de Seleção de Pessoal (SSC) abre o registro CGL, CHSL ou MTS, milhões de candidatos correm para enviar inscrições dentro de prazos apertados. Cada inscrição inclui uma fotografia de passaporte e uma digitalização de assinatura. Se cada foto fosse uma imagem de smartphone em resolução total (3 a 10 MB), os servidores do portal ficariam curvados sob a carga.\n\nPara evitar isso, os portais de recrutamento impõem limites rígidos de tamanho de arquivo – normalmente entre 10 KB e 20 KB para fotografias de passaporte. Essa restrição força os candidatos a compactar e redimensionar suas fotos antes de carregá-las.\n\nThe problem is that aggressive compression can destroy facial details, causing manual verification officers to reject applications. This guide shows you how to format photos correctly using [Redimensionador de fotos de exame do ToolWala](https://toolwala.co/tools/exam-photo-resizer), achieving the right balance between file size and image clarity.\n\n---\n\n## Guia passo a passo para redimensionar fotos abaixo de 20 KB\n\n### Etapa 1: capture uma boa foto de origem\n\nA qualidade da sua imagem final de 20 KB depende inteiramente da qualidade da sua foto inicial:\n\n1. **Encontre iluminação natural**: fique de frente para uma janela com luz natural suave e difusa. Evite luzes fortes que criam sombras sob os olhos, nariz e queixo.\n2. **Use um fundo liso**: fique contra uma parede branca ou de cor clara. Mantenha uma distância de 30 a 60 centímetros da parede para evitar que a sombra do seu corpo apareça na foto.\n3. **Enquadre corretamente**: peça a alguém para tirar sua foto na altura do peito. Sua cabeça deve ocupar cerca de 70–80% da moldura vertical.\n4. **Expressão Neutra**: Mantenha seu rosto relaxado. Ambos os olhos devem estar abertos e claramente visíveis. Não sorria, incline a cabeça ou use óculos escuros.\n\n### Etapa 2: fazer upload e redimensionar com ToolWala\n\n1. Abra o [Redimensionador de fotos para exames do ToolWala](https://toolwala.co/tools/exam-photo-resizer).\n2. Carregue sua fotografia de origem (qualquer formato: JPEG, PNG ou WebP).\n3. Selecione a predefinição de exame apropriada no menu suspenso:\n   - **SSC CGL/CHSL/MTS**: 3,5 cm x 4,5 cm, 10–20 KB\n   - **Ferrovia (RRB)**: 3,5 cm x 4,5 cm, 20–50 KB\n   - **Polícia Estadual Bharti**: 3,5 cm x 4,5 cm, 10–20 KB\n4. Alinhe as guias de corte sobre seu rosto. Os limites de detecção de bordas da ferramenta ajudam você a posicionar sua cabeça na taxa de cobertura correta.\n5. Defina o controle deslizante **tamanho do arquivo de destino** para **20KB**.\n6. Clique em **Download** para salvar seu JPEG otimizado.\n\n### Etapa 3: verifique antes de fazer upload\n\nAntes de enviar para o portal:\n- Abra o arquivo baixado e confirme se seu rosto está claramente visível\n- Verifique o tamanho do arquivo em seu gerenciador de arquivos (deve mostrar 15–20 KB)\n- Verifique se o formato é JPEG (não PNG)\n\n---\n\n## Requisitos de dimensão por portal\n\nDiferentes exames e portais impõem especificações ligeiramente diferentes:\n\n| Exame / Portal | Dimensões da foto | Faixa de tamanho de arquivo | Formato | Plano de fundo |\n| :--- | :--- | :--- | :--- | :--- |\n| **SSC CGL/CHSL/MTS** | 3,5 cm x 4,5 cm | 10–20 KB | JPEG | Branco |\n| **Condestável SSC GD** | 3,5 cm x 4,5 cm | 10–20 KB | JPEG | Branco |\n| **Ferrovia RRB ALP** | 3,5 cm x 4,5 cm | 20–50 KB | JPEG | Branco / Claro |\n| **Polícia Estadual Bharti** | 3,5 cm x 4,5 cm | 10–20 KB | JPEG | Branco |\n| **Exames Bancários IBPS** | 4,5 cm x 3,5 cm | 20–50 KB | JPEG | Branco |\n| **UPSC CSE** | 3,5 cm x 4,5 cm | 20–300 KB | JPEG | Branco |\n\nFor SSC-specific formatting, visit our [Redimensionador de fotos SSC](/tools/ssc-photo-resize/) or the [Centro de utilitários para exames SSC](/hubs/ssc-exam-utilities/).\n\n---\n\n## Como funciona a compressão sem perder qualidade\n\nReduzir uma foto de 500 KB para 20 KB requer a remoção de 96% dos dados do arquivo. Como o ToolWala faz isso sem destruir seu rosto?\n\n### Redução de dimensão\nUma foto de smartphone pode ter 4000x3000 pixels (12 megapixels). Os portais governamentais precisam apenas de cerca de 200x250 pixels. O redimensionamento para as dimensões corretas é responsável pela maior parte da redução do tamanho do arquivo – de megabytes para dezenas de kilobytes.\n\n### Otimização de qualidade JPEG\nA compactação JPEG funciona agrupando pixels em blocos de 8x8 e descartando detalhes visuais de alta frequência aos quais o olho humano é menos sensível. Nosso mecanismo aplica essa compressão seletivamente: as regiões de fundo recebem maior compressão, enquanto a região da face (detectada pela análise das bordas) recebe um tratamento mais suave.\n\n### Remoção de metadados\nAs fotos da câmera contêm metadados EXIF – coordenadas GPS, modelo da câmera, configurações ISO, carimbos de data e hora. Esses metadados podem ter de 10 a 50 KB sozinhos. A remoção reduz significativamente o tamanho do arquivo sem qualquer alteração visual.\n\n### Otimização do perfil de cores\nA conversão de espaços de cores de ampla gama (como Adobe RGB) para sRGB reduz o tamanho dos dados de cores, mantendo a aparência visual para exibição na web.\n\n---\n\n## Razões e soluções comuns para rejeição de fotos\n\nMesmo com o tamanho de arquivo correto, as fotos são rejeitadas pelos seguintes motivos:\n\n- **Sombras no rosto**: as sombras fortes das luzes do teto distorcem os marcadores biométricos. Em vez disso, use luz natural voltada para a frente.\n- **Óculos brilham**: os reflexos nas lentes dos óculos escondem seus olhos. Retire os óculos para a foto.\n- **Inclinação da cabeça**: mesmo uma leve inclinação pode desencadear rejeição automática. Mantenha a cabeça perfeitamente reta e nivelada.\n- **Artefatos de compactação excessivos**: se a foto parecer pixelada ou em blocos, aumente ligeiramente o controle deslizante de qualidade e verifique se o arquivo ainda cabe abaixo de 20 KB.\n- **Fundo errado**: Fundos coloridos ou estampados são rejeitados. Use o recurso de remoção de fundo do ToolWala para obter um fundo branco e limpo.\n\n---\n\n## Privacidade e Segurança\n\nFotografias de passaporte são dados biométricos confidenciais. Editores de fotos baseados em nuvem carregam seu rosto em servidores remotos para processamento, criando riscos de privacidade. ToolWala opera de maneira totalmente diferente:\n\n- **Nenhum upload de servidor**: todas as operações de corte, redimensionamento e compactação são executadas no mecanismo JavaScript do seu navegador.\n- **Funciona offline**: assim que a página carregar, você pode desconectar a Internet e continuar o processamento.\n- **Sem retenção de dados**: suas fotos existem apenas na memória do navegador e são apagadas quando você fecha a guia.\n\n---\n\n## Recursos relacionados\n\nPreencha o formulário de inscrição para o exame com estas ferramentas complementares:\n\n- [Redimensionamento de assinatura para 20 KB](/landing/signature-resize-to-20kb/) — Formate sua assinatura digitalizada para SSC e portais de exames\n- [SSC Photo Resizer](/tools/ssc-photo-resize/) — Predefinições dedicadas de formatação de fotos SSC\n- [Compressor de imagem](/tools/image-compressor/) — Compressão de imagem de uso geral para alvos de qualquer tamanho\n- [Photo Resize to 50KB](/landing/photo-resize-to-50kb/) — Para portais com limites de tamanho maiores\n- [SSC Exam Utilities Hub](/hubs/ssc-exam-utilities/) — Kit de ferramentas completo para preparação de inscrição SSC\n\nFor portal-specific upload guides, read [Como fazer upload de foto e assinatura no aplicativo SSC](/blog/upload-photo-signature-ssc-application) and [Diretrizes para fotos e assinaturas RRB ALP](/blog/rrb-alp-photo-signature-size-guidelines).\n\n---\n\n## Conclusão\n\nRedimensionar uma foto para 20 KB é um equilíbrio entre o tamanho do arquivo e a clareza visual. Comece com uma foto de origem bem iluminada, use a predefinição de dimensão correta e deixe a compactação inteligente do ToolWala cuidar do resto. O processamento do lado do cliente da ferramenta garante que seus dados biométricos permaneçam privados.\n\nOpen the [Redimensionador de fotos do exame](https://toolwala.co/tools/exam-photo-resizer) now and format your application photo in under a minute.",
+    "seoMetadata": {
+      "title": "Redimensionamento de fotos para 20 KB online grátis – Compressor de fotos do formulário de exame",
+      "description": "Redimensione e compacte fotos de passaporte com menos de 20 KB online gratuitamente. Atende aos requisitos de upload de fotos do SSC, UPSC, polícia estadual bharti e exame ferroviário.",
+      "keywords": "redimensionar fotos para 20kb, compactar fotos abaixo de 20kb, tamanho da foto ssc, foto do formulário de exame, compressor de fotos para passaporte"
+    },
+    "faqs": [
+      {
+        "id": "photo-resize-20kb-faq-1",
+        "question": "Por que os formulários governamentais exigem fotos com menos de 20 KB?",
+        "answer": "Portais de recrutamento como SSC, polícia estadual bharti e exames ferroviários usam bancos de dados legados com limites rígidos de tamanho de arquivo para lidar com milhões de aplicativos com eficiência. Fotos maiores que 20 KB causam erros de validação de upload.",
+        "order": 1
+      },
+      {
+        "id": "photo-resize-20kb-faq-2",
+        "question": "A compactação para 20 KB deixa minha foto desfocada?",
+        "answer": "Não quando feito corretamente. O mecanismo de compactação do ToolWala equilibra a qualidade JPEG e as dimensões dos pixels para preservar os detalhes faciais e, ao mesmo tempo, atender ao limite de tamanho. O segredo é começar com uma foto bem iluminada e devidamente enquadrada.",
+        "order": 2
+      },
+      {
+        "id": "photo-resize-20kb-faq-3",
+        "question": "Quais devem ser as dimensões da minha foto de 20 KB?",
+        "answer": "A maioria dos portais governamentais exige 3,5 cm x 4,5 cm (aproximadamente 200 x 250 pixels a 150 DPI). O SSC exige especificamente essa dimensão com formato JPEG entre 10 KB e 20 KB.",
+        "order": 3
+      },
+      {
+        "id": "photo-resize-20kb-faq-4",
+        "question": "Posso usar uma foto da câmera do telefone?",
+        "answer": "Sim. As câmeras modernas dos smartphones produzem excelentes resultados. Tire sua foto contra uma parede branca lisa com boa iluminação natural, depois corte e comprima usando nosso redimensionador.",
+        "order": 4
+      },
+      {
+        "id": "photo-resize-20kb-faq-5",
+        "question": "Qual cor de fundo é necessária?",
+        "answer": "A maioria dos formulários do governo indiano exige um fundo branco liso. Alguns aceitam cinza claro. ToolWala inclui um recurso de remoção de fundo para substituir fundos ocupados por brancos limpos.",
+        "order": 5
+      },
+      {
+        "id": "photo-resize-20kb-faq-6",
+        "question": "Minha foto tem 500 KB. Como faço para chegar a 20 KB?",
+        "answer": "Faça upload para o Exam Photo Resizer do ToolWala, selecione a predefinição SSC/exame (3,5x4,5cm), defina o tamanho alvo para 20 KB e faça o download. A ferramenta lida automaticamente com todos os ajustes de dimensão e compressão.",
+        "order": 6
+      },
+      {
+        "id": "photo-resize-20kb-faq-7",
+        "question": "Esta ferramenta é segura para minha foto de passaporte?",
+        "answer": "Absolutamente. Todo o processamento acontece localmente no seu navegador. Sua foto biométrica nunca é carregada em nenhum servidor, garantindo total privacidade.",
+        "order": 7
+      },
+      {
+        "id": "photo-resize-20kb-faq-8",
+        "question": "Posso redimensionar fotos PNG para 20 KB?",
+        "answer": "Sim. Nossa ferramenta aceita arquivos PNG, mas gera JPEGs otimizados, que é o formato obrigatório para todos os portais governamentais. JPEG oferece melhor compactação para fotografias.",
+        "order": 8
+      },
+      {
+        "id": "photo-resize-20kb-faq-9",
+        "question": "E se o portal disser que minha foto é muito pequena?",
+        "answer": "Alguns portais impõem um tamanho mínimo (por exemplo, 10 KB). Se a sua foto compactada estiver abaixo do mínimo, aumente ligeiramente o controle deslizante de qualidade no redimensionador até que o arquivo fique entre os limites mínimo e máximo.",
+        "order": 9
+      },
+      {
+        "id": "photo-resize-20kb-faq-10",
+        "question": "Também posso redimensionar minha assinatura com esta ferramenta?",
+        "answer": "Para assinaturas, use nossa ferramenta Signature Resizer dedicada, que possui predefinições específicas para dimensões de assinatura (6,0 cm x 3,0 cm para SSC). Visite o guia Redimensionamento de assinatura para 20 KB para obter instruções detalhadas.",
+        "order": 10
+      }
+    ]
+  },
+  "es:compress-pdf-to-100kb": {
+    "title": "Comprima PDF a 100 KB en línea: dimensionamiento de certificados para portales gubernamentales",
+    "excerpt": "Los portales gubernamentales como EPFO, SSC y las juntas estatales de contratación imponen límites estrictos de tamaño de archivos PDF. Aprenda a comprimir certificados, hojas de calificaciones y documentos de identidad de menos de 100 KB utilizando el compresor seguro basado en navegador de ToolWala.",
+    "content": "## Por qué los portales gubernamentales imponen límites de PDF de 100 KB\n\nLos portales gubernamentales de toda la India manejan millones de solicitudes simultáneamente. Cuando cada solicitante carga un certificado escaneado de 3 MB, la infraestructura del servidor colapsa bajo la carga. Para evitar esto, portales como EPFO, juntas estatales de contratación y plataformas de becas imponen límites estrictos al tamaño de los archivos, normalmente 100 KB para los documentos de respaldo.\n\nEl desafío para los candidatos es sencillo pero frustrante: ¿cómo se comprime un escaneo de certificado de alta resolución de 2 MB a 100 KB sin que el texto sea ilegible? Si la compresión es demasiado agresiva, el documento se vuelve ilegible y los encargados de la verificación manual lo rechazarán.\n\nThis guide walks you through the entire process using [Compresor de PDF de ToolWala](https://toolwala.co/tools/compress-pdf), a free, privacy-first tool that runs entirely in your browser.\n\n---\n\n## Guía paso a paso para comprimir PDF de menos de 100 KB\n\n### Paso 1: prepare un escaneo limpio\n\nComience con el documento fuente de mayor calidad que pueda obtener:\n\n1. **Escanee a 150–200 DPI**: configure su escáner o aplicación de teléfono para capturar entre 150 y 200 puntos por pulgada. Un DPI más alto produce texto más nítido pero archivos más grandes. 150 DPI es el punto ideal para cargas gubernamentales.\n2. **Recortar márgenes**: elimine los bordes en blanco alrededor de su documento. Los espacios en blanco adicionales añaden peso innecesario al archivo sin aportar información útil.\n3. **Aplanar el documento**: si su certificado tiene varias capas superpuestas (del software de edición), aplánelo en un PDF de una sola capa antes de comprimirlo.\n\n### Paso 2: Subir a ToolWala\n\n1. Navegue hasta [Compresor de PDF de ToolWala] (https://toolwala.co/tools/compress-pdf).\n2. Arrastre y suelte su PDF o explore sus archivos locales.\n3. Su documento se carga instantáneamente dentro del caché del navegador: no se carga nada en ningún servidor.\n\n### Paso 3: configurar los ajustes de compresión\n\n1. Seleccione el **preajuste de destino de 100 KB** de las opciones de compresión.\n2. La herramienta ajusta automáticamente la resolución de la imagen, elimina los subconjuntos de fuentes no utilizados y elimina los perfiles de metadatos (encabezados EXIF, miniaturas incrustadas).\n3. Obtenga una vista previa del resultado comprimido para verificar que los nombres, las fechas y los números de registro sean claramente legibles.\n\n### Paso 4: Descargar\n\nHaga clic en **Descargar** para guardar su PDF optimizado. Verifique que el tamaño del archivo sea inferior a 100 KB antes de cargarlo en el portal.\n\n---\n\n## ¿Qué portales requieren archivos PDF de menos de 100 KB?\n\nComprender dónde se aplican estos límites le ayudará a preparar los documentos con antelación:\n\n| Portal/Plataforma | Documentos requeridos | Tamaño máximo | Formato |\n| :--- | :--- | :--- | :--- |\n| **Portal para miembros de EPFO** | Escaneo de libreta, hoja de cheque | 100 KB | PDF/JPEG |\n| **UPSSSC (Uttar Pradesh)** | Certificado de Casta, Domicilio | 100 KB | PDF |\n| **HSSC (Haryana)** | Certificado de categoría, prueba de identificación | 100 KB | PDF |\n| **RPSC (Rajastán)** | Certificado de experiencia | 100 KB | PDF |\n| **Policía estatal Bharti** | Certificado de carácter | 50–100 KB | PDF |\n| **Portal de becas NSP** | Certificado de Ingresos, Hoja de Calificaciones | 100 KB | PDF |\n\nFor portals requiring larger limits like 200KB or 300KB, visit our [Comprimir PDF a 200 KB](/landing/compress-pdf-to-200kb/) or [Comprimir PDF a 300 KB](/landing/compress-pdf-to-300kb/) guides.\n\n---\n\n## Cómo funciona el motor de compresión\n\nEl compresor de PDF de ToolWala utiliza un enfoque de varias capas para reducir el tamaño del archivo y al mismo tiempo mantener la integridad del documento:\n\n### Optimización de la capa de imagen\nLos archivos PDF escaneados son esencialmente imágenes empaquetadas en un contenedor de PDF. Nuestro motor identifica estas capas ráster y aplica compresión JPEG específica. Las áreas de fondo (papel blanco, márgenes) reciben una compresión agresiva, mientras que las regiones de texto reciben un tratamiento más suave para preservar los bordes de los caracteres.\n\n### Subconjunto de fuentes\nMuchos archivos PDF incorporan familias de fuentes enteras (miles de glifos) cuando sólo se utiliza una fracción. Nuestro motor elimina los caracteres no utilizados, lo que reduce los datos de fuentes de más de 200 KB a solo unos pocos kilobytes.\n\n### Eliminación de metadatos\nLos archivos PDF suelen contener metadatos ocultos: información del software del creador, historial de ediciones, miniaturas incrustadas y perfiles de color. La eliminación de estos elementos no esenciales puede ahorrar entre 10 y 30 KB sin afectar el contenido visible.\n\n### Compresión de flujo\nLos flujos de datos internos de PDF se pueden recomprimir utilizando algoritmos más eficientes. Nuestro motor reempaqueta estas transmisiones para lograr el máximo ahorro de espacio.\n\n---\n\n## Errores comunes que provocan rechazos\n\nIncluso después de comprimirlo, su PDF puede ser rechazado si comete estos errores comunes:\n\n- **Escaneado a un valor de DPI demasiado alto**: un escaneo de 600 DPI produce archivos enormes. A menos que se requiera específicamente, 150 DPI son suficientes para cargas gubernamentales.\n- **Dejar bordes y márgenes**: los espacios en blanco adicionales alrededor del documento aumentan el tamaño del archivo. Recorte siempre hasta los bordes del contenido.\n- **No verificar después de la compresión**: abra siempre el archivo comprimido y verifique que el texto sea legible antes de cargarlo en el portal.\n- **Usar el formato incorrecto**: Algunos portales solo aceptan PDF, otros aceptan JPEG. Verifique el formato requerido antes de cargar.\n- **Comprimir un archivo ya comprimido**: varias rondas de compresión degradan la calidad exponencialmente. Comience desde el escaneo original cada vez.\n\n---\n\n## Privacidad y seguridad\n\nLos certificados gubernamentales contienen información personal confidencial: nombres, fechas de nacimiento, números de Aadhaar, detalles de casta e identificaciones de registro. Cargarlos en sitios web de compresión basados ​​en la nube lo expone a:\n\n- **Recolección de datos**: algunos servicios conservan copias de los archivos cargados para su análisis o reventa.\n- **Robo de identidad**: Los datos personales extraídos de sus certificados podrían utilizarse para aplicaciones fraudulentas.\n- **Violaciones del RGPD y de la Ley de TI**: el procesamiento de documentos personales en servidores extranjeros puede violar las normas de protección de datos.\n\nToolWala elimina estos riesgos por completo. Cada operación de compresión se ejecuta localmente en el motor JavaScript de su navegador. Sus archivos nunca tocan un servidor remoto. Incluso puedes desconectar tu Internet después de que se cargue la página y continuar trabajando sin conexión.\n\n---\n\n## Recursos relacionados con ToolWala\n\nAmplíe su kit de herramientas de preparación de documentos con estas utilidades relacionadas:\n\n- [Compresor de PDF de formularios gubernamentales](/tools/gov-form-pdf-compressor/) — Ajustes preestablecidos de compresión especializados para portales gubernamentales de la India\n- [Combinar PDF](/tools/merge-pdf/): combine varios certificados en un solo PDF antes de comprimirlo\n- [Firmar PDF](/tools/sign-pdf/): agregue firmas digitales a sus documentos comprimidos\n- [Comprimir PDF a 200 KB](/landing/compress-pdf-to-200kb/) — Para portales con límites de 200 KB\n- [Comprimir PDF a 300 KB](/landing/compress-pdf-to-300kb/) — Para cargas de e-Aadhaar y UPSC\n- [Aadhaar Utilities Hub](/hubs/aadhaar-utilities/) — Conjunto de herramientas completo para el procesamiento de documentos relacionados con Aadhaar\n\nFor detailed portal-specific guides, read our articles on [Cómo comprimir PDF de e-Aadhaar por debajo de 300 KB](/blog/compress-eaadhaar-pdf-under-300kb) and [Cómo cargar documentos en portales gubernamentales](/blog/upload-documents-government-portals).\n\n---\n\n## Conclusión\n\nComprimir archivos PDF a 100 KB no tiene por qué comprometer la calidad del documento. Con las prácticas de escaneo adecuadas (150 DPI, márgenes recortados) y el motor de compresión inteligente de ToolWala, puede producir documentos listos para el portal que pasan tanto la validación automática como la revisión manual.\n\nThe key advantage of ToolWala over cloud-based alternatives is absolute privacy — your certificates never leave your device. Open the [Compresor de PDF](https://toolwala.co/tools/compress-pdf) and prepare your documents in under a minute.",
+    "seoMetadata": {
+      "title": "Comprima PDF a 100 KB en línea gratis - Portal gubernamental PDF Reducer",
+      "description": "Comprima archivos PDF de menos de 100 KB en línea de forma gratuita. Procesamiento seguro del lado del cliente para cargas de portales de contratación estatales, EPFO, SSC, UPSC y. No hay cargas del servidor.",
+      "keywords": "comprimir pdf a 100 kb, compresor de pdf en línea gratis, reducir el tamaño del pdf, carga de pdf epfo, límite de pdf del portal gubernamental"
+    },
+    "faqs": [
+      {
+        "id": "compress-pdf-to-100kb-faq-1",
+        "question": "¿Cómo puedo comprimir un PDF a exactamente 100 KB?",
+        "answer": "Cargue su PDF en el compresor de ToolWala, seleccione el valor preestablecido de destino de 100 KB y la herramienta ajustará automáticamente la resolución de la imagen y el subconjunto de fuentes para llevar su archivo por debajo del límite mientras mantiene el texto legible.",
+        "order": 1
+      },
+      {
+        "id": "compress-pdf-to-100kb-faq-2",
+        "question": "¿Está seguro mi documento al comprimirlo en línea?",
+        "answer": "Sí. ToolWala procesa todo localmente en la memoria de su navegador usando JavaScript. Su PDF nunca sale de su dispositivo y nunca se carga en ningún servidor.",
+        "order": 2
+      },
+      {
+        "id": "compress-pdf-to-100kb-faq-3",
+        "question": "¿Comprimir a 100 KB hace que el texto sea ilegible?",
+        "answer": "No. Nuestro motor de compresión inteligente reduce los gráficos de fondo y las capas de imágenes al mismo tiempo que conserva los vectores de texto y los contornos de fuentes nítidos, lo que garantiza que el texto permanezca claro y legible.",
+        "order": 3
+      },
+      {
+        "id": "compress-pdf-to-100kb-faq-4",
+        "question": "¿Qué portales gubernamentales requieren archivos PDF de menos de 100 KB?",
+        "answer": "El portal para miembros de EPFO, muchas juntas estatales de reclutamiento (UPSSSC, HSSC, RPSC), los portales bharti de la policía y algunos sistemas de solicitud de becas imponen un límite de carga de 100 KB para los certificados.",
+        "order": 4
+      },
+      {
+        "id": "compress-pdf-to-100kb-faq-5",
+        "question": "¿Puedo comprimir un PDF escaneado a menos de 100 KB?",
+        "answer": "Sí. Los archivos PDF escaneados contienen imágenes rasterizadas, que son el objetivo principal de nuestro motor de compresión. La herramienta reduce la resolución de la imagen a 150 DPI y optimiza la calidad JPEG para reducir el tamaño del archivo de manera efectiva.",
+        "order": 5
+      },
+      {
+        "id": "compress-pdf-to-100kb-faq-6",
+        "question": "¿Cuál es el mejor DPI para cargas de PDF gubernamentales?",
+        "answer": "150 DPI proporciona el mejor equilibrio entre el tamaño del archivo y la claridad del texto para cargas en portales gubernamentales. Nuestra herramienta se optimiza automáticamente a esta resolución.",
+        "order": 6
+      },
+      {
+        "id": "compress-pdf-to-100kb-faq-7",
+        "question": "¿Puedo comprimir archivos PDF protegidos con contraseña?",
+        "answer": "Sí. ToolWala le pedirá que ingrese la contraseña localmente. El PDF se descifra en la memoria de su navegador, se comprime y puede descargar el archivo optimizado.",
+        "order": 7
+      },
+      {
+        "id": "compress-pdf-to-100kb-faq-8",
+        "question": "¿Esta herramienta funciona en teléfonos móviles?",
+        "answer": "Sí. El compresor de PDF de ToolWala responde completamente y funciona en navegadores Android e iOS. No se requiere instalación de aplicaciones.",
+        "order": 8
+      },
+      {
+        "id": "compress-pdf-to-100kb-faq-9",
+        "question": "¿Puedo fusionar varios archivos PDF y luego comprimirlos?",
+        "answer": "Sí. Utilice la herramienta Combinar PDF de ToolWala para combinar sus documentos primero y luego comprima el archivo combinado a menos de 100 KB usando el compresor.",
+        "order": 9
+      },
+      {
+        "id": "compress-pdf-to-100kb-faq-10",
+        "question": "¿En qué se diferencia ToolWala de otros compresores de PDF en línea?",
+        "answer": "A diferencia de los compresores basados ​​en la nube que cargan sus archivos en servidores remotos, ToolWala procesa todo localmente en su navegador. Sus documentos confidenciales nunca salen de su computadora, lo que garantiza una privacidad total.",
+        "order": 10
+      }
+    ]
   }
 }

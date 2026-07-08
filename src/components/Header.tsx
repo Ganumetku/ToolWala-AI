@@ -171,18 +171,18 @@ export default function Header() {
     <header 
       className={`sticky top-0 z-50 w-full transition-all duration-500 ${
         isScrolled 
-          ? 'glass border-b border-white/5 py-3' 
-          : 'bg-transparent py-6'
+          ? 'glass border-b border-white/5 py-3.5 sm:py-3' 
+          : 'bg-[#030712]/85 backdrop-blur-md border-b border-white/5 py-3.5 sm:bg-transparent sm:backdrop-blur-none sm:border-b-0 sm:py-6'
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between px-4 lg:px-4 xl:px-6 gap-2 xl:gap-4 2xl:gap-8">
-        <div className="flex items-center gap-2">
-          <Link href={localizeHref('/')} translate="no" data-no-translate className="flex items-center gap-3 group whitespace-nowrap shrink-0 no-translate notranslate">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white font-black text-2xl transition-all group-hover:scale-110 group-hover:rotate-3 shadow-[0_0_20px_rgba(37,99,235,0.4)] relative overflow-hidden no-translate notranslate" translate="no" data-no-translate>
+      <div className="container mx-auto flex items-center justify-between px-3 sm:px-4 lg:px-4 xl:px-6 gap-2 xl:gap-4 2xl:gap-8">
+        <div className="flex items-center gap-1 sm:gap-2">
+          <Link href={localizeHref('/')} translate="no" data-no-translate className="flex items-center gap-2 sm:gap-3 group whitespace-nowrap shrink-0 no-translate notranslate">
+            <div className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-blue-600 text-white font-black text-xl sm:text-2xl transition-all group-hover:scale-110 group-hover:rotate-3 shadow-[0_0_20px_rgba(37,99,235,0.4)] relative overflow-hidden no-translate notranslate" translate="no" data-no-translate>
               <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
               T
             </div>
-            <span translate="no" data-no-translate className="text-2xl font-black tracking-tighter text-white whitespace-nowrap no-translate notranslate">
+            <span translate="no" data-no-translate className="text-lg sm:text-2xl font-black tracking-tighter text-white whitespace-nowrap no-translate notranslate">
               ToolWala <span translate="no" data-no-translate className="text-blue-500 no-translate notranslate">AI</span>
             </span>
           </Link>
@@ -303,25 +303,25 @@ export default function Header() {
         </div>
  
         {/* Mobile menu button */}
-        <div className="lg:hidden flex items-center gap-3">
+        <div className="lg:hidden flex items-center gap-2">
           {/* Quick Lang Indicator for mobile */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-base leading-none"
+            className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 border border-white/10 text-sm leading-none shrink-0"
           >
             {currentLanguage.flag}
           </button>
           
           <button
             type="button"
-            className="text-white hover:text-blue-400 focus:outline-none p-2.5 bg-white/5 rounded-xl border border-white/10 backdrop-blur-md transition-all"
+            className="text-white hover:text-blue-400 focus:outline-none p-2 bg-white/5 rounded-lg border border-white/10 backdrop-blur-md transition-all h-9 w-9 flex items-center justify-center shrink-0"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             <span className="sr-only">Open main menu</span>
             {isMobileMenuOpen ? (
-              <X className="h-5 w-5" aria-hidden="true" suppressHydrationWarning />
+              <X className="h-4 w-4" aria-hidden="true" suppressHydrationWarning />
             ) : (
-              <Menu className="h-5 w-5" aria-hidden="true" suppressHydrationWarning />
+              <Menu className="h-4 w-4" aria-hidden="true" suppressHydrationWarning />
             )}
           </button>
         </div>
@@ -329,7 +329,7 @@ export default function Header() {
  
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-[72px] bottom-0 z-50 bg-[#030712]/98 backdrop-blur-2xl animate-fade-in border-t border-white/5 overflow-y-auto pb-10">
+        <div className="lg:hidden fixed inset-0 top-[64px] bottom-0 z-50 bg-[#030712]/98 backdrop-blur-2xl animate-fade-in border-t border-white/5 overflow-y-auto pb-10">
           <div className="flex flex-col p-6 gap-4">
             {navigation.map((item) => {
               if (item.submenu) {

@@ -422,5 +422,77 @@
         "order": 10
       }
     ]
+  },
+  "es:photo-resize-to-20kb": {
+    "title": "Cambiar el tamaño de la foto a 20 KB en línea: cómo formatear y comprimir imágenes para aplicaciones oficiales",
+    "excerpt": "Los portales de reclutamiento gubernamentales como SSC, bharti de la policía estatal y exámenes ferroviarios requieren fotografías de pasaporte de menos de 20 KB. Aprenda a cambiar el tamaño y comprimir sus fotos según especificaciones exactas utilizando el cambio de tamaño de fotos gratuito basado en navegador de ToolWala.",
+    "content": "## Por qué los portales gubernamentales imponen un límite de fotografías de 20 KB\n\nCuando la Comisión de Selección de Personal (SSC) abre el registro CGL, CHSL o MTS, millones de candidatos se apresuran a presentar solicitudes en plazos ajustados. Cada solicitud incluye una fotografía de pasaporte y un escaneo de firma. Si cada fotografía fuera una imagen de teléfono inteligente de resolución completa (3 a 10 MB), los servidores del portal colapsarían bajo la carga.\n\nPara evitar esto, los portales de contratación imponen límites estrictos de tamaño de archivo, normalmente entre 10 KB y 20 KB para fotografías de pasaporte. Esta restricción obliga a los candidatos a comprimir y cambiar el tamaño de sus fotos antes de subirlas.\n\nThe problem is that aggressive compression can destroy facial details, causing manual verification officers to reject applications. This guide shows you how to format photos correctly using [Cambiador de tamaño de fotos de examen de ToolWala](https://toolwala.co/tools/exam-photo-resizer), achieving the right balance between file size and image clarity.\n\n---\n\n## Guía paso a paso para cambiar el tamaño de una foto de menos de 20 KB\n\n### Paso 1: capture una buena foto fuente\n\nLa calidad de su imagen final de 20 KB depende completamente de la calidad de su foto inicial:\n\n1. **Busque iluminación natural**: Párese frente a una ventana con luz natural suave y difusa. Evite las luces fuertes que crean sombras debajo de los ojos, la nariz y la barbilla.\n2. **Utilice un fondo liso**: Párese frente a una pared limpia, blanca o de color claro. Mantenga una distancia de 1 a 2 pies de la pared para evitar que la sombra de su cuerpo aparezca en la toma.\n3. **Encuadre correctamente**: Pídale a alguien que tome su foto desde el nivel del pecho. Tu cabeza debe ocupar aproximadamente entre el 70% y el 80% del marco vertical.\n4. **Expresión Neutral**: Mantén tu rostro relajado. Ambos ojos deben estar abiertos y claramente visibles. No sonría, incline la cabeza ni use gafas de sol.\n\n### Paso 2: cargar y cambiar el tamaño con ToolWala\n\n1. Abra [Resizer de fotos de examen de ToolWala] (https://toolwala.co/tools/exam-photo-resizer).\n2. Cargue su fotografía de origen (cualquier formato: JPEG, PNG o WebP).\n3. Seleccione el examen preestablecido apropiado en el menú desplegable:\n   - **SSC CGL/CHSL/MTS**: 3,5 cm x 4,5 cm, 10–20 KB\n   - **Ferrocarril (RRB)**: 3,5 cm x 4,5 cm, 20–50 KB\n   - **Policía estatal Bharti**: 3,5 cm x 4,5 cm, 10–20 KB\n4. Alinea las guías de recorte sobre tu cara. Los límites de detección de bordes de la herramienta le ayudan a posicionar su cabeza en el índice de cobertura correcto.\n5. Establezca el control deslizante **tamaño del archivo de destino** en **20 KB**.\n6. Haga clic en **Descargar** para guardar su JPEG optimizado.\n\n### Paso 3: verificar antes de cargar\n\nAntes de enviar al portal:\n- Abra el archivo descargado y confirme que su rostro sea claramente visible.\n- Verifique el tamaño del archivo en su administrador de archivos (debe mostrar entre 15 y 20 KB)\n- Verifique que el formato sea JPEG (no PNG)\n\n---\n\n## Requisitos de dimensión por portal\n\nDiferentes exámenes y portales imponen especificaciones ligeramente diferentes:\n\n| Examen / Portal | Dimensiones de la foto | Rango de tamaño de archivo | Formato | Antecedentes |\n| :--- | :--- | :--- | :--- | :--- |\n| **SSC CGL/CHSL/MTS** | 3,5 cm x 4,5 cm | 10–20 KB | JPEG | Blanco |\n| **Agente de SSC GD** | 3,5 cm x 4,5 cm | 10–20 KB | JPEG | Blanco |\n| **Ferrocarril RRB ALP** | 3,5 cm x 4,5 cm | 20–50 KB | JPEG | Blanco / Claro |\n| **Policía estatal Bharti** | 3,5 cm x 4,5 cm | 10–20 KB | JPEG | Blanco |\n| **Exámenes bancarios IBPS** | 4,5 cm x 3,5 cm | 20–50 KB | JPEG | Blanco |\n| **UPSC CSE** | 3,5 cm x 4,5 cm | 20–300 KB | JPEG | Blanco |\n\nFor SSC-specific formatting, visit our [Cambio de tamaño de fotos SSC](/tools/ssc-photo-resize/) or the [Centro de utilidades de examen SSC](/hubs/ssc-exam-utilities/).\n\n---\n\n## Cómo funciona la compresión sin perder calidad\n\nReducir una foto de 500 KB a 20 KB requiere eliminar el 96% de los datos del archivo. ¿Cómo hace ToolWala esto sin destruirte la cara?\n\n### Reducción de dimensiones\nLa foto de un teléfono inteligente puede tener 4000x3000 píxeles (12 megapíxeles). Los portales gubernamentales sólo necesitan unos 200x250 píxeles. Cambiar el tamaño a las dimensiones correctas representa la mayor parte de la reducción del tamaño del archivo: desde megabytes hasta decenas de kilobytes.\n\n### Optimización de la calidad JPEG\nLa compresión JPEG funciona agrupando píxeles en bloques de 8x8 y descartando detalles visuales de alta frecuencia a los que el ojo humano es menos sensible. Nuestro motor aplica esta compresión de forma selectiva: las regiones del fondo reciben una mayor compresión, mientras que la región de la cara (detectada mediante el análisis de bordes) recibe un tratamiento más suave.\n\n### Eliminación de metadatos\nLas fotos de la cámara contienen metadatos EXIF: coordenadas GPS, modelo de cámara, configuración ISO, marcas de tiempo. Estos metadatos pueden tener entre 10 y 50 KB por sí solos. Quitarlo reduce significativamente el tamaño del archivo sin ningún cambio visual.\n\n### Optimización del perfil de color\nLa conversión de espacios de color de amplia gama (como Adobe RGB) a sRGB reduce el tamaño de los datos de color y al mismo tiempo mantiene la apariencia visual para la visualización web.\n\n---\n\n## Razones y soluciones comunes para el rechazo de fotografías\n\nIncluso con el tamaño de archivo correcto, las fotos se rechazan por estos motivos:\n\n- **Sombras en la cara**: Las sombras intensas de las luces del techo distorsionan los marcadores biométricos. En su lugar, utilice luz natural frontal.\n- **Las gafas deslumbran**: Los reflejos en las lentes de las gafas ocultan tus ojos. Quítese las gafas para la foto.\n- **Inclinación de la cabeza**: Incluso una ligera inclinación puede provocar un rechazo automático. Mantenga la cabeza perfectamente recta y nivelada.\n- **Artefactos de compresión excesivos**: si la foto se ve pixelada o en bloques, aumente ligeramente el control deslizante de calidad y verifique que el archivo aún tenga menos de 20 KB.\n- **Fondo incorrecto**: Se rechazan los fondos de colores o estampados. Utilice la función de eliminación de fondo de ToolWala para obtener un fondo blanco y limpio.\n\n---\n\n## Privacidad y seguridad\n\nLas fotografías de pasaportes son datos biométricos sensibles. Los editores de fotografías basados ​​en la nube cargan su rostro en servidores remotos para su procesamiento, lo que genera riesgos para la privacidad. ToolWala funciona de forma completamente diferente:\n\n- **Cargas cero al servidor**: todas las operaciones de recorte, cambio de tamaño y compresión se ejecutan en el motor JavaScript de su navegador.\n- **Funciona sin conexión**: una vez que se carga la página, puede desconectar Internet y continuar procesando.\n- **Sin retención de datos**: Tus fotos existen solo en la memoria del navegador y se borran cuando cierras la pestaña.\n\n---\n\n## Recursos relacionados\n\nComplete su formulario de solicitud de examen con estas herramientas complementarias:\n\n- [Cambio de tamaño de firma a 20 KB](/landing/signature-resize-to-20kb/) — Formatee su firma escaneada para SSC y portales de exámenes\n- [SSC Photo Resizer](/tools/ssc-photo-resize/) — Ajustes preestablecidos de formato de fotos SSC dedicados\n- [Image Compressor](/tools/image-compressor/) — Compresión de imágenes de uso general para objetivos de cualquier tamaño\n- [Cambiar tamaño de foto a 50 KB](/landing/photo-resize-to-50kb/) — Para portales con límites de tamaño más altos\n- [SSC Exam Utilities Hub](/hubs/ssc-exam-utilities/) — Kit de herramientas completo para la preparación de solicitudes de SSC\n\nFor portal-specific upload guides, read [Cómo cargar una foto y una firma en la aplicación SSC](/blog/upload-photo-signature-ssc-application) and [Pautas para fotografías y firmas de RRB ALP](/blog/rrb-alp-photo-signature-size-guidelines).\n\n---\n\n## Conclusión\n\nCambiar el tamaño de una foto a 20 KB es un equilibrio entre el tamaño del archivo y la claridad visual. Comience con una foto de origen bien iluminada, use la dimensión preestablecida correcta y deje que la compresión inteligente de ToolWala se encargue del resto. El procesamiento del lado del cliente de la herramienta garantiza que sus datos biométricos se mantengan privados.\n\nOpen the [Cambio de tamaño de fotos de examen](https://toolwala.co/tools/exam-photo-resizer) now and format your application photo in under a minute.",
+    "seoMetadata": {
+      "title": "Cambiar el tamaño de la foto a 20 KB en línea gratis - Compresor de fotos del formulario de examen",
+      "description": "Cambie el tamaño y comprima fotografías de pasaporte de menos de 20 KB en línea de forma gratuita. Cumple con los requisitos de carga de fotografías de exámenes ferroviarios y de SSC, UPSC, bharti de la policía estatal y de la policía estatal.",
+      "keywords": "cambiar el tamaño de la foto a 20 kb, comprimir la foto a menos de 20 kb, tamaño de la foto ssc, foto del formulario de examen, compresor de fotos de pasaporte"
+    },
+    "faqs": [
+      {
+        "id": "photo-resize-20kb-faq-1",
+        "question": "¿Por qué los formularios gubernamentales requieren fotografías de menos de 20 KB?",
+        "answer": "Los portales de reclutamiento como SSC, bharti de la policía estatal y exámenes ferroviarios utilizan bases de datos heredadas con límites estrictos de tamaño de archivos para manejar millones de solicitudes de manera eficiente. Las fotos de más de 20 KB provocan errores de validación de carga.",
+        "order": 1
+      },
+      {
+        "id": "photo-resize-20kb-faq-2",
+        "question": "¿Comprimir a 20 KB hace que mi foto se vea borrosa?",
+        "answer": "No cuando se hace correctamente. El motor de compresión de ToolWala equilibra la calidad JPEG y las dimensiones de píxeles para preservar los detalles faciales y al mismo tiempo cumplir con el límite de tamaño. La clave es comenzar con una foto bien iluminada y enmarcada adecuadamente.",
+        "order": 2
+      },
+      {
+        "id": "photo-resize-20kb-faq-3",
+        "question": "¿Qué dimensiones debe tener mi foto de 20 KB?",
+        "answer": "La mayoría de los portales gubernamentales requieren 3,5 cm x 4,5 cm (aproximadamente 200 x 250 píxeles a 150 DPI). SSC requiere específicamente esta dimensión con formato JPEG entre 10 KB y 20 KB.",
+        "order": 3
+      },
+      {
+        "id": "photo-resize-20kb-faq-4",
+        "question": "¿Puedo usar la cámara de fotos de un teléfono?",
+        "answer": "Sí. Las cámaras de los teléfonos inteligentes modernos producen excelentes resultados. Tome su foto contra una pared blanca con buena iluminación natural, luego recórtela y comprímala usando nuestro redimensionador.",
+        "order": 4
+      },
+      {
+        "id": "photo-resize-20kb-faq-5",
+        "question": "¿Qué color de fondo se requiere?",
+        "answer": "La mayoría de los formularios del gobierno indio requieren un fondo blanco. Algunos aceptan gris claro. ToolWala incluye una función de eliminación de fondo para reemplazar fondos ocupados con un blanco limpio.",
+        "order": 5
+      },
+      {
+        "id": "photo-resize-20kb-faq-6",
+        "question": "Mi foto es de 500 KB. ¿Cómo puedo llegar a 20 KB?",
+        "answer": "Cargue en Exam Photo Resizer de ToolWala, seleccione el valor preestablecido de SSC/examen (3,5 x 4,5 cm), establezca el tamaño objetivo en 20 KB y descárguelo. La herramienta maneja automáticamente todos los ajustes de dimensión y compresión.",
+        "order": 6
+      },
+      {
+        "id": "photo-resize-20kb-faq-7",
+        "question": "¿Esta herramienta es segura para mi foto de pasaporte?",
+        "answer": "Absolutamente. Todo el procesamiento ocurre localmente en su navegador. Su foto biométrica nunca se carga en ningún servidor, lo que garantiza una total privacidad.",
+        "order": 7
+      },
+      {
+        "id": "photo-resize-20kb-faq-8",
+        "question": "¿Puedo cambiar el tamaño de las fotos PNG a 20 KB?",
+        "answer": "Sí. Nuestra herramienta acepta archivos PNG pero genera archivos JPEG optimizados, que es el formato obligatorio para todos los portales gubernamentales. JPEG proporciona una mejor compresión para las fotografías.",
+        "order": 8
+      },
+      {
+        "id": "photo-resize-20kb-faq-9",
+        "question": "¿Qué pasa si el portal dice que mi foto es demasiado pequeña?",
+        "answer": "Algunos portales imponen un tamaño mínimo (por ejemplo, 10 KB). Si su foto comprimida está por debajo del mínimo, aumente ligeramente el control deslizante de calidad en el cambio de tamaño hasta que el archivo se encuentre entre los límites mínimo y máximo.",
+        "order": 9
+      },
+      {
+        "id": "photo-resize-20kb-faq-10",
+        "question": "¿Puedo también cambiar el tamaño de mi firma con esta herramienta?",
+        "answer": "Para firmas, utilice nuestra herramienta Signature Resizer dedicada que tiene ajustes preestablecidos específicos para las dimensiones de la firma (6,0 cm x 3,0 cm para SSC). Visite la guía Signature Resize to 20KB para obtener instrucciones detalladas.",
+        "order": 10
+      }
+    ]
   }
 }

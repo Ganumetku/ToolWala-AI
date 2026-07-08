@@ -348,7 +348,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
               {popularToolsList.map((tool) => (
                 <ToolCard 
                   key={tool.id} 
@@ -379,7 +379,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
               {pdfToolsList.map((tool) => (
                 <ToolCard key={tool.id} {...tool} />
               ))}
@@ -416,7 +416,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
               {imageToolsList.map((tool) => (
                 <ToolCard key={tool.id} {...tool} />
               ))}
@@ -453,7 +453,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
               {aiToolsList.map((tool) => (
                 <ToolCard key={tool.id} {...tool} />
               ))}

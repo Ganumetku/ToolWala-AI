@@ -38,6 +38,8 @@ export interface PDFWorkspaceProps {
   onFocusCanvas: (pageId: string, fbCanvas: unknown) => void;
   onObjectSelected: (pageId: string, activeObj: unknown) => void;
   onObjectCleared: () => void;
+  onFabricModified?: (pageId: string, fabricObj: Record<string, unknown>) => void;
+  onFabricAdded?: (pageId: string, fabricObj: Record<string, unknown>) => void;
   strokeColor: string;
   fillColor: string;
   strokeWidth: number;
@@ -96,6 +98,8 @@ export function PDFWorkspace({
   onFocusCanvas,
   onObjectSelected,
   onObjectCleared,
+  onFabricModified,
+  onFabricAdded,
   strokeColor,
   fillColor,
   strokeWidth,
@@ -282,6 +286,8 @@ export function PDFWorkspace({
                   originalTexts={originalTexts}
                   registerCanvasInstance={registerCanvasInstance}
                   unregisterCanvasInstance={unregisterCanvasInstance}
+                  onFabricModified={onFabricModified}
+                  onFabricAdded={onFabricAdded}
                 />
 
                 <div className="absolute top-2 -left-16 bg-slate-950 border border-slate-900 text-[9px] font-black tracking-widest uppercase text-slate-500 px-3 py-1.5 rounded-full select-none shadow">

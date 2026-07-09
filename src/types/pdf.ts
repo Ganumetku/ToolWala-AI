@@ -129,4 +129,6 @@ export interface PageRendererProps {
   originalTexts: Record<number, TextBoxInfo[]>;
   registerCanvasInstance?: (pageId: string, canvas: unknown) => void;
   unregisterCanvasInstance?: (pageId: string) => void;
+  onFabricModified?: (pageId: string, fabricObj: Record<string, unknown>) => void;
+  onFabricAdded?: (pageId: string, fabricObj: Record<string, unknown>) => void;
 }

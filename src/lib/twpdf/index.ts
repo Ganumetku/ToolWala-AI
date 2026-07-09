@@ -8,3 +8,5 @@ export * from './export';
 export * from './history';
 export * from './selection';
 export * from './dom';
+export * from './editing';
+export * from './editing';

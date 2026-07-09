@@ -1,7 +1,11 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { findSearchMatches, applyPropertyChange, adjustObjectLayer } from '@/lib/twpdf/selection';
+import { findSearchMatches } from '@/lib/twpdf/selection';
+import { hexToRgbaStr } from '@/lib/twpdf/utils';
+import { fabricPropertyToTwpdfPatch } from '@/lib/twpdf/editing/renderer/domToFabric';
+import type { TWPDFEditingEngine } from '@/lib/twpdf/editing/editingEngine';
+import type { TWPDFObject } from '@/types/twpdf';
 import type { PageItem, SearchMatch, SelectedObjectInfo, TextBoxInfo } from '@/types/pdf';
 
 interface UseSelectionOptions {
@@ -16,6 +20,8 @@ interface UseSelectionOptions {
   setSuccess: (msg: string | null) => void;
   setOriginalTexts: React.Dispatch<React.SetStateAction<Record<number, TextBoxInfo[]>>>;
   setCanvasStates: React.Dispatch<React.SetStateAction<Record<string, unknown>>>;
+  engine: TWPDFEditingEngine | null;
+  syncPageFromFabric?: (pageId: string, state: unknown) => void;
 }
 
 export function useSelection({
@@ -30,6 +36,8 @@ export function useSelection({
   setSuccess,
   setOriginalTexts,
   setCanvasStates,
+  engine,
+  syncPageFromFabric,
 }: UseSelectionOptions) {
   const [selectedObjectInfo, setSelectedObjectInfo] = useState<SelectedObjectInfo | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -104,23 +112,10 @@ export function useSelection({
     const regex = new RegExp(debouncedSearchQuery, 'i');
     const newText = match.text.replace(regex, replaceQuery);
 
-    const canvas = canvasInstances.current[pageId] as any;
-
-    if (canvas) {
-      const obj = canvas.getObjects().find((o: any) => o.id === boxId);
-      if (obj) {
-        obj.set('text', newText);
-        if (obj.isOriginalText) {
-          const detectedColor = obj.originalTextData?.detectedColor || '#0b2c8c';
-          obj.set({
-            fill: obj.fill === 'transparent' ? detectedColor : obj.fill,
-            backgroundColor: 'transparent',
-            stroke: 'transparent',
-          });
-        }
-        canvas.requestRenderAll();
-        canvas.fire('object:modified');
-      }
+    if (engine) {
+      const detectedColor =
+        (match as SearchMatch & { detectedColor?: string }).detectedColor || '#0b2c8c';
+      engine.updateObject(pageId, boxId, { text: newText, color: detectedColor });
     } else {
       const state = canvasStates[pageId] as { objects?: Array<Record<string, unknown>> } | undefined;
       if (state && state.objects) {
@@ -137,7 +132,9 @@ export function useSelection({
           }
           return obj;
         });
-        setCanvasStates((prev) => ({ ...prev, [pageId]: { ...state, objects: updatedObjects } }));
+        const updatedState = { ...state, objects: updatedObjects };
+        setCanvasStates((prev) => ({ ...prev, [pageId]: updatedState }));
+        syncPageFromFabric?.(pageId, updatedState);
       } else {
         setOriginalTexts((prev) => {
           const pageBoxes = prev[originalPageNum] || [];
@@ -159,9 +156,10 @@ export function useSelection({
     searchResults,
     debouncedSearchQuery,
     replaceQuery,
-    canvasInstances,
+    engine,
     canvasStates,
     setCanvasStates,
+    syncPageFromFabric,
     setOriginalTexts,
     setSuccess,
   ]);
@@ -188,64 +186,38 @@ export function useSelection({
           const pageMatches = matchesByPage[pageItem.id];
           if (!pageMatches) return;
 
-          const canvas = canvasInstances.current[pageItem.id] as any;
-
-          if (canvas) {
-            let canvasModified = false;
-            canvas.getObjects().forEach((obj: any) => {
-              if ((obj.type === 'textbox' || obj.type === 'i-text') && obj.text) {
-                if (obj.text.toLowerCase().includes(query)) {
-                  const updatedText = obj.text.replace(regex, replaceQuery);
-                  obj.set('text', updatedText);
-                  if (obj.isOriginalText) {
-                    const detectedColor = obj.originalTextData?.detectedColor || '#0b2c8c';
-                    obj.set({
-                      fill: obj.fill === 'transparent' ? detectedColor : obj.fill,
-                      backgroundColor: 'transparent',
-                      stroke: 'transparent',
-                    });
-                  }
-                  canvasModified = true;
-                }
+          const state = updatedStates[pageItem.id] as { objects?: Array<Record<string, unknown>> } | undefined;
+          if (state && state.objects) {
+            const updatedObjects = state.objects.map((obj) => {
+              if (
+                (obj.type === 'textbox' || obj.type === 'i-text') &&
+                obj.text &&
+                (obj.text as string).toLowerCase().includes(query)
+              ) {
+                const isOriginal = obj.isOriginalText;
+                const detectedColor = (obj.originalTextData as { detectedColor?: string })?.detectedColor || '#0b2c8c';
+                return {
+                  ...obj,
+                  text: (obj.text as string).replace(regex, replaceQuery),
+                  fill: isOriginal ? (obj.fill === 'transparent' ? detectedColor : obj.fill) : obj.fill,
+                  backgroundColor: 'transparent',
+                };
               }
+              return obj;
             });
-            if (canvasModified) {
-              canvas.requestRenderAll();
-              const state = canvas.toJSON(['id', 'isOriginalText', 'originalTextData', 'isDeletedOriginal']);
-              updatedStates[pageItem.id] = state;
-            }
+            const updatedState = { ...state, objects: updatedObjects };
+            updatedStates[pageItem.id] = updatedState;
+            syncPageFromFabric?.(pageItem.id, updatedState);
           } else {
-            const state = updatedStates[pageItem.id] as { objects?: Array<Record<string, unknown>> } | undefined;
-            if (state && state.objects) {
-              const updatedObjects = state.objects.map((obj) => {
-                if (
-                  (obj.type === 'textbox' || obj.type === 'i-text') &&
-                  obj.text &&
-                  (obj.text as string).toLowerCase().includes(query)
-                ) {
-                  const isOriginal = obj.isOriginalText;
-                  const detectedColor = (obj.originalTextData as { detectedColor?: string })?.detectedColor || '#0b2c8c';
-                  return {
-                    ...obj,
-                    text: (obj.text as string).replace(regex, replaceQuery),
-                    fill: isOriginal ? (obj.fill === 'transparent' ? detectedColor : obj.fill) : obj.fill,
-                    backgroundColor: 'transparent',
-                  };
-                }
-                return obj;
-              });
-              updatedStates[pageItem.id] = { ...state, objects: updatedObjects };
-            } else {
-              const pageBoxes = updatedOriginal[pageItem.originalPageNum] || [];
-              const updatedBoxes = pageBoxes.map((box) => {
-                const textToCheck = box.replacedText !== undefined ? box.replacedText : box.text;
-                if (textToCheck && textToCheck.toLowerCase().includes(query)) {
-                  return { ...box, replacedText: textToCheck.replace(regex, replaceQuery) };
-                }
-                return box;
-              });
-              updatedOriginal[pageItem.originalPageNum] = updatedBoxes;
-            }
+            const pageBoxes = updatedOriginal[pageItem.originalPageNum] || [];
+            const updatedBoxes = pageBoxes.map((box) => {
+              const textToCheck = box.replacedText !== undefined ? box.replacedText : box.text;
+              if (textToCheck && textToCheck.toLowerCase().includes(query)) {
+                return { ...box, replacedText: textToCheck.replace(regex, replaceQuery) };
+              }
+              return box;
+            });
+            updatedOriginal[pageItem.originalPageNum] = updatedBoxes;
           }
         });
 
@@ -262,9 +234,9 @@ export function useSelection({
     debouncedSearchQuery,
     replaceQuery,
     pageList,
-    canvasInstances,
     setOriginalTexts,
     setCanvasStates,
+    syncPageFromFabric,
     setSuccess,
   ]);
 
@@ -302,46 +274,79 @@ export function useSelection({
 
   const changeSelectedProperty = useCallback(
     (key: string, value: unknown) => {
-      const canvas = getActiveCanvas();
-      if (!canvas) return;
-      const activeObj = canvas.getActiveObject() as Parameters<typeof applyPropertyChange>[0] | null;
-      if (!activeObj) return;
+      if (!engine || !selectedObjectInfo) return;
+      const { pageId, id: objectId } = selectedObjectInfo;
 
-      applyPropertyChange(activeObj, canvas, key, value);
+      let patchValue = value;
+      if (key === 'fill' && selectedObjectInfo.isHighlight) {
+        const cleanHex = (value as string).startsWith('#') ? (value as string) : '#fbbf24';
+        let op = 0.4;
+        if (selectedObjectInfo.fill && selectedObjectInfo.fill.startsWith('rgba')) {
+          const match = selectedObjectInfo.fill.match(/rgba?\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/);
+          if (match) op = parseFloat(match[4]);
+        }
+        patchValue = hexToRgbaStr(cleanHex, op);
+        engine.updateObject(pageId, objectId, { color: patchValue as string });
+      } else if (key === 'opacity' && selectedObjectInfo.isHighlight) {
+        const fill = selectedObjectInfo.fill || '#fbbf24';
+        if (fill.startsWith('rgba')) {
+          const match = fill.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+          if (match) {
+            engine.updateObject(pageId, objectId, {
+              color: `rgba(${match[1]}, ${match[2]}, ${match[3]}, ${value})`,
+              opacity: 1,
+            });
+          }
+        } else {
+          engine.updateObject(pageId, objectId, {
+            color: hexToRgbaStr(fill, value as number),
+            opacity: 1,
+          });
+        }
+      } else {
+        const existingType = selectedObjectInfo.isHighlight
+          ? 'highlight'
+          : selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text'
+            ? 'text'
+            : 'shape';
+        const stubObj = { type: existingType } as TWPDFObject;
+        const patch = fabricPropertyToTwpdfPatch(key, patchValue, stubObj);
+        engine.updateObject(pageId, objectId, patch);
+      }
+
       setSelectedObjectInfo((prev) => (prev ? { ...prev, [key]: value } : null));
     },
-    [getActiveCanvas]
+    [engine, selectedObjectInfo]
   );
 
   const adjustLayer = useCallback(
     (action: 'front' | 'back' | 'forward' | 'backward') => {
-      const canvas = getActiveCanvas();
-      if (!canvas) return;
-      const activeObj = canvas.getActiveObject() as Parameters<typeof adjustObjectLayer>[0] | null;
-      if (!activeObj) return;
-      adjustObjectLayer(activeObj, canvas, action);
+      if (!engine || !selectedObjectInfo) return;
+      const { pageId, id: objectId } = selectedObjectInfo;
+
+      switch (action) {
+        case 'front':
+          engine.bringToFront(pageId, objectId);
+          break;
+        case 'back':
+          engine.sendToBack(pageId, objectId);
+          break;
+        case 'forward':
+          engine.bringForward(pageId, objectId);
+          break;
+        case 'backward':
+          engine.sendBackward(pageId, objectId);
+          break;
+      }
     },
-    [getActiveCanvas]
+    [engine, selectedObjectInfo]
   );
 
   const handleDeleteSelected = useCallback(() => {
-    const canvas = getActiveCanvas();
-    if (!canvas) return;
-    const activeObj = canvas.getActiveObject() as any;
-    if (!activeObj) return;
-
-    if (activeObj.isOriginalText) {
-      activeObj.set({ isDeletedOriginal: true, opacity: 0, selectable: false });
-      canvas.discardActiveObject();
-      canvas.requestRenderAll();
-      canvas.fire('object:modified');
-    } else {
-      canvas.remove(activeObj);
-      canvas.discardActiveObject();
-      canvas.requestRenderAll();
-    }
+    if (!engine || !selectedObjectInfo) return;
+    engine.deleteObject(selectedObjectInfo.pageId, selectedObjectInfo.id);
     setSelectedObjectInfo(null);
-  }, [getActiveCanvas]);
+  }, [engine, selectedObjectInfo]);
 
   return {
     selectedObjectInfo,

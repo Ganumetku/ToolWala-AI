@@ -1,0 +1,7 @@
+- [x] Register new tool in `src/data/tools.ts`
+- [x] Add translations in `src/data/tool_translations.json`
+- [x] Add SEO article in `src/data/toolArticles.ts`
+- [x] Create layout metadata file `src/app/tools/resume-bullet-generator/layout.tsx`
+- [x] Create core page file `src/app/tools/resume-bullet-generator/page.tsx`
+- [x] Build project and run smoke tests
+- [x] Complete walkthrough

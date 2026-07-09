@@ -134,9 +134,15 @@ export function useTWPdfDocument() {
 
   const getDocument = useCallback(() => documentRef.current, []);
 
+  const setTWPdfDocument = useCallback((doc: TWPDFDocument) => {
+    documentRef.current = doc;
+    setDocument(doc);
+  }, []);
+
   return {
     document,
     getDocument,
+    setTWPdfDocument,
     objectManager,
     selectionManager,
     pageManager,

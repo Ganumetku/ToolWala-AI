@@ -13,6 +13,7 @@ import {
   applyObjectSnapping,
 } from '@/lib/twpdf/editor';
 import { CANVAS_JSON_PROPS } from '@/lib/twpdf/core';
+import { getIsRenderingFromEngine } from '@/lib/twpdf/editing/renderer/fabricRenderer';
 import { hexToRgbaStr } from '@/lib/twpdf/utils';
 import type { PageRendererProps, TextBoxInfo } from '@/types/pdf';
 
@@ -43,6 +44,8 @@ interface PageWrapperProps {
   originalTexts: Record<number, TextBoxInfo[]>;
   registerCanvasInstance?: (pageId: string, canvas: any) => void;
   unregisterCanvasInstance?: (pageId: string) => void;
+  onFabricModified?: (pageId: string, fabricObj: Record<string, unknown>) => void;
+  onFabricAdded?: (pageId: string, fabricObj: Record<string, unknown>) => void;
 }
 
 const PDFPageWrapper = ({
@@ -68,7 +71,9 @@ const PDFPageWrapper = ({
   fontSize,
   originalTexts,
   registerCanvasInstance,
-  unregisterCanvasInstance
+  unregisterCanvasInstance,
+  onFabricModified,
+  onFabricAdded
 }: PageWrapperProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
@@ -123,6 +128,8 @@ const PDFPageWrapper = ({
           originalTexts={originalTexts}
           registerCanvasInstance={registerCanvasInstance}
           unregisterCanvasInstance={unregisterCanvasInstance}
+          onFabricModified={onFabricModified}
+          onFabricAdded={onFabricAdded}
         />
       ) : (
         // skeleton placeholder
@@ -163,11 +170,15 @@ const PageRenderer = ({
   fontSize,
   originalTexts,
   registerCanvasInstance,
-  unregisterCanvasInstance
+  unregisterCanvasInstance,
+  onFabricModified,
+  onFabricAdded
 }: PageRendererProps) => {
   const pdfCanvasRef = useRef<HTMLCanvasElement>(null);
   const fabricCanvasRef = useRef<HTMLCanvasElement>(null);
   const fabricCanvasInstance = useRef<any>(null);
+  const isLoadingFromPropRef = useRef(false);
+  const lastCanvasStateRef = useRef<string>('');
   const [isBackgroundRendered, setIsBackgroundRendered] = useState(false);
 
 
@@ -452,10 +463,34 @@ const PageRenderer = ({
       onFocusCanvas(pageId, fbCanvas);
     });
 
-    // Auto save JSON
-    const handleSaveState = () => {
+    // Auto save JSON / route through editing engine
+    const fabricObjToJson = (obj: any): Record<string, unknown> =>
+      obj.toObject ? obj.toObject([...CANVAS_JSON_PROPS]) : obj;
+
+    const handleBootstrapSave = () => {
+      if (getIsRenderingFromEngine()) return;
       const state = fbCanvas.toJSON([...CANVAS_JSON_PROPS]);
       saveCanvasState(pageId, state);
+    };
+
+    const handleObjectModified = (e: any) => {
+      if (getIsRenderingFromEngine()) return;
+      const obj = e.target;
+      if (obj && onFabricModified) {
+        onFabricModified(pageId, fabricObjToJson(obj));
+      } else {
+        handleBootstrapSave();
+      }
+    };
+
+    const handleObjectAdded = (e: any) => {
+      if (getIsRenderingFromEngine()) return;
+      const obj = e.target;
+      if (obj && onFabricAdded) {
+        onFabricAdded(pageId, fabricObjToJson(obj));
+      } else {
+        handleBootstrapSave();
+      }
     };
 
     const handleTextChanged = (e: any) => {
@@ -475,25 +510,40 @@ const PageRenderer = ({
         obj.set({ width: newWidth });
         fbCanvas.requestRenderAll();
       }
-      handleSaveState();
+      if (getIsRenderingFromEngine()) return;
+      if (obj && onFabricModified) {
+        onFabricModified(pageId, fabricObjToJson(obj));
+      } else {
+        handleBootstrapSave();
+      }
     };
 
-    fbCanvas.on('object:added', handleSaveState);
-    fbCanvas.on('object:modified', handleSaveState);
-    fbCanvas.on('object:removed', handleSaveState);
-    fbCanvas.on('path:created', handleSaveState);
+    const handlePathCreated = (e: any) => {
+      if (getIsRenderingFromEngine()) return;
+      const path = e.path;
+      if (path && onFabricAdded) {
+        onFabricAdded(pageId, fabricObjToJson(path));
+      } else {
+        handleBootstrapSave();
+      }
+    };
+
+    fbCanvas.on('object:added', handleObjectAdded);
+    fbCanvas.on('object:modified', handleObjectModified);
+    fbCanvas.on('object:removed', handleBootstrapSave);
+    fbCanvas.on('path:created', handlePathCreated);
     fbCanvas.on('text:changed', handleTextChanged);
-    fbCanvas.on('editing:exited', handleSaveState);
+    fbCanvas.on('editing:exited', handleObjectModified);
 
     return () => {
       fbCanvas.off('selection:created', handleSelection);
       fbCanvas.off('selection:updated', handleSelection);
-      fbCanvas.off('object:added', handleSaveState);
-      fbCanvas.off('object:modified', handleSaveState);
-      fbCanvas.off('object:removed', handleSaveState);
-      fbCanvas.off('path:created', handleSaveState);
+      fbCanvas.off('object:added', handleObjectAdded);
+      fbCanvas.off('object:modified', handleObjectModified);
+      fbCanvas.off('object:removed', handleBootstrapSave);
+      fbCanvas.off('path:created', handlePathCreated);
       fbCanvas.off('text:changed', handleTextChanged);
-      fbCanvas.off('editing:exited', handleSaveState);
+      fbCanvas.off('editing:exited', handleObjectModified);
       if (unregisterCanvasInstance) {
         unregisterCanvasInstance(pageId);
       }
@@ -501,6 +551,30 @@ const PageRenderer = ({
       fabricCanvasInstance.current = null;
     };
   }, [fabricLib, isBackgroundRendered, zoomScale]);
+
+  // Reload canvas when engine-driven canvasState changes (undo/redo, toolbar actions)
+  useEffect(() => {
+    const fbCanvas = fabricCanvasInstance.current;
+    if (!fbCanvas || !canvasState || getIsRenderingFromEngine()) return;
+
+    const serialized = JSON.stringify(canvasState);
+    if (serialized === lastCanvasStateRef.current) return;
+
+    isLoadingFromPropRef.current = true;
+    const stateCopy = JSON.parse(serialized);
+    stateCopy.viewportTransform = [zoomScale, 0, 0, zoomScale, 0, 0];
+
+    fbCanvas.loadFromJSON(stateCopy, () => {
+      fbCanvas.setZoom(zoomScale);
+      fbCanvas.setDimensions({
+        width: Math.round(width * zoomScale),
+        height: Math.round(height * zoomScale),
+      });
+      fbCanvas.renderAll();
+      lastCanvasStateRef.current = serialized;
+      isLoadingFromPropRef.current = false;
+    });
+  }, [canvasState, zoomScale, width, height]);
 
   // Sync mode changes to active canvas options
   useEffect(() => {

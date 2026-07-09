@@ -1,11 +1,18 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { ZOOM_LEVELS } from '@/lib/twpdf/core';
-import { createTextbox, createShape, insertObjectOnCanvas } from '@/lib/twpdf/editor';
 import { exportPdf, downloadPdfBytes } from '@/lib/twpdf/export';
-import { hexToRgbaStr } from '@/lib/twpdf/utils';
-import type { EditMode, PageDimensions, PageItem, ShapeType, TextBoxInfo } from '@/types/pdf';
+import {
+  buildTextObject,
+  buildShapeObject,
+  buildImageObject,
+  buildSignatureObject,
+  buildHighlightFromTextBounds,
+} from '@/lib/twpdf/editing/objectBuilders';
+import type { TWPDFEditingEngine } from '@/lib/twpdf/editing/editingEngine';
+import type { EditMode, PageDimensions, PageItem } from '@/types/pdf';
+import type { TWPDFShapeKind } from '@/types/twpdf';
 
 interface UsePdfEditorOptions {
   fabricLib: typeof import('fabric').fabric | null;
@@ -27,9 +34,8 @@ interface UsePdfEditorOptions {
   resetDocument: () => void;
   resetHistory: () => void;
   setCanvasStates: React.Dispatch<React.SetStateAction<Record<string, unknown>>>;
-  handleUndo: () => void;
-  handleRedo: () => void;
-  handleDeleteSelected: () => void;
+  engine: TWPDFEditingEngine | null;
+  onZoomScaleChange?: (scale: number) => void;
   onPageDuplicated?: (sourcePageId: string, newPageId: string, insertAfterIndex: number) => void;
   onPageDeleted?: (pageId: string) => void;
 }
@@ -54,9 +60,8 @@ export function usePdfEditor({
   resetDocument,
   resetHistory,
   setCanvasStates,
-  handleUndo,
-  handleRedo,
-  handleDeleteSelected,
+  engine,
+  onZoomScaleChange,
   onPageDuplicated,
   onPageDeleted,
 }: UsePdfEditorOptions) {
@@ -76,6 +81,10 @@ export function usePdfEditor({
 
   const zoomScale = ZOOM_LEVELS[zoomIndex];
 
+  useEffect(() => {
+    onZoomScaleChange?.(zoomScale);
+  }, [zoomScale, onZoomScaleChange]);
+
   const handleZoomOut = useCallback(() => {
     setZoomIndex((prev) => (prev > 0 ? prev - 1 : prev));
   }, []);
@@ -84,98 +93,99 @@ export function usePdfEditor({
     setZoomIndex((prev) => (prev < ZOOM_LEVELS.length - 1 ? prev + 1 : prev));
   }, []);
 
-  const insertObjectOnActiveCanvas = useCallback(
-    (obj: { set: (props: { left: number; top: number }) => void }) => {
-      const canvas = getActiveCanvas() as Parameters<typeof insertObjectOnCanvas>[0] | null;
-      if (!canvas) return;
-      insertObjectOnCanvas(canvas, obj, zoomScale);
-    },
-    [getActiveCanvas, zoomScale]
-  );
+  const getActivePageId = useCallback(() => {
+    return activePageId || pageList[0]?.id || null;
+  }, [activePageId, pageList]);
+
+  const getCanvasCenter = useCallback(() => {
+    const canvas = getActiveCanvas() as {
+      getCenter: () => { left: number; top: number };
+    } | null;
+    if (!canvas) return { centerX: 100, centerY: 100 };
+    const center = canvas.getCenter();
+    return { centerX: center.left / zoomScale, centerY: center.top / zoomScale };
+  }, [getActiveCanvas, zoomScale]);
 
   const handleAddText = useCallback(() => {
-    if (!fabricLib) return;
-    const text = createTextbox({
-      fabricLib: fabricLib as Parameters<typeof createTextbox>[0]['fabricLib'],
-      fontSize,
-      fontFamily,
-      strokeColor,
-      fillColor,
-      strokeWidth,
-    });
-    insertObjectOnActiveCanvas(text as { set: (props: { left: number; top: number }) => void });
+    const pageId = getActivePageId();
+    if (!engine || !pageId) return;
+    const ctx = getCanvasCenter();
+    const textObj = buildTextObject({ fontSize, fontFamily, strokeColor }, ctx);
+    engine.createObject(pageId, textObj);
     setEditMode('select');
-  }, [fabricLib, fontSize, fontFamily, strokeColor, fillColor, strokeWidth, insertObjectOnActiveCanvas]);
+  }, [engine, getActivePageId, getCanvasCenter, fontSize, fontFamily, strokeColor]);
 
   const handleAddImage = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (!fabricLib || !e.target.files?.[0]) return;
+      if (!fabricLib || !engine || !e.target.files?.[0]) return;
+      const pageId = getActivePageId();
+      if (!pageId) return;
+
       const file = e.target.files[0];
       const reader = new FileReader();
       reader.onload = (event) => {
-        if (event.target?.result) {
-          (fabricLib.Image as any).fromURL(
-            event.target.result as string,
-            (img: any) => {
-              const maxDim = 150;
-              if (img.width > maxDim || img.height > maxDim) {
-                img.scaleToWidth(maxDim);
-              }
-              img.set({
-                borderColor: '#3b82f6',
-                cornerColor: '#3b82f6',
-                cornerSize: 8,
-                transparentCorners: false,
-              });
-              insertObjectOnActiveCanvas(img);
-            }
+        if (!event.target?.result) return;
+        const src = event.target.result as string;
+        (fabricLib.Image as any).fromURL(src, (img: any) => {
+          const maxDim = 150;
+          let scaleX = 1;
+          let scaleY = 1;
+          if (img.width > maxDim || img.height > maxDim) {
+            const scale = maxDim / Math.max(img.width, img.height);
+            scaleX = scale;
+            scaleY = scale;
+          }
+          const ctx = getCanvasCenter();
+          const imageObj = buildImageObject(
+            src,
+            { width: img.width, height: img.height, scaleX, scaleY },
+            ctx
           );
-        }
+          engine.createObject(pageId, imageObj);
+        });
       };
       reader.readAsDataURL(file);
       if (imageUploadRef.current) imageUploadRef.current.value = '';
       setEditMode('select');
     },
-    [fabricLib, insertObjectOnActiveCanvas]
+    [fabricLib, engine, getActivePageId, getCanvasCenter]
   );
 
+  const SHAPE_MAP: Record<string, TWPDFShapeKind> = {
+    rect: 'rectangle',
+    circle: 'circle',
+    line: 'line',
+    arrow: 'arrow',
+  };
+
   const handleAddShape = useCallback(
-    (shapeType: ShapeType) => {
-      if (!fabricLib) return;
-      const shape = createShape(shapeType, {
-        fabricLib: fabricLib as Parameters<typeof createShape>[1]['fabricLib'],
-        fontSize,
-        fontFamily,
-        strokeColor,
-        fillColor,
-        strokeWidth,
-      });
-      if (shape) {
-        insertObjectOnActiveCanvas(shape as { set: (props: { left: number; top: number }) => void });
-        setEditMode('select');
-      }
+    (shapeType: import('@/types/pdf').ShapeType) => {
+      const pageId = getActivePageId();
+      if (!engine || !pageId) return;
+      const shapeKind = SHAPE_MAP[shapeType];
+      if (!shapeKind) return;
+      const ctx = getCanvasCenter();
+      const shapeObj = buildShapeObject(shapeKind, { strokeColor, fillColor, strokeWidth }, ctx);
+      engine.createObject(pageId, shapeObj);
+      setEditMode('select');
     },
-    [fabricLib, fontSize, fontFamily, strokeColor, fillColor, strokeWidth, insertObjectOnActiveCanvas]
+    [engine, getActivePageId, getCanvasCenter, strokeColor, fillColor, strokeWidth]
   );
 
   const handleSaveSignature = useCallback(
     (sigUrl: string) => {
-      if (!fabricLib) return;
-      (fabricLib.Image as any).fromURL(
-        sigUrl,
-        (img: any) => {
-          img.scaleToWidth(180);
-          img.set({
-            borderColor: '#3b82f6',
-            cornerColor: '#3b82f6',
-            cornerSize: 8,
-            transparentCorners: false,
-          });
-          insertObjectOnActiveCanvas(img);
-        }
-      );
+      if (!fabricLib || !engine) return;
+      const pageId = getActivePageId();
+      if (!pageId) return;
+
+      (fabricLib.Image as any).fromURL(sigUrl, (img: any) => {
+        const scaleX = 180 / img.width;
+        const ctx = getCanvasCenter();
+        const sigObj = buildSignatureObject(sigUrl, { width: img.width, height: img.height, scaleX }, ctx);
+        engine.createObject(pageId, sigObj);
+      });
     },
-    [fabricLib, insertObjectOnActiveCanvas]
+    [fabricLib, engine, getActivePageId, getCanvasCenter]
   );
 
   const handleHighlightSelectedText = useCallback(() => {
@@ -189,42 +199,27 @@ export function usePdfEditor({
         scaleY?: number;
         angle?: number;
       } | null;
-      add: (obj: unknown) => void;
-      discardActiveObject: () => void;
-      setActiveObject: (obj: unknown) => void;
-      requestRenderAll: () => void;
-      fire: (event: string) => void;
     } | null;
-    if (!canvas || !fabricLib) return;
+    const pageId = getActivePageId();
+    if (!canvas || !engine || !pageId) return;
     const activeObj = canvas.getActiveObject();
     if (!activeObj) return;
 
-    const highlightBox = new fabricLib.Rect({
-      left: activeObj.left,
-      top: activeObj.top,
-      width: activeObj.width * (activeObj.scaleX || 1),
-      height: activeObj.height * (activeObj.scaleY || 1),
-      angle: activeObj.angle || 0,
-      fill: hexToRgbaStr(strokeColor || '#fbbf24', 0.4),
-      stroke: 'transparent',
-      strokeWidth: 0,
-      isHighlight: true,
-      borderColor: '#3b82f6',
-      cornerColor: '#3b82f6',
-      cornerSize: 8,
-      transparentCorners: false,
-    } as any);
-
-    canvas.add(highlightBox);
-    (highlightBox as { sendToBack: () => void }).sendToBack();
-    canvas.discardActiveObject();
-    canvas.setActiveObject(highlightBox);
-    canvas.requestRenderAll();
-    canvas.fire('object:modified');
+    const highlightObj = buildHighlightFromTextBounds(
+      {
+        left: activeObj.left,
+        top: activeObj.top,
+        width: activeObj.width * (activeObj.scaleX || 1),
+        height: activeObj.height * (activeObj.scaleY || 1),
+        angle: activeObj.angle || 0,
+      },
+      strokeColor
+    );
+    engine.createObject(pageId, highlightObj);
 
     setSuccess('Selected text highlighted.');
     setTimeout(() => setSuccess(null), 3000);
-  }, [getActiveCanvas, fabricLib, strokeColor, setSuccess]);
+  }, [getActiveCanvas, engine, getActivePageId, strokeColor, setSuccess]);
 
   const handleDuplicatePage = useCallback(
     (idx: number) => {
@@ -236,14 +231,6 @@ export function usePdfEditor({
           originalPageNum: sourcePage.originalPageNum,
         };
 
-        const sourceState = canvasStates[sourcePage.id];
-        if (sourceState) {
-          setCanvasStates((prevStates) => ({
-            ...prevStates,
-            [newPageItem.id]: JSON.parse(JSON.stringify(sourceState)),
-          }));
-        }
-
         duplicated.splice(idx + 1, 0, newPageItem);
         onPageDuplicated?.(sourcePage.id, newPageItem.id, idx);
         return duplicated;
@@ -251,7 +238,7 @@ export function usePdfEditor({
       setSuccess('Page duplicated successfully!');
       setTimeout(() => setSuccess(null), 3000);
     },
-    [setPageList, canvasStates, setCanvasStates, setSuccess, onPageDuplicated]
+    [setPageList, setSuccess, onPageDuplicated]
   );
 
   const handleDeletePage = useCallback(
@@ -416,8 +403,5 @@ export function usePdfEditor({
     handleFocusCanvas,
     registerCanvasInstance,
     unregisterCanvasInstance,
-    handleUndo,
-    handleRedo,
-    handleDeleteSelected,
   };
 }

@@ -7,8 +7,16 @@ import { HitTest } from './HitTest';
  * and Top-to-Bottom click hit-testing.
  */
 export class SelectionEngine {
+  private static instance: SelectionEngine | null = null;
   private selectedObjectId: string | null = null;
   private selectedPageNumber: number | null = null;
+
+  static getInstance(): SelectionEngine {
+    if (!this.instance) {
+      this.instance = new SelectionEngine();
+    }
+    return this.instance;
+  }
 
   /**
    * Selects an object by ID on a specific page.

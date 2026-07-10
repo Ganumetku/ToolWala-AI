@@ -268,7 +268,9 @@ const PageRenderer = ({
 
     // Populate state from history or original texts
     if (canvasState) {
-      const stateCopy = JSON.parse(JSON.stringify(canvasState));
+      isLoadingFromPropRef.current = true;
+      const serialized = JSON.stringify(canvasState);
+      const stateCopy = JSON.parse(serialized);
       stateCopy.viewportTransform = [zoomScale, 0, 0, zoomScale, 0, 0];
       fbCanvas.loadFromJSON(stateCopy, () => {
         fbCanvas.setZoom(zoomScale);
@@ -277,6 +279,8 @@ const PageRenderer = ({
           height: Math.round(height * zoomScale)
         });
         fbCanvas.renderAll();
+        lastCanvasStateRef.current = serialized;
+        isLoadingFromPropRef.current = false;
       });
     } else {
       const textBoxesForPage = originalTexts[originalPageNum] || [];
@@ -363,6 +367,7 @@ const PageRenderer = ({
         fbCanvas.renderAll();
         // save initial state
         const state = fbCanvas.toJSON([...CANVAS_JSON_PROPS]);
+        lastCanvasStateRef.current = JSON.stringify(state);
         saveCanvasState(pageId, state);
       }
     }
@@ -468,13 +473,13 @@ const PageRenderer = ({
       obj.toObject ? obj.toObject([...CANVAS_JSON_PROPS]) : obj;
 
     const handleBootstrapSave = () => {
-      if (getIsRenderingFromEngine()) return;
+      if (getIsRenderingFromEngine() || isLoadingFromPropRef.current) return;
       const state = fbCanvas.toJSON([...CANVAS_JSON_PROPS]);
       saveCanvasState(pageId, state);
     };
 
     const handleObjectModified = (e: any) => {
-      if (getIsRenderingFromEngine()) return;
+      if (getIsRenderingFromEngine() || isLoadingFromPropRef.current) return;
       const obj = e.target;
       if (obj && onFabricModified) {
         onFabricModified(pageId, fabricObjToJson(obj));
@@ -484,7 +489,7 @@ const PageRenderer = ({
     };
 
     const handleObjectAdded = (e: any) => {
-      if (getIsRenderingFromEngine()) return;
+      if (getIsRenderingFromEngine() || isLoadingFromPropRef.current) return;
       const obj = e.target;
       if (obj && onFabricAdded) {
         onFabricAdded(pageId, fabricObjToJson(obj));
@@ -510,7 +515,7 @@ const PageRenderer = ({
         obj.set({ width: newWidth });
         fbCanvas.requestRenderAll();
       }
-      if (getIsRenderingFromEngine()) return;
+      if (getIsRenderingFromEngine() || isLoadingFromPropRef.current) return;
       if (obj && onFabricModified) {
         onFabricModified(pageId, fabricObjToJson(obj));
       } else {
@@ -519,7 +524,7 @@ const PageRenderer = ({
     };
 
     const handlePathCreated = (e: any) => {
-      if (getIsRenderingFromEngine()) return;
+      if (getIsRenderingFromEngine() || isLoadingFromPropRef.current) return;
       const path = e.path;
       if (path && onFabricAdded) {
         onFabricAdded(pageId, fabricObjToJson(path));

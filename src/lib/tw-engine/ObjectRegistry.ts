@@ -8,7 +8,26 @@ export class ObjectRegistry {
   private static instance: ObjectRegistry | null = null;
   private registry: Map<string, TWObject> = new Map();
 
+  private listeners: Array<(id: string, before: any, after: any) => void> = [];
+
   private constructor() {}
+
+  /**
+   * Registers a listener to receive callbacks when objects are updated.
+   */
+  addListener(listener: (id: string, before: any, after: any) => void): void {
+    this.listeners.push(listener);
+  }
+
+  /**
+   * Unregisters an update listener callback.
+   */
+  removeListener(listener: (id: string, before: any, after: any) => void): void {
+    const idx = this.listeners.indexOf(listener);
+    if (idx !== -1) {
+      this.listeners.splice(idx, 1);
+    }
+  }
 
   /**
    * Returns the global ObjectRegistry instance.
@@ -42,6 +61,27 @@ export class ObjectRegistry {
   updateObject(id: string, updates: Partial<TWObject>): void {
     const obj = this.registry.get(id);
     if (!obj) return;
+
+    // Capture state properties before updates
+    const beforeState = {
+      x: obj.x,
+      y: obj.y,
+      width: obj.width,
+      height: obj.height,
+      rotation: obj.rotation,
+      opacity: obj.opacity,
+      visible: obj.visible,
+      locked: obj.locked,
+      deleted: obj.deleted,
+      text: (obj as any).text,
+      fontName: (obj as any).fontName,
+      fontSize: (obj as any).fontSize,
+      fontColor: (obj as any).fontColor,
+      pathData: (obj as any).pathData,
+      strokeColor: (obj as any).strokeColor,
+      fillColor: (obj as any).fillColor,
+      strokeWidth: (obj as any).strokeWidth,
+    };
 
     let isEditingEditableField = false;
 
@@ -88,6 +128,33 @@ export class ObjectRegistry {
 
     // Apply updates
     Object.assign(obj, updates);
+
+    // Broadcast update changes
+    if (isEditingEditableField) {
+      const afterState = {
+        x: obj.x,
+        y: obj.y,
+        width: obj.width,
+        height: obj.height,
+        rotation: obj.rotation,
+        opacity: obj.opacity,
+        visible: obj.visible,
+        locked: obj.locked,
+        deleted: obj.deleted,
+        text: (obj as any).text,
+        fontName: (obj as any).fontName,
+        fontSize: (obj as any).fontSize,
+        fontColor: (obj as any).fontColor,
+        pathData: (obj as any).pathData,
+        strokeColor: (obj as any).strokeColor,
+        fillColor: (obj as any).fillColor,
+        strokeWidth: (obj as any).strokeWidth,
+      };
+
+      this.listeners.forEach((listener) => {
+        listener(id, beforeState, afterState);
+      });
+    }
   }
 
   /**

@@ -165,3 +165,73 @@ stateDiagram-v2
     isDirty_True --> Exporter : Filter isDirty elements
     Exporter --> [*] : Write changes to PDF contents stream
 ```
+
+---
+
+## 💾 Native PDF Writer Pipeline
+
+This flowchart outlines the direct serialization pipeline of our custom native PDF writer, generating document catalog nodes, page hierarchies, compressed font/media resources, and cross-reference offsets table:
+
+```mermaid
+graph TD
+    doc[TWDocument Tree] --> writer[PDFWriter.writeDocument]
+    
+    subgraph Object Generation
+        writer --> catObj[Catalog & parent Pages indirect objects]
+        writer --> infoObj[Info dictionary metadata]
+        writer --> fontObjs[Standard core Type1 Font objects]
+        writer --> pageObjs[Page objects MediaBoxes & Parents]
+      end
+
+    subgraph Content Stream Compilation
+        pageObjs --> pageSer[PageSerializer: generateContentsStream]
+        pageSer --> textOp[BT/Tf/Tm/Tj Text coordinates operators]
+        pageSer --> pathOp[q/RG/w/m/l/c/f Vector operators]
+        pageSer --> imgOp[q/cm/Do Image XObject placement operators]
+      end
+
+    subgraph Binary Serialization
+        textOp --> streamWrite[StreamWriter: format streams & Lengths]
+        pathOp --> streamWrite
+        imgOp --> streamWrite
+        streamWrite --> compress[Compression: dynamic zlib FlateDecode]
+      end
+
+    compress --> writeBytes[Serialize all objects and track file offsets]
+    writeBytes --> xrefBuild[XRefBuilder: construct cross-reference table]
+    xrefBuild --> trailBuild[TrailerBuilder: assemble trailer Root catalog links]
+    trailBuild --> mergeBytes[Merge binary buffers to output PDF bytes]
+    mergeBytes --> [*]
+```
+
+---
+
+## 🔄 Object Mutation Flow
+
+This sequence flowchart details the lifecycle coordinates changes routing through change observers, validators, and stack managers:
+
+```mermaid
+graph TD
+    userEdit[User performs layout / text edit on screen] --> regUpdate[ObjectRegistry.updateObject]
+    
+    subgraph Automatic Interception
+        regUpdate --> notifyListeners[Invoke registry listeners callbacks]
+        notifyListeners --> tracker[ChangeTracker: capture before/after snapshots]
+        tracker --> detectType[Classify change: Move, Resize, Rotate, TextReplace...]
+      end
+      
+    detectType --> createMut[Compile Mutation transaction payload]
+    createMut --> engine[MutationEngine.applyMutation]
+    
+    subgraph Operations Coordination
+        engine --> validate[MutationValidator: check limits & boundaries]
+        validate -- Invalid -- reject[Reject & Discard mutation]
+        validate -- Valid -- mergeCheck[MutationMerger: shouldMerge check]
+        
+        mergeCheck -- Yes -- coalesce[Coalesce states: update last undo stack entry]
+        mergeCheck -- No -- pushHistory[Push Mutation onto UndoRedoManager & History timeline]
+      end
+      
+    coalesce --> save[Mutations ready for consolidation & PDFWriter export]
+    pushHistory --> save
+```

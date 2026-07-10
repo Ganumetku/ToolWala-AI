@@ -1,23 +1,28 @@
 # Writer Module
 
-The PDF Writer is the export layer responsible for serializing modifications back into raw PDF document bytes.
+The Writer module compiles `TWDocument` model trees back into standard binary PDF byte streams.
 
 ---
 
 ## 📋 Responsibilities
-* Filter `ObjectRegistry` singleton cache to extract dirty elements (`isDirty = true`).
-* Identify deletion flags to modify stream layouts.
-* Re-encode fonts, pixels, and vectors back into PDF format byte streams.
+* Manage standard document trees compilation: Catalog node, Pages parent list, Page elements, and Info metadata dictionaries.
+* Serialize numbers, literal strings, reference arrays, and nested dictionaries into PDF syntax.
+* Translate screen layout text positions (including rotation angles), fonts, hex colors, and SVG paths into coordinate-flipped PDF drawing operators.
+* Compress streams dynamically using FlateDecode (deflateSync) with a browser uncompressed fallback.
+* Compile correct cross-reference offsets (`xref` sections) and trailers.
 
 ---
 
 ## 🛠 Public API Reference
-* `PDFWriter.exportDocument(registry: ObjectRegistry): Uint8Array`: Exporter skeleton entry point.
+* `PDFWriter.writeDocument(doc: TWDocument): Uint8Array`: Entrant method generating the compiled PDF byte stream.
+* `ObjectSerializer.serialize(val: PDFValue): string`: Converts values to PDF string formatting.
+* `PageSerializer.generateContentsStream(page: TWPage): Uint8Array`: Generates binary graphics instructions.
+* `IncrementalWriter.appendChanges(existingPdfBytes: Uint8Array, modifiedObjectsList: any[]): Uint8Array`: Architecture stub for incremental saving.
 
 ---
 
-## 🔄 Upcoming Serialization Pipeline
-1. Scan registries for items with `isDirty === true` or `deleted === true`.
-2. Map current viewport edited coordinates back to native PDF coordinates using the inverse matrix `Matrix.inverse(transformationMatrix)`.
-3. Rewrite the page operator content streams.
-4. Save file catalog updates and output compiled PDF bytes.
+## 🔄 Internal Data Pipeline Flow
+```
+TWDocument -> PDFWriter (indirect objects loop) -> PageSerializer (operators compilation) -> StreamWriter (Flate compression) -> XRefBuilder (byte offsets table) -> TrailerBuilder -> Compiled byte array
+```
+This module is self-contained and operates entirely in native TypeScript. It works on both Node.js server scripts and web browsers, facilitating clean document serialization.

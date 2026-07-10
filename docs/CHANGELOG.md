@@ -4,6 +4,39 @@ All notable changes and architectural updates to the ToolWala Native PDF Engine 
 
 ---
 
+## [Phase 5.1] - 2026-07-10
+### Added
+- Created `src/lib/tw-engine/mutation/` directory.
+- Created `MutationTypes.ts` declaring types for MutationType and Mutation payloads.
+- Created `MutationValidator.ts` asserting Move, Resize, Rotate, and Opacity boundaries.
+- Created `UndoRedoManager.ts` managing rollback and replay histories stack.
+- Created `MutationHistory.ts` collecting a flat timeline chronological ledger of changes.
+- Created `ChangeTracker.ts` observing ObjectRegistry updates and generating structured mutations automatically.
+- Created `MutationMerger.ts` coalescing sequential changes (e.g. typing, coordinates dragging) within a threshold.
+- Created `MutationSerializer.ts` consolidating mutations into final states maps.
+- Created `MutationEngine.ts` coordinating the mutation lifecycle.
+- Created `scratch/verify_mutation.ts` verification test script.
+- Modified `src/lib/tw-engine/ObjectRegistry.ts` to support change observer subscriptions.
+
+---
+
+## [Phase 5.0] - 2026-07-10
+### Added
+- Created `src/lib/tw-engine/writer/` directory.
+- Created `WriterTypes.ts` declaring types for PDFValues, names, and references.
+- Created `IndirectObject.ts` representing indirect entries (`X Y obj`).
+- Created `ObjectSerializer.ts` serializing nested dictionaries and value arrays.
+- Created `Compression.ts` handling dynamic FlateDecode sync compression.
+- Created `StreamWriter.ts` formatting headers and lengths.
+- Created `XRefBuilder.ts` constructing cross-reference tables from offset maps.
+- Created `TrailerBuilder.ts` constructing trailer Root catalog links.
+- Created `PageSerializer.ts` translating text/path/image coordinates to PDF operators flipping Y.
+- Created `IncrementalWriter.ts` skeleton placeholder for future incremental saves.
+- Created `PDFWriter.ts` entrant controller compiling final bytes array.
+- Created `scratch/verify_writer.ts` verification test script.
+
+---
+
 ## [Phase 4.4] - 2026-07-09
 ### Added
 - Created `src/lib/tw-engine/text/` directory.

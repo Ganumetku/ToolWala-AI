@@ -18,7 +18,11 @@ This live roadmap tracks completed implementation phases, current work scopes, a
 * [x] **Phase 4.3**: Render Graph & Scene Engine (Hierarchical SceneNodes, Camera pan/zoom view matrices, Viewport boundary visible pages, default layers containers, CullingManager, DirtyRegionManager clipped repaint clipping, RenderScheduler batch frame scheduler, RenderGraph compilation).
 * [x] **Phase 4.4**: Native Text Layout & Font Engine (Ascent/descent FontMetrics registries, GlyphCache proportional widths, FontResolver subset cleaner, Kerning pair spacing, LineBreaker wrapping constraints, GlyphLayout, TextLayout typesetter, CaretEngine click mapping, TextSelection highlights builder).
 
+* [x] **Phase 5.0**: Native PDF Writer Core (Indirect objects, ObjectSerializer, PageSerializer content streams, StreamWriter, XRefBuilder offsets, TrailerBuilder).
+
+* [x] **Phase 5.1**: Object Mutation Engine (ChangeTracker observers, MutationHistory timeline, UndoRedoManager stacks, MutationValidator boundaries, MutationMerger typing/drag merges, MutationSerializer).
+
 ### Upcoming Milestones
-* [ ] **Phase 5**: Native PDF Object Serializer & Exporter Writer
+* [ ] **Phase 5.2**: Incremental Saves implementation and modifications merging
 * [ ] **Phase 6**: Interactive UI Components integration (React/Canvas hooks bridge, toolbar commands layout, active caret indicator drawing)
 * [ ] **Phase 7**: Production benchmark tests & SDK packaging

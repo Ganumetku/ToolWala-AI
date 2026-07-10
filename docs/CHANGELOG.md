@@ -4,6 +4,22 @@ All notable changes and architectural updates to the ToolWala Native PDF Engine 
 
 ---
 
+## [Phase 5.2] - 2026-07-10
+### Added
+- Created `src/lib/tw-engine/ui/` directory.
+- Created `EditorEvents.ts` managing pub-sub layouts and selection updates channels.
+- Created `UIStateBridge.ts` linking UI state requests directly to ObjectRegistry.
+- Created `ViewportSync.ts` managing scroll coordinates, zoom levels, and page dimensions outside canvas contexts.
+- Created `SelectionSync.ts` syncing active selection states.
+- Created `MutationDispatcher.ts` dispatching mutations to MutationEngine on user actions.
+- Created `InteractionController.ts` mapping moves, resizes, and rotations inputs into registry updates and mutations.
+- Created `RenderAdapter.ts` wrapping generic Renderer adapter interfaces.
+- Created `CanvasSyncManager.ts` registering active canvases and triggering repaints automatically upon registry changes.
+- Created `UIStateValidator.ts` validating ID alignments between UI lists and the registry cache.
+- Created `scratch/verify_ui_sync.ts` verification test script.
+
+---
+
 ## [Phase 5.1] - 2026-07-10
 ### Added
 - Created `src/lib/tw-engine/mutation/` directory.

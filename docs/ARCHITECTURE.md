@@ -235,3 +235,52 @@ graph TD
     coalesce --> save[Mutations ready for consolidation & PDFWriter export]
     pushHistory --> save
 ```
+
+---
+
+## 🔄 UI Synchronization Layer (Phase 5.2)
+
+The UI Synchronization Layer completely decouples view components from active page states, making the native engine the single source of truth and rendering canvases pure output adapters.
+
+### 1. State Synchronization Flow
+This diagram details how the registry broadcasts updates to schedule canvas repaints asynchronously:
+
+```mermaid
+graph TD
+    registry[(ObjectRegistry Source of Truth)] -- updateObject -- syncMgr[CanvasSyncManager]
+    syncMgr -- triggerRepaint pageNum -- adapter[RenderAdapter]
+    adapter -- renderPage pageNum -- activeRenderer[Active Renderer Wrapper]
+    activeRenderer -- repaint -- canvas[HTMLCanvasElement page viewport]
+```
+
+### 2. UI Event Flow
+This pub-sub observer diagram compiles the coordination of selections, pans, and zoom operations:
+
+```mermaid
+graph TD
+    userPanZoom[User adjusts scroll / zoom scale] --> viewport[ViewportSync: update zoom/offsets]
+    viewport --> dispatch[EditorEvents: ZoomChanged / PageChanged]
+    dispatch --> reactViews[React Toolbar / Statusbar updates]
+```
+
+### 3. Mutation Dispatch
+This flowchart logs the coordinate dragging updates:
+
+```mermaid
+graph TD
+    userDrag[User drags transform handles] --> controller[InteractionController]
+    controller -- x/y updates -- registry[ObjectRegistry.updateObject]
+    controller -- before/after states -- dispatcher[MutationDispatcher]
+    dispatcher -- applyMutation -- engine[MutationEngine]
+```
+
+### 4. Renderer Adapter
+This block diagram outlines the active renderer wrapper interface:
+
+```mermaid
+graph TD
+    reactUI[React View components] --> adapter[RenderAdapter]
+    adapter --> rendererInterface[Renderer Interface]
+    rendererInterface --> legacyFabric[Legacy Fabric Renderer Adapter]
+    rendererInterface --> nativeRenderer[Native Renderer Adapter]
+```

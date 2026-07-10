@@ -134,6 +134,7 @@ export class LegacyFabricBridge {
       originalTextData: obj.originalTextData,
       backgroundColor: obj.isOriginalText && !isEdited ? 'rgba(255, 255, 255, 0.001)' : 'transparent',
       lockScalingY: true,
+      styles: [],
       ...FABRIC_CONTROL_PROPS,
     };
   }

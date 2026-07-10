@@ -205,7 +205,7 @@ export function pageToFabricState(
     .map((obj) => twpdfObjectToFabric(obj))
     .filter((o): o is Record<string, unknown> => o !== null);
 
-  console.log('[DEBUG] pageToFabricState objects:', objects);
+
 
   return {
     version: '5.3.0',

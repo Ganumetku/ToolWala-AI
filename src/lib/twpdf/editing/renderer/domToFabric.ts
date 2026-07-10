@@ -8,6 +8,7 @@ import type {
   TWPDFTextObject,
 } from '@/types/twpdf';
 import { isOriginalTextEdited } from '@/lib/twpdf/editor';
+import { LegacyFabricBridge } from './LegacyFabricBridge';
 
 const FABRIC_CONTROL_PROPS = {
   borderColor: '#3b82f6',
@@ -177,28 +178,11 @@ function annotationToFabric(obj: TWPDFAnnotationObject): Record<string, unknown>
   };
 }
 
-export function twpdfObjectToFabric(obj: TWPDFObject): Record<string, unknown> | null {
-  if (!obj.visible && obj.type === 'text' && (obj as TWPDFTextObject).isDeletedOriginal) {
-    return textToFabric(obj as TWPDFTextObject);
-  }
-  if (!obj.visible) return null;
 
-  switch (obj.type) {
-    case 'text':
-      return textToFabric(obj);
-    case 'shape':
-      return shapeToFabric(obj);
-    case 'highlight':
-      return highlightToFabric(obj);
-    case 'image':
-    case 'signature':
-      return imageToFabric(obj);
-    case 'annotation':
-      if (!obj.pathData) return null;
-      return annotationToFabric(obj);
-    default:
-      return null;
-  }
+
+
+export function twpdfObjectToFabric(obj: TWPDFObject): Record<string, unknown> | null {
+  return LegacyFabricBridge.toFabricObject(obj);
 }
 
 export function documentToCanvasStates(
@@ -220,6 +204,8 @@ export function pageToFabricState(
   const objects = sorted
     .map((obj) => twpdfObjectToFabric(obj))
     .filter((o): o is Record<string, unknown> => o !== null);
+
+  console.log('[DEBUG] pageToFabricState objects:', objects);
 
   return {
     version: '5.3.0',

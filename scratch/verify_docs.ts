@@ -29,6 +29,7 @@ function runDocsVerification() {
     'modules/text-engine.md',
     'modules/writer.md',
     'modules/mutation-engine.md',
+    'modules/fabric-bridge.md',
     'diagrams/parser-flow.md',
     'diagrams/render-flow.md',
     'diagrams/object-lifecycle.md',

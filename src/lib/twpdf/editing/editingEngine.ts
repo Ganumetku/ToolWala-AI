@@ -118,7 +118,7 @@ export class TWPDFEditingEngine {
 
     const before: Partial<TWPDFObject> = {};
     for (const key of Object.keys(patch)) {
-      (before as Record<string, unknown>)[key] = (existing as Record<string, unknown>)[key];
+      (before as Record<string, unknown>)[key] = (existing as unknown as Record<string, unknown>)[key];
     }
 
     const isTextPatch = existing.type === 'text' && ('text' in patch || 'color' in patch);
@@ -279,8 +279,18 @@ export class TWPDFEditingEngine {
     }
 
     const hasMoved = before.x !== patch.x || before.y !== patch.y;
-    const CommandClass = hasMoved ? MoveObjectCommand : UpdateObjectCommand;
-    return this.applyCommand(new CommandClass(pageId, objectId, before, patch));
+    if (hasMoved) {
+      return this.applyCommand(
+        new MoveObjectCommand(
+          pageId,
+          objectId,
+          { x: before.x ?? existing.x, y: before.y ?? existing.y },
+          { x: patch.x ?? existing.x, y: patch.y ?? existing.y }
+        )
+      );
+    } else {
+      return this.applyCommand(new UpdateObjectCommand(pageId, objectId, before, patch));
+    }
   }
 
   select(pageId: string, objectId: string): void {

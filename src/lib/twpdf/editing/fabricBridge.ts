@@ -58,7 +58,7 @@ export function classifyFabricChange(
   if (before && !after) return 'delete';
   if (!before || !after) return 'update';
 
-  if (before.text !== after.text && before.type === 'text') return 'text';
+  if (before.type === 'text' && after.type === 'text' && before.text !== after.text) return 'text';
   if (before.rotation !== after.rotation) return 'rotate';
   if (before.width !== after.width || before.height !== after.height) return 'resize';
   if (before.x !== after.x || before.y !== after.y) return 'move';

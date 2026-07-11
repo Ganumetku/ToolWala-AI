@@ -26,7 +26,17 @@ export default function EditPdfPage() {
     resetHistory,
   } = useHistory();
 
-  const editing = useTWPdfEditingEngine({
+  const {
+    engine: editingEngine,
+    handleUndo: triggerUndo,
+    handleRedo: triggerRedo,
+    resetEngine,
+    syncAllCanvasStates,
+    handleFabricModified,
+    handleFabricAdded,
+    historyIndex,
+    historyLength,
+  } = useTWPdfEditingEngine({
     getDocument: twpdf.getDocument,
     setDocument: twpdf.setTWPdfDocument,
     canvasInstances,
@@ -46,8 +56,8 @@ export default function EditPdfPage() {
     setSuccess: doc.setSuccess,
     setOriginalTexts: doc.setOriginalTexts,
     setCanvasStates,
-    engine: editing.engine,
-    syncPageFromFabric: (pageId, state) => editing.engine.syncPageFromFabric(pageId, state),
+    engine: editingEngine,
+    syncPageFromFabric: (pageId, state) => editingEngine.syncPageFromFabric(pageId, state),
   });
 
   const editor = usePdfEditor({
@@ -70,7 +80,7 @@ export default function EditPdfPage() {
     resetDocument: doc.resetDocument,
     resetHistory,
     setCanvasStates,
-    engine: editing.engine,
+    engine: editingEngine,
     onPageDuplicated: twpdf.handleDuplicatePage,
     onPageDeleted: twpdf.handleDeletePage,
   });
@@ -97,78 +107,78 @@ export default function EditPdfPage() {
   useEffect(() => {
     const twpdfDoc = twpdf.document;
     if (!twpdfDoc) return;
-    void editing.syncAllCanvasStates();
-  }, [twpdf.document?.id, editing]);
+    void syncAllCanvasStates();
+  }, [twpdf.document?.id, syncAllCanvasStates]);
 
   const handleCanvasStateUpdate = useCallback(
     (pageId: string, stateJSON: unknown) => {
-      editing.engine.syncPageFromFabric(pageId, stateJSON);
+      editingEngine.syncPageFromFabric(pageId, stateJSON);
     },
-    [editing.engine]
+    [editingEngine]
   );
 
   const handleUndo = useCallback(() => {
-    editing.handleUndo();
-  }, [editing]);
+    triggerUndo();
+  }, [triggerUndo]);
 
   const handleRedo = useCallback(() => {
-    editing.handleRedo();
-  }, [editing]);
+    triggerRedo();
+  }, [triggerRedo]);
 
   const handleLoadPdf = useCallback(
     (file: File) => {
       resetHistory();
-      editing.resetEngine();
+      resetEngine();
       twpdf.resetTWPdfDocument();
       doc.loadPdfFile(file);
     },
-    [doc, resetHistory, editing, twpdf]
+    [doc, resetHistory, resetEngine, twpdf]
   );
 
   const handleReset = useCallback(() => {
     editor.handleReset();
     resetHistory();
-    editing.resetEngine();
+    resetEngine();
     twpdf.resetTWPdfDocument();
-  }, [editor, resetHistory, editing, twpdf]);
+  }, [editor, resetHistory, resetEngine, twpdf]);
 
   const handleObjectSelected = useCallback(
     (pageId: string, activeObj: unknown) => {
       selection.handleObjectSelected(pageId, activeObj);
       const objId = (activeObj as { id?: string })?.id;
       if (objId) {
-        editing.engine.select(pageId, objId);
+        editingEngine.select(pageId, objId);
       }
     },
-    [selection, editing.engine]
+    [selection, editingEngine]
   );
 
   const handleObjectCleared = useCallback(() => {
     selection.handleObjectCleared();
-    editing.engine.clearSelection();
-  }, [selection, editing.engine]);
+    editingEngine.clearSelection();
+  }, [selection, editingEngine]);
 
   const handleCopy = useCallback(() => {
     const info = selection.selectedObjectInfo;
     if (info) {
-      editing.engine.copy(info.pageId, info.id);
+      editingEngine.copy(info.pageId, info.id);
     }
-  }, [selection.selectedObjectInfo, editing.engine]);
+  }, [selection.selectedObjectInfo, editingEngine]);
 
   const handleCut = useCallback(() => {
     const info = selection.selectedObjectInfo;
     if (info) {
-      editing.engine.cut(info.pageId, info.id);
+      editingEngine.cut(info.pageId, info.id);
       selection.handleObjectCleared();
     }
-  }, [selection, editing.engine]);
+  }, [selection, editingEngine]);
 
   const handlePaste = useCallback(() => {
     const pageId = doc.activePageId || doc.pageList[0]?.id;
     if (pageId) {
-      editing.engine.paste(pageId);
+      editingEngine.paste(pageId);
     }
-  }, [doc.activePageId, doc.pageList, editing.engine]);
+  }, [doc.activePageId, doc.pageList, editingEngine]);
 
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
@@ -258,8 +268,8 @@ export default function EditPdfPage() {
         setIsSigModalOpen={editor.setIsSigModalOpen}
         handleUndo={handleUndo}
         handleRedo={handleRedo}
-        historyIndex={editing.historyIndex}
-        historyLength={editing.historyLength}
+        historyIndex={historyIndex}
+        historyLength={historyLength}
         handleReset={handleReset}
         handleExportPDF={editor.handleExportPDF}
         isProcessing={doc.isProcessing}
@@ -294,8 +304,8 @@ export default function EditPdfPage() {
         onFocusCanvas={handleFocusCanvas}
         onObjectSelected={handleObjectSelected}
         onObjectCleared={handleObjectCleared}
-        onFabricModified={editing.handleFabricModified}
-        onFabricAdded={editing.handleFabricAdded}
+        onFabricModified={handleFabricModified}
+        onFabricAdded={handleFabricAdded}
         strokeColor={editor.strokeColor}
         fillColor={editor.fillColor}
         strokeWidth={editor.strokeWidth}

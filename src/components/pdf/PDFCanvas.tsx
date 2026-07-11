@@ -440,7 +440,7 @@ const PageRenderer = ({
       if (v) {
         ctx.transform(v[0], v[1], v[2], v[3], v[4], v[5]);
       }
-      renderEngine.render(ctx, pageNum);
+      renderEngine.render(ctx, pageNum, fbCanvas.getObjects());
       ctx.restore();
     });
 
@@ -529,6 +529,19 @@ const PageRenderer = ({
         const selectionEngine = SelectionEngine.getInstance();
         selectionEngine.select(obj.id, pageNum);
 
+        const detectedColor = obj.originalTextData?.detectedColor || '#0b2c8c';
+        obj.set({ fill: detectedColor });
+
+        fbCanvas.forEachObject((o: any) => {
+          if (o.isOriginalText && o.id !== obj.id && !isOriginalTextEdited(o)) {
+            o.set({
+              fill: 'transparent',
+              backgroundColor: 'rgba(255, 255, 255, 0.001)',
+              stroke: 'transparent'
+            });
+          }
+        });
+
         const layout = new TextLayout(obj.text, obj.fontFamily || 'Helvetica', obj.fontSize || 12);
         if (clickCount === 1) {
           selectionEngine.handleSingleClick(local.x, local.y, layout);
@@ -548,11 +561,18 @@ const PageRenderer = ({
         onObjectSelected(pageId, obj);
       } else {
         const selectionEngine = SelectionEngine.getInstance();
-        if (selectionEngine.getIsEditingText()) {
-          selectionEngine.deselect();
-          fbCanvas.requestRenderAll();
-          onObjectCleared();
-        }
+        selectionEngine.deselect();
+        fbCanvas.forEachObject((o: any) => {
+          if (o.isOriginalText && !isOriginalTextEdited(o)) {
+            o.set({
+              fill: 'transparent',
+              backgroundColor: 'rgba(255, 255, 255, 0.001)',
+              stroke: 'transparent'
+            });
+          }
+        });
+        fbCanvas.requestRenderAll();
+        onObjectCleared();
       }
     });
 

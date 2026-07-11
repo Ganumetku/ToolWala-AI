@@ -19,7 +19,55 @@ export class RenderEngine {
   /**
    * Renders registered objects for a given page onto the 2D context.
    */
-  render(ctx: CanvasRenderingContext2D, pageNumber: number): void {
+  render(ctx: CanvasRenderingContext2D, pageNumber: number, fabricObjects?: any[]): void {
+    if (fabricObjects) {
+      fabricObjects.forEach((obj) => {
+        if (obj.isOriginalText || obj.type === 'textbox' || obj.type === 'i-text') {
+          const selection = SelectionEngine.getInstance();
+          const isEditing = selection.getIsEditingText() && selection.getSelectedObjectId() === obj.id;
+          if (!isEditing) return;
+
+          ctx.save();
+          const scaleX = obj.scaleX || 1;
+          const scaleY = obj.scaleY || 1;
+
+          ctx.translate(obj.left || 0, obj.top || 0);
+          ctx.rotate(((obj.angle || 0) * Math.PI) / 180);
+          ctx.scale(scaleX, scaleY);
+
+          const layout = new TextLayout(obj.text || '', obj.fontFamily || 'Helvetica', obj.fontSize || 12);
+          const start = selection.getSelectionStart();
+          const end = selection.getSelectionEnd();
+
+          // 1. Draw Selection Highlights
+          if (start !== end) {
+            const rects = TextSelection.getSelectionRects(layout, start, end);
+            ctx.fillStyle = 'rgba(0, 102, 204, 0.3)'; // Professional highlight blue
+            for (const r of rects) {
+              ctx.fillRect(r.x, r.y, r.width, r.height);
+            }
+          }
+
+          // 2. Draw Blinking Caret
+          if (start === end) {
+            const caretIndex = selection.getCaretIndex();
+            if (Math.floor(Date.now() / 500) % 2 === 0) {
+              const caretCoords = this.getCaretCoords(layout, caretIndex);
+              ctx.strokeStyle = obj.fill && obj.fill !== 'transparent' ? obj.fill : '#000000';
+              ctx.lineWidth = 1.5;
+              ctx.beginPath();
+              ctx.moveTo(caretCoords.x, caretCoords.y);
+              ctx.lineTo(caretCoords.x, caretCoords.y + caretCoords.height);
+              ctx.stroke();
+            }
+          }
+
+          ctx.restore();
+        }
+      });
+      return;
+    }
+
     const registry = ObjectRegistry.getInstance();
     const pageObjects = registry.getObjectsByPage(pageNumber);
 

@@ -3,6 +3,7 @@ import { ObjectRegistry } from '../ObjectRegistry';
 import { SelectionEngine } from './SelectionEngine';
 import { TextLayout } from '../text/TextLayout';
 import { TextSelection } from '../text/TextSelection';
+import { FidelityEngine } from '../fidelity/FidelityEngine';
 
 /**
  * RenderEngine renders all active PDF objects from the ObjectRegistry
@@ -130,7 +131,8 @@ export class RenderEngine {
 
         switch (obj.type) {
           case 'text': {
-            ctx.font = `${state.fontSize}px ${state.fontName}`;
+            const run = FidelityEngine.compileTextRun(state.text, state.fontName, state.fontSize);
+            ctx.font = `${run.fontSize}px ${run.fontFamily}`;
             const baselineOffset = (obj as any).baseline - (obj as any).y;
 
             // Render native text selection highlight if active
@@ -151,9 +153,11 @@ export class RenderEngine {
               }
             }
 
-            // Draw actual text
+            // Draw actual text character-by-character based on exact compiled positions
             ctx.fillStyle = state.fontColor || '#000000';
-            ctx.fillText(state.text, 0, baselineOffset);
+            run.glyphs.forEach((g) => {
+              ctx.fillText(g.char, g.x, baselineOffset);
+            });
 
             // Render blinking caret (500ms intervals)
             if (isEditing && layout) {

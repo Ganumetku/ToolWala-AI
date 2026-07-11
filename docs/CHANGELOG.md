@@ -4,6 +4,41 @@ All notable changes and architectural updates to the ToolWala Native PDF Engine 
 
 ---
 
+## [Phase 5.4] - 2026-07-11
+### Added
+- Created `src/lib/tw-engine/fidelity/` directory.
+- Created `FontMatcher.ts` converting subset fonts and standardizing Base14 names.
+- Created `EmbeddedFontResolver.ts` caching font buffers and registering them in the browser via style elements.
+- Created `BrowserFontFallback.ts` mapping closest typographic metrics to system fonts.
+- Created `GlyphAdvanceEngine.ts` cache indexing explicit PDF glyph widths.
+- Created `BaselineEngine.ts` correcting baseline offsets dynamically.
+- Created `TextMatrixCompiler.ts` compiling text matrices (Tm, Td, T*).
+- Created `CharacterPositionEngine.ts` typesetting character glyphs individually.
+- Created `TextBoundsCompiler.ts` compiling aggregate line heights.
+- Created `FidelityEngine.ts` coordinating text layout runs compile.
+- Created `FidelityValidator.ts` assessing alignment drift error score.
+- Integrated `FidelityEngine` in `RenderEngine.ts` to draw characters individually based on compiled glyph advance metrics.
+- Created `scratch/verify_fidelity.ts` verification test script.
+
+---
+
+## [Phase 5.3.1] - 2026-07-11
+### Added
+- Implemented native I-beam cursor hovers on original text elements.
+- Hooked single-click, double-click, and triple-click snaps inside text boxes.
+- Registered drag selection handlers computing glyph start/end margins.
+- Enabled keyboard arrow keys, Shift+Arrows, Home, and End navigation.
+- Configured dynamic textbox controls and borders toggling between `edit-text` and `select` modes.
+- Created `scratch/verify_text_selection.ts` verification test script.
+
+---
+
+## [Phase 5.3] - 2026-07-10
+### Added
+- Created `src/lib/tw-engine/bridge/` directory containing `FabricAdapter.ts`, `FabricSelectionBridge.ts`, and legacy dependencies isolation wrappers.
+
+---
+
 ## [Phase 5.2] - 2026-07-10
 ### Added
 - Created `src/lib/tw-engine/ui/` directory.

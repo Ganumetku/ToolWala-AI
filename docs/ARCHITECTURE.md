@@ -283,4 +283,35 @@ graph TD
     adapter --> rendererInterface[Renderer Interface]
     rendererInterface --> legacyFabric[Legacy Fabric Renderer Adapter]
     rendererInterface --> nativeRenderer[Native Renderer Adapter]
+
+---
+
+## 🔠 Native PDF Text Fidelity Engine (Phase 5.4)
+
+The Native PDF Text Fidelity Engine ensures character-level typesetting matching original PDF document dimensions and positioning coordinates.
+
+### 1. Typesetting & Layout Pipeline
+This flow details how text records compile to exact coordinates using typographic subcomponents:
+
+```mermaid
+graph TD
+    record[Parsed PDF Text Records] --> matcher[FontMatcher: resolve subsets & base families]
+    matcher --> fallback[BrowserFontFallback: fallback close system metrics]
+    fallback --> resolver[EmbeddedFontResolver: load binary font @font-face]
+    resolver --> advEngine[GlyphAdvanceEngine: load explicit design widths]
+    advEngine --> matrixCompiler[TextMatrixCompiler: process Tm / Td / T* / Tc / Tw]
+    matrixCompiler --> posEngine[CharacterPositionEngine: calculate pixel coordinates per glyph]
+    posEngine --> boundsCompiler[TextBoundsCompiler: compile aggregation bounding boxes]
+    boundsCompiler --> runCache[FidelityEngine: Layout Cache]
+    runCache --> render[RenderEngine: draw individual glyph runs]
+```
+
+### 2. Typographic Core Subsystems
+* **FontMatcher**: Resolves custom PostScript subsets (`ABCDEF+TimesNewRomanPSMT` -> `Times New Roman`) and standard Core Base14 fonts.
+* **EmbeddedFontResolver**: Installs custom OpenType/TrueType binary font face tables dynamically to prevent browser font substitution.
+* **BrowserFontFallback**: Compares typographic ascenders, descenders, and average widths to match fallback system fonts.
+* **GlyphAdvanceEngine**: Maps proportional PDF glyph spacing widths.
+* **TextMatrixCompiler**: Parses transformation matrices mapping skewing, rotations, tracking (`Tc`), word spacing (`Tw`), and subscripts/superscripts rises (`Ts`).
+* **CharacterPositionEngine**: Position every character independently, mapping layouts to local pixel positions.
+* **FidelityValidator**: Asserts layout matching metrics and measures spacing/baseline alignments drift error.
 ```

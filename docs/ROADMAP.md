@@ -24,7 +24,10 @@ This live roadmap tracks completed implementation phases, current work scopes, a
 
 * [x] **Phase 5.2**: UI Synchronization Layer (EditorEvents, UIStateBridge, ViewportSync, SelectionSync, MutationDispatcher, InteractionController, RenderAdapter, CanvasSyncManager, UIStateValidator).
 
+* [x] **Phase 5.3**: Legacy Fabric Bridge Layer (Isolated dependencies behind FabricAdapter/FabricSelectionBridge adapters).
+* [x] **Phase 5.3.1**: Native Professional Text Selection & Editing UX (iLovePDF Style glyph highlights, blinking carets, arrow keys navigation).
+* [x] **Phase 5.4**: Native PDF Text Fidelity Engine (FontMatcher, EmbeddedFontResolver, GlyphAdvanceEngine, BaselineEngine, TextMatrixCompiler).
+
 ### Upcoming Milestones
-* [ ] **Phase 5.3**: Incremental Saves implementation and modifications merging
 * [ ] **Phase 6**: Interactive UI Components integration (React/Canvas hooks bridge, toolbar commands layout, active caret indicator drawing)
 * [ ] **Phase 7**: Production benchmark tests & SDK packaging

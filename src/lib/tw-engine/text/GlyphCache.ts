@@ -1,3 +1,5 @@
+import { GlyphAdvanceEngine } from '../fidelity/GlyphAdvanceEngine';
+
 /**
  * GlyphCache stores character advance widths for proportional fonts
  * (Helvetica, Times-Roman) and fixed-width Courier.
@@ -44,6 +46,11 @@ export class GlyphCache {
     const key = fontName.toLowerCase();
 
     // 1. Check custom dynamically-cached widths
+    const explicitAdv = GlyphAdvanceEngine.getGlyphAdvance(fontName, char, -1);
+    if (explicitAdv !== -1) {
+      return explicitAdv;
+    }
+
     let fontCache = this.cache.get(key);
     if (fontCache && fontCache.has(char)) {
       return fontCache.get(char)!;

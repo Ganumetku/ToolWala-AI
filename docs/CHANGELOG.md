@@ -4,6 +4,15 @@ All notable changes and architectural updates to the ToolWala Native PDF Engine 
 
 ---
 
+## [Phase 5.6] - 2026-07-12
+### Added
+- Integrated `FidelityEngine` typesetting runs directly into `RenderEngine.ts`'s custom `fabricObjects` render pass, rendering solid characters character-by-character based on exact baseline offsets.
+- Forced Fabric textbox `fill` to `'transparent'` during creation, selection, and editing modes inside `PDFCanvas.tsx` to completely remove Fabric text rendering visual discrepancies.
+- Added `sessionListener` inside `PDFCanvas.tsx` setup lifecycle to propagate native typing changes from `EditingSession` back to Fabric text states and dynamically adjust text box width limits.
+- Created `scratch/verify_native_text_rendering.ts` automated integration test script.
+
+---
+
 ## [Phase 5.5] - 2026-07-12
 ### Added
 - Created `src/lib/tw-engine/editing/` directory.

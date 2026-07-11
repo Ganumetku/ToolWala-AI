@@ -7,6 +7,7 @@ import { FidelityEngine } from '../fidelity/FidelityEngine';
 import { EditingSession } from '../editing/EditingSession';
 import { CaretRenderer } from '../editing/CaretRenderer';
 import { SelectionRenderer } from '../editing/SelectionRenderer';
+import { isOriginalTextEdited } from '../../twpdf/editor/textEdit';
 
 /**
  * RenderEngine renders all active PDF objects from the ObjectRegistry
@@ -29,7 +30,10 @@ export class RenderEngine {
         if (obj.isOriginalText || obj.type === 'textbox' || obj.type === 'i-text') {
           const session = EditingSession.getInstance();
           const isEditing = session.getActiveObjectId() === obj.id;
-          if (!isEditing) return;
+          const isEdited = isOriginalTextEdited(obj);
+
+          // We only render this element if it is actively being edited OR if it has been edited/modified!
+          if (!isEditing && !isEdited) return;
 
           ctx.save();
           const scaleX = obj.scaleX || 1;
@@ -39,18 +43,34 @@ export class RenderEngine {
           ctx.rotate(((obj.angle || 0) * Math.PI) / 180);
           ctx.scale(scaleX, scaleY);
 
+          // Compile text using the active session's typed text if editing, otherwise the object's current modified text
+          const currentText = isEditing ? session.getText() : (obj.text || '');
+          const fontColor = (obj.fill && obj.fill !== 'transparent') ? obj.fill : (obj.originalTextData?.detectedColor || '#000000');
+          
+          // Draw solid characters character-by-character using FidelityEngine positioning
+          const run = FidelityEngine.compileTextRun(currentText, obj.fontFamily || 'Helvetica', obj.fontSize || 12);
+          ctx.font = `${obj.fontStyle || 'normal'} ${obj.fontWeight || 'normal'} ${run.fontSize}px ${run.fontFamily}`;
+          ctx.fillStyle = fontColor;
+          
+          // Calculate baseline offset
+          const baselineOffset = (obj.baseline !== undefined) ? (obj.baseline - obj.top) : (run.fontSize * 0.8);
+          run.glyphs.forEach((g) => {
+            ctx.fillText(g.char, g.x, baselineOffset);
+          });
+
           // Build layout using the session's active text value
-          const layout = new TextLayout(session.getText() || '', obj.fontFamily || 'Helvetica', obj.fontSize || 12);
+          const layout = new TextLayout(currentText, obj.fontFamily || 'Helvetica', obj.fontSize || 12);
           
           // 1. Draw Selection Highlights
           SelectionRenderer.drawSelection(ctx, layout, session.getSelectionStart(), session.getSelectionEnd());
 
           // 2. Draw Blinking Caret
-          const start = session.getSelectionStart();
-          const end = session.getSelectionEnd();
-          if (start === end) {
-            const caretColor = obj.fill && obj.fill !== 'transparent' ? obj.fill : '#000000';
-            CaretRenderer.drawCaret(ctx, layout, session.getCaretIndex(), caretColor);
+          if (isEditing) {
+            const start = session.getSelectionStart();
+            const end = session.getSelectionEnd();
+            if (start === end) {
+              CaretRenderer.drawCaret(ctx, layout, session.getCaretIndex(), fontColor);
+            }
           }
 
           ctx.restore();

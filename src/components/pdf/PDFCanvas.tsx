@@ -385,9 +385,10 @@ const PageRenderer = ({
             fontFamily: box.fontFamily || 'Helvetica',
             padding: 0,
             lineHeight: 1.0,
-            fill: isReplaced ? (box.replacedColor || detectedColor) : 'transparent',
+            fill: 'transparent',
             backgroundColor: isReplaced ? 'transparent' : 'rgba(255, 255, 255, 0.001)', // invisible but registers clicks perfectly
             isOriginalText: true,
+            baseline: box.baseline || (box.y + box.fontSize * 0.8),
             originalTextData: {
               text: box.text,
               x: box.x,
@@ -417,11 +418,10 @@ const PageRenderer = ({
             strokeWidth: 1
           });
 
-          // Hook editing events directly on the textbox to manage fill transparency
+          // Hook editing events directly on the textbox to manage transparency
           textbox.on('editing:entered', () => {
-            const detectedColor = textbox.originalTextData?.detectedColor || '#0b2c8c';
             textbox.set({
-              fill: textbox.fill === 'transparent' ? detectedColor : textbox.fill,
+              fill: 'transparent',
               backgroundColor: 'transparent', // Transparent background
               stroke: 'transparent'
             });
@@ -429,14 +429,12 @@ const PageRenderer = ({
           });
 
           textbox.on('editing:exited', () => {
-            if (!isOriginalTextEdited(textbox)) {
-              textbox.set({
-                fill: 'transparent',
-                backgroundColor: 'rgba(255, 255, 255, 0.001)',
-                stroke: 'transparent'
-              });
-              fbCanvas.requestRenderAll();
-            }
+            textbox.set({
+              fill: 'transparent',
+              backgroundColor: 'rgba(255, 255, 255, 0.001)',
+              stroke: 'transparent'
+            });
+            fbCanvas.requestRenderAll();
           });
 
           fbCanvas.add(textbox);
@@ -580,8 +578,7 @@ const PageRenderer = ({
         const selectionEngine = SelectionEngine.getInstance();
         selectionEngine.select(obj.id, pageNum);
 
-        const detectedColor = obj.originalTextData?.detectedColor || '#0b2c8c';
-        obj.set({ fill: detectedColor });
+        obj.set({ fill: 'transparent' });
 
         fbCanvas.forEachObject((o: any) => {
           if (o.isOriginalText && o.id !== obj.id && !isOriginalTextEdited(o)) {
@@ -743,7 +740,41 @@ const PageRenderer = ({
     fbCanvas.on('text:changed', handleTextChanged);
     fbCanvas.on('editing:exited', handleObjectModified);
 
+    const sessionListener = {
+      onSessionStart: (objId: string, pageNumStart: number) => {},
+      onSessionUpdate: (text: string, caretIndex: number, selStart: number, selEnd: number) => {
+        const activePage = EditingSession.getInstance().getActivePageNum();
+        if (activePage !== pageNum) return;
+        const objId = EditingSession.getInstance().getActiveObjectId();
+        if (!objId) return;
+        const obj = fbCanvas.getObjects().find((o: any) => o.id === objId);
+        if (obj) {
+          obj.set({ text });
+          const origWidth = obj.originalTextData?.width || obj.width || 0;
+          obj.set({ width: 9999 });
+          let maxLineWidth = 0;
+          const linesList = text.split('\n');
+          for (let i = 0; i < linesList.length; i++) {
+            const lineWidth = obj.measureLine(i).width || 0;
+            if (lineWidth > maxLineWidth) {
+              maxLineWidth = lineWidth;
+            }
+          }
+          const newWidth = Math.max(origWidth, maxLineWidth + 10);
+          obj.set({ width: newWidth });
+          fbCanvas.requestRenderAll();
+        }
+      },
+      onSessionEnd: () => {
+        handleBootstrapSave();
+      }
+    };
+
+    EditingSession.getInstance().addListener(sessionListener);
+
     return () => {
+      EditingSession.getInstance().removeListener(sessionListener);
+      EditingSession.getInstance().endSession();
       fbCanvas.off('selection:created', handleSelection);
       fbCanvas.off('selection:updated', handleSelection);
       fbCanvas.off('object:added', handleObjectAdded);

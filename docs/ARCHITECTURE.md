@@ -356,4 +356,19 @@ stateDiagram-v2
 * **FocusManager**: Routes active browser keyboard focus between the hidden textarea and the active canvas.
 * **CursorManager**: Sets canvas pointer styles dynamically (default, text, grab).
 * **EditingValidator**: Enforces rules preventing canvas transforms or dragging operations when in TEXT_EDITING state.
+
+---
+
+## 🎨 Native Text Rendering Integration (Phase 5.6)
+
+Phase 5.6 makes the ToolWala Native Engine the sole owner of visible text rendering, bypassing Fabric.js text rendering entirely. Fabric textboxes remain solely as transparent hit-test regions for cursor hovers, selections, and clicks.
+
+### 1. Canvas Rendering Stack Order
+Each viewport page canvas is drawn in the following layer sequence:
+1. **PDF Background Canvas**: Renders the underlying static original PDF page content.
+2. **Whiteout Layer**: Drawn during `before:render` context calls, blanking out original background textboxes that are active or modified.
+3. **Native Text Rendering**: Drawn inside `after:render` using `FidelityEngine` compiled character-by-character glyph coordinates.
+4. **Native Selection Highlighting**: Displays exact multi-line blue selection blocks matching typographic bounds.
+5. **Native Caret Overlay**: Paints the blinking text caret positioned precisely along the local line baseline.
+6. **UI Overlays**: Fabric bounds and custom resize controls indicators.
 ```

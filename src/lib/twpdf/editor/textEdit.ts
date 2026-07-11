@@ -4,11 +4,14 @@ export function isOriginalTextEdited(obj: {
   text?: string;
   left?: number;
   top?: number;
+  x?: number;
+  y?: number;
   fontSize?: number;
   fontFamily?: string;
   fontWeight?: string;
   fontStyle?: string;
   fill?: string;
+  color?: string;
   originalTextData?: {
     text: string;
     x: number;
@@ -24,15 +27,22 @@ export function isOriginalTextEdited(obj: {
   const orig = obj.originalTextData;
   if (!orig) return false;
 
+  const currentX = obj.left !== undefined ? obj.left : (obj.x !== undefined ? obj.x : 0);
+  const currentY = obj.top !== undefined ? obj.top : (obj.y !== undefined ? obj.y : 0);
+
+  const hasColorDiff = 
+    (obj.fill !== undefined && obj.fill !== 'transparent' && obj.fill !== orig.detectedColor) ||
+    (obj.color !== undefined && obj.color !== 'transparent' && obj.color !== orig.detectedColor);
+
   return !!(
     obj.isDeletedOriginal ||
     obj.text !== orig.text ||
-    Math.abs((obj.left ?? 0) - orig.x) > 0.5 ||
-    Math.abs((obj.top ?? 0) - orig.y) > 0.5 ||
+    Math.abs(currentX - orig.x) > 0.5 ||
+    Math.abs(currentY - orig.y) > 0.5 ||
     obj.fontSize !== orig.fontSize ||
     obj.fontFamily !== orig.fontFamily ||
     obj.fontWeight !== orig.fontWeight ||
     obj.fontStyle !== orig.fontStyle ||
-    (obj.fill !== 'transparent' && obj.fill !== orig.detectedColor)
+    hasColorDiff
   );
 }

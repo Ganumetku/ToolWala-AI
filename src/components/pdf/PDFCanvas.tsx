@@ -5,7 +5,6 @@ import { RefreshCw } from 'lucide-react';
 import {
   detectTextColorFromCanvas,
   detectBackgroundColorFromCanvas,
-  detectTextWeightFromCanvas,
 } from '@/lib/twpdf/parser';
 import {
   isOriginalTextEdited,
@@ -289,12 +288,11 @@ const PageRenderer = ({
           // Detect properties from background canvas
           const detectedColor = detectTextColorFromCanvas(pdfCanvasRef.current, box, zoomScale);
           const detectedBgColor = detectBackgroundColorFromCanvas(pdfCanvasRef.current, box, zoomScale);
-          const detectedWeight = detectTextWeightFromCanvas(pdfCanvasRef.current, box, zoomScale);
 
           const isReplaced = box.replacedText !== undefined;
           const displayText = isReplaced ? box.replacedText : box.text;
 
-          const activeWeight = (box.fontWeight === 'bold' || detectedWeight === 'bold') ? 'bold' : 'normal';
+          const activeWeight = box.fontWeight === 'bold' ? 'bold' : 'normal';
 
           const textbox = new fabricLib.Textbox(displayText, {
             id: box.id,

@@ -7,6 +7,7 @@ import type {
   TWPDFSignatureObject,
   TWPDFAnnotationObject,
 } from '@/types/twpdf';
+import { isOriginalTextEdited } from '@/lib/twpdf/editor';
 
 const FABRIC_CONTROL_PROPS = {
   borderColor: '#3b82f6',
@@ -92,8 +93,7 @@ export class LegacyFabricBridge {
    * Compiles a standard text object to Fabric textbox JSON.
    */
   private static textToFabric(obj: TWPDFTextObject): Record<string, unknown> {
-    const isReplaced = obj.isOriginalText && obj.text !== obj.originalTextData?.text;
-    const isEdited = obj.isOriginalText && (isReplaced || obj.isDeletedOriginal);
+    const isEdited = isOriginalTextEdited(obj);
     const detectedColor = obj.originalTextData?.detectedColor || '#0b2c8c';
 
     let fill = obj.color;

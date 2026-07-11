@@ -4,6 +4,9 @@ import { SelectionEngine } from './SelectionEngine';
 import { TextLayout } from '../text/TextLayout';
 import { TextSelection } from '../text/TextSelection';
 import { FidelityEngine } from '../fidelity/FidelityEngine';
+import { EditingSession } from '../editing/EditingSession';
+import { CaretRenderer } from '../editing/CaretRenderer';
+import { SelectionRenderer } from '../editing/SelectionRenderer';
 
 /**
  * RenderEngine renders all active PDF objects from the ObjectRegistry
@@ -24,8 +27,8 @@ export class RenderEngine {
     if (fabricObjects) {
       fabricObjects.forEach((obj) => {
         if (obj.isOriginalText || obj.type === 'textbox' || obj.type === 'i-text') {
-          const selection = SelectionEngine.getInstance();
-          const isEditing = selection.getIsEditingText() && selection.getSelectedObjectId() === obj.id;
+          const session = EditingSession.getInstance();
+          const isEditing = session.getActiveObjectId() === obj.id;
           if (!isEditing) return;
 
           ctx.save();
@@ -36,31 +39,18 @@ export class RenderEngine {
           ctx.rotate(((obj.angle || 0) * Math.PI) / 180);
           ctx.scale(scaleX, scaleY);
 
-          const layout = new TextLayout(obj.text || '', obj.fontFamily || 'Helvetica', obj.fontSize || 12);
-          const start = selection.getSelectionStart();
-          const end = selection.getSelectionEnd();
-
+          // Build layout using the session's active text value
+          const layout = new TextLayout(session.getText() || '', obj.fontFamily || 'Helvetica', obj.fontSize || 12);
+          
           // 1. Draw Selection Highlights
-          if (start !== end) {
-            const rects = TextSelection.getSelectionRects(layout, start, end);
-            ctx.fillStyle = 'rgba(0, 102, 204, 0.3)'; // Professional highlight blue
-            for (const r of rects) {
-              ctx.fillRect(r.x, r.y, r.width, r.height);
-            }
-          }
+          SelectionRenderer.drawSelection(ctx, layout, session.getSelectionStart(), session.getSelectionEnd());
 
           // 2. Draw Blinking Caret
+          const start = session.getSelectionStart();
+          const end = session.getSelectionEnd();
           if (start === end) {
-            const caretIndex = selection.getCaretIndex();
-            if (Math.floor(Date.now() / 500) % 2 === 0) {
-              const caretCoords = this.getCaretCoords(layout, caretIndex);
-              ctx.strokeStyle = obj.fill && obj.fill !== 'transparent' ? obj.fill : '#000000';
-              ctx.lineWidth = 1.5;
-              ctx.beginPath();
-              ctx.moveTo(caretCoords.x, caretCoords.y);
-              ctx.lineTo(caretCoords.x, caretCoords.y + caretCoords.height);
-              ctx.stroke();
-            }
+            const caretColor = obj.fill && obj.fill !== 'transparent' ? obj.fill : '#000000';
+            CaretRenderer.drawCaret(ctx, layout, session.getCaretIndex(), caretColor);
           }
 
           ctx.restore();
@@ -131,26 +121,18 @@ export class RenderEngine {
 
         switch (obj.type) {
           case 'text': {
-            const run = FidelityEngine.compileTextRun(state.text, state.fontName, state.fontSize);
+            const session = EditingSession.getInstance();
+            const isEditing = session.getActiveObjectId() === obj.id;
+
+            const currentText = isEditing ? session.getText() : state.text;
+            const run = FidelityEngine.compileTextRun(currentText, state.fontName, state.fontSize);
             ctx.font = `${run.fontSize}px ${run.fontFamily}`;
             const baselineOffset = (obj as any).baseline - (obj as any).y;
 
-            // Render native text selection highlight if active
-            const selection = SelectionEngine.getInstance();
-            const isEditing = selection.getIsEditingText() && selection.getSelectedObjectId() === obj.id;
-
             let layout: TextLayout | null = null;
             if (isEditing) {
-              layout = new TextLayout(state.text, state.fontName, state.fontSize);
-              const start = selection.getSelectionStart();
-              const end = selection.getSelectionEnd();
-              if (start !== end) {
-                const rects = TextSelection.getSelectionRects(layout, start, end);
-                ctx.fillStyle = 'rgba(0, 102, 204, 0.3)'; // Professional highlight blue
-                for (const r of rects) {
-                  ctx.fillRect(r.x, r.y, r.width, r.height);
-                }
-              }
+              layout = new TextLayout(currentText, state.fontName, state.fontSize);
+              SelectionRenderer.drawSelection(ctx, layout, session.getSelectionStart(), session.getSelectionEnd());
             }
 
             // Draw actual text character-by-character based on exact compiled positions
@@ -161,19 +143,11 @@ export class RenderEngine {
 
             // Render blinking caret (500ms intervals)
             if (isEditing && layout) {
-              const start = selection.getSelectionStart();
-              const end = selection.getSelectionEnd();
+              const start = session.getSelectionStart();
+              const end = session.getSelectionEnd();
               if (start === end) {
-                const caretIndex = selection.getCaretIndex();
-                if (Math.floor(Date.now() / 500) % 2 === 0) {
-                  const caretCoords = this.getCaretCoords(layout, caretIndex);
-                  ctx.strokeStyle = state.fontColor || '#000000';
-                  ctx.lineWidth = 1.5;
-                  ctx.beginPath();
-                  ctx.moveTo(caretCoords.x, caretCoords.y);
-                  ctx.lineTo(caretCoords.x, caretCoords.y + caretCoords.height);
-                  ctx.stroke();
-                }
+                const caretColor = state.fontColor || '#000000';
+                CaretRenderer.drawCaret(ctx, layout, session.getCaretIndex(), caretColor);
               }
             }
             break;

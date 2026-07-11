@@ -314,4 +314,46 @@ graph TD
 * **TextMatrixCompiler**: Parses transformation matrices mapping skewing, rotations, tracking (`Tc`), word spacing (`Tw`), and subscripts/superscripts rises (`Ts`).
 * **CharacterPositionEngine**: Position every character independently, mapping layouts to local pixel positions.
 * **FidelityValidator**: Asserts layout matching metrics and measures spacing/baseline alignments drift error.
+
+---
+
+## 🔏 Native Text Editing Session Engine (Phase 5.5)
+
+The Native Text Editing Session Engine manages interaction states, preventing concurrent conflicts between caret typesetting inputs and object dragging coordinates.
+
+### 1. State Machine Transitions
+This state machine details how editing modes transition explicitly:
+
+```mermaid
+stateDiagram-v2
+    [*] --> IDLE
+    
+    IDLE --> OBJECT_SELECTED : Click object (Arrow Tool)
+    IDLE --> TEXT_EDITING : Click text (Text Tool)
+    
+    OBJECT_SELECTED --> DRAGGING : Pointer drag selection
+    OBJECT_SELECTED --> RESIZING : Drag resize handle
+    OBJECT_SELECTED --> ROTATING : Drag rotate handle
+    OBJECT_SELECTED --> TEXT_EDITING : Double Click textbox
+    
+    DRAGGING --> OBJECT_SELECTED : Pointer up
+    RESIZING --> OBJECT_SELECTED : Pointer up
+    ROTATING --> OBJECT_SELECTED : Pointer up
+    
+    TEXT_EDITING --> TEXT_SELECTING : Pointer drag selection inside
+    TEXT_SELECTING --> TEXT_EDITING : Pointer up
+    
+    TEXT_EDITING --> OBJECT_SELECTED : Press ESC / click outside
+    TEXT_SELECTING --> OBJECT_SELECTED : Press ESC / click outside
+```
+
+### 2. Core Editing Modules
+* **EditingSession**: Encapsulates active session text, caret index, selection start, and selection end metrics.
+* **TextInputController**: Dynamically mounts a hidden DOM `<textarea>` to intercept browser keyboard inputs and IME compositions.
+* **KeyboardController**: Binds hotkeys for character deletions, cursor navigation, and select-all actions.
+* **ClipboardController**: Interfaces with standard browser clipboard APIs for cut, copy, and paste commands.
+* **IMEController**: Listens to CompositionStart, CompositionUpdate, and CompositionEnd to support multi-byte inputs.
+* **FocusManager**: Routes active browser keyboard focus between the hidden textarea and the active canvas.
+* **CursorManager**: Sets canvas pointer styles dynamically (default, text, grab).
+* **EditingValidator**: Enforces rules preventing canvas transforms or dragging operations when in TEXT_EDITING state.
 ```

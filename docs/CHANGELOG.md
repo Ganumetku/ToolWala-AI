@@ -4,6 +4,25 @@ All notable changes and architectural updates to the ToolWala Native PDF Engine 
 
 ---
 
+## [Phase 5.5] - 2026-07-12
+### Added
+- Created `src/lib/tw-engine/editing/` directory.
+- Created `EditingState.ts` declaring state machine values (IDLE, OBJECT_SELECTED, TEXT_EDITING, TEXT_SELECTING, DRAGGING, RESIZING, ROTATING).
+- Created `EditModeManager.ts` managing active canvas tool types.
+- Created `EditingSession.ts` managing active text editing session values, transitions, and change listeners.
+- Created `CaretRenderer.ts` and `SelectionRenderer.ts` rendering caret lines and highlights runs.
+- Created `TextInputController.ts` dynamically mounting/unmounting an offscreen DOM textarea to capture native typing and composition inputs.
+- KeyboardController.ts mapping command navigations, deletes, backspaces, and clipboard actions (Ctrl+A/C/X/V).
+- Created `ClipboardController.ts` interfacing with the browser navigator clipboard systems.
+- Created `IMEController.ts` managing Composition start/update/end events to support multi-byte inputs (Hindi, Japanese, Chinese, Korean).
+- Created `FocusManager.ts` routing active window focus targets.
+- Created `CursorManager.ts` styling canvas element CSS pointers (text, default, grab).
+- Created `EditingValidator.ts` enforcing move blocking and transform controls hiding rules.
+- Integrated `EditingSession` and validations into `RenderEngine.ts` and `PDFCanvas.tsx` event loops.
+- Created `scratch/verify_editing_session.ts` verification test script.
+
+---
+
 ## [Phase 5.4] - 2026-07-11
 ### Added
 - Created `src/lib/tw-engine/fidelity/` directory.

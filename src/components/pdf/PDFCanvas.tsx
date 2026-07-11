@@ -18,6 +18,11 @@ import type { PageRendererProps, TextBoxInfo } from '@/types/pdf';
 import { SelectionEngine } from '@/lib/tw-engine/editor/SelectionEngine';
 import { TextLayout } from '@/lib/tw-engine/text/TextLayout';
 import { RenderEngine } from '@/lib/tw-engine/editor/RenderEngine';
+import { EditModeManager } from '@/lib/tw-engine/editing/EditModeManager';
+import { EditingSession } from '@/lib/tw-engine/editing/EditingSession';
+import { EditingValidator } from '@/lib/tw-engine/editing/EditingValidator';
+import { FocusManager } from '@/lib/tw-engine/editing/FocusManager';
+import { CursorManager } from '@/lib/tw-engine/editing/CursorManager';
 
 // -------------------------------------------------------------
 // VIRTUALIZED PAGE CONTAINER WRAPPER USING INTERSECTION OBSERVER
@@ -289,10 +294,53 @@ const PageRenderer = ({
     });
 
     // Smart Snapping implementation
+    // Smart Snapping & Drag block validations
     fbCanvas.on('object:moving', (options: any) => {
       const obj = options.target;
       if (!obj) return;
+      if (!EditingValidator.isDraggingPermitted()) {
+        if (obj._left !== undefined && obj._top !== undefined) {
+          obj.left = obj._left;
+          obj.top = obj._top;
+        }
+        fbCanvas.requestRenderAll();
+        return;
+      }
+      obj._left = obj.left;
+      obj._top = obj.top;
       applyObjectSnapping(obj, width, height);
+    });
+
+    fbCanvas.on('object:scaling', (options: any) => {
+      if (!EditingValidator.shouldRenderTransformControls()) {
+        const obj = options.target;
+        if (obj && obj._scaleX !== undefined) {
+          obj.scaleX = obj._scaleX;
+          obj.scaleY = obj._scaleY;
+          fbCanvas.requestRenderAll();
+        }
+      } else {
+        const obj = options.target;
+        if (obj) {
+          obj._scaleX = obj.scaleX;
+          obj._scaleY = obj.scaleY;
+        }
+      }
+    });
+
+    fbCanvas.on('object:rotating', (options: any) => {
+      if (!EditingValidator.shouldRenderTransformControls()) {
+        const obj = options.target;
+        if (obj && obj._angle !== undefined) {
+          obj.angle = obj._angle;
+          fbCanvas.requestRenderAll();
+        }
+      } else {
+        const obj = options.target;
+        if (obj) {
+          obj._angle = obj.angle;
+        }
+      }
     });
 
     // Populate state from history or original texts
@@ -513,6 +561,9 @@ const PageRenderer = ({
     fbCanvas.on('mouse:down', (e: any) => {
       onFocusCanvas(pageId, fbCanvas);
 
+      // Initialize FocusManager
+      FocusManager.getInstance();
+
       const obj = e.target;
       if (obj && obj.isOriginalText && editMode === 'edit-text') {
         const pointer = fbCanvas.getPointer(e.e);
@@ -552,6 +603,14 @@ const PageRenderer = ({
           clickCount = 0; // reset
         }
 
+        // Start active text editing session
+        EditingSession.getInstance().startSession(obj.id, pageNum, obj.text);
+        EditingSession.getInstance().setSelection(
+          selectionEngine.getSelectionStart(),
+          selectionEngine.getSelectionEnd(),
+          selectionEngine.getCaretIndex()
+        );
+
         isDragging = true;
         dragStartLocal = local;
 
@@ -562,6 +621,8 @@ const PageRenderer = ({
       } else {
         const selectionEngine = SelectionEngine.getInstance();
         selectionEngine.deselect();
+        EditingSession.getInstance().endSession();
+
         fbCanvas.forEachObject((o: any) => {
           if (o.isOriginalText && !isOriginalTextEdited(o)) {
             o.set({
@@ -584,13 +645,21 @@ const PageRenderer = ({
           const currentLocal = getLocalPointer(obj, pointer);
           const layout = new TextLayout(obj.text, obj.fontFamily || 'Helvetica', obj.fontSize || 12);
 
-          SelectionEngine.getInstance().handleDragSelection(
+          const selectionEngine = SelectionEngine.getInstance();
+          selectionEngine.handleDragSelection(
             dragStartLocal.x,
             dragStartLocal.y,
             currentLocal.x,
             currentLocal.y,
             layout
           );
+          
+          EditingSession.getInstance().setSelection(
+            selectionEngine.getSelectionStart(),
+            selectionEngine.getSelectionEnd(),
+            selectionEngine.getCaretIndex()
+          );
+
           fbCanvas.requestRenderAll();
         }
       }
@@ -621,8 +690,16 @@ const PageRenderer = ({
     };
 
     const handleObjectAdded = (e: any) => {
-      if (getIsRenderingFromEngine() || isLoadingFromPropRef.current) return;
       const obj = e.target;
+      if (obj) {
+        obj._left = obj.left;
+        obj._top = obj.top;
+        obj._scaleX = obj.scaleX || 1;
+        obj._scaleY = obj.scaleY || 1;
+        obj._angle = obj.angle || 0;
+      }
+
+      if (getIsRenderingFromEngine() || isLoadingFromPropRef.current) return;
       if (obj && onFabricAdded) {
         onFabricAdded(pageId, fabricObjToJson(obj));
       } else {
@@ -711,6 +788,8 @@ const PageRenderer = ({
   useEffect(() => {
     const fbCanvas = fabricCanvasInstance.current;
     if (!fbCanvas) return;
+
+    EditModeManager.getInstance().setTool(editMode as any);
 
     fbCanvas.isDrawingMode = false;
     fbCanvas.selection = editMode === 'select';

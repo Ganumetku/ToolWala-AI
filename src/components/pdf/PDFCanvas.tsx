@@ -15,6 +15,9 @@ import { CANVAS_JSON_PROPS } from '@/lib/twpdf/core';
 import { getIsRenderingFromEngine } from '@/lib/twpdf/editing/renderer/fabricRenderer';
 import { hexToRgbaStr } from '@/lib/twpdf/utils';
 import type { PageRendererProps, TextBoxInfo } from '@/types/pdf';
+import { SelectionEngine } from '@/lib/tw-engine/editor/SelectionEngine';
+import { TextLayout } from '@/lib/tw-engine/text/TextLayout';
+import { RenderEngine } from '@/lib/tw-engine/editor/RenderEngine';
 
 // -------------------------------------------------------------
 // VIRTUALIZED PAGE CONTAINER WRAPPER USING INTERSECTION OBSERVER
@@ -146,6 +149,20 @@ const PDFPageWrapper = ({
 // -------------------------------------------------------------
 // DETAILED CANVAS LAYER & INTERACTION MANAGER
 // -------------------------------------------------------------
+const getLocalPointer = (obj: any, pointer: { x: number; y: number }): { x: number; y: number } => {
+  const dx = pointer.x - (obj.left || 0);
+  const dy = pointer.y - (obj.top || 0);
+  const angleRad = -((obj.angle || 0) * Math.PI) / 180;
+  const rotatedX = dx * Math.cos(angleRad) - dy * Math.sin(angleRad);
+  const rotatedY = dx * Math.sin(angleRad) + dy * Math.cos(angleRad);
+  const scaleX = obj.scaleX || 1;
+  const scaleY = obj.scaleY || 1;
+  return {
+    x: rotatedX / scaleX,
+    y: rotatedY / scaleY
+  };
+};
+
 const PageRenderer = ({
   pageId,
   pageNum,
@@ -180,7 +197,20 @@ const PageRenderer = ({
   const lastCanvasStateRef = useRef<string>('');
   const [isBackgroundRendered, setIsBackgroundRendered] = useState(false);
 
+  // Blinking caret repaint trigger loop
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const fbCanvas = fabricCanvasInstance.current;
+      if (fbCanvas) {
+        const selection = SelectionEngine.getInstance();
+        if (selection.getIsEditingText() && selection.getSelectedPageNumber() === pageNum) {
+          fbCanvas.requestRenderAll();
+        }
+      }
+    }, 500);
 
+    return () => clearInterval(interval);
+  }, [pageNum]);
 
   // 1. PDF.js background rendering
   useEffect(() => {
@@ -325,15 +355,16 @@ const PageRenderer = ({
               detectedBgColor: detectedBgColor
             },
             selectable: true,
-            editable: true,
+            editable: false,
             evented: true,
-            hasControls: true,
+            hasControls: false,
+            hasBorders: false,
             lockScalingY: true,
             borderColor: '#3b82f6',
             cornerColor: '#3b82f6',
             cornerSize: 8,
             transparentCorners: false,
-            hasRotatingPoint: true,
+            hasRotatingPoint: false,
             stroke: 'transparent',
             strokeWidth: 1
           });
@@ -400,6 +431,19 @@ const PageRenderer = ({
       ctx.restore();
     });
 
+    // Custom render loop hook to paint native text selection overlays
+    const renderEngine = new RenderEngine(() => fbCanvas.requestRenderAll());
+    fbCanvas.on('after:render', () => {
+      const ctx = fbCanvas.getContext();
+      ctx.save();
+      const v = fbCanvas.viewportTransform;
+      if (v) {
+        ctx.transform(v[0], v[1], v[2], v[3], v[4], v[5]);
+      }
+      renderEngine.render(ctx, pageNum);
+      ctx.restore();
+    });
+
     // Brush Setup
     setupBrushes(fbCanvas, editMode, strokeColor, brushWidth);
 
@@ -461,9 +505,79 @@ const PageRenderer = ({
       }
     });
 
-    // MouseDown focus
-    fbCanvas.on('mouse:down', () => {
+    let isDragging = false;
+    let dragStartLocal = { x: 0, y: 0 };
+    let clickCount = 0;
+    let lastClickTime = 0;
+
+    fbCanvas.on('mouse:down', (e: any) => {
       onFocusCanvas(pageId, fbCanvas);
+
+      const obj = e.target;
+      if (obj && obj.isOriginalText && editMode === 'edit-text') {
+        const pointer = fbCanvas.getPointer(e.e);
+        const local = getLocalPointer(obj, pointer);
+
+        const now = Date.now();
+        if (now - lastClickTime < 300) {
+          clickCount++;
+        } else {
+          clickCount = 1;
+        }
+        lastClickTime = now;
+
+        const selectionEngine = SelectionEngine.getInstance();
+        selectionEngine.select(obj.id, pageNum);
+
+        const layout = new TextLayout(obj.text, obj.fontFamily || 'Helvetica', obj.fontSize || 12);
+        if (clickCount === 1) {
+          selectionEngine.handleSingleClick(local.x, local.y, layout);
+        } else if (clickCount === 2) {
+          selectionEngine.handleDoubleClick(local.x, local.y, layout);
+        } else if (clickCount >= 3) {
+          selectionEngine.handleTripleClick(local.x, local.y, layout);
+          clickCount = 0; // reset
+        }
+
+        isDragging = true;
+        dragStartLocal = local;
+
+        fbCanvas.requestRenderAll();
+        
+        // Notify selection change
+        onObjectSelected(pageId, obj);
+      } else {
+        const selectionEngine = SelectionEngine.getInstance();
+        if (selectionEngine.getIsEditingText()) {
+          selectionEngine.deselect();
+          fbCanvas.requestRenderAll();
+          onObjectCleared();
+        }
+      }
+    });
+
+    fbCanvas.on('mouse:move', (e: any) => {
+      if (isDragging) {
+        const obj = fbCanvas.getActiveObject();
+        if (obj && obj.isOriginalText) {
+          const pointer = fbCanvas.getPointer(e.e);
+          const currentLocal = getLocalPointer(obj, pointer);
+          const layout = new TextLayout(obj.text, obj.fontFamily || 'Helvetica', obj.fontSize || 12);
+
+          SelectionEngine.getInstance().handleDragSelection(
+            dragStartLocal.x,
+            dragStartLocal.y,
+            currentLocal.x,
+            currentLocal.y,
+            layout
+          );
+          fbCanvas.requestRenderAll();
+        }
+      }
+    });
+
+    fbCanvas.on('mouse:up', () => {
+      isDragging = false;
     });
 
     // Auto save JSON / route through editing engine

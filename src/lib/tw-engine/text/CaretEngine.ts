@@ -62,8 +62,10 @@ export class CaretEngine {
     // 3. Compute the cumulative text string index
     let cumulative = 0;
     for (let k = 0; k < activeLineIdx; k++) {
-      // Add line text length + 1 (for wrapped or hard carriage breaks)
       cumulative += layout.lines[k].text.length;
+      if (layout.text[cumulative] === '\n') {
+        cumulative += 1;
+      }
     }
 
     return cumulative + glyphOffsetIndex;
@@ -123,6 +125,9 @@ export class CaretEngine {
     let cumulative = 0;
     for (let k = 0; k < activeLineIdx; k++) {
       cumulative += layout.lines[k].text.length;
+      if (layout.text[cumulative] === '\n') {
+        cumulative += 1;
+      }
     }
 
     const lineText = layout.lines[activeLineIdx].text;

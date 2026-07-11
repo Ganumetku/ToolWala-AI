@@ -1,5 +1,8 @@
 import type { TWObject } from '../types';
 import { ObjectRegistry } from '../ObjectRegistry';
+import { SelectionEngine } from './SelectionEngine';
+import { TextLayout } from '../text/TextLayout';
+import { TextSelection } from '../text/TextSelection';
 
 /**
  * RenderEngine renders all active PDF objects from the ObjectRegistry
@@ -80,9 +83,47 @@ export class RenderEngine {
         switch (obj.type) {
           case 'text': {
             ctx.font = `${state.fontSize}px ${state.fontName}`;
-            ctx.fillStyle = state.fontColor;
             const baselineOffset = (obj as any).baseline - (obj as any).y;
+
+            // Render native text selection highlight if active
+            const selection = SelectionEngine.getInstance();
+            const isEditing = selection.getIsEditingText() && selection.getSelectedObjectId() === obj.id;
+
+            let layout: TextLayout | null = null;
+            if (isEditing) {
+              layout = new TextLayout(state.text, state.fontName, state.fontSize);
+              const start = selection.getSelectionStart();
+              const end = selection.getSelectionEnd();
+              if (start !== end) {
+                const rects = TextSelection.getSelectionRects(layout, start, end);
+                ctx.fillStyle = 'rgba(0, 102, 204, 0.3)'; // Professional highlight blue
+                for (const r of rects) {
+                  ctx.fillRect(r.x, r.y, r.width, r.height);
+                }
+              }
+            }
+
+            // Draw actual text
+            ctx.fillStyle = state.fontColor || '#000000';
             ctx.fillText(state.text, 0, baselineOffset);
+
+            // Render blinking caret (500ms intervals)
+            if (isEditing && layout) {
+              const start = selection.getSelectionStart();
+              const end = selection.getSelectionEnd();
+              if (start === end) {
+                const caretIndex = selection.getCaretIndex();
+                if (Math.floor(Date.now() / 500) % 2 === 0) {
+                  const caretCoords = this.getCaretCoords(layout, caretIndex);
+                  ctx.strokeStyle = state.fontColor || '#000000';
+                  ctx.lineWidth = 1.5;
+                  ctx.beginPath();
+                  ctx.moveTo(caretCoords.x, caretCoords.y);
+                  ctx.lineTo(caretCoords.x, caretCoords.y + caretCoords.height);
+                  ctx.stroke();
+                }
+              }
+            }
             break;
           }
 
@@ -126,5 +167,29 @@ export class RenderEngine {
 
       ctx.restore();
     });
+  }
+
+  private getCaretCoords(layout: TextLayout, caretIndex: number): { x: number; y: number; height: number } {
+    let cumulative = 0;
+    for (const line of layout.lines) {
+      const lineEndIdx = cumulative + line.text.length;
+      if (caretIndex >= cumulative && caretIndex <= lineEndIdx) {
+        const localIdx = caretIndex - cumulative;
+        let x = 0;
+        if (localIdx > 0 && line.glyphs.length > 0) {
+          const glyph = line.glyphs[Math.min(localIdx - 1, line.glyphs.length - 1)];
+          x = glyph.x + glyph.advanceX;
+        }
+        const y = line.y - line.ascent;
+        const height = line.ascent + line.descent;
+        return { x, y, height };
+      }
+      cumulative = lineEndIdx;
+    }
+    if (layout.lines.length > 0) {
+      const firstLine = layout.lines[0];
+      return { x: 0, y: firstLine.y - firstLine.ascent, height: firstLine.ascent + firstLine.descent };
+    }
+    return { x: 0, y: 0, height: 12 };
   }
 }

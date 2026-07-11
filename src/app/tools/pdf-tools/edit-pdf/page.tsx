@@ -12,6 +12,7 @@ import { useSelection } from '@/hooks/useSelection';
 import { usePdfEditor } from '@/hooks/usePdfEditor';
 import { useTWPdfDocument } from '@/hooks/useTWPdfDocument';
 import { useTWPdfEditingEngine } from '@/hooks/useTWPdfEditingEngine';
+import { SelectionEngine } from '@/lib/tw-engine/editor/SelectionEngine';
 
 export default function EditPdfPage() {
   const canvasInstances = useRef<Record<string, unknown>>({});
@@ -188,6 +189,60 @@ export default function EditPdfPage() {
         (e.target as HTMLElement).isContentEditable
       ) {
         return;
+      }
+
+      const selectionEngine = SelectionEngine.getInstance();
+      if (selectionEngine.getIsEditingText()) {
+        const obj = selectionEngine.getSelectedObject();
+        if (obj && obj.type === 'text') {
+          const state = obj.currentState as any;
+          const textLength = state.text?.length || 0;
+          
+          if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            selectionEngine.moveCaretLeft(e.shiftKey, e.ctrlKey || e.metaKey, textLength);
+            const activePageId = doc.activePageId;
+            if (activePageId) {
+              const canvas = (canvasInstances.current as Record<string, any>)[activePageId];
+              if (canvas) canvas.requestRenderAll();
+            }
+            return;
+          }
+          if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            selectionEngine.moveCaretRight(e.shiftKey, e.ctrlKey || e.metaKey, textLength);
+            const activePageId = doc.activePageId;
+            if (activePageId) {
+              const canvas = (canvasInstances.current as Record<string, any>)[activePageId];
+              if (canvas) canvas.requestRenderAll();
+            }
+            return;
+          }
+          if (e.key === 'Home') {
+            e.preventDefault();
+            selectionEngine.moveCaretHome(e.shiftKey);
+            const activePageId = doc.activePageId;
+            if (activePageId) {
+              const canvas = (canvasInstances.current as Record<string, any>)[activePageId];
+              if (canvas) canvas.requestRenderAll();
+            }
+            return;
+          }
+          if (e.key === 'End') {
+            e.preventDefault();
+            selectionEngine.moveCaretEnd(e.shiftKey, textLength);
+            const activePageId = doc.activePageId;
+            if (activePageId) {
+              const canvas = (canvasInstances.current as Record<string, any>)[activePageId];
+              if (canvas) canvas.requestRenderAll();
+            }
+            return;
+          }
+          if (e.key === 'Backspace' || e.key === 'Delete') {
+            e.preventDefault();
+            return;
+          }
+        }
       }
 
       const isMac = typeof window !== 'undefined' && navigator.platform.toUpperCase().indexOf('MAC') >= 0;

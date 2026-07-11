@@ -30,8 +30,14 @@ export function createTextbox(opts: ObjectFactoryOptions): unknown {
     fontSize: opts.fontSize,
     fontFamily: opts.fontFamily,
     fill: opts.strokeColor === 'transparent' ? '#000000' : opts.strokeColor,
-    ...FABRIC_CONTROL_PROPS,
+    borderColor: '#3b82f6',
+    cornerColor: '#3b82f6',
+    cornerSize: 8,
+    transparentCorners: false,
     lockScalingY: true,
+    hasControls: false,
+    hasBorders: false,
+    editable: false,
   });
 }
 

@@ -698,7 +698,16 @@ const PageRenderer = ({
     fbCanvas.forEachObject((obj: any) => {
       if (obj.isOriginalText) {
         obj.selectable = editMode === 'edit-text' || editMode === 'select';
-        obj.editable = editMode === 'edit-text';
+        obj.editable = false;
+        if (editMode === 'edit-text') {
+          obj.hasControls = false;
+          obj.hasBorders = false;
+          obj.hasRotatingPoint = false;
+        } else {
+          obj.hasControls = true;
+          obj.hasBorders = true;
+          obj.hasRotatingPoint = true;
+        }
       } else {
         obj.selectable = editMode === 'select';
       }

@@ -92,7 +92,12 @@ export class UpdateObjectCommand extends BaseCommand {
 }
 
 export class MoveObjectCommand extends UpdateObjectCommand {
-  constructor(pageId: string, objectId: string, before: { x: number; y: number }, after: { x: number; y: number }) {
+  constructor(
+    pageId: string,
+    objectId: string,
+    before: Partial<TWPDFObject> & { x: number; y: number },
+    after: Partial<TWPDFObject> & { x: number; y: number }
+  ) {
     super(pageId, objectId, before, after);
     (this as { type: string }).type = 'moveObject';
   }

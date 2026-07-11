@@ -284,8 +284,8 @@ export class TWPDFEditingEngine {
         new MoveObjectCommand(
           pageId,
           objectId,
-          { x: before.x ?? existing.x, y: before.y ?? existing.y },
-          { x: patch.x ?? existing.x, y: patch.y ?? existing.y }
+          { ...before, x: before.x ?? existing.x, y: before.y ?? existing.y },
+          { ...patch, x: patch.x ?? existing.x, y: patch.y ?? existing.y }
         )
       );
     } else {

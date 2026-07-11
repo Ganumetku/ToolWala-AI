@@ -513,12 +513,6 @@ const PageRenderer = ({
         obj.set({ width: newWidth });
         fbCanvas.requestRenderAll();
       }
-      if (getIsRenderingFromEngine() || isLoadingFromPropRef.current) return;
-      if (obj && onFabricModified) {
-        onFabricModified(pageId, fabricObjToJson(obj));
-      } else {
-        handleBootstrapSave();
-      }
     };
 
     const handlePathCreated = (e: any) => {

@@ -590,7 +590,17 @@ const PageRenderer = ({
           }
         });
 
-        const layout = new TextLayout(obj.text, obj.fontFamily || 'Helvetica', obj.fontSize || 12);
+        const fontFamily = obj.fontFamily || 'Helvetica';
+        const fontSize = obj.fontSize || 12;
+        const fontStyle = obj.fontStyle || 'normal';
+        const fontWeight = obj.fontWeight || 'normal';
+        const cacheKey = `${obj.text}_${fontFamily}_${fontSize}_${fontStyle}_${fontWeight}`;
+        if (!obj._cachedLayout || obj._cachedLayoutKey !== cacheKey) {
+          obj._cachedLayout = new TextLayout(obj.text, fontFamily, fontSize);
+          obj._cachedLayoutKey = cacheKey;
+        }
+        const layout = obj._cachedLayout;
+
         if (clickCount === 1) {
           selectionEngine.handleSingleClick(local.x, local.y, layout);
         } else if (clickCount === 2) {
@@ -640,7 +650,17 @@ const PageRenderer = ({
         if (obj && obj.isOriginalText) {
           const pointer = fbCanvas.getPointer(e.e);
           const currentLocal = getLocalPointer(obj, pointer);
-          const layout = new TextLayout(obj.text, obj.fontFamily || 'Helvetica', obj.fontSize || 12);
+
+          const fontFamily = obj.fontFamily || 'Helvetica';
+          const fontSize = obj.fontSize || 12;
+          const fontStyle = obj.fontStyle || 'normal';
+          const fontWeight = obj.fontWeight || 'normal';
+          const cacheKey = `${obj.text}_${fontFamily}_${fontSize}_${fontStyle}_${fontWeight}`;
+          if (!obj._cachedLayout || obj._cachedLayoutKey !== cacheKey) {
+            obj._cachedLayout = new TextLayout(obj.text, fontFamily, fontSize);
+            obj._cachedLayoutKey = cacheKey;
+          }
+          const layout = obj._cachedLayout;
 
           const selectionEngine = SelectionEngine.getInstance();
           selectionEngine.handleDragSelection(

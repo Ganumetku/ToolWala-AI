@@ -2,6 +2,8 @@ import type { TWObject } from '../types';
 import { ObjectRegistry } from '../ObjectRegistry';
 import { SelectionEngine } from './SelectionEngine';
 import { TextLayout } from '../text/TextLayout';
+import type { LineRun } from '../text/TextLayout';
+import type { GlyphLayout } from '../text/GlyphLayout';
 import { TextSelection } from '../text/TextSelection';
 import { FidelityEngine } from '../fidelity/FidelityEngine';
 import { EditingSession } from '../editing/EditingSession';
@@ -45,22 +47,29 @@ export class RenderEngine {
 
           // Compile text using the active session's typed text if editing, otherwise the object's current modified text
           const currentText = isEditing ? session.getText() : (obj.text || '');
+          const fontFamily = obj.fontFamily || 'Helvetica';
+          const fontSize = obj.fontSize || 12;
+          const fontStyle = obj.fontStyle || 'normal';
+          const fontWeight = obj.fontWeight || 'normal';
+
+          const cacheKey = `${currentText}_${fontFamily}_${fontSize}_${fontStyle}_${fontWeight}`;
+          if (!obj._cachedLayout || obj._cachedLayoutKey !== cacheKey) {
+            obj._cachedLayout = new TextLayout(currentText, fontFamily, fontSize);
+            obj._cachedLayoutKey = cacheKey;
+          }
+          const layout = obj._cachedLayout;
+
           const fontColor = (obj.fill && obj.fill !== 'transparent') ? obj.fill : (obj.originalTextData?.detectedColor || '#000000');
-          
-          // Draw solid characters character-by-character using FidelityEngine positioning
-          const run = FidelityEngine.compileTextRun(currentText, obj.fontFamily || 'Helvetica', obj.fontSize || 12);
-          ctx.font = `${obj.fontStyle || 'normal'} ${obj.fontWeight || 'normal'} ${run.fontSize}px ${run.fontFamily}`;
+          ctx.font = `${fontStyle} ${fontWeight} ${fontSize}px ${fontFamily}`;
           ctx.fillStyle = fontColor;
           
-          // Calculate baseline offset
-          const baselineOffset = (obj.baseline !== undefined) ? (obj.baseline - obj.top) : (run.fontSize * 0.8);
-          run.glyphs.forEach((g) => {
-            ctx.fillText(g.char, g.x, baselineOffset);
+          // Draw solid characters character-by-character from the layout line items
+          layout.lines.forEach((line: LineRun) => {
+            line.glyphs.forEach((g: GlyphLayout) => {
+              ctx.fillText(g.char, line.x + g.x, line.y);
+            });
           });
 
-          // Build layout using the session's active text value
-          const layout = new TextLayout(currentText, obj.fontFamily || 'Helvetica', obj.fontSize || 12);
-          
           // 1. Draw Selection Highlights
           SelectionRenderer.drawSelection(ctx, layout, session.getSelectionStart(), session.getSelectionEnd());
 
@@ -145,24 +154,30 @@ export class RenderEngine {
             const isEditing = session.getActiveObjectId() === obj.id;
 
             const currentText = isEditing ? session.getText() : state.text;
-            const run = FidelityEngine.compileTextRun(currentText, state.fontName, state.fontSize);
-            ctx.font = `${run.fontSize}px ${run.fontFamily}`;
-            const baselineOffset = (obj as any).baseline - (obj as any).y;
+            const fontName = state.fontName || 'Helvetica';
+            const fontSize = state.fontSize || 12;
 
-            let layout: TextLayout | null = null;
-            if (isEditing) {
-              layout = new TextLayout(currentText, state.fontName, state.fontSize);
-              SelectionRenderer.drawSelection(ctx, layout, session.getSelectionStart(), session.getSelectionEnd());
+            const cacheKey = `${currentText}_${fontName}_${fontSize}`;
+            if (!(obj as any)._cachedLayout || (obj as any)._cachedLayoutKey !== cacheKey) {
+              (obj as any)._cachedLayout = new TextLayout(currentText, fontName, fontSize);
+              (obj as any)._cachedLayoutKey = cacheKey;
             }
+            const layout = (obj as any)._cachedLayout;
+
+            ctx.font = `${fontSize}px ${fontName}`;
+            ctx.fillStyle = state.fontColor || '#000000';
 
             // Draw actual text character-by-character based on exact compiled positions
-            ctx.fillStyle = state.fontColor || '#000000';
-            run.glyphs.forEach((g) => {
-              ctx.fillText(g.char, g.x, baselineOffset);
+            layout.lines.forEach((line: LineRun) => {
+              line.glyphs.forEach((g: GlyphLayout) => {
+                ctx.fillText(g.char, line.x + g.x, line.y);
+              });
             });
 
-            // Render blinking caret (500ms intervals)
-            if (isEditing && layout) {
+            // Render selection highlights and blinking caret
+            SelectionRenderer.drawSelection(ctx, layout, session.getSelectionStart(), session.getSelectionEnd());
+
+            if (isEditing) {
               const start = session.getSelectionStart();
               const end = session.getSelectionEnd();
               if (start === end) {

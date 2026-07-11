@@ -371,4 +371,16 @@ Each viewport page canvas is drawn in the following layer sequence:
 4. **Native Selection Highlighting**: Displays exact multi-line blue selection blocks matching typographic bounds.
 5. **Native Caret Overlay**: Paints the blinking text caret positioned precisely along the local line baseline.
 6. **UI Overlays**: Fabric bounds and custom resize controls indicators.
+
+---
+
+## 🔒 Text Layout Stabilization (Phase 5.6.1)
+
+Layout stabilization ensures that text drawing coordinates, selections overlays, and blinking carets sit exactly on identical boundaries on every frame paint, eliminating metrics drift.
+
+### 1. Object-Level Layout Cache Key
+The cache key is computed as follows:
+`cacheKey = text + "_" + fontFamily + "_" + fontSize + "_" + fontStyle + "_" + fontWeight`
+
+If `cacheKey` remains unchanged, the engine reuses the immutable cached `TextLayout` instance (`obj._cachedLayout`), bypassing all typesetting and kerning spacing calculations completely.
 ```

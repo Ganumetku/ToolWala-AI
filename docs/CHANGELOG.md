@@ -4,6 +4,15 @@ All notable changes and architectural updates to the ToolWala Native PDF Engine 
 
 ---
 
+## [Phase 5.6.1] - 2026-07-12
+### Added
+- Introduced layout caching on the object instance (`obj._cachedLayout` / `obj._cachedLayoutKey`) to skip recomputing layout metrics during continuous repaint loops.
+- Replaced separate typographic baseline offset calculations with inline drawing directly from cached layout lines and glyphs data.
+- Consolidated selection drags and mouse clicks to reuse the identical cached `TextLayout` instances.
+- Created `scratch/verify_layout_stabilization.ts` automated layout stabilization verification tests.
+
+---
+
 ## [Phase 5.6] - 2026-07-12
 ### Added
 - Integrated `FidelityEngine` typesetting runs directly into `RenderEngine.ts`'s custom `fabricObjects` render pass, rendering solid characters character-by-character based on exact baseline offsets.

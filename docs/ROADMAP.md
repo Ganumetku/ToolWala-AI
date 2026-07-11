@@ -29,6 +29,7 @@ This live roadmap tracks completed implementation phases, current work scopes, a
 * [x] **Phase 5.4**: Native PDF Text Fidelity Engine (FontMatcher, EmbeddedFontResolver, GlyphAdvanceEngine, BaselineEngine, TextMatrixCompiler).
 * [x] **Phase 5.5**: Native Text Editing Session Engine (EditingSession state machine, CaretRenderer, SelectionRenderer, TextInputController, FocusManager).
 * [x] **Phase 5.6**: Native Text Rendering Integration (Hiding Fabric text drawing, native character-by-character render pass).
+* [x] **Phase 5.6.1**: Text Layout Stabilization (Immutable cached TextLayout instances, eliminating duplicate measurements).
 
 ### Upcoming Milestones
 * [ ] **Phase 6**: Interactive UI Components integration (React/Canvas hooks bridge, toolbar commands layout, active caret indicator drawing)

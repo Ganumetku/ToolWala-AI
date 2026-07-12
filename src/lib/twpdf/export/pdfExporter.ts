@@ -156,7 +156,7 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
             obj.set({
               fill:
                 obj.fill === 'transparent'
-                  ? obj.originalTextData?.detectedColor || '#0b2c8c'
+                  ? obj.originalTextData?.detectedColor || '#000000'
                   : obj.fill,
               backgroundColor: 'transparent',
               stroke: 'transparent',

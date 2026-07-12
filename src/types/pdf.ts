@@ -61,6 +61,9 @@ export interface OriginalTextData {
   fontFamily?: string;
   detectedColor?: string;
   detectedBgColor?: string;
+  ascent?: number;
+  descent?: number;
+  pdfFontName?: string;
 }
 
 export interface SearchMatch {

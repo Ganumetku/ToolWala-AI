@@ -17,7 +17,7 @@ export class SelectionRenderer {
   ): void {
     if (start === end) return;
 
-    const rects = TextSelection.getSelectionRects(layout, start, end);
+    const rects = layout.selectionRectangles;
     ctx.save();
     ctx.fillStyle = color;
     for (const r of rects) {

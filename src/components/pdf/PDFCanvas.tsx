@@ -217,7 +217,7 @@ const PageRenderer = ({
           fbCanvas.requestRenderAll();
         }
       }
-    }, 500);
+    }, 250);
 
     return () => clearInterval(interval);
   }, [pageNum]);
@@ -413,7 +413,10 @@ const PageRenderer = ({
               fontStyle: box.fontStyle || 'normal',
               fontFamily: box.fontFamily || 'Helvetica',
               detectedColor: detectedColor,
-              detectedBgColor: detectedBgColor
+              detectedBgColor: detectedBgColor,
+              ascent: box.ascent,
+              descent: box.descent,
+              pdfFontName: box.pdfFontName
             },
             selectable: true,
             editable: false,

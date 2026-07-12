@@ -44,9 +44,25 @@ export class RenderEngine {
           const fontStyle = obj.fontStyle || 'normal';
           const fontWeight = obj.fontWeight || 'normal';
 
-          const cacheKey = `${currentText}_${fontFamily}_${fontSize}_${fontStyle}_${fontWeight}`;
+          const selStart = isEditing ? session.getSelectionStart() : 0;
+          const selEnd = isEditing ? session.getSelectionEnd() : 0;
+          const caretIdx = isEditing ? session.getCaretIndex() : 0;
+
+          const cacheKey = `${currentText}_${fontFamily}_${fontSize}_${fontStyle}_${fontWeight}_${selStart}_${selEnd}_${caretIdx}`;
           if (!obj._cachedLayout || obj._cachedLayoutKey !== cacheKey) {
-            obj._cachedLayout = new TextLayout(currentText, fontFamily, fontSize);
+            obj._cachedLayout = new TextLayout(
+              currentText,
+              fontFamily,
+              fontSize,
+              0,
+              false,
+              0,
+              obj.originalTextData?.ascent,
+              obj.originalTextData?.descent,
+              selStart,
+              selEnd,
+              caretIdx
+            );
             obj._cachedLayoutKey = cacheKey;
           }
           const layout = obj._cachedLayout;
@@ -165,9 +181,25 @@ export class RenderEngine {
             const fontName = state.fontName || 'Helvetica';
             const fontSize = state.fontSize || 12;
 
-            const cacheKey = `${currentText}_${fontName}_${fontSize}`;
+            const selStart = isEditing ? session.getSelectionStart() : 0;
+            const selEnd = isEditing ? session.getSelectionEnd() : 0;
+            const caretIdx = isEditing ? session.getCaretIndex() : 0;
+
+            const cacheKey = `${currentText}_${fontName}_${fontSize}_${selStart}_${selEnd}_${caretIdx}`;
             if (!(obj as any)._cachedLayout || (obj as any)._cachedLayoutKey !== cacheKey) {
-              (obj as any)._cachedLayout = new TextLayout(currentText, fontName, fontSize);
+              (obj as any)._cachedLayout = new TextLayout(
+                currentText,
+                fontName,
+                fontSize,
+                0,
+                false,
+                0,
+                (obj as any).originalTextData?.ascent || (obj as any).ascent,
+                (obj as any).originalTextData?.descent || (obj as any).descent,
+                selStart,
+                selEnd,
+                caretIdx
+              );
               (obj as any)._cachedLayoutKey = cacheKey;
             }
             const layout = (obj as any)._cachedLayout;

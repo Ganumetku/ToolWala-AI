@@ -6,10 +6,10 @@ export function detectTextColorFromCanvas(
   box: { x: number; y: number; width: number; height: number },
   scale: number
 ): string {
-  if (!canvas) return '#0b2c8c';
+  if (!canvas) return '#000000';
   try {
     const ctx = canvas.getContext('2d');
-    if (!ctx) return '#0b2c8c';
+    if (!ctx) return '#000000';
 
     const x = box.x * scale;
     const y = box.y * scale;
@@ -43,11 +43,11 @@ export function detectTextColorFromCanvas(
       }
     }
 
-    if (samplePoints.length === 0) return '#0b2c8c';
+    if (samplePoints.length === 0) return '#000000';
 
     const textPixels = samplePoints.filter((p) => p.L < 235);
     if (textPixels.length === 0) {
-      return '#0b2c8c';
+      return '#000000';
     }
 
     textPixels.sort((a, b) => a.L - b.L);
@@ -331,6 +331,9 @@ export async function detectOriginalText(
         originalPdfWidth: widthPdf > 0 ? widthPdf : fontSizePdf * 0.55 * item.str.length,
         originalPdfHeight: fontSizePdf,
         originalPdfFontSize: fontSizePdf,
+        pdfFontName: item.fontName,
+        ascent: fontStyleObj ? fontStyleObj.ascent : undefined,
+        descent: fontStyleObj ? fontStyleObj.descent : undefined,
       };
     });
   } catch (e) {

@@ -4,6 +4,7 @@ import { FontResolver } from './FontResolver';
 import { Kerning } from './Kerning';
 import { LineBreaker } from './LineBreaker';
 import { GlyphLayout } from './GlyphLayout';
+import { TextSelection, SelectionRect } from './TextSelection';
 
 export interface LineRun {
   text: string;
@@ -28,10 +29,13 @@ export class TextLayout {
   autoWrap = false;
   letterSpacing = 0;
   lineHeightMultiplier = 1.2;
-
   lines: LineRun[] = [];
   width = 0;
   height = 0;
+  ascent?: number;
+  descent?: number;
+  selectionRectangles: SelectionRect[] = [];
+  caretPosition: { x: number; y: number; height: number } = { x: 0, y: 0, height: 12 };
 
   constructor(
     text: string,
@@ -39,7 +43,12 @@ export class TextLayout {
     fontSize: number,
     maxWidth = 0,
     autoWrap = false,
-    letterSpacing = 0
+    letterSpacing = 0,
+    ascent?: number,
+    descent?: number,
+    selectionStart?: number,
+    selectionEnd?: number,
+    caretIndex?: number
   ) {
     this.text = text;
     this.fontName = FontResolver.resolveFontFamily(fontName);
@@ -47,8 +56,59 @@ export class TextLayout {
     this.maxWidth = maxWidth;
     this.autoWrap = autoWrap;
     this.letterSpacing = letterSpacing;
+    this.ascent = ascent;
+    this.descent = descent;
 
     this.layout();
+
+    this.selectionRectangles = TextSelection.getSelectionRects(this, selectionStart ?? 0, selectionEnd ?? 0);
+    this.caretPosition = this.calculateCaretPosition(caretIndex ?? 0);
+  }
+
+  private calculateCaretPosition(caretIndex: number): { x: number; y: number; height: number } {
+    let cumulative = 0;
+    for (const line of this.lines) {
+      const lineEndIdx = cumulative + line.text.length;
+      
+      if (caretIndex >= cumulative && caretIndex <= lineEndIdx) {
+        const localIdx = caretIndex - cumulative;
+        let cx = line.x;
+        let cy = line.y - line.ascent;
+        
+        if (localIdx > 0 && line.glyphs.length > 0) {
+          const glyphIdx = Math.min(localIdx - 1, line.glyphs.length - 1);
+          const glyph = line.glyphs[glyphIdx];
+          cx = line.x + glyph.x + glyph.advanceX;
+        }
+        
+        return {
+          x: cx,
+          y: cy,
+          height: line.ascent + line.descent,
+        };
+      }
+      
+      cumulative = lineEndIdx;
+      if (this.text[cumulative] === '\n') {
+        cumulative += 1;
+      }
+    }
+
+    if (this.lines.length > 0) {
+      const lastLine = this.lines[this.lines.length - 1];
+      let cx = lastLine.x;
+      if (lastLine.glyphs.length > 0) {
+        const lastGlyph = lastLine.glyphs[lastLine.glyphs.length - 1];
+        cx = lastLine.x + lastGlyph.x + lastGlyph.advanceX;
+      }
+      return {
+        x: cx,
+        y: lastLine.y - lastLine.ascent,
+        height: lastLine.ascent + lastLine.descent,
+      };
+    }
+
+    return { x: 0, y: 0, height: this.fontSize };
   }
 
   /**
@@ -69,8 +129,8 @@ export class TextLayout {
     const metrics = FontMetricsRegistry.getMetrics(this.fontName);
     const scale = this.fontSize / metrics.unitsPerEm;
 
-    const ascentPx = metrics.ascent * scale;
-    const descentPx = Math.abs(metrics.descent * scale);
+    const ascentPx = (this.ascent !== undefined) ? (Math.abs(this.ascent) * this.fontSize) : (metrics.ascent * scale);
+    const descentPx = (this.descent !== undefined) ? (Math.abs(this.descent) * this.fontSize) : Math.abs(metrics.descent * scale);
     const lineGapPx = metrics.lineGap * scale;
     const lineHeightPx = (ascentPx + descentPx + lineGapPx) * this.lineHeightMultiplier;
 

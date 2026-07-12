@@ -1,5 +1,6 @@
 import { EditingState } from './EditingState';
 import { EditModeManager } from './EditModeManager';
+import { CaretRenderer } from './CaretRenderer';
 
 export interface EditingSessionListener {
   onSessionStart: (objId: string, pageNum: number) => void;
@@ -46,6 +47,7 @@ export class EditingSession {
 
     EditModeManager.getInstance().transitionTo(EditingState.TEXT_EDITING);
 
+    CaretRenderer.recordInteraction();
     this.listeners.forEach((l) => l.onSessionStart(objId, pageNum));
     this.notifyUpdate();
   }
@@ -101,6 +103,7 @@ export class EditingSession {
   }
 
   private notifyUpdate(): void {
+    CaretRenderer.recordInteraction();
     this.listeners.forEach((l) =>
       l.onSessionUpdate(this.text, this.caretIndex, this.selectionStart, this.selectionEnd)
     );

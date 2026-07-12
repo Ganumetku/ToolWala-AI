@@ -27,7 +27,7 @@ function textBoxToObject(
     fontSize: box.fontSize,
     fontWeight: box.fontWeight ?? 'normal',
     fontStyle: box.fontStyle ?? 'normal',
-    color: isReplaced ? (box.replacedColor ?? '#0b2c8c') : 'transparent',
+    color: isReplaced ? (box.replacedColor ?? '#000000') : 'transparent',
     alignment: 'left',
     lineHeight: 1.0,
     isOriginalText: true,

@@ -202,6 +202,11 @@ const PageRenderer = ({
   const lastCanvasStateRef = useRef<string>('');
   const [isBackgroundRendered, setIsBackgroundRendered] = useState(false);
 
+  const editModeRef = useRef(editMode);
+  useEffect(() => {
+    editModeRef.current = editMode;
+  }, [editMode]);
+
   // Blinking caret repaint trigger loop
   useEffect(() => {
     const interval = setInterval(() => {
@@ -264,6 +269,13 @@ const PageRenderer = ({
     // Enforce high-DPI scaling explicitly on the client to override Next.js/SSR defaults of 1
     const pixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
     fabricLib.devicePixelRatio = pixelRatio;
+
+    // Globally disable Fabric's native text painting to prevent duplicate text rendering
+    if (fabricLib.Textbox) {
+      fabricLib.Textbox.prototype._renderText = function(ctx: CanvasRenderingContext2D) {
+        // Do nothing. Native RenderEngine handles visible text drawing during after:render.
+      };
+    }
 
     const fbWidth = Math.round(width * zoomScale);
     const fbHeight = Math.round(height * zoomScale);
@@ -418,6 +430,11 @@ const PageRenderer = ({
             strokeWidth: 1
           });
 
+          // Disable Fabric text rendering entirely for this textbox
+          (textbox as any)._renderText = function(ctx: CanvasRenderingContext2D) {
+            // Do nothing. Native RenderEngine handles visible text drawing during after:render.
+          };
+
           // Hook editing events directly on the textbox to manage transparency
           textbox.on('editing:entered', () => {
             textbox.set({
@@ -464,13 +481,19 @@ const PageRenderer = ({
             const orig = obj.originalTextData;
             const padX = 2;
             const padY = 2; // full coverage, no shrinking
+            ctx.save();
+            ctx.translate(orig.x, orig.y);
+            if (orig.angle) {
+              ctx.rotate((orig.angle * Math.PI) / 180);
+            }
             ctx.fillStyle = orig.detectedBgColor || '#ffffff';
             ctx.fillRect(
-              orig.x - padX,
-              orig.y - padY,
+              -padX,
+              -padY,
               orig.width + padX * 2,
               orig.height + padY * 2
             );
+            ctx.restore();
           }
         }
       });
@@ -526,7 +549,7 @@ const PageRenderer = ({
     // Hover bounding box outlines for guides
     fbCanvas.on('mouse:over', (e: any) => {
       const obj = e.target;
-      if (obj && obj.isOriginalText && editMode === 'edit-text') {
+      if (obj && obj.isOriginalText && editModeRef.current === 'edit-text') {
         // Only show dashed border if transparent/unedited
         if (obj.fill === 'transparent') {
           obj.set({
@@ -541,7 +564,7 @@ const PageRenderer = ({
 
     fbCanvas.on('mouse:out', (e: any) => {
       const obj = e.target;
-      if (obj && obj.isOriginalText && editMode === 'edit-text') {
+      if (obj && obj.isOriginalText && editModeRef.current === 'edit-text') {
         if (obj.fill === 'transparent') {
           obj.set({
             stroke: 'transparent'
@@ -563,7 +586,7 @@ const PageRenderer = ({
       FocusManager.getInstance();
 
       const obj = e.target;
-      if (obj && obj.isOriginalText && editMode === 'edit-text') {
+      if (obj && obj.isOriginalText && editModeRef.current === 'edit-text') {
         const pointer = fbCanvas.getPointer(e.e);
         const local = getLocalPointer(obj, pointer);
 

@@ -37,14 +37,6 @@ export class RenderEngine {
           // We only render this element if it is actively being edited OR if it has been edited/modified!
           if (!isEditing && !isEdited) return;
 
-          ctx.save();
-          const scaleX = obj.scaleX || 1;
-          const scaleY = obj.scaleY || 1;
-
-          ctx.translate(obj.left || 0, obj.top || 0);
-          ctx.rotate(((obj.angle || 0) * Math.PI) / 180);
-          ctx.scale(scaleX, scaleY);
-
           // Compile text using the active session's typed text if editing, otherwise the object's current modified text
           const currentText = isEditing ? session.getText() : (obj.text || '');
           const fontFamily = obj.fontFamily || 'Helvetica';
@@ -58,6 +50,22 @@ export class RenderEngine {
             obj._cachedLayoutKey = cacheKey;
           }
           const layout = obj._cachedLayout;
+
+          ctx.save();
+          const scaleX = obj.scaleX || 1;
+          const scaleY = obj.scaleY || 1;
+
+          ctx.translate(obj.left || 0, obj.top || 0);
+          ctx.rotate(((obj.angle || 0) * Math.PI) / 180);
+          ctx.scale(scaleX, scaleY);
+
+          // Calculate baseline shift to ensure pixel-perfect vertical alignment with the original PDF layout
+          const firstLineBaselineY = (obj.baseline !== undefined)
+            ? (obj.baseline - obj.top)
+            : (layout.lines[0]?.y || (fontSize * 0.8));
+          const layoutFirstLineY = layout.lines[0]?.y || (fontSize * 0.8);
+          const baselineShift = firstLineBaselineY - layoutFirstLineY;
+          ctx.translate(0, baselineShift);
 
           const fontColor = (obj.fill && obj.fill !== 'transparent') ? obj.fill : (obj.originalTextData?.detectedColor || '#000000');
           ctx.font = `${fontStyle} ${fontWeight} ${fontSize}px ${fontFamily}`;
@@ -164,6 +172,15 @@ export class RenderEngine {
             }
             const layout = (obj as any)._cachedLayout;
 
+            // Calculate baseline shift to ensure pixel-perfect vertical alignment with the original PDF layout
+            const firstLineBaselineY = ((obj as any).baseline !== undefined && (obj as any).y !== undefined)
+              ? ((obj as any).baseline - (obj as any).y)
+              : (layout.lines[0]?.y || (fontSize * 0.8));
+            const layoutFirstLineY = layout.lines[0]?.y || (fontSize * 0.8);
+            const baselineShift = firstLineBaselineY - layoutFirstLineY;
+            ctx.save();
+            ctx.translate(0, baselineShift);
+
             ctx.font = `${fontSize}px ${fontName}`;
             ctx.fillStyle = state.fontColor || '#000000';
 
@@ -185,6 +202,7 @@ export class RenderEngine {
                 CaretRenderer.drawCaret(ctx, layout, session.getCaretIndex(), caretColor);
               }
             }
+            ctx.restore();
             break;
           }
 

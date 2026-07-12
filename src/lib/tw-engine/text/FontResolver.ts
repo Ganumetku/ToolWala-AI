@@ -25,7 +25,7 @@ export class FontResolver {
       return baseName;
     }
 
-    return 'Helvetica'; // Fallback
+    return baseName; // Preserves custom/embedded web fonts
   }
 
   /**

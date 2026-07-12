@@ -5,6 +5,7 @@ import { Kerning } from './Kerning';
 import { LineBreaker } from './LineBreaker';
 import { GlyphLayout } from './GlyphLayout';
 import { TextSelection, SelectionRect } from './TextSelection';
+import { FontMetricsCache } from './FontMetricsCache';
 
 export interface LineRun {
   text: string;
@@ -34,6 +35,8 @@ export class TextLayout {
   height = 0;
   ascent?: number;
   descent?: number;
+  fontWeight = 'normal';
+  fontStyle = 'normal';
   selectionRectangles: SelectionRect[] = [];
   caretPosition: { x: number; y: number; height: number } = { x: 0, y: 0, height: 12 };
 
@@ -48,7 +51,9 @@ export class TextLayout {
     descent?: number,
     selectionStart?: number,
     selectionEnd?: number,
-    caretIndex?: number
+    caretIndex?: number,
+    fontWeight = 'normal',
+    fontStyle = 'normal'
   ) {
     this.text = text;
     this.fontName = FontResolver.resolveFontFamily(fontName);
@@ -58,6 +63,8 @@ export class TextLayout {
     this.letterSpacing = letterSpacing;
     this.ascent = ascent;
     this.descent = descent;
+    this.fontWeight = fontWeight;
+    this.fontStyle = fontStyle;
 
     this.layout();
 
@@ -111,21 +118,29 @@ export class TextLayout {
     return { x: 0, y: 0, height: this.fontSize };
   }
 
-  /**
-   * Processes word wrapping, scales typographic margins, and calculates screen layouts.
-   */
   layout(): void {
-    // 1. Wrap string into lines array
+    const lowerFont = this.fontName.toLowerCase();
+    const isStandard = lowerFont.includes('helvetica') || lowerFont.includes('times') || lowerFont.includes('roman') || lowerFont.includes('courier');
+
+    if (isStandard) {
+      this.layoutPipelineA();
+    } else {
+      this.layoutPipelineB();
+    }
+  }
+
+  private layoutPipelineA(): void {
     const rawLines = LineBreaker.splitLines(
       this.text,
       this.fontName,
       this.fontSize,
       this.maxWidth,
       this.autoWrap,
-      this.letterSpacing
+      this.letterSpacing,
+      this.fontWeight,
+      this.fontStyle
     );
 
-    // 2. Resolve metrics scale factor
     const metrics = FontMetricsRegistry.getMetrics(this.fontName);
     const scale = this.fontSize / metrics.unitsPerEm;
 
@@ -135,7 +150,7 @@ export class TextLayout {
     const lineHeightPx = (ascentPx + descentPx + lineGapPx) * this.lineHeightMultiplier;
 
     this.lines = [];
-    let currentY = ascentPx; // First line baseline offset
+    let currentY = ascentPx;
     let maxLineWidth = 0;
 
     for (const lineText of rawLines) {
@@ -148,7 +163,6 @@ export class TextLayout {
         const advDU = GlyphCache.getGlyphAdvance(resolvedFont, char);
         const advPx = advDU * scale;
 
-        // Apply spacing and kerning adjustments
         let spacingPx = 0;
         if (i < lineText.length - 1) {
           const nextChar = lineText[i + 1];
@@ -156,7 +170,6 @@ export class TextLayout {
           spacingPx = spacingDU * scale;
         }
 
-        // Create individual character GlyphLayout relative to line baseline origin
         const gY = -ascentPx;
         const gH = ascentPx + descentPx;
         const glyph = new GlyphLayout(
@@ -172,6 +185,87 @@ export class TextLayout {
         glyphs.push(glyph);
 
         currentX += advPx + spacingPx;
+      }
+
+      this.lines.push({
+        text: lineText,
+        x: 0,
+        y: currentY,
+        width: currentX,
+        height: ascentPx + descentPx,
+        ascent: ascentPx,
+        descent: descentPx,
+        glyphs,
+      });
+
+      if (currentX > maxLineWidth) {
+        maxLineWidth = currentX;
+      }
+
+      currentY += lineHeightPx;
+    }
+
+    this.width = maxLineWidth;
+    this.height = currentY - lineHeightPx + descentPx;
+  }
+
+  private layoutPipelineB(): void {
+    const rawLines = LineBreaker.splitLines(
+      this.text,
+      this.fontName,
+      this.fontSize,
+      this.maxWidth,
+      this.autoWrap,
+      this.letterSpacing,
+      this.fontWeight,
+      this.fontStyle
+    );
+
+    // Measure block-wide metrics for custom font
+    let maxAscent = 0;
+    let maxDescent = 0;
+    for (let i = 0; i < this.text.length; i++) {
+      const char = this.text[i];
+      if (char === '\n' || char === ' ') continue;
+      const m = FontMetricsCache.getMetrics(this.fontName, this.fontSize, this.fontWeight, this.fontStyle, char);
+      if (m.ascent > maxAscent) maxAscent = m.ascent;
+      if (m.descent > maxDescent) maxDescent = m.descent;
+    }
+    if (maxAscent === 0) maxAscent = this.fontSize * 0.8;
+    if (maxDescent === 0) maxDescent = this.fontSize * 0.2;
+
+    const ascentPx = (this.ascent !== undefined) ? (Math.abs(this.ascent) * this.fontSize) : maxAscent;
+    const descentPx = (this.descent !== undefined) ? (Math.abs(this.descent) * this.fontSize) : maxDescent;
+    const lineHeightPx = (ascentPx + descentPx) * this.lineHeightMultiplier;
+
+    this.lines = [];
+    let currentY = ascentPx;
+    let maxLineWidth = 0;
+
+    for (const lineText of rawLines) {
+      const glyphs: GlyphLayout[] = [];
+      let currentX = 0;
+
+      for (let i = 0; i < lineText.length; i++) {
+        const char = lineText[i];
+        const m = FontMetricsCache.getMetrics(this.fontName, this.fontSize, this.fontWeight, this.fontStyle, char);
+        const advPx = m.advanceX;
+
+        const gY = -ascentPx;
+        const gH = ascentPx + descentPx;
+        const glyph = new GlyphLayout(
+          char,
+          currentX,
+          gY,
+          advPx,
+          gH,
+          ascentPx,
+          descentPx,
+          advPx + this.letterSpacing
+        );
+        glyphs.push(glyph);
+
+        currentX += advPx + this.letterSpacing;
       }
 
       this.lines.push({

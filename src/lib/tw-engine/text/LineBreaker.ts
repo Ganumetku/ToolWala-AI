@@ -1,6 +1,7 @@
 import { GlyphCache } from './GlyphCache';
 import { FontMetricsRegistry } from './FontMetrics';
 import { Kerning } from './Kerning';
+import { FontMetricsCache } from './FontMetricsCache';
 
 /**
  * LineBreaker splits text blocks into wrapped lines based on width constraints.
@@ -15,7 +16,9 @@ export class LineBreaker {
     fontSize: number,
     maxWidth: number,
     autoWrap = true,
-    letterSpacing = 0
+    letterSpacing = 0,
+    fontWeight = 'normal',
+    fontStyle = 'normal'
   ): string[] {
     if (!text) return [''];
 
@@ -49,7 +52,9 @@ export class LineBreaker {
           fontName,
           fontSize,
           scale,
-          letterSpacing
+          letterSpacing,
+          fontWeight,
+          fontStyle
         );
 
         // Check if adding this word triggers wrapping limits
@@ -73,30 +78,42 @@ export class LineBreaker {
   }
 
   /**
-   * Measures the pixel width of a target text string using GlyphCache and Kerning.
+   * Measures the pixel width of a target text string using GlyphCache or FontMetricsCache.
    */
   private static measureStringWidth(
     str: string,
     fontName: string,
     fontSize: number,
     scale: number,
-    letterSpacing: number
+    letterSpacing: number,
+    fontWeight: string,
+    fontStyle: string
   ): number {
+    const lowerFont = fontName.toLowerCase();
+    const isStandard = lowerFont.includes('helvetica') || lowerFont.includes('times') || lowerFont.includes('roman') || lowerFont.includes('courier');
+
+    if (!isStandard) {
+      let width = 0;
+      for (let i = 0; i < str.length; i++) {
+        const metrics = FontMetricsCache.getMetrics(fontName, fontSize, fontWeight, fontStyle, str[i]);
+        width += metrics.advanceX + letterSpacing;
+      }
+      return width;
+    }
+
     let widthDU = 0;
-    
     for (let i = 0; i < str.length; i++) {
       const char = str[i];
-      // Get design units advance
-      const adv = GlyphCache.getGlyphAdvance(fontName, char);
+      const resolvedFont = fontName;
+      const adv = GlyphCache.getGlyphAdvance(resolvedFont, char);
       widthDU += adv;
 
-      // Add kerning pair space if there is a next character
       if (i < str.length - 1) {
         const nextChar = str[i + 1];
-        widthDU += Kerning.getSpacingOffset(fontName, char, nextChar, letterSpacing);
+        widthDU += Kerning.getSpacingOffset(resolvedFont, char, nextChar, letterSpacing);
       }
     }
 
-    return widthDU * scale;
+    return (widthDU * scale) + (str.length * letterSpacing);
   }
 }

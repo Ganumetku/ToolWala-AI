@@ -61,7 +61,9 @@ export class RenderEngine {
               obj.originalTextData?.descent,
               selStart,
               selEnd,
-              caretIdx
+              caretIdx,
+              fontWeight,
+              fontStyle
             );
             obj._cachedLayoutKey = cacheKey;
           }
@@ -185,7 +187,10 @@ export class RenderEngine {
             const selEnd = isEditing ? session.getSelectionEnd() : 0;
             const caretIdx = isEditing ? session.getCaretIndex() : 0;
 
-            const cacheKey = `${currentText}_${fontName}_${fontSize}_${selStart}_${selEnd}_${caretIdx}`;
+            const fontWeight = state.fontWeight || (obj as any).fontWeight || 'normal';
+            const fontStyle = state.fontStyle || (obj as any).fontStyle || 'normal';
+
+            const cacheKey = `${currentText}_${fontName}_${fontSize}_${fontWeight}_${fontStyle}_${selStart}_${selEnd}_${caretIdx}`;
             if (!(obj as any)._cachedLayout || (obj as any)._cachedLayoutKey !== cacheKey) {
               (obj as any)._cachedLayout = new TextLayout(
                 currentText,
@@ -198,7 +203,9 @@ export class RenderEngine {
                 (obj as any).originalTextData?.descent || (obj as any).descent,
                 selStart,
                 selEnd,
-                caretIdx
+                caretIdx,
+                fontWeight,
+                fontStyle
               );
               (obj as any)._cachedLayoutKey = cacheKey;
             }

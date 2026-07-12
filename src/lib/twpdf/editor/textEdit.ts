@@ -37,9 +37,9 @@ export function isOriginalTextEdited(obj: {
   return !!(
     obj.isDeletedOriginal ||
     obj.text !== orig.text ||
-    Math.abs(currentX - orig.x) > 0.5 ||
-    Math.abs(currentY - orig.y) > 0.5 ||
-    obj.fontSize !== orig.fontSize ||
+    Math.abs(currentX - orig.x) > 2.0 ||
+    Math.abs(currentY - orig.y) > 2.0 ||
+    Math.abs((obj.fontSize || 0) - orig.fontSize) > 0.5 ||
     obj.fontFamily !== orig.fontFamily ||
     obj.fontWeight !== orig.fontWeight ||
     obj.fontStyle !== orig.fontStyle ||

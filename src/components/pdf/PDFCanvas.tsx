@@ -459,7 +459,7 @@ const PageRenderer = ({
       fbCanvas.forEachObject((obj: any) => {
         if (obj.isOriginalText) {
           const isEdited = isOriginalTextEdited(obj);
-          const isEditing = obj.isEditing;
+          const isEditing = EditingSession.getInstance().getActiveObjectId() === obj.id;
           if (isEdited || isEditing) {
             const orig = obj.originalTextData;
             const padX = 2;

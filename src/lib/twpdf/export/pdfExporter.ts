@@ -2,6 +2,7 @@ import { CANVAS_JSON_PROPS } from '@/lib/twpdf/core';
 import { isOriginalTextEdited } from '@/lib/twpdf/editor';
 import { dataUrlToUint8Array } from '@/lib/twpdf/utils';
 import type { ExportContext } from '@/types/pdf';
+import { RenderEngine } from '@/lib/tw-engine/editor/RenderEngine';
 
 export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
   const {
@@ -193,11 +194,32 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
         }
       });
 
+      const fabricObjects: any[] = [];
+      activeCanvas.forEachObject((obj) => fabricObjects.push(obj));
+
+      // Hide all text boxes from Fabric export canvas to prevent empty/broken text overlays
+      const originalOpacities = new Map<any, number>();
+      fabricObjects.forEach((obj) => {
+        if (obj.isOriginalText || obj.type === 'textbox' || obj.type === 'i-text') {
+          originalOpacities.set(obj, obj.opacity ?? 1);
+          obj.set({ opacity: 0 });
+        }
+      });
+      activeCanvas.renderAll();
+
       const multiplier = renderScale / zoomScale;
       const overlayDataUrl = activeCanvas.toDataURL({
         format: 'png',
         multiplier: multiplier,
       });
+
+      // Restore opacities on active canvas
+      fabricObjects.forEach((obj) => {
+        if (originalOpacities.has(obj)) {
+          obj.set({ opacity: originalOpacities.get(obj) });
+        }
+      });
+      activeCanvas.renderAll();
 
       if (tempPdfCtx) {
         const overlayImg = await new Promise<HTMLImageElement>((resolve, reject) => {
@@ -207,6 +229,9 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
           img.src = overlayDataUrl;
         });
         tempPdfCtx.drawImage(overlayImg, 0, 0);
+
+        // Render all text boxes directly onto the high-resolution PDF canvas context using unified RenderEngine
+        RenderEngine.renderObjects(tempPdfCtx, fabricObjects, renderScale);
       }
 
       activeCanvas.forEachObject((obj) => {

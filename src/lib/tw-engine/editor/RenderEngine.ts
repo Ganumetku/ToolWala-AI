@@ -28,89 +28,7 @@ export class RenderEngine {
    */
   render(ctx: CanvasRenderingContext2D, pageNumber: number, fabricObjects?: any[]): void {
     if (fabricObjects) {
-      fabricObjects.forEach((obj) => {
-        if (obj.isOriginalText || obj.type === 'textbox' || obj.type === 'i-text') {
-          const session = EditingSession.getInstance();
-          const isEditing = session.getActiveObjectId() === obj.id;
-          const isEdited = isOriginalTextEdited(obj);
-
-          // We only render this element if it is actively being edited OR if it has been edited/modified!
-          if (!isEditing && !isEdited) return;
-
-          // Compile text using the active session's typed text if editing, otherwise the object's current modified text
-          const currentText = isEditing ? session.getText() : (obj.text || '');
-          const fontFamily = obj.fontFamily || 'Helvetica';
-          const fontSize = obj.fontSize || 12;
-          const fontStyle = obj.fontStyle || 'normal';
-          const fontWeight = obj.fontWeight || 'normal';
-
-          const selStart = isEditing ? session.getSelectionStart() : 0;
-          const selEnd = isEditing ? session.getSelectionEnd() : 0;
-          const caretIdx = isEditing ? session.getCaretIndex() : 0;
-
-          const cacheKey = `${currentText}_${fontFamily}_${fontSize}_${fontStyle}_${fontWeight}_${selStart}_${selEnd}_${caretIdx}`;
-          if (!obj._cachedLayout || obj._cachedLayoutKey !== cacheKey) {
-            obj._cachedLayout = new TextLayout(
-              currentText,
-              fontFamily,
-              fontSize,
-              0,
-              false,
-              0,
-              obj.originalTextData?.ascent,
-              obj.originalTextData?.descent,
-              selStart,
-              selEnd,
-              caretIdx,
-              fontWeight,
-              fontStyle
-            );
-            obj._cachedLayoutKey = cacheKey;
-          }
-          const layout = obj._cachedLayout;
-
-          ctx.save();
-          const scaleX = obj.scaleX || 1;
-          const scaleY = obj.scaleY || 1;
-
-          ctx.translate(obj.left || 0, obj.top || 0);
-          ctx.rotate(((obj.angle || 0) * Math.PI) / 180);
-          ctx.scale(scaleX, scaleY);
-
-          // Calculate baseline shift to ensure pixel-perfect vertical alignment with the original PDF layout
-          const firstLineBaselineY = (obj.baseline !== undefined)
-            ? (obj.baseline - obj.top)
-            : (layout.lines[0]?.y || (fontSize * 0.8));
-          const layoutFirstLineY = layout.lines[0]?.y || (fontSize * 0.8);
-          const baselineShift = firstLineBaselineY - layoutFirstLineY;
-          ctx.translate(0, baselineShift);
-
-          const fontColor = (obj.fill && obj.fill !== 'transparent') ? obj.fill : (obj.originalTextData?.detectedColor || '#000000');
-          ctx.font = `${fontStyle} ${fontWeight} ${fontSize}px ${fontFamily}`;
-          ctx.fillStyle = fontColor;
-          
-          // Draw solid characters character-by-character from the layout line items
-          layout.lines.forEach((line: LineRun) => {
-            line.glyphs.forEach((g: GlyphLayout) => {
-              ctx.fillText(g.char, line.x + g.x, line.y);
-            });
-          });
-
-          // 1. Draw Selection Highlights
-          SelectionRenderer.drawSelection(ctx, layout, session.getSelectionStart(), session.getSelectionEnd());
-
-          // 2. Draw Blinking Caret
-          if (isEditing) {
-            const start = session.getSelectionStart();
-            const end = session.getSelectionEnd();
-            if (start === end) {
-              CaretRenderer.drawCaret(ctx, layout, session.getCaretIndex(), fontColor);
-            }
-          }
-
-          ctx.restore();
-        }
-      });
+      RenderEngine.renderObjects(ctx, fabricObjects, 1.0);
       return;
     }
 
@@ -284,6 +202,92 @@ export class RenderEngine {
       }
 
       ctx.restore();
+    });
+  }
+
+  public static renderObjects(ctx: CanvasRenderingContext2D, objects: any[], scale: number): void {
+    objects.forEach((obj) => {
+      if (obj.isOriginalText || obj.type === 'textbox' || obj.type === 'i-text') {
+        const session = EditingSession.getInstance();
+        const isEditing = session.getActiveObjectId() === obj.id;
+        const isEdited = isOriginalTextEdited(obj);
+
+        // We only render this element if it is actively being edited OR if it has been edited/modified!
+        if (!isEditing && !isEdited) return;
+
+        // Compile text using the active session's typed text if editing, otherwise the object's current modified text
+        const currentText = isEditing ? session.getText() : (obj.text || '');
+        const fontFamily = obj.fontFamily || 'Helvetica';
+        const fontSize = obj.fontSize || 12;
+        const fontStyle = obj.fontStyle || 'normal';
+        const fontWeight = obj.fontWeight || 'normal';
+
+        const selStart = isEditing ? session.getSelectionStart() : 0;
+        const selEnd = isEditing ? session.getSelectionEnd() : 0;
+        const caretIdx = isEditing ? session.getCaretIndex() : 0;
+
+        const cacheKey = `${currentText}_${fontFamily}_${fontSize}_${fontWeight}_${fontStyle}_${selStart}_${selEnd}_${caretIdx}`;
+        if (!obj._cachedLayout || obj._cachedLayoutKey !== cacheKey) {
+          obj._cachedLayout = new TextLayout(
+            currentText,
+            fontFamily,
+            fontSize,
+            0,
+            false,
+            0,
+            obj.originalTextData?.ascent,
+            obj.originalTextData?.descent,
+            selStart,
+            selEnd,
+            caretIdx,
+            fontWeight,
+            fontStyle
+          );
+          obj._cachedLayoutKey = cacheKey;
+        }
+        const layout = obj._cachedLayout;
+
+        ctx.save();
+        const scaleX = obj.scaleX || 1;
+        const scaleY = obj.scaleY || 1;
+
+        ctx.translate((obj.left || 0) * scale, (obj.top || 0) * scale);
+        ctx.rotate(((obj.angle || 0) * Math.PI) / 180);
+        ctx.scale(scaleX * scale, scaleY * scale);
+
+        // Calculate baseline shift to ensure pixel-perfect vertical alignment with the original PDF layout
+        const firstLineBaselineY = (obj.baseline !== undefined)
+          ? (obj.baseline - (obj.top || 0))
+          : (layout.lines[0]?.y || (fontSize * 0.8));
+        const layoutFirstLineY = layout.lines[0]?.y || (fontSize * 0.8);
+        const baselineShift = firstLineBaselineY - layoutFirstLineY;
+        ctx.translate(0, baselineShift);
+
+        const fontColor = (obj.fill && obj.fill !== 'transparent') ? obj.fill : (obj.originalTextData?.detectedColor || '#000000');
+        ctx.font = `${fontStyle} ${fontWeight} ${fontSize}px ${fontFamily}`;
+        ctx.fillStyle = fontColor;
+        
+        // Draw character glyphs
+        layout.lines.forEach((line: LineRun) => {
+          line.glyphs.forEach((g: GlyphLayout) => {
+            ctx.fillText(g.char, line.x + g.x, line.y);
+          });
+        });
+
+        // Highlights and carets are only drawn on active editor screen (scale = 1.0)
+        if (scale === 1.0) {
+          SelectionRenderer.drawSelection(ctx, layout, session.getSelectionStart(), session.getSelectionEnd());
+          if (isEditing) {
+            const start = session.getSelectionStart();
+            const end = session.getSelectionEnd();
+            if (start === end) {
+              CaretRenderer.drawCaret(ctx, layout, session.getCaretIndex(), fontColor);
+            }
+          }
+        }
+
+        ctx.restore();
+      }
     });
   }
 

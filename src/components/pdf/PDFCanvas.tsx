@@ -212,9 +212,9 @@ const PageRenderer = ({
     const interval = setInterval(() => {
       const fbCanvas = fabricCanvasInstance.current;
       if (fbCanvas) {
-        const selection = SelectionEngine.getInstance();
-        if (selection.getIsEditingText() && selection.getSelectedPageNumber() === pageNum) {
-          fbCanvas.requestRenderAll();
+        const session = EditingSession.getInstance();
+        if (session.getActiveObjectId() && session.getActivePageNum() === pageNum) {
+          fbCanvas.renderAll();
         }
       }
     }, 250);
@@ -249,6 +249,23 @@ const PageRenderer = ({
             canvasContext: ctx,
             viewport: highResViewport
           }).promise;
+
+          if (typeof document !== 'undefined' && document.fonts) {
+            await document.fonts.ready;
+            const { FontMetricsCache } = await import('@/lib/tw-engine/text/FontMetricsCache');
+            FontMetricsCache.clear();
+            const fbCanvas = fabricCanvasInstance.current;
+            if (fbCanvas) {
+              fbCanvas.forEachObject((o: any) => {
+                if (o._cachedLayout) {
+                  o._cachedLayout = null;
+                  o._cachedLayoutKey = null;
+                }
+              });
+              fbCanvas.requestRenderAll();
+            }
+          }
+
           setIsBackgroundRendered(true);
         }
       } catch (e) {
@@ -820,6 +837,7 @@ const PageRenderer = ({
         const obj = fbCanvas.getObjects().find((o: any) => o.id === objId);
         if (obj) {
           obj.set({ text });
+          obj.dirty = true;
           const origWidth = obj.originalTextData?.width || obj.width || 0;
           obj.set({ width: 9999 });
           let maxLineWidth = 0;
@@ -832,7 +850,7 @@ const PageRenderer = ({
           }
           const newWidth = Math.max(origWidth, maxLineWidth + 10);
           obj.set({ width: newWidth });
-          fbCanvas.requestRenderAll();
+          fbCanvas.renderAll();
         }
       },
       onSessionEnd: () => {

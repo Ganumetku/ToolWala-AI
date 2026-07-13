@@ -22,6 +22,8 @@ export class EditingSession {
   private selectionEnd = 0;
   private listeners: Set<EditingSessionListener> = new Set();
 
+  private selectionAnchor = 0;
+
   static getInstance(): EditingSession {
     if (!EditingSession.instance) {
       EditingSession.instance = new EditingSession();
@@ -44,6 +46,7 @@ export class EditingSession {
     this.caretIndex = initialText.length;
     this.selectionStart = initialText.length;
     this.selectionEnd = initialText.length;
+    this.selectionAnchor = initialText.length;
 
     EditModeManager.getInstance().transitionTo(EditingState.TEXT_EDITING);
 
@@ -60,6 +63,7 @@ export class EditingSession {
     this.caretIndex = 0;
     this.selectionStart = 0;
     this.selectionEnd = 0;
+    this.selectionAnchor = 0;
 
     EditModeManager.getInstance().transitionTo(EditingState.IDLE);
 
@@ -95,10 +99,21 @@ export class EditingSession {
     return this.selectionEnd;
   }
 
+  getSelectionAnchor(): number {
+    return this.selectionAnchor;
+  }
+
+  setSelectionAnchor(anchor: number): void {
+    this.selectionAnchor = anchor;
+  }
+
   setSelection(start: number, end: number, caret: number): void {
     this.selectionStart = Math.max(0, Math.min(this.text.length, start));
     this.selectionEnd = Math.max(0, Math.min(this.text.length, end));
     this.caretIndex = Math.max(0, Math.min(this.text.length, caret));
+    if (this.selectionAnchor !== start) {
+      this.selectionAnchor = start;
+    }
     this.notifyUpdate();
   }
 

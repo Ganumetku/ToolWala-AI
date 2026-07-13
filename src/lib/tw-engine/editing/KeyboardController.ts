@@ -1,6 +1,47 @@
 import { EditingSession } from './EditingSession';
 import { ClipboardController } from './ClipboardController';
 
+function findPreviousWordBoundary(text: string, index: number): number {
+  if (index <= 0) return 0;
+  let idx = index - 1;
+  while (idx > 0 && !/[a-zA-Z0-9_]/.test(text[idx])) {
+    idx--;
+  }
+  while (idx > 0 && /[a-zA-Z0-9_]/.test(text[idx - 1])) {
+    idx--;
+  }
+  return idx;
+}
+
+function findNextWordBoundary(text: string, index: number): number {
+  if (index >= text.length) return text.length;
+  let idx = index;
+  while (idx < text.length && !/[a-zA-Z0-9_]/.test(text[idx])) {
+    idx++;
+  }
+  while (idx < text.length && /[a-zA-Z0-9_]/.test(text[idx])) {
+    idx++;
+  }
+  return idx;
+}
+
+function getLineBoundaries(text: string, caretIndex: number): { start: number; end: number } {
+  const lines = text.split('\n');
+  let cumulative = 0;
+  for (let i = 0; i < lines.length; i++) {
+    const lineText = lines[i];
+    const start = cumulative;
+    const end = cumulative + lineText.length;
+    const hasNextLine = i < lines.length - 1;
+    const newlineLength = hasNextLine ? 1 : 0;
+    if (caretIndex >= start && caretIndex <= end + newlineLength) {
+      return { start, end };
+    }
+    cumulative = end + 1;
+  }
+  return { start: 0, end: text.length };
+}
+
 /**
  * KeyboardController processes command navigation, select all, and deletion shortcuts.
  */
@@ -20,39 +61,77 @@ export class KeyboardController {
     const caret = session.getCaretIndex();
     const start = session.getSelectionStart();
     const end = session.getSelectionEnd();
+    const anchor = session.getSelectionAnchor();
 
     const isMac = typeof window !== 'undefined' && navigator.platform.toUpperCase().indexOf('MAC') >= 0;
     const metaPressed = isMac ? e.metaKey : e.ctrlKey;
+    const optPressed = isMac ? e.altKey : e.ctrlKey;
 
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
-      const nextCaret = Math.max(0, caret - 1);
-      const nextStart = e.shiftKey ? start : nextCaret;
-      const nextEnd = e.shiftKey ? nextCaret : nextCaret;
-      session.setSelection(nextStart, nextEnd, nextCaret);
+      let nextCaret = caret;
+      if (optPressed || metaPressed) {
+        nextCaret = findPreviousWordBoundary(text, caret);
+      } else {
+        if (!e.shiftKey && start !== end) {
+          nextCaret = Math.min(start, end);
+        } else {
+          nextCaret = Math.max(0, caret - 1);
+        }
+      }
+
+      if (e.shiftKey) {
+        session.setSelection(anchor, nextCaret, nextCaret);
+      } else {
+        session.setSelection(nextCaret, nextCaret, nextCaret);
+      }
       return;
     }
 
     if (e.key === 'ArrowRight') {
       e.preventDefault();
-      const nextCaret = Math.min(text.length, caret + 1);
-      const nextStart = e.shiftKey ? start : nextCaret;
-      const nextEnd = e.shiftKey ? nextCaret : nextCaret;
-      session.setSelection(nextStart, nextEnd, nextCaret);
+      let nextCaret = caret;
+      if (optPressed || metaPressed) {
+        nextCaret = findNextWordBoundary(text, caret);
+      } else {
+        if (!e.shiftKey && start !== end) {
+          nextCaret = Math.max(start, end);
+        } else {
+          nextCaret = Math.min(text.length, caret + 1);
+        }
+      }
+
+      if (e.shiftKey) {
+        session.setSelection(anchor, nextCaret, nextCaret);
+      } else {
+        session.setSelection(nextCaret, nextCaret, nextCaret);
+      }
       return;
     }
 
     if (e.key === 'Home') {
       e.preventDefault();
-      const nextStart = e.shiftKey ? start : 0;
-      session.setSelection(nextStart, 0, 0);
+      const bounds = getLineBoundaries(text, caret);
+      const nextCaret = bounds.start;
+
+      if (e.shiftKey) {
+        session.setSelection(anchor, nextCaret, nextCaret);
+      } else {
+        session.setSelection(nextCaret, nextCaret, nextCaret);
+      }
       return;
     }
 
     if (e.key === 'End') {
       e.preventDefault();
-      const nextStart = e.shiftKey ? start : text.length;
-      session.setSelection(nextStart, text.length, text.length);
+      const bounds = getLineBoundaries(text, caret);
+      const nextCaret = bounds.end;
+
+      if (e.shiftKey) {
+        session.setSelection(anchor, nextCaret, nextCaret);
+      } else {
+        session.setSelection(nextCaret, nextCaret, nextCaret);
+      }
       return;
     }
 

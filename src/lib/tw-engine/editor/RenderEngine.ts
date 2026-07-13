@@ -3,13 +3,14 @@ import { ObjectRegistry } from '../ObjectRegistry';
 import { SelectionEngine } from './SelectionEngine';
 import { TextLayout } from '../text/TextLayout';
 import type { LineRun } from '../text/TextLayout';
-import type { GlyphLayout } from '../text/GlyphLayout';
+import type { GlyphLayout } from '../typography/GlyphLayout';
 import { TextSelection } from '../text/TextSelection';
 import { FidelityEngine } from '../fidelity/FidelityEngine';
 import { EditingSession } from '../editing/EditingSession';
 import { CaretRenderer } from '../editing/CaretRenderer';
 import { SelectionRenderer } from '../editing/SelectionRenderer';
 import { isOriginalTextEdited } from '../../twpdf/editor/textEdit';
+import { BaselineEngine } from '../typography/BaselineEngine';
 
 /**
  * RenderEngine renders all active PDF objects from the ObjectRegistry
@@ -255,12 +256,13 @@ export class RenderEngine {
         ctx.rotate(((obj.angle || 0) * Math.PI) / 180);
         ctx.scale(scaleX * scale, scaleY * scale);
 
-        // Calculate baseline shift to ensure pixel-perfect vertical alignment with the original PDF layout
-        const firstLineBaselineY = (obj.baseline !== undefined)
-          ? (obj.baseline - (obj.top || 0))
-          : (layout.lines[0]?.y || (fontSize * 0.8));
-        const layoutFirstLineY = layout.lines[0]?.y || (fontSize * 0.8);
-        const baselineShift = firstLineBaselineY - layoutFirstLineY;
+        // Calculate baseline shift using BaselineEngine to ensure perfect alignment
+        const baselineShift = BaselineEngine.calculateBaselineShift(
+          obj.baseline,
+          obj.top || 0,
+          fontSize,
+          layout.lines[0]?.y || (fontSize * 0.8)
+        );
         ctx.translate(0, baselineShift);
 
         const fontColor = (obj.fill && obj.fill !== 'transparent') ? obj.fill : (obj.originalTextData?.detectedColor || '#000000');

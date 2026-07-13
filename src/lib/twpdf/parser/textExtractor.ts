@@ -60,7 +60,7 @@ export function detectTextColorFromCanvas(
     return `#${toHex(best.r)}${toHex(best.g)}${toHex(best.b)}`;
   } catch (e) {
     console.error('Failed to detect text color from canvas', e);
-    return '#0b2c8c';
+    return '#000000';
   }
 }
 

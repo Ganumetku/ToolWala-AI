@@ -20,7 +20,7 @@ const FABRIC_CONTROL_PROPS = {
 function textToFabric(obj: TWPDFTextObject): Record<string, unknown> {
   const isReplaced = obj.isOriginalText && obj.text !== obj.originalTextData?.text;
   const isEdited = obj.isOriginalText && (isReplaced || obj.isDeletedOriginal);
-  const detectedColor = obj.originalTextData?.detectedColor || '#0b2c8c';
+  const detectedColor = obj.originalTextData?.detectedColor || obj.color || '#000000';
 
   let fill = obj.color;
   if (obj.isOriginalText) {

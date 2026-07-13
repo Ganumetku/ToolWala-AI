@@ -94,7 +94,7 @@ export class LegacyFabricBridge {
    */
   private static textToFabric(obj: TWPDFTextObject): Record<string, unknown> {
     const isEdited = isOriginalTextEdited(obj);
-    const detectedColor = obj.originalTextData?.detectedColor || '#0b2c8c';
+    const detectedColor = obj.originalTextData?.detectedColor || obj.color || '#000000';
 
     let fill = obj.color;
     if (obj.isOriginalText) {

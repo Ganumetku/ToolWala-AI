@@ -114,7 +114,7 @@ export function useSelection({
 
     if (engine) {
       const detectedColor =
-        (match as SearchMatch & { detectedColor?: string }).detectedColor || '#0b2c8c';
+        (match as SearchMatch & { detectedColor?: string }).detectedColor || '#000000';
       engine.updateObject(pageId, boxId, { text: newText, color: detectedColor });
     } else {
       const state = canvasStates[pageId] as { objects?: Array<Record<string, unknown>> } | undefined;
@@ -122,7 +122,7 @@ export function useSelection({
         const updatedObjects = state.objects.map((obj) => {
           if (obj.id === boxId) {
             const isOriginal = obj.isOriginalText;
-            const detectedColor = (obj.originalTextData as { detectedColor?: string })?.detectedColor || '#0b2c8c';
+            const detectedColor = (obj.originalTextData as { detectedColor?: string })?.detectedColor || (obj as any).fill || '#000000';
             return {
               ...obj,
               text: newText,
@@ -195,7 +195,7 @@ export function useSelection({
                 (obj.text as string).toLowerCase().includes(query)
               ) {
                 const isOriginal = obj.isOriginalText;
-                const detectedColor = (obj.originalTextData as { detectedColor?: string })?.detectedColor || '#0b2c8c';
+                const detectedColor = (obj.originalTextData as { detectedColor?: string })?.detectedColor || (obj as any).fill || '#000000';
                 return {
                   ...obj,
                   text: (obj.text as string).replace(regex, replaceQuery),

@@ -230,7 +230,7 @@ export function PropertyPanel({
                   type="color"
                   value={
                     selectedObjectInfo.type === 'textbox' || selectedObjectInfo.type === 'i-text'
-                      ? (selectedObjectInfo.fill === 'transparent' ? (selectedObjectInfo.originalTextData?.detectedColor || '#0b2c8c') : selectedObjectInfo.fill)
+                      ? (selectedObjectInfo.fill === 'transparent' ? (selectedObjectInfo.originalTextData?.detectedColor || '#000000') : selectedObjectInfo.fill)
                       : selectedObjectInfo.isHighlight
                       ? (selectedObjectInfo.fill.startsWith('rgba') ? rgbaToHex(selectedObjectInfo.fill) : selectedObjectInfo.fill)
                       : selectedObjectInfo.stroke

@@ -367,9 +367,33 @@ const PageRenderer = ({
           width: Math.round(width * zoomScale),
           height: Math.round(height * zoomScale)
         });
+
+        let needsSave = false;
+        fbCanvas.forEachObject((obj: any) => {
+          if (obj.isOriginalText && obj.originalTextData) {
+            obj._renderText = function(ctx: CanvasRenderingContext2D) {};
+            if (!obj.originalTextData.detectedColor) {
+              const color = detectTextColorFromCanvas(pdfCanvasRef.current, obj.originalTextData, zoomScale);
+              const bgColor = detectBackgroundColorFromCanvas(pdfCanvasRef.current, obj.originalTextData, zoomScale);
+              obj.originalTextData.detectedColor = color;
+              obj.originalTextData.detectedBgColor = bgColor;
+              if (obj.fill === '#0b2c8c') {
+                obj.set({ fill: color });
+              }
+              needsSave = true;
+            }
+          }
+        });
+
         fbCanvas.renderAll();
-        lastCanvasStateRef.current = serialized;
+        const updatedState = fbCanvas.toJSON([...CANVAS_JSON_PROPS]);
+        const updatedSerialized = JSON.stringify(updatedState);
+        lastCanvasStateRef.current = updatedSerialized;
         isLoadingFromPropRef.current = false;
+
+        if (needsSave) {
+          saveCanvasState(pageId, updatedState);
+        }
       });
     } else {
       const textBoxesForPage = originalTexts[originalPageNum] || [];

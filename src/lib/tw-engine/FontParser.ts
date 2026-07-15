@@ -1,4 +1,5 @@
 import type { TWFontMetadata } from './types';
+import { GlyphAdvanceEngine } from './fidelity/GlyphAdvanceEngine';
 
 /**
  * FontParser scans PDF stylesheets and common resources
@@ -39,6 +40,22 @@ export class FontParser {
 
           if (commonObj.toUnicode) {
             encoding = 'Unicode';
+          }
+
+          if (commonObj.data) {
+            const widths = commonObj.data.widths;
+            const firstChar = typeof commonObj.data.firstChar === 'number' ? commonObj.data.firstChar : 0;
+            const missingWidth = typeof commonObj.data.missingWidth === 'number' ? commonObj.data.missingWidth : 0;
+            const fontMatrix = commonObj.data.fontMatrix || null;
+            const toUnicode = commonObj.data.toUnicode || null;
+
+            GlyphAdvanceEngine.registerFont(fontRef, widths, firstChar, missingWidth, fontMatrix, toUnicode);
+            if (commonObj.name && commonObj.name !== fontRef) {
+              GlyphAdvanceEngine.registerFont(commonObj.name, widths, firstChar, missingWidth, fontMatrix, toUnicode);
+            }
+            if (fontFamilyName && fontFamilyName !== fontRef) {
+              GlyphAdvanceEngine.registerFont(fontFamilyName, widths, firstChar, missingWidth, fontMatrix, toUnicode);
+            }
           }
         }
 

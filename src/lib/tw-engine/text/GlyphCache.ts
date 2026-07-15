@@ -45,6 +45,10 @@ export class GlyphCache {
   static getGlyphAdvance(fontName: string, char: string): number {
     const key = fontName.toLowerCase();
 
+    if (GlyphAdvanceEngine.hasFont(fontName)) {
+      return GlyphAdvanceEngine.getAdvance(fontName, char, 1000);
+    }
+
     // 1. Check custom dynamically-cached widths
     const explicitAdv = GlyphAdvanceEngine.getGlyphAdvance(fontName, char, -1);
     if (explicitAdv !== -1) {

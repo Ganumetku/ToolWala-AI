@@ -260,6 +260,13 @@ export class TWPDFEditingEngine {
         underline: fabricObj.underline,
         opacity: fabricObj.opacity,
         isDeletedOriginal: fabricObj.isDeletedOriginal,
+        baseline: fabricObj.baseline,
+        ascent: fabricObj.ascent,
+        descent: fabricObj.descent,
+        pdfFontName: fabricObj.pdfFontName,
+        fontName: fabricObj.fontName,
+        originalBBox: fabricObj.originalBBox,
+        originalTextData: fabricObj.originalTextData,
       });
     }
 

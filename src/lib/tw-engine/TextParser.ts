@@ -108,6 +108,59 @@ export class TextParser {
         const fontStyleObj = textContent.styles ? textContent.styles[item.fontName] : null;
         const fontName = fontStyleObj ? fontStyleObj.fontFamily : item.fontName || 'Helvetica';
 
+        const fName = (item.fontName || '').toLowerCase();
+        const resFontFamily = (fontName || '').toLowerCase();
+
+        const isBold =
+          fName.includes('bold') ||
+          fName.includes('black') ||
+          fName.includes('heavy') ||
+          fName.includes('semibold') ||
+          fName.includes('medium') ||
+          fName.includes('w700') ||
+          fName.includes('w600') ||
+          fName.includes('w-700') ||
+          fName.includes('w-600') ||
+          resFontFamily.includes('bold') ||
+          resFontFamily.includes('black') ||
+          resFontFamily.includes('heavy') ||
+          resFontFamily.includes('semibold') ||
+          resFontFamily.includes('medium') ||
+          resFontFamily.includes('w700') ||
+          resFontFamily.includes('w600') ||
+          resFontFamily.includes('w-700') ||
+          resFontFamily.includes('w-600');
+
+        const isItalic =
+          fName.includes('italic') ||
+          fName.includes('oblique') ||
+          resFontFamily.includes('italic') ||
+          resFontFamily.includes('oblique');
+
+        const fontWeight = isBold ? 'bold' : 'normal';
+        const fontStyle = isItalic ? 'italic' : 'normal';
+
+        const ascent = fontStyleObj ? fontStyleObj.ascent : undefined;
+        const descent = fontStyleObj ? fontStyleObj.descent : undefined;
+        const pdfFontName = item.fontName;
+        const originalBBox = { x, y, width, height };
+
+        const originalTextData = {
+          text: item.str,
+          x,
+          y,
+          width,
+          height,
+          fontSize,
+          fontWeight,
+          fontStyle,
+          fontFamily: fontName,
+          baseline: vy,
+          ascent,
+          descent,
+          pdfFontName,
+        };
+
         const textState: TWTextState = {
           text: item.str,
           fontName,
@@ -120,6 +173,14 @@ export class TextParser {
           height,
           rotation,
           opacity: 1.0,
+          fontWeight,
+          fontStyle,
+          baseline: vy,
+          ascent,
+          descent,
+          pdfFontName,
+          originalBBox,
+          originalTextData,
         };
 
         return {
@@ -157,6 +218,14 @@ export class TextParser {
             width,
             height,
           },
+
+          fontWeight,
+          fontStyle,
+          ascent,
+          descent,
+          pdfFontName,
+          originalBBox,
+          originalTextData,
 
           originalState: { ...textState },
           currentState: { ...textState },

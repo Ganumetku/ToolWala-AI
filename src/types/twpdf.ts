@@ -51,6 +51,12 @@ export interface TWPDFTextObject extends TWPDFObjectBase {
   isOriginalText?: boolean;
   isDeletedOriginal?: boolean;
   originalTextData?: OriginalTextData;
+  baseline?: number;
+  ascent?: number;
+  descent?: number;
+  pdfFontName?: string;
+  originalBBox?: { x: number; y: number; width: number; height: number };
+  fontName?: string;
 }
 
 export interface TWPDFImageCrop {

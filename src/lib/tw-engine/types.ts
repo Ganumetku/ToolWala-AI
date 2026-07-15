@@ -48,6 +48,14 @@ export interface TWTextState {
   height: number;
   rotation: number;
   opacity: number;
+  fontWeight?: string;
+  fontStyle?: string;
+  baseline?: number;
+  ascent?: number;
+  descent?: number;
+  pdfFontName?: string;
+  originalBBox?: { x: number; y: number; width: number; height: number };
+  originalTextData?: any;
 }
 
 export interface TWImageState {
@@ -111,6 +119,14 @@ export interface TWTextObject extends TWObject {
   originalState: TWTextState;
   currentState: TWTextState;
   editedState?: Partial<TWTextState>;
+
+  fontWeight?: string;
+  fontStyle?: string;
+  ascent?: number;
+  descent?: number;
+  pdfFontName?: string;
+  originalBBox?: { x: number; y: number; width: number; height: number };
+  originalTextData?: any;
 }
 
 export interface TWImageObject extends TWObject {

@@ -256,9 +256,12 @@ export class RenderEngine {
         ctx.rotate(((obj.angle || 0) * Math.PI) / 180);
         ctx.scale(scaleX * scale, scaleY * scale);
 
-        // Calculate baseline shift using BaselineEngine to ensure perfect alignment
+        // Calculate baseline shift using BaselineEngine to ensure perfect alignment.
+        // Prefer live top-level baseline; fall back to originalTextData after serialize round-trips.
+        const resolvedBaseline =
+          obj.baseline ?? obj.originalTextData?.baseline;
         const baselineShift = BaselineEngine.calculateBaselineShift(
-          obj.baseline,
+          resolvedBaseline,
           obj.top || 0,
           fontSize,
           layout.lines[0]?.y || (fontSize * 0.8)

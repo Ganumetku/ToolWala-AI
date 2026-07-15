@@ -331,6 +331,7 @@ export async function detectOriginalText(
         originalPdfWidth: widthPdf > 0 ? widthPdf : fontSizePdf * 0.55 * item.str.length,
         originalPdfHeight: fontSizePdf,
         originalPdfFontSize: fontSizePdf,
+        baseline: vy,
         pdfFontName: item.fontName,
         ascent: fontStyleObj ? fontStyleObj.ascent : undefined,
         descent: fontStyleObj ? fontStyleObj.descent : undefined,

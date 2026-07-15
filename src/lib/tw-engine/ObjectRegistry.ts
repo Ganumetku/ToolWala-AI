@@ -77,6 +77,14 @@ export class ObjectRegistry {
       fontName: (obj as any).fontName,
       fontSize: (obj as any).fontSize,
       fontColor: (obj as any).fontColor,
+      fontWeight: (obj as any).fontWeight,
+      fontStyle: (obj as any).fontStyle,
+      baseline: (obj as any).baseline,
+      ascent: (obj as any).ascent,
+      descent: (obj as any).descent,
+      pdfFontName: (obj as any).pdfFontName,
+      originalBBox: (obj as any).originalBBox,
+      originalTextData: (obj as any).originalTextData,
       pathData: (obj as any).pathData,
       strokeColor: (obj as any).strokeColor,
       fillColor: (obj as any).fillColor,
@@ -101,7 +109,10 @@ export class ObjectRegistry {
       if (obj.type === 'text') {
         const textObj = obj as any;
         const textUpdates = updates as any;
-        const textFields = ['text', 'fontName', 'fontSize', 'fontColor'];
+        const textFields = [
+          'text', 'fontName', 'fontSize', 'fontColor',
+          'fontWeight', 'fontStyle', 'baseline', 'ascent', 'descent', 'pdfFontName', 'originalBBox', 'originalTextData'
+        ];
         for (const field of textFields) {
           if (textUpdates[field] !== undefined && textUpdates[field] !== textObj[field]) {
             isEditingEditableField = true;
@@ -145,6 +156,14 @@ export class ObjectRegistry {
         fontName: (obj as any).fontName,
         fontSize: (obj as any).fontSize,
         fontColor: (obj as any).fontColor,
+        fontWeight: (obj as any).fontWeight,
+        fontStyle: (obj as any).fontStyle,
+        baseline: (obj as any).baseline,
+        ascent: (obj as any).ascent,
+        descent: (obj as any).descent,
+        pdfFontName: (obj as any).pdfFontName,
+        originalBBox: (obj as any).originalBBox,
+        originalTextData: (obj as any).originalTextData,
         pathData: (obj as any).pathData,
         strokeColor: (obj as any).strokeColor,
         fillColor: (obj as any).fillColor,

@@ -389,6 +389,17 @@ const PageRenderer = ({
         fbCanvas.forEachObject((obj: any) => {
           if (obj.isOriginalText && obj.originalTextData) {
             obj._renderText = function(ctx: CanvasRenderingContext2D) {};
+            // Rehydrate top-level baseline after loadFromJSON if the allowlist previously dropped it
+            if (obj.baseline === undefined || obj.baseline === null) {
+              const orig = obj.originalTextData;
+              obj.baseline =
+                orig.baseline ??
+                (typeof orig.y === 'number' && typeof orig.fontSize === 'number'
+                  ? orig.y + orig.fontSize * 0.8
+                  : undefined);
+            } else if (obj.originalTextData.baseline === undefined) {
+              obj.originalTextData.baseline = obj.baseline;
+            }
             if (!obj.originalTextData.detectedColor) {
               const color = detectTextColorFromCanvas(pdfCanvasRef.current, obj.originalTextData, zoomScale);
               const bgColor = detectBackgroundColorFromCanvas(pdfCanvasRef.current, obj.originalTextData, zoomScale);
@@ -424,6 +435,7 @@ const PageRenderer = ({
           const displayText = isReplaced ? box.replacedText : box.text;
 
           const activeWeight = box.fontWeight === 'bold' ? 'bold' : 'normal';
+          const resolvedBaseline = box.baseline ?? (box.y + box.fontSize * 0.8);
 
           const textbox = new fabricLib.Textbox(displayText, {
             id: box.id,
@@ -441,7 +453,12 @@ const PageRenderer = ({
             fill: 'transparent',
             backgroundColor: isReplaced ? 'transparent' : 'rgba(255, 255, 255, 0.001)', // invisible but registers clicks perfectly
             isOriginalText: true,
-            baseline: box.baseline || (box.y + box.fontSize * 0.8),
+            baseline: resolvedBaseline,
+            ascent: box.ascent,
+            descent: box.descent,
+            pdfFontName: box.pdfFontName,
+            fontName: box.fontFamily || 'Helvetica',
+            originalBBox: { x: box.x, y: box.y, width: box.width, height: box.height },
             originalTextData: {
               text: box.text,
               x: box.x,
@@ -455,6 +472,7 @@ const PageRenderer = ({
               fontFamily: box.fontFamily || 'Helvetica',
               detectedColor: detectedColor,
               detectedBgColor: detectedBgColor,
+              baseline: resolvedBaseline,
               ascent: box.ascent,
               descent: box.descent,
               pdfFontName: box.pdfFontName
@@ -896,6 +914,21 @@ const PageRenderer = ({
       fbCanvas.setDimensions({
         width: Math.round(width * zoomScale),
         height: Math.round(height * zoomScale),
+      });
+      fbCanvas.forEachObject((obj: any) => {
+        if (obj.isOriginalText && obj.originalTextData) {
+          obj._renderText = function (_ctx: CanvasRenderingContext2D) {};
+          if (obj.baseline === undefined || obj.baseline === null) {
+            const orig = obj.originalTextData;
+            obj.baseline =
+              orig.baseline ??
+              (typeof orig.y === 'number' && typeof orig.fontSize === 'number'
+                ? orig.y + orig.fontSize * 0.8
+                : undefined);
+          } else if (obj.originalTextData.baseline === undefined) {
+            obj.originalTextData.baseline = obj.baseline;
+          }
+        }
       });
       fbCanvas.renderAll();
       lastCanvasStateRef.current = serialized;

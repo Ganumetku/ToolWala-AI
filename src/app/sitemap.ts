@@ -70,6 +70,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/landing/compress-pdf-to-200kb',
     '/tools/aadhaar-photo-resize',
     '/tools/gov-form-image-compressor',
+    // Image compression landing pages (Programmatic SEO)
+    '/landing/compress-image-to-20kb',
+    '/landing/compress-image-to-50kb',
+    '/landing/compress-image-to-100kb',
+    '/landing/compress-image-to-200kb',
+    '/landing/compress-image-to-300kb',
+    '/landing/compress-image-to-500kb',
+    '/landing/compress-image-to-1mb',
   ];
 
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.flatMap((route) => {

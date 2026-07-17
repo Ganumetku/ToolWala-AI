@@ -613,5 +613,457 @@ Since Aadhaar photos are sensitive biometric data linked to your unique identity
 - **Aadhaar Masking**: Hide the first 8 digits of your Aadhaar number for safe sharing.
 - **e-Aadhaar PDF Compression**: Compress downloaded e-Aadhaar PDFs to meet portal upload limits.
 - **Photo Background Removal**: Strip busy backgrounds and set clean white backdrops for official compliance.`
+  },
+
+  // ─── IMAGE COMPRESSION LANDING PAGES ───────────────────────────────────────
+
+  // BATCH 1 — 20KB (SSC / UPSC / Government Exam passport photos)
+  {
+    slug: "compress-image-to-20kb",
+    title: "Compress Image to 20KB Online Free - Toolwala",
+    metaDescription: "Easily compress your JPG, PNG, or WebP images to less than 20KB online. Perfect for SSC, UPSC, NDA, and bank exam photo uploads. 100% Free & Secure.",
+    h1: "Online Image Compressor to 20KB without Losing Quality",
+    badgeText: "SSC & UPSC Exam Compliant",
+    description: "Compress passport photos and signature scans to under 20KB directly in your browser. No upload to servers — ideal for SSC CGL, UPSC Prelims, NDA, and all central government recruitment portals that enforce strict 20KB photo limits.",
+    ctaText: "Click Here to Compress Image to 20KB",
+    ctaHref: "/tools/image-compressor",
+    category: "Image Tools",
+    relatedTools: ["gov-form-image-compressor", "image-compressor", "signature-resize"],
+    relatedBlogs: [
+      { title: "SSC CGL Photo & Signature Specifications Guide", slug: "ssc-cgl-photo-signature-specifications" },
+      { title: "How to Compress Image for Government Portals", slug: "compress-image-government-portals" }
+    ],
+    faqs: [
+      {
+        question: "How do I reduce a photo to 20KB?",
+        answer: "Open ToolWala's Image Compressor, upload your JPG or PNG photo, and the tool will automatically compress it to under 20KB by intelligently reducing image quality and resolution while keeping your face clearly identifiable. Most passport photos and signature scans compress to 20KB in seconds."
+      },
+      {
+        question: "Will compressing my image to 20KB reduce its quality?",
+        answer: "Some quality reduction is unavoidable at 20KB, but our algorithm prioritizes keeping facial features sharp. For a standard passport photo (3.5×4.5 cm), the face remains fully legible and passes recruitment portal validation even at 20KB."
+      },
+      {
+        question: "Is it safe to compress my personal images on Toolwala?",
+        answer: "Absolutely. All processing happens inside your browser using client-side JavaScript. Your photos and signature images are never uploaded to our servers, stored, or shared. You can even go offline after the page loads and compress images locally."
+      },
+      {
+        question: "Which exams require a photo under 20KB?",
+        answer: "SSC CGL, SSC CHSL, SSC MTS, UPSC Civil Services Prelims, NDA & NA Exam, CDS, and many state government recruitment portals require photos between 10KB and 20KB. Always verify the exact limit on the official notification before uploading."
+      }
+    ],
+    content: `Applying for central government exams in India means navigating dozens of portal-specific file size restrictions. Staff Selection Commission (SSC) portals for CGL, CHSL, and MTS examinations commonly require passport photographs to be between 10KB and 20KB. Similarly, UPSC Prelims and NDA online application forms have a strict 20KB ceiling for photographs. If your photo file exceeds this limit, the portal simply rejects it — and many candidates lose precious time figuring out how to fix this.
+
+ToolWala's free online image compressor solves this problem instantly. Upload your photo, get a compliant 20KB output, and proceed with your form submission. No software to install, no sign-up required.
+
+### Why Government Portals Set a 20KB Limit
+Recruitment portals handle lakhs of applications simultaneously. A 20KB limit ensures that even applicants using slow 2G/3G connections in remote areas can upload their photos without timing out. It also dramatically reduces storage costs for NIC (National Informatics Centre) hosted portals. The trade-off is that candidates must manually compress their images — something that most people find confusing or require software for.
+
+### Step-by-Step: Compress Photo to 20KB for SSC / UPSC
+1. **Upload your image** by clicking the upload area in the compressor tool above.
+2. **The tool automatically targets 20KB** — no settings adjustment needed for standard passport photos.
+3. **Click compress and download** your optimized image instantly, ready for portal upload.
+
+### Common Portals That Require 20KB Photos
+- **SSC (Staff Selection Commission)** — All tier exams (CGL, CHSL, MTS, GD Constable)
+- **UPSC** — Civil Services Preliminary Application
+- **NDA & NA Exam** — Photo and signature both under 20KB
+- **State Recruitment Boards** — BPSC, UPPSC, RPSC, MPSC often mirror SSC specifications
+- **Indian Army / Navy / Air Force** — Agniveer and other recruitment forms
+
+### Keeping Your Photo Sharp at 20KB
+The secret to a high-quality 20KB photo lies in balancing dimensions and compression. A passport photo at 100×130 pixels with JPEG quality 60–70% typically lands under 20KB while remaining perfectly sharp. Our tool handles this calculation automatically — you just need to upload a well-lit, front-facing photo for best results.
+
+### Tips for Taking a Rejection-Proof Exam Photo
+- Use natural front-facing light. Avoid shadows on the face or behind the head.
+- Wear contrasting colors. A dark shirt on a white background ensures sharp face edges.
+- Keep a neutral expression. Eyes open, mouth closed, ears visible.
+- No glasses, hats, or head coverings (unless for religious reasons).
+- Shoot in landscape mode, then crop to portrait before uploading.
+
+### Privacy and Data Security
+Since government exam photos contain your personal biometric data, privacy matters. Our tool runs entirely in your browser sandbox — no data is transmitted, no logs are stored. You remain in full control of your files throughout the process.`
+  },
+
+  // BATCH 1 — 50KB (IBPS / SBI / Bank PO Exam photo uploads)
+  {
+    slug: "compress-image-to-50kb",
+    title: "Compress Image to 50KB Online Free - Toolwala",
+    metaDescription: "Easily compress your JPG, PNG, or WebP images to less than 50KB online. Perfect for IBPS PO, SBI Clerk, RBI, and bank exam applications. 100% Free & Secure.",
+    h1: "Online Image Compressor to 50KB without Losing Quality",
+    badgeText: "Bank & IBPS Exam Ready",
+    description: "Reduce photo and signature file sizes to under 50KB for banking recruitment forms — IBPS PO, SBI PO, SBI Clerk, RBI Grade B, and NABARD examinations all require photos within this range. 100% browser-based, no data leaves your device.",
+    ctaText: "Click Here to Compress Image to 50KB",
+    ctaHref: "/tools/image-compressor",
+    category: "Image Tools",
+    relatedTools: ["gov-form-image-compressor", "image-compressor", "aadhaar-photo-resize"],
+    relatedBlogs: [
+      { title: "IBPS PO Photo & Signature Upload Requirements", slug: "ibps-po-photo-signature-upload-requirements" },
+      { title: "How to Compress Image for Government Portals", slug: "compress-image-government-portals" }
+    ],
+    faqs: [
+      {
+        question: "How do I reduce a photo to 50KB?",
+        answer: "Use ToolWala's Image Compressor — upload your JPG, PNG, or WebP photo and the tool will compress it to under 50KB by reducing JPEG quality and pixel dimensions optimally. The process takes under 5 seconds and requires no software installation."
+      },
+      {
+        question: "Will compressing my image to 50KB reduce its quality?",
+        answer: "At 50KB, your photo retains significantly more detail than at 20KB. A standard bank exam passport photo (200×230 pixels) compressed to 50KB is crisp, clearly legible, and will pass IBPS and SBI portal validation without any issues."
+      },
+      {
+        question: "Is it safe to compress my personal images on Toolwala?",
+        answer: "Yes, completely safe. The compression algorithm runs client-side in your browser. Your photo never leaves your device — we have zero access to your image data. This is especially important for bank exam photos which are linked to your identity."
+      },
+      {
+        question: "Which bank exams require a photo under 50KB?",
+        answer: "IBPS PO, IBPS Clerk, IBPS SO, SBI PO, SBI Clerk, SBI Specialist Officer, RBI Grade B, RBI Assistant, NABARD Grade A/B, and most cooperative bank exams specify a photo file size between 20KB and 50KB. Check the official notification for the exact limit."
+      }
+    ],
+    content: `Banking sector recruitment in India is one of the most competitive job markets, with lakhs of candidates appearing for IBPS PO, SBI PO, SBI Clerk, and RBI Grade B examinations every year. A consistent requirement across all these portals is that your passport photograph must be uploaded as a JPEG file between 20KB and 50KB. Larger files are automatically rejected, leaving many candidates scrambling at the last minute.
+
+With ToolWala's free online image compressor, you can reduce any photo to under 50KB in seconds — directly in your browser, without any app download or sign-up.
+
+### Why the 50KB Limit for Bank Exam Photos?
+Bank recruitment portals hosted by IBPS (Institute of Banking Personnel Selection) and SBI (State Bank of India) are built to handle crores of registrations during peak admission windows. Enforcing a 50KB photo limit ensures that forms load quickly on both desktop and mobile browsers, keeps the database lean, and ensures fair access for candidates with limited bandwidth. Despite the small file size, the photo must remain clearly identifiable for identity verification at exam centers.
+
+### Step-by-Step: Compress Photo to 50KB for Bank Exams
+1. **Upload your image** by clicking the upload area in the image compressor above.
+2. **The tool automatically sets the target limit to 50KB** for optimal bank exam compliance.
+3. **Click compress and download** your optimized photo, ready for IBPS, SBI, or RBI portal submission.
+
+### Bank Exam Photo Specifications at a Glance
+- **File Format**: JPEG / JPG (most portals reject PNG)
+- **File Size**: 20KB to 50KB (varies by portal — always verify the official notification)
+- **Dimensions**: Typically 200×230 pixels or equivalent passport size
+- **Background**: Plain white or off-white
+- **Age of Photo**: Taken within the last 6 months
+- **Signature Size**: Usually 10KB to 20KB (separate upload)
+
+### Signature Compression for Bank Forms
+Most IBPS and SBI forms require both a photograph and a signature to be uploaded separately. Signatures must typically be under 20KB. You can use the same ToolWala compressor to reduce your signature scan to under 20KB — just upload the signature image instead of a photo.
+
+### Avoiding Common Bank Exam Photo Rejections
+Many candidates face form rejection not because of qualifications but due to incorrect photo specifications. The most common mistakes are:
+- Uploading a PNG file when JPEG is required
+- Using a color photo when the portal specifies black-and-white (rare but applicable for some older portals)
+- Photo too small (under 20KB) resulting in blurry output when printed at exam halls
+- Incorrect background color — always use white
+
+### Security and Privacy Guarantee
+Bank exam applications contain your PAN number, Aadhaar number, and other sensitive details linked to your uploaded photo. Never use tools that upload your files to unknown servers. ToolWala's compressor is fully browser-native — your image is compressed locally with zero data transmission to our infrastructure.`
+  },
+
+  // BATCH 2 — 100KB (College Admissions — NEET, JEE, CUET, University portals)
+  {
+    slug: "compress-image-to-100kb",
+    title: "Compress Image to 100KB Online Free - Toolwala",
+    metaDescription: "Easily compress your JPG, PNG, or WebP images to less than 100KB online. Perfect for job applications, official portals, and admissions. 100% Free & Secure.",
+    h1: "Online Image Compressor to 100KB without Losing Quality",
+    badgeText: "Admission Portal Ready",
+    description: "Reduce image file sizes to under 100KB for NEET-UG, JEE Main, CUET, and university admission portals. The 100KB limit is the most common threshold for academic registration forms across India. Fast, free, and fully browser-based.",
+    ctaText: "Click Here to Compress Image to 100KB",
+    ctaHref: "/tools/image-compressor",
+    category: "Image Tools",
+    relatedTools: ["image-compressor", "gov-form-image-compressor", "passport-photo-maker"],
+    relatedBlogs: [
+      { title: "NEET UG Photo & Document Upload Specifications", slug: "neet-ug-photo-document-upload-specifications" },
+      { title: "How to Compress Image for Government Portals", slug: "compress-image-government-portals" }
+    ],
+    faqs: [
+      {
+        question: "How do I reduce a photo to 100KB?",
+        answer: "Upload your image to ToolWala's Image Compressor and it will automatically reduce it to under 100KB by adjusting JPEG compression and dimensions intelligently. No quality settings to configure — the tool picks the optimal balance for a clear, submission-ready photo."
+      },
+      {
+        question: "Will compressing my image to 100KB reduce its quality?",
+        answer: "At 100KB, images retain excellent quality. A high-resolution passport photo at 300×350 pixels compressed to 100KB is crisp, vibrant, and passes all standard admission portal validators for NEET, JEE, and university applications without any visual degradation."
+      },
+      {
+        question: "Is it safe to compress my personal images on Toolwala?",
+        answer: "Yes, 100% safe. Your photos are processed entirely within your browser using JavaScript — nothing is uploaded to our servers. We never store, log, or access your image data. This makes ToolWala the safest option for compressing personal admission photos."
+      },
+      {
+        question: "Which admission portals require photos under 100KB?",
+        answer: "NTA's NEET-UG and JEE Main portals, CUET (Common University Entrance Test), DU Admission, Delhi University SOL, IGNOU admission forms, CBSE scholarship portals, and most state-level university admission systems require photos under 100KB."
+      }
+    ],
+    content: `For millions of students across India, submitting the correct photo on academic admission portals is a critical step that can't be skipped or rushed. The National Testing Agency (NTA), which manages NEET-UG, JEE Main, and CUET, specifies a photo file size limit of 10KB to 100KB for the online application form. University admission portals — DU, IGNOU, BHU, and hundreds of state universities — also converge on the 100KB threshold as the standard maximum.
+
+If your photo exceeds this limit, the portal will display an error and refuse to proceed with form submission. ToolWala's free online image compressor resolves this in seconds.
+
+### Step-by-Step: Compress Image to 100KB for Admission Portals
+1. **Upload your image** by clicking the upload area in the compressor tool linked above.
+2. **The tool automatically sets the target limit to 100KB** — no manual configuration needed.
+3. **Click compress and download** your optimized photo, ready to upload on NTA, DU, or any university portal.
+
+### Why Academic Portals Use the 100KB Limit
+Unlike government exam portals that enforce very tight 20KB–50KB limits, academic admission platforms allocate slightly more space per photo to allow for better image quality. At 100KB, a student's facial features, skin tone, and expression are clearly identifiable — important for admit card generation and identity verification at exam centers. NTA specifically uses uploaded photos to print admit cards, so clarity matters.
+
+### NTA Photo Specifications for NEET & JEE Main
+- **File Format**: JPEG only
+- **File Size**: 10KB – 100KB
+- **Dimensions**: 3.5 cm × 4.5 cm (at 100 DPI for digital, 200–300 DPI for print)
+- **Background**: White or off-white only
+- **Recency**: Taken within the last 3 months
+- **Signature**: 3KB – 30KB (separate upload required)
+
+### Compressing Scanned Certificates to 100KB
+Beyond photos, some university portals also require scanned identity documents (10th certificate, Aadhaar card, caste certificate) to be uploaded under 100KB. If you're uploading a scanned PDF page as a JPEG, our compressor reduces it to portal-compliant size while keeping text and seals legible.
+
+### Tips for a Perfect Admission Portal Photo
+- Use a plain white background. Remove busy backgrounds using ToolWala's background remover first, then compress.
+- Ensure good lighting. Evenly lit photos compress better and look cleaner at 100KB.
+- Shoot at a slightly higher resolution than needed. Starting from a 500×600 pixel photo and compressing gives better results than starting from a 100×130 pixel image.
+- Avoid filters or processing from Instagram or social media — use raw camera output.
+
+### Privacy Commitment
+Student admission photos are tied to identity verification systems. Processing them on third-party servers creates a privacy risk. ToolWala's compressor never touches a server — the entire compression pipeline runs in your browser using the Canvas API, making it the safest tool for academic document processing.`
+  },
+
+  // BATCH 2 — 200KB (University / IGNOU / DU course registration & document uploads)
+  {
+    slug: "compress-image-to-200kb",
+    title: "Compress Image to 200KB Online Free - Toolwala",
+    metaDescription: "Easily compress your JPG, PNG, or WebP images to less than 200KB online. Perfect for job applications, official portals, and admissions. 100% Free & Secure.",
+    h1: "Online Image Compressor to 200KB without Losing Quality",
+    badgeText: "University Document Compliant",
+    description: "Compress photos, scanned certificates, and official documents to under 200KB for university re-registration, open learning portals (IGNOU, SOL), scholarship applications, and job application portals that allow slightly larger image uploads.",
+    ctaText: "Click Here to Compress Image to 200KB",
+    ctaHref: "/tools/image-compressor",
+    category: "Image Tools",
+    relatedTools: ["image-compressor", "gov-form-image-compressor", "bg-remover"],
+    relatedBlogs: [
+      { title: "How to Compress Image for Government Portals", slug: "compress-image-government-portals" },
+      { title: "Official Indian Passport Photo Size & Dimensions", slug: "official-indian-passport-photo-specifications" }
+    ],
+    faqs: [
+      {
+        question: "How do I reduce a photo to 200KB?",
+        answer: "Use ToolWala's Image Compressor — upload any JPG, PNG, or WebP file and the tool will reduce it to under 200KB by applying optimal JPEG encoding. The result is a high-quality image suitable for university portals, scholarship forms, and professional job applications."
+      },
+      {
+        question: "Will compressing my image to 200KB reduce its quality?",
+        answer: "At 200KB, images are visually lossless for most practical purposes. A full-color passport photo at 400×500 pixels fits comfortably under 200KB with no visible quality loss — faces, text, and document details remain sharp and perfectly legible."
+      },
+      {
+        question: "Is it safe to compress my personal images on Toolwala?",
+        answer: "Completely safe. ToolWala processes all images client-side in your browser. Your photos, certificates, or scanned documents are never sent to any server. This is especially important when uploading sensitive university or scholarship documents."
+      },
+      {
+        question: "Which portals require photos or documents under 200KB?",
+        answer: "IGNOU re-admission forms, Delhi University SOL, Indira Gandhi National Open University course enrolment, state scholarship portals (NSP, e-Shram), many private university online admission forms, and corporate HR portals for freshers commonly use a 200KB image upload limit."
+      }
+    ],
+    content: `The 200KB image upload limit is extremely common across open learning institutions and state scholarship schemes. IGNOU (Indira Gandhi National Open University), which serves over 3 million students, requires candidate photos for re-registration and fresh enrolment to be under 200KB. The National Scholarship Portal (NSP) used by state governments for OBC, SC/ST, and minority scholarships also enforces similar limits.
+
+At 200KB, you have enough room to upload a high-resolution passport photo, a scanned caste certificate image, or an identity card scan while keeping the file size within portal limits. ToolWala's compressor helps you hit this target accurately without compromising document legibility.
+
+### Step-by-Step: Compress Image to 200KB
+1. **Upload your image** using the upload zone in the image compressor tool linked above.
+2. **The tool automatically sets the target limit to 200KB**, giving you a crisp, high-fidelity output.
+3. **Click compress and download** your portal-ready image in seconds.
+
+### Why 200KB Allows Higher-Quality Uploads
+Unlike the tight 20KB–50KB limits for government exam photos, the 200KB threshold gives you enough budget for a high-quality color photo with minimal compression artifacts. This matters particularly for open learning and scholarship portals where uploaded photos are used for ID card printing, hostel applications, and scholarship disbursement verification. A blurry photo can cause issues during physical verification.
+
+### IGNOU & SOL Document Specifications
+- **Photo**: JPEG, under 200KB, white background, passport-size
+- **Signature**: JPEG, under 100KB, black ink on white paper
+- **Documents (mark sheets, certificates)**: JPEG or PDF, typically 200KB–500KB per page
+- **Identity Proof (Aadhaar/PAN scan)**: JPEG, under 200KB
+
+### Compressing Scanned Documents to 200KB
+If you have a color scan of your mark sheet or certificate that is 2–5MB, our image compressor reduces it to under 200KB while keeping text and seal details readable. For multi-page documents, compress each page individually before merging into a PDF.
+
+### Professional Job Applications at 200KB
+Many private sector HR portals and job boards (Naukri, LinkedIn document uploads, company career portals) also use 200KB as their standard image upload cap for profile photos and resume photo attachments. A 200KB photo looks professional, loads quickly, and is accepted universally across HR management systems.
+
+### Security and Privacy
+Since 200KB images often include scanned identity documents with Aadhaar numbers, PAN details, or caste certificate data, using a server-side compression tool is risky. ToolWala's zero-server-upload architecture ensures all processing happens in your browser memory, guaranteeing complete privacy for sensitive document handling.`
+  },
+
+  // BATCH 3 — 300KB
+  {
+    slug: "compress-image-to-300kb",
+    title: "Compress Image to 300KB Online Free - Toolwala",
+    metaDescription: "Easily compress your JPG, PNG, or WebP images to less than 300KB online. Perfect for EPFO, PAN card, and service portal uploads. 100% Free & Secure.",
+    h1: "Online Image Compressor to 300KB without Losing Quality",
+    badgeText: "EPFO & PAN Portal Ready",
+    description: "Reduce photo and scanned document sizes to under 300KB for EPFO UAN member portals, PAN card photo submissions, driving licence applications, and DigiLocker-linked service portals. Browser-only processing — zero server uploads.",
+    ctaText: "Click Here to Compress Image to 300KB",
+    ctaHref: "/tools/image-compressor",
+    category: "Image Tools",
+    relatedTools: ["image-compressor", "gov-form-image-compressor", "aadhaar-photo-resize"],
+    relatedBlogs: [
+      { title: "How to Compress Image for Government Portals", slug: "compress-image-government-portals" },
+      { title: "Official Indian Passport Photo Size & Dimensions", slug: "official-indian-passport-photo-specifications" }
+    ],
+    faqs: [
+      {
+        question: "How do I reduce a photo to 300KB?",
+        answer: "Open ToolWala's Image Compressor, upload your JPG, PNG, or WebP image, and the tool will compress it to under 300KB automatically. The 300KB target is achievable for all standard passport photos, certificate scans, and identity card images with no visible quality loss."
+      },
+      {
+        question: "Will compressing my image to 300KB reduce its quality?",
+        answer: "At 300KB, compression is very minimal. High-resolution photos and scanned documents compressed to 300KB are visually indistinguishable from the originals for all practical uses — identity verification, admit card printing, and form submissions."
+      },
+      {
+        question: "Is it safe to compress my personal images on Toolwala?",
+        answer: "Yes. All compression happens in your browser using the Canvas API. Your images, whether they are PAN card photos, Aadhaar scans, or EPFO documents, never leave your device. ToolWala has no server-side image processing infrastructure."
+      },
+      {
+        question: "Which portals require images under 300KB?",
+        answer: "EPFO UAN Member ePortal for photo and KYC document uploads, NSDL PAN card application photo upload, UIDAI e-Aadhaar photo update requests, Regional Transport Office (RTO) online driving licence applications, and DigiLocker linked document portals often use a 300KB upper limit."
+      }
+    ],
+    content: `A 300KB image size limit is commonly found on employment and financial service portals operated by central government departments. The EPFO (Employees' Provident Fund Organisation) UAN member portal requires KYC photo uploads under 300KB. Similarly, the NSDL PAN card online application requires a passport photograph to be uploaded as a JPEG under 300KB. If you're updating your Aadhaar-linked photo through UIDAI, the upload limit is also typically in the 300KB range.
+
+ToolWala's browser-native image compressor gives you a precisely sized output without any software installation or server exposure.
+
+### Step-by-Step: Compress Image to 300KB
+1. **Upload your image** by clicking the upload zone in the image compressor tool linked above.
+2. **The tool automatically targets the 300KB limit**, ensuring your photo or scanned document lands safely under the threshold.
+3. **Click compress and download** your optimized image, ready for EPFO, PAN, or RTO portal submission.
+
+### EPFO Photo KYC Requirements
+The EPFO UAN Member ePortal requires employees to upload a recent passport photograph as part of the KYC (Know Your Customer) compliance process. The uploaded photo is used for identity verification during PF withdrawal claims and transfers. Requirements typically include:
+- **Format**: JPEG
+- **Size**: Up to 300KB
+- **Background**: Plain white or light-colored
+- **Expression**: Neutral, eyes open
+
+### PAN Card Photo Upload via NSDL/UTI
+When applying for a new PAN card or requesting a PAN card reprint through the NSDL or UTI portal, you must upload a clear passport photograph under 300KB. Our compressor reduces even high-resolution camera photos to this limit while keeping your face sharp and clearly legible for NSDL's identity verification system.
+
+### Driving Licence Online Applications
+Several state RTOs (Regional Transport Offices) have migrated to the Parivahan Sewa portal for learner's licence and driving licence applications. The portal requires a recent photo upload typically capped at 300KB. Our tool helps you compress any photo to portal specs without quality loss.
+
+### Privacy Assurance for Financial Documents
+PAN cards, EPFO documents, and driving licence applications all carry sensitive financial and identity information. Using a server-based online compressor means your biometric data could be intercepted or stored. ToolWala is browser-native — there is zero data transmission, zero logs, and zero risk of identity data exposure.`
+  },
+
+  // BATCH 3 — 500KB
+  {
+    slug: "compress-image-to-500kb",
+    title: "Compress Image to 500KB Online Free - Toolwala",
+    metaDescription: "Easily compress your JPG, PNG, or WebP images to less than 500KB online. Perfect for visa applications, embassy submissions, and high-res uploads. 100% Free & Secure.",
+    h1: "Online Image Compressor to 500KB without Losing Quality",
+    badgeText: "Visa & Embassy Compliant",
+    description: "Compress high-resolution photos and document scans to under 500KB for visa applications, embassy document submissions, professional portfolio uploads, and official portals that permit slightly larger image files. Fully browser-based.",
+    ctaText: "Click Here to Compress Image to 500KB",
+    ctaHref: "/tools/image-compressor",
+    category: "Image Tools",
+    relatedTools: ["image-compressor", "passport-photo-maker", "bg-remover"],
+    relatedBlogs: [
+      { title: "Official Indian Passport Photo Size & Dimensions", slug: "official-indian-passport-photo-specifications" },
+      { title: "How to Make Passport Size Photo with Blue Background", slug: "make-passport-photo-blue-background" }
+    ],
+    faqs: [
+      {
+        question: "How do I reduce a photo to 500KB?",
+        answer: "Upload your image to ToolWala's Image Compressor and it will reduce the file size to under 500KB while preserving maximum visual quality. At this size, even high-resolution portrait photos with fine detail compress easily without any noticeable degradation."
+      },
+      {
+        question: "Will compressing my image to 500KB reduce its quality?",
+        answer: "Virtually no visible quality loss occurs at 500KB for standard photos. A high-resolution 2000×2500 pixel portrait photo typically compresses to well under 500KB with near-lossless quality. This makes the 500KB target easy to hit while maintaining pristine image clarity."
+      },
+      {
+        question: "Is it safe to compress my personal images on Toolwala?",
+        answer: "Yes, completely safe. ToolWala uses 100% client-side processing — your visa photos, passport scans, and embassy documents are compressed locally in your browser and never transmitted to our servers. This is especially critical for international visa application photos."
+      },
+      {
+        question: "Which portals require images or photos under 500KB?",
+        answer: "US visa (DS-160) online photo upload, UK visa applications via UKVI portal, Schengen visa online submission systems, professional freelance platforms, university faculty profile photo uploads, and e-commerce seller account photo verification portals commonly use a 500KB limit."
+      }
+    ],
+    content: `The 500KB image size limit appears on a wide range of professional and international portals. US visa applications via the DS-160 form, UK visa applications through the UKVI (UK Visas and Immigration) portal, and Schengen visa online submission systems all require photographs to be high quality but within manageable file sizes — typically under 500KB to 1MB. Professional portals for LinkedIn profile photos, Upwork, and Fiverr also use similar limits.
+
+At 500KB, you have substantial room for a high-fidelity image, but photos taken with modern smartphones can easily reach 5–15MB. ToolWala's compressor bridges this gap cleanly.
+
+### Step-by-Step: Compress Image to 500KB
+1. **Upload your image** using the upload zone in the image compressor above.
+2. **The tool automatically adjusts compression to target 500KB**, giving you maximum quality within the threshold.
+3. **Click compress and download** your visa-ready or portal-compliant image instantly.
+
+### US Visa (DS-160) Photo Requirements
+The US Department of State requires visa application photos uploaded through the DS-160 form to be:
+- **Format**: JPEG
+- **File Size**: Maximum 240KB (for the online upload tool) — if your photo is 500KB, our compressor helps you go further to meet this stricter sub-limit
+- **Dimensions**: 600×600 pixels to 1200×1200 pixels
+- **Background**: Plain white
+- **Face Coverage**: 50% to 69% of the frame
+
+### UK Visa Digital Photo Submission
+UKVI requires applicants to submit a digital photograph when applying for standard visitor visas, student visas, and work visas. The digital upload typically accepts JPEG files up to 500KB–1MB. Our compressor ensures your high-resolution portrait photo lands comfortably within this range.
+
+### Schengen Visa Photo Guidelines
+For Schengen visa applications (covering 27 European countries), photographs must comply with ICAO biometric standards. Digital submissions through consulate portals require photos under 500KB in most cases, at 35×45mm at 300–600 DPI.
+
+### Professional Portfolio and Freelance Platform Photos
+Beyond visa applications, platforms like Upwork, Fiverr, Freelancer, and 99designs require clean profile photos under 500KB for account creation and verification. A well-compressed 500KB photo looks professional, loads fast, and improves your profile's perceived credibility.
+
+### Security for Visa and Embassy Documents
+Visa application photos are among the most sensitive personal images you can upload online — they're directly linked to your biometric passport and travel history. Using ToolWala's client-side compressor ensures your photos are compressed locally, with zero exposure to third-party server infrastructure.`
+  },
+
+  // BATCH 3 — 1MB
+  {
+    slug: "compress-image-to-1mb",
+    title: "Compress Image to 1MB Online Free - Toolwala",
+    metaDescription: "Easily compress your JPG, PNG, or WebP images to less than 1MB online. Perfect for social media, e-commerce, and general high-quality uploads. 100% Free & Secure.",
+    h1: "Online Image Compressor to 1MB without Losing Quality",
+    badgeText: "Social Media & E-Commerce Ready",
+    description: "Reduce large photos, product images, and high-resolution scans to under 1MB for social media uploads, e-commerce platforms, professional websites, and general-purpose image sharing — all while maintaining the best possible visual quality.",
+    ctaText: "Click Here to Compress Image to 1MB",
+    ctaHref: "/tools/image-compressor",
+    category: "Image Tools",
+    relatedTools: ["image-compressor", "bg-remover", "ai-image-upscaler"],
+    relatedBlogs: [
+      { title: "Official Indian Passport Photo Size & Dimensions", slug: "official-indian-passport-photo-specifications" },
+      { title: "How to Compress Image for Government Portals", slug: "compress-image-government-portals" }
+    ],
+    faqs: [
+      {
+        question: "How do I reduce a photo to 1MB?",
+        answer: "Upload your image to ToolWala's Image Compressor. For most modern smartphone photos (5MB–15MB), the tool will compress them to under 1MB by reducing JPEG quality and pixel dimensions while keeping the image visually sharp and upload-ready for any platform."
+      },
+      {
+        question: "Will compressing my image to 1MB reduce its quality?",
+        answer: "At 1MB, images retain near-original quality. A 12MP smartphone photo compressed to 1MB is visually identical to the original at normal viewing sizes. For social media, e-commerce, and website use, a 1MB image is considered high quality and well-optimized."
+      },
+      {
+        question: "Is it safe to compress my personal images on Toolwala?",
+        answer: "Yes, 100% safe. All image processing happens in your browser using the Canvas API — no files are uploaded to our servers at any point. This applies equally to personal photos, product images, and professional portfolio photos."
+      },
+      {
+        question: "Which platforms require images under 1MB?",
+        answer: "Instagram (recommends under 1MB for fastest uploads), Facebook (compresses anything over 720KB automatically — uploading pre-compressed saves quality), Amazon seller central product images, Shopify and WooCommerce stores, WordPress uploads, and most CMS platforms work best with images under 1MB."
+      }
+    ],
+    content: `Modern smartphone cameras produce photos ranging from 5MB to 25MB per image. While this raw quality is excellent for printing, it creates problems for web use: slow page load times, high server storage costs, and upload failures on platforms that cap images at 1MB. Compressing to 1MB solves all three problems while maintaining excellent visual quality for screens and digital displays.
+
+Whether you're uploading product photos to an e-commerce store, sharing travel photos on social media, or adding images to a WordPress blog, ToolWala's free image compressor gets your files to under 1MB with one click.
+
+### Step-by-Step: Compress Image to 1MB
+1. **Upload your image** by clicking the upload area in the image compressor above.
+2. **The tool automatically targets the 1MB limit**, preserving maximum quality within this generous ceiling.
+3. **Click compress and download** your optimized image, ready for any platform or portal.
+
+### Why Compress to 1MB for Social Media?
+Social media platforms like Instagram, Facebook, and Twitter automatically re-compress images when you upload files larger than their internal thresholds. This double-compression (your camera → platform → display) degrades quality more than a single controlled compression to 1MB. By pre-compressing to 1MB with ToolWala, you control the quality and get sharper, more vibrant results on your feed.
+
+### E-Commerce Product Photography at 1MB
+For Amazon, Flipkart, Shopify, and Meesho seller accounts, product image quality directly impacts conversion rates. However, large image files slow down product pages, hurt SEO, and increase hosting costs. The sweet spot is a high-quality JPEG under 1MB at 1000×1000 pixels or larger — exactly what our compressor delivers.
+
+### Website and Blog Image Optimization
+Google's Core Web Vitals score — which directly affects search rankings — heavily penalizes pages with large uncompressed images. Images over 1MB are flagged by Google PageSpeed Insights as "opportunities" to improve Largest Contentful Paint (LCP). By compressing blog photos and website banners to under 1MB, you directly improve your SEO performance and site speed.
+
+### WhatsApp and Messaging Compression
+WhatsApp automatically compresses images when you share them, reducing quality further. Sending a pre-compressed 1MB image from ToolWala means WhatsApp's compression has less to "fix," resulting in cleaner photos on the recipient's end — especially important for business communications, real estate listings, and catalog sharing.
+
+### Batch Workflows for E-Commerce and Photographers
+If you regularly deal with large volumes of product photos or event photography, consider processing photos in batches. Compress each image to under 1MB before uploading to your catalog or sharing with clients. This workflow saves storage, reduces upload time, and ensures consistent file sizes across your portfolio.
+
+### Privacy and Security
+Even for general-use image compression, privacy matters. ToolWala processes all images exclusively within your browser — no image is sent to a cloud server for processing. This is especially important for business product photos, unreleased creative work, and personal photographs you don't want stored on third-party servers.`
   }
 ];

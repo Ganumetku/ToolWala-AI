@@ -7,6 +7,16 @@ import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { formatBytes } from '@/lib/utils/format';
 
+const SIZE_GUIDES = [
+  { label: '20KB', slug: 'compress-image-to-20kb', desc: 'SSC / UPSC / NDA' },
+  { label: '50KB', slug: 'compress-image-to-50kb', desc: 'IBPS / SBI / Bank PO' },
+  { label: '100KB', slug: 'compress-image-to-100kb', desc: 'NEET / JEE / CUET' },
+  { label: '200KB', slug: 'compress-image-to-200kb', desc: 'IGNOU / University' },
+  { label: '300KB', slug: 'compress-image-to-300kb', desc: 'EPFO / PAN Card' },
+  { label: '500KB', slug: 'compress-image-to-500kb', desc: 'Visa / Embassy' },
+  { label: '1MB', slug: 'compress-image-to-1mb', desc: 'Social Media / General' },
+];
+
 export default function ImageCompressor() {
   const [originalFile, setOriginalFile] = useState<File | null>(null);
   const [originalUrl, setOriginalUrl] = useState<string | null>(null);
@@ -313,6 +323,36 @@ export default function ImageCompressor() {
                 </div>
               </div>
             )}
+          </div>
+        </div>
+      </div>
+
+      {/* Internal: Size-Specific Compression Guides */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl mt-16">
+        <div className="glass rounded-[2rem] border border-white/5 p-8 sm:p-10">
+          <div className="mb-6">
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400">Compress to Exact Size</span>
+            <h2 className="text-2xl font-black text-white tracking-tight mt-1">Size-Specific Compression Guides</h2>
+            <p className="text-sm text-gray-500 mt-1 font-medium">Find the right guide for your exam or portal requirement.</p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {SIZE_GUIDES.map((guide) => (
+              <Link
+                key={guide.slug}
+                href={`/landing/${guide.slug}`}
+                className="group flex flex-col gap-1 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-blue-500/30 hover:bg-blue-500/[0.04] p-5 transition-all"
+              >
+                <span className="text-2xl font-black text-blue-400 group-hover:text-blue-300 transition-colors">
+                  {guide.label}
+                </span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 group-hover:text-gray-400 transition-colors line-clamp-1">
+                  {guide.desc}
+                </span>
+                <span className="text-[10px] text-gray-600 group-hover:text-blue-400 transition-colors mt-1 font-semibold">
+                  View Guide →
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </div>

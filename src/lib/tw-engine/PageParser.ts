@@ -16,7 +16,8 @@ export class PageParser {
   static async parsePage(
     page: any,
     pageNum: number,
-    pdfjs: any
+    pdfjs: any,
+    pdfLibDoc?: any
   ): Promise<TWPage> {
     const viewport = page.getViewport({ scale: 1.0 });
     const width = viewport.width;
@@ -30,7 +31,7 @@ export class PageParser {
       annotationObjects,
       fonts
     ] = await Promise.all([
-      TextParser.parsePageText(page, pageNum, viewport),
+      TextParser.parsePageText(page, pageNum, viewport, pdfLibDoc),
       ImageParser.parsePageImages(page, pageNum, viewport, pdfjs),
       VectorParser.parsePageVectors(page, pageNum, viewport, pdfjs),
       AnnotationParser.parsePageAnnotations(page, pageNum, viewport),

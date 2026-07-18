@@ -1,6 +1,9 @@
 import type { TWDocument } from './types';
 import { PageParser } from './PageParser';
 import { ObjectRegistry } from './ObjectRegistry';
+import { PDFDocument, PDFName, PDFRef, PDFRawStream, decodePDFRawStream } from 'pdf-lib';
+import { ContentStreamParser } from './pdf-writer/content-stream/ContentStreamParser';
+import { PDFContentStreamManager } from './pdf-writer/content-stream/PDFContentStreamManager';
 
 /**
  * DocumentParser handles client-side PDF document loading, dynamic bootstrapping
@@ -15,6 +18,7 @@ export class DocumentParser {
     pdfBytes: Uint8Array,
     fileName: string
   ): Promise<TWDocument> {
+    PDFContentStreamManager.clear();
     let pdfjs;
     
     // Environment-aware library loading
@@ -35,17 +39,67 @@ export class DocumentParser {
     const pageCount = doc.numPages;
     const pageParsers = [];
 
+    let pdfLibDoc: any = null;
+    try {
+      pdfLibDoc = await PDFDocument.load(pdfBytes);
+    } catch (e) {
+      console.warn('Failed to load document via pdf-lib:', e);
+    }
+
     // Parse all pages concurrently
     for (let i = 1; i <= pageCount; i++) {
       pageParsers.push(
         (async () => {
           const page = await doc.getPage(i);
-          return PageParser.parsePage(page, i, pdfjs);
+          return PageParser.parsePage(page, i, pdfjs, pdfLibDoc);
         })()
       );
     }
 
     const pages = await Promise.all(pageParsers);
+
+    // Verify each page's content stream(s) using ContentStreamParser
+    if (pdfLibDoc) {
+      try {
+        const pdfLibPages = pdfLibDoc.getPages();
+        for (let i = 0; i < pdfLibPages.length; i++) {
+          const pdfLibPage = pdfLibPages[i];
+          const contentsRef = pdfLibPage.node.get(PDFName.of('Contents'));
+
+          const verifySingleRef = (ref: any, idx?: number) => {
+            if (ref instanceof PDFRef) {
+              const rawStream = pdfLibDoc.context.lookup(ref);
+              if (rawStream instanceof PDFRawStream) {
+                try {
+                  const decompressedBytes = decodePDFRawStream(rawStream).decode();
+                  // Cache decompressed stream bytes in manager
+                  PDFContentStreamManager.setContentStreamBytes(i + 1, ref.objectNumber, decompressedBytes);
+
+                  ContentStreamParser.verifyStream(
+                    decompressedBytes,
+                    ref.objectNumber,
+                    idx !== undefined ? idx : i + 1
+                  );
+                } catch (e) {
+                  console.warn(`Failed to decompress content stream ${ref.objectNumber} R on page ${i + 1}`, e);
+                }
+              }
+            }
+          };
+
+          if (contentsRef instanceof PDFRef) {
+            verifySingleRef(contentsRef);
+          } else if (contentsRef && typeof contentsRef === 'object' && typeof (contentsRef as any).get === 'function') {
+            const size = (contentsRef as any).size ? (contentsRef as any).size() : 0;
+            for (let idx = 0; idx < size; idx++) {
+              verifySingleRef((contentsRef as any).get(idx), idx + 1);
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('Failed to verify content stream page structures:', e);
+      }
+    }
 
     // Read general info metadata if available
     let metadata: Record<string, unknown> | undefined = undefined;

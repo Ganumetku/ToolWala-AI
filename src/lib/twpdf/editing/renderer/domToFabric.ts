@@ -64,6 +64,7 @@ function textToFabric(obj: TWPDFTextObject): Record<string, unknown> {
     pdfFontName: obj.pdfFontName,
     fontName: obj.fontName || obj.fontFamily,
     originalBBox: obj.originalBBox,
+    pdfObject: obj.pdfObject,
     backgroundColor: obj.isOriginalText && !isEdited ? 'rgba(255, 255, 255, 0.001)' : 'transparent',
     lockScalingY: true,
     ...FABRIC_CONTROL_PROPS,

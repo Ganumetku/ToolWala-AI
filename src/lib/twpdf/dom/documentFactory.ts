@@ -32,6 +32,7 @@ function textBoxToObject(
     lineHeight: 1.0,
     isOriginalText: true,
     isDeletedOriginal: false,
+    pdfObject: box.pdfObject,
     originalTextData: {
       text: box.text,
       x: box.x,
@@ -43,6 +44,7 @@ function textBoxToObject(
       fontWeight: box.fontWeight ?? 'normal',
       fontStyle: box.fontStyle ?? 'normal',
       fontFamily: box.fontFamily ?? 'Helvetica',
+      pdfObject: box.pdfObject,
     },
   };
 }

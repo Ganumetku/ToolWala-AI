@@ -1,4 +1,5 @@
 import type { OriginalTextData } from '@/types/pdf';
+import type { PDFTextObject, PDFImageObject, PDFPathObject } from '@/lib/tw-engine/types';
 
 // ─── Object type discriminants ───────────────────────────────────────────────
 
@@ -30,6 +31,7 @@ export interface TWPDFObjectBase {
   createdAt: number;
   updatedAt: number;
   zIndex: number;
+  pdfObject?: PDFTextObject | PDFImageObject | PDFPathObject;
 }
 
 // ─── Specialized objects ─────────────────────────────────────────────────────
@@ -57,6 +59,8 @@ export interface TWPDFTextObject extends TWPDFObjectBase {
   pdfFontName?: string;
   originalBBox?: { x: number; y: number; width: number; height: number };
   fontName?: string;
+  pdfObject?: PDFTextObject;
+  backgroundColor?: string;
 }
 
 export interface TWPDFImageCrop {
@@ -73,6 +77,7 @@ export interface TWPDFImageObject extends TWPDFObjectBase {
   opacity: number;
   scaleX?: number;
   scaleY?: number;
+  pdfObject?: PDFImageObject;
 }
 
 export interface TWPDFShapeObject extends TWPDFObjectBase {
@@ -173,5 +178,6 @@ export interface CreateDocumentInput {
     angle?: number;
     replacedText?: string;
     replacedColor?: string;
+    pdfObject?: PDFTextObject;
   }>>;
 }

@@ -2,7 +2,6 @@ import { CANVAS_JSON_PROPS } from '@/lib/twpdf/core';
 import { isOriginalTextEdited } from '@/lib/twpdf/editor';
 import { dataUrlToUint8Array } from '@/lib/twpdf/utils';
 import type { ExportContext } from '@/types/pdf';
-import { RenderEngine } from '@/lib/tw-engine/editor/RenderEngine';
 
 export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
   const {
@@ -17,9 +16,10 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
     onStatus,
   } = context;
 
-  const { PDFDocument } = await import('pdf-lib');
+  const { PDFDocument, rgb, StandardFonts } = await import('pdf-lib');
   const newDoc = await PDFDocument.create();
   const originalPdfDoc = await PDFDocument.load(pdfBytes);
+
   const doc = pdfDoc as {
     getPage: (n: number) => Promise<{
       getViewport: (opts: { scale: number }) => { width: number; height: number };
@@ -50,11 +50,19 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
     text?: string;
     left?: number;
     top?: number;
+    width?: number;
+    height?: number;
+    scaleX?: number;
+    scaleY?: number;
+    angle?: number;
+    type?: string;
+    backgroundColor?: string;
     fontSize?: number;
     fontFamily?: string;
     fontWeight?: string;
     fontStyle?: string;
     fill?: string;
+    lineHeight?: number;
     originalTextData?: {
       text: string;
       x: number;
@@ -66,9 +74,62 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
       detectedBgColor?: string;
     };
     set: (props: Record<string, unknown>) => void;
+    baseline?: number;
   };
 
   const renderScale = 2.0;
+
+  // Helper to parse hex or rgb to pdf-lib rgb format
+  const parseColorToRgb = (colorStr: string) => {
+    if (!colorStr || colorStr === 'transparent') return rgb(0, 0, 0);
+
+    const rgbMatch = colorStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+    if (rgbMatch) {
+      return rgb(
+        parseInt(rgbMatch[1], 10) / 255,
+        parseInt(rgbMatch[2], 10) / 255,
+        parseInt(rgbMatch[3], 10) / 255
+      );
+    }
+
+    let cleanHex = colorStr.trim().replace('#', '');
+    if (cleanHex.length === 3) {
+      cleanHex = cleanHex.split('').map((c) => c + c).join('');
+    }
+    if (cleanHex.length === 6) {
+      return rgb(
+        parseInt(cleanHex.substring(0, 2), 16) / 255,
+        parseInt(cleanHex.substring(2, 4), 16) / 255,
+        parseInt(cleanHex.substring(4, 6), 16) / 255
+      );
+    }
+
+    return rgb(0, 0, 0);
+  };
+
+  // Helper to map font family to standard PDF PostScript font
+  const resolveStandardFontName = (obj: FabricObject) => {
+    const family = (obj.fontFamily || '').toLowerCase();
+    const isBold = obj.fontWeight === 'bold';
+    const isItalic = obj.fontStyle === 'italic';
+
+    if (family.includes('times') || family.includes('serif') || family.includes('georgia')) {
+      if (isBold && isItalic) return StandardFonts.TimesRomanBoldItalic;
+      if (isBold) return StandardFonts.TimesRomanBold;
+      if (isItalic) return StandardFonts.TimesRomanItalic;
+      return StandardFonts.TimesRoman;
+    }
+    if (family.includes('courier') || family.includes('mono')) {
+      if (isBold && isItalic) return StandardFonts.CourierBoldOblique;
+      if (isBold) return StandardFonts.CourierBold;
+      if (isItalic) return StandardFonts.CourierOblique;
+      return StandardFonts.Courier;
+    }
+    if (isBold && isItalic) return StandardFonts.HelveticaBoldOblique;
+    if (isBold) return StandardFonts.HelveticaBold;
+    if (isItalic) return StandardFonts.HelveticaOblique;
+    return StandardFonts.Helvetica;
+  };
 
   for (let idx = 0; idx < pageList.length; idx++) {
     const pageItem = pageList[idx];
@@ -108,23 +169,9 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
       continue;
     }
 
-    const page = await doc.getPage(pageItem.originalPageNum);
-
-    const tempPdfCanvas = document.createElement('canvas');
-    tempPdfCanvas.width = width * renderScale;
-    tempPdfCanvas.height = height * renderScale;
-    const tempPdfCtx = tempPdfCanvas.getContext('2d');
-
-    if (tempPdfCtx) {
-      tempPdfCtx.fillStyle = '#ffffff';
-      tempPdfCtx.fillRect(0, 0, tempPdfCanvas.width, tempPdfCanvas.height);
-
-      const viewport = page.getViewport({ scale: renderScale });
-      await page.render({
-        canvasContext: tempPdfCtx,
-        viewport: viewport,
-      }).promise;
-    }
+    // Load original vector PDF page content natively to preserve pure vector quality
+    const [copiedPage] = await newDoc.copyPages(originalPdfDoc, [pageItem.originalPageNum - 1]);
+    const addedPage = newDoc.addPage(copiedPage);
 
     let activeCanvas = liveCanvas;
     let tempFabricCanvas: FabricCanvas | null = null;
@@ -149,55 +196,10 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
     }
 
     if (activeCanvas) {
-      activeCanvas.forEachObject((obj) => {
-        if (obj.isOriginalText) {
-          if (obj.isDeletedOriginal) {
-            obj.set({ opacity: 0 });
-          } else if (isOriginalTextEdited(obj)) {
-            obj.set({
-              fill:
-                obj.fill === 'transparent'
-                  ? obj.originalTextData?.detectedColor || '#000000'
-                  : obj.fill,
-              backgroundColor: 'transparent',
-              stroke: 'transparent',
-            });
-          } else {
-            obj.set({
-              fill: 'transparent',
-              backgroundColor: 'transparent',
-              stroke: 'transparent',
-            });
-          }
-        }
-      });
-      if (!tempFabricCanvas) {
-        activeCanvas.requestRenderAll();
-      }
-
-      activeCanvas.forEachObject((obj) => {
-        if (obj.isOriginalText) {
-          if (isOriginalTextEdited(obj)) {
-            const orig = obj.originalTextData!;
-            const padX = 2;
-            const padY = 2;
-            if (tempPdfCtx) {
-              tempPdfCtx.fillStyle = orig.detectedBgColor || '#ffffff';
-              tempPdfCtx.fillRect(
-                (orig.x - padX) * renderScale,
-                (orig.y - padY) * renderScale,
-                (orig.width + padX * 2) * renderScale,
-                (orig.height + padY * 2) * renderScale
-              );
-            }
-          }
-        }
-      });
-
       const fabricObjects: any[] = [];
       activeCanvas.forEachObject((obj) => fabricObjects.push(obj));
 
-      // Hide all text boxes from Fabric export canvas to prevent empty/broken text overlays
+      // 1. Hide all text boxes from Fabric canvas to render only drawings/signatures in transparent PNG overlay
       const originalOpacities = new Map<any, number>();
       fabricObjects.forEach((obj) => {
         if (obj.isOriginalText || obj.type === 'textbox' || obj.type === 'i-text') {
@@ -213,7 +215,7 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
         multiplier: multiplier,
       });
 
-      // Restore opacities on active canvas
+      // Restore original opacities
       fabricObjects.forEach((obj) => {
         if (originalOpacities.has(obj)) {
           obj.set({ opacity: originalOpacities.get(obj) });
@@ -221,32 +223,73 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
       });
       activeCanvas.renderAll();
 
-      if (tempPdfCtx) {
-        const overlayImg = await new Promise<HTMLImageElement>((resolve, reject) => {
-          const img = new Image();
-          img.onload = () => resolve(img);
-          img.onerror = () => reject(new Error('Failed to load overlay image'));
-          img.src = overlayDataUrl;
-        });
-        tempPdfCtx.drawImage(overlayImg, 0, 0);
-
-        // Render all text boxes directly onto the high-resolution PDF canvas context using unified RenderEngine
-        RenderEngine.renderObjects(tempPdfCtx, fabricObjects, renderScale);
-      }
-
-      activeCanvas.forEachObject((obj) => {
-        if (
-          obj.isOriginalText &&
-          !obj.isDeletedOriginal &&
-          obj.text === obj.originalTextData?.text
-        ) {
-          obj.set({
-            fill: 'transparent',
-            backgroundColor: 'rgba(255, 255, 255, 0.001)',
-            stroke: 'transparent',
-          });
-        }
+      // 2. Draw transparent drawings/shapes overlay onto page natively
+      const overlayImgBytes = dataUrlToUint8Array(overlayDataUrl);
+      const embeddedPng = await newDoc.embedPng(overlayImgBytes);
+      addedPage.drawImage(embeddedPng, {
+        x: 0,
+        y: 0,
+        width,
+        height,
       });
+
+      // 3. Process all text boxes natively using pdf-lib vectors
+      for (const obj of fabricObjects) {
+        if (obj.type === 'textbox' || obj.type === 'i-text') {
+          const isOriginal = obj.isOriginalText;
+          const isEdited = isOriginalTextEdited(obj);
+          const isDeleted = obj.isDeletedOriginal || obj.opacity === 0;
+
+          const scaleX = obj.scaleX || 1;
+          const scaleY = obj.scaleY || 1;
+          const objWidth = (obj.width || 0) * scaleX;
+          const objHeight = (obj.height || 0) * scaleY;
+
+          // Coordinate inversion: Top-Left (Fabric) to Bottom-Left (PDF points)
+          const pdfX = obj.left || 0;
+          const pdfY = height - (obj.top || 0) - objHeight;
+
+          // Draw solid white or custom background covers to whiteout original text underneath
+          const hasBgColor = obj.backgroundColor && obj.backgroundColor !== 'transparent' && obj.backgroundColor !== 'rgba(255, 255, 255, 0.001)';
+
+          if (isDeleted || isEdited || hasBgColor) {
+            const bgColorStr = hasBgColor
+              ? obj.backgroundColor
+              : (obj.originalTextData?.detectedBgColor || '#ffffff');
+
+            if (bgColorStr && bgColorStr !== 'transparent' && bgColorStr !== 'rgba(255, 255, 255, 0.001)') {
+              const bgRgb = parseColorToRgb(bgColorStr);
+              addedPage.drawRectangle({
+                x: pdfX - 1.5,
+                y: pdfY - 1.5,
+                width: objWidth + 3.0,
+                height: objHeight + 3.0,
+                color: bgRgb,
+              });
+            }
+          }
+
+          // If not deleted, draw new/modified text natively
+          if (!isDeleted && (!isOriginal || isEdited)) {
+            const standardFontName = resolveStandardFontName(obj);
+            const embeddedFont = await newDoc.embedFont(standardFontName);
+            const fontSize = (obj.fontSize || 12) * scaleY;
+            const textColor = parseColorToRgb(obj.fill || '#000000');
+
+            // Align baseline precisely: Y-coordinate in pdf-lib is the typographic baseline of the text.
+            const yBaseline = obj.baseline ? (height - obj.baseline) : (pdfY + (objHeight * 0.15));
+
+            addedPage.drawText(obj.text || '', {
+              x: pdfX,
+              y: yBaseline,
+              size: fontSize,
+              font: embeddedFont,
+              color: textColor,
+              lineHeight: (obj.lineHeight || 1.0) * fontSize,
+            });
+          }
+        }
+      }
 
       if (tempFabricCanvas) {
         tempFabricCanvas.dispose();
@@ -254,18 +297,6 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
         activeCanvas.requestRenderAll();
       }
     }
-
-    const imgData = tempPdfCanvas.toDataURL('image/jpeg', 0.95);
-    const imgBytes = dataUrlToUint8Array(imgData);
-    const embeddedImage = await newDoc.embedJpg(imgBytes);
-
-    const newPage = newDoc.addPage([width, height]);
-    newPage.drawImage(embeddedImage, {
-      x: 0,
-      y: 0,
-      width,
-      height,
-    });
   }
 
   onStatus?.('Saving final file...');

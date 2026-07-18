@@ -11,6 +11,7 @@ import { CaretRenderer } from '../editing/CaretRenderer';
 import { SelectionRenderer } from '../editing/SelectionRenderer';
 import { isOriginalTextEdited } from '../../twpdf/editor/textEdit';
 import { BaselineEngine } from '../typography/BaselineEngine';
+import { mapPdfFontToLoadedFont, mapPdfFontToWebFont } from '../../twpdf/fonts/fontMapping';
 
 /**
  * RenderEngine renders all active PDF objects from the ObjectRegistry
@@ -27,9 +28,9 @@ export class RenderEngine {
   /**
    * Renders registered objects for a given page onto the 2D context.
    */
-  render(ctx: CanvasRenderingContext2D, pageNumber: number, fabricObjects?: any[]): void {
+  render(ctx: CanvasRenderingContext2D, pageNumber: number, fabricObjects?: any[], zoomScale = 1.0): void {
     if (fabricObjects) {
-      RenderEngine.renderObjects(ctx, fabricObjects, 1.0);
+      RenderEngine.renderObjects(ctx, fabricObjects, 1.0, zoomScale);
       return;
     }
 
@@ -109,11 +110,14 @@ export class RenderEngine {
             const fontWeight = state.fontWeight || (obj as any).fontWeight || 'normal';
             const fontStyle = state.fontStyle || (obj as any).fontStyle || 'normal';
 
-            const cacheKey = `${currentText}_${fontName}_${fontSize}_${fontWeight}_${fontStyle}_${selStart}_${selEnd}_${caretIdx}`;
+            const pdfFontName = (obj as any).pdfFontName || (obj as any).originalTextData?.pdfFontName;
+            const metricsFontName = pdfFontName || fontName;
+
+            const cacheKey = `${currentText}_${metricsFontName}_${fontSize}_${fontWeight}_${fontStyle}_${selStart}_${selEnd}_${caretIdx}`;
             if (!(obj as any)._cachedLayout || (obj as any)._cachedLayoutKey !== cacheKey) {
               (obj as any)._cachedLayout = new TextLayout(
                 currentText,
-                fontName,
+                metricsFontName,
                 fontSize,
                 0,
                 false,
@@ -139,15 +143,37 @@ export class RenderEngine {
             ctx.save();
             ctx.translate(0, baselineShift);
 
-            ctx.font = `${fontSize}px ${fontName}`;
+            // Resolve actual CSS Font Face and map subset fonts
+            const loadedFontFamily = mapPdfFontToLoadedFont(pdfFontName, fontName);
+            const webFontFamily = mapPdfFontToWebFont(pdfFontName, fontName);
+            const finalFontFamily = loadedFontFamily
+              ? `"${loadedFontFamily}", ${webFontFamily}, sans-serif`
+              : fontName;
+
+            let activeStyle = fontStyle;
+            let activeWeight = fontWeight;
+            const isEmbedded = finalFontFamily.includes('g_d') && finalFontFamily.includes('_sf');
+            if (isEmbedded) {
+              activeStyle = 'normal';
+              activeWeight = 'normal';
+            }
+
+            // Draw text with blur-removal: un-scale context and render at scaled font size
+            const scaleFactor = zoomScale || 1.0;
+            ctx.save();
+            ctx.scale(1 / scaleFactor, 1 / scaleFactor);
+
+            ctx.font = `${activeStyle} ${activeWeight} ${fontSize * scaleFactor}px ${finalFontFamily}`;
             ctx.fillStyle = state.fontColor || '#000000';
 
             // Draw actual text character-by-character based on exact compiled positions
             layout.lines.forEach((line: LineRun) => {
               line.glyphs.forEach((g: GlyphLayout) => {
-                ctx.fillText(g.char, line.x + g.x, line.y);
+                ctx.fillText(g.char, (line.x + g.x) * scaleFactor, line.y * scaleFactor);
               });
             });
+
+            ctx.restore(); // restore scaled text context
 
             // Render selection highlights and blinking caret
             SelectionRenderer.drawSelection(ctx, layout, session.getSelectionStart(), session.getSelectionEnd());
@@ -206,15 +232,15 @@ export class RenderEngine {
     });
   }
 
-  public static renderObjects(ctx: CanvasRenderingContext2D, objects: any[], scale: number): void {
+  public static renderObjects(ctx: CanvasRenderingContext2D, objects: any[], scale: number, zoomScale = 1.0): void {
     objects.forEach((obj) => {
       if (obj.isOriginalText || obj.type === 'textbox' || obj.type === 'i-text') {
         const session = EditingSession.getInstance();
         const isEditing = session.getActiveObjectId() === obj.id;
         const isEdited = isOriginalTextEdited(obj);
 
-        // We only render this element if it is actively being edited OR if it has been edited/modified!
-        if (!isEditing && !isEdited) return;
+        // We only render this element if it is actively being edited OR if it has been edited/modified (or is a new user-created textbox)!
+        if (obj.isOriginalText && !isEditing && !isEdited) return;
 
         // Compile text using the active session's typed text if editing, otherwise the object's current modified text
         const currentText = isEditing ? session.getText() : (obj.text || '');
@@ -227,11 +253,14 @@ export class RenderEngine {
         const selEnd = isEditing ? session.getSelectionEnd() : 0;
         const caretIdx = isEditing ? session.getCaretIndex() : 0;
 
-        const cacheKey = `${currentText}_${fontFamily}_${fontSize}_${fontWeight}_${fontStyle}_${selStart}_${selEnd}_${caretIdx}`;
+        const pdfFontName = obj.pdfFontName || obj.originalTextData?.pdfFontName;
+        const metricsFontName = pdfFontName || fontFamily;
+
+        const cacheKey = `${currentText}_${metricsFontName}_${fontSize}_${fontWeight}_${fontStyle}_${selStart}_${selEnd}_${caretIdx}`;
         if (!obj._cachedLayout || obj._cachedLayoutKey !== cacheKey) {
           obj._cachedLayout = new TextLayout(
             currentText,
-            fontFamily,
+            metricsFontName,
             fontSize,
             0,
             false,
@@ -256,6 +285,26 @@ export class RenderEngine {
         ctx.rotate(((obj.angle || 0) * Math.PI) / 180);
         ctx.scale(scaleX * scale, scaleY * scale);
 
+        // Draw solid background patch if one is defined/active (especially during PDF high-res export)
+        const hasBgColor = obj.backgroundColor && obj.backgroundColor !== 'transparent' && obj.backgroundColor !== 'rgba(255, 255, 255, 0.001)';
+        const isOriginalEdited = obj.isOriginalText && isEdited;
+        const isNewTextbox = !obj.isOriginalText;
+
+        if (hasBgColor || isOriginalEdited || isNewTextbox) {
+          const bgColor = hasBgColor
+            ? obj.backgroundColor
+            : (obj.originalTextData?.detectedBgColor || '#ffffff');
+          
+          if (bgColor && bgColor !== 'transparent' && bgColor !== 'rgba(255, 255, 255, 0.001)') {
+            ctx.save();
+            ctx.fillStyle = bgColor;
+            const padX = 2;
+            const padY = 2;
+            ctx.fillRect(-padX, -padY, (obj.width || 0) + padX * 2, (obj.height || 0) + padY * 2);
+            ctx.restore();
+          }
+        }
+
         // Calculate baseline shift using BaselineEngine to ensure perfect alignment.
         // Prefer live top-level baseline; fall back to originalTextData after serialize round-trips.
         const resolvedBaseline =
@@ -268,16 +317,40 @@ export class RenderEngine {
         );
         ctx.translate(0, baselineShift);
 
+        const loadedFontFamily = mapPdfFontToLoadedFont(pdfFontName, fontFamily);
+        const webFontFamily = mapPdfFontToWebFont(pdfFontName, fontFamily);
+        const finalFontFamily = loadedFontFamily
+          ? `"${loadedFontFamily}", ${webFontFamily}, sans-serif`
+          : fontFamily;
+
+        let activeStyle = fontStyle;
+        let activeWeight = fontWeight;
+        const isEmbedded = finalFontFamily.includes('g_d') && finalFontFamily.includes('_sf');
+        if (isEmbedded) {
+          activeStyle = 'normal';
+          activeWeight = 'normal';
+        }
+
         const fontColor = (obj.fill && obj.fill !== 'transparent') ? obj.fill : (obj.originalTextData?.detectedColor || '#000000');
-        ctx.font = `${fontStyle} ${fontWeight} ${fontSize}px ${fontFamily}`;
+
+        // Draw text with blur-removal: un-scale context and render at scaled font size
+        const sX = scaleX * scale;
+        const sY = scaleY * scale;
+
+        ctx.save();
+        ctx.scale(1 / sX, 1 / sY);
+
+        ctx.font = `${activeStyle} ${activeWeight} ${fontSize * sY}px ${finalFontFamily}`;
         ctx.fillStyle = fontColor;
         
         // Draw character glyphs
         layout.lines.forEach((line: LineRun) => {
           line.glyphs.forEach((g: GlyphLayout) => {
-            ctx.fillText(g.char, line.x + g.x, line.y);
+            ctx.fillText(g.char, (line.x + g.x) * sX, line.y * sY);
           });
         });
+
+        ctx.restore(); // restore scaled text context
 
         // Highlights and carets are only drawn on active editor screen (scale = 1.0)
         if (scale === 1.0) {

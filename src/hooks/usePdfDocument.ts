@@ -78,7 +78,7 @@ export function usePdfDocument() {
             dimensions[i] = { width: viewport.width, height: viewport.height };
             initialPages.push({ id: `page_${i}_${Date.now()}`, originalPageNum: i });
 
-            const textItems = await detectOriginalText(page, i, viewport);
+            const textItems = await detectOriginalText(page, i, viewport, bytes);
             textCache[i] = textItems;
           }
 

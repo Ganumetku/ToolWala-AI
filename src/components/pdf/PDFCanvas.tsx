@@ -11,6 +11,7 @@ import {
   setupBrushes,
   applyObjectSnapping,
 } from '@/lib/twpdf/editor';
+import { mapPdfFontToLoadedFont, mapPdfFontToWebFont } from '@/lib/twpdf/fonts';
 import { CANVAS_JSON_PROPS } from '@/lib/twpdf/core';
 import { getIsRenderingFromEngine } from '@/lib/twpdf/editing/renderer/fabricRenderer';
 import { hexToRgbaStr } from '@/lib/twpdf/utils';
@@ -23,6 +24,7 @@ import { EditingSession } from '@/lib/tw-engine/editing/EditingSession';
 import { EditingValidator } from '@/lib/tw-engine/editing/EditingValidator';
 import { FocusManager } from '@/lib/tw-engine/editing/FocusManager';
 import { CursorManager } from '@/lib/tw-engine/editing/CursorManager';
+import { PDFContentStreamManager } from '@/lib/tw-engine/pdf-writer/content-stream/PDFContentStreamManager';
 
 // -------------------------------------------------------------
 // VIRTUALIZED PAGE CONTAINER WRAPPER USING INTERSECTION OBSERVER
@@ -201,6 +203,8 @@ const PageRenderer = ({
   const isLoadingFromPropRef = useRef(false);
   const lastCanvasStateRef = useRef<string>('');
   const [isBackgroundRendered, setIsBackgroundRendered] = useState(false);
+  const [activeEditingId, setActiveEditingId] = useState<string | null>(null);
+  const bgRenderCountRef = useRef(0);
 
   const editModeRef = useRef(editMode);
   useEffect(() => {
@@ -245,6 +249,135 @@ const PageRenderer = ({
         if (ctx) {
           ctx.fillStyle = '#ffffff';
           ctx.fillRect(0, 0, canvas.width, canvas.height);
+          
+          bgRenderCountRef.current += 1;
+
+          // Helper to map PDFJS operator index to content stream operator index
+          const getStreamTextOpIndex = (opList: any, targetIdx: number, seq: any): number => {
+            let textOpCount = 0;
+            for (let i = 0; i < targetIdx; i++) {
+              const fn = opList.fnArray[i];
+              if (fn === 44 || fn === 45 || fn === 46 || fn === 47) {
+                textOpCount++;
+              }
+            }
+            
+            let currentTextOpCount = 0;
+            const operators = seq.getOperators();
+            for (let i = 0; i < operators.length; i++) {
+              const name = operators[i].name;
+              if (name === 'Tj' || name === 'TJ' || name === '\'' || name === '"') {
+                if (currentTextOpCount === textOpCount) {
+                  return i;
+                }
+                currentTextOpCount++;
+              }
+            }
+            return -1;
+          };
+
+          const fbCanvas = fabricCanvasInstance.current;
+
+          // 1. Perform operator restoration if editing has ended
+          let restoreSuccess = 'N/A';
+          if (!activeEditingId) {
+            // Restore every cached OperatorList inside page._intentStates
+            if (page._intentStates && page._intentStates instanceof Map) {
+              for (const intentState of page._intentStates.values()) {
+                const opList = intentState.operatorList;
+                if (opList && opList._originalArgs) {
+                  for (const [idxStr, originalArgs] of Object.entries(opList._originalArgs)) {
+                    const idx = parseInt(idxStr, 10);
+                    opList.argsArray[idx] = originalArgs;
+                  }
+                  delete opList._originalArgs;
+                  restoreSuccess = 'true';
+                }
+              }
+            }
+
+            // Restore suppressed flags in OperatorSequence
+            if (fbCanvas) {
+              fbCanvas.forEachObject((obj: any) => {
+                if (obj.isOriginalText && obj.pdfObject && obj.pdfObject.contentStreamObject) {
+                  const seq = PDFContentStreamManager.getOperatorSequence(pageNum, obj.pdfObject.contentStreamObject);
+                  if (seq) {
+                    seq.getOperators().forEach(op => {
+                      if (op.suppressed) {
+                        op.suppressed = false;
+                      }
+                    });
+                  }
+                }
+              });
+            }
+          }
+
+          // 2. Perform operator suppression if editing is active
+          let suppressedOpIdx = -1;
+
+          if (activeEditingId) {
+            const activeObj = fbCanvas?.getObjects().find((o: any) => o.id === activeEditingId);
+            if (activeObj && activeObj.pdfObject && activeObj.pdfObject.operatorIndex !== undefined) {
+              const opIdx = activeObj.pdfObject.operatorIndex;
+              const streamObjNum = activeObj.pdfObject.contentStreamObject;
+              
+              suppressedOpIdx = opIdx;
+
+              // Set suppressed flag in OperatorSequence
+              if (streamObjNum) {
+                const seq = PDFContentStreamManager.getOperatorSequence(pageNum, streamObjNum);
+                let sampleOpList = null;
+                if (page._intentStates && page._intentStates instanceof Map) {
+                  for (const intentState of page._intentStates.values()) {
+                    if (intentState.operatorList && intentState.operatorList.fnArray) {
+                      sampleOpList = intentState.operatorList;
+                      break;
+                    }
+                  }
+                }
+                
+                if (seq && sampleOpList) {
+                  const seqIdx = getStreamTextOpIndex(sampleOpList, opIdx, seq);
+                  if (seqIdx !== -1) {
+                    const seqOp = seq.getOperators()[seqIdx];
+                    seqOp.suppressed = true;
+                  }
+                }
+              }
+
+              // Apply suppression to every cached OperatorList inside page._intentStates
+              if (page._intentStates && page._intentStates instanceof Map) {
+                for (const intentState of page._intentStates.values()) {
+                  const opList = intentState.operatorList;
+                  if (opList && opList.fnArray && opIdx >= 0 && opIdx < opList.fnArray.length) {
+                    const fnCode = opList.fnArray[opIdx];
+                    if (fnCode === 44 || fnCode === 45 || fnCode === 46 || fnCode === 47) {
+                      // Backup original args only if not already backed up
+                      if (!opList._originalArgs) {
+                        opList._originalArgs = {};
+                      }
+                      if (opList._originalArgs[opIdx] === undefined) {
+                        opList._originalArgs[opIdx] = opList.argsArray[opIdx];
+                      }
+
+                      // Suppress operators according to operator type
+                      if (fnCode === 44 || fnCode === 45 || fnCode === 46) {
+                        opList.argsArray[opIdx] = [[]];
+                      } else if (fnCode === 47) {
+                        opList.argsArray[opIdx] = [0, 0, []];
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          if (suppressedOpIdx !== -1) {
+            console.log(`[PDFCanvas] Rendering page ${pageNum} background with suppressed text operator index:`, suppressedOpIdx);
+          }
+
           await page.render({
             canvasContext: ctx,
             viewport: highResViewport
@@ -277,7 +410,7 @@ const PageRenderer = ({
     return () => {
       active = false;
     };
-  }, [pdfDoc, originalPageNum, zoomScale]);
+  }, [pdfDoc, originalPageNum, zoomScale, activeEditingId]);
 
   // 2. Fabric.js setup and overlays
   useEffect(() => {
@@ -294,6 +427,36 @@ const PageRenderer = ({
       };
     }
 
+    const setupObjectEditingEvents = (obj: any, fb: any) => {
+      obj.off('editing:entered');
+      obj.off('editing:exited');
+
+      obj.on('editing:entered', () => {
+        console.log('[editing:entered event fired]', { id: obj.id, pageNum });
+        obj.set({
+          fill: 'transparent',
+          backgroundColor: obj.originalTextData?.detectedBgColor || obj.backgroundColor || '#ffffff',
+          stroke: 'transparent'
+        });
+        setActiveEditingId(obj.id);
+        fb.requestRenderAll();
+      });
+
+      obj.on('editing:exited', () => {
+        console.log('[editing:exited event fired]', { id: obj.id, pageNum });
+        const isEdited = isOriginalTextEdited(obj);
+        obj.set({
+          fill: 'transparent',
+          backgroundColor: obj.isOriginalText
+            ? (isEdited ? (obj.originalTextData?.detectedBgColor || '#ffffff') : 'rgba(255, 255, 255, 0.001)')
+            : (obj.backgroundColor || '#ffffff'),
+          stroke: 'transparent'
+        });
+        setActiveEditingId(null);
+        fb.requestRenderAll();
+      });
+    };
+
     const fbWidth = Math.round(width * zoomScale);
     const fbHeight = Math.round(height * zoomScale);
 
@@ -308,6 +471,7 @@ const PageRenderer = ({
     });
 
     fabricCanvasInstance.current = fbCanvas;
+    (fbCanvas as any).setupObjectEditingEvents = setupObjectEditingEvents;
     if (typeof window !== 'undefined') {
       (window as any).fabricCanvas = fbCanvas;
     }
@@ -497,24 +661,7 @@ const PageRenderer = ({
             // Do nothing. Native RenderEngine handles visible text drawing during after:render.
           };
 
-          // Hook editing events directly on the textbox to manage transparency
-          textbox.on('editing:entered', () => {
-            textbox.set({
-              fill: 'transparent',
-              backgroundColor: 'transparent', // Transparent background
-              stroke: 'transparent'
-            });
-            fbCanvas.requestRenderAll();
-          });
-
-          textbox.on('editing:exited', () => {
-            textbox.set({
-              fill: 'transparent',
-              backgroundColor: 'rgba(255, 255, 255, 0.001)',
-              stroke: 'transparent'
-            });
-            fbCanvas.requestRenderAll();
-          });
+          setupObjectEditingEvents(textbox, fbCanvas);
 
           fbCanvas.add(textbox);
         });
@@ -526,41 +673,6 @@ const PageRenderer = ({
       }
     }
 
-    // Custom render loop hook to paint whiteout masks underneath textboxes on screen
-    fbCanvas.on('before:render', () => {
-      const ctx = fbCanvas.getContext();
-      ctx.save();
-      const v = fbCanvas.viewportTransform;
-      if (v) {
-        ctx.transform(v[0], v[1], v[2], v[3], v[4], v[5]);
-      }
-      
-      fbCanvas.forEachObject((obj: any) => {
-        if (obj.isOriginalText) {
-          const isEdited = isOriginalTextEdited(obj);
-          const isEditing = EditingSession.getInstance().getActiveObjectId() === obj.id;
-          if (isEdited || isEditing) {
-            const orig = obj.originalTextData;
-            const padX = 2;
-            const padY = 2; // full coverage, no shrinking
-            ctx.save();
-            ctx.translate(orig.x, orig.y);
-            if (orig.angle) {
-              ctx.rotate((orig.angle * Math.PI) / 180);
-            }
-            ctx.fillStyle = orig.detectedBgColor || '#ffffff';
-            ctx.fillRect(
-              -padX,
-              -padY,
-              orig.width + padX * 2,
-              orig.height + padY * 2
-            );
-            ctx.restore();
-          }
-        }
-      });
-      ctx.restore();
-    });
 
     // Custom render loop hook to paint native text selection overlays
     const renderEngine = new RenderEngine(() => fbCanvas.requestRenderAll());
@@ -571,7 +683,13 @@ const PageRenderer = ({
       if (v) {
         ctx.transform(v[0], v[1], v[2], v[3], v[4], v[5]);
       }
-      renderEngine.render(ctx, pageNum, fbCanvas.getObjects());
+      const t0 = performance.now();
+      renderEngine.render(ctx, pageNum, fbCanvas.getObjects(), zoomScale);
+      const t1 = performance.now();
+      const elapsed = t1 - t0;
+      if (elapsed > 2.0) {
+        console.debug(`[Overlay Perf] Redraw time: ${elapsed.toFixed(2)}ms`);
+      }
       ctx.restore();
     });
 
@@ -581,6 +699,30 @@ const PageRenderer = ({
     // Event hooks selection
     const handleSelection = () => {
       const activeObj = fbCanvas.getActiveObject();
+      fbCanvas.forEachObject((obj: any) => {
+        if (obj.isOriginalText || obj.type === 'textbox' || obj.type === 'i-text') {
+          const isActive = obj === activeObj;
+          const isEdited = isOriginalTextEdited(obj);
+          if (obj.isOriginalText) {
+            if (isActive || isEdited) {
+              obj.set({
+                backgroundColor: obj.originalTextData?.detectedBgColor || '#ffffff'
+              });
+            } else {
+              obj.set({
+                backgroundColor: 'rgba(255, 255, 255, 0.001)'
+              });
+            }
+          } else {
+            // New user textbox
+            obj.set({
+              backgroundColor: obj.backgroundColor || '#ffffff'
+            });
+          }
+        }
+      });
+      fbCanvas.requestRenderAll();
+
       if (activeObj) {
         onObjectSelected(pageId, activeObj);
       } else {
@@ -592,12 +734,23 @@ const PageRenderer = ({
     fbCanvas.on('selection:updated', handleSelection);
     fbCanvas.on('selection:cleared', () => {
       fbCanvas.forEachObject((obj: any) => {
-        if (obj.isOriginalText) {
-          if (!isOriginalTextEdited(obj)) {
+        if (obj.isOriginalText || obj.type === 'textbox' || obj.type === 'i-text') {
+          const isEdited = isOriginalTextEdited(obj);
+          if (obj.isOriginalText) {
+            if (isEdited) {
+              obj.set({
+                backgroundColor: obj.originalTextData?.detectedBgColor || '#ffffff'
+              });
+            } else {
+              obj.set({
+                fill: 'transparent',
+                backgroundColor: 'rgba(255, 255, 255, 0.001)',
+                stroke: 'transparent'
+              });
+            }
+          } else {
             obj.set({
-              fill: 'transparent',
-              backgroundColor: 'rgba(255, 255, 255, 0.001)',
-              stroke: 'transparent'
+              backgroundColor: obj.backgroundColor || '#ffffff'
             });
           }
         }
@@ -646,6 +799,130 @@ const PageRenderer = ({
 
       // Initialize FocusManager
       FocusManager.getInstance();
+
+      const pointer = fbCanvas.getPointer(e.e);
+      const clickX = pointer.x;
+      const clickY = pointer.y;
+
+      if (editModeRef.current === 'text') {
+        // 1. Find underlying text object (either original or user-created) under the click coordinates
+        let matchedObj: any = null;
+        fbCanvas.forEachObject((o: any) => {
+          if (o.type === 'textbox' || o.type === 'i-text') {
+            if (o.containsPoint(pointer)) {
+              matchedObj = o;
+            }
+          }
+        });
+
+        // 2. Extract styles from matchedObj, or fall back to defaults
+        let newFontSize = fontSize;
+        let newFontFamily = fontFamily;
+        let newColor = strokeColor === 'transparent' ? '#000000' : strokeColor;
+        let newBaseline = undefined;
+        let newAscent = undefined;
+        let newDescent = undefined;
+        let newPdfFontName = undefined;
+        let newLeft = clickX;
+        let newTop = clickY;
+
+        if (matchedObj) {
+          newFontSize = matchedObj.fontSize || fontSize;
+          newFontFamily = matchedObj.fontFamily || fontFamily;
+          newColor = (matchedObj.fill && matchedObj.fill !== 'transparent') ? matchedObj.fill : (matchedObj.originalTextData?.detectedColor || '#000000');
+          newBaseline = matchedObj.baseline;
+          newAscent = matchedObj.ascent;
+          newDescent = matchedObj.descent;
+          newPdfFontName = matchedObj.pdfFontName;
+
+          // Align position
+          newLeft = matchedObj.left;
+          newTop = matchedObj.top;
+        } else {
+          // Proximity baseline alignment
+          const textBoxes = originalTexts[originalPageNum] || [];
+          const closeBox = textBoxes.find((box) => Math.abs(clickY - box.y) < 15);
+          if (closeBox) {
+            newFontSize = closeBox.fontSize;
+            newFontFamily = closeBox.fontFamily || fontFamily;
+            newBaseline = closeBox.baseline;
+            newAscent = closeBox.ascent;
+            newDescent = closeBox.descent;
+            newPdfFontName = closeBox.pdfFontName;
+
+            newColor = closeBox.pdfObject?.color || '#000000';
+            newLeft = clickX;
+            newTop = closeBox.y;
+          }
+        }
+
+        // Apply standard web font mapping if font is standard Serif/Sans-Serif
+        const mapToStandardWebFont = (pdfFont: string): string => {
+          const name = pdfFont.toLowerCase();
+          if (name.includes('times') || name.includes('serif') || name.includes('cambria') || name.includes('georgia') || name.includes('minion')) {
+            return 'Times New Roman';
+          }
+          if (name.includes('arial') || name.includes('helvetica') || name.includes('sans') || name.includes('calibri') || name.includes('tahoma') || name.includes('myriad')) {
+            return 'Arial';
+          }
+          if (name.includes('courier') || name.includes('mono') || name.includes('consolas')) {
+            return 'Courier New';
+          }
+          return pdfFont;
+        };
+
+        if (newPdfFontName) {
+          newFontFamily = mapToStandardWebFont(newPdfFontName);
+        } else if (newFontFamily) {
+          newFontFamily = mapToStandardWebFont(newFontFamily);
+        }
+
+        // 3. Create the Fabric Textbox at the aligned position with mapped styles
+        const newText = new fabricLib.Textbox('Type text...', {
+          id: `text_${Date.now()}`,
+          left: newLeft,
+          top: newTop,
+          width: matchedObj ? Math.max(120, matchedObj.width) : 150,
+          fontSize: newFontSize,
+          fontFamily: newFontFamily,
+          fill: newColor,
+          backgroundColor: '#ffffff',
+          isOriginalText: false,
+          baseline: newBaseline,
+          ascent: newAscent,
+          descent: newDescent,
+          pdfFontName: newPdfFontName,
+          borderColor: '#3b82f6',
+          cornerColor: '#3b82f6',
+          cornerSize: 8,
+          transparentCorners: false,
+          lockScalingY: true,
+          hasControls: true,
+          hasBorders: true,
+          editable: true
+        });
+
+        // Disable standard Fabric text rendering to use unified RenderEngine
+        (newText as any)._renderText = function(ctx: CanvasRenderingContext2D) {
+          // RenderEngine handles drawing text runs
+        };
+
+        setupObjectEditingEvents(newText, fbCanvas);
+
+        fbCanvas.add(newText);
+        fbCanvas.setActiveObject(newText);
+
+        setTimeout(() => {
+          newText.enterEditing();
+          fbCanvas.requestRenderAll();
+        }, 50);
+
+        if (typeof (window as any).setEditMode === 'function') {
+          (window as any).setEditMode('select');
+        }
+
+        return;
+      }
 
       const obj = e.target;
       if (obj && obj.isOriginalText && editModeRef.current === 'edit-text') {
@@ -846,13 +1123,18 @@ const PageRenderer = ({
     fbCanvas.on('editing:exited', handleObjectModified);
 
     const sessionListener = {
-      onSessionStart: (objId: string, pageNumStart: number) => {},
+      onSessionStart: (objId: string, pageNumStart: number) => {
+        if (pageNumStart === pageNum) {
+          console.log('[onSessionStart] setting activeEditingId to:', objId, 'for page:', pageNum);
+          setActiveEditingId(objId);
+        }
+      },
       onSessionUpdate: (text: string, caretIndex: number, selStart: number, selEnd: number) => {
         const activePage = EditingSession.getInstance().getActivePageNum();
         if (activePage !== pageNum) return;
-        const objId = EditingSession.getInstance().getActiveObjectId();
-        if (!objId) return;
-        const obj = fbCanvas.getObjects().find((o: any) => o.id === objId);
+        const objIdVal = EditingSession.getInstance().getActiveObjectId();
+        if (!objIdVal) return;
+        const obj = fbCanvas.getObjects().find((o: any) => o.id === objIdVal);
         if (obj) {
           obj.set({ text });
           obj.dirty = true;
@@ -872,6 +1154,8 @@ const PageRenderer = ({
         }
       },
       onSessionEnd: () => {
+        console.log('[onSessionEnd] clearing activeEditingId for page:', pageNum);
+        setActiveEditingId(null);
         handleBootstrapSave();
       }
     };
@@ -927,6 +1211,9 @@ const PageRenderer = ({
                 : undefined);
           } else if (obj.originalTextData.baseline === undefined) {
             obj.originalTextData.baseline = obj.baseline;
+          }
+          if (typeof (fbCanvas as any).setupObjectEditingEvents === 'function') {
+            (fbCanvas as any).setupObjectEditingEvents(obj, fbCanvas);
           }
         }
       });

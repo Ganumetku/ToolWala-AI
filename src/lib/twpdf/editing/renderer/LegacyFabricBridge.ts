@@ -138,7 +138,10 @@ export class LegacyFabricBridge {
       pdfFontName: obj.pdfFontName,
       fontName: obj.fontName || obj.fontFamily,
       originalBBox: obj.originalBBox,
-      backgroundColor: obj.isOriginalText && !isEdited ? 'rgba(255, 255, 255, 0.001)' : 'transparent',
+      pdfObject: obj.pdfObject,
+      backgroundColor: obj.isOriginalText
+        ? (isEdited ? (obj.originalTextData?.detectedBgColor || '#ffffff') : 'rgba(255, 255, 255, 0.001)')
+        : (obj.backgroundColor || '#ffffff'),
       lockScalingY: true,
       styles: [],
       ...FABRIC_CONTROL_PROPS,

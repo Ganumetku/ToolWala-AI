@@ -85,6 +85,17 @@ export function usePdfEditor({
     onZoomScaleChange?.(zoomScale);
   }, [zoomScale, onZoomScaleChange]);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      (window as any).setEditMode = setEditMode;
+    }
+    return () => {
+      if (typeof window !== 'undefined') {
+        delete (window as any).setEditMode;
+      }
+    };
+  }, [setEditMode]);
+
   const handleZoomOut = useCallback(() => {
     setZoomIndex((prev) => (prev > 0 ? prev - 1 : prev));
   }, []);

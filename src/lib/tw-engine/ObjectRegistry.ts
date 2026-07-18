@@ -1,4 +1,5 @@
 import type { TWObject } from './types';
+import { PDFMutationEngine } from './pdf-writer/PDFMutationEngine';
 
 /**
  * ObjectRegistry serves as the singleton, in-memory source of truth
@@ -135,6 +136,27 @@ export class ObjectRegistry {
     if (isEditingEditableField) {
       updates.isDirty = true;
       updates.updatedAt = Date.now();
+
+      // Print runtime verification
+      if (obj.type === 'text') {
+        const textObj = obj as any;
+        const pdfObj = textObj.pdfObject;
+        if (pdfObj) {
+          console.log(`[Verification] tw-engine Text Object Edited:`, {
+            'Object Number': pdfObj.objectNumber ?? 'N/A',
+            'Content Stream': pdfObj.contentStreamObject ?? 'N/A',
+            'Operator Type': pdfObj.operatorType ?? 'N/A',
+            'Operator Index': pdfObj.operatorIndex ?? 'N/A',
+            'Original Text': pdfObj.originalText ?? 'N/A',
+            'Current Text': (updates as any).text !== undefined ? (updates as any).text : textObj.text,
+            'Original Font': pdfObj.fontName ?? 'N/A',
+            'Original Matrix': pdfObj.originalTextMatrix ?? 'N/A',
+          });
+        }
+      }
+
+      // Notify PDFMutationEngine to construct and queue mutations
+      PDFMutationEngine.getInstance().handleObjectUpdate(obj, updates);
     }
 
     // Apply updates

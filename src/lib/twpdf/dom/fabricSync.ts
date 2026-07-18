@@ -43,6 +43,7 @@ interface FabricObjectJson {
   originalTextData?: TWPDFTextObject['originalTextData'];
   path?: Array<[string, ...number[]]>;
   baseline?: number;
+  backgroundColor?: string;
   ascent?: number;
   descent?: number;
   pdfFontName?: string;
@@ -50,7 +51,7 @@ interface FabricObjectJson {
   originalBBox?: { x: number; y: number; width: number; height: number };
 }
 
-function baseFromFabric(obj: FabricObjectJson, zIndex: number): Omit<TWPDFObject, 'type'> & { type: TWPDFObject['type'] } {
+function baseFromFabric(obj: FabricObjectJson, zIndex: number): Omit<TWPDFObject, 'type' | 'pdfObject'> & { type: TWPDFObject['type'] } {
   const ts = nowTimestamp();
   const scaleX = obj.scaleX ?? 1;
   const scaleY = obj.scaleY ?? 1;
@@ -99,6 +100,8 @@ function fabricToText(obj: FabricObjectJson, zIndex: number): TWPDFTextObject {
     pdfFontName: obj.pdfFontName,
     fontName: obj.fontName,
     originalBBox: obj.originalBBox,
+    pdfObject: obj.originalTextData?.pdfObject,
+    backgroundColor: obj.backgroundColor,
   };
 }
 

@@ -97,8 +97,8 @@ export function PDFToolbar({
           </button>
 
           <button
-            onClick={handleAddText}
-            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
+            onClick={() => setEditMode(editMode === 'text' ? 'select' : 'text')}
+            className={`p-2 rounded-xl transition-all ${editMode === 'text' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-400 hover:text-white hover:bg-slate-800'}`}
             title="Add New Text Box"
           >
             <Type className="w-4 h-4" />

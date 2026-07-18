@@ -21,6 +21,7 @@ export function buildTextObject(
     fontFamily: string;
     strokeColor: string;
     text?: string;
+    backgroundColor?: string;
   },
   ctx?: BuildContext
 ): TWPDFTextObject {
@@ -47,6 +48,7 @@ export function buildTextObject(
     color: opts.strokeColor === 'transparent' ? '#000000' : opts.strokeColor,
     alignment: 'left',
     lineHeight: 1.0,
+    backgroundColor: opts.backgroundColor ?? '#ffffff',
   };
 }
 

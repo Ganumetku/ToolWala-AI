@@ -1,5 +1,7 @@
 import { mapPdfFontToLoadedFont, mapPdfFontToWebFont } from '@/lib/twpdf/fonts';
 import type { TextBoxInfo } from '@/types/pdf';
+import type { PDFTextObject } from '@/lib/tw-engine/types';
+import { PDFDocument, PDFName, PDFRef } from 'pdf-lib';
 
 export function detectTextColorFromCanvas(
   canvas: HTMLCanvasElement | null,
@@ -186,7 +188,8 @@ export function detectTextWeightFromCanvas(
 export async function detectOriginalText(
   page: any,
   pageNum: number,
-  viewport: any
+  viewport: any,
+  pdfBytes?: Uint8Array
 ): Promise<TextBoxInfo[]> {
   try {
     const textContent = await page.getTextContent();
@@ -200,9 +203,125 @@ export async function detectOriginalText(
       height?: number;
     }>;
 
-    const validItems = rawItems
-      .filter((item) => item && typeof item.str === 'string' && item.str.trim().length > 0)
-      .map((item) => {
+    // Extract object numbers
+    let objectNumber = page.ref?.num;
+    let generationNumber = page.ref?.gen;
+    let contentStreamObject: number | undefined;
+    let contentStreamGeneration: number | undefined;
+
+    if (pdfBytes) {
+      try {
+        const pdfLibDoc = await PDFDocument.load(pdfBytes);
+        const pdfLibPages = pdfLibDoc.getPages();
+        const pdfLibPage = pdfLibPages[pageNum - 1];
+        if (pdfLibPage) {
+          const contentsRef = pdfLibPage.node.get(PDFName.of('Contents'));
+          if (contentsRef instanceof PDFRef) {
+            contentStreamObject = contentsRef.objectNumber;
+            contentStreamGeneration = contentsRef.generationNumber;
+          } else if (contentsRef && typeof contentsRef === 'object') {
+            if (typeof (contentsRef as any).get === 'function') {
+              const firstRef = (contentsRef as any).get(0);
+              if (firstRef instanceof PDFRef) {
+                contentStreamObject = firstRef.objectNumber;
+                contentStreamGeneration = firstRef.generationNumber;
+              }
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('pdf-lib failed to extract contents ref in detectOriginalText:', e);
+      }
+    }
+
+    // Track graphics and text states from operatorList
+    const textOps: any[] = [];
+    const resolvedOPS = page.OPS || (page._transport && page._transport.messageHandler && page._transport.messageHandler.OPS) || {};
+    try {
+      const opList = await page.getOperatorList();
+      const { fnArray, argsArray } = opList;
+
+      let currentFont = '';
+      let currentTm = [1, 0, 0, 1, 0, 0];
+      let currentTd = [0, 0];
+      let currentGs = '';
+
+      for (let i = 0; i < fnArray.length; i++) {
+        const fn = fnArray[i];
+        const args = argsArray[i];
+
+        if (fn === resolvedOPS.setFont) {
+          currentFont = args[0];
+        } else if (fn === resolvedOPS.setTextMatrix) {
+          currentTm = args;
+        } else if (fn === resolvedOPS.moveText || fn === resolvedOPS.moveTextWithLeading) {
+          currentTd = args;
+        } else if (fn === resolvedOPS.setGState) {
+          currentGs = args[0];
+        } else if (
+          fn === resolvedOPS.showText ||
+          fn === resolvedOPS.showTextGlyphs ||
+          fn === resolvedOPS.nextLineShowText ||
+          fn === resolvedOPS.nextLineSetSpacingShowText
+        ) {
+          let operatorType = 'Tj';
+          if (fn === resolvedOPS.showTextGlyphs) operatorType = 'TJ';
+          else if (fn === resolvedOPS.nextLineShowText) operatorType = "'";
+          else if (fn === resolvedOPS.nextLineSetSpacingShowText) operatorType = '"';
+
+          let originalEncodedString = '';
+          let originalOperatorBytes = '';
+
+          if (fn === resolvedOPS.showText) {
+            const glyphs = args[0] || [];
+            originalEncodedString = glyphs.map((g: any) => g.unicode || g.fontChar || '').join('');
+            originalOperatorBytes = `(${originalEncodedString}) Tj`;
+          } else if (fn === resolvedOPS.showTextGlyphs) {
+            const elements = args[0] || [];
+            originalEncodedString = elements
+              .map((el: any) => {
+                if (typeof el === 'number') return '';
+                return el.unicode || el.fontChar || '';
+              })
+              .join('');
+            const parts = elements.map((el: any) => {
+              if (typeof el === 'number') return el.toString();
+              return `(${el.unicode || el.fontChar || ''})`;
+            });
+            originalOperatorBytes = `[ ${parts.join(' ')} ] TJ`;
+          } else if (fn === resolvedOPS.nextLineShowText) {
+            const glyphs = args[0] || [];
+            originalEncodedString = glyphs.map((g: any) => g.unicode || g.fontChar || '').join('');
+            originalOperatorBytes = `(${originalEncodedString}) '`;
+          } else if (fn === resolvedOPS.nextLineSetSpacingShowText) {
+            const aw = args[0] || 0;
+            const ac = args[1] || 0;
+            const glyphs = args[2] || [];
+            originalEncodedString = glyphs.map((g: any) => g.unicode || g.fontChar || '').join('');
+            originalOperatorBytes = `${aw} ${ac} (${originalEncodedString}) "`;
+          }
+
+          textOps.push({
+            operatorType,
+            operatorIndex: i,
+            originalOperatorBytes,
+            originalEncodedString,
+            originalTextMatrix: [...currentTm],
+            originalTextPosition: [...currentTd],
+            fontResourceName: currentFont,
+            graphicsStateId: currentGs || undefined,
+          });
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to parse page operator list for metadata mapping in detectOriginalText:', e);
+    }
+
+    // Filter and sanitize items, preserving original index
+    const rawItemsWithIndex = rawItems.map((item, index) => ({ item, index }));
+    const validItems = rawItemsWithIndex
+      .filter(({ item }) => item && typeof item.str === 'string' && item.str.trim().length > 0)
+      .map(({ item, index }) => {
         const a = item.transform[0];
         const b = item.transform[1];
         const c = item.transform[2];
@@ -214,13 +333,14 @@ export async function detectOriginalText(
           fontName: item.fontName || '',
           width: item.width || 0,
           height: item.height || calculatedFontSize || 10,
+          rawIndex: index,
         };
       });
 
     if (validItems.length === 0) return [];
 
-    const merged: typeof validItems = [];
-    let current = { ...validItems[0] };
+    const merged: Array<typeof validItems[0] & { rawIndices: number[] }> = [];
+    let current = { ...validItems[0], rawIndices: [validItems[0].rawIndex] };
 
     for (let i = 1; i < validItems.length; i++) {
       const item = validItems[i];
@@ -252,9 +372,10 @@ export async function detectOriginalText(
           distance > currFontSize * 0.15 && !current.str.endsWith(' ') && !item.str.startsWith(' ');
         current.str += (hasSpace ? ' ' : '') + item.str;
         current.width = itemT[4] - currT[4] + item.width;
+        current.rawIndices.push(item.rawIndex);
       } else {
         merged.push(current);
-        current = { ...item };
+        current = { ...item, rawIndices: [item.rawIndex] };
       }
     }
     merged.push(current);
@@ -314,6 +435,48 @@ export async function detectOriginalText(
           ? `"${resolvedFontFamily}", ${webFontFamily}, sans-serif`
           : `${webFontFamily}, sans-serif`;
 
+      const rawFontName = item.fontName || '';
+      const subsetMatch = rawFontName.match(/^([A-Z]{6})\+/);
+      const subsetName = subsetMatch ? subsetMatch[1] : undefined;
+
+      const firstRawIndex = item.rawIndices[0];
+      const matchedOp = textOps[firstRawIndex];
+
+      const pdfObject: PDFTextObject = {
+        objectNumber,
+        generationNumber,
+        pageNumber: pageNum,
+        contentStreamObject,
+        contentStreamGeneration,
+        operatorType: matchedOp?.operatorType || 'Tj',
+        operatorIndex: matchedOp?.operatorIndex !== undefined ? matchedOp.operatorIndex : idx,
+        originalOperatorBytes: matchedOp?.originalOperatorBytes,
+        originalEncodedString: matchedOp?.originalEncodedString || item.str,
+        originalTextMatrix: matchedOp?.originalTextMatrix || [...item.transform],
+        originalTextPosition: matchedOp?.originalTextPosition || [item.transform[4], item.transform[5]],
+        fontResourceName: matchedOp?.fontResourceName || item.fontName,
+        fontResource: item.fontName,
+        fontName: resolvedFontFamily || item.fontName || 'Helvetica',
+        subsetName,
+        fontSize: fontSizePdf,
+        color: '#000000',
+        transformationMatrix: [...item.transform],
+        boundingBox: { x: vx, y: vy - boxHeight, width: boxWidth, height: boxHeight * 1.15 },
+        baseline: vy,
+        ascent: fontStyleObj ? fontStyleObj.ascent : undefined,
+        descent: fontStyleObj ? fontStyleObj.descent : undefined,
+        glyphIds: [],
+        glyphWidths: [],
+        unicodeMapping: {},
+        cidMapping: {},
+        originalText: item.str,
+        currentText: item.str,
+        renderMode: 0,
+        writingMode: 0,
+        rotation: angle,
+        graphicsStateId: matchedOp?.graphicsStateId,
+      };
+
       return {
         id: `orig_${pageNum}_${idx}_${Date.now()}`,
         text: item.str,
@@ -335,6 +498,7 @@ export async function detectOriginalText(
         pdfFontName: item.fontName,
         ascent: fontStyleObj ? fontStyleObj.ascent : undefined,
         descent: fontStyleObj ? fontStyleObj.descent : undefined,
+        pdfObject,
       };
     });
   } catch (e) {

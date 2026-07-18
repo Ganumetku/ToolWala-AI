@@ -1,3 +1,5 @@
+import type { PDFTextObject } from '@/lib/tw-engine/types';
+
 export const ZOOM_LEVELS = [0.5, 0.75, 1.0, 1.25, 1.5, 2.0, 2.5] as const;
 export const FONT_SIZES = [8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 48, 60, 72] as const;
 
@@ -14,11 +16,14 @@ export const CANVAS_JSON_PROPS = [
   'pdfFontName',
   'fontName',
   'originalBBox',
+  'pdfObject',
+  'backgroundColor',
 ] as const;
 
 export type EditMode =
   | 'select'
   | 'edit-text'
+  | 'text'
   | 'draw'
   | 'highlight-free'
   | 'pan';
@@ -64,6 +69,7 @@ export interface TextBoxInfo {
   ascent?: number;
   descent?: number;
   pdfFontName?: string;
+  pdfObject?: PDFTextObject;
 }
 
 export interface OriginalTextData {
@@ -84,6 +90,7 @@ export interface OriginalTextData {
   ascent?: number;
   descent?: number;
   pdfFontName?: string;
+  pdfObject?: PDFTextObject;
 }
 
 export interface SearchMatch {

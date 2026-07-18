@@ -1,3 +1,85 @@
+export interface PDFTextObject {
+  objectNumber?: number;
+  generationNumber?: number;
+  pageNumber: number;
+  contentStreamRef?: any;
+  contentStreamObject?: number;
+  contentStreamGeneration?: number;
+  operatorType?: string;
+  operatorIndex: number;
+  originalOperatorBytes?: string;
+  originalEncodedString?: string;
+  originalTextMatrix?: number[];
+  originalTextPosition?: number[];
+  fontResourceName?: string;
+  fontResource?: string;
+  fontName: string;
+  subsetName?: string;
+  fontSize: number;
+  color: string;
+  transformationMatrix: number[];
+  boundingBox: { x: number; y: number; width: number; height: number };
+  baseline: number;
+  ascent?: number;
+  descent?: number;
+  glyphIds?: any[];
+  glyphWidths?: number[];
+  unicodeMapping?: any;
+  cidMapping?: any;
+  originalText: string;
+  currentText: string;
+  renderMode?: number;
+  writingMode?: number;
+  rotation: number;
+  graphicsStateId?: string;
+}
+
+export interface PDFImageObject {
+  objectNumber?: number;
+  generationNumber?: number;
+  pageNumber: number;
+  contentStreamRef?: any;
+  operatorIndex: number;
+  originalPdfOperator?: any;
+  transformationMatrix: number[];
+  boundingBox: { x: number; y: number; width: number; height: number };
+  rotation: number;
+  width: number;
+  height: number;
+}
+
+export interface PDFPathObject {
+  objectNumber?: number;
+  generationNumber?: number;
+  pageNumber: number;
+  contentStreamRef?: any;
+  operatorIndex: number;
+  originalPdfOperator?: any;
+  transformationMatrix: number[];
+  boundingBox: { x: number; y: number; width: number; height: number };
+  rotation: number;
+  pathData: string;
+  strokeColor?: string;
+  fillColor?: string;
+  strokeWidth?: number;
+}
+
+export interface PDFFontObject {
+  objectNumber?: number;
+  generationNumber?: number;
+  fontName: string;
+  subsetName?: string;
+  fontFamily: string;
+  isEmbedded: boolean;
+  fontType?: string;
+  encoding?: string | string[];
+  ascent?: number;
+  descent?: number;
+  glyphWidths?: number[];
+  unicodeMapping?: any;
+  cidMapping?: any;
+}
+
 export interface TWObject {
   id: string;
   page: number; // 1-based page number
@@ -24,6 +106,9 @@ export interface TWObject {
   operatorIndex: number; // index inside page operator list
   resourceName?: string;
   transformationMatrix: number[]; // [a, b, c, d, e, f]
+  
+  // Native PDF Object Model
+  pdfObject?: PDFTextObject | PDFImageObject | PDFPathObject;
   
   // Dirty state tracking
   isDirty: boolean;
@@ -116,6 +201,8 @@ export interface TWTextObject extends TWObject {
     height: number;
   };
   
+  pdfObject?: PDFTextObject;
+
   originalState: TWTextState;
   currentState: TWTextState;
   editedState?: Partial<TWTextState>;
@@ -134,6 +221,8 @@ export interface TWImageObject extends TWObject {
   imageBytes: Uint8Array | null;
   mimeType: string;
   
+  pdfObject?: PDFImageObject;
+
   originalState: TWImageState;
   currentState: TWImageState;
   editedState?: Partial<TWImageState>;
@@ -146,6 +235,8 @@ export interface TWPathObject extends TWObject {
   fillColor?: string;
   strokeWidth?: number;
   
+  pdfObject?: PDFPathObject;
+
   originalState: TWPathState;
   currentState: TWPathState;
   editedState?: Partial<TWPathState>;

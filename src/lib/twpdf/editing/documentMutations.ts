@@ -56,6 +56,26 @@ export function updateObjectInDocument(
   objectId: string,
   patch: Partial<TWPDFObject>
 ): TWPDFDocument {
+  // Print runtime verification
+  const page = doc.pages.find((p) => p.id === pageId);
+  const obj = page?.objects.find((o) => o.id === objectId);
+  if (obj && obj.type === 'text') {
+    const textObj = obj as any;
+    const pdfObj = textObj.pdfObject;
+    if (pdfObj) {
+      console.log(`[Verification] Text Object Edited (Frontend Document Model):`, {
+        'Object Number': pdfObj.objectNumber ?? 'N/A',
+        'Content Stream': pdfObj.contentStreamObject ?? 'N/A',
+        'Operator Type': pdfObj.operatorType ?? 'N/A',
+        'Operator Index': pdfObj.operatorIndex ?? 'N/A',
+        'Original Text': pdfObj.originalText ?? 'N/A',
+        'Current Text': (patch as any).text !== undefined ? (patch as any).text : textObj.text,
+        'Original Font': pdfObj.fontName ?? 'N/A',
+        'Original Matrix': pdfObj.originalTextMatrix ?? 'N/A',
+      });
+    }
+  }
+
   return updatePageObjects(doc, pageId, (objects) =>
     objects.map((o) =>
       o.id === objectId ? ({ ...o, ...patch, updatedAt: nowTimestamp() } as TWPDFObject) : o

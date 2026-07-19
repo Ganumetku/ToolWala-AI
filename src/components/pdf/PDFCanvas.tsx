@@ -204,6 +204,7 @@ const PageRenderer = ({
   const lastCanvasStateRef = useRef<string>('');
   const [isBackgroundRendered, setIsBackgroundRendered] = useState(false);
   const [activeEditingId, setActiveEditingId] = useState<string | null>(null);
+  const [suppressionVersion, setSuppressionVersion] = useState(0);
   const bgRenderCountRef = useRef(0);
 
   const editModeRef = useRef(editMode);
@@ -258,15 +259,25 @@ const PageRenderer = ({
             for (let i = 0; i < targetIdx; i++) {
               const fn = opList.fnArray[i];
               if (fn === 44 || fn === 45 || fn === 46 || fn === 47) {
-                textOpCount++;
+                const seqOps = seq.getOperators();
+                let currentTextOpCount = 0;
+                for (let j = 0; j < seqOps.length; j++) {
+                  const seqOp = seqOps[j];
+                  if (seqOp.type === 'showText' || seqOp.type === 'showSpacedText' || seqOp.type === 'nextToken' || seqOp.type === 'setSpacingAndNextToken') {
+                    if (currentTextOpCount === textOpCount) {
+                      return j;
+                    }
+                    currentTextOpCount++;
+                  }
+                }
               }
             }
-            
+
+            const seqOps = seq.getOperators();
             let currentTextOpCount = 0;
-            const operators = seq.getOperators();
-            for (let i = 0; i < operators.length; i++) {
-              const name = operators[i].name;
-              if (name === 'Tj' || name === 'TJ' || name === '\'' || name === '"') {
+            for (let i = 0; i < seqOps.length; i++) {
+              const seqOp = seqOps[i];
+              if (seqOp.type === 'showText' || seqOp.type === 'showSpacedText' || seqOp.type === 'nextToken' || seqOp.type === 'setSpacingAndNextToken') {
                 if (currentTextOpCount === textOpCount) {
                   return i;
                 }
@@ -278,51 +289,50 @@ const PageRenderer = ({
 
           const fbCanvas = fabricCanvasInstance.current;
 
-          // 1. Perform operator restoration if editing has ended
-          let restoreSuccess = 'N/A';
-          if (!activeEditingId) {
-            // Restore every cached OperatorList inside page._intentStates
-            if (page._intentStates && page._intentStates instanceof Map) {
-              for (const intentState of page._intentStates.values()) {
-                const opList = intentState.operatorList;
-                if (opList && opList._originalArgs) {
-                  for (const [idxStr, originalArgs] of Object.entries(opList._originalArgs)) {
-                    const idx = parseInt(idxStr, 10);
-                    opList.argsArray[idx] = originalArgs;
-                  }
-                  delete opList._originalArgs;
-                  restoreSuccess = 'true';
+          // 1. Perform operator restoration prior to evaluating current suppression
+          if (page._intentStates && page._intentStates instanceof Map) {
+            for (const intentState of page._intentStates.values()) {
+              const opList = intentState.operatorList;
+              if (opList && opList._originalArgs) {
+                for (const [idxStr, originalArgs] of Object.entries(opList._originalArgs)) {
+                  const idx = parseInt(idxStr, 10);
+                  opList.argsArray[idx] = originalArgs;
                 }
+                delete opList._originalArgs;
               }
-            }
-
-            // Restore suppressed flags in OperatorSequence
-            if (fbCanvas) {
-              fbCanvas.forEachObject((obj: any) => {
-                if (obj.isOriginalText && obj.pdfObject && obj.pdfObject.contentStreamObject) {
-                  const seq = PDFContentStreamManager.getOperatorSequence(pageNum, obj.pdfObject.contentStreamObject);
-                  if (seq) {
-                    seq.getOperators().forEach(op => {
-                      if (op.suppressed) {
-                        op.suppressed = false;
-                      }
-                    });
-                  }
-                }
-              });
             }
           }
 
-          // 2. Perform operator suppression if editing is active
-          let suppressedOpIdx = -1;
+          if (fbCanvas) {
+            fbCanvas.forEachObject((obj: any) => {
+              if (obj.isOriginalText && obj.pdfObject && obj.pdfObject.contentStreamObject) {
+                const seq = PDFContentStreamManager.getOperatorSequence(pageNum, obj.pdfObject.contentStreamObject);
+                if (seq) {
+                  seq.getOperators().forEach(op => {
+                    if (op.suppressed) {
+                      op.suppressed = false;
+                    }
+                  });
+                }
+              }
+            });
+          }
 
-          if (activeEditingId) {
-            const activeObj = fbCanvas?.getObjects().find((o: any) => o.id === activeEditingId);
-            if (activeObj && activeObj.pdfObject && activeObj.pdfObject.operatorIndex !== undefined) {
-              const opIdx = activeObj.pdfObject.operatorIndex;
-              const streamObjNum = activeObj.pdfObject.contentStreamObject;
-              
-              suppressedOpIdx = opIdx;
+          // 2. Perform operator suppression for active or edited original text objects
+          let suppressedCount = 0;
+
+          if (fbCanvas) {
+            const objectsToSuppress = fbCanvas.getObjects().filter((obj: any) =>
+              obj.isOriginalText &&
+              obj.pdfObject &&
+              obj.pdfObject.operatorIndex !== undefined &&
+              (obj.id === activeEditingId || isOriginalTextEdited(obj))
+            );
+
+            for (const targetObj of objectsToSuppress) {
+              const opIdx = targetObj.pdfObject.operatorIndex;
+              const streamObjNum = targetObj.pdfObject.contentStreamObject;
+              suppressedCount++;
 
               // Set suppressed flag in OperatorSequence
               if (streamObjNum) {
@@ -374,8 +384,8 @@ const PageRenderer = ({
             }
           }
 
-          if (suppressedOpIdx !== -1) {
-            console.log(`[PDFCanvas] Rendering page ${pageNum} background with suppressed text operator index:`, suppressedOpIdx);
+          if (suppressedCount > 0) {
+            console.log(`[PDFCanvas] Rendering page ${pageNum} background with ${suppressedCount} suppressed text operator(s)`);
           }
 
           await page.render({
@@ -410,7 +420,7 @@ const PageRenderer = ({
     return () => {
       active = false;
     };
-  }, [pdfDoc, originalPageNum, zoomScale, activeEditingId]);
+  }, [pdfDoc, originalPageNum, zoomScale, activeEditingId, suppressionVersion]);
 
   // 2. Fabric.js setup and overlays
   useEffect(() => {
@@ -1061,6 +1071,9 @@ const PageRenderer = ({
     const handleObjectModified = (e: any) => {
       if (getIsRenderingFromEngine() || isLoadingFromPropRef.current) return;
       const obj = e.target;
+      if (obj && obj.isOriginalText) {
+        setSuppressionVersion((v) => v + 1);
+      }
       if (obj && onFabricModified) {
         onFabricModified(pageId, fabricObjToJson(obj));
       } else {

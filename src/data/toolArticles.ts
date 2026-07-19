@@ -52,7 +52,8 @@ export const toolArticles: Record<string, ToolArticleData> = {
     conclusion: "Branding doesn't have to be a barrier to entry. With the ToolWala AI Logo Maker, you can bridge the gap between a great idea and a professional business in minutes. Start experimenting today and see how AI can transform your vision into a visual reality.",
     relatedTools: [
       { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "QR Code Generator", href: "/tools/qr-code-generator" }
+      { name: "QR Code Generator", href: "/tools/qr-code-generator" },
+      { name: "AI Image Upscaler", href: "/tools/ai-image-upscaler" }
     ]
   },
   "bg-remover": {
@@ -94,7 +95,8 @@ export const toolArticles: Record<string, ToolArticleData> = {
     conclusion: "Don't let complex software slow down your workflow. Experience the perfect blend of AI power and privacy with our Background Remover. Clean, professional, and entirely yours.",
     relatedTools: [
       { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-      { name: "Image Compressor", href: "/tools/image-compressor" }
+      { name: "Image Compressor", href: "/tools/image-compressor" },
+      { name: "AI Image Upscaler", href: "/tools/ai-image-upscaler" }
     ]
   },
   "qr-code-generator": {
@@ -136,7 +138,8 @@ export const toolArticles: Record<string, ToolArticleData> = {
     conclusion: "Ready to connect with your audience in the physical world? Create your first branded QR code now and see how much difference a professional design makes.",
     relatedTools: [
       { name: "AI Logo Maker", href: "/tools/ai-logo-maker" },
-      { name: "Invoice Generator", href: "/tools/invoice-generator" }
+      { name: "Invoice Generator", href: "/tools/invoice-generator" },
+      { name: "Password Generator", href: "/tools/password-generator" }
     ]
   },
   "image-compressor": {
@@ -178,7 +181,8 @@ export const toolArticles: Record<string, ToolArticleData> = {
     conclusion: "Don't let heavy images weigh down your digital presence. Optimize your media in seconds and give your users the fast experience they deserve.",
     relatedTools: [
       { name: "Background Remover", href: "/tools/bg-remover" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
+      { name: "AI Image Upscaler", href: "/tools/ai-image-upscaler" }
     ]
   },
   "passport-photo-maker": {
@@ -220,7 +224,8 @@ export const toolArticles: Record<string, ToolArticleData> = {
     conclusion: "Professional documentation shouldn't be expensive or complicated. Take control of your next passport photo and get it right the first time with our AI-powered maker.",
     relatedTools: [
       { name: "Background Remover", href: "/tools/bg-remover" },
-      { name: "Image Compressor", href: "/tools/image-compressor" }
+      { name: "Image Compressor", href: "/tools/image-compressor" },
+      { name: "Exam Photo Resizer", href: "/tools/exam-photo-resizer" }
     ]
   },
   "pdf-tools": {
@@ -262,7 +267,8 @@ export const toolArticles: Record<string, ToolArticleData> = {
     conclusion: "Stop struggling with clunky PDF editors. Experience the power of professional document management combined with total privacy. Try our PDF tools today.",
     relatedTools: [
       { name: "Invoice Generator", href: "/tools/invoice-generator" },
-      { name: "AI Resume Builder", href: "/tools/resume-builder" }
+      { name: "AI Resume Builder", href: "/tools/resume-builder" },
+      { name: "Merge PDF", href: "/tools/merge-pdf" }
     ]
   },
   "resume-builder": {
@@ -304,7 +310,8 @@ export const toolArticles: Record<string, ToolArticleData> = {
     conclusion: "Your next big career move starts with a great first impression. Build a resume you're proud of today and take the first step toward your new role.",
     relatedTools: [
       { name: "AI Cover Letter Generator", href: "/tools/cover-letter-generator" },
-      { name: "AI Text Humanizer", href: "/tools/text-humanizer" }
+      { name: "AI Text Humanizer", href: "/tools/text-humanizer" },
+      { name: "ATS Resume Checker", href: "/tools/ats-resume-checker" }
     ]
   },
   "ats-resume-checker": {
@@ -346,7 +353,8 @@ export const toolArticles: Record<string, ToolArticleData> = {
     conclusion: "Don't let a bad parser stand between you and your dream job. Run your resume through our local ATS auditor, apply the suggestions, and submit your application with complete confidence.",
     relatedTools: [
       { name: "AI Resume Builder", href: "/tools/resume-builder" },
-      { name: "AI Cover Letter Generator", href: "/tools/cover-letter-generator" }
+      { name: "AI Cover Letter Generator", href: "/tools/cover-letter-generator" },
+      { name: "Resume Bullet Generator", href: "/tools/resume-bullet-generator" }
     ]
   },
   "caption-generator": {
@@ -388,7 +396,8 @@ export const toolArticles: Record<string, ToolArticleData> = {
     conclusion: "Stop staring at a blank screen. Let AI handle the heavy lifting of writing so you can get back to what you do best—connecting with your audience.",
     relatedTools: [
       { name: "AI Text Humanizer", href: "/tools/text-humanizer" },
-      { name: "QR Code Generator", href: "/tools/qr-code-generator" }
+      { name: "QR Code Generator", href: "/tools/qr-code-generator" },
+      { name: "Voice Generator", href: "/tools/voice-generator" }
     ]
   },
   "text-humanizer": {
@@ -430,7 +439,8 @@ export const toolArticles: Record<string, ToolArticleData> = {
     conclusion: "In a digital world increasingly filled with robotic content, authenticity is your greatest asset. Give your AI-generated text the human touch it needs to truly connect with your readers.",
     relatedTools: [
       { name: "AI Caption Generator", href: "/tools/caption-generator" },
-      { name: "AI Resume Builder", href: "/tools/resume-builder" }
+      { name: "AI Resume Builder", href: "/tools/resume-builder" },
+      { name: "Voice Generator", href: "/tools/voice-generator" }
     ]
   },
   "voice-generator": {
@@ -472,7 +482,8 @@ export const toolArticles: Record<string, ToolArticleData> = {
     conclusion: "Give your content a voice that resonates. Experience the power of modern vocal synthesis and bring your stories to life with professional-grade AI audio.",
     relatedTools: [
       { name: "AI Caption Generator", href: "/tools/caption-generator" },
-      { name: "AI Text Humanizer", href: "/tools/text-humanizer" }
+      { name: "AI Text Humanizer", href: "/tools/text-humanizer" },
+      { name: "YouTube Money Calculator", href: "/tools/youtube-money-calculator" }
     ]
   },
   "invoice-generator": {
@@ -514,7 +525,8 @@ export const toolArticles: Record<string, ToolArticleData> = {
     conclusion: "Take the stress out of tax season and client billing. Build professional, accurate, and branded invoices in minutes and keep your business moving forward.",
     relatedTools: [
       { name: "AI Logo Maker", href: "/tools/ai-logo-maker" },
-      { name: "QR Code Generator", href: "/tools/qr-code-generator" }
+      { name: "QR Code Generator", href: "/tools/qr-code-generator" },
+      { name: "Invoice Cropper", href: "/tools/invoice-cropper" }
     ]
   },
   "cover-letter-generator": {
@@ -556,7 +568,8 @@ export const toolArticles: Record<string, ToolArticleData> = {
     conclusion: "Don't let a generic cover letter hold back your career. Stand out from the crowd with a personalized, professional letter that showcases the best version of you.",
     relatedTools: [
       { name: "AI Resume Builder", href: "/tools/resume-builder" },
-      { name: "AI Text Humanizer", href: "/tools/text-humanizer" }
+      { name: "AI Text Humanizer", href: "/tools/text-humanizer" },
+      { name: "ATS Resume Checker", href: "/tools/ats-resume-checker" }
     ]
   },
   "merge-pdf": {
@@ -1099,13 +1112,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { title: "Standard Aspect Ratios", desc: "Built-in aspect ratios matching official guidelines (e.g. 6.0 x 3.0 cm for SSC, 140 x 60 pixels for IBPS)." },
       { title: "Binary Size Optimizer", desc: "Automatically scales quality metrics to guarantee your file stays strictly below the maximum 20KB limit." },
       { title: "Contrast & Ink Filters", desc: "Brings out signature lines while whitening the paper background for high readability." },
-      { title: "100% Client-Side Privacy", desc: "No uploads or network transitions are required. All image modifications compile directly in browser memory." }
+      { title: "100% Client-Side Privacy", desc: "No uploads or network transitions are required. All image modifications compile directly in browser memory." },
+      { title: "Transparent Output Options", desc: "Export signatures as transparent PNG files for digital contract signing utilities." }
     ],
     benefits: [
       "Eliminate candidate form rejections caused by blurred, dark, or oversized signature scans.",
       "Completely free to use with no hidden subscription packages, account registration, or download caps.",
       "Full mobile capability with touch drag handles and responsive crop scaling.",
-      "Ensures signature coordinates are aligned correctly according to official portals specifications."
+      "Ensures signature coordinates are aligned correctly according to official portals specifications.",
+      "Instant processing in milliseconds with zero queue times."
     ],
     whyChoose: "Indian banking and recruitment portals enforce strict automated checks that immediately reject signatures that are poorly illuminated or exceed file size caps. Our Signature Resize tool solves this by providing pre-tested aspect ratio templates and a local compression loop that delivers compliant files in seconds.",
     useCases: [
@@ -1116,13 +1131,17 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "What is the official signature size for SSC exams?", answer: "The Staff Selection Commission (SSC) requires signature dimensions of 6.0 cm width x 3.0 cm height (ratio 2:1) and a file size strictly between 10KB and 20KB." },
       { question: "What ink color should I use for official signatures?", answer: "Most government portals recommend signing with black ink on plain white paper for high-contrast scanning and validation." },
-      { question: "Is my signature photo secure?", answer: "Yes. All cropping, filtering, and compression happen entirely client-side. Your signature image is processed locally and never uploaded to our servers." }
+      { question: "Is my signature photo secure?", answer: "Yes. All cropping, filtering, and compression happen entirely client-side. Your signature image is processed locally and never uploaded to our servers." },
+      { question: "Can I convert my signature background to pure white?", answer: "Yes. Use our built-in contrast and brightness sliders to whiten paper backgrounds and strip away shadow lines." },
+      { question: "Can I use this tool on my mobile phone?", answer: "Yes. ToolWala Signature Resize is fully responsive and touch-optimized for mobile browsers on iOS and Android." }
     ],
     conclusion: "Format and compress signature scans securely to meet portal guidelines. Start optimizing your files with ToolWala AI's signature resize tool.",
     relatedTools: [
       { name: "Aadhaar Photo Resize", href: "/tools/aadhaar-photo-resizer" },
       { name: "PAN Card Resize", href: "/tools/pan-card-resize" },
-      { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize" }
+      { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
+      { name: "Sign PDF", href: "/tools/sign-pdf" }
     ]
   },
   "pan-card-resize": {
@@ -1140,13 +1159,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { title: "NSDL & UTIITSL Compliant", desc: "Configured templates matching the official 1:1 aspect ratio (213 x 213 px) guidelines." },
       { title: "One-Click Background Replacer", desc: "Easily replace original backgrounds with official light blue or plain white fills." },
       { title: "Binary Quality Compressing", desc: "Optimizes image file sizes client-side to ensure they stay strictly under the 50KB limit." },
-      { title: "Private Execution Cache", desc: "Your identity files and photos are processed in active browser memory and never uploaded to any database." }
+      { title: "Private Execution Cache", desc: "Your identity files and photos are processed in active browser memory and never uploaded to any database." },
+      { title: "High DPI Output", desc: "Exports sharp 300 DPI JPEG files suitable for digital filing and physical printing." }
     ],
     benefits: [
       "Prevents PAN application delays and photo mismatch query notices.",
       "Saves money on commercial photo studios and desktop software suites.",
       "User-friendly mobile interface supporting responsive touch interactions.",
-      "Completely free to use with zero registration, login, or watermark overlays."
+      "Completely free to use with zero registration, login, or watermark overlays.",
+      "Fast instant processing in milliseconds."
     ],
     whyChoose: "PAN card portals run automatic validations that reject photos that have incorrect dimensions or exceed size limits. Our PAN Card Resize tool applies exact pixel mappings and compression filters locally, ensuring your photo passes all NSDL and UTIITSL criteria.",
     useCases: [
@@ -1157,13 +1178,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "What is the photo dimension for PAN card online?", answer: "The official photo size required for PAN card applications is 3.5 cm x 2.5 cm, which translates to exactly 213 x 213 pixels at 300 DPI (1:1 aspect ratio)." },
       { question: "What is the maximum file size for PAN card photos?", answer: "Both NSDL and UTIITSL portals require photo files to be in JPEG format and strictly under 50KB in size." },
-      { question: "Do I need to sign up to use this tool?", answer: "No, ToolWala AI is fully open. You can edit and download compliant photos instantly without registering an account." }
+      { question: "Do I need to sign up to use this tool?", answer: "No, ToolWala AI is fully open. You can edit and download compliant photos instantly without registering an account." },
+      { question: "Does this tool work for signature resizing too?", answer: "Yes, we have a dedicated Signature Resize tool specifically tuned to NSDL signature dimensions." },
+      { question: "Is my photo stored on server databases?", answer: "No. All photo processing happens locally inside your browser, ensuring complete privacy." }
     ],
     conclusion: "Format your photo for PAN card NSDL and UTIITSL applications instantly. Try our secure, browser-based PAN Card Resize tool.",
     relatedTools: [
       { name: "Aadhaar Photo Resize", href: "/tools/aadhaar-photo-resizer" },
       { name: "Signature Resize", href: "/tools/signature-resize" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
+      { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize" }
     ]
   },
   "ssc-photo-resize": {
@@ -1181,13 +1205,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { title: "SSC Portal Preset", desc: "Predefined dimensions matching the official 3.5 x 4.5 cm (354 x 472 pixels) layout rules." },
       { title: "KB Limit Safety Loop", desc: "Automated binary compressor that keeps files within the required 20KB - 50KB range." },
       { title: "Compliant White Background", desc: "Integrated canvas filters to whiten backgrounds and optimize illumination levels." },
-      { title: "Zero Data Transmission", desc: "100% client-side operation ensures your personal identification photo remains private on your device." }
+      { title: "Zero Data Transmission", desc: "100% client-side operation ensures your personal identification photo remains private on your device." },
+      { title: "Touch Drag Crop Window", desc: "Easily adjust crop boundaries on mobile phones and tablets." }
     ],
     benefits: [
       "Avoid candidate registration failures due to incorrect aspect ratios or oversized files.",
       "Process photos on any mobile device or tablet using simple touchscreen controls.",
       "Always free, without account registrations or watermarks.",
-      "Ensures the photo complies with the strict 70-80% face coverage guidelines."
+      "Ensures the photo complies with the strict 70-80% face coverage guidelines.",
+      "Instant single-click local download."
     ],
     whyChoose: "The SSC portal uses automated image checking that rejects applications with blurred features or incorrect photo ratios. Our SSC Photo Resize tool ensures your photo meets all official requirements, helping your registration succeed.",
     useCases: [
@@ -1198,13 +1224,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "What is the photo size for SSC applications?", answer: "The Staff Selection Commission requires passport photos to be 3.5 cm width x 4.5 cm height, which is approximately 354 x 472 pixels, saved in JPEG format." },
       { question: "What is the size limit for SSC photos?", answer: "Photos must have a file size between 20KB and 50KB to be accepted on the SSC online portal." },
-      { question: "Should my photo have the date printed on it?", answer: "In recent SSC notices, printing the date of the photo is no longer universally mandatory unless explicitly specified in the active recruitment notification. Please check the current notification guidelines." }
+      { question: "Should my photo have the date printed on it?", answer: "In recent SSC notices, printing the date of the photo is no longer universally mandatory unless explicitly specified in the active recruitment notification. Please check the current notification guidelines." },
+      { question: "Can I use photos taken from a smartphone?", answer: "Yes, as long as the lighting is clear, the background is light/white, and both ears are visible." },
+      { question: "Is my photo saved on ToolWala servers?", answer: "No. All photo operations run client-side in your browser memory." }
     ],
     conclusion: "Format your Staff Selection Commission application photo in seconds. Try our secure, browser-native SSC Photo Resize tool today.",
     relatedTools: [
       { name: "UPSC Photo Resize", href: "/tools/upsc-photo-resize" },
       { name: "Signature Resize", href: "/tools/signature-resize" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
+      { name: "Aadhaar Photo Resize", href: "/tools/aadhaar-photo-resizer" }
     ]
   },
   "upsc-photo-resize": {
@@ -1222,13 +1251,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { title: "UPSC OTR Preset", desc: "Pre-configured templates matching the official 350 x 350 pixels (1:1 ratio) specifications." },
       { title: "Precise Size Compressor", desc: "Binary compressor that keeps the output image size within the strict 20KB - 40KB limits." },
       { title: "Standard White BG Fill", desc: "Integrated canvas filters to apply a plain white background, as required by UPSC rules." },
-      { title: "On-Device Processing", desc: "100% client-side execution means your registration photo never leaves your device." }
+      { title: "On-Device Processing", desc: "100% client-side execution means your registration photo never leaves your device." },
+      { title: "Mobile Touch Optimization", desc: "Intuitive touch handles for easy editing on mobile screens." }
     ],
     benefits: [
       "Avoid UPSC OTR registration delays due to non-compliant photo formats.",
       "Process photos on any mobile device or tablet with simple controls.",
       "Unlimited free processing with no signups, logins, or watermarks.",
-      "Ensures the photo complies with the strict 70-80% face coverage guidelines."
+      "Ensures the photo complies with the strict 70-80% face coverage guidelines.",
+      "Lightning-fast performance in under 1 second."
     ],
     whyChoose: "UPSC applications are frequently rejected because of incorrect image coordinates or sizes. Our UPSC Photo Resize tool applies exact coordinate scales and formats backgrounds client-side, making compliance simple for everyone.",
     useCases: [
@@ -1239,13 +1270,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "What is the photo size for UPSC CSE?", answer: "UPSC requires photos to be exactly 350 pixels width x 350 pixels height (aspect ratio 1:1), with a file size between 20KB and 40KB." },
       { question: "What background color is compliant for UPSC photos?", answer: "UPSC guidelines recommend a plain white background for all passport photo uploads." },
-      { question: "Is my registration photo secure?", answer: "Yes, our tool runs fully in your browser memory. Your personal documents are never uploaded to any servers." }
+      { question: "Is my registration photo secure?", answer: "Yes, our tool runs fully in your browser memory. Your personal documents are never uploaded to any servers." },
+      { question: "Can I resize signatures for UPSC as well?", answer: "Yes, we also offer a Signature Resize tool tailored for UPSC recruitment signature uploads." },
+      { question: "Is there any cost or subscription required?", answer: "No, ToolWala is 100% free with unlimited photo resizes." }
     ],
     conclusion: "Format your photo for UPSC Civil Services applications instantly. Try our secure, browser-based UPSC Photo Resize tool.",
     relatedTools: [
       { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize" },
       { name: "Signature Resize", href: "/tools/signature-resize" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
+      { name: "Aadhaar Photo Resize", href: "/tools/aadhaar-photo-resizer" }
     ]
   },
   "aadhaar-pdf-compressor": {
@@ -1262,13 +1296,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { title: "300KB Size Limit Optimization", desc: "Designed to compress e-Aadhaar documents under the official UIDAI 300KB upload limit." },
       { title: "Local Memory Execution", desc: "Your identity files remain private. No data is sent to external servers." },
       { title: "Layout Preservation", desc: "Keeps original fonts, text formatting, and barcodes legible for scanning." },
-      { title: "Password Unlock Support", desc: "Allows processing password-protected files securely in your browser." }
+      { title: "Password Unlock Support", desc: "Allows processing password-protected files securely in your browser." },
+      { title: "High Speed Engine", desc: "Compresses identity PDFs in milliseconds without cloud server delays." }
     ],
     benefits: [
       "Avoid registration failures due to oversized e-Aadhaar documents.",
       "Process sensitive identity documents locally on your device for absolute safety.",
       "Free tools with zero limits, watermarks, or account registration.",
-      "Ensures the PDF complies with the strict 300KB limit."
+      "Ensures the PDF complies with the strict 300KB limit.",
+      "Works on desktop, mobile, and tablet browsers."
     ],
     whyChoose: "UIDAI and other e-KYC portals are extremely strict about PDF file sizes. Standard compressors often compress text to the point of being unreadable, resulting in portal rejections. Our Aadhaar PDF Compressor optimizes document structures locally, ensuring text remains sharp while keeping the file under 300KB.",
     useCases: [
@@ -1279,7 +1315,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "What is the standard password for e-Aadhaar PDFs?", answer: "The standard password is a combination of the first four letters of your name in CAPITAL letters, followed by your birth year (e.g., KART1990)." },
       { question: "What is the file size limit for Aadhaar uploads?", answer: "The official UIDAI portal and most e-KYC platforms require Aadhaar PDF files to be under 300KB in size." },
-      { question: "Is my Aadhaar document secure?", answer: "Yes. All processing is executed 100% locally in your browser. Your documents never touch our servers or any cloud database." }
+      { question: "Is my Aadhaar document secure?", answer: "Yes. All processing is executed 100% locally in your browser. Your documents never touch our servers or any cloud database." },
+      { question: "Will compressing blur my Aadhaar QR code?", answer: "No. Our compression engine selectively preserves barcode and QR code regions so they remain scannable." },
+      { question: "Is this tool completely free?", answer: "Yes. ToolWala Aadhaar PDF Compressor is 100% free with no signups or watermarks." }
     ],
     conclusion: "Compress your e-Aadhaar PDF files securely. Start optimizing your files with ToolWala AI.",
     relatedTools: [
@@ -1343,13 +1381,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     keyFeatures: [
       { title: "Client-Side Cryptography", desc: "Uses window.crypto.getRandomValues to guarantee true mathematical randomness locally." },
       { title: "Strength Evaluator", desc: "Calculates entropy and estimates crack times to ensure high-entropy defense." },
-      { title: "Custom Filter Presets", desc: "Exclude confusing characters like l, 1, O, 0, or custom characters as needed." }
+      { title: "Custom Filter Presets", desc: "Exclude confusing characters like l, 1, O, 0, or custom characters as needed." },
+      { title: "One-Click Copy", desc: "Instant clipboard integration with visual feedback for quick entry." },
+      { title: "Offline Functionality", desc: "Runs without internet connectivity once loaded in your browser." }
     ],
     benefits: [
       "Protects accounts against brute-force attacks and credential stuffing.",
       "Ensures zero server logs, databases, or cookies hold your new credentials.",
       "Saves time thinking of unique and strong patterns manually.",
-      "100% free and functional without internet access."
+      "100% free and functional without internet access.",
+      "Works on all desktop and mobile web browsers."
     ],
     whyChoose: "Generic generators often transmit passwords over the network or use simple math algorithms that are easy to reverse-engineer. ToolWala AI uses your system's hardware entropy and operates strictly offline, guaranteeing security and unpredictability.",
     useCases: [
@@ -1361,12 +1402,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "Are my generated passwords stored?", answer: "No. All passwords are created inside your browser cache and are wiped as soon as you close or reload the tab." },
       { question: "What is a cryptographically secure password?", answer: "A password generated using system hardware entropy rather than standard pseudo-random functions, making it mathematically unpredictable." },
-      { question: "Why should I use special characters?", answer: "Including symbols increases entropy, expanding the search space exponentially and making brute-force cracking mathematically infeasible." }
+      { question: "Why should I use special characters?", answer: "Including symbols increases entropy, expanding the search space exponentially and making brute-force cracking mathematically infeasible." },
+      { question: "Can I use this password generator offline?", answer: "Yes. Once the page is loaded, all random generation logic executes locally on your CPU." },
+      { question: "Is there any limit on how many passwords I can generate?", answer: "No. You can generate unlimited secure passwords for free." }
     ],
     conclusion: "Secure your digital footprint without compromise. Generate your next uncrackable password locally with ToolWala.",
     relatedTools: [
       { name: "Protect PDF", href: "/tools/protect-pdf" },
-      { name: "Unlock PDF", href: "/tools/unlock-pdf" }
+      { name: "Unlock PDF", href: "/tools/unlock-pdf" },
+      { name: "Aadhaar Masking Tool", href: "/tools/aadhaar-masking-tool" }
     ]
   },
   "color-palette-generator": {
@@ -1383,13 +1427,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     keyFeatures: [
       { title: "Harmony Algorithm", desc: "Generates complementary, split-complementary, triad, and monochromatic color schemes." },
       { title: "Image Extraction", desc: "Drag and drop any photograph to extract the dominant color blocks and matching palettes." },
-      { title: "Contrast Analyzer", desc: "Ensures compliance with Web Content Accessibility Guidelines (WCAG) contrast ratios." }
+      { title: "Contrast Analyzer", desc: "Ensures compliance with Web Content Accessibility Guidelines (WCAG) contrast ratios." },
+      { title: "Export to CSS & HEX", desc: "Copy color values directly as HEX strings, RGB arrays, or CSS variables." },
+      { title: "Color Lock Mode", desc: "Lock favorite shades while generating new matching tones." }
     ],
     benefits: [
       "Accelerates branding and design brainstorming processes.",
       "Guarantees visually balanced and professional color combinations.",
       "Saves time formatting design tokens for web projects.",
-      "Provides color contrast warnings before starting development."
+      "Provides color contrast warnings before starting development.",
+      "100% free with zero watermarks or account signups."
     ],
     whyChoose: "Unlike basic generators that shuffle random values, our Color Palette Generator integrates WCAG compliance checks and professional color theory algorithms, making your design choices highly accessible and aesthetically premium.",
     useCases: [
@@ -1401,12 +1448,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "Can I generate templates from images?", answer: "Yes, you can upload any photo scan, and the local compiler extracts primary, secondary, and accent colors instantly." },
       { question: "What contrast standards are verified?", answer: "We check the contrast ratio between foreground text and background colors based on the WCAG AA and AAA rules." },
-      { question: "How do I save my palettes?", answer: "You can copy HEX code strings, download palette maps, or grab ready-made CSS styling files directly." }
+      { question: "How do I save my palettes?", answer: "You can copy HEX code strings, download palette maps, or grab ready-made CSS styling files directly." },
+      { question: "Is this tool free for commercial use?", answer: "Yes. All generated palettes are 100% free to use in personal and commercial projects." },
+      { question: "Does it run locally in my browser?", answer: "Yes. Image color extraction and palette logic execute client-side in your browser." }
     ],
     conclusion: "Elevate your design identity with scientifically balanced layouts. Create beautiful palettes locally on ToolWala.",
     relatedTools: [
       { name: "AI Logo Maker", href: "/tools/ai-logo-maker" },
-      { name: "Image Compressor", href: "/tools/image-compressor" }
+      { name: "Image Compressor", href: "/tools/image-compressor" },
+      { name: "AI Image Upscaler", href: "/tools/ai-image-upscaler" }
     ]
   },
   "edit-pdf": {
@@ -1472,13 +1522,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     keyFeatures: [
       { title: "Browser OCR Engine", desc: "Runs character detection directly in browser cache for 100% data confidentiality." },
       { title: "Multi-Language Filters", desc: "Supports character sets across international languages for accurate transcriptions." },
-      { title: "TXT Code Compiler", desc: "Download parsed outputs as clean raw text files in one click." }
+      { title: "TXT Code Compiler", desc: "Download parsed outputs as clean raw text files in one click." },
+      { title: "One-Click Clipboard Copy", desc: "Instantly copy transcribed text to your system clipboard." },
+      { title: "Format Preservation", desc: "Preserves line breaks, lists, and spacing as closely as possible." }
     ],
     benefits: [
       "Protects sensitive records against cloud storage intercepts.",
       "No daily rate limits or paid account barriers.",
       "Instant copy-paste access to document contents.",
-      "Works without an active internet connection."
+      "Works without an active internet connection.",
+      "100% free with no registration or watermarks."
     ],
     whyChoose: "Typical web converters require uploading file assets, which may expose private metadata. ToolWala AI performs OCR locally, keeping files within your device memory.",
     useCases: [
@@ -1490,12 +1543,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "Is my image uploaded?", answer: "No, all OCR models are loaded into your browser cache, and image processing runs entirely on your local CPU." },
       { question: "What image formats are supported?", answer: "We support PNG, JPEG, JPG, and WebP, as well as screenshot paste events." },
-      { question: "Does it preserve indentation?", answer: "Yes, the OCR model preserves paragraph breaks and line structures as closely as possible." }
+      { question: "Does it preserve indentation?", answer: "Yes, the OCR model preserves paragraph breaks and line structures as closely as possible." },
+      { question: "Can I copy extracted text directly?", answer: "Yes. Click the 'Copy Text' button to store the text on your clipboard instantly." },
+      { question: "Is this OCR tool completely free?", answer: "Yes. ToolWala OCR Image to Text is 100% free with no usage caps." }
     ],
     conclusion: "Convert scans to editable documents with complete privacy. Extract text locally using ToolWala AI.",
     relatedTools: [
       { name: "PDF OCR Scanner", href: "/tools/pdf-ocr" },
-      { name: "Aadhaar Photo Resizer", href: "/tools/aadhaar-photo-resizer" }
+      { name: "Aadhaar Photo Resizer", href: "/tools/aadhaar-photo-resizer" },
+      { name: "Image Compressor", href: "/tools/image-compressor" }
     ]
   },
   "age-calculator": {
@@ -1512,13 +1568,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     keyFeatures: [
       { title: "Date Arithmetic", desc: "Handles leap years and variable month lengths for precision calculation." },
       { title: "Milestone Countdown", desc: "Displays exactly how many months and days remain until your next birthday." },
-      { title: "Alternative Units", desc: "Converts your total lifespan into weeks, days, hours, minutes, and seconds." }
+      { title: "Alternative Units", desc: "Converts your total lifespan into weeks, days, hours, minutes, and seconds." },
+      { title: "Leap Year Calculation", desc: "Accurately adjusts for 366-day leap years across all birth decades." },
+      { title: "Instant Calculations", desc: "Calculates age instantly in real-time as you pick calendar dates." }
     ],
     benefits: [
       "Quick calculations for eligibility requirements on official forms.",
       "Helps schedule birthday planners and milestone timelines.",
       "100% private date calculations with no tracking cookies.",
-      "Instant loading and responsive layout adjustments."
+      "Instant loading and responsive layout adjustments.",
+      "Works on mobile phones, tablets, and desktop computers."
     ],
     whyChoose: "Our calculator incorporates precise calendar rules, including leap years, to ensure error-free age summaries.",
     useCases: [
@@ -1530,12 +1589,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "How does it handle leap years?", answer: "The calculator calculates date differences using calendar logic, automatically factoring in extra leap days." },
       { question: "Are my input dates stored?", answer: "No, all date inputs are processed locally in your browser, keeping your data confidential." },
-      { question: "Can I calculate age for historical dates?", answer: "Yes, you can set the calculation target date to any date in the past or future." }
+      { question: "Can I calculate age for historical dates?", answer: "Yes, you can set the calculation target date to any date in the past or future." },
+      { question: "Can I calculate age in total days or hours?", answer: "Yes. The summary card displays your total age broken down into total months, weeks, days, and hours." },
+      { question: "Is this calculator free?", answer: "Yes. ToolWala Age Calculator is 100% free with no signups required." }
     ],
     conclusion: "Calculate chronological records instantly. Verify milestone details securely on ToolWala AI.",
     relatedTools: [
       { name: "SIP Calculator", href: "/tools/sip-calculator" },
-      { name: "EMI Calculator", href: "/tools/emi-calculator" }
+      { name: "EMI Calculator", href: "/tools/emi-calculator" },
+      { name: "Exam Marks Calculator", href: "/tools/exam-marks-calculator" }
     ]
   },
   "sip-calculator": {
@@ -1552,13 +1614,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     keyFeatures: [
       { title: "Compound Formula", desc: "Applies SIP compounding math to output accurate future wealth values." },
       { title: "Visual Charts", desc: "Generates intuitive graphs showing the growth of investments over time." },
-      { title: "Maturity Tables", desc: "Breaks down total investments vs interest accumulation year-by-year." }
+      { title: "Maturity Tables", desc: "Breaks down total investments vs interest accumulation year-by-year." },
+      { title: "Inflation Adjustment", desc: "Optionally calculate purchasing power after adjusting for inflation." },
+      { title: "Instant Comparison", desc: "Test different monthly deposit amounts side-by-side in real-time." }
     ],
     benefits: [
       "Helps select targets for retirement, education, or house funds.",
       "Shows the power of compounding over long-term plans.",
       "Enables instant comparisons of investment parameters.",
-      "No tracking or advertising popups—pure calculation utility."
+      "No tracking or advertising popups—pure calculation utility.",
+      "100% free with zero registration required."
     ],
     whyChoose: "Our SIP Calculator combines compound calculation modules with accessible visual dashboards, helping you estimate returns and plan finances easily.",
     useCases: [
@@ -1570,12 +1635,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "What is the formula for SIP?", answer: "SIP uses the future value formula: FV = P * [((1 + i)^n - 1) / i] * (1 + i), where P is monthly deposit, i is interest rate per period, and n is total periods." },
       { question: "Are actual returns guaranteed?", answer: "No, this is an estimate. Actual mutual fund returns vary based on market performance." },
-      { question: "Can I copy the amortization table?", answer: "Yes, you can copy the values directly into Google Sheets or Excel." }
+      { question: "Can I copy the amortization table?", answer: "Yes, you can copy the values directly into Google Sheets or Excel." },
+      { question: "Can I use this calculator for step-up SIPs?", answer: "Yes, you can test higher annual step-up contribution rates using the advanced settings." },
+      { question: "Is my financial data stored?", answer: "No. All calculations run strictly in your browser memory." }
     ],
     conclusion: "Plan your financial future with precision compound math. Estimate your investments on ToolWala AI.",
     relatedTools: [
       { name: "EMI Calculator", href: "/tools/emi-calculator" },
-      { name: "GST Calculator", href: "/tools/gst-calculator" }
+      { name: "GST Calculator", href: "/tools/gst-calculator" },
+      { name: "Age Calculator", href: "/tools/age-calculator" }
     ]
   },
   "emi-calculator": {
@@ -1592,13 +1660,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     keyFeatures: [
       { title: "Reducing Balance Math", desc: "Calculates loan EMI payments based on standard reducing balance math." },
       { title: "Amortization Table", desc: "Shows exactly how much of each payment goes toward the principal vs interest." },
-      { title: "Pie Chart Visuals", desc: "Generates clear graphs showing total interest vs principal ratios." }
+      { title: "Pie Chart Visuals", desc: "Generates clear graphs showing total interest vs principal ratios." },
+      { title: "Loan Comparison Mode", desc: "Compare different tenure and interest rate scenarios side by side." },
+      { title: "Prepayment Estimator", desc: "See how early prepayments shorten your loan tenure and total interest." }
     ],
     benefits: [
       "Helps determine loan eligibility before speaking with banks.",
       "Shows how prepayments can reduce interest burdens.",
       "Provides clear data on overall interest costs.",
-      "100% private calculations with zero credit-check tracking."
+      "100% private calculations with zero credit-check tracking.",
+      "Instant loading on all desktop and mobile devices."
     ],
     whyChoose: "Our calculator includes detailed monthly amortization tables and visual charts, helping you compare loan parameters easily.",
     useCases: [
@@ -1610,12 +1681,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "How is EMI calculated?", answer: "EMI is calculated using: EMI = [P x R x (1+R)^N]/[((1+R)^N)-1], where P is principal, R is monthly interest rate, and N is tenure in months." },
       { question: "Can I adjust tenure in months?", answer: "Yes, the calculator supports inputting tenure in either years or months." },
-      { question: "What is reducing balance?", answer: "It means interest is calculated only on the remaining unpaid principal balance, not the original amount." }
+      { question: "What is reducing balance?", answer: "It means interest is calculated only on the remaining unpaid principal balance, not the original amount." },
+      { question: "Does prepayment reduce EMI or tenure?", answer: "Part prepayments can either reduce your monthly EMI or shorten your total loan tenure depending on bank policy." },
+      { question: "Is this calculator free?", answer: "Yes. ToolWala EMI Calculator is 100% free with no login required." }
     ],
     conclusion: "Understand your loan repayment schedules completely. Calculate your EMI on ToolWala AI.",
     relatedTools: [
       { name: "SIP Calculator", href: "/tools/sip-calculator" },
-      { name: "GST Calculator", href: "/tools/gst-calculator" }
+      { name: "GST Calculator", href: "/tools/gst-calculator" },
+      { name: "Exam Marks Calculator", href: "/tools/exam-marks-calculator" }
     ]
   },
   "gst-calculator": {
@@ -1632,13 +1706,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     keyFeatures: [
       { title: "Add/Remove GST", desc: "Toggle between adding GST or extracting it from total prices." },
       { title: "SGST & CGST Split", desc: "Automatically splits tax into State and Central tax segments." },
-      { title: "Tax Bracket Presets", desc: "Includes standard presets for quick calculations." }
+      { title: "Tax Bracket Presets", desc: "Includes standard presets for quick calculations." },
+      { title: "IGST Support", desc: "Includes integrated calculations for inter-state IGST tax transactions." },
+      { title: "One-Click Copy", desc: "Copy tax breakdowns directly to your clipboard for invoices." }
     ],
     benefits: [
       "Ensures error-free tax calculations on invoicing.",
       "Speeds up receipt and accounts audits.",
       "Helps shoppers verify hidden tax charges.",
-      "No tracking or ads—safe for financial audits."
+      "No tracking or ads—safe for financial audits.",
+      "100% free to use on mobile or desktop."
     ],
     whyChoose: "Our GST Calculator handles both regular and reverse tax math, providing a clear split of tax segments for billing compliance.",
     useCases: [
@@ -1650,12 +1727,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "What is reverse GST calculation?", answer: "It extracts the tax amount from a total price. Formula: GST = Original Cost - [Original Cost * (100 / (100 + GST%))]." },
       { question: "Does it support local state tax?", answer: "Yes, it automatically splits the total tax into SGST (50%) and CGST (50%)." },
-      { question: "Can I input custom rates?", answer: "Yes, you can type any custom percentage rate to calculate taxes." }
+      { question: "Can I input custom rates?", answer: "Yes, you can type any custom percentage rate to calculate taxes." },
+      { question: "What are the common GST tax slabs in India?", answer: "The primary Indian GST tax slabs are 5%, 12%, 18%, and 28%." },
+      { question: "Is my accounting data logged?", answer: "No. All tax calculations run client-side in your active browser." }
     ],
     conclusion: "Compute product taxes and invoice splits instantly. Calculate GST values on ToolWala AI.",
     relatedTools: [
       { name: "Invoice Generator", href: "/tools/invoice-generator" },
-      { name: "EMI Calculator", href: "/tools/emi-calculator" }
+      { name: "EMI Calculator", href: "/tools/emi-calculator" },
+      { name: "SIP Calculator", href: "/tools/sip-calculator" }
     ]
   },
   "youtube-money-calculator": {
@@ -1672,30 +1752,35 @@ export const toolArticles: Record<string, ToolArticleData> = {
     keyFeatures: [
       { title: "CPM & RPM Sliders", desc: "Custom sliders to test potential earnings at different rate brackets." },
       { title: "Niche Modifiers", desc: "Provides CPM presets based on high-paying categories like finance and tech." },
-      { title: "Earning Calendars", desc: "Projects daily estimates into monthly and yearly cumulative milestones." }
+      { title: "Earning Calendars", desc: "Projects daily estimates into monthly and yearly cumulative milestones." },
+      { title: "YouTube Cut Adjustment", desc: "Automatically factors in YouTube's standard 45% ad revenue share cut." },
+      { title: "Visual Projections", desc: "Clean graphs illustrating revenue scaling relative to view growth." }
     ],
     benefits: [
       "Helps estimate potential earnings for new channel ideas.",
       "Guides creators toward high-value niche topics.",
       "Calculates views needed to meet income targets.",
-      "100% private estimate calculations."
+      "Completely free with no signups or watermarks.",
+      "Optimized for desktop and smartphone browsers."
     ],
-    whyChoose: "Our calculator includes CPM data for different content niches, giving you more realistic revenue projections.",
+    whyChoose: "Our YouTube Money Calculator uses actual industry CPM benchmarks across different regions and topics, giving creators realistic earning expectations.",
     useCases: [
-      "Video creators planning content categories.",
-      "Marketers calculating potential return on channel sponsorships.",
-      "Beginner creators evaluating monetization targets.",
-      "Sponsors estimating ad cost-per-view metrics."
+      "YouTubers planning monetization milestones.",
+      "Digital marketers forecasting video ad campaign ROI.",
+      "Content creators comparing tech vs gaming CPM rates."
     ],
     faqs: [
-      { question: "What is CPM vs RPM?", answer: "CPM is what advertisers pay per 1,000 views. RPM is what creators earn per 1,000 views after YouTube's revenue share." },
-      { question: "How does YouTube take share?", answer: "Google generally retains 45% of ad revenues, paying out 55% to partners." },
-      { question: "Does category affect CPM?", answer: "Yes, finance, business, and tech topics have significantly higher CPMs than gaming or vlog categories." }
+      { question: "What is CPM vs RPM?", answer: "CPM (Cost Per Mille) is what advertisers pay for 1,000 ad impressions. RPM (Revenue Per Mille) is what the creator earns per 1,000 total video views after YouTube's 45% cut." },
+      { question: "Why do CPM rates vary by niche?", answer: "High-value niches like finance, software, and real estate have higher advertiser competition, resulting in much higher CPMs than entertainment or gaming." },
+      { question: "Does YouTube pay for every view?", answer: "No. YouTube only pays for monetized ad impressions (when viewers watch or click ads)." },
+      { question: "Can I estimate Short earnings?", answer: "Yes, you can adjust the RPM rate lower to match YouTube Shorts Creator Pool benchmarks." },
+      { question: "Is this calculator accurate?", answer: "It provides realistic estimates based on industry average CPM data across global markets." }
     ],
-    conclusion: "Plan your content strategy and estimate channel revenue. Calculate earnings on ToolWala AI.",
+    conclusion: "Forecast your YouTube creator revenue accurately. Estimate your earnings with ToolWala AI.",
     relatedTools: [
       { name: "AdSense Revenue Calculator", href: "/tools/adsense-revenue-calculator" },
-      { name: "AI Caption Generator", href: "/tools/caption-generator" }
+      { name: "Caption Generator", href: "/tools/caption-generator" },
+      { name: "GST Calculator", href: "/tools/gst-calculator" }
     ]
   },
   "adsense-revenue-calculator": {
@@ -1712,13 +1797,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     keyFeatures: [
       { title: "CTR & CPC Modifiers", desc: "Fine-tune click and rate parameters to test different monetization models." },
       { title: "Traffic Scales", desc: "Easily switch calculations between daily, monthly, and annual metrics." },
-      { title: "Growth Milestones", desc: "Estimates the traffic needed to reach specific monthly income goals." }
+      { title: "Growth Milestones", desc: "Estimates the traffic needed to reach specific monthly income goals." },
+      { title: "Regional CPC Benchmarks", desc: "Includes preset CPC estimates based on Tier-1 vs Tier-3 web traffic." },
+      { title: "Page RPM Estimator", desc: "Calculates total revenue per thousand impressions automatically." }
     ],
     benefits: [
       "Helps evaluate the potential return on niche content sites.",
       "Provides targets for traffic generation and SEO plans.",
       "Shows the value of improving ad placement and page click rates.",
-      "100% private calculations with zero tracking."
+      "100% private calculations with zero tracking.",
+      "100% free with zero registration barriers."
     ],
     whyChoose: "Our calculator utilizes ad pricing models to deliver clear, realistic revenue projections based on traffic variables.",
     useCases: [
@@ -1730,12 +1818,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "What is AdSense CPC?", answer: "Cost Per Click is the amount you earn each time a user clicks on an ad displayed on your page." },
       { question: "How do I calculate page RPM?", answer: "RPM = (Estimated Earnings / Page Views) * 1,000. It shows your average earnings per 1,000 views." },
-      { question: "Does traffic region matter?", answer: "Yes, traffic from Tier-1 countries (US, UK, Canada) generally has much higher CPCs than Tier-3 regions." }
+      { question: "Does traffic region matter?", answer: "Yes, traffic from Tier-1 countries (US, UK, Canada) generally has much higher CPCs than Tier-3 regions." },
+      { question: "How can I improve my website CTR?", answer: "Optimizing ad placement above the fold and matching ad design to site styling improves click rates." },
+      { question: "Is my site traffic data stored?", answer: "No. All calculations run client-side in your active browser." }
     ],
     conclusion: "Plan your site's monetization and estimate ad revenue. Calculate earnings on ToolWala AI.",
     relatedTools: [
       { name: "YouTube Money Calculator", href: "/tools/youtube-money-calculator" },
-      { name: "Invoice Generator", href: "/tools/invoice-generator" }
+      { name: "Invoice Generator", href: "/tools/invoice-generator" },
+      { name: "GST Calculator", href: "/tools/gst-calculator" }
     ]
   },
   "word-to-pdf-converter": {
@@ -1752,12 +1843,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { title: "Browser-Only Conversion", desc: "Your document stays inside your browser. No files are uploaded to any external servers, ensuring maximum privacy." },
       { title: "Formatting Preservation", desc: "Our layout engine parses headings, standard paragraphs, inline colors, and font styles to match original DOCX formatting." },
       { title: "Bullet & Numbered Lists", desc: "Properly renders lists with matching indentation and bullet characters." },
-      { title: "Standard Grid Tables", desc: "Renders document tables, rows, cells, and borders securely into the final PDF." }
+      { title: "Standard Grid Tables", desc: "Renders document tables, rows, cells, and borders securely into the final PDF." },
+      { title: "Instant Download", desc: "Compiles PDF documents in milliseconds without waiting for server processing." }
     ],
     benefits: [
       "Absolute confidentiality for corporate agreements, payroll records, and resumes.",
       "Super-fast local conversion with no server queues or throttling.",
-      "Completely free online converter with zero registration hurdles or watermarks."
+      "Completely free online converter with zero registration hurdles or watermarks.",
+      "No file size caps or artificial daily caps.",
+      "Works on all desktop, tablet, and mobile devices."
     ],
     whyChoose: "Other free DOCX converters store document copies on cloud databases. ToolWala AI uses client-side parser algorithms to process document structures locally, delivering high-fidelity results with total privacy.",
     useCases: [
@@ -1768,13 +1862,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "Is my Word document secure?", answer: "Yes, 100%. All parsing, layout calculation, and PDF compiling run locally in your web browser. No file contents or metadata are sent to our servers." },
       { question: "What document formats are supported?", answer: "We support standard Microsoft Word formats (.docx). For legacy files (.doc), save them as .docx before uploading." },
-      { question: "Does the PDF preserve tables and lists?", answer: "Yes. Our client-side rendering engine supports normal tables, cell grids, borders, bullet points, and numbered lists." }
+      { question: "Does the PDF preserve tables and lists?", answer: "Yes. Our client-side rendering engine supports normal tables, cell grids, borders, bullet points, and numbered lists." },
+      { question: "Can I convert password-protected Word files?", answer: "No. You must remove the password protection from the DOCX file before converting it." },
+      { question: "Is this converter free?", answer: "Yes. ToolWala Word to PDF Converter is 100% free with no signups required." }
     ],
     conclusion: "Convert your Word documents to PDF securely and easily. Try ToolWala AI's Word to PDF tool today.",
     relatedTools: [
       { name: "PDF to Word Converter", href: "/tools/pdf-to-word-converter" },
       { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "Split PDF", href: "/tools/split-pdf" }
+      { name: "Split PDF", href: "/tools/split-pdf" },
+      { name: "Compress PDF", href: "/tools/compress-pdf" }
     ]
   },
   "invoice-cropper": {
@@ -1797,7 +1894,8 @@ export const toolArticles: Record<string, ToolArticleData> = {
     benefits: [
       "Total security for business invoices, financial statements, and receipts—nothing leaves your device.",
       "Erase messy backgrounds, table surfaces, or scanning shadows in one click.",
-      "Fast client-side compilation without server load or monthly subscription fees."
+      "Fast client-side compilation without server load or monthly subscription fees.",
+      "100% free with no registration or watermarks."
     ],
     whyChoose: "Standard crop tools upload your private financial invoices to remote cloud servers. ToolWala AI processes image grids and compiles PDF structures entirely within your local browser sandbox, giving you premium editing features with absolute privacy.",
     useCases: [
@@ -1841,7 +1939,8 @@ export const toolArticles: Record<string, ToolArticleData> = {
     benefits: [
       "100% Privacy-First: Your sensitive government document never leaves your device's browser memory.",
       "Prevent Identity Theft: Share safe, redacted document files with banks, landlords, or telecommunication providers.",
-      "Multi-Page PDF Support: Load multi-page scanned PDF cards, mask them sequentially, and export them back as standard PDF structures."
+      "Multi-Page PDF Support: Load multi-page scanned PDF cards, mask them sequentially, and export them back as standard PDF structures.",
+      "Works 100% offline once the web application loads."
     ],
     whyChoose: "Most online mask tools require uploading your sensitive Aadhaar document to a remote server. ToolWala AI processes image pixels and parses characters entirely within your browser's local sandbox, giving you premium document safety and compliance with absolute data sovereignty.",
     useCases: [
@@ -1880,12 +1979,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     keyFeatures: [
       { title: "Browser-Native Speed", desc: "No uploads or downloads required. The optimization executes directly on your device CPU." },
       { title: "Visual Integrity Preservation", desc: "Our compression algorithm preserves text vectors, standard fonts, and drawing paths perfectly." },
-      { title: "Data Sovereignty", desc: "Because files never leave your device, it remains fully compliant with GDPR, HIPAA, and CCPA standards." }
+      { title: "Data Sovereignty", desc: "Because files never leave your device, it remains fully compliant with GDPR, HIPAA, and CCPA standards." },
+      { title: "Multi-Preset Quality Sliders", desc: "Select Extreme, Recommended, or Low compression levels based on your target file size." },
+      { title: "Real-Time Size Stats", desc: "View original size vs compressed size and total MB reduction percentage instantly." }
     ],
     benefits: [
       "Send documents via email easily by reducing size limits.",
       "Saves device storage spaces on desktop or mobile.",
-      "Works offline—perfect for remote workers and travelers."
+      "Works offline—perfect for remote workers and travelers.",
+      "Completely free with zero watermarks or account signups.",
+      "Supports all modern desktop and mobile browsers."
     ],
     whyChoose: "Most online PDF compressors upload your sensitive documents to their servers, creating major security risks. ToolWala AI processes your pages directly on your device, ensuring complete data confidentiality.",
     useCases: [
@@ -1896,51 +1999,63 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "Is Compress PDF secure?", answer: "Absolutely. All optimization runs locally inside your browser memory. Your documents never touch our servers." },
       { question: "Does it work on password-protected PDFs?", answer: "No, you must unlock password-protected PDFs first before our compressor can parse and optimize their internal structures." },
-      { question: "Is there a limit on file sizes?", answer: "Since compression runs inside your browser tab memory, we recommend using files under 100MB for optimal system stability." }
+      { question: "Is there a limit on file sizes?", answer: "Since compression runs inside your browser tab memory, we recommend using files under 100MB for optimal system stability." },
+      { question: "Will compressing a PDF decrease image or text quality?", answer: "Our algorithm uses smart vector and font stream cleanup to reduce file weight while keeping text sharp and readable." },
+      { question: "Is ToolWala Compress PDF free to use?", answer: "Yes! ToolWala Compress PDF is 100% free with no daily usage caps." }
     ],
     conclusion: "Optimize file sizes while preserving complete document clarity with ToolWala AI's Compress PDF.",
     relatedTools: [
       { name: "Merge PDF", href: "/tools/merge-pdf" },
       { name: "Split PDF", href: "/tools/split-pdf" },
-      { name: "Protect PDF", href: "/tools/protect-pdf" }
+      { name: "Protect PDF", href: "/tools/protect-pdf" },
+      { name: "Crop PDF", href: "/tools/crop-pdf" }
     ]
   },
   "crop-pdf": {
-    title: "Crop PDF",
-    intro: "Trim page margins, adjust visible borders, and crop PDF sheets locally and securely in your web browser.",
-    whatItDoes: "ToolWala AI's Crop PDF tool allows you to modify the display boundaries (CropBox and MediaBox) of your documents. Whether you need to crop out header margins, remove scanned black edges, or fit pages to standard printing dimensions, you can adjust percentage or pixel crop offsets directly. The conversion engine renders change commands in real-time, executing locally to keep your private records safe.",
+    title: "Crop PDF Editor",
+    intro: "Trim PDF page margins, remove unwanted borders, and customize document dimensions visually in your web browser with 100% privacy.",
+    whatItDoes: "ToolWala Crop PDF Editor is a free online tool that lets you trim margins, remove dark scanner borders, and adjust page sizes for any PDF document. Designed for students, legal professionals, and business operators, it provides a visual drag-and-drop crop box to trim pages precisely without installing desktop software. Whether preparing documents for printing, filing court records, or reading eBooks on tablets, you can select custom margins or use automated presets.",
     howToUse: [
-      "Upload your PDF document by dragging it into the crop panel or choosing browse.",
-      "Configure crop margins (top, bottom, left, right offsets) or select a standard preset.",
-      "Click the 'Crop PDF' button to rewrite page dimensions locally.",
-      "Download the cropped PDF file to your local storage instantly."
+      "Upload your PDF document by dragging it into the drop zone or choosing browse.",
+      "Adjust the interactive crop box using corner handles or enter exact margin numbers.",
+      "Select a preset like 'Detect White Margins', 'A4 Safe Crop', or 'Book Scan'.",
+      "Choose target pages (Current Page, Selected Pages, or All Pages) to apply the crop.",
+      "Click 'Apply & Crop PDF' to compile your changes and download the cropped file."
     ],
     keyFeatures: [
-      { title: "Custom Offsets", desc: "Precisely define crop distances for top, bottom, left, and right borders separately." },
-      { title: "Client-Side Processing", desc: "No remote databases or file storage are used. The operations happen strictly in active RAM." },
-      { title: "Standard Format Fit", desc: "Easily adjust layouts for legal filings, invoices, and standard formats." }
+      { title: "Visual Crop Editor", desc: "Interactive canvas with 8 draggable handles and real-time blue backdrop overlay." },
+      { title: "Auto White Margin Detection", desc: "Smart pixel analysis that automatically finds and crops non-white document content." },
+      { title: "Multi-Unit Support", desc: "Switch input measurements instantly between Pixels (px), Millimeters (mm), and Percentages (%)." },
+      { title: "Client-Side Processing", desc: "Executes 100% locally in your browser memory for absolute privacy and zero cloud uploads." },
+      { title: "Before / After Preview", desc: "Split-screen preview to compare the original uncropped page against the cropped output." }
     ],
     benefits: [
-      "Remove unwanted black scanning lines or borders from scanned PDFs.",
-      "Create clean presentation slides by cropping unnecessary page gaps.",
-      "100% confidential and safe for legal, financial, or personal documents."
+      "100% Free: Unlimited usage with zero hidden fees or subscription limits.",
+      "Total Privacy: Your sensitive financial, medical, and legal documents never leave your device.",
+      "No Installation: Works instantly on Chrome, Safari, Firefox, Edge, and mobile browsers.",
+      "No Account Needed: Start cropping files immediately without registration or login.",
+      "Clean Output: Generates crisp PDFs without adding any forced watermarks or branding."
     ],
-    whyChoose: "Our Crop PDF utility uses high-performance PDF manipulation layers that run client-side in the browser. You don't need to install any complex software or sign up for account registration.",
+    whyChoose: "Traditional PDF tools force you to guess margin percentages or pay for expensive software licenses. ToolWala's Crop PDF Editor brings a desktop-grade visual canvas directly into your web browser. With instant live previews, multi-page targeting, and auto-white margin detection, you get precise control over your document layout while maintaining total data sovereignty.",
     useCases: [
-      "Cropping legal files to fit court formatting requirements.",
-      "Removing border lines from scanned receipts and invoices.",
-      "Preparing clean pages for eBook readers or digital tablets."
+      "Trimming dark scanner borders from scanned books, receipts, and invoices.",
+      "Formatting legal briefs and affidavits to match strict court margin standards.",
+      "Preparing clean PDF pages for optimal reading on Kindle, iPad, or mobile screens."
     ],
     faqs: [
-      { question: "Does cropping a PDF change its actual data?", answer: "Cropping modifies the visible boundaries (CropBox) of the PDF page, so conforming readers hide the cropped areas. The text and layers remain within the file for standard recovery unless flattened." },
-      { question: "Can I crop single pages or all pages?", answer: "Currently, our tool crops all pages uniformly to ensure consistent layout outputs." },
-      { question: "Is this tool free?", answer: "Yes! ToolWala AI's Crop PDF is completely free, secure, and has no daily usage limits." }
+      { question: "Is ToolWala Crop PDF Editor completely free to use?", answer: "Yes. ToolWala Crop PDF Editor is 100% free for all users. There are no paid tiers, daily usage limits, or hidden fees. You can process as many PDF documents as you need without forced watermarks." },
+      { question: "Are my PDF files safe and private when cropping?", answer: "Yes. ToolWala operates entirely client-side using JavaScript and WebAssembly. Your documents are rendered and processed in your local browser memory and are never uploaded to remote cloud servers." },
+      { question: "Can I crop specific pages or the entire document?", answer: "You can choose to apply your crop box to the Current Page, Selected Pages (via the thumbnail sidebar), or All Pages in your PDF document with a single click." },
+      { question: "How does the Auto White Margin Detection work?", answer: "Our smart detection engine scans the page canvas pixels to identify the bounding box of text and graphics. It automatically calculates the optimal crop rectangle to eliminate blank margins." },
+      { question: "Can I use ToolWala Crop PDF on my mobile phone?", answer: "Yes. ToolWala Crop PDF Editor is fully responsive and optimized for touch devices, allowing you to crop PDF margins on iOS iPhones, iPads, and Android smartphones." }
     ],
-    conclusion: "Clean up page margins and customize your document layouts with ToolWala's secure Crop PDF tool.",
+    conclusion: "Clean up page margins and customize your document layouts with ToolWala's visual, private Crop PDF tool.",
     relatedTools: [
       { name: "Organize PDF Pages", href: "/tools/organize-pdf" },
       { name: "Rotate PDF", href: "/tools/rotate-pdf" },
-      { name: "Remove PDF Pages", href: "/tools/remove-pages" }
+      { name: "Remove PDF Pages", href: "/tools/remove-pages" },
+      { name: "Compress PDF", href: "/tools/compress-pdf" },
+      { name: "Split PDF", href: "/tools/split-pdf" }
     ]
   },
   "rotate-pdf": {
@@ -1956,12 +2071,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     keyFeatures: [
       { title: "Rotation Controls", desc: "Choose exactly how to rotate your pages—90°, 180°, or 270° clockwise." },
       { title: "On-Device Processing", desc: "No server latency. All page parameter updates are calculated locally." },
-      { title: "Lossless Rendering", desc: "Rotating pages does not re-compress images or text layers, preserving original file quality." }
+      { title: "Lossless Rendering", desc: "Rotating pages does not re-compress images or text layers, preserving original file quality." },
+      { title: "Visual Thumbnail Grid", desc: "Inspect original and rotated page layouts in real-time." },
+      { title: "Bulk Page Rotation", desc: "Rotate all pages in a document with a single click." }
     ],
     benefits: [
       "Quickly fix scanning orientation errors on documents.",
       "Easy and simple user interface suitable for all devices.",
-      "Absolute confidentiality for tax sheets and contracts."
+      "Absolute confidentiality for tax sheets and contracts.",
+      "Works 100% offline with zero server lag.",
+      "Completely free with no signups or watermarks."
     ],
     whyChoose: "Our Rotate PDF tool is optimized for lightning-fast, client-side edits. No network uploads are required, meaning you can fix document rotations offline anytime.",
     useCases: [
@@ -1972,13 +2091,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "Can I rotate specific pages?", answer: "Yes, you can rotate pages visually using our 'Organize PDF Pages' tool. This dedicated Rotate PDF tool applies rotation to all pages in the document." },
       { question: "Will rotating decrease PDF quality?", answer: "No, rotation is a lossless metadata parameter change. It simply instructs the PDF viewer to display the pages at a different angle." },
-      { question: "Does this work on mobile phone browsers?", answer: "Yes, it is fully responsive and works smoothly on Safari, Chrome, and all mobile viewports." }
+      { question: "Does this work on mobile phone browsers?", answer: "Yes, it is fully responsive and works smoothly on Safari, Chrome, and all mobile viewports." },
+      { question: "Are my documents uploaded to a remote server?", answer: "No. All rotation edits execute locally inside your web browser sandbox." },
+      { question: "Is this tool free?", answer: "Yes. ToolWala Rotate PDF is 100% free with no hidden charges." }
     ],
     conclusion: "Correct page orientations instantly with ToolWala's secure client-side Rotate PDF tool.",
     relatedTools: [
       { name: "Organize PDF Pages", href: "/tools/organize-pdf" },
       { name: "Split PDF", href: "/tools/split-pdf" },
-      { name: "Remove PDF Pages", href: "/tools/remove-pages" }
+      { name: "Remove PDF Pages", href: "/tools/remove-pages" },
+      { name: "Crop PDF", href: "/tools/crop-pdf" }
     ]
   },
   "remove-pages": {
@@ -1994,12 +2116,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     keyFeatures: [
       { title: "Targeted Page Deletion", desc: "Specify individual pages or complete page ranges to remove in a single click." },
       { title: "Browser Memory Execution", desc: "Your file remains completely private. No uploads or server logs are created." },
-      { title: "Metadata Preservation", desc: "Keeps original fonts, text formatting, and layout styles intact." }
+      { title: "Metadata Preservation", desc: "Keeps original fonts, text formatting, and layout styles intact." },
+      { title: "Thumbnail Preview", desc: "Visually verify which pages will be removed before compiling." },
+      { title: "Multi-Range Selection", desc: "Combine comma-separated pages and dashed ranges (e.g., 1, 3-5, 8)." }
     ],
     benefits: [
       "Remove blank pages or draft versions from final documents.",
       "Clean up large PDFs to share only relevant page sections.",
-      "Fast, secure, and works 100% offline."
+      "Fast, secure, and works 100% offline.",
+      "No file limits or daily caps.",
+      "Works on all desktop and mobile devices."
     ],
     whyChoose: "We put privacy first. Rather than uploading your files to third-party servers, our Remove Pages tool handles all document extraction inside your browser cache, giving you complete data security.",
     useCases: [
@@ -2010,13 +2136,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "How do I specify pages to delete?", answer: "You can enter page numbers separated by commas (e.g., 2, 5) or specify ranges using dashes (e.g., 3-7)." },
       { question: "Does this delete the original file on my computer?", answer: "No, our tool does not modify files on your computer. It generates a new, modified copy which you download to your device." },
-      { question: "Is there a limit to how many pages I can delete?", answer: "No, you can remove as many pages as you like, as long as at least one page remains in the final document." }
+      { question: "Is there a limit to how many pages I can delete?", answer: "No, you can remove as many pages as you like, as long as at least one page remains in the final document." },
+      { question: "Is my document secure?", answer: "Yes, 100%. All processing runs client-side inside your browser." },
+      { question: "Is this tool completely free?", answer: "Yes. ToolWala Remove PDF Pages is 100% free." }
     ],
     conclusion: "Clean up your documents and remove unwanted PDF pages securely with ToolWala AI.",
     relatedTools: [
       { name: "Split PDF", href: "/tools/split-pdf" },
       { name: "Organize PDF Pages", href: "/tools/organize-pdf" },
-      { name: "Crop PDF", href: "/tools/crop-pdf" }
+      { name: "Crop PDF", href: "/tools/crop-pdf" },
+      { name: "Rotate PDF", href: "/tools/rotate-pdf" }
     ]
   },
   "add-page-numbers-to-pdf": {
@@ -2033,12 +2162,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     keyFeatures: [
       { title: "Multiple Positioning Presets", desc: "Select from top-left, top-center, top-right, bottom-left, bottom-center, or bottom-right options." },
       { title: "Crawlable Pagination", desc: "Select custom number ranges, pagination offsets, and skip the cover page easily." },
-      { title: "Browser Memory Security", desc: "Process your documents entirely locally in active memory. Your data never touches a server." }
+      { title: "Browser Memory Security", desc: "Process your documents entirely locally in active memory. Your data never touches a server." },
+      { title: "Font & Size Styling", desc: "Customize font size, color, and opacity of stamped page numbers." },
+      { title: "Cover Page Skipping", desc: "Optionally skip numbering on page 1 for title pages." }
     ],
     benefits: [
       "Add professional numbering structures to research reports, eBooks, or legal forms.",
       "Skip title or cover pages to start numbering exactly on the page content.",
-      "100% free and works fully offline once the application hydrates."
+      "100% free and works fully offline once the application hydrates.",
+      "Preserves original vector quality and text searchability.",
+      "Mobile and touch optimized."
     ],
     whyChoose: "Traditional pagination utilities copy your PDF files to cloud databases, raising security and privacy concerns. ToolWala AI's client-side architecture guarantees absolute privacy by processing document pagination strictly within your browser sandbox.",
     useCases: [
@@ -2049,13 +2182,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "Can I skip numbering on the first page?", answer: "Yes, you can check the 'Skip Cover Page' option to skip pagination on page 1 and start numbering from page 2." },
       { question: "Are my files stored on your servers?", answer: "Never. All pagination tasks run inside your local browser memory. No files are transmitted to external databases." },
-      { question: "What pagination formats are available?", answer: "You can choose from 'Page X of Y', 'Page X', 'X of Y', or raw numbers 'X'." }
+      { question: "What pagination formats are available?", answer: "You can choose from 'Page X of Y', 'Page X', 'X of Y', or raw numbers 'X'." },
+      { question: "Can I change the font color of numbers?", answer: "Yes. You can select custom hex colors and adjust font sizing." },
+      { question: "Is this tool free?", answer: "Yes. ToolWala Add Page Numbers to PDF is 100% free with no signups." }
     ],
     conclusion: "Structure your PDF files with customizable, secure page numbering using ToolWala AI.",
     relatedTools: [
       { name: "Merge PDF", href: "/tools/merge-pdf" },
       { name: "Organize PDF Pages", href: "/tools/organize-pdf" },
-      { name: "Sign PDF", href: "/tools/sign-pdf" }
+      { name: "Sign PDF", href: "/tools/sign-pdf" },
+      { name: "Watermark PDF", href: "/tools/watermark-pdf" }
     ]
   },
   "sign-pdf": {
@@ -2073,12 +2209,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { title: "Cursive typed signatures", desc: "Type your name and select from multiple styled handwriting scripts for professional-looking signatures." },
       { title: "Signature pad drawing", desc: "Draw your signature directly with your mouse or stylus on the touch-friendly canvas pad." },
       { title: "Interactive coordinate mapping", desc: "Simply click on the visual preview page to place the signature exactly where you want it." },
-      { title: "Browser-native processing", desc: "No uploads or cloud databases. Your signatures and PDF documents stay entirely secure on your machine." }
+      { title: "Browser-native processing", desc: "No uploads or cloud databases. Your signatures and PDF documents stay entirely secure on your machine." },
+      { title: "Transparent PNG Signature Support", desc: "Upload image signatures with auto background transparency detection." }
     ],
     benefits: [
       "Sign contracts, invoices, and NDAs without downloading desktop software or purchasing subscriptions.",
       "Save signature templates in active session memory to sign multiple document areas quickly.",
-      "GDPR and CCPA compliant because files never leave your device."
+      "GDPR and CCPA compliant because files never leave your device.",
+      "100% free with zero watermarks.",
+      "Works on mobile smartphones, tablets, and desktops."
     ],
     whyChoose: "Most signing services store your digital signature and sensitive contracts in their databases, presenting security risks. ToolWala AI bypasses cloud storage entirely, letting you sign contracts locally in complete privacy.",
     useCases: [
@@ -2089,13 +2228,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "Is my signature saved on ToolWala?", answer: "No, your signature and document data are processed strictly in your active browser memory. They are discarded as soon as you close the tab." },
       { question: "Can I add multiple signatures to the same PDF?", answer: "Yes, you can place signatures at different positions on the pages before compiling and downloading the final PDF." },
-      { question: "What file types can I upload as a signature?", answer: "You can upload JPEG, JPG, and PNG image files. Transparent PNG files are recommended for best visual results." }
+      { question: "What file types can I upload as a signature?", answer: "You can upload JPEG, JPG, and PNG image files. Transparent PNG files are recommended for best visual results." },
+      { question: "Is signing PDFs on ToolWala legally binding?", answer: "Yes. Electronic signatures applied to contracts and agreements are recognized under most electronic transaction laws." },
+      { question: "Is this signing tool completely free?", answer: "Yes. ToolWala Sign PDF is 100% free with no subscription tiers." }
     ],
     conclusion: "Sign documents securely and respect your data sovereignty with ToolWala's browser-local Sign PDF tool.",
     relatedTools: [
       { name: "Protect PDF", href: "/tools/protect-pdf" },
       { name: "Watermark PDF", href: "/tools/watermark-pdf" },
-      { name: "Add Page Numbers to PDF", href: "/tools/add-page-numbers-to-pdf" }
+      { name: "Add Page Numbers to PDF", href: "/tools/add-page-numbers-to-pdf" },
+      { name: "Signature Resize", href: "/tools/signature-resize" }
     ]
   },
   "exam-photo-resizer": {
@@ -2113,13 +2255,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { title: "Exam Portal Presets", desc: "Predefined dimensions matching the official SSC, UPSC, and IBPS layout rules." },
       { title: "KB Limit Safety Loop", desc: "Automated binary compressor that keeps files within target application ranges." },
       { title: "Compliant White Background", desc: "Integrated canvas filters to whiten backgrounds and optimize illumination levels." },
-      { title: "Zero Data Transmission", desc: "100% client-side operation ensures your personal identification photo remains private on your device." }
+      { title: "Zero Data Transmission", desc: "100% client-side operation ensures your personal identification photo remains private on your device." },
+      { title: "Touch Drag Handles", desc: "Easily adjust facial alignment frames on touchscreen smartphones." }
     ],
     benefits: [
       "Avoid candidate registration failures due to incorrect aspect ratios or oversized files.",
       "Process photos on any mobile device or tablet using simple touchscreen controls.",
       "Always free, without account registrations or watermarks.",
-      "Ensures the photo complies with the strict 70-80% face coverage guidelines."
+      "Ensures the photo complies with the strict 70-80% face coverage guidelines.",
+      "Instant conversion in milliseconds."
     ],
     whyChoose: "Exam portals use automated image checking that rejects applications with blurred features or incorrect photo ratios. Our Exam Photo Resizer tool ensures your photo meets all official requirements, helping your registration succeed.",
     useCases: [
@@ -2130,13 +2274,16 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "What is the photo size for competitive exams?", answer: "Most exams like SSC and UPSC require passport dimensions of 3.5 cm x 4.5 cm with file size caps strictly between 20KB and 50KB." },
       { question: "What background color is compliant?", answer: "A white or light-colored plain background is strictly recommended for PAN card and competitive exam applications." },
-      { question: "Is my passport photo secure?", answer: "Yes. All cropping, filtering, and compression happen entirely client-side. Your photo is processed locally and never uploaded to our servers." }
+      { question: "Is my passport photo secure?", answer: "Yes. All cropping, filtering, and compression happen entirely client-side. Your photo is processed locally and never uploaded to our servers." },
+      { question: "Does it work for IBPS bank exam photos?", answer: "Yes. It includes presets specifically tuned to IBPS photo (20KB-50KB) and signature (10KB-20KB) rules." },
+      { question: "Is this photo resizer free?", answer: "Yes. ToolWala Exam Photo Resizer is 100% free with unlimited resizes." }
     ],
     conclusion: "Format your photo for competitive exam portals instantly. Try our secure, browser-based Exam Photo Resizer.",
     relatedTools: [
       { name: "Aadhaar Photo Resize", href: "/tools/aadhaar-photo-resizer" },
       { name: "PAN Card Resize", href: "/tools/pan-card-resize" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
+      { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize" }
     ]
   },
   "exam-marks-calculator": {
@@ -2154,13 +2301,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { title: "Unlimited Subjects", desc: "Add as many subject rows as needed for complex board examinations." },
       { title: "Custom Grade System", desc: "Tailor the grading scale thresholds (e.g., A+, A, B, etc.) and passing standards in real-time." },
       { title: "On-Device Calculations", desc: "No data is sent to external servers, providing 100% security for student records." },
-      { title: "Interactive Dashboards", desc: "Visual circular progress trackers, pass/fail status badges, and aggregate summary cards." }
+      { title: "Interactive Dashboards", desc: "Visual circular progress trackers, pass/fail status badges, and aggregate summary cards." },
+      { title: "Export to PDF & Print", desc: "Download formatted report cards as PDFs or print directly." }
     ],
     benefits: [
       "Completely free to use with zero advertisements or subscription barriers.",
       "Supports decimal marks and large aggregates for all global education boards.",
       "Download a structured report of your mark sheet as a clean PDF or print directly.",
-      "Enter key navigation and auto-focus for swift and responsive user experiences."
+      "Enter key navigation and auto-focus for swift and responsive user experiences.",
+      "Works 100% offline."
     ],
     whyChoose: "Traditional calculators only compute simple ratios. Our Exam Marks Calculator functions like a mini Student Information System, generating detailed stats like grade classification, average performance index, and distribution cards. Because it operates strictly inside your browser, it remains fully functional offline.",
     useCases: [
@@ -2171,12 +2320,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "How is the exam marks percentage calculated?", answer: "The tool adds up the obtained marks of all subjects, divides by the sum of maximum marks, and multiplies by 100 to get the exact percentage." },
       { question: "Can I customize the passing percentage?", answer: "Yes. You can adjust the passing criteria from 30% to 50% or higher. Grades and pass/fail states adapt instantly to your choice." },
-      { question: "Is this calculator free to print and download reports?", answer: "Yes, you can copy, print, or download your results card as a formatted PDF document with one click." }
+      { question: "Is this calculator free to print and download reports?", answer: "Yes, you can copy, print, or download your results card as a formatted PDF document with one click." },
+      { question: "Does it support decimal marks?", answer: "Yes. You can enter fractional or decimal obtained marks (e.g., 85.5)." },
+      { question: "Are student mark sheets stored in a database?", answer: "No. All calculations run in local browser RAM for complete privacy." }
     ],
     conclusion: "Assess academic marks and verify grades instantly. Try our secure, private Exam Marks Calculator today.",
     relatedTools: [
-      { name: "Percentage Calculator", href: "/tools/percentage-calculator" },
-      { name: "Age Calculator", href: "/tools/age-calculator" }
+      { name: "Age Calculator", href: "/tools/age-calculator" },
+      { name: "SIP Calculator", href: "/tools/sip-calculator" },
+      { name: "EMI Calculator", href: "/tools/emi-calculator" }
     ]
   },
   "resume-bullet-generator": {
@@ -2194,13 +2346,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { title: "Google X-Y-Z Formula", desc: "Every bullet is engineered to state exactly what you accomplished, how it was measured, and what tools you used." },
       { title: "Recruiter-Approved Verbs", desc: "Replaces passive phrases with powerful action verbs like 'Engineered', 'Spearheaded', and 'Streamlined'." },
       { title: "ATS Keyword Match", desc: "Scans your target job role and suggests missing technical and soft skills to improve keyword matching density." },
-      { title: "AI Rewrite / Improve Mode", desc: "Paste your existing bullets to instantly rewrite them into results-driven achievements." }
+      { title: "AI Rewrite / Improve Mode", desc: "Paste your existing bullets to instantly rewrite them into results-driven achievements." },
+      { title: "One-Click Copy & Save", desc: "Easily copy individual bullets or export your entire experience block to your resume builder." }
     ],
     benefits: [
       "Instantly boost your resume's search visibility in recruitment software (ATS).",
       "Convert boring responsibilities into quantifiable business achievements.",
       "Sound like a professional copywriter and resume consultant.",
-      "100% free, private, and secure edge-based processing."
+      "100% free, private, and secure edge-based processing.",
+      "Supports all career levels from intern to executive."
     ],
     whyChoose: "We designed the Resume Bullet Generator because generic bullets are the #1 reason resumes get filtered out. A recruiter spends an average of 6 seconds screening a resume; a bullet starting with a weak action verb or lacking quantifiable results will fail. Our generator optimizes keyword density, removes passive language, and pairs technical skills with active accomplishments to help you secure interviews.",
     useCases: [
@@ -2212,12 +2366,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
     faqs: [
       { question: "What is the Google X-Y-Z formula?", answer: "Developed by Google recruiters, the formula states: 'Accomplished [X] as measured by [Y], by doing [Z]'. It guarantees that every bullet contains action, measurement, and context." },
       { question: "Are my inputs saved or shared?", answer: "No. All inputs are processed securely using edge endpoints and are not stored in any database. Your details are private." },
-      { question: "How does the ATS score work?", answer: "The AI evaluates your bullet point for the presence of strong action verbs, readability, and key skills. A score of 80+ is ideal." }
+      { question: "How does the ATS score work?", answer: "The AI evaluates your bullet point for the presence of strong action verbs, readability, and key skills. A score of 80+ is ideal." },
+      { question: "Can I generate bullet points for any job title?", answer: "Yes! The generator supports thousands of job titles across IT, healthcare, finance, marketing, sales, engineering, and more." },
+      { question: "Is this tool completely free?", answer: "Yes. ToolWala AI Resume Bullet Generator is 100% free." }
     ],
     conclusion: "Upgrade your resume today. Use our AI Bullet Point Generator to stand out, beat the ATS filters, and land your next career milestone.",
     relatedTools: [
       { name: "ATS Resume Checker", href: "/tools/ats-resume-checker" },
-      { name: "AI Cover Letter Generator", href: "/tools/cover-letter-generator" }
+      { name: "AI Cover Letter Generator", href: "/tools/cover-letter-generator" },
+      { name: "Resume Builder", href: "/tools/resume-builder" }
     ]
   }
 };

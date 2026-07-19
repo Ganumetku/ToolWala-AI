@@ -20,33 +20,33 @@ export default function PrivacyHubPage() {
   const trustBadgesList = [
     {
       icon: <Cpu className="w-6 h-6 text-blue-400" />,
-      title: t('privacy_hub.badges.on_device_title', '100% On-Device'),
-      desc: t('privacy_hub.badges.on_device_desc', 'All parsing, compressing, and editing are executed on your machine.'),
+      title: t('privacy_hub.badges.on_device_title', 'Browser-Native Processing'),
+      desc: t('privacy_hub.badges.on_device_desc', 'All PDF tools, image converters, crop editors, and calculators process files 100% locally on your machine.'),
     },
     {
       icon: <Lock className="w-6 h-6 text-purple-400" />,
-      title: t('privacy_hub.badges.no_account_title', 'No Account Wall'),
-      desc: t('privacy_hub.badges.no_account_desc', 'Use every feature immediately without giving away your email or personal info.'),
+      title: t('privacy_hub.badges.no_account_title', 'No Account Required'),
+      desc: t('privacy_hub.badges.no_account_desc', 'Use our utilities immediately without signups, email walls, or mandatory personal data collection.'),
     },
     {
       icon: <WifiOff className="w-6 h-6 text-emerald-400" />,
-      title: t('privacy_hub.badges.offline_title', 'Offline Functional'),
-      desc: t('privacy_hub.badges.offline_desc', 'Disconnect from the internet completely; our core tools keep running.'),
+      title: t('privacy_hub.badges.offline_title', 'Offline Capable'),
+      desc: t('privacy_hub.badges.offline_desc', 'Core document and image tools keep running smoothly even if you disconnect from the internet after page load.'),
     },
     {
       icon: <Code className="w-6 h-6 text-yellow-400" />,
       title: t('privacy_hub.badges.wasm_title', 'WASM Sandboxed'),
-      desc: t('privacy_hub.badges.wasm_desc', 'C++/Rust code compiled to WebAssembly runs in an isolated browser thread.'),
+      desc: t('privacy_hub.badges.wasm_desc', 'Local compilation modules execute in isolated browser threads for maximum security.'),
     },
     {
       icon: <EyeOff className="w-6 h-6 text-pink-400" />,
-      title: t('privacy_hub.badges.zero_logs_title', 'Zero Telemetry & Logs'),
-      desc: t('privacy_hub.badges.zero_logs_desc', 'No database logs, no tracking of document names or private data.'),
+      title: t('privacy_hub.badges.zero_logs_title', 'Zero Document Logging'),
+      desc: t('privacy_hub.badges.zero_logs_desc', 'We do not log, track, or save your document contents, file names, or private inputs to any database.'),
     },
     {
       icon: <ShieldCheck className="w-6 h-6 text-cyan-400" />,
-      title: t('privacy_hub.badges.regulatory_title', 'GDPR & HIPAA Ready'),
-      desc: t('privacy_hub.badges.regulatory_desc', 'By design, no client information is collected or processed on third-party servers.'),
+      title: t('privacy_hub.badges.regulatory_title', 'Privacy-First Architecture'),
+      desc: t('privacy_hub.badges.regulatory_desc', 'Built with strict data minimization principles, helping users maintain full data sovereignty.'),
     }
   ];
 
@@ -55,33 +55,33 @@ export default function PrivacyHubPage() {
     {
       id: 1,
       num: "01",
-      title: t('privacy_hub.pipeline.step1_title', 'Local File Import'),
-      short: "Import RAM",
-      desc: t('privacy_hub.pipeline.step1_desc', 'You select your files. The browser loads them into local memory (RAM) directly inside the tab. No network packets are sent to the internet.'),
+      title: t('privacy_hub.pipeline.step1_title', 'Local Memory Loading'),
+      short: "Tab Memory",
+      desc: t('privacy_hub.pipeline.step1_desc', 'When you select files for local document tools, your browser loads them directly into tab memory (RAM). Your files are not transmitted across the network.'),
       glow: "from-blue-500/20 to-transparent"
     },
     {
       id: 2,
       num: "02",
-      title: t('privacy_hub.pipeline.step2_title', 'WebAssembly Load'),
-      short: "WASM Engine",
-      desc: t('privacy_hub.pipeline.step2_desc', 'Heavy compilation engines (written in C++ or Rust) load directly as WebAssembly (WASM) modules. They execute locally on your processor.'),
+      title: t('privacy_hub.pipeline.step2_title', 'Client-Side Engine Load'),
+      short: "WASM / JS Engine",
+      desc: t('privacy_hub.pipeline.step2_desc', 'Processing scripts (compiled WebAssembly, Canvas, and JavaScript modules) run on your CPU/GPU to parse, crop, resize, or compress your files.'),
       glow: "from-purple-500/20 to-transparent"
     },
     {
       id: 3,
       num: "03",
-      title: t('privacy_hub.pipeline.step3_title', 'Sandboxed Execution'),
-      short: "Sandbox Tab",
-      desc: t('privacy_hub.pipeline.step3_desc', 'The processing runs inside the browser\'s isolated tab thread, completely separated from other tabs and your operating system\'s files.'),
+      title: t('privacy_hub.pipeline.step3_title', 'Sandboxed Isolation'),
+      short: "Isolated Memory",
+      desc: t('privacy_hub.pipeline.step3_desc', 'All processing occurs within the isolated sandbox of your web browser tab, isolated from other web tabs and server databases.'),
       glow: "from-emerald-500/20 to-transparent"
     },
     {
       id: 4,
       num: "04",
-      title: t('privacy_hub.pipeline.step4_title', 'Native Local Download'),
-      short: "Direct Save",
-      desc: t('privacy_hub.pipeline.step4_desc', 'The output file is written directly from RAM back to your device. The connection is instant and requires zero server queues.'),
+      title: t('privacy_hub.pipeline.step4_title', 'Direct File Save'),
+      short: "Instant Save",
+      desc: t('privacy_hub.pipeline.step4_desc', 'Processed outputs are generated in browser RAM and saved directly to your device. No cloud storage queues or file retention involved.'),
       glow: "from-yellow-500/20 to-transparent"
     }
   ];
@@ -89,59 +89,59 @@ export default function PrivacyHubPage() {
   // Table rows comparisons
   const comparisonRows = [
     {
-      feature: t('privacy_hub.comparison.f1_name', 'Data Transmission'),
-      toolwala: t('privacy_hub.comparison.f1_toolwala', '0% Uploaded (Stays in local RAM)'),
-      traditional: t('privacy_hub.comparison.f1_traditional', '100% Uploaded to remote databases'),
+      feature: t('privacy_hub.comparison.f1_name', 'Document Data Transmission'),
+      toolwala: t('privacy_hub.comparison.f1_toolwala', '0% Uploaded for local document tools (Stays in browser RAM)'),
+      traditional: t('privacy_hub.comparison.f1_traditional', '100% Uploaded to remote servers'),
       secure: true
     },
     {
-      feature: t('privacy_hub.comparison.f2_name', 'Execution Method'),
-      toolwala: t('privacy_hub.comparison.f2_toolwala', 'Browser-Native WebAssembly / CPU'),
+      feature: t('privacy_hub.comparison.f2_name', 'Core Execution Method'),
+      toolwala: t('privacy_hub.comparison.f2_toolwala', 'Browser-Native WebAssembly / Client CPU'),
       traditional: t('privacy_hub.comparison.f2_traditional', 'Remote server farm execution'),
       secure: true
     },
     {
-      feature: t('privacy_hub.comparison.f3_name', 'Offline Mode'),
-      toolwala: t('privacy_hub.comparison.f3_toolwala', 'Fully Supported (Works offline)'),
-      traditional: t('privacy_hub.comparison.f3_traditional', 'Processing Works Offline After Initial Page Load'),
+      feature: t('privacy_hub.comparison.f3_name', 'Offline Functionality'),
+      toolwala: t('privacy_hub.comparison.f3_toolwala', 'Supported for all document & image tools after page load'),
+      traditional: t('privacy_hub.comparison.f3_traditional', 'Requires active internet & server connection'),
       secure: true
     },
     {
-      feature: t('privacy_hub.comparison.f4_name', 'Database Logging & Retention'),
-      toolwala: t('privacy_hub.comparison.f4_toolwala', 'None (Purged when you close tab)'),
-      traditional: t('privacy_hub.comparison.f4_traditional', '1 hour to several days of storage logs'),
+      feature: t('privacy_hub.comparison.f4_name', 'Database Logging & File Retention'),
+      toolwala: t('privacy_hub.comparison.f4_toolwala', 'Zero file database retention (Cleared when tab closes)'),
+      traditional: t('privacy_hub.comparison.f4_traditional', 'Stored in server temp folders for hours or days'),
       secure: true
     },
     {
-      feature: t('privacy_hub.comparison.f5_name', 'File Size & Usage Limits'),
-      toolwala: t('privacy_hub.comparison.f5_toolwala', 'Unlimited (Constrained only by your system)'),
-      traditional: t('privacy_hub.comparison.f5_traditional', 'Strict bandwidth/pricing paywalls'),
+      feature: t('privacy_hub.comparison.f5_name', 'Usage & Paywall Barriers'),
+      toolwala: t('privacy_hub.comparison.f5_toolwala', 'Free & Unrestricted (Limited only by hardware)'),
+      traditional: t('privacy_hub.comparison.f5_traditional', 'Strict file size & daily limit paywalls'),
       secure: true
     },
     {
-      feature: t('privacy_hub.comparison.f6_name', 'Security Risk Profile'),
-      toolwala: t('privacy_hub.comparison.f6_toolwala', 'Zero network exposure / Zero risk'),
-      traditional: t('privacy_hub.comparison.f6_traditional', 'Subject to API leaks & server hacking'),
+      feature: t('privacy_hub.comparison.f6_name', 'Server Data Leak Risk'),
+      toolwala: t('privacy_hub.comparison.f6_toolwala', 'Zero server file exposure for client-side utilities'),
+      traditional: t('privacy_hub.comparison.f6_traditional', 'Exposed to cloud breaches & database leaks'),
       secure: true
     }
   ];
 
   const privacyFaqs = [
     {
-      q: t('privacy_hub.faq.q1', 'How does ToolWala process files if they never leave my device?'),
-      a: t('privacy_hub.faq.a1', 'ToolWala uses WebAssembly (WASM). Instead of sending your files to a server, we run the logic directly in your browser. Think of it like installing desktop software, except it runs instantly inside your browser tab without any installation required.')
+      q: t('privacy_hub.faq.q1', 'How does ToolWala process document & image files without uploading them?'),
+      a: t('privacy_hub.faq.a1', 'ToolWala uses client-side WebAssembly (WASM) and HTML5 engines. Instead of sending your documents to a server, the processing scripts run directly in your browser. Your files remain on your device.')
     },
     {
-      q: t('privacy_hub.faq.q2', 'Can I really use these tools without an internet connection?'),
-      a: t('privacy_hub.faq.a2', 'Yes. Once you load the ToolWala page, you can disconnect from the internet and continue compressing images, merging PDFs, or humanizing text. The core tools execute 100% offline.')
+      q: t('privacy_hub.faq.q2', 'Do all tools work offline?'),
+      a: t('privacy_hub.faq.a2', 'All document, PDF, image resizer, cropper, and calculator tools work 100% offline once the page has loaded. Generative AI tools (like AI voice synthesis or logo generation) require internet access to process prompts via secure, ephemeral API endpoints.')
     },
     {
-      q: t('privacy_hub.faq.q3', 'Does ToolWala store any records of my files?'),
-      a: t('privacy_hub.faq.a3', 'None. Because files stay in your browser\'s active RAM memory, they disappear completely when you close the tab. We don\'t have servers storing logs of your files, document names, or processed outputs.')
+      q: t('privacy_hub.faq.q3', 'Does ToolWala store any records of my files or data?'),
+      a: t('privacy_hub.faq.a3', 'No. Files processed by client-side tools stay in your browser tab RAM and are discarded when you close the tab. For cloud AI tools, inputs are processed in volatile memory for real-time response generation and are not retained in any database.')
     },
     {
-      q: t('privacy_hub.faq.q4', 'Are these tools compliant with enterprise standards (GDPR, CCPA)?'),
-      a: t('privacy_hub.faq.a4', 'Yes, perfectly. Since there is zero data collection, zero transmission, and zero remote storage, there is no risk of violating GDPR, CCPA, or HIPAA. Data sovereignty is entirely maintained by the user.')
+      q: t('privacy_hub.faq.q4', 'Are these privacy practices compliant with GDPR and CCPA?'),
+      a: t('privacy_hub.faq.a4', 'Yes. By minimizing data collection and executing document tools locally on your device, ToolWala complies with global privacy principles including GDPR and CCPA. You maintain full data sovereignty.')
     }
   ];
 

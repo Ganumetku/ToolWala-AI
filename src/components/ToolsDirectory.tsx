@@ -4,9 +4,11 @@ import { useState, useMemo, useEffect } from 'react';
 import { toolsData, toolCategories, ToolCategory, Tool } from '@/data/tools';
 import { fetchPublicTools } from '@/lib/tools';
 import ToolCard from '@/components/ToolCard';
+import ToolAutocompleteSearch from '@/components/ToolAutocompleteSearch';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { useTranslation } from '@/components/I18nContext';
+import Fuse from 'fuse.js';
 
 interface ToolsDirectoryProps {
   initialSearchQuery?: string;
@@ -38,6 +40,21 @@ export default function ToolsDirectory({
 
   const mergedTools = publicTools;
 
+  const fuse = useMemo(() => {
+    return new Fuse(mergedTools, {
+      includeScore: true,
+      threshold: 0.45,
+      ignoreLocation: true,
+      minMatchCharLength: 1,
+      keys: [
+        { name: 'title', weight: 0.5 },
+        { name: 'tags', weight: 0.25 },
+        { name: 'category', weight: 0.15 },
+        { name: 'description', weight: 0.1 }
+      ]
+    });
+  }, [mergedTools]);
+
   const handleSearchChange = (query: string) => {
     if (onSearchChange) {
       onSearchChange(query);
@@ -48,18 +65,61 @@ export default function ToolsDirectory({
 
   const filteredTools = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
-    return mergedTools.filter(tool => {
-      const matchesSearch = 
-        tool.title.toLowerCase().includes(query) ||
-        tool.description.toLowerCase().includes(query) ||
-        tool.tags.some(tag => tag.toLowerCase().includes(query)) ||
-        tool.category.toLowerCase().includes(query);
-        
-      const matchesCategory = activeCategory === "All" || tool.category === activeCategory;
-      
-      return matchesSearch && matchesCategory;
+    
+    let baseList = mergedTools;
+    if (activeCategory !== "All") {
+      baseList = baseList.filter(t => t.category === activeCategory);
+    }
+
+    if (!query) {
+      return baseList;
+    }
+
+    // 1. Direct contains & prefix matches
+    const matchedIds = new Set<string>();
+    const directMatches = baseList.filter(tool => {
+      const lowerTitle = tool.title.toLowerCase();
+      const lowerCat = tool.category.toLowerCase();
+      const lowerTags = tool.tags.map(t => t.toLowerCase());
+      const lowerDesc = tool.description.toLowerCase();
+
+      const matches = 
+        lowerTitle.includes(query) ||
+        lowerCat.includes(query) ||
+        lowerTags.some(tag => tag.includes(query)) ||
+        lowerDesc.includes(query);
+
+      if (matches) matchedIds.add(tool.id);
+      return matches;
     });
-  }, [mergedTools, searchQuery, activeCategory]);
+
+    // 2. Fuzzy matches for typos like 'resiza'
+    const fuseCategoryFilter = activeCategory !== "All" ? baseList : mergedTools;
+    const fuseInstance = activeCategory !== "All" 
+      ? new Fuse(fuseCategoryFilter, {
+          includeScore: true,
+          threshold: 0.45,
+          ignoreLocation: true,
+          keys: [
+            { name: 'title', weight: 0.5 },
+            { name: 'tags', weight: 0.25 },
+            { name: 'category', weight: 0.15 },
+            { name: 'description', weight: 0.1 }
+          ]
+        })
+      : fuse;
+
+    const fuseResults = fuseInstance.search(query);
+    const fuzzyMatches: Tool[] = [];
+    fuseResults.forEach(res => {
+      if (!matchedIds.has(res.item.id)) {
+        fuzzyMatches.push(res.item);
+        matchedIds.add(res.item.id);
+      }
+    });
+
+    return [...directMatches, ...fuzzyMatches];
+  }, [mergedTools, searchQuery, activeCategory, fuse]);
 
 
   return (
@@ -67,26 +127,14 @@ export default function ToolsDirectory({
       {/* Search Bar */}
       {!hideSearch && (
         <div className="mx-auto max-w-2xl flex flex-col items-center gap-4 mb-16">
-          <div className="relative w-full group">
-            <div className="absolute inset-y-0 left-6 flex items-center text-[#64748B] dark:text-gray-500 group-focus-within:text-[#2563EB] dark:group-focus-within:text-blue-500 transition-colors">
-              <Search className="h-5 w-5" />
-            </div>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => handleSearchChange(e.target.value)}
-              className="block w-full h-[68px] rounded-[20px] border border-[#E8ECF4] dark:border-white/5 bg-white dark:bg-white/[0.03] pl-14 pr-12 text-[#0F172A] dark:text-white placeholder:text-[#64748B] dark:placeholder:text-gray-600 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/10 sm:text-lg font-bold outline-none transition-all shadow-[0_10px_30px_rgba(15,23,42,0.06)] dark:shadow-2xl backdrop-blur-md"
-              placeholder={t('tools.search_placeholder_filter', 'Filter by name, tag or category...')}
-            />
-            {searchQuery && (
-              <button 
-                onClick={() => handleSearchChange("")}
-                className="absolute inset-y-0 right-4 flex items-center px-2 text-[#64748B] hover:text-[#0F172A] dark:hover:text-white"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            )}
-          </div>
+          <ToolAutocompleteSearch
+            value={searchQuery}
+            onChange={handleSearchChange}
+            onSubmitSearch={(q) => handleSearchChange(q)}
+            onSelectTool={(tool) => {
+              handleSearchChange(tool.title);
+            }}
+          />
         </div>
       )}
 

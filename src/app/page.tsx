@@ -11,6 +11,7 @@ import {
   Lock, FileText, Cpu
 } from 'lucide-react';
 import ToolCard from '@/components/ToolCard';
+import ToolAutocompleteSearch from '@/components/ToolAutocompleteSearch';
 import { toolsData, Tool } from '@/data/tools';
 import { fetchPublicTools } from '@/lib/tools';
 import dynamic from 'next/dynamic';
@@ -164,27 +165,17 @@ export default function Home() {
             transition={{ delay: 0.3 }}
             className="mx-auto max-w-3xl mb-8"
           >
-            <form onSubmit={handleSearchSubmit} className="relative group p-1 rounded-[2.2rem] bg-gradient-to-r from-[#2563EB]/20 via-[#7C3AED]/20 to-[#2563EB]/20 bg-[length:200%_auto] animate-gradient shadow-[0_10px_30px_rgba(15,23,42,0.06)] dark:shadow-2xl transition-all hover:scale-[1.01]">
-              <div className="relative flex items-center bg-white dark:bg-[#090d16]/98 h-[68px] rounded-[20px] p-2 border border-[#E8ECF4] dark:border-white/5 focus-within:border-[#2563EB] transition-colors">
-                <div className="pl-5 text-[#64748B] dark:text-gray-500">
-                  <Search className="h-6 w-6 group-focus-within:text-[#2563EB] dark:group-focus-within:text-blue-500 transition-colors" />
-                </div>
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder={t('home.search_placeholder', 'Search PDF, Image, Resume & AI tools...')}
-                  className="w-full bg-transparent border-none outline-none text-[#0F172A] dark:text-white px-4 py-3 text-base sm:text-lg font-bold placeholder:text-[#64748B] dark:placeholder:text-gray-500"
-                  aria-label="Search tools"
-                />
-                <button
-                  type="submit"
-                  className="hidden sm:flex items-center gap-2 bg-gradient-to-r from-[#2563EB] to-[#7C3AED] hover:-translate-y-0.5 text-white font-black px-7 py-3.5 rounded-2xl text-xs uppercase tracking-widest transition-all shadow-md shrink-0 cursor-pointer"
-                >
-                  {t('home.search_btn', 'Search Utilities')}
-                </button>
-              </div>
-            </form>
+            <ToolAutocompleteSearch
+              value={searchQuery}
+              onChange={setSearchQuery}
+              onSubmitSearch={(query) => {
+                if (query.trim()) {
+                  router.push(localizeHref('/tools') + '?search=' + encodeURIComponent(query.trim()));
+                } else {
+                  router.push(localizeHref('/tools'));
+                }
+              }}
+            />
           </motion.div>
 
           {/* Top 3 Categories */}

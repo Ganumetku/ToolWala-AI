@@ -1,30 +1,13 @@
-"use client";
-
-import Link from 'next/link';
-import { 
-  Zap, Hammer, MessageCircle, Rocket, 
-  Sparkles, Video, Users, Image as ImageIcon, 
-  Maximize, MessageSquare, Layout, CheckCircle2,
-  ChevronRight, ShieldCheck, Heart
-} from 'lucide-react';
-import { motion } from 'framer-motion';
-import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
-import { useTranslation } from '@/components/I18nContext';
-
-const betaFeatures = [
-  { name: 'AI BG Removal', icon: ImageIcon, key: 'bg' },
-  { name: 'Text Humanizer', icon: MessageCircle, key: 'humanizer' },
-  { name: 'Logo Studio', icon: Hammer, key: 'logo' },
-  { name: 'Voice Lab', icon: Video, key: 'voice' },
-  { name: 'QR Art', icon: Users, key: 'qr' },
-  { name: 'AI Upscaler', icon: Maximize, key: 'upscaler' },
-  { name: 'AI Interview', icon: Sparkles, key: 'interview' },
-  { name: 'AI Chatbot', icon: MessageSquare, key: 'chatbot' },
-  { name: 'Website Builder', icon: Layout, key: 'builder' },
-  { name: 'Voice Clone', icon: Zap, key: 'clone' },
-];
+import { notFound } from 'next/navigation';
 
 export default function PricingPage() {
+  notFound();
+  return null;
+}
+
+/*
+export default function PricingPageContent() {
+*/
   const { t, localizeHref } = useTranslation();
 
   return (

@@ -102,7 +102,7 @@ export default function Footer() {
   const sitemap = [
     { name: "All Utilities", href: "/tools/" },
     { name: "Browse Folders", href: "/categories/" },
-    { name: "Pricing Beta", href: "/pricing/" },
+    // { name: "Pricing Beta", href: "/pricing/" },
     { name: "Privacy Hub", href: "/privacy/" },
     { name: "Insights Blog", href: "/blog/" },
     { name: "Platform Guide", href: "/about/" }

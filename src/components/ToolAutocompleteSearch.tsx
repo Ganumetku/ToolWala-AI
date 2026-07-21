@@ -365,8 +365,8 @@ export default function ToolAutocompleteSearch({
       
       {/* Search Input Box */}
       <div className="relative group p-0.5 rounded-[22px] bg-gradient-to-r from-[#2563EB]/20 via-[#7C3AED]/20 to-[#2563EB]/20 bg-[length:200%_auto] focus-within:from-[#2563EB] focus-within:to-[#7C3AED] transition-all shadow-[0_10px_30px_rgba(15,23,42,0.06)] dark:shadow-2xl">
-        <div className={`relative flex items-center bg-white dark:bg-[#090d16]/98 ${inputHeight} rounded-[20px] px-3.5 sm:px-5 border border-[#E8ECF4] dark:border-white/5 transition-colors`}>
-          <div className="text-[#64748B] dark:text-gray-500 mr-3 shrink-0">
+        <div className={`relative flex items-center bg-white dark:bg-[#090d16]/98 ${inputHeight} rounded-[20px] pl-6 sm:pl-7 pr-3 sm:pr-4 border border-[#E8ECF4] dark:border-white/5 transition-colors`}>
+          <div className="text-[#64748B] dark:text-gray-500 mr-3.5 sm:mr-4 shrink-0 flex items-center justify-center">
             <Search className="h-5 w-5 sm:h-6 sm:w-6 group-focus-within:text-[#2563EB] dark:group-focus-within:text-blue-500 transition-colors" />
           </div>
           
@@ -384,7 +384,7 @@ export default function ToolAutocompleteSearch({
             onKeyDown={handleKeyDown}
             autoFocus={autoFocus}
             placeholder={placeholder || defaultPlaceholder}
-            className="w-full bg-transparent border-none outline-none text-[#0F172A] dark:text-white py-3 text-base sm:text-lg font-bold placeholder:text-[#64748B] dark:placeholder:text-gray-500"
+            className="w-full bg-transparent border-0 border-none outline-none focus:outline-none focus:ring-0 focus:border-none focus-visible:outline-none focus-visible:ring-0 text-[#0F172A] dark:text-white py-3 text-base sm:text-lg font-bold placeholder:text-[#64748B] dark:placeholder:text-gray-500"
           />
 
           {query ? (

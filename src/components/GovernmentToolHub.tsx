@@ -93,22 +93,22 @@ export default function GovernmentToolHub() {
   const { t, localizeHref } = useTranslation();
 
   return (
-    <section className="py-24 relative overflow-hidden bg-black/30 border-b border-white/5">
+    <section className="py-24 relative overflow-hidden bg-slate-50/50 dark:bg-black/30 border-b border-gray-200 dark:border-white/5 transition-colors duration-250">
       {/* Background Radial Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-600/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/5 dark:bg-indigo-600/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20 mb-4 shadow-[0_0_15px_rgba(59,130,246,0.1)]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-200 dark:border-blue-500/20 mb-4 shadow-sm">
             <Sparkles className="w-3.5 h-3.5" />
             {t('gov_hub.badge', 'INDIAN PORTAL COMPLIANCE')}
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+          <h2 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase">
             {t('gov_hub.title', 'Government Utilities Hub')}
           </h2>
-          <p className="text-gray-500 mt-4 font-medium max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-500 mt-4 font-medium max-w-2xl mx-auto">
             {t('gov_hub.subtitle', 'Quickly format documents and photos according to official requirements for NSDL, UIDAI, passport offices, and recruitment boards.')}
           </p>
         </div>
@@ -143,7 +143,7 @@ export default function GovernmentToolHub() {
 
                   <Link
                     href={localizeHref(tool.href)}
-                    className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.02] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/40 w-full h-full glass shadow-2xl hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
+                    className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-gray-200 dark:border-white/5 bg-white dark:bg-white/[0.02] p-7 transition-all duration-500 hover:bg-gray-50 dark:hover:bg-white/[0.05] hover:border-blue-500/40 w-full h-full shadow-sm dark:glass hover:shadow-md"
                   >
                     {/* Glow Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -151,33 +151,33 @@ export default function GovernmentToolHub() {
                     <div className="relative z-10 w-full">
                       {/* Icon & Badge */}
                       <div className="flex items-center justify-between mb-5">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 relative">
+                        <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-gradient-to-br dark:from-blue-500/10 dark:to-indigo-500/10 border border-blue-100 dark:border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 relative">
                           <div className="absolute inset-0 rounded-2xl bg-blue-500/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                           <span className="relative z-10">{tool.icon}</span>
                         </div>
-                        <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-[9px] font-bold text-gray-400 group-hover:text-blue-400 group-hover:border-blue-500/20 transition-all uppercase tracking-wider relative z-10">
+                        <span className="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-[9px] font-bold text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:border-blue-500/20 transition-all uppercase tracking-wider relative z-10">
                           {displayBadge}
                         </span>
                       </div>
 
                       {/* Title & Description */}
-                      <h3 className="text-lg font-black text-white tracking-tight group-hover:text-blue-400 transition-colors uppercase leading-tight mb-2">
+                      <h3 className="text-lg font-black text-gray-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase leading-tight mb-2">
                         {displayTitle}
                       </h3>
-                      <p className="text-xs text-gray-500 font-medium leading-relaxed mb-6 group-hover:text-gray-400 transition-colors">
+                      <p className="text-xs text-gray-600 dark:text-gray-500 font-medium leading-relaxed mb-6 group-hover:text-gray-700 dark:group-hover:text-gray-400 transition-colors">
                         {displayDesc}
                       </p>
                     </div>
 
                     {/* Specs & CTA */}
-                    <div className="border-t border-white/5 pt-4 mt-auto relative z-10 w-full">
-                      <div className="flex justify-between items-center text-[10px] text-gray-600 font-bold uppercase tracking-wider mb-4">
-                        <span>{t('gov_hub.target_kb', 'Target KB:')} <span className="text-gray-400">{displayKb}</span></span>
-                        <span>{t('gov_hub.dim_label', 'Dim:')} <span className="text-gray-400">{displayDim}</span></span>
+                    <div className="border-t border-gray-100 dark:border-white/5 pt-4 mt-auto relative z-10 w-full">
+                      <div className="flex justify-between items-center text-[10px] text-gray-500 dark:text-gray-600 font-bold uppercase tracking-wider mb-4">
+                        <span>{t('gov_hub.target_kb', 'Target KB:')} <span className="text-gray-700 dark:text-gray-400">{displayKb}</span></span>
+                        <span>{t('gov_hub.dim_label', 'Dim:')} <span className="text-gray-700 dark:text-gray-400">{displayDim}</span></span>
                       </div>
 
                       <div 
-                        className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-white/5 group-hover:bg-blue-600 text-[10px] font-black uppercase tracking-widest text-gray-400 group-hover:text-white transition-all shadow-md"
+                        className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gray-100 dark:bg-white/5 group-hover:bg-blue-600 text-[10px] font-black uppercase tracking-widest text-gray-700 dark:text-gray-400 group-hover:text-white transition-all shadow-sm"
                       >
                         {t('gov_hub.configure_tool', 'Configure Tool')}
                         <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
@@ -191,15 +191,15 @@ export default function GovernmentToolHub() {
         </div>
 
         {/* Global Security Banner */}
-        <div className="mt-16 max-w-3xl mx-auto glass border border-white/5 p-6.5 rounded-[2rem] flex flex-col sm:flex-row items-center gap-4 bg-gradient-to-r from-blue-900/10 via-transparent to-transparent">
-          <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+        <div className="mt-16 max-w-3xl mx-auto bg-white dark:glass border border-gray-200 dark:border-white/5 p-6.5 rounded-[2rem] flex flex-col sm:flex-row items-center gap-4 shadow-sm bg-gradient-to-r from-blue-50 dark:from-blue-900/10 via-transparent to-transparent">
+          <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0">
             <Shield className="w-6 h-6" />
           </div>
           <div>
-            <h4 className="text-sm font-black text-white uppercase tracking-wider flex items-center gap-1.5">
+            <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
               {t('gov_hub.privacy_title', 'Strict Privacy Compliance')}
             </h4>
-            <p className="text-xs text-gray-500 mt-1 font-semibold leading-relaxed">
+            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1 font-semibold leading-relaxed">
               {t('gov_hub.privacy_desc', 'We understand the sensitivity of Aadhaar card details and personal photos. None of your data or files are uploaded to any server. Everything is processed 100% inside your browser cache.')}
             </p>
           </div>

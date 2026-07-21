@@ -31,9 +31,9 @@ export const MeshGradient = () => {
           will-change: transform;
         }
       `}} />
-      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/15 rounded-full blur-[100px] mesh-gradient-1" />
-      <div className="absolute bottom-[10%] right-[-10%] w-[45%] h-[45%] bg-indigo-600/8 rounded-full blur-[90px] mesh-gradient-2" />
-      <div className="absolute top-[20%] right-[15%] w-[20%] h-[20%] bg-purple-600/10 rounded-full blur-[70px] mesh-gradient-3" />
+      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-500/8 dark:bg-blue-600/15 rounded-full blur-[100px] mesh-gradient-1" />
+      <div className="absolute bottom-[10%] right-[-10%] w-[45%] h-[45%] bg-indigo-500/5 dark:bg-indigo-600/8 rounded-full blur-[90px] mesh-gradient-2" />
+      <div className="absolute top-[20%] right-[15%] w-[20%] h-[20%] bg-purple-500/5 dark:bg-purple-600/10 rounded-full blur-[70px] mesh-gradient-3" />
     </div>
   );
 };
@@ -66,10 +66,10 @@ export const FloatingParticles = () => {
             opacity: 0;
           }
           10% {
-            opacity: 0.4;
+            opacity: 0.3;
           }
           90% {
-            opacity: 0.4;
+            opacity: 0.3;
           }
           100% {
             transform: translate3d(0, -10vh, 0);
@@ -84,7 +84,7 @@ export const FloatingParticles = () => {
       {particles.map((p) => (
         <div
           key={p.id}
-          className="absolute rounded-full bg-blue-400/40 bg-particle"
+          className="absolute rounded-full bg-blue-500/30 dark:bg-blue-400/40 bg-particle"
           style={{
             left: p.left,
             width: p.size,

@@ -17,7 +17,7 @@ export default function ToolsClient() {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 sm:py-32 relative overflow-hidden font-sans">
+    <div className="bg-[#F8FAFC] dark:bg-[#030712] min-h-screen py-24 sm:py-32 relative overflow-hidden font-sans transition-colors duration-250">
       {/* Background Glow */}
       <MeshGradient />
       
@@ -32,7 +32,7 @@ export default function ToolsClient() {
         <div className="mt-20">
           <Suspense fallback={
             <div className="flex justify-center py-20">
-              <div className="h-8 w-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+              <div className="h-8 w-8 border-2 border-blue-600 dark:border-blue-500 border-t-transparent rounded-full animate-spin" />
             </div>
           }>
             <ToolsSearch />

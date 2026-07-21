@@ -10,7 +10,7 @@ export default function AboutClient() {
   const { t, localizeHref } = useTranslation();
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans">
+    <div className="bg-[#F8FAFC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250">
       <MeshGradient />
       
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
@@ -23,38 +23,38 @@ export default function AboutClient() {
             />
             
             <div className="space-y-10">
-              <div className="glass p-8 rounded-[2.5rem] border border-white/5 relative group">
+              <div className="bg-white dark:glass p-8 rounded-[2.5rem] border border-gray-200 dark:border-white/5 relative group shadow-sm">
                 <div className="flex items-center gap-6 mb-4">
                   <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
                     <Sparkles className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-black text-white tracking-tight uppercase">{t('about.vision_title', 'The Vision')}</h3>
+                  <h3 className="text-xl font-black text-gray-900 dark:text-white tracking-tight uppercase">{t('about.vision_title', 'The Vision')}</h3>
                 </div>
-                <p className="text-gray-400 font-medium leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-400 font-medium leading-relaxed">
                   {t('about.vision_desc', 'ToolWala AI was born from a frustration with clunky software and expensive subscriptions for simple daily tasks. We envisioned a world where premium AI tools are accessible instantly, without barriers.')}
                 </p>
               </div>
 
-              <div className="glass p-8 rounded-[2.5rem] border border-white/5 relative group">
+              <div className="bg-white dark:glass p-8 rounded-[2.5rem] border border-gray-200 dark:border-white/5 relative group shadow-sm">
                 <div className="flex items-center gap-6 mb-4">
                   <div className="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/20">
                     <ShieldCheck className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-black text-white tracking-tight uppercase">{t('about.privacy_title', 'Privacy Guarantee')}</h3>
+                  <h3 className="text-xl font-black text-gray-900 dark:text-white tracking-tight uppercase">{t('about.privacy_title', 'Privacy Guarantee')}</h3>
                 </div>
-                <p className="text-gray-400 font-medium leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-400 font-medium leading-relaxed">
                   {t('about.privacy_desc', 'We process as much as possible directly in your browser. Your data is your own. We never train our models on your files, and we never store your personal content on our servers.')}
                 </p>
               </div>
 
-              <div className="glass p-8 rounded-[2.5rem] border border-white/5 relative group">
+              <div className="bg-white dark:glass p-8 rounded-[2.5rem] border border-gray-200 dark:border-white/5 relative group shadow-sm">
                 <div className="flex items-center gap-6 mb-4">
                   <div className="w-12 h-12 bg-amber-600 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/20">
                     <Zap className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-black text-white tracking-tight uppercase">{t('about.speed_title', 'Built for Speed')}</h3>
+                  <h3 className="text-xl font-black text-gray-900 dark:text-white tracking-tight uppercase">{t('about.speed_title', 'Built for Speed')}</h3>
                 </div>
-                <p className="text-gray-400 font-medium leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-400 font-medium leading-relaxed">
                   {t('about.speed_desc', 'Our platform is optimized for performance. By leveraging WebAssembly and Edge AI, we deliver results in milliseconds, not minutes.')}
                 </p>
               </div>
@@ -63,7 +63,7 @@ export default function AboutClient() {
             <div className="mt-16">
               <Link
                 href={localizeHref('/tools')}
-                className="inline-flex items-center gap-3 bg-blue-600 text-white px-10 py-5 rounded-[2rem] font-black uppercase tracking-widest text-sm hover:bg-blue-500 transition-all shadow-2xl shadow-blue-500/20 active:scale-95"
+                className="inline-flex items-center gap-3 bg-blue-600 text-white px-10 py-5 rounded-[2rem] font-black uppercase tracking-widest text-sm hover:bg-blue-700 transition-all shadow-md active:scale-95"
               >
                 {t('about.explore_btn', 'Explore our tools')} <ChevronRight className="w-5 h-5" />
               </Link>
@@ -71,21 +71,21 @@ export default function AboutClient() {
           </div>
 
           <div className="relative">
-            <div className="absolute -inset-10 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
-            <div className="relative glass rounded-[4rem] p-12 border border-white/10 aspect-square flex flex-col items-center justify-center text-center">
-               <div className="w-32 h-32 bg-white/5 rounded-[2.5rem] flex items-center justify-center mb-8 border border-white/5">
-                 <Heart className="w-16 h-16 text-blue-500 animate-pulse fill-blue-500/10" />
+            <div className="absolute -inset-10 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="relative bg-white dark:glass rounded-[4rem] p-12 border border-gray-200 dark:border-white/10 aspect-square flex flex-col items-center justify-center text-center shadow-sm">
+               <div className="w-32 h-32 bg-blue-50 dark:bg-white/5 rounded-[2.5rem] flex items-center justify-center mb-8 border border-blue-100 dark:border-white/5">
+                 <Heart className="w-16 h-16 text-blue-600 dark:text-blue-500 animate-pulse fill-blue-500/10" />
                </div>
-               <h3 className="text-4xl font-black text-white tracking-tighter uppercase mb-4">50,000+</h3>
+               <h3 className="text-4xl font-black text-gray-900 dark:text-white tracking-tighter uppercase mb-4">50,000+</h3>
                <p className="text-gray-500 font-black uppercase tracking-[0.4em] text-xs">{t('about.stats_title', 'Users Empowered Monthly')}</p>
                
                <div className="mt-12 flex -space-x-4">
                  {[...Array(5)].map((_, i) => (
-                   <div key={i} className="w-12 h-12 rounded-full border-4 border-[#030712] bg-gray-800 flex items-center justify-center text-[10px] font-black">
+                   <div key={i} className="w-12 h-12 rounded-full border-4 border-white dark:border-[#030712] bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 flex items-center justify-center text-[10px] font-black">
                      U{i+1}
                    </div>
                  ))}
-                 <div className="w-12 h-12 rounded-full border-4 border-[#030712] bg-blue-600 flex items-center justify-center text-[10px] font-black">
+                 <div className="w-12 h-12 rounded-full border-4 border-white dark:border-[#030712] bg-blue-600 flex items-center justify-center text-[10px] font-black text-white">
                    +50k
                  </div>
                </div>

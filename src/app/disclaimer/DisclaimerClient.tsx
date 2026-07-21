@@ -8,8 +8,8 @@ export default function DisclaimerClient() {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
+    <div className="bg-[#F8FAFC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-500/5 blur-[120px] -z-10" />
       
       <div className="mx-auto max-w-5xl px-6 lg:px-8 relative z-10">
         <SectionTitle 
@@ -21,13 +21,13 @@ export default function DisclaimerClient() {
         
         <div className="mt-20 space-y-16">
           {/* Main Warning */}
-          <div className="glass p-10 rounded-[3rem] border border-white/5 bg-red-500/5 relative overflow-hidden group">
-            <div className="absolute inset-0 bg-red-600/5 blur-[80px] -z-10" />
+          <div className="bg-red-50 dark:bg-red-500/5 p-10 rounded-[3rem] border border-red-200 dark:border-white/5 relative overflow-hidden group shadow-sm">
+            <div className="absolute inset-0 bg-red-500/5 blur-[80px] -z-10" />
             <div className="flex items-center gap-4 mb-8">
-              <AlertTriangle className="w-10 h-10 text-red-500" />
-              <h3 className="text-2xl font-black text-white tracking-tight uppercase">{t('disclaimer.notice_title', 'AI Accuracy Notice')}</h3>
+              <AlertTriangle className="w-10 h-10 text-red-600 dark:text-red-500" />
+              <h3 className="text-2xl font-black text-gray-900 dark:text-white tracking-tight uppercase">{t('disclaimer.notice_title', 'AI Accuracy Notice')}</h3>
             </div>
-            <p className="text-gray-400 font-medium leading-relaxed text-lg">
+            <p className="text-gray-700 dark:text-gray-400 font-medium leading-relaxed text-lg">
               {t('disclaimer.notice_desc', 'ToolWala AI utilizes advanced artificial intelligence models to generate content and process data. While we strive for high precision, AI-generated outputs can occasionally be inaccurate, incomplete, or biased. Users are advised to exercise professional judgment and verify all critical outputs independently.')}
             </p>
           </div>
@@ -57,15 +57,15 @@ export default function DisclaimerClient() {
           </div>
 
           {/* Final Statement */}
-          <div className="glass p-10 rounded-[3rem] border border-white/5 space-y-6 text-gray-400 font-medium text-center bg-white/[0.01]">
-             <h4 className="text-white font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3">
-               <Info className="w-5 h-5 text-blue-500" />
+          <div className="bg-white dark:glass p-10 rounded-[3rem] border border-gray-200 dark:border-white/5 space-y-6 text-gray-600 dark:text-gray-400 font-medium text-center shadow-sm">
+             <h4 className="text-gray-900 dark:text-white font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3">
+               <Info className="w-5 h-5 text-blue-600 dark:text-blue-500" />
                {t('disclaimer.transparency_title', 'Transparency Statement')}
              </h4>
              <p className="max-w-3xl mx-auto">
                {t('disclaimer.transparency_desc', 'As the AI landscape evolves, so does ToolWala AI. We are committed to transparency and will update this disclaimer as our technology matures. If you find any significant inaccuracies in our tool outputs, please help us improve by reporting them to our technical team.')}
              </p>
-             <p className="pt-6 border-t border-white/5 text-xs font-bold uppercase tracking-widest text-gray-600">
+             <p className="pt-6 border-t border-gray-100 dark:border-white/5 text-xs font-bold uppercase tracking-widest text-gray-500">
                {t('disclaimer.last_updated', 'Last updated: May 16, 2026 • © ToolWala AI')}
              </p>
           </div>
@@ -77,12 +77,12 @@ export default function DisclaimerClient() {
 
 function DisclaimerCard({ icon, title, desc }: { icon: any; title: string; desc: string }) {
   return (
-    <div className="glass p-10 rounded-[2.5rem] border border-white/5 space-y-6 hover:border-blue-500/30 transition-all group">
-      <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-blue-500 border border-white/10 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
+    <div className="bg-white dark:glass p-10 rounded-[2.5rem] border border-gray-200 dark:border-white/5 space-y-6 hover:border-blue-500/30 transition-all group shadow-sm">
+      <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-white/5 flex items-center justify-center text-blue-600 dark:text-blue-500 border border-blue-100 dark:border-white/10 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
         {icon}
       </div>
-      <h4 className="text-xl font-black text-white uppercase tracking-tight">{title}</h4>
-      <p className="text-gray-500 leading-relaxed font-medium">{desc}</p>
+      <h4 className="text-xl font-black text-gray-900 dark:text-white uppercase tracking-tight">{title}</h4>
+      <p className="text-gray-600 dark:text-gray-500 leading-relaxed font-medium">{desc}</p>
     </div>
   );
 }

@@ -111,15 +111,15 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#030712] text-white relative overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-[#F7F8FC] dark:bg-[#030712] text-[#0F172A] dark:text-white relative overflow-hidden transition-colors duration-250">
 
       {/* 1. Hero Section */}
-      <section className="relative min-h-[90vh] flex flex-col items-center justify-center py-20 md:py-28 overflow-hidden border-b border-white/5">
+      <section className="relative min-h-[90vh] flex flex-col items-center justify-center py-20 md:py-28 overflow-hidden border-b border-[#E8ECF4] dark:border-white/5">
         {loadEffects && <MeshGradient />}
         {loadEffects && <FloatingParticles />}
 
         {/* Background Radial Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-blue-600/5 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-gradient-to-tr from-blue-500/10 via-purple-500/5 to-transparent rounded-full blur-[140px] pointer-events-none" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
 
@@ -127,21 +127,21 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-blue-400 text-xs font-black tracking-widest mb-8 shadow-2xl hover:border-blue-500/30 transition-colors cursor-pointer select-none"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-[#E8ECF4] dark:border-white/10 backdrop-blur-md text-[#2563EB] dark:text-blue-400 text-xs font-black tracking-widest mb-8 shadow-sm dark:shadow-2xl hover:border-blue-500/30 transition-colors cursor-pointer select-none"
           >
-            <span className="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
+            <span className="flex h-2 w-2 rounded-full bg-[#2563EB] dark:bg-blue-500 animate-pulse" />
             <span>{t('home.badge', '🔒 100% Client-Side Local AI Processing')}</span>
-            <ChevronRight className="w-3.5 h-3.5 text-gray-500" />
+            <ChevronRight className="w-3.5 h-3.5 text-[#64748B] dark:text-gray-500" />
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="mx-auto max-w-5xl font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-white leading-[0.95] mb-6 uppercase"
+            className="mx-auto max-w-5xl font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#0F172A] dark:text-white leading-[0.95] mb-6 uppercase"
           >
             {t('home.hero_title_1', 'Supercharge Your Daily')} <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 animate-gradient">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] via-indigo-600 to-[#7C3AED] dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400 animate-gradient">
               {t('home.hero_title_2', 'Workflow with AI')}
             </span>
           </motion.h1>
@@ -150,7 +150,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mx-auto max-w-2xl text-sm sm:text-base md:text-lg font-medium text-gray-400 leading-relaxed mb-10"
+            className="mx-auto max-w-[700px] text-sm sm:text-base md:text-lg font-medium text-[#475569] dark:text-gray-400 leading-relaxed mb-10"
           >
             {t('home.hero_subtitle', 'Free AI utilities that run 100% locally in your browser. No registration, no latency, no server uploads. Your data stays entirely on your device.')}
           </motion.p>
@@ -162,21 +162,22 @@ export default function Home() {
             transition={{ delay: 0.3 }}
             className="mx-auto max-w-3xl mb-8"
           >
-            <form onSubmit={handleSearchSubmit} className="relative group p-1 rounded-[2.2rem] bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 bg-[length:200%_auto] animate-gradient shadow-2xl transition-all hover:scale-[1.01]">
-              <div className="relative flex items-center bg-[#090d16]/98 rounded-[2rem] p-2 border border-white/5 focus-within:border-blue-500/50 transition-colors">
-                <div className="pl-5 text-gray-500">
-                  <Search className="h-6 w-6 group-focus-within:text-blue-500 transition-colors" />
+            <form onSubmit={handleSearchSubmit} className="relative group p-1 rounded-[2.2rem] bg-gradient-to-r from-[#2563EB]/20 via-[#7C3AED]/20 to-[#2563EB]/20 bg-[length:200%_auto] animate-gradient shadow-[0_10px_30px_rgba(15,23,42,0.06)] dark:shadow-2xl transition-all hover:scale-[1.01]">
+              <div className="relative flex items-center bg-white dark:bg-[#090d16]/98 h-[68px] rounded-[20px] p-2 border border-[#E8ECF4] dark:border-white/5 focus-within:border-[#2563EB] transition-colors">
+                <div className="pl-5 text-[#64748B] dark:text-gray-500">
+                  <Search className="h-6 w-6 group-focus-within:text-[#2563EB] dark:group-focus-within:text-blue-500 transition-colors" />
                 </div>
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="block w-full border-0 bg-transparent py-4 pl-4 pr-4 text-white placeholder:text-gray-500 focus:ring-0 text-sm sm:text-base font-bold outline-none"
-                  placeholder={t('home.search_placeholder', 'Search 25+ offline utilities...').replace('25+', `${mergedTools.length}+`).replace('25', mergedTools.length.toString())}
+                  placeholder={t('home.search_placeholder', 'Search 35+ free AI tools (e.g. bg remover, pdf crop, aadhaar photo)...')}
+                  className="w-full bg-transparent border-none outline-none text-[#0F172A] dark:text-white px-4 py-3 text-base sm:text-lg font-bold placeholder:text-[#64748B] dark:placeholder:text-gray-500"
+                  aria-label="Search tools"
                 />
                 <button
                   type="submit"
-                  className="hidden md:flex items-center gap-2 rounded-[1.5rem] bg-blue-600 hover:bg-blue-500 px-8 py-4 text-xs font-black uppercase tracking-widest text-white shadow-xl active:scale-95 transition-all cursor-pointer"
+                  className="hidden sm:flex items-center gap-2 bg-gradient-to-r from-[#2563EB] to-[#7C3AED] hover:-translate-y-0.5 text-white font-black px-7 py-3.5 rounded-2xl text-xs uppercase tracking-widest transition-all shadow-md shrink-0 cursor-pointer"
                 >
                   {t('home.search_btn', 'Search Utilities')}
                 </button>
@@ -252,46 +253,46 @@ export default function Home() {
       </section>
 
       {/* 2. Trust & Security Seals Banner */}
-      <section className="py-16 border-b border-white/5 bg-white/[0.01] relative overflow-hidden">
+      <section className="py-16 border-b border-[#E8ECF4] dark:border-white/5 bg-white dark:bg-white/[0.01] relative overflow-hidden transition-colors duration-250">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-500/[0.01] via-transparent to-purple-500/[0.01] pointer-events-none" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="text-center mb-10">
-            <span className="text-[10px] font-black uppercase tracking-[0.25em] text-gray-500">
+            <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#64748B]">
               {t('home.trust_banner.title', 'TRUST & SECURITY VERIFICATIONS')}
             </span>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="premium-card p-6 flex flex-col items-center justify-center text-center border-emerald-500/10 hover:border-emerald-500/20 bg-emerald-950/[0.01]">
-              <ShieldCheck className="w-7 h-7 text-emerald-400 mb-3" />
-              <h4 className="text-[11px] font-black text-white uppercase tracking-wider mb-1">
+            <div className="premium-card p-6 flex flex-col items-center justify-center text-center border-emerald-200 dark:border-emerald-500/10 hover:border-emerald-500/30 bg-emerald-50/30 dark:bg-emerald-950/[0.01]">
+              <ShieldCheck className="w-7 h-7 text-emerald-600 dark:text-emerald-400 mb-3" />
+              <h4 className="text-[11px] font-black text-[#0F172A] dark:text-white uppercase tracking-wider mb-1">
                 {t('home.trust_banner.gdpr', 'GDPR & CCPA Private')}
               </h4>
-              <p className="text-[9px] text-gray-500 font-semibold leading-relaxed">No files ever leave your device.</p>
+              <p className="text-[9px] text-[#475569] dark:text-gray-500 font-semibold leading-relaxed">No files ever leave your device.</p>
             </div>
             
-            <div className="premium-card p-6 flex flex-col items-center justify-center text-center border-blue-500/10 hover:border-blue-500/20 bg-blue-950/[0.01]">
-              <Cpu className="w-7 h-7 text-blue-400 mb-3" />
-              <h4 className="text-[11px] font-black text-white uppercase tracking-wider mb-1">
+            <div className="premium-card p-6 flex flex-col items-center justify-center text-center border-blue-200 dark:border-blue-500/10 hover:border-blue-500/30 bg-blue-50/30 dark:bg-blue-950/[0.01]">
+              <Cpu className="w-7 h-7 text-[#2563EB] dark:text-blue-400 mb-3" />
+              <h4 className="text-[11px] font-black text-[#0F172A] dark:text-white uppercase tracking-wider mb-1">
                 {t('home.trust_banner.local', '100% Edge Processing')}
               </h4>
-              <p className="text-[9px] text-gray-500 font-semibold leading-relaxed">Runs directly inside browser sandbox.</p>
+              <p className="text-[9px] text-[#475569] dark:text-gray-500 font-semibold leading-relaxed">Runs directly inside browser sandbox.</p>
             </div>
 
-            <div className="premium-card p-6 flex flex-col items-center justify-center text-center border-purple-500/10 hover:border-purple-500/20 bg-purple-950/[0.01]">
-              <Lock className="w-7 h-7 text-purple-400 mb-3" />
-              <h4 className="text-[11px] font-black text-white uppercase tracking-wider mb-1">
+            <div className="premium-card p-6 flex flex-col items-center justify-center text-center border-purple-200 dark:border-purple-500/10 hover:border-purple-500/30 bg-purple-50/30 dark:bg-purple-950/[0.01]">
+              <Lock className="w-7 h-7 text-[#7C3AED] dark:text-purple-400 mb-3" />
+              <h4 className="text-[11px] font-black text-[#0F172A] dark:text-white uppercase tracking-wider mb-1">
                 {t('home.trust_banner.no_upload', 'No Cloud Database Logs')}
               </h4>
-              <p className="text-[9px] text-gray-500 font-semibold leading-relaxed">Absolute data privacy, zero logging.</p>
+              <p className="text-[9px] text-[#475569] dark:text-gray-500 font-semibold leading-relaxed">Absolute data privacy, zero logging.</p>
             </div>
 
-            <div className="premium-card p-6 flex flex-col items-center justify-center text-center border-yellow-500/10 hover:border-yellow-500/20 bg-yellow-950/[0.01]">
-              <Zap className="w-7 h-7 text-yellow-400 mb-3" />
-              <h4 className="text-[11px] font-black text-white uppercase tracking-wider mb-1">
+            <div className="premium-card p-6 flex flex-col items-center justify-center text-center border-amber-200 dark:border-yellow-500/10 hover:border-yellow-500/30 bg-amber-50/30 dark:bg-yellow-950/[0.01]">
+              <Zap className="w-7 h-7 text-amber-600 dark:text-yellow-400 mb-3" />
+              <h4 className="text-[11px] font-black text-[#0F172A] dark:text-white uppercase tracking-wider mb-1">
                 {t('home.trust_banner.free', 'Always Free Beta')}
               </h4>
-              <p className="text-[9px] text-gray-500 font-semibold leading-relaxed">Unlimited calculations, splits, & crops.</p>
+              <p className="text-[9px] text-[#475569] dark:text-gray-500 font-semibold leading-relaxed">Unlimited calculations, splits, & crops.</p>
             </div>
           </div>
         </div>
@@ -299,12 +300,12 @@ export default function Home() {
 
       {/* Recently Used Tray */}
       {mounted && recentTools.length > 0 && (
-        <section className="py-16 border-b border-white/5 bg-white/[0.01] relative overflow-hidden">
+        <section className="py-16 border-b border-[#E8ECF4] dark:border-white/5 bg-[#F8FAFC] dark:bg-white/[0.01] relative overflow-hidden transition-colors duration-250">
           <div className="absolute inset-0 bg-blue-600/[0.02] blur-3xl pointer-events-none" />
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
             <div className="flex items-center gap-2.5 mb-6 relative z-10">
               <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <h3 className="text-[10px] font-black uppercase tracking-widest text-gray-500">{t('home.recent_visited', 'Recently Visited Utilities')}</h3>
+              <h3 className="text-[10px] font-black uppercase tracking-widest text-[#64748B]">{t('home.recent_visited', 'Recently Visited Utilities')}</h3>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
               {recentTools.map((tool) => {
@@ -314,14 +315,14 @@ export default function Home() {
                   <Link
                     key={tool.id}
                     href={localizeHref(tool.href)}
-                    className="flex items-center gap-3.5 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-blue-500/30 hover:bg-blue-600/5 transition-all group animate-in fade-in duration-300"
+                    className="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-white/5 border border-[#E8ECF4] dark:border-white/10 hover:border-[#2563EB]/40 hover:bg-blue-50/50 dark:hover:bg-blue-600/5 transition-all group animate-in fade-in duration-300 shadow-sm"
                   >
-                    <div className="text-xl w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/5 group-hover:scale-110 transition-transform">
+                    <div className="text-xl w-10 h-10 rounded-xl bg-blue-50 dark:bg-white/5 flex items-center justify-center border border-blue-100 dark:border-white/5 group-hover:scale-110 transition-transform">
                       {tool.icon}
                     </div>
                     <div className="overflow-hidden">
-                      <h4 className="text-xs font-black text-white group-hover:text-blue-400 transition-colors truncate">{displayTitle}</h4>
-                      <p className="text-[9px] text-gray-600 font-bold uppercase tracking-wider mt-0.5">{displayCategory}</p>
+                      <h4 className="text-xs font-black text-[#0F172A] dark:text-white group-hover:text-[#2563EB] dark:group-hover:text-blue-400 transition-colors truncate">{displayTitle}</h4>
+                      <p className="text-[9px] text-[#64748B] dark:text-gray-600 font-bold uppercase tracking-wider mt-0.5">{displayCategory}</p>
                     </div>
                   </Link>
                 );
@@ -333,17 +334,17 @@ export default function Home() {
 
       {/* 3. Most Popular Tools Shelf */}
       {popularToolsList.length > 0 && (
-        <section id="tools-section" className="py-24 relative overflow-hidden bg-black/10 border-b border-white/5">
+        <section id="tools-section" className="py-24 relative overflow-hidden bg-[#F9FAFB] dark:bg-black/10 border-b border-[#E8ECF4] dark:border-white/5 transition-colors duration-250">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20 mb-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-200 dark:border-blue-500/20 mb-4 shadow-sm">
                 <Sparkles className="w-3.5 h-3.5" />
                 {t('home.popular_shelf_title', 'Popular Handpicked Tools')}
               </div>
-              <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+              <h2 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase">
                 Most Popular Tools
               </h2>
-              <p className="text-gray-500 mt-3 font-medium">
+              <p className="text-gray-600 dark:text-gray-500 mt-3 font-medium">
                 Try our highly optimized local editors. No logins required, launch instantly.
               </p>
             </div>
@@ -363,18 +364,18 @@ export default function Home() {
 
       {/* 4. PDF Tools Shelf */}
       {pdfToolsList.length > 0 && (
-        <section className="py-24 relative overflow-hidden bg-black/20 border-b border-white/5">
-          <div className="absolute top-1/2 left-0 w-96 h-96 bg-red-600/5 rounded-full blur-[140px] pointer-events-none" />
+        <section className="py-24 relative overflow-hidden bg-slate-50/50 dark:bg-black/20 border-b border-gray-200 dark:border-white/5 transition-colors duration-250">
+          <div className="absolute top-1/2 left-0 w-96 h-96 bg-red-500/5 rounded-full blur-[140px] pointer-events-none" />
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 text-red-400 text-[10px] font-black uppercase tracking-widest border border-red-500/20 mb-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 text-[10px] font-black uppercase tracking-widest border border-red-200 dark:border-red-500/20 mb-4 shadow-sm">
                 <FileText className="w-3.5 h-3.5" />
                 PDF UTILITIES
               </div>
-              <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+              <h2 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase">
                 PDF Tools
               </h2>
-              <p className="text-gray-500 mt-3 font-medium">
+              <p className="text-gray-600 dark:text-gray-500 mt-3 font-medium">
                 Professional document tools to merge, split, compress, protect and edit PDFs locally.
               </p>
             </div>
@@ -388,10 +389,10 @@ export default function Home() {
             <div className="text-center">
               <Link
                 href={localizeHref('/categories/pdf-tools')}
-                className="inline-flex items-center gap-2 px-6 py-3.5 border border-white/5 hover:border-red-500/30 bg-white/[0.02] hover:bg-white/[0.05] text-[10px] font-black uppercase tracking-widest text-gray-300 hover:text-white rounded-xl transition-all active:scale-95 shadow-xl cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-3.5 border border-gray-200 dark:border-white/5 hover:border-red-500/40 bg-white dark:bg-white/[0.02] hover:bg-gray-50 dark:hover:bg-white/[0.05] text-[10px] font-black uppercase tracking-widest text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-xl transition-all active:scale-95 shadow-sm cursor-pointer"
               >
                 View All PDF Tools
-                <ArrowRight className="w-4 h-4 text-red-500" />
+                <ArrowRight className="w-4 h-4 text-red-600 dark:text-red-500" />
               </Link>
             </div>
           </div>
@@ -400,18 +401,18 @@ export default function Home() {
 
       {/* 5. Image Tools Shelf */}
       {imageToolsList.length > 0 && (
-        <section className="py-24 relative overflow-hidden bg-black/10 border-b border-white/5">
-          <div className="absolute top-1/2 right-0 w-96 h-96 bg-blue-600/5 rounded-full blur-[140px] pointer-events-none" />
+        <section className="py-24 relative overflow-hidden bg-white dark:bg-black/10 border-b border-gray-200 dark:border-white/5 transition-colors duration-250">
+          <div className="absolute top-1/2 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-[140px] pointer-events-none" />
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20 mb-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-200 dark:border-blue-500/20 mb-4 shadow-sm">
                 <Layers className="w-3.5 h-3.5" />
                 IMAGE EDITORS
               </div>
-              <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+              <h2 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase">
                 Image Tools
               </h2>
-              <p className="text-gray-500 mt-3 font-medium">
+              <p className="text-gray-600 dark:text-gray-500 mt-3 font-medium">
                 Crop, compress, remove backgrounds, or resize official document photos instantly.
               </p>
             </div>
@@ -425,10 +426,10 @@ export default function Home() {
             <div className="text-center">
               <Link
                 href={localizeHref('/categories/image-tools')}
-                className="inline-flex items-center gap-2 px-6 py-3.5 border border-white/5 hover:border-blue-500/30 bg-white/[0.02] hover:bg-white/[0.05] text-[10px] font-black uppercase tracking-widest text-gray-300 hover:text-white rounded-xl transition-all active:scale-95 shadow-xl cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-3.5 border border-gray-200 dark:border-white/5 hover:border-blue-500/40 bg-white dark:bg-white/[0.02] hover:bg-gray-50 dark:hover:bg-white/[0.05] text-[10px] font-black uppercase tracking-widest text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-xl transition-all active:scale-95 shadow-sm cursor-pointer"
               >
                 View All Image Tools
-                <ArrowRight className="w-4 h-4 text-blue-500" />
+                <ArrowRight className="w-4 h-4 text-blue-600 dark:text-blue-500" />
               </Link>
             </div>
           </div>
@@ -437,18 +438,18 @@ export default function Home() {
 
       {/* 6. AI Tools Shelf */}
       {aiToolsList.length > 0 && (
-        <section className="py-24 relative overflow-hidden bg-black/20 border-b border-white/5">
-          <div className="absolute top-1/2 left-0 w-96 h-96 bg-purple-600/5 rounded-full blur-[140px] pointer-events-none" />
+        <section className="py-24 relative overflow-hidden bg-slate-50/50 dark:bg-black/20 border-b border-gray-200 dark:border-white/5 transition-colors duration-250">
+          <div className="absolute top-1/2 left-0 w-96 h-96 bg-purple-500/5 rounded-full blur-[140px] pointer-events-none" />
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-[10px] font-black uppercase tracking-widest border border-purple-500/20 mb-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 text-[10px] font-black uppercase tracking-widest border border-purple-200 dark:border-purple-500/20 mb-4 shadow-sm">
                 <Cpu className="w-3.5 h-3.5" />
                 INTELLIGENT AI
               </div>
-              <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+              <h2 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase">
                 AI Tools
               </h2>
-              <p className="text-gray-500 mt-3 font-medium">
+              <p className="text-gray-600 dark:text-gray-500 mt-3 font-medium">
                 ATS resume builder, AI voice generator, logo constructor, and content humanizer.
               </p>
             </div>
@@ -462,10 +463,10 @@ export default function Home() {
             <div className="text-center">
               <Link
                 href={localizeHref('/categories/ai-tools')}
-                className="inline-flex items-center gap-2 px-6 py-3.5 border border-white/5 hover:border-purple-500/30 bg-white/[0.02] hover:bg-white/[0.05] text-[10px] font-black uppercase tracking-widest text-gray-300 hover:text-white rounded-xl transition-all active:scale-95 shadow-xl cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-3.5 border border-gray-200 dark:border-white/5 hover:border-purple-500/40 bg-white dark:bg-white/[0.02] hover:bg-gray-50 dark:hover:bg-white/[0.05] text-[10px] font-black uppercase tracking-widest text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white rounded-xl transition-all active:scale-95 shadow-sm cursor-pointer"
               >
                 View All AI Tools
-                <ArrowRight className="w-4 h-4 text-purple-500" />
+                <ArrowRight className="w-4 h-4 text-purple-600 dark:text-purple-500" />
               </Link>
             </div>
           </div>
@@ -473,49 +474,49 @@ export default function Home() {
       )}
 
       {/* 7. Why ToolWala (USP Section) */}
-      <section className="py-24 bg-[#030712] relative overflow-hidden border-b border-white/5">
-        <div className="absolute top-1/2 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] -z-10 pointer-events-none" />
+      <section className="py-24 bg-white dark:bg-[#030712] relative overflow-hidden border-b border-gray-200 dark:border-white/5 transition-colors duration-250">
+        <div className="absolute top-1/2 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-[120px] -z-10 pointer-events-none" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20 mb-4">
-              <Sparkles className="w-3.5 h-3.5 fill-blue-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-200 dark:border-blue-500/20 mb-4 shadow-sm">
+              <Sparkles className="w-3.5 h-3.5 fill-blue-600/20 dark:fill-blue-400" />
               {t('home.edge_title', 'The ToolWala Edge')}
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+            <h2 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase">
               {t('home.why_use_title', 'Why Professionals Choose ToolWala AI')}
             </h2>
-            <p className="text-gray-500 mt-3 font-medium">
+            <p className="text-gray-600 dark:text-gray-500 mt-3 font-medium">
               {t('home.edge_desc', 'We bridge the gap between complex AI models and everyday utility. No confusing interfaces, no subscription traps—just powerful AI that works for you.')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="premium-card p-8 flex flex-col items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+              <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400">
                 <Zap className="w-6 h-6" />
               </div>
-              <h4 className="text-lg font-black text-white uppercase tracking-wider">{t('home.feat1_title', 'Edge Processing')}</h4>
-              <p className="text-xs text-gray-400 leading-relaxed font-semibold">
+              <h4 className="text-lg font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat1_title', 'Edge Processing')}</h4>
+              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold">
                 {t('home.feat1_desc', 'Most tools run directly in your browser, ensuring lightning-fast results without server delays.')}
               </p>
             </div>
 
             <div className="premium-card p-8 flex flex-col items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
                 <ShieldCheck className="w-6 h-6" />
               </div>
-              <h4 className="text-lg font-black text-white uppercase tracking-wider">{t('home.feat2_title', 'Encrypted Data')}</h4>
-              <p className="text-xs text-gray-400 leading-relaxed font-semibold">
+              <h4 className="text-lg font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat2_title', 'Encrypted Data')}</h4>
+              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold">
                 {t('home.feat2_desc', 'Your files never leave your device. We use end-to-end encryption for any cloud-based processing.')}
               </p>
             </div>
 
             <div className="premium-card p-8 flex flex-col items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+              <div className="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-500/10 border border-purple-200 dark:border-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400">
                 <Lock className="w-6 h-6" />
               </div>
-              <h4 className="text-lg font-black text-white uppercase tracking-wider">No Account Traps</h4>
-              <p className="text-xs text-gray-400 leading-relaxed font-semibold">
+              <h4 className="text-lg font-black text-gray-900 dark:text-white uppercase tracking-wider">No Account Traps</h4>
+              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold">
                 Skip standard login sheets. Load the page and use features instantly inside active browser tab.
               </p>
             </div>
@@ -524,18 +525,18 @@ export default function Home() {
       </section>
 
       {/* 8. Privacy First (Sandbox comparison) */}
-      <section className="py-24 bg-black/10 relative overflow-hidden border-b border-white/5">
+      <section className="py-24 bg-slate-50/50 dark:bg-black/10 relative overflow-hidden border-b border-gray-200 dark:border-white/5 transition-colors duration-250">
         <div className="absolute inset-0 bg-blue-900/[0.01] blur-3xl pointer-events-none" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-500/20 mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-200 dark:border-emerald-500/20 mb-4 shadow-sm">
               <ShieldCheck className="w-3.5 h-3.5" />
               SECURITY VISUALIZED
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+            <h2 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase">
               {t('home.sandbox_diagram.title', 'On-Device Browser Sandbox vs Cloud Uploads')}
             </h2>
-            <p className="text-gray-500 mt-3 font-medium">
+            <p className="text-gray-600 dark:text-gray-500 mt-3 font-medium">
               {t('home.sandbox_diagram.subtitle', 'Traditional tools copy your data to remote databases. ToolWala isolates all operations inside your local CPU thread.')}
             </p>
           </div>
@@ -546,38 +547,38 @@ export default function Home() {
             <div className="space-y-6">
               
               {/* Cloud Upload Row */}
-              <div className="p-5.5 rounded-2xl bg-red-950/5 border border-red-500/10 flex items-center gap-5 relative opacity-75">
-                <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400 text-xl border border-red-500/20">
+              <div className="p-5.5 rounded-2xl bg-red-50 dark:bg-red-950/5 border border-red-200 dark:border-red-500/10 flex items-center gap-5 relative opacity-85 shadow-sm">
+                <div className="w-12 h-12 rounded-xl bg-red-100 dark:bg-red-500/10 flex items-center justify-center text-red-600 dark:text-red-400 text-xl border border-red-200 dark:border-red-500/20">
                   ⚠️
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className="text-xs font-black text-red-400 uppercase tracking-wider mb-1">
+                  <h4 className="text-xs font-black text-red-600 dark:text-red-400 uppercase tracking-wider mb-1">
                     {t('home.sandbox_diagram.cloud_db', 'Traditional Cloud Service')}
                   </h4>
-                  <p className="text-[11px] text-gray-500 font-semibold leading-relaxed">
+                  <p className="text-[11px] text-gray-600 dark:text-gray-500 font-semibold leading-relaxed">
                     {t('home.sandbox_diagram.cloud_desc', 'Files are transmitted to database servers, exposing them to network leaks, storage logs, and unsecure access.')}
                   </p>
                 </div>
                 {/* Dashed line flow */}
-                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-red-500 animate-pulse text-xs font-bold uppercase tracking-widest hidden sm:block">
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-red-600 dark:text-red-500 animate-pulse text-xs font-bold uppercase tracking-widest hidden sm:block">
                   Upload &rarr;
                 </div>
               </div>
 
               {/* ToolWala Local Sandbox Row */}
-              <div className="p-6.5 rounded-[2rem] bg-emerald-950/10 border-2 border-emerald-500/20 flex items-center gap-5 relative shadow-[0_0_50px_rgba(16,185,129,0.05)] animate-pulse-slow">
-                <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-2xl border border-emerald-500/20 shadow-lg">
+              <div className="p-6.5 rounded-[2rem] bg-emerald-50 dark:bg-emerald-950/10 border-2 border-emerald-200 dark:border-emerald-500/20 flex items-center gap-5 relative shadow-sm dark:shadow-[0_0_50px_rgba(16,185,129,0.05)] animate-pulse-slow">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-100 dark:bg-emerald-500/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-2xl border border-emerald-200 dark:border-emerald-500/20 shadow-sm">
                   🛡️
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className="text-sm font-black text-emerald-400 uppercase tracking-wider mb-1">
+                  <h4 className="text-sm font-black text-emerald-700 dark:text-emerald-400 uppercase tracking-wider mb-1">
                     {t('home.sandbox_diagram.local_browser', 'Local Browser Sandbox')}
                   </h4>
-                  <p className="text-xs text-gray-400 font-semibold leading-relaxed">
+                  <p className="text-xs text-gray-600 dark:text-gray-400 font-semibold leading-relaxed">
                     {t('home.sandbox_diagram.local_desc', 'Your documents remain in active RAM memory and compile locally using WebAssembly. 0% network uploads.')}
                   </p>
                 </div>
-                <div className="absolute right-6 top-1/2 -translate-y-1/2 text-emerald-400 font-black text-[10px] uppercase tracking-widest bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full hidden sm:block">
+                <div className="absolute right-6 top-1/2 -translate-y-1/2 text-emerald-700 dark:text-emerald-400 font-black text-[10px] uppercase tracking-widest bg-emerald-100 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 px-3 py-1 rounded-full hidden sm:block">
                   Local RAM
                 </div>
               </div>
@@ -586,20 +587,20 @@ export default function Home() {
 
             {/* Explanation Column */}
             <div className="space-y-6">
-              <h3 className="text-2xl font-black text-white uppercase tracking-tight leading-snug">
+              <h3 className="text-2xl font-black text-gray-900 dark:text-white uppercase tracking-tight leading-snug">
                 WebAssembly (WASM) & Browser Sandboxing
               </h3>
-              <p className="text-sm text-gray-400 leading-relaxed font-medium">
+              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-medium">
                 ToolWala uses cutting-edge browser engines. By compiling complex C++ and Rust libraries into WebAssembly (WASM), we load standard desktop-grade software directly inside your active tab sandbox.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
-                  <h5 className="text-xs font-black text-blue-400 uppercase mb-1">No Signups</h5>
-                  <p className="text-[10px] text-gray-500 font-semibold leading-relaxed">Start editing or merging instantly without creating credentials.</p>
+                <div className="p-4 rounded-2xl bg-white dark:bg-white/[0.02] border border-gray-200 dark:border-white/5 shadow-sm">
+                  <h5 className="text-xs font-black text-blue-600 dark:text-blue-400 uppercase mb-1">No Signups</h5>
+                  <p className="text-[10px] text-gray-600 dark:text-gray-500 font-semibold leading-relaxed">Start editing or merging instantly without creating credentials.</p>
                 </div>
-                <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
-                  <h5 className="text-xs font-black text-purple-400 uppercase mb-1">Works Offline</h5>
-                  <p className="text-[10px] text-gray-500 font-semibold leading-relaxed">Disconnect from network anytime. Core scripts execute offline in sandbox.</p>
+                <div className="p-4 rounded-2xl bg-white dark:bg-white/[0.02] border border-gray-200 dark:border-white/5 shadow-sm">
+                  <h5 className="text-xs font-black text-purple-600 dark:text-purple-400 uppercase mb-1">Works Offline</h5>
+                  <p className="text-[10px] text-gray-600 dark:text-gray-500 font-semibold leading-relaxed">Disconnect from network anytime. Core scripts execute offline in sandbox.</p>
                 </div>
               </div>
             </div>
@@ -609,17 +610,17 @@ export default function Home() {
       </section>
 
       {/* 9. Browser Native Processing (On-Device Pipeline) */}
-      <section className="py-24 bg-[#030712] border-b border-white/5 relative overflow-hidden">
+      <section className="py-24 bg-white dark:bg-[#030712] border-b border-gray-200 dark:border-white/5 relative overflow-hidden transition-colors duration-250">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20 mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-200 dark:border-blue-500/20 mb-4 shadow-sm">
               <Cpu className="w-3.5 h-3.5 animate-pulse" />
               LOCAL COMPILE PIPELINE
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+            <h2 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase">
               On-Device Execution Pipeline
             </h2>
-            <p className="text-gray-500 mt-3 font-medium">
+            <p className="text-gray-600 dark:text-gray-500 mt-3 font-medium">
               Your processor does the heavy lifting, keeping your files safe on your own machine.
             </p>
           </div>
@@ -629,44 +630,44 @@ export default function Home() {
             
             {/* Step 1 */}
             <div className="premium-card p-6 flex flex-col items-center text-center space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-xl text-blue-400 font-black">
+              <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 flex items-center justify-center text-xl text-blue-600 dark:text-blue-400 font-black">
                 1
               </div>
-              <h4 className="text-xs font-black text-white uppercase tracking-wider">User File Input</h4>
-              <p className="text-[11px] text-gray-500 font-semibold leading-relaxed">
+              <h4 className="text-xs font-black text-gray-900 dark:text-white uppercase tracking-wider">User File Input</h4>
+              <p className="text-[11px] text-gray-600 dark:text-gray-500 font-semibold leading-relaxed">
                 Drag and drop your file. It stays within your system storage loop.
               </p>
             </div>
 
             {/* Step 2 */}
             <div className="premium-card p-6 flex flex-col items-center text-center space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-xl text-purple-400 font-black">
+              <div className="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-500/10 border border-purple-200 dark:border-purple-500/20 flex items-center justify-center text-xl text-purple-600 dark:text-purple-400 font-black">
                 2
               </div>
-              <h4 className="text-xs font-black text-white uppercase tracking-wider">WASM Cache Load</h4>
-              <p className="text-[11px] text-gray-500 font-semibold leading-relaxed">
+              <h4 className="text-xs font-black text-gray-900 dark:text-white uppercase tracking-wider">WASM Cache Load</h4>
+              <p className="text-[11px] text-gray-600 dark:text-gray-500 font-semibold leading-relaxed">
                 Browser executes tool dependencies using local WebAssembly modules.
               </p>
             </div>
 
             {/* Step 3 */}
             <div className="premium-card p-6 flex flex-col items-center text-center space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-xl text-teal-400 font-black">
+              <div className="w-12 h-12 rounded-2xl bg-teal-50 dark:bg-teal-500/10 border border-teal-200 dark:border-teal-500/20 flex items-center justify-center text-xl text-teal-600 dark:text-teal-400 font-black">
                 3
               </div>
-              <h4 className="text-xs font-black text-white uppercase tracking-wider">GPU/Canvas Processing</h4>
-              <p className="text-[11px] text-gray-500 font-semibold leading-relaxed">
+              <h4 className="text-xs font-black text-gray-900 dark:text-white uppercase tracking-wider">GPU/Canvas Processing</h4>
+              <p className="text-[11px] text-gray-600 dark:text-gray-500 font-semibold leading-relaxed">
                 Image resizers, background removers, or PDFs compile locally in RAM.
               </p>
             </div>
 
             {/* Step 4 */}
             <div className="premium-card p-6 flex flex-col items-center text-center space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-xl text-emerald-400 font-black">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 flex items-center justify-center text-xl text-emerald-600 dark:text-emerald-400 font-black">
                 4
               </div>
-              <h4 className="text-xs font-black text-white uppercase tracking-wider">Secure Saving</h4>
-              <p className="text-[11px] text-gray-500 font-semibold leading-relaxed">
+              <h4 className="text-xs font-black text-gray-900 dark:text-white uppercase tracking-wider">Secure Saving</h4>
+              <p className="text-[11px] text-gray-600 dark:text-gray-500 font-semibold leading-relaxed">
                 Click save to download your compiled output instantly.
               </p>
             </div>
@@ -676,51 +677,51 @@ export default function Home() {
       </section>
 
       {/* 10. How It Works (3 Steps) */}
-      <section className="py-24 relative overflow-hidden bg-black/20 border-b border-white/5">
+      <section className="py-24 relative overflow-hidden bg-slate-50/50 dark:bg-black/20 border-b border-gray-200 dark:border-white/5 transition-colors duration-250">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-[10px] font-black uppercase tracking-widest border border-purple-500/20 mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 text-[10px] font-black uppercase tracking-widest border border-purple-200 dark:border-purple-500/20 mb-4 shadow-sm">
               <Layers className="w-3.5 h-3.5" />
               {t('home.how_it_works_title', 'How ToolWala Works')}
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+            <h2 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase">
               Launch Tools in 3 Steps
             </h2>
-            <p className="text-gray-500 mt-3 font-medium">
+            <p className="text-gray-600 dark:text-gray-500 mt-3 font-medium">
               We compile and output files without remote server configurations.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
             {/* Horizontal line for desktop stepper */}
-            <div className="hidden md:block absolute top-12 left-[15%] right-[15%] h-[1px] bg-dashed bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none z-0" />
+            <div className="hidden md:block absolute top-12 left-[15%] right-[15%] h-[1px] bg-dashed bg-gradient-to-r from-transparent via-gray-300 dark:via-white/10 to-transparent pointer-events-none z-0" />
 
             <div className="flex flex-col items-center text-center relative z-10 space-y-3">
-              <div className="w-14 h-14 rounded-full bg-blue-500/10 border-2 border-blue-500/20 text-blue-400 font-black text-sm flex items-center justify-center shadow-lg shadow-blue-500/5">
+              <div className="w-14 h-14 rounded-full bg-blue-50 dark:bg-blue-500/10 border-2 border-blue-200 dark:border-blue-500/20 text-blue-600 dark:text-blue-400 font-black text-sm flex items-center justify-center shadow-sm">
                 1
               </div>
-              <h4 className="text-sm font-black text-white uppercase tracking-wide">Choose Utility</h4>
-              <p className="text-xs text-gray-400 leading-relaxed font-semibold max-w-xs">
+              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wide">Choose Utility</h4>
+              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold max-w-xs">
                 {t('home.select_from_tools_desc', 'Select from 25+ specialized browser-native PDF, image, or AI tools.').replace('25+', `${mergedTools.length}+`).replace('25', mergedTools.length.toString())}
               </p>
             </div>
 
             <div className="flex flex-col items-center text-center relative z-10 space-y-3">
-              <div className="w-14 h-14 rounded-full bg-purple-500/10 border-2 border-purple-500/20 text-purple-400 font-black text-sm flex items-center justify-center shadow-lg shadow-purple-500/5">
+              <div className="w-14 h-14 rounded-full bg-purple-50 dark:bg-purple-500/10 border-2 border-purple-200 dark:border-purple-500/20 text-purple-600 dark:text-purple-400 font-black text-sm flex items-center justify-center shadow-sm">
                 2
               </div>
-              <h4 className="text-sm font-black text-white uppercase tracking-wide">Import Locally</h4>
-              <p className="text-xs text-gray-400 leading-relaxed font-semibold max-w-xs">
+              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wide">Import Locally</h4>
+              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold max-w-xs">
                 Drag and drop your file. It loads instantly in browser memory.
               </p>
             </div>
 
             <div className="flex flex-col items-center text-center relative z-10 space-y-3">
-              <div className="w-14 h-14 rounded-full bg-emerald-500/10 border-2 border-emerald-500/20 text-emerald-400 font-black text-sm flex items-center justify-center shadow-lg shadow-emerald-500/5">
+              <div className="w-14 h-14 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border-2 border-emerald-200 dark:border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-black text-sm flex items-center justify-center shadow-sm">
                 3
               </div>
-              <h4 className="text-sm font-black text-white uppercase tracking-wide">Download Securely</h4>
-              <p className="text-xs text-gray-400 leading-relaxed font-semibold max-w-xs">
+              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wide">Download Securely</h4>
+              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold max-w-xs">
                 Edit, crop, or compress in real-time, then click save.
               </p>
             </div>

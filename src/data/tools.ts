@@ -85,6 +85,23 @@ export const toolsData: Tool[] = [
     updatedAt: '2024-01-01T00:00:00Z'
   },
   {
+    id: "webp-to-jpg-png-converter",
+    title: "WebP to JPG / PNG Converter",
+    description: "Convert WebP images into JPG or PNG instantly with high quality. Fast, secure, and completely browser-based.",
+    icon: "🖼️",
+    href: "/tools/webp-to-jpg-png-converter",
+    slug: "webp-to-jpg-png-converter",
+    category: "Image Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["webp", "converter", "webp to jpg", "webp to png", "image converter", "transparency", "batch convert"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2026-07-21T00:00:00Z',
+    updatedAt: '2026-07-21T00:00:00Z'
+  },
+  {
     id: "qr-code-generator",
     title: "QR Code Generator",
     description: "Create custom QR codes for URLs, text, WiFi, and more with your logo.",

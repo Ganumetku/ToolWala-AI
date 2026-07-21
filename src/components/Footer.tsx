@@ -145,9 +145,9 @@ export default function Footer() {
   });
 
   return (
-    <footer className="bg-[#030712] border-t border-white/5 pt-24 pb-12 relative overflow-hidden">
+    <footer className="bg-[#F7F8FC] dark:bg-[#030712] border-t border-[#E8ECF4] dark:border-white/5 pt-24 pb-12 relative overflow-hidden transition-colors duration-250">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
-      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-blue-950/10 to-transparent -z-10 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-blue-50/50 dark:from-blue-950/10 to-transparent -z-10 pointer-events-none" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 lg:gap-12">
@@ -157,24 +157,24 @@ export default function Footer() {
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white font-black text-2xl shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-transform group-hover:scale-110 group-hover:rotate-3 no-translate notranslate" translate="no" data-no-translate>
                 T
               </div>
-              <span translate="no" data-no-translate className="text-2xl font-black tracking-tighter text-white no-translate notranslate">
-                ToolWala <span translate="no" data-no-translate className="text-blue-500 no-translate notranslate">AI</span>
+              <span translate="no" data-no-translate className="text-2xl font-black tracking-tighter text-gray-900 dark:text-white no-translate notranslate">
+                ToolWala <span translate="no" data-no-translate className="text-blue-600 dark:text-blue-500 no-translate notranslate">AI</span>
               </span>
             </Link>
             
-            <p className="text-gray-400 leading-relaxed font-medium text-sm">
+            <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-medium text-sm">
               {t('footer.tagline', 'Free AI utilities that run 100% locally in your browser. No registration, no latency, no server uploads. Experience privacy-first processing.')}
             </p>
 
             <div className="space-y-3">
-              <h4 className="text-xs font-black uppercase tracking-wider text-white">{t('footer.subscribe_releases', 'Subscribe to Releases')}</h4>
-              <form onSubmit={handleSubscribe} className="flex max-w-sm rounded-xl overflow-hidden bg-white/5 border border-white/10 p-1.5 focus-within:border-blue-500/50 transition-colors">
+              <h4 className="text-xs font-black uppercase tracking-wider text-gray-900 dark:text-white">{t('footer.subscribe_releases', 'Subscribe to Releases')}</h4>
+              <form onSubmit={handleSubscribe} className="flex max-w-sm rounded-xl overflow-hidden bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 p-1.5 focus-within:border-blue-500/50 transition-colors">
                 <input 
                   type="email" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@email.com"
-                  className="bg-transparent text-xs outline-none border-none py-2 px-3 flex-1 text-white placeholder-gray-600 focus:ring-0"
+                  className="bg-transparent text-xs outline-none border-none py-2 px-3 flex-1 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-600 focus:ring-0"
                 />
                 <button 
                   type="submit"
@@ -187,25 +187,25 @@ export default function Footer() {
             </div>
             
             <div className="flex flex-wrap gap-2.5">
-              <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-emerald-400 bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/20">
+              <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/20">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 {t('footer.browser_native', 'Browser-Native')}
               </div>
-              <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-blue-400 bg-blue-500/10 px-4 py-2 rounded-full border border-blue-500/20">
-                <Sparkles className="w-3.5 h-3.5 fill-blue-400" />
+              <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 bg-blue-500/10 px-4 py-2 rounded-full border border-blue-500/20">
+                <Sparkles className="w-3.5 h-3.5 fill-blue-600 dark:fill-blue-400" />
                 {t('footer.gdpr_compliant', 'GDPR Compliant')}
               </div>
             </div>
           </div>
           
           <div className="lg:col-span-2 space-y-6">
-            <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">{t('nav.categories', 'Categories')}</h3>
+            <h3 className="text-xs font-black text-gray-900 dark:text-white uppercase tracking-[0.2em]">{t('nav.categories', 'Categories')}</h3>
             <ul className="space-y-4">
               {localizedCategories.map((cat) => (
                 <li key={cat.name}>
                   <Link 
                     href={cat.href} 
-                    className="text-gray-400 hover:text-white text-xs font-bold transition-colors block"
+                    className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white text-xs font-bold transition-colors block"
                   >
                     {cat.name}
                   </Link>
@@ -215,13 +215,13 @@ export default function Footer() {
           </div>
           
           <div className="lg:col-span-2 space-y-6">
-            <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">{t('footer.tools', 'Top Tools')}</h3>
+            <h3 className="text-xs font-black text-gray-900 dark:text-white uppercase tracking-[0.2em]">{t('footer.tools', 'Top Tools')}</h3>
             <ul className="space-y-4">
               {localizedTopTools.map((tool) => (
                 <li key={tool.name}>
                   <Link 
                     href={tool.href} 
-                    className="text-gray-400 hover:text-white text-xs font-bold transition-colors block"
+                    className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white text-xs font-bold transition-colors block"
                   >
                     {tool.name}
                   </Link>
@@ -231,13 +231,13 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2 space-y-6">
-            <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">{t('footer.gov_hubs', 'Gov Hubs')}</h3>
+            <h3 className="text-xs font-black text-gray-900 dark:text-white uppercase tracking-[0.2em]">{t('footer.gov_hubs', 'Gov Hubs')}</h3>
             <ul className="space-y-4">
               {localizedGovHubs.map((hub) => (
                 <li key={hub.name}>
                   <Link 
                     href={hub.href} 
-                    className="text-gray-400 hover:text-white text-xs font-bold transition-colors block"
+                    className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white text-xs font-bold transition-colors block"
                   >
                     {hub.name}
                   </Link>
@@ -247,13 +247,13 @@ export default function Footer() {
           </div>
           
           <div className="lg:col-span-1 space-y-6">
-            <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">{t('footer.sitemap', 'Sitemap')}</h3>
+            <h3 className="text-xs font-black text-gray-900 dark:text-white uppercase tracking-[0.2em]">{t('footer.sitemap', 'Sitemap')}</h3>
             <ul className="space-y-4">
               {localizedSitemap.map((item) => (
                 <li key={item.name}>
                   <Link 
                     href={item.href} 
-                    className="text-gray-400 hover:text-white text-xs font-bold transition-colors block"
+                    className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white text-xs font-bold transition-colors block"
                   >
                     {item.name}
                   </Link>
@@ -263,10 +263,10 @@ export default function Footer() {
           </div>
           
           <div className="lg:col-span-2 space-y-6">
-            <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">{t('footer.contact_header', 'Contact')}</h3>
-            <a href="mailto:developtechx@gmail.com" className="flex items-center gap-2 text-gray-300 hover:text-blue-400 text-xs font-black transition-all group">
-              <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-blue-600/10 group-hover:border-blue-600/20 transition-all shrink-0">
-                <Mail className="w-4 h-4" />
+            <h3 className="text-xs font-black text-gray-900 dark:text-white uppercase tracking-[0.2em]">{t('footer.contact_header', 'Contact')}</h3>
+            <a href="mailto:developtechx@gmail.com" className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 text-xs font-black transition-all group">
+              <div className="w-10 h-10 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center border border-black/10 dark:border-white/10 group-hover:bg-blue-600/10 group-hover:border-blue-600/20 transition-all shrink-0">
+                <Mail className="w-4 h-4 text-gray-700 dark:text-gray-300" />
               </div>
               <span className="truncate">developtechx@gmail.com</span>
             </a>
@@ -282,21 +282,21 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="mt-20 pt-10 border-t border-white/5 flex flex-col lg:flex-row items-center justify-between gap-8 text-center lg:text-left select-none">
+        <div className="mt-20 pt-10 border-t border-gray-200 dark:border-white/5 flex flex-col lg:flex-row items-center justify-between gap-8 text-center lg:text-left select-none">
           <div className="space-y-4">
             <p className="text-xs text-gray-500 font-bold">
               &copy; {currentYear} <span translate="no" data-no-translate className="no-translate notranslate">ToolWala AI</span>. {t('footer.copyright_notice', 'All rights reserved.')}
             </p>
-            <div className="flex flex-wrap justify-center lg:justify-start gap-4.5 text-[10px] font-black uppercase tracking-wider text-gray-600">
-              <Link href={localizeHref('/privacy-policy')} prefetch={false} className="hover:text-gray-400 transition-colors">{t('footer.privacy', 'Privacy Policy')}</Link>
-              <Link href={localizeHref('/terms')} prefetch={false} className="hover:text-gray-400 transition-colors">{t('footer.terms', 'Terms of Service')}</Link>
-              <Link href={localizeHref('/disclaimer')} prefetch={false} className="hover:text-gray-400 transition-colors">{t('footer.disclaimer', 'Disclaimer')}</Link>
-              <Link href={localizeHref('/contact')} prefetch={false} className="hover:text-gray-400 transition-colors">{t('footer.contact', 'Contact Support')}</Link>
+            <div className="flex flex-wrap justify-center lg:justify-start gap-4.5 text-[10px] font-black uppercase tracking-wider text-gray-500">
+              <Link href={localizeHref('/privacy-policy')} prefetch={false} className="hover:text-gray-900 dark:hover:text-gray-400 transition-colors">{t('footer.privacy', 'Privacy Policy')}</Link>
+              <Link href={localizeHref('/terms')} prefetch={false} className="hover:text-gray-900 dark:hover:text-gray-400 transition-colors">{t('footer.terms', 'Terms of Service')}</Link>
+              <Link href={localizeHref('/disclaimer')} prefetch={false} className="hover:text-gray-900 dark:hover:text-gray-400 transition-colors">{t('footer.disclaimer', 'Disclaimer')}</Link>
+              <Link href={localizeHref('/contact')} prefetch={false} className="hover:text-gray-900 dark:hover:text-gray-400 transition-colors">{t('footer.contact', 'Contact Support')}</Link>
             </div>
             
             {/* Horizontal Footer Language Selector Grid */}
             <div className="flex flex-wrap gap-4.5 justify-center lg:justify-start items-center pt-2">
-              <Globe className="w-3.5 h-3.5 text-gray-600" />
+              <Globe className="w-3.5 h-3.5 text-gray-400 dark:text-gray-600" />
               {activeLanguages.map((lang) => (
                 <button
                   key={lang.code}
@@ -304,8 +304,8 @@ export default function Footer() {
                   translate="no"
                   className={`text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer ${
                     locale === lang.code
-                      ? 'text-blue-400'
-                      : 'text-gray-600 hover:text-gray-400'
+                      ? 'text-blue-600 dark:text-blue-400'
+                      : 'text-gray-500 dark:text-gray-600 hover:text-gray-900 dark:hover:text-gray-400'
                   }`}
                 >
                   {lang.flag} {lang.name}
@@ -327,7 +327,7 @@ function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode
   return (
     <a 
       href={href} 
-      className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 border border-white/5 transition-all active:scale-90"
+      className="w-10 h-10 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-black/10 dark:hover:bg-white/10 border border-black/10 dark:border-white/5 transition-all active:scale-90"
       aria-label={label}
     >
       {icon}

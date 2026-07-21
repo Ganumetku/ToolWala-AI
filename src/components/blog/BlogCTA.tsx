@@ -18,10 +18,10 @@ export default function BlogCTA({ tool, title, description }: BlogCTAProps) {
             <Sparkles className="w-4 h-4" />
             <span className="text-[10px] font-black uppercase tracking-widest">Free Tool</span>
           </div>
-          <h4 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
+          <h4 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white uppercase tracking-tight">
             {title || tool.title}
           </h4>
-          <p className="text-sm text-gray-400 font-medium leading-relaxed">
+          <p className="text-sm text-gray-600 dark:text-gray-400 font-medium leading-relaxed">
             {description || tool.description}
           </p>
         </div>

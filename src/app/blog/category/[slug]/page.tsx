@@ -114,7 +114,7 @@ export default async function BlogCategoryPage({ params }: CategoryPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <div className="bg-[#030712] min-h-screen py-20 relative overflow-hidden">
+      <div className="bg-slate-50/50 dark:bg-[#030712] min-h-screen py-20 relative overflow-hidden transition-colors duration-250">
         <MeshGradient />
         <FloatingParticles />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

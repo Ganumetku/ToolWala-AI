@@ -8,8 +8,8 @@ export default function TermsClient() {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
+    <div className="bg-[#F8FAFC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-500/5 blur-[120px] -z-10" />
       
       <div className="mx-auto max-w-5xl px-6 lg:px-8 relative z-10">
         <SectionTitle 
@@ -21,12 +21,12 @@ export default function TermsClient() {
         
         <div className="mt-20 space-y-16">
           {/* Agreement Summary */}
-          <div className="glass p-10 rounded-[3rem] border border-white/5 bg-white/[0.01]">
+          <div className="bg-white dark:glass p-10 rounded-[3rem] border border-gray-200 dark:border-white/5 shadow-sm">
             <div className="flex items-center gap-4 mb-8">
-              <Gavel className="w-10 h-10 text-blue-500" />
-              <h3 className="text-2xl font-black text-white tracking-tight uppercase">{t('terms.agreement_title', 'User Agreement')}</h3>
+              <Gavel className="w-10 h-10 text-blue-600 dark:text-blue-500" />
+              <h3 className="text-2xl font-black text-gray-900 dark:text-white tracking-tight uppercase">{t('terms.agreement_title', 'User Agreement')}</h3>
             </div>
-            <p className="text-gray-400 font-medium leading-relaxed text-lg">
+            <p className="text-gray-600 dark:text-gray-400 font-medium leading-relaxed text-lg">
               {t('terms.agreement_desc', 'By accessing or using ToolWala AI, you signify your agreement to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services. We provide a platform for AI-powered productivity, and these rules ensure it remains safe and effective for everyone.')}
             </p>
           </div>
@@ -77,10 +77,10 @@ export default function TermsClient() {
           </div>
 
           {/* Termination & Contact */}
-          <div className="glass p-10 rounded-[3rem] border border-white/5 space-y-6 text-gray-400 font-medium">
-             <h4 className="text-white font-black uppercase tracking-widest text-sm">{t('terms.law_title', 'Governing Law')}</h4>
+          <div className="bg-white dark:glass p-10 rounded-[3rem] border border-gray-200 dark:border-white/5 space-y-6 text-gray-600 dark:text-gray-400 font-medium shadow-sm">
+             <h4 className="text-gray-900 dark:text-white font-black uppercase tracking-widest text-sm">{t('terms.law_title', 'Governing Law')}</h4>
              <p className="text-sm">{t('terms.law_desc', 'These terms are governed by and construed in accordance with international digital service standards. Any disputes shall be handled through arbitration before legal proceedings.')}</p>
-             <p className="pt-4 border-t border-white/5">{t('terms.questions', 'Questions about these terms? Contact us at {email}').replace('{email}', 'developtechx@gmail.com')}</p>
+             <p className="pt-4 border-t border-gray-100 dark:border-white/5">{t('terms.questions', 'Questions about these terms? Contact us at {email}').replace('{email}', 'developtechx@gmail.com')}</p>
           </div>
         </div>
       </div>
@@ -90,12 +90,12 @@ export default function TermsClient() {
 
 function TermCard({ icon, title, desc }: { icon: any; title: string; desc: string }) {
   return (
-    <div className="glass p-10 rounded-[2.5rem] border border-white/5 space-y-6 hover:border-blue-500/30 transition-all group">
-      <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-blue-500 border border-white/10 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
+    <div className="bg-white dark:glass p-10 rounded-[2.5rem] border border-gray-200 dark:border-white/5 space-y-6 hover:border-blue-500/30 transition-all group shadow-sm">
+      <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-white/5 flex items-center justify-center text-blue-600 dark:text-blue-500 border border-blue-100 dark:border-white/10 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
         {icon}
       </div>
-      <h4 className="text-xl font-black text-white uppercase tracking-tight">{title}</h4>
-      <p className="text-gray-500 leading-relaxed font-medium">{desc}</p>
+      <h4 className="text-xl font-black text-gray-900 dark:text-white uppercase tracking-tight">{title}</h4>
+      <p className="text-gray-600 dark:text-gray-500 leading-relaxed font-medium">{desc}</p>
     </div>
   );
 }
@@ -103,12 +103,12 @@ function TermCard({ icon, title, desc }: { icon: any; title: string; desc: strin
 function DetailedClause({ icon, title, content }: { icon: any; title: string; content: string }) {
   return (
     <div className="flex gap-8 group">
-      <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-gray-500 border border-white/10 group-hover:text-blue-500 group-hover:border-blue-500/50 transition-all">
+      <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-50 dark:bg-white/5 flex items-center justify-center text-gray-500 border border-blue-100 dark:border-white/10 group-hover:text-blue-600 dark:group-hover:text-blue-500 group-hover:border-blue-500/50 transition-all">
         {icon}
       </div>
       <div className="space-y-4 text-left">
-        <h4 className="text-lg font-black text-white uppercase tracking-wider">{title}</h4>
-        <p className="text-gray-400 font-medium leading-relaxed">{content}</p>
+        <h4 className="text-lg font-black text-gray-900 dark:text-white uppercase tracking-wider">{title}</h4>
+        <p className="text-gray-600 dark:text-gray-400 font-medium leading-relaxed">{content}</p>
       </div>
     </div>
   );

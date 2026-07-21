@@ -43,17 +43,17 @@ export default function BlogNewsletter({ compact = false }: BlogNewsletterProps)
 
   return (
     <div
-      className={`glass rounded-[2rem] border border-white/5 bg-gradient-to-b from-blue-600/[0.05] to-transparent relative overflow-hidden ${
+      className={`glass rounded-[2rem] border border-gray-200 dark:border-white/5 bg-gradient-to-b from-blue-600/[0.05] to-transparent relative overflow-hidden ${
         compact ? "p-6" : "p-6 sm:p-8"
       }`}
     >
       <div className="absolute top-0 right-0 w-24 h-24 bg-blue-600/10 rounded-full blur-2xl" />
       <div className="space-y-4 relative z-10">
-        <Mail className="w-8 h-8 text-blue-500" />
-        <h3 className={`font-black text-white uppercase tracking-tight leading-none ${compact ? "text-base" : "text-lg"}`}>
+        <Mail className="w-8 h-8 text-blue-600 dark:text-blue-500" />
+        <h3 className={`font-black text-gray-900 dark:text-white uppercase tracking-tight leading-none ${compact ? "text-base" : "text-lg"}`}>
           {t('blog.newsletter_heading', 'Subscribe to ToolWala Insights')}
         </h3>
-        <p className="text-xs text-gray-400 font-semibold leading-relaxed">
+        <p className="text-xs text-gray-600 dark:text-gray-400 font-semibold leading-relaxed">
           {t('blog.newsletter_sub', 'Get browser-native AI updates, new tool launches, and deep-dive guides. No spam.')}
         </p>
         <form onSubmit={handleSubmit} className="space-y-3 pt-2">
@@ -63,7 +63,7 @@ export default function BlogNewsletter({ compact = false }: BlogNewsletterProps)
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder={t('blog.newsletter_placeholder', 'you@email.com')}
-            className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-xs font-bold text-white outline-none focus:border-blue-500/50 placeholder-gray-600"
+            className="w-full bg-white dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl px-4 py-3.5 text-xs font-bold text-gray-900 dark:text-white outline-none focus:border-blue-500/50 placeholder-gray-400 dark:placeholder-gray-600"
           />
           <button
             type="submit"

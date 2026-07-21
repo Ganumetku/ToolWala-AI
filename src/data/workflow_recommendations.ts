@@ -276,11 +276,20 @@ const WORKFLOWS: Record<string, ToolWorkflow> = {
     ]
   },
   'image-compressor': {
-    nextRecommended: ['bg-remover', 'passport-photo-maker', 'color-palette-generator'],
+    nextRecommended: ['bg-remover', 'passport-photo-maker', 'webp-to-jpg-png-converter'],
     mostUsedTogether: ['ai-image-upscaler', 'signature-resize', 'jpg-to-pdf'],
     workflow: [
       { slug: 'bg-remover', label: 'Remove Background', icon: '🖼️' },
       { slug: 'image-compressor', label: 'Compress JPG/PNG', icon: '📉' },
+      { slug: 'jpg-to-pdf', label: 'Convert to PDF', icon: '🔀' }
+    ]
+  },
+  'webp-to-jpg-png-converter': {
+    nextRecommended: ['image-compressor', 'bg-remover', 'passport-photo-maker'],
+    mostUsedTogether: ['ai-image-upscaler', 'color-palette-generator', 'jpg-to-pdf'],
+    workflow: [
+      { slug: 'webp-to-jpg-png-converter', label: 'Convert WebP', icon: '🖼️' },
+      { slug: 'image-compressor', label: 'Compress Size', icon: '📉' },
       { slug: 'jpg-to-pdf', label: 'Convert to PDF', icon: '🔀' }
     ]
   },

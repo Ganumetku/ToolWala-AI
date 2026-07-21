@@ -10,6 +10,7 @@ import GoogleAnalytics from "@/components/analytics/google-analytics";
 import { headers } from 'next/headers';
 import { I18nProvider } from '@/components/I18nContext';
 import LocaleDomTranslator from '@/components/LocaleDomTranslator';
+import { ThemeProvider } from '@/components/ThemeContext';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -341,18 +342,39 @@ export default async function RootLayout({
     >
       <head>
         <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('theme');
+                  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  if (saved === 'dark' || (!saved && prefersDark)) {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light');
+                  } else {
+                    document.documentElement.classList.add('light');
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-sans bg-[#030712] text-white">
-        <GoogleAnalytics />
-        <Toaster position="top-center" richColors />
-        <I18nProvider locale={locale} messages={messages} enabledLocales={enabledLocales}>
-          <LocaleDomTranslator>
-            <PublicLayoutWrapper>{children}</PublicLayoutWrapper>
-          </LocaleDomTranslator>
-        </I18nProvider>
+      <body className="min-h-full flex flex-col font-sans bg-[#F8FAFC] dark:bg-[#030712] text-[#111827] dark:text-white">
+        <ThemeProvider>
+          <GoogleAnalytics />
+          <Toaster position="top-center" richColors />
+          <I18nProvider locale={locale} messages={messages} enabledLocales={enabledLocales}>
+            <LocaleDomTranslator>
+              <PublicLayoutWrapper>{children}</PublicLayoutWrapper>
+            </LocaleDomTranslator>
+          </I18nProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

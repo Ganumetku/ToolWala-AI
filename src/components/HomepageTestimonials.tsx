@@ -43,22 +43,22 @@ export default function HomepageTestimonials() {
   ];
 
   return (
-    <section className="py-24 relative overflow-hidden bg-black/10 border-b border-white/5">
+    <section className="py-24 relative overflow-hidden bg-white dark:bg-black/10 border-b border-gray-200 dark:border-white/5 transition-colors duration-250">
       {/* Background Radial Glow */}
-      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 w-[600px] h-[600px] bg-blue-500/5 dark:bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20 mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-200 dark:border-blue-500/20 mb-4">
             <CheckCircle className="w-3.5 h-3.5" />
             {t('testimonials.badge', 'USER REVIEWS')}
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+          <h2 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase">
             {t('testimonials.title', 'Loved by 50,000+ Professionals')}
           </h2>
-          <p className="text-gray-500 mt-4 font-medium max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-500 mt-4 font-medium max-w-2xl mx-auto">
             {t('testimonials.subtitle', 'See why freelancers, developers, and daily internet users trust ToolWala AI to speed up their everyday workflows.')}
           </p>
         </div>
@@ -72,10 +72,10 @@ export default function HomepageTestimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.05, duration: 0.4 }}
-              className="premium-card p-8 hover:border-blue-500/20 group relative overflow-hidden"
+              className="p-8 rounded-2xl border border-gray-200 dark:border-white/5 bg-white dark:bg-[#0f172a] shadow-sm hover:shadow-md dark:glass hover:border-blue-500/30 group relative overflow-hidden transition-all duration-300"
             >
               {/* Quote Icon Background */}
-              <div className="absolute top-6 right-6 opacity-[0.02] text-white">
+              <div className="absolute top-6 right-6 opacity-[0.03] text-gray-900 dark:text-white">
                 <Quote className="w-20 h-20" />
               </div>
 
@@ -87,17 +87,17 @@ export default function HomepageTestimonials() {
               </div>
 
               {/* Quote */}
-              <p className="text-gray-300 font-semibold leading-relaxed text-sm md:text-base mb-6 italic relative z-10">
+              <p className="text-gray-700 dark:text-gray-300 font-semibold leading-relaxed text-sm md:text-base mb-6 italic relative z-10">
                 "{tItem.quote}"
               </p>
 
               {/* Profile details */}
-              <div className="flex justify-between items-center border-t border-white/5 pt-5">
+              <div className="flex justify-between items-center border-t border-gray-100 dark:border-white/5 pt-5">
                 <div>
-                  <h4 className="text-sm font-black text-white uppercase tracking-wider flex items-center gap-1.5">
+                  <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
                     {tItem.author}
                     {tItem.verified && (
-                      <span className="flex items-center gap-0.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-md px-1.5 py-0.5 text-[8px] font-black uppercase tracking-widest">
+                      <span className="flex items-center gap-0.5 bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-500/20 rounded-md px-1.5 py-0.5 text-[8px] font-black uppercase tracking-widest">
                         {t('testimonials.verified', 'Verified')}
                       </span>
                     )}
@@ -106,7 +106,7 @@ export default function HomepageTestimonials() {
                     {tItem.role}
                   </p>
                 </div>
-                <span className="text-[10px] text-gray-600 font-bold uppercase tracking-wider">
+                <span className="text-[10px] text-gray-400 dark:text-gray-600 font-bold uppercase tracking-wider">
                   {tItem.location}
                 </span>
               </div>

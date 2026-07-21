@@ -66,8 +66,8 @@ export default function BlogTableOfContents({
   if (!items.length) return null;
 
   return (
-    <div className="glass rounded-[2rem] border border-white/5 p-6 space-y-4">
-      <h3 className="text-xs font-black uppercase tracking-widest text-white border-b border-white/5 pb-3">
+    <div className="glass rounded-[2rem] border border-gray-200 dark:border-white/5 p-6 space-y-4">
+      <h3 className="text-xs font-black uppercase tracking-widest text-gray-900 dark:text-white border-b border-gray-200 dark:border-white/5 pb-3">
         {t('blog.table_of_contents', 'Table of Contents')}
       </h3>
       <ul className="space-y-3 text-xs font-bold tracking-wide max-h-[50vh] overflow-y-auto">
@@ -79,10 +79,10 @@ export default function BlogTableOfContents({
                 e.preventDefault();
                 document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth" });
               }}
-              className={`block transition-all hover:text-blue-400 line-clamp-2 ${
+              className={`block transition-all hover:text-blue-600 dark:hover:text-blue-400 line-clamp-2 ${
                 activeId === item.id
-                  ? "text-blue-500 pl-2 border-l-2 border-blue-500"
-                  : "text-gray-500"
+                  ? "text-blue-600 dark:text-blue-400 font-extrabold pl-2 border-l-2 border-blue-600 dark:border-blue-500"
+                  : "text-gray-600 dark:text-gray-400"
               }`}
             >
               {item.text}

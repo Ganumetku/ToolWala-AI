@@ -105,27 +105,27 @@ export default function BlogDetailClient({
         </div>
 
         <div className="lg:col-span-8 space-y-12">
-          <article className="glass rounded-[2.5rem] overflow-hidden border border-white/5 shadow-2xl p-6 sm:p-14 bg-white/[0.01]">
-            <header className="border-b border-white/5 pb-8 mb-10 space-y-6">
+          <article className="glass rounded-[2.5rem] overflow-hidden border border-gray-200 dark:border-white/5 shadow-2xl p-6 sm:p-14 bg-white/80 dark:bg-white/[0.01]">
+            <header className="border-b border-gray-200 dark:border-white/5 pb-8 mb-10 space-y-6">
               <div className="flex flex-wrap items-center gap-3">
                 <Link
                   href={localizeHref(`/blog/category/${blog.category.toLowerCase().replace(/\s+/g, "-")}`)}
-                  className="px-3 py-1.5 rounded bg-blue-500/10 border border-blue-500/20 text-xs font-black uppercase tracking-widest text-blue-400 hover:bg-blue-500/20 transition-colors"
+                  className="px-3 py-1.5 rounded bg-blue-500/10 border border-blue-500/20 text-xs font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 transition-colors"
                 >
                   {translatedCategory}
                 </Link>
                 {blog.trending && (
-                  <span className="px-3 py-1.5 rounded bg-purple-500/10 border border-purple-500/20 text-xs font-black uppercase tracking-widest text-purple-400">
+                  <span className="px-3 py-1.5 rounded bg-purple-500/10 border border-purple-500/20 text-xs font-black uppercase tracking-widest text-purple-600 dark:text-purple-400">
                     {t('blog.trending_badge', 'Trending')}
                   </span>
                 )}
               </div>
 
-              <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tighter leading-tight uppercase">
+              <h1 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tighter leading-tight uppercase">
                 {translatedTitle}
               </h1>
 
-              <div className="flex flex-wrap items-center gap-6 pt-4 text-xs font-black uppercase tracking-widest text-gray-500">
+              <div className="flex flex-wrap items-center gap-6 pt-4 text-xs font-black uppercase tracking-widest text-gray-600 dark:text-gray-400">
                 <div className="flex items-center gap-2">
                   {blog.author.avatar ? (
                     <Image
@@ -133,22 +133,22 @@ export default function BlogDetailClient({
                       alt={blog.author.name}
                       width={32}
                       height={32}
-                      className="w-8 h-8 rounded-full border border-white/10 shrink-0"
+                      className="w-8 h-8 rounded-full border border-gray-300 dark:border-white/10 shrink-0"
                     />
                   ) : (
-                    <div className="w-8 h-8 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-400 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center">
                       <User className="w-4 h-4" />
                     </div>
                   )}
                   <div>
-                    <span className="text-white block">{blog.author.name}</span>
+                    <span className="text-gray-900 dark:text-white block">{blog.author.name}</span>
                     <span className="text-[9px] text-gray-500 font-bold block mt-0.5">
                       {blog.author.role || t('blog.writer_role', 'Writer')}
                     </span>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 border-l border-white/10 pl-6 h-8">
+                <div className="flex items-center gap-4 border-l border-gray-300 dark:border-white/10 pl-6 h-8">
                   <span className="flex items-center gap-1.5">
                     <Calendar className="w-4 h-4" />
                     {formatDateLong(blog.publishedAt || blog.createdAt, locale)}
@@ -161,7 +161,7 @@ export default function BlogDetailClient({
               </div>
 
               {tocItems.length > 0 && (
-                <div className="lg:hidden pt-4 border-t border-white/5">
+                <div className="lg:hidden pt-4 border-t border-gray-200 dark:border-white/5">
                   <BlogTableOfContents items={tocItems} syncFromDom contentKey={translatedContent} />
                 </div>
               )}
@@ -185,12 +185,12 @@ export default function BlogDetailClient({
             <BlogFaqSection faqs={translatedFaqs} />
 
             {blog.tags.length > 0 && (
-              <div className="flex flex-wrap gap-2 pt-8 mt-12 border-t border-white/5">
+              <div className="flex flex-wrap gap-2 pt-8 mt-12 border-t border-gray-200 dark:border-white/5">
                 {blog.tags.map((tag) => (
                   <Link
                     key={tag}
                     href={localizeHref(`/blog/tag/${tag.toLowerCase().replace(/\s+/g, "-")}`)}
-                    className="px-3 py-1 rounded-full bg-white/5 border border-white/5 text-xs text-gray-400 font-bold hover:text-blue-400 hover:border-blue-500/30 transition-colors"
+                    className="px-3 py-1 rounded-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/5 text-xs text-gray-700 dark:text-gray-400 font-bold hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-500/30 transition-colors"
                   >
                     #{tag}
                   </Link>
@@ -199,8 +199,8 @@ export default function BlogDetailClient({
             )}
 
             {relatedCategories.length > 0 && (
-              <div className="pt-8 mt-8 border-t border-white/5">
-                <h4 className="text-xs font-black uppercase tracking-widest text-gray-400 mb-4">
+              <div className="pt-8 mt-8 border-t border-gray-200 dark:border-white/5">
+                <h4 className="text-xs font-black uppercase tracking-widest text-gray-600 dark:text-gray-400 mb-4">
                   {t('blog.related_categories', 'Related Categories')}
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -208,15 +208,15 @@ export default function BlogDetailClient({
                     <Link
                       key={cat.slug}
                       href={localizeHref(`/categories/${cat.slug}`)}
-                      className="p-4 rounded-xl bg-white/[0.01] border border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 transition-all flex items-center justify-between group"
+                      className="p-4 rounded-xl bg-gray-50 dark:bg-white/[0.01] border border-gray-200 dark:border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 transition-all flex items-center justify-between group"
                     >
                       <div className="flex items-center gap-2">
                         <span className="text-lg shrink-0">{cat.icon}</span>
-                        <span className="text-xs font-black text-gray-300 group-hover:text-white uppercase truncate">
+                        <span className="text-xs font-black text-gray-800 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-white uppercase truncate">
                           {t(`categories.${cat.title}`, cat.title)}
                         </span>
                       </div>
-                      <ArrowRight className="w-3.5 h-3.5 text-gray-600 group-hover:text-blue-500 transition-colors shrink-0" />
+                      <ArrowRight className="w-3.5 h-3.5 text-gray-500 group-hover:text-blue-500 transition-colors shrink-0" />
                     </Link>
                   ))}
                 </div>
@@ -226,15 +226,15 @@ export default function BlogDetailClient({
 
           <RelatedTools tools={relatedTools} />
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-between items-center bg-white/[0.01] border border-white/5 p-6 rounded-3xl backdrop-blur-md">
+          <div className="flex flex-col sm:flex-row gap-6 justify-between items-center bg-gray-50 dark:bg-white/[0.01] border border-gray-200 dark:border-white/5 p-6 rounded-3xl backdrop-blur-md">
             {prevPost ? (
               <Link href={localizeHref(`/blog/${prevPost.slug}`)} className="flex items-center gap-4 group text-left w-full sm:w-auto">
-                <div className="p-3 rounded-2xl bg-white/5 group-hover:bg-blue-600/10 border border-white/5 group-hover:border-blue-500/20 text-gray-400 group-hover:text-blue-400 transition-all">
+                <div className="p-3 rounded-2xl bg-gray-100 dark:bg-white/5 group-hover:bg-blue-600/10 border border-gray-200 dark:border-white/5 group-hover:border-blue-500/20 text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-all">
                   <ArrowLeft className="w-4 h-4" />
                 </div>
                 <div>
                   <span className="text-[9px] font-black uppercase tracking-widest text-gray-500 block">{t('blog.previous', 'Previous')}</span>
-                  <span className="text-xs font-black uppercase text-white group-hover:text-blue-400 transition-colors line-clamp-1">
+                  <span className="text-xs font-black uppercase text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
                     {t(`blogs.${prevPost.slug}.title`, prevPost.title)}
                   </span>
                 </div>
@@ -247,11 +247,11 @@ export default function BlogDetailClient({
               <Link href={localizeHref(`/blog/${nextPost.slug}`)} className="flex items-center gap-4 group text-right w-full sm:w-auto justify-end ml-auto">
                 <div>
                   <span className="text-[9px] font-black uppercase tracking-widest text-gray-500 block text-right">{t('blog.next', 'Next')}</span>
-                  <span className="text-xs font-black uppercase text-white group-hover:text-blue-400 transition-colors line-clamp-1 text-right">
+                  <span className="text-xs font-black uppercase text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1 text-right">
                     {t(`blogs.${nextPost.slug}.title`, nextPost.title)}
                   </span>
                 </div>
-                <div className="p-3 rounded-2xl bg-white/5 group-hover:bg-blue-600/10 border border-white/5 group-hover:border-blue-500/20 text-gray-400 group-hover:text-blue-400 transition-all">
+                <div className="p-3 rounded-2xl bg-gray-100 dark:bg-white/5 group-hover:bg-blue-600/10 border border-gray-200 dark:border-white/5 group-hover:border-blue-500/20 text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-all">
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </Link>
@@ -261,19 +261,19 @@ export default function BlogDetailClient({
           </div>
 
           <div className="space-y-6 pt-6">
-            <h3 className="text-lg font-black text-white uppercase tracking-widest">{t('blog.related_insights', 'Related Insights')}</h3>
+            <h3 className="text-lg font-black text-gray-900 dark:text-white uppercase tracking-widest">{t('blog.related_insights', 'Related Insights')}</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {relatedPosts.map((rBlog) => (
                 <Link
                   key={rBlog.id}
                   href={localizeHref(`/blog/${rBlog.slug}`)}
-                  className="group p-6 rounded-[2rem] border border-white/5 bg-white/[0.01] hover:bg-white/[0.02] transition-all"
+                  className="group p-6 rounded-[2rem] border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-white/[0.01] hover:bg-gray-100 dark:hover:bg-white/[0.02] transition-all"
                 >
-                  <span className="text-[9px] font-black uppercase tracking-widest text-blue-500">{t(`categories.${rBlog.category}`, rBlog.category)}</span>
-                  <h4 className="text-sm font-black text-white uppercase group-hover:text-blue-400 transition-colors line-clamp-2 mt-2">
+                  <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-500">{t(`categories.${rBlog.category}`, rBlog.category)}</span>
+                  <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 mt-2">
                     {t(`blogs.${rBlog.slug}.title`, rBlog.title)}
                   </h4>
-                  <div className="flex items-center gap-3 pt-4 mt-4 border-t border-white/5 text-[9px] font-black uppercase tracking-widest text-gray-500">
+                  <div className="flex items-center gap-3 pt-4 mt-4 border-t border-gray-200 dark:border-white/5 text-[9px] font-black uppercase tracking-widest text-gray-500">
                     <span>{formatReadingTime(rBlog.readingTime)}</span>
                     <span>•</span>
                     <span>{formatDateShort(rBlog.publishedAt || rBlog.createdAt, locale)}</span>
@@ -290,8 +290,8 @@ export default function BlogDetailClient({
           <BlogTableOfContents items={tocItems} syncFromDom contentKey={translatedContent} />
 
           {relatedTools.length > 0 && (
-            <div className="glass rounded-[2rem] border border-white/5 p-6 space-y-4">
-              <h3 className="text-xs font-black uppercase tracking-widest text-white border-b border-white/5 pb-3">
+            <div className="glass rounded-[2rem] border border-gray-200 dark:border-white/5 p-6 space-y-4">
+              <h3 className="text-xs font-black uppercase tracking-widest text-gray-900 dark:text-white border-b border-gray-200 dark:border-white/5 pb-3">
                 {t('blog.try_tools', 'Try These Tools')}
               </h3>
               <div className="space-y-3">
@@ -299,10 +299,10 @@ export default function BlogDetailClient({
                   <Link
                     key={tool.slug}
                     href={localizeHref(tool.href)}
-                    className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all group"
+                    className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/[0.02] border border-gray-200 dark:border-white/5 hover:border-blue-500/30 transition-all group"
                   >
                     <span className="text-lg">{tool.icon}</span>
-                    <span className="text-xs font-black text-white uppercase group-hover:text-blue-400 line-clamp-2">
+                    <span className="text-xs font-black text-gray-900 dark:text-white uppercase group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-2">
                       {t(`tools.${tool.slug}.title`, tool.title)}
                     </span>
                   </Link>
@@ -312,8 +312,8 @@ export default function BlogDetailClient({
           )}
 
           {relatedCategories.length > 0 && (
-            <div className="glass rounded-[2rem] border border-white/5 p-6 space-y-4">
-              <h3 className="text-xs font-black uppercase tracking-widest text-white border-b border-white/5 pb-3">
+            <div className="glass rounded-[2rem] border border-gray-200 dark:border-white/5 p-6 space-y-4">
+              <h3 className="text-xs font-black uppercase tracking-widest text-gray-900 dark:text-white border-b border-gray-200 dark:border-white/5 pb-3">
                 {t('blog.explore_categories_title', 'Explore Related Categories')}
               </h3>
               <div className="space-y-3">
@@ -321,11 +321,11 @@ export default function BlogDetailClient({
                   <Link
                     key={cat.slug}
                     href={localizeHref(`/categories/${cat.slug}`)}
-                    className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all group"
+                    className="flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-white/[0.02] border border-gray-200 dark:border-white/5 hover:border-blue-500/30 transition-all group"
                   >
                     <div className="flex items-center gap-2.5">
                       <span className="text-lg shrink-0">{cat.icon}</span>
-                      <span className="text-xs font-black text-white uppercase group-hover:text-blue-400 truncate">
+                      <span className="text-xs font-black text-gray-900 dark:text-white uppercase group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate">
                         {t(`categories.${cat.title}`, cat.title)}
                       </span>
                     </div>

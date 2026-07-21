@@ -2376,5 +2376,50 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "AI Cover Letter Generator", href: "/tools/cover-letter-generator" },
       { name: "Resume Builder", href: "/tools/resume-builder" }
     ]
+  },
+  "webp-to-jpg-png-converter": {
+    title: "WebP to JPG / PNG Converter",
+    intro: "Convert WebP images into JPG or PNG instantly with high quality. Fast, secure, and completely browser-based.",
+    whatItDoes: "The ToolWala WebP to JPG / PNG Converter is an advanced client-side media utility designed to convert modern WebP graphic files into universal JPG and PNG image formats. WebP is highly optimized for web performance, but many legacy graphics editors, photo printing portals, and official submission systems require standard JPG or transparent PNG images. Our converter runs 100% inside your Web browser using native HTML5 Canvas and Blob APIs. Your original WebP photographs and graphics are processed instantly in your device's memory, ensuring total privacy with zero cloud data uploads.",
+    howToUse: [
+      "Drop your WebP files onto the dropzone, click Browse Files, or press Ctrl+V to paste an image directly from your clipboard.",
+      "Select your target output format: choose 'Convert to JPG' for photographic images or 'Convert to PNG' for graphics requiring transparency.",
+      "Adjust output settings: set your desired JPG Quality percentage and background color (for transparent WebP files), or configure PNG transparency preservation.",
+      "Utilize live editing and preview features like 90° rotation, horizontal/vertical flipping, or side-by-side Before/After visual comparison.",
+      "Click 'Convert All' to process your queued WebP images, then download individual converted files or export all images in a convenient ZIP archive."
+    ],
+    keyFeatures: [
+      { title: "100% Client-Side Conversion", desc: "All image rendering and format encoding occurs locally in active browser memory without sending files to any backend server." },
+      { title: "Smart Transparency Management", desc: "Preserve crisp PNG transparency or flatten WebP alpha channels onto customizable background colors when converting to JPG." },
+      { title: "Batch Processing & ZIP Export", desc: "Upload and convert multiple WebP files simultaneously with real-time conversion progress and one-click ZIP downloads." },
+      { title: "Live Before / After & Editing", desc: "Compare original WebP quality with output previews, rotate, flip, and zoom in/out with full high-DPI canvas precision." }
+    ],
+    benefits: [
+      "Maximum compatibility with legacy photo editors, printing services, and official form submission portals.",
+      "100% private and secure processing with zero server tracking, data retention, or file privacy risks.",
+      "Instant lightning-fast conversions with no network upload bottlenecks or file size waiting times.",
+      "Full batch handling for high-volume graphic workflows without registration or subscription fees."
+    ],
+    whyChoose: "ToolWala AI prioritizes privacy-first computing. Traditional online converters transmit your confidential images across network connections to remote cloud servers, creating privacy risks and slow upload delays. Our WebP to JPG / PNG Converter executes natively within your browser tab. With support for custom transparency backdrops, batch converting, ZIP archive bundling, and real-time visual comparisons, ToolWala offers the safest and most reliable image conversion solution.",
+    useCases: [
+      "Photographers and designers needing JPG or PNG files for traditional photo editing software.",
+      "E-commerce sellers formatting product images for online marketplaces that require JPG uploads.",
+      "Applicants submitting photos to official government or university portals that reject WebP format.",
+      "Web developers converting optimized WebP assets back to transparent PNGs for design mockups."
+    ],
+    faqs: [
+      { question: "What is WebP to JPG / PNG Converter?", answer: "The WebP to JPG / PNG Converter is a browser-based tool that transforms modern WebP files into widely supported JPG or PNG formats without uploading your files to any external server." },
+      { question: "Why Convert WebP Images?", answer: "While WebP offers superior compression for websites, many legacy desktop software applications, email clients, social platforms, and official forms only accept JPG or PNG images." },
+      { question: "Is my image uploaded to any server?", answer: "No! All image conversions run 100% locally on your computer or mobile device using Web APIs. Your images never leave your browser." },
+      { question: "How does the tool handle transparent WebP files?", answer: "When converting to PNG, transparency is preserved automatically. When converting to JPG (which does not support alpha channels), you can select a custom background color (white, black, or custom hex)." },
+      { question: "Can I convert multiple WebP files at once?", answer: "Yes! ToolWala supports batch conversion for multiple WebP images simultaneously, along with an instant 'Download ZIP' option." },
+      { question: "What is the maximum file size supported?", answer: "You can upload WebP images up to 50 MB per file, allowing high-resolution photography processing with zero lag." }
+    ],
+    conclusion: "Convert your WebP images quickly, securely, and effortlessly. Experience privacy-first browser conversion with ToolWala today.",
+    relatedTools: [
+      { name: "Image Compressor", href: "/tools/image-compressor" },
+      { name: "AI Background Remover", href: "/tools/bg-remover" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
+    ]
   }
 };

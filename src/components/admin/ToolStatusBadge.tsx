@@ -13,12 +13,12 @@ export default function ToolStatusBadge({ status = 'draft', publishDate }: ToolS
 
   switch (status) {
     case 'published':
-      badgeStyles = 'border-emerald-500/20 bg-emerald-500/10 text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.1)]';
+      badgeStyles = 'border-emerald-200 dark:border-emerald-500/20 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 shadow-sm';
       Icon = Globe;
       label = 'Published';
       break;
     case 'scheduled':
-      badgeStyles = 'border-purple-500/20 bg-purple-500/10 text-purple-400 shadow-[0_0_12px_rgba(168,85,247,0.1)]';
+      badgeStyles = 'border-purple-200 dark:border-purple-500/20 bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-400 shadow-sm';
       Icon = Clock;
       label = 'Scheduled';
       if (publishDate) {
@@ -36,13 +36,13 @@ export default function ToolStatusBadge({ status = 'draft', publishDate }: ToolS
       }
       break;
     case 'archived':
-      badgeStyles = 'border-white/5 bg-white/[0.02] text-gray-500';
+      badgeStyles = 'border-slate-200 dark:border-white/5 bg-slate-100 dark:bg-white/[0.02] text-slate-500 dark:text-gray-500';
       Icon = Archive;
       label = 'Archived';
       break;
     case 'draft':
     default:
-      badgeStyles = 'border-amber-500/20 bg-amber-500/10 text-amber-400 shadow-[0_0_12px_rgba(245,158,11,0.1)]';
+      badgeStyles = 'border-amber-200 dark:border-amber-500/20 bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 shadow-sm';
       Icon = FileText;
       label = 'Draft';
       break;
@@ -55,7 +55,7 @@ export default function ToolStatusBadge({ status = 'draft', publishDate }: ToolS
         {label}
       </span>
       {status === 'scheduled' && dateText && (
-        <span className="text-[9px] text-gray-500 font-bold pl-0.5">
+        <span className="text-[9px] text-slate-400 dark:text-gray-500 font-bold pl-0.5">
           {dateText}
         </span>
       )}

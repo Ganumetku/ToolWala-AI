@@ -17,7 +17,7 @@ export default function AdminLayout({
 
   return (
     <div
-      className="min-h-screen bg-[#030712] text-white flex"
+      className="min-h-screen bg-[#F8FAFC] dark:bg-[#030712] text-slate-900 dark:text-white flex"
       style={{ '--sidebar-width': isCollapsed ? '80px' : '256px' } as React.CSSProperties}
     >
       <div className={`hidden md:block transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'}`}>
@@ -27,7 +27,7 @@ export default function AdminLayout({
       {sidebarOpen && (
         <div
           onClick={() => setSidebarOpen(false)}
-          className="fixed inset-0 bg-black/60 z-20 md:hidden backdrop-blur-sm"
+          className="fixed inset-0 bg-slate-900/40 z-20 md:hidden backdrop-blur-sm"
         />
       )}
 
@@ -49,7 +49,7 @@ export default function AdminLayout({
         </main>
       </div>
 
-      <Toaster theme="dark" position="bottom-right" />
+      <Toaster theme="light" position="bottom-right" />
     </div>
   );
 }

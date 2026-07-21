@@ -52,22 +52,22 @@ export default function ChartOverview({ data }: ChartOverviewProps) {
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4 }}
-      className="glass p-6 rounded-3xl border border-white/5 bg-white/[0.01] shadow-xl w-full"
+      className="bg-white dark:bg-white/[0.01] p-6 rounded-3xl border border-slate-200/80 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] w-full"
     >
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h4 className="text-sm font-black text-white uppercase tracking-widest">Traffic & Usage Analytics</h4>
-          <p className="text-xs font-medium text-gray-500 mt-1">Comparison of total platform visitors vs. actual AI tool executions.</p>
+          <h4 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest">Traffic & Usage Analytics</h4>
+          <p className="text-xs font-medium text-slate-500 dark:text-gray-500 mt-1">Comparison of total platform visitors vs. actual AI tool executions.</p>
         </div>
         
         <div className="flex gap-4 text-xs font-black uppercase tracking-widest">
           <div className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-blue-500" />
-            <span className="text-white">Visitors</span>
+            <span className="h-2.5 w-2.5 rounded-full bg-blue-600 dark:bg-blue-500" />
+            <span className="text-slate-900 dark:text-white">Visitors</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-cyan-400" />
-            <span className="text-gray-400">Tool Usage</span>
+            <span className="h-2.5 w-2.5 rounded-full bg-cyan-500 dark:bg-cyan-400" />
+            <span className="text-slate-500 dark:text-gray-400">Tool Usage</span>
           </div>
         </div>
       </div>
@@ -80,18 +80,18 @@ export default function ChartOverview({ data }: ChartOverviewProps) {
           >
             <defs>
               <linearGradient id="colorVisitors" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.2}/>
-                <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#2563eb" stopOpacity={0.15}/>
+                <stop offset="95%" stopColor="#2563eb" stopOpacity={0}/>
               </linearGradient>
               <linearGradient id="colorUsage" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#22d3ee" stopOpacity={0.2}/>
-                <stop offset="95%" stopColor="#22d3ee" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.15}/>
+                <stop offset="95%" stopColor="#06b6d4" stopOpacity={0}/>
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.03)" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
             <XAxis 
               dataKey="name" 
-              stroke="#4b5563" 
+              stroke="#64748b" 
               fontSize={10}
               tickLine={false}
               axisLine={false}
@@ -99,7 +99,7 @@ export default function ChartOverview({ data }: ChartOverviewProps) {
               style={{ fontWeight: 800, textTransform: 'uppercase' }}
             />
             <YAxis 
-              stroke="#4b5563" 
+              stroke="#64748b" 
               fontSize={10}
               tickLine={false}
               axisLine={false}
@@ -108,20 +108,20 @@ export default function ChartOverview({ data }: ChartOverviewProps) {
             />
             <Tooltip 
               contentStyle={{ 
-                backgroundColor: 'rgba(3, 7, 18, 0.9)', 
-                borderColor: 'rgba(255, 255, 255, 0.08)',
+                backgroundColor: '#ffffff', 
+                borderColor: '#e2e8f0',
                 borderRadius: '16px',
                 fontSize: '11px',
                 fontWeight: 'bold',
-                color: '#fff',
-                backdropFilter: 'blur(12px)'
+                color: '#0f172a',
+                boxShadow: '0 10px 25px rgba(0,0,0,0.1)'
               }}
-              labelStyle={{ color: '#6b7280', fontSize: '9px', textTransform: 'uppercase', marginBottom: '4px' }}
+              labelStyle={{ color: '#64748b', fontSize: '9px', textTransform: 'uppercase', marginBottom: '4px' }}
             />
             <Area 
               type="monotone" 
               dataKey="visitors" 
-              stroke="#3b82f6" 
+              stroke="#2563eb" 
               strokeWidth={3}
               fillOpacity={1} 
               fill="url(#colorVisitors)" 
@@ -129,7 +129,7 @@ export default function ChartOverview({ data }: ChartOverviewProps) {
             <Area 
               type="monotone" 
               dataKey="usage" 
-              stroke="#22d3ee" 
+              stroke="#06b6d4" 
               strokeWidth={3}
               fillOpacity={1} 
               fill="url(#colorUsage)" 

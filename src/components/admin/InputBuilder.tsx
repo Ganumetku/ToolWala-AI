@@ -95,20 +95,20 @@ export default function InputBuilder({ inputs, onChange }: InputBuilderProps) {
           {inputs.map((input, index) => (
             <div 
               key={index} 
-              className="p-5 border border-white/5 bg-white/[0.01] rounded-2xl space-y-4 relative group"
+              className="p-5 border border-slate-200/80 dark:border-white/5 bg-slate-50/50 dark:bg-white/[0.01] rounded-2xl space-y-4 relative group"
             >
               {/* Header Toolbar */}
-              <div className="flex items-center justify-between border-b border-white/5 pb-3">
+              <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-white/5 pb-3">
                 <div className="flex items-center gap-2">
-                  <GripVertical className="w-4 h-4 text-gray-600" />
-                  <span className="text-xs font-black text-white">Field #{index + 1} ({input.type.toUpperCase()})</span>
+                  <GripVertical className="w-4 h-4 text-slate-400 dark:text-gray-600" />
+                  <span className="text-xs font-black text-slate-900 dark:text-white">Field #{index + 1} ({input.type.toUpperCase()})</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <button
                     type="button"
                     onClick={() => moveInput(index, 'up')}
                     disabled={index === 0}
-                    className="p-1.5 border border-white/5 rounded-lg text-gray-500 hover:text-white disabled:opacity-30 disabled:hover:text-gray-500 transition-colors"
+                    className="p-1.5 border border-slate-200 dark:border-white/5 bg-white dark:bg-transparent rounded-lg text-slate-500 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white disabled:opacity-30 transition-colors"
                   >
                     <ArrowUp className="w-3.5 h-3.5" />
                   </button>
@@ -116,14 +116,14 @@ export default function InputBuilder({ inputs, onChange }: InputBuilderProps) {
                     type="button"
                     onClick={() => moveInput(index, 'down')}
                     disabled={index === inputs.length - 1}
-                    className="p-1.5 border border-white/5 rounded-lg text-gray-500 hover:text-white disabled:opacity-30 disabled:hover:text-gray-500 transition-colors"
+                    className="p-1.5 border border-slate-200 dark:border-white/5 bg-white dark:bg-transparent rounded-lg text-slate-500 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white disabled:opacity-30 transition-colors"
                   >
                     <ArrowDown className="w-3.5 h-3.5" />
                   </button>
                   <button
                     type="button"
                     onClick={() => deleteInput(index)}
-                    className="p-1.5 border border-white/5 hover:border-red-500/20 rounded-lg text-gray-500 hover:text-red-400 transition-colors ml-1"
+                    className="p-1.5 border border-slate-200 dark:border-white/5 hover:border-red-300 dark:hover:border-red-500/20 bg-white dark:bg-transparent rounded-lg text-slate-500 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-400 transition-colors ml-1"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -133,77 +133,77 @@ export default function InputBuilder({ inputs, onChange }: InputBuilderProps) {
               {/* Editing Fields Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <div className="space-y-1">
-                  <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Field Type</label>
+                  <label className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Field Type</label>
                   <select
                     value={input.type}
                     onChange={(e) => updateInput(index, 'type', e.target.value)}
-                    className="w-full bg-slate-950/80 border border-white/10 rounded-xl px-3 py-2 text-xs font-semibold text-white outline-none cursor-pointer"
+                    className="w-full bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 dark:text-white outline-none cursor-pointer"
                   >
-                    <option value="text">Single-line Text</option>
-                    <option value="textarea">Multi-line Textarea</option>
-                    <option value="select">Dropdown Select</option>
-                    <option value="toggle">Toggle switch</option>
-                    <option value="checkbox">Checkbox list</option>
-                    <option value="slider">Range Slider</option>
-                    <option value="number">Number input</option>
-                    <option value="file">File uploader</option>
-                    <option value="color">Color picker</option>
+                    <option value="text" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-white">Single-line Text</option>
+                    <option value="textarea" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-white">Multi-line Textarea</option>
+                    <option value="select" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-white">Dropdown Select</option>
+                    <option value="toggle" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-white">Toggle switch</option>
+                    <option value="checkbox" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-white">Checkbox list</option>
+                    <option value="slider" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-white">Range Slider</option>
+                    <option value="number" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-white">Number input</option>
+                    <option value="file" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-white">File uploader</option>
+                    <option value="color" className="bg-white text-slate-900 dark:bg-slate-900 dark:text-white">Color picker</option>
                   </select>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Field Label</label>
+                  <label className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Field Label</label>
                   <input
                     type="text"
                     value={input.label}
                     onChange={(e) => updateInput(index, 'label', e.target.value)}
                     placeholder="e.g. Tone of Voice"
-                    className="w-full bg-slate-950/80 border border-white/10 rounded-xl px-3 py-2 text-xs font-semibold text-white outline-none"
+                    className="w-full bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 dark:text-white outline-none"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">System Identifier (Slug)</label>
+                  <label className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">System Identifier (Slug)</label>
                   <input
                     type="text"
                     value={input.name}
                     onChange={(e) => updateInput(index, 'name', e.target.value)}
                     placeholder="e.g. tone_voice"
-                    className="w-full bg-slate-950/80 border border-white/10 rounded-xl px-3 py-2 text-xs font-semibold text-white outline-none font-mono"
+                    className="w-full bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 dark:text-white outline-none font-mono"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Placeholder text</label>
+                  <label className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Placeholder text</label>
                   <input
                     type="text"
                     value={input.placeholder || ''}
                     onChange={(e) => updateInput(index, 'placeholder', e.target.value)}
                     placeholder="Enter placeholder..."
-                    className="w-full bg-slate-950/80 border border-white/10 rounded-xl px-3 py-2 text-xs font-semibold text-white outline-none"
+                    className="w-full bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 dark:text-white outline-none"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Default value</label>
+                  <label className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Default value</label>
                   <input
                     type="text"
                     value={input.defaultValue || ''}
                     onChange={(e) => updateInput(index, 'defaultValue', e.target.value)}
                     placeholder="None"
-                    className="w-full bg-slate-950/80 border border-white/10 rounded-xl px-3 py-2 text-xs font-semibold text-white outline-none"
+                    className="w-full bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 dark:text-white outline-none"
                   />
                 </div>
 
                 <div className="space-y-1 flex flex-col justify-end">
-                  <label className="flex items-center gap-2 p-2 bg-slate-950/30 border border-white/5 rounded-xl cursor-pointer hover:bg-slate-950/50">
+                  <label className="flex items-center gap-2 p-2 bg-white dark:bg-slate-950/30 border border-slate-200 dark:border-white/5 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-950/50">
                     <input
                       type="checkbox"
                       checked={input.required}
                       onChange={(e) => updateInput(index, 'required', e.target.checked)}
-                      className="rounded text-blue-500 h-3.5 w-3.5 cursor-pointer"
+                      className="rounded text-blue-600 h-3.5 w-3.5 cursor-pointer"
                     />
-                    <span className="text-[10px] font-black text-gray-400 uppercase tracking-wider">Required Field</span>
+                    <span className="text-[10px] font-black text-slate-600 dark:text-gray-400 uppercase tracking-wider">Required Field</span>
                   </label>
                 </div>
               </div>
@@ -211,25 +211,25 @@ export default function InputBuilder({ inputs, onChange }: InputBuilderProps) {
               {/* Conditional Options / Sub configurations */}
               {input.type === 'select' && (
                 <div className="space-y-1.5 pt-2">
-                  <label className="text-[9px] font-black text-blue-400 uppercase tracking-widest">Dropdown choices (Comma separated)</label>
+                  <label className="text-[9px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest">Dropdown choices (Comma separated)</label>
                   <input
                     type="text"
                     value={input.options || ''}
                     onChange={(e) => updateInput(index, 'options', e.target.value)}
                     placeholder="e.g. Professional, Funny, Casual, Informative"
-                    className="w-full bg-slate-950/80 border border-blue-500/20 focus:border-blue-500/50 rounded-xl px-3 py-2 text-xs font-semibold text-white outline-none"
+                    className="w-full bg-white dark:bg-slate-950/80 border border-blue-200 dark:border-blue-500/20 focus:border-blue-500 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 dark:text-white outline-none"
                   />
                 </div>
               )}
 
               <div className="space-y-1">
-                <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Helper Instructions Text</label>
+                <label className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Helper Instructions Text</label>
                 <input
                   type="text"
                   value={input.helperText || ''}
                   onChange={(e) => updateInput(index, 'helperText', e.target.value)}
                   placeholder="e.g. Explain how to format the text..."
-                  className="w-full bg-slate-950/80 border border-white/10 rounded-xl px-3 py-2 text-xs font-semibold text-white outline-none"
+                  className="w-full bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 dark:text-white outline-none"
                 />
               </div>
 

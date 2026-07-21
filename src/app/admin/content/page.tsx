@@ -488,28 +488,28 @@ export default function ContentCMS() {
       />
 
       {/* 2. Header and Add button */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-6 glass p-6 rounded-3xl border border-white/5 bg-white/[0.01]">
-        <div className="flex items-center gap-3 bg-white/[0.02] border border-white/5 rounded-2xl px-5 py-3 w-full sm:w-80 focus-within:border-blue-500/50 transition-all">
-          <Search className="w-4 h-4 text-gray-500" />
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-6 bg-white dark:bg-white/[0.01] p-6 rounded-3xl border border-slate-200/80 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+        <div className="flex items-center gap-3 bg-slate-100/80 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 rounded-2xl px-5 py-3 w-full sm:w-80 focus-within:border-blue-500 transition-all">
+          <Search className="w-4 h-4 text-slate-400 dark:text-gray-500" />
           <input 
             type="text" 
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search tools registry..."
-            className="bg-transparent text-sm border-none outline-none text-white w-full placeholder-gray-600 font-semibold"
+            className="bg-transparent text-sm border-none outline-none text-slate-900 dark:text-white w-full placeholder-slate-400 dark:placeholder-gray-600 font-semibold"
           />
         </div>
 
         <button
           onClick={openAddModal}
-          className="flex items-center gap-2 px-5 py-3.5 text-xs font-black uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-500 rounded-2xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] cursor-pointer animate-in fade-in"
+          className="flex items-center gap-2 px-5 py-3.5 text-xs font-black uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-700 rounded-2xl transition-all shadow-md shadow-blue-500/20 cursor-pointer animate-in fade-in"
         >
           <Plus className="w-4 h-4" /> Add New Dynamic Tool
         </button>
       </div>
 
       {/* 3. Status workflow filter tabs */}
-      <div className="flex flex-wrap gap-2 border-b border-white/5 pb-4">
+      <div className="flex flex-wrap gap-2 border-b border-slate-200 dark:border-white/5 pb-4">
         {[
           { id: 'all', label: `All Tools (${tools.length})` },
           { id: 'published', label: `Published (${totalPublished})` },
@@ -522,8 +522,8 @@ export default function ContentCMS() {
             onClick={() => setCurrentFilterTab(tab.id as any)}
             className={`px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-wider border transition-all cursor-pointer ${
               currentFilterTab === tab.id
-                ? 'border-blue-500/30 bg-blue-600/10 text-blue-400 shadow-[0_0_15px_rgba(37,99,235,0.1)]'
-                : 'border-white/5 bg-white/[0.005] text-gray-500 hover:text-white'
+                ? 'border-blue-200 dark:border-blue-500/30 bg-blue-50 dark:bg-blue-600/10 text-blue-600 dark:text-blue-400 shadow-sm'
+                : 'border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-white/[0.005] text-slate-500 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             {tab.label}
@@ -532,11 +532,11 @@ export default function ContentCMS() {
       </div>
 
       {/* 4. Table view list */}
-      <div className="glass rounded-3xl border border-white/5 bg-white/[0.01] shadow-xl overflow-hidden">
+      <div className="bg-white dark:bg-white/[0.01] rounded-3xl border border-slate-200/80 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-[900px]">
             <thead>
-              <tr className="border-b border-white/5 text-[10px] font-black uppercase tracking-widest text-gray-500">
+              <tr className="bg-slate-50/80 dark:bg-transparent border-b border-slate-200 dark:border-white/5 text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-gray-500">
                 <th className="py-5 pl-6">Utility Tool</th>
                 <th className="py-5">Category</th>
                 <th className="py-5">Type</th>
@@ -547,28 +547,28 @@ export default function ContentCMS() {
                 <th className="py-5 pr-6 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5 text-xs">
+            <tbody className="divide-y divide-slate-100 dark:divide-white/5 text-xs">
               {filteredTools.map((t) => (
-                <tr key={t.id} className="hover:bg-white/[0.01] transition-colors">
+                <tr key={t.id} className="hover:bg-slate-50/80 dark:hover:bg-white/[0.01] transition-colors">
                   <td className="py-5 pl-6">
                     <div className="flex items-center gap-3">
-                      <div className="h-8 w-8 rounded-xl bg-blue-600/10 border border-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 font-bold">
+                      <div className="h-8 w-8 rounded-xl bg-blue-50 dark:bg-blue-600/10 border border-blue-200 dark:border-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 font-bold">
                         {t.icon || '🔧'}
                       </div>
                       <div>
-                        <span className="font-black text-white block">{t.title}</span>
-                        <span className="text-[10px] text-gray-500 font-bold block mt-0.5">Route: /tools/{t.slug}</span>
+                        <span className="font-black text-slate-900 dark:text-white block">{t.title}</span>
+                        <span className="text-[10px] text-slate-400 dark:text-gray-500 font-bold block mt-0.5">Route: /tools/{t.slug}</span>
                       </div>
                     </div>
                   </td>
 
                   <td className="py-5">
-                    <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-gray-400">
-                      <Layers className="w-3.5 h-3.5 text-blue-500" /> {t.categoryName}
+                    <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-400">
+                      <Layers className="w-3.5 h-3.5 text-blue-600 dark:text-blue-500" /> {t.categoryName}
                     </span>
                   </td>
 
-                  <td className="py-5 font-semibold text-gray-500">
+                  <td className="py-5 font-semibold text-slate-500 dark:text-gray-500">
                     {t.toolType}
                   </td>
 
@@ -584,8 +584,8 @@ export default function ContentCMS() {
                       onClick={() => toggleStatusDirect(t, 'isPopular')}
                       className={`p-2.5 rounded-xl border transition-all cursor-pointer ${
                         t.isPopular 
-                          ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400' 
-                          : 'border-white/5 hover:border-white/10 bg-white/[0.01] text-gray-500 hover:text-white'
+                          ? 'border-emerald-200 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400' 
+                          : 'border-slate-200 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10 bg-slate-50 dark:bg-white/[0.01] text-slate-400 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white'
                       }`}
                       title="Toggle Popular Status"
                     >
@@ -598,8 +598,8 @@ export default function ContentCMS() {
                       onClick={() => toggleStatusDirect(t, 'isFeatured')}
                       className={`p-2.5 rounded-xl border transition-all cursor-pointer ${
                         t.isFeatured 
-                          ? 'border-blue-500/30 bg-blue-500/10 text-blue-400' 
-                          : 'border-white/5 hover:border-white/10 bg-white/[0.01] text-gray-500 hover:text-white'
+                          ? 'border-blue-200 dark:border-blue-500/30 bg-blue-50 dark:bg-blue-600/10 text-blue-700 dark:text-blue-400' 
+                          : 'border-slate-200 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10 bg-slate-50 dark:bg-white/[0.01] text-slate-400 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white'
                       }`}
                       title="Toggle Featured Status"
                     >
@@ -612,8 +612,8 @@ export default function ContentCMS() {
                       onClick={() => toggleStatusDirect(t, 'isTrending')}
                       className={`p-2.5 rounded-xl border transition-all cursor-pointer ${
                         t.isTrending 
-                          ? 'border-amber-500/30 bg-amber-500/10 text-amber-400' 
-                          : 'border-white/5 hover:border-white/10 bg-white/[0.01] text-gray-500 hover:text-white'
+                          ? 'border-amber-200 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400' 
+                          : 'border-slate-200 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10 bg-slate-50 dark:bg-white/[0.01] text-slate-400 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white'
                       }`}
                       title="Toggle Trending Status"
                     >
@@ -632,21 +632,21 @@ export default function ContentCMS() {
                     />
                     <button
                       onClick={() => handleDuplicate(t)}
-                      className="p-2.5 border border-white/5 hover:border-white/20 rounded-xl bg-white/[0.01] hover:bg-white/5 text-gray-500 hover:text-white active:scale-95 transition-all inline-flex items-center justify-center cursor-pointer"
+                      className="p-2.5 border border-slate-200 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/20 rounded-xl bg-slate-50 dark:bg-white/[0.01] hover:bg-slate-100 dark:hover:bg-white/5 text-slate-400 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white active:scale-95 transition-all inline-flex items-center justify-center cursor-pointer"
                       title="Duplicate Tool"
                     >
                       <Copy className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={() => openEditModal(t)}
-                      className="p-2.5 border border-white/5 hover:border-blue-500/30 rounded-xl bg-white/[0.01] hover:bg-blue-600/10 text-gray-500 hover:text-blue-400 active:scale-95 transition-all inline-flex items-center justify-center cursor-pointer"
+                      className="p-2.5 border border-slate-200 dark:border-white/5 hover:border-blue-300 dark:hover:border-blue-500/30 rounded-xl bg-slate-50 dark:bg-white/[0.01] hover:bg-blue-50 dark:hover:bg-blue-600/10 text-slate-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 active:scale-95 transition-all inline-flex items-center justify-center cursor-pointer"
                       title="Edit Configurations"
                     >
                       <Edit3 className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={() => handleDelete(t.id)}
-                      className="p-2.5 border border-white/5 hover:border-red-500/30 rounded-xl bg-white/[0.01] hover:bg-red-500/10 text-gray-500 hover:text-red-400 active:scale-95 transition-all inline-flex items-center justify-center cursor-pointer"
+                      className="p-2.5 border border-slate-200 dark:border-white/5 hover:border-red-300 dark:hover:border-red-500/30 rounded-xl bg-slate-50 dark:bg-white/[0.01] hover:bg-red-50 dark:hover:bg-red-500/10 text-slate-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-400 active:scale-95 transition-all inline-flex items-center justify-center cursor-pointer"
                       title="Remove Entry"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -678,22 +678,22 @@ export default function ContentCMS() {
       {/* Edit/Add Modal Overlay */}
       <AnimatePresence>
         {isEditing && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 dark:bg-black/70 backdrop-blur-sm p-4">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              className="w-full max-w-3xl glass border border-white/10 p-8 rounded-[2.5rem] shadow-2xl relative max-h-[90vh] flex flex-col"
+              className="w-full max-w-3xl bg-white dark:bg-[#0d1321] border border-slate-200 dark:border-white/10 p-8 rounded-[2.5rem] shadow-2xl relative max-h-[90vh] flex flex-col text-slate-900 dark:text-gray-200"
             >
               {/* Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-white/5 mb-6">
-                <h3 className="text-base font-black text-white uppercase tracking-widest">
+              <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/5 mb-6">
+                <h3 className="text-base font-black text-slate-900 dark:text-white uppercase tracking-widest">
                   {editingItem ? `Configure dynamic tool: ${editingItem.title}` : 'Register New AI Tool'}
                 </h3>
               </div>
 
               {/* Internal Tab selectors */}
-              <div className="flex flex-wrap gap-2 border-b border-white/5 pb-4 mb-6">
+              <div className="flex flex-wrap gap-2 border-b border-slate-200 dark:border-white/5 pb-4 mb-6">
                 {[
                   { id: 'general', label: 'General Info', icon: Settings2 },
                   { id: 'inputs', label: 'Form inputs', icon: Plus },
@@ -709,8 +709,8 @@ export default function ContentCMS() {
                       onClick={() => setActiveTab(tab.id as any)}
                       className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-wider border transition-all cursor-pointer ${
                         activeTab === tab.id
-                          ? 'border-blue-500/30 bg-blue-600/10 text-blue-400'
-                          : 'border-white/5 bg-white/[0.005] text-gray-500 hover:text-white'
+                          ? 'border-blue-200 dark:border-blue-500/30 bg-blue-50 dark:bg-blue-600/10 text-blue-600 dark:text-blue-400 shadow-sm'
+                          : 'border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-white/[0.005] text-slate-500 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white'
                       }`}
                     >
                       <Icon className="w-3.5 h-3.5" />
@@ -728,7 +728,7 @@ export default function ContentCMS() {
                   <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Tool Name</label>
+                        <label className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Tool Name</label>
                         <input 
                           type="text" 
                           value={title}
@@ -737,67 +737,67 @@ export default function ContentCMS() {
                             if (!editingItem) setSlug(e.target.value.toLowerCase().replace(/ /g, '-').replace(/[^\w-]/g, ''));
                           }}
                           placeholder="e.g. Image Optimizer"
-                          className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-white outline-none focus:border-blue-500/50"
+                          className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500"
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Routing URL Slug</label>
+                        <label className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Routing URL Slug</label>
                         <input 
                           type="text" 
                           value={slug}
                           onChange={(e) => setSlug(e.target.value)}
                           placeholder="e.g. image-optimizer"
-                          className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-white outline-none focus:border-blue-500/50 font-mono"
+                          className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500 font-mono"
                         />
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Short Summary Description</label>
+                      <label className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Short Summary Description</label>
                       <textarea 
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         placeholder="Brief details about what the tool does..."
                         rows={2}
-                        className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 text-sm font-medium text-white outline-none focus:border-blue-500/50 resize-none"
+                        className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-5 text-sm font-medium text-slate-900 dark:text-white outline-none focus:border-blue-500 resize-none"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Extended Summary Description (Optional)</label>
+                      <label className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Extended Summary Description (Optional)</label>
                       <textarea 
                         value={longDesc}
                         onChange={(e) => setLongDesc(e.target.value)}
                         placeholder="Detailed background text explaining operations..."
                         rows={3}
-                        className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 text-sm font-medium text-white outline-none focus:border-blue-500/50 resize-none"
+                        className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-5 text-sm font-medium text-slate-900 dark:text-white outline-none focus:border-blue-500 resize-none"
                       />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Category Folder</label>
+                        <label className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Category Folder</label>
                         <select 
                           value={categoryName}
                           onChange={(e) => setCategoryName(e.target.value)}
-                          className="w-full bg-[#0a0d17] border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-white outline-none focus:border-blue-500/50 cursor-pointer"
+                          className="w-full bg-white dark:bg-[#0a0d17] border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500 cursor-pointer"
                         >
                           {CATEGORIES.map(cat => (
-                            <option key={cat} value={cat} className="bg-slate-950">{cat}</option>
+                            <option key={cat} value={cat} className="bg-white text-slate-900 dark:bg-slate-950 dark:text-white">{cat}</option>
                           ))}
                         </select>
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Tool Type Module</label>
+                        <label className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Tool Type Module</label>
                         <select 
                           value={toolType}
                           onChange={(e) => setToolType(e.target.value)}
-                          className="w-full bg-[#0a0d17] border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-white outline-none focus:border-blue-500/50 cursor-pointer"
+                          className="w-full bg-white dark:bg-[#0a0d17] border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500 cursor-pointer"
                         >
                           {TOOL_TYPES.map(type => (
-                            <option key={type} value={type} className="bg-slate-950">{type}</option>
+                            <option key={type} value={type} className="bg-white text-slate-900 dark:bg-slate-950 dark:text-white">{type}</option>
                           ))}
                         </select>
                       </div>
@@ -806,34 +806,34 @@ export default function ContentCMS() {
                     {/* Media uploads */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Emoji Icon or URL</label>
+                        <label className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Emoji Icon or URL</label>
                         <div className="flex gap-4">
                           <input 
                             type="text" 
                             value={icon}
                             onChange={(e) => setIcon(e.target.value)}
                             placeholder="e.g. 📸 or /uploads/image.png"
-                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-white outline-none focus:border-blue-500/50"
+                            className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500"
                           />
-                          <label className="px-5 py-3.5 border border-white/10 hover:border-blue-500/50 rounded-2xl bg-white/5 hover:bg-blue-600/10 cursor-pointer transition-colors flex items-center justify-center shrink-0">
-                            <Upload className="w-4 h-4 text-gray-400" />
+                          <label className="px-5 py-3.5 border border-slate-200 dark:border-white/10 hover:border-blue-500/50 rounded-2xl bg-slate-50 dark:bg-white/5 hover:bg-blue-50 dark:hover:bg-blue-600/10 cursor-pointer transition-colors flex items-center justify-center shrink-0">
+                            <Upload className="w-4 h-4 text-slate-400 dark:text-gray-400" />
                             <input type="file" onChange={(e) => handleFileUpload(e, 'icon')} className="hidden" />
                           </label>
                         </div>
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Thumbnail Banner URL</label>
+                        <label className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Thumbnail Banner URL</label>
                         <div className="flex gap-4">
                           <input 
                             type="text" 
                             value={thumbnail}
                             onChange={(e) => setThumbnail(e.target.value)}
                             placeholder="e.g. /uploads/banner.jpg"
-                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-white outline-none focus:border-blue-500/50"
+                            className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500"
                           />
-                          <label className="px-5 py-3.5 border border-white/10 hover:border-blue-500/50 rounded-2xl bg-white/5 hover:bg-blue-600/10 cursor-pointer transition-colors flex items-center justify-center shrink-0">
-                            <Upload className="w-4 h-4 text-gray-400" />
+                          <label className="px-5 py-3.5 border border-slate-200 dark:border-white/10 hover:border-blue-500/50 rounded-2xl bg-slate-50 dark:bg-white/5 hover:bg-blue-50 dark:hover:bg-blue-600/10 cursor-pointer transition-colors flex items-center justify-center shrink-0">
+                            <Upload className="w-4 h-4 text-slate-400 dark:text-gray-400" />
                             <input type="file" onChange={(e) => handleFileUpload(e, 'thumbnail')} className="hidden" />
                           </label>
                         </div>
@@ -841,24 +841,24 @@ export default function ContentCMS() {
                     </div>
 
                     {/* Publishing Workflow & Status Selector */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 border border-white/5 bg-white/[0.005] rounded-2xl">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 border border-slate-200 dark:border-white/5 bg-slate-50/50 dark:bg-white/[0.005] rounded-2xl">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Publishing Status</label>
+                        <label className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Publishing Status</label>
                         <select 
                           value={status}
                           onChange={(e) => setStatus(e.target.value as any)}
-                          className="w-full bg-[#0a0d17] border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-white outline-none focus:border-blue-500/50 cursor-pointer"
+                          className="w-full bg-white dark:bg-[#0a0d17] border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500 cursor-pointer"
                         >
-                          <option value="draft" className="bg-slate-950">Draft</option>
-                          <option value="scheduled" className="bg-slate-950">Scheduled</option>
-                          <option value="published" className="bg-slate-950">Published</option>
-                          <option value="archived" className="bg-slate-950">Archived</option>
+                          <option value="draft" className="bg-white text-slate-900 dark:bg-slate-950 dark:text-white">Draft</option>
+                          <option value="scheduled" className="bg-white text-slate-900 dark:bg-slate-950 dark:text-white">Scheduled</option>
+                          <option value="published" className="bg-white text-slate-900 dark:bg-slate-950 dark:text-white">Published</option>
+                          <option value="archived" className="bg-white text-slate-900 dark:bg-slate-950 dark:text-white">Archived</option>
                         </select>
                       </div>
 
                       {status === 'scheduled' && (
                         <div className="space-y-2">
-                          <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Schedule Publication Date & Time</label>
+                          <label className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Schedule Publication Date & Time</label>
                           <input 
                             type="datetime-local" 
                             value={publishDate ? new Date(new Date(publishDate).getTime() - new Date(publishDate).getTimezoneOffset() * 60000).toISOString().slice(0, 16) : ''}
@@ -866,7 +866,7 @@ export default function ContentCMS() {
                               const iso = e.target.value ? new Date(e.target.value).toISOString() : null;
                               setPublishDate(iso);
                             }}
-                            className="w-full bg-[#0a0d17] border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-white outline-none focus:border-blue-500/50 cursor-pointer"
+                            className="w-full bg-white dark:bg-[#0a0d17] border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500 cursor-pointer"
                           />
                         </div>
                       )}
@@ -874,17 +874,17 @@ export default function ContentCMS() {
 
                     {/* Metadata Flags */}
                     <div className="grid grid-cols-3 gap-4 pt-2">
-                      <label className="flex flex-col items-center gap-2 p-3 bg-white/[0.01] border border-white/5 rounded-2xl cursor-pointer hover:bg-white/[0.02]">
-                        <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Popular Tool</span>
-                        <input type="checkbox" checked={isPopular} onChange={(e) => setIsPopular(e.target.checked)} className="rounded text-blue-500 h-4 w-4" />
+                      <label className="flex flex-col items-center gap-2 p-3 bg-white dark:bg-white/[0.01] border border-slate-200 dark:border-white/5 rounded-2xl cursor-pointer hover:bg-slate-50 dark:hover:bg-white/[0.02]">
+                        <span className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Popular Tool</span>
+                        <input type="checkbox" checked={isPopular} onChange={(e) => setIsPopular(e.target.checked)} className="rounded text-blue-600 h-4 w-4" />
                       </label>
-                      <label className="flex flex-col items-center gap-2 p-3 bg-white/[0.01] border border-white/5 rounded-2xl cursor-pointer hover:bg-white/[0.02]">
-                        <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Featured Tool</span>
-                        <input type="checkbox" checked={isFeatured} onChange={(e) => setIsFeatured(e.target.checked)} className="rounded text-blue-500 h-4 w-4" />
+                      <label className="flex flex-col items-center gap-2 p-3 bg-white dark:bg-white/[0.01] border border-slate-200 dark:border-white/5 rounded-2xl cursor-pointer hover:bg-slate-50 dark:hover:bg-white/[0.02]">
+                        <span className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Featured Tool</span>
+                        <input type="checkbox" checked={isFeatured} onChange={(e) => setIsFeatured(e.target.checked)} className="rounded text-blue-600 h-4 w-4" />
                       </label>
-                      <label className="flex flex-col items-center gap-2 p-3 bg-white/[0.01] border border-white/5 rounded-2xl cursor-pointer hover:bg-white/[0.02]">
-                        <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Trending Tool</span>
-                        <input type="checkbox" checked={isTrending} onChange={(e) => setIsTrending(e.target.checked)} className="rounded text-blue-500 h-4 w-4" />
+                      <label className="flex flex-col items-center gap-2 p-3 bg-white dark:bg-white/[0.01] border border-slate-200 dark:border-white/5 rounded-2xl cursor-pointer hover:bg-slate-50 dark:hover:bg-white/[0.02]">
+                        <span className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Trending Tool</span>
+                        <input type="checkbox" checked={isTrending} onChange={(e) => setIsTrending(e.target.checked)} className="rounded text-blue-600 h-4 w-4" />
                       </label>
                     </div>
                   </div>
@@ -900,42 +900,42 @@ export default function ContentCMS() {
                   <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Execution Provider API</label>
+                        <label className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Execution Provider API</label>
                         <select 
                           value={apiType}
                           onChange={(e) => setApiType(e.target.value)}
-                          className="w-full bg-[#0a0d17] border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-white outline-none focus:border-blue-500/50 cursor-pointer"
+                          className="w-full bg-white dark:bg-[#0a0d17] border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500 cursor-pointer"
                         >
-                          <option value="openai">OpenAI Chat Completion</option>
-                          <option value="gemini">Google Gemini AI</option>
-                          <option value="claude">Anthropic Claude API</option>
-                          <option value="custom">Custom Web Service Endpoint</option>
+                          <option value="openai" className="bg-white text-slate-900 dark:bg-slate-950 dark:text-white">OpenAI Chat Completion</option>
+                          <option value="gemini" className="bg-white text-slate-900 dark:bg-slate-950 dark:text-white">Google Gemini AI</option>
+                          <option value="claude" className="bg-white text-slate-900 dark:bg-slate-950 dark:text-white">Anthropic Claude API</option>
+                          <option value="custom" className="bg-white text-slate-900 dark:bg-slate-950 dark:text-white">Custom Web Service Endpoint</option>
                         </select>
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Call-to-Action Text</label>
+                        <label className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Call-to-Action Text</label>
                         <input 
                           type="text" 
                           value={ctaButtonText}
                           onChange={(e) => setCtaButtonText(e.target.value)}
                           placeholder="e.g. Generate Copy"
-                          className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-white outline-none focus:border-blue-500/50"
+                          className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500"
                         />
                       </div>
                     </div>
 
                     <div className="space-y-2">
                       <div className="flex justify-between items-center ml-1">
-                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">AI Prompt Template</label>
-                        <span className="text-[9px] text-gray-600 font-bold italic">Wrap inputs in double braces, e.g. Write a story in a {"{{tone}}"} style.</span>
+                        <label className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">AI Prompt Template</label>
+                        <span className="text-[9px] text-slate-400 dark:text-gray-600 font-bold italic">Wrap inputs in double braces, e.g. Write a story in a {"{{tone}}"} style.</span>
                       </div>
                       <textarea 
                         value={promptTemplate}
                         onChange={(e) => setPromptTemplate(e.target.value)}
                         placeholder="Write detailed prompt directives..."
                         rows={6}
-                        className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 text-sm font-semibold text-white outline-none focus:border-blue-500/50 resize-none font-mono"
+                        className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-5 text-sm font-semibold text-slate-900 dark:text-white outline-none focus:border-blue-500 resize-none font-mono"
                       />
                     </div>
                   </div>
@@ -945,69 +945,69 @@ export default function ContentCMS() {
                 {activeTab === 'seo' && (
                   <div className="space-y-6">
                     {/* SEO Subpanel */}
-                    <div className="p-6 border border-white/5 bg-white/[0.005] rounded-2xl space-y-4">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-blue-400">SEO Meta Tags</span>
+                    <div className="p-6 border border-slate-200 dark:border-white/5 bg-slate-50/50 dark:bg-white/[0.005] rounded-2xl space-y-4">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400">SEO Meta Tags</span>
                       
                       <div className="space-y-3">
                         <div className="space-y-1">
-                          <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">SEO Meta Title</label>
+                          <label className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">SEO Meta Title</label>
                           <input 
                             type="text" 
                             value={seoTitle}
                             onChange={(e) => setSeoTitle(e.target.value)}
                             placeholder="Defaults to Tool Name | ToolWala AI"
-                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs font-bold text-white outline-none focus:border-blue-500/50"
+                            className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-xs font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500"
                           />
                         </div>
 
                         <div className="space-y-1">
-                          <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">SEO Meta Description</label>
+                          <label className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">SEO Meta Description</label>
                           <textarea 
                             value={seoDesc}
                             onChange={(e) => setSeoDesc(e.target.value)}
                             placeholder="Meta description search snippet..."
                             rows={2}
-                            className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-xs font-semibold text-white outline-none focus:border-blue-500/50 resize-none"
+                            className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-4 text-xs font-semibold text-slate-900 dark:text-white outline-none focus:border-blue-500 resize-none"
                           />
                         </div>
 
                         <div className="space-y-1">
-                          <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">SEO Meta Keywords (Comma separated)</label>
+                          <label className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">SEO Meta Keywords (Comma separated)</label>
                           <input 
                             type="text" 
                             value={seoKeywords}
                             onChange={(e) => setSeoKeywords(e.target.value)}
                             placeholder="e.g. background remover, transparent image, cutoff tool"
-                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs font-bold text-white outline-none focus:border-blue-500/50"
+                            className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-xs font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500"
                           />
                         </div>
                       </div>
                     </div>
 
                     {/* Article Editorial Subpanel */}
-                    <div className="p-6 border border-white/5 bg-white/[0.005] rounded-2xl space-y-4">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-blue-400">Deep Dive Guide Article</span>
+                    <div className="p-6 border border-slate-200 dark:border-white/5 bg-slate-50/50 dark:bg-white/[0.005] rounded-2xl space-y-4">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400">Deep Dive Guide Article</span>
 
                       <div className="space-y-3">
                         <div className="space-y-1">
-                          <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Guide Heading Title</label>
+                          <label className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Guide Heading Title</label>
                           <input 
                             type="text" 
                             value={articleTitle}
                             onChange={(e) => setArticleTitle(e.target.value)}
                             placeholder="e.g. Master dynamic data formatting with AI"
-                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs font-bold text-white outline-none focus:border-blue-500/50"
+                            className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-xs font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500"
                           />
                         </div>
 
                         <div className="space-y-1">
-                          <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Guide Content Text (Paragraphs or markdown format)</label>
+                          <label className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Guide Content Text (Paragraphs or markdown format)</label>
                           <textarea 
                             value={articleContent}
                             onChange={(e) => setArticleContent(e.target.value)}
                             placeholder="Detailed overview article contents..."
                             rows={8}
-                            className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-xs font-semibold text-white outline-none focus:border-blue-500/50 resize-none font-sans"
+                            className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-4 text-xs font-semibold text-slate-900 dark:text-white outline-none focus:border-blue-500 resize-none font-sans"
                           />
                         </div>
                       </div>
@@ -1019,51 +1019,51 @@ export default function ContentCMS() {
                 {activeTab === 'faqs' && (
                   <div className="space-y-6">
                     <div className="flex justify-between items-center">
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500">FAQ accordion items</span>
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 dark:text-blue-500">FAQ accordion items</span>
                       <button
                         type="button"
                         onClick={addFaqRow}
-                        className="flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-white bg-blue-600 hover:bg-blue-500 rounded-xl transition-all cursor-pointer"
+                        className="flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-all cursor-pointer shadow-sm"
                       >
                         <Plus className="w-3.5 h-3.5" /> Add FAQ
                       </button>
                     </div>
 
                     {faqs.length === 0 ? (
-                      <div className="text-center py-10 border border-white/5 border-dashed rounded-2xl bg-white/[0.005]">
-                        <p className="text-gray-500 text-xs font-semibold">No accordion questions created yet.</p>
+                      <div className="text-center py-10 border border-slate-200 dark:border-white/5 border-dashed rounded-2xl bg-slate-50/50 dark:bg-white/[0.005]">
+                        <p className="text-slate-400 dark:text-gray-500 text-xs font-semibold">No accordion questions created yet.</p>
                       </div>
                     ) : (
                       <div className="space-y-4">
                         {faqs.map((faq, index) => (
-                          <div key={index} className="p-4 border border-white/5 bg-white/[0.005] rounded-2xl space-y-3 relative">
+                          <div key={index} className="p-4 border border-slate-200 dark:border-white/5 bg-slate-50/50 dark:bg-white/[0.005] rounded-2xl space-y-3 relative">
                             <button
                               type="button"
                               onClick={() => removeFaqRow(index)}
-                              className="absolute top-4 right-4 p-1.5 border border-white/5 hover:border-red-500/20 rounded-lg text-gray-500 hover:text-red-400 transition-colors"
+                              className="absolute top-4 right-4 p-1.5 border border-slate-200 dark:border-white/5 hover:border-red-300 dark:hover:border-red-500/20 bg-white dark:bg-transparent rounded-lg text-slate-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-400 transition-colors"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
                             </button>
 
                             <div className="space-y-1 pr-10">
-                              <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Question #{index + 1}</label>
+                              <label className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Question #{index + 1}</label>
                               <input
                                 type="text"
                                 value={faq.question}
                                 onChange={(e) => updateFaqRow(index, 'question', e.target.value)}
                                 placeholder="Enter question..."
-                                className="w-full bg-slate-950/80 border border-white/10 rounded-xl px-3 py-2 text-xs font-bold text-white outline-none"
+                                className="w-full bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white outline-none"
                               />
                             </div>
 
                             <div className="space-y-1">
-                              <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Answer #{index + 1}</label>
+                              <label className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Answer #{index + 1}</label>
                               <textarea
                                 value={faq.answer}
                                 onChange={(e) => updateFaqRow(index, 'answer', e.target.value)}
                                 placeholder="Enter answer..."
                                 rows={2}
-                                className="w-full bg-slate-950/80 border border-white/10 rounded-xl p-3 text-xs font-medium text-white outline-none resize-none"
+                                className="w-full bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-xs font-medium text-slate-900 dark:text-white outline-none resize-none"
                               />
                             </div>
                           </div>
@@ -1076,17 +1076,17 @@ export default function ContentCMS() {
               </form>
 
               {/* Action Buttons */}
-              <div className="flex gap-4 border-t border-white/5 pt-4 mt-6">
+              <div className="flex gap-4 border-t border-slate-200 dark:border-white/5 pt-4 mt-6">
                 <button
                   type="button"
                   onClick={() => setIsEditing(false)}
-                  className="flex-1 py-4 text-xs font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all cursor-pointer"
+                  className="flex-1 py-4 text-xs font-black uppercase tracking-widest text-slate-600 dark:text-gray-400 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl hover:bg-slate-200 dark:hover:bg-white/10 transition-all cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleSave}
-                  className="flex-1 py-4 text-xs font-black uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-500 rounded-2xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] cursor-pointer"
+                  className="flex-1 py-4 text-xs font-black uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-700 rounded-2xl transition-all shadow-md shadow-blue-500/20 cursor-pointer"
                 >
                   Save Changes
                 </button>

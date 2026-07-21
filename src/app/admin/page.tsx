@@ -82,25 +82,25 @@ export default function AdminDashboard() {
   return (
     <div className="space-y-10">
       {/* Introduction Notification banner */}
-      <div className="bg-blue-600/10 border border-blue-500/20 p-6 rounded-3xl flex items-center justify-between gap-6">
+      <div className="bg-blue-50 dark:bg-blue-600/10 border border-blue-200 dark:border-blue-500/20 p-6 rounded-3xl flex items-center justify-between gap-6">
         <div className="flex items-center gap-4">
-          <div className="h-12 w-12 rounded-2xl bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
+          <div className="h-12 w-12 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
             <Sparkles className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-white tracking-tight">Welcome back to ToolWala Control Center</h3>
-            <p className="text-xs text-gray-400 mt-1 font-medium">Production analytics tracking is active. Real-time visitor logs are synchronizing with Supabase.</p>
+            <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">Welcome back to ToolWala Control Center</h3>
+            <p className="text-xs text-slate-600 dark:text-gray-400 mt-1 font-medium">Production analytics tracking is active. Real-time visitor logs are synchronizing with Supabase.</p>
             
             {/* Version Check Badge */}
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mt-3 text-[9px] font-sans font-semibold uppercase tracking-wider">
-              <span className="text-gray-400 flex items-center gap-1 bg-white/5 px-2 py-0.5 rounded border border-white/5">
-                Version: <span className="text-blue-400 font-mono">v{versionInfo.version}</span>
+              <span className="text-slate-600 dark:text-gray-400 flex items-center gap-1 bg-white dark:bg-white/5 px-2 py-0.5 rounded border border-slate-200 dark:border-white/5 shadow-xs">
+                Version: <span className="text-blue-600 dark:text-blue-400 font-mono">v{versionInfo.version}</span>
               </span>
-              <span className="text-gray-400 flex items-center gap-1 bg-white/5 px-2 py-0.5 rounded border border-white/5">
-                Commit: <span className="text-purple-400 font-mono">{versionInfo.commit}</span>
+              <span className="text-slate-600 dark:text-gray-400 flex items-center gap-1 bg-white dark:bg-white/5 px-2 py-0.5 rounded border border-slate-200 dark:border-white/5 shadow-xs">
+                Commit: <span className="text-purple-600 dark:text-purple-400 font-mono">{versionInfo.commit}</span>
               </span>
-              <span className="text-gray-400 flex items-center gap-1 bg-white/5 px-2 py-0.5 rounded border border-white/5">
-                Deployed: <span className="text-emerald-400 font-mono">{new Date(versionInfo.deployedAt).toLocaleString(undefined, { dateStyle: 'short', timeStyle: 'short' })}</span>
+              <span className="text-slate-600 dark:text-gray-400 flex items-center gap-1 bg-white dark:bg-white/5 px-2 py-0.5 rounded border border-slate-200 dark:border-white/5 shadow-xs">
+                Deployed: <span className="text-emerald-600 dark:text-emerald-400 font-mono">{new Date(versionInfo.deployedAt).toLocaleString(undefined, { dateStyle: 'short', timeStyle: 'short' })}</span>
               </span>
             </div>
           </div>
@@ -108,12 +108,12 @@ export default function AdminDashboard() {
         <div className="flex flex-col items-end gap-2 shrink-0">
           <button
             onClick={() => fetchStats(true)}
-            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white border border-blue-500/30 px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all active:scale-[0.98] cursor-pointer"
+            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white border border-blue-500/30 px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all active:scale-[0.98] cursor-pointer shadow-sm shadow-blue-500/20"
           >
             <ShieldCheck className="w-4 h-4" /> Sync Analytics
           </button>
           {lastUpdated && (
-            <span className="text-[9px] text-gray-500 font-bold uppercase tracking-wider">
+            <span className="text-[9px] text-slate-400 dark:text-gray-500 font-bold uppercase tracking-wider">
               Updated: {lastUpdated}
             </span>
           )}
@@ -172,37 +172,37 @@ export default function AdminDashboard() {
         <div className="lg:col-span-4 flex flex-col gap-6">
           
           {/* Quick Actions */}
-          <div className="glass p-6 rounded-3xl border border-white/5 bg-white/[0.01] shadow-xl">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-4">Quick Actions</h4>
+          <div className="bg-white dark:bg-white/[0.01] p-6 rounded-3xl border border-slate-200/80 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-gray-400 mb-4">Quick Actions</h4>
             <div className="grid grid-cols-2 gap-3">
-              <Link href="/admin/blog" className="flex flex-col items-center justify-center p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/30 hover:bg-blue-600/10 hover:text-white transition-all text-center">
-                <span className="text-xs font-bold text-gray-300">Write Post</span>
+              <Link href="/admin/blog" className="flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-blue-50 dark:hover:bg-blue-600/10 hover:text-blue-600 transition-all text-center">
+                <span className="text-xs font-bold text-slate-700 dark:text-gray-300">Write Post</span>
               </Link>
-              <Link href="/admin/content" className="flex flex-col items-center justify-center p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/30 hover:bg-blue-600/10 hover:text-white transition-all text-center">
-                <span className="text-xs font-bold text-gray-300">Add Tool</span>
+              <Link href="/admin/content" className="flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-blue-50 dark:hover:bg-blue-600/10 hover:text-blue-600 transition-all text-center">
+                <span className="text-xs font-bold text-slate-700 dark:text-gray-300">Add Tool</span>
               </Link>
-              <Link href="/admin/leads" className="flex flex-col items-center justify-center p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/30 hover:bg-blue-600/10 hover:text-white transition-all text-center">
-                <span className="text-xs font-bold text-gray-300">CRM Leads</span>
+              <Link href="/admin/leads" className="flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-blue-50 dark:hover:bg-blue-600/10 hover:text-blue-600 transition-all text-center">
+                <span className="text-xs font-bold text-slate-700 dark:text-gray-300">CRM Leads</span>
               </Link>
-              <Link href="/admin/users" className="flex flex-col items-center justify-center p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/30 hover:bg-blue-600/10 hover:text-white transition-all text-center">
-                <span className="text-xs font-bold text-gray-300">Manage Users</span>
+              <Link href="/admin/users" className="flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-blue-50 dark:hover:bg-blue-600/10 hover:text-blue-600 transition-all text-center">
+                <span className="text-xs font-bold text-slate-700 dark:text-gray-300">Manage Users</span>
               </Link>
             </div>
           </div>
 
           {/* Popular Tools */}
-          <div className="glass p-6 rounded-3xl border border-white/5 bg-white/[0.01] shadow-xl flex-1">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-4 font-sans">Popular Utility Engines</h4>
+          <div className="bg-white dark:bg-white/[0.01] p-6 rounded-3xl border border-slate-200/80 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex-1">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-gray-400 mb-4 font-sans">Popular Utility Engines</h4>
             <div className="space-y-3">
               {stats.popularTools.map((tool, idx) => (
-                <div key={idx} className="flex items-center justify-between gap-4 p-3 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-blue-500/10 transition-colors">
+                <div key={idx} className="flex items-center justify-between gap-4 p-3 rounded-2xl bg-slate-50/80 dark:bg-white/[0.01] border border-slate-200/60 dark:border-white/5 hover:border-blue-500/20 transition-colors">
                   <div>
-                    <h5 className="text-xs font-bold text-white">{tool.name}</h5>
-                    <span className="text-[10px] text-gray-500 font-semibold uppercase tracking-wide mt-0.5 block">{tool.category}</span>
+                    <h5 className="text-xs font-bold text-slate-900 dark:text-white">{tool.name}</h5>
+                    <span className="text-[10px] text-slate-400 dark:text-gray-500 font-semibold uppercase tracking-wide mt-0.5 block">{tool.category}</span>
                   </div>
                   <div className="text-right">
-                    <span className="text-xs font-bold text-white block">{tool.count.toLocaleString()}</span>
-                    <span className="text-[9px] font-semibold text-emerald-400 flex items-center gap-0.5 mt-0.5 justify-end">
+                    <span className="text-xs font-bold text-slate-900 dark:text-white block">{tool.count.toLocaleString()}</span>
+                    <span className="text-[9px] font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-0.5 mt-0.5 justify-end">
                       <ArrowUpRight className="w-3 h-3" /> {tool.growth}
                     </span>
                   </div>
@@ -216,46 +216,46 @@ export default function AdminDashboard() {
       </div>
 
       {/* Recent Activity Logs */}
-      <div className="glass p-6 rounded-3xl border border-white/5 bg-white/[0.01] shadow-xl">
+      <div className="bg-white dark:bg-white/[0.01] p-6 rounded-3xl border border-slate-200/80 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400">Real-time Platform Logs</h4>
-            <p className="text-xs font-medium text-gray-500 mt-1">Live updates showing client-side executions and telemetry actions.</p>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-gray-400">Real-time Platform Logs</h4>
+            <p className="text-xs font-medium text-slate-500 dark:text-gray-500 mt-1">Live updates showing client-side executions and telemetry actions.</p>
           </div>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-white/5 text-[10px] font-semibold uppercase tracking-wider text-gray-500">
-                <th className="pb-4 pl-4">Task / Action</th>
-                <th className="pb-4">Target Tool</th>
-                <th className="pb-4">User Alias</th>
-                <th className="pb-4">Execution Status</th>
-                <th className="pb-4 pr-4 text-right">Timestamp</th>
+              <tr className="border-b border-slate-200 dark:border-white/5 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-gray-500 bg-slate-50/50 dark:bg-transparent">
+                <th className="py-3 pl-4">Task / Action</th>
+                <th className="py-3">Target Tool</th>
+                <th className="py-3">User Alias</th>
+                <th className="py-3">Execution Status</th>
+                <th className="py-3 pr-4 text-right">Timestamp</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5 text-xs">
+            <tbody className="divide-y divide-slate-100 dark:divide-white/5 text-xs">
               {stats.recentLogs.map((log) => (
-                <tr key={log.id} className="hover:bg-white/[0.01] transition-colors">
-                  <td className="py-4 pl-4 font-bold text-white">{log.action}</td>
-                  <td className="py-4 text-gray-400 font-medium">{log.tool}</td>
-                  <td className="py-4 font-mono text-gray-500">{log.user}</td>
+                <tr key={log.id} className="hover:bg-slate-50/60 dark:hover:bg-white/[0.01] transition-colors">
+                  <td className="py-4 pl-4 font-bold text-slate-900 dark:text-white">{log.action}</td>
+                  <td className="py-4 text-slate-600 dark:text-gray-400 font-medium">{log.tool}</td>
+                  <td className="py-4 font-mono text-slate-500 dark:text-gray-500">{log.user}</td>
                   <td className="py-4">
                     <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl text-[10px] font-semibold uppercase tracking-wider ${
                       log.status === 'success'
-                        ? 'text-emerald-400 bg-emerald-500/10 border border-emerald-500/10'
-                        : 'text-red-400 bg-red-500/10 border border-red-500/10'
+                        ? 'text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/10'
+                        : 'text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/10'
                     }`}>
                       {log.status === 'success' ? (
-                        <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                        <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
                       ) : (
-                        <AlertTriangle className="w-3 h-3 text-red-400" />
+                        <AlertTriangle className="w-3 h-3 text-red-600 dark:text-red-400" />
                       )}
                       {log.status}
                     </span>
                   </td>
-                  <td className="py-4 pr-4 text-right text-gray-500 font-bold">{log.time}</td>
+                  <td className="py-4 pr-4 text-right text-slate-400 dark:text-gray-500 font-bold">{log.time}</td>
                 </tr>
               ))}
             </tbody>

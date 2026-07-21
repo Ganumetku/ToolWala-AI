@@ -24,47 +24,47 @@ export default function ContactClient() {
           
           {/* Left Side: Contact Info */}
           <div className="lg:col-span-5 space-y-8">
-            <div className="bg-white dark:glass p-10 rounded-[3rem] border border-gray-200 dark:border-white/5 space-y-10 relative overflow-hidden shadow-sm">
+            <div className="bg-white dark:bg-slate-900/60 backdrop-blur-xl p-8 sm:p-10 rounded-[3rem] border border-gray-200 dark:border-white/10 space-y-10 relative overflow-hidden shadow-sm">
               <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-3xl -z-10" />
               
               <div className="space-y-6">
                 <h3 className="text-2xl font-black text-gray-900 dark:text-white tracking-tight uppercase">{t('contact.channels_title', 'Contact Channels')}</h3>
-                <p className="text-gray-600 dark:text-gray-400 font-medium leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-300 font-medium leading-relaxed">
                   {t('contact.channels_desc', 'We aim to respond to all inquiries within 24-48 business hours. For urgent technical support, please use the support email below.')}
                 </p>
               </div>
 
               <div className="space-y-8">
                 <ContactItem 
-                  icon={<Mail />}
+                  icon={<Mail className="w-5 h-5" />}
                   title={t('contact.general_support', 'General Support')}
                   value="developtechx@gmail.com"
                   desc={t('contact.general_support_desc', 'For help with tools and general questions.')}
                 />
                 <ContactItem 
-                  icon={<Sparkles />}
+                  icon={<Sparkles className="w-5 h-5" />}
                   title={t('contact.business_inquiries', 'Business Inquiries')}
                   value="developtechx@gmail.com"
                   desc={t('contact.business_inquiries_desc', 'For collaborations and API access.')}
                 />
                 <ContactItem 
-                  icon={<ShieldCheck />}
+                  icon={<ShieldCheck className="w-5 h-5" />}
                   title={t('contact.legal_privacy', 'Legal & Privacy')}
                   value="developtechx@gmail.com"
                   desc={t('contact.legal_privacy_desc', 'For data requests and legal matters.')}
                 />
               </div>
 
-              <div className="pt-8 border-t border-gray-100 dark:border-white/5 grid grid-cols-2 gap-6">
+              <div className="pt-8 border-t border-gray-100 dark:border-white/10 grid grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-gray-500 font-bold uppercase tracking-widest text-[10px]">
-                    <Clock className="w-3 h-3" /> {t('contact.response_time', 'Response Time')}
+                  <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest text-[10px]">
+                    <Clock className="w-3 h-3 text-blue-600 dark:text-blue-400" /> {t('contact.response_time', 'Response Time')}
                   </div>
                   <p className="text-gray-900 dark:text-white font-black text-sm">~24 Hours</p>
                 </div>
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-gray-500 font-bold uppercase tracking-widest text-[10px]">
-                    <Globe className="w-3 h-3" /> {t('contact.availability', 'Availability')}
+                  <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest text-[10px]">
+                    <Globe className="w-3 h-3 text-blue-600 dark:text-blue-400" /> {t('contact.availability', 'Availability')}
                   </div>
                   <p className="text-gray-900 dark:text-white font-black text-sm">{t('contact.avail_days', 'Mon - Fri')}</p>
                 </div>
@@ -74,7 +74,7 @@ export default function ContactClient() {
 
           {/* Right Side: Contact Form */}
           <div className="lg:col-span-7">
-            <div className="bg-white dark:glass rounded-[3rem] border border-gray-200 dark:border-white/5 h-full overflow-hidden shadow-sm">
+            <div className="bg-white dark:bg-slate-900/60 backdrop-blur-xl rounded-[3rem] border border-gray-200 dark:border-white/10 h-full overflow-hidden shadow-sm">
               <ContactForm />
             </div>
           </div>
@@ -88,13 +88,13 @@ export default function ContactClient() {
 function ContactItem({ icon, title, value, desc }: { icon: any; title: string; value: string; desc: string }) {
   return (
     <div className="flex gap-6 group">
-      <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-50 dark:bg-white/5 flex items-center justify-center text-blue-600 dark:text-blue-500 border border-blue-100 dark:border-white/10 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
+      <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-500/20 group-hover:bg-blue-600 group-hover:text-white dark:group-hover:bg-blue-500 dark:group-hover:text-white transition-all duration-300">
         {icon}
       </div>
       <div className="space-y-1">
-        <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{title}</h4>
+        <h4 className="text-[10px] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest">{title}</h4>
         <p className="text-lg font-black text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{value}</p>
-        <p className="text-xs text-gray-600 dark:text-gray-500 font-medium">{desc}</p>
+        <p className="text-xs text-gray-600 dark:text-gray-300 font-medium">{desc}</p>
       </div>
     </div>
   );

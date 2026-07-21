@@ -127,6 +127,22 @@ body {
 }
 
 /* Premium Floating Glass Nav & SaaS Cards */
+@utility glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+
+  &:where(.dark, .dark *) {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  }
+}
+
 .glass {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(20px);
@@ -135,12 +151,27 @@ body {
   box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
 }
 
-html.dark .glass {
+html.dark .glass,
+:where(.dark, .dark *) .glass {
   background: rgba(15, 23, 42, 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+@utility glass-light {
+  background: rgba(248, 250, 252, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(229, 231, 235, 0.6);
+
+  &:where(.dark, .dark *) {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
 }
 
 .glass-light {
@@ -150,7 +181,8 @@ html.dark .glass {
   border: 1px solid rgba(229, 231, 235, 0.6);
 }
 
-html.dark .glass-light {
+html.dark .glass-light,
+:where(.dark, .dark *) .glass-light {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);

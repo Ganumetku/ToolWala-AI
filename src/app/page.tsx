@@ -130,7 +130,7 @@ export default function Home() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-[#E8ECF4] dark:border-white/10 backdrop-blur-md text-[#2563EB] dark:text-blue-400 text-xs font-black tracking-widest mb-8 shadow-sm dark:shadow-2xl hover:border-blue-500/30 transition-colors cursor-pointer select-none"
           >
             <span className="flex h-2 w-2 rounded-full bg-[#2563EB] dark:bg-blue-500 animate-pulse" />
-            <span>{t('home.badge', '🔒 100% Client-Side Local AI Processing')}</span>
+            <span>{t('home.badge', '🔒 100% Browser-Based • No Upload Required • Privacy First')}</span>
             <ChevronRight className="w-3.5 h-3.5 text-[#64748B] dark:text-gray-500" />
           </motion.div>
 
@@ -138,21 +138,23 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="mx-auto max-w-5xl font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#0F172A] dark:text-white leading-[0.95] mb-6 uppercase"
+            className="mx-auto max-w-5xl font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#0F172A] dark:text-white leading-[1.05] mb-6"
           >
-            {t('home.hero_title_1', 'Supercharge Your Daily')} <br />
+            {t('home.hero_title_1', 'Free ')}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] via-indigo-600 to-[#7C3AED] dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400 animate-gradient">
-              {t('home.hero_title_2', 'Workflow with AI')}
+              {t('home.hero_title_highlight', 'PDF, Image & Resume Tools')}
             </span>
+            <br />
+            {t('home.hero_title_2', 'Built for Everyone')}
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mx-auto max-w-[700px] text-sm sm:text-base md:text-lg font-medium text-[#475569] dark:text-gray-400 leading-relaxed mb-10"
+            className="mx-auto max-w-[720px] text-base sm:text-lg md:text-xl font-medium text-[#334155] dark:text-gray-300 leading-relaxed mb-10"
           >
-            {t('home.hero_subtitle', 'Free AI utilities that run 100% locally in your browser. No registration, no latency, no server uploads. Your data stays entirely on your device.')}
+            {t('home.hero_subtitle', 'Edit PDFs, convert images, create passport photos, compress files, optimize resumes, and use powerful browser-based utilities — all without uploading your files. Fast, secure, and completely free.')}
           </motion.p>
 
           {/* Search bar for tools */}
@@ -171,7 +173,7 @@ export default function Home() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder={t('home.search_placeholder', 'Search 35+ free AI tools (e.g. bg remover, pdf crop, aadhaar photo)...')}
+                  placeholder={t('home.search_placeholder', 'Search PDF, Image, Resume & AI tools...')}
                   className="w-full bg-transparent border-none outline-none text-[#0F172A] dark:text-white px-4 py-3 text-base sm:text-lg font-bold placeholder:text-[#64748B] dark:placeholder:text-gray-500"
                   aria-label="Search tools"
                 />
@@ -233,19 +235,26 @@ export default function Home() {
             ))}
           </motion.div>
 
-          {/* Primary CTA */}
+          {/* Primary & Secondary CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.45 }}
-            className="flex justify-center"
+            className="flex flex-wrap justify-center items-center gap-4"
           >
             <Link
               href={localizeHref('/tools')}
-              className="relative group inline-flex items-center gap-3.5 px-9 py-4.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl text-xs font-black uppercase tracking-widest text-white shadow-[0_0_30px_rgba(37,99,235,0.3)] hover:shadow-[0_0_40px_rgba(37,99,235,0.5)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              className="relative group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#2563EB] to-[#7C3AED] hover:from-blue-600 hover:to-purple-700 rounded-2xl text-xs font-black uppercase tracking-widest text-white shadow-[0_0_30px_rgba(37,99,235,0.3)] hover:shadow-[0_0_40px_rgba(37,99,235,0.5)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
             >
-              <span>{t('home.explore_all_tools', 'Explore All 25+ Tools').replace('25+', `${mergedTools.length}+`).replace('25', mergedTools.length.toString())}</span>
+              <span>{t('home.primary_cta', 'Explore Free Tools')}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+            <Link
+              href={localizeHref('/categories')}
+              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-white dark:bg-white/5 border border-[#E8ECF4] dark:border-white/10 hover:border-blue-500/40 text-xs font-black uppercase tracking-widest text-[#0F172A] dark:text-white hover:text-[#2563EB] dark:hover:text-blue-400 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <span>{t('home.secondary_cta', 'Browse Categories')}</span>
+              <ChevronRight className="w-4 h-4 text-[#64748B] dark:text-gray-400" />
             </Link>
           </motion.div>
 

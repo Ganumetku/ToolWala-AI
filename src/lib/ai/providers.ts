@@ -91,8 +91,30 @@ export async function callGemini(req: AIRequest): Promise<AIResponse> {
   );
 
   if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Gemini error: ${err}`);
+    const errText = await res.text();
+    try {
+      const errJson = JSON.parse(errText);
+      if (
+        res.status === 429 ||
+        errJson?.error?.code === 429 ||
+        errJson?.error?.status === 'RESOURCE_EXHAUSTED'
+      ) {
+        throw new Error(
+          'AI Service daily quota exceeded. Please try again in a few minutes or update API billing/key.'
+        );
+      }
+      if (errJson?.error?.message) {
+        throw new Error(`Gemini API Error: ${errJson.error.message}`);
+      }
+    } catch (parseErr: any) {
+      if (
+        parseErr?.message?.includes('AI Service') ||
+        parseErr?.message?.includes('Gemini API Error')
+      ) {
+        throw parseErr;
+      }
+    }
+    throw new Error(`Gemini error: ${errText}`);
   }
 
   const data = await res.json();

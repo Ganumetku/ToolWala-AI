@@ -199,11 +199,10 @@ export function buildToolPrompt(
 }
 
 export function selectProvider(slug: string, preferred?: string): AIProvider {
-  if (preferred === 'groq' && GROQ_API_KEY) return 'groq';
-  if (preferred === 'gemini' && GEMINI_API_KEY) return 'gemini';
-  if (preferred === 'openai' && OPENAI_API_KEY) return 'openai';
   if (GROQ_API_KEY) return 'groq';
-  if (GEMINI_API_KEY) return 'gemini';
+  if (preferred === 'openai' && OPENAI_API_KEY) return 'openai';
+  if (preferred === 'gemini' && GEMINI_API_KEY) return 'gemini';
   if (OPENAI_API_KEY) return 'openai';
+  if (GEMINI_API_KEY) return 'gemini';
   throw new Error('No AI provider configured');
 }

@@ -906,6 +906,7 @@ export default function ContentCMS() {
                           onChange={(e) => setApiType(e.target.value)}
                           className="w-full bg-white dark:bg-[#0a0d17] border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500 cursor-pointer"
                         >
+                          <option value="groq" className="bg-white text-slate-900 dark:bg-slate-950 dark:text-white">Groq Cloud AI (Llama 3.3 Ultra Fast)</option>
                           <option value="openai" className="bg-white text-slate-900 dark:bg-slate-950 dark:text-white">OpenAI Chat Completion</option>
                           <option value="gemini" className="bg-white text-slate-900 dark:bg-slate-950 dark:text-white">Google Gemini AI</option>
                           <option value="claude" className="bg-white text-slate-900 dark:bg-slate-950 dark:text-white">Anthropic Claude API</option>

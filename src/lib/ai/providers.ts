@@ -1,7 +1,8 @@
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
-export type AIProvider = 'openai' | 'gemini';
+export type AIProvider = 'openai' | 'gemini' | 'groq';
 
 export interface AIRequest {
   prompt: string;
@@ -15,6 +16,48 @@ export interface AIResponse {
   tokens: number;
   latencyMs: number;
   provider: AIProvider;
+}
+
+export async function callGroq(req: AIRequest): Promise<AIResponse> {
+  if (!GROQ_API_KEY) throw new Error('Groq API key not configured');
+
+  const start = Date.now();
+  const model = req.model || 'llama-3.3-70b-versatile';
+
+  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${GROQ_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model,
+      messages: [
+        ...(req.systemPrompt
+          ? [{ role: 'system', content: req.systemPrompt }]
+          : []),
+        { role: 'user', content: req.prompt },
+      ],
+      max_tokens: req.maxTokens || 1024,
+      temperature: 0.7,
+    }),
+  });
+
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(`Groq error: ${errText}`);
+  }
+
+  const data = await res.json();
+  const output = data.choices?.[0]?.message?.content || '';
+  const tokens = data.usage?.total_tokens || 0;
+
+  return {
+    output,
+    tokens,
+    latencyMs: Date.now() - start,
+    provider: 'groq',
+  };
 }
 
 export async function callOpenAI(req: AIRequest): Promise<AIResponse> {
@@ -156,9 +199,11 @@ export function buildToolPrompt(
 }
 
 export function selectProvider(slug: string, preferred?: string): AIProvider {
+  if (preferred === 'groq' && GROQ_API_KEY) return 'groq';
   if (preferred === 'gemini' && GEMINI_API_KEY) return 'gemini';
   if (preferred === 'openai' && OPENAI_API_KEY) return 'openai';
-  if (OPENAI_API_KEY) return 'openai';
+  if (GROQ_API_KEY) return 'groq';
   if (GEMINI_API_KEY) return 'gemini';
+  if (OPENAI_API_KEY) return 'openai';
   throw new Error('No AI provider configured');
 }

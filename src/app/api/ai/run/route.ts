@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import {
   callOpenAI,
   callGemini,
+  callGroq,
   buildToolPrompt,
   selectProvider,
   type AIProvider,
@@ -27,17 +28,47 @@ export async function POST(request: NextRequest) {
       selectedProvider = selectProvider(toolSlug, provider);
     } catch {
       return NextResponse.json(
-        { success: false, error: 'No AI provider configured. Set OPENAI_API_KEY or GEMINI_API_KEY.' },
+        { success: false, error: 'No AI provider configured. Set GROQ_API_KEY, OPENAI_API_KEY or GEMINI_API_KEY.' },
         { status: 503 }
       );
     }
 
     const prompt = buildToolPrompt(toolSlug, inputs, promptTemplate);
 
-    const result =
-      selectedProvider === 'gemini'
-        ? await callGemini({ prompt })
-        : await callOpenAI({ prompt });
+    let result;
+    try {
+      if (selectedProvider === 'groq') {
+        result = await callGroq({ prompt });
+      } else if (selectedProvider === 'gemini') {
+        result = await callGemini({ prompt });
+      } else {
+        result = await callOpenAI({ prompt });
+      }
+    } catch (primaryErr: any) {
+      console.warn(`Primary AI provider (${selectedProvider}) failed:`, primaryErr?.message);
+      // Fallback attempts
+      if (process.env.GROQ_API_KEY && selectedProvider !== 'groq') {
+        try {
+          result = await callGroq({ prompt });
+        } catch (e) {
+          throw primaryErr;
+        }
+      } else if (process.env.GEMINI_API_KEY && selectedProvider !== 'gemini') {
+        try {
+          result = await callGemini({ prompt });
+        } catch (e) {
+          throw primaryErr;
+        }
+      } else if (process.env.OPENAI_API_KEY && selectedProvider !== 'openai') {
+        try {
+          result = await callOpenAI({ prompt });
+        } catch (e) {
+          throw primaryErr;
+        }
+      } else {
+        throw primaryErr;
+      }
+    }
 
     return NextResponse.json({
       success: true,

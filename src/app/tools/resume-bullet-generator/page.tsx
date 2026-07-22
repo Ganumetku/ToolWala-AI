@@ -196,7 +196,6 @@ Return ONLY valid JSON. Do not include markdown code block formatting in your ou
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           slug: 'resume-bullet-generator',
-          provider: 'gemini',
           inputs: {
             count: bulletCount,
             jobTitle,
@@ -284,7 +283,6 @@ Return ONLY valid JSON. Do not include markdown code block formatting in your ou
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           slug: 'resume-bullet-generator',
-          provider: 'gemini',
           inputs: {
             originalBullet: textToImprove,
             targetJobTitle: targetJobTitle || 'Professional Role',

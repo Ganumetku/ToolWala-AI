@@ -201,7 +201,7 @@ function SliderInput({
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
         <div className="flex items-center gap-2">
           <Icon className="w-5 h-5 text-blue-400" />
-          <label className="text-sm font-black uppercase tracking-widest text-white">{label}</label>
+          <label className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">{label}</label>
         </div>
         <div className="relative flex items-center w-full sm:w-44">
           <input
@@ -423,7 +423,7 @@ export default function AdSenseRevenueCalculatorPage() {
 
   return (
     <ToolVisibilityGuard slug="adsense-revenue-calculator">
-      <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans">
+      <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250 font-sans">
         <MeshGradient />
         <FloatingParticles />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-blue-600/5 rounded-full blur-[140px] pointer-events-none z-0" />
@@ -446,7 +446,7 @@ export default function AdSenseRevenueCalculatorPage() {
               <span>Google AdSense Revenue Estimator</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-2 uppercase leading-none">
+            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-2 uppercase leading-none">
               AdSense Revenue
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400">
@@ -491,7 +491,7 @@ export default function AdSenseRevenueCalculatorPage() {
                 <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-8">
                   <div className="flex items-center gap-2">
                     <Calculator className="w-5 h-5 text-blue-400" />
-                    <h3 className="text-sm font-black uppercase tracking-widest text-white">Site Settings</h3>
+                    <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">Site Settings</h3>
                   </div>
                   <button onClick={handleReset} className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-gray-500 hover:text-blue-400 transition-colors">
                     <RefreshCw className="w-3 h-3" /> Reset
@@ -502,7 +502,7 @@ export default function AdSenseRevenueCalculatorPage() {
 
                   {/* Mode Toggle */}
                   <div className="space-y-3">
-                    <p className="text-sm font-black uppercase tracking-widest text-white">Calculation Mode</p>
+                    <p className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">Calculation Mode</p>
                     <div className="flex bg-black/40 border border-white/10 rounded-xl p-1.5 gap-1">
                       <button
                         onClick={() => setMode("cpc-ctr")}
@@ -574,7 +574,7 @@ export default function AdSenseRevenueCalculatorPage() {
 
                   {/* Niche */}
                   <div className="space-y-3">
-                    <p className="text-sm font-black uppercase tracking-widest text-white">Niche</p>
+                    <p className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">Niche</p>
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2">
                       {NICHES.map(n => (
                         <button
@@ -592,7 +592,7 @@ export default function AdSenseRevenueCalculatorPage() {
                   <div className="space-y-3">
                     <div className="flex items-center gap-2">
                       <Globe className="w-4 h-4 text-blue-400" />
-                      <p className="text-sm font-black uppercase tracking-widest text-white">Audience Country</p>
+                      <p className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">Audience Country</p>
                     </div>
 
                     {/* Popular Quick Chips */}
@@ -922,7 +922,7 @@ export default function AdSenseRevenueCalculatorPage() {
                 <BookOpen className="w-4 h-4" />
                 <span>AdSense Mastery Guide</span>
               </div>
-              <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase mb-6">
+              <h2 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-6">
                 📚 How AdSense Revenue Works
               </h2>
               <p className="text-gray-400 text-base font-medium leading-relaxed">
@@ -963,7 +963,7 @@ export default function AdSenseRevenueCalculatorPage() {
             {/* FAQ */}
             <div className="max-w-3xl mx-auto mb-20">
               <div className="text-center mb-8">
-                <h3 className="text-3xl font-black text-white tracking-tighter uppercase mb-2">Frequently Asked Questions</h3>
+                <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-2">Frequently Asked Questions</h3>
                 <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Everything about Google AdSense</p>
               </div>
               <div className="space-y-4">
@@ -1001,13 +1001,13 @@ export default function AdSenseRevenueCalculatorPage() {
             {/* Related tools */}
             {relatedTools.length > 0 && (
               <div className="mt-16">
-                <h3 className="text-2xl font-black text-white tracking-tighter uppercase mb-8 text-center">Related Tools</h3>
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-8 text-center">Related Tools</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
                   {relatedTools.map(tool => (
                     <Link key={tool.slug} href={tool.href} className="glass rounded-2xl border border-white/5 p-6 bg-white/[0.01] hover:bg-white/[0.05] transition-all group">
                       <div className="flex items-center gap-3 mb-3">
                         <span className="text-3xl group-hover:scale-110 transition-transform">{tool.icon}</span>
-                        <h4 className="text-sm font-black text-white">{tool.title}</h4>
+                        <h4 className="text-sm font-black text-slate-900 dark:text-white">{tool.title}</h4>
                       </div>
                       <p className="text-xs text-gray-400 font-medium">{tool.description}</p>
                     </Link>
@@ -1017,7 +1017,7 @@ export default function AdSenseRevenueCalculatorPage() {
             )}
 
             <div className="text-center py-12 border-t border-white/5 mt-16">
-              <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-8">Ready to estimate your AdSense income?</h3>
+              <h3 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-8">Ready to estimate your AdSense income?</h3>
               <button
                 onClick={() => document.getElementById("calc-section")?.scrollIntoView({ behavior: "smooth" })}
                 className="px-8 py-4 bg-blue-500 hover:bg-blue-400 text-white font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 flex items-center justify-center gap-2 mx-auto shadow-lg shadow-blue-500/20"

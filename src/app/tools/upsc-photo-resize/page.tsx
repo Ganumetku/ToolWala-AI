@@ -29,7 +29,7 @@ const UPSC_PRESETS: CropperPreset[] = [
 export default function UPSCPhotoResize() {
   return (
     <ToolVisibilityGuard slug="upsc-photo-resize">
-      <div className="min-h-screen bg-[#030712] text-gray-100 relative overflow-hidden font-sans">
+      <div className="min-h-screen bg-[#F6F8FC] dark:bg-[#030712] text-slate-900 dark:text-gray-100 relative overflow-hidden font-sans">
         <MeshGradient />
 
         {/* Decorative Radial Glow */}
@@ -51,7 +51,7 @@ export default function UPSCPhotoResize() {
               <Sparkles className="w-3.5 h-3.5" />
               100% Client-Side Processing
             </div>
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6 uppercase">
+            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-6 uppercase">
               UPSC Photo Resize <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
                 Official UPSC specs

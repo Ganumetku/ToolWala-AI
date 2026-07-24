@@ -76,7 +76,7 @@ function SliderInput({
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
         <div className="flex items-center gap-2">
           <Icon className="w-5 h-5 text-red-400" />
-          <label className="text-sm font-black uppercase tracking-widest text-white">{label}</label>
+          <label className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">{label}</label>
         </div>
         <div className="relative flex items-center w-full sm:w-44">
           <input
@@ -220,7 +220,7 @@ export default function YoutubeMoneyCalculatorPage() {
 
   return (
     <ToolVisibilityGuard slug="youtube-money-calculator">
-      <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans">
+      <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250 font-sans">
 
         <MeshGradient />
         <FloatingParticles />
@@ -245,7 +245,7 @@ export default function YoutubeMoneyCalculatorPage() {
               <span>YouTube Revenue Estimator</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-2 uppercase leading-none">
+            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-2 uppercase leading-none">
               YouTube Money<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-rose-400 to-orange-400">
                 Calculator
@@ -289,7 +289,7 @@ export default function YoutubeMoneyCalculatorPage() {
                 <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-8">
                   <div className="flex items-center gap-2">
                     <Play className="w-5 h-5 text-red-400" />
-                    <h3 className="text-sm font-black uppercase tracking-widest text-white">Channel Settings</h3>
+                    <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">Channel Settings</h3>
                   </div>
                   <button
                     onClick={() => { setMonthlyViews(1_000_000); setCpm(8); setRpm(4.5); setSelectedNiche('Tech'); }}
@@ -303,7 +303,7 @@ export default function YoutubeMoneyCalculatorPage() {
 
                   {/* Niche Selector */}
                   <div className="space-y-3">
-                    <p className="text-sm font-black uppercase tracking-widest text-white">Select Your Niche</p>
+                    <p className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">Select Your Niche</p>
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2">
                       {NICHES.map(n => (
                         <button
@@ -483,7 +483,7 @@ export default function YoutubeMoneyCalculatorPage() {
                 <BookOpen className="w-4 h-4" />
                 <span>YouTube Monetisation Guide</span>
               </div>
-              <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase mb-6">
+              <h2 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-6">
                 📚 How YouTube Earnings Work
               </h2>
               <p className="text-gray-400 text-base sm:text-lg font-medium leading-relaxed">
@@ -524,7 +524,7 @@ export default function YoutubeMoneyCalculatorPage() {
             {/* FAQ */}
             <div className="max-w-3xl mx-auto mb-20">
               <div className="text-center mb-8">
-                <h3 className="text-3xl font-black text-white tracking-tighter uppercase mb-2">Frequently Asked Questions</h3>
+                <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-2">Frequently Asked Questions</h3>
                 <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Everything about YouTube money</p>
               </div>
               <div className="space-y-4">
@@ -562,13 +562,13 @@ export default function YoutubeMoneyCalculatorPage() {
             {/* Related Tools */}
             {relatedTools.length > 0 && (
               <div className="mt-16">
-                <h3 className="text-2xl font-black text-white tracking-tighter uppercase mb-8 text-center">Related Tools</h3>
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-8 text-center">Related Tools</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
                   {relatedTools.map(tool => (
                     <Link key={tool.slug} href={tool.href} className="glass rounded-2xl border border-white/5 p-6 bg-white/[0.01] hover:bg-white/[0.05] transition-all group">
                       <div className="flex items-center gap-3 mb-3">
                         <span className="text-3xl group-hover:scale-110 transition-transform">{tool.icon}</span>
-                        <h4 className="text-sm font-black text-white">{tool.title}</h4>
+                        <h4 className="text-sm font-black text-slate-900 dark:text-white">{tool.title}</h4>
                       </div>
                       <p className="text-xs text-gray-400 font-medium">{tool.description}</p>
                     </Link>
@@ -578,7 +578,7 @@ export default function YoutubeMoneyCalculatorPage() {
             )}
 
             <div className="text-center py-12 border-t border-white/5 mt-16">
-              <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-8">Ready to estimate your earnings?</h3>
+              <h3 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-8">Ready to estimate your earnings?</h3>
               <button
                 onClick={() => document.getElementById('calculator-section')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-4 bg-red-500 hover:bg-red-400 text-white font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 flex items-center justify-center gap-2 mx-auto shadow-lg shadow-red-500/20"

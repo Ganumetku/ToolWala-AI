@@ -138,7 +138,7 @@ export function PDFWorkspace({
                 <Sparkles className="w-3.5 h-3.5" />
                 Next-Gen PDF Workspace
               </div>
-              <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight text-gradient">
+              <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight text-gradient">
                 Professional PDF Editor
               </h1>
               <p className="text-slate-400 text-sm font-medium leading-relaxed">
@@ -196,7 +196,7 @@ export function PDFWorkspace({
           <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex flex-col items-center justify-center select-none">
             <div className="max-w-md w-full text-center space-y-4 p-8">
               <RefreshCw className="w-12 h-12 text-blue-500 animate-spin mx-auto mb-4" />
-              <h3 className="text-lg font-bold text-white uppercase tracking-wider">{processingStatus || 'Initializing file...'}</h3>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white uppercase tracking-wider">{processingStatus || 'Initializing file...'}</h3>
               <div className="w-full bg-slate-900 h-1 rounded-full overflow-hidden">
                 <div className="bg-blue-600 h-full w-2/3 animate-pulse" />
               </div>

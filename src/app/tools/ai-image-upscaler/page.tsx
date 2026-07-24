@@ -334,10 +334,10 @@ export default function AIImageUpscaler() {
     });
   };
 
-  if (!mounted) return <div className="min-h-screen bg-[#030712]" />;
+  if (!mounted) return <div className="min-h-screen bg-[#F6F8FC] dark:bg-[#030712]" />;
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden transition-colors duration-250 font-sans">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
 
@@ -356,7 +356,7 @@ export default function AIImageUpscaler() {
                   <Sparkles className="w-8 h-8" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-black text-white tracking-tighter uppercase">AI Image Upscaler</h1>
+                  <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">AI Image Upscaler</h1>
                   <p className="text-gray-400 font-medium mt-1">Magnify, sharpen, and restore pixelated photos locally inside your browser.</p>
                 </div>
               </div>
@@ -370,7 +370,7 @@ export default function AIImageUpscaler() {
             </div>
           </div>
           
-          <div className="p-8 sm:p-12 bg-black/[0.15]">
+          <div className="p-8 sm:p-12 bg-white dark:bg-black/[0.15]">
             <AnimatePresence mode="wait">
               {error && (
                 <motion.div 
@@ -420,7 +420,7 @@ export default function AIImageUpscaler() {
                     >
                       <UploadCloud className="w-12 h-12" />
                     </motion.div>
-                    <h3 className="text-2xl font-black text-white mb-3 tracking-tight">Drop image here or click to upload</h3>
+                    <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">Drop image here or click to upload</h3>
                     <p className="text-gray-500 mb-10 max-w-sm mx-auto font-medium">Supports JPEG, PNG, and WebP. Your images never leave your computer—processing happens locally.</p>
                     
                     <div className="flex justify-center gap-6 text-xs font-black uppercase tracking-widest text-gray-600">
@@ -447,7 +447,7 @@ export default function AIImageUpscaler() {
                       <RefreshCw className="w-12 h-12 animate-spin" />
                     </div>
                   </div>
-                  <h3 className="text-3xl font-black text-white mb-3 tracking-tighter">Upscaling & Enhancing</h3>
+                  <h3 className="text-3xl font-black text-slate-900 dark:text-white mb-3 tracking-tighter">Upscaling & Enhancing</h3>
                   <p className="text-gray-400 mb-10 text-center max-w-sm font-medium">{loadingText}</p>
                   
                   <div className="w-full max-w-md bg-white/5 rounded-full h-3 overflow-hidden border border-white/10 relative">
@@ -484,7 +484,7 @@ export default function AIImageUpscaler() {
                             className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none border-r border-white/30" 
                             style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
                           >
-                            <div className="absolute inset-0 bg-[#030712]/90">
+                            <div className="absolute inset-0 bg-[#F6F8FC] dark:bg-[#030712]/90">
                               <img 
                                 src={sourceUrl || undefined} 
                                 className="absolute inset-0 w-full h-full object-contain pointer-events-none p-6" 
@@ -526,7 +526,7 @@ export default function AIImageUpscaler() {
                           </div>
                         </>
                       ) : (
-                        <div className="absolute inset-0 flex items-center justify-center bg-[#030712]/60 p-6">
+                        <div className="absolute inset-0 flex items-center justify-center bg-[#F6F8FC] dark:bg-[#030712]/60 p-6">
                           <img 
                             src={sourceUrl || undefined} 
                             className="w-full h-full object-contain p-2" 
@@ -584,7 +584,7 @@ export default function AIImageUpscaler() {
                     <div className="space-y-6">
                       <div className="flex items-center gap-3 border-b border-white/5 pb-4">
                         <Sliders className="w-5 h-5 text-blue-400" />
-                        <h3 className="text-sm font-black text-white uppercase tracking-widest">Enhancement Options</h3>
+                        <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest">Enhancement Options</h3>
                       </div>
 
                       {/* Upscale Target Factors */}
@@ -730,21 +730,21 @@ export default function AIImageUpscaler() {
         {/* Feature Cards Grid */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
           <div className="p-8 rounded-[2rem] bg-white/[0.02] border border-white/5">
-            <h4 className="text-sm font-black text-white uppercase tracking-widest mb-3 flex items-center gap-2 justify-center md:justify-start">
+            <h4 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest mb-3 flex items-center gap-2 justify-center md:justify-start">
               <span className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]" />
               Edge Scaling
             </h4>
             <p className="text-sm text-gray-500 font-medium leading-relaxed">Images scale up using advanced, hardware-accelerated canvas processing locally inside your device thread.</p>
           </div>
           <div className="p-8 rounded-[2rem] bg-white/[0.02] border border-white/5">
-            <h4 className="text-sm font-black text-white uppercase tracking-widest mb-3 flex items-center gap-2 justify-center md:justify-start">
+            <h4 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest mb-3 flex items-center gap-2 justify-center md:justify-start">
               <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]" />
               Smart Convolution
             </h4>
             <p className="text-sm text-gray-500 font-medium leading-relaxed">Our custom sharpening kernels isolate high-contrast contours to boost edge clarity without pixel distortion.</p>
           </div>
           <div className="p-8 rounded-[2rem] bg-white/[0.02] border border-white/5">
-            <h4 className="text-sm font-black text-white uppercase tracking-widest mb-3 flex items-center gap-2 justify-center md:justify-start">
+            <h4 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest mb-3 flex items-center gap-2 justify-center md:justify-start">
               <span className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_#8b5cf6]" />
               Privacy Absolute
             </h4>

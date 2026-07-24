@@ -67,7 +67,7 @@ export default function ToolVisibilityGuard({ slug, children }: ToolVisibilityGu
             {isScheduled ? <Clock className="w-8 h-8 animate-pulse" /> : <Lock className="w-8 h-8" />}
           </div>
 
-          <h2 className="text-2xl font-black text-white tracking-tight uppercase mb-2">
+          <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-2">
             {isScheduled ? 'Scheduled Release' : 'Access Restricted'}
           </h2>
           <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-6">

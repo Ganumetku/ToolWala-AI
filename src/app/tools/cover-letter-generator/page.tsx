@@ -144,7 +144,7 @@ export default function CoverLetterGenerator() {
   };
 
   return (
-    <div className="bg-[#030712] min-h-screen py-10 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-10 relative overflow-hidden transition-colors duration-250 font-sans">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
 
@@ -162,7 +162,7 @@ export default function CoverLetterGenerator() {
                 <FileText className="w-6 h-6" />
               </div>
               <div>
-                <h1 className="text-2xl font-black text-white tracking-tighter">AI Cover Letter Generator</h1>
+                <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter">AI Cover Letter Generator</h1>
                 <p className="text-sm text-gray-400 font-medium mt-1">Generate highly tailored, professional cover letters in seconds.</p>
               </div>
             </div>
@@ -190,7 +190,7 @@ export default function CoverLetterGenerator() {
             <section className="glass p-6 rounded-2xl border border-white/5">
               <div className="flex items-center gap-2 mb-6 pb-4 border-b border-white/5">
                 <User className="w-5 h-5 text-blue-500" />
-                <h2 className="text-lg font-black text-white uppercase tracking-tight">Your Details</h2>
+                <h2 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight">Your Details</h2>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="col-span-1 sm:col-span-2">
@@ -212,7 +212,7 @@ export default function CoverLetterGenerator() {
             <section className="glass p-6 rounded-2xl border border-white/5">
               <div className="flex items-center gap-2 mb-6 pb-4 border-b border-white/5">
                 <Building className="w-5 h-5 text-blue-500" />
-                <h2 className="text-lg font-black text-white uppercase tracking-tight">Target Role</h2>
+                <h2 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight">Target Role</h2>
               </div>
               <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -243,26 +243,26 @@ export default function CoverLetterGenerator() {
             <section className="glass p-6 rounded-2xl border border-white/5">
               <div className="flex items-center gap-2 mb-6 pb-4 border-b border-white/5">
                 <Settings className="w-5 h-5 text-blue-500" />
-                <h2 className="text-lg font-black text-white uppercase tracking-tight">Customization</h2>
+                <h2 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight">Customization</h2>
               </div>
               <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Experience Level</label>
                     <select name="experience" value={data.experience} onChange={handleChange} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none text-sm text-white">
-                      <option className="bg-[#0f172a]">Fresher</option>
-                      <option className="bg-[#0f172a]">1-2 years</option>
-                      <option className="bg-[#0f172a]">3-5 years</option>
-                      <option className="bg-[#0f172a]">5+ years</option>
+                      <option className="bg-white dark:bg-[#0f172a]">Fresher</option>
+                      <option className="bg-white dark:bg-[#0f172a]">1-2 years</option>
+                      <option className="bg-white dark:bg-[#0f172a]">3-5 years</option>
+                      <option className="bg-white dark:bg-[#0f172a]">5+ years</option>
                     </select>
                   </div>
                   <div>
                     <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 ml-1">Tone</label>
                     <select name="tone" value={data.tone} onChange={handleChange} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none text-sm text-white">
-                      <option className="bg-[#0f172a]">Professional</option>
-                      <option className="bg-[#0f172a]">Friendly</option>
-                      <option className="bg-[#0f172a]">Confident</option>
-                      <option className="bg-[#0f172a]">Short</option>
+                      <option className="bg-white dark:bg-[#0f172a]">Professional</option>
+                      <option className="bg-white dark:bg-[#0f172a]">Friendly</option>
+                      <option className="bg-white dark:bg-[#0f172a]">Confident</option>
+                      <option className="bg-white dark:bg-[#0f172a]">Short</option>
                     </select>
                   </div>
                 </div>
@@ -325,13 +325,13 @@ export default function CoverLetterGenerator() {
               </div>
 
               {/* Live Preview Document Wrapper */}
-              <div className="w-full overflow-x-auto max-w-full bg-[#0f172a] p-4 sm:p-10 rounded-[2.5rem] border border-white/5 shadow-2xl relative custom-scrollbar">
+              <div className="w-full overflow-x-auto max-w-full bg-white dark:bg-[#0f172a] p-4 sm:p-10 rounded-[2.5rem] border border-white/5 shadow-2xl relative custom-scrollbar">
 
                 {isGenerating && (
-                  <div className="absolute inset-0 z-10 bg-[#030712]/60 backdrop-blur-sm flex items-center justify-center rounded-[2.5rem]">
+                  <div className="absolute inset-0 z-10 bg-[#F6F8FC] dark:bg-[#030712]/60 backdrop-blur-sm flex items-center justify-center rounded-[2.5rem]">
                     <div className="glass p-8 rounded-3xl shadow-2xl flex flex-col items-center gap-4 border border-white/10">
                       <RefreshCw className="w-10 h-10 text-blue-500 animate-spin" />
-                      <p className="text-xs font-black uppercase tracking-widest text-white">Generating...</p>
+                      <p className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">Generating...</p>
                     </div>
                   </div>
                 )}

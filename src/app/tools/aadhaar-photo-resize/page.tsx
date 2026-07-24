@@ -25,7 +25,7 @@ export default function AadhaarPhotoResize() {
   ];
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250 font-sans">
       <MeshGradient />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative z-10 text-left">
@@ -41,7 +41,7 @@ export default function AadhaarPhotoResize() {
               <Sparkles className="w-3.5 h-3.5" />
               UIDAI Portal Compliance Tool
             </div>
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white uppercase leading-tight">
+            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white uppercase leading-tight">
               Aadhaar Photo Resize <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">
                 Online & Free
@@ -72,7 +72,7 @@ export default function AadhaarPhotoResize() {
 
           {/* SEO rich text */}
           <section className="space-y-6 pt-6 border-t border-white/5">
-            <h2 className="text-2xl font-black text-white uppercase tracking-tight">How to Resize Photo for Aadhaar Card</h2>
+            <h2 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">How to Resize Photo for Aadhaar Card</h2>
             <p className="text-sm text-gray-400 leading-relaxed font-sans">
               Updating your Aadhaar card photo on the official UIDAI portal requires a photograph that adheres strictly to biometric criteria. Non-compliant dimensions or file sizes will lead to application rejections. With ToolWala, formatting is simple:
             </p>
@@ -89,7 +89,7 @@ export default function AadhaarPhotoResize() {
           <section className="space-y-6 pt-6 border-t border-white/5">
             <div className="flex items-center gap-2">
               <HelpCircle className="w-5 h-5 text-blue-400" />
-              <h3 className="text-xl font-black text-white uppercase tracking-tight">Frequently Asked Questions</h3>
+              <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Frequently Asked Questions</h3>
             </div>
             <div className="space-y-4">
               {faqs.map((faq, i) => (

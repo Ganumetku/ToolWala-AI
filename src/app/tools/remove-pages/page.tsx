@@ -134,7 +134,7 @@ export default function RemovePages() {
           icon={<Trash2 className="w-7 h-7" />}
         />
 
-        <div className="p-8 sm:p-10 bg-black/[0.15]">
+        <div className="p-8 sm:p-10 bg-white dark:bg-black/[0.15]">
           {!file ? (
             <UploadZone
               onFilesSelected={handleFiles}
@@ -147,11 +147,11 @@ export default function RemovePages() {
             <div className="space-y-8 max-w-4xl mx-auto">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 bg-white/5 rounded-[2rem] border border-white/5 gap-6">
                 <div className="flex items-center gap-5 overflow-hidden w-full">
-                  <div className="bg-[#030712] p-4 rounded-2xl border border-white/5 flex-shrink-0">
+                  <div className="bg-[#F6F8FC] dark:bg-[#030712] p-4 rounded-2xl border border-white/5 flex-shrink-0">
                     <FileText className="w-7 h-7 text-red-500" />
                   </div>
                   <div className="overflow-hidden">
-                    <p className="text-base font-black text-white truncate">{file.name}</p>
+                    <p className="text-base font-black text-slate-900 dark:text-white truncate">{file.name}</p>
                     <p className="text-sm text-gray-500 mt-1">
                       {formatBytes(file.size)} • {pageCount} pages
                     </p>
@@ -175,7 +175,7 @@ export default function RemovePages() {
                     value={pageRange}
                     onChange={(e) => setPageRange(e.target.value)}
                     placeholder="e.g. 1, 3-5, 8"
-                    className="w-full rounded-2xl border border-white/10 px-6 py-4 text-sm font-bold bg-[#030712] text-white focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all shadow-xl"
+                    className="w-full rounded-2xl border border-white/10 px-6 py-4 text-sm font-bold bg-[#F6F8FC] dark:bg-[#030712] text-white focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all shadow-xl"
                   />
                   <div className="flex items-start gap-3 mt-4 text-xs text-gray-500">
                     <Info className="w-5 h-5 text-blue-500 flex-shrink-0" />
@@ -192,7 +192,7 @@ export default function RemovePages() {
                   <div className="w-16 h-16 bg-emerald-500/25 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-6 text-emerald-400">
                     <CheckCircle className="w-8 h-8" />
                   </div>
-                  <h4 className="text-2xl font-black tracking-tight text-white mb-2">
+                  <h4 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white mb-2">
                     Pages Removed Successfully!
                   </h4>
                   <p className="text-sm text-gray-400 mb-6">

@@ -813,7 +813,16 @@ export default function InvoiceCropperEngine({
         /* Upload Area */
         <div
           onClick={() => fileInputRef.current?.click()}
-          className="group relative border-2 border-dashed border-white/10 hover:border-blue-500/50 rounded-[2.5rem] p-16 sm:p-24 text-center hover:bg-white/[0.02] transition-all cursor-pointer overflow-hidden bg-white/[0.01]"
+          onDragOver={(e) => { e.preventDefault(); }}
+          onDrop={(e) => {
+            e.preventDefault();
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+              const dt = new DataTransfer();
+              dt.items.add(e.dataTransfer.files[0]);
+              handleFileUpload({ target: { files: dt.files } } as any);
+            }
+          }}
+          className="group relative border-2 border-dashed border-[#E6ECF5] dark:border-white/10 hover:border-blue-400 dark:hover:border-blue-500/50 rounded-[1.125rem] p-12 sm:p-20 text-center hover:bg-[#F0F4FF] dark:hover:bg-white/[0.02] transition-all duration-250 cursor-pointer overflow-hidden bg-[#FBFCFE] dark:bg-white/[0.01] shadow-[0_4px_20px_rgba(15,23,42,0.03)]"
         >
           <input
             type="file"
@@ -828,7 +837,7 @@ export default function InvoiceCropperEngine({
             <div className="mx-auto h-24 w-24 text-blue-500 bg-blue-500/10 rounded-[2rem] flex items-center justify-center mb-8 border border-blue-500/20 group-hover:scale-110 transition-transform duration-300">
               <UploadCloud className="w-10 h-10 text-blue-500" />
             </div>
-            <h3 className="text-2xl font-black text-white mb-3 tracking-tight uppercase">
+            <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3 tracking-tight uppercase">
               Drop invoice photo or PDF
             </h3>
             <p className="text-gray-500 mb-8 max-w-sm mx-auto font-medium text-sm leading-relaxed">
@@ -849,7 +858,7 @@ export default function InvoiceCropperEngine({
                 <RefreshCw className="animate-spin h-8 w-8 text-blue-500" />
               </div>
             </div>
-            <h3 className="text-xl font-black text-white mb-2 tracking-tight uppercase">
+            <h3 className="text-xl font-black text-slate-900 dark:text-white mb-2 tracking-tight uppercase">
               {loadingText}
             </h3>
             <p className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">
@@ -873,7 +882,7 @@ export default function InvoiceCropperEngine({
                   )}
                 </div>
                 <div className="overflow-hidden">
-                  <h4 className="text-xs font-black text-white truncate uppercase tracking-tight">
+                  <h4 className="text-xs font-black text-slate-900 dark:text-white truncate uppercase tracking-tight">
                     {uploadedFile?.name}
                   </h4>
                   <p className="text-[9px] text-gray-500 font-black tracking-widest mt-0.5">
@@ -1129,7 +1138,7 @@ export default function InvoiceCropperEngine({
             <div className="glass p-5 rounded-[2rem] border border-white/5 bg-white/[0.01] space-y-4">
               <div className="flex items-center gap-2 border-b border-white/5 pb-2">
                 <SlidersHorizontal className="w-4 h-4 text-blue-500" />
-                <h3 className="text-xs font-black text-white uppercase tracking-wider">Adjustment Console</h3>
+                <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Adjustment Console</h3>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -1207,7 +1216,7 @@ export default function InvoiceCropperEngine({
             <div className="glass p-5 rounded-[2rem] border border-white/5 bg-white/[0.01] space-y-4">
               <div className="flex items-center gap-2 border-b border-white/5 pb-2">
                 <FileCheck className="w-4 h-4 text-blue-500" />
-                <h3 className="text-xs font-black text-white uppercase tracking-wider">Compiler settings</h3>
+                <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">Compiler settings</h3>
               </div>
 
               {/* Format selection */}

@@ -457,7 +457,7 @@ export default function WebPConverterPage() {
   };
 
   return (
-    <div className="bg-[#030712] min-h-screen py-20 text-gray-100 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-20 text-slate-900 dark:text-gray-100 relative overflow-hidden transition-colors duration-250 font-sans">
       {/* Dynamic Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-gradient-to-b from-blue-600/10 via-indigo-600/5 to-transparent blur-[140px] pointer-events-none -z-10" />
 
@@ -483,7 +483,7 @@ export default function WebPConverterPage() {
                   <FileImage className="w-8 h-8" />
                 </div>
                 <div>
-                  <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase">
+                  <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">
                     WebP to JPG / PNG Converter
                   </h1>
                   <p className="text-gray-400 text-sm font-medium mt-1">
@@ -555,7 +555,7 @@ export default function WebPConverterPage() {
                     <Upload className="w-10 h-10" />
                   </div>
                   
-                  <h3 className="text-2xl font-black text-white mb-2 tracking-tight">
+                  <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-2 tracking-tight">
                     Drop your WebP image here or click to browse
                   </h3>
                   
@@ -644,7 +644,7 @@ export default function WebPConverterPage() {
                     
                     {/* Settings Box */}
                     <div className="glass rounded-2xl p-6 border border-white/10 space-y-6">
-                      <h3 className="text-base font-black text-white uppercase tracking-wider flex items-center gap-2">
+                      <h3 className="text-base font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
                         <Sliders className="w-4 h-4 text-blue-400" />
                         Output Settings
                       </h3>
@@ -903,7 +903,7 @@ export default function WebPConverterPage() {
                         {/* Live Preview Header */}
                         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-4">
                           <div>
-                            <h3 className="text-base font-black text-white uppercase tracking-wider flex items-center gap-2">
+                            <h3 className="text-base font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
                               <Eye className="w-4 h-4 text-blue-400" />
                               Live Preview
                             </h3>

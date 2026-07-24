@@ -464,7 +464,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
 
   if (!mounted) {
     return (
-      <div className="bg-[#030712] min-h-screen flex items-center justify-center relative overflow-hidden">
+      <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen flex items-center justify-center relative overflow-hidden transition-colors duration-250 font-sans">
         <MeshGradient />
         <div className="flex flex-col items-center gap-4 text-white z-10">
           <RefreshCw className="w-8 h-8 text-blue-500 animate-spin" />
@@ -480,7 +480,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
   const strokeDashoffset = circumference - (Math.min(100, Math.max(0, stats.percentage)) / 100) * circumference;
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans print:bg-white print:py-4">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans print:bg-white print:py-4 transition-colors duration-250 font-sans">
       <MeshGradient />
       <FloatingParticles />
       
@@ -508,7 +508,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
                   🎓
                 </div>
                 <div>
-                  <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tighter uppercase print:text-black print:text-4xl">
+                  <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tighter uppercase print:text-black print:text-4xl">
                     {tStrings.title}
                   </h1>
                   <p className="text-gray-400 font-medium mt-1 font-sans print:text-gray-700">
@@ -529,7 +529,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 print:flex print:flex-col">
             
             {/* Input workspace: 7 columns */}
-            <div className="lg:col-span-7 p-8 sm:p-12 bg-black/[0.15] border-r border-white/5 space-y-8 print:p-0 print:border-none print:bg-transparent">
+            <div className="lg:col-span-7 p-8 sm:p-12 bg-white dark:bg-black/[0.15] border-r border-white/5 space-y-8 print:p-0 print:border-none print:bg-transparent">
               
               {/* Settings Trigger Panel */}
               <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-6 print:hidden">
@@ -747,7 +747,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
             <div className="lg:col-span-5 p-8 sm:p-12 bg-white/[0.01] flex flex-col justify-between space-y-8 print:p-0 print:border-none print:bg-transparent">
               
               <div className="space-y-8">
-                <h2 className="text-xl font-black text-white uppercase tracking-wider border-b border-white/5 pb-4 print:text-black print:border-black">
+                <h2 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-wider border-b border-white/5 pb-4 print:text-black print:border-black">
                   {tStrings.results}
                 </h2>
 
@@ -906,7 +906,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
           
           {/* Formula & examples card */}
           <div className="glass rounded-[2rem] border border-white/5 p-8 bg-white/[0.01]">
-            <h3 className="text-lg font-black text-white uppercase tracking-tight mb-4 flex items-center gap-2">
+            <h3 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight mb-4 flex items-center gap-2">
               <Award className="w-5 h-5 text-blue-400" />
               {tStrings.formulaTitle}
             </h3>
@@ -920,7 +920,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
               Percentage = (Total Obtained Marks / Total Maximum Marks) * 100
             </div>
 
-            <h4 className="text-xs font-black uppercase tracking-widest text-white mb-2">
+            <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white mb-2">
               {tStrings.exampleTitle}
             </h4>
             <p className="text-gray-400 text-xs leading-relaxed whitespace-pre-line">
@@ -930,7 +930,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
 
           {/* Exam Tips card */}
           <div className="glass rounded-[2rem] border border-white/5 p-8 bg-white/[0.01]">
-            <h3 className="text-lg font-black text-white uppercase tracking-tight mb-6 flex items-center gap-2">
+            <h3 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight mb-6 flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-blue-400" />
               {tStrings.tipsTitle}
             </h3>
@@ -945,22 +945,22 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
 
         {/* FAQs section */}
         <div className="glass rounded-[2rem] border border-white/5 p-8 sm:p-12 bg-white/[0.01] mb-16 print:hidden">
-          <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-8 flex items-center gap-3">
+          <h3 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tighter mb-8 flex items-center gap-3">
             <HelpCircle className="w-6 h-6 text-blue-400" />
             {tStrings.faqTitle}
           </h3>
 
           <div className="space-y-6">
             <div className="border-b border-white/5 pb-6">
-              <h4 className="text-base font-black text-white mb-2">{tStrings.faqQ1}</h4>
+              <h4 className="text-base font-black text-slate-900 dark:text-white mb-2">{tStrings.faqQ1}</h4>
               <p className="text-gray-400 text-sm leading-relaxed">{tStrings.faqA1}</p>
             </div>
             <div className="border-b border-white/5 pb-6">
-              <h4 className="text-base font-black text-white mb-2">{tStrings.faqQ2}</h4>
+              <h4 className="text-base font-black text-slate-900 dark:text-white mb-2">{tStrings.faqQ2}</h4>
               <p className="text-gray-400 text-sm leading-relaxed">{tStrings.faqA2}</p>
             </div>
             <div>
-              <h4 className="text-base font-black text-white mb-2">{tStrings.faqQ3}</h4>
+              <h4 className="text-base font-black text-slate-900 dark:text-white mb-2">{tStrings.faqQ3}</h4>
               <p className="text-gray-400 text-sm leading-relaxed">{tStrings.faqA3}</p>
             </div>
           </div>

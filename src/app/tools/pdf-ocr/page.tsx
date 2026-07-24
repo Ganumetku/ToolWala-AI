@@ -350,11 +350,11 @@ export default function PdfOcrScanner() {
   };
 
   if (!mounted) {
-    return <div className="min-h-screen bg-[#030712]" />;
+    return <div className="min-h-screen bg-[#F6F8FC] dark:bg-[#030712]" />;
   }
 
   return (
-    <div className="min-h-screen bg-[#030712] text-gray-100 relative overflow-hidden font-sans">
+    <div className="min-h-screen bg-[#F6F8FC] dark:bg-[#030712] text-slate-900 dark:text-gray-100 relative overflow-hidden font-sans">
       <MeshGradient />
 
       {/* Decorative Glow Grid */}
@@ -377,7 +377,7 @@ export default function PdfOcrScanner() {
             <Sparkles className="w-3.5 h-3.5" />
             {t('pdf_ocr.badge_secure', '100% Secure Client Edge Processing')}
           </div>
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6 uppercase">
+          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-6 uppercase">
             {t('tools.pdf-ocr.title', 'PDF OCR Scanner')} <br />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
               {t('pdf_ocr.digitize_title', 'Digitize scanned files')}
@@ -428,7 +428,7 @@ export default function PdfOcrScanner() {
                     <UploadCloud className="w-8 h-8 text-blue-500" />
                     <div className="absolute inset-0 bg-blue-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
-                  <h3 className="mb-3 text-2xl font-black tracking-tight text-white">
+                  <h3 className="mb-3 text-2xl font-black tracking-tight text-slate-900 dark:text-white">
                     {t('pdf_ocr.drag_drop_pdf', 'Drag & Drop scanned PDF here')}
                   </h3>
                   <p className="mb-8 text-sm text-gray-500 font-semibold tracking-wide uppercase">
@@ -452,7 +452,7 @@ export default function PdfOcrScanner() {
                     <FileText className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-black text-white line-clamp-1">{pdfFile.name}</h4>
+                    <h4 className="text-sm font-black text-slate-900 dark:text-white line-clamp-1">{pdfFile.name}</h4>
                     <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider mt-0.5">
                       {t('pdf_ocr.size', 'Size')}: {formatBytes(pdfFile.size)} • {t('pdf_ocr.total', 'Total')}: {totalPages} {t('pdf_ocr.pages', 'Pages')}
                     </p>
@@ -512,7 +512,7 @@ export default function PdfOcrScanner() {
                         <div className="space-y-6">
                           <div className="flex items-center gap-3">
                             <RefreshCw className="w-5 h-5 text-blue-500 animate-spin" />
-                            <h4 className="text-sm font-black text-white uppercase tracking-wider">{t('pdf_ocr.extracting_characters', 'Extracting Characters')}</h4>
+                            <h4 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider">{t('pdf_ocr.extracting_characters', 'Extracting Characters')}</h4>
                           </div>
 
                           <div className="space-y-2">
@@ -709,7 +709,7 @@ export default function PdfOcrScanner() {
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
                 <Zap className="w-5.5 h-5.5" />
               </div>
-              <h4 className="text-lg font-black text-white mb-2">{t('pdf_ocr.feat_multipage_title', 'Multi-Page OCR Scanner')}</h4>
+              <h4 className="text-lg font-black text-slate-900 dark:text-white mb-2">{t('pdf_ocr.feat_multipage_title', 'Multi-Page OCR Scanner')}</h4>
               <p className="text-sm text-gray-400 leading-relaxed font-medium">
                 {t('pdf_ocr.feat_multipage_desc', 'Digitize multi-sheet PDF structures sequentially, optimizing browser processing loops and preventing leaks.')}
               </p>
@@ -718,7 +718,7 @@ export default function PdfOcrScanner() {
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
                 <FileDown className="w-5.5 h-5.5" />
               </div>
-              <h4 className="text-lg font-black text-white mb-2">{t('pdf_ocr.feat_download_title', 'Word & TXT Compiles')}</h4>
+              <h4 className="text-lg font-black text-slate-900 dark:text-white mb-2">{t('pdf_ocr.feat_download_title', 'Word & TXT Compiles')}</h4>
               <p className="text-sm text-gray-400 leading-relaxed font-medium">
                 {t('pdf_ocr.feat_download_desc', 'Download results as raw text (.txt) files or compile them directly into editable Microsoft Word (.doc) layouts.')}
               </p>
@@ -727,7 +727,7 @@ export default function PdfOcrScanner() {
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
                 <ShieldCheck className="w-5.5 h-5.5" />
               </div>
-              <h4 className="text-lg font-black text-white mb-2">{t('pdf_ocr.feat_privacy_title', 'Zero Data Cloud Exposure')}</h4>
+              <h4 className="text-lg font-black text-slate-900 dark:text-white mb-2">{t('pdf_ocr.feat_privacy_title', 'Zero Data Cloud Exposure')}</h4>
               <p className="text-sm text-gray-400 leading-relaxed font-medium">
                 {t('pdf_ocr.feat_privacy_desc', 'Parsed, rendered, and extracted locally using secure local workers. Complete privacy for sensitive invoices.')}
               </p>
@@ -744,7 +744,7 @@ export default function PdfOcrScanner() {
         <div className="mt-32 border-t border-white/5 pt-24 max-w-6xl mx-auto">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10">
             <div>
-              <h2 className="text-2xl font-black text-white tracking-tight sm:text-3xl">{t('blog.related_tools', 'Related Tools')}</h2>
+              <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight sm:text-3xl">{t('blog.related_tools', 'Related Tools')}</h2>
               <p className="text-sm text-gray-400 mt-1 font-medium">{t('tools.related_tools_desc', 'Discover more professional document operations tools.')}</p>
             </div>
             <Link 
@@ -773,7 +773,7 @@ export default function PdfOcrScanner() {
                 <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   <Sparkles className="w-5 h-5 text-blue-500" />
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">{t('tools.ocr-to-text.title', 'OCR Image to Text')}</h3>
+                <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors tracking-tight">{t('tools.ocr-to-text.title', 'OCR Image to Text')}</h3>
                 <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
                   {t('tools.ocr-to-text.description', 'Extract text from images, screenshots, and scans instantly using client-side OCR.')}
                 </p>
@@ -799,7 +799,7 @@ export default function PdfOcrScanner() {
                 <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   <Files className="w-5 h-5 text-blue-500" />
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">{t('tools.merge-pdf.title', 'Merge PDF')}</h3>
+                <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors tracking-tight">{t('tools.merge-pdf.title', 'Merge PDF')}</h3>
                 <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
                   {t('tools.merge-pdf.description', 'Combine multiple distinct PDF documents into a single professional-grade file quickly and securely.')}
                 </p>
@@ -825,7 +825,7 @@ export default function PdfOcrScanner() {
                 <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   <FileText className="w-5 h-5 text-blue-500" />
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">{t('tools.split-pdf.title', 'Split PDF')}</h3>
+                <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors tracking-tight">{t('tools.split-pdf.title', 'Split PDF')}</h3>
                 <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
                   {t('tools.split-pdf.description', 'Extract specific pages or ranges from your PDF files into individual documents instantly.')}
                 </p>

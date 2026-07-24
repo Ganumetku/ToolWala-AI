@@ -1044,7 +1044,7 @@ export default function AtsResumeChecker() {
   };
 
   return (
-    <div className="bg-[#030712] min-h-screen py-10 relative overflow-hidden font-sans print:bg-white print:text-black">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-10 relative overflow-hidden font-sans print:bg-white print:text-black transition-colors duration-250 font-sans">
       {/* Background Glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10 print:hidden" />
       <div className="absolute top-0 left-0 right-0 h-full bg-grid-pattern opacity-[0.02] -z-20 print:hidden" />
@@ -1074,7 +1074,7 @@ export default function AtsResumeChecker() {
                 <FileText className="w-6 h-6" />
               </div>
               <div>
-                <h1 className="text-2xl font-black text-white tracking-tighter">ATS Resume Checker</h1>
+                <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter">ATS Resume Checker</h1>
                 <p className="text-sm text-gray-400 font-medium mt-1">Audit formatting, check keywords, and optimize your resume for automated screening algorithms.</p>
               </div>
             </div>
@@ -1134,7 +1134,7 @@ export default function AtsResumeChecker() {
                         <FileText className="w-8 h-8" />
                       </div>
                       <div>
-                        <p className="text-white font-bold text-lg truncate px-4">{resumeFile.name}</p>
+                        <p className="text-slate-900 dark:text-white font-bold text-lg truncate px-4">{resumeFile.name}</p>
                         <p className="text-gray-400 text-xs mt-1">{formatBytes(resumeFile.size)}</p>
                       </div>
                       <div className="flex justify-center gap-3">
@@ -1182,7 +1182,7 @@ export default function AtsResumeChecker() {
                     <Shield className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-white font-bold text-sm">Privacy Guaranteed</h4>
+                    <h4 className="text-slate-900 dark:text-white font-bold text-sm">Privacy Guaranteed</h4>
                     <p className="text-xs text-gray-400 mt-1 leading-relaxed">We audit your documents locally inside your browser memory. Resumes are not stored permanently or shared with server databases, protecting your identity.</p>
                   </div>
                 </div>
@@ -1191,7 +1191,7 @@ export default function AtsResumeChecker() {
               {/* TARGET DETAILS & JD SETTINGS */}
               <div className="lg:col-span-5 space-y-6">
                 <div className="glass p-6 rounded-3xl border border-white/5 space-y-5">
-                  <h3 className="text-white font-black text-lg tracking-tight uppercase border-b border-white/5 pb-3">Target Role & JD</h3>
+                  <h3 className="text-slate-900 dark:text-white font-black text-lg tracking-tight uppercase border-b border-white/5 pb-3">Target Role & JD</h3>
                   
                   {/* Optional Target Role */}
                   <div>
@@ -1309,7 +1309,7 @@ export default function AtsResumeChecker() {
                   <FileText className="w-6 h-6 text-blue-500 animate-pulse" />
                 </div>
                 <div>
-                  <h3 className="text-white font-bold text-lg">Running ATS Diagnostic Scan...</h3>
+                  <h3 className="text-slate-900 dark:text-white font-bold text-lg">Running ATS Diagnostic Scan...</h3>
                   <p className="text-xs text-gray-400 mt-1">Simulating Applicant Tracking System scanners locally.</p>
                 </div>
               </div>
@@ -1639,7 +1639,7 @@ export default function AtsResumeChecker() {
                               <Info className="w-6 h-6 animate-pulse" />
                             </div>
                             <div>
-                              <h4 className="text-white font-bold">Upload Job Description for Keywords Match</h4>
+                              <h4 className="text-slate-900 dark:text-white font-bold">Upload Job Description for Keywords Match</h4>
                               <p className="text-xs text-gray-400 max-w-sm mx-auto mt-2 leading-relaxed">
                                 To run detailed technology audits and match skills overlap percentage, upload a Job Description file or paste requirement text in the upload settings page.
                               </p>
@@ -1747,7 +1747,7 @@ export default function AtsResumeChecker() {
                                     <AlertTriangle className="w-5 h-5" />
                                   </div>
                                   <div className="space-y-1">
-                                    <h4 className="text-white font-bold text-sm print:text-black">{warn.title}</h4>
+                                    <h4 className="text-slate-900 dark:text-white font-bold text-sm print:text-black">{warn.title}</h4>
                                     <p className="text-xs text-gray-400 leading-relaxed print:text-gray-700">{warn.description}</p>
                                   </div>
                                 </div>
@@ -1759,7 +1759,7 @@ export default function AtsResumeChecker() {
                                 <CheckCircle2 className="w-6 h-6" />
                               </div>
                               <div>
-                                <h4 className="text-white font-bold">ATS Formatting Compliant</h4>
+                                <h4 className="text-slate-900 dark:text-white font-bold">ATS Formatting Compliant</h4>
                                 <p className="text-xs text-gray-500 mt-1">Your resume contains no elements that will break legacy scanner parsers.</p>
                               </div>
                             </div>
@@ -1802,7 +1802,7 @@ export default function AtsResumeChecker() {
                           ) : (
                             <div className="text-center py-8 space-y-3">
                               <CheckCircle2 className="w-10 h-10 text-emerald-500 mx-auto" />
-                              <h4 className="text-white font-bold">Strong Action Verbs Found</h4>
+                              <h4 className="text-slate-900 dark:text-white font-bold">Strong Action Verbs Found</h4>
                               <p className="text-xs text-gray-500">Your resume contains only action-oriented active verbs.</p>
                             </div>
                           )}
@@ -1863,7 +1863,7 @@ export default function AtsResumeChecker() {
             ==================================================== */}
         <div className="mt-20 space-y-6 print:hidden">
           <div className="border-b border-white/5 pb-4">
-            <h2 className="text-xl font-black text-white tracking-tight uppercase">Featured ATS & Career Knowledge Hub</h2>
+            <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase">Featured ATS & Career Knowledge Hub</h2>
             <p className="text-xs text-gray-400 mt-1">Read expert guides on resume parsing algorithms, optimizing keywords, and passing recruiters' filters.</p>
           </div>
 
@@ -1878,7 +1878,7 @@ export default function AtsResumeChecker() {
                   <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-lg shadow-inner group-hover:scale-105 transition-transform">
                     {guide.icon}
                   </div>
-                  <h3 className="text-white font-bold text-sm tracking-tight group-hover:text-blue-400 transition-colors">{guide.title}</h3>
+                  <h3 className="text-slate-900 dark:text-white font-bold text-sm tracking-tight group-hover:text-blue-400 transition-colors">{guide.title}</h3>
                   <p className="text-xs text-gray-400 leading-relaxed font-medium">{guide.summary}</p>
                 </div>
                 <div className="flex items-center gap-1.5 text-blue-500 text-xs font-black uppercase tracking-wider mt-4">
@@ -1951,7 +1951,7 @@ export default function AtsResumeChecker() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setActiveGuide(null)}
-              className="absolute inset-0 bg-[#030712]/80 backdrop-blur-md"
+              className="absolute inset-0 bg-[#F6F8FC] dark:bg-[#030712]/80 backdrop-blur-md"
             />
             <motion.div
               initial={{ x: '100%' }}
@@ -1964,7 +1964,7 @@ export default function AtsResumeChecker() {
                 <div className="flex justify-between items-start border-b border-white/5 pb-4">
                   <div className="flex items-center gap-3">
                     <span className="text-2xl">{activeGuide.icon}</span>
-                    <h3 className="text-white font-black text-lg uppercase tracking-tight">{activeGuide.title}</h3>
+                    <h3 className="text-slate-900 dark:text-white font-black text-lg uppercase tracking-tight">{activeGuide.title}</h3>
                   </div>
                   <button
                     onClick={() => setActiveGuide(null)}
@@ -1977,7 +1977,7 @@ export default function AtsResumeChecker() {
                 <div className="prose prose-invert prose-xs text-xs text-gray-300 font-medium leading-relaxed space-y-4">
                   {activeGuide.content.split('\n\n').map((paragraph, index) => {
                     if (paragraph.startsWith('### ')) {
-                      return <h4 key={index} className="text-white font-black text-sm uppercase tracking-wider pt-2">{paragraph.replace('### ', '')}</h4>;
+                      return <h4 key={index} className="text-slate-900 dark:text-white font-black text-sm uppercase tracking-wider pt-2">{paragraph.replace('### ', '')}</h4>;
                     }
                     if (paragraph.startsWith('- ')) {
                       return (

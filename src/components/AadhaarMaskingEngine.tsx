@@ -1162,7 +1162,7 @@ export default function AadhaarMaskingEngine({
               <Scissors className="w-5.5 h-5.5" />
             </div>
             <div>
-              <h2 className="text-xl font-black text-white uppercase tracking-tight">{title}</h2>
+              <h2 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">{title}</h2>
               <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mt-0.5">Secure Document Redaction</p>
             </div>
           </div>
@@ -1204,7 +1204,7 @@ export default function AadhaarMaskingEngine({
                   onDragOver={handleDragOver}
                   onDrop={handleDrop}
                   onClick={() => fileInputRef.current?.click()}
-                  className="border-2 border-dashed border-white/10 hover:border-blue-500/40 rounded-[2rem] py-16 px-8 text-center bg-white/[0.01] hover:bg-white/[0.03] transition-all cursor-pointer group relative overflow-hidden"
+                  className="border-2 border-dashed border-[#E6ECF5] dark:border-white/10 hover:border-blue-400 dark:hover:border-blue-500/40 rounded-[1.125rem] py-16 px-8 text-center bg-[#FBFCFE] dark:bg-white/[0.01] hover:bg-[#F0F4FF] dark:hover:bg-white/[0.03] transition-all cursor-pointer group relative overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.03)]"
                 >
                   <input
                     type="file"
@@ -1223,7 +1223,7 @@ export default function AadhaarMaskingEngine({
                     </div>
 
                     <div className="space-y-2">
-                      <h3 className="text-2xl font-black text-white tracking-tight">Drop Aadhaar Card scan or PDF here</h3>
+                      <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Drop Aadhaar Card scan or PDF here</h3>
                       <p className="text-sm text-gray-500 font-medium max-w-sm mx-auto">Supports JPG, PNG, WEBP, and PDF documents. Max size: 20MB.</p>
                     </div>
 
@@ -1295,7 +1295,7 @@ export default function AadhaarMaskingEngine({
                         </span>
                       </div>
                       <div className="text-center space-y-1">
-                        <h5 className="text-xs font-black text-white uppercase tracking-tight">Clear & Straight</h5>
+                        <h5 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-tight">Clear & Straight</h5>
                         <p className="text-[10px] text-gray-500 leading-normal font-sans font-medium">
                           Numbers are sharp, card orientation is flat and horizontal.
                         </p>
@@ -1328,7 +1328,7 @@ export default function AadhaarMaskingEngine({
                         </span>
                       </div>
                       <div className="text-center space-y-1">
-                        <h5 className="text-xs font-black text-white uppercase tracking-tight">Out of Focus</h5>
+                        <h5 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-tight">Out of Focus</h5>
                         <p className="text-[10px] text-gray-500 leading-normal font-sans font-medium">
                           Low lighting or shaky camera results in fuzzy characters.
                         </p>
@@ -1363,7 +1363,7 @@ export default function AadhaarMaskingEngine({
                         </span>
                       </div>
                       <div className="text-center space-y-1">
-                        <h5 className="text-xs font-black text-white uppercase tracking-tight">Reflections</h5>
+                        <h5 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-tight">Reflections</h5>
                         <p className="text-[10px] text-gray-500 leading-normal font-sans font-medium">
                           Shiny card lamination or heavy light flash washes out digits.
                         </p>
@@ -1396,7 +1396,7 @@ export default function AadhaarMaskingEngine({
                         </span>
                       </div>
                       <div className="text-center space-y-1">
-                        <h5 className="text-xs font-black text-white uppercase tracking-tight">Tilted / Cropped</h5>
+                        <h5 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-tight">Tilted / Cropped</h5>
                         <p className="text-[10px] text-gray-500 leading-normal font-sans font-medium">
                           Sideways text or cropped bounds prevent standard layout scan.
                         </p>
@@ -1424,7 +1424,7 @@ export default function AadhaarMaskingEngine({
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-2xl font-black text-white uppercase tracking-tight animate-pulse">Running Secure Scan</h3>
+                  <h3 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight animate-pulse">Running Secure Scan</h3>
                   <p className="text-sm text-gray-400 font-medium max-w-sm mx-auto">{loadingText}</p>
                 </div>
 
@@ -1913,7 +1913,7 @@ export default function AadhaarMaskingEngine({
               <Lock className="w-5 h-5" />
             </div>
             <div className="space-y-1">
-              <h4 className="text-xs font-black uppercase tracking-widest text-white">Absolute Client-Side Document Security</h4>
+              <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">Absolute Client-Side Document Security</h4>
               <p className="text-[10px] text-gray-500 font-semibold leading-relaxed">
                 Your files never leave your device. All OCR character scanning, mask rendering, blurs, and PDF compilation are executed 100% locally in your web browser. Completely safe to use offline.
               </p>
@@ -1933,7 +1933,7 @@ export default function AadhaarMaskingEngine({
             <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
               <Sparkles className="w-5.5 h-5.5" />
             </div>
-            <h4 className="text-base font-black text-white mb-2 uppercase tracking-tight">Auto Aadhaar Detection</h4>
+            <h4 className="text-base font-black text-slate-900 dark:text-white mb-2 uppercase tracking-tight">Auto Aadhaar Detection</h4>
             <p className="text-xs text-gray-500 leading-relaxed font-semibold group-hover:text-gray-400 transition-colors font-sans">
               Dynamic character scanning locates your 12-digit layout bounds and automatically masks numbers correctly.
             </p>
@@ -1946,7 +1946,7 @@ export default function AadhaarMaskingEngine({
             <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
               <Scissors className="w-5.5 h-5.5" />
             </div>
-            <h4 className="text-base font-black text-white mb-2 uppercase tracking-tight">Custom Blurs & QR Hiding</h4>
+            <h4 className="text-base font-black text-slate-900 dark:text-white mb-2 uppercase tracking-tight">Custom Blurs & QR Hiding</h4>
             <p className="text-xs text-gray-500 leading-relaxed font-semibold group-hover:text-gray-400 transition-colors font-sans">
               Draw custom regions to hide portrait images, addresses, or apply pixelated overlays on Aadhaar QR barcodes.
             </p>
@@ -1959,7 +1959,7 @@ export default function AadhaarMaskingEngine({
             <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
               <ShieldCheck className="w-5.5 h-5.5" />
             </div>
-            <h4 className="text-base font-black text-white mb-2 uppercase tracking-tight">Watermark Protection</h4>
+            <h4 className="text-base font-black text-slate-900 dark:text-white mb-2 uppercase tracking-tight">Watermark Protection</h4>
             <p className="text-xs text-gray-500 leading-relaxed font-semibold group-hover:text-gray-400 transition-colors font-sans">
               Overlay diagonal semi-transparent secure indicators to identify your files for standard KYC verifications.
             </p>

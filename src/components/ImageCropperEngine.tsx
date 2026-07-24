@@ -1233,7 +1233,16 @@ export default function ImageCropperEngine({
             accept="image/jpeg, image/png, image/webp"
             className="hidden"
           />
-          <ImageUploadPlaceholder onClick={() => fileInputRef.current?.click()} />
+          <ImageUploadPlaceholder 
+            onClick={() => fileInputRef.current?.click()} 
+            onDrop={(files) => {
+              if (files && files[0]) {
+                const dt = new DataTransfer();
+                dt.items.add(files[0]);
+                handleFileUpload({ target: { files: dt.files } } as any);
+              }
+            }}
+          />
         </div>
       ) : step === "processing" || isRemovingBg ? (
         // LOADER
@@ -1248,7 +1257,7 @@ export default function ImageCropperEngine({
                 <RefreshCw className="animate-spin h-10 w-10 text-blue-500" />
               </div>
             </div>
-            <h3 className="text-2xl font-black text-white mb-2 tracking-tight uppercase">
+            <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-2 tracking-tight uppercase">
               {loadingText}
             </h3>
             <p className="text-xs text-gray-500 font-medium">
@@ -1519,7 +1528,7 @@ export default function ImageCropperEngine({
             <div className="glass p-7 rounded-[2rem] border border-white/5 bg-white/[0.01] space-y-6">
               <div className="flex items-center gap-2 border-b border-white/5 pb-4">
                 <Sliders className="w-5 h-5 text-blue-500" />
-                <h3 className="text-sm font-black text-white uppercase">Fine-Tuning Options</h3>
+                <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase">Fine-Tuning Options</h3>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-6">
@@ -1679,7 +1688,7 @@ export default function ImageCropperEngine({
             <div className="glass p-7 rounded-[2rem] border border-white/5 bg-white/[0.01] space-y-6">
               <div className="flex items-center gap-2 border-b border-white/5 pb-4">
                 <Palette className="w-5 h-5 text-blue-500" />
-                <h3 className="text-sm font-black text-white uppercase">Export Adjustments</h3>
+                <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase">Export Adjustments</h3>
               </div>
 
               {/* Background color select */}
@@ -1883,7 +1892,7 @@ export default function ImageCropperEngine({
           <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 mb-2 block">
             Print Sheet Preview
           </span>
-          <h3 className="text-xl font-black text-white mb-6 uppercase tracking-tight">
+          <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 uppercase tracking-tight">
             Passport Grid Layout ({gridSize})
           </h3>
           <div className="inline-block border border-white/10 rounded-2xl overflow-hidden shadow-2xl bg-white max-w-lg p-3">

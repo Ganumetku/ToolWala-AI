@@ -371,7 +371,7 @@ Return ONLY valid JSON. Do not include markdown code block formatting in your ou
   };
 
   return (
-    <div className="bg-[#030712] min-h-screen py-10 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-10 relative overflow-hidden transition-colors duration-250 font-sans">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
 
@@ -389,7 +389,7 @@ Return ONLY valid JSON. Do not include markdown code block formatting in your ou
                 <Award className="w-6 h-6" />
               </div>
               <div>
-                <h1 className="text-2xl font-black text-white tracking-tighter">Resume Bullet Generator</h1>
+                <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter">Resume Bullet Generator</h1>
                 <p className="text-sm text-gray-400 font-medium mt-1">Generate recruiter-approved, metric-rich Google X-Y-Z formula bullets.</p>
               </div>
             </div>
@@ -644,7 +644,7 @@ Return ONLY valid JSON. Do not include markdown code block formatting in your ou
             <div className="flex justify-between items-center glass p-4 rounded-2xl border border-white/5">
               <div className="flex items-center gap-2.5">
                 <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <h3 className="text-xs font-black uppercase tracking-widest text-white">Live Workspace</h3>
+                <h3 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">Live Workspace</h3>
               </div>
               
               <div className="flex gap-2">
@@ -679,11 +679,11 @@ Return ONLY valid JSON. Do not include markdown code block formatting in your ou
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/[0.02] to-purple-600/[0.02] pointer-events-none" />
 
               {isGenerating && (
-                <div className="absolute inset-0 z-20 bg-[#030712]/75 backdrop-blur-sm flex items-center justify-center">
+                <div className="absolute inset-0 z-20 bg-[#F6F8FC] dark:bg-[#030712]/75 backdrop-blur-sm flex items-center justify-center">
                   <div className="glass p-8 rounded-3xl border border-white/10 shadow-2xl flex flex-col items-center gap-4 text-center max-w-xs">
                     <RefreshCw className="w-10 h-10 text-blue-500 animate-spin" />
                     <div>
-                      <h4 className="text-xs font-black uppercase tracking-wider text-white">AI Engine Running</h4>
+                      <h4 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white">AI Engine Running</h4>
                       <p className="text-[10px] text-gray-500 mt-1">Applying recruiter keywords and Google X-Y-Z calculations...</p>
                     </div>
                   </div>
@@ -737,7 +737,7 @@ Return ONLY valid JSON. Do not include markdown code block formatting in your ou
                         </div>
 
                         {/* Bullet Text */}
-                        <p className="text-xs text-white leading-relaxed font-medium">
+                        <p className="text-xs text-slate-900 dark:text-white leading-relaxed font-medium">
                           {bullet.text}
                         </p>
 
@@ -759,7 +759,7 @@ Return ONLY valid JSON. Do not include markdown code block formatting in your ou
                   <div className="flex flex-col items-center justify-center text-center h-[350px] text-gray-500 gap-4">
                     <FileText className="w-16 h-16 opacity-10" />
                     <div>
-                      <h4 className="text-xs font-black uppercase tracking-wider text-white">Generate Your Achievements</h4>
+                      <h4 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white">Generate Your Achievements</h4>
                       <p className="text-[10px] text-gray-500 mt-1.5 max-w-xs">Fill out the left form, select a custom tone, and trigger professional bullet generation.</p>
                     </div>
                   </div>
@@ -820,7 +820,7 @@ Return ONLY valid JSON. Do not include markdown code block formatting in your ou
                           </div>
                         </div>
 
-                        <p className="text-xs text-white leading-relaxed font-bold">
+                        <p className="text-xs text-slate-900 dark:text-white leading-relaxed font-bold">
                           {rewrittenOutput.rewrittenBullet}
                         </p>
 
@@ -843,7 +843,7 @@ Return ONLY valid JSON. Do not include markdown code block formatting in your ou
                   <div className="flex flex-col items-center justify-center text-center h-[350px] text-gray-500 gap-4">
                     <TrendingUp className="w-16 h-16 opacity-10" />
                     <div>
-                      <h4 className="text-xs font-black uppercase tracking-wider text-white font-serif">Paste & Optimize</h4>
+                      <h4 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white font-serif">Paste & Optimize</h4>
                       <p className="text-[10px] text-gray-500 mt-1.5 max-w-xs">Enter an existing weak bullet point on the left and have the AI re-write it with recruiters' action keywords.</p>
                     </div>
                   </div>
@@ -858,7 +858,7 @@ Return ONLY valid JSON. Do not include markdown code block formatting in your ou
                 <div className="flex items-center justify-between mb-4 border-b border-white/5 pb-2">
                   <div className="flex items-center gap-2">
                     <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                    <h4 className="text-xs font-black uppercase tracking-wider text-white">Your Starred Bullets ({favorites.length})</h4>
+                    <h4 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white">Your Starred Bullets ({favorites.length})</h4>
                   </div>
                   <button
                     onClick={() => { setFavorites([]); localStorage.removeItem('toolwala_favorite_bullets'); }}
@@ -892,7 +892,7 @@ Return ONLY valid JSON. Do not include markdown code block formatting in your ou
         <div className="mt-20 max-w-4xl mx-auto">
           <div className="text-center mb-10">
             <span className="text-[10px] font-black uppercase tracking-[0.25em] text-gray-500 block mb-2">FAQ SUPPORT</span>
-            <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight uppercase">Resume Bullet Generator FAQs</h3>
+            <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight uppercase">Resume Bullet Generator FAQs</h3>
           </div>
 
           <div className="space-y-4">

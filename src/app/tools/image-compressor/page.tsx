@@ -139,7 +139,7 @@ export default function ImageCompressor() {
   const reductionValue = calculateReduction();
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden transition-colors duration-250 font-sans">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
 
@@ -160,7 +160,7 @@ export default function ImageCompressor() {
                 </svg>
               </div>
               <div>
-                <h1 className="text-3xl font-black text-white tracking-tighter uppercase">Image Compressor</h1>
+                <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">Image Compressor</h1>
                 <p className="text-gray-400 font-medium mt-1">Compress images up to 90% without losing visible quality.</p>
               </div>
             </div>
@@ -189,7 +189,7 @@ export default function ImageCompressor() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-black text-white mb-3 tracking-tight">Drop image here or click to upload</h3>
+                  <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">Drop image here or click to upload</h3>
                   <p className="text-gray-500 mb-10 max-w-sm mx-auto font-medium leading-relaxed">Supports JPG, PNG, and WebP up to 20MB. All processing happens safely in your browser.</p>
                   
                   <button className="rounded-2xl bg-blue-600 px-10 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-white hover:bg-blue-500 transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)] pointer-events-none">
@@ -201,7 +201,7 @@ export default function ImageCompressor() {
               <div className="space-y-10">
                 <div className="glass p-8 rounded-[2rem] border border-white/5">
                   <div className="flex items-center justify-between mb-10 pb-6 border-b border-white/5">
-                    <h4 className="text-xl font-black text-white tracking-tight">Compression Settings</h4>
+                    <h4 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Compression Settings</h4>
                     <button 
                       onClick={resetAll}
                       className="text-[10px] font-black text-red-500 uppercase tracking-widest hover:text-red-400 transition-colors"
@@ -270,7 +270,7 @@ export default function ImageCompressor() {
                     <div className="bg-white/5 p-4 border-b border-white/5 flex justify-between items-center">
                       <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Original Source</span>
                     </div>
-                    <div className="p-6 flex-1 flex items-center justify-center bg-[#030712]/50 min-h-[350px]">
+                    <div className="p-6 flex-1 flex items-center justify-center bg-[#F6F8FC] dark:bg-[#030712]/50 min-h-[350px]">
                       {originalUrl && (
                         <img src={originalUrl} alt="Original" className="max-h-[300px] w-full object-contain shadow-2xl rounded-2xl transition-transform group-hover:scale-105" />
                       )}
@@ -292,7 +292,7 @@ export default function ImageCompressor() {
                     <div className="bg-blue-600/5 p-4 border-b border-white/5 flex justify-between items-center">
                       <span className="text-[10px] font-black uppercase tracking-widest text-blue-400">AI Result</span>
                     </div>
-                    <div className="p-6 flex-1 flex items-center justify-center bg-[#030712]/50 min-h-[350px] relative">
+                    <div className="p-6 flex-1 flex items-center justify-center bg-[#F6F8FC] dark:bg-[#030712]/50 min-h-[350px] relative">
                       {compressedUrl ? (
                         <img src={compressedUrl} alt="Compressed" className="max-h-[300px] w-full object-contain shadow-2xl rounded-2xl animate-fade-in" />
                       ) : (
@@ -332,7 +332,7 @@ export default function ImageCompressor() {
         <div className="glass rounded-[2rem] border border-white/5 p-8 sm:p-10">
           <div className="mb-6">
             <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400">Compress to Exact Size</span>
-            <h2 className="text-2xl font-black text-white tracking-tight mt-1">Size-Specific Compression Guides</h2>
+            <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mt-1">Size-Specific Compression Guides</h2>
             <p className="text-sm text-gray-500 mt-1 font-medium">Find the right guide for your exam or portal requirement.</p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">

@@ -110,7 +110,7 @@ export default function ToolSeoFooter({ currentSlug }: ToolSeoFooterProps) {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">
               🛡️ {t('tools.trust.verified_badge', 'SECURE BROWSER-NATIVE EXECUTION')}
             </div>
-            <h3 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
+            <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tight">
               {t('tools.trust.title', 'Files Never Leave Your Device')}
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed font-medium">
@@ -122,28 +122,28 @@ export default function ToolSeoFooter({ currentSlug }: ToolSeoFooterProps) {
               <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex items-start gap-3">
                 <span className="text-xl">❌</span>
                 <div>
-                  <h5 className="text-xs font-black text-white uppercase">{t('tools.trust.no_uploads', 'No Uploads')}</h5>
+                  <h5 className="text-xs font-black text-slate-900 dark:text-white uppercase">{t('tools.trust.no_uploads', 'No Uploads')}</h5>
                   <p className="text-[10px] text-gray-500 leading-relaxed font-semibold">{t('tools.trust.no_uploads_desc', 'Files compile in local RAM.')}</p>
                 </div>
               </div>
               <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex items-start gap-3">
                 <span className="text-xl">🚫</span>
                 <div>
-                  <h5 className="text-xs font-black text-white uppercase">{t('tools.trust.no_signups', 'No Signups')}</h5>
+                  <h5 className="text-xs font-black text-slate-900 dark:text-white uppercase">{t('tools.trust.no_signups', 'No Signups')}</h5>
                   <p className="text-[10px] text-gray-500 leading-relaxed font-semibold">{t('tools.trust.no_signups_desc', 'Skip email collection.')}</p>
                 </div>
               </div>
               <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex items-start gap-3">
                 <span className="text-xl">🔌</span>
                 <div>
-                  <h5 className="text-xs font-black text-white uppercase">{t('tools.trust.offline', 'Offline Ready')}</h5>
+                  <h5 className="text-xs font-black text-slate-900 dark:text-white uppercase">{t('tools.trust.offline', 'Offline Ready')}</h5>
                   <p className="text-[10px] text-gray-500 leading-relaxed font-semibold">{t('tools.trust.offline_desc', 'Works with internet cut off.')}</p>
                 </div>
               </div>
               <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex items-start gap-3">
                 <span className="text-xl">🛡️</span>
                 <div>
-                  <h5 className="text-xs font-black text-white uppercase">{t('tools.trust.gdpr', 'GDPR Compliant')}</h5>
+                  <h5 className="text-xs font-black text-slate-900 dark:text-white uppercase">{t('tools.trust.gdpr', 'GDPR Compliant')}</h5>
                   <p className="text-[10px] text-gray-500 leading-relaxed font-semibold">{t('tools.trust.gdpr_desc', 'Complete data sovereignty.')}</p>
                 </div>
               </div>
@@ -186,15 +186,15 @@ export default function ToolSeoFooter({ currentSlug }: ToolSeoFooterProps) {
             {t('tools.related_utilities', 'Explore Related Utilities')}
           </h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-            {relatedTools.map((rt) => (
+            {relatedTools.map((rt, idx) => (
               <Link
-                key={rt.id}
+                key={`${rt.id || rt.slug}-${idx}`}
                 href={localizeHref(rt.href)}
                 className="group p-5 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 transition-all flex flex-col justify-between h-36 shadow-lg hover:shadow-blue-500/5 cursor-pointer"
               >
                 <div>
                   <span className="text-2xl mb-3 block group-hover:scale-110 transition-transform">{rt.icon}</span>
-                  <h4 className="text-xs font-black text-white group-hover:text-blue-400 transition-colors uppercase line-clamp-2 leading-tight">
+                  <h4 className="text-xs font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors uppercase line-clamp-2 leading-tight">
                     {t(`tools.${rt.slug}.title`, rt.title)}
                   </h4>
                 </div>
@@ -215,9 +215,9 @@ export default function ToolSeoFooter({ currentSlug }: ToolSeoFooterProps) {
             {t('tools.related_insights', 'Related Insights & Guides')}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {relatedBlogs.map((b) => (
+            {relatedBlogs.map((b, idx) => (
               <Link
-                key={b.id}
+                key={`${b.id || b.slug}-${idx}`}
                 href={localizeHref(`/blog/${b.slug}`)}
                 className="p-6 rounded-[2rem] bg-white/[0.01] border border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 transition-all flex flex-col justify-between h-48 group shadow-lg cursor-pointer"
               >
@@ -225,7 +225,7 @@ export default function ToolSeoFooter({ currentSlug }: ToolSeoFooterProps) {
                   <span className="text-[9px] font-black uppercase tracking-widest text-blue-500">
                     {t(`categories.${b.category}`, b.category)}
                   </span>
-                  <h4 className="text-sm font-black text-white uppercase group-hover:text-blue-400 transition-colors line-clamp-2 mt-2 leading-tight">
+                  <h4 className="text-sm font-black text-slate-900 dark:text-white uppercase group-hover:text-blue-400 transition-colors line-clamp-2 mt-2 leading-tight">
                     {t(`blogs.${b.slug}.title`, b.title)}
                   </h4>
                   <p className="text-gray-400 text-xs font-medium line-clamp-2 mt-2 font-sans leading-relaxed">

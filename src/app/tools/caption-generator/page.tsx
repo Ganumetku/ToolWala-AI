@@ -279,7 +279,7 @@ Respond ONLY with a valid JSON object matching this schema (do not include markd
   };
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden transition-colors duration-250 font-sans">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
 
@@ -297,7 +297,7 @@ Respond ONLY with a valid JSON object matching this schema (do not include markd
                 <Type className="w-7 h-7" />
               </div>
               <div>
-                <h1 className="text-3xl font-black text-white tracking-tighter">AI Caption Generator</h1>
+                <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">AI Caption Generator</h1>
                 <p className="text-gray-400 font-medium mt-1">Create engaging, highly-optimized captions for any social media platform.</p>
               </div>
             </div>
@@ -327,7 +327,7 @@ Respond ONLY with a valid JSON object matching this schema (do not include markd
             <section className="glass rounded-[2rem] border border-white/5 p-8">
               <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/5">
                 <MessageSquare className="w-5 h-5 text-blue-500" />
-                <h2 className="text-xl font-black text-white tracking-tight">Post Details</h2>
+                <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Post Details</h2>
               </div>
               
               <div className="space-y-6">
@@ -344,7 +344,7 @@ Respond ONLY with a valid JSON object matching this schema (do not include markd
                   ) : (
                     <div className="relative w-full h-48 rounded-[2rem] overflow-hidden border border-white/10 group shadow-2xl">
                       <img src={data.imagePreview} alt="Preview" className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-[#030712]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                      <div className="absolute inset-0 bg-[#F6F8FC] dark:bg-[#030712]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
                         <button onClick={removeImage} className="p-4 bg-red-500 text-white rounded-full hover:bg-red-600 shadow-2xl transform hover:scale-110 transition-all">
                           <Trash2 className="w-6 h-6" />
                         </button>
@@ -371,7 +371,7 @@ Respond ONLY with a valid JSON object matching this schema (do not include markd
             <section className="glass rounded-[2rem] border border-white/5 p-8">
               <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/5">
                 <Settings className="w-5 h-5 text-blue-500" />
-                <h2 className="text-xl font-black text-white tracking-tight">AI Settings</h2>
+                <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">AI Settings</h2>
               </div>
               <div className="space-y-6">
                 
@@ -448,7 +448,7 @@ Respond ONLY with a valid JSON object matching this schema (do not include markd
                 <div className="bg-blue-500/10 w-24 h-24 rounded-[2rem] border border-blue-500/20 flex items-center justify-center mb-8 shadow-2xl rotate-3 group hover:rotate-12 transition-transform">
                   <Sparkles className="w-12 h-12 text-blue-500" />
                 </div>
-                <h3 className="text-3xl font-black text-white mb-4 tracking-tighter uppercase">AI Ready to Draft</h3>
+                <h3 className="text-3xl font-black text-slate-900 dark:text-white mb-4 tracking-tighter uppercase">AI Ready to Draft</h3>
                 <p className="text-gray-500 max-w-sm font-medium leading-relaxed">Fill out the post details and witness 5 professional caption variations optimized for maximum engagement.</p>
               </div>
             )}
@@ -463,7 +463,7 @@ Respond ONLY with a valid JSON object matching this schema (do not include markd
                   />
                   <RefreshCw className="w-16 h-16 text-white animate-spin relative z-10" />
                 </div>
-                <h3 className="text-2xl font-black text-white mb-2 tracking-tighter">Crafting Engagement...</h3>
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-2 tracking-tighter">Crafting Engagement...</h3>
                 <p className="text-gray-400 font-medium">Optimizing hooks and hashtags for {data.platform}.</p>
               </div>
             )}
@@ -477,26 +477,26 @@ Respond ONLY with a valid JSON object matching this schema (do not include markd
                   </div>
                   <div className="flex items-center gap-3 mb-8">
                     <BarChart2 className="w-6 h-6 text-blue-500" />
-                    <h3 className="text-xl font-black text-white tracking-tight">Viral Strategy</h3>
+                    <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Viral Strategy</h3>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="bg-white/5 p-5 rounded-2xl border border-white/5 backdrop-blur-sm">
                       <div className="flex items-center gap-2 text-[10px] font-black text-blue-400 uppercase tracking-widest mb-2">
                         <Clock className="w-4 h-4" /> Peak Time
                       </div>
-                      <p className="text-sm font-bold text-white leading-tight">{result.tips.time}</p>
+                      <p className="text-sm font-bold text-slate-900 dark:text-white leading-tight">{result.tips.time}</p>
                     </div>
                     <div className="bg-white/5 p-5 rounded-2xl border border-white/5 backdrop-blur-sm">
                       <div className="flex items-center gap-2 text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-2">
                         <MessageSquare className="w-4 h-4" /> Power Hook
                       </div>
-                      <p className="text-sm font-bold text-white line-clamp-2 leading-tight">{result.tips.hook}</p>
+                      <p className="text-sm font-bold text-slate-900 dark:text-white line-clamp-2 leading-tight">{result.tips.hook}</p>
                     </div>
                     <div className="bg-white/5 p-5 rounded-2xl border border-white/5 backdrop-blur-sm">
                       <div className="flex items-center gap-2 text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-2">
                         <CheckCircle className="w-4 h-4" /> Smart CTA
                       </div>
-                      <p className="text-sm font-bold text-white line-clamp-2 leading-tight">{result.tips.cta}</p>
+                      <p className="text-sm font-bold text-slate-900 dark:text-white line-clamp-2 leading-tight">{result.tips.cta}</p>
                     </div>
                   </div>
                 </div>
@@ -506,7 +506,7 @@ Respond ONLY with a valid JSON object matching this schema (do not include markd
                   <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6">
                     <div className="flex items-center gap-3">
                       <Hash className="w-6 h-6 text-blue-500" />
-                      <h3 className="text-xl font-black text-white tracking-tight">Smart Hashtags</h3>
+                      <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Smart Hashtags</h3>
                     </div>
                     <button 
                       onClick={() => copyToClipboard(result.hashtags, 'tags')}

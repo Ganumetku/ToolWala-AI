@@ -26,7 +26,7 @@ export default function ToolsLayout({ children }: ToolsLayoutProps) {
     <>
       {children}
       {isToolPage && (
-        <div className="w-full bg-[#030712] border-t border-white/5 pb-20 relative z-20">
+        <div className="w-full bg-[#F6F8FC] dark:bg-[#030712] border-t border-[#E6ECF5] dark:border-white/5 pb-20 relative z-20 transition-colors duration-250 font-sans">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <ToolSeoFooter currentSlug={slug} />
           </div>

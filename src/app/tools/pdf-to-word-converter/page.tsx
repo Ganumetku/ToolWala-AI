@@ -319,7 +319,7 @@ export default function PdfToWord() {
   };
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden transition-colors duration-250 font-sans">
       <MeshGradient />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
@@ -341,7 +341,7 @@ export default function PdfToWord() {
                   📝
                 </div>
                 <div>
-                  <h1 className="text-3xl font-black text-white tracking-tighter uppercase">PDF to Word Converter</h1>
+                  <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">PDF to Word Converter</h1>
                   <p className="text-gray-400 font-medium mt-1">Convert PDF files to editable Word documents (.docx) locally and securely.</p>
                 </div>
               </div>
@@ -352,7 +352,7 @@ export default function PdfToWord() {
             </div>
           </div>
 
-          <div className="p-8 sm:p-10 bg-black/[0.15]">
+          <div className="p-8 sm:p-10 bg-white dark:bg-black/[0.15]">
             
             {/* Decryption Warning */}
             {isPasswordProtected && (
@@ -414,7 +414,7 @@ export default function PdfToWord() {
                     <div className="w-20 h-20 mx-auto mb-8 rounded-2xl bg-white/5 flex items-center justify-center text-gray-500 border border-white/5 group-hover:text-blue-400 group-hover:bg-blue-500/10 group-hover:scale-110 transition-all duration-300 shadow-2xl">
                       <UploadCloud className="w-10 h-10" />
                     </div>
-                    <h3 className="text-2xl font-black text-white tracking-tight mb-3">Upload PDF to Convert</h3>
+                    <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-3">Upload PDF to Convert</h3>
                     <p className="text-sm text-gray-500 mb-10 max-w-sm mx-auto font-medium leading-relaxed font-sans">
                       Drag and drop your PDF here, or click to choose from your device. Files remain strictly inside your browser. (Max 50MB)
                     </p>
@@ -441,7 +441,7 @@ export default function PdfToWord() {
                   </div>
                   
                   <div className="space-y-2">
-                    <h3 className="text-2xl font-black text-white tracking-tight">Reading PDF Document...</h3>
+                    <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Reading PDF Document...</h3>
                     <p className="text-sm text-gray-500 font-medium font-sans">Analyzing layout structures and page boundaries.</p>
                   </div>
                 </motion.div>
@@ -460,11 +460,11 @@ export default function PdfToWord() {
                   <div className="lg:col-span-2 space-y-6">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6 bg-white/5 border border-white/5 rounded-2xl gap-4">
                       <div className="flex items-center gap-3.5 overflow-hidden">
-                        <div className="bg-[#030712] p-3 rounded-xl border border-white/5 flex-shrink-0 text-2xl">
+                        <div className="bg-[#F6F8FC] dark:bg-[#030712] p-3 rounded-xl border border-white/5 flex-shrink-0 text-2xl">
                           📄
                         </div>
                         <div className="overflow-hidden">
-                          <p className="text-sm font-bold text-white truncate max-w-xs sm:max-w-md">{pdfFile.name}</p>
+                          <p className="text-sm font-bold text-slate-900 dark:text-white truncate max-w-xs sm:max-w-md">{pdfFile.name}</p>
                           <p className="text-xs text-gray-500 mt-0.5 font-medium font-sans">{formatBytes(pdfFile.size)} • {totalPages} pages</p>
                         </div>
                       </div>
@@ -480,7 +480,7 @@ export default function PdfToWord() {
                       <div className="p-5 border border-amber-500/20 bg-amber-500/5 rounded-2xl flex items-start gap-4">
                         <AlertCircle className="w-5 h-5 text-amber-400 mt-0.5 shrink-0" />
                         <div>
-                          <h4 className="text-xs font-bold text-white uppercase tracking-wider">Scanned PDF Detected</h4>
+                          <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">Scanned PDF Detected</h4>
                           <p className="text-xs text-gray-400 mt-1 leading-relaxed font-sans">
                             This PDF appears to be scanned. OCR is required to convert it into editable Word text. We will extract all selectable elements, but flat pictures of text cannot be parsed client-side.
                           </p>
@@ -531,7 +531,7 @@ export default function PdfToWord() {
                                     <div className="text-center text-[10px] text-gray-600 font-bold uppercase">Page {pageNum}</div>
                                   )}
                                 </div>
-                                <div className="p-2 text-center text-[9px] font-black uppercase tracking-widest bg-[#030712] border-t border-white/5 text-gray-500">
+                                <div className="p-2 text-center text-[9px] font-black uppercase tracking-widest bg-[#F6F8FC] dark:bg-[#030712] border-t border-white/5 text-gray-500">
                                   Page {pageNum}
                                 </div>
                               </div>
@@ -627,7 +627,7 @@ export default function PdfToWord() {
                           value={outputName}
                           onChange={(e) => setOutputName(e.target.value)}
                           placeholder="converted_document"
-                          className="w-full rounded-xl border border-white/10 px-4 py-3 text-sm font-bold bg-[#030712] text-white focus:border-blue-500 focus:outline-none transition-all"
+                          className="w-full rounded-xl border border-white/10 px-4 py-3 text-sm font-bold bg-[#F6F8FC] dark:bg-[#030712] text-white focus:border-blue-500 focus:outline-none transition-all"
                         />
                       </div>
 
@@ -662,7 +662,7 @@ export default function PdfToWord() {
                   </div>
                   
                   <div className="space-y-2">
-                    <h3 className="text-2xl font-black text-white tracking-tight uppercase">Converting your PDF...</h3>
+                    <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight uppercase">Converting your PDF...</h3>
                     <p className="text-sm text-gray-500 font-medium font-sans">Extracting character layouts and generating DOCX runs.</p>
                   </div>
 
@@ -715,7 +715,7 @@ export default function PdfToWord() {
                   </motion.div>
 
                   <div className="space-y-3 relative z-10 font-sans">
-                    <h3 className="text-3xl font-black text-white tracking-tight uppercase">✅ Conversion Complete</h3>
+                    <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">✅ Conversion Complete</h3>
                     <p className="text-sm text-gray-400 font-medium">Your Word document is ready.</p>
                   </div>
 
@@ -793,7 +793,7 @@ export default function PdfToWord() {
                   </div>
 
                   <div className="space-y-2">
-                    <h3 className="text-2xl font-black text-white tracking-tight uppercase">❌ Conversion Failed</h3>
+                    <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight uppercase">❌ Conversion Failed</h3>
                     <p className="text-sm text-gray-400 font-medium font-sans">{errorMsg || "An error occurred while compiling your Word document."}</p>
                   </div>
 

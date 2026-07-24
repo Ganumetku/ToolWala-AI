@@ -190,7 +190,7 @@ export default function UnlockPdf() {
   };
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden transition-colors duration-250 font-sans">
       <MeshGradient />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
@@ -212,7 +212,7 @@ export default function UnlockPdf() {
                   <Unlock className="w-7 h-7" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-black text-white tracking-tighter uppercase">Unlock PDF</h1>
+                  <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">Unlock PDF</h1>
                   <p className="text-gray-400 font-medium mt-1">Remove passwords and security restrictions from your encrypted PDF documents instantly.</p>
                 </div>
               </div>
@@ -223,7 +223,7 @@ export default function UnlockPdf() {
             </div>
           </div>
 
-          <div className="p-8 sm:p-10 bg-black/[0.15]">
+          <div className="p-8 sm:p-10 bg-white dark:bg-black/[0.15]">
             
             {/* Success state display */}
             {success && decryptedBytes && (
@@ -235,7 +235,7 @@ export default function UnlockPdf() {
                 <div className="w-16 h-16 bg-emerald-500/25 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.2)]">
                   <LockKeyholeOpen className="w-8 h-8" />
                 </div>
-                <h3 className="text-2xl font-black text-white tracking-tight mb-2">Document Unlocked!</h3>
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Document Unlocked!</h3>
                 <p className="text-sm text-gray-400 mb-6 max-w-md mx-auto">
                   Your PDF was decrypted successfully and all security password restrictions have been permanently removed.
                 </p>
@@ -284,7 +284,7 @@ export default function UnlockPdf() {
                   <div className="w-24 h-24 rounded-[2rem] bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:border-blue-500/50 transition-all duration-500 shadow-inner">
                     <UploadCloud className="w-10 h-10 text-gray-400 group-hover:text-blue-500 transition-colors" />
                   </div>
-                  <h3 className="text-3xl font-black text-white tracking-tighter uppercase mb-3">Upload Protected PDF</h3>
+                  <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-3">Upload Protected PDF</h3>
                   <p className="text-gray-400 font-medium max-w-sm mx-auto mb-8 text-sm">
                     Drag and drop your password-locked PDF here, or click to search files.
                   </p>
@@ -309,7 +309,7 @@ export default function UnlockPdf() {
                       <FileText className="w-6 h-6" />
                     </div>
                     <div>
-                      <h4 className="text-base font-black text-white line-clamp-1">{pdfFile.name}</h4>
+                      <h4 className="text-base font-black text-slate-900 dark:text-white line-clamp-1">{pdfFile.name}</h4>
                       <p className="text-xs text-gray-500 font-semibold mt-0.5">
                         {formatBytes(pdfFile.size)} • <span className="text-amber-500 font-bold uppercase">Password Locked</span>
                       </p>
@@ -330,7 +330,7 @@ export default function UnlockPdf() {
                   {/* Left Column: Password Credentials */}
                   <div className="glass p-8 rounded-[2rem] border border-white/5 bg-white/[0.01] relative flex flex-col justify-between">
                     <div className="space-y-6">
-                      <h3 className="text-xs font-black uppercase tracking-widest text-white border-b border-white/5 pb-4 flex items-center gap-2">
+                      <h3 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white border-b border-white/5 pb-4 flex items-center gap-2">
                         <KeyRound className="w-4 h-4 text-blue-500" /> Enter PDF Password
                       </h3>
 
@@ -343,7 +343,7 @@ export default function UnlockPdf() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             disabled={isProcessing}
-                            className="w-full bg-[#030712]/50 border border-white/5 focus:border-blue-500/50 rounded-xl pl-4 pr-12 py-3.5 text-white text-sm font-semibold outline-none transition-all focus:ring-4 focus:ring-blue-500/5"
+                            className="w-full bg-[#F6F8FC] dark:bg-[#030712]/50 border border-white/5 focus:border-blue-500/50 rounded-xl pl-4 pr-12 py-3.5 text-white text-sm font-semibold outline-none transition-all focus:ring-4 focus:ring-blue-500/5"
                             placeholder="Enter password lock to decrypt..."
                             onKeyDown={(e) => e.key === 'Enter' && decryptDocument()}
                           />
@@ -381,7 +381,7 @@ export default function UnlockPdf() {
                   {/* Right Column: Educational Security Panels */}
                   <div className="glass p-8 rounded-[2rem] border border-white/5 bg-white/[0.01] flex flex-col justify-between">
                     <div className="space-y-6">
-                      <h3 className="text-xs font-black uppercase tracking-widest text-white border-b border-white/5 pb-4 flex items-center gap-2">
+                      <h3 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white border-b border-white/5 pb-4 flex items-center gap-2">
                         <Shield className="w-4 h-4 text-blue-500" /> Decryption Security Info
                       </h3>
                       
@@ -391,7 +391,7 @@ export default function UnlockPdf() {
                             🔑
                           </div>
                           <div>
-                            <h4 className="text-xs font-black text-white uppercase tracking-wider mb-1">Local Decoding only</h4>
+                            <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider mb-1">Local Decoding only</h4>
                             <p className="text-[11px] font-semibold text-gray-500">
                               Your password is never sent to the network. Cryptographic algorithms decrypt the byte buffers completely on your machine.
                             </p>
@@ -403,7 +403,7 @@ export default function UnlockPdf() {
                             🛡️
                           </div>
                           <div>
-                            <h4 className="text-xs font-black text-white uppercase tracking-wider mb-1">Permanent Removal</h4>
+                            <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider mb-1">Permanent Removal</h4>
                             <p className="text-[11px] font-semibold text-gray-500">
                               Downloading compiles a standard PDF copy without encryption blocks, meaning it will open anywhere without password prompts.
                             </p>
@@ -415,7 +415,7 @@ export default function UnlockPdf() {
                             ⚠️
                           </div>
                           <div>
-                            <h4 className="text-xs font-black text-white uppercase tracking-wider mb-1">Password Requirement</h4>
+                            <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider mb-1">Password Requirement</h4>
                             <p className="text-[11px] font-semibold text-gray-500">
                               This tool removes restrictions from files you are authorized to access. You must provide the original password once to decode the stream.
                             </p>
@@ -458,7 +458,7 @@ export default function UnlockPdf() {
                 <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   <Lock className="w-5 h-5 text-blue-500" />
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">Protect PDF</h3>
+                <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors tracking-tight">Protect PDF</h3>
                 <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
                   Add secure user passwords and protect your PDF documents with client-side encryption.
                 </p>
@@ -484,7 +484,7 @@ export default function UnlockPdf() {
                 <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   <Files className="w-5 h-5 text-blue-500" />
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">Merge PDF</h3>
+                <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors tracking-tight">Merge PDF</h3>
                 <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
                   Combine multiple distinct PDF documents into a single professional-grade file quickly and securely.
                 </p>
@@ -510,7 +510,7 @@ export default function UnlockPdf() {
                 <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   <Layers className="w-5 h-5 text-blue-500" />
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">PDF to JPG</h3>
+                <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors tracking-tight">PDF to JPG</h3>
                 <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
                   Convert PDF pages into high-resolution JPG images directly in your browser.
                 </p>

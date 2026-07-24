@@ -98,7 +98,7 @@ export default async function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans">
+      <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250 font-sans">
         <MeshGradient />
         <FloatingParticles />
 
@@ -120,14 +120,14 @@ export default async function Page() {
           <div className="glass rounded-[2.5rem] border border-white/5 overflow-hidden mb-16 shadow-2xl">
 
             {/* HEADER HERO */}
-            <div className="p-8 sm:p-10 border-b border-white/5 bg-black/[0.15]">
+            <div className="p-8 sm:p-10 border-b border-white/5 bg-white dark:bg-black/[0.15]">
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
                 <div className="flex items-center gap-6 text-left">
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_0_25px_rgba(37,99,235,0.4)]">
                     <Files className="w-7 h-7" />
                   </div>
                   <div>
-                    <h1 className="text-3xl font-black text-white tracking-tighter uppercase">
+                    <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">
                       {t('nav.pdf_suite', 'PDF Suite')}
                     </h1>
                     <p className="text-gray-400 font-medium mt-1">
@@ -163,7 +163,7 @@ export default async function Page() {
                           {tool.icon}
                         </div>
                         <div className="overflow-hidden">
-                          <h4 className="text-xs font-black text-white group-hover:text-blue-400 transition-colors truncate">{displayTitle}</h4>
+                          <h4 className="text-xs font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors truncate">{displayTitle}</h4>
                           <p className="text-[9px] text-gray-500 font-semibold mt-0.5 truncate leading-relaxed">{displayDesc}</p>
                         </div>
                       </Link>
@@ -186,7 +186,7 @@ export default async function Page() {
                       <div className="flex items-center gap-3 border-b border-white/5 pb-4 mb-6 text-left">
                         <div className="text-3xl filter drop-shadow-[0_0_8px_rgba(37,99,235,0.2)]">{group.icon}</div>
                         <div>
-                          <h2 className="text-sm font-black uppercase tracking-wide text-white group-hover/category:text-blue-400 transition-colors">{group.title}</h2>
+                          <h2 className="text-sm font-black uppercase tracking-wide text-slate-900 dark:text-white group-hover/category:text-blue-400 transition-colors">{group.title}</h2>
                           <p className="text-[10px] text-gray-500 font-semibold mt-0.5 leading-normal">{group.description}</p>
                         </div>
                       </div>
@@ -208,11 +208,11 @@ export default async function Page() {
                               {/* Micro-glow effect */}
                               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-purple-600/5 opacity-0 group-hover/tool:opacity-100 transition-opacity pointer-events-none" />
                               
-                              <div className="bg-[#030712] p-2.5 rounded-xl border border-white/5 flex-shrink-0 flex items-center justify-center text-2xl group-hover/tool:scale-110 duration-300 transition-transform">
+                              <div className="bg-[#F6F8FC] dark:bg-[#030712] p-2.5 rounded-xl border border-white/5 flex-shrink-0 flex items-center justify-center text-2xl group-hover/tool:scale-110 duration-300 transition-transform">
                                 {tool.icon}
                               </div>
                               <div className="space-y-0.5 overflow-hidden pr-4">
-                                <h3 className="text-xs font-black uppercase tracking-wide text-white group-hover/tool:text-blue-400 transition-colors">
+                                <h3 className="text-xs font-black uppercase tracking-wide text-slate-900 dark:text-white group-hover/tool:text-blue-400 transition-colors">
                                   {toolTitle}
                                 </h3>
                                 <p className="text-[10px] text-gray-500 leading-normal font-semibold truncate group-hover/tool:text-gray-400 transition-colors">

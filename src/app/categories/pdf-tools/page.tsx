@@ -157,7 +157,7 @@ export default async function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <div className="min-h-screen bg-[#030712] text-white relative overflow-hidden font-sans">
+      <div className="min-h-screen bg-[#F6F8FC] dark:bg-[#030712] text-white relative overflow-hidden font-sans">
         <MeshGradient />
         <FloatingParticles />
 

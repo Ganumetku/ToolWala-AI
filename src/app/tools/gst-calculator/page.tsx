@@ -30,7 +30,7 @@ function NumberInput({ label, value, onChange, icon: Icon, suffix = "", helperTe
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
         <div className="flex items-center gap-2">
           <Icon className="w-5 h-5 text-emerald-400" />
-          <label className="text-sm font-black uppercase tracking-widest text-white">{label}</label>
+          <label className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">{label}</label>
         </div>
         <div className="relative flex items-center w-full sm:w-48">
           <input 
@@ -170,12 +170,12 @@ export default function GstCalculatorPage() {
   ];
 
   if (!mounted) {
-    return <div className="min-h-screen bg-[#030712]" />;
+    return <div className="min-h-screen bg-[#F6F8FC] dark:bg-[#030712]" />;
   }
 
   return (
     <ToolVisibilityGuard slug="gst-calculator">
-      <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans">
+      <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250 font-sans">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -202,7 +202,7 @@ export default function GstCalculatorPage() {
               <span>🧾 Smart Tax Planning Tool</span>
             </div>
             
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-2 uppercase leading-none">
+            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-2 uppercase leading-none">
               GST Calculator
             </h1>
             
@@ -244,7 +244,7 @@ export default function GstCalculatorPage() {
                 <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-8">
                   <div className="flex items-center gap-2">
                     <Calculator className="w-5 h-5 text-emerald-400" />
-                    <h3 className="text-sm font-black uppercase tracking-widest text-white">Calculation Details</h3>
+                    <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">Calculation Details</h3>
                   </div>
                   <button 
                     onClick={handleReset}
@@ -257,7 +257,7 @@ export default function GstCalculatorPage() {
                 <div className="space-y-8">
                   {/* Calculation Mode Toggle */}
                   <div className="space-y-3">
-                    <label className="text-sm font-black uppercase tracking-widest text-white block">Mode</label>
+                    <label className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white block">Mode</label>
                     <div className="flex bg-black/40 border border-white/10 rounded-xl p-1.5 gap-1 w-full">
                       <button 
                         onClick={() => setMode('add')}
@@ -291,7 +291,7 @@ export default function GstCalculatorPage() {
                   <div className="space-y-3">
                     <div className="flex items-center gap-2">
                       <Percent className="w-5 h-5 text-emerald-400" />
-                      <label className="text-sm font-black uppercase tracking-widest text-white block">GST Rate</label>
+                      <label className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white block">GST Rate</label>
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {[3, 5, 12, 18, 28].map(r => (
@@ -440,7 +440,7 @@ export default function GstCalculatorPage() {
                 <BookOpen className="w-4 h-4" />
                 <span>GST Guide</span>
               </div>
-              <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase mb-6">
+              <h2 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-6">
                 📚 How to Use the GST Calculator
               </h2>
               <p className="text-gray-400 text-base sm:text-lg font-medium leading-relaxed">
@@ -476,7 +476,7 @@ export default function GstCalculatorPage() {
 
             <div className="max-w-3xl mx-auto space-y-8 mb-20">
               <div className="text-center">
-                <h3 className="text-3xl font-black text-white tracking-tighter uppercase mb-2">Frequently Asked Questions</h3>
+                <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-2">Frequently Asked Questions</h3>
                 <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-8">Everything you need to know about GST</p>
               </div>
               <div className="space-y-4">
@@ -517,13 +517,13 @@ export default function GstCalculatorPage() {
             {/* Related Tools */}
             {relatedTools.length > 0 && (
               <div className="mt-20">
-                <h3 className="text-2xl font-black text-white tracking-tighter uppercase mb-8 text-center">Related Calculators</h3>
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-8 text-center">Related Calculators</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
                   {relatedTools.map(tool => (
                     <Link key={tool.slug} href={tool.href} className="glass rounded-2xl border border-white/5 p-6 bg-white/[0.01] hover:bg-white/[0.05] transition-all group">
                       <div className="flex items-center gap-4 mb-3">
                         <span className="text-3xl group-hover:scale-110 transition-transform">{tool.icon}</span>
-                        <h4 className="text-lg font-black text-white">{tool.title}</h4>
+                        <h4 className="text-lg font-black text-slate-900 dark:text-white">{tool.title}</h4>
                       </div>
                       <p className="text-sm text-gray-400 font-medium">{tool.description}</p>
                     </Link>
@@ -533,7 +533,7 @@ export default function GstCalculatorPage() {
             )}
 
             <div className="text-center py-12 border-t border-white/5 mt-16">
-              <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-8">Ready to compute your tax?</h3>
+              <h3 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-8">Ready to compute your tax?</h3>
               <button 
                 onClick={scrollToCalculator}
                 className="px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 flex items-center justify-center gap-2 mx-auto shadow-lg shadow-emerald-500/20"

@@ -243,7 +243,7 @@ export default function ProfessionalQRCodeGenerator() {
   };
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden transition-colors duration-250 font-sans">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
 
@@ -262,7 +262,7 @@ export default function ProfessionalQRCodeGenerator() {
                 <Globe className="w-8 h-8" />
               </div>
               <div>
-                <h1 className="text-3xl font-black text-white tracking-tighter uppercase">Professional QR Generator</h1>
+                <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">Professional QR Generator</h1>
                 <p className="text-gray-400 font-medium mt-1">Create, customize, and brand your QR codes instantly.</p>
               </div>
             </div>
@@ -283,7 +283,7 @@ export default function ProfessionalQRCodeGenerator() {
             <div className="glass p-8 rounded-[2.5rem] border border-white/5 shadow-2xl">
               <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-6">
                 <Settings className="w-5 h-5 text-blue-500" />
-                <h2 className="text-xl font-black text-white tracking-tight uppercase">1. Select Data Type</h2>
+                <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase">1. Select Data Type</h2>
               </div>
               
               <div className="grid grid-cols-3 sm:grid-cols-6 gap-4">
@@ -397,7 +397,7 @@ export default function ProfessionalQRCodeGenerator() {
             <div className="glass p-8 rounded-[2.5rem] border border-white/5 shadow-2xl">
               <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-6">
                 <Palette className="w-5 h-5 text-blue-500" />
-                <h2 className="text-xl font-black text-white tracking-tight uppercase">2. Design & Branding</h2>
+                <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase">2. Design & Branding</h2>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -466,7 +466,7 @@ export default function ProfessionalQRCodeGenerator() {
             <div className="glass p-8 rounded-[2.5rem] border border-white/5 shadow-2xl">
               <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-6">
                 <Layout className="w-5 h-5 text-blue-500" />
-                <h2 className="text-xl font-black text-white tracking-tight uppercase">3. Select Frame Template</h2>
+                <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase">3. Select Frame Template</h2>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
@@ -504,7 +504,7 @@ export default function ProfessionalQRCodeGenerator() {
                 </div>
 
                 <div className="w-full mb-12">
-                  <h3 className="text-2xl font-black text-white tracking-tight uppercase">Studio Preview</h3>
+                  <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight uppercase">Studio Preview</h3>
                   <p className="text-gray-500 font-medium mt-1">Real-time generation engine.</p>
                 </div>
 

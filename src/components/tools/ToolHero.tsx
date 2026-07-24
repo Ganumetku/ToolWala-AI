@@ -21,21 +21,21 @@ export default function ToolHero({
   const displayBadgeText = badgeText || t('tools.badge_client_side', '100% Client-Side & Secure');
 
   return (
-    <div className="p-8 sm:p-10 border-b border-white/5 bg-white/[0.02] flex flex-col sm:flex-row sm:items-start justify-between gap-6">
+    <div className="p-8 sm:p-10 border-b border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.02] flex flex-col sm:flex-row sm:items-start justify-between gap-6">
       <div className="flex items-center gap-6">
         {icon && (
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_0_25px_rgba(37,99,235,0.4)]">
+          <div className="flex h-14 w-14 items-center justify-center rounded-[16px] bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white shadow-[0_4px_20px_rgba(37,99,235,0.25)] text-xl font-bold">
             {icon}
           </div>
         )}
         <div>
-          <h1 className="text-3xl font-black text-white tracking-tighter uppercase">{title}</h1>
-          <p className="text-gray-400 font-medium mt-1">{description}</p>
+          <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">{title}</h1>
+          <p className="text-slate-600 dark:text-gray-400 font-medium mt-1 font-sans">{description}</p>
         </div>
       </div>
-      <div className="flex items-center gap-3 bg-emerald-500/10 px-4 py-2 rounded-xl border border-emerald-500/20 h-fit self-start">
-        <Shield className="w-4 h-4 text-emerald-400" />
-        <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">{displayBadgeText}</span>
+      <div className="flex items-center gap-2.5 bg-emerald-50 dark:bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-200 dark:border-emerald-500/20 h-fit self-start shadow-sm">
+        <Shield className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+        <span className="text-[10px] font-black uppercase tracking-widest text-emerald-700 dark:text-emerald-400">{displayBadgeText}</span>
       </div>
     </div>
   );

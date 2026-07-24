@@ -115,7 +115,7 @@ export default function AadhaarPdfCompressor() {
             icon={<Minimize2 className="w-7 h-7" />}
           />
 
-          <div className="p-8 sm:p-10 bg-black/[0.15]">
+          <div className="p-8 sm:p-10 bg-white dark:bg-black/[0.15]">
             {!file ? (
               <UploadZone
                 onFilesSelected={handleFiles}
@@ -128,11 +128,11 @@ export default function AadhaarPdfCompressor() {
               <div className="space-y-8 max-w-4xl mx-auto">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 bg-white/5 rounded-[2rem] border border-white/5 gap-6">
                   <div className="flex items-center gap-5 overflow-hidden w-full">
-                    <div className="bg-[#030712] p-4 rounded-2xl border border-white/5 flex-shrink-0">
+                    <div className="bg-[#F6F8FC] dark:bg-[#030712] p-4 rounded-2xl border border-white/5 flex-shrink-0">
                       <FileText className="w-7 h-7 text-red-500" />
                     </div>
                     <div className="overflow-hidden">
-                      <p className="text-base font-black text-white truncate">{file.name}</p>
+                      <p className="text-base font-black text-slate-900 dark:text-white truncate">{file.name}</p>
                       <p className="text-sm text-gray-500 mt-1">Original Size: <span className="font-bold text-gray-300">{formatBytes(file.size)}</span></p>
                     </div>
                   </div>
@@ -148,7 +148,7 @@ export default function AadhaarPdfCompressor() {
                   <div className="p-6 bg-yellow-500/10 border border-yellow-500/20 rounded-2xl flex items-start gap-4">
                     <Lock className="w-5 h-5 text-yellow-400 shrink-0 mt-0.5" />
                     <div>
-                      <h5 className="text-sm font-black text-white uppercase tracking-wider">Aadhaar PDF is Password-Protected</h5>
+                      <h5 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider">Aadhaar PDF is Password-Protected</h5>
                       <p className="text-xs text-gray-400 mt-1 leading-relaxed">
                         e-Aadhaar PDF files downloaded from UIDAI are locked with a password (format: first 4 letters of your name in CAPITALS followed by your birth year, e.g., KART1990). For security, please decrypt your PDF first using an unlock tool or submit a decrypted file.
                       </p>
@@ -165,7 +165,7 @@ export default function AadhaarPdfCompressor() {
                     }`}>
                       {compressResult.isCompliant ? <CheckCircle className="w-8 h-8" /> : <ShieldAlert className="w-8 h-8" />}
                     </div>
-                    <h4 className="text-2xl font-black tracking-tight mb-2 text-white">
+                    <h4 className="text-2xl font-black tracking-tight mb-2 text-slate-900 dark:text-white">
                       {compressResult.isCompliant ? 'UIDAI-Compliant Output!' : 'Compressed!'}
                     </h4>
                     <p className="text-xs text-gray-400 max-w-sm mx-auto">
@@ -173,7 +173,7 @@ export default function AadhaarPdfCompressor() {
                         ? 'Your Aadhaar PDF is optimized and under the 300KB limit, ready for UIDAI portal submissions.' 
                         : 'Optimization finished, but the file size is still above the 300KB UIDAI portal limit.'}
                     </p>
-                    <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs font-black uppercase tracking-widest mt-8 bg-[#030712] w-fit mx-auto px-8 py-5 rounded-2xl border border-white/5 shadow-xl">
+                    <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs font-black uppercase tracking-widest mt-8 bg-[#F6F8FC] dark:bg-[#030712] w-fit mx-auto px-8 py-5 rounded-2xl border border-white/5 shadow-xl">
                       <div>
                         <span className="text-gray-500">Original</span>
                         <span className="text-white ml-3">{formatBytes(file.size)}</span>

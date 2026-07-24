@@ -440,7 +440,7 @@ ${palette.map((c, i) => `          ${(i + 1) * 100}: '${c.hex}',`).join('\n')}
   };
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden transition-colors duration-250 font-sans">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
 
@@ -461,7 +461,7 @@ ${palette.map((c, i) => `          ${(i + 1) * 100}: '${c.hex}',`).join('\n')}
                 🎨
               </div>
               <div>
-                <h1 className="text-3xl font-black text-white tracking-tighter uppercase">AI Color Palette Harmonizer</h1>
+                <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">AI Color Palette Harmonizer</h1>
                 <p className="text-gray-400 font-medium mt-1 font-sans">Extract color palettes from images, generate harmonies, and export code blueprints.</p>
               </div>
             </div>
@@ -488,7 +488,7 @@ ${palette.map((c, i) => `          ${(i + 1) * 100}: '${c.hex}',`).join('\n')}
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/5 pb-6 mb-8">
                 <div className="flex items-center gap-2">
                   <Palette className="w-5 h-5 text-blue-500" />
-                  <h2 className="text-xl font-black text-white tracking-tight uppercase">Palette Harmonizer</h2>
+                  <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase">Palette Harmonizer</h2>
                 </div>
                 
                 <div className="flex items-center gap-3 w-full sm:w-auto">
@@ -496,7 +496,7 @@ ${palette.map((c, i) => `          ${(i + 1) * 100}: '${c.hex}',`).join('\n')}
                   <select 
                     value={harmonyRule}
                     onChange={(e) => handleHarmonyChange(e.target.value as HarmonyRule)}
-                    className="bg-[#090d16] border border-white/10 rounded-xl px-4 py-2.5 text-xs font-bold text-white outline-none cursor-pointer focus:border-blue-500/50"
+                    className="bg-[#FBFCFE] dark:bg-[#090d16] border border-white/10 rounded-xl px-4 py-2.5 text-xs font-bold text-white outline-none cursor-pointer focus:border-blue-500/50"
                   >
                     <option value="Custom">Custom (Manual)</option>
                     <option value="Monochromatic">Monochromatic</option>
@@ -640,7 +640,7 @@ ${palette.map((c, i) => `          ${(i + 1) * 100}: '${c.hex}',`).join('\n')}
             <div className="glass p-8 sm:p-10 rounded-[2.5rem] border border-white/5 bg-white/[0.01] shadow-2xl relative">
               <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-6">
                 <Upload className="w-5 h-5 text-blue-500" />
-                <h2 className="text-xl font-black text-white tracking-tight uppercase">Extract Palette from Image</h2>
+                <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase">Extract Palette from Image</h2>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -700,7 +700,7 @@ ${palette.map((c, i) => `          ${(i + 1) * 100}: '${c.hex}',`).join('\n')}
             {/* LIVE UI PREVIEW */}
             <div className="glass p-8 sm:p-10 rounded-[2.5rem] border border-white/5 bg-white/[0.01] shadow-2xl relative">
               <div className="flex justify-between items-center border-b border-white/5 pb-4 mb-6">
-                <h3 className="text-sm font-black uppercase tracking-widest text-white flex items-center gap-2">
+                <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white flex items-center gap-2">
                   <Eye className="w-4 h-4 text-blue-500" /> UI Mock Preview
                 </h3>
                 <span className="text-[9px] bg-blue-600/10 text-blue-400 border border-blue-500/20 px-2.5 py-1 rounded-lg font-black uppercase tracking-widest">
@@ -725,7 +725,7 @@ ${palette.map((c, i) => `          ${(i + 1) * 100}: '${c.hex}',`).join('\n')}
 
                 {/* Hero Mock */}
                 <div className="space-y-3 py-2">
-                  <h4 className="text-lg font-black leading-tight text-white uppercase tracking-tight">
+                  <h4 className="text-lg font-black leading-tight text-slate-900 dark:text-white uppercase tracking-tight">
                     Powering <span style={{ color: palette[1].hex }}>Future</span> Interfaces
                   </h4>
                   <p className="text-xs text-gray-500 font-medium leading-relaxed">

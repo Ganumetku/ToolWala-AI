@@ -68,7 +68,7 @@ export default function OrganizePdf() {
   }, []);
 
   if (!mounted) {
-    return <div className="min-h-screen bg-[#030712]" />;
+    return <div className="min-h-screen bg-[#F6F8FC] dark:bg-[#030712]" />;
   }
 
   // ------------------------------------
@@ -394,7 +394,7 @@ export default function OrganizePdf() {
           icon={<Grid className="w-7 h-7" />}
         />
 
-        <div className="p-8 sm:p-10 bg-black/[0.15]">
+        <div className="p-8 sm:p-10 bg-white dark:bg-black/[0.15]">
           {!pdfFile ? (
             <div className="relative">
               {isProcessing && processingMessage && (
@@ -428,7 +428,7 @@ export default function OrganizePdf() {
                     <FileText className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-black text-white line-clamp-1">{pdfFile.name}</h4>
+                    <h4 className="text-sm font-black text-slate-900 dark:text-white line-clamp-1">{pdfFile.name}</h4>
                     <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider mt-0.5">
                       Size: {formatBytes(pdfFile.size)} • Total: {pages.length} Pages
                     </p>
@@ -553,7 +553,7 @@ export default function OrganizePdf() {
                 <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center z-50">
                   <div className="bg-[#0b0f19] border border-white/5 p-8 rounded-3xl flex flex-col items-center max-w-sm text-center shadow-2xl">
                     <RefreshCw className="w-10 h-10 text-blue-500 animate-spin mb-4" />
-                    <p className="text-sm font-bold text-white uppercase tracking-widest mb-1">Processing PDF</p>
+                    <p className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest mb-1">Processing PDF</p>
                     <p className="text-xs text-gray-500 font-medium leading-relaxed">{processingMessage}</p>
                   </div>
                 </div>
@@ -563,7 +563,7 @@ export default function OrganizePdf() {
               {pages.length === 0 ? (
                 <div className="glass p-16 rounded-[2.5rem] text-center border border-white/5 flex flex-col items-center">
                   <AlertCircle className="w-12 h-12 text-gray-600 mb-4" />
-                  <h3 className="text-lg font-black text-white mb-2">No pages remaining</h3>
+                  <h3 className="text-lg font-black text-slate-900 dark:text-white mb-2">No pages remaining</h3>
                   <p className="text-sm text-gray-500 max-w-xs font-semibold leading-relaxed">
                     You have deleted all pages from the document. Click 'Reset Layout' above to start over.
                   </p>
@@ -700,7 +700,7 @@ export default function OrganizePdf() {
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
                 <Grid className="w-5.5 h-5.5" />
               </div>
-              <h4 className="text-lg font-black text-white mb-2">Visual Order Grids</h4>
+              <h4 className="text-lg font-black text-slate-900 dark:text-white mb-2">Visual Order Grids</h4>
               <p className="text-sm text-gray-400 leading-relaxed font-medium">
                 Arrange page sequence visually by dragging cards around. What you see is exactly what gets compiled.
               </p>
@@ -709,7 +709,7 @@ export default function OrganizePdf() {
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
                 <Copy className="w-5.5 h-5.5" />
               </div>
-              <h4 className="text-lg font-black text-white mb-2">Visual Page Duplicates</h4>
+              <h4 className="text-lg font-black text-slate-900 dark:text-white mb-2">Visual Page Duplicates</h4>
               <p className="text-sm text-gray-400 leading-relaxed font-medium">
                 Instantly duplicate forms, agreements, or cover sheets to distribute duplicates across the PDF.
               </p>
@@ -718,7 +718,7 @@ export default function OrganizePdf() {
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
                 <Shield className="w-5.5 h-5.5" />
               </div>
-              <h4 className="text-lg font-black text-white mb-2">Zero Cloud Uploads</h4>
+              <h4 className="text-lg font-black text-slate-900 dark:text-white mb-2">Zero Cloud Uploads</h4>
               <p className="text-sm text-gray-400 leading-relaxed font-medium">
                 Parsed and reassembled on your local browser thread. Your sensitive data never leaves your computer.
               </p>

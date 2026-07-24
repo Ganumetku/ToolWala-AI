@@ -346,7 +346,7 @@ export default function PdfToJpg() {
   };
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden transition-colors duration-250 font-sans">
       <MeshGradient />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
@@ -368,7 +368,7 @@ export default function PdfToJpg() {
                   <Image className="w-7 h-7" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-black text-white tracking-tighter uppercase">PDF to JPG</h1>
+                  <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">PDF to JPG</h1>
                   <p className="text-gray-400 font-medium mt-1">Convert PDF pages into high-resolution JPG images entirely in your browser.</p>
                 </div>
               </div>
@@ -379,7 +379,7 @@ export default function PdfToJpg() {
             </div>
           </div>
 
-          <div className="p-8 sm:p-10 bg-black/[0.15]">
+          <div className="p-8 sm:p-10 bg-white dark:bg-black/[0.15]">
             
             {/* Success state overview */}
             {success && convertedImages.length > 0 && (
@@ -391,7 +391,7 @@ export default function PdfToJpg() {
                 <div className="w-16 h-16 bg-emerald-500/25 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.2)]">
                   <CheckCircle className="w-8 h-8" />
                 </div>
-                <h3 className="text-2xl font-black text-white tracking-tight mb-2">Conversion Complete!</h3>
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Conversion Complete!</h3>
                 <p className="text-sm text-gray-400 mb-6 max-w-md mx-auto">
                   {convertedImages.length} page(s) successfully converted to JPG files. Save them individually or download everything zipped.
                 </p>
@@ -440,7 +440,7 @@ export default function PdfToJpg() {
                   <div className="w-24 h-24 rounded-[2rem] bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:border-blue-500/50 transition-all duration-500 shadow-inner">
                     <UploadCloud className="w-10 h-10 text-gray-400 group-hover:text-blue-500 transition-colors" />
                   </div>
-                  <h3 className="text-3xl font-black text-white tracking-tighter uppercase mb-3">Upload your PDF</h3>
+                  <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-3">Upload your PDF</h3>
                   <p className="text-gray-400 font-medium max-w-sm mx-auto mb-8 text-sm">
                     Drag & drop your PDF file here, or click to browse from your folders.
                   </p>
@@ -465,7 +465,7 @@ export default function PdfToJpg() {
                       <FileText className="w-6 h-6" />
                     </div>
                     <div>
-                      <h4 className="text-base font-black text-white line-clamp-1">{pdfFile.name}</h4>
+                      <h4 className="text-base font-black text-slate-900 dark:text-white line-clamp-1">{pdfFile.name}</h4>
                       <p className="text-xs text-gray-500 font-semibold mt-0.5">
                         {formatBytes(pdfFile.size)} • {totalPages} Pages
                       </p>
@@ -486,7 +486,7 @@ export default function PdfToJpg() {
                   {/* Left Column: Settings Configuration */}
                   <div className="space-y-8 lg:col-span-1">
                     <div className="glass p-6 sm:p-8 rounded-[2rem] border border-white/5 bg-white/[0.01] space-y-6">
-                      <h3 className="text-xs font-black uppercase tracking-widest text-white border-b border-white/5 pb-4 flex items-center gap-2">
+                      <h3 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white border-b border-white/5 pb-4 flex items-center gap-2">
                         <Sparkles className="w-4 h-4 text-blue-500" /> Output Settings
                       </h3>
                       
@@ -497,7 +497,7 @@ export default function PdfToJpg() {
                           type="text"
                           value={outputPrefix}
                           onChange={(e) => setOutputPrefix(e.target.value.replace(/[^a-zA-Z0-9_\-]/g, "_"))}
-                          className="w-full bg-[#030712]/50 border border-white/5 focus:border-blue-500/50 rounded-xl px-4 py-3 text-white text-sm font-semibold outline-none transition-all focus:ring-4 focus:ring-blue-500/5"
+                          className="w-full bg-[#F6F8FC] dark:bg-[#030712]/50 border border-white/5 focus:border-blue-500/50 rounded-xl px-4 py-3 text-white text-sm font-semibold outline-none transition-all focus:ring-4 focus:ring-blue-500/5"
                           placeholder="document_pages"
                         />
                       </div>
@@ -578,7 +578,7 @@ export default function PdfToJpg() {
                     <div className="glass p-6 sm:p-8 rounded-[2rem] border border-white/5 bg-white/[0.01]">
                       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/5 pb-4 mb-6 gap-4">
                         <div>
-                          <h3 className="text-xs font-black uppercase tracking-widest text-white">Visual Previewer</h3>
+                          <h3 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">Visual Previewer</h3>
                           <p className="text-[10px] text-gray-500 font-semibold mt-0.5">
                             {selectionMode === 'all' 
                               ? "Converting all pages of the document." 
@@ -698,7 +698,7 @@ export default function PdfToJpg() {
               >
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                   <div>
-                    <h3 className="text-lg font-black uppercase tracking-tight text-white">Extracted JPEG Images</h3>
+                    <h3 className="text-lg font-black uppercase tracking-tight text-slate-900 dark:text-white">Extracted JPEG Images</h3>
                     <p className="text-xs text-gray-500 font-semibold mt-0.5">Download files individually or compile everything.</p>
                   </div>
                   <button 
@@ -730,7 +730,7 @@ export default function PdfToJpg() {
                       {/* Card meta and action */}
                       <div className="flex items-center justify-between">
                         <div>
-                          <h4 className="text-xs font-black text-white">PAGE {img.pageNumber}</h4>
+                          <h4 className="text-xs font-black text-slate-900 dark:text-white">PAGE {img.pageNumber}</h4>
                           <p className="text-[9px] text-gray-500 font-bold uppercase tracking-wider mt-0.5">JPEG format</p>
                         </div>
                         <button
@@ -769,7 +769,7 @@ export default function PdfToJpg() {
                 <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   <Grid className="w-5 h-5 text-blue-500" />
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">Split PDF</h3>
+                <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors tracking-tight">Split PDF</h3>
                 <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
                   Extract specific page segments or split your PDF documents into separate individual files.
                 </p>
@@ -795,7 +795,7 @@ export default function PdfToJpg() {
                 <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   <Files className="w-5 h-5 text-blue-500" />
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">Merge PDF</h3>
+                <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors tracking-tight">Merge PDF</h3>
                 <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
                   Combine multiple distinct PDF documents into a single professional-grade file quickly and securely.
                 </p>
@@ -821,7 +821,7 @@ export default function PdfToJpg() {
                 <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   <Layers className="w-5 h-5 text-blue-500" />
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">JPG to PDF</h3>
+                <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors tracking-tight">JPG to PDF</h3>
                 <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
                   Convert JPG, JPEG, and PNG images into a single professional PDF document.
                 </p>

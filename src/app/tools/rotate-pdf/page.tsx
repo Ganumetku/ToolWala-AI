@@ -78,7 +78,7 @@ export default function RotatePdf() {
           icon={<RotateCw className="w-7 h-7" />}
         />
 
-        <div className="p-8 sm:p-10 bg-black/[0.15]">
+        <div className="p-8 sm:p-10 bg-white dark:bg-black/[0.15]">
           {!file ? (
             <UploadZone
               onFilesSelected={handleFiles}
@@ -91,11 +91,11 @@ export default function RotatePdf() {
             <div className="space-y-8 max-w-4xl mx-auto">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 bg-white/5 rounded-[2rem] border border-white/5 gap-6">
                 <div className="flex items-center gap-5 overflow-hidden w-full">
-                  <div className="bg-[#030712] p-4 rounded-2xl border border-white/5 flex-shrink-0">
+                  <div className="bg-[#F6F8FC] dark:bg-[#030712] p-4 rounded-2xl border border-white/5 flex-shrink-0">
                     <FileText className="w-7 h-7 text-red-500" />
                   </div>
                   <div className="overflow-hidden">
-                    <p className="text-base font-black text-white truncate">{file.name}</p>
+                    <p className="text-base font-black text-slate-900 dark:text-white truncate">{file.name}</p>
                     <p className="text-sm text-gray-500 mt-1">{formatBytes(file.size)}</p>
                   </div>
                 </div>
@@ -137,7 +137,7 @@ export default function RotatePdf() {
                   <div className="w-16 h-16 bg-emerald-500/25 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-6 text-emerald-400">
                     <CheckCircle className="w-8 h-8" />
                   </div>
-                  <h4 className="text-2xl font-black tracking-tight text-white mb-2">
+                  <h4 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white mb-2">
                     PDF Rotated Successfully!
                   </h4>
                   <p className="text-sm text-gray-400 mb-6">

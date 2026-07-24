@@ -344,7 +344,7 @@ export default function JpgToPdf() {
   const totalSize = images.reduce((acc, curr) => acc + curr.size, 0);
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden transition-colors duration-250 font-sans">
       <MeshGradient />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
@@ -366,7 +366,7 @@ export default function JpgToPdf() {
                   <ImageIcon className="w-7 h-7" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-black text-white tracking-tighter uppercase">JPG to PDF</h1>
+                  <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">JPG to PDF</h1>
                   <p className="text-gray-400 font-medium mt-1">Convert JPEG, JPG, and PNG images into a beautifully formatted PDF document locally.</p>
                 </div>
               </div>
@@ -377,7 +377,7 @@ export default function JpgToPdf() {
             </div>
           </div>
 
-          <div className="p-8 sm:p-10 bg-black/[0.15]">
+          <div className="p-8 sm:p-10 bg-white dark:bg-black/[0.15]">
             
             {/* Success state circular indicator */}
             {success && (
@@ -389,7 +389,7 @@ export default function JpgToPdf() {
                 <div className="w-16 h-16 bg-emerald-500/25 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.2)]">
                   <CheckCircle className="w-8 h-8" />
                 </div>
-                <h3 className="text-2xl font-black text-white tracking-tight mb-2">Conversion Complete!</h3>
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Conversion Complete!</h3>
                 <p className="text-sm text-gray-400 mb-6 max-w-md mx-auto">
                   Your images were converted into a single PDF document successfully. Download triggered automatically.
                 </p>
@@ -442,7 +442,7 @@ export default function JpgToPdf() {
                   <div className="w-20 h-20 mx-auto mb-8 rounded-2xl bg-white/5 flex items-center justify-center text-gray-500 border border-white/5 group-hover:text-blue-400 group-hover:bg-blue-500/10 group-hover:scale-110 transition-all duration-300 shadow-2xl">
                     <UploadCloud className="w-10 h-10" />
                   </div>
-                  <h3 className="text-2xl font-black text-white tracking-tight mb-3">Upload your Images to Convert</h3>
+                  <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-3">Upload your Images to Convert</h3>
                   <p className="text-sm text-gray-500 mb-10 max-w-sm mx-auto font-medium leading-relaxed">
                     Drag and drop JPG, JPEG, PNG, or WebP files here, or click to browse. Conversion processes offline in your browser.
                   </p>
@@ -508,7 +508,7 @@ export default function JpgToPdf() {
                           </div>
 
                           {/* Image Thumbnail wrapper */}
-                          <div className="w-20 h-20 bg-[#030712] rounded-xl border border-white/5 flex-shrink-0 relative overflow-hidden flex items-center justify-center">
+                          <div className="w-20 h-20 bg-[#F6F8FC] dark:bg-[#030712] rounded-xl border border-white/5 flex-shrink-0 relative overflow-hidden flex items-center justify-center">
                             <img 
                               src={img.src} 
                               alt={img.name} 
@@ -525,7 +525,7 @@ export default function JpgToPdf() {
                           {/* File Details */}
                           <div className="overflow-hidden flex-1 flex flex-col justify-between pr-2">
                             <div className="overflow-hidden">
-                              <p className="text-xs font-bold text-white truncate" title={img.name}>{img.name}</p>
+                              <p className="text-xs font-bold text-slate-900 dark:text-white truncate" title={img.name}>{img.name}</p>
                               <p className="text-[10px] text-gray-500 mt-0.5 font-medium">{formatBytes(img.size)}</p>
                             </div>
                             
@@ -663,7 +663,7 @@ export default function JpgToPdf() {
                           value={outputFileName}
                           onChange={(e) => setOutputFileName(e.target.value)}
                           placeholder="converted_document"
-                          className="w-full rounded-xl border border-white/10 px-4 py-3 text-sm font-bold bg-[#030712] text-white focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500/20 transition-all pr-12"
+                          className="w-full rounded-xl border border-white/10 px-4 py-3 text-sm font-bold bg-[#F6F8FC] dark:bg-[#030712] text-white focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500/20 transition-all pr-12"
                         />
                         <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gray-500 font-bold pointer-events-none">.pdf</span>
                       </div>
@@ -752,7 +752,7 @@ export default function JpgToPdf() {
                 <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   <Files className="w-5 h-5 text-blue-500" />
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">Merge PDF</h3>
+                <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors tracking-tight">Merge PDF</h3>
                 <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
                   Combine multiple distinct PDF documents into a single professional-grade file quickly and securely.
                 </p>
@@ -778,7 +778,7 @@ export default function JpgToPdf() {
                 <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                   <FileUp className="w-5 h-5 text-blue-500" />
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">Split PDF</h3>
+                <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors tracking-tight">Split PDF</h3>
                 <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
                   Extract specific page segments or break PDFs into individual files securely.
                 </p>

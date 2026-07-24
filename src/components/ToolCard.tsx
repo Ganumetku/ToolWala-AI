@@ -5,6 +5,7 @@ import { ToolCategory } from '@/data/tools';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, TrendingUp } from 'lucide-react';
 import { useTranslation } from '@/components/I18nContext';
+import ToolIcon from '@/components/ToolIcon';
 
 export interface ToolCardProps {
   title: string;
@@ -70,7 +71,7 @@ export default function ToolCard({ title, description, icon, href, isPopular, is
           <div className="flex items-start justify-between mb-4 sm:mb-6">
             <div className="flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-blue-50/80 dark:bg-gradient-to-br dark:from-blue-500/10 dark:to-indigo-500/10 text-3xl sm:text-4xl shadow-sm border border-blue-100 dark:border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 relative shrink-0">
               <div className="absolute inset-0 rounded-2xl bg-[#2563EB]/10 blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
-              <span className="relative z-10">{icon}</span>
+              <ToolIcon icon={icon} className="w-8 h-8 sm:w-10 sm:h-10 text-3xl sm:text-4xl" />
             </div>
             
             {/* Category Badge on Mobile */}

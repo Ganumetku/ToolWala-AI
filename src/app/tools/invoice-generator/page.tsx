@@ -378,7 +378,7 @@ export default function InvoiceGenerator() {
   };
 
   return (
-    <div className="bg-[#030712] min-h-screen py-12 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-12 relative overflow-hidden transition-colors duration-250 font-sans">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
 
@@ -394,7 +394,7 @@ export default function InvoiceGenerator() {
               <Receipt className="w-8 h-8" />
             </div>
             <div>
-              <h1 className="text-3xl font-black text-white tracking-tighter">Professional Invoice Generator</h1>
+              <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">Professional Invoice Generator</h1>
               <p className="text-gray-400 font-medium mt-1">Create, customize, and download beautiful PDF invoices instantly.</p>
             </div>
           </div>
@@ -427,7 +427,7 @@ export default function InvoiceGenerator() {
                     onChange={handleInputChange}
                     className="w-full rounded-xl border border-white/10 px-4 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-white/5 text-white"
                   >
-                    {TEMPLATES.map(t => <option key={t} value={t} className="bg-[#0f172a]">{t}</option>)}
+                    {TEMPLATES.map(t => <option key={t} value={t} className="bg-white dark:bg-[#0f172a]">{t}</option>)}
                   </select>
                 </div>
                 <div>
@@ -534,7 +534,7 @@ export default function InvoiceGenerator() {
                 <div>
                   <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Currency</label>
                   <select name="currency" value={data.currency} onChange={handleInputChange} className="w-full rounded-xl border border-white/10 px-4 py-3 text-xs font-black bg-white/5 text-white outline-none focus:border-blue-500">
-                    {CURRENCIES.map(c => <option key={c.code} value={c.code} className="bg-[#0f172a]">{c.code} ({c.symbol})</option>)}
+                    {CURRENCIES.map(c => <option key={c.code} value={c.code} className="bg-white dark:bg-[#0f172a]">{c.code} ({c.symbol})</option>)}
                   </select>
                 </div>
                 <div>
@@ -656,17 +656,17 @@ export default function InvoiceGenerator() {
               <div className="hidden xl:flex justify-between items-center mb-6">
                 <div className="flex items-center gap-3">
                   <LayoutTemplate className="w-5 h-5 text-blue-500" />
-                  <h2 className="text-sm font-black uppercase tracking-[0.2em] text-white">Live Preview</h2>
+                  <h2 className="text-sm font-black uppercase tracking-[0.2em] text-slate-900 dark:text-white">Live Preview</h2>
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 bg-blue-600/10 px-4 py-2 rounded-full border border-blue-500/20 shadow-[0_0_15px_rgba(37,99,235,0.1)]">Updates instantly</span>
               </div>
               
-              <div className="w-full overflow-x-auto max-w-full bg-[#0f172a] p-4 sm:p-10 rounded-[3rem] border border-white/5 shadow-2xl relative custom-scrollbar">
+              <div className="w-full overflow-x-auto max-w-full bg-white dark:bg-[#0f172a] p-4 sm:p-10 rounded-[3rem] border border-white/5 shadow-2xl relative custom-scrollbar">
                  {isGenerating && (
-                    <div className="absolute inset-0 z-10 bg-[#030712]/60 backdrop-blur-sm flex items-center justify-center rounded-[3rem]">
+                    <div className="absolute inset-0 z-10 bg-[#F6F8FC] dark:bg-[#030712]/60 backdrop-blur-sm flex items-center justify-center rounded-[3rem]">
                       <div className="glass p-8 rounded-3xl shadow-2xl flex flex-col items-center gap-4 border border-white/10">
                         <RefreshCw className="w-10 h-10 text-blue-500 animate-spin" />
-                        <p className="text-xs font-black uppercase tracking-widest text-white">Generating...</p>
+                        <p className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">Generating...</p>
                       </div>
                     </div>
                   )}

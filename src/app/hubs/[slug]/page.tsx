@@ -87,7 +87,7 @@ export default async function HubPage({ params }: HubPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans">
+      <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans">
         <MeshGradient />
         
         {/* Decorative Glow Grid */}

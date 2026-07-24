@@ -195,7 +195,7 @@ export default function SignatureModal({ isOpen, onClose, onSave }: SignatureMod
         
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800">
-          <h3 className="text-lg font-bold text-white">Create Digital Signature</h3>
+          <h3 className="text-lg font-bold text-slate-900 dark:text-white">Create Digital Signature</h3>
           <button onClick={onClose} className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
             <X className="w-5 h-5" />
           </button>

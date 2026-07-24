@@ -230,12 +230,12 @@ export default function PasswordGeneratorPage() {
   ];
 
   if (!mounted) {
-    return <div className="min-h-screen bg-[#030712]" />;
+    return <div className="min-h-screen bg-[#F6F8FC] dark:bg-[#030712]" />;
   }
 
   return (
     <ToolVisibilityGuard slug="password-generator">
-      <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans">
+      <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250 font-sans">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -264,7 +264,7 @@ export default function PasswordGeneratorPage() {
             <span className="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
             <span>🔒 Offline Client-Side Encryption</span>
           </div>
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6 uppercase leading-none">
+          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-6 uppercase leading-none">
             Password <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
               Generator
@@ -361,7 +361,7 @@ export default function PasswordGeneratorPage() {
             <div className="glass rounded-[2.5rem] border border-white/5 shadow-2xl p-6 sm:p-8 bg-white/[0.01] space-y-6">
               <div className="flex items-center gap-2 border-b border-white/5 pb-4 mb-4">
                 <Settings className="w-4 h-4 text-blue-400" />
-                <h3 className="text-xs font-black uppercase tracking-widest text-white">Generator Settings</h3>
+                <h3 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">Generator Settings</h3>
               </div>
 
               {/* Length Selector Slider */}
@@ -399,7 +399,7 @@ export default function PasswordGeneratorPage() {
                     type="checkbox" 
                     checked={includeUppercase} 
                     onChange={(e) => setIncludeUppercase(e.target.checked)} 
-                    className="rounded border-white/10 bg-[#090d16] text-blue-500 h-4.5 w-4.5 focus:ring-blue-500/25 cursor-pointer" 
+                    className="rounded border-white/10 bg-[#FBFCFE] dark:bg-[#090d16] text-blue-500 h-4.5 w-4.5 focus:ring-blue-500/25 cursor-pointer" 
                   />
                 </label>
 
@@ -412,7 +412,7 @@ export default function PasswordGeneratorPage() {
                     type="checkbox" 
                     checked={includeLowercase} 
                     onChange={(e) => setIncludeLowercase(e.target.checked)} 
-                    className="rounded border-white/10 bg-[#090d16] text-blue-500 h-4.5 w-4.5 focus:ring-blue-500/25 cursor-pointer" 
+                    className="rounded border-white/10 bg-[#FBFCFE] dark:bg-[#090d16] text-blue-500 h-4.5 w-4.5 focus:ring-blue-500/25 cursor-pointer" 
                   />
                 </label>
 
@@ -425,7 +425,7 @@ export default function PasswordGeneratorPage() {
                     type="checkbox" 
                     checked={includeNumbers} 
                     onChange={(e) => setIncludeNumbers(e.target.checked)} 
-                    className="rounded border-white/10 bg-[#090d16] text-blue-500 h-4.5 w-4.5 focus:ring-blue-500/25 cursor-pointer" 
+                    className="rounded border-white/10 bg-[#FBFCFE] dark:bg-[#090d16] text-blue-500 h-4.5 w-4.5 focus:ring-blue-500/25 cursor-pointer" 
                   />
                 </label>
 
@@ -438,7 +438,7 @@ export default function PasswordGeneratorPage() {
                     type="checkbox" 
                     checked={includeSymbols} 
                     onChange={(e) => setIncludeSymbols(e.target.checked)} 
-                    className="rounded border-white/10 bg-[#090d16] text-blue-500 h-4.5 w-4.5 focus:ring-blue-500/25 cursor-pointer" 
+                    className="rounded border-white/10 bg-[#FBFCFE] dark:bg-[#090d16] text-blue-500 h-4.5 w-4.5 focus:ring-blue-500/25 cursor-pointer" 
                   />
                 </label>
 
@@ -451,7 +451,7 @@ export default function PasswordGeneratorPage() {
                     type="checkbox" 
                     checked={excludeSimilar} 
                     onChange={(e) => setExcludeSimilar(e.target.checked)} 
-                    className="rounded border-white/10 bg-[#090d16] text-blue-500 h-4.5 w-4.5 focus:ring-blue-500/25 cursor-pointer" 
+                    className="rounded border-white/10 bg-[#FBFCFE] dark:bg-[#090d16] text-blue-500 h-4.5 w-4.5 focus:ring-blue-500/25 cursor-pointer" 
                   />
                 </label>
 
@@ -464,7 +464,7 @@ export default function PasswordGeneratorPage() {
                     type="checkbox" 
                     checked={excludeAmbiguous} 
                     onChange={(e) => setExcludeAmbiguous(e.target.checked)} 
-                    className="rounded border-white/10 bg-[#090d16] text-blue-500 h-4.5 w-4.5 focus:ring-blue-500/25 cursor-pointer" 
+                    className="rounded border-white/10 bg-[#FBFCFE] dark:bg-[#090d16] text-blue-500 h-4.5 w-4.5 focus:ring-blue-500/25 cursor-pointer" 
                   />
                 </label>
 
@@ -493,7 +493,7 @@ export default function PasswordGeneratorPage() {
               
               <div className="flex items-center gap-2 border-b border-white/5 pb-4 mb-4">
                 <Activity className="w-4 h-4 text-indigo-400" />
-                <h3 className="text-xs font-black uppercase tracking-widest text-white">Entropy Analysis</h3>
+                <h3 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">Entropy Analysis</h3>
               </div>
 
               <div className="space-y-4">
@@ -525,7 +525,7 @@ export default function PasswordGeneratorPage() {
                   <Shield className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-black text-white uppercase tracking-widest">Privacy Assured</h4>
+                  <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-widest">Privacy Assured</h4>
                   <p className="text-[10px] text-purple-300 font-semibold leading-relaxed mt-1 font-sans">
                     Passwords never leave your device. All randomization algorithms are processed locally inside your browser's offline scope.
                   </p>
@@ -542,7 +542,7 @@ export default function PasswordGeneratorPage() {
               <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-4">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-blue-400" />
-                  <h3 className="text-xs font-black uppercase tracking-widest text-white">Recent Passwords</h3>
+                  <h3 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">Recent Passwords</h3>
                 </div>
                 {history.length > 0 && (
                   <button 
@@ -588,7 +588,7 @@ export default function PasswordGeneratorPage() {
         {/* Dynamic FAQ Accordion */}
         <section className="py-16 border-t border-white/5 max-w-3xl mx-auto space-y-8">
           <div className="text-center">
-            <h3 className="text-3xl font-black text-white tracking-tighter uppercase mb-2">Frequently Asked Questions</h3>
+            <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-2">Frequently Asked Questions</h3>
             <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Everything you need to know about secure random passwords</p>
           </div>
 
@@ -640,7 +640,7 @@ export default function PasswordGeneratorPage() {
                 <div className="h-10 w-10 rounded-xl bg-blue-600/10 border border-blue-500/20 text-blue-400 flex items-center justify-center mb-4 text-lg font-bold">
                   {t.icon}
                 </div>
-                <h5 className="text-xs font-black uppercase tracking-wider text-white mb-1">{t.title}</h5>
+                <h5 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white mb-1">{t.title}</h5>
                 <p className="text-[10px] text-gray-500 font-bold">{t.desc}</p>
               </Link>
             ))}

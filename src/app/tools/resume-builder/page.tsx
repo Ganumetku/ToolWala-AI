@@ -334,7 +334,7 @@ export default function ResumeBuilder() {
   };
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden transition-colors duration-250 font-sans">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
 
@@ -352,7 +352,7 @@ export default function ResumeBuilder() {
                 <FileText className="w-7 h-7" />
               </div>
               <div>
-                <h1 className="text-3xl font-black text-white tracking-tighter">AI Resume Builder & ATS Checker</h1>
+                <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">AI Resume Builder & ATS Checker</h1>
                 <p className="text-gray-400 font-medium mt-1">Create an ATS-friendly resume and optimize it against your target job instantly.</p>
               </div>
             </div>
@@ -398,7 +398,7 @@ export default function ResumeBuilder() {
             <section className="glass rounded-[2rem] border border-white/5 p-8">
               <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/5">
                 <User className="w-5 h-5 text-blue-500" />
-                <h2 className="text-xl font-black text-white tracking-tight">Personal Details</h2>
+                <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Personal Details</h2>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="col-span-1 sm:col-span-2">
@@ -439,7 +439,7 @@ export default function ResumeBuilder() {
               </div>
               <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/5">
                 <Target className="w-5 h-5 text-blue-400" />
-                <h2 className="text-xl font-black text-white tracking-tight">Target Job Info</h2>
+                <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Target Job Info</h2>
               </div>
               <div className="space-y-6">
                 <div>
@@ -468,7 +468,7 @@ export default function ResumeBuilder() {
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/5">
                 <div className="flex items-center gap-3">
                   <LayoutTemplate className="w-5 h-5 text-blue-500" />
-                  <h2 className="text-xl font-black text-white tracking-tight">Summary</h2>
+                  <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Summary</h2>
                 </div>
                 <button 
                   onClick={generateAISummary}
@@ -493,7 +493,7 @@ export default function ResumeBuilder() {
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/5">
                 <div className="flex items-center gap-3">
                   <Briefcase className="w-5 h-5 text-blue-500" />
-                  <h2 className="text-xl font-black text-white tracking-tight">Work History</h2>
+                  <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Work History</h2>
                 </div>
                 <button onClick={addExperience} className="flex items-center gap-2 px-5 py-2.5 text-[10px] font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all active:scale-95">
                   <Plus className="w-3.5 h-3.5" /> Add New
@@ -505,19 +505,19 @@ export default function ResumeBuilder() {
                 
                 {experience.map((exp, index) => (
                   <div key={exp.id} className="relative p-6 border border-white/5 rounded-[2rem] bg-white/[0.02] group/item">
-                    <button onClick={() => removeExperience(exp.id)} className="absolute -top-3 -right-3 bg-[#030712] border border-white/10 text-gray-500 hover:text-red-400 p-2.5 rounded-full shadow-2xl transition-all z-10 hover:scale-110 active:scale-90">
+                    <button onClick={() => removeExperience(exp.id)} className="absolute -top-3 -right-3 bg-[#F6F8FC] dark:bg-[#030712] border border-white/10 text-gray-500 hover:text-red-400 p-2.5 rounded-full shadow-2xl transition-all z-10 hover:scale-110 active:scale-90">
                       <Trash2 className="w-4 h-4" />
                     </button>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                       <div className="col-span-1 sm:col-span-2">
-                        <input type="text" value={exp.role} onChange={e => updateExperience(exp.id, 'role', e.target.value)} placeholder="Role / Job Title" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
+                        <input type="text" value={exp.role} onChange={e => updateExperience(exp.id, 'role', e.target.value)} placeholder="Role / Job Title" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#F6F8FC] dark:bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
                       </div>
                       <div>
-                        <input type="text" value={exp.company} onChange={e => updateExperience(exp.id, 'company', e.target.value)} placeholder="Company Name" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
+                        <input type="text" value={exp.company} onChange={e => updateExperience(exp.id, 'company', e.target.value)} placeholder="Company Name" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#F6F8FC] dark:bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
                       </div>
                       <div className="flex gap-2">
-                        <input type="text" value={exp.start} onChange={e => updateExperience(exp.id, 'start', e.target.value)} placeholder="Start (e.g. Jan 2021)" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
-                        <input type="text" value={exp.end} onChange={e => updateExperience(exp.id, 'end', e.target.value)} placeholder="End (e.g. Present)" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
+                        <input type="text" value={exp.start} onChange={e => updateExperience(exp.id, 'start', e.target.value)} placeholder="Start (e.g. Jan 2021)" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#F6F8FC] dark:bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
+                        <input type="text" value={exp.end} onChange={e => updateExperience(exp.id, 'end', e.target.value)} placeholder="End (e.g. Present)" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#F6F8FC] dark:bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
                       </div>
                     </div>
                     <textarea 
@@ -525,7 +525,7 @@ export default function ResumeBuilder() {
                       value={exp.desc} 
                       onChange={e => updateExperience(exp.id, 'desc', e.target.value)} 
                       placeholder="List achievements. Start with action verbs: Developed, Built, Led..." 
-                      className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-medium resize-none custom-scrollbar" 
+                      className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#F6F8FC] dark:bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-medium resize-none custom-scrollbar" 
                     />
                   </div>
                 ))}
@@ -537,7 +537,7 @@ export default function ResumeBuilder() {
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/5">
                 <div className="flex items-center gap-3">
                   <GraduationCap className="w-5 h-5 text-blue-500" />
-                  <h2 className="text-xl font-black text-white tracking-tight">Education</h2>
+                  <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Education</h2>
                 </div>
                 <button onClick={addEducation} className="flex items-center gap-2 px-5 py-2.5 text-[10px] font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all active:scale-95">
                   <Plus className="w-3.5 h-3.5" /> Add New
@@ -549,17 +549,17 @@ export default function ResumeBuilder() {
                 
                 {education.map(edu => (
                   <div key={edu.id} className="relative p-6 border border-white/5 rounded-[2rem] bg-white/[0.02] grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <button onClick={() => removeEducation(edu.id)} className="absolute -top-3 -right-3 bg-[#030712] border border-white/10 text-gray-500 hover:text-red-400 p-2.5 rounded-full shadow-2xl transition-all z-10 hover:scale-110 active:scale-90">
+                    <button onClick={() => removeEducation(edu.id)} className="absolute -top-3 -right-3 bg-[#F6F8FC] dark:bg-[#030712] border border-white/10 text-gray-500 hover:text-red-400 p-2.5 rounded-full shadow-2xl transition-all z-10 hover:scale-110 active:scale-90">
                       <Trash2 className="w-4 h-4" />
                     </button>
                     <div className="col-span-1 sm:col-span-2">
-                      <input type="text" value={edu.degree} onChange={e => updateEducation(edu.id, 'degree', e.target.value)} placeholder="Degree / Program" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
+                      <input type="text" value={edu.degree} onChange={e => updateEducation(edu.id, 'degree', e.target.value)} placeholder="Degree / Program" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#F6F8FC] dark:bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
                     </div>
                     <div>
-                      <input type="text" value={edu.institute} onChange={e => updateEducation(edu.id, 'institute', e.target.value)} placeholder="University / School" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
+                      <input type="text" value={edu.institute} onChange={e => updateEducation(edu.id, 'institute', e.target.value)} placeholder="University / School" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#F6F8FC] dark:bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
                     </div>
                     <div>
-                      <input type="text" value={edu.year} onChange={e => updateEducation(edu.id, 'year', e.target.value)} placeholder="Year (e.g. 2018 - 2022)" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
+                      <input type="text" value={edu.year} onChange={e => updateEducation(edu.id, 'year', e.target.value)} placeholder="Year (e.g. 2018 - 2022)" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#F6F8FC] dark:bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
                     </div>
                   </div>
                 ))}
@@ -570,7 +570,7 @@ export default function ResumeBuilder() {
             <section className="glass rounded-[2rem] border border-white/5 p-8">
               <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/5">
                 <Code className="w-5 h-5 text-blue-500" />
-                <h2 className="text-xl font-black text-white tracking-tight">Core Competencies *</h2>
+                <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Core Competencies *</h2>
               </div>
               <textarea 
                 rows={3}
@@ -587,7 +587,7 @@ export default function ResumeBuilder() {
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/5">
                 <div className="flex items-center gap-3">
                   <LayoutTemplate className="w-5 h-5 text-blue-500" />
-                  <h2 className="text-xl font-black text-white tracking-tight">Projects</h2>
+                  <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Projects</h2>
                 </div>
                 <button onClick={addProject} className="flex items-center gap-2 px-5 py-2.5 text-[10px] font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all active:scale-95">
                   <Plus className="w-3.5 h-3.5" /> Add New
@@ -599,15 +599,15 @@ export default function ResumeBuilder() {
                 
                 {projects.map(proj => (
                   <div key={proj.id} className="relative p-6 border border-white/5 rounded-[2rem] bg-white/[0.02] space-y-4">
-                    <button onClick={() => removeProject(proj.id)} className="absolute -top-3 -right-3 bg-[#030712] border border-white/10 text-gray-500 hover:text-red-400 p-2.5 rounded-full shadow-2xl transition-all z-10 hover:scale-110 active:scale-90">
+                    <button onClick={() => removeProject(proj.id)} className="absolute -top-3 -right-3 bg-[#F6F8FC] dark:bg-[#030712] border border-white/10 text-gray-500 hover:text-red-400 p-2.5 rounded-full shadow-2xl transition-all z-10 hover:scale-110 active:scale-90">
                       <Trash2 className="w-4 h-4" />
                     </button>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <input type="text" value={proj.name} onChange={e => updateProject(proj.id, 'name', e.target.value)} placeholder="Project Name" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
+                        <input type="text" value={proj.name} onChange={e => updateProject(proj.id, 'name', e.target.value)} placeholder="Project Name" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#F6F8FC] dark:bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
                       </div>
                       <div>
-                        <input type="text" value={proj.tech} onChange={e => updateProject(proj.id, 'tech', e.target.value)} placeholder="Tech Stack" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
+                        <input type="text" value={proj.tech} onChange={e => updateProject(proj.id, 'tech', e.target.value)} placeholder="Tech Stack" className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#F6F8FC] dark:bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-bold" />
                       </div>
                     </div>
                     <textarea 
@@ -615,7 +615,7 @@ export default function ResumeBuilder() {
                       value={proj.desc} 
                       onChange={e => updateProject(proj.id, 'desc', e.target.value)} 
                       placeholder="Briefly describe the project's impact..." 
-                      className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-medium resize-none custom-scrollbar" 
+                      className="w-full px-4 py-3 border border-white/10 rounded-xl bg-[#F6F8FC] dark:bg-[#030712] text-white focus:ring-1 focus:ring-blue-500 outline-none text-sm font-medium resize-none custom-scrollbar" 
                     />
                   </div>
                 ))}
@@ -634,7 +634,7 @@ export default function ResumeBuilder() {
               'border-red-500/20 bg-red-500/[0.02]'
             }`}>
               <div className="flex justify-between items-center mb-10">
-                <h2 className="text-xl font-black text-white flex items-center gap-3 tracking-tight">
+                <h2 className="text-xl font-black text-slate-900 dark:text-white flex items-center gap-3 tracking-tight">
                   <TrendingUp className={`w-6 h-6 ${
                     atsScore.score >= 80 ? 'text-emerald-400' : 
                     atsScore.score >= 60 ? 'text-amber-400' : 
@@ -740,7 +740,7 @@ export default function ResumeBuilder() {
             </div>
             
             {/* Live Preview Document Wrapper */}
-            <div className="w-full overflow-x-auto max-w-full bg-[#030712] p-6 sm:p-12 rounded-[3rem] border border-white/5 shadow-[0_0_50px_rgba(0,0,0,0.5)] custom-scrollbar relative">
+            <div className="w-full overflow-x-auto max-w-full bg-[#F6F8FC] dark:bg-[#030712] p-6 sm:p-12 rounded-[3rem] border border-white/5 shadow-[0_0_50px_rgba(0,0,0,0.5)] custom-scrollbar relative">
               <div className="absolute top-6 left-1/2 -translate-x-1/2 text-[10px] font-black text-gray-600 uppercase tracking-[0.4em] z-20 pointer-events-none">
                 Interactive Preview
               </div>

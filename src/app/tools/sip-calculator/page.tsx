@@ -37,7 +37,7 @@ function InputSlider({ label, min, max, step, value, onChange, icon: Icon, suffi
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
         <div className="flex items-center gap-2">
           <Icon className="w-5 h-5 text-emerald-400" />
-          <label className="text-sm font-black uppercase tracking-widest text-white">{label}</label>
+          <label className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">{label}</label>
         </div>
         <div className="relative flex items-center w-full sm:w-40">
           <input 
@@ -102,7 +102,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
       <div className="glass rounded-xl border border-white/10 p-4 bg-black/80 backdrop-blur-md">
-        <p className="text-sm font-black text-white mb-2">{label}</p>
+        <p className="text-sm font-black text-slate-900 dark:text-white mb-2">{label}</p>
         {payload.map((entry: any, index: number) => (
           <div key={index} className="flex justify-between gap-6 items-center text-xs font-semibold">
             <span style={{ color: entry.color }}>{entry.name}:</span>
@@ -252,12 +252,12 @@ export default function SipCalculatorPage() {
   ];
 
   if (!mounted) {
-    return <div className="min-h-screen bg-[#030712]" />;
+    return <div className="min-h-screen bg-[#F6F8FC] dark:bg-[#030712]" />;
   }
 
   return (
     <ToolVisibilityGuard slug="sip-calculator">
-      <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans">
+      <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250 font-sans">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -283,7 +283,7 @@ export default function SipCalculatorPage() {
               <span>📈 Smart Investment Planning Tool</span>
             </div>
             
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-2 uppercase leading-none">
+            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-2 uppercase leading-none">
               SIP Calculator
             </h1>
             
@@ -328,7 +328,7 @@ export default function SipCalculatorPage() {
                 <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-8">
                   <div className="flex items-center gap-2">
                     <Calculator className="w-5 h-5 text-emerald-400" />
-                    <h3 className="text-sm font-black uppercase tracking-widest text-white">Investment Plan</h3>
+                    <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">Investment Plan</h3>
                   </div>
                   <button 
                     onClick={handleReset}
@@ -462,7 +462,7 @@ export default function SipCalculatorPage() {
                   </div>
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-widest text-emerald-500">With SIP</p>
-                    <p className="text-lg font-black text-white">{formatCurrency(results.futureValue)}</p>
+                    <p className="text-lg font-black text-slate-900 dark:text-white">{formatCurrency(results.futureValue)}</p>
                     <p className="text-xs text-emerald-400 font-bold mt-0.5">Huge Benefit!</p>
                   </div>
                 </div>
@@ -489,7 +489,7 @@ export default function SipCalculatorPage() {
           <div className="glass rounded-[2.5rem] border border-white/5 shadow-2xl p-6 sm:p-10 bg-white/[0.01] mb-16">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 mb-10">
               <div>
-                <h3 className="text-xl font-black text-white tracking-tight">Year-wise Growth Chart</h3>
+                <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Year-wise Growth Chart</h3>
                 <p className="text-sm text-gray-400 font-medium mt-1">See how your money compounds over time.</p>
               </div>
               <div className="flex items-center gap-4">
@@ -578,7 +578,7 @@ export default function SipCalculatorPage() {
                 <BookOpen className="w-4 h-4" />
                 <span>Comprehensive Guide</span>
               </div>
-              <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase mb-6">
+              <h2 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-6">
                 📚 Learn How SIP Works
               </h2>
               <p className="text-gray-400 text-base sm:text-lg font-medium leading-relaxed">
@@ -626,7 +626,7 @@ export default function SipCalculatorPage() {
 
             <div className="mb-20 glass rounded-[3rem] border border-emerald-500/20 p-8 sm:p-12 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none" />
-              <h3 className="text-2xl sm:text-4xl font-black text-white uppercase tracking-tight mb-8 relative z-10 text-center">
+              <h3 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-8 relative z-10 text-center">
                 The Power of Compounding 🚀
               </h3>
               <p className="text-center text-gray-400 font-medium mb-12 max-w-2xl mx-auto relative z-10">
@@ -644,13 +644,13 @@ export default function SipCalculatorPage() {
                 </div>
                 <div className="bg-black/50 border border-emerald-500/30 rounded-[2rem] p-8 text-center bg-gradient-to-t from-emerald-500/10 to-transparent shadow-2xl shadow-emerald-500/5">
                   <p className="text-xs font-black text-emerald-500 uppercase tracking-widest mb-3">Total Wealth</p>
-                  <p className="text-3xl sm:text-4xl font-black text-white">₹49,95,740</p>
+                  <p className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">₹49,95,740</p>
                 </div>
               </div>
             </div>
 
             <div className="mb-20">
-              <h3 className="text-2xl font-black text-white text-center uppercase tracking-widest mb-8">Quick SIP Tips 💡</h3>
+              <h3 className="text-2xl font-black text-slate-900 dark:text-white text-center uppercase tracking-widest mb-8">Quick SIP Tips 💡</h3>
               <div className="flex flex-wrap justify-center gap-4">
                 <span className="glass px-6 py-4 rounded-full text-sm font-bold text-gray-300 flex items-center gap-2 border border-white/10 hover:border-emerald-500/30 transition-colors"><Zap className="w-4 h-4 text-yellow-400" /> Start early</span>
                 <span className="glass px-6 py-4 rounded-full text-sm font-bold text-gray-300 flex items-center gap-2 border border-white/10 hover:border-emerald-500/30 transition-colors"><Zap className="w-4 h-4 text-yellow-400" /> Invest regularly</span>
@@ -661,7 +661,7 @@ export default function SipCalculatorPage() {
 
             <div className="max-w-3xl mx-auto space-y-8 mb-20">
               <div className="text-center">
-                <h3 className="text-3xl font-black text-white tracking-tighter uppercase mb-2">Frequently Asked Questions</h3>
+                <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-2">Frequently Asked Questions</h3>
                 <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-8">Everything you need to know about Mutual Fund SIP</p>
               </div>
               <div className="space-y-4">
@@ -700,7 +700,7 @@ export default function SipCalculatorPage() {
             </div>
 
             <div className="text-center py-12 border-t border-white/5">
-              <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-8">Ready to calculate your SIP?</h3>
+              <h3 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-8">Ready to calculate your SIP?</h3>
               <button 
                 onClick={scrollToCalculator}
                 className="px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 flex items-center justify-center gap-2 mx-auto shadow-lg shadow-emerald-500/20"

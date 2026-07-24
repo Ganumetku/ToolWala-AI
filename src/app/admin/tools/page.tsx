@@ -6,9 +6,11 @@ import { isToolLive } from '@/lib/tools';
 import type { ToolUpdateInput, CreateToolInput } from '@/lib/tool-service';
 import { toast } from 'sonner';
 import { adminFetch } from '@/lib/admin-fetch';
+import ToolIcon from '@/components/ToolIcon';
+import ToolIconModal from './ToolIconModal';
 import {
   Search, EyeOff, Star, TrendingUp, Zap, Calendar, Settings,
-  CheckCircle2, Clock, Plus, RefreshCw, Database, X, Loader2,
+  CheckCircle2, Clock, Plus, RefreshCw, Database, X, Loader2, Image as ImageIcon,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -24,6 +26,7 @@ export default function AdminToolsDashboard() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [seeding, setSeeding] = useState(false);
   const [activeScheduleTool, setActiveScheduleTool] = useState<Tool | null>(null);
+  const [activeIconTool, setActiveIconTool] = useState<Tool | null>(null);
 
   // Add tool form
   const [newTitle, setNewTitle] = useState('');
@@ -362,9 +365,17 @@ export default function AdminToolsDashboard() {
                       >
                         <td className="py-4 px-6">
                           <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-lg shadow-xs">
-                              {tool.icon}
-                            </div>
+                            <button
+                              type="button"
+                              onClick={() => setActiveIconTool(tool)}
+                              className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-lg shadow-xs hover:border-blue-500 hover:scale-105 transition-all group relative cursor-pointer"
+                              title="Click to edit logo / icon"
+                            >
+                              <ToolIcon icon={tool.icon} className="w-6 h-6 text-xl" />
+                              <div className="absolute -top-1 -right-1 w-4 h-4 bg-blue-600 text-white rounded-full flex items-center justify-center text-[8px] opacity-0 group-hover:opacity-100 transition-opacity shadow-xs">
+                                ✏️
+                              </div>
+                            </button>
                             <div>
                               <div className="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2 flex-wrap">
                                 {tool.title}
@@ -498,6 +509,14 @@ export default function AdminToolsDashboard() {
                             >
                               <Calendar className="w-4 h-4" />
                             </button>
+                            <button
+                              onClick={() => setActiveIconTool(tool)}
+                              disabled={saving === tool.slug}
+                              className="p-1.5 bg-blue-50 dark:bg-blue-500/10 hover:bg-blue-100 dark:hover:bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-lg border border-blue-200 dark:border-blue-500/20 transition-colors disabled:opacity-50 cursor-pointer"
+                              title="Edit Logo / Icon"
+                            >
+                              <ImageIcon className="w-4 h-4" />
+                            </button>
                           </div>
                         </td>
                       </motion.tr>
@@ -505,6 +524,17 @@ export default function AdminToolsDashboard() {
                   </AnimatePresence>
                 </tbody>
               </table>
+
+              {/* Tool Icon & Logo Modal */}
+              {activeIconTool && (
+                <ToolIconModal
+                  tool={activeIconTool}
+                  onClose={() => setActiveIconTool(null)}
+                  onSave={async (tool, newIcon) => {
+                    await handleUpdate(tool, { icon: newIcon });
+                  }}
+                />
+              )}
               {filteredTools.length === 0 && (
                 <div className="text-center py-20 text-slate-400 dark:text-gray-500 text-sm font-medium">
                   No tools found matching your filters.

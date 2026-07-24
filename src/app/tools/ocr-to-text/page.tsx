@@ -202,10 +202,10 @@ export default function OcrToText() {
     ]
   };
 
-  if (!mounted) return <div className="min-h-screen bg-[#030712]" />;
+  if (!mounted) return <div className="min-h-screen bg-[#F6F8FC] dark:bg-[#030712]" />;
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden transition-colors duration-250 font-sans">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
 
@@ -224,7 +224,7 @@ export default function OcrToText() {
                   <FileText className="w-8 h-8" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-black text-white tracking-tighter uppercase">OCR Image to Text</h1>
+                  <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">OCR Image to Text</h1>
                   <p className="text-gray-400 font-medium mt-1 font-sans">Extract text from images, screenshots, and scans locally in the browser.</p>
                 </div>
               </div>
@@ -289,7 +289,7 @@ export default function OcrToText() {
                     >
                       <UploadCloud className="w-12 h-12" />
                     </motion.div>
-                    <h3 className="text-2xl font-black text-white mb-3 tracking-tight">Drop image here or click to upload</h3>
+                    <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">Drop image here or click to upload</h3>
                     <p className="text-gray-500 mb-6 max-w-sm mx-auto font-medium">Supports JPG, PNG, and WebP. You can also paste screenshots directly (`Ctrl+V` / `Cmd+V`).</p>
                     
                     <div className="flex justify-center gap-6 text-xs font-black uppercase tracking-widest text-gray-600">
@@ -312,7 +312,7 @@ export default function OcrToText() {
                       <Sparkles className="w-12 h-12 animate-pulse" />
                     </div>
                   </div>
-                  <h3 className="text-3xl font-black text-white mb-3 tracking-tighter">Recognizing Text</h3>
+                  <h3 className="text-3xl font-black text-slate-900 dark:text-white mb-3 tracking-tighter">Recognizing Text</h3>
                   <p className="text-gray-400 mb-10 text-center max-w-sm font-medium">{loadingText}</p>
                   
                   <div className="w-full max-w-md bg-white/5 rounded-full h-3 overflow-hidden border border-white/10 relative">

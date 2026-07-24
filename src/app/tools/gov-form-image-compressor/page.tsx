@@ -25,7 +25,7 @@ export default function GovFormImageCompressor() {
   ];
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250 font-sans">
       <MeshGradient />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative z-10 text-left">
@@ -41,7 +41,7 @@ export default function GovFormImageCompressor() {
               <Sparkles className="w-3.5 h-3.5" />
               Sarkari Result & Portal Helper
             </div>
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white uppercase leading-tight">
+            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white uppercase leading-tight">
               Government Form Image Compressor <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">
                 Online & Free
@@ -72,7 +72,7 @@ export default function GovFormImageCompressor() {
 
           {/* SEO rich text */}
           <section className="space-y-6 pt-6 border-t border-white/5">
-            <h2 className="text-2xl font-black text-white uppercase tracking-tight">How to Compress Image for Government Portals</h2>
+            <h2 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">How to Compress Image for Government Portals</h2>
             <p className="text-sm text-gray-400 leading-relaxed font-sans">
               Indian recruitment dashboards (such as Staff Selection Commission - SSC, Union Public Service Commission - UPSC, banking, and state portals) enforce strict size limits for uploaded documents. If your passport photo or signature scan is larger than 20KB or 50KB, it will be rejected. ToolWala compresses your images quickly:
             </p>
@@ -88,7 +88,7 @@ export default function GovFormImageCompressor() {
           <section className="space-y-6 pt-6 border-t border-white/5">
             <div className="flex items-center gap-2">
               <HelpCircle className="w-5 h-5 text-blue-400" />
-              <h3 className="text-xl font-black text-white uppercase tracking-tight">Frequently Asked Questions</h3>
+              <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Frequently Asked Questions</h3>
             </div>
             <div className="space-y-4">
               {faqs.map((faq, i) => (

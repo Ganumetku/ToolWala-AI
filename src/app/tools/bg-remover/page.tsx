@@ -136,10 +136,10 @@ export default function BackgroundRemover() {
     });
   };
 
-  if (!mounted) return <div className="min-h-screen bg-[#030712]" />;
+  if (!mounted) return <div className="min-h-screen bg-[#F6F8FC] dark:bg-[#030712]" />;
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden transition-colors duration-250 font-sans">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
 
@@ -158,7 +158,7 @@ export default function BackgroundRemover() {
                   <Sparkles className="w-8 h-8" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-black text-white tracking-tighter">Background Remover</h1>
+                  <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">Background Remover</h1>
                   <p className="text-gray-400 font-medium mt-1">Professional client-side background removal with 100% privacy.</p>
                 </div>
               </div>
@@ -223,7 +223,7 @@ export default function BackgroundRemover() {
                     >
                       <UploadCloud className="w-12 h-12" />
                     </motion.div>
-                    <h3 className="text-2xl font-black text-white mb-3 tracking-tight">Drop image here or click to upload</h3>
+                    <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">Drop image here or click to upload</h3>
                     <p className="text-gray-500 mb-10 max-w-sm mx-auto font-medium">Supports JPG, PNG, and WebP. Your images never leave your computer—processing happens locally.</p>
                     
                     <div className="flex justify-center gap-6 text-xs font-black uppercase tracking-widest text-gray-600">
@@ -250,7 +250,7 @@ export default function BackgroundRemover() {
                       <Sparkles className="w-12 h-12 animate-pulse" />
                     </div>
                   </div>
-                  <h3 className="text-3xl font-black text-white mb-3 tracking-tighter">Analyzing Image</h3>
+                  <h3 className="text-3xl font-black text-slate-900 dark:text-white mb-3 tracking-tighter">Analyzing Image</h3>
                   <p className="text-gray-400 mb-10 text-center max-w-sm font-medium">{loadingText}</p>
                   
                   <div className="w-full max-w-md bg-white/5 rounded-full h-3 overflow-hidden border border-white/10 relative">
@@ -286,7 +286,7 @@ export default function BackgroundRemover() {
                       className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none border-r-2 border-white/50 shadow-2xl" 
                       style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
                     >
-                      <div className="absolute inset-0 bg-[#030712]">
+                      <div className="absolute inset-0 bg-[#F6F8FC] dark:bg-[#030712]">
                         <img 
                           src={sourceUrl} 
                           className="absolute inset-0 w-full h-full object-contain pointer-events-none p-8" 
@@ -365,15 +365,15 @@ export default function BackgroundRemover() {
         {/* Footer Info */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
           <div className="p-8 rounded-[2rem] bg-white/[0.02] border border-white/5">
-            <h4 className="text-sm font-black text-white uppercase tracking-widest mb-3">Browser Based</h4>
+            <h4 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest mb-3">Browser Based</h4>
             <p className="text-sm text-gray-500 font-medium leading-relaxed">Images are processed on your GPU using WebAssembly, ensuring your data never touches our servers.</p>
           </div>
           <div className="p-8 rounded-[2rem] bg-white/[0.02] border border-white/5">
-            <h4 className="text-sm font-black text-white uppercase tracking-widest mb-3">High Precision</h4>
+            <h4 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest mb-3">High Precision</h4>
             <p className="text-sm text-gray-500 font-medium leading-relaxed">Our AI model is optimized for complex edges like hair and semi-transparent objects.</p>
           </div>
           <div className="p-8 rounded-[2rem] bg-white/[0.02] border border-white/5">
-            <h4 className="text-sm font-black text-white uppercase tracking-widest mb-3">Total Privacy</h4>
+            <h4 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest mb-3">Total Privacy</h4>
             <p className="text-sm text-gray-500 font-medium leading-relaxed">No accounts, no tracking. Just professional background removal with zero footprint.</p>
           </div>
         </div>

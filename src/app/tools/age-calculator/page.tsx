@@ -274,12 +274,12 @@ export default function AgeCalculatorPage() {
   ];
 
   if (!mounted) {
-    return <div className="min-h-screen bg-[#030712]" />;
+    return <div className="min-h-screen bg-[#F6F8FC] dark:bg-[#030712]" />;
   }
 
   return (
     <ToolVisibilityGuard slug="age-calculator">
-      <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans">
+      <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250 font-sans">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -308,7 +308,7 @@ export default function AgeCalculatorPage() {
               <span className="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
               <span>⚡ Live Client-Side Calculation</span>
             </div>
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6 uppercase leading-none">
+            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-6 uppercase leading-none">
               Age <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
                 Calculator
@@ -326,7 +326,7 @@ export default function AgeCalculatorPage() {
               <div className="glass rounded-[2.5rem] border border-white/5 shadow-2xl p-6 sm:p-8 bg-white/[0.01]">
                 <div className="flex items-center gap-2 border-b border-white/5 pb-4 mb-6">
                   <Calculator className="w-5 h-5 text-blue-400" />
-                  <h3 className="text-sm font-black uppercase tracking-widest text-white">Date Details</h3>
+                  <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">Date Details</h3>
                 </div>
 
                 <div className="space-y-6">
@@ -369,7 +369,7 @@ export default function AgeCalculatorPage() {
               {errorMsg ? (
                 <div className="h-full glass rounded-[2.5rem] border border-red-500/20 bg-red-500/5 p-8 flex flex-col items-center justify-center text-center shadow-2xl">
                   <AlertCircle className="w-12 h-12 text-red-400 mb-4 opacity-70" />
-                  <h3 className="text-sm font-black text-white uppercase tracking-wider mb-2">Invalid Selection</h3>
+                  <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider mb-2">Invalid Selection</h3>
                   <p className="text-xs text-red-300 font-semibold">{errorMsg}</p>
                 </div>
               ) : !results ? (
@@ -465,7 +465,7 @@ export default function AgeCalculatorPage() {
           {/* Dynamic FAQ Accordion */}
           <section className="py-16 border-t border-white/5 max-w-3xl mx-auto space-y-8">
             <div className="text-center">
-              <h3 className="text-3xl font-black text-white tracking-tighter uppercase mb-2">Frequently Asked Questions</h3>
+              <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-2">Frequently Asked Questions</h3>
               <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Everything you need to know about age calculation</p>
             </div>
 

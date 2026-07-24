@@ -302,7 +302,7 @@ export default function AddPageNumbersPdf() {
 
   return (
     <ToolLayout>
-      <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans">
+      <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250 font-sans">
         <MeshGradient />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
@@ -323,7 +323,7 @@ export default function AddPageNumbersPdf() {
                     <ListOrdered className="w-7 h-7" />
                   </div>
                   <div>
-                    <h1 className="text-3xl font-black text-white tracking-tighter uppercase">Add Page Numbers to PDF</h1>
+                    <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">Add Page Numbers to PDF</h1>
                     <p className="text-gray-400 font-medium mt-1">Configure layout, numbering sequence, and positions locally on your device.</p>
                   </div>
                 </div>
@@ -334,7 +334,7 @@ export default function AddPageNumbersPdf() {
               </div>
             </div>
 
-            <div className="p-8 sm:p-10 bg-black/[0.15]">
+            <div className="p-8 sm:p-10 bg-white dark:bg-black/[0.15]">
               {success && numberedBytes && (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -344,7 +344,7 @@ export default function AddPageNumbersPdf() {
                   <div className="w-16 h-16 bg-emerald-500/25 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.2)]">
                     <CheckCircle className="w-8 h-8" />
                   </div>
-                  <h3 className="text-2xl font-black text-white tracking-tight mb-2">Page Numbers Added!</h3>
+                  <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Page Numbers Added!</h3>
                   <p className="text-sm text-gray-400 mb-6 max-w-md mx-auto">
                     The PDF document has been successfully paginated locally.
                   </p>
@@ -389,7 +389,7 @@ export default function AddPageNumbersPdf() {
                     <div className="w-24 h-24 rounded-[2rem] bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:border-blue-500/50 transition-all duration-500">
                       <UploadCloud className="w-10 h-10 text-gray-400 group-hover:text-blue-500 transition-colors" />
                     </div>
-                    <h3 className="text-3xl font-black text-white tracking-tighter uppercase mb-3">Upload PDF File</h3>
+                    <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-3">Upload PDF File</h3>
                     <p className="text-gray-400 font-medium max-w-sm mx-auto mb-8 text-sm">
                       Drag and drop your PDF here, or click to browse files.
                     </p>
@@ -406,7 +406,7 @@ export default function AddPageNumbersPdf() {
                         <FileText className="w-6 h-6" />
                       </div>
                       <div>
-                        <h4 className="text-base font-black text-white line-clamp-1 text-left">{pdfFile.name}</h4>
+                        <h4 className="text-base font-black text-slate-900 dark:text-white line-clamp-1 text-left">{pdfFile.name}</h4>
                         <p className="text-xs text-gray-500 font-semibold mt-0.5 text-left">
                           {formatBytes(pdfFile.size)} • {totalPages} Pages
                         </p>
@@ -424,7 +424,7 @@ export default function AddPageNumbersPdf() {
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
                     <div className="space-y-8 lg:col-span-5 text-left">
                       <div className="glass p-6 sm:p-8 rounded-[2rem] border border-white/5 bg-white/[0.01] space-y-6">
-                        <h3 className="text-xs font-black uppercase tracking-widest text-white border-b border-white/5 pb-4 flex items-center gap-2">
+                        <h3 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white border-b border-white/5 pb-4 flex items-center gap-2">
                           <Sliders className="w-4 h-4 text-blue-500" /> Numbering Settings
                         </h3>
 
@@ -434,7 +434,7 @@ export default function AddPageNumbersPdf() {
                           <select 
                             value={format}
                             onChange={(e) => setFormat(e.target.value as NumberingFormat)}
-                            className="w-full bg-[#030712] border border-white/10 rounded-xl px-4 py-3 text-white text-xs font-bold outline-none cursor-pointer"
+                            className="w-full bg-[#F6F8FC] dark:bg-[#030712] border border-white/10 rounded-xl px-4 py-3 text-white text-xs font-bold outline-none cursor-pointer"
                           >
                             <option value="page-n-m">Page X of Y</option>
                             <option value="page-n">Page X</option>
@@ -446,7 +446,7 @@ export default function AddPageNumbersPdf() {
                         {/* Position Grid */}
                         <div className="space-y-3">
                           <label className="text-[10px] font-black uppercase tracking-widest text-gray-500">Position Placement</label>
-                          <div className="grid grid-cols-3 gap-2 border border-white/5 rounded-2xl p-3 bg-[#030712]/50">
+                          <div className="grid grid-cols-3 gap-2 border border-white/5 rounded-2xl p-3 bg-[#F6F8FC] dark:bg-[#030712]/50">
                             {([
                               'top-left', 'top-center', 'top-right',
                               'bottom-left', 'bottom-center', 'bottom-right'
@@ -481,7 +481,7 @@ export default function AddPageNumbersPdf() {
                               min="1"
                               value={startPage}
                               onChange={(e) => setStartPage(Math.max(1, parseInt(e.target.value) || 1))}
-                              className="w-full bg-[#030712] border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs font-bold outline-none"
+                              className="w-full bg-[#F6F8FC] dark:bg-[#030712] border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs font-bold outline-none"
                             />
                           </div>
 
@@ -493,7 +493,7 @@ export default function AddPageNumbersPdf() {
                               max="100"
                               value={margin}
                               onChange={(e) => setMargin(Math.max(10, Math.min(100, parseInt(e.target.value) || 30)))}
-                              className="w-full bg-[#030712] border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs font-bold outline-none"
+                              className="w-full bg-[#F6F8FC] dark:bg-[#030712] border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs font-bold outline-none"
                             />
                           </div>
                         </div>
@@ -505,7 +505,7 @@ export default function AddPageNumbersPdf() {
                               type="checkbox"
                               checked={skipFirst}
                               onChange={(e) => setSkipFirst(e.target.checked)}
-                              className="w-4 h-4 rounded border-white/10 bg-[#030712] text-blue-600 focus:ring-0"
+                              className="w-4 h-4 rounded border-white/10 bg-[#F6F8FC] dark:bg-[#030712] text-blue-600 focus:ring-0"
                             />
                             <span>Skip Cover Page (Number from page 2)</span>
                           </label>

@@ -181,7 +181,7 @@ export default function VoiceGenerator() {
   const formattedDuration = `${Math.floor(estSeconds / 60)}:${(estSeconds % 60).toString().padStart(2, '0')}`;
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden transition-colors duration-250 font-sans">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
 
@@ -202,7 +202,7 @@ export default function VoiceGenerator() {
                 <Mic className="w-8 h-8" />
               </div>
               <div>
-                <h1 className="text-3xl font-black text-white tracking-tighter uppercase">AI Voice Generator</h1>
+                <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">AI Voice Generator</h1>
                 <p className="text-gray-400 font-medium mt-1">Transform text into lifelike speech with premium AI voices.</p>
               </div>
             </div>
@@ -230,7 +230,7 @@ export default function VoiceGenerator() {
             <section className="glass p-8 rounded-[2.5rem] border border-white/5 shadow-2xl flex flex-col h-full relative overflow-hidden group">
               <div className="absolute inset-0 bg-blue-600/5 opacity-0 group-focus-within:opacity-100 transition-opacity" />
               <div className="flex justify-between items-center mb-6 relative z-10">
-                <h2 className="text-sm font-black text-white flex items-center gap-3 uppercase tracking-widest">
+                <h2 className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-3 uppercase tracking-widest">
                   <Volume2 className="w-5 h-5 text-blue-500" />
                   Voice Script
                 </h2>
@@ -267,7 +267,7 @@ export default function VoiceGenerator() {
                       onClick={() => handlePresetSelect(preset)}
                       className={`p-5 rounded-[1.5rem] border-2 text-left transition-all group ${selectedPreset === preset.id ? `border-blue-600 bg-blue-600/10 shadow-[0_0_20px_rgba(37,99,235,0.2)]` : 'bg-white/5 border-white/5 hover:border-white/10 hover:bg-white/[0.08]'}`}
                     >
-                      <h4 className="font-black text-sm text-white group-hover:text-blue-400 transition-colors">{preset.name}</h4>
+                      <h4 className="font-black text-sm text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors">{preset.name}</h4>
                       <p className="text-[10px] text-gray-500 mt-1 font-black uppercase tracking-widest">{preset.desc}</p>
                     </button>
                   ))}
@@ -279,7 +279,7 @@ export default function VoiceGenerator() {
             <section className="glass p-8 rounded-[2.5rem] border border-white/5 shadow-2xl">
               <div className="flex items-center gap-3 mb-10 pb-6 border-b border-white/5">
                 <Settings className="w-5 h-5 text-blue-500" />
-                <h2 className="text-xl font-black text-white tracking-tight uppercase">Config Studio</h2>
+                <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase">Config Studio</h2>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
@@ -360,7 +360,7 @@ export default function VoiceGenerator() {
               </div>
 
               <div className="mb-10">
-                <h3 className="text-2xl font-black text-white tracking-tight uppercase">Preview Engine</h3>
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight uppercase">Preview Engine</h3>
                 <p className="text-gray-500 font-medium mt-1">Listen to your generation in real-time.</p>
               </div>
 

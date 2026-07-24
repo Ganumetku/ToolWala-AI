@@ -345,7 +345,7 @@ export default function SplitPdf() {
           icon={<Scissors className="w-7 h-7" />}
         />
 
-        <div className="p-8 sm:p-10 bg-black/[0.15]">
+        <div className="p-8 sm:p-10 bg-white dark:bg-black/[0.15]">
           
           {/* Success alert message */}
           {success && (
@@ -357,7 +357,7 @@ export default function SplitPdf() {
               <div className="w-16 h-16 bg-emerald-500/25 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.2)]">
                 <CheckCircle className="w-8 h-8" />
               </div>
-              <h3 className="text-2xl font-black text-white tracking-tight mb-2">Split Completed!</h3>
+              <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Split Completed!</h3>
               <p className="text-sm text-gray-400 mb-6 max-w-md mx-auto">
                 Your PDF was successfully split into {downloadCount} file(s). Downloading triggered automatically.
               </p>
@@ -402,11 +402,11 @@ export default function SplitPdf() {
                   {/* File Metadata Header */}
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 bg-white/5 border border-white/5 rounded-2xl gap-4">
                     <div className="flex items-center gap-3.5 overflow-hidden">
-                      <div className="bg-[#030712] p-3 rounded-xl border border-white/5 flex-shrink-0">
+                      <div className="bg-[#F6F8FC] dark:bg-[#030712] p-3 rounded-xl border border-white/5 flex-shrink-0">
                         <FileText className="w-6 h-6 text-red-500" />
                       </div>
                       <div className="overflow-hidden">
-                        <p className="text-sm font-bold text-white truncate max-w-xs sm:max-w-md">{pdfFile.name}</p>
+                        <p className="text-sm font-bold text-slate-900 dark:text-white truncate max-w-xs sm:max-w-md">{pdfFile.name}</p>
                         <p className="text-xs text-gray-500 mt-0.5 font-medium">{formatBytes(pdfFile.size)} • {totalPages} pages</p>
                       </div>
                     </div>
@@ -490,7 +490,7 @@ export default function SplitPdf() {
 
                             {/* Page Index Banner */}
                             <div className={`p-2.5 text-center text-[10px] font-black uppercase tracking-widest border-t transition-colors
-                              ${isSelected && !isDisabled ? 'bg-blue-500/10 border-blue-500/10 text-blue-400' : 'bg-[#030712] border-white/5 text-gray-500'}
+                              ${isSelected && !isDisabled ? 'bg-blue-500/10 border-blue-500/10 text-blue-400' : 'bg-[#F6F8FC] dark:bg-[#030712] border-white/5 text-gray-500'}
                             `}>
                               Page {pageNum}
                             </div>
@@ -582,7 +582,7 @@ export default function SplitPdf() {
                           value={pageRangesInput}
                           onChange={(e) => setPageRangesInput(e.target.value)}
                           placeholder="e.g. 1-2, 4, 5-8"
-                          className="w-full rounded-xl border border-white/10 px-4 py-3 text-sm font-bold bg-[#030712] text-white focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500/20 transition-all"
+                          className="w-full rounded-xl border border-white/10 px-4 py-3 text-sm font-bold bg-[#F6F8FC] dark:bg-[#030712] text-white focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500/20 transition-all"
                         />
                         <p className="text-[10px] text-gray-500 leading-relaxed font-medium">
                           Use commas to split distinct files, and dashes for ranges. E.g., <span className="font-mono text-gray-400 bg-white/5 px-1.5 py-0.5 rounded">1-3, 5</span> yields 2 files.
@@ -609,7 +609,7 @@ export default function SplitPdf() {
                         value={outputPrefix}
                         onChange={(e) => setOutputPrefix(e.target.value)}
                         placeholder="split_document"
-                        className="w-full rounded-xl border border-white/10 px-4 py-3 text-sm font-bold bg-[#030712] text-white focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500/20 transition-all"
+                        className="w-full rounded-xl border border-white/10 px-4 py-3 text-sm font-bold bg-[#F6F8FC] dark:bg-[#030712] text-white focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500/20 transition-all"
                       />
                     </div>
 

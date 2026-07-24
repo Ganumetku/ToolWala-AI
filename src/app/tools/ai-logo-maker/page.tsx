@@ -223,7 +223,7 @@ export default function ProfessionalLogoMaker() {
         </div>
       ),
       'badge': (
-        <div className="relative flex items-center justify-center p-16 rounded-[3rem] border-8 border-white/10 bg-[#030712] shadow-2xl" style={{ borderColor: color }}>
+        <div className="relative flex items-center justify-center p-16 rounded-[3rem] border-8 border-white/10 bg-[#F6F8FC] dark:bg-[#030712] shadow-2xl" style={{ borderColor: color }}>
           <div className="flex flex-col items-center">
             <IndustryIcon size={32} style={iconStyle} className="mb-4" />
             <h3 className="font-black uppercase tracking-[0.2em]" style={{ ...textStyle, fontSize: (size * 0.8) + 'px' }}>{text}</h3>
@@ -242,12 +242,12 @@ export default function ProfessionalLogoMaker() {
         </div>
       ),
       'tech-gradient': (
-        <div className="flex items-center gap-5 p-8 rounded-[2.5rem] bg-[#030712] border border-white/5 shadow-2xl relative overflow-hidden group">
+        <div className="flex items-center gap-5 p-8 rounded-[2.5rem] bg-[#F6F8FC] dark:bg-[#030712] border border-white/5 shadow-2xl relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-transparent opacity-50" />
           <div className="relative z-10 p-4 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-xl shadow-blue-500/20">
             <IndustryIcon size={40} className="text-white" />
           </div>
-          <h3 className="relative z-10 text-white font-black tracking-tighter" style={{ ...textStyle, color: '#fff' }}>{text}</h3>
+          <h3 className="relative z-10 text-slate-900 dark:text-white font-black tracking-tighter" style={{ ...textStyle, color: '#fff' }}>{text}</h3>
         </div>
       )
     };
@@ -255,10 +255,10 @@ export default function ProfessionalLogoMaker() {
     return layouts[variant.type as keyof typeof layouts] || layouts['icon-top'];
   };
 
-  if (!mounted) return <div className="min-h-screen bg-[#030712]" />;
+  if (!mounted) return <div className="min-h-screen bg-[#F6F8FC] dark:bg-[#030712]" />;
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden transition-colors duration-250 font-sans">
       {/* --- TOP NAV --- */}
       <div className="container mx-auto max-w-7xl px-4 pt-10 flex flex-col md:flex-row items-center justify-between gap-10">
         <Link href="/tools" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors group">
@@ -455,7 +455,7 @@ export default function ProfessionalLogoMaker() {
                     <div className="w-28 h-28 bg-blue-600 rounded-[2.5rem] flex items-center justify-center mx-auto mb-10 shadow-[0_0_60px_rgba(37,99,235,0.4)] rotate-6 border border-white/10">
                       <Sparkles className="w-14 h-14" />
                     </div>
-                    <h3 className="text-4xl font-black text-white mb-6 tracking-tighter uppercase">Launch Your Brand Today</h3>
+                    <h3 className="text-4xl font-black text-slate-900 dark:text-white mb-6 tracking-tighter uppercase">Launch Your Brand Today</h3>
                     <p className="text-gray-500 max-w-sm mb-12 font-medium leading-relaxed">Experience professional AI branding. Enter your brand name and witness dozens of unique concepts designed specifically for your industry.</p>
                     
                     <div className="flex flex-wrap justify-center gap-8 text-[10px] font-black uppercase tracking-[0.3em] text-gray-600">
@@ -479,7 +479,7 @@ export default function ProfessionalLogoMaker() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-[#030712]/90 backdrop-blur-2xl" 
+              className="absolute inset-0 bg-[#F6F8FC] dark:bg-[#030712]/90 backdrop-blur-2xl" 
               onClick={() => setEditingLogo(null)} 
             />
             
@@ -487,7 +487,7 @@ export default function ProfessionalLogoMaker() {
               initial={{ opacity: 0, scale: 0.9, y: 50 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 50 }}
-              className="relative bg-[#030712] w-full max-w-6xl rounded-[4rem] shadow-[0_0_100px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col lg:flex-row border border-white/10 max-h-[90vh]"
+              className="relative bg-[#F6F8FC] dark:bg-[#030712] w-full max-w-6xl rounded-[4rem] shadow-[0_0_100px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col lg:flex-row border border-white/10 max-h-[90vh]"
             >
               {/* PREVIEW AREA */}
               <div className="flex-1 bg-black/40 flex flex-col items-center justify-center p-12 relative border-r border-white/5">
@@ -530,7 +530,7 @@ export default function ProfessionalLogoMaker() {
               </div>
 
               {/* CONTROLS AREA */}
-              <div className="w-full lg:w-[450px] p-12 overflow-y-auto bg-[#030712] custom-scrollbar">
+              <div className="w-full lg:w-[450px] p-12 overflow-y-auto bg-[#F6F8FC] dark:bg-[#030712] custom-scrollbar">
                 <div className="flex items-center gap-4 mb-12">
                   <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
                     <Settings className="w-5 h-5" />

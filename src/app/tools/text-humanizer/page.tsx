@@ -182,10 +182,10 @@ export default function ProfessionalTextHumanizer() {
     setResult(null);
   };
 
-  if (!mounted) return <div className="min-h-screen bg-[#030712]" />;
+  if (!mounted) return <div className="min-h-screen bg-[#F6F8FC] dark:bg-[#030712]" />;
 
   return (
-    <div className="bg-[#030712] min-h-screen py-24 relative overflow-hidden">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden transition-colors duration-250 font-sans">
       {/* Background Glow */}
       <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-blue-600/5 blur-[150px] -z-10" />
       <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-indigo-600/5 blur-[120px] -z-10" />
@@ -203,7 +203,7 @@ export default function ProfessionalTextHumanizer() {
               <Sparkles className="w-10 h-10" />
             </div>
             <div>
-              <h1 className="text-4xl font-black text-white tracking-tighter">AI Text Humanizer</h1>
+              <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter">AI Text Humanizer</h1>
               <p className="text-gray-400 font-medium mt-2">Rewrite robotic AI content into natural, undetectable human writing.</p>
             </div>
           </div>
@@ -307,7 +307,7 @@ export default function ProfessionalTextHumanizer() {
                   <div className="w-24 h-24 bg-white/5 rounded-[2rem] flex items-center justify-center mb-10 border border-white/5">
                     <Wand2 className="w-12 h-12 text-gray-700" />
                   </div>
-                  <h3 className="text-3xl font-black text-white mb-4 tracking-tighter">Ready for Polish</h3>
+                  <h3 className="text-3xl font-black text-slate-900 dark:text-white mb-4 tracking-tighter">Ready for Polish</h3>
                   <p className="text-gray-500 max-w-xs font-medium leading-relaxed">Your transformed, human-quality text will appear here instantly after processing.</p>
                 </motion.div>
               ) : isGenerating ? (
@@ -322,7 +322,7 @@ export default function ProfessionalTextHumanizer() {
                     <RefreshCw className="w-20 h-20 text-blue-500 animate-spin" />
                     <Sparkles className="absolute -top-4 -right-4 w-10 h-10 text-amber-500 animate-pulse" />
                   </div>
-                  <h3 className="text-3xl font-black text-white tracking-tighter">Bypassing AI Detectors</h3>
+                  <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">Bypassing AI Detectors</h3>
                   <p className="text-gray-500 mt-4 font-medium">Injecting natural linguistic variations...</p>
                   
                   <div className="mt-12 w-full max-w-xs h-1 bg-white/5 rounded-full overflow-hidden">
@@ -349,7 +349,7 @@ export default function ProfessionalTextHumanizer() {
                       </div>
                       <div>
                         <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">Human Score</p>
-                        <h4 className="text-3xl font-black text-white">{result.readabilityScore}<span className="text-sm text-gray-600 ml-1">%</span></h4>
+                        <h4 className="text-3xl font-black text-slate-900 dark:text-white">{result.readabilityScore}<span className="text-sm text-gray-600 ml-1">%</span></h4>
                       </div>
                     </div>
                     <div className="glass p-8 rounded-[2.5rem] border border-white/5 flex items-center gap-6">
@@ -358,7 +358,7 @@ export default function ProfessionalTextHumanizer() {
                       </div>
                       <div>
                         <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">AI Bypassed</p>
-                        <h4 className="text-3xl font-black text-white">100<span className="text-sm text-gray-600 ml-1">%</span></h4>
+                        <h4 className="text-3xl font-black text-slate-900 dark:text-white">100<span className="text-sm text-gray-600 ml-1">%</span></h4>
                       </div>
                     </div>
                   </div>

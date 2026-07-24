@@ -606,7 +606,7 @@ export default function CropPdfEngine({ seoArticle }: CropPdfEngineProps) {
                     <FileText className="w-6 h-6" />
                   </div>
                   <div className="overflow-hidden">
-                    <p className="text-sm font-black text-white truncate">{file.name}</p>
+                    <p className="text-sm font-black text-slate-900 dark:text-white truncate">{file.name}</p>
                     <p className="text-xs text-gray-400 mt-0.5">
                       {numPages} Page(s) • {(file.size / 1024).toFixed(1)} KB
                     </p>
@@ -693,7 +693,7 @@ export default function CropPdfEngine({ seoArticle }: CropPdfEngineProps) {
                           </div>
 
                           <div className="flex-1 overflow-hidden">
-                            <p className="text-xs font-bold text-white">Page {pageNum}</p>
+                            <p className="text-xs font-bold text-slate-900 dark:text-white">Page {pageNum}</p>
                             <p className="text-[10px] text-gray-400 mt-0.5">
                               {pageCrops[pageNum] && pageCrops[pageNum].width < 100
                                 ? "Cropped"
@@ -1149,7 +1149,7 @@ export default function CropPdfEngine({ seoArticle }: CropPdfEngineProps) {
                   <div className="w-14 h-14 bg-emerald-500/25 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-400">
                     <CheckCircle className="w-7 h-7" />
                   </div>
-                  <h4 className="text-xl font-black text-white mb-2">PDF Cropped Successfully!</h4>
+                  <h4 className="text-xl font-black text-slate-900 dark:text-white mb-2">PDF Cropped Successfully!</h4>
                   <p className="text-xs text-gray-400 mb-4">
                     Your cropped document is compiled and ready for instant download.
                   </p>

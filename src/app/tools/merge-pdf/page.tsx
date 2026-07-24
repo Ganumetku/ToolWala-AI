@@ -204,7 +204,7 @@ export default function MergePdf() {
           icon={<Files className="w-7 h-7" />}
         />
 
-        <div className="p-8 sm:p-10 bg-black/[0.15]">
+        <div className="p-8 sm:p-10 bg-white dark:bg-black/[0.15]">
           
           {/* Success state */}
           {success && (
@@ -216,7 +216,7 @@ export default function MergePdf() {
               <div className="w-16 h-16 bg-emerald-500/25 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.2)]">
                 <CheckCircle className="w-8 h-8" />
               </div>
-              <h3 className="text-2xl font-black text-white tracking-tight mb-2">Merge Completed!</h3>
+              <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Merge Completed!</h3>
               <p className="text-sm text-gray-400 mb-6 max-w-md mx-auto">
                 Your PDF was compiled successfully. Your download should have started automatically.
               </p>
@@ -301,14 +301,14 @@ export default function MergePdf() {
                         </div>
 
                         {/* PDF Badge Icon */}
-                        <div className="bg-[#030712] p-3 rounded-xl border border-white/5 flex-shrink-0 flex items-center justify-center relative">
+                        <div className="bg-[#F6F8FC] dark:bg-[#030712] p-3 rounded-xl border border-white/5 flex-shrink-0 flex items-center justify-center relative">
                           <FileText className="w-6 h-6 text-red-500" />
                           <span className="absolute bottom-0 right-0 bg-red-600 text-[6px] font-black uppercase px-1 rounded text-white tracking-widest scale-90">PDF</span>
                         </div>
 
                         {/* Meta Details */}
                         <div className="overflow-hidden flex-1 pr-4">
-                          <p className="text-sm font-bold text-white truncate max-w-[200px] sm:max-w-md" title={pdf.name}>
+                          <p className="text-sm font-bold text-slate-900 dark:text-white truncate max-w-[200px] sm:max-w-md" title={pdf.name}>
                             {pdf.name}
                           </p>
                           <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-500 mt-1 font-medium items-center">
@@ -391,7 +391,7 @@ export default function MergePdf() {
                         value={outputFileName}
                         onChange={(e) => setOutputFileName(e.target.value)}
                         placeholder="merged_document"
-                        className="w-full rounded-xl border border-white/10 px-4 py-3 text-sm font-bold bg-[#030712] text-white focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500/20 transition-all pr-12"
+                        className="w-full rounded-xl border border-white/10 px-4 py-3 text-sm font-bold bg-[#F6F8FC] dark:bg-[#030712] text-white focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500/20 transition-all pr-12"
                       />
                       <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gray-500 font-bold pointer-events-none">.pdf</span>
                     </div>

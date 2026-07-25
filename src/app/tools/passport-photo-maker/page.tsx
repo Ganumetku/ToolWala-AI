@@ -117,15 +117,18 @@ export default function PassportPhotoMaker() {
               title="Passport Photo Maker"
               description="Create perfectly sized passport photos for any country with AI background removal."
               presets={PASSPORT_PRESETS}
-              seoArticle={
-                toolArticles['passport-photo-maker'] && (
-                  <div className="mt-24 border-t border-white/5 pt-20">
-                    <ToolArticle {...toolArticles['passport-photo-maker']} />
-                  </div>
-                )
-              }
             />
-            {/* Workflow Recommendations */}
+          </div>
+
+          {/* SEO Article */}
+          {toolArticles['passport-photo-maker'] && (
+            <div className="mt-24 border-t border-white/5 pt-20 max-w-6xl mx-auto">
+              <ToolArticle {...toolArticles['passport-photo-maker']} />
+            </div>
+          )}
+
+          {/* Workflow Recommendations */}
+          <div className="max-w-6xl mx-auto">
             <WorkflowRecommendations slug="passport-photo-maker" />
           </div>
 

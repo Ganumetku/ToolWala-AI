@@ -52,15 +52,18 @@ export default function AadhaarMaskingTool() {
               toolSlug="aadhaar-masking-tool"
               title="Aadhaar Masking Tool"
               description="Automatically detect and mask the first 8 digits of your Aadhaar card for secure privacy protection."
-              seoArticle={
-                toolArticles['aadhaar-masking-tool'] && (
-                  <div className="mt-24 border-t border-white/5 pt-20">
-                    <ToolArticle {...toolArticles['aadhaar-masking-tool']} />
-                  </div>
-                )
-              }
             />
-            {/* Workflow Recommendations */}
+          </div>
+
+          {/* SEO Article */}
+          {toolArticles['aadhaar-masking-tool'] && (
+            <div className="mt-24 border-t border-white/5 pt-20 max-w-6xl mx-auto">
+              <ToolArticle {...toolArticles['aadhaar-masking-tool']} />
+            </div>
+          )}
+
+          {/* Workflow Recommendations */}
+          <div className="max-w-6xl mx-auto">
             <WorkflowRecommendations slug="aadhaar-masking-tool" />
           </div>
 

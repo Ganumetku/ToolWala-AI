@@ -69,15 +69,18 @@ export default function SSCPhotoResize() {
               title="SSC Photo Resize"
               description="Format and resize passport photos to official Staff Selection Commission (SSC) guidelines."
               presets={SSC_PRESETS}
-              seoArticle={
-                toolArticles["ssc-photo-resize"] && (
-                  <div className="mt-24 border-t border-white/5 pt-20">
-                    <ToolArticle {...toolArticles["ssc-photo-resize"]} />
-                  </div>
-                )
-              }
             />
-            {/* Workflow Recommendations */}
+          </div>
+
+          {/* SEO Article */}
+          {toolArticles["ssc-photo-resize"] && (
+            <div className="mt-24 border-t border-white/5 pt-20 max-w-6xl mx-auto">
+              <ToolArticle {...toolArticles["ssc-photo-resize"]} />
+            </div>
+          )}
+
+          {/* Workflow Recommendations */}
+          <div className="max-w-6xl mx-auto">
             <WorkflowRecommendations slug="ssc-photo-resize" />
           </div>
         </div>

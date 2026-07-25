@@ -71,15 +71,18 @@ export default function AadhaarPhotoResizer() {
               title="Aadhaar Photo Resizer"
               description="Resize, crop, and compress passport photos for Aadhaar, UIDAI, and official government updates."
               presets={AADHAAR_PRESETS}
-              seoArticle={
-                toolArticles['aadhaar-photo-resizer'] && (
-                  <div className="mt-24 border-t border-white/5 pt-20">
-                    <ToolArticle {...toolArticles['aadhaar-photo-resizer']} />
-                  </div>
-                )
-              }
             />
-            {/* Workflow Recommendations */}
+          </div>
+
+          {/* SEO Article */}
+          {toolArticles['aadhaar-photo-resizer'] && (
+            <div className="mt-24 border-t border-white/5 pt-20 max-w-6xl mx-auto">
+              <ToolArticle {...toolArticles['aadhaar-photo-resizer']} />
+            </div>
+          )}
+
+          {/* Workflow Recommendations */}
+          <div className="max-w-6xl mx-auto">
             <WorkflowRecommendations slug="aadhaar-photo-resizer" />
           </div>
 

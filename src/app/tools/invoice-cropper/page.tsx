@@ -50,15 +50,15 @@ export default function InvoiceCropperPage() {
               toolSlug="invoice-cropper"
               title="Invoice Cropper"
               description="Crop and resize invoice scans cleanly with edge detection."
-              seoArticle={
-                toolArticles["invoice-cropper"] && (
-                  <div className="mt-24 border-t border-white/5 pt-20">
-                    <ToolArticle {...toolArticles["invoice-cropper"]} />
-                  </div>
-                )
-              }
             />
           </div>
+
+          {/* SEO Article */}
+          {toolArticles["invoice-cropper"] && (
+            <div className="mt-24 border-t border-white/5 pt-20 max-w-6xl mx-auto">
+              <ToolArticle {...toolArticles["invoice-cropper"]} />
+            </div>
+          )}
         </div>
       </div>
     </ToolVisibilityGuard>

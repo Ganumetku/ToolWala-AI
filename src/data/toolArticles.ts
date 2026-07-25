@@ -1,14 +1,16 @@
 export interface ToolArticleData {
   title: string;
   intro: string;
-  whatItDoes: string;
-  howToUse: string[];
-  keyFeatures: { title: string; desc: string }[];
-  benefits: string[];
-  whyChoose: string;
-  useCases: string[];
-  faqs: { question: string; answer: string }[];
-  conclusion: string;
+  whatItDoes?: string;
+  howToUse?: string[];
+  specificationTable?: { requirement: string; specification: string }[];
+  commonMistakes?: string[];
+  keyFeatures?: { title: string; desc: string }[];
+  benefits?: string[];
+  whyChoose?: string;
+  useCases?: string[];
+  faqs?: { question: string; answer: string }[];
+  conclusion?: string;
   relatedTools?: { name: string; href: string }[];
 }
 
@@ -961,46 +963,39 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "aadhaar-photo-resizer": {
-    title: "Aadhaar Photo Resizer",
-    intro: "Quickly resize, crop, and compress your passport-size photo to official UIDAI specifications for Aadhaar card updates, student cards, and government online applications.",
-    whatItDoes: "The ToolWala AI Aadhaar Photo Resizer is a dedicated image workshop designed for Indian citizens and government form applicants. It helps you prepare official photos matching UIDAI specifications (3.5 cm x 4.5 cm / 354 x 472 px at 300 DPI) completely in your web browser. When you upload any photo—whether it is a selfie, a full-body snapshot, or an existing ID photo—our local subject analysis isolates your pose, centers your face, and crops it to the head-and-shoulders layout needed for official cards. You can toggle background colors to White or Light Blue, tweak visual parameters like contrast and brightness, sharpen the image, and compress the file size down to exact targets (like 20KB or 50KB) to meet upload caps perfectly.",
+    title: "Aadhaar Card Photo Size 2026: Official Specification",
+    intro: "UIDAI Aadhaar portal applications and updates require photographs to meet strict physical and digital dimension standards. Uploading uncropped photos or improper background colors often causes portal verification failures.",
+    whatItDoes: "The Aadhaar Photo Resizer tool automatically crops and formats photographs to match UIDAI guidelines. It formats your portrait to 3.5 cm x 4.5 cm (354 x 472 pixels), sets a compliant white background, and compresses the JPEG output between 20KB and 50KB directly in your browser memory.",
+    specificationTable: [
+      { requirement: "Photo size (pixels)", specification: "354 x 472 px (300 DPI)" },
+      { requirement: "Physical size", specification: "3.5cm x 4.5cm" },
+      { requirement: "File format", specification: "JPEG" },
+      { requirement: "File size", specification: "20KB - 50KB" },
+      { requirement: "Background", specification: "White/light plain" },
+      { requirement: "Facial proportion", specification: "70% - 80% face coverage" }
+    ],
+    commonMistakes: [
+      "Using colored or patterned wall backdrops.",
+      "Wearing dark sunglasses or reflective eyeglasses that obscure eyes.",
+      "Uploading photos larger than 50KB or in PNG/PDF formats.",
+      "Smiling or tilting head away from camera lens."
+    ],
     howToUse: [
-      "Upload your portrait, selfie, or full body photo by dragging it into the active upload box or clicking to browse your device.",
-      "Let the browser-local processor analyze your pose. It will isolate the subject and crop to a centered head-and-shoulders frame.",
-      "Select your target background color: White (UIDAI standard), Light Blue, or use the custom color picker for other government forms.",
-      "Fine-tune visual parameters: adjust brightness, contrast, and apply sharpening filters if the image looks blurry.",
-      "Select your target file size (20KB or 50KB cards, or enter a custom KB limit) and click download to get your compliant JPEG or PNG."
-    ],
-    keyFeatures: [
-      { title: "Auto Face Centering", desc: "Analyzes the subject's pose and automatically centers the head and shoulders, preventing random off-center crops." },
-      { title: "UIDAI Standard Sizes", desc: "Applies standard dimensions (35x45 mm) required for Aadhaar cards, passport updates, and official Indian web portals." },
-      { title: "Exact KB Compressor", desc: "Enforces strict file size thresholds (e.g. under 20KB or 50KB) using an iterative quality search algorithm." },
-      { title: "Government Color Backgrounds", desc: "Instantly switch background colors to White or Light Blue, matching standard official guidelines." }
-    ],
-    benefits: [
-      "Standard-Compliant Layouts: Get photos that follow government criteria exactly, preventing form rejections.",
-      "100% Secure Client Processing: Your personal photos and documents are processed locally and never uploaded to any remote server.",
-      "Smart Full-Body Cropping: Intelligently isolates face and shoulders from full-body snapshots or group pictures.",
-      "Interactive Before/After View: Inspect differences side-by-side to review crops and color changes in real-time."
-    ],
-    whyChoose: "Most online resizers crop images crudely, leading to rejected application forms due to bad ratios or incorrect KB sizes. ToolWala AI combines smart subject extraction with exact KB compression. We run all logic inside your browser thread, keeping your personal identity photos secure while delivering professional results for free.",
-    useCases: [
-      "Updating Aadhaar details online through UIDAI portal uploads.",
-      "Uploading candidate photos for government service examinations (SSC, UPSC, Banking).",
-      "Creating passport-size photos for student enrollment cards and college forms.",
-      "Preparing standardized photos for online KYC verifications and bank accounts."
+      "Upload your passport portrait image by dragging it into the dropzone.",
+      "Align your face inside the UIDAI biometric crop guide.",
+      "Enable white background cleanup if required.",
+      "Download the compliant JPEG file ready for upload."
     ],
     faqs: [
-      { question: "What is the official photo size for Aadhaar updates?", answer: "The official size is 35mm x 45mm (3.5 cm x 4.5 cm), with the head and shoulders centered and occupying 70% to 80% of the photo area on a white background." },
-      { question: "How does the size compression work?", answer: "Portals like UIDAI often require photos to be strictly under 50KB or 20KB. Our system uses an iterative binary search algorithm to compress the image bytes to fit exactly within your requested KB target." },
-      { question: "Is my uploaded photo private?", answer: "Yes, absolutely. Background removal, face cropping, color replacement, and size compression are executed on your local device. We do not store or transmit your photos." },
-      { question: "Can I use this for other government exams?", answer: "Yes. While optimized for Aadhaar, you can select standard passport dimensions and custom background colors/KB sizes to meet SSC, UPSC, and State exam criteria." }
+      { question: "What is the official photo size for Aadhaar card update?", answer: "The official UIDAI size is 3.5 cm x 4.5 cm (354 x 472 pixels) with a white background." },
+      { question: "Can I take an Aadhaar photo with a smartphone?", answer: "Yes, provided it is taken in good natural lighting against a plain wall and cropped to 3.5 x 4.5 cm." },
+      { question: "What is the maximum file size for UIDAI photo uploads?", answer: "The portal requires JPEG files strictly between 20KB and 50KB." },
+      { question: "Is background removal required for Aadhaar photo?", answer: "UIDAI mandates a plain white or light off-white background without shadows or objects." }
     ],
-    conclusion: "Standardize your ID photos, replace background colors, and compress files to compliance limits in one click. Crop your photos securely using ToolWala AI.",
     relatedTools: [
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-      { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "AI Background Remover", href: "/tools/bg-remover" }
+      { name: "PAN Card Resize", href: "/tools/pan-card-resize" },
+      { name: "Signature Resize", href: "/tools/signature-resize" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
     ]
   },
   "pdf-to-word-converter": {

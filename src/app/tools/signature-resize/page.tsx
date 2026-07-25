@@ -97,15 +97,18 @@ export default function SignatureResize() {
               title="Signature Resize"
               description="Crop and resize signature scans to official standards for recruitment, banks, and exams."
               presets={SIGNATURE_PRESETS}
-              seoArticle={
-                toolArticles["signature-resize"] && (
-                  <div className="mt-24 border-t border-white/5 pt-20">
-                    <ToolArticle {...toolArticles["signature-resize"]} />
-                  </div>
-                )
-              }
             />
-            {/* Workflow Recommendations */}
+          </div>
+
+          {/* SEO Article */}
+          {toolArticles["signature-resize"] && (
+            <div className="mt-24 border-t border-white/5 pt-20 max-w-6xl mx-auto">
+              <ToolArticle {...toolArticles["signature-resize"]} />
+            </div>
+          )}
+
+          {/* Workflow Recommendations */}
+          <div className="max-w-6xl mx-auto">
             <WorkflowRecommendations slug="signature-resize" />
           </div>
         </div>

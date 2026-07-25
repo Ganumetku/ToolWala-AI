@@ -69,15 +69,18 @@ export default function UPSCPhotoResize() {
               title="UPSC Photo Resize"
               description="Format and resize passport photos to official Union Public Service Commission (UPSC) guidelines."
               presets={UPSC_PRESETS}
-              seoArticle={
-                toolArticles["upsc-photo-resize"] && (
-                  <div className="mt-24 border-t border-white/5 pt-20">
-                    <ToolArticle {...toolArticles["upsc-photo-resize"]} />
-                  </div>
-                )
-              }
             />
-            {/* Workflow Recommendations */}
+          </div>
+
+          {/* SEO Article */}
+          {toolArticles["upsc-photo-resize"] && (
+            <div className="mt-24 border-t border-white/5 pt-20 max-w-6xl mx-auto">
+              <ToolArticle {...toolArticles["upsc-photo-resize"]} />
+            </div>
+          )}
+
+          {/* Workflow Recommendations */}
+          <div className="max-w-6xl mx-auto">
             <WorkflowRecommendations slug="upsc-photo-resize" />
           </div>
         </div>

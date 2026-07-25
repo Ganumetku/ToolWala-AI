@@ -20,31 +20,36 @@ interface FAQ {
 interface ToolArticleProps {
   title: string;
   intro: string;
-  whatItDoes: string;
-  howToUse: string[];
-  keyFeatures: { title: string; desc: string }[];
-  benefits: string[];
-  whyChoose: string;
-  useCases: string[];
-  faqs: FAQ[];
-  conclusion: string;
+  whatItDoes?: string;
+  howToUse?: string[];
+  specificationTable?: { requirement: string; specification: string }[];
+  commonMistakes?: string[];
+  keyFeatures?: { title: string; desc: string }[];
+  benefits?: string[];
+  whyChoose?: string;
+  useCases?: string[];
+  faqs?: FAQ[];
+  conclusion?: string;
   relatedTools?: { name: string; href: string }[];
+  toolId?: string;
 }
 
 export default function ToolArticle({
   title,
   intro,
-  whatItDoes,
-  howToUse,
-  keyFeatures,
-  benefits,
-  whyChoose,
-  useCases,
-  faqs,
-  conclusion,
+  whatItDoes = "",
+  howToUse = [],
+  specificationTable = [],
+  commonMistakes = [],
+  keyFeatures = [],
+  benefits = [],
+  whyChoose = "",
+  useCases = [],
+  faqs = [],
+  conclusion = "",
   relatedTools = [],
   toolId
-}: ToolArticleProps & { toolId?: string }) {
+}: ToolArticleProps) {
   
   const { t, locale, messages, localizeHref } = useTranslation();
 
@@ -64,35 +69,35 @@ export default function ToolArticle({
   const translatedWhatItDoes = resolvedToolId ? t(`tools.${resolvedToolId}.whatItDoes`, whatItDoes) : whatItDoes;
   
   const translatedHowToUse = useMemo(() => {
-    if (!resolvedToolId) return howToUse;
+    if (!resolvedToolId) return howToUse || [];
     const val = getTranslation(messages, `tools.${resolvedToolId}.howToUse`);
-    return Array.isArray(val) ? val : howToUse;
+    return Array.isArray(val) ? val : (howToUse || []);
   }, [messages, resolvedToolId, howToUse]);
 
   const translatedKeyFeatures = useMemo(() => {
-    if (!resolvedToolId) return keyFeatures;
+    if (!resolvedToolId) return keyFeatures || [];
     const val = getTranslation(messages, `tools.${resolvedToolId}.keyFeatures`);
-    return Array.isArray(val) ? val : keyFeatures;
+    return Array.isArray(val) ? val : (keyFeatures || []);
   }, [messages, resolvedToolId, keyFeatures]);
 
   const translatedBenefits = useMemo(() => {
-    if (!resolvedToolId) return benefits;
+    if (!resolvedToolId) return benefits || [];
     const val = getTranslation(messages, `tools.${resolvedToolId}.benefits`);
-    return Array.isArray(val) ? val : benefits;
+    return Array.isArray(val) ? val : (benefits || []);
   }, [messages, resolvedToolId, benefits]);
 
   const translatedWhyChoose = resolvedToolId ? t(`tools.${resolvedToolId}.whyChoose`, whyChoose) : whyChoose;
 
   const translatedUseCases = useMemo(() => {
-    if (!resolvedToolId) return useCases;
+    if (!resolvedToolId) return useCases || [];
     const val = getTranslation(messages, `tools.${resolvedToolId}.useCases`);
-    return Array.isArray(val) ? val : useCases;
+    return Array.isArray(val) ? val : (useCases || []);
   }, [messages, resolvedToolId, useCases]);
 
   const translatedFaqs = useMemo(() => {
-    if (!resolvedToolId) return faqs;
+    if (!resolvedToolId) return faqs || [];
     const val = getTranslation(messages, `tools.${resolvedToolId}.faqs`);
-    return Array.isArray(val) ? val : faqs;
+    return Array.isArray(val) ? val : (faqs || []);
   }, [messages, resolvedToolId, faqs]);
 
   const translatedConclusion = resolvedToolId ? t(`tools.${resolvedToolId}.conclusion`, conclusion) : conclusion;
@@ -247,18 +252,6 @@ export default function ToolArticle({
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          {/* Section Divider */}
-          <div className="flex items-center gap-4 mb-16">
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#E6ECF5] dark:via-white/10 to-transparent" />
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-[#E6ECF5] dark:border-white/10 shadow-sm backdrop-blur-sm">
-              <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
-                {t('article.deepDiveGuide', 'Deep Dive Guide & SaaS Documentation')}
-              </span>
-            </div>
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#E6ECF5] dark:via-white/10 to-transparent" />
-          </div>
-
           <div className="max-w-[72ch] mx-auto">
             {/* Header */}
             <div className="text-center mb-16 space-y-6">
@@ -278,136 +271,195 @@ export default function ToolArticle({
                   {translatedTitle}
                 </span>
               </h2>
-              <p className="text-base sm:text-lg text-slate-600 dark:text-gray-400 leading-relaxed font-medium max-w-2xl mx-auto italic">
-                "{translatedIntro}"
-              </p>
               
-              <div className="flex justify-center pt-4">
+              <div className="flex justify-center pt-2">
                 <ShareButtons title={translatedTitle} />
               </div>
             </div>
 
             {/* Content Sections */}
-            <div className="space-y-16">
-              {/* What is it */}
-              <div className="p-8 sm:p-10 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)] relative group">
-                <div className="absolute top-0 right-10 h-[2px] w-24 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
-                <div className="relative">
-                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 uppercase tracking-tight">
-                    <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">01</span>
-                    {t('article.whatIs', 'What is {title}?').replace('{title}', translatedTitle)}
-                  </h3>
-                  <p className="text-slate-700 dark:text-gray-300 leading-relaxed text-base font-sans font-medium">
-                    {translatedWhatItDoes}
-                  </p>
-                </div>
-              </div>
+            <div className="space-y-12">
 
-              {/* How to use */}
-              <div className="p-8 sm:p-10 rounded-[1.125rem] bg-[#FBFCFE] dark:bg-[#090d16] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.04)]">
-                <h3 className="text-xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3 uppercase tracking-tight">
-                  <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">02</span>
-                  {t('article.howToUse', 'How to use {title}').replace('{title}', translatedTitle)}
-                </h3>
-                <div className="grid gap-4">
-                  {translatedHowToUse.map((step, i) => (
-                    <motion.div 
-                      key={i}
-                      whileHover={{ x: 6 }}
-                      className="flex gap-5 p-5 rounded-[1rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 hover:border-blue-300 dark:hover:border-blue-500/30 transition-all shadow-[0_4px_20px_rgba(15,23,42,0.03)] group"
-                    >
-                      <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-600/10 border border-blue-200 dark:border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400 font-black text-sm">
-                        {i + 1}
+              {/* What is section with Specification Table immediately following the paragraph */}
+              {translatedWhatItDoes && translatedWhatItDoes.trim().length > 0 && (
+                <div className="p-8 sm:p-10 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)] relative group">
+                  <div className="absolute top-0 right-10 h-[2px] w-24 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+                  <div className="relative space-y-6">
+                    <h3 className="text-xl font-black text-slate-900 dark:text-white flex items-center gap-3 uppercase tracking-tight">
+                      <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">01</span>
+                      {t('article.whatIs', 'What is {title}?').replace('{title}', translatedTitle)}
+                    </h3>
+                    <p className="text-slate-700 dark:text-gray-300 leading-relaxed text-base font-sans font-medium">
+                      {translatedWhatItDoes}
+                    </p>
+
+                    {/* Markdown Specification Table immediately after paragraph */}
+                    {specificationTable && specificationTable.length > 0 && (
+                      <div className="pt-4 space-y-2">
+                        <div className="overflow-x-auto rounded-xl border border-[#E6ECF5] dark:border-white/10">
+                          <table className="w-full text-left text-xs sm:text-sm font-sans border-collapse">
+                            <thead>
+                              <tr className="border-b border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5">
+                                <th className="py-3 px-4 font-black uppercase text-slate-900 dark:text-white tracking-wider">Requirement</th>
+                                <th className="py-3 px-4 font-black uppercase text-slate-900 dark:text-white tracking-wider">Specification</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100 dark:divide-white/5 bg-white dark:bg-transparent">
+                              {specificationTable.map((row, idx) => (
+                                <tr key={idx} className="hover:bg-slate-50/50 dark:hover:bg-white/[0.02] transition-colors">
+                                  <td className="py-3 px-4 font-bold text-slate-900 dark:text-white">{row.requirement}</td>
+                                  <td className="py-3 px-4 font-mono text-xs text-slate-700 dark:text-gray-300">{row.specification}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                        <p className="text-[11px] font-semibold text-slate-500 dark:text-gray-400 italic">
+                          * Official notification se cross-verify zaroor karein apply karne se pehle.
+                        </p>
                       </div>
-                      <p className="text-slate-800 dark:text-gray-200 font-medium leading-relaxed font-sans text-sm sm:text-base">{step}</p>
-                    </motion.div>
-                  ))}
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
 
-              {/* Key Features */}
-              <div>
-                <h3 className="text-xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3 uppercase tracking-tight">
-                  <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">03</span>
-                  {t('article.keyFeatures', 'Key Features')}
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {translatedKeyFeatures.map((feature, i) => (
-                    <div key={i} className="p-6 sm:p-8 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 hover:border-blue-300 dark:hover:border-blue-500/30 transition-all shadow-[0_10px_35px_rgba(15,23,42,0.06)] hover:-translate-y-1 group relative overflow-hidden">
-                      <div className="absolute top-0 right-0 p-4 opacity-[0.05] group-hover:opacity-20 transition-opacity">
-                         <Sparkles className="w-12 h-12 text-blue-600 dark:text-white" />
-                      </div>
-                      <h4 className="text-slate-900 dark:text-white font-black mb-3 uppercase tracking-widest text-xs flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
-                        {feature.title}
-                      </h4>
-                      <p className="text-slate-600 dark:text-gray-400 text-xs sm:text-sm leading-relaxed font-medium font-sans">
-                        {feature.desc}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Benefits & Use Cases */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="p-8 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
-                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 uppercase tracking-tight">
-                    <span className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xs font-black">04</span>
-                    {t('article.benefits', 'Benefits')}
-                  </h3>
-                  <ul className="space-y-4 list-none p-0">
-                    {translatedBenefits.map((benefit, i) => (
-                      <li key={i} className="flex items-start gap-3 text-slate-700 dark:text-gray-300 font-medium font-sans text-sm">
-                        <CheckCircle2 className="w-5 h-5 text-blue-600 dark:text-blue-500 flex-shrink-0 mt-0.5" />
-                        {benefit}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="p-8 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
-                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 uppercase tracking-tight">
-                    <span className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xs font-black">05</span>
-                    {t('article.useCases', 'Use Cases')}
+              {/* Common Mistakes Warning Card */}
+              {commonMistakes && commonMistakes.length > 0 && (
+                <div className="p-8 sm:p-10 rounded-[1.125rem] bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-500/20 shadow-sm relative">
+                  <h3 className="text-xl font-black text-rose-950 dark:text-rose-300 mb-6 flex items-center gap-3 uppercase tracking-tight">
+                    <span className="w-10 h-10 rounded-xl bg-rose-500 text-white flex items-center justify-center text-sm font-black shadow-sm">⚠️</span>
+                    Common Mistakes That Cause Rejection
                   </h3>
                   <ul className="space-y-3 list-none p-0">
-                    {translatedUseCases.map((useCase, i) => (
-                      <li key={i} className="bg-[#FBFCFE] dark:bg-white/[0.01] px-5 py-3.5 rounded-[16px] border border-[#E6ECF5] dark:border-white/5 text-slate-800 dark:text-gray-200 text-xs font-bold flex items-center justify-between group hover:border-blue-300 transition-all shadow-sm">
-                         <span className="font-sans leading-relaxed">{useCase}</span>
-                         <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors" />
+                    {commonMistakes.map((mistake, i) => (
+                      <li key={i} className="flex items-start gap-3 text-rose-900 dark:text-rose-200 font-medium font-sans text-sm">
+                        <span className="text-rose-500 font-black flex-shrink-0 mt-0.5">•</span>
+                        {mistake}
                       </li>
                     ))}
                   </ul>
                 </div>
-              </div>
+              )}
 
-              {/* Callout / Tip Box */}
-              <div className="p-6 sm:p-8 rounded-[1.125rem] bg-emerald-50/80 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 shadow-sm flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center flex-shrink-0 font-bold">
-                  💡
+              {/* How to use */}
+              {translatedHowToUse && translatedHowToUse.length > 0 && (
+                <div className="p-8 sm:p-10 rounded-[1.125rem] bg-[#FBFCFE] dark:bg-[#090d16] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.04)]">
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3 uppercase tracking-tight">
+                    <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">02</span>
+                    {t('article.howToUse', 'How to use {title}').replace('{title}', translatedTitle)}
+                  </h3>
+                  <div className="grid gap-4">
+                    {translatedHowToUse.map((step, i) => (
+                      <motion.div 
+                        key={i}
+                        whileHover={{ x: 6 }}
+                        className="flex gap-5 p-5 rounded-[1rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 hover:border-blue-300 dark:hover:border-blue-500/30 transition-all shadow-[0_4px_20px_rgba(15,23,42,0.03)] group"
+                      >
+                        <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-600/10 border border-blue-200 dark:border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400 font-black text-sm">
+                          {i + 1}
+                        </div>
+                        <p className="text-slate-800 dark:text-gray-200 font-medium leading-relaxed font-sans text-sm sm:text-base">{step}</p>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
+              )}
+
+              {/* Key Features */}
+              {translatedKeyFeatures && translatedKeyFeatures.length > 0 && (
                 <div>
-                  <h4 className="text-sm font-black uppercase tracking-wider text-emerald-950 dark:text-emerald-300 mb-1">
-                    Pro SaaS Tip
-                  </h4>
-                  <p className="text-xs sm:text-sm font-medium text-emerald-900 dark:text-emerald-200 leading-relaxed">
-                    All file conversions and calculations executed on ToolWala AI leverage client-side web technology to guarantee maximum data privacy and instant processing speed.
-                  </p>
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3 uppercase tracking-tight">
+                    <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">03</span>
+                    {t('article.keyFeatures', 'Key Features')}
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {translatedKeyFeatures.map((feature, i) => (
+                      <div key={i} className="p-6 sm:p-8 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 hover:border-blue-300 dark:hover:border-blue-500/30 transition-all shadow-[0_10px_35px_rgba(15,23,42,0.06)] hover:-translate-y-1 group relative overflow-hidden">
+                        <div className="absolute top-0 right-0 p-4 opacity-[0.05] group-hover:opacity-20 transition-opacity">
+                           <Sparkles className="w-12 h-12 text-blue-600 dark:text-white" />
+                        </div>
+                        <h4 className="text-slate-900 dark:text-white font-black mb-3 uppercase tracking-widest text-xs flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+                          {feature.title}
+                        </h4>
+                        <p className="text-slate-600 dark:text-gray-400 text-xs sm:text-sm leading-relaxed font-medium font-sans">
+                          {feature.desc}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Benefits & Use Cases */}
+              {(translatedBenefits.length > 0 || translatedUseCases.length > 0) && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {translatedBenefits.length > 0 && (
+                    <div className="p-8 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
+                      <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 uppercase tracking-tight">
+                        <span className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xs font-black">04</span>
+                        {t('article.benefits', 'Benefits')}
+                      </h3>
+                      <ul className="space-y-4 list-none p-0">
+                        {translatedBenefits.map((benefit, i) => (
+                          <li key={i} className="flex items-start gap-3 text-slate-700 dark:text-gray-300 font-medium font-sans text-sm">
+                            <CheckCircle2 className="w-5 h-5 text-blue-600 dark:text-blue-500 flex-shrink-0 mt-0.5" />
+                            {benefit}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {translatedUseCases.length > 0 && (
+                    <div className="p-8 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
+                      <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 uppercase tracking-tight">
+                        <span className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xs font-black">05</span>
+                        {t('article.useCases', 'Use Cases')}
+                      </h3>
+                      <ul className="space-y-3 list-none p-0">
+                        {translatedUseCases.map((useCase, i) => (
+                          <li key={i} className="bg-[#FBFCFE] dark:bg-white/[0.01] px-5 py-3.5 rounded-[16px] border border-[#E6ECF5] dark:border-white/5 text-slate-800 dark:text-gray-200 text-xs font-bold flex items-center justify-between group hover:border-blue-300 transition-all shadow-sm">
+                             <span className="font-sans leading-relaxed">{useCase}</span>
+                             <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors" />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Privacy Trust Section: Files Never Leave Your Device */}
+              <div className="p-8 sm:p-10 rounded-[1.125rem] bg-slate-900 dark:bg-white/[0.02] text-white border border-slate-800 dark:border-white/10 shadow-xl relative overflow-hidden">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-2xl flex-shrink-0">
+                    🔒
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-white">
+                      Files Never Leave Your Device
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-300 dark:text-gray-300 leading-relaxed font-sans font-medium">
+                      All photo editing, scaling, cropping, and document compression on ToolWala AI happen 100% locally inside your browser active memory using HTML5 Canvas & WebAssembly. Your confidential identity files and photos are never transmitted to or saved on any remote cloud server.
+                    </p>
+                  </div>
                 </div>
               </div>
 
               {/* Why ToolWala */}
-              <div className="relative p-8 sm:p-10 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 overflow-hidden shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
-                <div className="relative">
-                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4 uppercase tracking-tight">
-                    {t('article.whyChoose', 'Why Choose ToolWala AI?')}
-                  </h3>
-                  <p className="text-slate-700 dark:text-gray-300 leading-relaxed text-base font-sans font-medium">
-                    {translatedWhyChoose}
-                  </p>
+              {translatedWhyChoose && translatedWhyChoose.trim().length > 0 && (
+                <div className="relative p-8 sm:p-10 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 overflow-hidden shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
+                  <div className="relative">
+                    <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4 uppercase tracking-tight">
+                      {t('article.whyChoose', 'Why Choose ToolWala AI?')}
+                    </h3>
+                    <p className="text-slate-700 dark:text-gray-300 leading-relaxed text-base font-sans font-medium">
+                      {translatedWhyChoose}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* FAQs */}
               {translatedFaqs && translatedFaqs.length > 0 && (
@@ -430,15 +482,43 @@ export default function ToolArticle({
               )}
 
               {/* Conclusion */}
-              <div className="p-8 sm:p-12 rounded-[1.125rem] bg-gradient-to-br from-blue-50/80 via-[#FBFCFE] to-indigo-50/50 dark:from-blue-600/10 dark:via-transparent dark:to-transparent border border-blue-200 dark:border-blue-500/15 text-center relative overflow-hidden group shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
-                <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" />
-                <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-4 uppercase tracking-tight">
-                  {t('article.finalVerdict', 'Final Verdict')}
-                </h3>
-                <p className="text-slate-700 dark:text-gray-300 leading-relaxed text-base sm:text-lg font-medium max-w-2xl mx-auto relative z-10 font-sans">
-                  {translatedConclusion}
-                </p>
-              </div>
+              {translatedConclusion && translatedConclusion.trim().length > 0 && (
+                <div className="p-8 sm:p-12 rounded-[1.125rem] bg-gradient-to-br from-blue-50/80 via-[#FBFCFE] to-indigo-50/50 dark:from-blue-600/10 dark:via-transparent dark:to-transparent border border-blue-200 dark:border-blue-500/15 text-center relative overflow-hidden group shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
+                  <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" />
+                  <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-4 uppercase tracking-tight">
+                    {t('article.finalVerdict', 'Final Verdict')}
+                  </h3>
+                  <p className="text-slate-700 dark:text-gray-300 leading-relaxed text-base sm:text-lg font-medium max-w-2xl mx-auto relative z-10 font-sans">
+                    {translatedConclusion}
+                  </p>
+                </div>
+              )}
+
+              {/* Explore Related Utilities Section (Cross-link Section) */}
+              {(relatedTools.length > 0 || resolvedRelatedTools.length > 0) && (
+                <div className="pt-8 border-t border-[#E6ECF5] dark:border-white/5 space-y-6">
+                  <div className="flex items-center gap-3">
+                    <span className="text-xl">🔗</span>
+                    <h3 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight">
+                      Explore Related Utilities
+                    </h3>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    {(relatedTools.length > 0 ? relatedTools : resolvedRelatedTools).map((tool, idx) => (
+                      <Link
+                        key={idx}
+                        href={localizeHref(tool.href)}
+                        className="p-4 rounded-xl bg-white dark:bg-white/5 border border-[#E6ECF5] dark:border-white/10 hover:border-blue-500 dark:hover:border-blue-400 transition-all group flex items-center justify-between shadow-xs hover:shadow-md"
+                      >
+                        <span className="text-xs font-bold text-slate-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                          {tool.name}
+                        </span>
+                        <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Relevant Blogs Section */}
               {relevantBlogs.length > 0 && (

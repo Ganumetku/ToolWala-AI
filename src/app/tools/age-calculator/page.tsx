@@ -22,21 +22,21 @@ const MONTHS = [
 function Dropdown({ value, onChange, options, placeholder, label }: any) {
   return (
     <div className="space-y-1.5 relative">
-      <span className="text-[10px] font-bold uppercase text-gray-500 pl-1 tracking-wider">{label}</span>
+      <span className="text-[10px] font-bold uppercase text-slate-500 dark:text-gray-500 pl-1 tracking-wider">{label}</span>
       <div className="relative group">
         <select 
           value={value} 
           onChange={onChange}
-          className="w-full bg-black/40 hover:bg-black/60 border border-white/10 group-hover:border-white/20 rounded-xl py-3.5 pl-4 pr-10 text-white font-semibold text-sm focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 appearance-none transition-all cursor-pointer"
+          className="w-full bg-slate-100 dark:bg-black/40 hover:bg-slate-200 dark:hover:bg-black/60 border border-slate-300 dark:border-white/10 group-hover:border-slate-400 dark:group-hover:border-white/20 rounded-xl py-3.5 pl-4 pr-10 text-slate-900 dark:text-white font-semibold text-sm focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 appearance-none transition-all cursor-pointer"
         >
-          <option value="" disabled className="bg-gray-900 text-gray-500">{placeholder}</option>
+          <option value="" disabled className="bg-white dark:bg-gray-900 text-gray-500">{placeholder}</option>
           {options.map((opt: any) => (
-            <option key={opt.value} value={opt.value} className="bg-gray-900 text-white">
+            <option key={opt.value} value={opt.value} className="bg-white dark:bg-gray-900 text-slate-900 dark:text-white">
               {opt.label}
             </option>
           ))}
         </select>
-        <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none group-hover:text-gray-400 transition-colors" />
+        <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-gray-500 pointer-events-none group-hover:text-slate-600 dark:group-hover:text-gray-400 transition-colors" />
       </div>
     </div>
   );
@@ -58,15 +58,15 @@ function DateSelector({
   const yearOptions = years.map(y => ({ value: String(y), label: String(y) }));
 
   return (
-    <div className="space-y-4 bg-white/[0.02] border border-white/5 rounded-2xl p-5 hover:bg-white/[0.04] transition-colors">
-      <div className="flex items-center justify-between border-b border-white/5 pb-3">
+    <div className="space-y-4 bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 rounded-2xl p-5 hover:bg-slate-100 dark:hover:bg-white/[0.04] transition-colors">
+      <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/5 pb-3">
         <div className="flex items-center gap-2">
-          <Icon className="w-4 h-4 text-gray-400" />
-          <label className="text-xs font-black uppercase tracking-widest text-gray-300 block">{label}</label>
+          <Icon className="w-4 h-4 text-slate-500 dark:text-gray-400" />
+          <label className="text-xs font-black uppercase tracking-widest text-slate-700 dark:text-gray-300 block">{label}</label>
         </div>
         <div className="flex gap-3">
-          <button onClick={onToday} className="text-[10px] uppercase font-bold text-blue-400 hover:text-blue-300 transition-colors">Today</button>
-          <button onClick={onClear} className="text-[10px] uppercase font-bold text-gray-500 hover:text-red-400 transition-colors">Clear</button>
+          <button onClick={onToday} className="text-[10px] uppercase font-bold text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors">Today</button>
+          <button onClick={onClear} className="text-[10px] uppercase font-bold text-slate-500 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400 transition-colors">Clear</button>
         </div>
       </div>
       
@@ -323,9 +323,9 @@ export default function AgeCalculatorPage() {
             
             {/* Left Panel: Inputs */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="glass rounded-[2.5rem] border border-white/5 shadow-2xl p-6 sm:p-8 bg-white/[0.01]">
-                <div className="flex items-center gap-2 border-b border-white/5 pb-4 mb-6">
-                  <Calculator className="w-5 h-5 text-blue-400" />
+              <div className="glass rounded-[2.5rem] border border-slate-200 dark:border-white/5 shadow-2xl p-6 sm:p-8 bg-white dark:bg-white/[0.01]">
+                <div className="flex items-center gap-2 border-b border-slate-200 dark:border-white/5 pb-4 mb-6">
+                  <Calculator className="w-5 h-5 text-blue-500 dark:text-blue-400" />
                   <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">Date Details</h3>
                 </div>
 
@@ -370,43 +370,43 @@ export default function AgeCalculatorPage() {
                 <div className="h-full glass rounded-[2.5rem] border border-red-500/20 bg-red-500/5 p-8 flex flex-col items-center justify-center text-center shadow-2xl">
                   <AlertCircle className="w-12 h-12 text-red-400 mb-4 opacity-70" />
                   <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider mb-2">Invalid Selection</h3>
-                  <p className="text-xs text-red-300 font-semibold">{errorMsg}</p>
+                  <p className="text-xs text-red-500 dark:text-red-300 font-semibold">{errorMsg}</p>
                 </div>
               ) : !results ? (
-                <div className="h-full glass rounded-[2.5rem] border border-white/5 bg-white/[0.01] p-8 flex flex-col items-center justify-center text-center">
-                  <Activity className="w-12 h-12 text-gray-500 mb-4 opacity-50 animate-pulse" />
-                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Calculating...</p>
+                <div className="h-full glass rounded-[2.5rem] border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.01] p-8 flex flex-col items-center justify-center text-center">
+                  <Activity className="w-12 h-12 text-gray-400 mb-4 opacity-50 animate-pulse" />
+                  <p className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">Calculating...</p>
                 </div>
               ) : (
                 <div className="space-y-6">
                   {/* Main Age Card */}
-                  <div className="glass rounded-[2.5rem] border border-white/5 shadow-2xl overflow-hidden bg-white/[0.01] relative group">
+                  <div className="glass rounded-[2.5rem] border border-slate-200 dark:border-white/5 shadow-2xl overflow-hidden bg-white dark:bg-white/[0.01] relative group">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none transition-transform group-hover:scale-110 duration-700" />
                     
                     <div className="p-8 sm:p-10 relative z-10">
                       <div className="flex items-center gap-2 mb-8">
-                        <Activity className="w-5 h-5 text-blue-400" />
-                        <span className="text-xs font-black uppercase tracking-widest text-gray-400">Chronological Age</span>
+                        <Activity className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                        <span className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-gray-400">Chronological Age</span>
                       </div>
 
                       <div className="flex flex-wrap items-end gap-6 sm:gap-10">
                         <div className="flex flex-col">
-                          <span className="text-6xl sm:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400 leading-none">
+                          <span className="text-6xl sm:text-7xl font-black text-slate-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-white dark:to-gray-400 leading-none">
                             {results.years}
                           </span>
-                          <span className="text-sm font-black uppercase tracking-widest text-blue-400 mt-2">Years</span>
+                          <span className="text-sm font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 mt-2">Years</span>
                         </div>
                         <div className="flex flex-col">
-                          <span className="text-5xl sm:text-6xl font-black text-white leading-none">
+                          <span className="text-5xl sm:text-6xl font-black text-slate-900 dark:text-white leading-none">
                             {results.months}
                           </span>
-                          <span className="text-sm font-black uppercase tracking-widest text-indigo-400 mt-2">Months</span>
+                          <span className="text-sm font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mt-2">Months</span>
                         </div>
                         <div className="flex flex-col">
-                          <span className="text-5xl sm:text-6xl font-black text-white leading-none">
+                          <span className="text-5xl sm:text-6xl font-black text-slate-900 dark:text-white leading-none">
                             {results.days}
                           </span>
-                          <span className="text-sm font-black uppercase tracking-widest text-purple-400 mt-2">Days</span>
+                          <span className="text-sm font-black uppercase tracking-widest text-purple-600 dark:text-purple-400 mt-2">Days</span>
                         </div>
                       </div>
                     </div>
@@ -416,41 +416,41 @@ export default function AgeCalculatorPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     
                     {/* Next Birthday Card */}
-                    <div className="glass rounded-[2rem] border border-white/5 p-6 bg-gradient-to-br from-white/[0.02] to-transparent hover:bg-white/[0.04] transition-all duration-300">
+                    <div className="glass rounded-[2rem] border border-slate-200 dark:border-white/5 p-6 bg-slate-50 dark:bg-gradient-to-br dark:from-white/[0.02] dark:to-transparent hover:bg-slate-100 dark:hover:bg-white/[0.04] transition-all duration-300">
                       <div className="flex items-center justify-between mb-4">
-                        <span className="text-xs font-black uppercase tracking-widest text-gray-400">Next Birthday</span>
-                        <CalendarDays className="w-5 h-5 text-emerald-400" />
+                        <span className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-gray-400">Next Birthday</span>
+                        <CalendarDays className="w-5 h-5 text-emerald-500 dark:text-emerald-400" />
                       </div>
                       
                       {results.isBirthdayToday ? (
                         <div className="flex items-center gap-3 mt-4">
                           <Heart className="w-8 h-8 text-rose-500 animate-pulse" />
-                          <span className="text-xl font-black text-white tracking-wide uppercase">Happy Birthday!</span>
+                          <span className="text-xl font-black text-slate-900 dark:text-white tracking-wide uppercase">Happy Birthday!</span>
                         </div>
                       ) : (
                         <div className="flex items-baseline gap-2">
-                          <span className="text-3xl font-black text-white">{results.nextBdayMonths}</span>
-                          <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 mr-2">Mos</span>
-                          <span className="text-3xl font-black text-white">{results.nextBdayDays}</span>
-                          <span className="text-xs font-bold uppercase tracking-widest text-emerald-400">Days</span>
+                          <span className="text-3xl font-black text-slate-900 dark:text-white">{results.nextBdayMonths}</span>
+                          <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mr-2">Mos</span>
+                          <span className="text-3xl font-black text-slate-900 dark:text-white">{results.nextBdayDays}</span>
+                          <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Days</span>
                         </div>
                       )}
                     </div>
 
                     {/* Total Summary */}
-                    <div className="glass rounded-[2rem] border border-white/5 p-6 bg-gradient-to-br from-white/[0.02] to-transparent">
+                    <div className="glass rounded-[2rem] border border-slate-200 dark:border-white/5 p-6 bg-slate-50 dark:bg-gradient-to-br dark:from-white/[0.02] dark:to-transparent">
                       <div className="space-y-4">
-                        <div className="flex justify-between items-end border-b border-white/5 pb-3">
-                          <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Total Months</span>
-                          <span className="text-lg font-mono font-black text-white">{results.totalMonths.toLocaleString()}</span>
+                        <div className="flex justify-between items-end border-b border-slate-200 dark:border-white/5 pb-3">
+                          <span className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Total Months</span>
+                          <span className="text-lg font-mono font-black text-slate-900 dark:text-white">{results.totalMonths.toLocaleString()}</span>
                         </div>
-                        <div className="flex justify-between items-end border-b border-white/5 pb-3">
-                          <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Total Weeks</span>
-                          <span className="text-lg font-mono font-black text-white">{results.totalWeeks.toLocaleString()}</span>
+                        <div className="flex justify-between items-end border-b border-slate-200 dark:border-white/5 pb-3">
+                          <span className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Total Weeks</span>
+                          <span className="text-lg font-mono font-black text-slate-900 dark:text-white">{results.totalWeeks.toLocaleString()}</span>
                         </div>
                         <div className="flex justify-between items-end">
-                          <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Total Days</span>
-                          <span className="text-lg font-mono font-black text-white">{results.totalDays.toLocaleString()}</span>
+                          <span className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Total Days</span>
+                          <span className="text-lg font-mono font-black text-slate-900 dark:text-white">{results.totalDays.toLocaleString()}</span>
                         </div>
                       </div>
                     </div>
@@ -463,22 +463,22 @@ export default function AgeCalculatorPage() {
           </div>
 
           {/* Dynamic FAQ Accordion */}
-          <section className="py-16 border-t border-white/5 max-w-3xl mx-auto space-y-8">
+          <section className="py-16 border-t border-slate-200 dark:border-white/5 max-w-3xl mx-auto space-y-8">
             <div className="text-center">
               <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-2">Frequently Asked Questions</h3>
-              <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Everything you need to know about age calculation</p>
+              <p className="text-xs text-slate-500 dark:text-gray-500 font-bold uppercase tracking-wider">Everything you need to know about age calculation</p>
             </div>
 
             <div className="space-y-4">
               {faqs.map((faq, index) => {
                 const isExpanded = faqExpanded === index;
                 return (
-                  <div key={index} className="glass rounded-2xl border border-white/5 bg-white/[0.01] overflow-hidden">
+                  <div key={index} className="glass rounded-2xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.01] overflow-hidden">
                     <button
                       onClick={() => setFaqExpanded(isExpanded ? null : index)}
                       className="w-full flex items-center justify-between p-5.5 text-left focus:outline-none cursor-pointer"
                     >
-                      <span className="text-xs sm:text-sm font-black text-white hover:text-blue-400 transition-colors">
+                      <span className="text-xs sm:text-sm font-black text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                         {faq.q}
                       </span>
                       <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform duration-300 flex-shrink-0 ml-4 ${isExpanded ? 'rotate-180 text-blue-400' : ''}`} />

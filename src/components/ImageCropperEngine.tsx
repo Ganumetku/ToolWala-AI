@@ -59,52 +59,102 @@ const sharpenCanvas = (canvas: HTMLCanvasElement, value: number) => {
   ctx.putImageData(imgData, 0, 0);
 };
 
-// Helper to compress canvas to JPEG below target KB size using binary search
+// Helper to compress canvas to JPEG below target KB size using multi-pass quality & resolution scaling
 const compressToKbLimit = (
   canvas: HTMLCanvasElement,
   targetKb: number
 ): Promise<string> => {
   return new Promise((resolve) => {
-    let low = 0.01;
-    let high = 0.99;
-    let bestDataUrl = "";
-    let bestSize = Infinity;
-    let iterations = 0;
     const targetBytes = targetKb * 1024;
 
-    const run = () => {
-      if (iterations >= 8 || low > high) {
-        resolve(bestDataUrl || canvas.toDataURL("image/jpeg", 0.1));
-        return;
-      }
-      iterations++;
-      const mid = (low + high) / 2;
-      canvas.toBlob(
-        (blob) => {
-          if (!blob) {
-            resolve(canvas.toDataURL("image/jpeg", mid));
+    const tryCompressCanvas = (
+      c: HTMLCanvasElement
+    ): Promise<{ dataUrl: string; size: number; qualityUsed: number } | null> => {
+      return new Promise((res) => {
+        let low = 0.15; // Maintain minimum 15% quality to prevent blocky artifacts
+        let high = 0.98;
+        let bestDataUrl = "";
+        let bestSize = Infinity;
+        let bestQuality = 0;
+        let iterations = 0;
+
+        const run = () => {
+          if (iterations >= 8 || low > high) {
+            if (bestDataUrl) {
+              res({ dataUrl: bestDataUrl, size: bestSize, qualityUsed: bestQuality });
+            } else {
+              res(null);
+            }
             return;
           }
-          const size = blob.size;
-          if (size <= targetBytes) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-              bestDataUrl = reader.result as string;
-              bestSize = size;
-              low = mid + 0.02;
-              run();
-            };
-            reader.readAsDataURL(blob);
-          } else {
-            high = mid - 0.02;
-            run();
-          }
-        },
-        "image/jpeg",
-        mid
-      );
+          iterations++;
+          const mid = (low + high) / 2;
+          c.toBlob(
+            (blob) => {
+              if (!blob) {
+                res(null);
+                return;
+              }
+              if (blob.size <= targetBytes) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                  bestDataUrl = reader.result as string;
+                  bestSize = blob.size;
+                  bestQuality = mid;
+                  low = mid + 0.02;
+                  run();
+                };
+                reader.readAsDataURL(blob);
+              } else {
+                high = mid - 0.02;
+                run();
+              }
+            },
+            "image/jpeg",
+            mid
+          );
+        };
+        run();
+      });
     };
-    run();
+
+    // First attempt: Compress at 100% canvas resolution
+    tryCompressCanvas(canvas).then(async (result) => {
+      if (result && result.qualityUsed >= 0.35) {
+        // High visual quality achieved at full resolution
+        resolve(result.dataUrl);
+        return;
+      }
+
+      // If full resolution requires low quality (< 35%), scale down canvas resolution slightly
+      // so quality stays crisp (60-90%) without visual artifacts or blur
+      let bestAttempt = result;
+
+      for (const scale of [0.85, 0.70, 0.55]) {
+        const scaledCanvas = document.createElement("canvas");
+        scaledCanvas.width = Math.max(100, Math.round(canvas.width * scale));
+        scaledCanvas.height = Math.max(100, Math.round(canvas.height * scale));
+        const ctx = scaledCanvas.getContext("2d");
+        if (ctx) {
+          ctx.fillStyle = "#FFFFFF";
+          ctx.fillRect(0, 0, scaledCanvas.width, scaledCanvas.height);
+          ctx.drawImage(canvas, 0, 0, scaledCanvas.width, scaledCanvas.height);
+        }
+
+        const res = await tryCompressCanvas(scaledCanvas);
+        if (res && res.size <= targetBytes) {
+          bestAttempt = res;
+          if (res.qualityUsed >= 0.45) break; // High quality threshold achieved!
+        }
+      }
+
+      if (bestAttempt) {
+        resolve(bestAttempt.dataUrl);
+      } else {
+        // Safe fallback
+        resolve(canvas.toDataURL("image/jpeg", 0.5));
+      }
+    });
   });
 };
 

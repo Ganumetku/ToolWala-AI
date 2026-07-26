@@ -90,7 +90,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
           <BlogBreadcrumbs items={breadcrumbs} />
 
           {translatedBlog.thumbnail && (
-            <div className="w-full aspect-[21/9] rounded-[2.5rem] overflow-hidden border border-gray-200 dark:border-white/5 shadow-2xl relative mb-12">
+            <div className="w-full aspect-[16/9] rounded-[2.5rem] overflow-hidden border border-gray-200 dark:border-white/5 shadow-2xl relative mb-12 bg-gray-900/20 dark:bg-black/40">
               <LazyBlogImage
                 src={translatedBlog.thumbnail}
                 alt={translatedBlog.title}
@@ -98,7 +98,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
                 className="absolute inset-0 w-full h-full object-cover"
                 aspectRatio="w-full h-full"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-950/40 via-transparent to-transparent pointer-events-none" />
             </div>
           )}
 

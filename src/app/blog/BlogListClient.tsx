@@ -160,16 +160,17 @@ export default function BlogListClient({
                 className="group relative overflow-hidden rounded-[2.5rem] border border-gray-200 dark:border-white/5 bg-white dark:bg-white/[0.01] hover:bg-gray-50 dark:hover:bg-white/[0.02] shadow-sm hover:shadow-md dark:shadow-2xl transition-all duration-300 card-glow"
               >
                 <Link href={localizeHref(`/blog/${featuredPost.slug}`)} className="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 sm:p-8">
-                  <div className="md:col-span-7 rounded-[2rem] overflow-hidden relative min-h-[260px] max-h-[350px]">
+                  <div className="md:col-span-7 rounded-[2rem] overflow-hidden relative aspect-video md:aspect-auto md:min-h-[260px] md:max-h-[350px] bg-[#0d082d]/90 dark:bg-black/60 flex items-center justify-center">
                     <LazyBlogImage
                       src={featuredPost.thumbnail}
                       alt={featuredPost.title}
                       priority
-                      aspectRatio="absolute inset-0 w-full h-full"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      objectFit="contain"
+                      aspectRatio="w-full h-full"
+                      className="w-full h-full group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-80" />
-                    <span className="absolute top-5 left-5 px-3 py-1 rounded-lg bg-blue-600 text-[10px] font-black uppercase tracking-widest text-white shadow-md">
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950/40 via-transparent to-transparent pointer-events-none" />
+                    <span className="absolute top-4 left-4 z-20 px-3 py-1 rounded-lg bg-blue-600 text-[10px] font-black uppercase tracking-widest text-white shadow-md">
                       {t('blog.featured_badge', 'Featured')}
                     </span>
                   </div>
@@ -224,14 +225,15 @@ export default function BlogListClient({
                     className="group flex flex-col justify-between rounded-[2rem] border border-gray-200 dark:border-white/5 bg-white dark:bg-white/[0.01] hover:bg-gray-50 dark:hover:bg-white/[0.02] shadow-sm hover:shadow-md dark:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden relative card-glow"
                   >
                     <Link href={localizeHref(`/blog/${blog.slug}`)} className="flex flex-col h-full">
-                      <div className="relative aspect-video overflow-hidden">
+                      <div className="relative aspect-video overflow-hidden bg-[#0d082d]/90 dark:bg-black/60 flex items-center justify-center">
                         <LazyBlogImage
                           src={blog.thumbnail}
                           alt={blog.title}
+                          objectFit="contain"
                           aspectRatio="w-full h-full"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                          className="w-full h-full group-hover:scale-105 transition-transform duration-700"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-gray-950/40 via-transparent to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-950/30 via-transparent to-transparent pointer-events-none" />
                         <span className="absolute bottom-4 left-4 px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-[9px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400">
                           {t('categories.' + blog.category, blog.category)}
                         </span>

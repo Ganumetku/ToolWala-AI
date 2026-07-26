@@ -82,13 +82,15 @@ export default function BlogPreview() {
               >
                 <div>
                   {/* Thumbnail */}
-                  <div className="h-52 w-full overflow-hidden relative border-b border-gray-100 dark:border-white/5">
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 to-transparent z-10" />
+                  <div className="aspect-video w-full overflow-hidden relative border-b border-gray-100 dark:border-white/5 bg-[#0d082d]/90 dark:bg-black/60 flex items-center justify-center">
                     <LazyBlogImage 
                       src={blog.thumbnail || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80"} 
                       alt={blogTitle}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      objectFit="contain"
+                      aspectRatio="w-full h-full"
+                      className="w-full h-full group-hover:scale-105 transition-transform duration-500"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950/30 to-transparent pointer-events-none z-10" />
                     <span className="absolute top-4 left-4 z-20 px-2.5 py-1 rounded-md bg-blue-600 text-[8px] font-black uppercase tracking-widest text-white shadow-md">
                       {blogCategory}
                     </span>

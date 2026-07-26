@@ -168,12 +168,29 @@ export default function Header() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <header 
-      className={`sticky top-0 z-50 w-full transition-all duration-500 ${
-        isScrolled 
-          ? 'bg-white/90 dark:bg-[#030712]/85 backdrop-blur-md border-b border-gray-200 dark:border-white/5 py-3.5 sm:py-3 shadow-sm' 
-          : 'bg-white/80 dark:bg-[#030712]/85 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border-b border-gray-200 dark:border-white/5 sm:border-b-0 py-3.5 sm:py-6'
+      className={`sticky top-0 z-[9999] w-full transition-all duration-300 ${
+        isMobileMenuOpen
+          ? 'bg-white dark:bg-[#030712] border-b border-gray-200 dark:border-white/5 py-3.5'
+          : isScrolled 
+            ? 'bg-white/90 dark:bg-[#030712]/85 backdrop-blur-md border-b border-gray-200 dark:border-white/5 py-3.5 sm:py-3 shadow-sm' 
+            : 'bg-white/80 dark:bg-[#030712]/85 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border-b border-gray-200 dark:border-white/5 sm:border-b-0 py-3.5 sm:py-6'
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-3 sm:px-4 lg:px-4 xl:px-6 gap-2 xl:gap-4 2xl:gap-8">
@@ -335,7 +352,7 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-[64px] bottom-0 z-50 bg-white/98 dark:bg-[#030712]/98 backdrop-blur-2xl animate-fade-in border-t border-gray-200 dark:border-white/5 overflow-y-auto pb-10">
+        <div className="lg:hidden fixed inset-x-0 top-[60px] sm:top-[64px] bottom-0 z-[9999] bg-white dark:bg-[#030712] border-t border-gray-200 dark:border-white/5 overflow-y-auto pb-20 animate-fade-in">
           <div className="flex flex-col p-6 gap-4">
             {navigation.map((item) => {
               if (item.submenu) {

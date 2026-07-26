@@ -985,9 +985,8 @@ export default function BlogCMS() {
                   <div className="max-w-3xl mx-auto space-y-8 py-8 animate-fade-in">
                     {/* Featured Image */}
                     {thumbnail && (
-                      <div className="w-full aspect-[16/9] rounded-[2rem] overflow-hidden border border-slate-200 dark:border-white/5 relative shadow-md bg-slate-900/20 dark:bg-black/40">
-                        <img src={thumbnail} alt="" className="absolute inset-0 w-full h-full object-cover" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 dark:from-gray-950/60 via-transparent" />
+                      <div className="w-full aspect-[16/9] rounded-[2rem] overflow-hidden border border-slate-200 dark:border-white/5 relative shadow-md bg-[#0d082d]/90 dark:bg-black/60 flex items-center justify-center">
+                        <img src={thumbnail} alt="" className="w-full h-full object-contain" />
                       </div>
                     )}
 

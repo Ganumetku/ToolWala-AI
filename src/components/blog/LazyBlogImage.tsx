@@ -9,6 +9,7 @@ interface LazyBlogImageProps {
   className?: string;
   priority?: boolean;
   aspectRatio?: string;
+  objectFit?: "cover" | "contain" | "fill";
 }
 
 export default function LazyBlogImage({
@@ -17,10 +18,13 @@ export default function LazyBlogImage({
   className = "",
   priority = false,
   aspectRatio,
+  objectFit = "cover",
 }: LazyBlogImageProps) {
   const [loaded, setLoaded] = useState(false);
 
   const isBase64 = src.startsWith("data:") || src.startsWith("blob:");
+
+  const fitClass = objectFit === "contain" ? "object-contain" : objectFit === "fill" ? "object-fill" : "object-cover";
 
   if (isBase64) {
     return (
@@ -34,7 +38,7 @@ export default function LazyBlogImage({
           loading={priority ? "eager" : "lazy"}
           decoding="async"
           onLoad={() => setLoaded(true)}
-          className={`transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"} ${className}`}
+          className={`transition-opacity duration-500 ${fitClass} ${loaded ? "opacity-100" : "opacity-0"} ${className}`}
         />
       </div>
     );
@@ -52,7 +56,7 @@ export default function LazyBlogImage({
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         onLoad={() => setLoaded(true)}
-        className={`transition-opacity duration-500 object-cover ${loaded ? "opacity-100" : "opacity-0"} ${className}`}
+        className={`transition-opacity duration-500 ${fitClass} ${loaded ? "opacity-100" : "opacity-0"} ${className}`}
       />
     </div>
   );

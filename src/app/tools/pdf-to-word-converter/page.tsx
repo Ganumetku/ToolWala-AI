@@ -342,12 +342,12 @@ export default function PdfToWord() {
                 </div>
                 <div>
                   <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">PDF to Word Converter</h1>
-                  <p className="text-gray-400 font-medium mt-1">Convert PDF files to editable Word documents (.docx) locally and securely.</p>
+                  <p className="text-slate-600 dark:text-gray-400 font-medium mt-1">Convert PDF files to editable Word documents (.docx) locally and securely.</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 bg-emerald-500/10 px-4 py-2 rounded-xl border border-emerald-500/20 h-fit">
-                <Shield className="w-4 h-4 text-emerald-400" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">Secure Processing</span>
+                <Shield className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Secure Processing</span>
               </div>
             </div>
           </div>
@@ -357,11 +357,11 @@ export default function PdfToWord() {
             {/* Decryption Warning */}
             {isPasswordProtected && (
               <div className="mb-8 p-6 bg-red-500/10 border border-red-500/20 rounded-2xl text-center">
-                <div className="text-red-400 text-sm font-bold flex flex-col items-center gap-3">
+                <div className="text-red-500 dark:text-red-400 text-sm font-bold flex flex-col items-center gap-3">
                   <FileWarning className="w-8 h-8 text-red-500" />
-                  <span>This PDF is password-protected. Please unlock the file using our <Link href="/tools/unlock-pdf" className="text-blue-400 underline hover:text-blue-300">Unlock PDF</Link> tool before uploading.</span>
+                  <span>This PDF is password-protected. Please unlock the file using our <Link href="/tools/unlock-pdf" className="text-blue-600 dark:text-blue-400 underline hover:text-blue-500 dark:hover:text-blue-300">Unlock PDF</Link> tool before uploading.</span>
                 </div>
-                <button onClick={resetAll} className="mt-4 px-5 py-2.5 bg-white/5 border border-white/10 text-xs font-bold text-gray-300 rounded-xl hover:bg-white/10 transition-all cursor-pointer">
+                <button onClick={resetAll} className="mt-4 px-5 py-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-700 dark:text-gray-300 rounded-xl hover:bg-slate-200 dark:hover:bg-white/10 transition-all cursor-pointer">
                   Try Another File
                 </button>
               </div>
@@ -370,11 +370,11 @@ export default function PdfToWord() {
             {/* Empty PDF Warning */}
             {isEmptyPdf && (
               <div className="mb-8 p-6 bg-red-500/10 border border-red-500/20 rounded-2xl text-center">
-                <div className="text-red-400 text-sm font-bold flex flex-col items-center gap-3">
+                <div className="text-red-500 dark:text-red-400 text-sm font-bold flex flex-col items-center gap-3">
                   <AlertCircle className="w-8 h-8 text-red-500" />
                   <span>This PDF appears to be empty and does not contain any pages or content.</span>
                 </div>
-                <button onClick={resetAll} className="mt-4 px-5 py-2.5 bg-white/5 border border-white/10 text-xs font-bold text-gray-300 rounded-xl hover:bg-white/10 transition-all cursor-pointer">
+                <button onClick={resetAll} className="mt-4 px-5 py-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-700 dark:text-gray-300 rounded-xl hover:bg-slate-200 dark:hover:bg-white/10 transition-all cursor-pointer">
                   Try Another File
                 </button>
               </div>
@@ -397,7 +397,7 @@ export default function PdfToWord() {
                   className={`border-2 border-dashed rounded-[3rem] p-12 sm:p-24 text-center transition-all cursor-pointer group relative overflow-hidden
                     ${isDraggingOverUpload 
                       ? 'border-blue-500 bg-blue-500/10 scale-[1.01] shadow-[0_0_30px_rgba(59,130,246,0.1)]' 
-                      : 'border-white/10 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/20'
+                      : 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/[0.02] hover:bg-slate-100 dark:hover:bg-white/[0.04] hover:border-slate-300 dark:hover:border-white/20'
                     }
                   `}
                 >
@@ -411,14 +411,14 @@ export default function PdfToWord() {
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
                   <div className="relative z-10">
-                    <div className="w-20 h-20 mx-auto mb-8 rounded-2xl bg-white/5 flex items-center justify-center text-gray-500 border border-white/5 group-hover:text-blue-400 group-hover:bg-blue-500/10 group-hover:scale-110 transition-all duration-300 shadow-2xl">
+                    <div className="w-20 h-20 mx-auto mb-8 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 dark:text-gray-500 border border-slate-200 dark:border-white/5 group-hover:text-blue-500 dark:group-hover:text-blue-400 group-hover:bg-blue-500/10 group-hover:scale-110 transition-all duration-300 shadow-2xl">
                       <UploadCloud className="w-10 h-10" />
                     </div>
                     <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-3">Upload PDF to Convert</h3>
-                    <p className="text-sm text-gray-500 mb-10 max-w-sm mx-auto font-medium leading-relaxed font-sans">
+                    <p className="text-sm text-slate-500 dark:text-gray-500 mb-10 max-w-sm mx-auto font-medium leading-relaxed font-sans">
                       Drag and drop your PDF here, or click to choose from your device. Files remain strictly inside your browser. (Max 50MB)
                     </p>
-                    <button className="rounded-xl bg-white text-black px-8 py-3.5 text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-[0_4px_20px_rgba(255,255,255,0.1)] cursor-pointer">
+                    <button className="rounded-xl bg-blue-600 dark:bg-white text-white dark:text-black px-8 py-3.5 text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-[0_4px_20px_rgba(37,99,235,0.3)] dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)] cursor-pointer">
                       Browse File
                     </button>
                   </div>
@@ -458,19 +458,19 @@ export default function PdfToWord() {
                 >
                   {/* Left Side: Metadata Card & Notices */}
                   <div className="lg:col-span-2 space-y-6">
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6 bg-white/5 border border-white/5 rounded-2xl gap-4">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl gap-4">
                       <div className="flex items-center gap-3.5 overflow-hidden">
-                        <div className="bg-[#F6F8FC] dark:bg-[#030712] p-3 rounded-xl border border-white/5 flex-shrink-0 text-2xl">
+                        <div className="bg-slate-100 dark:bg-[#030712] p-3 rounded-xl border border-slate-200 dark:border-white/5 flex-shrink-0 text-2xl">
                           📄
                         </div>
                         <div className="overflow-hidden">
                           <p className="text-sm font-bold text-slate-900 dark:text-white truncate max-w-xs sm:max-w-md">{pdfFile.name}</p>
-                          <p className="text-xs text-gray-500 mt-0.5 font-medium font-sans">{formatBytes(pdfFile.size)} • {totalPages} pages</p>
+                          <p className="text-xs text-slate-500 dark:text-gray-500 mt-0.5 font-medium font-sans">{formatBytes(pdfFile.size)} • {totalPages} pages</p>
                         </div>
                       </div>
                       <button 
                         onClick={resetAll} 
-                        className="text-[10px] font-black uppercase tracking-widest text-red-400 hover:text-red-300 bg-red-500/10 px-4 py-2 border border-red-500/20 rounded-xl transition-all self-end sm:self-auto cursor-pointer"
+                        className="text-[10px] font-black uppercase tracking-widest text-red-500 dark:text-red-400 hover:text-red-600 dark:hover:text-red-300 bg-red-500/10 px-4 py-2 border border-red-500/20 rounded-xl transition-all self-end sm:self-auto cursor-pointer"
                       >
                         Clear File
                       </button>
@@ -478,10 +478,10 @@ export default function PdfToWord() {
 
                     {isScanned && (
                       <div className="p-5 border border-amber-500/20 bg-amber-500/5 rounded-2xl flex items-start gap-4">
-                        <AlertCircle className="w-5 h-5 text-amber-400 mt-0.5 shrink-0" />
+                        <AlertCircle className="w-5 h-5 text-amber-500 dark:text-amber-400 mt-0.5 shrink-0" />
                         <div>
                           <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">Scanned PDF Detected</h4>
-                          <p className="text-xs text-gray-400 mt-1 leading-relaxed font-sans">
+                          <p className="text-xs text-slate-600 dark:text-gray-400 mt-1 leading-relaxed font-sans">
                             This PDF appears to be scanned. OCR is required to convert it into editable Word text. We will extract all selectable elements, but flat pictures of text cannot be parsed client-side.
                           </p>
                         </div>
@@ -490,8 +490,8 @@ export default function PdfToWord() {
 
                     {pdfFile.size > 15 * 1024 * 1024 && (
                       <div className="p-4 border border-blue-500/20 bg-blue-500/5 rounded-xl flex items-center gap-3.5">
-                        <Sparkles className="w-4 h-4 text-blue-400 shrink-0" />
-                        <p className="text-xs text-gray-400 font-sans leading-relaxed">
+                        <Sparkles className="w-4 h-4 text-blue-500 dark:text-blue-400 shrink-0" />
+                        <p className="text-xs text-slate-600 dark:text-gray-400 font-sans leading-relaxed">
                           Note: Large PDF files might take longer to convert on your device.
                         </p>
                       </div>
@@ -506,14 +506,14 @@ export default function PdfToWord() {
 
                     {/* PDF Page Previews Grid */}
                     <div className="space-y-3 pt-2">
-                      <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">
+                      <h4 className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-[0.2em] ml-1">
                         PDF Page Previews {totalPages > 8 && `(First 8 of ${totalPages} pages)`}
                       </h4>
 
                       {isGeneratingPreviews || thumbnailUrls.length === 0 ? (
-                        <div className="flex flex-col items-center justify-center p-12 bg-white/[0.01] border border-white/5 rounded-3xl gap-4">
-                          <RefreshCw className="w-5 h-5 text-blue-500 animate-spin" />
-                          <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Generating page previews...</p>
+                        <div className="flex flex-col items-center justify-center p-12 bg-slate-50 dark:bg-white/[0.01] border border-slate-200 dark:border-white/5 rounded-3xl gap-4">
+                          <RefreshCw className="w-5 h-5 text-blue-600 dark:text-blue-500 animate-spin" />
+                          <p className="text-xs text-slate-500 dark:text-gray-500 font-bold uppercase tracking-wider">Generating page previews...</p>
                         </div>
                       ) : (
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-h-[360px] overflow-y-auto pr-2 custom-scrollbar">
@@ -522,16 +522,16 @@ export default function PdfToWord() {
                             return (
                               <div 
                                 key={idx}
-                                className="relative border border-white/5 rounded-2xl overflow-hidden aspect-[3/4] bg-white/[0.02] flex flex-col justify-between transition-all group hover:border-white/10"
+                                className="relative border border-slate-200 dark:border-white/5 rounded-2xl overflow-hidden aspect-[3/4] bg-slate-100 dark:bg-white/[0.02] flex flex-col justify-between transition-all group hover:border-slate-300 dark:hover:border-white/10 shadow-sm"
                               >
-                                <div className="flex-1 flex items-center justify-center p-2 relative overflow-hidden bg-white/5">
+                                <div className="flex-1 flex items-center justify-center p-2 relative overflow-hidden bg-slate-200/50 dark:bg-white/5">
                                   {url ? (
                                     <img src={url} alt={`Page ${pageNum}`} className="max-h-full max-w-full object-contain rounded shadow-md transition-transform group-hover:scale-[1.02]" />
                                   ) : (
-                                    <div className="text-center text-[10px] text-gray-600 font-bold uppercase">Page {pageNum}</div>
+                                    <div className="text-center text-[10px] text-slate-500 dark:text-gray-600 font-bold uppercase">Page {pageNum}</div>
                                   )}
                                 </div>
-                                <div className="p-2 text-center text-[9px] font-black uppercase tracking-widest bg-[#F6F8FC] dark:bg-[#030712] border-t border-white/5 text-gray-500">
+                                <div className="p-2 text-center text-[9px] font-black uppercase tracking-widest bg-slate-100 dark:bg-[#030712] border-t border-slate-200 dark:border-white/5 text-slate-600 dark:text-gray-500">
                                   Page {pageNum}
                                 </div>
                               </div>
@@ -544,10 +544,10 @@ export default function PdfToWord() {
 
                   {/* Right Side: Configurations Config Sidebar */}
                   <div>
-                    <div className="glass rounded-[2rem] border border-white/5 p-6 sm:p-8 space-y-8 bg-white/[0.01]">
+                    <div className="glass rounded-[2rem] border border-slate-200 dark:border-white/5 p-6 sm:p-8 space-y-8 bg-white dark:bg-white/[0.01]">
                       
                       <div className="space-y-4">
-                        <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] pb-4 border-b border-white/5 flex items-center gap-2">
+                        <h4 className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-[0.2em] pb-4 border-b border-slate-200 dark:border-white/5 flex items-center gap-2">
                           Choose Conversion Mode
                         </h4>
                         
@@ -557,15 +557,15 @@ export default function PdfToWord() {
                             onClick={() => setMode('visual')}
                             className={`w-full flex items-start gap-3 p-3.5 border rounded-2xl transition-all text-left cursor-pointer
                               ${mode === 'visual'
-                                ? 'bg-blue-500/10 border-blue-500/30 text-white shadow-lg'
-                                : 'bg-white/[0.01] border-white/5 text-gray-400 hover:bg-[#ffffff03]'
+                                ? 'bg-blue-50 dark:bg-blue-500/10 border-blue-500/40 dark:border-blue-500/30 text-slate-900 dark:text-white shadow-md'
+                                : 'bg-slate-50 dark:bg-white/[0.01] border-slate-200 dark:border-white/5 text-slate-600 dark:text-gray-400 hover:bg-slate-100 dark:hover:bg-[#ffffff03]'
                               }
                             `}
                           >
                             <span className="text-lg mt-0.5">👁️</span>
                             <div>
-                              <span className="text-xs font-black uppercase tracking-wider block">Exact Visual Match</span>
-                              <span className="text-[10px] text-gray-500 font-medium block mt-0.5 leading-normal font-sans">
+                              <span className={`text-xs font-black uppercase tracking-wider block ${mode === 'visual' ? 'text-blue-600 dark:text-white' : 'text-slate-800 dark:text-gray-300'}`}>Exact Visual Match</span>
+                              <span className="text-[10px] text-slate-500 dark:text-gray-400 font-medium block mt-0.5 leading-normal font-sans">
                                 Best layout alignment. Converts each page to a high-quality image and places it in DOCX. Perfect copy of layout (non-editable).
                               </span>
                             </div>
@@ -576,15 +576,15 @@ export default function PdfToWord() {
                             onClick={() => setMode('layout')}
                             className={`w-full flex items-start gap-3 p-3.5 border rounded-2xl transition-all text-left cursor-pointer
                               ${mode === 'layout'
-                                ? 'bg-blue-500/10 border-blue-500/30 text-white shadow-lg'
-                                : 'bg-white/[0.01] border-white/5 text-gray-400 hover:bg-[#ffffff03]'
+                                ? 'bg-blue-50 dark:bg-blue-500/10 border-blue-500/40 dark:border-blue-500/30 text-slate-900 dark:text-white shadow-md'
+                                : 'bg-slate-50 dark:bg-white/[0.01] border-slate-200 dark:border-white/5 text-slate-600 dark:text-gray-400 hover:bg-slate-100 dark:hover:bg-[#ffffff03]'
                               }
                             `}
                           >
                             <span className="text-lg mt-0.5">📐</span>
                             <div>
-                              <span className="text-xs font-black uppercase tracking-wider block">Layout Preserve Mode</span>
-                              <span className="text-[10px] text-gray-500 font-medium block mt-0.5 leading-normal font-sans">
+                              <span className={`text-xs font-black uppercase tracking-wider block ${mode === 'layout' ? 'text-blue-600 dark:text-white' : 'text-slate-800 dark:text-gray-300'}`}>Layout Preserve Mode</span>
+                              <span className="text-[10px] text-slate-500 dark:text-gray-400 font-medium block mt-0.5 leading-normal font-sans">
                                 Uses PDF X/Y coordinates to place text elements in DOCX accurately (editable).
                               </span>
                             </div>
@@ -595,15 +595,15 @@ export default function PdfToWord() {
                             onClick={() => setMode('editable')}
                             className={`w-full flex items-start gap-3 p-3.5 border rounded-2xl transition-all text-left cursor-pointer
                               ${mode === 'editable'
-                                ? 'bg-blue-500/10 border-blue-500/30 text-white shadow-lg'
-                                : 'bg-white/[0.01] border-white/5 text-gray-400 hover:bg-[#ffffff03]'
+                                ? 'bg-blue-50 dark:bg-blue-500/10 border-blue-500/40 dark:border-blue-500/30 text-slate-900 dark:text-white shadow-md'
+                                : 'bg-slate-50 dark:bg-white/[0.01] border-slate-200 dark:border-white/5 text-slate-600 dark:text-gray-400 hover:bg-slate-100 dark:hover:bg-[#ffffff03]'
                               }
                             `}
                           >
                             <span className="text-lg mt-0.5">📝</span>
                             <div>
-                              <span className="text-xs font-black uppercase tracking-wider block">Editable Word Mode</span>
-                              <span className="text-[10px] text-gray-500 font-medium block mt-0.5 leading-normal font-sans">
+                              <span className={`text-xs font-black uppercase tracking-wider block ${mode === 'editable' ? 'text-blue-600 dark:text-white' : 'text-slate-800 dark:text-gray-300'}`}>Editable Word Mode</span>
+                              <span className="text-[10px] text-slate-500 dark:text-gray-400 font-medium block mt-0.5 leading-normal font-sans">
                                 Clean document flows, structured paragraphs, lists, and headings (fully editable).
                               </span>
                             </div>
@@ -612,14 +612,14 @@ export default function PdfToWord() {
                       </div>
 
                       {/* Important Mode Notice */}
-                      <div className="p-4 bg-white/5 border border-white/5 rounded-2xl">
-                        <p className="text-[10px] text-gray-400 font-medium leading-relaxed font-sans">
+                      <div className="p-4 bg-amber-500/10 border border-amber-500/20 rounded-2xl">
+                        <p className="text-[10px] text-amber-800 dark:text-gray-300 font-medium leading-relaxed font-sans">
                           💡 <strong>Notice:</strong> For perfect design matching, use Exact Visual Match mode. For editable text, use Editable Word mode. Editable conversion may slightly change formatting because PDF files are fixed-layout documents.
                         </p>
                       </div>
 
                       <div className="space-y-3 font-sans">
-                        <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">
+                        <label className="block text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest ml-1">
                           Word File Name
                         </label>
                         <input 
@@ -627,11 +627,11 @@ export default function PdfToWord() {
                           value={outputName}
                           onChange={(e) => setOutputName(e.target.value)}
                           placeholder="converted_document"
-                          className="w-full rounded-xl border border-white/10 px-4 py-3 text-sm font-bold bg-[#F6F8FC] dark:bg-[#030712] text-white focus:border-blue-500 focus:outline-none transition-all"
+                          className="w-full rounded-xl border border-slate-300 dark:border-white/10 px-4 py-3 text-sm font-bold bg-slate-100 dark:bg-[#030712] text-slate-900 dark:text-white focus:border-blue-500 focus:outline-none transition-all"
                         />
                       </div>
 
-                      <div className="space-y-3 pt-4 border-t border-white/5">
+                      <div className="space-y-3 pt-4 border-t border-slate-200 dark:border-white/5">
                         <button
                           onClick={processConversion}
                           className="w-full flex items-center justify-center gap-3 px-6 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-white bg-blue-600 rounded-xl hover:bg-blue-500 transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] active:scale-95 cursor-pointer font-sans"
@@ -698,7 +698,7 @@ export default function PdfToWord() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -30, scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 100, damping: 15 }}
-                  className="py-12 text-center max-w-xl mx-auto space-y-8 bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-8 sm:p-10 shadow-2xl relative overflow-hidden"
+                  className="py-12 text-center max-w-xl mx-auto space-y-8 bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 rounded-[2.5rem] p-8 sm:p-10 shadow-2xl relative overflow-hidden"
                 >
                   {/* Decorative background glow */}
                   <div className="absolute -top-24 -left-24 w-48 h-48 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
@@ -709,40 +709,40 @@ export default function PdfToWord() {
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 12 }}
-                    className="w-24 h-24 bg-emerald-500/15 border border-emerald-500/25 rounded-full flex items-center justify-center mx-auto text-emerald-400 shadow-[0_0_50px_rgba(16,185,129,0.2)]"
+                    className="w-24 h-24 bg-emerald-500/15 border border-emerald-500/25 rounded-full flex items-center justify-center mx-auto text-emerald-500 dark:text-emerald-400 shadow-[0_0_50px_rgba(16,185,129,0.2)]"
                   >
                     <CheckCircle className="w-12 h-12" />
                   </motion.div>
 
                   <div className="space-y-3 relative z-10 font-sans">
                     <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">✅ Conversion Complete</h3>
-                    <p className="text-sm text-gray-400 font-medium">Your Word document is ready.</p>
+                    <p className="text-sm text-slate-600 dark:text-gray-400 font-medium">Your Word document is ready.</p>
                   </div>
 
                   {/* Summary Block */}
-                  <div className="bg-black/40 border border-white/5 rounded-[2rem] p-6 text-left space-y-4 max-w-md mx-auto shadow-inner relative overflow-hidden font-sans">
+                  <div className="bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/5 rounded-[2rem] p-6 text-left space-y-4 max-w-md mx-auto shadow-inner relative overflow-hidden font-sans">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/5 rounded-full blur-2xl pointer-events-none" />
                     
-                    <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-widest pb-3 border-b border-white/5 font-sans">Conversion Summary</h4>
+                    <h4 className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest pb-3 border-b border-slate-200 dark:border-white/5 font-sans">Conversion Summary</h4>
                     
                     <div className="space-y-3 text-xs">
                       <div className="flex justify-between items-center gap-4">
-                        <span className="text-gray-500 font-medium">Output File:</span>
-                        <span className="text-white font-bold truncate max-w-[200px]" title={`${outputName.trim() || 'document'}.docx`}>
+                        <span className="text-slate-500 dark:text-gray-500 font-medium">Output File:</span>
+                        <span className="text-slate-900 dark:text-white font-bold truncate max-w-[200px]" title={`${outputName.trim() || 'document'}.docx`}>
                           {outputName.trim() || 'document'}.docx
                         </span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-gray-500 font-medium">File Size:</span>
-                        <span className="text-white font-bold">{formatBytes(convertedFile.size)}</span>
+                        <span className="text-slate-500 dark:text-gray-500 font-medium">File Size:</span>
+                        <span className="text-slate-900 dark:text-white font-bold">{formatBytes(convertedFile.size)}</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-gray-500 font-medium">Total Pages:</span>
-                        <span className="text-white font-bold">{totalPages} pages</span>
+                        <span className="text-slate-500 dark:text-gray-500 font-medium">Total Pages:</span>
+                        <span className="text-slate-900 dark:text-white font-bold">{totalPages} pages</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-gray-500 font-medium">Conversion Mode:</span>
-                        <span className="text-blue-400 font-bold uppercase tracking-wider text-[10px]">
+                        <span className="text-slate-500 dark:text-gray-500 font-medium">Conversion Mode:</span>
+                        <span className="text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider text-[10px]">
                           {mode === 'editable' ? 'Editable Word' : mode === 'layout' ? 'Layout Preserve' : 'Exact Visual Match'}
                         </span>
                       </div>
@@ -771,7 +771,7 @@ export default function PdfToWord() {
 
                     <button
                       onClick={resetAll}
-                      className="w-full px-6 py-4 bg-white/5 border border-white/10 text-gray-400 text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-white/10 hover:text-white transition-all active:scale-[0.98] cursor-pointer font-sans"
+                      className="w-full px-6 py-4 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-gray-400 text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-slate-200 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white transition-all active:scale-[0.98] cursor-pointer font-sans"
                     >
                       Convert Another File
                     </button>
@@ -833,10 +833,10 @@ export default function PdfToWord() {
 // Sub components
 function TrustBadge({ icon, title, desc }: { icon: string; title: string; desc: string }) {
   return (
-    <div className="flex flex-col items-center justify-center p-4 bg-white/5 border border-white/5 rounded-2xl text-center">
+    <div className="flex flex-col items-center justify-center p-4 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl text-center shadow-sm">
       <span className="text-xl mb-1.5">{icon}</span>
-      <span className="text-[10px] font-black text-white uppercase tracking-wider">{title}</span>
-      <span className="text-[9px] text-gray-500 font-bold mt-0.5">{desc}</span>
+      <span className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-wider">{title}</span>
+      <span className="text-[9px] text-slate-500 dark:text-gray-400 font-bold mt-0.5">{desc}</span>
     </div>
   );
 }

@@ -37,6 +37,7 @@ export default function ImageCompressor() {
   const [compressionQuality, setCompressionQuality] = useState(60);
   const [targetPresetMB, setTargetPresetMB] = useState<number | null>(null);
   const [warningMessage, setWarningMessage] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
   
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -45,9 +46,11 @@ export default function ImageCompressor() {
     return ((originalFile.size - compressedFile.size) / originalFile.size) * 100;
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const processFile = (file: File) => {
+    if (!file.type.match(/^image\/(jpeg|png|webp|jpg)$/i)) {
+      alert('Please upload a valid JPG, PNG, or WebP image.');
+      return;
+    }
     
     // Reset previous states
     setCompressedFile(null);
@@ -59,6 +62,34 @@ export default function ImageCompressor() {
     setOriginalFile(file);
     setOriginalUrl(URL.createObjectURL(file));
     setTargetPresetMB(null);
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) processFile(file);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    
+    const file = e.dataTransfer.files?.[0];
+    if (file) {
+      processFile(file);
+    }
   };
 
   // Canvas-assisted multi-pass compression fallback
@@ -238,7 +269,27 @@ export default function ImageCompressor() {
           Back to Directory
         </Link>
         
-        <div className="glass rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl">
+        <div 
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          className={`glass rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl relative transition-all ${
+            isDragging ? 'ring-4 ring-blue-500/50 border-blue-500' : ''
+          }`}
+        >
+          {/* Drag Overlay */}
+          {isDragging && (
+            <div className="absolute inset-0 bg-slate-950/90 dark:bg-black/90 backdrop-blur-md z-50 flex flex-col items-center justify-center border-4 border-dashed border-blue-500 rounded-[2.5rem] p-8 text-center animate-fade-in">
+              <div className="mx-auto h-20 w-20 text-blue-400 bg-blue-500/20 rounded-[1.5rem] flex items-center justify-center mb-6 shadow-2xl border border-blue-500/30 animate-bounce">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                </svg>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">Drop your image here</h3>
+              <p className="text-sm text-blue-300 font-medium">Release file to compress instantly</p>
+            </div>
+          )}
+
           <div className="p-8 sm:p-10 border-b border-white/5 bg-white/[0.02]">
             <div className="flex flex-col md:flex-row md:items-center gap-8">
               <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-blue-600 text-white shadow-[0_0_30px_rgba(37,99,235,0.4)]">
@@ -257,7 +308,14 @@ export default function ImageCompressor() {
             {!originalFile ? (
               <div 
                 onClick={() => fileInputRef.current?.click()}
-                className="group relative border-2 border-dashed border-white/10 rounded-[2.5rem] p-16 sm:p-24 text-center hover:border-blue-500/50 hover:bg-white/[0.02] transition-all cursor-pointer overflow-hidden"
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                className={`group relative border-2 border-dashed rounded-[2.5rem] p-16 sm:p-24 text-center transition-all cursor-pointer overflow-hidden ${
+                  isDragging
+                    ? "border-blue-500 bg-blue-500/10 scale-[1.01]"
+                    : "border-white/10 hover:border-blue-500/50 hover:bg-white/[0.02]"
+                }`}
               >
                 <input 
                   type="file" 

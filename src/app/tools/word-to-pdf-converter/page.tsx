@@ -553,7 +553,7 @@ export default function WordToPdf() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -30, scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 100, damping: 15 }}
-                  className="py-12 text-center max-w-xl mx-auto space-y-8 bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-8 sm:p-10 shadow-2xl relative overflow-hidden"
+                  className="py-12 text-center max-w-xl mx-auto space-y-8 bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 rounded-[2.5rem] p-8 sm:p-10 shadow-2xl relative overflow-hidden"
                 >
                   {/* Decorative background glow */}
                   <div className="absolute -top-24 -left-24 w-48 h-48 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
@@ -564,32 +564,32 @@ export default function WordToPdf() {
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 12 }}
-                    className="w-24 h-24 bg-emerald-500/15 border border-emerald-500/25 rounded-full flex items-center justify-center mx-auto text-emerald-400 shadow-[0_0_50px_rgba(16,185,129,0.2)]"
+                    className="w-24 h-24 bg-emerald-500/15 border border-emerald-500/25 rounded-full flex items-center justify-center mx-auto text-emerald-500 dark:text-emerald-400 shadow-[0_0_50px_rgba(16,185,129,0.2)]"
                   >
                     <CheckCircle className="w-12 h-12" />
                   </motion.div>
 
                   <div className="space-y-3 relative z-10 font-sans">
                     <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">✅ Conversion Complete</h3>
-                    <p className="text-sm text-gray-400 font-medium">Your PDF document is ready.</p>
+                    <p className="text-sm text-slate-600 dark:text-gray-400 font-medium">Your PDF document is ready.</p>
                   </div>
 
                   {/* Summary Block */}
-                  <div className="bg-black/40 border border-white/5 rounded-[2rem] p-6 text-left space-y-4 max-w-md mx-auto shadow-inner relative overflow-hidden font-sans">
+                  <div className="bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/5 rounded-[2rem] p-6 text-left space-y-4 max-w-md mx-auto shadow-inner relative overflow-hidden font-sans">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/5 rounded-full blur-2xl pointer-events-none" />
                     
-                    <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-widest pb-3 border-b border-white/5 font-sans">Conversion Summary</h4>
+                    <h4 className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest pb-3 border-b border-slate-200 dark:border-white/5 font-sans">Conversion Summary</h4>
                     
                     <div className="space-y-3 text-xs">
                       <div className="flex justify-between items-center gap-4">
-                        <span className="text-gray-500 font-medium">Output File:</span>
-                        <span className="text-white font-bold truncate max-w-[200px]" title={`${outputName.trim() || 'document'}.pdf`}>
+                        <span className="text-slate-500 dark:text-gray-500 font-medium">Output File:</span>
+                        <span className="text-slate-900 dark:text-white font-bold truncate max-w-[200px]" title={`${outputName.trim() || 'document'}.pdf`}>
                           {outputName.trim() || 'document'}.pdf
                         </span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-gray-500 font-medium">File Size:</span>
-                        <span className="text-white font-bold">{formatBytes(convertedFile.size)}</span>
+                        <span className="text-slate-500 dark:text-gray-500 font-medium">File Size:</span>
+                        <span className="text-slate-900 dark:text-white font-bold">{formatBytes(convertedFile.size)}</span>
                       </div>
                     </div>
                   </div>
@@ -616,7 +616,7 @@ export default function WordToPdf() {
 
                     <button
                       onClick={resetAll}
-                      className="w-full px-6 py-4 bg-white/5 border border-white/10 text-gray-400 text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-white/10 hover:text-white transition-all active:scale-[0.98] cursor-pointer font-sans"
+                      className="w-full px-6 py-4 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-gray-400 text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-slate-200 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white transition-all active:scale-[0.98] cursor-pointer font-sans"
                     >
                       Convert Another File
                     </button>

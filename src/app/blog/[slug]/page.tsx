@@ -90,7 +90,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
           <BlogBreadcrumbs items={breadcrumbs} />
 
           {translatedBlog.thumbnail && (
-            <div className="w-full aspect-[16/9] rounded-[2.5rem] overflow-hidden border border-gray-200 dark:border-white/5 shadow-2xl relative mb-12 bg-[#0d082d]/90 dark:bg-black/60 flex items-center justify-center">
+            <div className="w-full aspect-[16/9] rounded-2xl sm:rounded-[2.5rem] overflow-hidden border border-gray-200 dark:border-white/5 shadow-2xl relative mb-8 sm:mb-12 bg-[#0d082d]/90 dark:bg-black/60 flex items-center justify-center p-1 sm:p-2">
               <LazyBlogImage
                 src={translatedBlog.thumbnail}
                 alt={translatedBlog.title}

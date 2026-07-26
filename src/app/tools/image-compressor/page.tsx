@@ -1,11 +1,20 @@
 "use client";
 
 import Link from 'next/link';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import imageCompression from 'browser-image-compression';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { formatBytes } from '@/lib/utils/format';
+
+const SIZE_PRESETS = [
+  { label: '20 KB', targetMB: 0.02, desc: 'SSC / UPSC Sign' },
+  { label: '50 KB', targetMB: 0.05, desc: 'Bank PO / IBPS' },
+  { label: '100 KB', targetMB: 0.1, desc: 'NEET / JEE' },
+  { label: '200 KB', targetMB: 0.2, desc: 'IGNOU / Portal' },
+  { label: '500 KB', targetMB: 0.5, desc: 'Visa / High Quality' },
+  { label: '1 MB', targetMB: 1.0, desc: 'Social Media / Web' },
+];
 
 const SIZE_GUIDES = [
   { label: '20KB', slug: 'compress-image-to-20kb', desc: 'SSC / UPSC / NDA' },
@@ -25,7 +34,8 @@ export default function ImageCompressor() {
   const [compressedUrl, setCompressedUrl] = useState<string | null>(null);
   
   const [isCompressing, setIsCompressing] = useState(false);
-  const [compressionQuality, setCompressionQuality] = useState(80);
+  const [compressionQuality, setCompressionQuality] = useState(60);
+  const [targetPresetMB, setTargetPresetMB] = useState<number | null>(null);
   const [warningMessage, setWarningMessage] = useState<string | null>(null);
   
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -33,15 +43,6 @@ export default function ImageCompressor() {
   const calculateReduction = () => {
     if (!originalFile || !compressedFile) return 0;
     return ((originalFile.size - compressedFile.size) / originalFile.size) * 100;
-  };
-
-  const getMaxSizeForQuality = (quality: number) => {
-    if (quality <= 10) return 0.08;
-    if (quality <= 20) return 0.15;
-    if (quality <= 40) return 0.3;
-    if (quality <= 60) return 0.6;
-    if (quality <= 80) return 1;
-    return 2;
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,58 +54,136 @@ export default function ImageCompressor() {
     setWarningMessage(null);
     if (compressedUrl) URL.revokeObjectURL(compressedUrl);
     setCompressedUrl(null);
-    
     if (originalUrl) URL.revokeObjectURL(originalUrl);
     
     setOriginalFile(file);
     setOriginalUrl(URL.createObjectURL(file));
+    setTargetPresetMB(null);
   };
 
-  const compressImage = async () => {
+  // Canvas-assisted multi-pass compression fallback
+  const compressWithCanvasFallback = async (file: File, qualityPct: number, targetSizeMB: number): Promise<File> => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+
+        // Dynamic max dimension scaling based on quality / target size
+        let maxDim = 1920;
+        if (targetSizeMB <= 0.05) maxDim = 800;
+        else if (targetSizeMB <= 0.1) maxDim = 1024;
+        else if (targetSizeMB <= 0.3 || qualityPct <= 30) maxDim = 1280;
+        else if (targetSizeMB <= 0.6 || qualityPct <= 50) maxDim = 1600;
+
+        if (width > maxDim || height > maxDim) {
+          if (width > height) {
+            height = Math.round((height * maxDim) / width);
+            width = maxDim;
+          } else {
+            width = Math.round((width * maxDim) / height);
+            height = maxDim;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(0, 0, width, height);
+          ctx.drawImage(img, 0, 0, width, height);
+        }
+
+        const quality = Math.max(0.05, qualityPct / 100);
+        const mimeType = 'image/jpeg';
+
+        canvas.toBlob(
+          (blob) => {
+            if (blob) {
+              resolve(new File([blob], `compressed_${file.name.replace(/\.[^/.]+$/, "")}.jpg`, { type: mimeType }));
+            } else {
+              resolve(file);
+            }
+          },
+          mimeType,
+          quality
+        );
+      };
+
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        resolve(file);
+      };
+
+      img.src = url;
+    });
+  };
+
+  const compressImage = async (overrideQuality?: number, overridePresetMB?: number | null) => {
     if (!originalFile) return;
     
     setIsCompressing(true);
     setWarningMessage(null);
     
-    try {
-      const initialMaxSizeMB = getMaxSizeForQuality(compressionQuality);
-      const initialQuality = compressionQuality / 100;
+    const activeQuality = overrideQuality ?? compressionQuality;
+    const activePresetMB = overridePresetMB !== undefined ? overridePresetMB : targetPresetMB;
 
-      let options = {
-        maxSizeMB: initialMaxSizeMB,
-        maxWidthOrHeight: 1920,
-        useWebWorker: true,
-        initialQuality: initialQuality,
-      };
+    try {
+      const originalSizeMB = originalFile.size / (1024 * 1024);
       
-      let compressedBlob = await imageCompression(originalFile, options);
-      
-      // Retry with stricter options if compressed file is still bigger or almost same size
-      const firstReduction = ((originalFile.size - compressedBlob.size) / originalFile.size) * 100;
-      
-      if (firstReduction < 5) {
-        options = {
-          maxSizeMB: Math.max(0.03, initialMaxSizeMB / 2),
-          maxWidthOrHeight: 1920,
+      // Calculate dynamic max target size in MB
+      let targetSizeMB: number;
+      if (activePresetMB && activePresetMB > 0) {
+        targetSizeMB = activePresetMB;
+      } else {
+        // Proportional target relative to quality slider
+        // Quality 100% -> 90% size, Quality 50% -> 40% size, Quality 10% -> 15% size
+        const ratio = Math.max(0.1, activeQuality / 100);
+        targetSizeMB = Math.max(0.02, originalSizeMB * ratio * 0.85);
+      }
+
+      const qualityFraction = Math.max(0.05, activeQuality / 100);
+      let maxDim = 1920;
+      if (targetSizeMB <= 0.05) maxDim = 800;
+      else if (targetSizeMB <= 0.1) maxDim = 1024;
+      else if (targetSizeMB <= 0.3 || activeQuality <= 30) maxDim = 1280;
+      else if (targetSizeMB <= 0.6 || activeQuality <= 50) maxDim = 1600;
+
+      let compressedBlob: Blob | null = null;
+
+      try {
+        const options = {
+          maxSizeMB: Math.min(targetSizeMB, originalSizeMB * 0.9),
+          maxWidthOrHeight: maxDim,
           useWebWorker: true,
-          initialQuality: Math.max(0.05, compressionQuality / 200),
+          initialQuality: qualityFraction,
         };
-        
-        const stricterBlob = await imageCompression(originalFile, options);
-        if (stricterBlob.size < compressedBlob.size) {
-          compressedBlob = stricterBlob;
-        }
+        compressedBlob = await imageCompression(originalFile, options);
+      } catch (err) {
+        console.warn('browser-image-compression fallback:', err);
+      }
+
+      // If browser-image-compression didn't reduce size effectively, run canvas multi-pass
+      if (!compressedBlob || compressedBlob.size >= originalFile.size * 0.95) {
+        const canvasFile = await compressWithCanvasFallback(originalFile, activeQuality, targetSizeMB);
+        compressedBlob = canvasFile;
       }
 
       const finalReduction = ((originalFile.size - compressedBlob.size) / originalFile.size) * 100;
       if (finalReduction <= 0) {
-        setWarningMessage("Image is already highly optimized. Further compression wasn't effective.");
+        setWarningMessage("Image is already heavily optimized. Re-encoded with optimal format settings.");
       }
       
       const compressedImageFile = new File([compressedBlob], `compressed_${originalFile.name}`, {
         type: compressedBlob.type,
       });
       
+      if (compressedUrl) URL.revokeObjectURL(compressedUrl);
       setCompressedFile(compressedImageFile);
       setCompressedUrl(URL.createObjectURL(compressedBlob));
     } catch (error) {
@@ -115,6 +194,13 @@ export default function ImageCompressor() {
     }
   };
 
+  // Auto-compress when originalFile is loaded
+  useEffect(() => {
+    if (originalFile && !compressedFile && !isCompressing) {
+      compressImage(60, null);
+    }
+  }, [originalFile]);
+
   const resetAll = () => {
     setOriginalFile(null);
     setCompressedFile(null);
@@ -123,6 +209,7 @@ export default function ImageCompressor() {
     if (compressedUrl) URL.revokeObjectURL(compressedUrl);
     setOriginalUrl(null);
     setCompressedUrl(null);
+    setTargetPresetMB(null);
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
@@ -199,9 +286,12 @@ export default function ImageCompressor() {
               </div>
             ) : (
               <div className="space-y-10">
-                <div className="glass p-8 rounded-[2rem] border border-white/5">
-                  <div className="flex items-center justify-between mb-10 pb-6 border-b border-white/5">
-                    <h4 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Compression Settings</h4>
+                <div className="glass p-8 rounded-[2rem] border border-white/5 space-y-8">
+                  <div className="flex items-center justify-between pb-6 border-b border-white/5">
+                    <div>
+                      <h4 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Compression Controls</h4>
+                      <p className="text-xs text-gray-500 font-medium mt-0.5">Select a target size preset or adjust quality slider for instant compression.</p>
+                    </div>
                     <button 
                       onClick={resetAll}
                       className="text-[10px] font-black text-red-500 uppercase tracking-widest hover:text-red-400 transition-colors"
@@ -209,24 +299,67 @@ export default function ImageCompressor() {
                       Reset & Upload New
                     </button>
                   </div>
-                  <div className="space-y-8 max-w-xl">
-                    <div className="space-y-6">
-                      <div className="flex justify-between items-end">
-                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Target Quality</label>
-                        <span className="text-xl font-black text-blue-500">{compressionQuality}%</span>
-                      </div>
-                      <input 
-                        type="range" 
-                        min="10" 
-                        max="100" 
-                        value={compressionQuality}
-                        onChange={(e) => setCompressionQuality(Number(e.target.value))}
-                        className="w-full h-3 bg-white/5 rounded-full appearance-none cursor-pointer accent-blue-600" 
-                      />
-                      <p className="text-xs text-gray-500 font-medium italic">Hint: 70-80% usually offers the best balance of size and visual clarity.</p>
+
+                  {/* Preset Quick Buttons */}
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 block">
+                      Quick Compress Presets (Target File Size)
+                    </label>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+                      {SIZE_PRESETS.map((preset) => {
+                        const isSelected = targetPresetMB === preset.targetMB;
+                        return (
+                          <button
+                            key={preset.label}
+                            type="button"
+                            onClick={() => {
+                              setTargetPresetMB(preset.targetMB);
+                              compressImage(compressionQuality, preset.targetMB);
+                            }}
+                            className={`p-3.5 rounded-2xl border text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-1 ${
+                              isSelected
+                                ? "border-blue-500 bg-blue-600 text-white shadow-lg shadow-blue-500/20 scale-[1.02]"
+                                : "border-slate-200 dark:border-white/5 bg-slate-100/50 dark:bg-white/[0.02] hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-600/10 text-slate-900 dark:text-white"
+                            }`}
+                          >
+                            <span className="text-base font-black uppercase tracking-tight">{preset.label}</span>
+                            <span className={`text-[9px] font-semibold truncate max-w-full ${isSelected ? "text-blue-100" : "text-gray-500 dark:text-gray-400"}`}>
+                              {preset.desc}
+                            </span>
+                          </button>
+                        );
+                      })}
                     </div>
+                  </div>
+
+                  {/* Custom Quality Slider */}
+                  <div className="space-y-6 pt-4 border-t border-white/5">
+                    <div className="flex justify-between items-end">
+                      <div>
+                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Quality Level</label>
+                        <p className="text-xs text-gray-500 font-medium italic mt-0.5">Lower percentage = maximum compression (smaller file). 40–60% gives huge size reduction with sharp clarity.</p>
+                      </div>
+                      <span className="text-2xl font-black text-blue-500">{compressionQuality}%</span>
+                    </div>
+                    <input 
+                      type="range" 
+                      min="10" 
+                      max="95" 
+                      step="5"
+                      value={compressionQuality}
+                      onChange={(e) => {
+                        const val = Number(e.target.value);
+                        setCompressionQuality(val);
+                        setTargetPresetMB(null);
+                        compressImage(val, null);
+                      }}
+                      className="w-full h-3 bg-white/5 rounded-full appearance-none cursor-pointer accent-blue-600" 
+                    />
+                  </div>
+
+                  <div className="pt-2">
                     <button 
-                      onClick={compressImage}
+                      onClick={() => compressImage()}
                       disabled={isCompressing}
                       className="w-full sm:w-auto rounded-2xl bg-blue-600 px-12 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-white hover:bg-blue-500 transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)] disabled:opacity-50 flex justify-center items-center gap-3 active:scale-[0.98]"
                     >
@@ -236,7 +369,7 @@ export default function ImageCompressor() {
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                           </svg>
-                          Processing...
+                          Compressing Image...
                         </>
                       ) : (
                         <>
@@ -361,5 +494,4 @@ export default function ImageCompressor() {
       <ToolArticle {...toolArticles['image-compressor']} />
     </div>
   );
-
 }

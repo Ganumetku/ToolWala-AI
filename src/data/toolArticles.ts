@@ -2416,5 +2416,115 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "AI Background Remover", href: "/tools/bg-remover" },
       { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
     ]
+  },
+  "pdf-to-excel-converter": {
+    title: "PDF to Excel Converter",
+    intro: "Transform PDF tables into clean, fully editable Excel spreadsheets (.xlsx) instantly. Preserve rows, columns, numerical precision, and table formatting with 100% client-side browser processing.",
+    whatItDoes: "ToolWala AI's PDF to Excel Converter automatically extracts structured tables from digital and scanned PDF files directly inside your browser tab. Powered by advanced spatial parsing and on-device OCR, our tool scans PDF document layouts to detect table boundaries, headers, cell alignments, merged cells, and data types (numbers, dates, currency, percentages). It converts your documents into formatted Excel workbooks without requiring cloud uploads or compromising data privacy.",
+    howToUse: [
+      "Upload or drag & drop your PDF file (up to 100MB) into the secure upload area.",
+      "Review the automated PDF analysis detailing total pages, detected tables, document type (Digital vs Scanned), and estimated conversion accuracy.",
+      "Inspect the live interactive Excel-style preview grid to verify extracted rows, columns, and headers across all detected tables.",
+      "Customize Export & Advanced Options: select specific page ranges, table subset exports, auto column formatting, date/currency detection, and merged cell preservation.",
+      "If a scanned PDF is detected, enable OCR Mode and select your preferred target language (English, Hindi, or Auto Detect).",
+      "Click 'Convert to Excel' to generate your formatted .xlsx workbook and download it immediately."
+    ],
+    specificationTable: [
+      { requirement: "Supported Input", specification: "PDF Documents (Digital & Scanned, up to 100 MB)" },
+      { requirement: "Output Format", specification: "Microsoft Excel (.xlsx)" },
+      { requirement: "Processing Engine", specification: "100% Local Browser Engine (pdfjs-dist, SheetJS & Tesseract OCR)" },
+      { requirement: "Table Recognition", specification: "Automatic header detection, spatial cell alignment & merged cell detection" },
+      { requirement: "Data Preservation", specification: "Numbers, dates, currency ($ / ₹ / €), percentages, empty cells, and text formatting" }
+    ],
+    keyFeatures: [
+      { title: "Client-Side Processing", desc: "All PDF parsing and spreadsheet generation happens inside your browser tab. Your files never touch external servers." },
+      { title: "Intelligent Table Detection", desc: "Automatically locates tabular data across multi-page documents, maintaining exact row heights and column alignment." },
+      { title: "Interactive Excel Preview", desc: "Inspect and navigate extracted tables using a spreadsheet grid before exporting to .xlsx format." },
+      { title: "On-Device OCR Engine", desc: "Extract tables from scanned documents and physical paper PDF scans with multi-language optical character recognition." }
+    ],
+    benefits: [
+      "Save hours of manual data re-entry and typing errors when extracting financial reports, bank statements, or invoices.",
+      "Maintain absolute document privacy and corporate security with client-side execution.",
+      "Preserve mathematical formulas, numerical precision, and cell alignments for seamless analysis in Microsoft Excel or Google Sheets.",
+      "Process large multi-page reports with customizable page ranges and selective table export options."
+    ],
+    whyChoose: "ToolWala AI offers a privacy-first, enterprise-grade PDF to Excel conversion suite that rivals premium desktop software. Unlike third-party cloud services that compromise security, ToolWala processes all records locally on your device GPU/CPU. Enjoy fast processing, zero file caps, clean column boundaries, and multi-language OCR capabilities—all completely free.",
+    useCases: [
+      "Financial analysts converting corporate PDF earnings reports, balance sheets, and tax filings into Excel models.",
+      "Accountants extracting bank statement line items and transaction receipts into spreadsheet workbooks.",
+      "Data researchers pulling tabular data sets from academic PDF papers and government reports.",
+      "Business managers consolidating multi-page project schedules, pricing matrices, and inventory lists."
+    ],
+    faqs: [
+      { question: "What is PDF to Excel Converter?", answer: "The PDF to Excel Converter is a client-side web utility that extracts tables from digital and scanned PDF documents and transforms them into editable Microsoft Excel (.xlsx) spreadsheets." },
+      { question: "Why Convert PDF to Excel?", answer: "PDF files are static and non-editable. Converting tables to Excel enables dynamic data analysis, formula calculations, sorting, filtering, and seamless integration into business financial models." },
+      { question: "Are my confidential files uploaded to any server?", answer: "No! All parsing, OCR scanning, table extraction, and Excel workbook creation run 100% locally in your browser memory. Your documents are completely private and never uploaded." },
+      { question: "Can I convert scanned PDFs to Excel?", answer: "Yes! If a scanned or image-based PDF is detected, our tool enables on-device OCR (Optical Character Recognition) using Tesseract.js to read text within images and format them into Excel columns." },
+      { question: "How does the tool handle multiple tables and multi-page PDFs?", answer: "Our layout parser scans all pages, detects every individual table, and lets you choose between exporting all tables into separate spreadsheet tabs or consolidating selected pages into a unified workbook." },
+      { question: "What file size limit is supported?", answer: "ToolWala AI supports PDF files up to 100 MB per document, handling high-density reports smoothly without crashing or slowing down." }
+    ],
+    conclusion: "Convert your PDF tables into clean, editable Excel spreadsheets in seconds. Experience fast, private, and precise document conversion with ToolWala AI today.",
+    relatedTools: [
+      { name: "PDF to Word Converter", href: "/tools/pdf-to-word-converter" },
+      { name: "Merge PDF", href: "/tools/merge-pdf" },
+      { name: "Compress PDF", href: "/tools/compress-pdf" },
+      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr" }
+    ]
+  },
+  "excel-to-pdf-converter": {
+    title: "Excel to PDF Converter",
+    intro: "Convert Excel spreadsheets (.xlsx, .xls, .csv) into clean, professional PDF documents instantly. Preserve table layout, formatting, headers, gridlines, and pagination with 100% browser-based processing.",
+    whatItDoes: "ToolWala AI's Excel to PDF Converter parses spreadsheet workbooks locally in your browser memory and renders high-density tables into crisp PDF documents. It supports multi-sheet selection, custom page orientations (Portrait or Landscape), paper sizes (A4, Letter, Legal, A3), table auto-fitting, margin controls, and page number overlays—without requiring cloud server uploads.",
+    howToUse: [
+      "Upload or drag & drop your Excel workbook (.xlsx, .xls) or CSV file into the secure upload area.",
+      "Review detected worksheets and select which sheets to include in the converted PDF.",
+      "Customize PDF layout settings: select page orientation (Portrait or Landscape), paper size (A4, Letter, Legal, A3), and margin spacing.",
+      "Toggle layout preferences: enable/disable table gridlines, header row highlights, auto column fitting, and page numbers.",
+      "Inspect the live interactive page preview grid with page break indicators.",
+      "Click 'Convert to PDF' to generate and download your formatted PDF document."
+    ],
+    specificationTable: [
+      { requirement: "Supported Input", specification: "Microsoft Excel (.xlsx, .xls) & CSV files (up to 100 MB)" },
+      { requirement: "Output Format", specification: "Adobe PDF (.pdf)" },
+      { requirement: "Processing Engine", specification: "100% Browser Engine (SheetJS & jsPDF)" },
+      { requirement: "Page Customization", specification: "A4, Letter, Legal, A3 | Portrait & Landscape | Margin controls" },
+      { requirement: "Layout Features", specification: "Table gridlines, column auto-fitting, header highlights & page numbers" }
+    ],
+    keyFeatures: [
+      { title: "Client-Side Privacy", desc: "Your financial records, pricing sheets, and private data never leave your browser window." },
+      { title: "Multi-Sheet Conversion", desc: "Convert all worksheets into a single unified PDF or select specific tabs." },
+      { title: "Orientation & Size Options", desc: "Switch between Portrait and Landscape modes for wide data tables on A4, Letter, or Legal pages." },
+      { title: "Gridlines & Column Auto-Fit", desc: "Preserve clean table borders and automatic column width adjustments for maximum readability." }
+    ],
+    benefits: [
+      "Ensure non-editable document sharing for corporate reports, financial statements, and client invoices.",
+      "Prevent formatting shifts when sharing spreadsheets across different devices or operating systems.",
+      "Save time with instant local conversions without waiting for cloud upload queues.",
+      "Maintain complete control over page breaks, margins, gridlines, and page number footers."
+    ],
+    whyChoose: "ToolWala AI delivers an enterprise-grade document conversion suite with zero subscription traps or signups. Unlike online tools that store your sensitive spreadsheet files on remote servers, ToolWala processes everything natively on your computer's CPU, keeping your corporate data 100% private.",
+    useCases: [
+      "Accountants rendering monthly tax sheets, P&L statements, and balance sheets into read-only PDFs.",
+      "Sales managers converting pricing matrices, quote proposals, and inventory lists for client distribution.",
+      "Teachers exporting grade books, attendance records, and student marks to PDF.",
+      "Business owners converting payroll records and project schedules into standardized printable files."
+    ],
+    faqs: [
+      { question: "What is Excel to PDF Converter?", answer: "The Excel to PDF Converter is a free web tool that transforms Excel workbooks (.xlsx, .xls) and CSV spreadsheets into formatted PDF documents." },
+      { question: "Why Convert Excel to PDF?", answer: "PDF files preserve exact layout, typography, and page structure across all devices, preventing accidental editing or formula distortion when sharing sensitive documents." },
+      { question: "Are my Excel files uploaded to any server?", answer: "No! All file parsing, table layout calculations, and PDF generation occur 100% locally inside your browser tab." },
+      { question: "Can I convert multiple worksheets in an Excel file?", answer: "Yes! ToolWala detects all sheets within your workbook and lets you choose between converting all sheets or selecting specific tabs." },
+      { question: "What if my table is too wide for portrait mode?", answer: "You can easily select Landscape orientation, A3/Legal paper size, or enable the 'Fit to Page Width' option to fit wide tables onto single pages cleanly." },
+      { question: "What file size limit is supported?", answer: "You can upload Excel files up to 100 MB, handling large multi-sheet workbooks smoothly with zero server delays." }
+    ],
+    conclusion: "Convert your Excel spreadsheets into clean, professional PDF documents in seconds. Experience fast, secure, and private file conversion with ToolWala AI today.",
+    relatedTools: [
+      { name: "PDF to Excel Converter", href: "/tools/pdf-to-excel-converter" },
+      { name: "Merge PDF", href: "/tools/merge-pdf" },
+      { name: "Compress PDF", href: "/tools/compress-pdf" },
+      { name: "Word to PDF Converter", href: "/tools/word-to-pdf-converter" }
+    ]
   }
 };
+
+

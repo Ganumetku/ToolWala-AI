@@ -10375,5 +10375,338 @@
     "seoDescription": "उच्च गुणवत्ता के साथ तुरंत WebP छवियों को JPG या PNG में परिवर्तित करें। तेज़, सुरक्षित और पूरी तरह से ब्राउज़र-आधारित।",
     "createdAt": "2026-07-21T06:00:32.234Z",
     "updatedAt": "2026-07-21T06:00:33.976Z"
+  },
+  {
+    "id": "egufbc6",
+    "toolSlug": "png-to-webp",
+    "locale": "hi",
+    "title": "मुफ़्त पीएनजी से वेबपी कन्वर्टर",
+    "description": "पारदर्शी पृष्ठभूमि को बरकरार रखते हुए पीएनजी छवियों को आधुनिक वेबपी प्रारूप में मुफ्त में ऑनलाइन रूपांतरित करें। छवि फ़ाइल का आकार 80% तक कम करें, पेज रेंडरिंग तेज़ करें, और कोर वेब वाइटल्स में सुधार करें—फ़ाइल अपलोड किए बिना आपके ब्राउज़र में 100%।",
+    "faq": [
+      {
+        "question": "क्या पीएनजी को वेबपी में परिवर्तित करने से पारदर्शी पृष्ठभूमि सुरक्षित रहती है?",
+        "answer": "हाँ! वेबपी पूरी तरह से 8-बिट अल्फा चैनल पारदर्शिता (पीएनजी की तरह) का समर्थन करता है। हमारा कनवर्टर डिफ़ॉल्ट रूप से पारदर्शी पृष्ठभूमि को सुरक्षित रखता है ताकि आपके ग्राफ़िक्स किसी भी वेबपेज पर सहज दिखें।"
+      },
+      {
+        "question": "मैं पीएनजी से वेबपी तक फ़ाइल आकार में कितनी कमी की उम्मीद कर सकता हूं?",
+        "answer": "औसतन, वेबपी दृश्यमान समान गुणवत्ता और स्पष्ट पारदर्शी किनारों को संरक्षित करते हुए मानक पीएनजी छवियों की तुलना में 60% से 80% छोटे फ़ाइल आकार प्रदान करता है।"
+      },
+      {
+        "question": "क्या यह पीएनजी से वेबपी कनवर्टर मुफ़्त है?",
+        "answer": "हाँ! टूलवाला एआई का पीएनजी टू वेबपी कन्वर्टर बिना किसी पंजीकरण, वॉटरमार्क, दैनिक रूपांतरण सीमा या छिपी हुई फीस के 100% मुफ़्त है।"
+      },
+      {
+        "question": "क्या मेरी पीएनजी फ़ाइलें किसी सर्वर पर अपलोड की गई हैं?",
+        "answer": "नहीं! सभी फ़ाइल प्रोसेसिंग, कैनवास रेंडरिंग, पारदर्शिता सम्मिश्रण और वेबपी एन्कोडिंग आपके ब्राउज़र मेमोरी के अंदर स्थानीय रूप से होती है। आपकी छवियाँ आपकी मशीन को कभी नहीं छोड़तीं।"
+      },
+      {
+        "question": "क्या मैं एक साथ कई पीएनजी फाइलों को बैच में परिवर्तित कर सकता हूं?",
+        "answer": "हाँ! आप एक साथ कई पीएनजी फ़ाइलों को खींच और छोड़ सकते हैं, उन्हें एक साथ परिवर्तित कर सकते हैं, और सभी वेबपी आउटपुट को एक ही ज़िप फ़ाइल में डाउनलोड कर सकते हैं।"
+      },
+      {
+        "question": "कौन से ब्राउज़र पारदर्शी WebP छवियों का समर्थन करते हैं?",
+        "answer": "ट्रांसपेरेंट वेबपी क्रोम, सफारी, फ़ायरफ़ॉक्स, एज, ओपेरा और मोबाइल ऑपरेटिंग सिस्टम (आईओएस और एंड्रॉइड) सहित सभी आधुनिक वेब ब्राउज़रों पर समर्थित है।"
+      }
+    ],
+    "seoTitle": "मुफ़्त पीएनजी से वेबपी कन्वर्टर",
+    "seoDescription": "पारदर्शी पृष्ठभूमि को बरकरार रखते हुए पीएनजी छवियों को आधुनिक वेबपी प्रारूप में मुफ्त में ऑनलाइन रूपांतरित करें। छवि फ़ाइल का आकार 80% तक कम करें, पेज रेंडरिंग तेज़ करें, और कोर वेब वाइटल्स में सुधार करें—फ़ाइल अपलोड किए बिना आपके ब्राउज़र में 100%।",
+    "createdAt": "2026-07-28T02:51:25.932Z",
+    "updatedAt": "2026-07-28T02:51:27.569Z"
+  },
+  {
+    "id": "k819vof",
+    "toolSlug": "excel-to-pdf-converter",
+    "locale": "hi",
+    "title": "एक्सेल से पीडीएफ कन्वर्टर",
+    "description": "एक्सेल स्प्रेडशीट (.xlsx, .xls, .csv) को तुरंत साफ, पेशेवर पीडीएफ दस्तावेजों में बदलें। 100% ब्राउज़र-आधारित प्रोसेसिंग के साथ टेबल लेआउट, फ़ॉर्मेटिंग, हेडर, ग्रिडलाइन और पेजिनेशन को सुरक्षित रखें।",
+    "faq": [
+      {
+        "question": "एक्सेल टू पीडीएफ कन्वर्टर क्या है?",
+        "answer": "एक्सेल टू पीडीएफ कन्वर्टर एक मुफ्त वेब टूल है जो एक्सेल वर्कबुक (.xlsx, .xls) और सीएसवी स्प्रेडशीट को फॉर्मेटेड पीडीएफ दस्तावेजों में बदल देता है।"
+      },
+      {
+        "question": "एक्सेल को पीडीएफ में क्यों बदलें?",
+        "answer": "पीडीएफ फाइलें सभी उपकरणों में सटीक लेआउट, टाइपोग्राफी और पेज संरचना को सुरक्षित रखती हैं, जिससे संवेदनशील दस्तावेजों को साझा करते समय आकस्मिक संपादन या फॉर्मूला विरूपण को रोका जा सकता है।"
+      },
+      {
+        "question": "क्या मेरी एक्सेल फ़ाइलें किसी सर्वर पर अपलोड की गई हैं?",
+        "answer": "नहीं! सभी फ़ाइल पार्सिंग, टेबल लेआउट गणना और पीडीएफ पीढ़ी आपके ब्राउज़र टैब के अंदर 100% स्थानीय रूप से होती है।"
+      },
+      {
+        "question": "क्या मैं एकाधिक कार्यपत्रकों को एक Excel फ़ाइल में परिवर्तित कर सकता हूँ?",
+        "answer": "हाँ! टूलवाला आपकी कार्यपुस्तिका में सभी शीटों का पता लगाता है और आपको सभी शीटों को परिवर्तित करने या विशिष्ट टैब चुनने के बीच चयन करने देता है।"
+      },
+      {
+        "question": "यदि मेरी तालिका पोर्ट्रेट मोड के लिए बहुत चौड़ी है तो क्या होगा?",
+        "answer": "आप आसानी से लैंडस्केप ओरिएंटेशन, ए3/लीगल पेपर आकार का चयन कर सकते हैं, या विस्तृत तालिकाओं को एक पेज पर साफ-सुथरे तरीके से फिट करने के लिए 'पेज चौड़ाई में फिट' विकल्प को सक्षम कर सकते हैं।"
+      },
+      {
+        "question": "कौन सी फ़ाइल आकार सीमा समर्थित है?",
+        "answer": "आप 100 एमबी तक की एक्सेल फ़ाइलें अपलोड कर सकते हैं, बड़ी मल्टी-शीट कार्यपुस्तिकाओं को शून्य सर्वर विलंब के साथ आसानी से संभाल सकते हैं।"
+      }
+    ],
+    "seoTitle": "एक्सेल से पीडीएफ कन्वर्टर",
+    "seoDescription": "एक्सेल स्प्रेडशीट (.xlsx, .xls, .csv) को तुरंत साफ, पेशेवर पीडीएफ दस्तावेजों में बदलें। 100% ब्राउज़र-आधारित प्रोसेसिंग के साथ टेबल लेआउट, फ़ॉर्मेटिंग, हेडर, ग्रिडलाइन और पेजिनेशन को सुरक्षित रखें।",
+    "createdAt": "2026-07-28T02:51:26.590Z",
+    "updatedAt": "2026-07-28T02:51:27.460Z"
+  },
+  {
+    "id": "brq9t01",
+    "toolSlug": "pdf-to-excel-converter",
+    "locale": "hi",
+    "title": "पीडीएफ से एक्सेल कन्वर्टर",
+    "description": "पीडीएफ तालिकाओं को तुरंत साफ, पूरी तरह से संपादन योग्य एक्सेल स्प्रेडशीट (.xlsx) में बदलें। 100% क्लाइंट-साइड ब्राउज़र प्रोसेसिंग के साथ पंक्तियों, स्तंभों, संख्यात्मक परिशुद्धता और तालिका स्वरूपण को सुरक्षित रखें।",
+    "faq": [
+      {
+        "question": "पीडीएफ टू एक्सेल कन्वर्टर क्या है?",
+        "answer": "पीडीएफ टू एक्सेल कन्वर्टर एक क्लाइंट-साइड वेब उपयोगिता है जो डिजिटल और स्कैन किए गए पीडीएफ दस्तावेजों से टेबल निकालती है और उन्हें संपादन योग्य माइक्रोसॉफ्ट एक्सेल (.xlsx) स्प्रेडशीट में बदल देती है।"
+      },
+      {
+        "question": "पीडीएफ को एक्सेल में क्यों बदलें?",
+        "answer": "पीडीएफ फाइलें स्थिर और गैर-संपादन योग्य हैं। तालिकाओं को एक्सेल में परिवर्तित करने से गतिशील डेटा विश्लेषण, सूत्र गणना, सॉर्टिंग, फ़िल्टरिंग और व्यावसायिक वित्तीय मॉडल में निर्बाध एकीकरण सक्षम हो जाता है।"
+      },
+      {
+        "question": "क्या मेरी गोपनीय फ़ाइलें किसी सर्वर पर अपलोड की गई हैं?",
+        "answer": "नहीं! सभी पार्सिंग, ओसीआर स्कैनिंग, टेबल एक्सट्रैक्शन और एक्सेल वर्कबुक निर्माण आपके ब्राउज़र मेमोरी में 100% स्थानीय रूप से चलते हैं। आपके दस्तावेज़ पूरी तरह से निजी हैं और कभी भी अपलोड नहीं किए जाते हैं।"
+      },
+      {
+        "question": "क्या मैं स्कैन की गई पीडीएफ़ को एक्सेल में बदल सकता हूँ?",
+        "answer": "हाँ! यदि स्कैन की गई या छवि-आधारित पीडीएफ का पता चलता है, तो हमारा टूल छवियों के भीतर पाठ को पढ़ने और उन्हें एक्सेल कॉलम में प्रारूपित करने के लिए Tesseract.js का उपयोग करके ऑन-डिवाइस OCR (ऑप्टिकल कैरेक्टर रिकॉग्निशन) को सक्षम करता है।"
+      },
+      {
+        "question": "यह टूल एकाधिक तालिकाओं और बहु-पृष्ठ PDF को कैसे संभालता है?",
+        "answer": "हमारा लेआउट पार्सर सभी पृष्ठों को स्कैन करता है, प्रत्येक व्यक्तिगत तालिका का पता लगाता है, और आपको सभी तालिकाओं को अलग-अलग स्प्रेडशीट टैब में निर्यात करने या चयनित पृष्ठों को एक एकीकृत कार्यपुस्तिका में समेकित करने के बीच चयन करने देता है।"
+      },
+      {
+        "question": "कौन सी फ़ाइल आकार सीमा समर्थित है?",
+        "answer": "टूलवाला एआई प्रति दस्तावेज़ 100 एमबी तक की पीडीएफ फाइलों का समर्थन करता है, बिना क्रैश या धीमा हुए उच्च-घनत्व रिपोर्ट को आसानी से संभालता है।"
+      }
+    ],
+    "seoTitle": "पीडीएफ से एक्सेल कन्वर्टर",
+    "seoDescription": "पीडीएफ तालिकाओं को तुरंत साफ, पूरी तरह से संपादन योग्य एक्सेल स्प्रेडशीट (.xlsx) में बदलें। 100% क्लाइंट-साइड ब्राउज़र प्रोसेसिंग के साथ पंक्तियों, स्तंभों, संख्यात्मक परिशुद्धता और तालिका स्वरूपण को सुरक्षित रखें।",
+    "createdAt": "2026-07-28T02:51:26.774Z",
+    "updatedAt": "2026-07-28T02:51:27.387Z"
+  },
+  {
+    "id": "9q2y1lh",
+    "toolSlug": "jpg-to-webp",
+    "locale": "hi",
+    "title": "मुफ़्त जेपीजी से वेबपी कन्वर्टर",
+    "description": "अपनी JPG और JPEG छवियों को निःशुल्क ऑनलाइन आधुनिक WebP प्रारूप में बदलें। वेबसाइट की गति बढ़ाएं, भंडारण आवश्यकताओं को 80% तक कम करें, और मूल दृश्य गुणवत्ता को संरक्षित करें - यह सब बाहरी सर्वर पर एक भी फ़ाइल अपलोड किए बिना।",
+    "faq": [
+      {
+        "question": "वेबपी क्या है?",
+        "answer": "WebP Google द्वारा विकसित एक आधुनिक छवि प्रारूप है जो वेब पर छवियों के लिए बेहतर हानिपूर्ण और दोषरहित संपीड़न प्रदान करता है। समान दृश्य गुणवत्ता बनाए रखते हुए वेबपी छवियां आमतौर पर तुलनीय जेपीईजी छवियों की तुलना में 25% से 35% छोटी होती हैं।"
+      },
+      {
+        "question": "क्या JPG को WebP में बदलने से गुणवत्ता कम हो जाती है?",
+        "answer": "WebP उन्नत पूर्वानुमानित कोडिंग और स्थानिक ब्लॉक संपीड़न का उपयोग करता है। हमारे अनुशंसित 'संतुलित' प्रीसेट (80%) पर, मानव आंखें परिवर्तित वेबपी को मूल जेपीजी से अलग नहीं कर सकती हैं, फिर भी फ़ाइल का आकार 60%-80% तक कम हो जाता है।"
+      },
+      {
+        "question": "क्या यह कनवर्टर मुफ़्त है?",
+        "answer": "हाँ! टूलवाला एआई का जेपीजी टू वेबपी कन्वर्टर बिना किसी छिपी हुई फीस, दैनिक सीमा, वॉटरमार्क या खाता पंजीकरण आवश्यकताओं के उपयोग के लिए 100% मुफ़्त है।"
+      },
+      {
+        "question": "क्या मेरी फ़ाइलें अपलोड हो गई हैं?",
+        "answer": "नहीं! सभी छवि पढ़ना, डिकोडिंग, कैनवास स्केलिंग और वेबपी एन्कोडिंग आपके वेब ब्राउज़र के अंदर स्थानीय रूप से होती है। आपकी छवियाँ आपके डिवाइस को कभी नहीं छोड़तीं।"
+      },
+      {
+        "question": "क्या मैं एकाधिक JPG फ़ाइलें परिवर्तित कर सकता हूँ?",
+        "answer": "हाँ! आप एक साथ कई JPG और JPEG फ़ाइलों को चुन सकते हैं या खींच सकते हैं, उन्हें बैच मोड में परिवर्तित कर सकते हैं, और सभी परिवर्तित WebP फ़ाइलों को एक ही ज़िप फ़ाइल में डाउनलोड कर सकते हैं।"
+      },
+      {
+        "question": "कौन से ब्राउज़र WebP का समर्थन करते हैं?",
+        "answer": "WebP सभी आधुनिक ब्राउज़रों द्वारा समर्थित है, जिसमें Google Chrome, मोज़िला फ़ायरफ़ॉक्स, Apple Safari, Microsoft Edge, ओपेरा और iOS/Android मोबाइल ब्राउज़र (97% से अधिक वैश्विक ब्राउज़र समर्थन) शामिल हैं।"
+      }
+    ],
+    "seoTitle": "मुफ़्त जेपीजी से वेबपी कन्वर्टर",
+    "seoDescription": "अपनी JPG और JPEG छवियों को निःशुल्क ऑनलाइन आधुनिक WebP प्रारूप में बदलें। वेबसाइट की गति बढ़ाएं, भंडारण आवश्यकताओं को 80% तक कम करें, और मूल दृश्य गुणवत्ता को संरक्षित करें - यह सब बाहरी सर्वर पर एक भी फ़ाइल अपलोड किए बिना।",
+    "createdAt": "2026-07-28T02:51:27.930Z",
+    "updatedAt": "2026-07-28T02:51:54.496Z"
+  },
+  {
+    "id": "oi3xk1q",
+    "toolSlug": "excel-to-pdf-converter",
+    "locale": "es",
+    "title": "Convertidor de Excel a PDF",
+    "description": "Convierta hojas de cálculo de Excel (.xlsx, .xls, .csv) en documentos PDF limpios y profesionales al instante. Conserve el diseño, el formato, los encabezados, las líneas de cuadrícula y la paginación de las tablas con un procesamiento 100% basado en navegador.",
+    "faq": [
+      {
+        "question": "¿Qué es el convertidor de Excel a PDF?",
+        "answer": "Excel to PDF Converter es una herramienta web gratuita que transforma libros de Excel (.xlsx, .xls) y hojas de cálculo CSV en documentos PDF formateados."
+      },
+      {
+        "question": "¿Por qué convertir Excel a PDF?",
+        "answer": "Los archivos PDF conservan el diseño, la tipografía y la estructura de página exactos en todos los dispositivos, evitando la edición accidental o la distorsión de fórmulas al compartir documentos confidenciales."
+      },
+      {
+        "question": "¿Mis archivos de Excel se cargan en algún servidor?",
+        "answer": "¡No! Todo el análisis de archivos, los cálculos de diseño de tablas y la generación de PDF se realizan 100% localmente dentro de la pestaña de su navegador."
+      },
+      {
+        "question": "¿Puedo convertir varias hojas de trabajo en un archivo de Excel?",
+        "answer": "¡Sí! ToolWala detecta todas las hojas dentro de su libro y le permite elegir entre convertir todas las hojas o seleccionar pestañas específicas."
+      },
+      {
+        "question": "¿Qué pasa si mi mesa es demasiado ancha para el modo vertical?",
+        "answer": "Puede seleccionar fácilmente la orientación horizontal, el tamaño de papel A3/Legal o habilitar la opción \"Ajustar al ancho de página\" para ajustar tablas anchas en páginas individuales de manera limpia."
+      },
+      {
+        "question": "¿Qué límite de tamaño de archivo se admite?",
+        "answer": "Puede cargar archivos de Excel de hasta 100 MB y manejar libros grandes de varias hojas sin problemas y sin demoras en el servidor."
+      }
+    ],
+    "seoTitle": "Convertidor de Excel a PDF",
+    "seoDescription": "Convierta hojas de cálculo de Excel (.xlsx, .xls, .csv) en documentos PDF limpios y profesionales al instante. Conserve el diseño, el formato, los encabezados, las líneas de cuadrícula y la paginación de las tablas con un procesamiento 100% basado en navegador.",
+    "createdAt": "2026-07-28T02:51:38.700Z",
+    "updatedAt": "2026-07-28T02:51:38.700Z"
+  },
+  {
+    "id": "150uh5s",
+    "toolSlug": "webp-to-jpg-png-converter",
+    "locale": "es",
+    "title": "Convertidor de WebP a JPG/PNG",
+    "description": "Convierta imágenes WebP a JPG o PNG al instante con alta calidad. Rápido, seguro y completamente basado en navegador.",
+    "faq": [
+      {
+        "question": "¿Qué es el convertidor de WebP a JPG/PNG?",
+        "answer": "WebP to JPG / PNG Converter es una herramienta basada en navegador que transforma archivos WebP modernos en formatos JPG o PNG ampliamente compatibles sin cargar sus archivos en ningún servidor externo."
+      },
+      {
+        "question": "¿Por qué convertir imágenes WebP?",
+        "answer": "Si bien WebP ofrece una compresión superior para sitios web, muchas aplicaciones de software de escritorio, clientes de correo electrónico, plataformas sociales y formularios oficiales heredados solo aceptan imágenes JPG o PNG."
+      },
+      {
+        "question": "¿Mi imagen está cargada en algún servidor?",
+        "answer": "¡No! Todas las conversiones de imágenes se ejecutan 100% localmente en su computadora o dispositivo móvil mediante API web. Tus imágenes nunca salen de tu navegador."
+      },
+      {
+        "question": "¿Cómo maneja la herramienta los archivos WebP transparentes?",
+        "answer": "Al convertir a PNG, la transparencia se conserva automáticamente. Al convertir a JPG (que no admite canales alfa), puede seleccionar un color de fondo personalizado (blanco, negro o hexadecimal personalizado)."
+      },
+      {
+        "question": "¿Puedo convertir varios archivos WebP a la vez?",
+        "answer": "¡Sí! ToolWala admite la conversión por lotes de múltiples imágenes WebP simultáneamente, junto con una opción instantánea de 'Descargar ZIP'."
+      },
+      {
+        "question": "¿Cuál es el tamaño máximo de archivo admitido?",
+        "answer": "Puede cargar imágenes WebP de hasta 50 MB por archivo, lo que permite el procesamiento de fotografías de alta resolución sin demoras."
+      }
+    ],
+    "seoTitle": "Convertidor de WebP a JPG/PNG",
+    "seoDescription": "Convierta imágenes WebP a JPG o PNG al instante con alta calidad. Rápido, seguro y completamente basado en navegador.",
+    "createdAt": "2026-07-28T02:51:38.910Z",
+    "updatedAt": "2026-07-28T02:51:38.910Z"
+  },
+  {
+    "id": "gvunhjl",
+    "toolSlug": "png-to-webp",
+    "locale": "es",
+    "title": "Convertidor gratuito de PNG a WebP",
+    "description": "Convierta imágenes PNG al formato WebP moderno en línea de forma gratuita manteniendo intactos los fondos transparentes. Reduzca el tamaño de los archivos de imagen hasta en un 80 %, acelere la representación de páginas y mejore Core Web Vitals al 100 % en su navegador sin necesidad de cargar archivos.",
+    "faq": [
+      {
+        "question": "¿La conversión de PNG a WebP conserva los fondos transparentes?",
+        "answer": "¡Sí! WebP es totalmente compatible con la transparencia del canal alfa de 8 bits (al igual que PNG). Nuestro conversor conserva fondos transparentes de forma predeterminada para que sus gráficos se vean perfectos en cualquier página web."
+      },
+      {
+        "question": "¿Cuánta reducción de tamaño de archivo puedo esperar de PNG a WebP?",
+        "answer": "En promedio, WebP ofrece tamaños de archivo entre un 60 % y un 80 % más pequeños en comparación con las imágenes PNG estándar, al tiempo que conserva una calidad visual idéntica y bordes transparentes nítidos."
+      },
+      {
+        "question": "¿Este conversor de PNG a WebP es gratuito?",
+        "answer": "¡Sí! El convertidor de PNG a WebP de ToolWala AI es 100% gratuito, sin registro, marcas de agua, límites de conversión diarios ni tarifas ocultas."
+      },
+      {
+        "question": "¿Mis archivos PNG se cargan en algún servidor?",
+        "answer": "¡No! Todo el procesamiento de archivos, la representación del lienzo, la combinación de transparencias y la codificación WebP se producen localmente dentro de la memoria de su navegador. Tus imágenes nunca salen de tu máquina."
+      },
+      {
+        "question": "¿Puedo convertir por lotes varios archivos PNG a la vez?",
+        "answer": "¡Sí! Puede arrastrar y soltar varios archivos PNG a la vez, convertirlos simultáneamente y descargar todas las salidas WebP en un único archivo ZIP."
+      },
+      {
+        "question": "¿Qué navegadores admiten imágenes WebP transparentes?",
+        "answer": "Transparent WebP es compatible con todos los navegadores web modernos, incluidos Chrome, Safari, Firefox, Edge, Opera y sistemas operativos móviles (iOS y Android)."
+      }
+    ],
+    "seoTitle": "Convertidor gratuito de PNG a WebP",
+    "seoDescription": "Convierta imágenes PNG al formato WebP moderno en línea de forma gratuita manteniendo intactos los fondos transparentes. Reduzca el tamaño de los archivos de imagen hasta en un 80 %, acelere la representación de páginas y mejore Core Web Vitals al 100 % en su navegador sin necesidad de cargar archivos.",
+    "createdAt": "2026-07-28T02:51:39.306Z",
+    "updatedAt": "2026-07-28T02:51:39.306Z"
+  },
+  {
+    "id": "yxque0d",
+    "toolSlug": "pdf-to-excel-converter",
+    "locale": "es",
+    "title": "Convertidor de PDF a Excel",
+    "description": "Transforme tablas PDF en hojas de cálculo de Excel limpias y totalmente editables (.xlsx) al instante. Conserve filas, columnas, precisión numérica y formato de tablas con un procesamiento 100% del navegador del lado del cliente.",
+    "faq": [
+      {
+        "question": "¿Qué es el convertidor de PDF a Excel?",
+        "answer": "PDF to Excel Converter es una utilidad web del lado del cliente que extrae tablas de documentos PDF digitales y escaneados y los transforma en hojas de cálculo editables de Microsoft Excel (.xlsx)."
+      },
+      {
+        "question": "¿Por qué convertir PDF a Excel?",
+        "answer": "Los archivos PDF son estáticos y no editables. La conversión de tablas a Excel permite el análisis dinámico de datos, cálculos de fórmulas, clasificación, filtrado e integración perfecta en modelos financieros comerciales."
+      },
+      {
+        "question": "¿Mis archivos confidenciales se cargan en algún servidor?",
+        "answer": "¡No! Todo el análisis, el escaneo OCR, la extracción de tablas y la creación de libros de Excel se ejecutan 100% localmente en la memoria de su navegador. Sus documentos son completamente privados y nunca se cargan."
+      },
+      {
+        "question": "¿Puedo convertir archivos PDF escaneados a Excel?",
+        "answer": "¡Sí! Si se detecta un PDF escaneado o basado en imágenes, nuestra herramienta habilita el OCR (reconocimiento óptico de caracteres) en el dispositivo utilizando Tesseract.js para leer texto dentro de las imágenes y formatearlas en columnas de Excel."
+      },
+      {
+        "question": "¿Cómo maneja la herramienta varias tablas y archivos PDF de varias páginas?",
+        "answer": "Nuestro analizador de diseño escanea todas las páginas, detecta cada tabla individual y le permite elegir entre exportar todas las tablas en pestañas de hojas de cálculo separadas o consolidar las páginas seleccionadas en un libro de trabajo unificado."
+      },
+      {
+        "question": "¿Qué límite de tamaño de archivo se admite?",
+        "answer": "ToolWala AI admite archivos PDF de hasta 100 MB por documento y maneja informes de alta densidad sin problemas, sin fallas ni ralentizaciones."
+      }
+    ],
+    "seoTitle": "Convertidor de PDF a Excel",
+    "seoDescription": "Transforme tablas PDF en hojas de cálculo de Excel limpias y totalmente editables (.xlsx) al instante. Conserve filas, columnas, precisión numérica y formato de tablas con un procesamiento 100% del navegador del lado del cliente.",
+    "createdAt": "2026-07-28T02:51:39.810Z",
+    "updatedAt": "2026-07-28T02:51:39.810Z"
+  },
+  {
+    "id": "quora7r",
+    "toolSlug": "jpg-to-webp",
+    "locale": "es",
+    "title": "Convertidor gratuito de JPG a WebP",
+    "description": "Convierta sus imágenes JPG y JPEG al formato WebP moderno en línea de forma gratuita. Aumente la velocidad del sitio web, reduzca los requisitos de almacenamiento hasta en un 80 % y conserve la calidad visual original, todo sin cargar un solo archivo en servidores externos.",
+    "faq": [
+      {
+        "question": "¿Qué es WebP?",
+        "answer": "WebP es un formato de imagen moderno desarrollado por Google que proporciona una compresión superior con y sin pérdida para imágenes en la web. Las imágenes WebP suelen ser entre un 25% y un 35% más pequeñas que las imágenes JPEG comparables y, al mismo tiempo, mantienen una calidad visual equivalente."
+      },
+      {
+        "question": "¿La conversión de JPG a WebP reduce la calidad?",
+        "answer": "WebP utiliza codificación predictiva avanzada y compresión de bloques espaciales. Con nuestro ajuste preestablecido 'Equilibrado' recomendado (80%), los ojos humanos no pueden distinguir el WebP convertido del JPG original, pero el tamaño del archivo se reduce entre un 60% y un 80%."
+      },
+      {
+        "question": "¿Este convertidor es gratuito?",
+        "answer": "¡Sí! El convertidor de JPG a WebP de ToolWala AI es 100% gratuito, sin tarifas ocultas, límites diarios, marcas de agua ni requisitos de registro de cuenta."
+      },
+      {
+        "question": "¿Se cargan mis archivos?",
+        "answer": "¡No! Toda la lectura, decodificación, escalado del lienzo y codificación WebP de imágenes se realizan localmente dentro de su navegador web. Tus imágenes nunca salen de tu dispositivo."
+      },
+      {
+        "question": "¿Puedo convertir varios archivos JPG?",
+        "answer": "¡Sí! Puede seleccionar o arrastrar varios archivos JPG y JPEG a la vez, convertirlos en modo por lotes y descargar todos los archivos WebP convertidos en un único archivo ZIP."
+      },
+      {
+        "question": "¿Qué navegadores admiten WebP?",
+        "answer": "WebP es compatible con todos los navegadores modernos, incluidos Google Chrome, Mozilla Firefox, Apple Safari, Microsoft Edge, Opera y navegadores móviles iOS/Android (más del 97 % de compatibilidad con navegadores a nivel mundial)."
+      }
+    ],
+    "seoTitle": "Convertidor gratuito de JPG a WebP",
+    "seoDescription": "Convierta sus imágenes JPG y JPEG al formato WebP moderno en línea de forma gratuita. Aumente la velocidad del sitio web, reduzca los requisitos de almacenamiento hasta en un 80 % y conserve la calidad visual original, todo sin cargar un solo archivo en servidores externos.",
+    "createdAt": "2026-07-28T02:51:40.758Z",
+    "updatedAt": "2026-07-28T02:51:40.758Z"
   }
 ]

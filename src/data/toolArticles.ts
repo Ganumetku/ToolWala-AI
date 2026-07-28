@@ -2524,6 +2524,116 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "Compress PDF", href: "/tools/compress-pdf" },
       { name: "Word to PDF Converter", href: "/tools/word-to-pdf-converter" }
     ]
+  },
+  "jpg-to-webp": {
+    title: "Free JPG to WebP Converter",
+    intro: "Convert your JPG and JPEG images to modern WebP format online for free. Boost website speed, reduce storage requirements by up to 80%, and preserve original visual quality—all without uploading a single file to external servers.",
+    whatItDoes: "The ToolWala AI JPG to WebP Converter is a client-side image optimization engine powered by native browser Web Assembly & HTML5 Canvas encoders. It accepts single or batch JPG/JPEG uploads, analyzes pixel resolution and metadata, and converts them directly on your machine into optimized WebP files. You can choose from four fine-tuned quality presets or customize compression percentage with live size estimates.",
+    howToUse: [
+      "Drag & drop your JPG or JPEG images into the upload area, click 'Browse Files', or paste images directly from your clipboard (Ctrl+V).",
+      "Select a quality preset (Maximum 95%, Balanced 80%, Small Size 65%, or Ultra Compression 40%) or adjust the custom quality slider.",
+      "Optionally configure advanced settings: resize image dimensions with locked aspect ratio or choose whether to strip metadata.",
+      "Preview the estimated vs actual output size and file size reduction percentage for each image.",
+      "Click 'Download WebP' for individual images or click 'Download All as ZIP' to download your entire batch instantly."
+    ],
+    specificationTable: [
+      { requirement: "Supported Input", specification: "JPG, JPEG (.jpg, .jpeg) up to 50 MB per file" },
+      { requirement: "Output Format", specification: "WebP (.webp)" },
+      { requirement: "Processing Engine", specification: "100% Client-Side Engine (HTML5 Canvas & Web API)" },
+      { requirement: "Quality Presets", specification: "Maximum (95%), Balanced (80%), Small Size (65%), Ultra (40%), Custom (40%-100%)" },
+      { requirement: "Advanced Options", specification: "Batch Processing, ZIP Archiving, Custom Dimension Resizing, EXIF Metadata Control" }
+    ],
+    keyFeatures: [
+      { title: "Client-Side Privacy", desc: "Your images never leave your computer. All rendering happens in browser memory with zero tracking." },
+      { title: "Batch Processing & ZIP Download", desc: "Convert dozens of JPG files simultaneously and download them in a single compressed ZIP archive." },
+      { title: "Real-Time Quality Tuning", desc: "Instantly compare file sizes across 4 quality presets or adjust fine-grain quality with live resolution previews." },
+      { title: "Aspect Ratio Resizing", desc: "Downscale oversized photography resolution before encoding to achieve maximum WebP compression efficiency." }
+    ],
+    benefits: [
+      "Drastically speed up web page load times and improve Core Web Vitals (LCP, CLS, FID).",
+      "Save up to 80% bandwidth and disk storage compared to standard JPEG files.",
+      "Ensure 100% data privacy and confidentiality for personal or sensitive photographs.",
+      "Zero wait times—no network queue delays, upload bandwidth caps, or daily conversion limits."
+    ],
+    whyChoose: "Unlike cloud-based image converters that upload your personal photos to third-party servers, ToolWala AI processes everything locally inside your web browser. Enjoy high performance, privacy guarantees, customizable quality options, and batch ZIP downloads for free.",
+    useCases: [
+      "Web developers and SEO experts optimizing website hero images, blog thumbnails, and product assets.",
+      "E-commerce store owners compressing product catalogs for Shopify, WooCommerce, or custom storefronts.",
+      "Photographers needing compact preview versions of high-resolution JPEG portfolios for online sharing.",
+      "Mobile app developers reducing APK/bundle size by converting asset imagery to WebP."
+    ],
+    faqs: [
+      { question: "What is WebP?", answer: "WebP is a modern image format developed by Google that provides superior lossy and lossless compression for images on the web. WebP images are typically 25% to 35% smaller than comparable JPEG images while maintaining equivalent visual quality." },
+      { question: "Does converting JPG to WebP reduce quality?", answer: "WebP uses advanced predictive coding and spatial block compression. At our recommended 'Balanced' preset (80%), human eyes cannot distinguish the converted WebP from the original JPG, yet file size is cut by 60%–80%." },
+      { question: "Is this converter free?", answer: "Yes! ToolWala AI's JPG to WebP Converter is 100% free to use with no hidden fees, daily limits, watermarks, or account registration requirements." },
+      { question: "Are my files uploaded?", answer: "No! All image reading, decoding, canvas scaling, and WebP encoding take place locally inside your web browser. Your images never leave your device." },
+      { question: "Can I convert multiple JPG files?", answer: "Yes! You can select or drag multiple JPG and JPEG files at once, convert them in batch mode, and download all converted WebP files in a single ZIP file." },
+      { question: "Which browsers support WebP?", answer: "WebP is supported by all modern browsers, including Google Chrome, Mozilla Firefox, Apple Safari, Microsoft Edge, Opera, and iOS/Android mobile browsers (over 97% global browser support)." }
+    ],
+    conclusion: "Supercharge your website performance and save disk space with ToolWala AI's JPG to WebP Converter. Convert single or batch images instantly in your browser with complete privacy.",
+    relatedTools: [
+      { name: "WebP to JPG", href: "/tools/webp-to-jpg-png-converter" },
+      { name: "PNG to WebP", href: "/tools/png-to-webp" },
+      { name: "Image Compressor", href: "/tools/image-compressor" },
+      { name: "Resize Image", href: "/tools/aadhaar-photo-resizer" },
+      { name: "Crop Image", href: "/tools/invoice-cropper" },
+      { name: "Convert Image", href: "/tools/gov-form-image-compressor" }
+    ]
+  },
+  "png-to-webp": {
+    title: "Free PNG to WebP Converter",
+    intro: "Convert PNG images to modern WebP format online for free while keeping transparent backgrounds intact. Cut image file sizes by up to 80%, speed up page rendering, and improve Core Web Vitals—100% in your browser without file uploads.",
+    whatItDoes: "The ToolWala AI PNG to WebP Converter is a high-performance, client-side image optimization engine. It processes PNG graphics directly in browser memory, automatically detecting alpha channels to preserve full image transparency. You can select quality presets, adjust custom compression levels, or choose to fill transparent areas with custom background colors when needed.",
+    howToUse: [
+      "Drag & drop your PNG images into the upload dropzone, click 'Browse Files', or paste images from your clipboard (Ctrl+V).",
+      "Choose a quality preset (Maximum 95%, Balanced 80%, Small Size 65%, or Ultra Compression 40%) or adjust the custom quality slider.",
+      "Toggle 'Preserve Transparency' to keep transparent alpha backgrounds intact, or pick a solid background color (White, Black, or Custom Hex).",
+      "Optionally configure custom pixel dimensions with aspect ratio locking or strip unnecessary PNG chunks & metadata.",
+      "Preview the file size reduction and click 'Download WebP' for individual images or 'Download All as ZIP' for batch archives."
+    ],
+    specificationTable: [
+      { requirement: "Supported Input", specification: "PNG (.png) up to 50 MB per file" },
+      { requirement: "Output Format", specification: "WebP (.webp) with Alpha Channel Support" },
+      { requirement: "Processing Engine", specification: "100% Client-Side Engine (HTML5 Canvas & Web API)" },
+      { requirement: "Transparency Options", specification: "Alpha Channel Preservation / Custom Hex & Preset Background Fill" },
+      { requirement: "Quality Presets", specification: "Maximum (95%), Balanced (80%), Small Size (65%), Ultra (40%), Custom (40%-100%)" }
+    ],
+    keyFeatures: [
+      { title: "Alpha Transparency Preservation", desc: "Natively preserves transparent PNG layers and smooth gradients in WebP format." },
+      { title: "Background Color Fill", desc: "Optionally convert transparent backgrounds to crisp white, black, or custom hex tones for solid image exports." },
+      { title: "Batch Queue & ZIP Download", desc: "Upload and optimize dozens of PNG files in parallel, downloading them in a single compressed ZIP archive." },
+      { title: "Local Privacy Guaranteed", desc: "No server uploads or external APIs. All canvas rendering and WebP encoding happen strictly inside your browser." }
+    ],
+    benefits: [
+      "Reduce PNG graphic file sizes by up to 80% without sacrificing crisp edges or transparent backgrounds.",
+      "Improve Google PageSpeed scores, LCP metrics, and mobile browser loading times.",
+      "Eliminate security risks by keeping sensitive graphic assets and logos on your local device.",
+      "Instant batch processing with zero bandwidth restrictions or daily conversion caps."
+    ],
+    whyChoose: "Standard PNG images are notoriously large due to uncompressed pixel data and extra chunks. ToolWala AI's PNG to WebP converter uses browser WebAssembly to convert PNG files to WebP with alpha transparency support, delivering lightweight web assets without sending your graphics to third-party cloud servers.",
+    useCases: [
+      "UI/UX designers and front-end developers optimizing transparent icons, logos, and UI illustration assets.",
+      "E-commerce merchants converting transparent product cutouts for web stores and product cards.",
+      "Digital marketers shrinking banner overlays, transparent badges, and social media templates.",
+      "Webmasters replacing heavy PNG graphics with high-performance WebP alternatives across site pages."
+    ],
+    faqs: [
+      { question: "Does converting PNG to WebP preserve transparent backgrounds?", answer: "Yes! WebP fully supports 8-bit alpha channel transparency (just like PNG). Our converter preserves transparent backgrounds by default so your graphics look seamless on any webpage." },
+      { question: "How much file size reduction can I expect from PNG to WebP?", answer: "On average, WebP offers 60% to 80% smaller file sizes compared to standard PNG images while preserving visually identical quality and crisp transparent edges." },
+      { question: "Is this PNG to WebP converter free?", answer: "Yes! ToolWala AI's PNG to WebP Converter is 100% free with no registration, watermarks, daily conversion limits, or hidden fees." },
+      { question: "Are my PNG files uploaded to any server?", answer: "No! All file processing, canvas rendering, transparency blending, and WebP encoding occur locally inside your browser memory. Your images never leave your machine." },
+      { question: "Can I batch convert multiple PNG files at once?", answer: "Yes! You can drag and drop multiple PNG files at once, convert them simultaneously, and download all WebP outputs in a single ZIP file." },
+      { question: "Which browsers support transparent WebP images?", answer: "Transparent WebP is supported across all modern web browsers, including Chrome, Safari, Firefox, Edge, Opera, and mobile operating systems (iOS and Android)." }
+    ],
+    conclusion: "Convert your PNG graphics to light, fast, and transparent WebP images in seconds. Enjoy maximum compression, local browser privacy, and batch ZIP downloads with ToolWala AI.",
+    relatedTools: [
+      { name: "JPG to WebP", href: "/tools/jpg-to-webp" },
+      { name: "WebP to JPG", href: "/tools/webp-to-jpg-png-converter" },
+      { name: "Image Compressor", href: "/tools/image-compressor" },
+      { name: "Resize Image", href: "/tools/aadhaar-photo-resizer" },
+      { name: "Crop Image", href: "/tools/invoice-cropper" },
+      { name: "Convert Image", href: "/tools/gov-form-image-compressor" }
+    ]
   }
 };
 

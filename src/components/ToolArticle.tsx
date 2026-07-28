@@ -5,7 +5,8 @@ import { ChevronDown, Sparkles, CheckCircle2, HelpCircle, ArrowRight } from 'luc
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import ShareButtons from './ShareButtons';
-import { toolsData } from '@/data/tools';
+import { toolsData, ToolCategory } from '@/data/tools';
+import ToolIcon from '@/components/ToolIcon';
 import { useTranslation } from '@/components/I18nContext';
 import { getTranslation } from '@/lib/i18n';
 import Breadcrumbs from './Breadcrumbs';
@@ -117,34 +118,67 @@ export default function ToolArticle({
     );
   }, [currentTool]);
 
-  // Resolve related tools dynamically from toolsData if none provided (exactly 5 related tools)
+  // Resolve related tools dynamically from toolsData matching name/href to full Tool objects
   const resolvedRelatedTools = useMemo(() => {
-    if (relatedTools && relatedTools.length > 0) return relatedTools;
-    if (!currentTool) {
-      return toolsData
-        .filter(t => t.popular && t.isVisible)
-        .slice(0, 5)
-        .map(t => ({ name: t.title, href: t.href }));
-    }
+    const rawList = relatedTools && relatedTools.length > 0 ? relatedTools : [];
+    
+    if (rawList.length === 0) {
+      if (!currentTool) {
+        return toolsData.filter(t => t.popular && t.isVisible).slice(0, 6);
+      }
 
-    const sameCategoryTools = toolsData.filter(t => 
-      t.category === currentTool.category && 
-      t.isVisible && 
-      t.id !== currentTool.id
-    );
-
-    let related = [...sameCategoryTools];
-    if (related.length < 5) {
-      const popularTools = toolsData.filter(t => 
-        t.popular && 
+      const sameCategoryTools = toolsData.filter(t => 
+        t.category === currentTool.category && 
         t.isVisible && 
-        t.id !== currentTool.id &&
-        !sameCategoryTools.some(st => st.id === t.id)
+        t.id !== currentTool.id
       );
-      related = [...related, ...popularTools];
+
+      let related = [...sameCategoryTools];
+      if (related.length < 6) {
+        const popularTools = toolsData.filter(t => 
+          t.popular && 
+          t.isVisible && 
+          t.id !== currentTool.id &&
+          !sameCategoryTools.some(st => st.id === t.id)
+        );
+        related = [...related, ...popularTools];
+      }
+      return related.slice(0, 6);
     }
 
-    return related.slice(0, 5).map(t => ({ name: t.title, href: t.href }));
+    // Map given relatedTools (e.g. { name: "WebP to JPG", href: "/tools/webp-to-jpg-png-converter" }) to full tool objects
+    return rawList.map(rt => {
+      const hrefClean = rt.href.toLowerCase().replace(/\/$/, '');
+      const slugFromHref = hrefClean.replace(/^\/tools\//, '');
+
+      const matched = toolsData.find(t => 
+        t.href.toLowerCase().replace(/\/$/, '') === hrefClean ||
+        t.slug.toLowerCase() === slugFromHref ||
+        t.id.toLowerCase() === slugFromHref ||
+        t.title.toLowerCase().includes(rt.name.toLowerCase()) ||
+        rt.name.toLowerCase().includes(t.title.toLowerCase())
+      );
+
+      if (matched) return matched;
+
+      return {
+        id: slugFromHref || 'tool',
+        title: rt.name,
+        description: 'Fast, secure online tool for your daily workflow.',
+        icon: '⚡',
+        href: rt.href,
+        slug: slugFromHref,
+        category: (currentTool?.category || 'Image Tools') as ToolCategory,
+        featured: false,
+        trending: false,
+        popular: true,
+        tags: [],
+        status: 'published' as const,
+        isVisible: true,
+        createdAt: '',
+        updatedAt: ''
+      };
+    });
   }, [currentTool, relatedTools]);
 
   const relevantBlogs = useMemo(() => {
@@ -494,35 +528,9 @@ export default function ToolArticle({
                 </div>
               )}
 
-              {/* Explore Related Utilities Section (Cross-link Section) */}
-              {(relatedTools.length > 0 || resolvedRelatedTools.length > 0) && (
-                <div className="pt-8 border-t border-[#E6ECF5] dark:border-white/5 space-y-6">
-                  <div className="flex items-center gap-3">
-                    <span className="text-xl">🔗</span>
-                    <h3 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight">
-                      Explore Related Utilities
-                    </h3>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {(relatedTools.length > 0 ? relatedTools : resolvedRelatedTools).map((tool, idx) => (
-                      <Link
-                        key={idx}
-                        href={localizeHref(tool.href)}
-                        className="p-4 rounded-xl bg-white dark:bg-white/5 border border-[#E6ECF5] dark:border-white/10 hover:border-blue-500 dark:hover:border-blue-400 transition-all group flex items-center justify-between shadow-xs hover:shadow-md"
-                      >
-                        <span className="text-xs font-bold text-slate-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                          {tool.name}
-                        </span>
-                        <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-
               {/* Relevant Blogs Section */}
               {relevantBlogs.length > 0 && (
-                <div className="pt-16 border-t border-[#E6ECF5] dark:border-white/5">
+                <div className="pt-16 border-t border-[#E6ECF5] dark:border-white/10">
                   <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] mb-10 text-center select-none">
                     {t('blog.related_insights', 'Related Insights & Tutorials')}
                   </h4>
@@ -531,16 +539,16 @@ export default function ToolArticle({
                       <Link
                         key={`${rBlog.id || rBlog.slug}-${idx}`}
                         href={localizeHref(`/blog/${rBlog.slug}`)}
-                        className="p-6 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 hover:border-blue-300 dark:hover:border-blue-500/30 transition-all flex flex-col justify-between group h-48 text-left shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_10px_35px_rgba(15,23,42,0.06)] hover:-translate-y-1"
+                        className="p-6 rounded-[1.125rem] bg-white dark:bg-white/[0.03] border border-[#E6ECF5] dark:border-white/10 hover:border-blue-400 dark:hover:border-blue-500/50 transition-all flex flex-col justify-between group h-48 text-left shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_10px_35px_rgba(15,23,42,0.06)] hover:-translate-y-1"
                       >
                         <div>
-                          <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-500">
+                          <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400">
                             {t(`categories.${rBlog.category}`, rBlog.category)}
                           </span>
                           <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 mt-2 leading-tight">
                             {t(`blogs.${rBlog.slug}.title`, rBlog.title)}
                           </h4>
-                          <p className="text-slate-600 dark:text-gray-500 text-[10px] font-medium line-clamp-2 mt-2 leading-relaxed font-sans">
+                          <p className="text-slate-600 dark:text-gray-400 text-[10px] font-medium line-clamp-2 mt-2 leading-relaxed font-sans">
                             {t(`blogs.${rBlog.slug}.excerpt`, rBlog.excerpt)}
                           </p>
                         </div>
@@ -548,7 +556,7 @@ export default function ToolArticle({
                           <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">
                             {rBlog.readingTime}
                           </span>
-                          <span className="text-[9px] font-black text-blue-600 dark:text-blue-500 uppercase tracking-widest flex items-center gap-1 select-none">
+                          <span className="text-[9px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest flex items-center gap-1 select-none">
                             {t('blog.read_post', 'Read Post')}
                             <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                           </span>
@@ -559,26 +567,50 @@ export default function ToolArticle({
                 </div>
               )}
 
-              {/* Related Tools Engine */}
+              {/* Recommended Utilities Section */}
               {resolvedRelatedTools.length > 0 && (
-                <div className="pt-16 border-t border-[#E6ECF5] dark:border-white/5">
-                  <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] mb-10 text-center select-none">
-                    {t('article.recommendedUtilities', 'Recommended Utilities')}
-                  </h4>
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div className="pt-16 border-t border-[#E6ECF5] dark:border-white/10">
+                  <div className="text-center mb-10">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-3">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      {t('article.recommendedUtilities', 'Recommended Utilities')}
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">
+                      More Productivity Tools
+                    </h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {resolvedRelatedTools.map((tool, i) => (
                       <Link 
                         key={i} 
-                        href={tool.href}
-                        className="p-5 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 hover:border-blue-300 dark:hover:border-blue-500/30 transition-all flex flex-col justify-between group h-32 shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:-translate-y-1"
+                        href={localizeHref(tool.href)}
+                        className="group relative p-5 rounded-2xl bg-white dark:bg-white/[0.04] border border-[#E6ECF5] dark:border-white/10 hover:border-blue-500/60 dark:hover:border-blue-400/60 transition-all duration-300 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(37,99,235,0.2)] flex flex-col justify-between hover:-translate-y-1 min-h-[140px]"
                       >
-                        <span className="text-xs sm:text-sm font-black text-slate-900 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-white transition-colors uppercase leading-tight">
-                           {tool.name}
-                        </span>
-                        <span className="text-[9px] font-black text-blue-600 dark:text-blue-500 uppercase tracking-widest flex items-center gap-1 select-none">
-                          {t('article.tryTool', 'Try Tool')}
-                          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                        </span>
+                        <div>
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+                              <ToolIcon icon={tool.icon} className="w-5 h-5 text-xl" />
+                            </div>
+                            <span className="text-[9px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest bg-blue-50 dark:bg-blue-500/10 px-2 py-0.5 rounded border border-blue-100 dark:border-blue-500/20">
+                              {t(`categories.${tool.category}`, tool.category)}
+                            </span>
+                          </div>
+
+                          <h4 className="text-sm font-black text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase tracking-tight leading-snug line-clamp-2">
+                            {t(`tools.${tool.id}.title`, tool.title)}
+                          </h4>
+                        </div>
+
+                        <div className="flex items-center justify-between pt-3 mt-3 border-t border-[#E6ECF5] dark:border-white/5">
+                          <span className="text-[10px] text-slate-500 dark:text-gray-400 font-semibold truncate max-w-[65%]">
+                            {tool.description || 'Free Online Utility'}
+                          </span>
+                          <span className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-wider flex items-center gap-1 shrink-0 group-hover:translate-x-1 transition-transform">
+                            <span>{t('article.tryTool', 'Try Tool')}</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </span>
+                        </div>
                       </Link>
                     ))}
                   </div>

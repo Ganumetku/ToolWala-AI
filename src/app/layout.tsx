@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import PublicLayoutWrapper from "@/components/PublicLayoutWrapper";
+import PwaInstallPrompt from "@/components/PwaInstallPrompt";
 
 export const dynamic = 'force-dynamic';
 
@@ -369,6 +370,7 @@ export default async function RootLayout({
         <ThemeProvider>
           <GoogleAnalytics />
           <Toaster position="top-center" richColors />
+          <PwaInstallPrompt />
           <I18nProvider locale={locale} messages={messages} enabledLocales={enabledLocales}>
             <LocaleDomTranslator>
               <PublicLayoutWrapper>{children}</PublicLayoutWrapper>

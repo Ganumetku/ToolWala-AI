@@ -12,6 +12,7 @@ import { adminFetch } from "@/lib/admin-fetch";
 import RichTextEditor from "@/components/blog/RichTextEditor";
 import BlogSeoScore from "@/components/blog/BlogSeoScore";
 import { generateSeoSlug, autoGenerateSeoMetadata } from "@/lib/blog-seo";
+import { renderMarkdown } from "@/lib/markdown";
 import type { BlogFaq } from "@/types/blog";
 
 interface ArticleItem {
@@ -1019,7 +1020,7 @@ export default function BlogCMS() {
                       {content ? (
                         <div
                           className="prose dark:prose-invert max-w-none text-slate-700 dark:text-gray-300 text-sm font-medium leading-relaxed font-sans space-y-6"
-                          dangerouslySetInnerHTML={{ __html: content }}
+                          dangerouslySetInnerHTML={{ __html: renderMarkdown(content) }}
                         />
                       ) : (
                         <div className="text-center py-10 italic text-slate-400 dark:text-gray-600">

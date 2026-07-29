@@ -6,6 +6,7 @@ import { MeshGradient } from '@/components/BackgroundEffects';
 import FAQAccordion from '@/app/tools/[slug]/FAQAccordion';
 import { hubsData } from '@/data/hubs';
 import { landingPagesData } from '@/data/landingPages';
+import { renderMarkdown } from '@/lib/markdown';
 import { 
   buildWebPageSchema, 
   buildBreadcrumbJsonLd, 
@@ -148,14 +149,9 @@ export default async function HubPage({ params }: HubPageProps) {
             {/* 800+ Words Guidelines */}
             <section className="space-y-6 pt-6 border-t border-white/5 content-renderer prose prose-invert max-w-none text-gray-300 leading-relaxed font-sans">
               <div 
-                className="space-y-6 text-sm [&>h2]:text-2xl [&>h2]:font-black [&>h2]:text-white [&>h2]:uppercase [&>h2]:tracking-tight [&>h2]:mt-8 [&>h3]:text-xl [&>h3]:font-black [&>h3]:text-white [&>h3]:mt-6 [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-2 [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:space-y-2"
+                className="space-y-4 text-sm [&_h2]:text-2xl [&_h2]:font-black [&_h2]:text-white [&_h2]:uppercase [&_h2]:tracking-tight [&_h2]:mt-8 [&_h2]:border-b [&_h2]:border-white/5 [&_h2]:pb-2 [&_h3]:text-xl [&_h3]:font-black [&_h3]:text-white [&_h3]:mt-6 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:space-y-2 [&_p]:mb-4 [&_strong]:font-bold [&_strong]:text-white"
                 dangerouslySetInnerHTML={{ 
-                  __html: hub.content
-                    .replace(/\n\n/g, '<br/>')
-                    .replace(/### (.*)/g, '<h3 class="text-xl font-black text-white mt-6">$1</h3>')
-                    .replace(/## (.*)/g, '<h2 class="text-2xl font-black text-white uppercase tracking-tight mt-8 border-b border-white/5 pb-2">$1</h2>')
-                    .replace(/\* \*\*(.*?)\*\*:(.*)/g, '<li><strong>$1</strong>: $2</li>')
-                    .replace(/1\. \*\*(.*?)\*\*:(.*)/g, '<li><strong>$1</strong>: $2</li>')
+                  __html: renderMarkdown(hub.content)
                 }} 
               />
             </section>

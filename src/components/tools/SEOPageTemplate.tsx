@@ -9,6 +9,7 @@ import WorkflowRecommendations from '@/components/tools/WorkflowRecommendations'
 import { landingPagesData } from '@/data/landingPages';
 import { toolsData } from '@/data/tools';
 import { getLocalizedCanonicalUrl } from '@/lib/seo-client';
+import { renderMarkdown } from '@/lib/markdown';
 
 interface SEOPageTemplateProps {
   slug: string;
@@ -139,14 +140,9 @@ export default function SEOPageTemplate({ slug }: SEOPageTemplateProps) {
             {/* 800+ Words Long-Form SEO Content */}
             <section className="space-y-6 pt-6 border-t border-gray-200 dark:border-white/5 content-renderer font-sans text-gray-700 dark:text-gray-300 leading-relaxed">
               <div 
-                className="space-y-6 text-sm [&>h2]:text-2xl [&>h2]:font-black [&>h2]:text-gray-900 dark:[&>h2]:text-white [&>h2]:uppercase [&>h2]:tracking-tight [&>h2]:mt-8 [&>h3]:text-xl [&>h3]:font-black [&>h3]:text-gray-900 dark:[&>h3]:text-white [&>h3]:mt-6 [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-2 [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:space-y-2"
+                className="space-y-4 text-sm [&_h2]:text-2xl [&_h2]:font-black [&_h2]:text-gray-900 dark:[&_h2]:text-white [&_h2]:uppercase [&_h2]:tracking-tight [&_h2]:mt-8 [&_h2]:border-b [&_h2]:border-gray-200 dark:[&_h2]:border-white/5 [&_h2]:pb-2 [&_h3]:text-xl [&_h3]:font-black [&_h3]:text-gray-900 dark:[&_h3]:text-white [&_h3]:mt-6 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:space-y-2 [&_p]:mb-4 [&_strong]:font-bold [&_strong]:text-gray-900 dark:[&_strong]:text-white"
                 dangerouslySetInnerHTML={{ 
-                  __html: pageData.content
-                    .replace(/\n\n/g, '<br/>')
-                    .replace(/### (.*)/g, '<h3 class="text-xl font-black text-gray-900 dark:text-white mt-6">$1</h3>')
-                    .replace(/## (.*)/g, '<h2 class="text-2xl font-black text-gray-900 dark:text-white uppercase tracking-tight mt-8 border-b border-gray-200 dark:border-white/5 pb-2">$1</h2>')
-                    .replace(/\* \*\*(.*?)\*\*:(.*)/g, '<li><strong>$1</strong>: $2</li>')
-                    .replace(/1\. \*\*(.*?)\*\*:(.*)/g, '<li><strong>$1</strong>: $2</li>')
+                  __html: renderMarkdown(pageData.content)
                 }} 
               />
             </section>

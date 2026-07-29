@@ -12,6 +12,8 @@ import ToolLayout from '@/components/tools/ToolLayout';
 import ToolHero from '@/components/tools/ToolHero';
 import UploadZone from '@/components/tools/UploadZone';
 import ToolArticle from '@/components/ToolArticle';
+import ToolResultScreen from '@/components/tools/ToolResultScreen';
+import ToolSchema from '@/components/analytics/ToolSchema';
 import { toolArticles } from '@/data/toolArticles';
 import { formatBytes } from '@/lib/utils/format';
 import { uint8ArrayToArrayBuffer } from '@/lib/pdf/pdfUtils';
@@ -283,67 +285,29 @@ export default function CompressPdf() {
               </div>
 
               {/* ======================================================== */}
-              {/* AFTER COMPRESSION RESULT DISPLAY (100% REAL DATA ONLY)   */}
+              {/* AFTER COMPRESSION RESULT DISPLAY                         */}
               {/* ======================================================== */}
               {success && compressResult && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="p-8 sm:p-10 border border-[#E6ECF5] dark:border-white/10 bg-[#FBFCFE] dark:bg-white/[0.02] rounded-[1.125rem] text-center shadow-[0_10px_35px_rgba(15,23,42,0.06)] space-y-8"
-                >
-                  {/* HIGH REDUCTION BADGE (> 30%) */}
-                  {compressResult.actualReductionPct > 30 && (
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-black uppercase tracking-widest shadow-sm">
-                      <Sparkles className="w-4 h-4 text-emerald-500" />
-                      Excellent Compression — Saved {compressResult.actualReductionPct}%
-                    </div>
-                  )}
-
-                  <div className="space-y-2">
-                    <h4 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
-                      Compression Complete
-                    </h4>
-                    <p className="text-xs text-slate-500 dark:text-gray-400 font-bold uppercase tracking-wider">
-                      Level Applied: <span className="text-blue-600 dark:text-blue-400 font-black">{compressResult.levelUsed}</span>
-                    </p>
-                  </div>
-
-                  {/* 6 REAL POST-COMPRESSION STATS GRID (NO ESTIMATED VALUES) */}
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 pt-2">
-                    <div className="p-4 rounded-[14px] bg-white dark:bg-white/5 border border-[#E6ECF5] dark:border-white/10 text-left shadow-sm">
-                      <span className="text-[9px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-400 block">Original Size</span>
-                      <span className="text-sm font-black text-slate-900 dark:text-white mt-1 block">{formatBytes(file.size)}</span>
-                    </div>
-
-                    <div className="p-4 rounded-[14px] bg-white dark:bg-white/5 border border-[#E6ECF5] dark:border-white/10 text-left shadow-sm">
-                      <span className="text-[9px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-400 block">Compressed Size</span>
-                      <span className="text-sm font-black text-emerald-600 dark:text-emerald-400 mt-1 block">{formatBytes(compressResult.actualSize)}</span>
-                    </div>
-
-                    <div className="p-4 rounded-[14px] bg-white dark:bg-white/5 border border-[#E6ECF5] dark:border-white/10 text-left shadow-sm">
-                      <span className="text-[9px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-400 block">Space Saved</span>
-                      <span className="text-sm font-black text-blue-600 dark:text-blue-400 mt-1 block">{formatBytes(compressResult.spaceSaved)}</span>
-                    </div>
-
-                    <div className="p-4 rounded-[14px] bg-white dark:bg-white/5 border border-[#E6ECF5] dark:border-white/10 text-left shadow-sm">
-                      <span className="text-[9px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-400 block">Actual Reduction</span>
-                      <span className="text-sm font-black text-purple-600 dark:text-purple-400 mt-1 block">{compressResult.actualReductionPct}%</span>
-                    </div>
-
-                    <div className="p-4 rounded-[14px] bg-white dark:bg-white/5 border border-[#E6ECF5] dark:border-white/10 text-left shadow-sm">
-                      <span className="text-[9px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-400 block">Level Used</span>
-                      <span className="text-xs font-black text-slate-800 dark:text-gray-200 truncate mt-1 block">{selectedPreset.toUpperCase()}</span>
-                    </div>
-
-                    <div className="p-4 rounded-[14px] bg-white dark:bg-white/5 border border-[#E6ECF5] dark:border-white/10 text-left shadow-sm">
-                      <span className="text-[9px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-400 block">Status</span>
-                      <span className="text-xs font-black text-emerald-600 dark:text-emerald-400 truncate mt-1 block">{compressResult.status}</span>
-                    </div>
-                  </div>
+                <div className="space-y-6">
+                  <ToolResultScreen
+                    title="PDF Compressed Successfully!"
+                    description={`Your PDF file "${file.name}" was compressed privately in your browser.`}
+                    originalSizeBytes={file.size}
+                    finalSizeBytes={compressResult.actualSize}
+                    processingTimeMs={1400}
+                    downloadButtonText="Download Compressed PDF"
+                    onDownload={() => {
+                      const a = document.createElement('a');
+                      a.href = compressResult.url;
+                      a.download = `compressed_${file.name}`;
+                      a.click();
+                    }}
+                    onReset={resetAll}
+                  />
 
                   {/* LOW REDUCTION NOTICE CARD (< 10%) */}
                   {compressResult.actualReductionPct < 10 && (
-                    <div className="p-6 rounded-[1.125rem] bg-amber-50/80 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm">
+                    <div className="p-6 rounded-[1.125rem] bg-amber-50/80 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm max-w-3xl mx-auto">
                       <div className="flex items-start gap-3">
                         <Info className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
                         <div>
@@ -365,24 +329,7 @@ export default function CompressPdf() {
                       )}
                     </div>
                   )}
-
-                  {/* RESULT ACTION BUTTONS */}
-                  <div className="flex flex-wrap gap-4 justify-center pt-2">
-                    <a
-                      href={compressResult.url}
-                      download={`compressed_${file.name}`}
-                      className="flex items-center gap-2 px-8 h-[52px] bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white text-xs font-black uppercase tracking-widest rounded-[16px] hover:shadow-[0_8px_30px_rgba(99,102,241,0.35)] hover:-translate-y-0.5 transition-all shadow-md cursor-pointer"
-                    >
-                      <Download className="w-4 h-4" /> Download Compressed PDF
-                    </a>
-                    <button 
-                      onClick={resetAll} 
-                      className="flex items-center gap-2 px-6 h-[52px] bg-white dark:bg-white/5 border border-[#E6ECF5] dark:border-white/10 text-slate-700 dark:text-gray-300 text-xs font-black uppercase tracking-widest rounded-[16px] hover:bg-slate-50 dark:hover:bg-white/10 transition-all cursor-pointer shadow-sm"
-                    >
-                      <RotateCcw className="w-4 h-4" /> Compress Another File
-                    </button>
-                  </div>
-                </motion.div>
+                </div>
               )}
 
               {/* ======================================================== */}

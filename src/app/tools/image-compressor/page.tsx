@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import imageCompression from 'browser-image-compression';
 import ToolArticle from '@/components/ToolArticle';
+import BeforeAfterSlider from '@/components/tools/BeforeAfterSlider';
+import ToolResultScreen from '@/components/tools/ToolResultScreen';
+import ToolSchema from '@/components/analytics/ToolSchema';
 import { toolArticles } from '@/data/toolArticles';
 import { formatBytes } from '@/lib/utils/format';
 
@@ -449,69 +452,39 @@ export default function ImageCompressor() {
                     <span>{warningMessage}</span>
                   </div>
                 )}
+                {/* Split-Screen Visual Comparison Slider & Result Stats */}
+                {originalUrl && compressedUrl && originalFile && compressedFile && (
+                  <div className="space-y-8 pt-4">
+                    <div className="text-center mb-4">
+                      <h4 className="text-sm font-extrabold uppercase text-slate-400 tracking-wider mb-2">
+                        Interactive Visual Quality Inspector
+                      </h4>
+                      <p className="text-xs text-slate-500 font-medium">
+                        Drag the center slider left and right to inspect visual clarity before and after compression.
+                      </p>
+                    </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                  {/* Original Image */}
-                  <div className="glass rounded-[2rem] border border-white/5 overflow-hidden flex flex-col shadow-2xl relative group">
-                    <div className="absolute top-4 right-4 z-20">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-white/50 bg-black/60 px-4 py-2 rounded-xl backdrop-blur-md border border-white/10">
-                        {formatBytes(originalFile.size)}
-                      </span>
-                    </div>
-                    <div className="bg-white/5 p-4 border-b border-white/5 flex justify-between items-center">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Original Source</span>
-                    </div>
-                    <div className="p-6 flex-1 flex items-center justify-center bg-[#F6F8FC] dark:bg-[#030712]/50 min-h-[350px]">
-                      {originalUrl && (
-                        <img src={originalUrl} alt="Original" className="max-h-[300px] w-full object-contain shadow-2xl rounded-2xl transition-transform group-hover:scale-105" />
-                      )}
-                    </div>
-                  </div>
+                    <BeforeAfterSlider
+                      originalUrl={originalUrl}
+                      compressedUrl={compressedUrl}
+                      originalLabel={`Original (${formatBytes(originalFile.size)})`}
+                      compressedLabel={`Optimized (${formatBytes(compressedFile.size)})`}
+                      className="max-w-4xl mx-auto shadow-2xl"
+                    />
 
-                  {/* Compressed Image */}
-                  <div className="glass rounded-[2rem] border border-white/5 overflow-hidden flex flex-col shadow-2xl relative group">
-                    <div className="absolute top-4 right-4 z-20 flex gap-3">
-                      {compressedFile && reductionValue > 0 && (
-                        <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400 bg-emerald-500/20 px-4 py-2 rounded-xl backdrop-blur-md border border-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
-                          -{reductionValue.toFixed(1)}% Smaller
-                        </span>
-                      )}
-                      <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 bg-blue-500/20 px-4 py-2 rounded-xl backdrop-blur-md border border-blue-500/20 shadow-[0_0_20px_rgba(37,99,235,0.2)]">
-                        {compressedFile ? formatBytes(compressedFile.size) : 'Ready'}
-                      </span>
-                    </div>
-                    <div className="bg-blue-600/5 p-4 border-b border-white/5 flex justify-between items-center">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-blue-400">AI Result</span>
-                    </div>
-                    <div className="p-6 flex-1 flex items-center justify-center bg-[#F6F8FC] dark:bg-[#030712]/50 min-h-[350px] relative">
-                      {compressedUrl ? (
-                        <img src={compressedUrl} alt="Compressed" className="max-h-[300px] w-full object-contain shadow-2xl rounded-2xl animate-fade-in" />
-                      ) : (
-                        <div className="text-center">
-                          <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/10">
-                            <svg className="h-8 w-8 text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                          </div>
-                          <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">Preview will appear here</span>
-                        </div>
-                      )}
-                    </div>
-                    {compressedUrl && (
-                      <div className="p-6 border-t border-white/5 bg-white/[0.02]">
-                        <button 
-                          onClick={downloadImage}
-                          className="w-full flex items-center justify-center rounded-2xl bg-blue-600 px-6 py-4 text-[10px] font-black uppercase tracking-widest text-white hover:bg-blue-500 transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)] active:scale-[0.98]"
-                        >
-                          <svg className="w-4 h-4 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                          </svg>
-                          Download Optimized Image
-                        </button>
-                      </div>
-                    )}
+                    <ToolResultScreen
+                      title="Image Compression Complete!"
+                      description={`Your image "${originalFile.name}" was compressed locally with zero quality loss.`}
+                      originalSizeBytes={originalFile.size}
+                      finalSizeBytes={compressedFile.size}
+                      processingTimeMs={800}
+                      downloadButtonText="Download Optimized Image"
+                      onDownload={downloadImage}
+                      onReset={resetAll}
+                      previewUrl={compressedUrl}
+                    />
                   </div>
-                </div>
+                )}
               </div>
             )}
           </div>

@@ -125,6 +125,27 @@ export default function JPGToWebPConverterPage() {
   const [isZipping, setIsZipping] = useState<boolean>(false);
   const [warningMessage, setWarningMessage] = useState<string | null>(null);
   const [errorCards, setErrorCards] = useState<{ id: string; name: string; reason: string }[]>([]);
+  const [isDraggingOverUpload, setIsDraggingOverUpload] = useState<boolean>(false);
+
+  const handleDragOverUpload = (e: React.DragEvent) => {
+    e.preventDefault();
+    if (!isDraggingOverUpload) setIsDraggingOverUpload(true);
+  };
+
+  const handleDragLeaveUpload = (e: React.DragEvent) => {
+    e.preventDefault();
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      setIsDraggingOverUpload(false);
+    }
+  };
+
+  const handleDropUpload = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDraggingOverUpload(false);
+    if (e.dataTransfer.files) {
+      handleFilesSelection(e.dataTransfer.files);
+    }
+  };
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -574,7 +595,7 @@ export default function JPGToWebPConverterPage() {
                   <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">
                     Free JPG to WebP Converter
                   </h1>
-                  <p className="text-gray-400 text-sm font-medium mt-1">
+                  <p className="text-slate-600 dark:text-gray-400 text-sm font-medium mt-1">
                     Convert single or batch JPG / JPEG images to modern high-quality WebP format directly in your browser.
                   </p>
                 </div>
@@ -582,20 +603,20 @@ export default function JPGToWebPConverterPage() {
 
               {/* Privacy Badges */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div className="glass-light px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold text-gray-300 border border-white/5">
-                  <Lock className="w-3.5 h-3.5 text-blue-400" />
+                <div className="bg-slate-100 dark:bg-white/5 px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-white/5">
+                  <Lock className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
                   <span>100% Browser</span>
                 </div>
-                <div className="glass-light px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold text-gray-300 border border-white/5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <div className="bg-slate-100 dark:bg-white/5 px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-white/5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
                   <span>No Server Upload</span>
                 </div>
-                <div className="glass-light px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold text-gray-300 border border-white/5">
-                  <Zap className="w-3.5 h-3.5 text-amber-400" />
+                <div className="bg-slate-100 dark:bg-white/5 px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-white/5">
+                  <Zap className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
                   <span>Fast Conversion</span>
                 </div>
-                <div className="glass-light px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold text-gray-300 border border-white/5">
-                  <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+                <div className="bg-slate-100 dark:bg-white/5 px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-white/5">
+                  <Sparkles className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" />
                   <span>Privacy First</span>
                 </div>
               </div>
@@ -643,14 +664,14 @@ export default function JPGToWebPConverterPage() {
             {files.length === 0 ? (
               <div 
                 onClick={() => fileInputRef.current?.click()}
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={(e) => {
-                  e.preventDefault();
-                  if (e.dataTransfer.files) {
-                    handleFilesSelection(e.dataTransfer.files);
-                  }
-                }}
-                className="group relative border-2 border-dashed border-white/10 rounded-[2.5rem] p-12 sm:p-20 text-center hover:border-blue-500/50 hover:bg-white/[0.02] transition-all cursor-pointer overflow-hidden"
+                onDragOver={handleDragOverUpload}
+                onDragLeave={handleDragLeaveUpload}
+                onDrop={handleDropUpload}
+                className={`group relative border-2 border-dashed rounded-[2.5rem] p-12 sm:p-20 text-center transition-all duration-300 cursor-pointer overflow-hidden ${
+                  isDraggingOverUpload
+                    ? 'border-blue-500 bg-blue-500/10 dark:bg-blue-500/15 scale-[1.015] shadow-[0_0_50px_rgba(59,130,246,0.35)] ring-4 ring-blue-500/30'
+                    : 'border-white/10 hover:border-blue-500/50 hover:bg-white/[0.02]'
+                }`}
               >
                 <input 
                   type="file" 
@@ -662,21 +683,29 @@ export default function JPGToWebPConverterPage() {
                 />
 
                 <div className="relative z-10 max-w-lg mx-auto">
-                  <div className="mx-auto h-20 w-20 text-blue-400 bg-blue-500/10 rounded-[1.5rem] flex items-center justify-center mb-6 shadow-2xl border border-blue-500/20 group-hover:scale-110 transition-transform">
+                  <div className={`mx-auto h-20 w-20 rounded-[1.5rem] flex items-center justify-center mb-6 border transition-all duration-300 ${
+                    isDraggingOverUpload
+                      ? 'bg-blue-500 text-white border-blue-400 scale-125 shadow-[0_0_30px_rgba(59,130,246,0.5)] animate-bounce'
+                      : 'text-blue-400 bg-blue-500/10 border-blue-500/20 group-hover:scale-110 shadow-2xl'
+                  }`}>
                     <Upload className="w-10 h-10" />
                   </div>
                   
-                  <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-2 tracking-tight">
-                    Drop your JPG images here or click to browse
+                  <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-2 tracking-tight transition-colors">
+                    {isDraggingOverUpload ? 'Drop JPG Images Right Here!' : 'Drop your JPG images here or click to browse'}
                   </h2>
                   
                   <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-                    Supports <strong className="text-white">JPG</strong> &amp; <strong className="text-white">JPEG</strong> files up to <strong className="text-white">50 MB</strong> each. Batch uploads &amp; paste (<kbd className="px-2 py-0.5 rounded bg-white/10 text-xs">Ctrl + V</kbd>) supported.
+                    {isDraggingOverUpload ? 'Release your file now to start WebP conversion immediately.' : 'Supports JPG & JPEG files up to 50 MB each. Batch uploads & paste (Ctrl + V) supported.'}
                   </p>
 
                   <div className="flex flex-wrap items-center justify-center gap-3">
-                    <button className="rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-3.5 text-xs font-black uppercase tracking-widest text-white hover:from-blue-500 hover:to-indigo-500 transition-all shadow-[0_0_25px_rgba(37,99,235,0.4)] pointer-events-none">
-                      Browse Files
+                    <button className={`rounded-2xl px-8 py-3.5 text-xs font-black uppercase tracking-widest text-white transition-all pointer-events-none ${
+                      isDraggingOverUpload
+                        ? 'bg-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.6)] scale-105'
+                        : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-[0_0_25px_rgba(37,99,235,0.4)]'
+                    }`}>
+                      {isDraggingOverUpload ? 'Release To Convert' : 'Browse Files'}
                     </button>
                   </div>
                 </div>

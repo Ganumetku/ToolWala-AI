@@ -61,11 +61,14 @@ export default function OcrToText() {
 
   const onDragOver = (e: React.DragEvent) => {
     e.preventDefault();
-    setIsDragging(true);
+    if (!isDragging) setIsDragging(true);
   };
 
-  const onDragLeave = () => {
-    setIsDragging(false);
+  const onDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      setIsDragging(false);
+    }
   };
 
   const onDrop = (e: React.DragEvent) => {
@@ -265,9 +268,9 @@ export default function OcrToText() {
                   onDragLeave={onDragLeave}
                   onDrop={onDrop}
                   onClick={() => fileInputRef.current?.click()}
-                  className={`relative border-2 border-dashed rounded-[2.5rem] p-16 sm:p-24 text-center transition-all cursor-pointer group overflow-hidden ${
+                  className={`relative border-2 border-dashed rounded-[2.5rem] p-16 sm:p-24 text-center transition-all duration-300 cursor-pointer group overflow-hidden ${
                     isDragging 
-                      ? 'border-blue-500 bg-blue-500/5 shadow-inner' 
+                      ? 'border-blue-500 bg-blue-500/10 dark:bg-blue-500/15 scale-[1.015] shadow-[0_0_50px_rgba(59,130,246,0.35)] ring-4 ring-blue-500/30' 
                       : 'border-white/10 hover:border-blue-500/50 hover:bg-white/[0.02]'
                   }`}
                 >
@@ -280,16 +283,22 @@ export default function OcrToText() {
                   />
                   
                   {/* Decorative Glow */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
                   <div className="relative z-10">
                     <motion.div 
-                      animate={isDragging ? { scale: 1.1, y: -5 } : {}}
-                      className="mx-auto h-24 w-24 text-blue-500 bg-blue-500/10 rounded-[2rem] flex items-center justify-center mb-8 shadow-2xl border border-blue-500/20"
+                      animate={isDragging ? { scale: 1.25, y: -5 } : {}}
+                      className={`mx-auto h-24 w-24 rounded-[2rem] flex items-center justify-center mb-8 border transition-all duration-300 ${
+                        isDragging 
+                          ? 'bg-blue-500 text-white border-blue-400 shadow-[0_0_30px_rgba(59,130,246,0.5)] animate-bounce' 
+                          : 'text-blue-500 bg-blue-500/10 border-blue-500/20 shadow-2xl'
+                      }`}
                     >
                       <UploadCloud className="w-12 h-12" />
                     </motion.div>
-                    <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">Drop image here or click to upload</h3>
+                    <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3 tracking-tight transition-colors">
+                      {isDragging ? 'Drop Image Here to Extract Text!' : 'Drop image here or click to upload'}
+                    </h3>
                     <p className="text-gray-500 mb-6 max-w-sm mx-auto font-medium">Supports JPG, PNG, and WebP. You can also paste screenshots directly (`Ctrl+V` / `Cmd+V`).</p>
                     
                     <div className="flex justify-center gap-6 text-xs font-black uppercase tracking-widest text-gray-600">

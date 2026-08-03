@@ -168,12 +168,14 @@ export default function UnlockPdf() {
   // Drag-and-drop handlers
   const handleDragOverUpload = (e: React.DragEvent) => {
     e.preventDefault();
-    setIsDraggingOverUpload(true);
+    if (!isDraggingOverUpload) setIsDraggingOverUpload(true);
   };
 
   const handleDragLeaveUpload = (e: React.DragEvent) => {
     e.preventDefault();
-    setIsDraggingOverUpload(false);
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      setIsDraggingOverUpload(false);
+    }
   };
 
   const handleDropUpload = (e: React.DragEvent) => {
@@ -265,9 +267,9 @@ export default function UnlockPdf() {
                 onDragLeave={handleDragLeaveUpload}
                 onDrop={handleDropUpload}
                 onClick={() => fileInputRef.current?.click()}
-                className={`border-2 border-dashed rounded-[3rem] p-12 sm:p-24 text-center transition-all cursor-pointer group relative overflow-hidden
+                className={`border-2 border-dashed rounded-[3rem] p-12 sm:p-24 text-center transition-all duration-300 cursor-pointer group relative overflow-hidden
                   ${isDraggingOverUpload 
-                    ? 'border-blue-500 bg-blue-500/10 scale-[1.01] shadow-[0_0_30px_rgba(59,130,246,0.1)]' 
+                    ? 'border-blue-500 bg-blue-500/10 dark:bg-blue-500/15 scale-[1.015] shadow-[0_0_50px_rgba(59,130,246,0.35)] ring-4 ring-blue-500/30' 
                     : 'border-white/10 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/20'
                   }
                 `}

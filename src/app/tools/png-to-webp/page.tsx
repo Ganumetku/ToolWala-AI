@@ -132,6 +132,27 @@ export default function PNGToWebPConverterPage() {
   const [isZipping, setIsZipping] = useState<boolean>(false);
   const [warningMessage, setWarningMessage] = useState<string | null>(null);
   const [errorCards, setErrorCards] = useState<{ id: string; name: string; reason: string }[]>([]);
+  const [isDraggingOverUpload, setIsDraggingOverUpload] = useState<boolean>(false);
+
+  const handleDragOverUpload = (e: React.DragEvent) => {
+    e.preventDefault();
+    if (!isDraggingOverUpload) setIsDraggingOverUpload(true);
+  };
+
+  const handleDragLeaveUpload = (e: React.DragEvent) => {
+    e.preventDefault();
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      setIsDraggingOverUpload(false);
+    }
+  };
+
+  const handleDropUpload = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDraggingOverUpload(false);
+    if (e.dataTransfer.files) {
+      handleFilesSelection(e.dataTransfer.files);
+    }
+  };
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -591,7 +612,7 @@ export default function PNGToWebPConverterPage() {
         {/* Navigation Breadcrumb */}
         <Link 
           href="/tools" 
-          className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-gray-400 hover:text-blue-400 transition-colors mb-8 group"
+          className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-8 group"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -600,8 +621,8 @@ export default function PNGToWebPConverterPage() {
         </Link>
 
         {/* Main Header Card */}
-        <div className="glass rounded-[2.5rem] border border-white/10 overflow-hidden shadow-2xl mb-8">
-          <div className="p-8 sm:p-10 border-b border-white/5 bg-white/[0.02]">
+        <div className="glass rounded-[2.5rem] border border-slate-200 dark:border-white/10 overflow-hidden shadow-2xl mb-8">
+          <div className="p-8 sm:p-10 border-b border-slate-200 dark:border-white/5 bg-slate-50/50 dark:bg-white/[0.02]">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
               <div className="flex items-center gap-6">
                 <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 text-white shadow-[0_0_30px_rgba(37,99,235,0.4)]">
@@ -611,7 +632,7 @@ export default function PNGToWebPConverterPage() {
                   <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">
                     Free PNG to WebP Converter
                   </h1>
-                  <p className="text-gray-400 text-sm font-medium mt-1">
+                  <p className="text-slate-600 dark:text-gray-400 text-sm font-medium mt-1">
                     Convert PNG images into high-performance WebP format with full alpha transparency support. Fast, secure, and client-side.
                   </p>
                 </div>
@@ -619,20 +640,20 @@ export default function PNGToWebPConverterPage() {
 
               {/* Privacy Badges */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div className="glass-light px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold text-gray-300 border border-white/5">
-                  <Lock className="w-3.5 h-3.5 text-blue-400" />
+                <div className="bg-slate-100 dark:bg-white/5 px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-white/5">
+                  <Lock className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
                   <span>100% Browser</span>
                 </div>
-                <div className="glass-light px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold text-gray-300 border border-white/5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <div className="bg-slate-100 dark:bg-white/5 px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-white/5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
                   <span>No Server Upload</span>
                 </div>
-                <div className="glass-light px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold text-gray-300 border border-white/5">
-                  <Zap className="w-3.5 h-3.5 text-amber-400" />
+                <div className="bg-slate-100 dark:bg-white/5 px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-white/5">
+                  <Zap className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
                   <span>Alpha Transparency</span>
                 </div>
-                <div className="glass-light px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold text-gray-300 border border-white/5">
-                  <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+                <div className="bg-slate-100 dark:bg-white/5 px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-white/5">
+                  <Sparkles className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" />
                   <span>Privacy First</span>
                 </div>
               </div>
@@ -680,14 +701,14 @@ export default function PNGToWebPConverterPage() {
             {files.length === 0 ? (
               <div 
                 onClick={() => fileInputRef.current?.click()}
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={(e) => {
-                  e.preventDefault();
-                  if (e.dataTransfer.files) {
-                    handleFilesSelection(e.dataTransfer.files);
-                  }
-                }}
-                className="group relative border-2 border-dashed border-white/10 rounded-[2.5rem] p-12 sm:p-20 text-center hover:border-blue-500/50 hover:bg-white/[0.02] transition-all cursor-pointer overflow-hidden"
+                onDragOver={handleDragOverUpload}
+                onDragLeave={handleDragLeaveUpload}
+                onDrop={handleDropUpload}
+                className={`group relative border-2 border-dashed rounded-[2.5rem] p-12 sm:p-20 text-center transition-all duration-300 cursor-pointer overflow-hidden ${
+                  isDraggingOverUpload
+                    ? 'border-blue-500 bg-blue-500/10 dark:bg-blue-500/15 scale-[1.015] shadow-[0_0_50px_rgba(59,130,246,0.35)] ring-4 ring-blue-500/30'
+                    : 'border-white/10 hover:border-blue-500/50 hover:bg-white/[0.02]'
+                }`}
               >
                 <input 
                   type="file" 
@@ -699,21 +720,29 @@ export default function PNGToWebPConverterPage() {
                 />
 
                 <div className="relative z-10 max-w-lg mx-auto">
-                  <div className="mx-auto h-20 w-20 text-blue-400 bg-blue-500/10 rounded-[1.5rem] flex items-center justify-center mb-6 shadow-2xl border border-blue-500/20 group-hover:scale-110 transition-transform">
+                  <div className={`mx-auto h-20 w-20 rounded-[1.5rem] flex items-center justify-center mb-6 border transition-all duration-300 ${
+                    isDraggingOverUpload
+                      ? 'bg-blue-500 text-white border-blue-400 scale-125 shadow-[0_0_30px_rgba(59,130,246,0.5)] animate-bounce'
+                      : 'text-blue-400 bg-blue-500/10 border-blue-500/20 group-hover:scale-110 shadow-2xl'
+                  }`}>
                     <Upload className="w-10 h-10" />
                   </div>
                   
-                  <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-2 tracking-tight">
-                    Drop your PNG images here or click to browse
+                  <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-2 tracking-tight transition-colors">
+                    {isDraggingOverUpload ? 'Drop PNG Images Right Here!' : 'Drop your PNG images here or click to browse'}
                   </h2>
                   
-                  <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-                    Supports <strong className="text-white">PNG</strong> graphics with transparent backgrounds up to <strong className="text-white">50 MB</strong> each. Batch uploads &amp; paste (<kbd className="px-2 py-0.5 rounded bg-white/10 text-xs">Ctrl + V</kbd>) supported.
+                  <p className="text-slate-600 dark:text-gray-400 text-sm mb-6 leading-relaxed">
+                    {isDraggingOverUpload ? 'Release your file now to start WebP conversion immediately.' : 'Supports PNG graphics with transparent backgrounds up to 50 MB each. Batch uploads & paste (Ctrl + V) supported.'}
                   </p>
 
                   <div className="flex flex-wrap items-center justify-center gap-3">
-                    <button className="rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-3.5 text-xs font-black uppercase tracking-widest text-white hover:from-blue-500 hover:to-indigo-500 transition-all shadow-[0_0_25px_rgba(37,99,235,0.4)] pointer-events-none">
-                      Select PNG Files
+                    <button className={`rounded-2xl px-8 py-3.5 text-xs font-black uppercase tracking-widest text-white transition-all pointer-events-none ${
+                      isDraggingOverUpload
+                        ? 'bg-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.6)] scale-105'
+                        : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-[0_0_25px_rgba(37,99,235,0.4)]'
+                    }`}>
+                      {isDraggingOverUpload ? 'Release To Convert' : 'Select PNG Files'}
                     </button>
                   </div>
                 </div>
@@ -723,16 +752,16 @@ export default function PNGToWebPConverterPage() {
               <div className="space-y-8">
                 
                 {/* Top Action Bar */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl glass-light border border-white/5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-slate-100/80 dark:bg-white/[0.03] border border-slate-200 dark:border-white/5">
                   <div className="flex items-center gap-3">
-                    <span className="text-xs font-black uppercase tracking-wider text-blue-400 bg-blue-500/10 px-3 py-1.5 rounded-lg border border-blue-500/20">
+                    <span className="text-xs font-black uppercase tracking-wider text-blue-600 dark:text-blue-400 bg-blue-500/10 px-3 py-1.5 rounded-lg border border-blue-500/20">
                       {files.length} {files.length === 1 ? 'PNG Image' : 'PNG Images'} Loaded
                     </span>
                     <button 
                       onClick={() => fileInputRef.current?.click()}
-                      className="text-xs font-bold text-gray-300 hover:text-white flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5 transition-colors"
+                      className="text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-slate-200/60 dark:hover:bg-white/5 transition-colors"
                     >
-                      <Upload className="w-3.5 h-3.5" />
+                      <Upload className="w-3.5 h-3.5 text-blue-500" />
                       Add More
                     </button>
                     <input 
@@ -758,15 +787,15 @@ export default function PNGToWebPConverterPage() {
                     <button 
                       onClick={downloadZip}
                       disabled={isZipping || !files.some(f => f.convertedBlob !== null)}
-                      className="px-4 py-2.5 rounded-xl glass-light border border-white/10 text-xs font-bold text-gray-200 hover:bg-white/10 hover:text-white transition-all flex items-center gap-2 disabled:opacity-40"
+                      className="px-4 py-2.5 rounded-xl bg-slate-200/80 dark:bg-white/10 border border-slate-300 dark:border-white/10 text-xs font-bold text-slate-800 dark:text-gray-200 hover:bg-slate-300 dark:hover:bg-white/20 transition-all flex items-center gap-2 disabled:opacity-40"
                     >
-                      <Archive className="w-3.5 h-3.5 text-amber-400" />
+                      <Archive className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
                       <span>{isZipping ? 'Creating ZIP...' : 'Download ZIP'}</span>
                     </button>
 
                     <button 
                       onClick={clearAll}
-                      className="px-3.5 py-2.5 rounded-xl glass-light border border-white/5 text-xs font-bold text-rose-400 hover:bg-rose-500/10 transition-colors flex items-center gap-1.5"
+                      className="px-3.5 py-2.5 rounded-xl bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/20 text-xs font-bold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-500/20 transition-colors flex items-center gap-1.5"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                       <span>Clear</span>
@@ -777,11 +806,11 @@ export default function PNGToWebPConverterPage() {
                 {/* Batch Progress Bar */}
                 {isConvertingAll && (
                   <div className="space-y-2">
-                    <div className="flex justify-between text-xs text-gray-400 font-semibold">
+                    <div className="flex justify-between text-xs text-slate-600 dark:text-gray-400 font-semibold">
                       <span>{loadingText}</span>
                       <span>{convertProgress.current} / {convertProgress.total}</span>
                     </div>
-                    <div className="w-full bg-white/5 rounded-full h-2 overflow-hidden border border-white/10">
+                    <div className="w-full bg-slate-200 dark:bg-white/5 rounded-full h-2 overflow-hidden border border-slate-300 dark:border-white/10">
                       <div 
                         className="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 h-full transition-all duration-300"
                         style={{ width: `${(convertProgress.current / convertProgress.total) * 100}%` }}
@@ -797,13 +826,13 @@ export default function PNGToWebPConverterPage() {
                   <div className="lg:col-span-5 space-y-6">
                     
                     {/* Quality Presets & Slider */}
-                    <div className="glass rounded-2xl p-6 border border-white/10 space-y-6">
+                    <div className="glass rounded-2xl p-6 border border-slate-200 dark:border-white/10 space-y-6">
                       <div className="flex items-center justify-between">
                         <h3 className="text-base font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
-                          <Sliders className="w-4 h-4 text-blue-400" />
+                          <Sliders className="w-4 h-4 text-blue-500 dark:text-blue-400" />
                           Quality Options
                         </h3>
-                        <span className="text-xs font-bold text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-md border border-blue-500/20">
+                        <span className="text-xs font-bold text-blue-600 dark:text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-md border border-blue-500/20">
                           {webpQuality}% WebP
                         </span>
                       </div>
@@ -818,22 +847,22 @@ export default function PNGToWebPConverterPage() {
                               onClick={() => setWebpQuality(preset.quality)}
                               className={`p-3.5 rounded-xl border text-left transition-all relative overflow-hidden ${
                                 isSelected 
-                                  ? 'bg-blue-600/15 border-blue-500 ring-2 ring-blue-500/30' 
-                                  : 'bg-white/5 border-white/5 hover:bg-white/10 hover:border-white/15'
+                                  ? 'bg-blue-50 dark:bg-blue-600/15 border-blue-500 ring-2 ring-blue-500/30' 
+                                  : 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/5 hover:bg-slate-100 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/15'
                               }`}
                             >
                               <div className="flex items-center justify-between mb-1">
-                                <span className="text-xs font-bold text-white flex items-center gap-1">
+                                <span className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1">
                                   <span>{preset.stars}</span>
                                   <span>{preset.name}</span>
                                 </span>
                                 <span className={`text-[10px] font-black px-1.5 py-0.5 rounded ${
-                                  isSelected ? 'bg-blue-500 text-white' : 'bg-white/10 text-gray-400'
+                                  isSelected ? 'bg-blue-500 text-white' : 'bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-gray-400'
                                 }`}>
                                   {preset.badge}
                                 </span>
                               </div>
-                              <p className="text-[11px] text-gray-400 leading-tight">
+                              <p className="text-[11px] text-slate-600 dark:text-gray-400 leading-tight">
                                 {preset.description}
                               </p>
                             </button>
@@ -842,12 +871,12 @@ export default function PNGToWebPConverterPage() {
                       </div>
 
                       {/* Custom Quality Slider */}
-                      <div className="space-y-2 pt-2 border-t border-white/5">
+                      <div className="space-y-2 pt-2 border-t border-slate-200 dark:border-white/5">
                         <div className="flex justify-between items-center">
-                          <label className="text-xs font-bold text-gray-300 uppercase tracking-wider">
+                          <label className="text-xs font-bold text-slate-800 dark:text-gray-300 uppercase tracking-wider">
                             Custom Quality Slider
                           </label>
-                          <span className="text-[11px] text-gray-400 font-semibold">
+                          <span className="text-[11px] text-slate-600 dark:text-gray-400 font-semibold">
                             {webpQuality >= 90 ? 'Maximum Quality' : webpQuality >= 75 ? 'Balanced' : webpQuality >= 55 ? 'Small Size' : 'Ultra Compression'}
                           </span>
                         </div>
@@ -858,10 +887,10 @@ export default function PNGToWebPConverterPage() {
                           max="100" 
                           value={webpQuality} 
                           onChange={(e) => setWebpQuality(Number(e.target.value))}
-                          className="w-full accent-blue-500 bg-white/10 h-2 rounded-lg cursor-pointer" 
+                          className="w-full accent-blue-500 bg-slate-200 dark:bg-white/10 h-2 rounded-lg cursor-pointer" 
                         />
 
-                        <div className="flex justify-between text-[10px] text-gray-500 font-semibold px-1">
+                        <div className="flex justify-between text-[10px] text-slate-500 dark:text-gray-500 font-semibold px-1">
                           <span>40% (Smallest)</span>
                           <span>70%</span>
                           <span>100% (Best)</span>
@@ -869,18 +898,18 @@ export default function PNGToWebPConverterPage() {
                       </div>
 
                       {/* Transparency Controls */}
-                      <div className="pt-4 border-t border-white/5 space-y-4">
+                      <div className="pt-4 border-t border-slate-200 dark:border-white/5 space-y-4">
                         <div className="flex items-center justify-between">
                           <div>
-                            <label className="text-xs font-bold text-gray-200 block">
+                            <label className="text-xs font-bold text-slate-800 dark:text-gray-200 block">
                               Preserve Transparency
                             </label>
-                            <span className="text-[10px] text-gray-400 block">Maintain alpha background in WebP</span>
+                            <span className="text-[10px] text-slate-600 dark:text-gray-400 block">Maintain alpha background in WebP</span>
                           </div>
                           <button
                             onClick={() => setPreserveTransparency(!preserveTransparency)}
                             className={`w-11 h-6 rounded-full transition-colors relative p-1 ${
-                              preserveTransparency ? 'bg-blue-600' : 'bg-white/10'
+                              preserveTransparency ? 'bg-blue-600' : 'bg-slate-300 dark:bg-white/10'
                             }`}
                           >
                             <div className={`w-4 h-4 rounded-full bg-white transition-transform ${
@@ -890,15 +919,15 @@ export default function PNGToWebPConverterPage() {
                         </div>
 
                         {!preserveTransparency && (
-                          <div className="p-3 rounded-xl bg-white/5 border border-white/5 space-y-3">
-                            <label className="text-[10px] font-bold text-gray-300 uppercase block">
+                          <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 space-y-3">
+                            <label className="text-[10px] font-bold text-slate-700 dark:text-gray-300 uppercase block">
                               Fill Transparent Background With
                             </label>
                             <div className="flex items-center gap-2">
                               <button
                                 onClick={() => setBgColor('#FFFFFF')}
                                 className={`flex-1 py-1.5 px-2 rounded-lg text-[11px] font-bold border flex items-center justify-center gap-1.5 ${
-                                  bgColor === '#FFFFFF' ? 'bg-white text-gray-900 border-blue-500' : 'bg-white/5 text-gray-300 border-white/10'
+                                  bgColor === '#FFFFFF' ? 'bg-white text-slate-900 border-blue-500' : 'bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-gray-300 border-slate-200 dark:border-white/10'
                                 }`}
                               >
                                 <span className="w-3 h-3 rounded-full bg-white border border-gray-400" />
@@ -908,7 +937,7 @@ export default function PNGToWebPConverterPage() {
                               <button
                                 onClick={() => setBgColor('#000000')}
                                 className={`flex-1 py-1.5 px-2 rounded-lg text-[11px] font-bold border flex items-center justify-center gap-1.5 ${
-                                  bgColor === '#000000' ? 'bg-gray-900 text-white border-blue-500' : 'bg-white/5 text-gray-300 border-white/10'
+                                  bgColor === '#000000' ? 'bg-slate-900 text-white border-blue-500' : 'bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-gray-300 border-slate-200 dark:border-white/10'
                                 }`}
                               >
                                 <span className="w-3 h-3 rounded-full bg-black border border-gray-600" />
@@ -917,7 +946,7 @@ export default function PNGToWebPConverterPage() {
 
                               <label 
                                 className={`flex-1 py-1.5 px-2 rounded-lg text-[11px] font-bold border flex items-center justify-center gap-1.5 cursor-pointer ${
-                                  bgColor === 'custom' ? 'bg-blue-600/20 text-blue-300 border-blue-500' : 'bg-white/5 text-gray-300 border-white/10'
+                                  bgColor === 'custom' ? 'bg-blue-500/20 text-blue-600 dark:text-blue-300 border-blue-500' : 'bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-gray-300 border-slate-200 dark:border-white/10'
                                 }`}
                               >
                                 <input 
@@ -937,24 +966,24 @@ export default function PNGToWebPConverterPage() {
                       </div>
 
                       {/* Advanced Options */}
-                      <div className="pt-4 border-t border-white/5 space-y-4">
-                        <h4 className="text-xs font-black uppercase tracking-wider text-gray-300 flex items-center gap-2">
-                          <SlidersHorizontal className="w-3.5 h-3.5 text-indigo-400" />
+                      <div className="pt-4 border-t border-slate-200 dark:border-white/5 space-y-4">
+                        <h4 className="text-xs font-black uppercase tracking-wider text-slate-800 dark:text-gray-300 flex items-center gap-2">
+                          <SlidersHorizontal className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" />
                           Advanced Settings
                         </h4>
 
                         {/* Strip Metadata */}
-                        <div className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5">
+                        <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
                           <div>
-                            <label className="text-xs font-bold text-gray-200 block">
+                            <label className="text-xs font-bold text-slate-800 dark:text-gray-200 block">
                               Strip Metadata &amp; Chunks
                             </label>
-                            <span className="text-[10px] text-gray-400 block">Clean PNG profile headers</span>
+                            <span className="text-[10px] text-slate-600 dark:text-gray-400 block">Clean PNG profile headers</span>
                           </div>
                           <button
                             onClick={() => setRemoveMetadata(!removeMetadata)}
                             className={`w-11 h-6 rounded-full transition-colors relative p-1 ${
-                              removeMetadata ? 'bg-blue-600' : 'bg-white/10'
+                              removeMetadata ? 'bg-blue-600' : 'bg-slate-300 dark:bg-white/10'
                             }`}
                           >
                             <div className={`w-4 h-4 rounded-full bg-white transition-transform ${
@@ -966,14 +995,14 @@ export default function PNGToWebPConverterPage() {
                         {/* Resolution Mode */}
                         <div className="space-y-3">
                           <div className="flex items-center justify-between">
-                            <label className="text-xs font-bold text-gray-300">
+                            <label className="text-xs font-bold text-slate-800 dark:text-gray-300">
                               Resolution Output
                             </label>
                             <div className="flex gap-2">
                               <button
                                 onClick={() => setKeepOriginalResolution(true)}
                                 className={`px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase transition-all ${
-                                  keepOriginalResolution ? 'bg-blue-600 text-white' : 'bg-white/5 text-gray-400'
+                                  keepOriginalResolution ? 'bg-blue-600 text-white' : 'bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-gray-400'
                                 }`}
                               >
                                 Keep Original
@@ -981,7 +1010,7 @@ export default function PNGToWebPConverterPage() {
                               <button
                                 onClick={() => setKeepOriginalResolution(false)}
                                 className={`px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase transition-all ${
-                                  !keepOriginalResolution ? 'bg-blue-600 text-white' : 'bg-white/5 text-gray-400'
+                                  !keepOriginalResolution ? 'bg-blue-600 text-white' : 'bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-gray-400'
                                 }`}
                               >
                                 Custom Resize
@@ -990,10 +1019,10 @@ export default function PNGToWebPConverterPage() {
                           </div>
 
                           {!keepOriginalResolution && (
-                            <div className="p-3 rounded-xl bg-white/5 border border-white/5 space-y-3">
+                            <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 space-y-3">
                               <div className="grid grid-cols-2 gap-3">
                                 <div>
-                                  <label className="text-[10px] text-gray-400 uppercase font-bold block mb-1">
+                                  <label className="text-[10px] text-slate-600 dark:text-gray-400 uppercase font-bold block mb-1">
                                     Width (px)
                                   </label>
                                   <input 
@@ -1001,11 +1030,11 @@ export default function PNGToWebPConverterPage() {
                                     placeholder={activeFile ? String(activeFile.width) : '1920'}
                                     value={resizeWidth}
                                     onChange={(e) => handleWidthChange(e.target.value)}
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
+                                    className="w-full bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-lg px-3 py-1.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500"
                                   />
                                 </div>
                                 <div>
-                                  <label className="text-[10px] text-gray-400 uppercase font-bold block mb-1">
+                                  <label className="text-[10px] text-slate-600 dark:text-gray-400 uppercase font-bold block mb-1">
                                     Height (px)
                                   </label>
                                   <input 
@@ -1013,7 +1042,7 @@ export default function PNGToWebPConverterPage() {
                                     placeholder={activeFile ? String(activeFile.height) : '1080'}
                                     value={resizeHeight}
                                     onChange={(e) => handleHeightChange(e.target.value)}
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
+                                    className="w-full bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-lg px-3 py-1.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500"
                                   />
                                 </div>
                               </div>
@@ -1025,7 +1054,7 @@ export default function PNGToWebPConverterPage() {
                                   onChange={(e) => setMaintainAspectRatio(e.target.checked)}
                                   className="accent-blue-500 rounded"
                                 />
-                                <span className="text-xs text-gray-300 font-semibold">
+                                <span className="text-xs text-slate-700 dark:text-gray-300 font-semibold">
                                   Maintain Aspect Ratio ({activeFile ? activeFile.aspectRatio : 'Auto'})
                                 </span>
                               </label>
@@ -1036,8 +1065,8 @@ export default function PNGToWebPConverterPage() {
                     </div>
 
                     {/* Image Batch List Queue */}
-                    <div className="glass rounded-2xl p-6 border border-white/10 space-y-4">
-                      <h4 className="text-xs font-black uppercase tracking-wider text-gray-300">
+                    <div className="glass rounded-2xl p-6 border border-slate-200 dark:border-white/10 space-y-4">
+                      <h4 className="text-xs font-black uppercase tracking-wider text-slate-800 dark:text-gray-300">
                         Queued PNGs ({files.length})
                       </h4>
 
@@ -1050,12 +1079,12 @@ export default function PNGToWebPConverterPage() {
                               onClick={() => setActiveFileId(item.id)}
                               className={`p-3 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
                                 isActive 
-                                  ? 'bg-blue-600/15 border-blue-500' 
-                                  : 'bg-white/5 border-white/5 hover:bg-white/10'
+                                  ? 'bg-blue-50 dark:bg-blue-600/15 border-blue-500' 
+                                  : 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/5 hover:bg-slate-100 dark:hover:bg-white/10'
                               }`}
                             >
                               <div className="flex items-center gap-3 min-w-0">
-                                <div className="w-10 h-10 rounded-lg border border-white/10 flex-shrink-0 overflow-hidden bg-black/40 flex items-center justify-center">
+                                <div className="w-10 h-10 rounded-lg border border-slate-200 dark:border-white/10 flex-shrink-0 overflow-hidden bg-slate-200 dark:bg-black/40 flex items-center justify-center">
                                   <img 
                                     src={item.originalUrl} 
                                     alt={item.name}
@@ -1063,10 +1092,10 @@ export default function PNGToWebPConverterPage() {
                                   />
                                 </div>
                                 <div className="min-w-0">
-                                  <p className="text-xs font-bold text-white truncate max-w-[180px]">
+                                  <p className="text-xs font-bold text-slate-900 dark:text-white truncate max-w-[180px]">
                                     {item.name}
                                   </p>
-                                  <p className="text-[10px] text-gray-400">
+                                  <p className="text-[10px] text-slate-600 dark:text-gray-400">
                                     {formatBytes(item.size)} • {item.hasTransparency ? 'Transparent Alpha' : 'Opaque'}
                                   </p>
                                 </div>
@@ -1074,10 +1103,10 @@ export default function PNGToWebPConverterPage() {
 
                               <div className="flex items-center gap-2 flex-shrink-0">
                                 {item.status === 'converting' && (
-                                  <RefreshCw className="w-4 h-4 text-blue-400 animate-spin" />
+                                  <RefreshCw className="w-4 h-4 text-blue-500 dark:text-blue-400 animate-spin" />
                                 )}
                                 {item.status === 'completed' && (
-                                  <span className="text-[10px] font-black bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/30">
+                                  <span className="text-[10px] font-black bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/30">
                                     {getReductionPercent(item.size, item.convertedSize)}% Smaller
                                   </span>
                                 )}
@@ -1086,7 +1115,7 @@ export default function PNGToWebPConverterPage() {
                                     e.stopPropagation();
                                     removeFile(item.id);
                                   }}
-                                  className="p-1 text-gray-500 hover:text-rose-400 transition-colors"
+                                  className="p-1 text-slate-400 hover:text-rose-600 dark:text-gray-500 dark:hover:text-rose-400 transition-colors"
                                 >
                                   <Trash2 className="w-3.5 h-3.5" />
                                 </button>
@@ -1101,27 +1130,27 @@ export default function PNGToWebPConverterPage() {
                   {/* Right Column: Active Preview & Result Card (7 Cols) */}
                   <div className="lg:col-span-7 space-y-6">
                     {activeFile ? (
-                      <div className="glass rounded-2xl p-6 sm:p-8 border border-white/10 space-y-6">
+                      <div className="glass rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-white/10 space-y-6">
                         
                         {/* Status Header */}
-                        <div className="flex items-center justify-between border-b border-white/5 pb-4">
+                        <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/5 pb-4">
                           <div className="flex items-center gap-3">
                             <span className="flex h-3 w-3 relative">
                               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                               <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                             </span>
-                            <span className="text-xs font-black uppercase tracking-wider text-emerald-400">
+                            <span className="text-xs font-black uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
                               Conversion Successful
                             </span>
                           </div>
 
-                          <span className="text-xs font-bold text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-lg border border-indigo-500/20">
+                          <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-lg border border-indigo-500/20">
                             Target: WebP
                           </span>
                         </div>
 
                         {/* Image Preview Container */}
-                        <div className="relative rounded-2xl bg-black/50 border border-white/10 overflow-hidden flex items-center justify-center min-h-[300px] max-h-[450px] bg-[radial-gradient(#1f2937_1px,transparent_1px)] [background-size:16px_16px]">
+                        <div className="relative rounded-2xl bg-slate-950 dark:bg-black/50 border border-slate-200 dark:border-white/10 overflow-hidden flex items-center justify-center min-h-[300px] max-h-[450px] bg-[radial-gradient(#1f2937_1px,transparent_1px)] [background-size:16px_16px]">
                           <img 
                             src={activeFile.convertedUrl || activeFile.originalUrl} 
                             alt={activeFile.name}
@@ -1133,69 +1162,69 @@ export default function PNGToWebPConverterPage() {
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                           
                           {/* Original Size */}
-                          <div className="p-3.5 rounded-xl glass-light border border-white/5">
-                            <span className="text-[10px] font-bold text-gray-400 uppercase block">
+                          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
+                            <span className="text-[10px] font-bold text-slate-600 dark:text-gray-400 uppercase block">
                               Original Size
                             </span>
-                            <span className="text-sm font-black text-white mt-1 block">
+                            <span className="text-sm font-black text-slate-900 dark:text-white mt-1 block">
                               {formatBytes(activeFile.size)}
                             </span>
-                            <span className="text-[10px] text-gray-500 font-semibold">PNG Format</span>
+                            <span className="text-[10px] text-slate-500 dark:text-gray-500 font-semibold">PNG Format</span>
                           </div>
 
                           {/* Converted Size */}
-                          <div className="p-3.5 rounded-xl glass-light border border-white/5">
-                            <span className="text-[10px] font-bold text-gray-400 uppercase block">
+                          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
+                            <span className="text-[10px] font-bold text-slate-600 dark:text-gray-400 uppercase block">
                               Converted Size
                             </span>
-                            <span className="text-sm font-black text-emerald-400 mt-1 block">
+                            <span className="text-sm font-black text-emerald-600 dark:text-emerald-400 mt-1 block">
                               {activeFile.convertedSize ? formatBytes(activeFile.convertedSize) : 'Calculating...'}
                             </span>
-                            <span className="text-[10px] text-emerald-400/80 font-semibold">WebP Format</span>
+                            <span className="text-[10px] text-emerald-600/80 dark:text-emerald-400/80 font-semibold">WebP Format</span>
                           </div>
 
                           {/* Reduction Percentage */}
-                          <div className="p-3.5 rounded-xl bg-blue-600/10 border border-blue-500/20">
-                            <span className="text-[10px] font-bold text-blue-300 uppercase block">
+                          <div className="p-3.5 rounded-xl bg-blue-500/10 dark:bg-blue-600/10 border border-blue-500/20">
+                            <span className="text-[10px] font-bold text-blue-600 dark:text-blue-300 uppercase block">
                               Size Reduction
                             </span>
-                            <span className="text-sm font-black text-blue-400 mt-1 block">
+                            <span className="text-sm font-black text-blue-600 dark:text-blue-400 mt-1 block">
                               {getReductionPercent(activeFile.size, activeFile.convertedSize)}% Smaller
                             </span>
-                            <span className="text-[10px] text-blue-300/80 font-semibold">Saved Space</span>
+                            <span className="text-[10px] text-blue-600/80 dark:text-blue-300/80 font-semibold">Saved Space</span>
                           </div>
 
                           {/* Resolution */}
-                          <div className="p-3.5 rounded-xl glass-light border border-white/5">
-                            <span className="text-[10px] font-bold text-gray-400 uppercase block">
+                          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
+                            <span className="text-[10px] font-bold text-slate-600 dark:text-gray-400 uppercase block">
                               Resolution
                             </span>
-                            <span className="text-sm font-black text-white mt-1 block truncate">
+                            <span className="text-sm font-black text-slate-900 dark:text-white mt-1 block truncate">
                               {activeFile.width} × {activeFile.height}
                             </span>
-                            <span className="text-[10px] text-gray-500 font-semibold">Ratio {activeFile.aspectRatio}</span>
+                            <span className="text-[10px] text-slate-500 dark:text-gray-500 font-semibold">Ratio {activeFile.aspectRatio}</span>
                           </div>
                         </div>
 
                         {/* Image Metadata Specifications List */}
-                        <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs space-y-2">
-                          <div className="flex justify-between text-gray-400">
+                        <div className="p-4 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 text-xs space-y-2">
+                          <div className="flex justify-between text-slate-600 dark:text-gray-400">
                             <span>File Name:</span>
-                            <strong className="text-white font-mono truncate max-w-[240px]">{activeFile.name}</strong>
+                            <strong className="text-slate-900 dark:text-white font-mono truncate max-w-[240px]">{activeFile.name}</strong>
                           </div>
-                          <div className="flex justify-between text-gray-400">
+                          <div className="flex justify-between text-slate-600 dark:text-gray-400">
                             <span>Alpha Channel:</span>
-                            <strong className="text-emerald-400">
+                            <strong className="text-emerald-600 dark:text-emerald-400">
                               {activeFile.hasTransparency && preserveTransparency ? 'Preserved WebP Alpha Layer' : 'Solid Layer'}
                             </strong>
                           </div>
-                          <div className="flex justify-between text-gray-400">
+                          <div className="flex justify-between text-slate-600 dark:text-gray-400">
                             <span>Quality Encoding:</span>
-                            <strong className="text-white">{webpQuality}% Canvas WebP Encoder</strong>
+                            <strong className="text-slate-900 dark:text-white">{webpQuality}% Canvas WebP Encoder</strong>
                           </div>
-                          <div className="flex justify-between text-gray-400">
+                          <div className="flex justify-between text-slate-600 dark:text-gray-400">
                             <span>Privacy Security:</span>
-                            <strong className="text-emerald-400">100% Client-Side (No Upload)</strong>
+                            <strong className="text-emerald-600 dark:text-emerald-400">100% Client-Side (No Upload)</strong>
                           </div>
                         </div>
 
@@ -1213,15 +1242,15 @@ export default function PNGToWebPConverterPage() {
                           <button
                             onClick={downloadZip}
                             disabled={isZipping || !files.some(f => f.convertedBlob !== null)}
-                            className="w-full sm:w-auto py-3.5 px-5 rounded-xl glass-light border border-white/10 text-xs font-bold text-gray-200 hover:bg-white/10 hover:text-white transition-all flex items-center justify-center gap-2 disabled:opacity-40"
+                            className="w-full sm:w-auto py-3.5 px-5 rounded-xl bg-slate-100 dark:bg-white/10 border border-slate-300 dark:border-white/10 text-xs font-bold text-slate-800 dark:text-gray-200 hover:bg-slate-200 dark:hover:bg-white/20 transition-all flex items-center justify-center gap-2 disabled:opacity-40"
                           >
-                            <Archive className="w-4 h-4 text-amber-400" />
+                            <Archive className="w-4 h-4 text-amber-500 dark:text-amber-400" />
                             <span>Download All ({files.filter(f => f.convertedBlob).length}) as ZIP</span>
                           </button>
 
                           <button
                             onClick={() => fileInputRef.current?.click()}
-                            className="w-full sm:w-auto py-3.5 px-5 rounded-xl glass-light border border-white/5 text-xs font-bold text-gray-300 hover:bg-white/10 transition-colors flex items-center justify-center gap-1.5"
+                            className="w-full sm:w-auto py-3.5 px-5 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5 text-xs font-bold text-slate-700 dark:text-gray-300 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors flex items-center justify-center gap-1.5"
                           >
                             <FileUp className="w-4 h-4" />
                             <span>Convert More</span>
@@ -1229,7 +1258,7 @@ export default function PNGToWebPConverterPage() {
                         </div>
                       </div>
                     ) : (
-                      <div className="glass rounded-2xl p-12 border border-white/10 text-center text-gray-400">
+                      <div className="glass rounded-2xl p-12 border border-slate-200 dark:border-white/10 text-center text-slate-600 dark:text-gray-400">
                         Select a PNG image from the queue to view details.
                       </div>
                     )}

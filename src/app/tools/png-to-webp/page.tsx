@@ -663,12 +663,12 @@ export default function PNGToWebPConverterPage() {
           {/* Main Content Area */}
           <div className="p-6 sm:p-10">
             {warningMessage && (
-              <div className="mb-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-sm flex items-center justify-between">
+              <div className="mb-6 p-4 rounded-2xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 text-amber-900 dark:text-amber-300 text-sm flex items-center justify-between shadow-sm">
                 <div className="flex items-center gap-3">
-                  <Info className="w-5 h-5 flex-shrink-0" />
+                  <Info className="w-5 h-5 flex-shrink-0 text-amber-600 dark:text-amber-400" />
                   <span>{warningMessage}</span>
                 </div>
-                <button onClick={() => setWarningMessage(null)} className="text-amber-400 hover:text-amber-200">
+                <button onClick={() => setWarningMessage(null)} className="text-amber-600 hover:text-amber-800 dark:text-amber-400 dark:hover:text-amber-200 transition-colors">
                   <X className="w-4 h-4" />
                 </button>
               </div>
@@ -678,17 +678,17 @@ export default function PNGToWebPConverterPage() {
             {errorCards.length > 0 && (
               <div className="mb-6 space-y-3">
                 {errorCards.map(err => (
-                  <div key={err.id} className="p-4 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-300 text-sm flex items-center justify-between">
+                  <div key={err.id} className="p-4 rounded-2xl bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/20 text-rose-900 dark:text-rose-200 text-sm flex items-center justify-between shadow-sm">
                     <div className="flex items-center gap-3">
-                      <AlertCircle className="w-5 h-5 flex-shrink-0 text-rose-400" />
+                      <AlertCircle className="w-5 h-5 flex-shrink-0 text-rose-600 dark:text-rose-400" />
                       <div>
-                        <strong className="font-bold text-rose-200">{err.name}: </strong>
-                        <span>{err.reason}</span>
+                        <strong className="font-bold text-rose-950 dark:text-rose-100">{err.name}: </strong>
+                        <span className="text-rose-900 dark:text-rose-200">{err.reason}</span>
                       </div>
                     </div>
                     <button 
                       onClick={() => setErrorCards(prev => prev.filter(c => c.id !== err.id))}
-                      className="text-rose-400 hover:text-rose-200 p-1"
+                      className="text-rose-600 hover:text-rose-800 dark:text-rose-400 dark:hover:text-rose-200 p-1 transition-colors"
                     >
                       <X className="w-4 h-4" />
                     </button>

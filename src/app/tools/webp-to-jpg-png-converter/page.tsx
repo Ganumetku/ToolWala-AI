@@ -538,12 +538,12 @@ export default function WebPConverterPage() {
           {/* Main Content Area */}
           <div className="p-6 sm:p-10">
             {warningMessage && (
-              <div className="mb-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-sm flex items-center justify-between">
+              <div className="mb-6 p-4 rounded-2xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 text-amber-900 dark:text-amber-300 text-sm flex items-center justify-between shadow-sm">
                 <div className="flex items-center gap-3">
-                  <Info className="w-5 h-5 flex-shrink-0" />
+                  <Info className="w-5 h-5 flex-shrink-0 text-amber-600 dark:text-amber-400" />
                   <span>{warningMessage}</span>
                 </div>
-                <button onClick={() => setWarningMessage(null)} className="text-amber-400 hover:text-amber-200">
+                <button onClick={() => setWarningMessage(null)} className="text-amber-600 hover:text-amber-800 dark:text-amber-400 dark:hover:text-amber-200 transition-colors">
                   <X className="w-4 h-4" />
                 </button>
               </div>

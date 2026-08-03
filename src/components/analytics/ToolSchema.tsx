@@ -1,4 +1,5 @@
 import React from 'react';
+import { buildHowToSchema } from '@/lib/howto-schema';
 
 export interface FAQItem {
   question: string;
@@ -10,10 +11,12 @@ export interface ToolSchemaProps {
   description: string;
   url: string;
   category?: string;
+  slug?: string;
   imageUrl?: string;
   ratingValue?: number;
   ratingCount?: number;
   faqs?: FAQItem[];
+  disableHowTo?: boolean;
 }
 
 /**
@@ -48,15 +51,18 @@ export default function ToolSchema({
   description,
   url,
   category = 'Utility Tools',
+  slug,
   imageUrl = 'https://toolwala.co/icon-512.png',
   ratingValue,
   ratingCount,
   faqs = [],
+  disableHowTo = false,
 }: ToolSchemaProps) {
   const canonicalUrl = url.endsWith('/') ? url : `${url}/`;
   const appCategory = mapToApplicationCategory(category);
+  const toolSlug = slug || url.replace(/^https?:\/\/[^\/]+\/tools\//, '').replace(/\/$/, '');
 
-  // Construct Google Rich Results compliant SoftwareApplication schema
+  // 1. Construct Google Rich Results compliant SoftwareApplication schema
   const softwareAppSchema: Record<string, any> = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
@@ -101,7 +107,17 @@ export default function ToolSchema({
     };
   }
 
-  // Construct FAQPage schema if FAQs exist
+  // 2. Construct Google Rich Results compliant HowTo schema
+  const howToSchema = !disableHowTo && toolSlug
+    ? buildHowToSchema({
+        slug: toolSlug,
+        title: name,
+        category: category,
+        description: description,
+      })
+    : null;
+
+  // 3. Construct FAQPage schema if FAQs exist
   const faqSchema = faqs && faqs.length > 0 ? {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -115,17 +131,26 @@ export default function ToolSchema({
     })),
   } : null;
 
+  const sanitizeId = (str: string) => str.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
   return (
     <>
       <script
         type="application/ld+json"
-        id={`schema-software-app-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+        id={`schema-software-app-${sanitizeId(name)}`}
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppSchema) }}
       />
+      {howToSchema && (
+        <script
+          type="application/ld+json"
+          id={`schema-howto-${sanitizeId(name)}`}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+        />
+      )}
       {faqSchema && (
         <script
           type="application/ld+json"
-          id={`schema-faq-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+          id={`schema-faq-${sanitizeId(name)}`}
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       )}

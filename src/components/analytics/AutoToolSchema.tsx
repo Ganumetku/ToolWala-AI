@@ -63,6 +63,7 @@ export default function AutoToolSchema({ slug }: AutoToolSchemaProps) {
       description={description}
       url={url}
       category={category}
+      slug={cleanSlug}
       imageUrl="https://toolwala.co/icon-512.png"
     />
   );

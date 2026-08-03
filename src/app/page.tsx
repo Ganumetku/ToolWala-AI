@@ -31,7 +31,7 @@ const FloatingParticles = dynamic(
 const GovernmentToolHub = dynamic(() => import('@/components/GovernmentToolHub'), { ssr: false });
 const HomepageTestimonials = dynamic(() => import('@/components/HomepageTestimonials'), { ssr: false });
 const HomepageFAQ = dynamic(() => import('@/components/HomepageFAQ'), { ssr: false });
-const BlogPreview = dynamic(() => import('@/components/BlogPreview'), { ssr: false });
+const PopularToolsGrid = dynamic(() => import('@/components/PopularToolsGrid'), { ssr: false });
 
 export default function Home() {
   const { t, localizeHref } = useTranslation();
@@ -732,8 +732,8 @@ export default function Home() {
       {/* 11. Indian Government Tool Hub Section */}
       <GovernmentToolHub />
 
-      {/* 12. Blog Preview Section */}
-      <BlogPreview />
+      {/* 12. Popular & Essential Tools Suite */}
+      <PopularToolsGrid />
 
       {/* 13. Testimonials Section */}
       <HomepageTestimonials />

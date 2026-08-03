@@ -182,46 +182,6 @@ export default function ToolSeoFooter({ currentSlug }: ToolSeoFooterProps) {
 
       {/* 2. 6-8 Related Tools Grid */}
       <RelatedToolsSection currentSlug={currentSlug} category={tool?.category} limit={8} />
-
-      {/* 3. 3 Related Blogs */}
-      {relatedBlogs.length > 0 && (
-        <div className="space-y-6">
-          <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">
-            {t('tools.related_insights', 'Related Insights & Guides')}
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {relatedBlogs.map((b, idx) => (
-              <Link
-                key={`${b.id || b.slug}-${idx}`}
-                href={localizeHref(`/blog/${b.slug}`)}
-                className="p-6 rounded-[2rem] bg-white/[0.01] border border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 transition-all flex flex-col justify-between h-48 group shadow-lg cursor-pointer"
-              >
-                <div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-blue-500">
-                    {t(`categories.${b.category}`, b.category)}
-                  </span>
-                  <h4 className="text-sm font-black text-slate-900 dark:text-white uppercase group-hover:text-blue-400 transition-colors line-clamp-2 mt-2 leading-tight">
-                    {t(`blogs.${b.slug}.title`, b.title)}
-                  </h4>
-                  <p className="text-gray-400 text-xs font-medium line-clamp-2 mt-2 font-sans leading-relaxed">
-                    {t(`blogs.${b.slug}.excerpt`, b.excerpt)}
-                  </p>
-                </div>
-                <div className="flex items-center justify-between pt-4 mt-4 border-t border-white/5">
-                  <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">
-                    {b.readingTime}
-                  </span>
-                  <span className="text-[9px] font-black text-blue-500 uppercase tracking-widest flex items-center gap-1 select-none">
-                    {t('blog.read_post', 'Read Post')}
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-
     </div>
   );
 }

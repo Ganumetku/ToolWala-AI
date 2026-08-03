@@ -262,13 +262,18 @@ export default function Footer() {
             </ul>
           </div>
           
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-6 min-w-0">
             <h3 className="text-xs font-black text-gray-900 dark:text-white uppercase tracking-[0.2em]">{t('footer.contact_header', 'Contact')}</h3>
-            <a href="mailto:developtechx@gmail.com" className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 text-xs font-black transition-all group">
-              <div className="w-10 h-10 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center border border-black/10 dark:border-white/10 group-hover:bg-blue-600/10 group-hover:border-blue-600/20 transition-all shrink-0">
+            <a 
+              href="mailto:developtechx@gmail.com" 
+              className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 text-xs font-bold transition-all group whitespace-nowrap"
+            >
+              <div className="w-9 h-9 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center border border-black/10 dark:border-white/10 group-hover:bg-blue-600/10 group-hover:border-blue-600/20 transition-all shrink-0">
                 <Mail className="w-4 h-4 text-gray-700 dark:text-gray-300" />
               </div>
-              <span className="truncate">developtechx@gmail.com</span>
+              <span translate="no" data-no-translate className="notranslate font-bold text-xs">
+                developtechx@gmail.com
+              </span>
             </a>
  
             <div className="space-y-3.5 pt-4">

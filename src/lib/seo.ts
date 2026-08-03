@@ -486,25 +486,37 @@ export async function generateToolMetadataHelper(
     }
   });
 
+  const canonicalPath = originalPathname.endsWith('/') ? originalPathname : `${originalPathname}/`;
+  const canonicalUrl = `${siteUrl}${canonicalPath}`;
+
   return {
     title,
     description,
     alternates: {
-      canonical: `${siteUrl}${originalPathname.endsWith('/') ? originalPathname : originalPathname + '/'}`,
+      canonical: canonicalUrl,
       languages
     },
     openGraph: {
       title,
       description,
-      url: `${siteUrl}${originalPathname}`,
+      url: canonicalUrl,
       siteName: "ToolWala AI",
       type: "website",
       locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
+      images: [
+        {
+          url: `${siteUrl}/og-image.png`,
+          width: 1200,
+          height: 630,
+          alt: title,
+        }
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [`${siteUrl}/og-image.png`],
     }
   };
 }

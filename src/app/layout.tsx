@@ -63,24 +63,35 @@ export async function generateMetadata(): Promise<Metadata> {
   
   if (cleanPathNoSlash.startsWith('/tools/')) {
     try {
-      const { toolsData } = await import('@/data/tools');
-      const matchedStaticTool = toolsData.find(t => t.href.replace(/\/$/, '') === cleanPathNoSlash);
-      
-      if (matchedStaticTool) {
+      const slug = cleanPathNoSlash.replace(/^\/tools\//, '').replace(/\/$/, '');
+      if (slug && slug !== 'pdf-tools') {
         const { getToolTranslationWithFallback } = await import('@/lib/tool-translation-service');
-        const translation = await getToolTranslationWithFallback(matchedStaticTool.slug, locale);
-        toolTitle = translation.seoTitle || translation.title || `${matchedStaticTool.title} | ToolWala AI`;
-        toolDesc = translation.seoDescription || translation.description || matchedStaticTool.description;
-        // Dynamic database tool page lookup
-        const slug = cleanPathNoSlash.split('/').pop() || "";
-        if (slug) {
-          const { findToolBySlugServer } = await import('@/lib/tools-server');
-          const dbTool = await findToolBySlugServer(slug);
-          if (dbTool) {
-            const { getToolTranslationWithFallback } = await import('@/lib/tool-translation-service');
-            const translation = await getToolTranslationWithFallback(slug, locale);
-            toolTitle = translation.seoTitle || translation.title || dbTool.seoMetadata?.title || `${dbTool.title} | ToolWala AI`;
-            toolDesc = translation.seoDescription || translation.description || dbTool.seoMetadata?.description || dbTool.description;
+        const translation = await getToolTranslationWithFallback(slug, locale);
+
+        if (translation.seoTitle || translation.title) {
+          toolTitle = translation.seoTitle || (translation.title.includes('ToolWala') ? translation.title : `${translation.title} – Free & 100% Private | ToolWala AI`);
+          toolDesc = translation.seoDescription || translation.description;
+        } else {
+          const { toolsData } = await import('@/data/tools');
+          const matchedStaticTool = toolsData.find(t => t.slug === slug || t.href.replace(/\/$/, '') === cleanPathNoSlash);
+          
+          if (matchedStaticTool) {
+            toolTitle = `${matchedStaticTool.title} – Free & 100% Private | ToolWala AI`;
+            toolDesc = matchedStaticTool.description;
+          } else {
+            const { findToolBySlugServer } = await import('@/lib/tools-server');
+            const dbTool = await findToolBySlugServer(slug);
+            if (dbTool) {
+              toolTitle = dbTool.seoMetadata?.title || `${dbTool.title} – Free & 100% Private | ToolWala AI`;
+              toolDesc = dbTool.seoMetadata?.description || dbTool.description;
+            } else {
+              const formattedTitle = slug
+                .split('-')
+                .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                .join(' ');
+              toolTitle = `Free ${formattedTitle} Online – 100% Private & Fast | ToolWala AI`;
+              toolDesc = `Free online ${formattedTitle} tool by ToolWala AI. Fast, secure, and 100% browser-based with no file uploads to servers.`;
+            }
           }
         }
       }

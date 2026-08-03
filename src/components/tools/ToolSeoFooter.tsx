@@ -7,6 +7,7 @@ import { toolsData } from '@/data/tools';
 import { categoriesData } from '@/data/categories';
 import blogsData from '@/data/dynamic_blogs.json';
 import { useTranslation } from '@/components/I18nContext';
+import RelatedToolsSection from './RelatedToolsSection';
 
 interface ToolSeoFooterProps {
   currentSlug: string;
@@ -179,34 +180,8 @@ export default function ToolSeoFooter({ currentSlug }: ToolSeoFooterProps) {
         </div>
       </div>
 
-      {/* 2. 5 Related Tools */}
-      {relatedTools.length > 0 && (
-        <div className="space-y-6">
-          <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">
-            {t('tools.related_utilities', 'Explore Related Utilities')}
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-            {relatedTools.map((rt, idx) => (
-              <Link
-                key={`${rt.id || rt.slug}-${idx}`}
-                href={localizeHref(rt.href)}
-                className="group p-5 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 transition-all flex flex-col justify-between h-36 shadow-lg hover:shadow-blue-500/5 cursor-pointer"
-              >
-                <div>
-                  <span className="text-2xl mb-3 block group-hover:scale-110 transition-transform">{rt.icon}</span>
-                  <h4 className="text-xs font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors uppercase line-clamp-2 leading-tight">
-                    {t(`tools.${rt.slug}.title`, rt.title)}
-                  </h4>
-                </div>
-                <span className="text-[9px] font-black text-blue-500 uppercase tracking-widest flex items-center gap-1 mt-2">
-                  {t('tools.try_tool', 'Try Tool')}
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
+      {/* 2. 6-8 Related Tools Grid */}
+      <RelatedToolsSection currentSlug={currentSlug} category={tool?.category} limit={8} />
 
       {/* 3. 3 Related Blogs */}
       {relatedBlogs.length > 0 && (

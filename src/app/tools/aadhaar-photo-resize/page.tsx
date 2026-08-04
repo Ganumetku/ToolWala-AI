@@ -42,21 +42,21 @@ export default function AadhaarPhotoResize() {
               UIDAI Portal Compliance Tool
             </div>
             <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white uppercase leading-tight">
-              Aadhaar Photo Resize <br />
+              Crop Aadhaar Card <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">
                 Online & Free
               </span>
             </h1>
             <p className="text-base sm:text-lg text-gray-400 font-medium leading-relaxed">
-              Format, crop, and resize photos to official UIDAI specifications online. Replace backgrounds and compress to under 100KB locally and securely.
+              Crop Aadhaar Card online quickly and securely. Remove unwanted background, white space, and margins from your Aadhaar Card image instantly.
             </p>
 
             <div className="pt-6">
               <Link
-                href={localizeHref("/tools/aadhaar-photo-resizer")}
+                href={localizeHref("/tools/crop-aadhaar-card")}
                 className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase tracking-[0.2em] rounded-2xl transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)] hover:scale-105 active:scale-95 cursor-pointer font-sans"
               >
-                Go to Aadhaar Photo Resizer
+                Crop Aadhaar Card Online Free
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

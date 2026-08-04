@@ -127,10 +127,10 @@ ToolWala's Aadhaar Hub runs 100% locally inside your web browser. The **Aadhaar 
     relatedTools: [
       { title: "Aadhaar Masking Tool", slug: "aadhaar-masking-tool", icon: "🪪" },
       { title: "Aadhaar PDF Compressor", slug: "aadhaar-pdf-compressor", icon: "🔒" },
-      { title: "Aadhaar Photo Resizer", slug: "aadhaar-photo-resizer", icon: "📸" }
+      { title: "Crop Aadhaar Card", slug: "crop-aadhaar-card", icon: "📸" }
     ],
     landingPages: [
-      { title: "Aadhaar Photo Resize", slug: "aadhaar-photo-resizer" },
+      { title: "Crop Aadhaar Card", slug: "crop-aadhaar-card" },
       { title: "Compress PDF to 300KB", slug: "compress-pdf-to-300kb" },
       { title: "Aadhaar Masking Tool", slug: "aadhaar-masking-tool" }
     ],

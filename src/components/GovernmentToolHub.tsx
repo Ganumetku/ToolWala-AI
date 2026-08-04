@@ -7,10 +7,10 @@ import { useTranslation } from "@/components/I18nContext";
 
 const govTools = [
   {
-    title: "Aadhaar Card Photo Resizer",
-    desc: "Resize & crop photo to official UIDAI specifications (3.5cm x 4.5cm) under 50KB.",
+    title: "Crop Aadhaar Card",
+    desc: "Crop Aadhaar Card online quickly and remove unwanted background & margins to official UIDAI specs (3.5cm x 4.5cm).",
     icon: <span className="text-2xl select-none" role="img" aria-label="Aadhaar Card">🪪</span>,
-    href: "/tools/aadhaar-photo-resizer/",
+    href: "/tools/crop-aadhaar-card/",
     badge: "Official UIDAI Spec",
     kb: "20KB - 50KB",
     dim: "354 x 472 px"

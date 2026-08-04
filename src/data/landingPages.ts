@@ -561,15 +561,15 @@ Official portals require text to be clear and readable. Our compressor is design
   },
   {
     slug: "aadhaar-photo-resize",
-    title: "Aadhaar Photo Resize Online - UIDAI Biometric Photo Editor",
-    metaDescription: "Resize and crop photos to official UIDAI Aadhaar specifications (3.5cm x 4.5cm) under 50KB. 100% client-side processing for privacy.",
-    h1: "Aadhaar Card Photo Resizer Online (Free)",
+    title: "Crop Aadhaar Card Online Free – Resize & Crop Aadhaar Card Instantly | ToolWala AI",
+    metaDescription: "Crop Aadhaar Card online for free with ToolWala. Remove unwanted background, white space, and margins from your Aadhaar Card image instantly. Fast, secure, and easy to use.",
+    h1: "Crop Aadhaar Card Online Free",
     badgeText: "UIDAI Biometric Specs",
-    description: "Crop and resize passport photographs to official UIDAI Aadhaar card specifications. Adjust dimensions to 3.5x4.5 cm, compress under 50KB, and remove backgrounds — all locally in your browser.",
-    ctaText: "Go to Aadhaar Photo Resizer",
-    ctaHref: "/tools/aadhaar-photo-resizer",
+    description: "Crop Aadhaar Card online quickly and securely with ToolWala. Remove unwanted background, white space, and margins from your Aadhaar Card image instantly.",
+    ctaText: "Crop Aadhaar Card Online Free",
+    ctaHref: "/tools/crop-aadhaar-card",
     category: "Image Tools",
-    relatedTools: ["aadhaar-masking-tool", "aadhaar-pdf-compressor", "image-compressor"],
+    relatedTools: ["crop-aadhaar-card", "aadhaar-masking-tool", "aadhaar-pdf-compressor", "image-compressor"],
     relatedBlogs: [
       { title: "Aadhaar Photo Resize Online: How to Format Photos for UIDAI Card Updates", slug: "aadhaar-photo-resize-online" },
       { title: "How to Crop Aadhaar Card Photo to UIDAI Specs", slug: "crop-aadhaar-card-photo-uidai-specs" }

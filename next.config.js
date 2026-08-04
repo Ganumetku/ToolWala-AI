@@ -66,6 +66,25 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/tools/aadhaar-photo-resizer',
+        destination: '/tools/crop-aadhaar-card/',
+        permanent: true,
+      },
+      {
+        source: '/tools/aadhar-card-cropper',
+        destination: '/tools/crop-aadhaar-card/',
+        permanent: true,
+      },
+      {
+        source: '/tools/crop-aadhar-card',
+        destination: '/tools/crop-aadhaar-card/',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

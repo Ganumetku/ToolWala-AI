@@ -962,10 +962,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "Split PDF", href: "/tools/split-pdf" }
     ]
   },
-  "aadhaar-photo-resizer": {
-    title: "Aadhaar Card Photo Size 2026: Official Specification",
-    intro: "UIDAI Aadhaar portal applications and updates require photographs to meet strict physical and digital dimension standards. Uploading uncropped photos or improper background colors often causes portal verification failures.",
-    whatItDoes: "The Aadhaar Photo Resizer tool automatically crops and formats photographs to match UIDAI guidelines. It formats your portrait to 3.5 cm x 4.5 cm (354 x 472 pixels), sets a compliant white background, and compresses the JPEG output between 20KB and 50KB directly in your browser memory.",
+  "crop-aadhaar-card": {
+    title: "Crop Aadhaar Card Online Free – Resize & Crop Aadhaar Card Instantly",
+    intro: "UIDAI Aadhaar portal applications and updates require photographs to meet strict physical and digital dimension standards. Crop Aadhaar Card online for free with ToolWala to remove unwanted background, white space, and margins instantly.",
+    whatItDoes: "The Crop Aadhaar Card tool automatically crops and formats photographs to match UIDAI guidelines. It formats your portrait to 3.5 cm x 4.5 cm (354 x 472 pixels), sets a compliant white background, and compresses the JPEG output between 20KB and 50KB directly in your browser memory.",
     specificationTable: [
       { requirement: "Photo size (pixels)", specification: "354 x 472 px (300 DPI)" },
       { requirement: "Physical size", specification: "3.5cm x 4.5cm" },
@@ -987,10 +987,46 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Download the compliant JPEG file ready for upload."
     ],
     faqs: [
+      { question: "How to crop Aadhaar card photo online for free?", answer: "Upload your image to ToolWala's Crop Aadhaar Card tool. It auto-aligns to 3.5 cm x 4.5 cm, removes extra margins/backgrounds, and optimizes file size under 50KB." },
       { question: "What is the official photo size for Aadhaar card update?", answer: "The official UIDAI size is 3.5 cm x 4.5 cm (354 x 472 pixels) with a white background." },
       { question: "Can I take an Aadhaar photo with a smartphone?", answer: "Yes, provided it is taken in good natural lighting against a plain wall and cropped to 3.5 x 4.5 cm." },
-      { question: "What is the maximum file size for UIDAI photo uploads?", answer: "The portal requires JPEG files strictly between 20KB and 50KB." },
-      { question: "Is background removal required for Aadhaar photo?", answer: "UIDAI mandates a plain white or light off-white background without shadows or objects." }
+      { question: "What is the maximum file size for UIDAI photo uploads?", answer: "The portal requires JPEG files strictly between 20KB and 50KB." }
+    ],
+    relatedTools: [
+      { name: "PAN Card Resize", href: "/tools/pan-card-resize" },
+      { name: "Signature Resize", href: "/tools/signature-resize" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
+    ]
+  },
+  "aadhaar-photo-resizer": {
+    title: "Crop Aadhaar Card Online Free – Resize & Crop Aadhaar Card Instantly",
+    intro: "UIDAI Aadhaar portal applications and updates require photographs to meet strict physical and digital dimension standards. Crop Aadhaar Card online for free with ToolWala to remove unwanted background, white space, and margins instantly.",
+    whatItDoes: "The Crop Aadhaar Card tool automatically crops and formats photographs to match UIDAI guidelines. It formats your portrait to 3.5 cm x 4.5 cm (354 x 472 pixels), sets a compliant white background, and compresses the JPEG output between 20KB and 50KB directly in your browser memory.",
+    specificationTable: [
+      { requirement: "Photo size (pixels)", specification: "354 x 472 px (300 DPI)" },
+      { requirement: "Physical size", specification: "3.5cm x 4.5cm" },
+      { requirement: "File format", specification: "JPEG" },
+      { requirement: "File size", specification: "20KB - 50KB" },
+      { requirement: "Background", specification: "White/light plain" },
+      { requirement: "Facial proportion", specification: "70% - 80% face coverage" }
+    ],
+    commonMistakes: [
+      "Using colored or patterned wall backdrops.",
+      "Wearing dark sunglasses or reflective eyeglasses that obscure eyes.",
+      "Uploading photos larger than 50KB or in PNG/PDF formats.",
+      "Smiling or tilting head away from camera lens."
+    ],
+    howToUse: [
+      "Upload your passport portrait image by dragging it into the dropzone.",
+      "Align your face inside the UIDAI biometric crop guide.",
+      "Enable white background cleanup if required.",
+      "Download the compliant JPEG file ready for upload."
+    ],
+    faqs: [
+      { question: "How to crop Aadhaar card photo online for free?", answer: "Upload your image to ToolWala's Crop Aadhaar Card tool. It auto-aligns to 3.5 cm x 4.5 cm, removes extra margins/backgrounds, and optimizes file size under 50KB." },
+      { question: "What is the official photo size for Aadhaar card update?", answer: "The official UIDAI size is 3.5 cm x 4.5 cm (354 x 472 pixels) with a white background." },
+      { question: "Can I take an Aadhaar photo with a smartphone?", answer: "Yes, provided it is taken in good natural lighting against a plain wall and cropped to 3.5 x 4.5 cm." },
+      { question: "What is the maximum file size for UIDAI photo uploads?", answer: "The portal requires JPEG files strictly between 20KB and 50KB." }
     ],
     relatedTools: [
       { name: "PAN Card Resize", href: "/tools/pan-card-resize" },

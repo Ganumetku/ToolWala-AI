@@ -208,12 +208,30 @@ const WORKFLOWS: Record<string, ToolWorkflow> = {
       { slug: 'signature-resize', label: 'Signature Resize', icon: '✍️' }
     ]
   },
+  'crop-aadhaar-card': {
+    nextRecommended: ['signature-resize', 'gov-form-image-compressor', 'passport-photo-maker'],
+    mostUsedTogether: ['exam-photo-resizer', 'bg-remover', 'aadhaar-pdf-compressor'],
+    workflow: [
+      { slug: 'bg-remover', label: 'Remove BG', icon: '🖼️' },
+      { slug: 'crop-aadhaar-card', label: 'Aadhaar Crop', icon: '🪪' },
+      { slug: 'signature-resize', label: 'Signature Resize', icon: '✍️' }
+    ]
+  },
   'aadhaar-photo-resizer': {
     nextRecommended: ['signature-resize', 'gov-form-image-compressor', 'passport-photo-maker'],
     mostUsedTogether: ['exam-photo-resizer', 'bg-remover', 'aadhaar-pdf-compressor'],
     workflow: [
       { slug: 'bg-remover', label: 'Remove BG', icon: '🖼️' },
-      { slug: 'aadhaar-photo-resizer', label: 'Aadhaar Crop', icon: '🪪' },
+      { slug: 'crop-aadhaar-card', label: 'Aadhaar Crop', icon: '🪪' },
+      { slug: 'signature-resize', label: 'Signature Resize', icon: '✍️' }
+    ]
+  },
+  'aadhar-card-cropper': {
+    nextRecommended: ['signature-resize', 'gov-form-image-compressor', 'passport-photo-maker'],
+    mostUsedTogether: ['exam-photo-resizer', 'bg-remover', 'aadhaar-pdf-compressor'],
+    workflow: [
+      { slug: 'bg-remover', label: 'Remove BG', icon: '🖼️' },
+      { slug: 'crop-aadhaar-card', label: 'Aadhaar Crop', icon: '🪪' },
       { slug: 'signature-resize', label: 'Signature Resize', icon: '✍️' }
     ]
   },

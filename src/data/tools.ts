@@ -28,6 +28,11 @@ export interface Tool {
   status: 'draft' | 'scheduled' | 'published';
   isVisible: boolean;
   publishDate?: string;
+  seoMetadata?: {
+    title?: string;
+    description?: string;
+    keywords?: string[];
+  };
   createdAt: string;
   updatedAt: string;
 }
@@ -391,19 +396,24 @@ export const toolsData: Tool[] = [
     updatedAt: '2026-06-20T00:00:00Z'
   },
   {
-    id: "aadhaar-photo-resizer",
-    title: "Aadhaar Photo Resizer",
-    description: "Resize, crop, and compress passport photos for Aadhaar, UIDAI, and official government updates.",
-    icon: "🆔",
-    href: "/tools/aadhaar-photo-resizer",
-    slug: "aadhaar-photo-resizer",
+    id: "crop-aadhaar-card",
+    title: "Crop Aadhaar Card",
+    description: "Crop Aadhaar Card online quickly and securely. Remove unwanted background, white space, and margins from your Aadhaar Card image instantly.",
+    icon: "🪪",
+    href: "/tools/crop-aadhaar-card",
+    slug: "crop-aadhaar-card",
     category: "Image Tools",
     featured: true,
     trending: true,
     popular: true,
-    tags: ["aadhaar", "photo", "resizer", "crop", "compress", "passport photo", "uidai", "kyc", "image"],
+    tags: ["crop aadhar card", "crop aadhaar card", "aadhar card cropper", "crop aadhar card online", "crop aadhar card free", "aadhaar photo resizer", "aadhar photo resize", "uidai", "kyc", "crop", "image"],
     status: 'published',
     isVisible: true,
+    seoMetadata: {
+      title: "Crop Aadhaar Card Online Free – Resize & Crop Aadhaar Card Instantly | ToolWala AI",
+      description: "Crop Aadhaar Card online for free with ToolWala. Remove unwanted background, white space, and margins from your Aadhaar Card image instantly. Fast, secure, and easy to use.",
+      keywords: ["crop aadhar card online", "crop aadhaar card", "aadhar card cropper", "crop aadhar card free", "aadhaar photo resizer", "aadhar card crop"]
+    },
     createdAt: '2024-01-01T00:00:00Z',
     updatedAt: '2024-01-01T00:00:00Z'
   },

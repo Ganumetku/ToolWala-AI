@@ -32,7 +32,7 @@ export interface PDFToolbarProps {
   isProcessing?: boolean;
 }
 
-export default function PDFToolbar({
+export function PDFToolbar({
   pdfFile,
   editMode,
   setEditMode,

@@ -59,8 +59,16 @@ export async function proxy(request: NextRequest) {
     }
   }
 
-  // 301 redirect duplicate tool /tools/pan-photo-tool/ to /tools/pan-card-resize/
+  // 301 redirect /pricing to home /
   const normalizedRewritten = rewrittenPathname.endsWith('/') ? rewrittenPathname : rewrittenPathname + '/';
+  if (normalizedRewritten === '/pricing/') {
+    const targetPath = isLocalePrefix ? `/${locale}/` : '/';
+    const redirectUrl = new URL(targetPath + request.nextUrl.search, request.url);
+    console.log(`[Proxy] Redirecting 301 pricing page ${pathname} to ${redirectUrl.toString()}`);
+    return NextResponse.redirect(redirectUrl, { status: 301 });
+  }
+
+  // 301 redirect duplicate tool /tools/pan-photo-tool/ to /tools/pan-card-resize/
   if (normalizedRewritten === '/tools/pan-photo-tool/') {
     const targetPath = isLocalePrefix ? `/${locale}/tools/pan-card-resize/` : '/tools/pan-card-resize/';
     const redirectUrl = new URL(targetPath + request.nextUrl.search, request.url);
@@ -76,6 +84,54 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(redirectUrl, { status: 301 });
   }
 
+  // 301 redirect legacy blog post slugs to active replacements
+  const LEGACY_BLOG_REDIRECTS: Record<string, string> = {
+    'why-pan-card-document-upload-failed': '/blog/resize-photo-signature-pan-card-application/',
+    'indian-government-scheme-document-sizes': '/blog/upload-documents-government-portals/',
+    'nsdl-pan-card-document-specifications': '/blog/resize-photo-signature-pan-card-application/',
+    'resize-upsc-signature-350x350-pixels': '/blog/upsc-photo-signature-resize-specifications/',
+  };
+
+  if (rewrittenPathname.startsWith('/blog/')) {
+    const parts = rewrittenPathname.split('/').filter(Boolean); // ['blog', 'slug']
+    const blogSlug = parts[1];
+    if (blogSlug && LEGACY_BLOG_REDIRECTS[blogSlug]) {
+      const targetBase = LEGACY_BLOG_REDIRECTS[blogSlug];
+      const targetPath = isLocalePrefix ? `/${locale}${targetBase}` : targetBase;
+      const redirectUrl = new URL(targetPath + request.nextUrl.search, request.url);
+      console.log(`[Proxy] Redirecting 301 legacy blog ${pathname} to ${redirectUrl.toString()}`);
+      return NextResponse.redirect(redirectUrl, { status: 301 });
+    }
+  }
+
+  // 301 redirect legacy tool category subpaths (e.g. /tools/image-tools/passport-photo-maker/ -> /tools/passport-photo-maker/)
+  const CATEGORY_SLUGS = [
+    'image-tools',
+    'pdf-tools',
+    'ai-tools',
+    'resume-career',
+    'financial-calculators',
+    'document-tools',
+    'developer-tools',
+    'social-media',
+  ];
+
+  if (rewrittenPathname.startsWith('/tools/')) {
+    const parts = rewrittenPathname.split('/').filter(Boolean); // ['tools', 'cat' or 'slug', 'slug']
+    if (parts.length >= 3 && CATEGORY_SLUGS.includes(parts[1])) {
+      // Exclude valid nested route: /tools/pdf-tools/edit-pdf/
+      if (parts[1] === 'pdf-tools' && parts[2] === 'edit-pdf') {
+        // Valid route, do not redirect
+      } else {
+        const toolSlug = parts[2];
+        const targetPath = isLocalePrefix ? `/${locale}/tools/${toolSlug}/` : `/tools/${toolSlug}/`;
+        const redirectUrl = new URL(targetPath + request.nextUrl.search, request.url);
+        console.log(`[Proxy] Redirecting 301 category tool subpath ${pathname} to ${redirectUrl.toString()}`);
+        return NextResponse.redirect(redirectUrl, { status: 301 });
+      }
+    }
+  }
+
   // 301 redirect landing pages from /tools/[slug]/ to /landing/[slug]/
   if (rewrittenPathname.startsWith('/tools/')) {
     const parts = rewrittenPathname.split('/');
@@ -86,6 +142,32 @@ export async function proxy(request: NextRequest) {
       console.log(`[Proxy] Redirecting 301 landing page ${pathname} to ${redirectUrl.toString()}`);
       return NextResponse.redirect(redirectUrl, { status: 301 });
     }
+  }
+
+  // 301 redirect raw Hindi translated routes (/टूल/* -> /hi/tools/*, /ब्लॉग/* -> /hi/blog/*)
+  const decodedPathname = decodeURIComponent(pathname);
+  if (decodedPathname.startsWith('/टूल/') || decodedPathname.startsWith('/ब्लॉग/')) {
+    let targetPath = '/hi/tools/';
+    if (decodedPathname.startsWith('/टूल/')) {
+      const slug = decodedPathname.replace('/टूल/', '').replace(/\/$/, '');
+      if (slug === 'प्रोटेक्ट-पीडीएफ') {
+        targetPath = '/hi/tools/protect-pdf/';
+      } else if (slug) {
+        targetPath = `/hi/tools/${slug}/`;
+      }
+    } else if (decodedPathname.startsWith('/ब्लॉग/')) {
+      const slug = decodedPathname.replace('/ब्लॉग/', '').replace(/\/$/, '');
+      if (slug === 'आकार-फोटो-हस्ताक्षर-पैन-कार्ड-आवेदन') {
+        targetPath = '/hi/blog/resize-photo-signature-pan-card-application/';
+      } else if (slug) {
+        targetPath = `/hi/blog/${slug}/`;
+      } else {
+        targetPath = '/hi/blog/';
+      }
+    }
+    const redirectUrl = new URL(targetPath + request.nextUrl.search, request.url);
+    console.log(`[Proxy] Redirecting 301 raw Hindi route ${pathname} to ${redirectUrl.toString()}`);
+    return NextResponse.redirect(redirectUrl, { status: 301 });
   }
 
   // 2. Handle saved language redirect on root "/"

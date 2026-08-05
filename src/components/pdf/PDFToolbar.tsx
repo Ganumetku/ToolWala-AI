@@ -8,6 +8,7 @@ import {
   Square, Circle, ArrowUpRight, CheckSquare, Edit3,
 } from 'lucide-react';
 import type { EditMode, ShapeType } from '@/types/pdf';
+import { useTranslation } from '@/components/I18nContext';
 
 export interface PDFToolbarProps {
   pdfFile: File | null;
@@ -28,10 +29,10 @@ export interface PDFToolbarProps {
   historyLength: number;
   handleReset: () => void;
   handleExportPDF: () => void | Promise<void>;
-  isProcessing: boolean;
+  isProcessing?: boolean;
 }
 
-export function PDFToolbar({
+export default function PDFToolbar({
   pdfFile,
   editMode,
   setEditMode,
@@ -49,11 +50,13 @@ export function PDFToolbar({
   handleExportPDF,
   isProcessing,
 }: PDFToolbarProps) {
+  const { localizeHref } = useTranslation();
+
   return (
     <header className="h-16 border-b border-slate-900 px-6 flex items-center justify-between glass z-30 select-none">
       {/* Left Section */}
       <div className="flex items-center gap-4">
-        <Link href="/tools/pdf-tools" className="flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-white transition-colors">
+        <Link href={localizeHref('/tools/pdf-tools')} className="flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-white transition-colors">
           <ChevronLeft className="w-4 h-4" />
           PDF Tools
         </Link>

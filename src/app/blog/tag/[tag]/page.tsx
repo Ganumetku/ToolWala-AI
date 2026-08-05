@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { MeshGradient, FloatingParticles } from "@/components/BackgroundEffects";
 import BlogListClient from "../../BlogListClient";
 import BlogBreadcrumbs from "@/components/blog/BlogBreadcrumbs";
@@ -82,14 +82,16 @@ export default async function BlogTagPage({ params }: TagPageProps) {
   const { tag } = await params;
   const rawTagBlogs = await getBlogsByTag(tag);
 
-  if (!rawTagBlogs.length) notFound();
-
   let locale = "en";
   try {
     const { headers } = await import('next/headers');
     const headerList = await headers();
     locale = headerList.get("x-locale") || "en";
   } catch (e) {}
+
+  if (!rawTagBlogs.length) {
+    redirect(locale === 'en' ? '/blog/' : `/${locale}/blog/`);
+  }
 
   const { getBlogTranslationWithFallback } = await import("@/lib/blog-translation-service");
   const tagBlogs = await Promise.all(rawTagBlogs.map(b => getBlogTranslationWithFallback(b, locale)));

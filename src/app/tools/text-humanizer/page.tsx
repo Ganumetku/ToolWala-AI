@@ -411,8 +411,8 @@ export default function ProfessionalTextHumanizer() {
                           <p className="text-sm font-medium text-blue-100 opacity-80">Advanced multi-model bypassing coming next week.</p>
                         </div>
                       </div>
-                      <Link href="/pricing" className="bg-white text-blue-600 px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl">
-                        Waitlist
+                      <Link href="/tools" className="bg-white text-blue-600 px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl">
+                        Explore Tools
                       </Link>
                     </div>
                   </div>

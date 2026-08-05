@@ -2,7 +2,7 @@
 
 import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Terminal, Lock, User, Sparkles, Eye, EyeOff, ShieldCheck } from 'lucide-react';
+import { Terminal, Lock, User, Sparkles, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
@@ -16,7 +16,6 @@ function LoginForm() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   if (errorParam === 'unauthorized') {
@@ -135,7 +134,7 @@ function LoginForm() {
             <div className="flex items-center gap-3 bg-slate-100/80 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 focus-within:border-blue-600 dark:focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-500/10 rounded-2xl px-4.5 py-3.5 transition-all">
               <Lock className="w-4.5 h-4.5 text-slate-400 dark:text-slate-500 shrink-0" />
               <input
-                type={showPassword ? 'text' : 'password'}
+                type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
@@ -143,14 +142,6 @@ function LoginForm() {
                 disabled={isLoading}
                 autoComplete="current-password"
               />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors p-1 cursor-pointer"
-                tabIndex={-1}
-              >
-                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-              </button>
             </div>
           </div>
 

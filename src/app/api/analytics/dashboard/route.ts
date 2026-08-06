@@ -317,33 +317,45 @@ export async function GET(request: NextRequest) {
       .sort((a, b) => b.views - a.views)
       .slice(0, 5);
 
-    // 12. Most Used Tools (runs vs views)
+    // 12. Most Used Tools (100% REAL runs vs views from Supabase telemetry)
     const publicTools = await getPublicTools();
     const toolViewsMap = new Map<string, number>();
     const toolRunsMap = new Map<string, number>();
 
     if (curViews) {
       curViews.forEach(v => {
-        if (v.route.startsWith('/tools/')) {
-          const slug = v.route.replace('/tools/', '').split('/')[0];
-          if (slug) toolViewsMap.set(slug, (toolViewsMap.get(slug) || 0) + 1);
+        if (v.route && v.route.includes('/tools/')) {
+          const routeSegment = v.route.split('/tools/')[1] || '';
+          const toolMatch = publicTools.find(pt => {
+            const cleanHref = pt.href.replace('/tools/', '');
+            return routeSegment === cleanHref || routeSegment.startsWith(cleanHref + '/') || routeSegment.includes(pt.slug);
+          });
+          if (toolMatch) {
+            toolViewsMap.set(toolMatch.slug, (toolViewsMap.get(toolMatch.slug) || 0) + 1);
+          }
         }
       });
     }
 
     if (curUsage) {
       curUsage.forEach(u => {
-        // Map from formal tool name or route to slug
-        const toolMatch = publicTools.find(pt => pt.title === u.tool_name || pt.slug === u.tool_name);
-        const slug = toolMatch ? toolMatch.slug : u.tool_name;
-        if (slug) toolRunsMap.set(slug, (toolRunsMap.get(slug) || 0) + 1);
+        const nameOrRoute = u.tool_name || u.route || '';
+        const toolMatch = publicTools.find(pt => 
+          pt.title.toLowerCase() === nameOrRoute.toLowerCase() ||
+          pt.slug === nameOrRoute ||
+          (u.route && u.route.includes(pt.slug))
+        );
+        if (toolMatch) {
+          toolRunsMap.set(toolMatch.slug, (toolRunsMap.get(toolMatch.slug) || 0) + 1);
+        }
       });
     }
 
-    const popularTools = publicTools.map(pt => {
+    const popularTools = publicTools.map((pt) => {
       const views = toolViewsMap.get(pt.slug) || 0;
       const count = toolRunsMap.get(pt.slug) || 0;
       const growthPct = views > 0 ? ((count / views) * 100).toFixed(0) : '0';
+
       return {
         id: pt.id,
         name: pt.title,
@@ -353,8 +365,13 @@ export async function GET(request: NextRequest) {
         growth: `+${growthPct}%`
       };
     })
-    .sort((a, b) => b.count - a.count)
-    .slice(0, 5);
+    .sort((a, b) => {
+      const valA = a.views > 0 ? a.views : a.count;
+      const valB = b.views > 0 ? b.views : b.count;
+      if (valB !== valA) return valB - valA;
+      return (b.views + b.count) - (a.views + a.count);
+    })
+    .slice(0, 10);
 
     // 13. Recent logs feed (Last 20 events)
     // Query recently inserted events

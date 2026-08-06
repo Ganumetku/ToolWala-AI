@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { 
   LayoutDashboard, Mail, BarChart3, Users, 
-  Cpu, Layers, BookOpen, LogOut, ChevronLeft, ChevronRight, Terminal, Settings, ListChecks, Globe
+  Cpu, Layers, BookOpen, LogOut, ChevronLeft, ChevronRight, Settings, ListChecks, Globe
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -35,7 +35,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
   const handleLogout = async () => {
     const { supabase } = await import('@/lib/supabase');
     await supabase.auth.signOut();
-    router.push('/login');
+    router.push('/control-access');
     router.refresh();
   };
 
@@ -47,9 +47,10 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
     >
       {/* Brand Logo Header */}
       <div className="h-20 border-b border-slate-200/80 dark:border-white/5 flex items-center justify-between px-6">
-        <Link href="/admin" className="flex items-center gap-3 overflow-hidden select-none">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.3)]">
-            <Terminal className="w-5 h-5" />
+        <Link href="/admin" className="flex items-center gap-3 overflow-hidden select-none group">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white font-black text-xl shadow-[0_0_20px_rgba(37,99,235,0.4)] relative overflow-hidden transition-all group-hover:scale-105 group-hover:rotate-3 no-translate notranslate" translate="no" data-no-translate>
+            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
+            T
           </div>
           {!isCollapsed && (
             <motion.span 

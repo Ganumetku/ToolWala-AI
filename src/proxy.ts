@@ -16,9 +16,10 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Redirect legacy admin login to /login
-  if (pathname === '/admin/login' || pathname === '/admin/login/') {
-    return NextResponse.redirect(new URL('/login', request.url));
+  // Block & redirect standard /login and /admin/login to home / to hide login route from hackers
+  if (pathname === '/login' || pathname === '/login/' || pathname === '/admin/login' || pathname === '/admin/login/') {
+    console.log(`[Security Proxy] Redirecting public login attempt ${pathname} to homepage /`);
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
   // 1. Detect if pathname starts with a locale prefix (e.g. /hi/, /es/)
@@ -245,7 +246,7 @@ export async function proxy(request: NextRequest) {
 
   // Admin protection logic
   if (!user) {
-    const loginUrl = new URL('/login', request.url);
+    const loginUrl = new URL('/control-access', request.url);
     loginUrl.searchParams.set('redirect', pathname);
     const response = NextResponse.redirect(loginUrl);
     supabaseResponse.cookies.getAll().forEach((cookie) => {
@@ -273,7 +274,7 @@ export async function proxy(request: NextRequest) {
   }
 
   if (!profile || profile.role !== 'admin' || profile.status !== 'active') {
-    const loginUrl = new URL('/login', request.url);
+    const loginUrl = new URL('/control-access', request.url);
     loginUrl.searchParams.set('error', 'unauthorized');
     const response = NextResponse.redirect(loginUrl);
     supabaseResponse.cookies.getAll().forEach((cookie) => {

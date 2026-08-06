@@ -4,12 +4,63 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 export const dynamic = 'force-dynamic';
 
+// In-memory rate limiting store (IP -> { count: number, resetAt: number })
+interface RateLimitEntry {
+  count: number;
+  resetAt: number;
+}
+
+const rateLimitMap = new Map<string, RateLimitEntry>();
+const MAX_ATTEMPTS = 5;
+const LOCKOUT_MS = 15 * 60 * 1000; // 15 Minutes Lockout
+
+function getClientIp(request: NextRequest): string {
+  const forwarded = request.headers.get('x-forwarded-for');
+  if (forwarded) {
+    return forwarded.split(',')[0].trim();
+  }
+  return request.headers.get('x-real-ip') || 
+         request.headers.get('cf-connecting-ip') || 
+         '127.0.0.1';
+}
+
 export async function POST(request: NextRequest) {
+  const clientIp = getClientIp(request);
+  const now = Date.now();
+
+  // 1. Rate Limit Lockout Check
+  const currentRateLimit = rateLimitMap.get(clientIp);
+  if (currentRateLimit) {
+    if (now < currentRateLimit.resetAt) {
+      if (currentRateLimit.count >= MAX_ATTEMPTS) {
+        const remainingMins = Math.ceil((currentRateLimit.resetAt - now) / 60000);
+        return NextResponse.json(
+          {
+            success: false,
+            error: `Security Lockout Active: 5 failed login attempts detected from your IP (${clientIp}). Try again in ${remainingMins} minutes.`,
+          },
+          { status: 429 }
+        );
+      }
+    } else {
+      // Lockout window expired, reset counter
+      rateLimitMap.delete(clientIp);
+    }
+  }
+
+  const recordFailedAttempt = () => {
+    const entry = rateLimitMap.get(clientIp) || { count: 0, resetAt: now + LOCKOUT_MS };
+    entry.count += 1;
+    entry.resetAt = now + LOCKOUT_MS;
+    rateLimitMap.set(clientIp, entry);
+  };
+
   try {
     const body = await request.json();
     const accessToken = body.access_token as string;
 
     if (!accessToken) {
+      recordFailedAttempt();
       return NextResponse.json({ success: false, error: 'Missing access token' }, { status: 400 });
     }
 
@@ -28,6 +79,7 @@ export async function POST(request: NextRequest) {
     const { data: userData, error: userError } = await authClient.auth.getUser(accessToken);
 
     if (userError || !userData.user) {
+      recordFailedAttempt();
       return NextResponse.json({ success: false, error: 'Invalid session' }, { status: 401 });
     }
 
@@ -62,6 +114,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (profileError && !profile) {
+      recordFailedAttempt();
       return NextResponse.json(
         { success: false, error: profileError.message },
         { status: 500 }
@@ -69,10 +122,11 @@ export async function POST(request: NextRequest) {
     }
 
     if (!profile) {
+      recordFailedAttempt();
       return NextResponse.json(
         {
           success: false,
-          error: 'No profile found. Run supabase/RUN_THIS_FIX_ADMIN.sql in Supabase SQL Editor.',
+          error: 'No profile found. Run RUN_THIS_FIX_ADMIN.sql in Supabase SQL Editor.',
         },
         { status: 403 }
       );
@@ -94,10 +148,12 @@ export async function POST(request: NextRequest) {
           .single();
 
         if (promoted) {
+          rateLimitMap.delete(clientIp);
           return NextResponse.json({ success: true, profile: promoted });
         }
       }
 
+      recordFailedAttempt();
       return NextResponse.json(
         {
           success: false,
@@ -107,6 +163,9 @@ export async function POST(request: NextRequest) {
         { status: 403 }
       );
     }
+
+    // Success! Clear rate limit for this IP
+    rateLimitMap.delete(clientIp);
 
     return NextResponse.json({ success: true, profile });
   } catch (err) {

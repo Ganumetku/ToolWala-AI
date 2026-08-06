@@ -38,5 +38,13 @@
     "message": "Hello",
     "status": "new",
     "createdAt": "2026-06-18T07:37:50.077Z"
+  },
+  {
+    "id": "lead-kt9t9bm",
+    "name": "Ganesh Metku",
+    "email": "ganeshmetku@gmail.com",
+    "message": "Hello my friends how are uyou ",
+    "status": "new",
+    "createdAt": "2026-08-06T02:51:23.975Z"
   }
 ]

@@ -65,27 +65,29 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="bg-[#0f172a]/50 p-8 sm:p-12 backdrop-blur-xl font-sans">
+    <div className="p-8 sm:p-12 font-sans bg-slate-50/70 dark:bg-slate-900/40 backdrop-blur-xl h-full flex flex-col justify-between">
       <AnimatePresence mode="wait">
         {status === 'success' ? (
           <motion.div 
             key="success"
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-center py-12"
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="text-center py-12 my-auto"
           >
-            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-[2rem] bg-emerald-500/10 text-emerald-500 mb-8 border border-emerald-500/20 shadow-[0_0_40px_rgba(16,185,129,0.2)]">
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-[2rem] bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 mb-8 border border-emerald-500/20 shadow-[0_0_40px_rgba(16,185,129,0.15)]">
               <CheckCircle className="h-10 w-10" />
             </div>
-            <h3 className="text-3xl font-black text-white mb-4 tracking-tighter uppercase">{t('contact.form_received_title', 'Message Received')}</h3>
-            <p className="text-gray-400 font-medium mb-10 max-w-sm mx-auto leading-relaxed">
+            <h3 className="text-3xl font-black text-slate-900 dark:text-white mb-4 tracking-tight uppercase">{t('contact.form_received_title', 'Message Received')}</h3>
+            <p className="text-slate-600 dark:text-slate-300 font-medium mb-10 max-w-sm mx-auto leading-relaxed text-sm">
               {t('contact.form_received_desc', "We've successfully received your transmission. Our team will analyze and respond within 24 standard business hours.")}
             </p>
             <button
               onClick={() => setStatus('idle')}
-              className="text-blue-500 font-black uppercase tracking-[0.2em] text-[10px] hover:text-blue-400 transition-colors"
+              className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-black uppercase tracking-[0.2em] text-[11px] hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
             >
-              {t('contact.form_send_another', 'Send Another Transmission')}
+              <Send className="w-3.5 h-3.5" />
+              <span>{t('contact.form_send_another', 'Send Another Transmission')}</span>
             </button>
           </motion.div>
         ) : (
@@ -93,8 +95,9 @@ export default function ContactForm() {
             key="form"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             onSubmit={handleSubmit} 
-            className="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2"
+            className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2"
           >
             {/* Honeypot field (hidden from users) */}
             <div className="hidden" aria-hidden="true">
@@ -108,8 +111,8 @@ export default function ContactForm() {
               />
             </div>
 
-            <div className="space-y-3">
-              <label htmlFor="firstName" className="block text-[10px] font-black uppercase tracking-widest text-gray-500 ml-1">
+            <div className="space-y-2">
+              <label htmlFor="firstName" className="block text-[11px] font-black uppercase tracking-widest text-slate-600 dark:text-slate-300 ml-1">
                 {t('contact.form_first_name', 'First Name')}
               </label>
               <input
@@ -120,12 +123,13 @@ export default function ContactForm() {
                 value={formData.firstName}
                 onChange={handleChange}
                 placeholder="John"
-                className="block w-full rounded-2xl bg-white/5 border border-white/5 px-6 py-4 text-white font-bold focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700"
+                className="block w-full rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 px-5 py-3.5 text-slate-900 dark:text-white font-semibold focus:border-blue-600 dark:focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 shadow-xs"
                 disabled={isSubmitting}
               />
             </div>
-            <div className="space-y-3">
-              <label htmlFor="lastName" className="block text-[10px] font-black uppercase tracking-widest text-gray-500 ml-1">
+
+            <div className="space-y-2">
+              <label htmlFor="lastName" className="block text-[11px] font-black uppercase tracking-widest text-slate-600 dark:text-slate-300 ml-1">
                 {t('contact.form_last_name', 'Last Name')}
               </label>
               <input
@@ -136,12 +140,13 @@ export default function ContactForm() {
                 value={formData.lastName}
                 onChange={handleChange}
                 placeholder="Doe"
-                className="block w-full rounded-2xl bg-white/5 border border-white/5 px-6 py-4 text-white font-bold focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700"
+                className="block w-full rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 px-5 py-3.5 text-slate-900 dark:text-white font-semibold focus:border-blue-600 dark:focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 shadow-xs"
                 disabled={isSubmitting}
               />
             </div>
-            <div className="sm:col-span-2 space-y-3">
-              <label htmlFor="email" className="block text-[10px] font-black uppercase tracking-widest text-gray-500 ml-1">
+
+            <div className="sm:col-span-2 space-y-2">
+              <label htmlFor="email" className="block text-[11px] font-black uppercase tracking-widest text-slate-600 dark:text-slate-300 ml-1">
                 {t('contact.form_email', 'Email Address')}
               </label>
               <input
@@ -152,12 +157,13 @@ export default function ContactForm() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="john@example.com"
-                className="block w-full rounded-2xl bg-white/5 border border-white/5 px-6 py-4 text-white font-bold focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700"
+                className="block w-full rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 px-5 py-3.5 text-slate-900 dark:text-white font-semibold focus:border-blue-600 dark:focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 shadow-xs"
                 disabled={isSubmitting}
               />
             </div>
-            <div className="sm:col-span-2 space-y-3">
-              <label htmlFor="message" className="block text-[10px] font-black uppercase tracking-widest text-gray-500 ml-1">
+
+            <div className="sm:col-span-2 space-y-2">
+              <label htmlFor="message" className="block text-[11px] font-black uppercase tracking-widest text-slate-600 dark:text-slate-300 ml-1">
                 {t('contact.form_message', 'Message Content')}
               </label>
               <textarea
@@ -168,37 +174,39 @@ export default function ContactForm() {
                 value={formData.message}
                 onChange={handleChange}
                 placeholder={t('contact.form_message_placeholder', 'How can we help you achieve your AI goals?')}
-                className="block w-full rounded-2xl bg-white/5 border border-white/5 px-6 py-4 text-white font-bold focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700 resize-none"
+                className="block w-full rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 px-5 py-3.5 text-slate-900 dark:text-white font-semibold focus:border-blue-600 dark:focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 resize-none shadow-xs"
                 disabled={isSubmitting}
               />
             </div>
-            <div className="sm:col-span-2 mt-4">
+
+            <div className="sm:col-span-2 mt-2">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="group relative flex w-full items-center justify-center gap-4 rounded-[1.8rem] bg-blue-600 px-8 py-6 text-center text-sm font-black uppercase tracking-[0.2em] text-white shadow-2xl hover:bg-blue-500 active:scale-[0.98] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                className="group relative flex w-full items-center justify-center gap-3 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 text-center text-xs font-black uppercase tracking-[0.15em] shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/35 active:scale-[0.99] transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <Loader2 className="w-4 h-4 animate-spin" />
                     <span>{t('contact.form_btn_sending', 'Transmitting...')}</span>
                   </>
                 ) : (
                   <>
-                    <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    <Send className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     <span>{t('contact.form_btn_send', 'Send Message')}</span>
                   </>
                 )}
               </button>
-              <div className="mt-8 flex items-center justify-center gap-6 text-[8px] font-black uppercase tracking-[0.3em] text-gray-600">
-                <div className="flex items-center gap-2"><Sparkles className="w-3 h-3 text-blue-500" /> {t('contact.form_secure_protocol', 'Secure Protocol')}</div>
-                <div className="flex items-center gap-2"><CheckCircle className="w-3 h-3 text-emerald-500" /> {t('contact.form_human_support', 'Human Support')}</div>
+
+              <div className="mt-6 flex items-center justify-center gap-6 text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                <div className="flex items-center gap-1.5"><Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" /> {t('contact.form_secure_protocol', 'Secure Protocol')}</div>
+                <div className="flex items-center gap-1.5"><CheckCircle className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> {t('contact.form_human_support', 'Human Support')}</div>
               </div>
             </div>
 
             {status === 'error' && (
-              <div className="sm:col-span-2 mt-4 flex items-center gap-2 text-red-500 text-[10px] font-black uppercase tracking-widest animate-pulse">
-                <AlertCircle className="w-4 h-4" />
+              <div className="sm:col-span-2 mt-2 flex items-center gap-2 text-rose-600 dark:text-rose-400 text-xs font-bold uppercase tracking-wide bg-rose-50 dark:bg-rose-500/10 p-3 rounded-xl border border-rose-200 dark:border-rose-500/20">
+                <AlertCircle className="w-4 h-4 flex-shrink-0" />
                 <span>{t('contact.form_error', 'Transmission Failure. Check connection and retry.')}</span>
               </div>
             )}
@@ -208,3 +216,4 @@ export default function ContactForm() {
     </div>
   );
 }
+

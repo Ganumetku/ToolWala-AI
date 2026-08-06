@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import { adminFetch } from '@/lib/admin-fetch';
 import ToolIcon from '@/components/ToolIcon';
 import ToolIconModal from './ToolIconModal';
+import TopToolsRanking from '@/components/admin/TopToolsRanking';
 import {
   Search, EyeOff, Star, TrendingUp, Zap, Calendar, Settings,
   CheckCircle2, Clock, Plus, RefreshCw, Database, X, Loader2, Image as ImageIcon,
@@ -276,8 +277,8 @@ export default function AdminToolsDashboard() {
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        {/* Stats Cards */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           <div className="bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10 rounded-2xl px-6 py-5 text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
             <div className="text-3xl font-black text-slate-900 dark:text-white">{tools.length}</div>
             <div className="text-[10px] uppercase tracking-widest text-slate-400 dark:text-gray-500 font-bold mt-1">Total Tools</div>
@@ -294,6 +295,11 @@ export default function AdminToolsDashboard() {
             <div className="text-3xl font-black text-amber-700 dark:text-yellow-400">{tools.filter(t => t.status === 'scheduled').length}</div>
             <div className="text-[10px] uppercase tracking-widest text-amber-700/80 dark:text-yellow-500/70 font-bold mt-1">Scheduled Tools</div>
           </div>
+        </div>
+
+        {/* Top Performing Tools Ranked Leaderboard */}
+        <div className="mb-10">
+          <TopToolsRanking />
         </div>
 
         {/* Controls */}

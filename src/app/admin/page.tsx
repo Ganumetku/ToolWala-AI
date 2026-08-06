@@ -9,6 +9,8 @@ import {
 import { motion } from 'framer-motion';
 import StatCard from '@/components/admin/StatCard';
 import ChartOverview from '@/components/admin/ChartOverview';
+import CountryPieChart from '@/components/admin/CountryPieChart';
+import TopToolsRanking from '@/components/admin/TopToolsRanking';
 import { toast } from 'sonner';
 import { adminFetch } from '@/lib/admin-fetch';
 import versionInfo from '@/data/version.json';
@@ -21,9 +23,10 @@ interface DashboardStats {
   visitorsChange?: string;
   usagesChange?: string;
   activeChange?: string;
-  popularTools: Array<{ name: string; count: number; category: string; growth: string }>;
+  popularTools: Array<{ id?: string; name: string; count?: number; views?: number; category?: string; growth?: string }>;
   recentLogs: Array<{ id: string; action: string; tool: string; user: string; status: string; time: string }>;
   dailyUsageData?: Array<{ name: string; visitors: number; usage: number }>;
+  topCountries?: Array<{ name: string; value: number; percentage?: string }>;
 }
 
 const initialStats: DashboardStats = {
@@ -160,57 +163,54 @@ export default function AdminDashboard() {
         />
       </div>
 
-      {/* Charts & Popular Tools Section */}
+      {/* Charts & Country Analytics Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
         
-        {/* Main Chart */}
-        <div className="lg:col-span-8 flex flex-col justify-between">
+        {/* Area Chart: Traffic & Usage */}
+        <div className="lg:col-span-7 flex flex-col justify-between">
           <ChartOverview data={stats.dailyUsageData} />
         </div>
 
-        {/* Right Sidebar: Quick Actions & Popular Tools */}
-        <div className="lg:col-span-4 flex flex-col gap-6">
-          
-          {/* Quick Actions */}
-          <div className="bg-white dark:bg-white/[0.01] p-6 rounded-3xl border border-slate-200/80 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-gray-400 mb-4">Quick Actions</h4>
-            <div className="grid grid-cols-2 gap-3">
-              <Link href="/admin/blog" className="flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-blue-50 dark:hover:bg-blue-600/10 hover:text-blue-600 transition-all text-center">
+        {/* Pie Chart: Country Traffic Distribution */}
+        <div className="lg:col-span-5 flex flex-col justify-between">
+          <CountryPieChart data={stats.topCountries} />
+        </div>
+
+      </div>
+
+      {/* Top Performing Tools Leaderboard & Quick Actions Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        
+        {/* Ranked Top Tools Leaderboard */}
+        <div className="lg:col-span-8 flex flex-col justify-between">
+          <TopToolsRanking tools={stats.popularTools} />
+        </div>
+
+        {/* Quick Actions */}
+        <div className="lg:col-span-4 bg-white dark:bg-white/[0.01] p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-gray-400 mb-6">Quick Control Actions</h4>
+            <div className="grid grid-cols-2 gap-4">
+              <Link href="/admin/blog" className="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-blue-50 dark:hover:bg-blue-600/10 hover:text-blue-600 transition-all text-center shadow-xs">
                 <span className="text-xs font-bold text-slate-700 dark:text-gray-300">Write Post</span>
               </Link>
-              <Link href="/admin/content" className="flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-blue-50 dark:hover:bg-blue-600/10 hover:text-blue-600 transition-all text-center">
+              <Link href="/admin/content" className="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-blue-50 dark:hover:bg-blue-600/10 hover:text-blue-600 transition-all text-center shadow-xs">
                 <span className="text-xs font-bold text-slate-700 dark:text-gray-300">Add Tool</span>
               </Link>
-              <Link href="/admin/leads" className="flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-blue-50 dark:hover:bg-blue-600/10 hover:text-blue-600 transition-all text-center">
+              <Link href="/admin/leads" className="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-blue-50 dark:hover:bg-blue-600/10 hover:text-blue-600 transition-all text-center shadow-xs">
                 <span className="text-xs font-bold text-slate-700 dark:text-gray-300">CRM Leads</span>
               </Link>
-              <Link href="/admin/users" className="flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-blue-50 dark:hover:bg-blue-600/10 hover:text-blue-600 transition-all text-center">
+              <Link href="/admin/users" className="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-blue-50 dark:hover:bg-blue-600/10 hover:text-blue-600 transition-all text-center shadow-xs">
                 <span className="text-xs font-bold text-slate-700 dark:text-gray-300">Manage Users</span>
               </Link>
             </div>
           </div>
 
-          {/* Popular Tools */}
-          <div className="bg-white dark:bg-white/[0.01] p-6 rounded-3xl border border-slate-200/80 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex-1">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-gray-400 mb-4 font-sans">Popular Utility Engines</h4>
-            <div className="space-y-3">
-              {stats.popularTools.map((tool, idx) => (
-                <div key={idx} className="flex items-center justify-between gap-4 p-3 rounded-2xl bg-slate-50/80 dark:bg-white/[0.01] border border-slate-200/60 dark:border-white/5 hover:border-blue-500/20 transition-colors">
-                  <div>
-                    <h5 className="text-xs font-bold text-slate-900 dark:text-white">{tool.name}</h5>
-                    <span className="text-[10px] text-slate-400 dark:text-gray-500 font-semibold uppercase tracking-wide mt-0.5 block">{tool.category}</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-xs font-bold text-slate-900 dark:text-white block">{tool.count.toLocaleString()}</span>
-                    <span className="text-[9px] font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-0.5 mt-0.5 justify-end">
-                      <ArrowUpRight className="w-3 h-3" /> {tool.growth}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div className="mt-8 pt-6 border-t border-slate-100 dark:border-white/5 text-center">
+            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-gray-500">
+              ToolWala AI Analytics v2.0
+            </span>
           </div>
-
         </div>
 
       </div>

@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'bg-remover',
-    'Free AI Background Remover – Remove Image BG',
-    'Remove background from images online in one click. High-performance, secure, and browser-first AI background removal.',
+    'Background Remover – Remove BG Online | ToolWala AI',
+    'Free background remover tool online. Remove image background instantly in your browser without uploads or signups. Privacy-first & 100% free.',
     '/tools/bg-remover'
   );
 }

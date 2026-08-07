@@ -68,7 +68,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/tools/sign-pdf',
     '/landing/compress-pdf-to-100kb',
     '/landing/compress-pdf-to-200kb',
-    '/tools/aadhaar-photo-resize',
+    '/tools/crop-aadhaar-card',
     '/tools/gov-form-image-compressor',
     // Image compression landing pages (Programmatic SEO)
     '/landing/compress-image-to-20kb',

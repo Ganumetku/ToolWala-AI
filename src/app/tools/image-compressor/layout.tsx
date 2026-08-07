@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'image-compressor',
-    'Free Online Image Compressor – Compress PNG & JPG',
-    'Reduce image file size without losing quality. Compress PNG, JPG, and WebP images quickly and securely in your browser.',
+    'Image Compressor – Compress Image Online | ToolWala AI',
+    'Free online image compressor and photo compressor. Reduce JPG, PNG, and WebP file sizes by up to 90% in your browser with zero quality loss.',
     '/tools/image-compressor'
   );
 }

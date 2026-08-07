@@ -56,13 +56,13 @@ export default function CropAadhaarCardPage() {
               100% Client-Side Image Processing
             </div>
             <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-6 uppercase">
-              Crop Aadhaar Card <br />
+              Crop & Resize Aadhaar Photo <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
-                Official UIDAI Standard
+                Official UIDAI Size & Spec
               </span>
             </h1>
             <p className="text-base sm:text-lg text-gray-400 leading-relaxed font-medium">
-              Crop Aadhaar Card online quickly and securely with ToolWala. Remove unwanted background, white space, and margins from your Aadhaar Card image instantly. Fast, secure, and easy to use.
+              Crop and resize Aadhaar card photos online free to official UIDAI specifications (3.5x4.5 cm, &lt;50KB). Remove extra margins, set a compliant white background, and compress file size instantly with 100% browser privacy.
             </p>
           </div>
 
@@ -76,9 +76,20 @@ export default function CropAadhaarCardPage() {
             />
           </div>
 
+          {/* Contextual Hub Banner */}
+          <div className="my-12 max-w-6xl mx-auto bg-blue-50/60 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-500/20 p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+            <div>
+              <h4 className="text-sm font-black uppercase text-slate-900 dark:text-white tracking-wide">UIDAI e-Aadhaar & Privacy Toolkit</h4>
+              <p className="text-xs text-slate-600 dark:text-gray-400 mt-1 font-medium">Need to mask your 12-digit Aadhaar number, unlock password-protected e-Aadhaar PDFs, or compress files under 300KB?</p>
+            </div>
+            <Link href="/hubs/aadhaar-utilities/" className="px-5 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-black uppercase tracking-wider hover:bg-blue-700 transition-all shrink-0">
+              Visit Aadhaar Hub →
+            </Link>
+          </div>
+
           {/* SEO Article */}
           {article && (
-            <div className="mt-24 border-t border-white/5 pt-20 max-w-6xl mx-auto">
+            <div className="mt-12 border-t border-white/5 pt-12 max-w-6xl mx-auto">
               <ToolArticle {...article} />
             </div>
           )}

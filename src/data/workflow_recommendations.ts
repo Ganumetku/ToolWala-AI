@@ -248,7 +248,7 @@ const WORKFLOWS: Record<string, ToolWorkflow> = {
   //  government compressors
   'aadhaar-pdf-compressor': {
     nextRecommended: ['aadhaar-masking-tool', 'compress-pdf', 'protect-pdf'],
-    mostUsedTogether: ['aadhaar-photo-resizer', 'gov-form-pdf-compressor', 'sign-pdf'],
+    mostUsedTogether: ['crop-aadhaar-card', 'gov-form-pdf-compressor', 'sign-pdf'],
     workflow: [
       { slug: 'aadhaar-pdf-compressor', label: 'Compress PDF', icon: '🔒' },
       { slug: 'aadhaar-masking-tool', label: 'Mask Card', icon: '🪪' },
@@ -266,7 +266,7 @@ const WORKFLOWS: Record<string, ToolWorkflow> = {
   },
   'aadhaar-masking-tool': {
     nextRecommended: ['aadhaar-pdf-compressor', 'protect-pdf', 'sign-pdf'],
-    mostUsedTogether: ['aadhaar-photo-resizer', 'ocr-to-text', 'compress-pdf'],
+    mostUsedTogether: ['crop-aadhaar-card', 'ocr-to-text', 'compress-pdf'],
     workflow: [
       { slug: 'aadhaar-pdf-compressor', label: 'Compress Aadhaar', icon: '🔒' },
       { slug: 'aadhaar-masking-tool', label: 'Mask Numbers', icon: '🪪' },

@@ -1740,10 +1740,10 @@
     "updatedAt": "2026-06-19T02:10:41.647Z"
   },
   {
-    "id": "trans-60-aadhaar-photo-resizer-en",
-    "toolSlug": "aadhaar-photo-resizer",
+    "id": "trans-60-crop-aadhaar-card-en",
+    "toolSlug": "crop-aadhaar-card",
     "locale": "en",
-    "title": "Aadhaar Photo Resizer",
+    "title": "Crop & Resize Aadhaar Card Photo",
     "description": "Quickly resize, crop, and compress your passport-size photo to official UIDAI specifications for Aadhaar card updates, student cards, and government online applications.",
     "faq": [
       {
@@ -1763,14 +1763,14 @@
         "answer": "Yes. While optimized for Aadhaar, you can select standard passport dimensions and custom background colors/KB sizes to meet SSC, UPSC, and State exam criteria."
       }
     ],
-    "seoTitle": "Aadhaar Photo Resizer – Free Online Tool",
-    "seoDescription": "Resize, crop, and compress passport photos for Aadhaar, UIDAI, and official government updates.",
+    "seoTitle": "Aadhaar Photo Resize & Crop Tool – Official UIDAI Photo Specs",
+    "seoDescription": "Crop and resize Aadhaar card photos to official UIDAI specifications (3.5x4.5 cm, <50KB) online free with clean white background and 100% privacy.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-18T02:01:06.127Z"
   },
   {
-    "id": "trans-61-aadhaar-photo-resizer-hi",
-    "toolSlug": "aadhaar-photo-resizer",
+    "id": "trans-61-crop-aadhaar-card-hi",
+    "toolSlug": "crop-aadhaar-card",
     "locale": "hi",
     "title": "आधार फोटो रिसाइज़र",
     "description": "आधार कार्ड अपडेट, छात्र कार्ड और सरकारी ऑनलाइन आवेदनों के लिए आधिकारिक यूआईडीएआई विनिर्देशों के अनुसार अपने पासपोर्ट आकार के फोटो का त्वरित आकार बदलें, काटें और संपीड़ित करें।",
@@ -1798,8 +1798,8 @@
     "updatedAt": "2026-06-18T02:15:54.658Z"
   },
   {
-    "id": "trans-62-aadhaar-photo-resizer-es",
-    "toolSlug": "aadhaar-photo-resizer",
+    "id": "trans-62-crop-aadhaar-card-es",
+    "toolSlug": "crop-aadhaar-card",
     "locale": "es",
     "title": "Aadhaar Cambio de tamaño de fotos",
     "description": "Cambie el tamaño, recorte y comprima rápidamente su fotografía tamaño pasaporte según las especificaciones oficiales UIDAI para actualizaciones de tarjetas Aadhaar, tarjetas de estudiantes y solicitudes gubernamentales en línea.",
@@ -1827,8 +1827,8 @@
     "updatedAt": "2026-06-19T01:06:50.260Z"
   },
   {
-    "id": "trans-63-aadhaar-photo-resizer-fr",
-    "toolSlug": "aadhaar-photo-resizer",
+    "id": "trans-63-crop-aadhaar-card-fr",
+    "toolSlug": "crop-aadhaar-card",
     "locale": "fr",
     "title": "Aadhaar Redimensionneur de photos",
     "description": "Redimensionnez, recadrez et compressez rapidement votre photo au format passeport selon les spécifications officielles UIDAI pour les mises à jour de cartes Aadhaar, les cartes d'étudiant et les demandes gouvernementales en ligne.",
@@ -5004,8 +5004,8 @@
     "updatedAt": "2026-06-19T01:42:18.426Z"
   },
   {
-    "id": "trans-aadhaar-photo-resizer-pt",
-    "toolSlug": "aadhaar-photo-resizer",
+    "id": "trans-crop-aadhaar-card-pt",
+    "toolSlug": "crop-aadhaar-card",
     "locale": "pt",
     "title": "Aadhaar Redimensionador de fotos",
     "description": "Redimensione, corte e compacte rapidamente sua foto tamanho passaporte de acordo com as especificações oficiais UIDAI para atualizações de cartões Aadhaar, cartões de estudante e inscrições governamentais on-line.",
@@ -6139,8 +6139,8 @@
     "updatedAt": "2026-06-19T02:12:47.176Z"
   },
   {
-    "id": "trans-aadhaar-photo-resizer-de",
-    "toolSlug": "aadhaar-photo-resizer",
+    "id": "trans-crop-aadhaar-card-de",
+    "toolSlug": "crop-aadhaar-card",
     "locale": "de",
     "title": "Aadhaar Foto-Resizer",
     "description": "Ändern Sie schnell die Größe Ihres Passfotos, schneiden Sie es zu und komprimieren Sie es auf die offiziellen UIDAI-Spezifikationen für Aadhaar-Kartenaktualisierungen, Studentenausweise und behördliche Online-Anträge.",
@@ -7274,8 +7274,8 @@
     "updatedAt": "2026-06-19T02:14:31.316Z"
   },
   {
-    "id": "trans-aadhaar-photo-resizer-id",
-    "toolSlug": "aadhaar-photo-resizer",
+    "id": "trans-crop-aadhaar-card-id",
+    "toolSlug": "crop-aadhaar-card",
     "locale": "id",
     "title": "Aadhaar Pengubah Ukuran Foto",
     "description": "Ubah ukuran, potong, dan kompres foto ukuran paspor Anda dengan cepat ke spesifikasi resmi UIDAI untuk pembaruan kartu Aadhaar, kartu pelajar, dan aplikasi online pemerintah.",
@@ -8409,8 +8409,8 @@
     "updatedAt": "2026-06-19T02:16:40.984Z"
   },
   {
-    "id": "trans-aadhaar-photo-resizer-ar",
-    "toolSlug": "aadhaar-photo-resizer",
+    "id": "trans-crop-aadhaar-card-ar",
+    "toolSlug": "crop-aadhaar-card",
     "locale": "ar",
     "title": "Aadhaar أداة تغيير حجم الصور",
     "description": "يمكنك تغيير حجم الصورة بحجم جواز السفر واقتصاصها وضغطها بسرعة وفقًا للمواصفات الرسمية UIDAI لتحديثات البطاقة Aadhaar وبطاقات الطلاب والتطبيقات الحكومية عبر الإنترنت.",

@@ -1467,7 +1467,7 @@
       }
     ],
     "relatedToolSlugs": [
-      "aadhaar-photo-resizer",
+      "crop-aadhaar-card",
       "bg-remover"
     ]
   },
@@ -2148,6 +2148,112 @@
       "webp-to-jpg-png-converter",
       "image-compressor",
       "bg-remover"
+    ]
+  },
+  {
+    "id": "pan-card-photo-size-2026-new-requirement",
+    "slug": "pan-card-photo-size-2026-new-requirement",
+    "title": "PAN Card Photo Size Specs: NSDL & UTIITSL Guidelines",
+    "excerpt": "Complete guide to official NSDL (3.5x2.5cm) and UTIITSL (213x213px) PAN card photo specs for online applications, plus physical Form 49AA paper rules for NRIs.",
+    "content": "Applying for or updating a Permanent Account Number (PAN) card via the official NSDL (Protean e-Gov) or UTIITSL portals requires uploading photographs and signatures that strictly match digital dimension and file size limits. Uploading non-compliant file sizes or incorrect pixel aspect ratios will trigger automatic rejection notices on government portals.\n\nBecause PAN card applications serve two distinct applicant groups—Indian residents applying online versus NRIs/foreign citizens filing physical paper forms—it is essential to follow the exact specifications for your application method.\n\nIn this guide, we break down the exact specifications for both NSDL and UTIITSL online portals as well as physical paper submissions.\n\n---\n\n## 1. Online Application Specifications (Indian Residents — Form 49A / Online Portals)\n\nFor almost all applicants filing online through NSDL (Protean) or UTIITSL, official digital upload portals enforce strict pixel, DPI, and file size constraints.\n\n### NSDL (Protean e-Gov) Portal Specifications\n- **Photograph Dimensions**: 3.5 cm (Height) x 2.5 cm (Width) at 200 DPI (approx 197 x 276 pixels)\n- **File Size**: Strictly between 20 KB and 50 KB in JPEG format\n- **Signature Dimensions**: 2.0 cm (Height) x 4.5 cm (Width) at 200 DPI (approx 157 x 354 pixels)\n- **Signature File Size**: Under 50 KB in JPEG format\n- **Background**: Plain white or off-white backdrop\n\n### UTIITSL Portal Specifications\n- **Photograph Dimensions**: 213 x 213 pixels at 300 DPI (square aspect ratio)\n- **File Size**: Between 10 KB and 30 KB in JPEG format\n- **Signature Dimensions**: 213 x 444 pixels at 300 DPI\n- **Signature File Size**: Under 30 KB in JPEG format\n\n### Crop & Resize Your PAN Photo Online\nTo format your photo for online NSDL or UTIITSL submission, use our specialized online utility:\n\n> **Try the Tool**: [Resize PAN Card Photo Online Free](/tools/pan-card-resize/) — Select NSDL or UTIITSL presets to automatically format dimensions and compress output under 50KB/30KB with 100% browser privacy.\n\n---\n\n## 2. Physical Paper Application Guidelines (NRIs & Foreign Nationals — Form 49AA / Form 95/96)\n\nApplicants filing paper applications (such as foreign citizens, NRIs using Form 49AA, or offline physical correction submissions under Form 95/96) must paste physical paper photographs onto the printed application form.\n\n- **Physical Photo Dimensions**: 4.5 cm (Height) x 3.5 cm (Width) physical print photograph\n- **Submission Method**: Physical paper photo pasted onto the paper form and submitted to an authorized NSDL / UTIITSL TIN-FC collection center.\n- **Note**: This 4.5 cm x 3.5 cm print dimension applies strictly to physical paper forms. Digital online upload portals require the NSDL (3.5x2.5 cm / 197x276 px) or UTIITSL (213x213 px) portal specifications detailed in Section 1.\n\n---\n\n## Summary of Official PAN Photo Specifications\n\n| Portal / Application Type | Photo Dimensions | DPI | File Size Limit | Signature Specs |\n| :--- | :--- | :--- | :--- | :--- |\n| **NSDL Online (Protean)** | 3.5 cm (H) x 2.5 cm (W) (~197x276 px) | 200 DPI | 20 KB – 50 KB (JPEG) | 2.0x4.5 cm (~157x354 px), <50KB |\n| **UTIITSL Online** | 213 x 213 pixels | 300 DPI | 10 KB – 30 KB (JPEG) | 213 x 444 px, <30KB |\n| **Physical Paper Form (Form 49AA)** | 4.5 cm (H) x 3.5 cm (W) print | N/A (Paper) | N/A (Physical Paste) | Physical Ink Signature |\n\nFor more details on preparing scanned supporting documents (Aadhaar, address proof) under 300KB, visit our [NSDL & UTIITSL PAN Card Hub](/hubs/pan-card-utilities/).",
+    "thumbnail": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80",
+    "category": "Document Tools",
+    "tags": [
+      "PAN Card",
+      "PAN Card Photo Size",
+      "NSDL",
+      "UTIITSL",
+      "Photo Resizer"
+    ],
+    "featured": true,
+    "status": "published",
+    "publishedAt": "2026-08-07T08:00:00.000Z",
+    "createdAt": "2026-08-07T08:00:00.000Z",
+    "updatedAt": "2026-08-07T08:00:00.000Z",
+    "author": {
+      "name": "ToolWala Editorial",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
+      "role": "Government Form Specialist"
+    },
+    "seoMetadata": {
+      "title": "PAN Card Photo Size Specs: NSDL 3.5x2.5cm & UTIITSL 213x213px | ToolWala AI",
+      "description": "Official NSDL and UTIITSL PAN card photo size specifications for online & physical applications. Crop & resize photos to 20KB-50KB online free."
+    },
+    "readingTime": "4 min read",
+    "faqs": [
+      {
+        "id": "pan-faq-1",
+        "question": "What is the official PAN card photo size for NSDL online applications?",
+        "answer": "For NSDL (Protean) online applications, the required photo size is 3.5 cm (height) x 2.5 cm (width) at 200 DPI (approx 197x276 pixels), with a file size strictly between 20KB and 50KB in JPEG format.",
+        "order": 1
+      },
+      {
+        "id": "pan-faq-2",
+        "question": "What is the UTIITSL PAN card photo size specification?",
+        "answer": "For UTIITSL online portal uploads, the photo specification is 213 x 213 pixels at 300 DPI, with file size strictly under 30KB in JPEG format.",
+        "order": 2
+      },
+      {
+        "id": "pan-faq-3",
+        "question": "When does the 4.5 cm x 3.5 cm physical photo size apply for PAN cards?",
+        "answer": "The 4.5cm x 3.5cm physical photograph size applies strictly to paper/physical applications submitted via Form 49AA or Form 95/96 for NRIs and foreign citizens.",
+        "order": 3
+      }
+    ],
+    "relatedToolSlugs": [
+      "pan-card-resize",
+      "signature-resize",
+      "gov-form-pdf-compressor"
+    ]
+  },
+  {
+    "id": "indian-passport-photo-size-2026-why-old-2x2-inch-photo-no-longer-accepted",
+    "slug": "indian-passport-photo-size-2026-why-old-2x2-inch-photo-no-longer-accepted",
+    "title": "Indian Passport Photo Size 2026: Why the Old 2x2 Inch Photo Is No Longer Accepted",
+    "excerpt": "Indian Passport Photo rules changed in 2026. Discover why 2x2 inch square photos are discontinued and learn how to format standard 35x45mm photos online free.",
+    "content": "If you are planning to apply for a fresh Indian passport or renew an existing one on the Passport Seva portal in 2026, pay close attention to the photograph upload rules. A major rule update effective 16 February 2026 has updated the accepted photo dimensions for all Passport Seva Kendra (PSK) and Post Office Passport Seva Kendra (POPSK) filings.\n\nFor over a decade, many applicants used 2x2 inch (51mm x 51mm) square photos originally designed for US visa applications. As of 2026, **the 2x2 inch square format is officially discontinued and no longer accepted** by the Ministry of External Affairs (MEA) for Indian passport applications. Only standard 35mm x 45mm (3.5cm x 4.5cm) photographs are valid.\n\nIn this article, we explain why passport photo requirements changed, detail the updated 2026 specification, and show you how to generate compliant passport photos instantly online.\n\n---\n\n## Why the Old 2x2 Inch Photo Is Discontinued for Indian Passports\n\nThe decision to mandate 35mm x 45mm photo dimensions aligns Indian travel documents with the International Civil Aviation Organization (ICAO) Document 9303 standards.\n\n### Reasons Behind the 2026 Mandate\n1. **ICAO Global Interoperability**: International airport biometric e-gates read facial ratios formatted in 35x45mm vertical aspect ratios. The old 51x51mm square format caused optical scanning misalignment at international border checkpoints.\n2. **Passport Seva Kendra Automated Validation**: The Passport Seva online portal now enforces automated pixel validation upon file selection. Uploading a 2x2 inch (600x600 px) image triggers an immediate error message: *\"File aspect ratio invalid. Required: 3.5cm x 4.5cm.\"*\n3. **Printing Standardization**: Physical passport booklets printed at RPO centers are calibrated strictly for 35x45mm frames.\n\n---\n\n## Official Indian Passport Photo Specifications (2026)\n\nTo avoid rejection at the Passport Seva Kendra appointment or during online filing, ensure your photograph strictly satisfies these guidelines:\n\n### Key Requirements Checklist\n- **Dimensions**: Exactly 35 mm width x 45 mm height (3.5 cm x 4.5 cm / minimum 350 x 450 pixels).\n- **Background**: Plain white or off-white background only. Colored, patterned, or dark backgrounds are rejected instantly.\n- **Facial Coverage**: Your head and facial features must occupy **70% to 80%** of the photograph height (from chin to top of hair).\n- **File Size**: Between 20 KB and 50 KB in JPG/JPEG format for online portal uploads.\n- **Lighting & Posture**: Eyes must be open and clearly visible. Both ears must be uncovered. Head must be centered with a neutral expression.\n\n---\n\n## How to Create 35x45mm Passport Photos Online Free\n\nYou no longer need to visit a commercial photo booth or buy expensive studio prints. With ToolWala's AI engine, you can turn any mobile selfie into an official passport photo in seconds.\n\n### Step-by-Step Creation Guide\n1. Take a portrait photo on your smartphone in bright, natural light against any plain wall.\n2. Open our [Passport Photo Maker Online](/tools/passport-photo-maker/).\n3. Upload your photo. Our built-in AI automatically removes the original background, replaces it with a clean white backdrop, auto-centers your face, and crops to exact 3.5cm x 4.5cm dimensions.\n4. Download your compliant individual photo or a print-ready 4x6 inch sheet containing 8 passport copies.\n\n> **Create Your Passport Photo Now**: [Use Passport Photo Maker Tool](/tools/passport-photo-maker/) — 100% browser-native AI processing, instant background replacement, and zero data uploads to remote servers.\n\n---\n\n## Essential Passport Seva Document & Upload Guidelines\n\nAlong with your 35x45mm passport photograph, uploading birth certificates, address proofs, and academic marks sheets to the Passport Seva portal requires satisfying the 1.0 MB file size limit per PDF document.\n\nFor comprehensive guidelines on compressing supporting document scans, handling password-protected PDFs, and verifying appointment checklists, check out our [Passport Seva Document & Photo Optimization Hub](/hubs/passport-seva-utilities/).",
+    "thumbnail": "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+    "category": "Image Tools",
+    "tags": [
+      "Passport Photo Size India 2026",
+      "Passport Photo Maker",
+      "Passport Seva",
+      "Passport Photo Requirements Changed",
+      "ToolWala"
+    ],
+    "featured": true,
+    "status": "published",
+    "publishedAt": "2026-08-07T08:15:00.000Z",
+    "createdAt": "2026-08-07T08:15:00.000Z",
+    "updatedAt": "2026-08-07T08:15:00.000Z",
+    "author": {
+      "name": "ToolWala Editorial",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
+      "role": "Travel & Documentation Specialist"
+    },
+    "seoMetadata": {
+      "title": "Passport Photo Size India 2026: Why 2x2 Inch Is Discontinued | ToolWala AI",
+      "description": "Learn about the 2026 Indian passport photo size rule change. 2x2 inch photos are discontinued; only 35x45mm photos are accepted. Create photos online free."
+    },
+    "readingTime": "5 min read",
+    "faqs": [
+      {
+        "id": "pass-faq-1",
+        "question": "What is the official passport photo size in India for 2026?",
+        "answer": "The official size is 35mm x 45mm (3.5cm x 4.5cm) with a white background and 70-80% face coverage.",
+        "order": 1
+      },
+      {
+        "id": "pass-faq-2",
+        "question": "Are 2x2 inch (51x51mm) photos accepted for Indian passports in 2026?",
+        "answer": "No. The 2x2 inch format is no longer accepted for Indian passport applications as per updated Passport Seva guidelines.",
+        "order": 2
+      }
+    ],
+    "relatedToolSlugs": [
+      "passport-photo-maker",
+      "image-compressor",
+      "gov-form-pdf-compressor"
     ]
   }
 ]

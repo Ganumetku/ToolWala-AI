@@ -125,12 +125,12 @@ Additionally, when updating details or uploading Aadhaar proofs, you must meet s
 
 ToolWala's Aadhaar Hub runs 100% locally inside your web browser. The **Aadhaar Masking Tool** uses browser-based image detection to overlay dark masks on the first 8 digits, protecting your biometric privacy. The **Aadhaar PDF Compressor** shrinks your document under 300KB locally, keeping your sensitive identity scans safe from third-party databases.`,
     relatedTools: [
+      { title: "Crop & Resize Aadhaar Card", slug: "crop-aadhaar-card", icon: "📸" },
       { title: "Aadhaar Masking Tool", slug: "aadhaar-masking-tool", icon: "🪪" },
-      { title: "Aadhaar PDF Compressor", slug: "aadhaar-pdf-compressor", icon: "🔒" },
-      { title: "Crop Aadhaar Card", slug: "crop-aadhaar-card", icon: "📸" }
+      { title: "Aadhaar PDF Compressor", slug: "aadhaar-pdf-compressor", icon: "🔒" }
     ],
     landingPages: [
-      { title: "Crop Aadhaar Card", slug: "crop-aadhaar-card" },
+      { title: "Crop & Resize Aadhaar Card", slug: "crop-aadhaar-card" },
       { title: "Compress PDF to 300KB", slug: "compress-pdf-to-300kb" },
       { title: "Aadhaar Masking Tool", slug: "aadhaar-masking-tool" }
     ],

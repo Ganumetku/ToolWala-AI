@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'passport-photo-maker',
-    'Free AI Passport Photo Maker – Print-Ready Photos',
-    'Convert photos into standard, print-ready passport-size pictures. Automatic background removal and cropping tools.',
+    'Passport Photo Maker – 35x45mm Online | ToolWala AI',
+    'Create passport size photo online free with our passport photo maker. Formats 35x45mm photos for India 2026 specs with white background.',
     '/tools/passport-photo-maker'
   );
 }

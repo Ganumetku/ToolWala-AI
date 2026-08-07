@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'resume-builder',
-    'Free AI Resume Builder – Professional CV Maker',
-    'Build ATS-friendly, professional resumes in minutes. Choose elegant templates, optimize sections, and export to PDF.',
+    'Free Resume Builder – AI Resume Maker | ToolWala AI',
+    'Free AI resume builder & resume maker. Create ATS-friendly professional resumes online in minutes with instant PDF download and zero signup.',
     '/tools/resume-builder'
   );
 }

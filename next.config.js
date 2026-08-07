@@ -74,6 +74,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/tools/aadhaar-photo-resize',
+        destination: '/tools/crop-aadhaar-card/',
+        permanent: true,
+      },
+      {
         source: '/tools/aadhar-card-cropper',
         destination: '/tools/crop-aadhaar-card/',
         permanent: true,

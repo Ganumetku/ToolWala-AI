@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'ai-logo-maker',
-    'Free AI Logo Maker – Design Professional Logos',
-    'Generate high-quality, professional logo designs instantly. Customize styles, fonts, and colors for your brand identity for free.',
+    'AI Logo Maker – Free Logo Generator | ToolWala AI',
+    'Create custom logos with our AI logo maker. Free logo maker online generates vector SVG & high-res PNG logos for your business instantly.',
     '/tools/ai-logo-maker'
   );
 }

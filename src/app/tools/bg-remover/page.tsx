@@ -289,7 +289,7 @@ export default function BackgroundRemover() {
                     <img 
                       src={resultUrl} 
                       className="absolute inset-0 w-full h-full object-contain pointer-events-none p-8" 
-                      alt="Background Removed" 
+                      alt="Free background remover tool online – remove image background instantly" 
                     />
                     
                     {/* BEFORE Image (Original) wrapped in clip-path */}

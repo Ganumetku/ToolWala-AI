@@ -204,6 +204,18 @@ export default function GovernmentToolHub() {
             </p>
           </div>
         </div>
+
+        {/* 2026 Rule Update Guides */}
+        <div className="mt-8 max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 text-xs font-semibold text-gray-600 dark:text-gray-400">
+          <span className="font-bold text-gray-900 dark:text-white uppercase tracking-wider text-[10px]">2026 Official Guides:</span>
+          <Link href="/blog/pan-card-photo-size-2026-new-requirement/" className="hover:text-blue-600 dark:hover:text-blue-400 underline underline-offset-4">
+            PAN Photo Size & Specs Guide →
+          </Link>
+          <span className="hidden sm:inline text-gray-300 dark:text-gray-700">•</span>
+          <Link href="/blog/indian-passport-photo-size-2026-why-old-2x2-inch-photo-no-longer-accepted/" className="hover:text-blue-600 dark:hover:text-blue-400 underline underline-offset-4">
+            Passport Photo 2026 Rule Change →
+          </Link>
+        </div>
       </div>
     </section>
   );

@@ -16,7 +16,7 @@ export interface ToolArticleData {
 
 export const toolArticles: Record<string, ToolArticleData> = {
   "ai-logo-maker": {
-    title: "AI Logo Maker",
+    title: "Free AI Logo Maker – Generate Brand Logos Online",
     intro: "Your brand's visual identity starts here. Our AI Logo Maker combines professional design principles with advanced artificial intelligence to help you create stunning, high-resolution logos in seconds—no design degree required.",
     whatItDoes: "The ToolWala AI Logo Maker is a sophisticated design engine that understands the nuances of branding. Unlike generic template editors, our tool analyzes your business name, industry, and preferred style to generate a diverse array of logo concepts. It handles the complex work of color theory, typography pairing, and iconography, allowing you to focus on choosing the perfect face for your brand. Whether you need a sleek tech monogram or a classic corporate emblem, the engine adapts to your vision.",
     howToUse: [
@@ -46,10 +46,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Side projects that need a polished face before launch."
     ],
     faqs: [
-      { question: "Do I own the logos I create?", answer: "Yes, you retain 100% ownership of the logos you design and download using ToolWala AI. We claim no rights over your creative outputs." },
-      { question: "Can I download my logo for free?", answer: "During our beta period, you can generate and customize logos for free. We aim to keep professional branding accessible to everyone." },
-      { question: "What file formats do you provide?", answer: "Currently, we provide high-resolution PNG files which are perfect for web use, social media, and small-scale printing." },
-      { question: "Is this really powered by AI?", answer: "Yes! Our custom-built engine uses AI to pair fonts, select icons, and generate layouts based on the data you provide, ensuring each result is contextually relevant." }
+      { question: "How to create brand logos with this free logo maker online?", answer: "Enter your brand name, slogan, and niche. The AI logo maker generates unique modern logo concepts that you can customize and download in high resolution." },
+      { question: "Are generated logos free for commercial use?", answer: "Yes, vector SVG and PNG logos created on ToolWala AI logo maker are yours to use for commercial projects, websites, and business cards." },
+      { question: "Can I customize colors and typography in the logo maker?", answer: "Absolutely. Adjust icon styles, layout alignment, color palettes, and fonts before exporting vector files." },
+      { question: "Do I own the logos I create?", answer: "Yes, you retain 100% ownership of the logos you design and download using ToolWala AI. We claim no rights over your creative outputs." }
     ],
     conclusion: "Branding doesn't have to be a barrier to entry. With the ToolWala AI Logo Maker, you can bridge the gap between a great idea and a professional business in minutes. Start experimenting today and see how AI can transform your vision into a visual reality.",
     relatedTools: [
@@ -59,7 +59,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "bg-remover": {
-    title: "AI Background Remover",
+    title: "Free AI Background Remover – Remove Image BG Instantly",
     intro: "Professional-grade image isolation in your browser. Remove backgrounds with surgical precision using our edge-computing AI—no data uploads, 100% privacy.",
     whatItDoes: "Our Background Remover uses state-of-the-art neural networks to distinguish between foreground subjects and their backgrounds. What makes our tool unique is that it runs entirely on your device using WebAssembly. This means your images are processed locally on your GPU, ensuring that sensitive photos never leave your computer. It handles complex details like hair, fur, and transparent objects with ease, delivering a clean PNG with a transparent background in seconds.",
     howToUse: [
@@ -89,9 +89,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Real estate agents isolating houses for marketing materials."
     ],
     faqs: [
-      { question: "Is it really private?", answer: "Yes. Unlike other tools, we don't 'upload' your file. The AI model is downloaded to your browser and runs locally. Your data stays on your machine." },
-      { question: "Does it work on complex backgrounds?", answer: "Our AI is highly capable of handling busy backgrounds, though results are always best when there is some contrast between the subject and the background." },
-      { question: "Is there a file size limit?", answer: "The tool works best with images under 10MB to ensure smooth performance in your browser's memory." },
+      { question: "How to remove bg from images online for free?", answer: "Upload your photo to ToolWala's background remover. Our AI automatically detects the subject and removes the background instantly in your browser without uploading files to remote servers." },
+      { question: "Is this bg remover safe for sensitive and private photos?", answer: "Yes. ToolWala AI processes images 100% client-side using WebAssembly. Your photos never leave your device, guaranteeing total privacy." },
+      { question: "What image formats are supported for background removal?", answer: "You can upload JPG, PNG, and WebP images to remove background, download transparent PNGs, or add custom background colors." },
       { question: "Do I need to sign up?", answer: "No. You can use the tool instantly without creating an account or providing any personal information." }
     ],
     conclusion: "Don't let complex software slow down your workflow. Experience the perfect blend of AI power and privacy with our Background Remover. Clean, professional, and entirely yours.",
@@ -145,7 +145,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "image-compressor": {
-    title: "Image Compressor",
+    title: "Online Image Compressor & JPG Size Reducer",
     intro: "Faster websites start with optimized images. Shrink your file sizes by up to 90% without losing the quality your eyes can see.",
     whatItDoes: "Our Image Compressor is a powerful tool designed to solve the 'slow website' problem. It uses intelligent lossy and lossless compression algorithms to strip out unnecessary metadata and optimize pixel data. By running locally in your browser using the `browser-image-compression` engine, it offers incredible speed and total privacy. Whether you're a photographer uploading to a portfolio or a developer optimizing for PageSpeed Insights, our tool helps you find the perfect balance between file size and visual fidelity.",
     howToUse: [
@@ -175,10 +175,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Bloggers ensuring their pages load quickly on mobile devices."
     ],
     faqs: [
-      { question: "Will my images look blurry?", answer: "Not if you stay within the 70-90% quality range. Our compression is designed to be 'visually lossless' for most use cases." },
-      { question: "Is there a limit on how many images I can compress?", answer: "No. You can compress as many images as you need, entirely for free." },
-      { question: "Does this support PNG transparency?", answer: "Yes! Our compressor preserves PNG transparency (alpha channels) while still reducing the overall file size." },
-      { question: "Why is browser-based compression better?", answer: "It's faster (no upload/download delay) and significantly more secure because your images never leave your local machine." }
+      { question: "How can I compress image files without losing quality?", answer: "Use our free photo compressor to adjust target file size or quality settings. Advanced browser canvas compression shrinks JPGs and PNGs up to 90% without visible quality loss." },
+      { question: "Does this JPG size reducer work offline?", answer: "Yes, once loaded, the image compressor runs entirely in your browser memory via WebAssembly, so no images are ever uploaded to any server." },
+      { question: "What is the maximum file size for photo compression?", answer: "Because compression occurs on your local device, there are no file size limits or restrictions on the number of images you can compress." },
+      { question: "Does this support PNG transparency?", answer: "Yes! Our compressor preserves PNG transparency (alpha channels) while still reducing the overall file size." }
     ],
     conclusion: "Don't let heavy images weigh down your digital presence. Optimize your media in seconds and give your users the fast experience they deserve.",
     relatedTools: [
@@ -188,9 +188,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "passport-photo-maker": {
-    title: "Passport Photo Maker",
+    title: "Passport Photo Maker – Official 35x45mm Photo Online",
     intro: "Skip the studio and the long lines. Create professional, government-compliant passport and visa photos in your browser using our intelligent head-centering AI.",
-    whatItDoes: "The ToolWala Passport Photo Maker is designed to take the guesswork out of standardized documentation. It uses advanced face detection to automatically identify your features and align them with international passport standards (like the 2x2 inch US requirement). Our tool doesn't just crop; it intelligently frames your head and shoulders to ensure you meet official guidelines for head size and eye level. Plus, with our background removal integration, you can turn any wall in your home into a professional white studio background.",
+    whatItDoes: "The ToolWala Passport Photo Maker is designed to take the guesswork out of standardized documentation. It uses advanced face detection to automatically identify your features and align them with international passport standards (like the 35x45mm India Passport requirement). Our tool doesn't just crop; it intelligently frames your head and shoulders to ensure you meet official guidelines for head size and eye level. Plus, with our background removal integration, you can turn any wall in your home into a professional white studio background.",
     howToUse: [
       "Upload a clear portrait photo taken in good lighting against any plain background.",
       "Select your target country or document type to apply the correct dimension and framing rules.",
@@ -200,7 +200,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     keyFeatures: [
       { title: "Auto-Centering AI", desc: "Face detection technology that perfectly aligns your eyes and head according to official government standards." },
-      { title: "Standard Presets", desc: "Built-in dimensions for US Passport, India Passport, Schengen Visa, and more." },
+      { title: "Standard Presets", desc: "Built-in dimensions for US Passport, India Passport (35x45mm), Schengen Visa, and more." },
       { title: "Print-Ready Layouts", desc: "Generate a standard 4x6 print sheet so you can get multiple photos at any local print shop for pennies." },
       { title: "Integrated BG Removal", desc: "Automatically replaces busy backgrounds with official white or off-white colors." }
     ],
@@ -218,9 +218,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Families needing to coordinate multiple passport photos at once."
     ],
     faqs: [
-      { question: "Are these photos legally acceptable?", answer: "Yes, as long as you follow basic rules like looking straight at the camera and having a neutral expression. Our tool ensures the dimensions and framing meet official standards." },
-      { question: "What should I wear for my photo?", answer: "We recommend wearing dark-colored clothing that contrasts with the white background. Avoid uniforms, hats (unless religious), or glasses that create a glare." },
-      { question: "Is the background removal accurate enough?", answer: "Our AI is highly precise, especially if you take your photo against a relatively plain wall. It handles hair edges much better than traditional manual cropping." },
+      { question: "What is the passport photo size in India for 2026 applications?", answer: "The official Passport Seva requirement is 35mm x 45mm (3.5cm x 4.5cm) with a plain white background. Note that the old 2x2 inch (51x51mm) format is no longer accepted." },
+      { question: "How do I make a passport size photo online free?", answer: "Upload your photo to our passport photo maker. The built-in AI removes background, adds clean white backdrop, and auto-crops to 35x45mm dimensions." },
+      { question: "Can I use this passport photo maker for government exam portals?", answer: "Yes! It supports standard passport photo specs suitable for Passport Seva, UPSC, SSC, and state exam portals." },
       { question: "Can I print these at home?", answer: "Absolutely. You can download the 4x6 sheet and print it on any photo-capable printer, or take it to a kiosk at CVS, Walgreens, or Walmart." }
     ],
     conclusion: "Professional documentation shouldn't be expensive or complicated. Take control of your next passport photo and get it right the first time with our AI-powered maker.",
@@ -231,7 +231,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "pdf-tools": {
-    title: "PDF Tools Suite",
+    title: "Free PDF Tools: Merge PDF, Compress & Split Documents",
     intro: "The only PDF toolkit you'll ever need. Merge, split, compress, and organize your documents with professional-grade tools that run entirely in your browser.",
     whatItDoes: "PDFs are the backbone of modern documentation, but they can be notoriously difficult to edit. The ToolWala PDF Suite provides a set of powerful, lightweight utilities to manage your documents without needing expensive Acrobat subscriptions. Whether you need to combine multiple reports into a single file, extract a specific page, or shrink a large PDF for an email attachment, our tools handle it with zero friction. Most importantly, all processing happens locally using the `pdf-lib` engine, so your sensitive documents never leave your device.",
     howToUse: [
@@ -261,9 +261,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Legal professionals needing to merge multiple case documents securely."
     ],
     faqs: [
-      { question: "Is my data safe?", answer: "100%. We use client-side libraries to process PDFs. This means your files never leave your computer's memory. We literally cannot see your documents." },
-      { question: "Can I merge password-protected files?", answer: "Currently, you must remove the password from a PDF before our tool can process and merge it with other documents." },
-      { question: "Is there a file size limit?", answer: "Since it runs in your browser, the limit depends on your computer's RAM. Most users can easily process files up to 100MB without any issues." },
+      { question: "How do I merge PDF files together online?", answer: "Select multiple PDF files, arrange them in your preferred page order, and click merge PDF. The documents will be combined into a single PDF instantly." },
+      { question: "Can I compress PDF files and split PDF pages on this page?", answer: "Yes, ToolWala provides full PDF tools including PDF merge, PDF compression under target sizes (300KB, 500KB, 1MB), and splitting PDF pages." },
+      { question: "Are my confidential PDF documents safe during merging?", answer: "Absolutely. All PDF merging, splitting, and compression happens client-side inside your browser sandbox. No file is ever uploaded." },
       { question: "Does it work on mobile?", answer: "Yes! Our PDF suite is fully responsive and works great on tablets and smartphones for quick on-the-go edits." }
     ],
     conclusion: "Stop struggling with clunky PDF editors. Experience the power of professional document management combined with total privacy. Try our PDF tools today.",
@@ -274,7 +274,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "resume-builder": {
-    title: "AI Resume Builder",
+    title: "Free AI Resume Builder & ATS Resume Maker",
     intro: "Land your dream job with a resume that stands out. Our AI-powered builder helps you craft professional, ATS-friendly resumes that highlight your unique strengths.",
     whatItDoes: "The ToolWala AI Resume Builder is designed to take the stress out of job applications. It's more than just a template—it's a smart assistant that helps you structure your career history for maximum impact. The tool ensures your resume follows modern design standards that are both pleasing to human recruiters and optimized for Applicant Tracking Systems (ATS). It handles all the complex formatting, margins, and typography automatically, so you can focus on telling your story.",
     howToUse: [
@@ -304,9 +304,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Students looking for internships or part-time work."
     ],
     faqs: [
-      { question: "Is my resume data saved?", answer: "For your privacy, we don't store your resume on our servers. The data is saved in your browser's local storage so you can come back and edit it later." },
-      { question: "Can I create multiple resumes?", answer: "Yes! You can create and download as many versions as you need for different job applications." },
-      { question: "Are the templates really ATS-friendly?", answer: "Absolutely. We avoid complex graphics or multi-column layouts that often confuse automated systems, focusing on clean, structured text." },
+      { question: "Is this AI resume builder completely free to use?", answer: "Yes! ToolWala AI resume builder is 100% free. You can build, edit, and download unlimited high-scoring ATS resumes without payment or watermark." },
+      { question: "How does the free resume builder make resumes ATS-friendly?", answer: "The resume maker uses clean single-column layouts, standard typography, and optimized section headings that ATS scanners parse easily." },
+      { question: "Is my personal career data saved on remote servers?", answer: "No, all your resume data stays in your browser's local storage. Your contact info and experience remain strictly private." },
       { question: "What file format is the download?", answer: "We provide high-quality PDF files, which is the industry standard and ensures your formatting looks exactly the same on every device." }
     ],
     conclusion: "Your next big career move starts with a great first impression. Build a resume you're proud of today and take the first step toward your new role.",
@@ -963,9 +963,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "crop-aadhaar-card": {
-    title: "Crop Aadhaar Card Online Free – Resize & Crop Aadhaar Card Instantly",
-    intro: "UIDAI Aadhaar portal applications and updates require photographs to meet strict physical and digital dimension standards. Crop Aadhaar Card online for free with ToolWala to remove unwanted background, white space, and margins instantly.",
-    whatItDoes: "The Crop Aadhaar Card tool automatically crops and formats photographs to match UIDAI guidelines. It formats your portrait to 3.5 cm x 4.5 cm (354 x 472 pixels), sets a compliant white background, and compresses the JPEG output between 20KB and 50KB directly in your browser memory.",
+    title: "Crop & Resize Aadhaar Card Photo – Official UIDAI Size",
+    intro: "UIDAI Aadhaar portal applications and updates require photographs to meet strict physical and digital dimension standards. Crop and resize Aadhaar Card photo online for free with ToolWala to remove unwanted background, white space, and margins instantly.",
+    whatItDoes: "The Crop & Resize Aadhaar Card tool automatically crops and formats photographs to match UIDAI guidelines. It formats your portrait to 3.5 cm x 4.5 cm (354 x 472 pixels), sets a compliant white background, and compresses the JPEG output between 20KB and 50KB directly in your browser memory.",
     specificationTable: [
       { requirement: "Photo size (pixels)", specification: "354 x 472 px (300 DPI)" },
       { requirement: "Physical size", specification: "3.5cm x 4.5cm" },
@@ -988,50 +988,15 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     faqs: [
       { question: "How to crop Aadhaar card photo online for free?", answer: "Upload your image to ToolWala's Crop Aadhaar Card tool. It auto-aligns to 3.5 cm x 4.5 cm, removes extra margins/backgrounds, and optimizes file size under 50KB." },
-      { question: "What is the official photo size for Aadhaar card update?", answer: "The official UIDAI size is 3.5 cm x 4.5 cm (354 x 472 pixels) with a white background." },
-      { question: "Can I take an Aadhaar photo with a smartphone?", answer: "Yes, provided it is taken in good natural lighting against a plain wall and cropped to 3.5 x 4.5 cm." },
-      { question: "What is the maximum file size for UIDAI photo uploads?", answer: "The portal requires JPEG files strictly between 20KB and 50KB." }
+      { question: "What is the official Aadhaar photo size for UIDAI updates?", answer: "The UIDAI online portal requires passport photo dimensions of 3.5 cm x 4.5 cm (35mm x 45mm / 354 x 472 px) with file size strictly under 50KB in JPG format." },
+      { question: "How do I complete Aadhaar photo resize online?", answer: "Upload your photo, select the Aadhaar photo resize preset, auto-crop your face with a white background, and compress under 50KB in one click." },
+      { question: "Is it safe to resize identity photos on ToolWala?", answer: "Yes! Image processing is conducted 100% inside your browser session using local HTML5 Canvas APIs, so your sensitive Aadhaar photos are never stored or uploaded." }
     ],
     relatedTools: [
       { name: "PAN Card Resize", href: "/tools/pan-card-resize" },
       { name: "Signature Resize", href: "/tools/signature-resize" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
-    ]
-  },
-  "aadhaar-photo-resizer": {
-    title: "Crop Aadhaar Card Online Free – Resize & Crop Aadhaar Card Instantly",
-    intro: "UIDAI Aadhaar portal applications and updates require photographs to meet strict physical and digital dimension standards. Crop Aadhaar Card online for free with ToolWala to remove unwanted background, white space, and margins instantly.",
-    whatItDoes: "The Crop Aadhaar Card tool automatically crops and formats photographs to match UIDAI guidelines. It formats your portrait to 3.5 cm x 4.5 cm (354 x 472 pixels), sets a compliant white background, and compresses the JPEG output between 20KB and 50KB directly in your browser memory.",
-    specificationTable: [
-      { requirement: "Photo size (pixels)", specification: "354 x 472 px (300 DPI)" },
-      { requirement: "Physical size", specification: "3.5cm x 4.5cm" },
-      { requirement: "File format", specification: "JPEG" },
-      { requirement: "File size", specification: "20KB - 50KB" },
-      { requirement: "Background", specification: "White/light plain" },
-      { requirement: "Facial proportion", specification: "70% - 80% face coverage" }
-    ],
-    commonMistakes: [
-      "Using colored or patterned wall backdrops.",
-      "Wearing dark sunglasses or reflective eyeglasses that obscure eyes.",
-      "Uploading photos larger than 50KB or in PNG/PDF formats.",
-      "Smiling or tilting head away from camera lens."
-    ],
-    howToUse: [
-      "Upload your passport portrait image by dragging it into the dropzone.",
-      "Align your face inside the UIDAI biometric crop guide.",
-      "Enable white background cleanup if required.",
-      "Download the compliant JPEG file ready for upload."
-    ],
-    faqs: [
-      { question: "How to crop Aadhaar card photo online for free?", answer: "Upload your image to ToolWala's Crop Aadhaar Card tool. It auto-aligns to 3.5 cm x 4.5 cm, removes extra margins/backgrounds, and optimizes file size under 50KB." },
-      { question: "What is the official photo size for Aadhaar card update?", answer: "The official UIDAI size is 3.5 cm x 4.5 cm (354 x 472 pixels) with a white background." },
-      { question: "Can I take an Aadhaar photo with a smartphone?", answer: "Yes, provided it is taken in good natural lighting against a plain wall and cropped to 3.5 x 4.5 cm." },
-      { question: "What is the maximum file size for UIDAI photo uploads?", answer: "The portal requires JPEG files strictly between 20KB and 50KB." }
-    ],
-    relatedTools: [
-      { name: "PAN Card Resize", href: "/tools/pan-card-resize" },
-      { name: "Signature Resize", href: "/tools/signature-resize" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
+      { name: "e-Aadhaar & Document Hub", href: "/hubs/aadhaar-utilities" }
     ]
   },
   "pdf-to-word-converter": {
@@ -1125,7 +1090,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "AI Background Remover", href: "/tools/bg-remover" },
       { name: "Image Compressor", href: "/tools/image-compressor" },
       { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-      { name: "Aadhaar Photo Resizer", href: "/tools/aadhaar-photo-resizer" }
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" }
     ]
   },
   "signature-resize": {
@@ -1168,7 +1133,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Format and compress signature scans securely to meet portal guidelines. Start optimizing your files with ToolWala AI's signature resize tool.",
     relatedTools: [
-      { name: "Aadhaar Photo Resize", href: "/tools/aadhaar-photo-resizer" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" },
       { name: "PAN Card Resize", href: "/tools/pan-card-resize" },
       { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize" },
       { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
@@ -1215,7 +1180,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Format your photo for PAN card NSDL and UTIITSL applications instantly. Try our secure, browser-based PAN Card Resize tool.",
     relatedTools: [
-      { name: "Aadhaar Photo Resize", href: "/tools/aadhaar-photo-resizer" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" },
       { name: "Signature Resize", href: "/tools/signature-resize" },
       { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
       { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize" }
@@ -1264,7 +1229,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "UPSC Photo Resize", href: "/tools/upsc-photo-resize" },
       { name: "Signature Resize", href: "/tools/signature-resize" },
       { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-      { name: "Aadhaar Photo Resize", href: "/tools/aadhaar-photo-resizer" }
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" }
     ]
   },
   "upsc-photo-resize": {
@@ -1310,7 +1275,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize" },
       { name: "Signature Resize", href: "/tools/signature-resize" },
       { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-      { name: "Aadhaar Photo Resize", href: "/tools/aadhaar-photo-resizer" }
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" }
     ]
   },
   "aadhaar-pdf-compressor": {
@@ -1353,7 +1318,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     conclusion: "Compress your e-Aadhaar PDF files securely. Start optimizing your files with ToolWala AI.",
     relatedTools: [
       { name: "Government Form PDF Compressor", href: "/tools/gov-form-pdf-compressor" },
-      { name: "Aadhaar Photo Resize", href: "/tools/aadhaar-photo-resizer" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" },
       { name: "Aadhaar Masking Tool", href: "/tools/aadhaar-masking-tool" }
     ]
   },
@@ -1491,7 +1456,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "edit-pdf": {
-    title: "Edit PDF Online",
+    title: "Edit PDF Online – Free PDF Editor & Annotation Tool",
     intro: "Modify PDF text, fill forms, draw shapes, and sign documents securely directly in your browser. Experience a smooth, professional online PDF editor that runs 100% locally on your device with no software installations and no server uploads.",
     whatItDoes: "The ToolWala PDF text editor is a state-of-the-art, browser-first application designed to let you edit PDF without Adobe and without compromising your document's privacy. Unlike other cloud-based services, this tool brings the editing power directly into your browser using advanced client-side WebAssembly technology.\n\nYou can select any existing text node, modify PDF text directly, append new paragraphs, and draw annotations like boxes, circles, and highlight markers. The editor automatically detects the font size and matches the style, creating a seamless editing experience. Once you are done making changes, the tool generates a high-resolution, pixel-perfect output document. Whether you are dealing with professional invoices, government tax certificates, or academic papers, our free PDF editor ensures your layout remains sharp, uncorrupted, and perfectly styled.",
     howToUse: [
@@ -1526,11 +1491,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Updating business templates, price quotes, and resumes with new details."
     ],
     faqs: [
-      { question: "Is my document uploaded to a server?", answer: "Absolutely not. ToolWala operates entirely client-side. The file processing libraries run inside your local browser cache, meaning your document files never leave your computer or network." },
-      { question: "Can I change text in PDF without layout issues?", answer: "Yes! The tool lets you edit text directly inside PDF. The textbox automatically matches the font size, scales, and expands horizontally as you type, preserving alignment." },
-      { question: "How does color matching work?", answer: "When you click to modify PDF text, our tool samples the pixels of the original text from the background to detect the exact hex code, applying it to your edits automatically." },
-      { question: "Does this online PDF editor support multi-page files?", answer: "Yes, the editor dynamically loads and displays all pages of your PDF. Unmodified pages are copied as vector pages to ensure the download file size remains optimized and small." },
-      { question: "Do I need to install any software?", answer: "No software installation or browser extensions are required. Our free PDF editor works directly in any modern web browser across desktop and mobile devices." }
+      { question: "How to edit PDF online without subscription or signup?", answer: "Upload your PDF to ToolWala's online PDF editor. You can add text to PDF free, insert digital signatures, highlight sections, and export updated files instantly." },
+      { question: "Can I add text to PDF free and change font styling?", answer: "Yes! Click anywhere on the loaded PDF page to insert custom text, adjust text colors, resize fonts, and position elements precisely." },
+      { question: "Is my document uploaded to a remote server when I edit PDF online?", answer: "No, all editing and PDF rendering take place 100% locally on your computer or mobile device." },
+      { question: "Does this online PDF editor support multi-page files?", answer: "Yes, the editor dynamically loads and displays all pages of your PDF. Unmodified pages are copied as vector pages to ensure the download file size remains optimized and small." }
     ],
     conclusion: "Whether you need to modify PDF text for a resume, sign an official agreement, or fill out tax registration forms, ToolWala offers the ultimate privacy-first solution. Ditch the costly subscriptions and insecure server-upload tools. Take control of your documents, enjoy a fast and smooth editing experience, and start using our free PDF editor for documents online today.",
     relatedTools: [
@@ -1581,7 +1545,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     conclusion: "Convert scans to editable documents with complete privacy. Extract text locally using ToolWala AI.",
     relatedTools: [
       { name: "PDF OCR Scanner", href: "/tools/pdf-ocr" },
-      { name: "Aadhaar Photo Resizer", href: "/tools/aadhaar-photo-resizer" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" },
       { name: "Image Compressor", href: "/tools/image-compressor" }
     ]
   },
@@ -1951,7 +1915,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "aadhaar-masking-tool": {
-    title: "Aadhaar Masking Tool",
+    title: "Aadhaar Masking Tool – Mask Aadhaar Number Online",
     intro: "Secure your identity instantly. Mask the first 8 digits of your Aadhaar card online using browser-native AI—no data uploads, 100% private, works offline.",
     whatItDoes: "The ToolWala AI Aadhaar Masking Tool automatically detects and redacts the first 8 digits of your Aadhaar number, leaving only the last 4 digits visible as per UIDAI privacy guidelines (e.g. XXXX XXXX 1234). Operating entirely client-side, the tool uses high-accuracy local OCR to scan your document layout and cover sensitive numbers. It also supports manual masking, custom blurs for QR codes or photos, watermarks, and multi-format exports (PDF, PNG, JPG)—ensuring absolute privacy for bank updates, SIM registrations, and rental agreements.",
     howToUse: [
@@ -1980,14 +1944,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Sharing privacy-masked document proofs with landlords or rental portals."
     ],
     faqs: [
-      { question: "What is Aadhaar Masking?", answer: "Aadhaar masking replaces the first 8 digits of your 12-digit Aadhaar number with cross marks (e.g., XXXX XXXX 1234). This obscures your unique identifier while keeping the last 4 digits visible for verification, preventing misuse." },
-      { question: "Is Aadhaar masking secure?", answer: "Yes, our Aadhaar Masking Tool runs entirely client-side. The OCR engine and image modifications occur strictly within your web browser sandbox. No file data, texts, or metadata are ever transmitted to our servers." },
-      { question: "Does this tool upload my Aadhaar?", answer: "No. All scanning, character detection, and image manipulation are completed locally inside your browser cache. The tool can be run completely offline after loading the initial page layout." },
-      { question: "Can I mask Aadhaar PDF?", answer: "Yes! Our engine rendering pipeline supports scanned PDF cards, rendering page views into clean images so you can apply auto or manual mask configurations." },
-      { question: "Is Aadhaar masking mandatory?", answer: "Yes. The Unique Identification Authority of India (UIDAI) and regulatory authorities like RBI recommend sharing masked Aadhaar cards instead of unmasked ones to prevent identity theft." },
-      { question: "How does automatic masking work?", answer: "Our tool employs a local WebAssembly-based Tesseract OCR library to parse text bounding boxes. If a 12-digit format or a consecutive grouping of three 4-digit numbers is found, a mask is automatically overlayed." },
-      { question: "Can I blur QR code?", answer: "Yes! You can toggle the 'Blur QR Code' option or draw a custom manual blur region to pixelate and hide the QR code grid and prevent unauthorized barcode scanning." },
-      { question: "Does this work on mobile?", answer: "Absolutely. The editor is optimized for mobile touch viewports, allowing you to pinch-zoom and drag mask layers smoothly on any smartphone or tablet." }
+      { question: "How do I mask Aadhaar number online for privacy?", answer: "Upload your scanned Aadhaar card or e-Aadhaar image. The Aadhaar masking tool overlays black privacy boxes over the first 8 digits, leaving only the last 4 visible." },
+      { question: "Is a Masked Aadhaar card legally accepted in India?", answer: "Yes, UIDAI guidelines state that Masked Aadhaar is legally valid for e-KYC verification across telecom providers, hotels, and financial agencies." },
+      { question: "Does this tool upload my Aadhaar card image anywhere?", answer: "No. The Aadhaar masking tool processes files locally using browser HTML5 canvas API. Zero data leaves your computer or phone." },
+      { question: "Can I mask Aadhaar PDF?", answer: "Yes! Our engine rendering pipeline supports scanned PDF cards, rendering page views into clean images so you can apply auto or manual mask configurations." }
     ],
     conclusion: "Protect your identity and comply with UIDAI guidelines. Mask your Aadhaar cards safely in the browser with ToolWala AI.",
     relatedTools: [
@@ -2311,7 +2271,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Format your photo for competitive exam portals instantly. Try our secure, browser-based Exam Photo Resizer.",
     relatedTools: [
-      { name: "Aadhaar Photo Resize", href: "/tools/aadhaar-photo-resizer" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" },
       { name: "PAN Card Resize", href: "/tools/pan-card-resize" },
       { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
       { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize" }
@@ -2454,7 +2414,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "pdf-to-excel-converter": {
-    title: "PDF to Excel Converter",
+    title: "PDF to Excel Converter – Extract Tables to Spreadsheet",
     intro: "Transform PDF tables into clean, fully editable Excel spreadsheets (.xlsx) instantly. Preserve rows, columns, numerical precision, and table formatting with 100% client-side browser processing.",
     whatItDoes: "ToolWala AI's PDF to Excel Converter automatically extracts structured tables from digital and scanned PDF files directly inside your browser tab. Powered by advanced spatial parsing and on-device OCR, our tool scans PDF document layouts to detect table boundaries, headers, cell alignments, merged cells, and data types (numbers, dates, currency, percentages). It converts your documents into formatted Excel workbooks without requiring cloud uploads or compromising data privacy.",
     howToUse: [
@@ -2492,12 +2452,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Business managers consolidating multi-page project schedules, pricing matrices, and inventory lists."
     ],
     faqs: [
-      { question: "What is PDF to Excel Converter?", answer: "The PDF to Excel Converter is a client-side web utility that extracts tables from digital and scanned PDF documents and transforms them into editable Microsoft Excel (.xlsx) spreadsheets." },
-      { question: "Why Convert PDF to Excel?", answer: "PDF files are static and non-editable. Converting tables to Excel enables dynamic data analysis, formula calculations, sorting, filtering, and seamless integration into business financial models." },
-      { question: "Are my confidential files uploaded to any server?", answer: "No! All parsing, OCR scanning, table extraction, and Excel workbook creation run 100% locally in your browser memory. Your documents are completely private and never uploaded." },
-      { question: "Can I convert scanned PDFs to Excel?", answer: "Yes! If a scanned or image-based PDF is detected, our tool enables on-device OCR (Optical Character Recognition) using Tesseract.js to read text within images and format them into Excel columns." },
-      { question: "How does the tool handle multiple tables and multi-page PDFs?", answer: "Our layout parser scans all pages, detects every individual table, and lets you choose between exporting all tables into separate spreadsheet tabs or consolidating selected pages into a unified workbook." },
-      { question: "What file size limit is supported?", answer: "ToolWala AI supports PDF files up to 100 MB per document, handling high-density reports smoothly without crashing or slowing down." }
+      { question: "How do I convert PDF to Excel free online?", answer: "Upload your PDF bank statement, invoice, or tabular document. Our PDF to Excel converter extracts table structures into clean XLSX spreadsheet format instantly." },
+      { question: "Will my original PDF formatting and tabular data be retained?", answer: "Yes, the conversion algorithm detects table boundaries, headers, rows, and numbers, accurately populating Excel columns." },
+      { question: "Is there any daily conversion limit or file size restriction?", answer: "No, conversion runs locally in your browser so you can convert unlimited PDF files to Excel free without registration." },
+      { question: "Can I convert scanned PDFs to Excel?", answer: "Yes! If a scanned or image-based PDF is detected, our tool enables on-device OCR (Optical Character Recognition) using Tesseract.js to read text within images and format them into Excel columns." }
     ],
     conclusion: "Convert your PDF tables into clean, editable Excel spreadsheets in seconds. Experience fast, private, and precise document conversion with ToolWala AI today.",
     relatedTools: [
@@ -2508,7 +2466,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "excel-to-pdf-converter": {
-    title: "Excel to PDF Converter",
+    title: "Excel to PDF Converter – Convert Spreadsheets Free",
     intro: "Convert Excel spreadsheets (.xlsx, .xls, .csv) into clean, professional PDF documents instantly. Preserve table layout, formatting, headers, gridlines, and pagination with 100% browser-based processing.",
     whatItDoes: "ToolWala AI's Excel to PDF Converter parses spreadsheet workbooks locally in your browser memory and renders high-density tables into crisp PDF documents. It supports multi-sheet selection, custom page orientations (Portrait or Landscape), paper sizes (A4, Letter, Legal, A3), table auto-fitting, margin controls, and page number overlays—without requiring cloud server uploads.",
     howToUse: [
@@ -2546,12 +2504,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Business owners converting payroll records and project schedules into standardized printable files."
     ],
     faqs: [
-      { question: "What is Excel to PDF Converter?", answer: "The Excel to PDF Converter is a free web tool that transforms Excel workbooks (.xlsx, .xls) and CSV spreadsheets into formatted PDF documents." },
-      { question: "Why Convert Excel to PDF?", answer: "PDF files preserve exact layout, typography, and page structure across all devices, preventing accidental editing or formula distortion when sharing sensitive documents." },
-      { question: "Are my Excel files uploaded to any server?", answer: "No! All file parsing, table layout calculations, and PDF generation occur 100% locally inside your browser tab." },
-      { question: "Can I convert multiple worksheets in an Excel file?", answer: "Yes! ToolWala detects all sheets within your workbook and lets you choose between converting all sheets or selecting specific tabs." },
-      { question: "What if my table is too wide for portrait mode?", answer: "You can easily select Landscape orientation, A3/Legal paper size, or enable the 'Fit to Page Width' option to fit wide tables onto single pages cleanly." },
-      { question: "What file size limit is supported?", answer: "You can upload Excel files up to 100 MB, handling large multi-sheet workbooks smoothly with zero server delays." }
+      { question: "How to convert Excel to PDF online for free?", answer: "Drag and drop your XLS or XLSX spreadsheet file into the converter tool. It renders all sheets into standard, formatted PDF documents in seconds." },
+      { question: "Are my financial spreadsheets secure during conversion?", answer: "Yes, processing happens entirely within your web browser memory. Your Excel data is never transmitted to outside servers." },
+      { question: "Can I convert multi-sheet Excel files into PDF?", answer: "Yes, the Excel to PDF converter processes multi-sheet workbooks and structures them cleanly into sequential PDF pages." },
+      { question: "Are my Excel files uploaded to any server?", answer: "No! All file parsing, table layout calculations, and PDF generation occur 100% locally inside your browser tab." }
     ],
     conclusion: "Convert your Excel spreadsheets into clean, professional PDF documents in seconds. Experience fast, secure, and private file conversion with ToolWala AI today.",
     relatedTools: [
@@ -2611,7 +2567,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "WebP to JPG", href: "/tools/webp-to-jpg-png-converter" },
       { name: "PNG to WebP", href: "/tools/png-to-webp" },
       { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "Resize Image", href: "/tools/aadhaar-photo-resizer" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" },
       { name: "Crop Image", href: "/tools/invoice-cropper" },
       { name: "Convert Image", href: "/tools/gov-form-image-compressor" }
     ]
@@ -2666,7 +2622,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "JPG to WebP", href: "/tools/jpg-to-webp" },
       { name: "WebP to JPG", href: "/tools/webp-to-jpg-png-converter" },
       { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "Resize Image", href: "/tools/aadhaar-photo-resizer" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" },
       { name: "Crop Image", href: "/tools/invoice-cropper" },
       { name: "Convert Image", href: "/tools/gov-form-image-compressor" }
     ]

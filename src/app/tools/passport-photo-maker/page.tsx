@@ -120,9 +120,20 @@ export default function PassportPhotoMaker() {
             />
           </div>
 
+          {/* Contextual Hub Banner */}
+          <div className="my-12 max-w-6xl mx-auto bg-blue-50/60 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-500/20 p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+            <div>
+              <h4 className="text-sm font-black uppercase text-slate-900 dark:text-white tracking-wide">Passport Seva & PSK Document Guidance</h4>
+              <p className="text-xs text-slate-600 dark:text-gray-400 mt-1 font-medium">Need help formatting passport application certificates, birth proofs, and size limits for PSK uploads?</p>
+            </div>
+            <Link href="/hubs/passport-seva-utilities/" className="px-5 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-black uppercase tracking-wider hover:bg-blue-700 transition-all shrink-0">
+              Visit Passport Seva Hub →
+            </Link>
+          </div>
+
           {/* SEO Article */}
           {toolArticles['passport-photo-maker'] && (
-            <div className="mt-24 border-t border-white/5 pt-20 max-w-6xl mx-auto">
+            <div className="mt-12 border-t border-white/5 pt-12 max-w-6xl mx-auto">
               <ToolArticle {...toolArticles['passport-photo-maker']} />
             </div>
           )}

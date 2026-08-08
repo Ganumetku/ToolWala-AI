@@ -13,13 +13,15 @@ export interface ToolPerformance {
   percentage?: string;
 }
 
+export type TimeFilterOption = 'today' | '7days' | '30days';
+
 interface TopToolsRankingProps {
   tools?: ToolPerformance[];
   title?: string;
   subtitle?: string;
+  activeFilter?: TimeFilterOption;
+  onFilterChange?: (filter: TimeFilterOption) => void;
 }
-
-
 
 const RANK_STYLES = [
   {
@@ -83,27 +85,73 @@ const RANK_STYLES = [
   },
 ];
 
-export default function TopToolsRanking({ tools, title, subtitle }: TopToolsRankingProps) {
+export default function TopToolsRanking({ tools, title, subtitle, activeFilter, onFilterChange }: TopToolsRankingProps) {
   const [mounted, setMounted] = useState(false);
+  const [internalFilter, setInternalFilter] = useState<TimeFilterOption>('today');
+  const [fetchedTools, setFetchedTools] = useState<ToolPerformance[]>([]);
+  const [loadingSelf, setLoadingSelf] = useState(false);
+
+  const currentFilter = activeFilter || internalFilter;
+
+  const handleFilterClick = (filter: TimeFilterOption) => {
+    if (onFilterChange) {
+      onFilterChange(filter);
+    } else {
+      setInternalFilter(filter);
+    }
+  };
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Fetch telemetry standalone if tools prop is not supplied
+  useEffect(() => {
+    if (!tools && mounted) {
+      const loadStandalone = async () => {
+        setLoadingSelf(true);
+        try {
+          const res = await fetch(`/api/analytics/dashboard?filter=${currentFilter}`);
+          if (res.ok) {
+            const data = await res.json();
+            setFetchedTools(data.popularTools || []);
+          }
+        } catch (e) {
+          console.error('Error fetching standalone top tools ranking', e);
+        } finally {
+          setLoadingSelf(false);
+        }
+      };
+      loadStandalone();
+    }
+  }, [tools, currentFilter, mounted]);
+
+  const sourceTools = tools || fetchedTools;
+
   const displayTools = useMemo(() => {
-    return [...(tools || [])].sort((a, b) => {
+    return [...(sourceTools || [])].sort((a, b) => {
       const valA = (a.views || 0) > 0 ? (a.views || 0) : (a.count || 0);
       const valB = (b.views || 0) > 0 ? (b.views || 0) : (b.count || 0);
       if (valB !== valA) return valB - valA;
       return ((b.views || 0) + (b.count || 0)) - ((a.views || 0) + (a.count || 0));
     }).slice(0, 10);
-  }, [tools]);
+  }, [sourceTools]);
   
   // Calculate total views for percentages & max views for bar length
   const totalViews = displayTools.reduce((acc, t) => acc + (t.views || t.count || 0), 0);
   const maxViews = Math.max(...displayTools.map(t => (t.views || t.count || 0)), 1);
 
-  if (!mounted) {
+  const filterLabel =
+    currentFilter === 'today'
+      ? 'Today'
+      : currentFilter === '7days'
+      ? 'Last 7 Days'
+      : 'Last 30 Days';
+
+  const defaultSubtitle =
+    subtitle || `Ranked by total page views and user engagement for ${filterLabel}.`;
+
+  if (!mounted || loadingSelf) {
     return (
       <div className="h-96 w-full bg-white/[0.01] border border-white/5 rounded-3xl animate-pulse flex items-center justify-center">
         <span className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-gray-600">Loading top tools leaderboard...</span>
@@ -126,13 +174,50 @@ export default function TopToolsRanking({ tools, title, subtitle }: TopToolsRank
             {title || 'Top Performing Tools'}
           </h3>
           <p className="text-xs font-medium text-slate-500 dark:text-gray-400 mt-1">
-            {subtitle || 'Ranked by total page views and real-time user engagement.'}
+            {defaultSubtitle}
           </p>
         </div>
 
-        <div className="flex items-center gap-2 self-start sm:self-auto">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 text-amber-700 dark:text-amber-400 text-[10px] font-black uppercase tracking-wider">
-            <Flame className="w-3.5 h-3.5 text-amber-500" />
+        <div className="flex flex-wrap items-center gap-2.5 self-start sm:self-auto">
+          {/* Time Filter Controls */}
+          <div className="flex items-center gap-1 p-1 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl shadow-xs">
+            <button
+              type="button"
+              onClick={() => handleFilterClick('today')}
+              className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer ${
+                currentFilter === 'today'
+                  ? 'bg-blue-600 text-white shadow-sm'
+                  : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-white/5'
+              }`}
+            >
+              Today
+            </button>
+            <button
+              type="button"
+              onClick={() => handleFilterClick('7days')}
+              className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer ${
+                currentFilter === '7days'
+                  ? 'bg-blue-600 text-white shadow-sm'
+                  : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-white/5'
+              }`}
+            >
+              7 Days
+            </button>
+            <button
+              type="button"
+              onClick={() => handleFilterClick('30days')}
+              className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer ${
+                currentFilter === '30days'
+                  ? 'bg-blue-600 text-white shadow-sm'
+                  : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-white/5'
+              }`}
+            >
+              30 Days
+            </button>
+          </div>
+
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 text-amber-700 dark:text-amber-400 text-[10px] font-black uppercase tracking-wider shrink-0">
+            <Flame className="w-3.5 h-3.5 text-amber-500 animate-pulse" />
             Live Telemetry
           </span>
         </div>

@@ -43,16 +43,18 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState<DashboardStats>(initialStats);
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState<string>('');
+  const [timeFilter, setTimeFilter] = useState<'today' | '7days' | '30days'>('today');
 
-  const fetchStats = async (isManual = false) => {
+  const fetchStats = async (isManual = false, overrideFilter?: 'today' | '7days' | '30days') => {
+    const activeFilterTarget = overrideFilter || timeFilter;
     try {
-      const res = await adminFetch('/api/analytics/dashboard?filter=7days');
+      const res = await adminFetch(`/api/analytics/dashboard?filter=${activeFilterTarget}`);
       if (res.ok) {
         const data = await res.json();
         setStats(data);
         setLastUpdated(new Date().toLocaleTimeString());
         if (isManual) {
-          toast.success('Live database analytics sync complete.');
+          toast.success(`Live database analytics sync complete (${activeFilterTarget === 'today' ? 'Today' : activeFilterTarget}).`);
         }
       }
     } catch (err) {
@@ -62,12 +64,17 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleTimeFilterChange = (filter: 'today' | '7days' | '30days') => {
+    setTimeFilter(filter);
+    fetchStats(false, filter);
+  };
+
   useEffect(() => {
-    fetchStats();
+    fetchStats(false, timeFilter);
     // Auto-refresh telemetry every 30 seconds for live active user tracking
-    const interval = setInterval(() => fetchStats(false), 30000);
+    const interval = setInterval(() => fetchStats(false, timeFilter), 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [timeFilter]);
 
   if (loading) {
     return (
@@ -183,7 +190,11 @@ export default function AdminDashboard() {
         
         {/* Ranked Top Tools Leaderboard */}
         <div className="lg:col-span-8 flex flex-col justify-between">
-          <TopToolsRanking tools={stats.popularTools} />
+          <TopToolsRanking 
+            tools={stats.popularTools} 
+            activeFilter={timeFilter}
+            onFilterChange={handleTimeFilterChange}
+          />
         </div>
 
         {/* Quick Actions */}

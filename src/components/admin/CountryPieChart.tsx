@@ -61,6 +61,7 @@ const DEFAULT_COUNTRIES: CountryItem[] = [
 
 export default function CountryPieChart({ data }: CountryPieChartProps) {
   const [isMounted, setIsMounted] = useState(false);
+  const [hoveredData, setHoveredData] = useState<any | null>(null);
 
   useEffect(() => {
     setIsMounted(true);
@@ -128,31 +129,34 @@ export default function CountryPieChart({ data }: CountryPieChartProps) {
                 paddingAngle={4}
                 dataKey="value"
                 stroke="none"
+                onMouseLeave={() => setHoveredData(null)}
               >
                 {formattedData.map((entry, index) => (
                   <Cell 
                     key={`cell-${index}`} 
                     fill={entry.color} 
                     className="hover:opacity-80 transition-opacity cursor-pointer outline-none"
+                    onMouseEnter={() => setHoveredData(entry)}
                   />
                 ))}
               </Pie>
               <Tooltip
+                wrapperStyle={{ zIndex: 100, outline: 'none' }}
                 content={({ active, payload }) => {
                   if (active && payload && payload.length) {
-                    const data = payload[0].payload;
+                    const item = payload[0].payload;
                     return (
-                      <div className="bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl text-xs font-sans">
-                        <div className="flex items-center gap-2 font-black text-slate-900 dark:text-white">
-                          <span>{data.flag}</span>
-                          <span>{data.name}</span>
+                      <div className="bg-slate-950 border border-slate-700/80 p-3 rounded-2xl shadow-2xl text-xs font-sans text-white pointer-events-none z-50">
+                        <div className="flex items-center gap-2 font-black text-white">
+                          <span>{item.flag}</span>
+                          <span>{item.name}</span>
                         </div>
-                        <div className="mt-1.5 flex items-center justify-between gap-4 text-slate-600 dark:text-slate-300 font-bold">
+                        <div className="mt-1.5 flex items-center justify-between gap-4 text-slate-300 font-bold">
                           <span>Traffic Share:</span>
-                          <span className="text-blue-600 dark:text-blue-400 font-black">{data.percentageStr}</span>
+                          <span className="text-blue-400 font-black">{item.percentageStr}</span>
                         </div>
-                        <div className="text-[10px] text-slate-400 dark:text-slate-500 font-semibold mt-0.5">
-                          {data.value.toLocaleString()} visitors
+                        <div className="text-[10px] text-slate-400 font-semibold mt-0.5">
+                          {item.value.toLocaleString()} visitors
                         </div>
                       </div>
                     );
@@ -164,16 +168,35 @@ export default function CountryPieChart({ data }: CountryPieChartProps) {
           </ResponsiveContainer>
 
           {/* Center Badge in Donut */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-            <span className="text-lg font-black text-slate-900 dark:text-white tracking-tight">100%</span>
-            <span className="text-[9px] font-extrabold uppercase tracking-widest text-slate-400 dark:text-slate-500">Global</span>
+          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none transition-all duration-300">
+            {hoveredData ? (
+              <>
+                <span className="text-xl font-black tracking-tight" style={{ color: hoveredData.color }}>
+                  {hoveredData.percentageStr}
+                </span>
+                <span className="text-[9px] font-extrabold uppercase tracking-widest text-slate-700 dark:text-slate-200 truncate max-w-[90px] flex items-center gap-1">
+                  <span>{hoveredData.flag}</span>
+                  <span className="truncate">{hoveredData.name}</span>
+                </span>
+              </>
+            ) : (
+              <>
+                <span className="text-lg font-black text-slate-900 dark:text-white tracking-tight">100%</span>
+                <span className="text-[9px] font-extrabold uppercase tracking-widest text-slate-400 dark:text-slate-500">Global</span>
+              </>
+            )}
           </div>
         </div>
 
         {/* Country Breakdown Legend with Percentage Bars */}
         <div className="sm:col-span-6 space-y-2.5">
           {formattedData.map((item) => (
-            <div key={item.name} className="space-y-1">
+            <div 
+              key={item.name} 
+              className="space-y-1 p-1 rounded-xl transition-colors cursor-pointer hover:bg-slate-100/80 dark:hover:bg-white/5"
+              onMouseEnter={() => setHoveredData(item)}
+              onMouseLeave={() => setHoveredData(null)}
+            >
               <div className="flex items-center justify-between text-xs">
                 <div className="flex items-center gap-2 font-bold text-slate-800 dark:text-slate-200">
                   <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: item.color }} />

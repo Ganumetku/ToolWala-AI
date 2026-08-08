@@ -34,13 +34,23 @@ export async function generateMetadata(): Promise<Metadata> {
   let ogDescription = "Secure browser-local AI utilities. Browse categorized directories for fast document processing, image optimization, and content creations.";
 
   if (locale === 'hi') {
-    title = `सभी श्रेणियां ब्राउज़ करें - ${liveToolsCount}+ स्थानीय एआई टूल्स | टूलवाला AI`;
-    description = `${liveToolsCount}+ ब्राउज़र-स्थानीय डिज़ाइन, पीडीएफ, एआई, दस्तावेज़, रिज्यूमे और डेवलपर टूल की वर्गीकृत निर्देशिकाएं ब्राउज़ करें। तेज़, सुरक्षित और जीडीपीआर अनुपालन।`;
-    ogDescription = "सुरक्षित ब्राउज़र-स्थानीय एआई उपयोगिताएँ। तेज़ दस्तावेज़ प्रसंस्करण, छवि अनुकूलन और सामग्री निर्माण के लिए वर्गीकृत निर्देशिकाएं ब्राउज़ करें।";
+    title = "श्रेणियां ब्राउज़ करें | टूलवाला AI";
+    description = `${liveToolsCount}+ ब्राउज़र-स्थानीय डिज़ाइन, पीडीएफ, एआई, दस्तावेज़, रिज्यूमे और डेवलपर टूल की वर्गीकृत निर्देशिकाएं ब्राउज़ करें।`;
+    ogDescription = "सुरक्षित ब्राउज़र-स्थानीय एआई उपयोगिताएँ। तेज़ दस्तावेज़ प्रसंस्करण और छवि अनुकूलन।";
   } else if (locale === 'es') {
-    title = `Explorar todas las categorías - Más de ${liveToolsCount} utilidades locales de IA | ToolWala AI`;
-    description = `Explore directorios categorizados de más de ${liveToolsCount} herramientas de diseño, PDF, IA, documentos, currículos y desarrollo locales en el navegador. Rápido, seguro y cumple con GDPR.`;
-    ogDescription = "Utilidades de IA seguras locales en el navegador. Explore directorios categorizados para un procesamiento rápido de documentos, optimización de imagens y creación de contenido.";
+    title = "Explorar todas las categorías | ToolWala AI";
+    description = `Explore directorios categorizados de más de ${liveToolsCount} herramientas de diseño, PDF, IA, documentos y desarrollo locales.`;
+    ogDescription = "Utilidades de IA seguras locales en el navegador. Explore directorios categorizados para un procesamiento rápido.";
+  } else if (locale === 'pt') {
+    title = "Navegar por Categorias | ToolWala AI";
+  } else if (locale === 'fr') {
+    title = "Parcourir par catégorie | ToolWala AI";
+  } else if (locale === 'de') {
+    title = "Kategorien durchsuchen | ToolWala AI";
+  } else if (locale === 'id') {
+    title = "Jelajahi Kategori | ToolWala AI";
+  } else if (locale === 'ar') {
+    title = "تصفح حسب الفئة | ToolWala AI";
   }
 
   const path = '/categories';

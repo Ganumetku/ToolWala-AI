@@ -163,7 +163,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const finalTitle = toolTitle || pricingTitle || loginTitle || "";
   const finalDesc = toolDesc || pricingDesc || loginDesc || "";
 
-  const defaultTitle = "ToolWala AI – Free AI Tools for Images, PDF, Resume, QR & More";
+  const defaultTitle = "ToolWala AI – Free Online PDF, Image & AI Tools";
   const defaultDesc = "ToolWala AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.";
 
   const titleObj = finalTitle ? { default: finalTitle, template: "%s | ToolWala AI" } : {

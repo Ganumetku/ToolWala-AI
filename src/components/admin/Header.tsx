@@ -84,12 +84,12 @@ export default function Header({ sidebarOpen, setSidebarOpen, isCollapsed }: Hea
         <div className="flex items-center gap-6">
           
           {/* Search bar */}
-          <div className="hidden sm:flex items-center gap-3 bg-slate-100/80 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 rounded-xl px-4 py-2 w-64 focus-within:border-blue-500 focus-within:bg-white dark:focus-within:bg-transparent transition-all">
-            <Search className="w-4 h-4 text-slate-400 dark:text-gray-500" />
+          <div className="hidden sm:flex items-center gap-3 bg-slate-100/80 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 rounded-xl px-4 py-2 w-64 focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-500/10 focus-within:bg-white dark:focus-within:bg-transparent transition-all">
+            <Search className="w-4 h-4 text-slate-400 dark:text-gray-500 shrink-0" />
             <input 
               type="text" 
               placeholder="Search..."
-              className="bg-transparent text-sm border-none outline-none text-slate-900 dark:text-white w-full placeholder-slate-400 dark:placeholder-gray-600 font-semibold"
+              className="bg-transparent text-sm border-none outline-none focus:outline-none focus:ring-0 focus:border-none text-slate-900 dark:text-white w-full placeholder-slate-400 dark:placeholder-gray-600 font-semibold pl-2 h-auto"
             />
           </div>
 

@@ -131,8 +131,8 @@ export default function BlogListClient({
           ))}
         </div>
 
-        <div className="flex items-center gap-3 bg-white dark:bg-[#0f172a] border border-gray-200 dark:border-white/5 rounded-2xl px-5 py-3 w-full md:w-80 focus-within:border-blue-500 shadow-sm transition-all">
-          <Search className="w-4 h-4 text-gray-400 dark:text-gray-500" />
+        <div className="flex items-center gap-3 bg-white dark:bg-[#0f172a] border border-gray-200 dark:border-white/5 rounded-2xl px-5 py-3 w-full md:w-80 focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-500/10 shadow-sm transition-all">
+          <Search className="w-4 h-4 text-gray-400 dark:text-gray-500 shrink-0" />
           <input
             type="search"
             value={search}
@@ -141,7 +141,7 @@ export default function BlogListClient({
               setPage(1);
             }}
             placeholder={t('blog.search_placeholder', 'Search articles & tags...')}
-            className="bg-transparent text-sm border-none outline-none text-gray-900 dark:text-white w-full placeholder-gray-400 dark:placeholder-gray-600 font-semibold"
+            className="bg-transparent text-sm border-none outline-none focus:outline-none focus:ring-0 focus:border-none text-gray-900 dark:text-white w-full placeholder-gray-400 dark:placeholder-gray-600 font-semibold pl-2 h-auto"
             aria-label="Search blog articles"
           />
         </div>
@@ -300,7 +300,7 @@ export default function BlogListClient({
                   key={trending.id}
                   className="flex gap-4 group pt-5 first:pt-0"
                 >
-                  <span className="text-3xl font-black text-gray-200 dark:text-white/10 group-hover:text-blue-500/20 transition-colors leading-none shrink-0 font-sans">
+                  <span className="text-3xl font-black text-slate-400 dark:text-slate-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-none shrink-0 font-sans">
                     0{idx + 1}
                   </span>
                   <div className="space-y-1">

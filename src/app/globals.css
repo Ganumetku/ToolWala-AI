@@ -354,6 +354,24 @@ html.dark select:focus {
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
 }
 
+/* Reset search inputs & transparent wrapper inputs on focus */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+}
+
+input.bg-transparent:focus,
+html.dark input.bg-transparent:focus,
+input[class*="bg-transparent"]:focus,
+html.dark input[class*="bg-transparent"]:focus {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
 /* SaaS Premium Button Utility */
 .btn-saas-primary {
   background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #7c3aed 100%);

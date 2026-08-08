@@ -416,14 +416,14 @@ export default function BlogCMS() {
       <div className="flex flex-col xl:flex-row items-center justify-between gap-6 bg-white dark:bg-white/[0.01] p-6 rounded-3xl border border-slate-200/80 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
         <div className="flex flex-col sm:flex-row items-center gap-4 w-full xl:w-auto">
           {/* Search */}
-          <div className="flex items-center gap-3 bg-slate-100/80 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 rounded-2xl px-5 py-3 w-full sm:w-80 focus-within:border-blue-500 transition-all">
-            <Search className="w-4 h-4 text-slate-400 dark:text-gray-500" />
+          <div className="flex items-center gap-3 bg-slate-100/80 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 rounded-2xl px-5 py-3 w-full sm:w-80 focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-500/10 transition-all">
+            <Search className="w-4 h-4 text-slate-400 dark:text-gray-500 shrink-0" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by title..."
-              className="bg-transparent text-sm border-none outline-none text-slate-900 dark:text-white w-full placeholder-slate-400 dark:placeholder-gray-600 font-semibold"
+              className="bg-transparent text-sm border-none outline-none focus:outline-none focus:ring-0 focus:border-none text-slate-900 dark:text-white w-full placeholder-slate-400 dark:placeholder-gray-600 font-semibold pl-2 h-auto"
             />
           </div>
 

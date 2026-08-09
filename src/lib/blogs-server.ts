@@ -121,11 +121,34 @@ async function fetchFromSupabase(): Promise<BlogPost[] | null> {
   }
 }
 
-/** All blogs (admin) — Supabase first, JSON fallback */
+/** All blogs (admin) — Supabase DB merged with JSON fallback & auto-sync */
 export async function getAllBlogs(): Promise<BlogPost[]> {
+  const jsonBlogs = jsonDb.getBlogs().map(jsonToBlog);
   const fromDb = await fetchFromSupabase();
-  if (fromDb) return fromDb;
-  return jsonDb.getBlogs().map(jsonToBlog);
+
+  if (!fromDb) {
+    return jsonBlogs;
+  }
+
+  const dbSlugs = new Set(fromDb.map((b) => b.slug));
+  const dbIds = new Set(fromDb.map((b) => b.id));
+
+  // Find JSON blogs missing in Supabase DB
+  const missingInDb = jsonBlogs.filter((b) => !dbSlugs.has(b.slug) && !dbIds.has(b.id));
+
+  if (missingInDb.length > 0) {
+    for (const blog of missingInDb) {
+      try {
+        await saveBlog(blog);
+      } catch (err) {
+        console.warn(`[blogs-server] Syncing JSON blog ${blog.slug} to Supabase failed:`, err);
+      }
+    }
+    const updatedDb = await fetchFromSupabase();
+    if (updatedDb) return updatedDb;
+  }
+
+  return [...fromDb, ...missingInDb];
 }
 
 /** Published blogs for public pages */

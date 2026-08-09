@@ -37,7 +37,7 @@ function InputSlider({ label, min, max, step, value, onChange, icon: Icon, suffi
     <div className="space-y-3">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
         <div className="flex items-center gap-2">
-          <Icon className="w-5 h-5 text-emerald-400" />
+          <Icon className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
           <label className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">{label}</label>
         </div>
         <div className="relative flex items-center w-full sm:w-40">
@@ -55,15 +55,15 @@ function InputSlider({ label, min, max, step, value, onChange, icon: Icon, suffi
               if (value !== '' && value < min) onChange(min);
               if (value !== '' && value > max) onChange(max);
             }}
-            className="w-full bg-black/40 border border-white/10 hover:border-white/20 rounded-xl py-3 px-4 pr-10 text-white font-mono text-lg text-center focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all placeholder:text-white/20"
+            className="w-full bg-slate-100 dark:bg-black/40 border border-slate-300 dark:border-white/10 hover:border-slate-400 dark:hover:border-white/20 rounded-xl py-3 px-4 pr-10 text-slate-900 dark:text-white font-mono text-lg text-center focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all placeholder:text-slate-400 dark:placeholder:text-white/20 shadow-inner dark:shadow-none"
           />
-          {suffix && <span className="absolute right-4 text-gray-500 text-sm font-bold pointer-events-none">{suffix}</span>}
+          {suffix && <span className="absolute right-4 text-slate-500 dark:text-gray-500 text-sm font-bold pointer-events-none">{suffix}</span>}
         </div>
       </div>
       
-      <p className="text-xs text-gray-400 font-medium">{helperText}</p>
+      <p className="text-xs text-slate-600 dark:text-gray-400 font-medium">{helperText}</p>
       
-      <div className="relative w-full h-2 bg-white/5 rounded-full overflow-hidden mt-2">
+      <div className="relative w-full h-2 bg-slate-200 dark:bg-white/5 rounded-full overflow-hidden mt-2">
         <motion.div 
           className="absolute top-0 left-0 h-full bg-emerald-500 pointer-events-none" 
           initial={{ width: 0 }}
@@ -87,7 +87,7 @@ function InputSlider({ label, min, max, step, value, onChange, icon: Icon, suffi
             <button
               key={preset.value}
               onClick={() => onChange(preset.value)}
-              className="px-3 py-1.5 text-xs font-bold rounded-lg border border-white/5 bg-white/[0.02] hover:bg-emerald-500/10 hover:text-emerald-400 hover:border-emerald-500/30 text-gray-400 transition-all"
+              className="px-3 py-1.5 text-xs font-bold rounded-lg border border-slate-200 dark:border-white/5 bg-slate-100 dark:bg-white/[0.02] hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400 hover:border-emerald-500/30 text-slate-700 dark:text-gray-400 transition-all"
             >
               {preset.label}
             </button>

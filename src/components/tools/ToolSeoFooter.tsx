@@ -104,76 +104,76 @@ export default function ToolSeoFooter({ currentSlug }: ToolSeoFooterProps) {
       )}
 
       {/* CRO & Trust Verification Section */}
-      <div className="glass rounded-[2.5rem] border border-white/5 p-8 sm:p-12 bg-white/[0.01] shadow-xl space-y-10">
+      <div className="glass rounded-[2.5rem] border border-slate-200/80 dark:border-white/5 p-8 sm:p-12 bg-white dark:bg-white/[0.01] shadow-xl space-y-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           {/* Column 1: Core Explanation & Badges */}
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">
               🛡️ {t('tools.trust.verified_badge', 'SECURE BROWSER-NATIVE EXECUTION')}
             </div>
             <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tight">
               {t('tools.trust.title', 'Files Never Leave Your Device')}
             </h3>
-            <p className="text-gray-400 text-sm leading-relaxed font-medium">
+            <p className="text-slate-600 dark:text-gray-400 text-sm leading-relaxed font-medium">
               {t('tools.trust.description', 'ToolWala executes all operations directly on your computer using WebAssembly (WASM) sandboxing and local RAM compilation. We do not copy, store, or transmit your private document details. 100% serverless, private-by-design.')}
             </p>
             
             {/* Badges Grid */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex items-start gap-3">
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 flex items-start gap-3">
                 <span className="text-xl">❌</span>
                 <div>
                   <h5 className="text-xs font-black text-slate-900 dark:text-white uppercase">{t('tools.trust.no_uploads', 'No Uploads')}</h5>
-                  <p className="text-[10px] text-gray-500 leading-relaxed font-semibold">{t('tools.trust.no_uploads_desc', 'Files compile in local RAM.')}</p>
+                  <p className="text-[10px] text-slate-500 dark:text-gray-500 leading-relaxed font-semibold">{t('tools.trust.no_uploads_desc', 'Files compile in local RAM.')}</p>
                 </div>
               </div>
-              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex items-start gap-3">
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 flex items-start gap-3">
                 <span className="text-xl">🚫</span>
                 <div>
                   <h5 className="text-xs font-black text-slate-900 dark:text-white uppercase">{t('tools.trust.no_signups', 'No Signups')}</h5>
-                  <p className="text-[10px] text-gray-500 leading-relaxed font-semibold">{t('tools.trust.no_signups_desc', 'Skip email collection.')}</p>
+                  <p className="text-[10px] text-slate-500 dark:text-gray-500 leading-relaxed font-semibold">{t('tools.trust.no_signups_desc', 'Skip email collection.')}</p>
                 </div>
               </div>
-              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex items-start gap-3">
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 flex items-start gap-3">
                 <span className="text-xl">🔌</span>
                 <div>
                   <h5 className="text-xs font-black text-slate-900 dark:text-white uppercase">{t('tools.trust.offline', 'Offline Ready')}</h5>
-                  <p className="text-[10px] text-gray-500 leading-relaxed font-semibold">{t('tools.trust.offline_desc', 'Works with internet cut off.')}</p>
+                  <p className="text-[10px] text-slate-500 dark:text-gray-500 leading-relaxed font-semibold">{t('tools.trust.offline_desc', 'Works with internet cut off.')}</p>
                 </div>
               </div>
-              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex items-start gap-3">
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 flex items-start gap-3">
                 <span className="text-xl">🛡️</span>
                 <div>
                   <h5 className="text-xs font-black text-slate-900 dark:text-white uppercase">{t('tools.trust.gdpr', 'GDPR Compliant')}</h5>
-                  <p className="text-[10px] text-gray-500 leading-relaxed font-semibold">{t('tools.trust.gdpr_desc', 'Complete data sovereignty.')}</p>
+                  <p className="text-[10px] text-slate-500 dark:text-gray-500 leading-relaxed font-semibold">{t('tools.trust.gdpr_desc', 'Complete data sovereignty.')}</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Column 2: Direct Comparison Grid */}
-          <div className="border border-white/10 rounded-[2rem] overflow-hidden bg-black/20">
-            <div className="p-5 border-b border-white/5 bg-white/5 text-center">
-              <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">
+          <div className="border border-slate-200 dark:border-white/10 rounded-[2rem] overflow-hidden bg-slate-50 dark:bg-black/20">
+            <div className="p-5 border-b border-slate-200 dark:border-white/5 bg-slate-100 dark:bg-white/5 text-center">
+              <span className="text-[10px] font-black uppercase tracking-widest text-slate-700 dark:text-gray-400">
                 {t('tools.trust.comp_title', 'ToolWala vs Cloud Alternatives')}
               </span>
             </div>
-            <div className="divide-y divide-white/5 text-xs font-semibold">
+            <div className="divide-y divide-slate-200 dark:divide-white/5 text-xs font-semibold">
               <div className="grid grid-cols-3 p-4 items-center">
-                <span className="text-gray-400 font-bold">{t('tools.trust.metric_upload', 'File Uploads')}</span>
-                <span className="text-emerald-400 font-black col-span-2 text-right">❌ {t('tools.trust.comp_none', 'None (Browser-Local)')}</span>
+                <span className="text-slate-700 dark:text-gray-400 font-bold">{t('tools.trust.metric_upload', 'File Uploads')}</span>
+                <span className="text-emerald-700 dark:text-emerald-400 font-black col-span-2 text-right">❌ {t('tools.trust.comp_none', 'None (Browser-Local)')}</span>
               </div>
               <div className="grid grid-cols-3 p-4 items-center">
-                <span className="text-gray-400 font-bold">{t('tools.trust.metric_data', 'Data Storage')}</span>
-                <span className="text-emerald-400 font-black col-span-2 text-right">0% {t('tools.trust.comp_purged', 'Saved (Instant Purge)')}</span>
+                <span className="text-slate-700 dark:text-gray-400 font-bold">{t('tools.trust.metric_data', 'Data Storage')}</span>
+                <span className="text-emerald-700 dark:text-emerald-400 font-black col-span-2 text-right">0% {t('tools.trust.comp_purged', 'Saved (Instant Purge)')}</span>
               </div>
               <div className="grid grid-cols-3 p-4 items-center">
-                <span className="text-gray-400 font-bold">{t('tools.trust.metric_speed', 'Processing Speed')}</span>
-                <span className="text-emerald-400 font-black col-span-2 text-right">⚡ {t('tools.trust.comp_subsecond', 'Sub-second (No Queue)')}</span>
+                <span className="text-slate-700 dark:text-gray-400 font-bold">{t('tools.trust.metric_speed', 'Processing Speed')}</span>
+                <span className="text-emerald-700 dark:text-emerald-400 font-black col-span-2 text-right">⚡ {t('tools.trust.comp_subsecond', 'Sub-second (No Queue)')}</span>
               </div>
               <div className="grid grid-cols-3 p-4 items-center">
-                <span className="text-gray-400 font-bold">{t('tools.trust.metric_limits', 'Limits & Fees')}</span>
-                <span className="text-emerald-400 font-black col-span-2 text-right">🆓 {t('tools.trust.comp_free', '100% Free / Unlimited')}</span>
+                <span className="text-slate-700 dark:text-gray-400 font-bold">{t('tools.trust.metric_limits', 'Limits & Fees')}</span>
+                <span className="text-emerald-700 dark:text-emerald-400 font-black col-span-2 text-right">🆓 {t('tools.trust.comp_free', '100% Free / Unlimited')}</span>
               </div>
             </div>
           </div>

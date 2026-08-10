@@ -55,9 +55,20 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       }
     };
 
-    const docObj = document as unknown as { startViewTransition?: (cb: () => void) => void };
+    const docObj = document as unknown as { 
+      startViewTransition?: (cb: () => void) => { finished?: Promise<void>; ready?: Promise<void> } 
+    };
+
     if (typeof docObj.startViewTransition === "function") {
-      docObj.startViewTransition(applyThemeChange);
+      try {
+        const transition = docObj.startViewTransition(applyThemeChange);
+        if (transition) {
+          if (transition.finished) transition.finished.catch(() => {});
+          if (transition.ready) transition.ready.catch(() => {});
+        }
+      } catch {
+        applyThemeChange();
+      }
       return;
     }
 

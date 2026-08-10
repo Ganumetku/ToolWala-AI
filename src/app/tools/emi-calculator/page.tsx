@@ -208,12 +208,12 @@ const CustomPieTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload;
     return (
-      <div className="glass rounded-xl border border-white/10 p-4 bg-black/80 backdrop-blur-md">
-        <div className="flex items-center gap-2 mb-2">
-          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: data.color }}></div>
-          <p className="text-sm font-black text-slate-900 dark:text-white">{data.name}</p>
+      <div className="rounded-xl border border-slate-200 dark:border-white/10 p-3 bg-white/95 dark:bg-slate-900/95 shadow-2xl backdrop-blur-md z-50 pointer-events-none min-w-[140px]">
+        <div className="flex items-center gap-2 mb-1">
+          <div className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: data.color }}></div>
+          <p className="text-xs font-black uppercase tracking-wider text-slate-700 dark:text-gray-300">{data.name}</p>
         </div>
-        <p className="text-slate-900 dark:text-white font-mono text-lg font-bold">{formatCurrency(data.value)}</p>
+        <p className="text-slate-900 dark:text-white font-mono text-sm font-bold truncate">{formatCurrency(data.value)}</p>
       </div>
     );
   }
@@ -688,7 +688,7 @@ export default function EmiCalculatorPage() {
                               <Cell key={`cell-${index}`} fill={entry.color} />
                             ))}
                           </Pie>
-                          <RechartsTooltip content={<CustomPieTooltip />} />
+                          <RechartsTooltip content={<CustomPieTooltip />} wrapperStyle={{ zIndex: 1000, outline: 'none' }} />
                         </PieChart>
                       </ResponsiveContainer>
                       <div className="absolute inset-0 flex items-center justify-center pointer-events-none flex-col">

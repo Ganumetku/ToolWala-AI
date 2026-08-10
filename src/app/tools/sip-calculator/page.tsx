@@ -207,12 +207,12 @@ function InputSlider({ label, min, max, step, value, onChange, icon: Icon, suffi
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div className="glass rounded-xl border border-white/10 p-4 bg-black/80 backdrop-blur-md">
-        <p className="text-sm font-black text-slate-900 dark:text-white mb-2">{label}</p>
+      <div className="rounded-xl border border-slate-200 dark:border-white/10 p-3 bg-white/95 dark:bg-slate-900/95 shadow-2xl backdrop-blur-md z-50 pointer-events-none min-w-[160px]">
+        <p className="text-xs font-black text-slate-900 dark:text-white mb-2">{label}</p>
         {payload.map((entry: any, index: number) => (
           <div key={index} className="flex justify-between gap-6 items-center text-xs font-semibold">
             <span style={{ color: entry.color }}>{entry.name}:</span>
-            <span className="text-white font-mono">{formatCurrency(entry.value)}</span>
+            <span className="text-slate-900 dark:text-white font-mono">{formatCurrency(entry.value)}</span>
           </div>
         ))}
       </div>
@@ -659,7 +659,7 @@ export default function SipCalculatorPage() {
                     axisLine={false}
                     tickFormatter={(value) => `₹${(value / 100000).toFixed(1)}L`}
                   />
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip content={<CustomTooltip />} wrapperStyle={{ zIndex: 1000, outline: 'none' }} />
                   <Area 
                     type="monotone" 
                     dataKey="Total" 

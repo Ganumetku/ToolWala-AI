@@ -339,13 +339,13 @@ export default function EmiCalculatorPage() {
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
               <button 
                 onClick={scrollToCalculator}
-                className="w-full sm:w-auto px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-emerald-500/20"
+                className="w-full sm:w-auto px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-emerald-500/20"
               >
                 Calculate EMI Now
               </button>
               <button 
                 onClick={scrollToLearnMore}
-                className="w-full sm:w-auto px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 active:scale-95 border border-white/10"
+                className="w-full sm:w-auto px-8 py-4 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-900 dark:text-white font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 active:scale-95 border border-slate-200 dark:border-white/10 shadow-sm"
               >
                 Learn How EMI Works
               </button>
@@ -354,16 +354,16 @@ export default function EmiCalculatorPage() {
 
           {/* Quick Presets */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <button onClick={() => applyPreset('home')} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/[0.02] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/10 text-gray-300 hover:text-emerald-400 transition-all font-bold text-sm">
+            <button onClick={() => applyPreset('home')} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 hover:border-emerald-500/50 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 text-slate-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all font-bold text-sm shadow-sm">
               <Home className="w-4 h-4" /> Home Loan
             </button>
-            <button onClick={() => applyPreset('car')} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/[0.02] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/10 text-gray-300 hover:text-emerald-400 transition-all font-bold text-sm">
+            <button onClick={() => applyPreset('car')} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 hover:border-emerald-500/50 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 text-slate-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all font-bold text-sm shadow-sm">
               <Car className="w-4 h-4" /> Car Loan
             </button>
-            <button onClick={() => applyPreset('personal')} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/[0.02] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/10 text-gray-300 hover:text-emerald-400 transition-all font-bold text-sm">
+            <button onClick={() => applyPreset('personal')} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 hover:border-emerald-500/50 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 text-slate-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all font-bold text-sm shadow-sm">
               <User className="w-4 h-4" /> Personal Loan
             </button>
-            <button onClick={() => applyPreset('education')} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/[0.02] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/10 text-gray-300 hover:text-emerald-400 transition-all font-bold text-sm">
+            <button onClick={() => applyPreset('education')} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 hover:border-emerald-500/50 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 text-slate-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all font-bold text-sm shadow-sm">
               <GraduationCap className="w-4 h-4" /> Edu Loan
             </button>
           </div>
@@ -372,15 +372,15 @@ export default function EmiCalculatorPage() {
             
             {/* Inputs Panel */}
             <div className="w-full lg:w-5/12 space-y-6 shrink-0">
-              <div className="glass rounded-[2.5rem] border border-white/5 shadow-2xl p-6 sm:p-8 bg-white/[0.01]">
-                <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-8">
+              <div className="glass rounded-[2.5rem] border border-slate-200/80 dark:border-white/5 shadow-2xl p-6 sm:p-8 bg-white dark:bg-white/[0.01]">
+                <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/5 pb-4 mb-8">
                   <div className="flex items-center gap-2">
-                    <Calculator className="w-5 h-5 text-emerald-400" />
+                    <Calculator className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                     <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">Loan Details</h3>
                   </div>
                   <button 
                     onClick={handleReset}
-                    className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-gray-500 hover:text-emerald-400 transition-colors"
+                    className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-slate-500 dark:text-gray-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                   >
                     <RefreshCw className="w-3 h-3" /> Reset
                   </button>
@@ -428,11 +428,11 @@ export default function EmiCalculatorPage() {
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-2">
-                        <Clock className="w-5 h-5 text-emerald-400" />
+                        <Clock className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                         <label className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">Loan Tenure</label>
                       </div>
                       
-                      <div className="flex bg-black/40 border border-white/10 rounded-lg p-1">
+                      <div className="flex bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-lg p-1">
                         <button 
                           onClick={() => {
                             if (tenureType !== 'years') {
@@ -440,7 +440,7 @@ export default function EmiCalculatorPage() {
                               setTenure(Math.max(1, Math.round(tenure / 12)));
                             }
                           }}
-                          className={`px-3 py-1 rounded-md text-xs font-bold transition-colors ${tenureType === 'years' ? 'bg-emerald-500/20 text-emerald-400' : 'text-gray-500 hover:text-white'}`}
+                          className={`px-3 py-1 rounded-md text-xs font-bold transition-colors ${tenureType === 'years' ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 font-extrabold' : 'text-slate-600 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white'}`}
                         >
                           Years
                         </button>
@@ -451,7 +451,7 @@ export default function EmiCalculatorPage() {
                               setTenure(tenure * 12);
                             }
                           }}
-                          className={`px-3 py-1 rounded-md text-xs font-bold transition-colors ${tenureType === 'months' ? 'bg-emerald-500/20 text-emerald-400' : 'text-gray-500 hover:text-white'}`}
+                          className={`px-3 py-1 rounded-md text-xs font-bold transition-colors ${tenureType === 'months' ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 font-extrabold' : 'text-slate-600 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white'}`}
                         >
                           Months
                         </button>
@@ -475,12 +475,12 @@ export default function EmiCalculatorPage() {
                           if ((tenure as any) !== '' && tenure < min) setTenure(min);
                           if ((tenure as any) !== '' && tenure > max) setTenure(max);
                         }}
-                        className="w-full bg-black/40 border border-white/10 hover:border-white/20 rounded-xl py-3 px-4 pr-16 text-white font-mono text-lg text-center focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all placeholder:text-white/20"
+                        className="w-full bg-slate-100 dark:bg-black/40 border border-slate-300 dark:border-white/10 hover:border-slate-400 dark:hover:border-white/20 rounded-xl py-3 px-4 pr-16 text-slate-900 dark:text-white font-mono text-lg text-center focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all placeholder:text-slate-400 dark:placeholder:text-white/20 shadow-inner dark:shadow-none"
                       />
-                      <span className="absolute right-5 text-gray-500 text-sm font-bold pointer-events-none uppercase">{tenureType === 'years' ? 'Yrs' : 'Mos'}</span>
+                      <span className="absolute right-5 text-slate-500 dark:text-gray-500 text-sm font-bold pointer-events-none uppercase">{tenureType === 'years' ? 'Yrs' : 'Mos'}</span>
                     </div>
 
-                    <div className="relative w-full h-2 bg-white/5 rounded-full overflow-hidden mt-4">
+                    <div className="relative w-full h-2 bg-slate-200 dark:bg-white/5 rounded-full overflow-hidden mt-4">
                       <motion.div 
                         className="absolute top-0 left-0 h-full bg-emerald-500 pointer-events-none" 
                         initial={{ width: 0 }}
@@ -507,49 +507,49 @@ export default function EmiCalculatorPage() {
             {/* Results Panel */}
             <div className="w-full lg:w-7/12 flex flex-col gap-6">
               
-              <div className="glass rounded-[2.5rem] border border-white/5 shadow-2xl overflow-hidden bg-white/[0.01] relative group h-full flex flex-col">
+              <div className="glass rounded-[2.5rem] border border-slate-200/80 dark:border-white/5 shadow-2xl overflow-hidden bg-white dark:bg-white/[0.01] relative group h-full flex flex-col">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none transition-transform group-hover:scale-110 duration-700" />
                 
                 <div className="p-8 sm:p-10 relative z-10 flex-grow flex flex-col justify-between">
                   <div className="flex items-center justify-between mb-8">
                     <div className="flex items-center gap-2">
-                      <Target className="w-6 h-6 text-emerald-400" />
-                      <span className="text-sm font-black uppercase tracking-widest text-white">🎯 EMI Details</span>
+                      <Target className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                      <span className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">🎯 EMI Details</span>
                     </div>
                     <button 
                       onClick={handleCopy}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-bold text-gray-300 transition-colors border border-white/10"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-xs font-bold text-slate-700 dark:text-gray-300 transition-colors border border-slate-200 dark:border-white/10 shadow-sm"
                     >
-                      {copied ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                      {copied ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                       {copied ? 'Copied!' : 'Share'}
                     </button>
                   </div>
 
                   <div className="mb-10 text-center">
-                    <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2 block">Monthly EMI</span>
+                    <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-2 block">Monthly EMI</span>
                     <motion.div 
                       key={results.emi}
                       initial={{ scale: 0.9, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      className="text-6xl sm:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400 tracking-tight leading-none"
+                      className="text-6xl sm:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-600 dark:from-white dark:to-gray-400 tracking-tight leading-none"
                     >
                       {formatCurrency(results.emi)}
                     </motion.div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center bg-black/40 border border-white/5 rounded-3xl p-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center bg-slate-50 dark:bg-black/40 border border-slate-200/80 dark:border-white/5 rounded-3xl p-6 shadow-inner dark:shadow-none">
                     <div className="space-y-6">
                       <div>
-                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 flex items-center gap-2 mb-1"><div className="w-2 h-2 rounded-full bg-blue-500" /> Principal Amount</span>
-                        <span className="text-2xl font-black text-white">{formatCurrency(loanAmount)}</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 flex items-center gap-2 mb-1"><div className="w-2 h-2 rounded-full bg-blue-500" /> Principal Amount</span>
+                        <span className="text-2xl font-black text-slate-900 dark:text-white">{formatCurrency(loanAmount)}</span>
                       </div>
                       <div>
-                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 flex items-center gap-2 mb-1"><div className="w-2 h-2 rounded-full bg-emerald-500" /> Total Interest</span>
-                        <span className="text-2xl font-black text-emerald-400">{formatCurrency(results.totalInterest)}</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 flex items-center gap-2 mb-1"><div className="w-2 h-2 rounded-full bg-emerald-500" /> Total Interest</span>
+                        <span className="text-2xl font-black text-emerald-600 dark:text-emerald-400">{formatCurrency(results.totalInterest)}</span>
                       </div>
-                      <div className="pt-4 border-t border-white/10">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1 block">Total Amount Payable</span>
-                        <span className="text-xl font-black text-white">{formatCurrency(results.totalPayment)}</span>
+                      <div className="pt-4 border-t border-slate-200 dark:border-white/10">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-600 dark:text-gray-400 mb-1 block">Total Amount Payable</span>
+                        <span className="text-xl font-black text-slate-900 dark:text-white">{formatCurrency(results.totalPayment)}</span>
                       </div>
                     </div>
                     
@@ -572,8 +572,8 @@ export default function EmiCalculatorPage() {
                         </PieChart>
                       </ResponsiveContainer>
                       <div className="absolute inset-0 flex items-center justify-center pointer-events-none flex-col">
-                        <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Interest</span>
-                        <span className="text-lg font-black text-white">{results.totalPayment > 0 ? Math.round((results.totalInterest / results.totalPayment) * 100) : 0}%</span>
+                        <span className="text-[10px] font-bold text-slate-500 dark:text-gray-500 uppercase tracking-widest">Interest</span>
+                        <span className="text-lg font-black text-slate-900 dark:text-white">{results.totalPayment > 0 ? Math.round((results.totalInterest / results.totalPayment) * 100) : 0}%</span>
                       </div>
                     </div>
                   </div>

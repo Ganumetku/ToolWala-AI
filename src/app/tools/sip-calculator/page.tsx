@@ -307,13 +307,13 @@ export default function SipCalculatorPage() {
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
               <button 
                 onClick={scrollToCalculator}
-                className="w-full sm:w-auto px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-emerald-500/20"
+                className="w-full sm:w-auto px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-emerald-500/20"
               >
                 Calculate SIP Returns
               </button>
               <button 
                 onClick={scrollToLearnMore}
-                className="w-full sm:w-auto px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 active:scale-95 border border-white/10"
+                className="w-full sm:w-auto px-8 py-4 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-900 dark:text-white font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 active:scale-95 border border-slate-200 dark:border-white/10 shadow-sm"
               >
                 Learn How SIP Works
               </button>
@@ -324,15 +324,15 @@ export default function SipCalculatorPage() {
             
             {/* Inputs Panel */}
             <div className="w-full lg:w-5/12 space-y-6 shrink-0">
-              <div className="glass rounded-[2.5rem] border border-white/5 shadow-2xl p-6 sm:p-8 bg-white/[0.01]">
-                <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-8">
+              <div className="glass rounded-[2.5rem] border border-slate-200/80 dark:border-white/5 shadow-2xl p-6 sm:p-8 bg-white dark:bg-white/[0.01]">
+                <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/5 pb-4 mb-8">
                   <div className="flex items-center gap-2">
-                    <Calculator className="w-5 h-5 text-emerald-400" />
+                    <Calculator className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                     <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">Investment Plan</h3>
                   </div>
                   <button 
                     onClick={handleReset}
-                    className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-gray-500 hover:text-emerald-400 transition-colors"
+                    className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-slate-500 dark:text-gray-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                   >
                     <RefreshCw className="w-3 h-3" /> Reset
                   </button>
@@ -404,81 +404,81 @@ export default function SipCalculatorPage() {
             {/* Results Panel */}
             <div className="w-full lg:w-7/12 flex flex-col gap-6">
               
-              <div className="glass rounded-[2.5rem] border border-white/5 shadow-2xl overflow-hidden bg-white/[0.01] relative group">
+              <div className="glass rounded-[2.5rem] border border-slate-200/80 dark:border-white/5 shadow-2xl overflow-hidden bg-white dark:bg-white/[0.01] relative group">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none transition-transform group-hover:scale-110 duration-700" />
                 
                 <div className="p-8 sm:p-10 relative z-10">
                   <div className="flex items-center justify-between mb-8">
                     <div className="flex items-center gap-2">
-                      <Target className="w-6 h-6 text-emerald-400" />
-                      <span className="text-sm font-black uppercase tracking-widest text-white">🎯 Wealth Created</span>
+                      <Target className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                      <span className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">🎯 Wealth Created</span>
                     </div>
                   </div>
 
                   <div className="mb-8">
-                    <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2 block">Future Value</span>
+                    <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-2 block">Future Value</span>
                     <motion.div 
                       key={results.futureValue}
                       initial={{ scale: 0.9, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      className="text-5xl sm:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400 tracking-tight leading-none"
+                      className="text-5xl sm:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-600 dark:from-white dark:to-gray-400 tracking-tight leading-none"
                     >
                       {formatCurrency(results.futureValue)}
                     </motion.div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4 pt-6 border-t border-white/5">
+                  <div className="grid grid-cols-2 gap-4 pt-6 border-t border-slate-200/80 dark:border-white/5">
                     <div>
-                      <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1 block">You Invested</span>
-                      <span className="text-xl sm:text-2xl font-black text-blue-400">{formatCurrency(results.totalInvestment)}</span>
+                      <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 mb-1 block">You Invested</span>
+                      <span className="text-xl sm:text-2xl font-black text-blue-600 dark:text-blue-400">{formatCurrency(results.totalInvestment)}</span>
                     </div>
                     <div>
-                      <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1 block">You Earned</span>
-                      <span className="text-xl sm:text-2xl font-black text-emerald-400">{formatCurrency(results.estimatedReturns)}</span>
+                      <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 mb-1 block">You Earned</span>
+                      <span className="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400">{formatCurrency(results.estimatedReturns)}</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="glass rounded-[2rem] border border-white/5 p-6 bg-gradient-to-r from-blue-500/5 to-emerald-500/5 flex flex-col sm:flex-row items-center justify-between gap-6 cursor-pointer hover:bg-white/[0.03] transition-colors" onClick={() => setCompareMode(!compareMode)}>
+              <div className="glass rounded-[2rem] border border-slate-200/80 dark:border-white/5 p-6 bg-slate-50 dark:bg-gradient-to-r dark:from-blue-500/5 dark:to-emerald-500/5 flex flex-col sm:flex-row items-center justify-between gap-6 cursor-pointer hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-colors shadow-md dark:shadow-none" onClick={() => setCompareMode(!compareMode)}>
                 <div className="flex items-center gap-3 w-full sm:w-auto">
-                  <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center shrink-0">
-                    <ShieldCheck className="w-5 h-5 text-gray-400" />
+                  <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-white/5 flex items-center justify-center shrink-0">
+                    <ShieldCheck className="w-5 h-5 text-slate-600 dark:text-gray-400" />
                   </div>
                   <div>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-gray-500">Without Investing</p>
-                    <p className="text-lg font-black text-gray-300">{formatCurrency(results.totalInvestment)}</p>
-                    <p className="text-xs text-red-400 font-bold mt-0.5">₹0 Growth</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500">Without Investing</p>
+                    <p className="text-lg font-black text-slate-800 dark:text-gray-300">{formatCurrency(results.totalInvestment)}</p>
+                    <p className="text-xs text-red-600 dark:text-red-400 font-bold mt-0.5">₹0 Growth</p>
                   </div>
                 </div>
                 
                 <div className="hidden sm:block">
-                  <ArrowRight className="w-5 h-5 text-gray-600" />
+                  <ArrowRight className="w-5 h-5 text-slate-400 dark:text-gray-600" />
                 </div>
                 
                 <div className="flex items-center gap-3 w-full sm:w-auto">
                   <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center shrink-0">
-                    <Zap className="w-5 h-5 text-emerald-400" />
+                    <Zap className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                   </div>
                   <div>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-emerald-500">With SIP</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-500">With SIP</p>
                     <p className="text-lg font-black text-slate-900 dark:text-white">{formatCurrency(results.futureValue)}</p>
-                    <p className="text-xs text-emerald-400 font-bold mt-0.5">Huge Benefit!</p>
+                    <p className="text-xs text-emerald-600 dark:text-emerald-400 font-bold mt-0.5">Huge Benefit!</p>
                   </div>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="glass rounded-2xl border border-white/5 p-5 bg-white/[0.01]">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-2">📈 Wealth Growth</p>
-                  <p className="text-sm font-semibold text-gray-300 leading-relaxed">
-                    Returns are <span className="text-white font-bold">{results.percentageReturn}%</span> of your investment.
+                <div className="glass rounded-2xl border border-slate-200/80 dark:border-white/5 p-5 bg-white dark:bg-white/[0.01] shadow-sm dark:shadow-none">
+                  <p className="text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-2">📈 Wealth Growth</p>
+                  <p className="text-sm font-semibold text-slate-700 dark:text-gray-300 leading-relaxed">
+                    Returns are <span className="text-slate-900 dark:text-white font-bold">{results.percentageReturn}%</span> of your investment.
                   </p>
                 </div>
-                <div className="glass rounded-2xl border border-white/5 p-5 bg-white/[0.01]">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-blue-400 mb-2">💰 Monthly Habit</p>
-                  <p className="text-sm font-semibold text-gray-300 leading-relaxed">
-                    Investing <span className="text-white font-bold">₹{monthlyInvestment}/mo</span> creates <span className="text-white font-bold">{formatCompactCurrency(results.futureValue)}</span> over {years} years.
+                <div className="glass rounded-2xl border border-slate-200/80 dark:border-white/5 p-5 bg-white dark:bg-white/[0.01] shadow-sm dark:shadow-none">
+                  <p className="text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-2">💰 Monthly Habit</p>
+                  <p className="text-sm font-semibold text-slate-700 dark:text-gray-300 leading-relaxed">
+                    Investing <span className="text-slate-900 dark:text-white font-bold">₹{monthlyInvestment}/mo</span> creates <span className="text-slate-900 dark:text-white font-bold">{formatCompactCurrency(results.futureValue)}</span> over {years} years.
                   </p>
                 </div>
               </div>
@@ -486,7 +486,7 @@ export default function SipCalculatorPage() {
             </div>
           </div>
 
-          <div className="glass rounded-[2.5rem] border border-white/5 shadow-2xl p-6 sm:p-10 bg-white/[0.01] mb-16">
+          <div className="glass rounded-[2.5rem] border border-slate-200/80 dark:border-white/5 shadow-2xl p-6 sm:p-10 bg-white dark:bg-white/[0.01] mb-16">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 mb-10">
               <div>
                 <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Year-wise Growth Chart</h3>

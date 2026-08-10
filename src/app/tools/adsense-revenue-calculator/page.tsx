@@ -217,13 +217,13 @@ function SliderInput({
               if (value !== "" && numVal < min) onChange(min);
               if (value !== "" && numVal > max) onChange(max);
             }}
-            className="w-full bg-black/40 border border-white/10 hover:border-white/20 rounded-xl py-3 px-4 pr-10 text-white font-mono text-lg text-center focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all placeholder:text-white/20"
+            className="w-full bg-slate-100 dark:bg-black/40 border border-slate-300 dark:border-white/10 hover:border-slate-400 dark:hover:border-white/20 rounded-xl py-3 px-4 pr-10 text-slate-900 dark:text-white font-mono text-lg text-center focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all placeholder:text-slate-400 dark:placeholder:text-white/20 shadow-inner dark:shadow-none"
           />
-          {suffix && <span className="absolute right-4 text-gray-500 text-sm font-bold pointer-events-none">{suffix}</span>}
+          {suffix && <span className="absolute right-4 text-slate-500 dark:text-gray-500 text-sm font-bold pointer-events-none">{suffix}</span>}
         </div>
       </div>
-      {helperText && <p className="text-xs text-gray-400 font-medium">{helperText}</p>}
-      <div className="relative w-full h-2 bg-white/5 rounded-full overflow-hidden">
+      {helperText && <p className="text-xs text-slate-600 dark:text-gray-400 font-medium">{helperText}</p>}
+      <div className="relative w-full h-2 bg-slate-200 dark:bg-white/5 rounded-full overflow-hidden">
         <motion.div
           className="absolute top-0 left-0 h-full bg-blue-500 pointer-events-none"
           animate={{ width: `${pct}%` }}

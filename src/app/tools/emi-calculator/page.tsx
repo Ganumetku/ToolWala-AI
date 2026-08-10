@@ -32,7 +32,89 @@ const formatCompactCurrency = (value: number) => {
   }).format(value);
 };
 
-function InputSlider({ label, min, max, step, value, onChange, icon: Icon, suffix = "", helperText, presets, placeholder = "" }: any) {
+function numberToWordsINR(amount: number): string {
+  if (!amount || isNaN(amount) || amount <= 0) return "";
+
+  const units = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", 
+                 "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
+  const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+
+  const convertTwoDigits = (n: number): string => {
+    if (n < 20) return units[n];
+    const unitDigit = n % 10;
+    return `${tens[Math.floor(n / 10)]}${unitDigit ? " " + units[unitDigit] : ""}`;
+  };
+
+  const convertThreeDigits = (n: number): string => {
+    const hundred = Math.floor(n / 100);
+    const remainder = n % 100;
+    let str = "";
+    if (hundred > 0) {
+      str += `${units[hundred]} Hundred`;
+    }
+    if (remainder > 0) {
+      if (str) str += " ";
+      str += convertTwoDigits(remainder);
+    }
+    return str;
+  };
+
+  const integerPart = Math.floor(amount);
+  const decimalPart = Math.round((amount - integerPart) * 100);
+
+  if (integerPart === 0 && decimalPart === 0) return "";
+
+  let words = "";
+
+  if (integerPart > 0) {
+    let num = integerPart;
+
+    const crore = Math.floor(num / 10000000);
+    num %= 10000000;
+
+    const lakh = Math.floor(num / 100000);
+    num %= 100000;
+
+    const thousand = Math.floor(num / 1000);
+    num %= 1000;
+
+    const remainder = num;
+
+    let parts: string[] = [];
+
+    if (crore > 0) {
+      const croreWords = crore < 100 ? convertTwoDigits(crore) : convertThreeDigits(crore);
+      parts.push(`${croreWords} Crore`);
+    }
+    if (lakh > 0) {
+      parts.push(`${convertTwoDigits(lakh)} Lakh`);
+    }
+    if (thousand > 0) {
+      parts.push(`${convertTwoDigits(thousand)} Thousand`);
+    }
+    if (remainder > 0) {
+      parts.push(convertThreeDigits(remainder));
+    }
+
+    words = parts.join(" ") + " Rupees";
+  }
+
+  if (decimalPart > 0) {
+    const paiseWords = convertTwoDigits(decimalPart);
+    if (words) {
+      words += ` and ${paiseWords} Paise`;
+    } else {
+      words = `${paiseWords} Paise`;
+    }
+  }
+
+  return words ? `${words} Only` : "";
+}
+
+function InputSlider({ label, min, max, step, value, onChange, icon: Icon, suffix = "", helperText, presets, placeholder = "", showInWords = false }: any) {
+  const isOverLimit = typeof value === 'number' && value > max;
+  const wordsText = showInWords && typeof value === 'number' && value > 0 ? numberToWordsINR(value) : '';
+
   return (
     <div className="space-y-3">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
@@ -55,11 +137,26 @@ function InputSlider({ label, min, max, step, value, onChange, icon: Icon, suffi
               if (value !== '' && value < min) onChange(min);
               if (value !== '' && value > max) onChange(max);
             }}
-            className="w-full bg-slate-100 dark:bg-black/40 border border-slate-300 dark:border-white/10 hover:border-slate-400 dark:hover:border-white/20 rounded-xl py-3 px-4 pr-10 text-slate-900 dark:text-white font-mono text-lg text-center focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all placeholder:text-slate-400 dark:placeholder:text-white/20 shadow-inner dark:shadow-none"
+            className={`w-full bg-slate-100 dark:bg-black/40 border ${
+              isOverLimit ? 'border-amber-500 ring-2 ring-amber-500/20' : 'border-slate-300 dark:border-white/10'
+            } hover:border-slate-400 dark:hover:border-white/20 rounded-xl py-3 px-4 pr-10 text-slate-900 dark:text-white font-mono text-lg text-center focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all placeholder:text-slate-400 dark:placeholder:text-white/20 shadow-inner dark:shadow-none`}
           />
           {suffix && <span className="absolute right-4 text-slate-500 dark:text-gray-500 text-sm font-bold pointer-events-none">{suffix}</span>}
         </div>
       </div>
+
+      {isOverLimit && (
+        <p className="text-xs text-amber-600 dark:text-amber-400 font-bold flex items-center gap-1">
+          ⚠️ Maximum limit is {suffix === '₹' ? formatCurrency(max) : `${max}${suffix}`}
+        </p>
+      )}
+
+      {wordsText && (
+        <div className="text-xs font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-sm">
+          <span className="font-bold text-emerald-800 dark:text-emerald-400 shrink-0">🔤 In Words:</span>
+          <span className="font-bold truncate">{wordsText}</span>
+        </div>
+      )}
       
       <p className="text-xs text-slate-600 dark:text-gray-400 font-medium">{helperText}</p>
       
@@ -67,7 +164,7 @@ function InputSlider({ label, min, max, step, value, onChange, icon: Icon, suffi
         <motion.div 
           className="absolute top-0 left-0 h-full bg-emerald-500 pointer-events-none" 
           initial={{ width: 0 }}
-          animate={{ width: `${((value - min) / (max - min)) * 100}%` }} 
+          animate={{ width: `${Math.min(100, Math.max(0, ((value - min) / (max - min)) * 100))}%` }} 
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
         />
         <input 
@@ -75,7 +172,7 @@ function InputSlider({ label, min, max, step, value, onChange, icon: Icon, suffi
           min={min}
           max={max}
           step={step}
-          value={value}
+          value={Math.min(value, max)}
           onChange={(e) => onChange(Number(e.target.value))}
           className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
         />
@@ -392,17 +489,19 @@ export default function EmiCalculatorPage() {
                     helperText="Total amount you wish to borrow."
                     icon={Wallet}
                     min={10000} 
-                    max={20000000} 
+                    max={500000000} 
                     step={10000} 
                     value={loanAmount} 
                     onChange={setLoanAmount}
                     suffix="₹"
-                    placeholder="1000000"
+                    placeholder="5000000"
+                    showInWords={true}
                     presets={[
                       { label: "₹1L", value: 100000 },
-                      { label: "₹5L", value: 500000 },
-                      { label: "₹20L", value: 2000000 },
+                      { label: "₹10L", value: 1000000 },
                       { label: "₹50L", value: 5000000 },
+                      { label: "₹1Cr", value: 10000000 },
+                      { label: "₹5Cr", value: 50000000 },
                     ]}
                   />
                   
@@ -535,6 +634,13 @@ export default function EmiCalculatorPage() {
                     >
                       {formatCurrency(results.emi)}
                     </motion.div>
+
+                    {results.emi > 0 && (
+                      <div className="mt-3 inline-flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold text-emerald-700 dark:text-emerald-300 shadow-sm">
+                        <span className="text-emerald-800 dark:text-emerald-400">🔤 EMI in Words:</span>
+                        <span>{numberToWordsINR(results.emi)}</span>
+                      </div>
+                    )}
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center bg-slate-50 dark:bg-black/40 border border-slate-200/80 dark:border-white/5 rounded-3xl p-6 shadow-inner dark:shadow-none">
@@ -550,6 +656,11 @@ export default function EmiCalculatorPage() {
                       <div className="pt-4 border-t border-slate-200 dark:border-white/10">
                         <span className="text-[10px] font-black uppercase tracking-widest text-slate-600 dark:text-gray-400 mb-1 block">Total Amount Payable</span>
                         <span className="text-xl font-black text-slate-900 dark:text-white">{formatCurrency(results.totalPayment)}</span>
+                        {results.totalPayment > 0 && (
+                          <p className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 mt-1">
+                            {numberToWordsINR(results.totalPayment)}
+                          </p>
+                        )}
                       </div>
                     </div>
                     

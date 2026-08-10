@@ -587,63 +587,63 @@ export default function SipCalculatorPage() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-              <div className="glass rounded-[2rem] border border-white/5 p-8 bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
-                <h3 className="text-xl font-black text-emerald-400 uppercase tracking-widest mb-4">What is SIP?</h3>
-                <p className="text-gray-300 leading-relaxed font-medium">
+              <div className="glass rounded-[2rem] border border-slate-200/80 dark:border-white/5 p-8 bg-white dark:bg-white/[0.01] hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors shadow-md dark:shadow-none">
+                <h3 className="text-xl font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-4">What is SIP?</h3>
+                <p className="text-slate-700 dark:text-gray-300 leading-relaxed font-medium">
                   SIP (Systematic Investment Plan) allows you to invest a fixed amount regularly (monthly or quarterly) in mutual funds. Instead of trying to time the market with a lump sum, a SIP Calculator helps you plan disciplined investments, reducing market volatility risks and building wealth over time.
                 </p>
               </div>
               
-              <div className="glass rounded-[2rem] border border-white/5 p-8 bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
-                <h3 className="text-xl font-black text-blue-400 uppercase tracking-widest mb-4">How SIP Works?</h3>
-                <ul className="space-y-4 text-gray-300 font-medium">
-                  <li className="flex gap-3 items-start"><CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" /> <span><strong>Monthly Investment:</strong> A fixed amount is auto-debited from your bank.</span></li>
-                  <li className="flex gap-3 items-start"><CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" /> <span><strong>Compounding:</strong> Reinvesting your returns generates explosive long-term growth.</span></li>
-                  <li className="flex gap-3 items-start"><CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" /> <span><strong>Rupee Cost Averaging:</strong> You buy more units when markets are down and fewer when markets are up.</span></li>
+              <div className="glass rounded-[2rem] border border-slate-200/80 dark:border-white/5 p-8 bg-white dark:bg-white/[0.01] hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors shadow-md dark:shadow-none">
+                <h3 className="text-xl font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-4">How SIP Works?</h3>
+                <ul className="space-y-4 text-slate-700 dark:text-gray-300 font-medium">
+                  <li className="flex gap-3 items-start"><CheckCircle2 className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" /> <span><strong>Monthly Investment:</strong> A fixed amount is auto-debited from your bank.</span></li>
+                  <li className="flex gap-3 items-start"><CheckCircle2 className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" /> <span><strong>Compounding:</strong> Reinvesting your returns generates explosive long-term growth.</span></li>
+                  <li className="flex gap-3 items-start"><CheckCircle2 className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" /> <span><strong>Rupee Cost Averaging:</strong> You buy more units when markets are down and fewer when markets are up.</span></li>
                 </ul>
               </div>
               
-              <div className="glass rounded-[2rem] border border-white/5 p-8 bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
-                <h3 className="text-xl font-black text-purple-400 uppercase tracking-widest mb-4">Benefits of SIP</h3>
-                <ul className="space-y-4 text-gray-300 font-medium">
-                  <li className="flex gap-3 items-center"><CheckCircle2 className="w-5 h-5 text-purple-400 shrink-0" /> Disciplined investing habit</li>
-                  <li className="flex gap-3 items-center"><CheckCircle2 className="w-5 h-5 text-purple-400 shrink-0" /> Affordable investing (start with ₹500)</li>
-                  <li className="flex gap-3 items-center"><CheckCircle2 className="w-5 h-5 text-purple-400 shrink-0" /> Power of compounding</li>
-                  <li className="flex gap-3 items-center"><CheckCircle2 className="w-5 h-5 text-purple-400 shrink-0" /> Reduced market timing risk</li>
+              <div className="glass rounded-[2rem] border border-slate-200/80 dark:border-white/5 p-8 bg-white dark:bg-white/[0.01] hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors shadow-md dark:shadow-none">
+                <h3 className="text-xl font-black text-purple-600 dark:text-purple-400 uppercase tracking-widest mb-4">Benefits of SIP</h3>
+                <ul className="space-y-4 text-slate-700 dark:text-gray-300 font-medium">
+                  <li className="flex gap-3 items-center"><CheckCircle2 className="w-5 h-5 text-purple-600 dark:text-purple-400 shrink-0" /> Disciplined investing habit</li>
+                  <li className="flex gap-3 items-center"><CheckCircle2 className="w-5 h-5 text-purple-600 dark:text-purple-400 shrink-0" /> Affordable investing (start with ₹500)</li>
+                  <li className="flex gap-3 items-center"><CheckCircle2 className="w-5 h-5 text-purple-600 dark:text-purple-400 shrink-0" /> Power of compounding</li>
+                  <li className="flex gap-3 items-center"><CheckCircle2 className="w-5 h-5 text-purple-600 dark:text-purple-400 shrink-0" /> Reduced market timing risk</li>
                 </ul>
               </div>
               
-              <div className="glass rounded-[2rem] border border-white/5 p-8 bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
-                <h3 className="text-xl font-black text-orange-400 uppercase tracking-widest mb-4">Who Should Invest?</h3>
-                <ul className="space-y-4 text-gray-300 font-medium">
-                  <li className="flex gap-3 items-center"><CheckCircle2 className="w-5 h-5 text-orange-400 shrink-0" /> <strong>Students:</strong> Build early capital</li>
-                  <li className="flex gap-3 items-center"><CheckCircle2 className="w-5 h-5 text-orange-400 shrink-0" /> <strong>Working Professionals:</strong> Wealth accumulation</li>
-                  <li className="flex gap-3 items-center"><CheckCircle2 className="w-5 h-5 text-orange-400 shrink-0" /> <strong>Parents:</strong> Child education or marriage funds</li>
-                  <li className="flex gap-3 items-center"><CheckCircle2 className="w-5 h-5 text-orange-400 shrink-0" /> <strong>Retirement Planners:</strong> Build a retirement corpus</li>
+              <div className="glass rounded-[2rem] border border-slate-200/80 dark:border-white/5 p-8 bg-white dark:bg-white/[0.01] hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors shadow-md dark:shadow-none">
+                <h3 className="text-xl font-black text-orange-600 dark:text-orange-400 uppercase tracking-widest mb-4">Who Should Invest?</h3>
+                <ul className="space-y-4 text-slate-700 dark:text-gray-300 font-medium">
+                  <li className="flex gap-3 items-center"><CheckCircle2 className="w-5 h-5 text-orange-600 dark:text-orange-400 shrink-0" /> <strong>Students:</strong> Build early capital</li>
+                  <li className="flex gap-3 items-center"><CheckCircle2 className="w-5 h-5 text-orange-600 dark:text-orange-400 shrink-0" /> <strong>Working Professionals:</strong> Wealth accumulation</li>
+                  <li className="flex gap-3 items-center"><CheckCircle2 className="w-5 h-5 text-orange-600 dark:text-orange-400 shrink-0" /> <strong>Parents:</strong> Child education or marriage funds</li>
+                  <li className="flex gap-3 items-center"><CheckCircle2 className="w-5 h-5 text-orange-600 dark:text-orange-400 shrink-0" /> <strong>Retirement Planners:</strong> Build a retirement corpus</li>
                 </ul>
               </div>
             </div>
 
-            <div className="mb-20 glass rounded-[3rem] border border-emerald-500/20 p-8 sm:p-12 relative overflow-hidden">
+            <div className="mb-20 glass rounded-[3rem] border border-slate-200/80 dark:border-emerald-500/20 p-8 sm:p-12 relative overflow-hidden bg-white dark:bg-transparent shadow-xl dark:shadow-none">
               <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none" />
               <h3 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-8 relative z-10 text-center">
                 The Power of Compounding 🚀
               </h3>
-              <p className="text-center text-gray-400 font-medium mb-12 max-w-2xl mx-auto relative z-10">
+              <p className="text-center text-slate-600 dark:text-gray-400 font-medium mb-12 max-w-2xl mx-auto relative z-10">
                 Einstein called it the 8th wonder of the world! See what happens when you invest a disciplined ₹5,000 every month at an expected 12% return for 20 years. Use our SIP Calculator to test your own numbers.
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 relative z-10">
-                <div className="bg-black/50 border border-white/10 rounded-[2rem] p-8 text-center hover:bg-black/70 transition-colors">
-                  <p className="text-xs font-black text-gray-500 uppercase tracking-widest mb-3">Invested Amount</p>
-                  <p className="text-3xl sm:text-4xl font-black text-blue-400">₹12,00,000</p>
+                <div className="bg-slate-100 dark:bg-black/50 border border-slate-200 dark:border-white/10 rounded-[2rem] p-8 text-center hover:bg-slate-200 dark:hover:bg-black/70 transition-colors">
+                  <p className="text-xs font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest mb-3">Invested Amount</p>
+                  <p className="text-3xl sm:text-4xl font-black text-blue-600 dark:text-blue-400">₹12,00,000</p>
                 </div>
-                <div className="bg-black/50 border border-white/10 rounded-[2rem] p-8 text-center hover:bg-black/70 transition-colors">
-                  <p className="text-xs font-black text-gray-500 uppercase tracking-widest mb-3">Estimated Returns</p>
-                  <p className="text-3xl sm:text-4xl font-black text-emerald-400">₹37,95,740</p>
+                <div className="bg-slate-100 dark:bg-black/50 border border-slate-200 dark:border-white/10 rounded-[2rem] p-8 text-center hover:bg-slate-200 dark:hover:bg-black/70 transition-colors">
+                  <p className="text-xs font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest mb-3">Estimated Returns</p>
+                  <p className="text-3xl sm:text-4xl font-black text-emerald-600 dark:text-emerald-400">₹37,95,740</p>
                 </div>
-                <div className="bg-black/50 border border-emerald-500/30 rounded-[2rem] p-8 text-center bg-gradient-to-t from-emerald-500/10 to-transparent shadow-2xl shadow-emerald-500/5">
-                  <p className="text-xs font-black text-emerald-500 uppercase tracking-widest mb-3">Total Wealth</p>
+                <div className="bg-emerald-50 dark:bg-black/50 border border-emerald-500/30 rounded-[2rem] p-8 text-center dark:bg-gradient-to-t dark:from-emerald-500/10 dark:to-transparent shadow-xl dark:shadow-emerald-500/5">
+                  <p className="text-xs font-black text-emerald-700 dark:text-emerald-500 uppercase tracking-widest mb-3">Total Wealth</p>
                   <p className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">₹49,95,740</p>
                 </div>
               </div>
@@ -652,31 +652,31 @@ export default function SipCalculatorPage() {
             <div className="mb-20">
               <h3 className="text-2xl font-black text-slate-900 dark:text-white text-center uppercase tracking-widest mb-8">Quick SIP Tips 💡</h3>
               <div className="flex flex-wrap justify-center gap-4">
-                <span className="glass px-6 py-4 rounded-full text-sm font-bold text-gray-300 flex items-center gap-2 border border-white/10 hover:border-emerald-500/30 transition-colors"><Zap className="w-4 h-4 text-yellow-400" /> Start early</span>
-                <span className="glass px-6 py-4 rounded-full text-sm font-bold text-gray-300 flex items-center gap-2 border border-white/10 hover:border-emerald-500/30 transition-colors"><Zap className="w-4 h-4 text-yellow-400" /> Invest regularly</span>
-                <span className="glass px-6 py-4 rounded-full text-sm font-bold text-gray-300 flex items-center gap-2 border border-white/10 hover:border-emerald-500/30 transition-colors"><Zap className="w-4 h-4 text-yellow-400" /> Stay invested long term</span>
-                <span className="glass px-6 py-4 rounded-full text-sm font-bold text-gray-300 flex items-center gap-2 border border-white/10 hover:border-emerald-500/30 transition-colors"><Zap className="w-4 h-4 text-yellow-400" /> Increase SIP yearly</span>
+                <span className="glass px-6 py-4 rounded-full text-sm font-bold text-slate-700 dark:text-gray-300 flex items-center gap-2 border border-slate-200/80 dark:border-white/10 hover:border-emerald-500/30 transition-colors shadow-sm"><Zap className="w-4 h-4 text-amber-500 dark:text-yellow-400" /> Start early</span>
+                <span className="glass px-6 py-4 rounded-full text-sm font-bold text-slate-700 dark:text-gray-300 flex items-center gap-2 border border-slate-200/80 dark:border-white/10 hover:border-emerald-500/30 transition-colors shadow-sm"><Zap className="w-4 h-4 text-amber-500 dark:text-yellow-400" /> Invest regularly</span>
+                <span className="glass px-6 py-4 rounded-full text-sm font-bold text-slate-700 dark:text-gray-300 flex items-center gap-2 border border-slate-200/80 dark:border-white/10 hover:border-emerald-500/30 transition-colors shadow-sm"><Zap className="w-4 h-4 text-amber-500 dark:text-yellow-400" /> Stay invested long term</span>
+                <span className="glass px-6 py-4 rounded-full text-sm font-bold text-slate-700 dark:text-gray-300 flex items-center gap-2 border border-slate-200/80 dark:border-white/10 hover:border-emerald-500/30 transition-colors shadow-sm"><Zap className="w-4 h-4 text-amber-500 dark:text-yellow-400" /> Increase SIP yearly</span>
               </div>
             </div>
 
             <div className="max-w-3xl mx-auto space-y-8 mb-20">
               <div className="text-center">
                 <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-2">Frequently Asked Questions</h3>
-                <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-8">Everything you need to know about Mutual Fund SIP</p>
+                <p className="text-xs text-slate-500 dark:text-gray-500 font-bold uppercase tracking-wider mb-8">Everything you need to know about Mutual Fund SIP</p>
               </div>
               <div className="space-y-4">
                 {faqs.map((faq, index) => {
                   const isExpanded = faqExpanded === index;
                   return (
-                    <div key={index} className="glass rounded-2xl border border-white/5 bg-white/[0.01] overflow-hidden">
+                    <div key={index} className="glass rounded-2xl border border-slate-200/80 dark:border-white/5 bg-white dark:bg-white/[0.01] overflow-hidden shadow-sm dark:shadow-none">
                       <button
                         onClick={() => setFaqExpanded(isExpanded ? null : index)}
                         className="w-full flex items-center justify-between p-5.5 text-left focus:outline-none cursor-pointer"
                       >
-                        <span className="text-xs sm:text-sm font-black text-white hover:text-emerald-400 transition-colors">
+                        <span className="text-xs sm:text-sm font-black text-slate-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
                           {faq.q}
                         </span>
-                        <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform duration-300 flex-shrink-0 ml-4 ${isExpanded ? 'rotate-180 text-emerald-400' : ''}`} />
+                        <ChevronDown className={`w-4 h-4 text-slate-400 dark:text-gray-500 transition-transform duration-300 flex-shrink-0 ml-4 ${isExpanded ? 'rotate-180 text-emerald-600 dark:text-emerald-400' : ''}`} />
                       </button>
 
                       <AnimatePresence initial={false}>
@@ -687,7 +687,7 @@ export default function SipCalculatorPage() {
                             exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: 0.2, ease: "easeInOut" }}
                           >
-                            <div className="px-5.5 pb-5.5 pt-0.5 border-t border-white/5 text-xs text-gray-400 leading-relaxed font-semibold font-sans">
+                            <div className="px-5.5 pb-5.5 pt-0.5 border-t border-slate-200 dark:border-white/5 text-xs text-slate-600 dark:text-gray-400 leading-relaxed font-semibold font-sans">
                               {faq.a}
                             </div>
                           </motion.div>

@@ -586,33 +586,33 @@ export default function EmiCalculatorPage() {
 
           {/* Repayment Schedule */}
           {results.schedule.length > 0 && (
-            <div className="glass rounded-[2.5rem] border border-white/5 shadow-2xl p-6 sm:p-10 bg-white/[0.01] mb-16 overflow-hidden">
+            <div className="glass rounded-[2.5rem] border border-slate-200/80 dark:border-white/5 shadow-2xl p-6 sm:p-10 bg-white dark:bg-white/[0.01] mb-16 overflow-hidden">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 mb-8">
                 <div>
-                  <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2"><BookOpen className="w-5 h-5 text-emerald-400" /> Repayment Schedule</h3>
-                  <p className="text-sm text-gray-400 font-medium mt-1">Yearly breakdown of your principal and interest payments.</p>
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2"><BookOpen className="w-5 h-5 text-emerald-600 dark:text-emerald-400" /> Repayment Schedule</h3>
+                  <p className="text-sm text-slate-600 dark:text-gray-400 font-medium mt-1">Yearly breakdown of your principal and interest payments.</p>
                 </div>
               </div>
 
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="border-b border-white/10">
-                      <th className="py-4 px-4 text-xs font-black text-gray-500 uppercase tracking-widest">Year</th>
-                      <th className="py-4 px-4 text-xs font-black text-gray-500 uppercase tracking-widest text-right">Principal Paid</th>
-                      <th className="py-4 px-4 text-xs font-black text-gray-500 uppercase tracking-widest text-right">Interest Paid</th>
-                      <th className="py-4 px-4 text-xs font-black text-gray-500 uppercase tracking-widest text-right">Total Payment</th>
-                      <th className="py-4 px-4 text-xs font-black text-gray-500 uppercase tracking-widest text-right">Balance</th>
+                    <tr className="border-b border-slate-200 dark:border-white/10">
+                      <th className="py-4 px-4 text-xs font-black text-slate-600 dark:text-gray-500 uppercase tracking-widest">Year</th>
+                      <th className="py-4 px-4 text-xs font-black text-slate-600 dark:text-gray-500 uppercase tracking-widest text-right">Principal Paid</th>
+                      <th className="py-4 px-4 text-xs font-black text-slate-600 dark:text-gray-500 uppercase tracking-widest text-right">Interest Paid</th>
+                      <th className="py-4 px-4 text-xs font-black text-slate-600 dark:text-gray-500 uppercase tracking-widest text-right">Total Payment</th>
+                      <th className="py-4 px-4 text-xs font-black text-slate-600 dark:text-gray-500 uppercase tracking-widest text-right">Balance</th>
                     </tr>
                   </thead>
                   <tbody>
                     {results.schedule.map((row, idx) => (
-                      <tr key={idx} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
-                        <td className="py-4 px-4 text-sm font-bold text-white">{row.year}</td>
-                        <td className="py-4 px-4 text-sm font-mono text-blue-400 text-right">{formatCurrency(row.principal)}</td>
-                        <td className="py-4 px-4 text-sm font-mono text-emerald-400 text-right">{formatCurrency(row.interest)}</td>
-                        <td className="py-4 px-4 text-sm font-mono text-gray-300 text-right">{formatCurrency(row.principal + row.interest)}</td>
-                        <td className="py-4 px-4 text-sm font-mono text-white font-bold text-right">{formatCurrency(row.balance)}</td>
+                      <tr key={idx} className="border-b border-slate-200/60 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors">
+                        <td className="py-4 px-4 text-sm font-bold text-slate-900 dark:text-white">{row.year}</td>
+                        <td className="py-4 px-4 text-sm font-mono text-blue-600 dark:text-blue-400 text-right">{formatCurrency(row.principal)}</td>
+                        <td className="py-4 px-4 text-sm font-mono text-emerald-600 dark:text-emerald-400 text-right">{formatCurrency(row.interest)}</td>
+                        <td className="py-4 px-4 text-sm font-mono text-slate-700 dark:text-gray-300 text-right">{formatCurrency(row.principal + row.interest)}</td>
+                        <td className="py-4 px-4 text-sm font-mono text-slate-900 dark:text-white font-bold text-right">{formatCurrency(row.balance)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -622,35 +622,35 @@ export default function EmiCalculatorPage() {
           )}
 
           {/* Educational Content Section */}
-          <section id="learn-more-section" className="py-20 border-t border-white/5 mt-16 pt-24 scroll-mt-10">
+          <section id="learn-more-section" className="py-20 border-t border-slate-200/80 dark:border-white/5 mt-16 pt-24 scroll-mt-10">
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-emerald-400 text-xs font-black tracking-widest mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-md text-emerald-600 dark:text-emerald-400 text-xs font-black tracking-widest mb-6 shadow-sm">
                 <BookOpen className="w-4 h-4" />
                 <span>Comprehensive Guide</span>
               </div>
               <h2 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-6">
                 📚 Learn How EMI Works
               </h2>
-              <p className="text-gray-400 text-base sm:text-lg font-medium leading-relaxed">
+              <p className="text-slate-600 dark:text-gray-400 text-base sm:text-lg font-medium leading-relaxed">
                 Understand EMI math, principal reduction, and smart borrowing strategies before taking your next big loan.
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-              <div className="glass rounded-[2rem] border border-white/5 p-8 bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
-                <h3 className="text-xl font-black text-emerald-400 uppercase tracking-widest mb-4">What is EMI?</h3>
-                <p className="text-gray-300 leading-relaxed font-medium">
+              <div className="glass rounded-[2rem] border border-slate-200/80 dark:border-white/5 p-8 bg-white dark:bg-white/[0.01] hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors shadow-md dark:shadow-none">
+                <h3 className="text-xl font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-4">What is EMI?</h3>
+                <p className="text-slate-700 dark:text-gray-300 leading-relaxed font-medium">
                   Equated Monthly Installment (EMI) is the fixed payment amount you make to a bank or lender on a specific date each month. It helps you pay off the principal loan amount and the accrued interest over a specified tenure without a massive financial burden at once.
                 </p>
               </div>
               
-              <div className="glass rounded-[2rem] border border-white/5 p-8 bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
-                <h3 className="text-xl font-black text-blue-400 uppercase tracking-widest mb-4">How EMI is Calculated?</h3>
-                <p className="text-gray-300 leading-relaxed font-medium mb-4">EMI depends on three major factors:</p>
-                <ul className="space-y-3 text-gray-300 font-medium">
-                  <li className="flex gap-3 items-start"><CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" /> <span><strong>Principal (P):</strong> The initial amount you borrow.</span></li>
-                  <li className="flex gap-3 items-start"><CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" /> <span><strong>Interest Rate (R):</strong> The cost of borrowing the money.</span></li>
-                  <li className="flex gap-3 items-start"><CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" /> <span><strong>Tenure (N):</strong> The total time (months/years) given to repay.</span></li>
+              <div className="glass rounded-[2rem] border border-slate-200/80 dark:border-white/5 p-8 bg-white dark:bg-white/[0.01] hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors shadow-md dark:shadow-none">
+                <h3 className="text-xl font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-4">How EMI is Calculated?</h3>
+                <p className="text-slate-700 dark:text-gray-300 leading-relaxed font-medium mb-4">EMI depends on three major factors:</p>
+                <ul className="space-y-3 text-slate-700 dark:text-gray-300 font-medium">
+                  <li className="flex gap-3 items-start"><CheckCircle2 className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" /> <span><strong>Principal (P):</strong> The initial amount you borrow.</span></li>
+                  <li className="flex gap-3 items-start"><CheckCircle2 className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" /> <span><strong>Interest Rate (R):</strong> The cost of borrowing the money.</span></li>
+                  <li className="flex gap-3 items-start"><CheckCircle2 className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" /> <span><strong>Tenure (N):</strong> The total time (months/years) given to repay.</span></li>
                 </ul>
               </div>
             </div>
@@ -658,21 +658,21 @@ export default function EmiCalculatorPage() {
             <div className="max-w-3xl mx-auto space-y-8 mb-20">
               <div className="text-center">
                 <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-2">Frequently Asked Questions</h3>
-                <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-8">Everything you need to know about Loans & EMIs</p>
+                <p className="text-xs text-slate-500 dark:text-gray-500 font-bold uppercase tracking-wider mb-8">Everything you need to know about Loans & EMIs</p>
               </div>
               <div className="space-y-4">
                 {faqs.map((faq, index) => {
                   const isExpanded = faqExpanded === index;
                   return (
-                    <div key={index} className="glass rounded-2xl border border-white/5 bg-white/[0.01] overflow-hidden">
+                    <div key={index} className="glass rounded-2xl border border-slate-200/80 dark:border-white/5 bg-white dark:bg-white/[0.01] overflow-hidden shadow-sm dark:shadow-none">
                       <button
                         onClick={() => setFaqExpanded(isExpanded ? null : index)}
                         className="w-full flex items-center justify-between p-5.5 text-left focus:outline-none cursor-pointer"
                       >
-                        <span className="text-xs sm:text-sm font-black text-white hover:text-emerald-400 transition-colors">
+                        <span className="text-xs sm:text-sm font-black text-slate-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
                           {faq.q}
                         </span>
-                        <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform duration-300 flex-shrink-0 ml-4 ${isExpanded ? 'rotate-180 text-emerald-400' : ''}`} />
+                        <ChevronDown className={`w-4 h-4 text-slate-400 dark:text-gray-500 transition-transform duration-300 flex-shrink-0 ml-4 ${isExpanded ? 'rotate-180 text-emerald-600 dark:text-emerald-400' : ''}`} />
                       </button>
 
                       <AnimatePresence initial={false}>
@@ -680,10 +680,10 @@ export default function EmiCalculatorPage() {
                           <motion.div
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
+                            exit={{ height: "auto", opacity: 0 }}
                             transition={{ duration: 0.2, ease: "easeInOut" }}
                           >
-                            <div className="px-5.5 pb-5.5 pt-0.5 border-t border-white/5 text-xs text-gray-400 leading-relaxed font-semibold font-sans">
+                            <div className="px-5.5 pb-5.5 pt-0.5 border-t border-slate-200 dark:border-white/5 text-xs text-slate-600 dark:text-gray-400 leading-relaxed font-semibold font-sans">
                               {faq.a}
                             </div>
                           </motion.div>

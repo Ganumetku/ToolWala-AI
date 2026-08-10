@@ -187,19 +187,19 @@ export default function Home() {
           >
             <Link
               href={localizeHref('/categories/pdf-tools')}
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-red-500/10 hover:bg-red-600/20 border border-red-500/20 text-xs font-black uppercase tracking-wider text-red-400 hover:text-white transition-all duration-300 active:scale-95 shadow-lg"
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-red-50 dark:bg-red-500/10 hover:bg-red-600 dark:hover:bg-red-600 border border-red-200/80 dark:border-red-500/20 text-xs font-black uppercase tracking-wider text-red-600 dark:text-red-400 hover:text-white dark:hover:text-white transition-all duration-300 active:scale-95 shadow-sm hover:shadow-lg hover:shadow-red-500/20 hover:scale-105"
             >
               📄 {t('categories.PDF Tools', 'PDF Tools')}
             </Link>
             <Link
               href={localizeHref('/categories/image-tools')}
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-blue-500/10 hover:bg-blue-600/20 border border-blue-500/20 text-xs font-black uppercase tracking-wider text-blue-400 hover:text-white transition-all duration-300 active:scale-95 shadow-lg"
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-blue-50 dark:bg-blue-500/10 hover:bg-blue-600 dark:hover:bg-blue-600 border border-blue-200/80 dark:border-blue-500/20 text-xs font-black uppercase tracking-wider text-blue-600 dark:text-blue-400 hover:text-white dark:hover:text-white transition-all duration-300 active:scale-95 shadow-sm hover:shadow-lg hover:shadow-blue-500/20 hover:scale-105"
             >
               🖼️ {t('categories.Image Tools', 'Image Tools')}
             </Link>
             <Link
               href={localizeHref('/categories/ai-tools')}
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-purple-500/10 hover:bg-purple-600/20 border border-purple-500/20 text-xs font-black uppercase tracking-wider text-purple-400 hover:text-white transition-all duration-300 active:scale-95 shadow-lg"
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-purple-50 dark:bg-purple-500/10 hover:bg-purple-600 dark:hover:bg-purple-600 border border-purple-200/80 dark:border-purple-500/20 text-xs font-black uppercase tracking-wider text-purple-600 dark:text-purple-400 hover:text-white dark:hover:text-white transition-all duration-300 active:scale-95 shadow-sm hover:shadow-lg hover:shadow-purple-500/20 hover:scale-105"
             >
               🤖 {t('categories.AI Tools', 'AI Tools')}
             </Link>
@@ -212,14 +212,14 @@ export default function Home() {
             transition={{ delay: 0.4 }}
             className="flex flex-wrap justify-center items-center gap-2 max-w-2xl mx-auto mb-10"
           >
-            <span className="text-[9px] font-black uppercase tracking-widest text-gray-500 mr-1 flex items-center gap-1">
+            <span className="text-[9px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 mr-1 flex items-center gap-1">
               <MousePointerClick className="w-3 h-3 text-blue-500" /> {t('home.suggestions_label', 'Suggestions:')}
             </span>
             {popularSuggestionChips.map((chip) => (
               <button
                 key={chip.label}
                 onClick={() => handleSuggestionClick(chip.query)}
-                className="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-blue-500/30 text-[9px] text-gray-400 hover:text-white transition-all font-bold cursor-pointer active:scale-95"
+                className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 hover:border-blue-500/40 hover:bg-blue-50 dark:hover:bg-blue-600/20 text-[9px] text-slate-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-all font-bold cursor-pointer active:scale-95"
               >
                 {chip.label}
               </button>

@@ -33,6 +33,7 @@ const formatCompactCurrency = (value: number) => {
 
 function numberToWordsINR(amount: number): string {
   if (!amount || isNaN(amount) || amount <= 0) return "";
+  if (amount > 100000000000) return "Amount Exceeds Supported Limit";
 
   const units = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", 
                  "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
@@ -48,7 +49,7 @@ function numberToWordsINR(amount: number): string {
     const hundred = Math.floor(n / 100);
     const remainder = n % 100;
     let str = "";
-    if (hundred > 0) {
+    if (hundred > 0 && hundred < units.length) {
       str += `${units[hundred]} Hundred`;
     }
     if (remainder > 0) {
@@ -83,7 +84,7 @@ function numberToWordsINR(amount: number): string {
 
     if (crore > 0) {
       const croreWords = crore < 100 ? convertTwoDigits(crore) : convertThreeDigits(crore);
-      parts.push(`${croreWords} Crore`);
+      parts.push(`${croreWords || crore} Crore`);
     }
     if (lakh > 0) {
       parts.push(`${convertTwoDigits(lakh)} Lakh`);
@@ -129,12 +130,20 @@ function InputSlider({ label, min, max, step, value, onChange, icon: Icon, suffi
             value={value}
             placeholder={placeholder}
             onChange={(e) => {
-              let val = e.target.value === '' ? '' : Number(e.target.value);
+              let valStr = e.target.value;
+              const maxLen = max ? max.toString().length : 10;
+              if (valStr.length > maxLen) {
+                valStr = valStr.slice(0, maxLen);
+              }
+              let val = valStr === '' ? '' : Number(valStr);
+              if (typeof val === 'number' && val > max) {
+                val = max;
+              }
               onChange(val);
             }}
             onBlur={() => {
               if (value !== '' && value < min) onChange(min);
-              if (value !== '' && value > max) onChange(max);
+              if (value !== '' && typeof value === 'number' && value > max) onChange(max);
             }}
             className={`w-full bg-slate-100 dark:bg-black/40 border ${
               isOverLimit ? 'border-amber-500 ring-2 ring-amber-500/20' : 'border-slate-300 dark:border-white/10'

@@ -34,6 +34,7 @@ const formatCompactCurrency = (value: number) => {
 
 function numberToWordsINR(amount: number): string {
   if (!amount || isNaN(amount) || amount <= 0) return "";
+  if (amount > 100000000000) return "Amount Exceeds Supported Limit";
 
   const units = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", 
                  "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
@@ -49,7 +50,7 @@ function numberToWordsINR(amount: number): string {
     const hundred = Math.floor(n / 100);
     const remainder = n % 100;
     let str = "";
-    if (hundred > 0) {
+    if (hundred > 0 && hundred < units.length) {
       str += `${units[hundred]} Hundred`;
     }
     if (remainder > 0) {
@@ -84,7 +85,7 @@ function numberToWordsINR(amount: number): string {
 
     if (crore > 0) {
       const croreWords = crore < 100 ? convertTwoDigits(crore) : convertThreeDigits(crore);
-      parts.push(`${croreWords} Crore`);
+      parts.push(`${croreWords || crore} Crore`);
     }
     if (lakh > 0) {
       parts.push(`${convertTwoDigits(lakh)} Lakh`);
@@ -130,12 +131,20 @@ function InputSlider({ label, min, max, step, value, onChange, icon: Icon, suffi
             value={value}
             placeholder={placeholder}
             onChange={(e) => {
-              let val = e.target.value === '' ? '' : Number(e.target.value);
+              let valStr = e.target.value;
+              const maxLen = max ? max.toString().length : 10;
+              if (valStr.length > maxLen) {
+                valStr = valStr.slice(0, maxLen);
+              }
+              let val = valStr === '' ? '' : Number(valStr);
+              if (typeof val === 'number' && val > max) {
+                val = max;
+              }
               onChange(val);
             }}
             onBlur={() => {
               if (value !== '' && value < min) onChange(min);
-              if (value !== '' && value > max) onChange(max);
+              if (value !== '' && typeof value === 'number' && value > max) onChange(max);
             }}
             className={`w-full bg-slate-100 dark:bg-black/40 border ${
               isOverLimit ? 'border-amber-500 ring-2 ring-amber-500/20' : 'border-slate-300 dark:border-white/10'
@@ -624,40 +633,40 @@ export default function EmiCalculatorPage() {
                     </button>
                   </div>
 
-                  <div className="mb-10 text-center">
+                  <div className="mb-10 text-center px-2">
                     <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-2 block">Monthly EMI</span>
                     <motion.div 
                       key={results.emi}
                       initial={{ scale: 0.9, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      className="text-6xl sm:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-600 dark:from-white dark:to-gray-400 tracking-tight leading-none"
+                      className="text-4xl sm:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-600 dark:from-white dark:to-gray-400 tracking-tight leading-none break-all"
                     >
                       {formatCurrency(results.emi)}
                     </motion.div>
 
                     {results.emi > 0 && (
-                      <div className="mt-3 inline-flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold text-emerald-700 dark:text-emerald-300 shadow-sm">
-                        <span className="text-emerald-800 dark:text-emerald-400">🔤 EMI in Words:</span>
-                        <span>{numberToWordsINR(results.emi)}</span>
+                      <div className="mt-3 inline-flex flex-wrap items-center justify-center gap-1.5 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold text-emerald-700 dark:text-emerald-300 shadow-sm max-w-full">
+                        <span className="text-emerald-800 dark:text-emerald-400 shrink-0">🔤 EMI in Words:</span>
+                        <span className="break-words">{numberToWordsINR(results.emi)}</span>
                       </div>
                     )}
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center bg-slate-50 dark:bg-black/40 border border-slate-200/80 dark:border-white/5 rounded-3xl p-6 shadow-inner dark:shadow-none">
-                    <div className="space-y-6">
-                      <div>
-                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 flex items-center gap-2 mb-1"><div className="w-2 h-2 rounded-full bg-blue-500" /> Principal Amount</span>
-                        <span className="text-2xl font-black text-slate-900 dark:text-white">{formatCurrency(loanAmount)}</span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center bg-slate-50 dark:bg-black/40 border border-slate-200/80 dark:border-white/5 rounded-3xl p-6 shadow-inner dark:shadow-none overflow-hidden">
+                    <div className="space-y-6 min-w-0">
+                      <div className="min-w-0">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 flex items-center gap-2 mb-1"><div className="w-2 h-2 rounded-full bg-blue-500 shrink-0" /> Principal Amount</span>
+                        <span className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white block break-all">{formatCurrency(loanAmount)}</span>
                       </div>
-                      <div>
-                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 flex items-center gap-2 mb-1"><div className="w-2 h-2 rounded-full bg-emerald-500" /> Total Interest</span>
-                        <span className="text-2xl font-black text-emerald-600 dark:text-emerald-400">{formatCurrency(results.totalInterest)}</span>
+                      <div className="min-w-0">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 flex items-center gap-2 mb-1"><div className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" /> Total Interest</span>
+                        <span className="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400 block break-all">{formatCurrency(results.totalInterest)}</span>
                       </div>
-                      <div className="pt-4 border-t border-slate-200 dark:border-white/10">
+                      <div className="pt-4 border-t border-slate-200 dark:border-white/10 min-w-0">
                         <span className="text-[10px] font-black uppercase tracking-widest text-slate-600 dark:text-gray-400 mb-1 block">Total Amount Payable</span>
-                        <span className="text-xl font-black text-slate-900 dark:text-white">{formatCurrency(results.totalPayment)}</span>
+                        <span className="text-lg sm:text-xl font-black text-slate-900 dark:text-white block break-all">{formatCurrency(results.totalPayment)}</span>
                         {results.totalPayment > 0 && (
-                          <p className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 mt-1">
+                          <p className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 mt-1 break-words">
                             {numberToWordsINR(results.totalPayment)}
                           </p>
                         )}

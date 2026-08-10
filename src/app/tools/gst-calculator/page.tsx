@@ -191,7 +191,8 @@ const formatCompactCurrency = (value: number) => {
 };
 
 function numberToWordsINR(amount: number): string {
-  if (!amount || isNaN(amount) || amount === 0) return "";
+  if (!amount || isNaN(amount) || amount <= 0) return "";
+  if (amount > 100000000000) return "Amount Exceeds Supported Limit";
 
   const units = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", 
                  "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
@@ -207,7 +208,7 @@ function numberToWordsINR(amount: number): string {
     const hundred = Math.floor(n / 100);
     const remainder = n % 100;
     let str = "";
-    if (hundred > 0) {
+    if (hundred > 0 && hundred < units.length) {
       str += `${units[hundred]} Hundred`;
     }
     if (remainder > 0) {
@@ -242,7 +243,7 @@ function numberToWordsINR(amount: number): string {
 
     if (crore > 0) {
       const croreWords = crore < 100 ? convertTwoDigits(crore) : convertThreeDigits(crore);
-      parts.push(`${croreWords} Crore`);
+      parts.push(`${croreWords || crore} Crore`);
     }
     if (lakh > 0) {
       parts.push(`${convertTwoDigits(lakh)} Lakh`);
@@ -291,7 +292,12 @@ function NumberInput({ label, value, onChange, icon: Icon, suffix = "", helperTe
                 onChange('');
                 return;
               }
-              let val = Number(e.target.value);
+              let valStr = e.target.value;
+              const maxLen = MAX_AMOUNT ? MAX_AMOUNT.toString().length : 12;
+              if (valStr.length > maxLen) {
+                valStr = valStr.slice(0, maxLen);
+              }
+              let val = Number(valStr);
               if (val > MAX_AMOUNT) val = MAX_AMOUNT;
               if (val < 0) val = 0;
               onChange(val);

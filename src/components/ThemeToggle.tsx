@@ -14,7 +14,7 @@ export default function ThemeToggle() {
       onClick={toggleTheme}
       aria-label={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
       title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-      className={`relative inline-flex h-[34px] w-[68px] shrink-0 cursor-pointer items-center rounded-full p-1 border-2 transition-colors duration-500 select-none overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+      className={`relative inline-flex h-[34px] w-[68px] shrink-0 cursor-pointer items-center rounded-full p-1 border-2 transition-colors duration-300 select-none overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-blue-500 active:scale-95 ${
         isDark
           ? "border-indigo-400/30 bg-gradient-to-r from-[#2B32B2] via-[#2563EB] to-[#1E1B4B] shadow-[inset_0_2px_6px_rgba(0,0,0,0.5)]"
           : "border-white/80 bg-gradient-to-r from-[#FF7E80] via-[#FF8A65] to-[#FFA726] shadow-[inset_0_2px_5px_rgba(0,0,0,0.18)]"
@@ -54,13 +54,13 @@ export default function ThemeToggle() {
         layout
         transition={{
           type: "spring",
-          stiffness: 500,
-          damping: 30
+          stiffness: 400,
+          damping: 28
         }}
         animate={{
           x: isDark ? 34 : 0
         }}
-        className="z-10 h-[26px] w-[26px] rounded-full bg-gradient-to-b from-white to-[#e6e6e6] shadow-[0_3px_8px_rgba(0,0,0,0.35),inset_0_-2px_4px_rgba(0,0,0,0.1),inset_0_2px_4px_rgba(255,255,255,0.9)] flex items-center justify-center"
+        className="z-10 h-[26px] w-[26px] rounded-full bg-gradient-to-b from-white to-[#e6e6e6] shadow-[0_3px_8px_rgba(0,0,0,0.35),inset_0_-2px_4px_rgba(0,0,0,0.1),inset_0_2px_4px_rgba(255,255,255,0.9)] flex items-center justify-center no-theme-transition"
       >
         {/* Subtle inner highlight dot on knob */}
         <div className="h-2 w-2 rounded-full bg-slate-200/50 dark:bg-slate-400/40 shadow-inner" />

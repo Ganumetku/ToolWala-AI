@@ -36,26 +36,37 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const setTheme = useCallback((newTheme: Theme) => {
-    document.documentElement.classList.add("theme-transition");
-    
-    setThemeState(newTheme);
-    try {
-      localStorage.setItem("theme", newTheme);
-    } catch (e) {
-      console.error("Failed to save theme in localStorage", e);
+    if (typeof window === "undefined") return;
+
+    const applyThemeChange = () => {
+      setThemeState(newTheme);
+      try {
+        localStorage.setItem("theme", newTheme);
+      } catch (e) {
+        console.error("Failed to save theme in localStorage", e);
+      }
+
+      if (newTheme === "dark") {
+        document.documentElement.classList.add("dark");
+        document.documentElement.classList.remove("light");
+      } else {
+        document.documentElement.classList.remove("dark");
+        document.documentElement.classList.add("light");
+      }
+    };
+
+    const docObj = document as unknown as { startViewTransition?: (cb: () => void) => void };
+    if (typeof docObj.startViewTransition === "function") {
+      docObj.startViewTransition(applyThemeChange);
+      return;
     }
 
-    if (newTheme === "dark") {
-      document.documentElement.classList.add("dark");
-      document.documentElement.classList.remove("light");
-    } else {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
-    }
+    document.documentElement.classList.add("theme-transition");
+    applyThemeChange();
 
     setTimeout(() => {
       document.documentElement.classList.remove("theme-transition");
-    }, 250);
+    }, 350);
   }, []);
 
   const toggleTheme = useCallback(() => {

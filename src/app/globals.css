@@ -110,12 +110,48 @@ html.dark {
   --animate-shimmer: shimmer 2s linear infinite;
 }
 
-/* 250ms Theme Transition Helper */
+/* Ultra-smooth View Transitions & Fallback Helper */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 280ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 html.theme-transition,
-html.theme-transition *,
-html.theme-transition *::before,
-html.theme-transition *::after {
-  transition: background-color 250ms ease-in-out, border-color 250ms ease-in-out, color 250ms ease-in-out, fill 250ms ease-in-out, stroke 250ms ease-in-out, box-shadow 250ms ease-in-out !important;
+html.theme-transition body,
+html.theme-transition header,
+html.theme-transition footer,
+html.theme-transition nav,
+html.theme-transition main,
+html.theme-transition div:not(.no-theme-transition),
+html.theme-transition section,
+html.theme-transition article,
+html.theme-transition aside,
+html.theme-transition button:not(.no-theme-transition),
+html.theme-transition input,
+html.theme-transition select,
+html.theme-transition textarea,
+html.theme-transition span:not(.no-theme-transition),
+html.theme-transition p,
+html.theme-transition h1,
+html.theme-transition h2,
+html.theme-transition h3,
+html.theme-transition h4,
+html.theme-transition h5,
+html.theme-transition h6,
+html.theme-transition svg,
+html.theme-transition path {
+  transition: background-color 280ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 280ms cubic-bezier(0.4, 0, 0.2, 1),
+              color 280ms cubic-bezier(0.4, 0, 0.2, 1),
+              fill 280ms cubic-bezier(0.4, 0, 0.2, 1),
+              stroke 280ms cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.no-theme-transition,
+.no-theme-transition * {
+  transition: none !important;
 }
 
 body {

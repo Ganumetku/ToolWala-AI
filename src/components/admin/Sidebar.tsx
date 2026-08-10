@@ -67,27 +67,33 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
       {/* Navigation Items */}
       <nav className="flex-1 px-3 py-6 space-y-1.5 overflow-y-auto">
         {navItems.map((item) => {
-          const isActive = pathname === item.href;
+          const cleanPath = (pathname || '').replace(/\/$/, '') || '/admin';
+          const cleanHref = item.href.replace(/\/$/, '');
+          const isOverview = item.href === '/admin';
+          const isActive = isOverview
+            ? cleanPath === '/admin'
+            : cleanPath === cleanHref || cleanPath.startsWith(`${cleanHref}/`);
+
           const Icon = item.icon;
 
           return (
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-4 px-4 py-3.5 rounded-xl text-sm font-semibold transition-all relative group ${
+              className={`flex items-center gap-4 px-4 py-3.5 rounded-xl text-sm transition-all relative group ${
                 isActive 
-                  ? 'text-blue-600 dark:text-white bg-blue-50 dark:bg-blue-600/10 border border-blue-200/80 dark:border-blue-500/20 font-bold shadow-sm' 
-                  : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-white/5 border border-transparent'
+                  ? 'text-white bg-blue-600 dark:bg-blue-600 font-extrabold shadow-md shadow-blue-600/30 border border-blue-600 dark:border-blue-500' 
+                  : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 border border-transparent font-semibold'
               }`}
             >
-              <Icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-blue-600 dark:text-blue-500' : 'text-slate-400 dark:text-gray-400 group-hover:text-slate-900 dark:group-hover:text-white'}`} />
+              <Icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-white' : 'text-slate-400 dark:text-gray-400 group-hover:text-slate-900 dark:group-hover:text-white'}`} />
               {!isCollapsed && (
                 <span className="truncate">{item.name}</span>
               )}
               {isActive && (
                 <motion.div 
                   layoutId="active-indicator"
-                  className="absolute left-0 top-1/4 bottom-1/4 w-1 bg-blue-600 dark:bg-blue-500 rounded-r"
+                  className="absolute left-0 top-1/4 bottom-1/4 w-1.5 bg-amber-300 dark:bg-emerald-400 rounded-r"
                 />
               )}
             </Link>

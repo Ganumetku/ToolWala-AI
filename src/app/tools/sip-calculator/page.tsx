@@ -634,12 +634,12 @@ export default function SipCalculatorPage() {
               </div>
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-blue-500/50" />
-                  <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Invested</span>
+                  <div className="w-3 h-3 rounded-full bg-blue-500" />
+                  <span className="text-xs font-bold text-slate-600 dark:text-gray-400 uppercase tracking-widest">Invested</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-emerald-500/50" />
-                  <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Total Value</span>
+                  <div className="w-3 h-3 rounded-full bg-emerald-500" />
+                  <span className="text-xs font-bold text-slate-600 dark:text-gray-400 uppercase tracking-widest">Total Value</span>
                 </div>
               </div>
             </div>
@@ -657,10 +657,10 @@ export default function SipCalculatorPage() {
                       <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#94a3b830" vertical={false} />
                   <XAxis 
                     dataKey="year" 
-                    stroke="#ffffff40" 
+                    stroke="#94a3b8" 
                     fontSize={12} 
                     tickLine={false} 
                     axisLine={false}
@@ -668,7 +668,7 @@ export default function SipCalculatorPage() {
                     minTickGap={20}
                   />
                   <YAxis 
-                    stroke="#ffffff40" 
+                    stroke="#94a3b8" 
                     fontSize={12} 
                     tickLine={false} 
                     axisLine={false}
@@ -697,14 +697,14 @@ export default function SipCalculatorPage() {
               </ResponsiveContainer>
             </div>
             
-            <div className="mt-12 pt-10 border-t border-white/5">
-              <p className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-6 text-center">Growth Timeline Milestones</p>
+            <div className="mt-12 pt-10 border-t border-slate-200 dark:border-white/5">
+              <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 mb-6 text-center">Growth Timeline Milestones</p>
               <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-10">
                 {timelineMilestones.map((milestone: any, index: number) => (
-                  <div key={index} className="flex flex-col items-center bg-white/[0.02] border border-white/5 rounded-2xl p-4 w-full sm:w-48 text-center">
-                    <span className="text-xs font-black uppercase tracking-widest text-emerald-400 mb-2">{milestone.data.year}</span>
-                    <span className="text-xl font-black text-white">{formatCompactCurrency(milestone.data.Total)}</span>
-                    <span className="text-[10px] font-semibold text-gray-500 mt-1">Value</span>
+                  <div key={index} className="flex flex-col items-center bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 rounded-2xl p-4 w-full sm:w-48 text-center shadow-sm dark:shadow-none">
+                    <span className="text-xs font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-2">{milestone.data.year}</span>
+                    <span className="text-xl font-black text-slate-900 dark:text-white">{formatCompactCurrency(milestone.data.Total)}</span>
+                    <span className="text-[10px] font-bold text-slate-500 dark:text-gray-400 mt-1 uppercase tracking-wider">Value</span>
                   </div>
                 ))}
               </div>

@@ -127,6 +127,12 @@ export async function toggleVisibilityAdmin(slug: string, isVisible: boolean): P
   return updateToolAdmin(slug, { isVisible });
 }
 
+export async function deleteToolAdmin(slug: string): Promise<boolean> {
+  const { error } = await supabaseAdmin.from('tools').delete().eq('slug', slug);
+  if (error) throw new Error(error.message);
+  return true;
+}
+
 export async function processScheduledPublishesAdmin(): Promise<number> {
   const now = new Date().toISOString();
 
@@ -134,7 +140,6 @@ export async function processScheduledPublishesAdmin(): Promise<number> {
     .from('tools')
     .select('id, slug')
     .eq('status', 'scheduled')
-    .eq('is_visible', true)
     .lte('publish_date', now);
 
   if (!dueTools?.length) return 0;
@@ -142,7 +147,7 @@ export async function processScheduledPublishesAdmin(): Promise<number> {
   for (const tool of dueTools) {
     await supabaseAdmin
       .from('tools')
-      .update({ status: 'published', updated_at: now })
+      .update({ status: 'published', is_visible: true, updated_at: now })
       .eq('id', tool.id);
   }
 

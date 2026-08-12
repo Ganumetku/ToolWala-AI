@@ -290,7 +290,7 @@ export default function ContentCMS() {
       const url = editingItem ? `/api/admin/tools/${editingItem.id}` : '/api/admin/tools';
       const method = editingItem ? 'PUT' : 'POST';
 
-      const res = await fetch(url, {
+      const res = await adminFetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

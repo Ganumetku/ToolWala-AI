@@ -39,6 +39,23 @@ export interface Tool {
 
 export const toolsData: Tool[] = [
   {
+    id: "word-counter",
+    title: "Word & Character Counter",
+    description: "Count words, characters, sentences, paragraphs, reading time, and keyword density online with social media character limits.",
+    icon: "📝",
+    href: "/tools/word-counter",
+    slug: "word-counter",
+    category: "Utility Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["word count", "character count", "counter", "text", "reading time", "keyword density", "social media", "utility"],
+    status: 'draft',
+    isVisible: false,
+    createdAt: '2026-08-12T00:00:00Z',
+    updatedAt: '2026-08-12T00:00:00Z'
+  },
+  {
     id: "json-formatter-validator",
     title: "JSON Formatter & Validator",
     description: "Format, beautify, minify, validate, and convert JSON online with syntax highlighting, error line detection, and tree view.",

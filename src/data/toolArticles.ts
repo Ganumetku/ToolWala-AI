@@ -15,6 +15,43 @@ export interface ToolArticleData {
 }
 
 export const toolArticles: Record<string, ToolArticleData> = {
+  "word-counter": {
+    title: "Word & Character Counter – Free Real-Time Text Analyzer",
+    intro: "Count words, characters (with and without spaces), sentences, paragraphs, reading time, and keyword density in real-time with ToolWala AI's 100% private, browser-based Word Counter.",
+    whatItDoes: "The ToolWala AI Word Counter is an advanced text analyzer for writers, SEO specialists, students, and social media managers. Type or paste your document to instantly calculate total words, characters, sentences, paragraphs, reading/speaking time estimates, top keyword frequencies, case transformations, and social media character limits (Twitter/X, Instagram, LinkedIn, Meta descriptions)—all processed 100% locally in browser memory without server tracking.",
+    howToUse: [
+      "Type or paste your text into the main editor text area or click 'Upload .txt'.",
+      "Watch live counts update instantly for words, characters, sentences, paragraphs, and reading time.",
+      "Check platform character limits by selecting presets like Twitter (280), Instagram (2200), or LinkedIn (3000).",
+      "Use Case Converter buttons to transform text into UPPERCASE, lowercase, Title Case, or Sentence case.",
+      "Inspect the Keyword Density table to discover your top repeated words, frequency counts, and keyword percentages."
+    ],
+    keyFeatures: [
+      { title: "Real-Time Instant Counting", desc: "Live keystroke metrics with zero latency or lag, even for 10,000+ word essays." },
+      { title: "Social Media Limits", desc: "Built-in target character limits and visual progress meters for Twitter, Instagram, LinkedIn, and Meta SEO." },
+      { title: "Keyword Density Analyzer", desc: "Detect top repeated terms with automatic stop-word filtering for SEO optimization." },
+      { title: "Case Transformation Tools", desc: "Convert text instantly between UPPERCASE, lowercase, Title Case, and Sentence case." }
+    ],
+    benefits: [
+      "Ensure essays, blogs, and social posts meet strict length specifications.",
+      "Optimize SEO content by maintaining ideal keyword density balances.",
+      "Estimate presentation speech durations with speaking time indicators.",
+      "100% private: Confidential drafts, articles, and copy never touch external servers."
+    ],
+    whyChoose: "Unlike online text counters that log your private articles or load sluggish ad scripts, ToolWala AI operates 100% client-side in browser memory. It features debounced keyword algorithms, clean visual stats, and instant case converters.",
+    useCases: [
+      "Writers and bloggers tracking article length and reading time.",
+      "Students checking essay word limits for college assignments.",
+      "Social media managers drafting tweets, captions, and LinkedIn posts within strict character limits.",
+      "Copywriters optimizing meta descriptions and titles for search engines."
+    ],
+    faqs: [
+      { question: "Is my text uploaded or saved on any server?", answer: "No! 100% of text counting, keyword analysis, and case conversion occurs locally inside your web browser. No data is ever transmitted over the internet." },
+      { question: "How is reading time calculated?", answer: "Reading time is calculated based on the average adult reading speed of 200 words per minute (WPM). Speaking time is based on 130 words per minute." },
+      { question: "How does the Keyword Density analyzer work?", answer: "The analyzer tokenizes your text, filters out common stop words (like 'the', 'is', 'at'), and calculates the frequency percentage of top keywords." },
+      { question: "What is the difference between characters with and without spaces?", answer: "Characters with spaces counts every single letter, number, punctuation mark, and space character. Characters without spaces excludes space characters from the total tally." }
+    ]
+  },
   "json-formatter-validator": {
     title: "JSON Formatter & Validator – Free Online Developer Tool",
     intro: "Format, beautify, minify, validate, and inspect JSON payloads instantly in your web browser with 100% privacy, line-number syntax error detection, tree view navigation, and CSV/YAML conversion.",

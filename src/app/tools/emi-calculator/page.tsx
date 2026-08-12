@@ -152,7 +152,7 @@ function InputSlider({ label, min, max, step, value, onChange, icon: Icon, suffi
               isOverLimit ? 'border-amber-500 ring-2 ring-amber-500/20' : 'border-slate-300 dark:border-white/10'
             } hover:border-slate-400 dark:hover:border-white/20 rounded-xl py-3 px-4 pr-10 text-slate-900 dark:text-white font-mono text-lg text-center focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all placeholder:text-slate-400 dark:placeholder:text-white/20 shadow-inner dark:shadow-none`}
           />
-          {suffix && <span className="absolute right-4 text-slate-500 dark:text-gray-500 text-sm font-bold pointer-events-none">{suffix}</span>}
+          {suffix && <span className="absolute right-4 text-slate-500 dark:text-emerald-400 text-sm font-extrabold pointer-events-none">{suffix}</span>}
         </div>
       </div>
 
@@ -163,9 +163,9 @@ function InputSlider({ label, min, max, step, value, onChange, icon: Icon, suffi
       )}
 
       {wordsText && (
-        <div className="text-xs font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-sm">
+        <div className="text-xs font-semibold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-500/15 border border-emerald-200 dark:border-emerald-500/30 px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-sm">
           <span className="font-bold text-emerald-800 dark:text-emerald-400 shrink-0">🔤 In Words:</span>
-          <span className="font-bold truncate">{wordsText}</span>
+          <span className="font-bold truncate text-slate-900 dark:text-white">{wordsText}</span>
         </div>
       )}
       
@@ -208,7 +208,7 @@ function InputSlider({ label, min, max, step, value, onChange, icon: Icon, suffi
             <button
               key={preset.value}
               onClick={() => onChange(preset.value)}
-              className="px-3 py-1.5 text-xs font-bold rounded-lg border border-slate-200 dark:border-white/5 bg-slate-100 dark:bg-white/[0.02] hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400 hover:border-emerald-500/30 text-slate-700 dark:text-gray-400 transition-all"
+              className="px-3 py-1.5 text-xs font-bold rounded-lg border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 hover:bg-emerald-500/20 dark:hover:bg-emerald-500/20 hover:text-emerald-700 dark:hover:text-emerald-300 text-slate-700 dark:text-slate-200 transition-all shadow-sm"
             >
               {preset.label}
             </button>
@@ -672,15 +672,15 @@ export default function EmiCalculatorPage() {
                       key={results.emi}
                       initial={{ scale: 0.9, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      className="text-4xl sm:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-600 dark:from-white dark:to-gray-400 tracking-tight leading-none break-all"
+                      className="text-4xl sm:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-600 dark:from-white dark:via-emerald-100 dark:to-emerald-400 tracking-tight leading-none break-all drop-shadow-sm"
                     >
                       {formatCurrency(results.emi)}
                     </motion.div>
 
                     {results.emi > 0 && (
-                      <div className="mt-3 inline-flex flex-wrap items-center justify-center gap-1.5 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold text-emerald-700 dark:text-emerald-300 shadow-sm max-w-full">
+                      <div className="mt-3 inline-flex flex-wrap items-center justify-center gap-1.5 bg-emerald-50 dark:bg-emerald-500/15 border border-emerald-200 dark:border-emerald-500/30 px-4 py-2 rounded-full text-xs sm:text-sm font-bold text-emerald-800 dark:text-emerald-300 shadow-sm max-w-full">
                         <span className="text-emerald-800 dark:text-emerald-400 shrink-0">🔤 EMI in Words:</span>
-                        <span className="break-words">{numberToWordsINR(results.emi)}</span>
+                        <span className="break-words text-slate-900 dark:text-white font-bold">{numberToWordsINR(results.emi)}</span>
                       </div>
                     )}
                   </div>

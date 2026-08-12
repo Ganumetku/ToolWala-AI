@@ -314,7 +314,7 @@ function NumberInput({ label, value, onChange, icon: Icon, suffix = "", helperTe
                 : 'border-slate-300 dark:border-white/10 hover:border-slate-400 dark:hover:border-white/20 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50'
             }`}
           />
-          {suffix && <span className="absolute right-4 text-slate-500 dark:text-gray-500 text-sm font-bold pointer-events-none">{suffix}</span>}
+          {suffix && <span className="absolute right-4 text-slate-500 dark:text-emerald-400 text-sm font-extrabold pointer-events-none">{suffix}</span>}
         </div>
       </div>
       

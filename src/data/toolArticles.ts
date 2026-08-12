@@ -15,6 +15,43 @@ export interface ToolArticleData {
 }
 
 export const toolArticles: Record<string, ToolArticleData> = {
+  "bmi-calculator": {
+    title: "BMI Calculator – Calculate Body Mass Index Online",
+    intro: "Calculate your Body Mass Index (BMI), WHO weight category, ideal healthy weight range, and personalized health insights instantly with ToolWala AI's 100% private, browser-based BMI Calculator.",
+    whatItDoes: "The ToolWala AI BMI Calculator evaluates body weight relative to height according to World Health Organization (WHO) standards. It supports Metric (kg/cm) and Imperial (lbs/ft-in) units, computes your exact BMI score, categorizes weight status from Underweight to Obese, displays your position on a visual rainbow scale, and provides healthy weight targets—all calculated 100% locally in your browser without saving any personal data.",
+    howToUse: [
+      "Select your unit system: Metric (kg, cm) or Imperial (lbs, feet, inches).",
+      "Enter your current Weight and Height using the interactive sliders or numeric input boxes.",
+      "Optionally select your Gender and Age for tailored health category context.",
+      "Instantly view your BMI score, WHO weight category, visual gauge indicator, and ideal healthy weight range.",
+      "Explore advanced health metrics like BMI Prime, Ponderal Index, and Body Surface Area in the collapsible section."
+    ],
+    keyFeatures: [
+      { title: "Dual Unit Systems", desc: "Seamlessly toggle between Metric (kg/cm) and Imperial (lbs/ft-in) with real-time conversion." },
+      { title: "Visual BMI Gauge", desc: "Interactive multi-colored WHO spectrum scale showing your exact position from Underweight to Obese." },
+      { title: "Ideal Weight Range", desc: "Calculates the exact healthy weight range (BMI 18.5 - 24.9) for your height and how much weight to gain or lose." },
+      { title: "100% Client-Side Privacy", desc: "All calculations happen locally in your web browser. Zero server calls, zero data logging." }
+    ],
+    benefits: [
+      "Instant, real-time calculation as you type or drag sliders.",
+      "Clear WHO category breakdown with color-coded health badges.",
+      "Includes advanced fitness metrics: BMI Prime, Ponderal Index, and BSA.",
+      "Fully responsive and mobile-optimized for smartphones, tablets, and desktops."
+    ],
+    whyChoose: "ToolWala AI's BMI Calculator is engineered for speed, privacy, and visual elegance. Unlike clutter-heavy health sites filled with intrusive ads and data trackers, our tool runs 100% client-side with zero data storage. It provides instant visual clarity with custom sliders, interactive gauges, and clear actionable health insights.",
+    useCases: [
+      "Tracking personal fitness goals and weight management progress.",
+      "Determining healthy target weight ranges before starting a diet or workout regimen.",
+      "Quick health checks for adults, athletes, and fitness enthusiasts.",
+      "Calculating advanced biometric indices like Ponderal Index and BMI Prime."
+    ],
+    faqs: [
+      { question: "What is Body Mass Index (BMI)?", answer: "BMI is a simple numerical calculation of your weight relative to your height (kg/m²). It is widely used by WHO and health professionals to categorize weight status into Underweight, Normal, Overweight, or Obese." },
+      { question: "What is a healthy BMI range?", answer: "According to World Health Organization (WHO) standards for adults: Underweight is below 18.5, Normal weight is 18.5 to 24.9, Overweight is 25 to 29.9, and Obese is 30 or higher." },
+      { question: "Is BMI accurate for muscle builders and athletes?", answer: "BMI measures total body mass and does not distinguish between muscle mass and fat. Muscle is denser than fat, so highly muscular individuals or bodybuilders may score as 'Overweight' despite having low body fat." },
+      { question: "How is ideal body weight calculated?", answer: "Ideal weight is calculated using the healthy WHO BMI range (18.5 to 24.9) multiplied by height squared in meters: Min Weight = 18.5 × (height in m)² and Max Weight = 24.9 × (height in m)²." }
+    ]
+  },
   "ai-logo-maker": {
     title: "Free AI Logo Maker – Generate Brand Logos Online",
     intro: "Your brand's visual identity starts here. Our AI Logo Maker combines professional design principles with advanced artificial intelligence to help you create stunning, high-resolution logos in seconds—no design degree required.",

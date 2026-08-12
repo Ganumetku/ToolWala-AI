@@ -39,6 +39,23 @@ export interface Tool {
 
 export const toolsData: Tool[] = [
   {
+    id: "bmi-calculator",
+    title: "BMI Calculator",
+    description: "Calculate your Body Mass Index (BMI), WHO weight category, ideal healthy weight range, and health insights instantly.",
+    icon: "⚖️",
+    href: "/tools/bmi-calculator",
+    slug: "bmi-calculator",
+    category: "Calculator Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["bmi", "body mass index", "weight", "health", "fitness", "calculator", "ideal weight"],
+    status: 'draft',
+    isVisible: false,
+    createdAt: '2026-08-12T00:00:00Z',
+    updatedAt: '2026-08-12T00:00:00Z'
+  },
+  {
     id: "passport-photo-maker",
     title: "Passport Photo Maker",
     description: "Create perfectly sized passport photos for any country with AI background removal.",

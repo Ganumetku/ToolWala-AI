@@ -15,6 +15,43 @@ export interface ToolArticleData {
 }
 
 export const toolArticles: Record<string, ToolArticleData> = {
+  "heic-to-jpg-png-converter": {
+    title: "HEIC to JPG / PNG Converter – Free Batch Converter Online",
+    intro: "Convert Apple iPhone HEIC & HEIF photos into universal JPG or PNG images instantly in your web browser with 100% privacy, batch conversion, quality control, and zero server uploads.",
+    whatItDoes: "The ToolWala AI HEIC Converter decodes High Efficiency Image Container (.heic/.heif) files directly inside your web browser using WebAssembly (WASM). Convert single or multiple iPhone photos into high-quality JPG or PNG format, adjust compression quality, preview converted images, compare file size savings, and download converted files individually or as a single ZIP archive.",
+    howToUse: [
+      "Drag and drop your .heic or .heif photos into the upload zone or click 'Browse Files'.",
+      "Select your target output format: JPG or PNG.",
+      "Adjust the JPG output quality slider from 60% to 100% (default 90%).",
+      "Click 'Convert All' to process files instantly in browser memory.",
+      "Preview converted images, compare original vs converted file sizes, and download individually or click 'Download All as ZIP'."
+    ],
+    keyFeatures: [
+      { title: "100% In-Browser Privacy", desc: "Your photos never leave your device. All decoding and encoding is performed locally using WebAssembly." },
+      { title: "Batch Image Conversion", desc: "Upload and convert multiple iPhone HEIC photos at once with real-time per-file progress." },
+      { title: "Custom Quality Control", desc: "Adjust JPEG compression quality from 60% to 100% to balance image crispness and file size." },
+      { title: "Instant ZIP Download", desc: "Bundle all converted JPG/PNG files into a single ZIP archive for one-click downloading." }
+    ],
+    benefits: [
+      "Open iPhone photos on Windows, Android, Linux, and legacy devices without compatibility issues.",
+      "100% client-side execution means lightning-fast conversion without network upload bottlenecks.",
+      "Skips already-supported formats (JPG/PNG/WebP) automatically to save processing time.",
+      "Preserves visual clarity and image orientation."
+    ],
+    whyChoose: "Most online HEIC converters force you to upload private family photos to remote servers. ToolWala AI processes 100% of your images locally inside browser WebAssembly memory. Your private photos remain completely confidential and secure on your machine.",
+    useCases: [
+      "Converting iPhone photos to JPG so they can be attached to official applications, government portals, or email.",
+      "Viewing HEIC images on Windows PCs, smart TVs, or older photo editors.",
+      "Batch converting holiday photo albums before uploading to web galleries.",
+      "Reducing file sizes for web publishing or social media."
+    ],
+    faqs: [
+      { question: "What is a HEIC file?", answer: "HEIC (High Efficiency Image Container) is the default photo format introduced by Apple in iOS 11. It offers high image quality at half the file size of JPG, but isn't universally supported on non-Apple devices." },
+      { question: "Are my photos uploaded to any server?", answer: "No! 100% of the conversion process occurs inside your web browser using client-side JavaScript & WebAssembly technology. No data is sent over the internet." },
+      { question: "Can I convert multiple HEIC photos at once?", answer: "Yes, you can upload dozens of HEIC/HEIF files simultaneously and convert them all in batch mode, then download them as a single ZIP file." },
+      { question: "Should I convert to JPG or PNG?", answer: "JPG is best for standard photos and offers smaller file sizes with adjustable compression quality. PNG is uncompressed/lossless, ideal if you need maximum clarity without compression artifacts." }
+    ]
+  },
   "bmi-calculator": {
     title: "BMI Calculator – Calculate Body Mass Index Online",
     intro: "Calculate your Body Mass Index (BMI), WHO weight category, ideal healthy weight range, and personalized health insights instantly with ToolWala AI's 100% private, browser-based BMI Calculator.",

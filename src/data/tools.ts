@@ -39,6 +39,23 @@ export interface Tool {
 
 export const toolsData: Tool[] = [
   {
+    id: "heic-to-jpg-png-converter",
+    title: "HEIC to JPG / PNG Converter",
+    description: "Convert Apple HEIC & HEIF photos to JPG or PNG format instantly in your browser with batch processing.",
+    icon: "🔄",
+    href: "/tools/heic-to-jpg-png-converter",
+    slug: "heic-to-jpg-png-converter",
+    category: "Image Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["heic", "heif", "jpg", "png", "convert", "image", "apple", "iphone", "batch"],
+    status: 'draft',
+    isVisible: false,
+    createdAt: '2026-08-12T00:00:00Z',
+    updatedAt: '2026-08-12T00:00:00Z'
+  },
+  {
     id: "bmi-calculator",
     title: "BMI Calculator",
     description: "Calculate your Body Mass Index (BMI), WHO weight category, ideal healthy weight range, and health insights instantly.",

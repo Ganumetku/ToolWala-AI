@@ -15,6 +15,43 @@ export interface ToolArticleData {
 }
 
 export const toolArticles: Record<string, ToolArticleData> = {
+  "json-formatter-validator": {
+    title: "JSON Formatter & Validator – Free Online Developer Tool",
+    intro: "Format, beautify, minify, validate, and inspect JSON payloads instantly in your web browser with 100% privacy, line-number syntax error detection, tree view navigation, and CSV/YAML conversion.",
+    whatItDoes: "The ToolWala AI JSON Formatter & Validator is a developer utility designed to clean up messy API responses and detect syntax errors. Paste or upload raw JSON to get instant line-by-line syntax validation, exact error position detection, 2-space or 4-space indentation, minification, key sorting, tree view inspection, and instant conversion to CSV or YAML formats—all executed 100% locally in browser memory without sending data to external servers.",
+    howToUse: [
+      "Paste your raw JSON payload into the left input editor panel or click 'Upload File'.",
+      "Real-time validation instantly checks syntax. If an error exists, the exact line number and token position will be highlighted.",
+      "Use the control toolbar to 'Beautify' (2 or 4 spaces), 'Minify' (single line), or 'Sort Keys' alphabetically.",
+      "Switch between 'Code View', 'Tree View', 'CSV', and 'YAML' outputs.",
+      "Click 'Copy' to copy formatted JSON or 'Download' to save as a .json file."
+    ],
+    keyFeatures: [
+      { title: "Line-Number Error Detection", desc: "Instantly pinpoint exact syntax errors (missing commas, quotes, brackets) with line number and character offset." },
+      { title: "Interactive Tree View", desc: "Expand and collapse nested JSON objects and arrays for fast structural inspection." },
+      { title: "Format Conversions", desc: "Seamlessly convert valid JSON into CSV table format or YAML data structures." },
+      { title: "100% Client-Side Privacy", desc: "Zero backend processing. Your API payloads, tokens, and confidential JSON data never leave browser memory." }
+    ],
+    benefits: [
+      "Debug broken API requests and responses in seconds.",
+      "Clean up minified or unformatted JSON for enhanced readability.",
+      "Safe for sensitive API keys, database dumps, and credentials.",
+      "Supports multi-megabyte large JSON payloads without UI freezes."
+    ],
+    whyChoose: "Many web-based JSON utilities send your payload to remote logging servers. ToolWala AI processes 100% of your JSON locally in your browser DOM. It offers high contrast syntax highlighting, line numbers, tree navigation, and zero server tracking.",
+    useCases: [
+      "Debugging REST API responses and GraphQL payloads.",
+      "Cleaning up configuration files (package.json, tsconfig.json, appsettings.json).",
+      "Converting JSON database exports into CSV spreadsheet tables.",
+      "Validating complex nested data structures before deployment."
+    ],
+    faqs: [
+      { question: "Is my JSON data uploaded or stored on your server?", answer: "No! 100% of parsing, validation, formatting, and conversion happens locally inside your browser memory using JavaScript DOM APIs. No data is sent over the internet." },
+      { question: "How does the syntax validator detect errors?", answer: "The validator parses your JSON using native browser parsers, extracts line and column offsets on syntax exceptions, and highlights the exact broken line." },
+      { question: "Can I convert JSON to CSV or YAML?", answer: "Yes! Use the output format toggle to instantly convert valid JSON arrays or objects into CSV spreadsheets or clean YAML configuration files." },
+      { question: "What is the difference between Beautify and Minify?", answer: "Beautify adds line breaks and indentation (2 or 4 spaces) for human readability. Minify strips all white space, newlines, and indentation to produce a compact single line suitable for network transfer." }
+    ]
+  },
   "heic-to-jpg-png-converter": {
     title: "HEIC to JPG / PNG Converter – Free Batch Converter Online",
     intro: "Convert Apple iPhone HEIC & HEIF photos into universal JPG or PNG images instantly in your web browser with 100% privacy, batch conversion, quality control, and zero server uploads.",

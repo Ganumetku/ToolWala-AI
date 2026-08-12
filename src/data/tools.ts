@@ -39,6 +39,23 @@ export interface Tool {
 
 export const toolsData: Tool[] = [
   {
+    id: "json-formatter-validator",
+    title: "JSON Formatter & Validator",
+    description: "Format, beautify, minify, validate, and convert JSON online with syntax highlighting, error line detection, and tree view.",
+    icon: "⚙️",
+    href: "/tools/json-formatter-validator",
+    slug: "json-formatter-validator",
+    category: "Developer Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["json", "formatter", "validator", "beautify", "minify", "developer", "tree view", "yaml", "csv"],
+    status: 'draft',
+    isVisible: false,
+    createdAt: '2026-08-12T00:00:00Z',
+    updatedAt: '2026-08-12T00:00:00Z'
+  },
+  {
     id: "heic-to-jpg-png-converter",
     title: "HEIC to JPG / PNG Converter",
     description: "Convert Apple HEIC & HEIF photos to JPG or PNG format instantly in your browser with batch processing.",

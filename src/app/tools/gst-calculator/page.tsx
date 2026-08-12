@@ -270,8 +270,11 @@ function numberToWordsINR(amount: number): string {
   return words ? `${words} Only` : "";
 }
 
-function NumberInput({ label, value, onChange, icon: Icon, suffix = "", helperText, placeholder = "" }: any) {
+function NumberInput({ label, value, onChange, icon: Icon, suffix = "", helperText, placeholder = "", max = 500000 }: any) {
   const isMaxReached = value === MAX_AMOUNT;
+  const numVal = typeof value === 'number' ? value : 0;
+  const sliderMax = Math.min(max || 500000, MAX_AMOUNT);
+  const pct = Math.min(100, Math.max(0, (numVal / sliderMax) * 100));
 
   return (
     <div className="space-y-3">
@@ -323,6 +326,37 @@ function NumberInput({ label, value, onChange, icon: Icon, suffix = "", helperTe
       ) : (
         <p className="text-xs text-slate-600 dark:text-gray-400 font-medium">{helperText}</p>
       )}
+
+      {/* Interactive Slider Track with Draggable Circle Handle Knob */}
+      <div className="relative w-full py-3 cursor-pointer group select-none">
+        <div className="w-full h-2.5 bg-slate-200 dark:bg-white/10 rounded-full relative overflow-hidden shadow-inner">
+          <motion.div 
+            className="absolute top-0 left-0 h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full" 
+            animate={{ width: `${pct}%` }} 
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          />
+        </div>
+
+        {/* Visible Circle Knob / Thumb */}
+        <motion.div 
+          className="absolute top-1/2 -translate-y-1/2 -ml-3.5 w-7 h-7 bg-white dark:bg-slate-900 border-2 border-emerald-500 rounded-full shadow-lg flex items-center justify-center pointer-events-none group-hover:scale-110 group-active:scale-95 transition-transform"
+          animate={{ left: `${pct}%` }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        >
+          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm" />
+        </motion.div>
+
+        {/* Full drag input */}
+        <input 
+          type="range"
+          min={0}
+          max={sliderMax}
+          step={100}
+          value={Math.min(numVal, sliderMax)}
+          onChange={(e) => onChange(Number(e.target.value))}
+          className="absolute inset-0 w-full h-full opacity-0 cursor-grab active:cursor-grabbing z-10"
+        />
+      </div>
     </div>
   );
 }

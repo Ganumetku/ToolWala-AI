@@ -114,6 +114,8 @@ function numberToWordsINR(amount: number): string {
 function InputSlider({ label, min, max, step, value, onChange, icon: Icon, suffix = "", helperText, presets, placeholder = "", showInWords = false }: any) {
   const isOverLimit = typeof value === 'number' && value > max;
   const wordsText = showInWords && typeof value === 'number' && value > 0 ? numberToWordsINR(value) : '';
+  const numVal = typeof value === 'number' ? value : min;
+  const pct = Math.min(100, Math.max(0, ((numVal - min) / (max - min)) * 100));
 
   return (
     <div className="space-y-3">
@@ -168,26 +170,39 @@ function InputSlider({ label, min, max, step, value, onChange, icon: Icon, suffi
       
       <p className="text-xs text-slate-600 dark:text-gray-400 font-medium">{helperText}</p>
       
-      <div className="relative w-full h-2 bg-slate-200 dark:bg-white/5 rounded-full overflow-hidden mt-2">
+      {/* Interactive Slider Track with Draggable Circle Handle Knob */}
+      <div className="relative w-full py-3 cursor-pointer group select-none">
+        <div className="w-full h-2.5 bg-slate-200 dark:bg-white/10 rounded-full relative overflow-hidden shadow-inner">
+          <motion.div 
+            className="absolute top-0 left-0 h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full" 
+            animate={{ width: `${pct}%` }} 
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          />
+        </div>
+
+        {/* Visible Circle Knob / Thumb */}
         <motion.div 
-          className="absolute top-0 left-0 h-full bg-emerald-500 pointer-events-none" 
-          initial={{ width: 0 }}
-          animate={{ width: `${Math.min(100, Math.max(0, ((value - min) / (max - min)) * 100))}%` }} 
-          transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        />
+          className="absolute top-1/2 -translate-y-1/2 -ml-3.5 w-7 h-7 bg-white dark:bg-slate-900 border-2 border-emerald-500 rounded-full shadow-lg flex items-center justify-center pointer-events-none group-hover:scale-110 group-active:scale-95 transition-transform"
+          animate={{ left: `${pct}%` }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        >
+          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm" />
+        </motion.div>
+
+        {/* Full drag input */}
         <input 
           type="range"
           min={min}
           max={max}
           step={step}
-          value={Math.min(value, max)}
+          value={Math.min(numVal, max)}
           onChange={(e) => onChange(Number(e.target.value))}
-          className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+          className="absolute inset-0 w-full h-full opacity-0 cursor-grab active:cursor-grabbing z-10"
         />
       </div>
 
       {presets && (
-        <div className="flex flex-wrap gap-2 pt-3">
+        <div className="flex flex-wrap gap-2 pt-1">
           {presets.map((preset: any) => (
             <button
               key={preset.value}

@@ -39,6 +39,23 @@ export interface Tool {
 
 export const toolsData: Tool[] = [
   {
+    id: "income-tax-calculator",
+    title: "Income Tax Calculator (India)",
+    description: "Calculate your Indian Income Tax for FY 2024-25 & 2025-26 with New vs Old Regime comparison, slab breakdowns, and 80C/80D deductions.",
+    icon: "💰",
+    href: "/tools/income-tax-calculator",
+    slug: "income-tax-calculator",
+    category: "Calculator Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["income tax", "tax calculator", "new regime", "old regime", "80c", "tds", "india tax", "budget 2024"],
+    status: 'draft',
+    isVisible: false,
+    createdAt: '2026-08-12T00:00:00Z',
+    updatedAt: '2026-08-12T00:00:00Z'
+  },
+  {
     id: "word-counter",
     title: "Word & Character Counter",
     description: "Count words, characters, sentences, paragraphs, reading time, and keyword density online with social media character limits.",

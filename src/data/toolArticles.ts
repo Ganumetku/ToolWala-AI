@@ -2811,6 +2811,41 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "Crop Image", href: "/tools/invoice-cropper" },
       { name: "Convert Image", href: "/tools/gov-form-image-compressor" }
     ]
+  },
+  "video-compressor": {
+    title: "In-Browser Video Compressor – 100% Private Client-Side FFmpeg WASM",
+    intro: "Compress MP4, MOV, WebM, AVI, and MKV videos directly inside your web browser using FFmpeg WebAssembly. 100% serverless, private-by-design, with no video uploads or data logging.",
+    whatItDoes: "ToolWala AI's Video Compressor utilizes FFmpeg compiled to WebAssembly (@ffmpeg/ffmpeg) to transcode and compress videos locally on your device CPU. Reduce video file size by up to 80% with customizable CRF quality sliders, resolution downscaling (1080p, 720p, 480p), frame rate reduction, video trimming, and MP3 audio extraction.",
+    howToUse: [
+      "Drag and drop your MP4, MOV, WebM, AVI, or MKV video file into the upload dropzone.",
+      "Select your preferred compression quality (Low, Medium, High or custom CRF percentage).",
+      "Optionally downscale resolution (e.g. 720p HD or 480p SD), reduce FPS (30fps/24fps), or trim start/end times.",
+      "Click 'Compress Video' to start FFmpeg WASM in-memory processing with real-time percentage progress.",
+      "Compare original vs compressed file sizes, preview the compressed video player, and click Download."
+    ],
+    keyFeatures: [
+      { title: "100% Client-Side FFmpeg WASM", desc: "Runs FFmpeg WebAssembly inside your browser RAM. Zero server uploads guarantee absolute privacy." },
+      { title: "Custom CRF & Format Controls", desc: "Export as MP4 (H.264) or WebM with adjustable compression sliders, resolution caps, and FPS limits." },
+      { title: "Video Trimming & MP3 Extraction", desc: "Trim video duration to save size or extract pristine MP3 audio tracks directly." },
+      { title: "Before/After Side-by-Side Comparison", desc: "Compare original vs compressed file sizes, percentage savings, and video playback." }
+    ],
+    benefits: [
+      "Share large video files over WhatsApp, email, or web portals without hitting upload limits.",
+      "Keep personal home recordings and sensitive business clips 100% secure on your computer.",
+      "No registration, no subscription paywalls, no watermark additions.",
+      "Fast local processing with multi-threaded WASM hardware acceleration."
+    ],
+    faqs: [
+      { question: "Is my video uploaded to any cloud server?", answer: "No. All video decoding, scaling, audio extraction, and encoding occur 100% locally inside your web browser using WebAssembly. No data leaves your machine." },
+      { question: "What is the maximum file size supported?", answer: "Because FFmpeg runs inside browser WASM memory, we recommend files under 500MB for optimal performance and tab stability." },
+      { question: "Which formats are supported?", answer: "Input formats include MP4, MOV, WebM, AVI, and MKV. Output formats include MP4 (H.264), WebM, and MP3 audio." }
+    ],
+    conclusion: "Compress and transcode video files in seconds with complete privacy. Try ToolWala AI's browser-native Video Compressor today!",
+    relatedTools: [
+      { name: "Image Compressor", href: "/tools/image-compressor" },
+      { name: "PDF Compressor", href: "/tools/compress-pdf" },
+      { name: "Voice Generator", href: "/tools/voice-generator" }
+    ]
   }
 };
 

@@ -548,6 +548,62 @@ export const categoriesData: CategoryMetadata[] = [
         desc: "Inspect compound schedules, tax breakdowns, or age values instantly."
       }
     ]
+  },
+  {
+    id: "video-tools",
+    slug: "video-tools",
+    title: "Video Tools",
+    description: "Browser-native video compressor, format converter, and audio extractor powered by WebAssembly.",
+    intro: "Compress MP4, MOV, WebM, and MKV video files 100% locally in your browser with zero server uploads.",
+    icon: "🎬",
+    seoTitle: "Video Tools - Client-Side Video Compressor & Converter | ToolWala AI",
+    seoDescription: "Compress videos, reduce MP4 file sizes, and extract MP3 audio locally using in-browser WASM. 100% private, no server upload.",
+    keywords: ["video compressor", "compress mp4", "reduce video size", "video tools", "wasm video compressor", "in-browser video transcoder"],
+    faqs: [
+      {
+        question: "Are my video files uploaded to any server?",
+        answer: "No. All video compression and transcoding operations take place 100% locally inside your web browser using FFmpeg WebAssembly."
+      },
+      {
+        question: "What formats can I compress?",
+        answer: "Supports MP4, MOV, WebM, AVI, and MKV files."
+      }
+    ],
+    longDescription: "Video files are notoriously large and difficult to share over email, WhatsApp, or web portals. Traditional online video converters force users to upload gigabytes of sensitive recordings to cloud servers, introducing massive bandwidth delays and severe privacy risks. ToolWala AI's Video Tools category completely eliminates server uploads by executing full FFmpeg video compression directly inside your web browser via WebAssembly (WASM). Convert MP4, MOV, WebM, and MKV videos, adjust resolution downscaling, reduce frame rates, and extract MP3 audio tracks locally with complete privacy and zero data leakage.",
+    whyUse: [
+      {
+        title: "100% Private WASM Engine",
+        desc: "Videos compile in browser memory without sending a single byte to external servers.",
+        icon: "🔒"
+      },
+      {
+        title: "Flexible Quality & Size Controls",
+        desc: "Adjust CRF compression sliders, resolution limits (1080p, 720p, 480p), and FPS targets.",
+        icon: "🎛️"
+      },
+      {
+        title: "Multi-Format & Audio Extraction",
+        desc: "Convert videos to MP4/WebM or extract pristine MP3 audio tracks in one click.",
+        icon: "🎧"
+      }
+    ],
+    howItWorks: [
+      {
+        step: "1",
+        title: "Upload Video",
+        desc: "Drag and drop your MP4, MOV, or WebM video file into the browser window."
+      },
+      {
+        step: "2",
+        title: "Configure Settings",
+        desc: "Select your desired compression level, target resolution, or format."
+      },
+      {
+        step: "3",
+        title: "Compress & Download",
+        desc: "Process the video locally and save your optimized video file instantly."
+      }
+    ]
   }
 ];
 
@@ -563,6 +619,7 @@ export function getToolsByCategory(categoryId: string, allTools: Tool[]): Tool[]
     'developer-tools': 'Developer Tools',
     'social-media-tools': 'Social Media Tools',
     'calculator-tools': 'Calculator Tools',
+    'video-tools': 'Video Tools',
   };
 
   const categoryName = idToCategoryMap[categoryId];

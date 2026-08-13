@@ -11,8 +11,7 @@ const cspHeader = `
   frame-ancestors 'self';
   worker-src 'self' blob:;
   child-src 'self' blob:;
-  connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://stats.g.doubleclick.net https://vitals.vercel-insights.com;
-  upgrade-insecure-requests;
+  connect-src 'self' blob: data: https://unpkg.com https://cdn.jsdelivr.net https://*.supabase.co https://www.google-analytics.com https://stats.g.doubleclick.net https://vitals.vercel-insights.com;
 `.replace(/\s{2,}/g, ' ').trim();
 
 const nextConfig = {
@@ -61,6 +60,14 @@ const nextConfig = {
           {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=(), payment=(), usb=()',
+          },
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin',
+          },
+          {
+            key: 'Cross-Origin-Embedder-Policy',
+            value: 'credentialless',
           },
         ],
       },

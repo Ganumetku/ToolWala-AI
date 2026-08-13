@@ -11,7 +11,8 @@ export type ToolCategory =
   | "Document Tools"
   | "Resume & Career"
   | "SEO Tools"
-  | "Developer Tools";
+  | "Developer Tools"
+  | "Video Tools";
 
 export interface Tool {
   id: string;
@@ -1130,6 +1131,23 @@ export const toolsData: Tool[] = [
     isVisible: true,
     createdAt: '2026-07-08T11:24:00Z',
     updatedAt: '2026-07-08T11:24:00Z'
+  },
+  {
+    id: "video-compressor",
+    title: "Video Compressor",
+    description: "Compress MP4, MOV, WebM, and MKV videos locally in your browser using FFmpeg WebAssembly. 100% private, zero server uploads.",
+    icon: "🎥",
+    href: "/tools/video-compressor",
+    slug: "video-compressor",
+    category: "Video Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["video", "compressor", "mp4", "webm", "mov", "mkv", "ffmpeg", "wasm", "reduce video size", "trim video", "extract mp3"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2026-08-13T00:00:00Z',
+    updatedAt: '2026-08-13T00:00:00Z'
   }
 ];
 
@@ -1141,5 +1159,6 @@ export const toolCategories: ToolCategory[] = [
   "Calculator Tools",
   "Utility Tools",
   "Social Media Tools",
-  "Business Tools"
+  "Business Tools",
+  "Video Tools"
 ];

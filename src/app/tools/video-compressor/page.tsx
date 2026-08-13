@@ -12,14 +12,13 @@ import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects'
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { toolArticles } from '@/data/toolArticles';
 import ToolArticle from '@/components/ToolArticle';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
-
-const SEO_TITLE = "Free Online Video Compressor (100% Client-Side WASM) | ToolWala AI";
-const SEO_DESC = "Compress MP4, MOV, WebM, and MKV video files directly inside your browser. 100% private, no server uploads, customizable quality CRF, resolution downscaling, and audio extraction.";
-
-// Formats supported
-const SUPPORTED_FORMATS = ['video/mp4', 'video/quicktime', 'video/webm', 'video/x-msvideo', 'video/x-matroska', 'video/avi', 'video/mkv'];
+// Helper: Convert URL to Blob URL using native fetch (avoids Turbopack dynamic import issues)
+const fetchToBlobUrl = async (url: string, type: string): Promise<string> => {
+  const res = await fetch(url);
+  const buf = await res.arrayBuffer();
+  const blob = new Blob([buf], { type });
+  return URL.createObjectURL(blob);
+};
 
 // Helper: Format Bytes into KB/MB/GB
 const formatBytes = (bytes: number, decimals = 2) => {
@@ -82,7 +81,7 @@ export default function VideoCompressorPage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const ffmpegRef = useRef<FFmpeg | null>(null);
+  const ffmpegRef = useRef<any>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -104,13 +103,19 @@ export default function VideoCompressorPage() {
     setEngineError(null);
 
     try {
+      const { FFmpeg } = await import('@ffmpeg/ffmpeg');
       const ffmpeg = new FFmpeg();
 
-      // Load WASM from unpkg CDN
+      // Fetch core and WASM binaries using native fetchToBlobUrl
       const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
+      const [coreURL, wasmURL] = await Promise.all([
+        fetchToBlobUrl(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
+        fetchToBlobUrl(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm')
+      ]);
+
       await ffmpeg.load({
-        coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-        wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+        coreURL,
+        wasmURL,
       });
 
       ffmpegRef.current = ffmpeg;
@@ -120,7 +125,7 @@ export default function VideoCompressorPage() {
     } catch (err: any) {
       console.error('Failed to load FFmpeg WASM engine:', err);
       setEngineLoading(false);
-      setEngineError('Failed to initialize WebAssembly video engine. Please check internet connection or browser WebAssembly support.');
+      setEngineError(`Failed to initialize WebAssembly video engine: ${err?.message || err}`);
       return null;
     }
   };
@@ -224,11 +229,11 @@ export default function VideoCompressorPage() {
       const outputName = `output_${targetVideo.id}.${outputExt}`;
 
       // Write video file to FFmpeg Virtual File System (MEMFS)
-      const fileData = await fetchFile(targetVideo.file);
-      await ffmpeg.writeFile(inputName, fileData);
+      const fileBuf = await targetVideo.file.arrayBuffer();
+      await ffmpeg.writeFile(inputName, new Uint8Array(fileBuf));
 
       // Setup Progress callback
-      ffmpeg.on('progress', ({ progress }) => {
+      ffmpeg.on('progress', ({ progress }: { progress: number }) => {
         const pct = Math.min(99, Math.max(10, Math.round(progress * 100)));
         updateVideoState(targetVideo.id, { progress: pct });
       });

@@ -15,15 +15,13 @@ export { dbToTool as dbToolToTool } from '@/lib/tool-service';
 
 /** LIVE rule: status === published AND isVisible === true (or auto-published scheduled) */
 export function isToolLive(tool: Tool): boolean {
-  if (tool.isVisible !== true) return false;
-
-  if (tool.status === 'published') return true;
-
+  if (tool.status === 'published') {
+    return tool.isVisible === true;
+  }
   if (tool.status === 'scheduled') {
     if (!tool.publishDate) return false;
     return new Date(tool.publishDate) <= new Date();
   }
-
   return false;
 }
 

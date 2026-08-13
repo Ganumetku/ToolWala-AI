@@ -6,8 +6,9 @@ export type ToolOverride = Partial<
 
 /** LIVE rule: status === published AND isVisible === true (scheduled auto-publishes when date passes) */
 export function isToolLive(tool: Tool): boolean {
-  if (tool.isVisible !== true) return false;
-  if (tool.status === 'published') return true;
+  if (tool.status === 'published') {
+    return tool.isVisible === true;
+  }
   if (tool.status === 'scheduled') {
     if (!tool.publishDate) return false;
     return new Date(tool.publishDate) <= new Date();

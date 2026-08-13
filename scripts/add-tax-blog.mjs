@@ -239,7 +239,7 @@ Before you submit your investment declarations to your HR team or file your ITR,
 
 const newPost = {
   id: String(Date.now()),
-  slug: "new-vs-old-tax-regime-fy-2026-27",
+  slug: "new-vs-old-tax-regime",
   title: "New vs Old Tax Regime FY 2026-27 (AY 2027-28): Which One Saves You More Money?",
   excerpt: "Confused between New and Old Tax Regime for FY 2026-27? Learn verified tax slabs, Section 87A ₹12L rebate rules, real rupee examples, and calculate take-home pay.",
   content: blogContent,

@@ -79,7 +79,7 @@ export default function ContentCMS() {
   const [slug, setSlug] = useState('');
   const [description, setDescription] = useState('');
   const [longDesc, setLongDesc] = useState('');
-  const [categoryName, setCategoryName] = useState(CATEGORIES[0]);
+  const [categoryName, setCategoryName] = useState<string>(CATEGORIES[0]);
   const [toolType, setToolType] = useState(TOOL_TYPES[0]);
   const [icon, setIcon] = useState('🔧');
   const [thumbnail, setThumbnail] = useState('');

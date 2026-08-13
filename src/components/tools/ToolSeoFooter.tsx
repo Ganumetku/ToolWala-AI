@@ -81,14 +81,14 @@ export default function ToolSeoFooter({ currentSlug }: ToolSeoFooterProps) {
       
       {/* 1. Parent Category Link Banner */}
       {parentCategory && (
-        <div className="glass rounded-[2rem] border border-white/5 p-6 bg-white/[0.01] flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+        <div className="glass rounded-[2rem] border border-slate-200 dark:border-white/5 p-6 bg-white dark:bg-white/[0.01] flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
           <div className="flex items-center gap-3">
             <span className="text-3xl shrink-0">{parentCategory.icon}</span>
             <div>
-              <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-widest">
+              <h4 className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">
                 {t('tools.parent_category', 'Parent Category')}
               </h4>
-              <span className="text-sm font-black text-white uppercase mt-0.5 block">
+              <span className="text-sm font-black text-slate-900 dark:text-white uppercase mt-0.5 block">
                 {t(`categories.${parentCategory.title}`, parentCategory.title)}
               </span>
             </div>

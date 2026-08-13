@@ -17,11 +17,19 @@ export async function PUT(request: NextRequest, context: RouteContext) {
     const body = await request.json();
 
     const updates: ToolUpdateInput = {};
-    if (body.status !== undefined) updates.status = body.status;
+    if (body.status !== undefined) {
+      updates.status = body.status;
+      if (body.status === 'published') {
+        updates.isVisible = true;
+      } else if (body.status === 'draft' || body.status === 'archived') {
+        updates.isVisible = false;
+      }
+    }
+
     if (body.isPublished !== undefined) updates.isVisible = body.isPublished;
-    if (body.published !== undefined && body.isPublished === undefined) updates.isVisible = body.published;
-    if (body.isVisible !== undefined) updates.isVisible = body.isVisible;
-    if (body.is_visible !== undefined) updates.isVisible = body.is_visible;
+    else if (body.published !== undefined) updates.isVisible = body.published;
+    else if (body.isVisible !== undefined) updates.isVisible = body.isVisible;
+    else if (body.is_visible !== undefined && updates.isVisible === undefined) updates.isVisible = body.is_visible;
 
     if (body.featured !== undefined) updates.featured = body.featured;
     if (body.isFeatured !== undefined && body.featured === undefined) updates.featured = body.isFeatured;

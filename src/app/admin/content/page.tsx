@@ -43,14 +43,9 @@ interface ToolCMSItem {
   seoMetadata?: { title: string; description: string; keywords: string } | null;
 }
 
-const CATEGORIES = [
-  "Creative & Design",
-  "Document & PDF",
-  "AI Writing",
-  "Career Studio",
-  "Business Ops",
-  "Developer Utilities"
-];
+import { toolCategories } from '@/data/tools';
+
+const CATEGORIES = toolCategories.filter(c => c !== 'All');
 
 const TOOL_TYPES = [
   "AI Text Tool",

@@ -13,6 +13,7 @@
       "WebAssembly"
     ],
     "featured": true,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-16T17:35:00.000Z",
     "createdAt": "2026-06-04T05:54:22.719Z",
@@ -26,6 +27,14 @@
       "title": "Local OCR WebAssembly Data Safety | ToolWala AI",
       "description": "Learn why processing character recognition inside the browser context outperforms cloud databases."
     },
+    "faqs": [],
+    "relatedToolSlugs": [
+      "pdf-tools",
+      "protect-pdf",
+      "edit-pdf",
+      "invoice-generator"
+    ],
+    "viewCount": 0,
     "readingTime": "3 min read"
   },
   {
@@ -42,6 +51,7 @@
       "SEO"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-05T10:15:00.000Z",
     "createdAt": "2026-06-05T10:15:00.000Z",
@@ -55,6 +65,9 @@
       "title": "Mastering Image Compression & Optimization | ToolWala AI",
       "description": "Learn how to optimize web layouts by compressing images. Hitting the perfect balance between quality and speed."
     },
+    "faqs": [],
+    "relatedToolSlugs": [],
+    "viewCount": 0,
     "readingTime": "4 min read"
   },
   {
@@ -71,6 +84,7 @@
       "WebDev"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-06T08:00:00.000Z",
     "createdAt": "2026-06-06T08:00:00.000Z",
@@ -84,6 +98,14 @@
       "title": "Rise of Edge AI: Running Models Locally in Browser | ToolWala AI",
       "description": "Discover how browser-native AI architectures run background removers and voice synthesizers locally without cloud servers."
     },
+    "faqs": [],
+    "relatedToolSlugs": [
+      "passport-photo-maker",
+      "aadhaar-photo-resizer",
+      "ssc-photo-resize",
+      "upsc-photo-resize"
+    ],
+    "viewCount": 0,
     "readingTime": "5 min read"
   },
   {
@@ -101,6 +123,7 @@
       "Job Search"
     ],
     "featured": true,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-07-08T08:36:00.000Z",
     "createdAt": "2026-06-06T09:25:00.000Z",
@@ -115,7 +138,6 @@
       "description": "Test your resume with ToolWala's free ATS Resume Checker. Get an instant ATS score, identify formatting issues, missing keywords, and improve your chances of getting shortlisted.",
       "keywords": "Free ATS Resume Checker, ATS Resume Checker Free, ATS Resume Score, ATS Friendly Resume, Resume ATS Test, ATS Resume Scanner, ATS Resume Checker Online"
     },
-    "readingTime": "5 min read",
     "faqs": [
       {
         "id": "faq-4-1",
@@ -159,7 +181,9 @@
       "resume-builder",
       "pdf-to-word-converter",
       "word-to-pdf-converter"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "5 min read"
   },
   {
     "id": "5",
@@ -175,6 +199,7 @@
       "PromptEngineering"
     ],
     "featured": false,
+    "trending": false,
     "status": "draft",
     "publishedAt": "",
     "createdAt": "2026-06-06T09:25:00.000Z",
@@ -188,6 +213,9 @@
       "title": "Practical Developer Prompt Engineering Guide | ToolWala AI",
       "description": "Learn prompt engineering structures to accelerate coding tasks and build browser integrations."
     },
+    "faqs": [],
+    "relatedToolSlugs": [],
+    "viewCount": 0,
     "readingTime": "4 min read"
   },
   {
@@ -205,6 +233,7 @@
       "PDF Tools"
     ],
     "featured": true,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-17T17:35:00.000Z",
     "createdAt": "2026-06-17T17:35:00.000Z",
@@ -302,6 +331,7 @@
       "word-to-pdf-converter",
       "pdf-ocr"
     ],
+    "viewCount": 0,
     "readingTime": "16 min read"
   },
   {
@@ -318,6 +348,7 @@
       "Document Management"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-20T08:00:00.000Z",
     "createdAt": "2026-06-20T08:00:00.000Z",
@@ -350,6 +381,7 @@
       "split-pdf",
       "pdf-tools"
     ],
+    "viewCount": 0,
     "readingTime": "3 min read"
   },
   {
@@ -366,6 +398,7 @@
       "Optimization"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-20T08:00:00.000Z",
     "createdAt": "2026-06-20T08:00:00.000Z",
@@ -398,6 +431,7 @@
       "aadhaar-pdf-compressor",
       "gov-form-pdf-compressor"
     ],
+    "viewCount": 0,
     "readingTime": "4 min read"
   },
   {
@@ -415,6 +449,7 @@
       "Image Tools"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-20T08:00:00.000Z",
     "createdAt": "2026-06-20T08:00:00.000Z",
@@ -447,6 +482,7 @@
       "jpg-to-pdf",
       "image-compressor"
     ],
+    "viewCount": 0,
     "readingTime": "3 min read"
   },
   {
@@ -463,6 +499,7 @@
       "Encryption"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-20T08:00:00.000Z",
     "createdAt": "2026-06-20T08:00:00.000Z",
@@ -495,6 +532,7 @@
       "unlock-pdf",
       "pdf-tools"
     ],
+    "viewCount": 0,
     "readingTime": "3 min read"
   },
   {
@@ -512,6 +550,7 @@
       "WebPerformance"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-20T08:00:00.000Z",
     "createdAt": "2026-06-20T08:00:00.000Z",
@@ -544,6 +583,7 @@
       "bg-remover",
       "ai-image-upscaler"
     ],
+    "viewCount": 0,
     "readingTime": "4 min read"
   },
   {
@@ -560,6 +600,7 @@
       "Resize Image"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-20T08:00:00.000Z",
     "createdAt": "2026-06-20T08:00:00.000Z",
@@ -593,6 +634,7 @@
       "pan-card-resize",
       "signature-resize"
     ],
+    "viewCount": 0,
     "readingTime": "5 min read"
   },
   {
@@ -609,6 +651,7 @@
       "Social Media"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-20T08:00:00.000Z",
     "createdAt": "2026-06-20T08:00:00.000Z",
@@ -641,6 +684,7 @@
       "ai-logo-maker",
       "voice-generator"
     ],
+    "viewCount": 0,
     "readingTime": "3 min read"
   },
   {
@@ -657,6 +701,7 @@
       "Writing Tools"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-20T08:00:00.000Z",
     "createdAt": "2026-06-20T08:00:00.000Z",
@@ -689,6 +734,7 @@
       "cover-letter-generator",
       "pdf-summarizer"
     ],
+    "viewCount": 0,
     "readingTime": "4 min read"
   },
   {
@@ -705,6 +751,7 @@
       "Recruitment"
     ],
     "featured": true,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -718,7 +765,6 @@
       "title": "New SSC Photo & Signature Guidelines | ToolWala AI",
       "description": "Understand the Staff Selection Commission's rules for live captures and scanned signatures."
     },
-    "readingTime": "4 min read",
     "faqs": [
       {
         "id": "ssc-faq-1",
@@ -730,7 +776,9 @@
     "relatedToolSlugs": [
       "ssc-photo-resize",
       "signature-resize"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "4 min read"
   },
   {
     "id": "11",
@@ -746,6 +794,7 @@
       "Civil Services"
     ],
     "featured": true,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -759,7 +808,6 @@
       "title": "UPSC Photo and Signature Resize Specifications | ToolWala AI",
       "description": "Step-by-step guide to formatting IAS, NDA, and CDS application documents to UPSC specifications."
     },
-    "readingTime": "4 min read",
     "faqs": [
       {
         "id": "upsc-faq-1",
@@ -771,7 +819,9 @@
     "relatedToolSlugs": [
       "upsc-photo-resize",
       "signature-resize"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "4 min read"
   },
   {
     "id": "12",
@@ -787,6 +837,7 @@
       "UIDAI"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -800,7 +851,6 @@
       "title": "Compress e-Aadhaar PDF Under 300KB Online | ToolWala AI",
       "description": "Securely compress UIDAI e-Aadhaar PDFs to meet the 300KB upload limit. Processes 100% locally in your browser."
     },
-    "readingTime": "3 min read",
     "faqs": [
       {
         "id": "aadhaar-faq-1",
@@ -812,7 +862,9 @@
     "relatedToolSlugs": [
       "aadhaar-pdf-compressor",
       "unlock-pdf"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "3 min read"
   },
   {
     "id": "13",
@@ -828,6 +880,7 @@
       "Security"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -841,7 +894,6 @@
       "title": "Remove Password Lock from Aadhaar PDF | ToolWala AI",
       "description": "Decrypt and unlock password-protected e-Aadhaar PDFs locally. Free, secure, and browser-native."
     },
-    "readingTime": "3 min read",
     "faqs": [
       {
         "id": "unlock-faq-1",
@@ -853,7 +905,9 @@
     "relatedToolSlugs": [
       "unlock-pdf",
       "aadhaar-pdf-compressor"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "3 min read"
   },
   {
     "id": "14",
@@ -869,6 +923,7 @@
       "NSDL"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -882,7 +937,6 @@
       "title": "Resize Photo & Signature for PAN Card Online | ToolWala AI",
       "description": "Format, crop, and compress application photos to official NSDL/UTIITSL specifications."
     },
-    "readingTime": "4 min read",
     "faqs": [
       {
         "id": "pan-faq-1",
@@ -894,7 +948,9 @@
     "relatedToolSlugs": [
       "pan-card-resize",
       "signature-resize"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "4 min read"
   },
   {
     "id": "15",
@@ -910,6 +966,7 @@
       "NSDL"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -923,7 +980,6 @@
       "title": "Signature Size for PAN Card Online Uploads | ToolWala AI",
       "description": "Learn how to format scanned signatures for NSDL Protean and UTIITSL PAN card portals."
     },
-    "readingTime": "3 min read",
     "faqs": [
       {
         "id": "pan-sig-faq-1",
@@ -935,13 +991,14 @@
     "relatedToolSlugs": [
       "signature-resize",
       "pan-card-resize"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "3 min read"
   },
   {
     "id": "16",
     "slug": "official-indian-passport-photo-specifications",
     "title": "Official Indian Passport Photo Size & Dimensions Guidelines",
-    "metaDescription": "Understand the Ministry of External Affairs' guidelines for passport photo background colors, sizing, and facial expressions.",
     "excerpt": "Learn the official guidelines for passport photo backgrounds, dimensions, and framing for Indian passport applications.",
     "content": "Indian passport applications are subject to strict review by the Ministry of External Affairs. Using a photo with a colored background, shadows, or incorrect framing will cause rejections.\n\n### Official Indian Passport Photo Specifications\n- **Dimensions**: 3.5 cm x 4.5 cm (35 mm x 45 mm).\n- **Face Coverage**: Face must cover 70-80% of the image (32 mm to 36 mm from top of head to chin).\n- **Background**: Solid white background with no shadows or borders.\n- **File size**: 20 KB to 50 KB in JPEG format.\n\nUse our Passport Photo Maker to center your face automatically and remove backgrounds. All rendering runs client-side to keep your personal photos secure.",
     "thumbnail": "/passportMakerImage.png",
@@ -952,6 +1009,7 @@
       "Govt Guidelines"
     ],
     "featured": true,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -965,7 +1023,6 @@
       "title": "Indian Passport Photo Sizing & Specs | ToolWala AI",
       "description": "Official photo dimensions, face alignment, and background colors for Passport Seva."
     },
-    "readingTime": "4 min read",
     "faqs": [
       {
         "id": "pass-faq-1",
@@ -977,7 +1034,9 @@
     "relatedToolSlugs": [
       "passport-photo-maker",
       "image-compressor"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "4 min read"
   },
   {
     "id": "17",
@@ -993,6 +1052,7 @@
       "Visa"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -1006,7 +1066,6 @@
       "title": "Make Passport Size Photo with Blue Background | ToolWala AI",
       "description": "Change passport background colors to blue online. Crop to official dimensions securely."
     },
-    "readingTime": "3 min read",
     "faqs": [
       {
         "id": "blue-faq-1",
@@ -1018,7 +1077,9 @@
     "relatedToolSlugs": [
       "passport-photo-maker",
       "bg-remover"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "3 min read"
   },
   {
     "id": "18",
@@ -1034,6 +1095,7 @@
       "Signature Crop"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -1047,7 +1109,6 @@
       "title": "How to Upload SSC Photo and Signature Scans | ToolWala AI",
       "description": "Learn how to format, crop, and compress files to meet SSC CGL and CHSL portal rules."
     },
-    "readingTime": "3 min read",
     "faqs": [
       {
         "id": "ssc-up-faq-1",
@@ -1059,7 +1120,9 @@
     "relatedToolSlugs": [
       "ssc-photo-resize",
       "signature-resize"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "3 min read"
   },
   {
     "id": "19",
@@ -1075,6 +1138,7 @@
       "Seva Portal"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -1088,7 +1152,6 @@
       "title": "Upload & Format Documents for Passport Seva | ToolWala AI",
       "description": "Compress scanned certificates under 1MB and convert photos to compliant PDFs."
     },
-    "readingTime": "4 min read",
     "faqs": [
       {
         "id": "pass-up-faq-1",
@@ -1100,7 +1163,9 @@
     "relatedToolSlugs": [
       "gov-form-pdf-compressor",
       "unlock-pdf"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "4 min read"
   },
   {
     "id": "20",
@@ -1116,6 +1181,7 @@
       "Mains Certificate"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -1129,7 +1195,6 @@
       "title": "Compress UPSC Application Certificates to 300KB | ToolWala AI",
       "description": "Compress scanned marksheets and category certificates under 300KB locally in your browser."
     },
-    "readingTime": "3 min read",
     "faqs": [
       {
         "id": "upsc-pdf-faq-1",
@@ -1141,7 +1206,9 @@
     "relatedToolSlugs": [
       "gov-form-pdf-compressor",
       "merge-pdf"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "3 min read"
   },
   {
     "id": "21",
@@ -1157,6 +1224,7 @@
       "Photo Sizing"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -1170,7 +1238,6 @@
       "title": "RRB ALP Photo & Signature Size Guidelines | ToolWala AI",
       "description": "Format, crop, and compress files to meet Railway Recruitment Board ALP specifications."
     },
-    "readingTime": "4 min read",
     "faqs": [
       {
         "id": "rrb-faq-1",
@@ -1182,7 +1249,9 @@
     "relatedToolSlugs": [
       "exam-photo-resizer",
       "signature-resize"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "4 min read"
   },
   {
     "id": "22",
@@ -1198,6 +1267,7 @@
       "Govt Guidelines"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -1211,7 +1281,6 @@
       "title": "Upload Documents on Government Portals | ToolWala AI",
       "description": "Avoid validation errors by formatting, cropping, and compressing JPEGs and PDFs correctly."
     },
-    "readingTime": "4 min read",
     "faqs": [
       {
         "id": "upload-faq-1",
@@ -1223,7 +1292,9 @@
     "relatedToolSlugs": [
       "gov-form-pdf-compressor",
       "exam-photo-resizer"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "4 min read"
   },
   {
     "id": "23",
@@ -1239,6 +1310,7 @@
       "PDF Optimization"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -1252,7 +1324,6 @@
       "title": "Compress PDF under 100KB/200KB for Job Portals | ToolWala AI",
       "description": "Optimize scanned certificates to fit strict job application upload limits securely."
     },
-    "readingTime": "3 min read",
     "faqs": [
       {
         "id": "job-faq-1",
@@ -1264,7 +1335,9 @@
     "relatedToolSlugs": [
       "gov-form-pdf-compressor",
       "compress-pdf"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "3 min read"
   },
   {
     "id": "24",
@@ -1280,6 +1353,7 @@
       "Photo Sizing"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -1293,7 +1367,6 @@
       "title": "IBPS PO & SBI PO Sizing Requirements | ToolWala AI",
       "description": "Learn how to crop and compress photos and signatures for banking exam forms."
     },
-    "readingTime": "4 min read",
     "faqs": [
       {
         "id": "ibps-faq-1",
@@ -1305,7 +1378,9 @@
     "relatedToolSlugs": [
       "exam-photo-resizer",
       "signature-resize"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "4 min read"
   },
   {
     "id": "25",
@@ -1321,6 +1396,7 @@
       "Privacy"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -1334,7 +1410,6 @@
       "title": "Mask Aadhaar Card Number Online for Security | ToolWala AI",
       "description": "Secure your Aadhaar details by masking the first 8 digits locally in your browser."
     },
-    "readingTime": "3 min read",
     "faqs": [
       {
         "id": "mask-faq-1",
@@ -1346,7 +1421,9 @@
     "relatedToolSlugs": [
       "aadhaar-masking-tool",
       "aadhaar-pdf-compressor"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "3 min read"
   },
   {
     "id": "26",
@@ -1362,6 +1439,7 @@
       "CGL Form"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -1375,7 +1453,6 @@
       "title": "Resize Signature for SSC CGL Form | ToolWala AI",
       "description": "Format and compress scanned signatures under 20KB to fit SSC CGL specifications."
     },
-    "readingTime": "3 min read",
     "faqs": [
       {
         "id": "ssc-sig-faq-1",
@@ -1387,7 +1464,9 @@
     "relatedToolSlugs": [
       "signature-resize",
       "ssc-photo-resize"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "3 min read"
   },
   {
     "id": "27",
@@ -1403,6 +1482,7 @@
       "Photo Sizing"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -1416,7 +1496,6 @@
       "title": "UPSC OTR Sizing & Document Upload Guide | ToolWala AI",
       "description": "Learn how to format, crop, and compress files for the UPSC OTR portal."
     },
-    "readingTime": "4 min read",
     "faqs": [
       {
         "id": "otr-faq-1",
@@ -1428,7 +1507,9 @@
     "relatedToolSlugs": [
       "upsc-photo-resize",
       "signature-resize"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "4 min read"
   },
   {
     "id": "28",
@@ -1444,6 +1525,7 @@
       "UIDAI Guidelines"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -1457,7 +1539,6 @@
       "title": "Crop Aadhaar Card Photo Online | ToolWala AI",
       "description": "Format and compress passport photos to official UIDAI specifications."
     },
-    "readingTime": "3 min read",
     "faqs": [
       {
         "id": "uidai-faq-1",
@@ -1469,7 +1550,9 @@
     "relatedToolSlugs": [
       "crop-aadhaar-card",
       "bg-remover"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "3 min read"
   },
   {
     "id": "29",
@@ -1485,6 +1568,7 @@
       "Biometric Photo"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T08:00:00.000Z",
     "createdAt": "2026-06-21T08:00:00.000Z",
@@ -1498,7 +1582,6 @@
       "title": "Create Passport Size Photos on Mobile | ToolWala AI",
       "description": "Capture, crop, and change background colors on mobile web browsers."
     },
-    "readingTime": "3 min read",
     "faqs": [
       {
         "id": "mob-faq-1",
@@ -1510,7 +1593,9 @@
     "relatedToolSlugs": [
       "passport-photo-maker",
       "bg-remover"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "3 min read"
   },
   {
     "id": "30",
@@ -1528,6 +1613,7 @@
       "Free Tools"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T04:39:56.642Z",
     "createdAt": "2026-06-21T04:39:56.642Z",
@@ -1541,7 +1627,6 @@
       "title": "Passport Size Photo Maker Online Free - Create Compliant Photos",
       "description": "Create print-ready passport-size photos online for free. Adjust dimensions for Indian Passport, US Visa, and Schengen with zero server uploads."
     },
-    "readingTime": "6 min read",
     "faqs": [
       {
         "id": "passport-size-photo-maker-online-free-faq-1",
@@ -1607,7 +1692,9 @@
     "relatedToolSlugs": [
       "passport-photo-maker",
       "bg-remover"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "6 min read"
   },
   {
     "id": "31",
@@ -1627,6 +1714,7 @@
       "Government Forms"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T04:39:56.647Z",
     "createdAt": "2026-06-21T04:39:56.647Z",
@@ -1641,7 +1729,6 @@
       "description": "Resize and compress passport photos under 20KB online for free. Meets SSC, UPSC, state police bharti, and railway exam photo upload requirements.",
       "keywords": "photo resize to 20kb, compress photo under 20kb, ssc photo size, exam form photo, passport photo compressor"
     },
-    "readingTime": "6 min read",
     "faqs": [
       {
         "id": "photo-resize-20kb-faq-1",
@@ -1709,7 +1796,9 @@
       "image-compressor",
       "ssc-photo-resize",
       "signature-resize"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "6 min read"
   },
   {
     "id": "32",
@@ -1729,6 +1818,7 @@
       "Free Tools"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T04:39:56.648Z",
     "createdAt": "2026-06-21T04:39:56.648Z",
@@ -1743,7 +1833,6 @@
       "description": "Crop and compress scanned signatures under 20KB online for free. Format signatures to SSC, UPSC, railway, and bank exam specifications.",
       "keywords": "signature resize to 20kb, ssc signature size, compress signature online, exam signature upload, scanned signature cropper"
     },
-    "readingTime": "6 min read",
     "faqs": [
       {
         "id": "sig-resize-20kb-faq-1",
@@ -1811,7 +1900,9 @@
       "image-compressor",
       "ssc-photo-resize",
       "exam-photo-resizer"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "6 min read"
   },
   {
     "id": "33",
@@ -1831,6 +1922,7 @@
       "Free Tools"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T04:39:56.648Z",
     "createdAt": "2026-06-21T04:39:56.648Z",
@@ -1845,7 +1937,6 @@
       "description": "Compress PDF files under 100KB online for free. Secure client-side processing for EPFO, SSC, UPSC, and state recruitment portal uploads. No server uploads.",
       "keywords": "compress pdf to 100kb, pdf compressor online free, reduce pdf size, epfo pdf upload, government portal pdf limit"
     },
-    "readingTime": "6 min read",
     "faqs": [
       {
         "id": "compress-pdf-to-100kb-faq-1",
@@ -1913,7 +2004,9 @@
       "gov-form-pdf-compressor",
       "merge-pdf",
       "sign-pdf"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "6 min read"
   },
   {
     "id": "34",
@@ -1933,6 +2026,7 @@
       "Free Tools"
     ],
     "featured": false,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-06-21T04:39:56.648Z",
     "createdAt": "2026-06-21T04:39:56.648Z",
@@ -1947,7 +2041,6 @@
       "description": "Resize and crop photos to official UIDAI Aadhaar specifications (3.5cm x 4.5cm) under 50KB. 100% client-side processing for complete privacy.",
       "keywords": "aadhaar photo resize, uidai photo size, aadhaar card photo dimensions, resize photo for aadhaar update, aadhaar photo cropper"
     },
-    "readingTime": "6 min read",
     "faqs": [
       {
         "id": "aadhaar-photo-faq-1",
@@ -2015,7 +2108,9 @@
       "image-compressor",
       "aadhaar-masking-tool",
       "aadhaar-pdf-compressor"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "6 min read"
   },
   {
     "id": "5",
@@ -2031,6 +2126,7 @@
       "Study Tips"
     ],
     "featured": true,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-07-04T19:42:31.000Z",
     "createdAt": "2026-07-04T19:42:31.000Z",
@@ -2044,7 +2140,6 @@
       "title": "How to Calculate Exam Percentage Easily (2026 Guide) | ToolWala AI",
       "description": "Learn how to compute your academic marks percentage with formulas and worked examples for students and teachers."
     },
-    "readingTime": "5 min read",
     "faqs": [
       {
         "id": "percent-faq-1",
@@ -2062,7 +2157,9 @@
     "relatedToolSlugs": [
       "exam-marks-calculator",
       "age-calculator"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "5 min read"
   },
   {
     "id": "6",
@@ -2080,6 +2177,7 @@
       "SSC"
     ],
     "featured": true,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-07-19T20:40:00.000Z",
     "createdAt": "2026-07-19T20:40:00.000Z",
@@ -2093,7 +2191,6 @@
       "title": "Best Government Form PDF Compressor: Online PDF Under 100KB, 200KB & 300KB | ToolWala",
       "description": "Free Government Form PDF Compressor by ToolWala: Compress PDF under 100KB, 200KB & 300KB for EPFO, UPSC, SSC & PAN card without losing quality. Try now!"
     },
-    "readingTime": "4 min read",
     "faqs": [
       {
         "id": "gov-pdf-faq-1",
@@ -2112,7 +2209,9 @@
       "gov-form-pdf-compressor",
       "aadhaar-pdf-compressor",
       "compress-pdf"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "4 min read"
   },
   {
     "id": "webp-to-jpg-png-converter-guide",
@@ -2130,6 +2229,7 @@
       "ToolWala"
     ],
     "featured": true,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-07-21T08:45:00.000Z",
     "createdAt": "2026-07-21T08:45:00.000Z",
@@ -2143,12 +2243,14 @@
       "title": "WebP to JPG / PNG Converter – Convert WebP Images Online for Free",
       "description": "Convert WebP images to JPG or PNG instantly online for free. Fast, 100% browser-based, transparent background support, batch conversion, and zero server uploads."
     },
-    "readingTime": "12 min read",
+    "faqs": [],
     "relatedToolSlugs": [
       "webp-to-jpg-png-converter",
       "image-compressor",
       "bg-remover"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "12 min read"
   },
   {
     "id": "pan-card-photo-size-2026-new-requirement",
@@ -2166,6 +2268,7 @@
       "Photo Resizer"
     ],
     "featured": true,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-08-07T08:00:00.000Z",
     "createdAt": "2026-08-07T08:00:00.000Z",
@@ -2179,7 +2282,6 @@
       "title": "PAN Card Photo Size Specs: NSDL 3.5x2.5cm & UTIITSL 213x213px | ToolWala AI",
       "description": "Official NSDL and UTIITSL PAN card photo size specifications for online & physical applications. Crop & resize photos to 20KB-50KB online free."
     },
-    "readingTime": "4 min read",
     "faqs": [
       {
         "id": "pan-faq-1",
@@ -2204,7 +2306,9 @@
       "pan-card-resize",
       "signature-resize",
       "gov-form-pdf-compressor"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "4 min read"
   },
   {
     "id": "indian-passport-photo-size-2026-why-old-2x2-inch-photo-no-longer-accepted",
@@ -2222,6 +2326,7 @@
       "ToolWala"
     ],
     "featured": true,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-08-07T08:15:00.000Z",
     "createdAt": "2026-08-07T08:15:00.000Z",
@@ -2235,7 +2340,6 @@
       "title": "Passport Photo Size India 2026: Why 2x2 Inch Is Discontinued | ToolWala AI",
       "description": "Learn about the 2026 Indian passport photo size rule change. 2x2 inch photos are discontinued; only 35x45mm photos are accepted. Create photos online free."
     },
-    "readingTime": "5 min read",
     "faqs": [
       {
         "id": "pass-faq-1",
@@ -2254,7 +2358,9 @@
       "passport-photo-maker",
       "image-compressor",
       "gov-form-pdf-compressor"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "5 min read"
   },
   {
     "id": "gst-calculator-complete-guide",
@@ -2272,6 +2378,7 @@
       "ToolWala"
     ],
     "featured": true,
+    "trending": false,
     "status": "published",
     "publishedAt": "2026-08-09T16:20:00.000Z",
     "createdAt": "2026-08-09T16:20:00.000Z",
@@ -2285,7 +2392,6 @@
       "title": "GST Calculator Kaise Use Karein: Complete Guide & Tax Rules | ToolWala AI",
       "description": "GST calculate karne ka aasan tarika seekhein. Exclusive vs Inclusive GST, CGST/SGST/IGST split, Multi-item cart, GSTIN validator aur Rounding rules complete guide."
     },
-    "readingTime": "6 min read",
     "faqs": [
       {
         "id": "gst-faq-1",
@@ -2322,6 +2428,8 @@
       "gst-calculator",
       "emi-calculator",
       "sip-calculator"
-    ]
+    ],
+    "viewCount": 0,
+    "readingTime": "6 min read"
   }
 ]

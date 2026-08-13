@@ -127,41 +127,61 @@ export default function VideoCompressorPage() {
 
   // Handle File Uploads
   const handleFilesAdded = (files: FileList | File[]) => {
-    const newItems: VideoItem[] = [];
-
     Array.from(files).forEach((file) => {
-      const isVideo = file.type.startsWith('video/') || SUPPORTED_FORMATS.some(ext => file.name.toLowerCase().endsWith(ext.replace('video/', '')));
+      const isVideo = 
+        file.type.startsWith('video/') || 
+        ['.mp4', '.mov', '.webm', '.avi', '.mkv', '.m4v', '.3gp', '.flv', '.ts'].some(ext => file.name.toLowerCase().endsWith(ext));
       
       if (!isVideo) {
-        alert(`File "${file.name}" is not a supported video format.`);
+        alert(`File "${file.name}" is not a recognized video format.`);
         return;
       }
 
       const url = URL.createObjectURL(file);
+      const itemId = Math.random().toString(36).substring(2, 9);
+
+      const item: VideoItem = {
+        id: itemId,
+        file,
+        name: file.name,
+        originalSize: file.size,
+        originalUrl: url,
+        duration: 0,
+        width: 0,
+        height: 0,
+        status: 'idle',
+        progress: 0
+      };
+
+      // Instantly add to state so user sees their file immediately
+      setVideos((prev) => [...prev, item]);
+      setActiveVideoId((prev) => prev || itemId);
+
+      // Probe metadata asynchronously without blocking UI
       const videoEl = document.createElement('video');
+      videoEl.preload = 'metadata';
       videoEl.src = url;
 
       videoEl.onloadedmetadata = () => {
-        const item: VideoItem = {
-          id: Math.random().toString(36).substring(2, 9),
-          file,
-          name: file.name,
-          originalSize: file.size,
-          originalUrl: url,
-          duration: videoEl.duration || 0,
-          width: videoEl.videoWidth || 0,
-          height: videoEl.videoHeight || 0,
-          status: 'idle',
-          progress: 0
-        };
+        const dur = videoEl.duration || 0;
+        const w = videoEl.videoWidth || 0;
+        const h = videoEl.videoHeight || 0;
 
-        setVideos((prev) => [...prev, item]);
-        if (!activeVideoId) setActiveVideoId(item.id);
-        
-        // Auto initialize trimEnd if duration loaded
-        if (item.duration > 0 && trimEnd === 0) {
-          setTrimEnd(Math.floor(item.duration));
+        setVideos((prev) =>
+          prev.map((v) =>
+            v.id === itemId
+              ? { ...v, duration: dur, width: w, height: h }
+              : v
+          )
+        );
+
+        if (dur > 0) {
+          setTrimEnd((prevTrim) => (prevTrim === 0 ? Math.floor(dur) : prevTrim));
         }
+      };
+
+      videoEl.onerror = () => {
+        console.warn('Video metadata probe failed for:', file.name);
       };
     });
   };
@@ -415,7 +435,7 @@ Processed 100% Client-Side via ToolWala AI: ${window.location.href}`;
                 type="file"
                 ref={fileInputRef}
                 onChange={(e) => e.target.files && handleFilesAdded(e.target.files)}
-                accept="video/mp4,video/quicktime,video/webm,video/x-msvideo,video/x-matroska,.mp4,.mov,.webm,.avi,.mkv"
+                accept="video/*,.mp4,.mov,.webm,.avi,.mkv,.m4v,.3gp,.flv,.ts"
                 multiple
                 className="hidden"
               />

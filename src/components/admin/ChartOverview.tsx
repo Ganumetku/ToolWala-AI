@@ -52,7 +52,7 @@ export default function ChartOverview({ data }: ChartOverviewProps) {
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4 }}
-      className="bg-white dark:bg-white/[0.01] p-6 rounded-3xl border border-slate-200/80 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] w-full"
+      className="bg-white dark:bg-white/[0.01] p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-slate-200/80 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] w-full"
     >
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
@@ -72,7 +72,7 @@ export default function ChartOverview({ data }: ChartOverviewProps) {
         </div>
       </div>
 
-      <div className="h-80 w-full">
+      <div className="h-60 sm:h-80 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={chartData}

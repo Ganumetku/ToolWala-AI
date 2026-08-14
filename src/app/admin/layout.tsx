@@ -44,7 +44,7 @@ export default function AdminLayout({
           isCollapsed={isCollapsed}
         />
 
-        <main className="flex-grow p-6 sm:p-10 transition-all duration-300 admin-main-content">
+        <main className="flex-grow p-4 sm:p-8 pt-24 sm:pt-28 transition-all duration-300 admin-main-content">
           {children}
         </main>
       </div>

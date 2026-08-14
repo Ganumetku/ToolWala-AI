@@ -76,7 +76,7 @@ export default function Header({ sidebarOpen, setSidebarOpen, isCollapsed }: Hea
           </button>
           
           <div>
-            <h2 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-wider">{getPageTitle()}</h2>
+            <h2 className="text-base sm:text-lg font-black text-slate-900 dark:text-white tracking-wider">{getPageTitle()}</h2>
           </div>
         </div>
 

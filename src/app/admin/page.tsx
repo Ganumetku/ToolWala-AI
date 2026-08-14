@@ -90,19 +90,19 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-6 sm:space-y-10">
       {/* Introduction Notification banner */}
-      <div className="bg-blue-50 dark:bg-blue-600/10 border border-blue-200 dark:border-blue-500/20 p-6 rounded-3xl flex items-center justify-between gap-6">
-        <div className="flex items-center gap-4">
-          <div className="h-12 w-12 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
-            <Sparkles className="w-5 h-5" />
+      <div className="bg-blue-50 dark:bg-blue-600/10 border border-blue-200 dark:border-blue-500/20 p-4 sm:p-6 rounded-2xl sm:rounded-3xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6">
+        <div className="flex items-start sm:items-center gap-3.5 sm:gap-4">
+          <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">Welcome back to ToolWala Control Center</h3>
-            <p className="text-xs text-slate-600 dark:text-gray-400 mt-1 font-medium">Production analytics tracking is active. Real-time visitor logs are synchronizing with Supabase.</p>
+            <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white tracking-tight">Welcome back to ToolWala Control Center</h3>
+            <p className="text-xs text-slate-600 dark:text-gray-400 mt-0.5 sm:mt-1 font-medium">Production analytics tracking is active. Real-time visitor logs are synchronizing with Supabase.</p>
             
             {/* Version Check Badge */}
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mt-3 text-[9px] font-sans font-semibold uppercase tracking-wider">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mt-2.5 sm:mt-3 text-[9px] font-sans font-semibold uppercase tracking-wider">
               <span className="text-slate-600 dark:text-gray-400 flex items-center gap-1 bg-white dark:bg-white/5 px-2 py-0.5 rounded border border-slate-200 dark:border-white/5 shadow-xs">
                 Version: <span className="text-blue-600 dark:text-blue-400 font-mono">v{versionInfo.version}</span>
               </span>
@@ -115,12 +115,12 @@ export default function AdminDashboard() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-end gap-2 shrink-0">
+        <div className="flex items-center sm:flex-col sm:items-end justify-between sm:justify-start gap-2 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-blue-200/60 dark:border-white/5">
           <button
             onClick={() => fetchStats(true)}
-            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white border border-blue-500/30 px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all active:scale-[0.98] cursor-pointer shadow-sm shadow-blue-500/20"
+            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white border border-blue-500/30 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-[10px] sm:text-xs font-semibold uppercase tracking-wider transition-all active:scale-[0.98] cursor-pointer shadow-sm shadow-blue-500/20"
           >
-            <ShieldCheck className="w-4 h-4" /> Sync Analytics
+            <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Sync Analytics
           </button>
           {lastUpdated && (
             <span className="text-[9px] text-slate-400 dark:text-gray-500 font-bold uppercase tracking-wider">
@@ -131,7 +131,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* KPI Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6">
         <StatCard 
           title="Total Users" 
           value={stats.totalUsers.toLocaleString()} 

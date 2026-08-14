@@ -139,12 +139,12 @@ export default function ToolsDirectory({
       )}
 
       {/* Category Chips */}
-      <div className="flex flex-wrap justify-center gap-3 mb-16">
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-16">
         {toolCategories.map(category => (
           <button
             key={category}
             onClick={() => setActiveCategory(category)}
-            className={`px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 transform active:scale-95 cursor-pointer ${
+            className={`px-3.5 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl text-[9px] sm:text-[10px] font-black uppercase tracking-wider sm:tracking-[0.2em] transition-all duration-300 transform active:scale-95 cursor-pointer ${
               activeCategory === category 
                 ? 'bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white shadow-md border-transparent' 
                 : 'bg-white dark:bg-white/5 text-[#475569] dark:text-gray-400 border border-[#E8ECF4] dark:border-white/10 hover:-translate-y-0.5 hover:border-[#2563EB]/50 hover:text-[#2563EB] dark:hover:text-white shadow-sm'
@@ -160,9 +160,9 @@ export default function ToolsDirectory({
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-12 text-center"
+          className="mb-8 sm:mb-12 text-center"
         >
-          <p className="text-gray-600 dark:text-gray-400 font-medium font-sans">
+          <p className="text-gray-600 dark:text-gray-400 font-medium font-sans text-xs sm:text-base">
             {t('tools.found_count', 'Found {count} tools for "{query}"').replace('{count}', String(filteredTools.length)).replace('{query}', searchQuery)}
             {activeCategory !== "All" && <span className="text-gray-600 dark:text-gray-400 font-medium"> {t('tools.in_category', ' in {category}').replace('{category}', t('categories.' + activeCategory, activeCategory))}</span>}
           </p>
@@ -173,7 +173,7 @@ export default function ToolsDirectory({
       {filteredTools.length > 0 ? (
         <motion.div 
           layout
-          className="grid grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-3 xl:grid-cols-4"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6"
         >
           <AnimatePresence>
             {filteredTools.map((tool) => (

@@ -143,44 +143,46 @@ export default function GovernmentToolHub() {
 
                   <Link
                     href={localizeHref(tool.href)}
-                    className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-gray-200 dark:border-white/5 bg-white dark:bg-white/[0.02] p-7 transition-all duration-500 hover:bg-gray-50 dark:hover:bg-white/[0.05] hover:border-blue-500/40 w-full h-full shadow-sm dark:glass hover:shadow-md"
+                    className="group relative flex flex-col justify-between overflow-hidden rounded-[1.5rem] border border-gray-200 dark:border-white/5 bg-white dark:bg-white/[0.02] p-5 sm:p-6 transition-all duration-500 hover:bg-gray-50 dark:hover:bg-white/[0.05] hover:border-blue-500/40 w-full h-full shadow-sm dark:glass hover:shadow-md"
                   >
                     {/* Glow Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                    <div className="relative z-10 w-full">
-                      {/* Icon & Badge */}
-                      <div className="flex items-center justify-between mb-5">
-                        <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-gradient-to-br dark:from-blue-500/10 dark:to-indigo-500/10 border border-blue-100 dark:border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 relative">
-                          <div className="absolute inset-0 rounded-2xl bg-blue-500/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                          <span className="relative z-10">{tool.icon}</span>
+                    <div className="relative z-10 w-full flex-1 flex flex-col justify-between">
+                      <div>
+                        {/* Icon & Badge */}
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-blue-50 dark:bg-gradient-to-br dark:from-blue-500/10 dark:to-indigo-500/10 border border-blue-100 dark:border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 relative">
+                            <div className="absolute inset-0 rounded-2xl bg-blue-500/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                            <span className="relative z-10">{tool.icon}</span>
+                          </div>
+                          <span className="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-[9px] font-bold text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:border-blue-500/20 transition-all uppercase tracking-wider relative z-10 max-w-[60%] truncate">
+                            {displayBadge}
+                          </span>
                         </div>
-                        <span className="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-[9px] font-bold text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:border-blue-500/20 transition-all uppercase tracking-wider relative z-10">
-                          {displayBadge}
-                        </span>
+
+                        {/* Title & Description */}
+                        <h3 className="text-base sm:text-lg font-black text-gray-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug line-clamp-2 min-h-[2.75rem] mb-2">
+                          {displayTitle}
+                        </h3>
+                        <p className="text-xs text-gray-600 dark:text-gray-400 font-medium leading-relaxed line-clamp-2 sm:line-clamp-3 min-h-[2.5rem] mb-4 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">
+                          {displayDesc}
+                        </p>
                       </div>
 
-                      {/* Title & Description */}
-                      <h3 className="text-lg font-black text-gray-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-tight mb-2">
-                        {displayTitle}
-                      </h3>
-                      <p className="text-xs text-gray-600 dark:text-gray-500 font-medium leading-relaxed mb-6 group-hover:text-gray-700 dark:group-hover:text-gray-400 transition-colors">
-                        {displayDesc}
-                      </p>
-                    </div>
+                      {/* Specs & CTA */}
+                      <div className="border-t border-gray-100 dark:border-white/5 pt-3.5 mt-2 relative z-10 w-full">
+                        <div className="flex justify-between items-center text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider mb-3">
+                          <span>{t('gov_hub.target_kb', 'Target KB:')} <span className="text-gray-700 dark:text-gray-300">{displayKb}</span></span>
+                          <span>{t('gov_hub.dim_label', 'Dim:')} <span className="text-gray-700 dark:text-gray-300">{displayDim}</span></span>
+                        </div>
 
-                    {/* Specs & CTA */}
-                    <div className="border-t border-gray-100 dark:border-white/5 pt-4 mt-auto relative z-10 w-full">
-                      <div className="flex justify-between items-center text-[10px] text-gray-500 dark:text-gray-600 font-bold uppercase tracking-wider mb-4">
-                        <span>{t('gov_hub.target_kb', 'Target KB:')} <span className="text-gray-700 dark:text-gray-400">{displayKb}</span></span>
-                        <span>{t('gov_hub.dim_label', 'Dim:')} <span className="text-gray-700 dark:text-gray-400">{displayDim}</span></span>
-                      </div>
-
-                      <div 
-                        className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gray-100 dark:bg-white/5 group-hover:bg-blue-600 text-[10px] font-black uppercase tracking-widest text-gray-700 dark:text-gray-400 group-hover:text-white transition-all shadow-sm"
-                      >
-                        {t('gov_hub.configure_tool', 'Configure Tool')}
-                        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                        <div 
+                          className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-gray-100 dark:bg-white/5 group-hover:bg-blue-600 text-[10px] font-black uppercase tracking-widest text-gray-700 dark:text-gray-300 group-hover:text-white transition-all shadow-sm"
+                        >
+                          {t('gov_hub.configure_tool', 'Configure Tool')}
+                          <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                        </div>
                       </div>
                     </div>
                   </Link>

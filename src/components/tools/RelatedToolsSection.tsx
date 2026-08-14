@@ -99,24 +99,24 @@ export default function RelatedToolsSection({
           <Link
             key={toolItem.id}
             href={localizeHref(toolItem.href)}
-            className="group relative p-6 rounded-[1.25rem] bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 hover:border-blue-500/40 dark:hover:border-blue-500/40 hover:bg-slate-50 dark:hover:bg-white/[0.04] transition-all duration-300 shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_12px_30px_rgba(37,99,235,0.12)] flex flex-col justify-between cursor-pointer"
+            className="group relative p-5 sm:p-6 rounded-[1.25rem] bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 hover:border-blue-500/40 dark:hover:border-blue-500/40 hover:bg-slate-50 dark:hover:bg-white/[0.04] transition-all duration-300 shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_12px_30px_rgba(37,99,235,0.12)] flex flex-col justify-between cursor-pointer"
           >
             {/* Top Row: Icon + Category Badge */}
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-blue-50 dark:group-hover:bg-blue-500/10 transition-all shadow-sm">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-blue-50 dark:group-hover:bg-blue-500/10 transition-all shadow-sm">
                   {toolItem.icon}
                 </div>
-                <span className="text-[10px] font-bold text-slate-500 dark:text-gray-400 bg-slate-100 dark:bg-white/5 px-2.5 py-1 rounded-full border border-slate-200 dark:border-white/5">
+                <span className="text-[10px] font-bold text-slate-500 dark:text-gray-400 bg-slate-100 dark:bg-white/5 px-2.5 py-1 rounded-full border border-slate-200 dark:border-white/5 truncate max-w-[55%]">
                   {toolItem.category}
                 </span>
               </div>
 
               {/* Title & Description */}
-              <h3 className="text-base font-black text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-tight mb-2 line-clamp-1">
+              <h3 className="text-base font-black text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-tight mb-2 line-clamp-2 min-h-[2.5rem]">
                 {t(`tools.${toolItem.slug}.title`, toolItem.title)}
               </h3>
-              <p className="text-xs font-medium text-slate-600 dark:text-gray-400 line-clamp-2 leading-relaxed font-sans mb-6">
+              <p className="text-xs font-medium text-slate-600 dark:text-gray-400 line-clamp-2 leading-relaxed font-sans min-h-[2.25rem] mb-4">
                 {t(`tools.${toolItem.slug}.desc`, toolItem.description)}
               </p>
             </div>

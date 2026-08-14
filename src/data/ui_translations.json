@@ -1493,5 +1493,7 @@
   "es:Browse Categories": "Explorar categorías",
   "es:Select from 59+ specialized browser-native PDF, image, or AI tools.": "Seleccione entre más de 59 herramientas especializadas de IA, PDF o imágenes nativas del navegador.",
   "es:@keyframes particle-rise {\n          0% {\n            transform: translate3d(0, 110vh, 0);\n            opacity: 0;\n          }\n          10% {\n            opacity: 0.3;\n          }\n          90% {\n            opacity: 0.3;\n          }\n          100% {\n            transform: translate3d(0, -10vh, 0);\n            opacity: 0;\n          }\n        }\n        .bg-particle {\n          animation: particle-rise linear infinite;\n          will-change: transform;\n        }": "@keyframes aumento de partículas {\n          0% {\n            transformar: traducir3d(0, 110vh, 0);\n            opacidad: 0;\n          }\n          10% {\n            opacidad: 0,3;\n          }\n          90% {\n            opacidad: 0,3;\n          }\n          100% {\n            transformar: traducir3d(0, -10vh, 0);\n            opacidad: 0;\n          }\n        }\n        .bg-partícula {\n          animación: ascenso de partículas lineal infinito;\n          cambiará: transformará;\n        }",
-  "es:Select from 58+ specialized browser-native PDF, image, or AI tools.": "Seleccione entre más de 58 herramientas especializadas de IA, PDF o imágenes nativas del navegador."
+  "es:Select from 58+ specialized browser-native PDF, image, or AI tools.": "Seleccione entre más de 58 herramientas especializadas de IA, PDF o imágenes nativas del navegador.",
+  "hi:categories.Video Tools": "वीडियो उपकरण",
+  "hi:Video Tools": "वीडियो उपकरण"
 }

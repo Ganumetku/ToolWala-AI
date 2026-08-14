@@ -280,19 +280,19 @@ export async function getToolTranslationWithFallback(slug: string, locale: strin
   let fallbackFaqs: any[] = [];
 
   try {
+    const { toolsData } = require('@/data/tools');
+    const tool = toolsData.find((t: any) => t.id === slug || t.slug === slug);
     const { toolArticles } = require('@/data/toolArticles');
     const article = toolArticles[slug];
-    if (article) {
+
+    if (tool) {
+      fallbackTitle = tool.title;
+      fallbackDesc = tool.description;
+      fallbackFaqs = article?.faqs || [];
+    } else if (article) {
       fallbackTitle = article.title;
       fallbackDesc = article.intro;
-      fallbackFaqs = article.faqs;
-    } else {
-      const { toolsData } = require('@/data/tools');
-      const tool = toolsData.find((t: any) => t.id === slug);
-      if (tool) {
-        fallbackTitle = tool.title;
-        fallbackDesc = tool.description;
-      }
+      fallbackFaqs = article.faqs || [];
     }
   } catch (e) {
     // ignore

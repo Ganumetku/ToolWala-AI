@@ -615,7 +615,9 @@
     "Productivity": "उत्पादकता",
     "SEO": "एसईओ",
     "Tutorials": "ट्यूटोरियल",
-    "Online Utilities": "ऑनलाइन उपयोगिताएँ"
+    "Online Utilities": "ऑनलाइन उपयोगिताएँ",
+    "Video Tools": "वीडियो उपकरण",
+    "video-tools": "वीडियो उपकरण"
   },
   "gov_hub": {
     "badge": "भारतीय पोर्टल अनुपालन",
@@ -675,64 +677,268 @@
     "no_tools_sub": "अपनी खोज को व्यापक बनाने या किसी भिन्न श्रेणी को तलाशने का प्रयास करें।",
     "clear_filters": "फ़िल्टर साफ़ करें",
     "merge-pdf": {
-      "title": "पीडीएफ मर्ज करें",
-      "description": "एकाधिक पीडीएफ दस्तावेजों को एक साथ जोड़ें"
+      "title": "PDF मर्ज करें",
+      "description": "एकाधिक PDF दस्तावेजों को एक साथ जोड़ें।"
     },
     "split-pdf": {
-      "title": "पीडीएफ विभाजित करें",
-      "description": "पीडीएफ से विशिष्ट पृष्ठ निकालें या विभाजित करें"
+      "title": "PDF स्प्लिट करें",
+      "description": "PDF से विशिष्ट पृष्ठ निकालें या अलग-अलग फाइलों में विभाजित करें।"
     },
     "compress-pdf": {
-      "title": "पीडीएफ संपीड़ित करें",
-      "description": "दस्तावेज़ की गुणवत्ता बनाए रखते हुए पीडीएफ का आकार कम करें"
+      "title": "PDF कंप्रेस करें",
+      "description": "गुणवत्ता बनाए रखते हुए PDF का आकार कम करें।"
     },
     "pdf-to-jpg": {
-      "title": "पीडीएफ से जेपीजी",
-      "description": "पीडीएफ पृष्ठों को उच्च गुणवत्ता वाले जेपीजी छवियों में बदलें"
+      "title": "PDF से JPG",
+      "description": "PDF पृष्ठों को उच्च गुणवत्ता वाली JPG छवियों में बदलें।"
     },
     "jpg-to-pdf": {
-      "title": "जेपीजी से पीडीएफ",
-      "description": "छवियों (JPG, PNG) को एक पीडीएफ दस्तावेज़ में बदलें"
+      "title": "JPG से PDF",
+      "description": "JPG, PNG और अन्य छवियों को एक PDF दस्तावेज़ में बदलें।"
     },
     "word-to-pdf-converter": {
-      "title": "वर्ड से पीडीएफ",
-      "description": "वर्ड (.docx) फाइलों को आसानी से पीडीएफ में बदलें"
+      "title": "Word से PDF कन्वर्टर",
+      "description": "Word (.docx) फाइलों को PDF में सुरक्षित रूप से बदलें।"
     },
     "pdf-to-word-converter": {
-      "title": "पीडीएफ से वर्ड",
-      "description": "पीडीएफ फाइलों को संपादन योग्य वर्ड दस्तावेज़ में बदलें"
+      "title": "PDF से Word कन्वर्टर",
+      "description": "PDF फाइलों को एडिट योग्य Word दस्तावेज़ में बदलें।"
     },
     "crop-pdf": {
-      "title": "पीडीएफ क्रॉप करें",
-      "description": "पीडीएफ के मार्जिन को क्रॉप और समायोजित करें"
+      "title": "PDF क्रॉप करें",
+      "description": "PDF दस्तावेज़ों के मार्जिन को क्रॉप और कस्टमाइज़ करें।"
     },
     "rotate-pdf": {
-      "title": "पीडीएफ रोटेट करें",
-      "description": "पीडीएफ पेजों को किसी भी कोण पर घुमाएं"
+      "title": "PDF रोटेट करें",
+      "description": "PDF पृष्ठों को किसी भी कोण पर घुमाएं।"
     },
     "watermark-pdf": {
-      "title": "वॉटरमार्क पीडीएफ",
-      "description": "अपने पीडीएफ में सुरक्षित टेक्स्ट या इमेज वॉटरमार्क जोड़ें"
+      "title": "PDF वॉटरमार्क",
+      "description": "PDF में टेक्स्ट या इमेज वॉटरमार्क जोड़ें।"
     },
     "unlock-pdf": {
-      "title": "पीडीएफ अनलॉक करें",
-      "description": "पीडीएफ फाइलों से पासवर्ड और सुरक्षा प्रतिबंध हटाएं"
+      "title": "PDF अनलॉक करें",
+      "description": "PDF फाइलों से पासवर्ड और सुरक्षा प्रतिबंध हटाएं।"
     },
     "protect-pdf": {
-      "title": "पीडीएफ सुरक्षित करें",
-      "description": "सुरक्षित पासवर्ड के साथ अपनी पीडीएफ फाइलों को एन्क्रिप्ट करें"
+      "title": "PDF सुरक्षित करें",
+      "description": "पासवर्ड एन्क्रिप्शन के साथ अपनी PDF फाइलों को सुरक्षित करें।"
     },
     "remove-pages": {
-      "title": "पृष्ठ हटाएँ",
-      "description": "पीडीएफ दस्तावेज़ों से अनचाहे पृष्ठों को हटाएँ"
+      "title": "PDF पेज हटाएँ",
+      "description": "PDF दस्तावेज़ों से अवांछित पृष्ठों को हटाएँ।"
     },
     "organize-pdf": {
-      "title": "पीडीएफ व्यवस्थित करें",
-      "description": "पीडीएफ पेजों को विज़ुअली पुनर्व्यवस्थित करें"
+      "title": "PDF व्यवस्थित करें",
+      "description": "PDF पृष्ठों को पुनर्व्यवस्थित करें, घुमाएं या हटाएं।"
     },
     "pdf-ocr": {
-      "title": "पीडीएफ ओसीआर स्कैनर",
-      "description": "स्कैन किए गए पीडीएफ से स्थानीय रूप से टेक्स्ट निकालें"
+      "title": "PDF OCR स्कैनर",
+      "description": "स्कैन किए गए PDF और छवियों से टेक्स्ट निकालें।"
+    },
+    "income-tax-calculator": {
+      "title": "आयकर कैलकुलेटर (भारत)",
+      "description": "नई बनाम पुरानी कर व्यवस्था की तुलना करें, 80C/80D कटौती बचत और मासिक TDS अनुमान लगाएं।"
+    },
+    "word-counter": {
+      "title": "शब्द और वर्ण काउंटर",
+      "description": "टेक्स्ट के शब्द, अक्षर, वाक्य, पैराग्राफ और पढ़ने के समय की तुरंत गणना करें।"
+    },
+    "json-formatter-validator": {
+      "title": "JSON फॉर्मेटर और वैलिडेटर",
+      "description": "JSON डेटा को सुंदर प्रारूपित करें, वैलिडेट करें, मिनिफाई करें और त्रुटियों को ठीक करें।"
+    },
+    "heic-to-jpg-png-converter": {
+      "title": "HEIC से JPG / PNG कन्वर्टर",
+      "description": "iPhone HEIC तस्वीरों को तुरंत JPG या PNG प्रारूप में बदलें।"
+    },
+    "bmi-calculator": {
+      "title": "बीएमआई कैलकुलेटर",
+      "description": "बॉडी मास इंडेक्स (BMI) की गणना करें और अपनी स्वास्थ्य स्थिति जानें।"
+    },
+    "passport-photo-maker": {
+      "title": "पासपोर्ट फोटो मेकर",
+      "description": "AI बैकग्राउंड हटाने के साथ किसी भी देश के लिए पासपोर्ट आकार की फोटो बनाएं।"
+    },
+    "color-palette-generator": {
+      "title": "AI कलर पैलेट जनरेटर",
+      "description": "डिजाइन और वेब डेवलपमेंट के लिए सुंदर सामंजस्यपूर्ण कलर पैलेट बनाएं।"
+    },
+    "image-compressor": {
+      "title": "इमेज कंप्रेसर",
+      "description": "गुणवत्ता खोए बिना JPG, PNG और WebP छवियों का आकार कम करें।"
+    },
+    "webp-to-jpg-png-converter": {
+      "title": "WebP से JPG / PNG कन्वर्टर",
+      "description": "WebP छवियों को सार्वभौमिक JPG या PNG प्रारूप में तुरंत बदलें।"
+    },
+    "jpg-to-webp": {
+      "title": "JPG से WebP कन्वर्टर",
+      "description": "JPG छवियों को आधुनिक वेब-अनुकूलित WebP प्रारूप में बदलें।"
+    },
+    "png-to-webp": {
+      "title": "PNG से WebP कन्वर्टर",
+      "description": "पारदर्शिता बनाए रखते हुए PNG छवियों को WebP में बदलें।"
+    },
+    "qr-code-generator": {
+      "title": "QR कोड जनरेटर",
+      "description": "URL, टेक्स्ट, Wi-Fi और संपर्क विवरण के लिए कस्टमाइज़्ड QR कोड बनाएं।"
+    },
+    "pdf-tools": {
+      "title": "PDF टूल्स",
+      "description": "PDF फाइलों को एडिट, मर्ज, स्प्लिट, कंप्रेस और कन्वर्ट करने का संपूर्ण सूट।"
+    },
+    "edit-pdf": {
+      "title": "PDF एडिट करें",
+      "description": "PDF दस्तावेज़ों में टेक्स्ट, इमेज और सिग्नेचर जोड़ें।"
+    },
+    "pdf-to-excel-converter": {
+      "title": "PDF से Excel कन्वर्टर",
+      "description": "PDF तालिकाओं को संपादन योग्य Excel स्प्रेडशीट में बदलें।"
+    },
+    "excel-to-pdf-converter": {
+      "title": "Excel से PDF कन्वर्टर",
+      "description": "XLSX और XLS स्प्रेडशीट को PDF दस्तावेज़ में बदलें।"
+    },
+    "pdf-summarizer": {
+      "title": "AI PDF समराइज़र",
+      "description": "लंबी PDF रिपोर्ट का मुख्य निष्कर्ष और सारांश तुरंत प्राप्त करें।"
+    },
+    "crop-aadhaar-card": {
+      "title": "आधार कार्ड क्रॉप करें",
+      "description": "आधार कार्ड PDF को प्रिंटिंग और लेमिनेशन के लिए सटीक आकार में क्रॉप करें।"
+    },
+    "ai-logo-maker": {
+      "title": "AI लोगो मेकर",
+      "description": "अपने ब्रांड या व्यवसाय के लिए पेशेवर लोगो बनाएं।"
+    },
+    "resume-builder": {
+      "title": "AI रिज्यूमे बिल्डर",
+      "description": "नौकरी के लिए पेशेवर और ATS-अनुकूलित रिज्यूमे बनाएं।"
+    },
+    "ats-resume-checker": {
+      "title": "ATS रिज्यूमे चेकर",
+      "description": "अपने रिज्यूमे का ATS स्कोर जांचें और सुधार के सुझाव पाएं।"
+    },
+    "caption-generator": {
+      "title": "AI कैप्शन जनरेटर",
+      "description": "Instagram, YouTube और सोशल मीडिया के लिए आकर्षक कैप्शन बनाएं।"
+    },
+    "text-humanizer": {
+      "title": "AI टेक्स्ट ह्यूमनाइज़र",
+      "description": "AI द्वारा लिखे गए टेक्स्ट को प्राकृतिक और मानवीय भाषा में बदलें।"
+    },
+    "voice-generator": {
+      "title": "AI वॉइस जनरेटर",
+      "description": "पाठ को यथार्थवादी AI वॉयसओवर में बदलें।"
+    },
+    "invoice-generator": {
+      "title": "इनवॉइस जनरेटर",
+      "description": "पेशेवर बिल और इनवॉइस तुरंत बनाएं और डाउनलोड करें।"
+    },
+    "background-remover": {
+      "title": "AI बैकग्राउंड रिमूवर",
+      "description": "किसी भी फोटो का बैकग्राउंड 100% स्वचालित रूप से हटाएं।"
+    },
+    "cover-letter-generator": {
+      "title": "AI कवर लेटर जनरेटर",
+      "description": "नौकरी आवेदन के लिए अनुकूलित कवर लेटर तैयार करें।"
+    },
+    "ocr-to-text": {
+      "title": "OCR इमेज से टेक्स्ट",
+      "description": "तस्वीरों और स्कैन किए गए दस्तावेज़ों से टेक्स्ट एक्सट्रैक्ट करें।"
+    },
+    "password-generator": {
+      "title": "पासवर्ड जनरेटर",
+      "description": "मजबूत और सुरक्षित रैंडम पासवर्ड उत्पन्न करें।"
+    },
+    "age-calculator": {
+      "title": "आयु कैलकुलेटर",
+      "description": "वर्षों, महीनों और दिनों में अपनी सटीक उम्र की गणना करें।"
+    },
+    "sip-calculator": {
+      "title": "SIP कैलकुलेटर",
+      "description": "म्यूचुअल फंड SIP निवेश और रिटर्न की गणना करें।"
+    },
+    "emi-calculator": {
+      "title": "EMI कैलकुलेटर",
+      "description": "होम लोन, कार लोन और पर्सनल लोन की मासिक EMI की गणना करें।"
+    },
+    "gst-calculator": {
+      "title": "GST कैलकुलेटर",
+      "description": "शामिल या अलग किए गए GST राशि की तुरंत गणना करें।"
+    },
+    "youtube-money-calculator": {
+      "title": "यूट्यूब मनी कैलकुलेटर",
+      "description": "व्यूज और एंगेजमेंट के आधार पर यूट्यूब कमाई का अनुमान लगाएं।"
+    },
+    "adsense-revenue-calculator": {
+      "title": "AdSense रेवेन्यू कैलकुलेटर",
+      "description": "वेबसाइट ट्रैफ़िक और पेज व्यू के आधार पर गूगल ऐडसेंस आय का अनुमान लगाएं।"
+    },
+    "ai-image-upscaler": {
+      "title": "AI इमेज अपस्केलर",
+      "description": "धुंधली छवियों का रिज़ॉल्यूशन बढ़ाएं और स्पष्टता सुधारें।"
+    },
+    "signature-resize": {
+      "title": "सिग्नेचर रिसाइज़र",
+      "description": "सरकारी फॉर्म के लिए हस्ताक्षर का आकार और KB समायोजित करें।"
+    },
+    "pan-card-resize": {
+      "title": "पैन कार्ड रिसाइज़र",
+      "description": "पैन कार्ड आवेदन के लिए फोटो और हस्ताक्षर का आकार बदलें।"
+    },
+    "ssc-photo-resize": {
+      "title": "SSC फोटो रिसाइज़र",
+      "description": "कर्मचारी चयन आयोग (SSC) फॉर्म के लिए फोटो का आकार समायोजित करें।"
+    },
+    "upsc-photo-resize": {
+      "title": "UPSC फोटो रिसाइज़र",
+      "description": "UPSC परीक्षा फॉर्म के लिए फोटो और हस्ताक्षर का आकार बदलें।"
+    },
+    "exam-photo-resizer": {
+      "title": "एग्जाम फोटो रिसाइज़र",
+      "description": "विभिन्न प्रतियोगी परीक्षाओं के लिए फोटो और हस्ताक्षर का आकार बदलें।"
+    },
+    "aadhaar-pdf-compressor": {
+      "title": "आधार PDF कंप्रेसर",
+      "description": "आधार कार्ड PDF फाइल का आकार 200KB से कम करें।"
+    },
+    "gov-form-pdf-compressor": {
+      "title": "सरकारी फॉर्म PDF कंप्रेसर",
+      "description": "सरकारी ऑनलाइन आवेदनों के लिए PDF का आकार कम करें।"
+    },
+    "invoice-cropper": {
+      "title": "इनवॉइस क्रॉपर",
+      "description": "इनवॉइस और रसीदों के विशिष्ट भागों को क्रॉप करें।"
+    },
+    "aadhaar-masking-tool": {
+      "title": "आधार मास्किंग टूल",
+      "description": "सुरक्षा के लिए आधार नंबर के पहले 8 अंकों को छिपाएं।"
+    },
+    "add-page-numbers-to-pdf": {
+      "title": "PDF पेज नंबर जोड़ें",
+      "description": "PDF दस्तावेज़ों के सभी पृष्ठों पर पेज नंबर डालें।"
+    },
+    "sign-pdf": {
+      "title": "PDF साइन करें",
+      "description": "PDF पर अपने डिजिटल हस्ताक्षर ऑनलाइन जोड़ें।"
+    },
+    "exam-marks-calculator": {
+      "title": "एग्जाम मार्क्स कैलकुलेटर",
+      "description": "परीक्षा के अंक, प्रतिशत और कट-ऑफ की गणना करें।"
+    },
+    "resume-bullet-generator": {
+      "title": "रिज्यूमे बुलेट जनरेटर",
+      "description": "रिज्यूमे के लिए प्रभावशाली बुलेट प्वाइंट बनाएं।"
+    },
+    "video-compressor": {
+      "title": "वीडियो कंप्रेसर",
+      "description": "MP4, MOV, WebM और MKV वीडियो को सीधे अपने वेब ब्राउज़र में कंप्रेस करें।"
+    },
+    "bg-remover": {
+      "title": "AI बैकग्राउंड रिमूवर",
+      "description": "किसी भी फोटो का बैकग्राउंड 100% स्वचालित रूप से हटाएं।"
     }
   },
   "form": {

@@ -454,7 +454,7 @@ Calculated via ToolWala AI Income Tax Calculator: ${window.location.href}`;
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-4 shadow-sm">
               <Calculator className="w-4 h-4" /> FY 2026-27 (AY 2027-28) Official Slabs
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-3">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-3">
               Income Tax Calculator <span className="text-emerald-600 dark:text-emerald-400">(India)</span>
             </h1>
             <p className="text-slate-600 dark:text-gray-400 text-sm sm:text-base font-medium leading-relaxed">

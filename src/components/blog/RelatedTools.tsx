@@ -23,7 +23,7 @@ export default function RelatedTools({ tools }: RelatedToolsProps) {
           >
             <span className="text-2xl shrink-0">{tool.icon}</span>
             <div className="space-y-1 min-w-0">
-              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
+              <h4 className="text-sm font-black text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
                 {tool.title}
               </h4>
               <p className="text-xs text-gray-600 dark:text-gray-400 font-medium line-clamp-2">{tool.description}</p>

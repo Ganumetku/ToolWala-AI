@@ -303,7 +303,7 @@ export default function ImageCompressor() {
                 </svg>
               </div>
               <div>
-                <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">Image Compressor</h1>
+                <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">Image Compressor</h1>
                 <p className="text-gray-400 font-medium mt-1">Compress images up to 90% without losing visible quality.</p>
               </div>
             </div>

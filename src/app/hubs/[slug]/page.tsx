@@ -133,7 +133,7 @@ export default async function HubPage({ params }: HubPageProps) {
                       <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600/10 text-white border border-blue-500/10 text-xl">
                         {tool.icon}
                       </div>
-                      <h3 className="text-base font-black text-white group-hover:text-blue-400 transition-colors uppercase tracking-tight">
+                      <h3 className="text-base font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">
                         {tool.title}
                       </h3>
                     </div>
@@ -170,7 +170,7 @@ export default async function HubPage({ params }: HubPageProps) {
                         href={localizeHref(targetHref)}
                         className="p-5 rounded-2xl border border-white/5 bg-[#0b0f19]/40 hover:border-blue-500/20 hover:bg-blue-500/[0.01] transition-all group flex items-center justify-between cursor-pointer"
                       >
-                        <span className="text-xs font-black text-white group-hover:text-blue-400 transition-colors uppercase tracking-tight line-clamp-1">{lp.title}</span>
+                        <span className="text-xs font-black text-white group-hover:text-blue-400 transition-colors tracking-tight line-clamp-1">{lp.title}</span>
                         <ArrowRight className="w-4 h-4 text-gray-500 group-hover:text-white group-hover:translate-x-0.5 transition-all flex-shrink-0" />
                       </Link>
                     );

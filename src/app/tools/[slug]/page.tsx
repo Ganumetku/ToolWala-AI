@@ -126,7 +126,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
                     {tool.icon || '🔧'}
                   </div>
                   <div>
-                    <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">{tool.title}</h1>
+                    <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">{tool.title}</h1>
                     <p className="text-slate-600 dark:text-gray-400 font-medium mt-1 font-sans">{tool.description}</p>
                     
                     {/* Reusable share component */}

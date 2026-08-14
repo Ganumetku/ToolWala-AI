@@ -99,7 +99,7 @@ export default function PassportPhotoMaker() {
               <Sparkles className="w-3.5 h-3.5" />
               100% Client-Side Image Processing
             </div>
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-6 uppercase">
+            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-6">
               Passport Photo Maker <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
                 Premium AI Editor

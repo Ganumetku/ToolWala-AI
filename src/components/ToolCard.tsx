@@ -82,7 +82,7 @@ export default function ToolCard({ title, description, icon, href, isPopular, is
             )}
           </div>
 
-          <h3 className="mb-2.5 text-lg sm:text-2xl font-bold sm:font-black text-[#0F172A] dark:text-white group-hover:text-[#2563EB] dark:group-hover:text-blue-400 transition-colors tracking-tight uppercase leading-tight sm:leading-none line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">{displayTitle}</h3>
+          <h3 className="mb-2.5 text-lg sm:text-2xl font-bold sm:font-black text-[#0F172A] dark:text-white group-hover:text-[#2563EB] dark:group-hover:text-blue-400 transition-colors tracking-tight leading-tight sm:leading-none line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">{displayTitle}</h3>
           <p className="text-sm text-[#475569] dark:text-gray-400 leading-relaxed font-medium line-clamp-2 sm:line-clamp-3 group-hover:text-[#0F172A] dark:group-hover:text-gray-300 transition-colors">{displayDescription}</p>
         </div>
 

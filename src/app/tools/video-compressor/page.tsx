@@ -409,7 +409,7 @@ Processed 100% Client-Side via ToolWala AI: ${window.location.href}`;
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-black uppercase tracking-widest text-purple-600 dark:text-purple-400 mb-4 shadow-sm">
               <Video className="w-4 h-4" /> FFmpeg WebAssembly Transcoder Engine
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-3">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-3">
               Client-Side <span className="text-purple-600 dark:text-purple-400">Video Compressor</span>
             </h1>
             <p className="text-slate-600 dark:text-gray-400 text-sm sm:text-base font-medium leading-relaxed">

@@ -474,7 +474,7 @@ export default function WatermarkPdf() {
                   <Type className="w-7 h-7" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">Add Watermark to PDF</h1>
+                  <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">Add Watermark to PDF</h1>
                   <p className="text-gray-400 font-medium mt-1">Design and embed secure text or image watermarks client-side with visual preview.</p>
                 </div>
               </div>

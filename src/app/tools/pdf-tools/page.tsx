@@ -212,7 +212,7 @@ export default async function Page() {
                                 {tool.icon}
                               </div>
                               <div className="space-y-0.5 overflow-hidden pr-4">
-                                <h3 className="text-xs font-black uppercase tracking-wide text-slate-900 dark:text-white group-hover/tool:text-blue-400 transition-colors">
+                                <h3 className="text-xs font-black tracking-wide text-slate-900 dark:text-white group-hover/tool:text-blue-400 transition-colors">
                                   {toolTitle}
                                 </h3>
                                 <p className="text-[10px] text-gray-500 leading-normal font-semibold truncate group-hover/tool:text-gray-400 transition-colors">

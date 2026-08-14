@@ -1,4 +1,3 @@
-'use me';
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -9,25 +8,69 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>;
 }
 
+const DISMISS_DAYS = 7;
+const DISMISS_KEY = 'toolwala_pwa_dismissed_until';
+const INSTALLED_KEY = 'toolwala_pwa_installed';
+
+function isPromptSuppressed(): boolean {
+  if (typeof window === 'undefined') return true;
+
+  // 1. Check if app is already running as standalone PWA
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+    (navigator as unknown as { standalone?: boolean }).standalone === true;
+  if (isStandalone) return true;
+
+  // 2. Check if user already installed the app
+  const isInstalled = localStorage.getItem(INSTALLED_KEY) === 'true';
+  if (isInstalled) return true;
+
+  // 3. Check if user snoozed/dismissed prompt within last 7 days
+  const dismissedUntil = localStorage.getItem(DISMISS_KEY);
+  if (dismissedUntil) {
+    const expiry = Number(dismissedUntil);
+    if (!isNaN(expiry) && Date.now() < expiry) {
+      return true;
+    }
+  }
+
+  // Legacy key check for backward compatibility
+  const legacyDismissed = localStorage.getItem('toolwala_pwa_dismissed');
+  if (legacyDismissed === 'true' && !dismissedUntil) {
+    return true;
+  }
+
+  return false;
+}
+
 export default function PwaInstallPrompt() {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Check if user previously dismissed the prompt in this session or recently
-    const isDismissed = localStorage.getItem('toolwala_pwa_dismissed');
-    if (isDismissed) return;
+    if (isPromptSuppressed()) return;
 
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
+
+      // Re-verify suppression before showing
+      if (isPromptSuppressed()) return;
+
       setDeferredPrompt(e as BeforeInstallPromptEvent);
       setIsVisible(true);
     };
 
+    const handleAppInstalled = () => {
+      localStorage.setItem(INSTALLED_KEY, 'true');
+      setIsVisible(false);
+      setDeferredPrompt(null);
+    };
+
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('appinstalled', handleAppInstalled);
 
     return () => {
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('appinstalled', handleAppInstalled);
     };
   }, []);
 
@@ -37,14 +80,22 @@ export default function PwaInstallPrompt() {
     await deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
     if (outcome === 'accepted') {
-      localStorage.setItem('toolwala_pwa_dismissed', 'true');
+      localStorage.setItem(INSTALLED_KEY, 'true');
+    } else {
+      // User cancelled browser installation dialog -> snooze for 7 days
+      snoozePrompt();
     }
     setDeferredPrompt(null);
   };
 
-  const handleDismiss = () => {
+  const snoozePrompt = () => {
+    const expiry = Date.now() + DISMISS_DAYS * 24 * 60 * 60 * 1000; // 7 days in ms
+    localStorage.setItem(DISMISS_KEY, expiry.toString());
     setIsVisible(false);
-    localStorage.setItem('toolwala_pwa_dismissed', 'true');
+  };
+
+  const handleDismiss = () => {
+    snoozePrompt();
   };
 
   if (!isVisible || !deferredPrompt) return null;
@@ -77,14 +128,14 @@ export default function PwaInstallPrompt() {
             <div className="flex items-center gap-2.5 mt-3">
               <button
                 onClick={handleInstallClick}
-                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white text-xs font-bold rounded-xl transition-all shadow-md shadow-blue-600/30"
+                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white text-xs font-bold rounded-xl transition-all shadow-md shadow-blue-600/30 cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Install App</span>
               </button>
               <button
                 onClick={handleDismiss}
-                className="px-3.5 py-2 text-xs font-semibold text-slate-400 hover:text-slate-200 transition-colors"
+                className="px-3.5 py-2 text-xs font-semibold text-slate-400 hover:text-slate-200 transition-colors cursor-pointer"
               >
                 Not Now
               </button>

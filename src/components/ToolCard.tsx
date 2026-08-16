@@ -92,7 +92,7 @@ export default function ToolCard({ title, description, icon, href, isPopular, is
             </div>
 
             <h3 className="mb-1.5 sm:mb-2 text-sm sm:text-xl font-bold sm:font-black text-[#0F172A] dark:text-white group-hover:text-[#2563EB] dark:group-hover:text-blue-400 transition-colors tracking-tight leading-snug line-clamp-2 min-h-[2.25rem] sm:min-h-[2.75rem]">{displayTitle}</h3>
-            <p className="text-[11px] sm:text-sm text-[#475569] dark:text-gray-400 leading-relaxed font-medium line-clamp-2 sm:line-clamp-3 group-hover:text-[#0F172A] dark:group-hover:text-gray-300 transition-colors">{displayDescription}</p>
+            <p className="text-[11px] sm:text-sm text-[#475569] dark:text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-[#0F172A] dark:group-hover:text-gray-300 transition-colors">{displayDescription}</p>
           </div>
 
           {/* Action Button & quick open hover link */}

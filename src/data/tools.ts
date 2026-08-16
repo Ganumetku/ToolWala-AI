@@ -42,7 +42,7 @@ export const toolsData: Tool[] = [
   {
     id: "income-tax-calculator",
     title: "Income Tax Calculator (India)",
-    description: "Calculate your Indian Income Tax for FY 2024-25 & 2025-26 with New vs Old Regime comparison, slab breakdowns, and 80C/80D deductions.",
+    description: "Calculate Indian Income Tax for FY 2024-25 & 2025-26. Compare New vs Old regime slabs.",
     icon: "💰",
     href: "/tools/income-tax-calculator",
     slug: "income-tax-calculator",
@@ -59,7 +59,7 @@ export const toolsData: Tool[] = [
   {
     id: "word-counter",
     title: "Word & Character Counter",
-    description: "Count words, characters, sentences, paragraphs, reading time, and keyword density online with social media character limits.",
+    description: "Count words, characters, sentences, paragraphs, reading time, and keywords live.",
     icon: "📝",
     href: "/tools/word-counter",
     slug: "word-counter",
@@ -76,7 +76,7 @@ export const toolsData: Tool[] = [
   {
     id: "json-formatter-validator",
     title: "JSON Formatter & Validator",
-    description: "Format, beautify, minify, validate, and convert JSON online with syntax highlighting, error line detection, and tree view.",
+    description: "Format, beautify, minify, and validate JSON online. Inspect tree view with error checks.",
     icon: "⚙️",
     href: "/tools/json-formatter-validator",
     slug: "json-formatter-validator",
@@ -93,7 +93,7 @@ export const toolsData: Tool[] = [
   {
     id: "heic-to-jpg-png-converter",
     title: "HEIC to JPG / PNG Converter",
-    description: "Convert Apple HEIC & HEIF photos to JPG or PNG format instantly in your browser with batch processing.",
+    description: "Convert Apple HEIC photos to JPG or PNG format instantly in your browser in batches.",
     icon: "🔄",
     href: "/tools/heic-to-jpg-png-converter",
     slug: "heic-to-jpg-png-converter",
@@ -110,7 +110,7 @@ export const toolsData: Tool[] = [
   {
     id: "bmi-calculator",
     title: "BMI Calculator",
-    description: "Calculate your Body Mass Index (BMI), WHO weight category, ideal healthy weight range, and health insights instantly.",
+    description: "Calculate your Body Mass Index (BMI) and WHO weight category with health insights.",
     icon: "⚖️",
     href: "/tools/bmi-calculator",
     slug: "bmi-calculator",
@@ -161,7 +161,7 @@ export const toolsData: Tool[] = [
   {
     id: "image-compressor",
     title: "Image Compressor",
-    description: "Compress images up to 90% without losing visible quality. Fast and secure.",
+    description: "Compress PNG, JPG, and WebP images up to 90% without losing quality. 100% private.",
     icon: "📉",
     href: "/tools/image-compressor",
     slug: "image-compressor",
@@ -178,7 +178,7 @@ export const toolsData: Tool[] = [
   {
     id: "webp-to-jpg-png-converter",
     title: "WebP to JPG / PNG Converter",
-    description: "Convert WebP images into JPG or PNG instantly with high quality. Fast, secure, and completely browser-based.",
+    description: "Convert WebP images into JPG or PNG format instantly. Works 100% locally in browser.",
     icon: "🖼️",
     href: "/tools/webp-to-jpg-png-converter",
     slug: "webp-to-jpg-png-converter",
@@ -195,7 +195,7 @@ export const toolsData: Tool[] = [
   {
     id: "jpg-to-webp",
     title: "JPG to WebP Converter",
-    description: "Convert JPG and JPEG images to WebP online for free. Reduce image size while maintaining high quality with zero server uploads.",
+    description: "Convert JPG and JPEG images to WebP online. Reduce file size with high visual quality.",
     icon: "⚡",
     href: "/tools/jpg-to-webp",
     slug: "jpg-to-webp",
@@ -212,7 +212,7 @@ export const toolsData: Tool[] = [
   {
     id: "png-to-webp",
     title: "PNG to WebP Converter",
-    description: "Convert PNG images to WebP online for free while preserving transparency. Reduce file size by up to 80% with zero server uploads.",
+    description: "Convert PNG images to WebP online while preserving transparency. Reduce size by 80%.",
     icon: "💎",
     href: "/tools/png-to-webp",
     slug: "png-to-webp",
@@ -280,7 +280,7 @@ export const toolsData: Tool[] = [
   {
     id: "pdf-to-excel-converter",
     title: "PDF to Excel Converter",
-    description: "Convert PDF tables into editable Excel spreadsheets instantly. Preserve rows, columns, formatting, and data accuracy.",
+    description: "Convert PDF tables into editable Excel spreadsheets. Preserve rows, columns, formatting, and data accuracy.",
     icon: "📊",
     href: "/tools/pdf-to-excel-converter",
     slug: "pdf-to-excel-converter",
@@ -297,7 +297,7 @@ export const toolsData: Tool[] = [
   {
     id: "excel-to-pdf-converter",
     title: "Excel to PDF Converter",
-    description: "Convert Excel spreadsheets (.xlsx, .xls, .csv) into clean, formatted PDF documents instantly. 100% private and browser-based.",
+    description: "Convert Excel spreadsheets (.xlsx, .xls, .csv) into formatted PDF documents. Works 100% locally in browser.",
     icon: "📄",
     href: "/tools/excel-to-pdf-converter",
     slug: "excel-to-pdf-converter",
@@ -365,7 +365,7 @@ export const toolsData: Tool[] = [
   {
     id: "pdf-to-jpg",
     title: "PDF to JPG",
-    description: "Convert PDF documents into high-quality JPG images directly in your browser. Fast, secure, and free.",
+    description: "Convert PDF documents into high-quality JPG images directly in your browser. Fast, secure, and private.",
     icon: "🖼️",
     href: "/tools/pdf-to-jpg",
     slug: "pdf-to-jpg",
@@ -484,7 +484,7 @@ export const toolsData: Tool[] = [
   {
     id: "crop-aadhaar-card",
     title: "Crop Aadhaar Card",
-    description: "Crop Aadhaar Card online quickly and securely. Remove unwanted background, white space, and margins from your Aadhaar Card image instantly.",
+    description: "Crop Aadhaar Card online securely. Remove unwanted background and margins from your Aadhaar card image.",
     icon: "🪪",
     href: "/tools/crop-aadhaar-card",
     slug: "crop-aadhaar-card",
@@ -982,7 +982,7 @@ export const toolsData: Tool[] = [
   {
     id: "aadhaar-masking-tool",
     title: "Aadhaar Masking Tool",
-    description: "Automatically detect and mask the first 8 digits of your Aadhaar card for secure privacy protection.",
+    description: "Automatically detect and mask the first 8 digits of your Aadhaar card for maximum privacy protection.",
     icon: "🛡️",
     href: "/tools/aadhaar-masking-tool",
     slug: "aadhaar-masking-tool",
@@ -1067,7 +1067,7 @@ export const toolsData: Tool[] = [
   {
     id: "add-page-numbers-to-pdf",
     title: "Add Page Numbers to PDF",
-    description: "Add page numbers to your PDF documents. Customize format, position, margin, and fonts locally.",
+    description: "Add page numbers to your PDF documents. Customize format, position, margins, and fonts locally.",
     icon: "🔢",
     href: "/tools/add-page-numbers-to-pdf",
     slug: "add-page-numbers-to-pdf",
@@ -1135,7 +1135,7 @@ export const toolsData: Tool[] = [
   {
     id: "video-compressor",
     title: "Video Compressor",
-    description: "Compress MP4, MOV, WebM, and MKV videos locally in your browser using FFmpeg WebAssembly. 100% private, zero server uploads.",
+    description: "Compress MP4, MOV, WebM, and MKV videos locally in browser with zero quality loss.",
     icon: "🎥",
     href: "/tools/video-compressor",
     slug: "video-compressor",

@@ -779,6 +779,54 @@
     "sign-pdf": {
       "title": "Sign PDF",
       "description": "Sign PDF documents online. Draw, type, or upload your signature to place on pages locally."
+    },
+    "income-tax-calculator": {
+      "title": "Income Tax Calculator (India)",
+      "description": "Calculate Indian Income Tax for FY 2024-25 & 2025-26. Compare New vs Old regime slabs."
+    },
+    "video-compressor": {
+      "title": "Video Compressor",
+      "description": "Compress MP4, MOV, WebM, and MKV videos locally in browser with zero quality loss."
+    },
+    "json-formatter-validator": {
+      "title": "JSON Formatter & Validator",
+      "description": "Format, beautify, minify, and validate JSON online. Inspect tree view with error checks."
+    },
+    "heic-to-jpg-png-converter": {
+      "title": "HEIC to JPG / PNG Converter",
+      "description": "Convert Apple HEIC photos to JPG or PNG format instantly in your browser in batches."
+    },
+    "bmi-calculator": {
+      "title": "BMI Calculator",
+      "description": "Calculate your Body Mass Index (BMI) and WHO weight category with health insights."
+    },
+    "jpg-to-webp": {
+      "title": "JPG to WebP Converter",
+      "description": "Convert JPG and JPEG images to WebP online. Reduce file size with high visual quality."
+    },
+    "png-to-webp": {
+      "title": "PNG to WebP Converter",
+      "description": "Convert PNG images to WebP online while preserving transparency. Reduce size by 80%."
+    },
+    "webp-to-jpg-png-converter": {
+      "title": "WebP to JPG / PNG Converter",
+      "description": "Convert WebP images into JPG or PNG format instantly. Works 100% locally in browser."
+    },
+    "word-counter": {
+      "title": "Word & Character Counter",
+      "description": "Count words, characters, sentences, paragraphs, reading time, and keywords live."
+    },
+    "passport-photo-maker": {
+      "title": "Passport Photo Maker",
+      "description": "Create perfectly sized passport photos for any country with AI background removal."
+    },
+    "color-palette-generator": {
+      "title": "AI Color Palette Generator",
+      "description": "Generate color schemes, extract palettes from custom photos, and export CSS themes."
+    },
+    "image-compressor": {
+      "title": "Image Compressor",
+      "description": "Compress PNG, JPG, and WebP images up to 90% without losing quality. 100% private."
     }
   },
   "form": {

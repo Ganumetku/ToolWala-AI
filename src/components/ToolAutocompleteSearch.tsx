@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, Clock, TrendingUp, Sparkles, ArrowRight, CornerDownLeft, Trash2 } from 'lucide-react';
-import Fuse from 'fuse.js';
 import { Tool, toolsData } from '@/data/tools';
 import { fetchPublicTools } from '@/lib/tools';
 import { useTranslation } from '@/components/I18nContext';
@@ -51,10 +50,12 @@ export default function ToolAutocompleteSearch({
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const [allTools, setAllTools] = useState<Tool[]>(toolsData);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [fuzzyResults, setFuzzyResults] = useState<Tool[]>([]);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
+  const fuseRef = useRef<any>(null);
 
   const query = externalValue !== undefined ? externalValue : internalValue;
 
@@ -85,6 +86,47 @@ export default function ToolAutocompleteSearch({
     }, 150);
     return () => clearTimeout(handler);
   }, [query]);
+
+  // Lazy-load Fuse.js on demand when user types a query
+  useEffect(() => {
+    const trimmed = debouncedValue.trim().toLowerCase();
+    if (!trimmed) {
+      setFuzzyResults([]);
+      return;
+    }
+
+    let isCancelled = false;
+    const loadAndSearchFuse = async () => {
+      try {
+        if (!fuseRef.current) {
+          const { default: Fuse } = await import('fuse.js');
+          fuseRef.current = new Fuse(allTools, {
+            includeScore: true,
+            threshold: 0.45,
+            ignoreLocation: true,
+            minMatchCharLength: 1,
+            keys: [
+              { name: 'title', weight: 0.5 },
+              { name: 'tags', weight: 0.25 },
+              { name: 'category', weight: 0.15 },
+              { name: 'description', weight: 0.1 }
+            ]
+          });
+        }
+        if (!isCancelled && fuseRef.current) {
+          const results = fuseRef.current.search(trimmed);
+          setFuzzyResults(results.map((r: any) => r.item));
+        }
+      } catch (err) {
+        console.error('Failed to run fuzzy search:', err);
+      }
+    };
+
+    loadAndSearchFuse();
+    return () => {
+      isCancelled = true;
+    };
+  }, [debouncedValue, allTools]);
 
   // Save recent search
   const addRecentSearch = useCallback((searchQuery: string) => {
@@ -127,32 +169,10 @@ export default function ToolAutocompleteSearch({
     });
   }, []);
 
-  // Initialize Fuse.js for intelligent fuzzy search
-  const fuse = useMemo(() => {
-    return new Fuse(allTools, {
-      includeScore: true,
-      threshold: 0.45,
-      ignoreLocation: true,
-      minMatchCharLength: 1,
-      keys: [
-        { name: 'title', weight: 0.5 },
-        { name: 'tags', weight: 0.25 },
-        { name: 'category', weight: 0.15 },
-        { name: 'description', weight: 0.1 }
-      ]
-    });
-  }, [allTools]);
-
   // Search Ranking Logic
   const suggestions = useMemo(() => {
     const trimmed = debouncedValue.trim().toLowerCase();
     if (!trimmed) return [];
-
-    // Common query aliases for instant intent matching
-    let searchTerms = [trimmed];
-    if (trimmed === 'cv') searchTerms.push('resume');
-    if (trimmed === 'passport') searchTerms.push('photo');
-    if (trimmed === 'pasport' || trimmed === 'pass') searchTerms.push('passport');
 
     const exactTitleStarts: Tool[] = [];
     const wordTitleStarts: Tool[] = [];
@@ -196,13 +216,12 @@ export default function ToolAutocompleteSearch({
       }
     });
 
-    // 5. Fuzzy match for typos (Fuse.js)
-    const fuseResults = fuse.search(trimmed);
-    const fuzzyTools: Tool[] = [];
-    fuseResults.forEach(res => {
-      if (!matchedIds.has(res.item.id) && res.item.isVisible) {
-        fuzzyTools.push(res.item);
-        matchedIds.add(res.item.id);
+    // 5. Add dynamic fuzzy matches
+    const extraFuzzy: Tool[] = [];
+    fuzzyResults.forEach(item => {
+      if (!matchedIds.has(item.id) && item.isVisible) {
+        extraFuzzy.push(item);
+        matchedIds.add(item.id);
       }
     });
 
@@ -216,11 +235,11 @@ export default function ToolAutocompleteSearch({
       ...sortByPopularity(wordTitleStarts),
       ...sortByPopularity(containsTitle),
       ...sortByPopularity(tagOrCategoryMatch),
-      ...fuzzyTools
+      ...extraFuzzy
     ];
 
     return combined.slice(0, 7); // Max 7 suggestions
-  }, [debouncedValue, allTools, fuse]);
+  }, [debouncedValue, allTools, fuzzyResults]);
 
   // Fallback "Did you mean" tools if no exact results match
   const fallbackSuggestions = useMemo(() => {

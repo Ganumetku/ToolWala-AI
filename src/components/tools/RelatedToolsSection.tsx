@@ -113,10 +113,10 @@ export default function RelatedToolsSection({
               </div>
 
               {/* Title & Description */}
-              <h3 className="text-base font-black text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-tight mb-2 line-clamp-2 min-h-[2.5rem]">
+              <h3 className="text-[18px] sm:text-[20px] font-bold leading-[1.3] text-[#0F172A] dark:text-[#F1F5F9] mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-tight line-clamp-2">
                 {t(`tools.${toolItem.slug}.title`, toolItem.title)}
               </h3>
-              <p className="text-xs font-medium text-slate-600 dark:text-gray-400 line-clamp-2 leading-relaxed font-sans min-h-[2.25rem] mb-4">
+              <p className="text-[14px] font-normal leading-[1.6] text-[#6B7280] dark:text-[#9CA3AF] line-clamp-3 mb-4">
                 {t(`tools.${toolItem.slug}.desc`, toolItem.description)}
               </p>
             </div>

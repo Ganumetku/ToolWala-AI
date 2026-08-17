@@ -10780,5 +10780,514 @@
     "seoDescription": "MP4, MOV, WebM और MKV वीडियो को सीधे अपने वेब ब्राउज़र में कंप्रेस करें।",
     "createdAt": "2026-08-14T05:37:04.229Z",
     "updatedAt": "2026-08-14T05:37:04.229Z"
+  },
+  {
+    "id": "t8sg1km",
+    "toolSlug": "video-compressor",
+    "locale": "es",
+    "title": "Compresor de vídeo",
+    "description": "Comprima videos MP4, MOV, WebM y MKV localmente en el navegador sin pérdida de calidad.",
+    "faq": [
+      {
+        "question": "¿Mi video está subido a algún servidor en la nube?",
+        "answer": "No. Toda la decodificación, escalado, extracción de audio y codificación de video se realizan 100% localmente dentro de su navegador web mediante WebAssembly. No salen datos de su máquina."
+      },
+      {
+        "question": "¿Cuál es el tamaño máximo de archivo admitido?",
+        "answer": "Debido a que FFmpeg se ejecuta dentro de la memoria WASM del navegador, recomendamos archivos de menos de 500 MB para un rendimiento óptimo y estabilidad de pestañas."
+      },
+      {
+        "question": "¿Qué formatos son compatibles?",
+        "answer": "Los formatos de entrada incluyen MP4, MOV, WebM, AVI y MKV. Los formatos de salida incluyen audio MP4 (H.264), WebM y MP3."
+      }
+    ],
+    "seoTitle": "Compresor de vídeo",
+    "seoDescription": "Comprima videos MP4, MOV, WebM y MKV localmente en el navegador sin pérdida de calidad.",
+    "createdAt": "2026-08-17T16:51:54.392Z",
+    "updatedAt": "2026-08-17T16:51:54.960Z"
+  },
+  {
+    "id": "fmm10jc",
+    "toolSlug": "json-formatter-validator",
+    "locale": "es",
+    "title": "Formateador y validador JSON",
+    "description": "Formatee, embellezca, minimice y valide JSON en línea. Inspeccione la vista de árbol con comprobaciones de errores.",
+    "faq": [
+      {
+        "question": "¿Mis datos JSON se cargan o almacenan en su servidor?",
+        "answer": "¡No! El 100 % del análisis, la validación, el formateo y la conversión se realizan localmente dentro de la memoria de su navegador mediante las API DOM de JavaScript. No se envían datos a través de Internet."
+      },
+      {
+        "question": "¿Cómo detecta errores el validador de sintaxis?",
+        "answer": "El validador analiza su JSON utilizando analizadores de navegador nativos, extrae desplazamientos de líneas y columnas en excepciones de sintaxis y resalta la línea discontinua exacta."
+      },
+      {
+        "question": "¿Puedo convertir JSON a CSV o YAML?",
+        "answer": "¡Sí! Utilice la opción de formato de salida para convertir instantáneamente matrices u objetos JSON válidos en hojas de cálculo CSV o archivos de configuración YAML limpios."
+      },
+      {
+        "question": "¿Cuál es la diferencia entre Embellecer y Minimizar?",
+        "answer": "Beautify agrega saltos de línea y sangría (2 o 4 espacios) para facilitar la lectura humana. Minify elimina todos los espacios en blanco, nuevas líneas y sangrías para producir una única línea compacta adecuada para la transferencia de red."
+      }
+    ],
+    "seoTitle": "Formateador y validador JSON",
+    "seoDescription": "Formatee, embellezca, minimice y valide JSON en línea. Inspeccione la vista de árbol con comprobaciones de errores.",
+    "createdAt": "2026-08-17T16:51:55.051Z",
+    "updatedAt": "2026-08-17T16:51:55.567Z"
+  },
+  {
+    "id": "2pghspt",
+    "toolSlug": "income-tax-calculator",
+    "locale": "es",
+    "title": "Calculadora del impuesto sobre la renta (India)",
+    "description": "Calcule el impuesto sobre la renta de la India para los años fiscales 2024-25 y 2025-26. Compare losas de régimen nuevo versus antiguo.",
+    "faq": [
+      {
+        "question": "¿Qué régimen es mejor: el nuevo régimen fiscal o el antiguo régimen fiscal?",
+        "answer": "El nuevo régimen fiscal ofrece tasas impositivas fijas más bajas y una deducción estándar más alta (75 000 ₹) con cero impuestos para ingresos de hasta 7 lakhs (reembolso 87A de u/s). Sin embargo, si tiene deducciones elevadas (80C, 80D, HRA, intereses de préstamos hipotecarios que superan los 3,75 lakhs), el antiguo régimen fiscal puede ahorrar más impuestos."
+      },
+      {
+        "question": "¿Qué es la devolución de impuestos de la Sección 87A?",
+        "answer": "Según la Sección 87A, las personas con ingresos imponibles de hasta 700 000 ₹ según el Nuevo Régimen no pagan impuestos (reembolso de hasta 25 000 ₹). En el antiguo régimen, el límite de reembolso es de 500 000 INR (reembolso de hasta 12 500 INR)."
+      },
+      {
+        "question": "¿Qué es la deducción estándar para el año fiscal 2024-25?",
+        "answer": "La deducción estándar para empleados asalariados es de 75.000 INR en el nuevo régimen fiscal y de 50.000 INR en el antiguo régimen fiscal."
+      },
+      {
+        "question": "¿Se incluye la Tasa de Salud y Educación en el cálculo?",
+        "answer": "¡Sí! Se agrega automáticamente un impuesto de salud y educación del 4% al monto del impuesto y recargo en ambos regímenes."
+      }
+    ],
+    "seoTitle": "Calculadora del impuesto sobre la renta (India)",
+    "seoDescription": "Calcule el impuesto sobre la renta de la India para los años fiscales 2024-25 y 2025-26. Compare losas de régimen nuevo versus antiguo.",
+    "createdAt": "2026-08-17T16:51:55.618Z",
+    "updatedAt": "2026-08-17T16:51:55.688Z"
+  },
+  {
+    "id": "aqv0x7y",
+    "toolSlug": "heic-to-jpg-png-converter",
+    "locale": "es",
+    "title": "Convertidor HEIC a JPG/PNG",
+    "description": "Convierta fotos Apple HEIC a formato JPG o PNG instantáneamente en su navegador en lotes.",
+    "faq": [
+      {
+        "question": "¿Qué es un archivo HEIC?",
+        "answer": "HEIC (Contenedor de imágenes de alta eficiencia) es el formato de fotografía predeterminado introducido por Apple en iOS 11. Ofrece alta calidad de imagen con la mitad del tamaño de archivo de JPG, pero no es universalmente compatible con dispositivos que no sean Apple."
+      },
+      {
+        "question": "¿Mis fotos se suben a algún servidor?",
+        "answer": "¡No! El 100% del proceso de conversión ocurre dentro de su navegador web utilizando la tecnología JavaScript y WebAssembly del lado del cliente. No se envían datos a través de Internet."
+      },
+      {
+        "question": "¿Puedo convertir varias fotos HEIC a la vez?",
+        "answer": "Sí, puedes cargar docenas de archivos HEIC/HEIF simultáneamente y convertirlos todos en modo por lotes, luego descargarlos como un único archivo ZIP."
+      },
+      {
+        "question": "¿Debo convertir a JPG o PNG?",
+        "answer": "JPG es mejor para fotografías estándar y ofrece tamaños de archivo más pequeños con calidad de compresión ajustable. PNG no está comprimido ni tiene pérdidas, ideal si necesita la máxima claridad sin artefactos de compresión."
+      }
+    ],
+    "seoTitle": "Convertidor HEIC a JPG/PNG",
+    "seoDescription": "Convierta fotos Apple HEIC a formato JPG o PNG instantáneamente en su navegador en lotes.",
+    "createdAt": "2026-08-17T16:51:56.254Z",
+    "updatedAt": "2026-08-17T16:51:56.282Z"
+  },
+  {
+    "id": "mrdzx5l",
+    "toolSlug": "word-counter",
+    "locale": "es",
+    "title": "Contador de palabras y caracteres",
+    "description": "Cuente palabras, caracteres, oraciones, párrafos, tiempo de lectura y palabras clave en vivo.",
+    "faq": [
+      {
+        "question": "¿Mi texto se sube o guarda en algún servidor?",
+        "answer": "¡No! El 100% del recuento de texto, análisis de palabras clave y conversión de casos se produce localmente dentro de su navegador web. Nunca se transmiten datos a través de Internet."
+      },
+      {
+        "question": "¿Cómo se calcula el tiempo de lectura?",
+        "answer": "El tiempo de lectura se calcula en función de la velocidad de lectura promedio de un adulto de 200 palabras por minuto (WPM). El tiempo de conversación se basa en 130 palabras por minuto."
+      },
+      {
+        "question": "¿Cómo funciona el analizador de densidad de palabras clave?",
+        "answer": "El analizador tokeniza su texto, filtra las palabras vacías comunes (como 'el', 'es', 'en') y calcula el porcentaje de frecuencia de las palabras clave principales."
+      },
+      {
+        "question": "¿Cuál es la diferencia entre caracteres con y sin espacios?",
+        "answer": "Los caracteres con espacios cuentan cada letra, número, signo de puntuación y carácter de espacio. Los caracteres sin espacios excluyen los caracteres con espacios del total."
+      }
+    ],
+    "seoTitle": "Contador de palabras y caracteres",
+    "seoDescription": "Cuente palabras, caracteres, oraciones, párrafos, tiempo de lectura y palabras clave en vivo.",
+    "createdAt": "2026-08-17T16:51:56.364Z",
+    "updatedAt": "2026-08-17T16:51:56.391Z"
+  },
+  {
+    "id": "yllijp1",
+    "toolSlug": "bmi-calculator",
+    "locale": "es",
+    "title": "Calculadora de IMC",
+    "description": "Calcule su índice de masa corporal (IMC) y la categoría de peso de la OMS con información sobre salud.",
+    "faq": [
+      {
+        "question": "¿Qué es el índice de masa corporal (IMC)?",
+        "answer": "El IMC es un cálculo numérico simple de su peso en relación con su altura (kg/m²). Es ampliamente utilizado por la OMS y los profesionales de la salud para clasificar el estado de peso en bajo peso, normal, sobrepeso u obesidad."
+      },
+      {
+        "question": "¿Qué es un rango de IMC saludable?",
+        "answer": "Según los estándares de la Organización Mundial de la Salud (OMS) para adultos: el peso insuficiente es inferior a 18,5, el peso normal es de 18,5 a 24,9, el sobrepeso es de 25 a 29,9 y la obesidad es de 30 o más."
+      },
+      {
+        "question": "¿El IMC es exacto para los deportistas y los constructores de músculos?",
+        "answer": "El IMC mide la masa corporal total y no distingue entre masa muscular y grasa. El músculo es más denso que la grasa, por lo que las personas muy musculosas o los culturistas pueden obtener una puntuación de \"sobrepeso\" a pesar de tener poca grasa corporal."
+      },
+      {
+        "question": "¿Cómo se calcula el peso corporal ideal?",
+        "answer": "El peso ideal se calcula utilizando el rango de IMC saludable de la OMS (18,5 a 24,9) multiplicado por la altura al cuadrado en metros: Peso mínimo = 18,5 × (altura en m)² y Peso máximo = 24,9 × (altura en m)²."
+      }
+    ],
+    "seoTitle": "Calculadora de IMC",
+    "seoDescription": "Calcule su índice de masa corporal (IMC) y la categoría de peso de la OMS con información sobre salud.",
+    "createdAt": "2026-08-17T16:51:56.686Z",
+    "updatedAt": "2026-08-17T16:51:57.223Z"
+  },
+  {
+    "id": "olpq9om",
+    "toolSlug": "json-formatter-validator",
+    "locale": "pt",
+    "title": "Formatador e validador JSON",
+    "description": "Formate, embeleze, reduza e valide JSON online. Inspecione a visualização em árvore com verificações de erros.",
+    "faq": [
+      {
+        "question": "Meus dados JSON são carregados ou armazenados em seu servidor?",
+        "answer": "Não! 100% da análise, validação, formatação e conversão acontecem localmente na memória do seu navegador usando APIs JavaScript DOM. Nenhum dado é enviado pela internet."
+      },
+      {
+        "question": "Como o validador de sintaxe detecta erros?",
+        "answer": "O validador analisa seu JSON usando analisadores de navegador nativos, extrai deslocamentos de linha e coluna em exceções de sintaxe e destaca a linha quebrada exata."
+      },
+      {
+        "question": "Posso converter JSON para CSV ou YAML?",
+        "answer": "Sim! Use a alternância de formato de saída para converter instantaneamente matrizes ou objetos JSON válidos em planilhas CSV ou limpar arquivos de configuração YAML."
+      },
+      {
+        "question": "Qual é a diferença entre Embelezar e Minificar?",
+        "answer": "Beautify adiciona quebras de linha e recuo (2 ou 4 espaços) para legibilidade humana. Minify remove todos os espaços em branco, novas linhas e recuos para produzir uma única linha compacta adequada para transferência de rede."
+      }
+    ],
+    "seoTitle": "Formatador e validador JSON",
+    "seoDescription": "Formate, embeleze, reduza e valide JSON online. Inspecione a visualização em árvore com verificações de erros.",
+    "createdAt": "2026-08-17T16:52:18.467Z",
+    "updatedAt": "2026-08-17T16:52:20.725Z"
+  },
+  {
+    "id": "wdvhmkc",
+    "toolSlug": "heic-to-jpg-png-converter",
+    "locale": "pt",
+    "title": "Conversor HEIC para JPG/PNG",
+    "description": "Converta fotos HEIC da Apple para o formato JPG ou PNG instantaneamente em seu navegador em lotes.",
+    "faq": [
+      {
+        "question": "O que é um arquivo .HEIC?",
+        "answer": "HEIC (High Efficiency Image Container) é o formato de foto padrão introduzido pela Apple no iOS 11. Ele oferece alta qualidade de imagem com metade do tamanho do arquivo JPG, mas não é universalmente compatível com dispositivos que não sejam da Apple."
+      },
+      {
+        "question": "Minhas fotos são enviadas para algum servidor?",
+        "answer": "Não! 100% do processo de conversão ocorre dentro do seu navegador usando JavaScript do lado do cliente e tecnologia WebAssembly. Nenhum dado é enviado pela internet."
+      },
+      {
+        "question": "Posso converter várias fotos HEIC de uma vez?",
+        "answer": "Sim, você pode fazer upload de dezenas de arquivos HEIC/HEIF simultaneamente e convertê-los todos em modo lote e, em seguida, baixá-los como um único arquivo ZIP."
+      },
+      {
+        "question": "Devo converter para JPG ou PNG?",
+        "answer": "JPG é melhor para fotos padrão e oferece tamanhos de arquivo menores com qualidade de compactação ajustável. PNG é descompactado/sem perdas, ideal se você precisar de clareza máxima sem artefatos de compactação."
+      }
+    ],
+    "seoTitle": "Conversor HEIC para JPG/PNG",
+    "seoDescription": "Converta fotos HEIC da Apple para o formato JPG ou PNG instantaneamente em seu navegador em lotes.",
+    "createdAt": "2026-08-17T16:52:19.597Z",
+    "updatedAt": "2026-08-17T16:52:21.673Z"
+  },
+  {
+    "id": "e7n413k",
+    "toolSlug": "video-compressor",
+    "locale": "pt",
+    "title": "Compressor de vídeo",
+    "description": "Compacte vídeos MP4, MOV, WebM e MKV localmente no navegador sem perda de qualidade.",
+    "faq": [
+      {
+        "question": "Meu vídeo é enviado para algum servidor em nuvem?",
+        "answer": "Não. Toda a decodificação, dimensionamento, extração de áudio e codificação de vídeo ocorrem 100% localmente em seu navegador usando WebAssembly. Nenhum dado sai da sua máquina."
+      },
+      {
+        "question": "Qual é o tamanho máximo de arquivo suportado?",
+        "answer": "Como o FFmpeg é executado na memória WASM do navegador, recomendamos arquivos com menos de 500 MB para desempenho ideal e estabilidade de guias."
+      },
+      {
+        "question": "Quais formatos são suportados?",
+        "answer": "Os formatos de entrada incluem MP4, MOV, WebM, AVI e MKV. Os formatos de saída incluem áudio MP4 (H.264), WebM e MP3."
+      }
+    ],
+    "seoTitle": "Compressor de vídeo",
+    "seoDescription": "Compacte vídeos MP4, MOV, WebM e MKV localmente no navegador sem perda de qualidade.",
+    "createdAt": "2026-08-17T16:52:20.431Z",
+    "updatedAt": "2026-08-17T16:52:21.033Z"
+  },
+  {
+    "id": "5g58fvf",
+    "toolSlug": "income-tax-calculator",
+    "locale": "pt",
+    "title": "Calculadora de imposto de renda (Índia)",
+    "description": "Calcule o imposto de renda indiano para o ano fiscal de 2024-25 e 2025-26. Compare lajes de regime novo e antigo.",
+    "faq": [
+      {
+        "question": "Qual regime é melhor: Novo Regime Tributário ou Antigo Regime Tributário?",
+        "answer": "O Novo Regime Tributário oferece taxas de imposto mais baixas e uma Dedução Padrão mais alta ($$ 75.000) com imposto zero para renda de até ₹ 7 Lakhs (desconto u/s 87A). No entanto, se você tiver deduções altas (80C, 80D, HRA, juros de empréstimos residenciais superiores a ₹ 3,75 Lakhs), o antigo regime tributário pode economizar mais impostos."
+      },
+      {
+        "question": "O que é o desconto fiscal da Seção 87A?",
+        "answer": "De acordo com a Seção 87A, indivíduos com renda tributável de até ₹ 7.00.000 sob o Novo Regime pagam imposto zero (desconto de até ₹ 25.000). No Antigo Regime, o limite de desconto é de ₹ 5.00.000 (desconto de até ₹ 12.500)."
+      },
+      {
+        "question": "Qual é a dedução padrão para o ano fiscal de 2024-25?",
+        "answer": "A dedução padrão para funcionários assalariados é de ₹ 75.000 no Novo Regime Tributário e de ₹ 50.000 no Antigo Regime Tributário."
+      },
+      {
+        "question": "A Taxa de Saúde e Educação está incluída no cálculo?",
+        "answer": "Sim! Uma taxa de saúde e educação de 4% é automaticamente adicionada ao valor do imposto e da sobretaxa em ambos os regimes."
+      }
+    ],
+    "seoTitle": "Calculadora de imposto de renda (Índia)",
+    "seoDescription": "Calcule o imposto de renda indiano para o ano fiscal de 2024-25 e 2025-26. Compare lajes de regime novo e antigo.",
+    "createdAt": "2026-08-17T16:52:20.875Z",
+    "updatedAt": "2026-08-17T16:52:21.525Z"
+  },
+  {
+    "id": "0f0n7ba",
+    "toolSlug": "bmi-calculator",
+    "locale": "pt",
+    "title": "Calculadora de IMC",
+    "description": "Calcule seu Índice de Massa Corporal (IMC) e categoria de peso da OMS com informações de saúde.",
+    "faq": [
+      {
+        "question": "O que é o Índice de Massa Corporal (IMC)?",
+        "answer": "O IMC é um cálculo numérico simples do seu peso em relação à sua altura (kg/m²). É amplamente utilizado pela OMS e pelos profissionais de saúde para categorizar o peso em Abaixo do Peso, Normal, Sobrepeso ou Obeso."
+      },
+      {
+        "question": "O que é uma faixa de IMC saudável?",
+        "answer": "De acordo com os padrões da Organização Mundial da Saúde (OMS) para adultos: Baixo peso está abaixo de 18,5, Peso normal é 18,5 a 24,9, Excesso de peso é 25 a 29,9 e Obeso é 30 ou mais."
+      },
+      {
+        "question": "O IMC é preciso para construtores musculares e atletas?",
+        "answer": "O IMC mede a massa corporal total e não distingue entre massa muscular e gordura. O músculo é mais denso que a gordura, portanto, indivíduos altamente musculosos ou fisiculturistas podem pontuar como “Excesso de Peso”, apesar de terem baixa gordura corporal."
+      },
+      {
+        "question": "Como é calculado o peso corporal ideal?",
+        "answer": "O peso ideal é calculado usando a faixa de IMC saudável da OMS (18,5 a 24,9) multiplicado pela altura ao quadrado em metros: Peso Mínimo = 18,5 × (altura em m)² e Peso Máximo = 24,9 × (altura em m)²."
+      }
+    ],
+    "seoTitle": "Calculadora de IMC",
+    "seoDescription": "Calcule seu Índice de Massa Corporal (IMC) e categoria de peso da OMS com informações de saúde.",
+    "createdAt": "2026-08-17T16:52:20.935Z",
+    "updatedAt": "2026-08-17T16:52:21.740Z"
+  },
+  {
+    "id": "wimd2zi",
+    "toolSlug": "word-counter",
+    "locale": "pt",
+    "title": "Contador de palavras e caracteres",
+    "description": "Conte palavras, caracteres, frases, parágrafos, tempo de leitura e palavras-chave ao vivo.",
+    "faq": [
+      {
+        "question": "Meu texto é carregado ou salvo em algum servidor?",
+        "answer": "Não! 100% da contagem de texto, análise de palavras-chave e conversão de casos ocorrem localmente em seu navegador. Nenhum dado é transmitido pela Internet."
+      },
+      {
+        "question": "Como é calculado o tempo de leitura?",
+        "answer": "O tempo de leitura é calculado com base na velocidade média de leitura de um adulto de 200 palavras por minuto (WPM). O tempo de fala é baseado em 130 palavras por minuto."
+      },
+      {
+        "question": "Como funciona o analisador de densidade de palavras-chave?",
+        "answer": "O analisador tokeniza seu texto, filtra palavras irrelevantes comuns (como 'o', 'é', 'em') e calcula a porcentagem de frequência das principais palavras-chave."
+      },
+      {
+        "question": "Qual é a diferença entre caracteres com e sem espaços?",
+        "answer": "Caracteres com espaços contam cada letra, número, sinal de pontuação e caractere de espaço. Caracteres sem espaços excluem caracteres de espaço da contagem total."
+      }
+    ],
+    "seoTitle": "Contador de palavras e caracteres",
+    "seoDescription": "Conte palavras, caracteres, frases, parágrafos, tempo de leitura e palavras-chave ao vivo.",
+    "createdAt": "2026-08-17T16:52:22.359Z",
+    "updatedAt": "2026-08-17T16:52:22.743Z"
+  },
+  {
+    "id": "b70u1kc",
+    "toolSlug": "excel-to-pdf-converter",
+    "locale": "pt",
+    "title": "Conversor de Excel para PDF",
+    "description": "Converta planilhas do Excel (.xlsx, .xls, .csv) em documentos PDF formatados. Funciona 100% localmente no navegador.",
+    "faq": [
+      {
+        "question": "Como converter Excel para PDF online gratuitamente?",
+        "answer": "Arraste e solte seu arquivo de planilha XLS ou XLSX na ferramenta de conversão. Ele renderiza todas as planilhas em documentos PDF formatados padrão em segundos."
+      },
+      {
+        "question": "Minhas planilhas financeiras ficam seguras durante a conversão?",
+        "answer": "Sim, o processamento ocorre inteiramente na memória do seu navegador. Seus dados do Excel nunca são transmitidos para servidores externos."
+      },
+      {
+        "question": "Posso converter arquivos Excel de várias planilhas em PDF?",
+        "answer": "Sim, o conversor de Excel para PDF processa pastas de trabalho com várias planilhas e as estrutura de forma limpa em páginas PDF sequenciais."
+      },
+      {
+        "question": "Meus arquivos Excel são carregados em algum servidor?",
+        "answer": "Não! Toda a análise de arquivos, cálculos de layout de tabela e geração de PDF ocorrem 100% localmente na guia do seu navegador."
+      }
+    ],
+    "seoTitle": "Conversor de Excel para PDF",
+    "seoDescription": "Converta planilhas do Excel (.xlsx, .xls, .csv) em documentos PDF formatados. Funciona 100% localmente no navegador.",
+    "createdAt": "2026-08-17T16:52:22.424Z",
+    "updatedAt": "2026-08-17T16:52:22.649Z"
+  },
+  {
+    "id": "ai185r0",
+    "toolSlug": "pdf-to-excel-converter",
+    "locale": "pt",
+    "title": "Conversor de PDF para Excel",
+    "description": "Converta tabelas PDF em planilhas Excel editáveis. Preserve linhas, colunas, formatação e precisão dos dados.",
+    "faq": [
+      {
+        "question": "Como faço para converter PDF para Excel online gratuitamente?",
+        "answer": "Carregue seu extrato bancário, fatura ou documento tabular em PDF. Nosso conversor de PDF para Excel extrai estruturas de tabelas em formato de planilha XLSX limpo instantaneamente."
+      },
+      {
+        "question": "A formatação original do PDF e os dados tabulares serão mantidos?",
+        "answer": "Sim, o algoritmo de conversão detecta limites de tabelas, cabeçalhos, linhas e números, preenchendo com precisão as colunas do Excel."
+      },
+      {
+        "question": "Existe algum limite diário de conversão ou restrição de tamanho de arquivo?",
+        "answer": "Não, a conversão é executada localmente no seu navegador para que você possa converter arquivos PDF ilimitados para Excel gratuitamente, sem registro."
+      },
+      {
+        "question": "Posso converter PDFs digitalizados para Excel?",
+        "answer": "Sim! Se um PDF digitalizado ou baseado em imagem for detectado, nossa ferramenta permite OCR (reconhecimento óptico de caracteres) no dispositivo usando Tesseract.js para ler texto dentro de imagens e formatá-los em colunas do Excel."
+      }
+    ],
+    "seoTitle": "Conversor de PDF para Excel",
+    "seoDescription": "Converta tabelas PDF em planilhas Excel editáveis. Preserve linhas, colunas, formatação e precisão dos dados.",
+    "createdAt": "2026-08-17T16:52:22.486Z",
+    "updatedAt": "2026-08-17T16:52:22.543Z"
+  },
+  {
+    "id": "m75q2mg",
+    "toolSlug": "webp-to-jpg-png-converter",
+    "locale": "pt",
+    "title": "Conversor WebP para JPG/PNG",
+    "description": "Converta imagens WebP em formato JPG ou PNG instantaneamente. Funciona 100% localmente no navegador.",
+    "faq": [
+      {
+        "question": "O que é o conversor WebP para JPG/PNG?",
+        "answer": "O WebP to JPG / PNG Converter é uma ferramenta baseada em navegador que transforma arquivos WebP modernos em formatos JPG ou PNG amplamente suportados, sem enviar seus arquivos para qualquer servidor externo."
+      },
+      {
+        "question": "Por que converter imagens WebP?",
+        "answer": "Embora o WebP ofereça compactação superior para sites, muitos aplicativos de software de desktop legados, clientes de e-mail, plataformas sociais e formulários oficiais aceitam apenas imagens JPG ou PNG."
+      },
+      {
+        "question": "Minha imagem é carregada em algum servidor?",
+        "answer": "Não! Todas as conversões de imagens são executadas 100% localmente em seu computador ou dispositivo móvel usando APIs da Web. Suas imagens nunca saem do seu navegador."
+      },
+      {
+        "question": "Como a ferramenta lida com arquivos WebP transparentes?",
+        "answer": "Ao converter para PNG, a transparência é preservada automaticamente. Ao converter para JPG (que não oferece suporte a canais alfa), você pode selecionar uma cor de fundo personalizada (branco, preto ou hexadecimal personalizado)."
+      },
+      {
+        "question": "Posso converter vários arquivos WebP de uma vez?",
+        "answer": "Sim! ToolWala oferece suporte à conversão em lote para várias imagens WebP simultaneamente, junto com uma opção instantânea de ‘Baixar ZIP’."
+      },
+      {
+        "question": "Qual é o tamanho máximo de arquivo suportado?",
+        "answer": "Você pode fazer upload de imagens WebP de até 50 MB por arquivo, permitindo processamento fotográfico de alta resolução com atraso zero."
+      }
+    ],
+    "seoTitle": "Conversor WebP para JPG/PNG",
+    "seoDescription": "Converta imagens WebP em formato JPG ou PNG instantaneamente. Funciona 100% localmente no navegador.",
+    "createdAt": "2026-08-17T16:52:24.350Z",
+    "updatedAt": "2026-08-17T16:52:24.568Z"
+  },
+  {
+    "id": "rp8iaxx",
+    "toolSlug": "jpg-to-webp",
+    "locale": "pt",
+    "title": "Conversor JPG para WebP",
+    "description": "Converta imagens JPG e JPEG em WebP online. Reduza o tamanho do arquivo com alta qualidade visual.",
+    "faq": [
+      {
+        "question": "O que é WebP?",
+        "answer": "WebP é um formato de imagem moderno desenvolvido pelo Google que fornece compactação superior com e sem perdas para imagens na web. As imagens WebP são normalmente 25% a 35% menores do que imagens JPEG comparáveis, mantendo uma qualidade visual equivalente."
+      },
+      {
+        "question": "A conversão de JPG para WebP reduz a qualidade?",
+        "answer": "WebP usa codificação preditiva avançada e compactação de blocos espaciais. Em nossa predefinição 'Balanceada' recomendada (80%), os olhos humanos não conseguem distinguir o WebP convertido do JPG original, mas o tamanho do arquivo é reduzido em 60% a 80%."
+      },
+      {
+        "question": "Este conversor é gratuito?",
+        "answer": "Sim! O conversor JPG para WebP da ToolWala AI é 100% gratuito para uso, sem taxas ocultas, limites diários, marcas d'água ou requisitos de registro de conta."
+      },
+      {
+        "question": "Meus arquivos foram carregados?",
+        "answer": "Não! Toda a leitura de imagens, decodificação, dimensionamento de tela e codificação WebP ocorrem localmente em seu navegador. Suas imagens nunca saem do seu dispositivo."
+      },
+      {
+        "question": "Posso converter vários arquivos JPG?",
+        "answer": "Sim! Você pode selecionar ou arrastar vários arquivos JPG e JPEG de uma vez, convertê-los em lote e baixar todos os arquivos WebP convertidos em um único arquivo ZIP."
+      },
+      {
+        "question": "Quais navegadores suportam WebP?",
+        "answer": "WebP é compatível com todos os navegadores modernos, incluindo Google Chrome, Mozilla Firefox, Apple Safari, Microsoft Edge, Opera e navegadores móveis iOS/Android (mais de 97% de suporte global para navegadores)."
+      }
+    ],
+    "seoTitle": "Conversor JPG para WebP",
+    "seoDescription": "Converta imagens JPG e JPEG em WebP online. Reduza o tamanho do arquivo com alta qualidade visual.",
+    "createdAt": "2026-08-17T16:52:25.393Z",
+    "updatedAt": "2026-08-17T16:52:25.916Z"
+  },
+  {
+    "id": "yemum5p",
+    "toolSlug": "png-to-webp",
+    "locale": "pt",
+    "title": "Conversor PNG para WebP",
+    "description": "Converta imagens PNG em WebP online preservando a transparência. Reduza o tamanho em 80%.",
+    "faq": [
+      {
+        "question": "A conversão de PNG para WebP preserva fundos transparentes?",
+        "answer": "Sim! WebP suporta totalmente transparência de canal alfa de 8 bits (assim como PNG). Nosso conversor preserva fundos transparentes por padrão para que seus gráficos fiquem perfeitos em qualquer página da web."
+      },
+      {
+        "question": "Quanta redução de tamanho de arquivo posso esperar de PNG para WebP?",
+        "answer": "Em média, o WebP oferece tamanhos de arquivo 60% a 80% menores em comparação com imagens PNG padrão, preservando qualidade visualmente idêntica e bordas transparentes nítidas."
+      },
+      {
+        "question": "Este conversor de PNG para WebP é gratuito?",
+        "answer": "Sim! O conversor PNG para WebP da ToolWala AI é 100% gratuito, sem registro, marcas d'água, limites de conversão diários ou taxas ocultas."
+      },
+      {
+        "question": "Meus arquivos PNG são carregados em algum servidor?",
+        "answer": "Não! Todo o processamento de arquivos, renderização de tela, combinação de transparência e codificação WebP ocorrem localmente na memória do navegador. Suas imagens nunca saem da sua máquina."
+      },
+      {
+        "question": "Posso converter em lote vários arquivos PNG de uma vez?",
+        "answer": "Sim! Você pode arrastar e soltar vários arquivos PNG de uma vez, convertê-los simultaneamente e baixar todas as saídas WebP em um único arquivo ZIP."
+      },
+      {
+        "question": "Quais navegadores suportam imagens WebP transparentes?",
+        "answer": "Transparent WebP é compatível com todos os navegadores modernos, incluindo Chrome, Safari, Firefox, Edge, Opera e sistemas operacionais móveis (iOS e Android)."
+      }
+    ],
+    "seoTitle": "Conversor PNG para WebP",
+    "seoDescription": "Converta imagens PNG em WebP online preservando a transparência. Reduza o tamanho em 80%.",
+    "createdAt": "2026-08-17T16:52:26.132Z",
+    "updatedAt": "2026-08-17T16:52:27.201Z"
   }
 ]

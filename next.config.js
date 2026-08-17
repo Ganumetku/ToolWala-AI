@@ -30,7 +30,7 @@ const nextConfig = {
   },
   // Hybrid: static pages + API routes (no full static export)
   experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion', 'recharts'],
+    optimizePackageImports: ['lucide-react', 'framer-motion', 'recharts', 'sonner', 'fuse.js'],
   },
   async headers() {
     return [

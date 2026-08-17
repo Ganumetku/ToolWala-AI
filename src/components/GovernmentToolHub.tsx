@@ -162,10 +162,10 @@ export default function GovernmentToolHub() {
                         </div>
 
                         {/* Title & Description */}
-                        <h3 className="text-sm sm:text-lg font-black text-gray-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug line-clamp-2 min-h-[2.25rem] sm:min-h-[2.75rem] mb-1.5 sm:mb-2">
+                        <h3 className="text-[18px] sm:text-[20px] font-bold leading-[1.3] text-[#0F172A] dark:text-[#F1F5F9] mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-tight line-clamp-2">
                           {displayTitle}
                         </h3>
-                        <p className="text-[11px] sm:text-xs text-gray-600 dark:text-gray-400 font-medium leading-relaxed line-clamp-2 sm:line-clamp-3 min-h-[2.25rem] sm:min-h-[2.5rem] mb-3.5 sm:mb-4 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">
+                        <p className="text-[14px] font-normal leading-[1.6] text-[#6B7280] dark:text-[#9CA3AF] line-clamp-3 mb-3.5 sm:mb-4 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">
                           {displayDesc}
                         </p>
                       </div>

@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Homepage smoke', () => {
   test('loads and shows hero section', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('h1')).toContainText(/Workflow with AI/i);
+    await expect(page.locator('h1')).toContainText(/PDF, Image & Resume Tools|Free/i);
   });
 
   test('tools directory section is reachable', async ({ page }) => {

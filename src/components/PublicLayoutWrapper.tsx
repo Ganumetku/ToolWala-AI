@@ -17,7 +17,10 @@ export default function PublicLayoutWrapper({
   const isLogin = pathname === '/login' || pathname === '/login/';
 
   useEffect(() => {
-    if (pathname && !pathname.startsWith('/admin')) {
+    if (!pathname || pathname.startsWith('/admin')) return;
+
+    // Defer analytics tracking to browser idle time to avoid main thread blocking
+    const runTracking = () => {
       let source = 'Direct';
       if (typeof document !== 'undefined' && document.referrer) {
         try {
@@ -86,6 +89,14 @@ export default function PublicLayoutWrapper({
           });
         }
       }
+    };
+
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      const handle = (window as any).requestIdleCallback(runTracking, { timeout: 2000 });
+      return () => (window as any).cancelIdleCallback(handle);
+    } else {
+      const timer = setTimeout(runTracking, 1000);
+      return () => clearTimeout(timer);
     }
   }, [pathname, trackPageView, trackEvent]);
 

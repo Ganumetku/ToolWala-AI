@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Star, CheckCircle, Quote } from "lucide-react";
 import { useTranslation } from "@/components/I18nContext";
 
@@ -65,13 +64,9 @@ export default function HomepageTestimonials() {
 
         {/* Testimonials Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {testimonials.map((tItem, idx) => (
-            <motion.div
+          {testimonials.map((tItem) => (
+            <div
               key={tItem.author}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.05, duration: 0.4 }}
               className="p-8 rounded-2xl border border-gray-200 dark:border-white/5 bg-white dark:bg-[#0f172a] shadow-sm hover:shadow-md dark:glass hover:border-blue-500/30 group relative overflow-hidden transition-all duration-300"
             >
               {/* Quote Icon Background */}
@@ -110,7 +105,7 @@ export default function HomepageTestimonials() {
                   {tItem.location}
                 </span>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

@@ -55,10 +55,10 @@ export default function RelatedTools({ currentSlug, maxTools = 3 }: RelatedTools
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 text-2xl">
                 {tool.icon}
               </div>
-              <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors tracking-tight uppercase">
+              <h3 className="text-[18px] sm:text-[20px] font-bold leading-[1.3] text-[#0F172A] dark:text-[#F1F5F9] mb-2 group-hover:text-blue-400 transition-colors tracking-tight">
                 {tool.title}
               </h3>
-              <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
+              <p className="text-[14px] font-normal leading-[1.6] text-[#6B7280] dark:text-[#9CA3AF] line-clamp-3 group-hover:text-gray-300 transition-colors">
                 {tool.description}
               </p>
             </div>

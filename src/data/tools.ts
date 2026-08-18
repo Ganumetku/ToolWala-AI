@@ -793,6 +793,23 @@ export const toolsData: Tool[] = [
     updatedAt: '2024-01-01T00:00:00Z'
   },
   {
+    id: "discount-calculator",
+    title: "Discount Calculator",
+    description: "Calculate final sale price, discount amount, double successive discounts, and GST tax instantly.",
+    icon: "🏷️",
+    href: "/tools/discount-calculator",
+    slug: "discount-calculator",
+    category: "Calculator Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["discount", "calculator", "sale price", "shopping", "savings", "percentage", "tax", "gst", "offers"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
+  },
+  {
     id: "youtube-money-calculator",
     title: "YouTube Money Calculator",
     description: "Estimate YouTube earnings from views, CPM, RPM, niche and monthly traffic instantly.",

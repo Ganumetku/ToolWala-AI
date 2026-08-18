@@ -1918,6 +1918,54 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "SIP Calculator", href: "/tools/sip-calculator" }
     ]
   },
+  "discount-calculator": {
+    title: "Discount Calculator",
+    intro: "Calculate discount amounts, final sale prices, successive double discounts, and GST tax additions instantly with our 100% private, client-side discount calculator.",
+    whatItDoes: "Our Discount Calculator enables shoppers, sellers, e-commerce buyers, and business managers to compute exact discount amounts, net savings, and final prices in real time. It supports single discounts, consecutive coupon markdowns (e.g. 30% + 10%), sales tax addition, and reverse discount percentage calculations.",
+    howToUse: [
+      "Select your calculation mode ('Find Final Price', 'Find Discount %', or 'Compare Two Deals').",
+      "Enter the original list price (MRP) in Indian Rupees (₹).",
+      "Set the discount percentage using the number input, slider, or quick preset buttons.",
+      "Optionally toggle 'Multiple Discounts' to calculate stacked coupon codes (e.g., 30% off + 10% extra).",
+      "Optionally toggle 'Add GST/Tax' to see the final post-tax payable total.",
+      "Copy the formatted calculation summary to your clipboard with a single click."
+    ],
+    keyFeatures: [
+      { title: "Real-Time Interactive Slider", desc: "Instantly preview savings and final price changes as you slide the percentage from 0% to 100%." },
+      { title: "Stacked / Double Discounts", desc: "Calculate compounding discounts like '30% Off + Extra 10% Off' with accurate effective percentage math." },
+      { title: "GST & Tax Calculator", desc: "Apply 5%, 12%, 18%, 28% or custom tax rates on top of discounted item totals." },
+      { title: "Reverse Discount Mode", desc: "Enter original and sale prices to instantly discover the exact discount percentage and savings." },
+      { title: "Compare Two Deals", desc: "Side-by-side deal analysis to instantly see which offer saves you more money." },
+      { title: "100% Client-Side Privacy", desc: "All arithmetic runs entirely inside your browser memory without server logging." }
+    ],
+    benefits: [
+      "Avoid hidden checkout surprises during e-commerce festival sales (Diwali, Big Billion Days, Great Indian Festival).",
+      "Quickly compare shopping deals across retail stores and online platforms.",
+      "Calculate multi-coupon stacking without tricky mental arithmetic.",
+      "Zero registration, zero ads, and instant Indian rupee currency formatting."
+    ],
+    whyChoose: "ToolWala AI's Discount Calculator combines single, successive, tax-inclusive, and comparative calculation modes in a lightweight, lightning-fast interface that guarantees absolute privacy.",
+    useCases: [
+      "Shoppers verifying discount coupons on Amazon, Flipkart, Myntra, and retail stores.",
+      "Shopkeepers and merchants calculating customer discounts during seasonal clearance sales.",
+      "Wholesalers and invoice creators calculating trade discounts before tax additions.",
+      "Bargain hunters comparing competing promotion schemes."
+    ],
+    faqs: [
+      { question: "How is a percentage discount calculated?", answer: "Discount Amount = Original Price × (Discount % ÷ 100). The Final Sale Price = Original Price - Discount Amount." },
+      { question: "How do successive (double) discounts work?", answer: "Successive discounts are applied sequentially, not by adding percentages. For example, 30% off on ₹1000 reduces it to ₹700; an extra 10% off takes ₹70 off ₹700, resulting in ₹630 (an effective 37% discount, not 40%)." },
+      { question: "How is GST calculated on discounted items?", answer: "Under Indian tax law, GST is applied to the final discounted sale price, not the original MRP. Formula: Final Price = Discounted Price + (Discounted Price × GST Rate / 100)." },
+      { question: "How do I find the discount percentage if I know the sale price?", answer: "Discount Percentage = ((Original Price - Sale Price) ÷ Original Price) × 100." },
+      { question: "Are my financial figures stored on ToolWala servers?", answer: "Never. All calculations run strictly in your local browser sandbox without any network transmission." }
+    ],
+    conclusion: "Compute sale prices, stacked coupons, and shopping deals instantly. Calculate discounts on ToolWala AI.",
+    relatedTools: [
+      { name: "GST Calculator", href: "/tools/gst-calculator" },
+      { name: "EMI Calculator", href: "/tools/emi-calculator" },
+      { name: "SIP Calculator", href: "/tools/sip-calculator" },
+      { name: "Income Tax Calculator", href: "/tools/income-tax-calculator" }
+    ]
+  },
   "youtube-money-calculator": {
     title: "YouTube Money Calculator",
     intro: "Estimate your YouTube channel revenue. Enter daily view counts, niche categories, and CPM rates to predict growth.",

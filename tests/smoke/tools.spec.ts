@@ -25,4 +25,10 @@ test.describe('Critical tools smoke', () => {
     await page.goto('/tools/caption-generator/');
     await expect(page.locator('body')).toContainText(/caption/i);
   });
+
+  test('Discount Calculator loads and calculates savings', async ({ page }) => {
+    await page.goto('/tools/discount-calculator/');
+    await expect(page.locator('h1')).toContainText(/Discount Calculator/i);
+    await expect(page.locator('body')).toContainText(/Total You Save|Final/i);
+  });
 });

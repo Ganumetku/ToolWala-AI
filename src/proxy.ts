@@ -60,14 +60,9 @@ export async function proxy(request: NextRequest) {
     }
   }
 
-  // 301 redirect /pricing to home /
+
+
   const normalizedRewritten = rewrittenPathname.endsWith('/') ? rewrittenPathname : rewrittenPathname + '/';
-  if (normalizedRewritten === '/pricing/') {
-    const targetPath = isLocalePrefix ? `/${locale}/` : '/';
-    const redirectUrl = new URL(targetPath + request.nextUrl.search, request.url);
-    console.log(`[Proxy] Redirecting 301 pricing page ${pathname} to ${redirectUrl.toString()}`);
-    return NextResponse.redirect(redirectUrl, { status: 301 });
-  }
 
   // 301 redirect duplicate tool /tools/pan-photo-tool/ to /tools/pan-card-resize/
   if (normalizedRewritten === '/tools/pan-photo-tool/') {

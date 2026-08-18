@@ -43,7 +43,7 @@ export default function AboutClient() {
                   <h3 className="text-xl font-black text-gray-900 dark:text-white tracking-tight uppercase">{t('about.privacy_title', 'Privacy Guarantee')}</h3>
                 </div>
                 <p className="text-gray-600 dark:text-gray-300 font-medium leading-relaxed">
-                  {t('about.privacy_desc', 'We process as much as possible directly in your browser. Your data is your own. We never train our models on your files, and we never store your personal content on our servers.')}
+                  {t('about.privacy_desc', 'Core utilities process 100% directly in your browser. For AI-assisted features, data is transmitted over encrypted channels, processed in-memory, and immediately discarded. We never store your files, retain logs, or train models on your content.')}
                 </p>
               </div>
 

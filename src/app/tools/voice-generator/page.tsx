@@ -229,6 +229,13 @@ export default function VoiceGenerator() {
             {/* Input Script */}
             <section className="glass p-8 rounded-[2.5rem] border border-white/5 shadow-2xl flex flex-col h-full relative overflow-hidden group">
               <div className="absolute inset-0 bg-blue-600/5 opacity-0 group-focus-within:opacity-100 transition-opacity" />
+              
+              {/* AI Privacy Disclosure */}
+              <div className="flex items-start gap-2.5 p-3 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-gray-700 dark:text-gray-300 text-[11px] font-medium leading-relaxed mb-6 relative z-10">
+                <Lock className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+                <span>This tool uses secure AI speech synthesis. Your script is processed in-memory and immediately discarded — never stored or used for model training.</span>
+              </div>
+
               <div className="flex justify-between items-center mb-6 relative z-10">
                 <h2 className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-3 uppercase tracking-widest">
                   <Volume2 className="w-5 h-5 text-blue-500" />

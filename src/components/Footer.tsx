@@ -163,7 +163,7 @@ export default function Footer() {
             </Link>
             
             <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-medium text-sm">
-              {t('footer.tagline', 'Free AI utilities that run 100% locally in your browser. No registration, no latency, no server uploads. Experience privacy-first processing.')}
+              {t('footer.tagline', 'Free utility tools that prioritize user privacy. Core tools run 100% locally in your browser, while AI features use secure encrypted processing with zero data retention.')}
             </p>
 
             <div className="space-y-3">

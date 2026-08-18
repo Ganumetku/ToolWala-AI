@@ -126,7 +126,7 @@ export default function Home() {
           {/* Glowing Badge */}
           <div className="animate-fade-in inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-[#E8ECF4] dark:border-white/10 backdrop-blur-md text-[#2563EB] dark:text-blue-400 text-xs font-black tracking-widest mb-8 shadow-sm dark:shadow-2xl hover:border-blue-500/30 transition-colors cursor-pointer select-none">
             <span className="flex h-2 w-2 rounded-full bg-[#2563EB] dark:bg-blue-500 animate-pulse" />
-            <span>{t('home.badge', '🔒 100% Browser-Based • No Upload Required • Privacy First')}</span>
+            <span>{t('home.badge', '🔒 Privacy-First: Most Tools Run 100% In-Browser • Zero Data Retention')}</span>
             <ChevronRight className="w-3.5 h-3.5 text-[#64748B] dark:text-gray-500" />
           </div>
 
@@ -140,7 +140,7 @@ export default function Home() {
           </h1>
 
           <p className="animate-fade-up mx-auto max-w-[720px] text-base sm:text-lg md:text-xl font-medium text-[#334155] dark:text-gray-300 leading-relaxed mb-10">
-            {t('home.hero_subtitle', 'Edit PDFs, convert images, create passport photos, compress files, optimize resumes, and use powerful browser-based utilities — all without uploading your files. Fast, secure, and completely free.')}
+            {t('home.hero_subtitle', 'Most tools run 100% locally in your browser — files never leave your device. AI-powered tools use secure, encrypted processing with zero data retention.')}
           </p>
 
           {/* Search bar for tools */}
@@ -231,25 +231,25 @@ export default function Home() {
             <div className="premium-card p-6 flex flex-col items-center justify-center text-center border-emerald-200 dark:border-emerald-500/10 hover:border-emerald-500/30 bg-emerald-50/30 dark:bg-emerald-950/[0.01]">
               <ShieldCheck className="w-7 h-7 text-emerald-600 dark:text-emerald-400 mb-3" />
               <h4 className="text-[11px] font-black text-[#0F172A] dark:text-white uppercase tracking-wider mb-1">
-                {t('home.trust_banner.gdpr', 'GDPR & CCPA Private')}
+                {t('home.trust_banner.gdpr', 'Privacy Protected')}
               </h4>
-              <p className="text-[9px] text-[#475569] dark:text-gray-500 font-semibold leading-relaxed">No files ever leave your device.</p>
+              <p className="text-[9px] text-[#475569] dark:text-gray-500 font-semibold leading-relaxed">Local processing & zero AI retention.</p>
             </div>
             
             <div className="premium-card p-6 flex flex-col items-center justify-center text-center border-blue-200 dark:border-blue-500/10 hover:border-blue-500/30 bg-blue-50/30 dark:bg-blue-950/[0.01]">
               <Cpu className="w-7 h-7 text-[#2563EB] dark:text-blue-400 mb-3" />
               <h4 className="text-[11px] font-black text-[#0F172A] dark:text-white uppercase tracking-wider mb-1">
-                {t('home.trust_banner.local', '100% Edge Processing')}
+                {t('home.trust_banner.local', '100% In-Browser Tools')}
               </h4>
-              <p className="text-[9px] text-[#475569] dark:text-gray-500 font-semibold leading-relaxed">Runs directly inside browser sandbox.</p>
+              <p className="text-[9px] text-[#475569] dark:text-gray-500 font-semibold leading-relaxed">PDFs & files process inside device RAM.</p>
             </div>
 
             <div className="premium-card p-6 flex flex-col items-center justify-center text-center border-purple-200 dark:border-purple-500/10 hover:border-purple-500/30 bg-purple-50/30 dark:bg-purple-950/[0.01]">
               <Lock className="w-7 h-7 text-[#7C3AED] dark:text-purple-400 mb-3" />
               <h4 className="text-[11px] font-black text-[#0F172A] dark:text-white uppercase tracking-wider mb-1">
-                {t('home.trust_banner.no_upload', 'No Cloud Database Logs')}
+                {t('home.trust_banner.no_upload', 'Zero Model Training')}
               </h4>
-              <p className="text-[9px] text-[#475569] dark:text-gray-500 font-semibold leading-relaxed">Absolute data privacy, zero logging.</p>
+              <p className="text-[9px] text-[#475569] dark:text-gray-500 font-semibold leading-relaxed">Never stored, logged, or trained on.</p>
             </div>
 
             <div className="premium-card p-6 flex flex-col items-center justify-center text-center border-amber-200 dark:border-yellow-500/10 hover:border-yellow-500/30 bg-amber-50/30 dark:bg-yellow-950/[0.01]">
@@ -537,10 +537,10 @@ export default function Home() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <h4 className="text-sm font-black text-emerald-700 dark:text-emerald-400 uppercase tracking-wider mb-1">
-                    {t('home.sandbox_diagram.local_browser', 'Local Browser Sandbox')}
+                    {t('home.sandbox_diagram.local_browser', 'Local Browser Sandbox & Secure AI')}
                   </h4>
                   <p className="text-xs text-gray-600 dark:text-gray-400 font-semibold leading-relaxed">
-                    {t('home.sandbox_diagram.local_desc', 'Your documents remain in active RAM memory and compile locally using WebAssembly. 0% network uploads.')}
+                    {t('home.sandbox_diagram.local_desc', 'Core documents remain in active RAM memory and compile locally using WebAssembly. AI features process securely with zero data retention.')}
                   </p>
                 </div>
                 <div className="absolute right-6 top-1/2 -translate-y-1/2 text-emerald-700 dark:text-emerald-400 font-black text-[10px] uppercase tracking-widest bg-emerald-100 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 px-3 py-1 rounded-full hidden sm:block">

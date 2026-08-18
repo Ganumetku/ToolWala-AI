@@ -394,6 +394,12 @@ export default function ResumeBuilder() {
           {/* LEFT: FORM AREA */}
           <div className="w-full xl:w-[45%] xl:h-[calc(100vh-180px)] overflow-y-auto custom-scrollbar-hidden pr-0 space-y-8 pb-32">
             
+            {/* AI Privacy Disclosure */}
+            <div className="flex items-start gap-2.5 p-3.5 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-gray-700 dark:text-gray-300 text-xs font-medium leading-relaxed">
+              <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+              <span>This tool uses secure AI processing. Your resume and job details are processed in-memory and immediately discarded — never stored or used for model training.</span>
+            </div>
+            
             {/* A. Personal Details */}
             <section className="glass rounded-[2rem] border border-white/5 p-8">
               <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/5">

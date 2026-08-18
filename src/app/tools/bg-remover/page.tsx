@@ -176,6 +176,12 @@ export default function BackgroundRemover() {
           </div>
           
           <div className="p-8 sm:p-12">
+            {/* AI Privacy Disclosure */}
+            <div className="flex items-start gap-2.5 p-3 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-gray-700 dark:text-gray-300 text-xs font-medium leading-relaxed mb-6">
+              <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+              <span>This tool uses secure AI model execution. Your image is processed in active memory and immediately deleted — never stored or used for training.</span>
+            </div>
+
             <AnimatePresence mode="wait">
               {error && (
                 <motion.div 

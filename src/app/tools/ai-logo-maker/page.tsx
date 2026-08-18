@@ -361,6 +361,12 @@ export default function ProfessionalLogoMaker() {
                   </div>
                 </div>
 
+                {/* AI Privacy Disclosure */}
+                <div className="flex items-start gap-2.5 p-3 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-gray-300 text-[11px] font-medium leading-relaxed">
+                  <ShieldCheck className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+                  <span>This tool uses secure cloud AI processing. Your input is processed in-memory and immediately deleted — never stored or used for model training.</span>
+                </div>
+
                 <button 
                   type="submit" 
                   disabled={isGenerating}

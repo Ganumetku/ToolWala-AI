@@ -276,7 +276,13 @@ export default function ProfessionalTextHumanizer() {
                 placeholder="Paste your AI-generated text here..."
                 className="flex-1 p-10 text-xl font-medium text-white placeholder:text-gray-700 outline-none resize-none bg-transparent leading-relaxed custom-scrollbar"
               />
-              <div className="p-8 bg-black/20 border-t border-white/5">
+              <div className="p-8 bg-black/20 border-t border-white/5 space-y-4">
+                {/* AI Privacy Disclosure */}
+                <div className="flex items-start gap-2.5 p-3 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-gray-300 text-[11px] font-medium leading-relaxed">
+                  <Sparkles className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+                  <span>This tool uses secure cloud AI processing. Your text is rewritten in-memory and immediately deleted — never stored or used for training.</span>
+                </div>
+
                 <button
                   onClick={handleHumanize}
                   disabled={isGenerating || !inputText.trim()}

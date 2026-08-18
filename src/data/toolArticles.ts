@@ -17,10 +17,10 @@ export interface ToolArticleData {
 export const toolArticles: Record<string, ToolArticleData> = {
   "income-tax-calculator": {
     title: "Income Tax Calculator (India) – Compare New vs Old Tax Regime",
-    intro: "Calculate your Indian Income Tax liability for FY 2024-25 & FY 2025-26 with instant side-by-side comparison between New Tax Regime and Old Tax Regime, Section 80C/80D deduction savings, slab-wise breakdowns, and monthly TDS estimates.",
+    intro: "Calculate your Indian Income Tax liability for FY 2026-27 (AY 2027-28) with instant side-by-side comparison between New Tax Regime and Old Tax Regime, Section 80C/80D deduction savings, slab-wise breakdowns, and monthly TDS estimates.",
     whatItDoes: "The ToolWala AI Income Tax Calculator helps salaried employees, self-employed professionals, and senior citizens compute exact tax liability under official Income Tax Department slab rates. Input your annual gross salary, age category, Section 80C (PPF/ELSS/EPF), 80D (Health Insurance), Section 24b (Home Loan Interest), and HRA exemptions to discover which regime saves you more tax.",
     howToUse: [
-      "Select your Financial Year (FY 2024-25 or FY 2025-26) and Age Category.",
+      "Select your Financial Year (FY 2026-27, FY 2025-26, or FY 2024-25) and Age Category.",
       "Enter your Gross Annual Salary using the interactive sliders or numeric input box.",
       "In the Old Tax Regime Deductions section, enter your investments under 80C (max ₹1.5L), 80D (Health Insurance), Home Loan Interest (Section 24b), HRA, and NPS.",
       "Instantly view side-by-side tax calculations for New Tax Regime vs Old Tax Regime.",
@@ -28,7 +28,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     keyFeatures: [
       { title: "New vs Old Regime Comparison", desc: "Instant side-by-side tax computation showing exact tax savings under each regime." },
-      { title: "Latest Budget Slab Updates", desc: "Includes Union Budget ₹75,000 Standard Deduction under New Regime and Section 87A rebate up to ₹7 Lakhs." },
+      { title: "Latest Budget Slab Updates", desc: "Includes Union Budget ₹75,000 Standard Deduction under New Regime and Section 87A rebate up to ₹12 Lakhs." },
       { title: "Deductions & Exemptions", desc: "Supports Section 80C, 80D, 80CCD(1B), 24b Home Loan Interest, HRA, and Standard Deduction." },
       { title: "100% Client-Side Privacy", desc: "Calculates tax 100% locally in your web browser. Zero server logging, zero data storage." }
     ],
@@ -46,9 +46,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Planning 80C investments, health insurance, and home loan interest tax benefits."
     ],
     faqs: [
-      { question: "Which regime is better: New Tax Regime or Old Tax Regime?", answer: "The New Tax Regime offers lower tax slab rates and a higher Standard Deduction (₹75,000) with zero tax for income up to ₹7 Lakhs (u/s 87A rebate). However, if you have high deductions (80C, 80D, HRA, Home Loan Interest exceeding ₹3.75 Lakhs), the Old Tax Regime may save more tax." },
-      { question: "What is Section 87A Tax Rebate?", answer: "Under Section 87A, individuals with taxable income up to ₹7,00,000 under the New Regime pay zero tax (rebate up to ₹25,000). Under the Old Regime, the rebate limit is ₹5,00,000 (rebate up to ₹12,500)." },
-      { question: "What is the Standard Deduction for FY 2024-25?", answer: "Standard Deduction for salaried employees is ₹75,000 under the New Tax Regime and ₹50,000 under the Old Tax Regime." },
+      { question: "Which regime is better: New Tax Regime or Old Tax Regime?", answer: "The New Tax Regime offers lower tax slab rates and a higher Standard Deduction (₹75,000) with zero tax for income up to ₹12 Lakhs (u/s 87A rebate). However, if you have high deductions (80C, 80D, HRA, Home Loan Interest exceeding ₹3.75 Lakhs), the Old Tax Regime may save more tax." },
+      { question: "What is Section 87A Tax Rebate?", answer: "Under Section 87A for FY 2026-27, individuals with taxable income up to ₹12,00,000 under the New Regime pay zero tax (rebate up to ₹60,000). Under the Old Regime, the rebate limit is ₹5,00,000 (rebate up to ₹12,500)." },
+      { question: "What is the Standard Deduction for FY 2026-27?", answer: "Standard Deduction for salaried employees is ₹75,000 under the New Tax Regime and ₹50,000 under the Old Tax Regime." },
       { question: "Is Health & Education Cess included in the calculation?", answer: "Yes! A 4% Health & Education Cess is automatically added to the tax and surcharge amount across both regimes." }
     ]
   },

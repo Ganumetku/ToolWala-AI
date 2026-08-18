@@ -42,7 +42,7 @@ export const toolsData: Tool[] = [
   {
     id: "income-tax-calculator",
     title: "Income Tax Calculator (India)",
-    description: "Calculate Indian Income Tax for FY 2024-25 & 2025-26. Compare New vs Old regime slabs.",
+    description: "Calculate Indian Income Tax for FY 2026-27 (AY 2027-28). Compare New vs Old regime slabs with official Union Budget rates.",
     icon: "💰",
     href: "/tools/income-tax-calculator",
     slug: "income-tax-calculator",
@@ -50,11 +50,11 @@ export const toolsData: Tool[] = [
     featured: true,
     trending: true,
     popular: true,
-    tags: ["income tax", "tax calculator", "new regime", "old regime", "80c", "tds", "india tax", "budget 2024"],
+    tags: ["income tax", "tax calculator", "new regime", "old regime", "80c", "tds", "india tax", "budget 2026", "fy 2026-27"],
     status: 'published',
     isVisible: true,
     createdAt: '2026-08-12T00:00:00Z',
-    updatedAt: '2026-08-12T00:00:00Z'
+    updatedAt: '2026-08-18T00:00:00Z'
   },
   {
     id: "word-counter",

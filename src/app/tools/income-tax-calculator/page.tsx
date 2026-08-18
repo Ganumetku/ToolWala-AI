@@ -20,7 +20,7 @@ import {
 } from '@/lib/taxConstants';
 
 const SEO_TITLE = "Income Tax Calculator India FY 2026-27 (AY 2027-28) | ToolWala AI";
-const SEO_DESC = "Calculate Indian Income Tax for FY 2026-27 & FY 2025-26 with verified Union Budget slabs, New vs Old Regime comparison, 87A marginal relief, and Section 80C/80D deductions.";
+const SEO_DESC = "Calculate Indian Income Tax for FY 2026-27 (AY 2027-28). Compare New vs Old regime slabs with official Union Budget rates, 87A marginal relief, and Section 80C/80D deductions.";
 
 // Helper: Format Currency (INR)
 const formatCurrency = (val: number) => {

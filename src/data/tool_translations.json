@@ -10714,12 +10714,12 @@
     "toolSlug": "income-tax-calculator",
     "locale": "hi",
     "title": "आयकर कैलकुलेटर (भारत)",
-    "description": "नई बनाम पुरानी कर व्यवस्था की तुलना करें, 80C/80D कटौती बचत और मासिक TDS अनुमान लगाएं।",
+    "description": "वित्तीय वर्ष 2026-27 (AY 2027-28) के लिए भारतीय आयकर की गणना करें। बजट दरों के साथ नई बनाम पुरानी व्यवस्था की तुलना करें।",
     "faq": [],
-    "seoTitle": "आयकर कैलकुलेटर (भारत) - ToolWala AI",
-    "seoDescription": "नई बनाम पुरानी कर व्यवस्था की तुलना करें, 80C/80D कटौती बचत और मासिक TDS अनुमान लगाएं।",
+    "seoTitle": "आयकर कैलकुलेटर (भारत) FY 2026-27 - ToolWala AI",
+    "seoDescription": "वित्तीय वर्ष 2026-27 (AY 2027-28) के लिए भारतीय आयकर की गणना करें। बजट दरों के साथ नई बनाम पुरानी व्यवस्था की तुलना करें।",
     "createdAt": "2026-08-14T05:37:04.228Z",
-    "updatedAt": "2026-08-14T05:37:04.229Z"
+    "updatedAt": "2026-08-18T05:37:04.229Z"
   },
   {
     "id": "trans-word-counter-hi",
@@ -10840,19 +10840,19 @@
     "toolSlug": "income-tax-calculator",
     "locale": "es",
     "title": "Calculadora del impuesto sobre la renta (India)",
-    "description": "Calcule el impuesto sobre la renta de la India para los años fiscales 2024-25 y 2025-26. Compare losas de régimen nuevo versus antiguo.",
+    "description": "Calcule el impuesto sobre la renta de la India para el año fiscal 2026-27 (AY 2027-28). Compare los tramos del nuevo versus el antiguo régimen con las tasas oficiales del Presupuesto de la Unión.",
     "faq": [
       {
         "question": "¿Qué régimen es mejor: el nuevo régimen fiscal o el antiguo régimen fiscal?",
-        "answer": "El nuevo régimen fiscal ofrece tasas impositivas fijas más bajas y una deducción estándar más alta (75 000 ₹) con cero impuestos para ingresos de hasta 7 lakhs (reembolso 87A de u/s). Sin embargo, si tiene deducciones elevadas (80C, 80D, HRA, intereses de préstamos hipotecarios que superan los 3,75 lakhs), el antiguo régimen fiscal puede ahorrar más impuestos."
+        "answer": "El nuevo régimen fiscal ofrece tasas impositivas fijas más bajas y una deducción estándar más alta (75 000 ₹) con cero impuestos para ingresos de hasta 12 lakhs (reembolso 87A de u/s). Sin embargo, si tiene deducciones elevadas (80C, 80D, HRA, intereses de préstamos hipotecarios que superan los 3,75 lakhs), el antiguo régimen fiscal puede ahorrar más impuestos."
       },
       {
         "question": "¿Qué es la devolución de impuestos de la Sección 87A?",
-        "answer": "Según la Sección 87A, las personas con ingresos imponibles de hasta 700 000 ₹ según el Nuevo Régimen no pagan impuestos (reembolso de hasta 25 000 ₹). En el antiguo régimen, el límite de reembolso es de 500 000 INR (reembolso de hasta 12 500 INR)."
+        "answer": "Según la Sección 87A, las personas con ingresos imponibles de hasta 1.200.000 ₹ según el Nuevo Régimen no pagan impuestos (reembolso de hasta 60.000 ₹). En el antiguo régimen, el límite de reembolso es de 500.000 INR (reembolso de hasta 12.500 INR)."
       },
       {
-        "question": "¿Qué es la deducción estándar para el año fiscal 2024-25?",
-        "answer": "La deducción estándar para empleados asalariados es de 75.000 INR en el nuevo régimen fiscal y de 50.000 INR en el antiguo régimen fiscal."
+        "question": "¿Qué es la deducción estándar para el año fiscal 2026-27?",
+        "answer": "La deducción estándar para empleados asalariados es de 75.000 INR en el nuevo régimen fiscal y de 50.000 INR en el antiguo régimen fiscal."
       },
       {
         "question": "¿Se incluye la Tasa de Salud y Educación en el cálculo?",
@@ -10860,9 +10860,9 @@
       }
     ],
     "seoTitle": "Calculadora del impuesto sobre la renta (India)",
-    "seoDescription": "Calcule el impuesto sobre la renta de la India para los años fiscales 2024-25 y 2025-26. Compare losas de régimen nuevo versus antiguo.",
+    "seoDescription": "Calcule el impuesto sobre la renta de la India para el año fiscal 2026-27 (AY 2027-28). Compare los tramos del nuevo versus el antiguo régimen con las tasas oficiales del Presupuesto de la Unión.",
     "createdAt": "2026-08-17T16:51:55.618Z",
-    "updatedAt": "2026-08-17T16:51:55.688Z"
+    "updatedAt": "2026-08-18T16:51:55.688Z"
   },
   {
     "id": "aqv0x7y",
@@ -11039,18 +11039,18 @@
     "toolSlug": "income-tax-calculator",
     "locale": "pt",
     "title": "Calculadora de imposto de renda (Índia)",
-    "description": "Calcule o imposto de renda indiano para o ano fiscal de 2024-25 e 2025-26. Compare lajes de regime novo e antigo.",
+    "description": "Calcule o imposto de renda indiano para o ano fiscal de 2026-27 (AY 2027-28). Compare as tabelas do novo e antigo regime com as alíquotas oficiais do Orçamento da União.",
     "faq": [
       {
         "question": "Qual regime é melhor: Novo Regime Tributário ou Antigo Regime Tributário?",
-        "answer": "O Novo Regime Tributário oferece taxas de imposto mais baixas e uma Dedução Padrão mais alta ($$ 75.000) com imposto zero para renda de até ₹ 7 Lakhs (desconto u/s 87A). No entanto, se você tiver deduções altas (80C, 80D, HRA, juros de empréstimos residenciais superiores a ₹ 3,75 Lakhs), o antigo regime tributário pode economizar mais impostos."
+        "answer": "O Novo Regime Tributário oferece taxas de imposto mais baixas e uma Dedução Padrão mais alta ($$ 75.000) com imposto zero para renda de até ₹ 12 Lakhs (desconto u/s 87A). No entanto, se você tiver deduções altas (80C, 80D, HRA, juros de empréstimos residenciais superiores a ₹ 3,75 Lakhs), o antigo regime tributário pode economizar mais impostos."
       },
       {
         "question": "O que é o desconto fiscal da Seção 87A?",
-        "answer": "De acordo com a Seção 87A, indivíduos com renda tributável de até ₹ 7.00.000 sob o Novo Regime pagam imposto zero (desconto de até ₹ 25.000). No Antigo Regime, o limite de desconto é de ₹ 5.00.000 (desconto de até ₹ 12.500)."
+        "answer": "De acordo com a Seção 87A, indivíduos com renda tributável de até ₹ 12.00.000 sob o Novo Regime pagam imposto zero (desconto de até ₹ 60.000). No Antigo Regime, o limite de desconto é de ₹ 5.00.000 (desconto de até ₹ 12.500)."
       },
       {
-        "question": "Qual é a dedução padrão para o ano fiscal de 2024-25?",
+        "question": "Qual é a dedução padrão para o ano fiscal de 2026-27?",
         "answer": "A dedução padrão para funcionários assalariados é de ₹ 75.000 no Novo Regime Tributário e de ₹ 50.000 no Antigo Regime Tributário."
       },
       {
@@ -11059,9 +11059,9 @@
       }
     ],
     "seoTitle": "Calculadora de imposto de renda (Índia)",
-    "seoDescription": "Calcule o imposto de renda indiano para o ano fiscal de 2024-25 e 2025-26. Compare lajes de regime novo e antigo.",
+    "seoDescription": "Calcule o imposto de renda indiano para o ano fiscal de 2026-27 (AY 2027-28). Compare as tabelas do novo e antigo regime com as alíquotas oficiais do Orçamento da União.",
     "createdAt": "2026-08-17T16:52:20.875Z",
-    "updatedAt": "2026-08-17T16:52:21.525Z"
+    "updatedAt": "2026-08-18T16:52:21.525Z"
   },
   {
     "id": "0f0n7ba",

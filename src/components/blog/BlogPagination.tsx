@@ -24,8 +24,8 @@ export default function BlogPagination({
     const isActive = p === page;
     const className = `min-w-10 h-10 flex items-center justify-center rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
       isActive
-        ? "bg-blue-600 text-white shadow-[0_0_12px_rgba(37,99,235,0.4)]"
-        : "bg-white/5 text-gray-400 hover:text-white hover:bg-white/10 border border-white/5"
+        ? "bg-blue-600 text-white shadow-md shadow-blue-500/25 border border-blue-600"
+        : "bg-white dark:bg-white/5 text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white hover:bg-blue-50 dark:hover:bg-white/10 border border-slate-200/90 dark:border-white/10 shadow-sm"
     }`;
 
     if (basePath) {
@@ -50,7 +50,7 @@ export default function BlogPagination({
         basePath ? (
           <Link
             href={page === 2 ? basePath : `${basePath}?page=${page - 1}`}
-            className="p-2.5 rounded-xl bg-white/5 border border-white/5 text-gray-400 hover:text-white transition-colors"
+            className="p-2.5 rounded-xl bg-white dark:bg-white/5 border border-slate-200/90 dark:border-white/10 text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white hover:bg-blue-50 dark:hover:bg-white/10 transition-colors shadow-sm"
             aria-label="Previous page"
           >
             <ChevronLeft className="w-4 h-4" />
@@ -59,7 +59,7 @@ export default function BlogPagination({
           <button
             type="button"
             onClick={() => onPageChange?.(page - 1)}
-            className="p-2.5 rounded-xl bg-white/5 border border-white/5 text-gray-400 hover:text-white transition-colors cursor-pointer"
+            className="p-2.5 rounded-xl bg-white dark:bg-white/5 border border-slate-200/90 dark:border-white/10 text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white hover:bg-blue-50 dark:hover:bg-white/10 transition-colors cursor-pointer shadow-sm"
             aria-label="Previous page"
           >
             <ChevronLeft className="w-4 h-4" />
@@ -79,7 +79,7 @@ export default function BlogPagination({
         basePath ? (
           <Link
             href={`${basePath}?page=${page + 1}`}
-            className="p-2.5 rounded-xl bg-white/5 border border-white/5 text-gray-400 hover:text-white transition-colors"
+            className="p-2.5 rounded-xl bg-white dark:bg-white/5 border border-slate-200/90 dark:border-white/10 text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white hover:bg-blue-50 dark:hover:bg-white/10 transition-colors shadow-sm"
             aria-label="Next page"
           >
             <ChevronRight className="w-4 h-4" />
@@ -88,7 +88,7 @@ export default function BlogPagination({
           <button
             type="button"
             onClick={() => onPageChange?.(page + 1)}
-            className="p-2.5 rounded-xl bg-white/5 border border-white/5 text-gray-400 hover:text-white transition-colors cursor-pointer"
+            className="p-2.5 rounded-xl bg-white dark:bg-white/5 border border-slate-200/90 dark:border-white/10 text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white hover:bg-blue-50 dark:hover:bg-white/10 transition-colors cursor-pointer shadow-sm"
             aria-label="Next page"
           >
             <ChevronRight className="w-4 h-4" />

@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const cspHeader = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://unpkg.com https://cdn.jsdelivr.net;
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   img-src 'self' blob: data: https://*.supabase.co https://images.unsplash.com https://www.google-analytics.com https://www.googletagmanager.com;
   font-src 'self' data: https://fonts.gstatic.com;
@@ -9,7 +9,7 @@ const cspHeader = `
   base-uri 'self';
   form-action 'self';
   frame-ancestors 'self';
-  worker-src 'self' blob:;
+  worker-src 'self' blob: https://unpkg.com https://cdn.jsdelivr.net;
   child-src 'self' blob:;
   connect-src 'self' blob: data: https://unpkg.com https://cdn.jsdelivr.net https://*.supabase.co https://www.google-analytics.com https://stats.g.doubleclick.net https://vitals.vercel-insights.com;
 `.replace(/\s{2,}/g, ' ').trim();

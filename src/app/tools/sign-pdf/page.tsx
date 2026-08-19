@@ -8,7 +8,7 @@ import {
   Shield, RefreshCw, AlertCircle, CheckCircle,
   ChevronLeft, ArrowRight, Sparkles, Sliders,
   HelpCircle, ChevronDown, PenTool, Type, Image as ImageIcon,
-  Check, X
+  Check, X, Layers
 } from 'lucide-react';
 import { toast } from 'sonner';
 import ToolArticle from '@/components/ToolArticle';
@@ -24,6 +24,7 @@ const uint8ArrayToArrayBuffer = (bytes: Uint8Array): ArrayBuffer => {
 };
 
 type SignatureMethod = 'draw' | 'type' | 'upload';
+type PageScope = 'current' | 'all' | 'first' | 'last' | 'custom';
 
 export default function SignPdf() {
   const [pdfjs, setPdfjs] = useState<any>(null);
@@ -38,10 +39,17 @@ export default function SignPdf() {
   const [fontFamily, setFontFamily] = useState<string>('Brush Script MT');
   const [uploadedSigUrl, setUploadedSigUrl] = useState<string>("");
   const [uploadedSigBytes, setUploadedSigBytes] = useState<Uint8Array | null>(null);
+  const [hasDrawn, setHasDrawn] = useState<boolean>(false);
+  const [drawPadVersion, setDrawPadVersion] = useState<number>(0);
+  
+  // Page Scope Settings
+  const [pageScope, setPageScope] = useState<PageScope>('current');
+  const [customPages, setCustomPages] = useState<string>("");
   
   // Coordinates mapping
   const [stampCoords, setStampCoords] = useState<{ x: number; y: number } | null>(null);
-  const [stampWidth, setStampWidth] = useState<number>(150);
+  const [stampWidth, setStampWidth] = useState<number>(160);
+  const [isDraggingStamp, setIsDraggingStamp] = useState(false);
   
   // Drawing pad state
   const [isDrawing, setIsDrawing] = useState(false);
@@ -55,15 +63,59 @@ export default function SignPdf() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const sigImageInputRef = useRef<HTMLInputElement>(null);
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
+  const baseCanvasRef = useRef<HTMLCanvasElement | null>(null);
+  const renderTaskRef = useRef<any>(null);
   const drawCanvasRef = useRef<HTMLCanvasElement>(null);
+  const uploadedSigImgRef = useRef<HTMLImageElement | null>(null);
   const pdfDocRef = useRef<any>(null);
+
+  // Helper to parse target page indices based on user scope
+  const getTargetPageIndices = (
+    scope: PageScope,
+    current: number,
+    total: number,
+    customStr: string
+  ): number[] => {
+    if (total <= 0) return [];
+    if (scope === 'current') return [current - 1];
+    if (scope === 'all') return Array.from({ length: total }, (_, i) => i);
+    if (scope === 'first') return [0];
+    if (scope === 'last') return [total - 1];
+    if (scope === 'custom') {
+      const indices = new Set<number>();
+      const parts = customStr.split(',');
+      for (const part of parts) {
+        const trimmed = part.trim();
+        if (!trimmed) continue;
+        if (trimmed.includes('-')) {
+          const [startStr, endStr] = trimmed.split('-');
+          const start = parseInt(startStr);
+          const end = parseInt(endStr);
+          if (!isNaN(start) && !isNaN(end)) {
+            const min = Math.max(1, Math.min(start, end));
+            const max = Math.min(total, Math.max(start, end));
+            for (let p = min; p <= max; p++) {
+              indices.add(p - 1);
+            }
+          }
+        } else {
+          const p = parseInt(trimmed);
+          if (!isNaN(p) && p >= 1 && p <= total) {
+            indices.add(p - 1);
+          }
+        }
+      }
+      return Array.from(indices).sort((a, b) => a - b);
+    }
+    return [current - 1];
+  };
 
   // Load PDF.js dynamically
   useEffect(() => {
     const loadPdfjs = async () => {
       try {
         const lib = await import('pdfjs-dist');
-        lib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${lib.version}/build/pdf.worker.min.mjs`;
+        lib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
         setPdfjs(lib);
       } catch (err) {
         console.error("Failed to load pdfjs-dist", err);
@@ -81,60 +133,147 @@ export default function SignPdf() {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
-  // Preview Page details
-  const renderPreviewPage = async (pageNum: number) => {
+  // Synchronously draw signature stamp overlay on top of the cached base PDF canvas
+  const drawCanvasWithOverlay = () => {
+    const baseCanvas = baseCanvasRef.current;
+    const canvas = previewCanvasRef.current;
+    if (!canvas || !baseCanvas) return;
+
+    if (canvas.width !== baseCanvas.width || canvas.height !== baseCanvas.height) {
+      canvas.width = baseCanvas.width;
+      canvas.height = baseCanvas.height;
+    }
+
+    const context = canvas.getContext('2d');
+    if (!context) return;
+
+    // Draw base PDF image
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(baseCanvas, 0, 0);
+
+    const targetIndices = getTargetPageIndices(pageScope, currentPage, totalPages, customPages);
+    const isSignatureOnCurrentPage = targetIndices.includes(currentPage - 1);
+
+    if (!isSignatureOnCurrentPage) {
+      // Signature is disabled on this page
+      context.save();
+      context.fillStyle = 'rgba(15, 23, 42, 0.7)';
+      context.font = 'bold 11px sans-serif';
+      context.fillText(`ℹ Signature is disabled on Page ${currentPage}`, 16, 24);
+      context.restore();
+      return;
+    }
+
+    // Default position if user has not chosen one
+    const activeX = stampCoords ? stampCoords.x : canvas.width / 2;
+    const activeY = stampCoords ? stampCoords.y : Math.max(60, canvas.height * 0.82);
+
+    const stampH = stampWidth * 0.38;
+    const stampX = activeX - stampWidth / 2;
+    const stampY = activeY - stampH / 2;
+
+    // 1. Draw signature visual content
+    context.save();
+    if (method === 'draw' && drawCanvasRef.current && hasDrawn) {
+      context.drawImage(drawCanvasRef.current, stampX, stampY, stampWidth, stampH);
+    } else if (method === 'type' && typedName.trim()) {
+      context.font = `italic 600 ${Math.max(14, Math.round(stampWidth * 0.14))}px "${fontFamily}", cursive, sans-serif`;
+      context.fillStyle = '#0f172a';
+      context.textAlign = 'center';
+      context.textBaseline = 'middle';
+      context.fillText(typedName, activeX, activeY);
+    } else if (method === 'upload' && uploadedSigImgRef.current) {
+      try {
+        context.drawImage(uploadedSigImgRef.current, stampX, stampY, stampWidth, stampH);
+      } catch (e) {
+        console.warn("Could not draw uploaded sig preview", e);
+      }
+    } else {
+      // Placeholder text inside signature boundary
+      context.font = '500 11px sans-serif';
+      context.fillStyle = '#64748b';
+      context.textAlign = 'center';
+      context.textBaseline = 'middle';
+      context.fillText("✎ Signature will appear here", activeX, activeY);
+    }
+    context.restore();
+
+    // 2. Draw signature stamp outline box
+    context.save();
+    context.strokeStyle = '#2563eb';
+    context.lineWidth = 1.5;
+    context.setLineDash([5, 4]);
+    context.strokeRect(stampX, stampY, stampWidth, stampH);
+    context.fillStyle = 'rgba(37,99,235,0.05)';
+    context.fillRect(stampX, stampY, stampWidth, stampH);
+
+    // Top badge
+    context.setLineDash([]);
+    context.fillStyle = '#2563eb';
+    context.font = 'bold 9px sans-serif';
+    context.fillText("✎ SIGNATURE (Click or Drag to Move)", stampX + 4, Math.max(12, stampY - 5));
+    context.restore();
+  };
+
+  // Render PDF Page to Base Canvas (only when page/document changes)
+  const renderPdfBasePage = async (pageNum: number) => {
     if (!pdfDocRef.current || !pdfjs) return;
     try {
+      // Cancel previous in-flight render task if any
+      if (renderTaskRef.current) {
+        try {
+          renderTaskRef.current.cancel();
+        } catch (_) {}
+        renderTaskRef.current = null;
+      }
+
       const page = await pdfDocRef.current.getPage(pageNum);
       const viewport = page.getViewport({ scale: 0.75 });
-      
-      const canvas = previewCanvasRef.current;
-      if (canvas) {
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        const context = canvas.getContext('2d');
-        if (context) {
-          context.fillStyle = '#ffffff';
-          context.fillRect(0, 0, canvas.width, canvas.height);
-          
-          await page.render({
-            canvasContext: context,
-            viewport: viewport,
-          }).promise;
 
-          // Draw the stamp marker visually on canvas preview
-          if (stampCoords) {
-            context.strokeStyle = '#2563eb'; // blue primary
-            context.lineWidth = 2;
-            context.strokeRect(
-              stampCoords.x - stampWidth / 2, 
-              stampCoords.y - (stampWidth * 0.4) / 2, 
-              stampWidth, 
-              stampWidth * 0.4
-            );
-            context.fillStyle = 'rgba(37,99,235,0.1)';
-            context.fillRect(
-              stampCoords.x - stampWidth / 2, 
-              stampCoords.y - (stampWidth * 0.4) / 2, 
-              stampWidth, 
-              stampWidth * 0.4
-            );
-            context.fillStyle = '#2563eb';
-            context.font = 'bold 9px sans-serif';
-            context.fillText("SIGNATURE STAMP", stampCoords.x - stampWidth / 2 + 5, stampCoords.y - (stampWidth * 0.4) / 2 - 5);
-          }
-        }
+      // Offscreen/base canvas
+      if (!baseCanvasRef.current) {
+        baseCanvasRef.current = document.createElement('canvas');
       }
-    } catch (err) {
-      console.error("Preview render failed:", err);
+      const baseCanvas = baseCanvasRef.current;
+      baseCanvas.width = viewport.width;
+      baseCanvas.height = viewport.height;
+      const baseCtx = baseCanvas.getContext('2d');
+      if (!baseCtx) return;
+
+      baseCtx.fillStyle = '#ffffff';
+      baseCtx.fillRect(0, 0, baseCanvas.width, baseCanvas.height);
+
+      const renderTask = page.render({
+        canvasContext: baseCtx,
+        viewport: viewport,
+      });
+      renderTaskRef.current = renderTask;
+
+      await renderTask.promise;
+      renderTaskRef.current = null;
+
+      // Draw overlay on visible canvas
+      drawCanvasWithOverlay();
+    } catch (err: any) {
+      if (err?.name !== 'RenderingCancelledException') {
+        console.error("PDF Base render failed:", err);
+      }
     }
   };
 
+  // When PDF doc or currentPage changes, render base page
   useEffect(() => {
     if (pdfDocRef.current) {
-      renderPreviewPage(currentPage);
+      renderPdfBasePage(currentPage);
     }
-  }, [currentPage, pdfBytes, stampCoords, stampWidth]);
+  }, [currentPage, pdfBytes]);
+
+  // When signature params or page scope change, instantly redraw overlay without PDF.js re-render
+  useEffect(() => {
+    if (baseCanvasRef.current) {
+      drawCanvasWithOverlay();
+    }
+  }, [stampCoords, stampWidth, method, typedName, fontFamily, uploadedSigUrl, hasDrawn, drawPadVersion, pageScope, customPages, currentPage, totalPages]);
 
   const handlePdfUpload = (file: File) => {
     setIsProcessing(true);
@@ -142,6 +281,8 @@ export default function SignPdf() {
     setSignedBytes(null);
     setStampCoords(null);
     setCurrentPage(1);
+    setPageScope('current');
+    setCustomPages("");
     
     const reader = new FileReader();
     reader.onload = async (e) => {
@@ -161,9 +302,13 @@ export default function SignPdf() {
         setTotalPages(doc.numPages);
         setPdfBytes(bytes);
         setPdfFile(file);
-      } catch (err) {
+      } catch (err: any) {
         console.error(err);
-        toast.error("Failed to read PDF file. Make sure it is not password protected.");
+        if (err?.name === 'PasswordException' || err?.message?.toLowerCase().includes('password')) {
+          toast.error("This PDF file is password protected. Please unlock it first.");
+        } else {
+          toast.error(err?.message || "Failed to read PDF file. Make sure it is a valid PDF.");
+        }
       } finally {
         setIsProcessing(false);
       }
@@ -192,9 +337,12 @@ export default function SignPdf() {
     if (!ctx) return;
     
     setIsDrawing(true);
+    setHasDrawn(true);
     const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
     ctx.beginPath();
-    ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    ctx.moveTo((e.clientX - rect.left) * scaleX, (e.clientY - rect.top) * scaleY);
   };
 
   const draw = (e: React.PointerEvent<HTMLCanvasElement>) => {
@@ -206,15 +354,19 @@ export default function SignPdf() {
     if (!ctx) return;
 
     const rect = canvas.getBoundingClientRect();
-    ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    ctx.lineTo((e.clientX - rect.left) * scaleX, (e.clientY - rect.top) * scaleY);
     ctx.strokeStyle = '#0f172a';
     ctx.lineWidth = 3.5;
     ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
     ctx.stroke();
   };
 
   const stopDrawing = () => {
     setIsDrawing(false);
+    setDrawPadVersion(v => v + 1);
   };
 
   const clearDrawPad = () => {
@@ -224,6 +376,8 @@ export default function SignPdf() {
     if (ctx) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
+    setHasDrawn(false);
+    setDrawPadVersion(v => v + 1);
   };
 
   // Upload Signature Image handler
@@ -234,6 +388,13 @@ export default function SignPdf() {
         const url = URL.createObjectURL(file);
         setUploadedSigUrl(url);
         
+        const img = new Image();
+        img.onload = () => {
+          uploadedSigImgRef.current = img;
+          setDrawPadVersion(v => v + 1);
+        };
+        img.src = url;
+
         const reader = new FileReader();
         reader.onload = (event) => {
           const arrBuffer = event.target?.result as ArrayBuffer;
@@ -246,35 +407,76 @@ export default function SignPdf() {
     }
   };
 
-  // Canvas Click event to record stamp coords
-  const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  // Interactive PDF Canvas click / drag position handlers
+  const calculateCanvasCoords = (e: React.PointerEvent<HTMLCanvasElement> | React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = previewCanvasRef.current;
-    if (!canvas) return;
+    if (!canvas) return null;
     const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    setStampCoords({ x, y });
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    return {
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top) * scaleY,
+    };
+  };
+
+  const handlePreviewPointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    const coords = calculateCanvasCoords(e);
+    if (!coords) return;
+    setIsDraggingStamp(true);
+    setStampCoords(coords);
+  };
+
+  const handlePreviewPointerMove = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    if (!isDraggingStamp) return;
+    const coords = calculateCanvasCoords(e);
+    if (coords) {
+      setStampCoords(coords);
+    }
+  };
+
+  const handlePreviewPointerUp = () => {
+    setIsDraggingStamp(false);
   };
 
   // Execute Signature Merging
   const applySignature = async () => {
-    if (!pdfBytes || !stampCoords) {
-      toast.error("Please click on the PDF page preview to place your signature.");
+    if (!pdfBytes) {
+      toast.error("Please upload a PDF file first.");
+      return;
+    }
+
+    const canvas = previewCanvasRef.current;
+    if (!canvas) return;
+    const canvasWidth = canvas.width;
+    const canvasHeight = canvas.height;
+
+    const activeCoords = stampCoords || {
+      x: canvasWidth / 2,
+      y: Math.max(60, canvasHeight * 0.82),
+    };
+
+    const targetIndices = getTargetPageIndices(pageScope, currentPage, totalPages, customPages);
+    if (targetIndices.length === 0) {
+      toast.error("Please specify at least one valid page to apply your signature.");
       return;
     }
     
     setIsProcessing(true);
     try {
       let signatureImgBytes: Uint8Array | null = null;
-      let isPng = true;
 
       // Extract signature image based on method
       if (method === 'draw') {
-        const canvas = drawCanvasRef.current;
-        if (!canvas) return;
+        const drawCanvas = drawCanvasRef.current;
+        if (!drawCanvas || !hasDrawn) {
+          toast.error("Please draw your signature on the pad first.");
+          setIsProcessing(false);
+          return;
+        }
         
         // Export drawing pad canvas to PNG data URL
-        const dataUrl = canvas.toDataURL('image/png');
+        const dataUrl = drawCanvas.toDataURL('image/png');
         const base64 = dataUrl.split(',')[1];
         const raw = window.atob(base64);
         signatureImgBytes = new Uint8Array(new ArrayBuffer(raw.length));
@@ -289,23 +491,21 @@ export default function SignPdf() {
         }
 
         const textCanvas = document.createElement('canvas');
-        textCanvas.width = 400;
-        textCanvas.height = 150;
+        textCanvas.width = 600;
+        textCanvas.height = 220;
         const ctx = textCanvas.getContext('2d');
         if (ctx) {
-          ctx.fillStyle = 'rgba(0,0,0,0)'; // transparent bg
-          ctx.fillRect(0, 0, 400, 150);
+          ctx.clearRect(0, 0, 600, 220);
           
-          let selectedFont = 'cursive';
-          if (fontFamily === 'Brush Script MT') selectedFont = '36px "Brush Script MT", cursive';
-          else if (fontFamily === 'Lucida Handwriting') selectedFont = '24px "Lucida Handwriting", cursive';
-          else selectedFont = '30px "Apple Chancery", cursive';
+          let selectedFont = '48px "Brush Script MT", cursive';
+          if (fontFamily === 'Lucida Handwriting') selectedFont = '36px "Lucida Handwriting", cursive';
+          else if (fontFamily === 'Apple Chancery') selectedFont = '42px "Apple Chancery", cursive';
           
           ctx.font = selectedFont;
-          ctx.fillStyle = '#0f172a'; // ink blue
+          ctx.fillStyle = '#0f172a'; // ink dark blue
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-          ctx.fillText(typedName, 200, 75);
+          ctx.fillText(typedName, 300, 110);
         }
         const dataUrl = textCanvas.toDataURL('image/png');
         const base64 = dataUrl.split(',')[1];
@@ -316,7 +516,7 @@ export default function SignPdf() {
         }
       } else if (method === 'upload') {
         if (!uploadedSigBytes) {
-          toast.error("Please upload a signature image.");
+          toast.error("Please upload a signature image first.");
           setIsProcessing(false);
           return;
         }
@@ -332,40 +532,39 @@ export default function SignPdf() {
       const { PDFDocument } = await import('pdf-lib');
       const pdfDoc = await PDFDocument.load(pdfBytes);
       const pages = pdfDoc.getPages();
-      const page = pages[currentPage - 1];
-      const { width: pageWidth, height: pageHeight } = page.getSize();
 
-      const canvas = previewCanvasRef.current;
-      if (!canvas) return;
-      const canvasWidth = canvas.width;
-      const canvasHeight = canvas.height;
-
-      // Map canvas click coordinates back to PDF coordinates
-      const pdfX = (stampCoords.x / canvasWidth) * pageWidth;
-      const pdfY = ((canvasHeight - stampCoords.y) / canvasHeight) * pageHeight;
-      const pdfWidth = (stampWidth / canvasWidth) * pageWidth;
-      const pdfHeight = ((stampWidth * 0.4) / canvasHeight) * pageHeight;
-
-      // Embed signature image
+      // Embed signature image once (support PNG or JPG)
       let embeddedImg;
-      if (isPng) {
+      try {
         embeddedImg = await pdfDoc.embedPng(signatureImgBytes);
-      } else {
+      } catch {
         embeddedImg = await pdfDoc.embedJpg(signatureImgBytes);
       }
 
-      // Draw image onto PDF page
-      page.drawImage(embeddedImg, {
-        x: pdfX - pdfWidth / 2,
-        y: pdfY - pdfHeight / 2,
-        width: pdfWidth,
-        height: pdfHeight,
-      });
+      // Draw signature onto all targeted pages
+      for (const pageIdx of targetIndices) {
+        if (pageIdx < 0 || pageIdx >= pages.length) continue;
+        const page = pages[pageIdx];
+        const { width: pageWidth, height: pageHeight } = page.getSize();
+
+        // Map canvas coordinates back to PDF coordinates
+        const pdfX = (activeCoords.x / canvasWidth) * pageWidth;
+        const pdfY = ((canvasHeight - activeCoords.y) / canvasHeight) * pageHeight;
+        const pdfWidth = (stampWidth / canvasWidth) * pageWidth;
+        const pdfHeight = ((stampWidth * 0.38) / canvasHeight) * pageHeight;
+
+        page.drawImage(embeddedImg, {
+          x: pdfX - pdfWidth / 2,
+          y: pdfY - pdfHeight / 2,
+          width: pdfWidth,
+          height: pdfHeight,
+        });
+      }
 
       const compiledBytes = await pdfDoc.save();
       setSignedBytes(compiledBytes);
       setSuccess(true);
-      toast.success("Signature stamped successfully!");
+      toast.success(`Signature stamped on ${targetIndices.length} ${targetIndices.length === 1 ? 'page' : 'pages'} successfully!`);
     } catch (err) {
       console.error(err);
       toast.error("Failed to sign PDF document.");
@@ -389,6 +588,13 @@ export default function SignPdf() {
   };
 
   const resetAll = () => {
+    if (renderTaskRef.current) {
+      try {
+        renderTaskRef.current.cancel();
+      } catch (_) {}
+      renderTaskRef.current = null;
+    }
+    baseCanvasRef.current = null;
     setPdfFile(null);
     setPdfBytes(null);
     pdfDocRef.current = null;
@@ -399,6 +605,9 @@ export default function SignPdf() {
     setUploadedSigBytes(null);
     setUploadedSigUrl("");
     setTypedName("");
+    setHasDrawn(false);
+    setPageScope('current');
+    setCustomPages("");
     setIsProcessing(false);
     setSuccess(false);
     if (fileInputRef.current) fileInputRef.current.value = '';
@@ -427,6 +636,9 @@ export default function SignPdf() {
       }
     }
   };
+
+  const currentTargetIndices = getTargetPageIndices(pageScope, currentPage, totalPages, customPages);
+  const isSignatureOnCurrentPage = currentTargetIndices.includes(currentPage - 1);
 
   return (
     <ToolLayout>
@@ -696,15 +908,62 @@ export default function SignPdf() {
                           />
                         </div>
 
+                        {/* Target Pages Section */}
+                        <div className="space-y-3 pt-3 border-t border-white/5">
+                          <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest text-gray-400">
+                            <span className="flex items-center gap-1.5"><Layers className="w-3.5 h-3.5 text-blue-500" /> Apply Signature To</span>
+                            <span className="text-blue-400 font-bold">
+                              {currentTargetIndices.length} {currentTargetIndices.length === 1 ? 'Page' : 'Pages'}
+                            </span>
+                          </div>
+
+                          <div className="grid grid-cols-3 gap-1.5">
+                            {[
+                              { id: 'current', label: `Page ${currentPage}` },
+                              { id: 'all', label: `All (${totalPages})` },
+                              { id: 'last', label: 'Last Page' },
+                              { id: 'first', label: 'First Page' },
+                              { id: 'custom', label: 'Custom' },
+                            ].map((scope) => (
+                              <button
+                                key={scope.id}
+                                onClick={() => setPageScope(scope.id as PageScope)}
+                                className={`py-2 px-1 text-[9px] font-black uppercase tracking-wider rounded-lg border transition-all cursor-pointer ${
+                                  pageScope === scope.id
+                                    ? 'bg-blue-600 text-white border-blue-500 shadow-md'
+                                    : 'bg-white/5 border-white/5 text-gray-400 hover:text-white hover:bg-white/10'
+                                }`}
+                              >
+                                {scope.label}
+                              </button>
+                            ))}
+                          </div>
+
+                          {pageScope === 'custom' && (
+                            <div className="space-y-1.5 pt-1">
+                              <input
+                                type="text"
+                                value={customPages}
+                                onChange={(e) => setCustomPages(e.target.value)}
+                                placeholder={`e.g. 1, 3, 5-${totalPages}`}
+                                className="w-full bg-[#F6F8FC] dark:bg-[#030712] border border-white/10 rounded-xl px-3 py-2 text-slate-900 dark:text-white text-xs font-semibold outline-none focus:border-blue-500"
+                              />
+                              <p className="text-[9px] text-gray-500 font-medium">
+                                Enter comma-separated page numbers or ranges (e.g. 1, 2, 4-6).
+                              </p>
+                            </div>
+                          )}
+                        </div>
+
                         <div className="p-4 bg-blue-600/5 border border-blue-600/10 rounded-2xl">
                           <p className="text-[10px] text-gray-400 font-medium leading-relaxed font-sans">
-                            💡 <strong>Interactive Placement:</strong> Navigate to the target page, then **click directly on the preview page** to place the signature stamp marker. You can adjust size and click again to reposition.
+                            💡 <strong>Interactive Placement:</strong> Signature is previewed in real-time. **Click or drag on the preview page** to reposition it anywhere on the document.
                           </p>
                         </div>
 
                         <button
                           onClick={applySignature}
-                          disabled={isProcessing || !stampCoords}
+                          disabled={isProcessing || !pdfFile}
                           className="w-full flex items-center justify-center gap-3 px-6 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-white bg-blue-600 rounded-xl hover:bg-blue-500 transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                         >
                           {isProcessing ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
@@ -715,31 +974,49 @@ export default function SignPdf() {
 
                     {/* Previews panel */}
                     <div className="lg:col-span-7 flex flex-col items-center justify-center border border-white/5 rounded-[2rem] bg-white/[0.01] p-6 relative min-h-[400px]">
-                      <div className="absolute top-4 right-4 flex gap-2">
-                        <button 
-                          disabled={currentPage <= 1}
-                          onClick={() => { setCurrentPage(c => Math.max(1, c - 1)); setStampCoords(null); }}
-                          className="px-3 py-1.5 bg-white/5 border border-white/15 rounded-lg text-xs font-bold text-gray-300 hover:bg-white/10 disabled:opacity-30 cursor-pointer"
-                        >
-                          Prev
-                        </button>
-                        <span className="px-3 py-1.5 text-xs text-gray-400 font-bold uppercase tracking-widest">
-                          Page {currentPage} of {totalPages}
-                        </span>
-                        <button 
-                          disabled={currentPage >= totalPages}
-                          onClick={() => { setCurrentPage(c => Math.min(totalPages, c + 1)); setStampCoords(null); }}
-                          className="px-3 py-1.5 bg-white/5 border border-white/15 rounded-lg text-xs font-bold text-gray-300 hover:bg-white/10 disabled:opacity-30 cursor-pointer"
-                        >
-                          Next
-                        </button>
+                      {/* Top Bar for page status and navigation */}
+                      <div className="flex flex-wrap items-center justify-between gap-3 w-full mb-4 px-2">
+                        <div className="flex items-center gap-2">
+                          {isSignatureOnCurrentPage ? (
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 rounded-full text-[10px] font-black uppercase tracking-wider">
+                              <CheckCircle className="w-3.5 h-3.5" /> Signature Active on Page {currentPage}
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-500/10 border border-white/10 text-gray-400 rounded-full text-[10px] font-black uppercase tracking-wider">
+                              Signature Disabled on Page {currentPage}
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <button 
+                            disabled={currentPage <= 1}
+                            onClick={() => { setCurrentPage(c => Math.max(1, c - 1)); }}
+                            className="px-3 py-1.5 bg-white/5 border border-white/15 rounded-lg text-xs font-bold text-gray-300 hover:bg-white/10 disabled:opacity-30 cursor-pointer"
+                          >
+                            Prev
+                          </button>
+                          <span className="px-3 py-1.5 text-xs text-gray-400 font-bold uppercase tracking-widest">
+                            Page {currentPage} of {totalPages}
+                          </span>
+                          <button 
+                            disabled={currentPage >= totalPages}
+                            onClick={() => { setCurrentPage(c => Math.min(totalPages, c + 1)); }}
+                            className="px-3 py-1.5 bg-white/5 border border-white/15 rounded-lg text-xs font-bold text-gray-300 hover:bg-white/10 disabled:opacity-30 cursor-pointer"
+                          >
+                            Next
+                          </button>
+                        </div>
                       </div>
 
-                      <div className="max-w-full overflow-hidden flex items-center justify-center border border-white/5 rounded-xl bg-white shadow-xl mt-6">
+                      <div className="max-w-full overflow-hidden flex items-center justify-center border border-white/5 rounded-xl bg-white shadow-xl">
                         <canvas 
                           ref={previewCanvasRef} 
-                          onClick={handleCanvasClick}
-                          className="max-w-full max-h-[500px] cursor-crosshair" 
+                          onPointerDown={handlePreviewPointerDown}
+                          onPointerMove={handlePreviewPointerMove}
+                          onPointerUp={handlePreviewPointerUp}
+                          onPointerLeave={handlePreviewPointerUp}
+                          className="max-w-full max-h-[500px] cursor-crosshair touch-none select-none" 
                         />
                       </div>
                     </div>

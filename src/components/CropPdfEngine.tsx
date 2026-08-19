@@ -97,7 +97,7 @@ export default function CropPdfEngine({ seoArticle }: CropPdfEngineProps) {
     const initPdfjs = async () => {
       try {
         const lib = await import("pdfjs-dist");
-        lib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${lib.version}/build/pdf.worker.min.mjs`;
+        lib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
         setPdfjs(lib);
       } catch (err) {
         console.error("Failed to load pdfjs-dist", err);

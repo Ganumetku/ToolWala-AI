@@ -72,7 +72,7 @@ export default function WatermarkPdf() {
     const loadPdfjs = async () => {
       try {
         const lib = await import('pdfjs-dist');
-        lib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${lib.version}/build/pdf.worker.min.mjs`;
+        lib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
         setPdfjs(lib);
       } catch (err) {
         console.error("Failed to load pdfjs-dist", err);
@@ -90,14 +90,12 @@ export default function WatermarkPdf() {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
-  // ------------------------------------
-  // PREVIEW GENERATION
-  // ------------------------------------
+  // Preview Page details
   const renderPreviewPage = async (pageNum: number) => {
     if (!pdfDocRef.current || !pdfjs) return;
     try {
       const page = await pdfDocRef.current.getPage(pageNum);
-      const viewport = page.getViewport({ scale: 0.75 }); // balanced scale for workspace preview
+      const viewport = page.getViewport({ scale: 0.75 });
       
       const canvas = canvasRef.current;
       if (canvas) {
@@ -119,7 +117,6 @@ export default function WatermarkPdf() {
     }
   };
 
-  // Render preview whenever file or currentPage changes
   useEffect(() => {
     if (pdfDocRef.current) {
       renderPreviewPage(currentPage);
@@ -153,9 +150,13 @@ export default function WatermarkPdf() {
         setTotalPages(doc.numPages);
         setPdfBytes(bytes);
         setPdfFile(file);
-      } catch (err) {
+      } catch (err: any) {
         console.error(err);
-        toast.error("Failed to read PDF file. Make sure it is not password protected.");
+        if (err?.name === 'PasswordException' || err?.message?.toLowerCase().includes('password')) {
+          toast.error("This PDF file is password protected. Please unlock it first.");
+        } else {
+          toast.error(err?.message || "Failed to read PDF file. Make sure it is a valid PDF.");
+        }
       } finally {
         setIsProcessing(false);
       }

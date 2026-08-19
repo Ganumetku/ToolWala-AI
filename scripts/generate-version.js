@@ -39,6 +39,22 @@ function main() {
     fs.mkdirSync(versionJsonDir, { recursive: true });
   }
 
+  // Sync pdfjs worker to public directory
+  try {
+    const workerSrc = path.join(__dirname, '../node_modules/pdfjs-dist/build/pdf.worker.min.mjs');
+    const workerDestDir = path.join(__dirname, '../public');
+    const workerDest = path.join(workerDestDir, 'pdf.worker.min.mjs');
+    if (fs.existsSync(workerSrc)) {
+      if (!fs.existsSync(workerDestDir)) {
+        fs.mkdirSync(workerDestDir, { recursive: true });
+      }
+      fs.copyFileSync(workerSrc, workerDest);
+      console.log('[Version Gen] Synced pdf.worker.min.mjs to public folder');
+    }
+  } catch (err) {
+    console.warn('[Version Gen] Warning: Could not sync pdf worker to public folder:', err.message);
+  }
+
   // Write file
   fs.writeFileSync(versionJsonPath, JSON.stringify(versionData, null, 2), 'utf8');
   console.log(`[Version Gen] Generated version metadata: v${version} (${commit}) at ${deployedAt}`);

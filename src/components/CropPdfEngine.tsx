@@ -87,6 +87,7 @@ export default function CropPdfEngine({ seoArticle }: CropPdfEngineProps) {
   // DOM Refs
   const workspaceRef = useRef<HTMLDivElement>(null);
   const mainCanvasRef = useRef<HTMLCanvasElement>(null);
+  const mainRenderTaskRef = useRef<any>(null);
   const thumbnailRefs = useRef<Record<number, HTMLCanvasElement | null>>({});
 
   // Get active crop for current page
@@ -113,11 +114,11 @@ export default function CropPdfEngine({ seoArticle }: CropPdfEngineProps) {
       if (e.key === "Shift") setIsShiftPressed(true);
       if (e.key === "ArrowLeft") {
         e.preventDefault();
-        setCurrentPage((prev) => Math.max(1, prev - 1));
+        setCurrentPage((p) => Math.max(1, p - 1));
       }
       if (e.key === "ArrowRight") {
         e.preventDefault();
-        setCurrentPage((prev) => Math.min(numPages || 1, prev + 1));
+        setCurrentPage((p) => (pdfDoc ? Math.min(pdfDoc.numPages, p + 1) : p));
       }
     };
     const handleKeyUp = (e: KeyboardEvent) => {
@@ -130,7 +131,7 @@ export default function CropPdfEngine({ seoArticle }: CropPdfEngineProps) {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
     };
-  }, [numPages]);
+  }, [pdfDoc]);
 
   // Load PDF document when file changes
   const handleFilesSelected = async (fileList: FileList | File[]) => {
@@ -199,8 +200,10 @@ export default function CropPdfEngine({ seoArticle }: CropPdfEngineProps) {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           await page.render({ canvasContext: ctx, viewport }).promise;
         }
-      } catch (e) {
-        console.error(`Error rendering thumbnail page ${pageNum}`, e);
+      } catch (e: any) {
+        if (e?.name !== "RenderingCancelledException") {
+          console.error(`Error rendering thumbnail page ${pageNum}`, e);
+        }
       }
     },
     [pdfDoc]
@@ -211,6 +214,14 @@ export default function CropPdfEngine({ seoArticle }: CropPdfEngineProps) {
     if (!pdfDoc || !mainCanvasRef.current || currentPage < 1) return;
 
     try {
+      // Cancel previous in-flight render task if active
+      if (mainRenderTaskRef.current) {
+        try {
+          mainRenderTaskRef.current.cancel();
+        } catch (_) {}
+        mainRenderTaskRef.current = null;
+      }
+
       const page = await pdfDoc.getPage(currentPage);
       const baseViewport = page.getViewport({ scale: 1.0 });
       let renderScale = zoom;
@@ -236,10 +247,15 @@ export default function CropPdfEngine({ seoArticle }: CropPdfEngineProps) {
       const ctx = canvas.getContext("2d");
       if (ctx) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        await page.render({ canvasContext: ctx, viewport }).promise;
+        const task = page.render({ canvasContext: ctx, viewport });
+        mainRenderTaskRef.current = task;
+        await task.promise;
+        mainRenderTaskRef.current = null;
       }
-    } catch (e) {
-      console.error("Error rendering main page canvas", e);
+    } catch (e: any) {
+      if (e?.name !== "RenderingCancelledException") {
+        console.error("Error rendering main page canvas", e);
+      }
     }
   }, [pdfDoc, currentPage, zoom, fitMode]);
 

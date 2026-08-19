@@ -90,10 +90,19 @@ export default function WatermarkPdf() {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
+  const renderTaskRef = useRef<any>(null);
+
   // Preview Page details
   const renderPreviewPage = async (pageNum: number) => {
     if (!pdfDocRef.current || !pdfjs) return;
     try {
+      if (renderTaskRef.current) {
+        try {
+          renderTaskRef.current.cancel();
+        } catch (_) {}
+        renderTaskRef.current = null;
+      }
+
       const page = await pdfDocRef.current.getPage(pageNum);
       const viewport = page.getViewport({ scale: 0.75 });
       
@@ -106,14 +115,19 @@ export default function WatermarkPdf() {
           context.fillStyle = '#ffffff';
           context.fillRect(0, 0, canvas.width, canvas.height);
           
-          await page.render({
+          const task = page.render({
             canvasContext: context,
             viewport: viewport,
-          }).promise;
+          });
+          renderTaskRef.current = task;
+          await task.promise;
+          renderTaskRef.current = null;
         }
       }
-    } catch (err) {
-      console.error("Preview render failed:", err);
+    } catch (err: any) {
+      if (err?.name !== 'RenderingCancelledException') {
+        console.error("Preview render failed:", err);
+      }
     }
   };
 

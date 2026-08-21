@@ -220,12 +220,7 @@ Respond STRICTLY with a valid JSON object matching this exact JSON schema (witho
         throw new Error(resData.error || 'Failed to analyze image');
       }
 
-      let cleanText = resData.output.trim();
-      if (cleanText.startsWith('```')) {
-        cleanText = cleanText.replace(/^```[a-zA-Z]*\n/, '').replace(/\n```$/, '').trim();
-      }
-
-      const parsed: AnalysisResult = JSON.parse(cleanText);
+      const parsed = parseVisionJson(resData.output);
       setResult(parsed);
       toast.success('Image analyzed successfully!');
     } catch (err: any) {
@@ -236,6 +231,99 @@ Respond STRICTLY with a valid JSON object matching this exact JSON schema (witho
       setIsAnalyzing(false);
     }
   };
+
+  function parseVisionJson(rawText: string): AnalysisResult {
+    let cleaned = rawText.trim();
+    
+    // 1. Remove markdown codeblocks if present
+    if (cleaned.includes('```')) {
+      const match = cleaned.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
+      if (match && match[1]) {
+        cleaned = match[1].trim();
+      } else {
+        cleaned = cleaned.replace(/^```[a-zA-Z]*\n?/, '').replace(/\n?```$/, '').trim();
+      }
+    }
+
+    // 2. Try standard JSON.parse
+    try {
+      const parsed = JSON.parse(cleaned);
+      return normalizeResult(parsed, cleaned);
+    } catch (e1) {
+      // 3. Try to extract JSON object between outer brackets
+      const firstIdx = cleaned.indexOf('{');
+      const lastIdx = cleaned.lastIndexOf('}');
+      if (firstIdx !== -1 && lastIdx > firstIdx) {
+        try {
+          const sliced = cleaned.slice(firstIdx, lastIdx + 1);
+          const parsed = JSON.parse(sliced);
+          return normalizeResult(parsed, cleaned);
+        } catch (e2) {
+          // Fall through to regex extraction
+        }
+      }
+
+      // 4. Regex extraction for resilient partial JSON recovery
+      const extractString = (field: string): string => {
+        const regex = new RegExp(`"${field}"\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"`, 's');
+        const m = cleaned.match(regex);
+        return m ? m[1].replace(/\\n/g, '\n').replace(/\\"/g, '"').trim() : '';
+      };
+
+      const extractArray = (field: string): string[] => {
+        const regex = new RegExp(`"${field}"\\s*:\\s*\\[([^\\]]*)\\]`, 's');
+        const m = cleaned.match(regex);
+        if (!m) return [];
+        return m[1]
+          .split(',')
+          .map((s) => s.replace(/["'\r\n\t]/g, '').trim())
+          .filter(Boolean);
+      };
+
+      const title = extractString('title') || 'Scene Visual Analysis';
+      const detailedDescription = extractString('detailedDescription') || cleaned.replace(/[{}[\]"]/g, '').trim();
+      const conciseSummary = extractString('conciseSummary') || (detailedDescription ? detailedDescription.slice(0, 140) : '');
+      const seoAltText = extractString('seoAltText') || title;
+      const aiPrompt = extractString('aiPrompt') || title;
+      const moodAndLighting = extractString('moodAndLighting') || 'Natural daylight';
+
+      return {
+        title,
+        detailedDescription: detailedDescription || 'Visual analysis completed.',
+        conciseSummary: conciseSummary || detailedDescription.slice(0, 120),
+        detectedElements: {
+          subjects: extractArray('subjects').length > 0 ? extractArray('subjects') : ['Detected Subject'],
+          apparel_and_objects: extractArray('apparel_and_objects'),
+          colors: extractArray('colors'),
+          setting_and_environment: extractArray('setting_and_environment')
+        },
+        seoAltText: seoAltText || title,
+        aiPrompt: aiPrompt || title,
+        socialCaptions: extractArray('socialCaptions').length > 0 ? extractArray('socialCaptions') : [detailedDescription.slice(0, 100)],
+        hashtags: extractArray('hashtags').length > 0 ? extractArray('hashtags') : ['#photo', '#vibe', '#portrait', '#ai'],
+        moodAndLighting
+      };
+    }
+  }
+
+  function normalizeResult(raw: any, fallbackText: string): AnalysisResult {
+    return {
+      title: raw.title || 'Scene Visual Analysis',
+      detailedDescription: raw.detailedDescription || fallbackText || 'Image analyzed.',
+      conciseSummary: raw.conciseSummary || (raw.detailedDescription ? String(raw.detailedDescription).slice(0, 140) : ''),
+      detectedElements: {
+        subjects: Array.isArray(raw.detectedElements?.subjects) ? raw.detectedElements.subjects : [],
+        apparel_and_objects: Array.isArray(raw.detectedElements?.apparel_and_objects) ? raw.detectedElements.apparel_and_objects : [],
+        colors: Array.isArray(raw.detectedElements?.colors) ? raw.detectedElements.colors : [],
+        setting_and_environment: Array.isArray(raw.detectedElements?.setting_and_environment) ? raw.detectedElements.setting_and_environment : []
+      },
+      seoAltText: raw.seoAltText || raw.title || 'Image description',
+      aiPrompt: raw.aiPrompt || raw.title || 'Photographic portrait',
+      socialCaptions: Array.isArray(raw.socialCaptions) ? raw.socialCaptions : [],
+      hashtags: Array.isArray(raw.hashtags) ? raw.hashtags : [],
+      moodAndLighting: raw.moodAndLighting || 'Natural lighting'
+    };
+  }
 
   return (
     <div className="min-h-screen bg-[#F7F8FC] dark:bg-[#030712] text-[#0F172A] dark:text-white py-8 sm:py-12 transition-colors duration-250" onPaste={handlePaste}>

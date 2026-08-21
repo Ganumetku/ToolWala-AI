@@ -11,6 +11,7 @@ export interface AIRequest {
   maxTokens?: number;
   imageBase64?: string;
   mimeType?: string;
+  jsonMode?: boolean;
 }
 
 export interface AIResponse {
@@ -25,6 +26,23 @@ export async function callGroq(req: AIRequest): Promise<AIResponse> {
 
   const start = Date.now();
   const model = req.model || 'llama-3.3-70b-versatile';
+  const isJson = req.jsonMode || req.prompt.includes('JSON') || req.prompt.includes('json');
+
+  const bodyPayload: any = {
+    model,
+    messages: [
+      ...(req.systemPrompt
+        ? [{ role: 'system', content: req.systemPrompt }]
+        : []),
+      { role: 'user', content: req.prompt },
+    ],
+    max_tokens: req.maxTokens || 2048,
+    temperature: isJson ? 0.3 : 0.7,
+  };
+
+  if (isJson) {
+    bodyPayload.response_format = { type: 'json_object' };
+  }
 
   const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
@@ -32,17 +50,7 @@ export async function callGroq(req: AIRequest): Promise<AIResponse> {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${GROQ_API_KEY}`,
     },
-    body: JSON.stringify({
-      model,
-      messages: [
-        ...(req.systemPrompt
-          ? [{ role: 'system', content: req.systemPrompt }]
-          : []),
-        { role: 'user', content: req.prompt },
-      ],
-      max_tokens: req.maxTokens || 1024,
-      temperature: 0.7,
-    }),
+    body: JSON.stringify(bodyPayload),
   });
 
   if (!res.ok) {
@@ -67,6 +75,7 @@ export async function callOpenAI(req: AIRequest): Promise<AIResponse> {
 
   const start = Date.now();
   const model = req.model || 'gpt-4o-mini';
+  const isJson = req.jsonMode || req.prompt.includes('JSON') || req.prompt.includes('json');
 
   let userContent: any = req.prompt;
   if (req.imageBase64) {
@@ -82,23 +91,29 @@ export async function callOpenAI(req: AIRequest): Promise<AIResponse> {
     ];
   }
 
+  const bodyPayload: any = {
+    model,
+    messages: [
+      ...(req.systemPrompt
+        ? [{ role: 'system', content: req.systemPrompt }]
+        : []),
+      { role: 'user', content: userContent },
+    ],
+    max_tokens: req.maxTokens || 4000,
+    temperature: isJson ? 0.3 : 0.7,
+  };
+
+  if (isJson) {
+    bodyPayload.response_format = { type: 'json_object' };
+  }
+
   const res = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${OPENAI_API_KEY}`,
     },
-    body: JSON.stringify({
-      model,
-      messages: [
-        ...(req.systemPrompt
-          ? [{ role: 'system', content: req.systemPrompt }]
-          : []),
-        { role: 'user', content: userContent },
-      ],
-      max_tokens: req.maxTokens || 1024,
-      temperature: 0.7,
-    }),
+    body: JSON.stringify(bodyPayload),
   });
 
   if (!res.ok) {
@@ -123,6 +138,7 @@ export async function callGemini(req: AIRequest): Promise<AIResponse> {
 
   const start = Date.now();
   const model = req.model || 'gemini-2.5-flash';
+  const isJson = req.jsonMode || req.prompt.includes('JSON') || req.prompt.includes('json');
 
   const parts: any[] = [];
 
@@ -148,6 +164,15 @@ export async function callGemini(req: AIRequest): Promise<AIResponse> {
       : req.prompt,
   });
 
+  const generationConfig: Record<string, any> = {
+    maxOutputTokens: req.maxTokens || 4000,
+    temperature: isJson ? 0.3 : 0.7,
+  };
+
+  if (isJson) {
+    generationConfig.responseMimeType = 'application/json';
+  }
+
   const res = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`,
     {
@@ -159,10 +184,7 @@ export async function callGemini(req: AIRequest): Promise<AIResponse> {
             parts,
           },
         ],
-        generationConfig: {
-          maxOutputTokens: req.maxTokens || 1500,
-          temperature: 0.7,
-        },
+        generationConfig,
       }),
     }
   );

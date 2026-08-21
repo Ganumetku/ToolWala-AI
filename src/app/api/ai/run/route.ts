@@ -13,7 +13,7 @@ export const dynamic = 'force-dynamic';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { slug, toolId, inputs = {}, provider, promptTemplate } = body;
+    const { slug, toolId, inputs = {}, provider, promptTemplate, imageBase64: topImageBase64, mimeType: topMimeType } = body;
     const toolSlug = slug || toolId || '';
 
     if (!toolSlug) {
@@ -23,9 +23,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const imageBase64 = topImageBase64 || (inputs.imageBase64 as string | undefined);
+    const mimeType = topMimeType || (inputs.mimeType as string | undefined);
+    const hasImage = !!imageBase64;
+
     let selectedProvider: AIProvider;
     try {
-      selectedProvider = selectProvider(toolSlug, provider);
+      selectedProvider = selectProvider(toolSlug, provider, hasImage);
     } catch {
       return NextResponse.json(
         { success: false, error: 'No AI provider configured. Set GROQ_API_KEY, OPENAI_API_KEY or GEMINI_API_KEY.' },
@@ -36,32 +40,34 @@ export async function POST(request: NextRequest) {
     const prompt = buildToolPrompt(toolSlug, inputs, promptTemplate);
 
     let result;
+    const reqPayload = { prompt, imageBase64, mimeType };
+
     try {
-      if (selectedProvider === 'groq') {
-        result = await callGroq({ prompt });
-      } else if (selectedProvider === 'gemini') {
-        result = await callGemini({ prompt });
+      if (selectedProvider === 'gemini') {
+        result = await callGemini(reqPayload);
+      } else if (selectedProvider === 'openai') {
+        result = await callOpenAI(reqPayload);
       } else {
-        result = await callOpenAI({ prompt });
+        result = await callGroq({ prompt });
       }
     } catch (primaryErr: any) {
       console.warn(`Primary AI provider (${selectedProvider}) failed:`, primaryErr?.message);
       // Fallback attempts
-      if (process.env.GROQ_API_KEY && selectedProvider !== 'groq') {
+      if (process.env.GEMINI_API_KEY && selectedProvider !== 'gemini') {
         try {
-          result = await callGroq({ prompt });
-        } catch (e) {
-          throw primaryErr;
-        }
-      } else if (process.env.GEMINI_API_KEY && selectedProvider !== 'gemini') {
-        try {
-          result = await callGemini({ prompt });
+          result = await callGemini(reqPayload);
         } catch (e) {
           throw primaryErr;
         }
       } else if (process.env.OPENAI_API_KEY && selectedProvider !== 'openai') {
         try {
-          result = await callOpenAI({ prompt });
+          result = await callOpenAI(reqPayload);
+        } catch (e) {
+          throw primaryErr;
+        }
+      } else if (process.env.GROQ_API_KEY && selectedProvider !== 'groq' && !hasImage) {
+        try {
+          result = await callGroq({ prompt });
         } catch (e) {
           throw primaryErr;
         }

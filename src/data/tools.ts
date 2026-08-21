@@ -572,6 +572,23 @@ export const toolsData: Tool[] = [
     updatedAt: '2024-01-01T00:00:00Z'
   },
   {
+    id: "ai-image-describer",
+    title: "AI Image Describer & Scene Analyzer",
+    description: "Upload any photo to detect people, clothing, objects, scene environment, SEO alt-text, and reverse AI art prompts.",
+    icon: "👁️",
+    href: "/tools/ai-image-describer",
+    slug: "ai-image-describer",
+    category: "AI Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["image describer", "photo description", "vision ai", "scene analysis", "alt text", "ai caption", "object detection", "image to text", "reverse prompt"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2026-08-21T00:00:00Z',
+    updatedAt: '2026-08-21T00:00:00Z'
+  },
+  {
     id: "text-humanizer",
     title: "AI Text Humanizer",
     description: "Make AI text sound more natural, clear, and human-friendly in seconds.",

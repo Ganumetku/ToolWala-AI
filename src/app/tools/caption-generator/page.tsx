@@ -204,26 +204,30 @@ export default function CaptionGenerator() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           slug: 'caption-generator',
+          imageBase64: data.imagePreview || undefined,
           inputs: {
-            topic: data.topic,
+            topic: data.topic.trim() || (data.imagePreview ? 'Please inspect and describe the visual scene and subjects in the uploaded image to craft the captions.' : 'General motivational / lifestyle'),
             platform: data.platform,
             tone: data.tone,
             language: data.language,
             length: data.length,
             hashtagCount: data.hashtagCount
           },
-          promptTemplate: `You are an expert social media copywriter. Generate high-converting captions based on these parameters:
-Topic/Description: {{topic}}
-Platform: {{platform}}
+          promptTemplate: `You are an expert social media copywriter and vision analyzer.
+${data.imagePreview ? 'CRITICAL: An image is provided. Look closely at the image (subjects, people, clothing, colors, setting, objects, vibes, background) and generate captions that directly match and describe the photo.' : ''}
+
+Parameters:
+User Topic/Note: {{topic}}
+Target Platform: {{platform}}
 Tone/Vibe: {{tone}}
-Language: {{language}} (Note: If language is Hinglish, write the caption text using Hindi words in Latin/English script)
+Language: {{language}} (Note: If language is Hinglish, write natural Indian social media Hinglish using Hindi words in Latin/English script)
 Length: {{length}}
 Hashtags Count: {{hashtagCount}}
 
 Respond ONLY with a valid JSON object matching this schema (do not include markdown formatting or backticks around the JSON):
 {
   "captions": [
-    "Caption 1...",
+    "Caption 1 (engaging, tailored to image & tone)...",
     "Caption 2...",
     "Caption 3...",
     "Caption 4...",
@@ -231,7 +235,7 @@ Respond ONLY with a valid JSON object matching this schema (do not include markd
   ],
   "hashtags": "#tag1 #tag2 ...",
   "tips": {
-    "time": "Best posting time for this category",
+    "time": "Best posting time for this specific category and platform",
     "cta": "Recommended CTA to drive comments/shares",
     "hook": "Suggested hook sentence to start"
   }

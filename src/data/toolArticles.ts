@@ -582,9 +582,54 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Stop staring at a blank screen. Let AI handle the heavy lifting of writing so you can get back to what you do best—connecting with your audience.",
     relatedTools: [
+      { name: "AI Image Describer", href: "/tools/ai-image-describer" },
       { name: "AI Text Humanizer", href: "/tools/text-humanizer" },
-      { name: "QR Code Generator", href: "/tools/qr-code-generator" },
-      { name: "Voice Generator", href: "/tools/voice-generator" }
+      { name: "AI Resume Builder", href: "/tools/resume-builder" }
+    ]
+  },
+  "ai-image-describer": {
+    title: "AI Image Describer & Scene Analyzer – Photo to Detailed Text",
+    intro: "Turn any photograph into detailed narrative scene descriptions, detected apparel, objects, SEO alt tags, and reverse AI art prompts using Google Gemini multimodal vision AI.",
+    whatItDoes: "The ToolWala AI Image Describer is a computer vision engine that inspects every visual detail of your photo. It analyzes subjects, posture, clothing colors and patterns, background setting, lighting, mood, and surrounding objects. It provides structured breakdowns including comprehensive narratives, one-click SEO alt tags, social captions with hashtags, audio voice narration, and Midjourney/Flux generation prompts.",
+    howToUse: [
+      "Upload or drag and drop any JPG, PNG, or WebP photo into the upload container.",
+      "Select your preferred analysis focus (Full Breakdown, Social Captions, SEO Alt-Text, or AI Art Prompt).",
+      "Choose your preferred output language (English, Hinglish, Hindi, Spanish, French, etc.).",
+      "Click 'Analyze Image with AI' to process your image with Gemini Vision in real-time.",
+      "Copy your detailed description, detected tags, SEO alt-tag, or listen to the spoken audio description."
+    ],
+    keyFeatures: [
+      { title: "Deep Scene Breakdown", desc: "Detailed breakdown of who is in the photo, what they are wearing, specific patterns, and setting." },
+      { title: "Detected Apparel & Objects", desc: "Categorized chips highlighting clothing, colors, objects, and environmental backdrops." },
+      { title: "SEO Alt-Text Generator", desc: "Generates WCAG accessible, Google-optimized alt tags for bloggers and e-commerce websites." },
+      { title: "Reverse AI Art Prompt", desc: "Converts any photo into photographic prompts for Midjourney, Flux, and Stable Diffusion." },
+      { title: "Text-to-Speech Voice Narration", desc: "Built-in accessibility reader to hear the photo description spoken aloud." },
+      { title: "100% In-Memory Privacy", desc: "Images are processed in active RAM and immediately discarded without permanent storage." }
+    ],
+    benefits: [
+      "Know exactly what visual elements and objects are present in any image.",
+      "Generate instant Instagram captions and hashtags directly from photos without typing topics.",
+      "Save hours writing SEO alt-tags for websites, Shopify, and WordPress blogs.",
+      "Recreate similar photo aesthetics in AI image generators with accurate reverse prompts."
+    ],
+    whyChoose: "Unlike basic OCR tools that only look for typed letters, ToolWala AI Image Describer utilizes multimodal vision neural networks to understand context, human expressions, fashion styling, and landscape scenery. Plus, zero data retention ensures your private photos remain confidential.",
+    useCases: [
+      "Social media creators seeking tailored captions and hashtags for their daily looks and travel photos.",
+      "Webmasters and SEO specialists generating bulk accessible alt-text for web images.",
+      "E-commerce merchants generating descriptive apparel and product catalog details.",
+      "AI artists and prompt engineers wanting to reverse-engineer photographic styles."
+    ],
+    faqs: [
+      { question: "How does this differ from OCR (Image to Text)?", answer: "OCR tools only extract written or printed letters from documents and receipts. AI Image Describer uses Computer Vision to describe what is visually happening in the picture (people, clothes, scenery, colors, objects)." },
+      { question: "Are my uploaded photos stored on your servers?", answer: "No. Your images are processed securely in memory and immediately discarded. ToolWala AI never retains, logs, or trains on your uploaded files." },
+      { question: "Can it generate social media captions in Hinglish?", answer: "Yes! Select Hinglish from the language dropdown to generate natural Indian social media captions in Latin script." },
+      { question: "Is this tool free to use?", answer: "Yes, the AI Image Describer & Scene Analyzer is completely free to use on ToolWala AI." }
+    ],
+    conclusion: "Effortlessly understand and describe any photo with multimodal AI vision. Get detailed descriptions, SEO alt-tags, and viral captions instantly.",
+    relatedTools: [
+      { name: "AI Caption Generator", href: "/tools/caption-generator" },
+      { name: "OCR Image to Text", href: "/tools/image-to-text-ocr" },
+      { name: "AI Text Humanizer", href: "/tools/text-humanizer" }
     ]
   },
   "text-humanizer": {

@@ -9,6 +9,8 @@ export interface AIRequest {
   systemPrompt?: string;
   model?: string;
   maxTokens?: number;
+  imageBase64?: string;
+  mimeType?: string;
 }
 
 export interface AIResponse {
@@ -66,6 +68,20 @@ export async function callOpenAI(req: AIRequest): Promise<AIResponse> {
   const start = Date.now();
   const model = req.model || 'gpt-4o-mini';
 
+  let userContent: any = req.prompt;
+  if (req.imageBase64) {
+    const dataUrl = req.imageBase64.startsWith('data:')
+      ? req.imageBase64
+      : `data:${req.mimeType || 'image/jpeg'};base64,${req.imageBase64}`;
+    userContent = [
+      { type: 'text', text: req.prompt },
+      {
+        type: 'image_url',
+        image_url: { url: dataUrl },
+      },
+    ];
+  }
+
   const res = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -78,7 +94,7 @@ export async function callOpenAI(req: AIRequest): Promise<AIResponse> {
         ...(req.systemPrompt
           ? [{ role: 'system', content: req.systemPrompt }]
           : []),
-        { role: 'user', content: req.prompt },
+        { role: 'user', content: userContent },
       ],
       max_tokens: req.maxTokens || 1024,
       temperature: 0.7,
@@ -106,7 +122,31 @@ export async function callGemini(req: AIRequest): Promise<AIResponse> {
   if (!GEMINI_API_KEY) throw new Error('Gemini API key not configured');
 
   const start = Date.now();
-  const model = req.model || 'gemini-2.0-flash';
+  const model = req.model || 'gemini-2.5-flash';
+
+  const parts: any[] = [];
+
+  if (req.imageBase64) {
+    let cleanBase64 = req.imageBase64;
+    let mime = req.mimeType || 'image/jpeg';
+    if (cleanBase64.includes(';base64,')) {
+      const split = cleanBase64.split(';base64,');
+      mime = split[0].replace('data:', '');
+      cleanBase64 = split[1];
+    }
+    parts.push({
+      inline_data: {
+        mime_type: mime,
+        data: cleanBase64,
+      },
+    });
+  }
+
+  parts.push({
+    text: req.systemPrompt
+      ? `${req.systemPrompt}\n\n${req.prompt}`
+      : req.prompt,
+  });
 
   const res = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`,
@@ -116,17 +156,11 @@ export async function callGemini(req: AIRequest): Promise<AIResponse> {
       body: JSON.stringify({
         contents: [
           {
-            parts: [
-              {
-                text: req.systemPrompt
-                  ? `${req.systemPrompt}\n\n${req.prompt}`
-                  : req.prompt,
-              },
-            ],
+            parts,
           },
         ],
         generationConfig: {
-          maxOutputTokens: req.maxTokens || 1024,
+          maxOutputTokens: req.maxTokens || 1500,
           temperature: 0.7,
         },
       }),
@@ -185,11 +219,13 @@ export function buildToolPrompt(
   }
 
   const inputText = Object.entries(inputs)
+    .filter(([k]) => k !== 'imageBase64' && k !== 'mimeType')
     .map(([k, v]) => `${k}: ${v}`)
     .join('\n');
 
   const templates: Record<string, string> = {
     'caption-generator': `Generate 5 engaging social media captions for:\n${inputText}`,
+    'ai-image-describer': `Analyze the provided image in detail and describe what you see:\n${inputText}`,
     'cover-letter-generator': `Write a professional cover letter based on:\n${inputText}`,
     'text-humanizer': `Rewrite this text to sound more natural and human:\n${inputs.text || inputText}`,
     'voice-generator': `Generate a voice script based on:\n${inputText}`,
@@ -198,11 +234,16 @@ export function buildToolPrompt(
   return templates[slug] || `Process the following inputs for tool "${slug}":\n${inputText}`;
 }
 
-export function selectProvider(slug: string, preferred?: string): AIProvider {
-  if (GROQ_API_KEY) return 'groq';
-  if (preferred === 'openai' && OPENAI_API_KEY) return 'openai';
+export function selectProvider(slug: string, preferred?: string, hasImage?: boolean): AIProvider {
+  if (hasImage) {
+    if (GEMINI_API_KEY) return 'gemini';
+    if (OPENAI_API_KEY) return 'openai';
+  }
   if (preferred === 'gemini' && GEMINI_API_KEY) return 'gemini';
-  if (OPENAI_API_KEY) return 'openai';
+  if (preferred === 'openai' && OPENAI_API_KEY) return 'openai';
+  if (preferred === 'groq' && GROQ_API_KEY) return 'groq';
+  if (GROQ_API_KEY) return 'groq';
   if (GEMINI_API_KEY) return 'gemini';
+  if (OPENAI_API_KEY) return 'openai';
   throw new Error('No AI provider configured');
 }

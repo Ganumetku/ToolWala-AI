@@ -16,6 +16,7 @@ import ToolStatusBadge from '@/components/admin/ToolStatusBadge';
 import PublishToggle from '@/components/admin/PublishToggle';
 import ScheduleModal from '@/components/admin/ScheduleModal';
 import ToolSchedulerCard from '@/components/admin/ToolSchedulerCard';
+import AdminPagination from '@/components/admin/AdminPagination';
 
 interface ToolCMSItem {
   id: string;
@@ -462,6 +463,17 @@ export default function ContentCMS() {
     return true;
   });
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, currentFilterTab]);
+
+  const totalPages = Math.ceil(filteredTools.length / itemsPerPage) || 1;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedTools = filteredTools.slice(startIndex, startIndex + itemsPerPage);
+
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-32 gap-4">
@@ -543,7 +555,7 @@ export default function ContentCMS() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-white/5 text-xs">
-              {filteredTools.map((t) => (
+              {paginatedTools.map((t) => (
                 <tr key={t.id} className="hover:bg-slate-50/80 dark:hover:bg-white/[0.01] transition-colors">
                   <td className="py-5 pl-6">
                     <div className="flex items-center gap-3">
@@ -652,6 +664,17 @@ export default function ContentCMS() {
             </tbody>
           </table>
         </div>
+
+        {/* 4b. Pagination Controls */}
+        <AdminPagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          totalItems={filteredTools.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={setCurrentPage}
+          onItemsPerPageChange={setItemsPerPage}
+          itemLabel="tools"
+        />
       </div>
 
       {/* 5. Schedule Modal Popup */}

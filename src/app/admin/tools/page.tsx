@@ -9,6 +9,7 @@ import { adminFetch } from '@/lib/admin-fetch';
 import ToolIcon from '@/components/ToolIcon';
 import ToolIconModal from './ToolIconModal';
 import TopToolsRanking from '@/components/admin/TopToolsRanking';
+import AdminPagination from '@/components/admin/AdminPagination';
 import {
   Search, EyeOff, Star, TrendingUp, Zap, Calendar, Settings,
   CheckCircle2, Clock, Plus, RefreshCw, Database, X, Loader2, Image as ImageIcon,
@@ -195,6 +196,19 @@ export default function AdminToolsDashboard() {
     });
   }, [tools, searchQuery, filter]);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, filter]);
+
+  const totalPages = Math.ceil(filteredTools.length / itemsPerPage) || 1;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedTools = useMemo(() => {
+    return filteredTools.slice(startIndex, startIndex + itemsPerPage);
+  }, [filteredTools, startIndex, itemsPerPage]);
+
   const getStatusBadge = (tool: Tool) => {
     if (!tool.isVisible) {
       return (
@@ -358,7 +372,7 @@ export default function AdminToolsDashboard() {
                 </thead>
                 <tbody>
                   <AnimatePresence>
-                    {filteredTools.map((tool) => (
+                    {paginatedTools.map((tool) => (
                       <motion.tr
                         layout
                         initial={{ opacity: 0 }}
@@ -547,6 +561,17 @@ export default function AdminToolsDashboard() {
                 </div>
               )}
             </div>
+
+            {/* Pagination Controls */}
+            <AdminPagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              totalItems={filteredTools.length}
+              itemsPerPage={itemsPerPage}
+              onPageChange={setCurrentPage}
+              onItemsPerPageChange={setItemsPerPage}
+              itemLabel="tools"
+            />
           </div>
         )}
       </div>

@@ -14,6 +14,7 @@ import BlogSeoScore from "@/components/blog/BlogSeoScore";
 import { generateSeoSlug, autoGenerateSeoMetadata } from "@/lib/blog-seo";
 import { renderMarkdown } from "@/lib/markdown";
 import type { BlogFaq } from "@/types/blog";
+import AdminPagination from "@/components/admin/AdminPagination";
 
 interface ArticleItem {
   id: string;
@@ -399,6 +400,17 @@ export default function BlogCMS() {
     return matchesSearch && matchesCategory;
   });
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, selectedCatFilter]);
+
+  const totalPages = Math.ceil(filteredArticles.length / itemsPerPage) || 1;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedArticles = filteredArticles.slice(startIndex, startIndex + itemsPerPage);
+
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-32 gap-4">
@@ -466,8 +478,8 @@ export default function BlogCMS() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-white/5 text-xs font-semibold">
-              {filteredArticles.length > 0 ? (
-                filteredArticles.map((a) => (
+              {paginatedArticles.length > 0 ? (
+                paginatedArticles.map((a) => (
                   <tr key={a.id} className="hover:bg-slate-50/80 dark:hover:bg-white/[0.01] transition-colors">
                     {/* Thumbnail */}
                     <td className="py-4 pl-6">
@@ -576,6 +588,17 @@ export default function BlogCMS() {
             </tbody>
           </table>
         </div>
+
+        {/* Pagination Controls */}
+        <AdminPagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          totalItems={filteredArticles.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={setCurrentPage}
+          onItemsPerPageChange={setItemsPerPage}
+          itemLabel="articles"
+        />
       </div>
 
       {/* Large Composer Modal Drawer */}

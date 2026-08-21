@@ -8,6 +8,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { adminFetch } from '@/lib/admin-fetch';
+import AdminPagination from '@/components/admin/AdminPagination';
 
 interface User {
   id: string;
@@ -90,6 +91,17 @@ export default function UserManagement() {
     return matchesSearch && matchesRole;
   });
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, filterRole]);
+
+  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage) || 1;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedUsers = filteredUsers.slice(startIndex, startIndex + itemsPerPage);
+
   return (
     <div className="space-y-10">
       {/* Search and Filters panel */}
@@ -150,7 +162,7 @@ export default function UserManagement() {
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-white/5 text-xs">
                 <AnimatePresence initial={false}>
-                  {filteredUsers.map((u) => (
+                  {paginatedUsers.map((u) => (
                     <motion.tr 
                       key={u.id}
                       initial={{ opacity: 0 }}
@@ -178,9 +190,7 @@ export default function UserManagement() {
                           u.role === 'premium' ? 'text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/10' :
                           'text-slate-600 dark:text-gray-400 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5'
                         }`}>
-                          {u.role === 'admin' && <ShieldAlert className="w-3 h-3" />}
-                          {u.role === 'premium' && <Crown className="w-3 h-3" />}
-                          {u.role === 'user' && <Users className="w-3 h-3" />}
+                          {u.role === 'admin' ? <Crown className="w-3 h-3" /> : u.role === 'premium' ? <Shield className="w-3 h-3" /> : <Users className="w-3 h-3" />}
                           {u.role}
                         </span>
                       </td>
@@ -234,6 +244,17 @@ export default function UserManagement() {
                 </AnimatePresence>
               </tbody>
             </table>
+
+            {/* Pagination Controls */}
+            <AdminPagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              totalItems={filteredUsers.length}
+              itemsPerPage={itemsPerPage}
+              onPageChange={setCurrentPage}
+              onItemsPerPageChange={setItemsPerPage}
+              itemLabel="users"
+            />
           </div>
         )}
       </div>

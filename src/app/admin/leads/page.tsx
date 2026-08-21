@@ -8,6 +8,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { adminFetch } from '@/lib/admin-fetch';
+import AdminPagination from '@/components/admin/AdminPagination';
 
 interface Lead {
   id: string;
@@ -136,6 +137,17 @@ export default function LeadsManagement() {
     return matchesSearch && matchesStatus;
   });
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, filterStatus]);
+
+  const totalPages = Math.ceil(filteredLeads.length / itemsPerPage) || 1;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedLeads = filteredLeads.slice(startIndex, startIndex + itemsPerPage);
+
   return (
     <div className="space-y-10">
       {/* Search and Filters panel */}
@@ -178,18 +190,18 @@ export default function LeadsManagement() {
         </div>
       </div>
 
-      {/* Main CRM Grid */}
+      {/* Main Table view */}
       <div className="bg-white dark:bg-white/[0.01] rounded-3xl border border-slate-200/80 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] overflow-hidden">
         {loading ? (
           <div className="p-20 flex flex-col items-center justify-center gap-4">
             <div className="h-8 w-8 border-2 border-slate-200 dark:border-white/10 border-t-blue-600 rounded-full animate-spin" />
-            <span className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-gray-500">Querying Leads database...</span>
+            <span className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-gray-500">Querying platform leads...</span>
           </div>
         ) : filteredLeads.length === 0 ? (
           <div className="p-20 text-center flex flex-col items-center justify-center">
             <MessageSquare className="w-12 h-12 text-slate-300 dark:text-gray-600 mb-4" />
             <h4 className="text-base font-black text-slate-900 dark:text-white uppercase tracking-wider">No Leads Found</h4>
-            <p className="text-xs text-slate-500 dark:text-gray-500 font-semibold mt-1">No contact submissions match the selected parameters.</p>
+            <p className="text-xs text-slate-500 dark:text-gray-500 font-semibold mt-1">No contact forms matched your filter criteria.</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
@@ -198,45 +210,47 @@ export default function LeadsManagement() {
                 <tr className="bg-slate-50/80 dark:bg-transparent border-b border-slate-200 dark:border-white/5 text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-gray-500">
                   <th className="py-5 pl-6 w-12">
                     <input 
-                      type="checkbox"
-                      checked={selectedIds.length === filteredLeads.length}
-                      onChange={toggleSelectAll}
-                      className="rounded border-slate-300 dark:border-white/10 bg-white dark:bg-white/5 text-blue-600 h-4 w-4 cursor-pointer focus:ring-0 outline-none"
+                      type="checkbox" 
+                      onChange={toggleSelectAll} 
+                      checked={selectedIds.length === filteredLeads.length && filteredLeads.length > 0}
+                      className="rounded-md border-slate-300 dark:border-white/10 text-blue-600 focus:ring-0 focus:ring-offset-0 cursor-pointer"
                     />
                   </th>
                   <th className="py-5">Sender</th>
-                  <th className="py-5">Message details</th>
+                  <th className="py-5">Message Preview</th>
                   <th className="py-5">Status</th>
-                  <th className="py-5">Date</th>
-                  <th className="py-5 pr-6 text-right">Actions</th>
+                  <th className="py-5">Received At</th>
+                  <th className="py-5 pr-6 text-right font-black">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-white/5 text-xs">
                 <AnimatePresence initial={false}>
-                  {filteredLeads.map((lead) => (
+                  {paginatedLeads.map((lead) => (
                     <motion.tr 
                       key={lead.id}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       className={`hover:bg-slate-50/80 dark:hover:bg-white/[0.01] transition-all duration-150 ${
-                        selectedIds.includes(lead.id) ? 'bg-blue-50/50 dark:bg-blue-600/[0.02]' : ''
+                        selectedIds.includes(lead.id) ? 'bg-blue-50/40 dark:bg-blue-950/[0.05]' : ''
                       }`}
                     >
                       <td className="py-5 pl-6">
                         <input 
-                          type="checkbox"
+                          type="checkbox" 
                           checked={selectedIds.includes(lead.id)}
                           onChange={() => toggleSelect(lead.id)}
-                          className="rounded border-slate-300 dark:border-white/10 bg-white dark:bg-white/5 text-blue-600 h-4 w-4 cursor-pointer focus:ring-0 outline-none"
+                          className="rounded-md border-slate-300 dark:border-white/10 text-blue-600 focus:ring-0 focus:ring-offset-0 cursor-pointer"
                         />
                       </td>
                       <td className="py-5">
-                        <div className="font-black text-slate-900 dark:text-white">{lead.name}</div>
-                        <div className="text-slate-500 dark:text-gray-500 font-semibold mt-0.5">{lead.email}</div>
+                        <div>
+                          <span className="font-black text-slate-900 dark:text-white block">{lead.name}</span>
+                          <span className="text-[10px] text-slate-400 dark:text-gray-500 font-bold block mt-0.5">{lead.email}</span>
+                        </div>
                       </td>
                       <td className="py-5 max-w-sm">
-                        <p className="text-slate-600 dark:text-gray-400 font-medium leading-relaxed truncate-2-lines" title={lead.message}>
+                        <p className="text-slate-600 dark:text-gray-400 line-clamp-2 text-xs font-semibold leading-relaxed">
                           {lead.message}
                         </p>
                       </td>
@@ -283,6 +297,17 @@ export default function LeadsManagement() {
                 </AnimatePresence>
               </tbody>
             </table>
+
+            {/* Pagination Controls */}
+            <AdminPagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              totalItems={filteredLeads.length}
+              itemsPerPage={itemsPerPage}
+              onPageChange={setCurrentPage}
+              onItemsPerPageChange={setItemsPerPage}
+              itemLabel="leads"
+            />
           </div>
         )}
       </div>

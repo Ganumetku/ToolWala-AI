@@ -144,7 +144,7 @@ export default function Home() {
           </p>
 
           {/* Search bar for tools */}
-          <div className="animate-fade-up mx-auto max-w-3xl mb-8">
+          <div className="animate-fade-up mx-auto max-w-3xl mb-8 relative z-30">
             <ToolAutocompleteSearch
               value={searchQuery}
               onChange={setSearchQuery}
@@ -159,7 +159,7 @@ export default function Home() {
           </div>
 
           {/* Top 3 Categories */}
-          <div className="animate-fade-up flex flex-wrap justify-center gap-4 max-w-2xl mx-auto mb-8">
+          <div className="animate-fade-up flex flex-wrap justify-center gap-4 max-w-2xl mx-auto mb-8 relative z-10">
             <Link
               href={localizeHref('/categories/pdf-tools')}
               className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-red-50 dark:bg-red-500/10 hover:bg-red-600 dark:hover:bg-red-600 border border-red-200/80 dark:border-red-500/20 text-xs font-black uppercase tracking-wider text-red-600 dark:text-red-400 hover:text-white dark:hover:text-white transition-all duration-300 active:scale-95 shadow-sm hover:shadow-lg hover:shadow-red-500/20 hover:scale-105"
@@ -174,14 +174,14 @@ export default function Home() {
             </Link>
             <Link
               href={localizeHref('/categories/ai-tools')}
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-purple-50 dark:bg-purple-500/10 hover:bg-purple-600 dark:hover:bg-purple-600 border border-purple-200/80 dark:border-purple-500/20 text-xs font-black uppercase tracking-wider text-purple-600 dark:text-purple-400 hover:text-white dark:hover:text-white transition-all duration-300 active:scale-95 shadow-sm hover:shadow-lg hover:shadow-purple-500/20 hover:scale-105"
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-purple-50 dark:purple-500/10 hover:bg-purple-600 dark:hover:bg-purple-600 border border-purple-200/80 dark:border-purple-500/20 text-xs font-black uppercase tracking-wider text-purple-600 dark:text-purple-400 hover:text-white dark:hover:text-white transition-all duration-300 active:scale-95 shadow-sm hover:shadow-lg hover:shadow-purple-500/20 hover:scale-105"
             >
               🤖 {t('categories.AI Tools', 'AI Tools')}
             </Link>
           </div>
 
           {/* Suggestion Chips */}
-          <div className="animate-fade-in flex flex-wrap justify-center items-center gap-2 max-w-2xl mx-auto mb-10">
+          <div className="animate-fade-in flex flex-wrap justify-center items-center gap-2 max-w-2xl mx-auto mb-10 relative z-10">
             <span className="text-[9px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 mr-1 flex items-center gap-1">
               <MousePointerClick className="w-3 h-3 text-blue-500" /> {t('home.suggestions_label', 'Suggestions:')}
             </span>
@@ -197,7 +197,7 @@ export default function Home() {
           </div>
 
           {/* Primary & Secondary CTAs */}
-          <div className="animate-fade-up flex flex-wrap justify-center items-center gap-4">
+          <div className="animate-fade-up flex flex-wrap justify-center items-center gap-4 relative z-10">
             <Link
               href={localizeHref('/tools')}
               className="relative group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#2563EB] to-[#7C3AED] hover:from-blue-600 hover:to-purple-700 rounded-2xl text-xs font-black uppercase tracking-widest text-white shadow-[0_0_30px_rgba(37,99,235,0.3)] hover:shadow-[0_0_40px_rgba(37,99,235,0.5)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"

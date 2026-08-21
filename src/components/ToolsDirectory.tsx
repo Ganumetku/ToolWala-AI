@@ -126,7 +126,7 @@ export default function ToolsDirectory({
     <div className="w-full" id="tools-directory">
       {/* Search Bar */}
       {!hideSearch && (
-        <div className="mx-auto max-w-2xl flex flex-col items-center gap-4 mb-16">
+        <div className="mx-auto max-w-2xl flex flex-col items-center gap-4 mb-16 relative z-30">
           <ToolAutocompleteSearch
             value={searchQuery}
             onChange={handleSearchChange}
@@ -139,7 +139,7 @@ export default function ToolsDirectory({
       )}
 
       {/* Category Chips */}
-      <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-16">
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-16 relative z-10">
         {toolCategories.map(category => (
           <button
             key={category}
@@ -160,7 +160,7 @@ export default function ToolsDirectory({
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8 sm:mb-12 text-center"
+          className="mb-8 sm:mb-12 text-center relative z-10"
         >
           <p className="text-gray-600 dark:text-gray-400 font-medium font-sans text-xs sm:text-base">
             {t('tools.found_count', 'Found {count} tools for "{query}"').replace('{count}', String(filteredTools.length)).replace('{query}', searchQuery)}
@@ -173,7 +173,7 @@ export default function ToolsDirectory({
       {filteredTools.length > 0 ? (
         <motion.div 
           layout
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6 relative z-10"
         >
           <AnimatePresence>
             {filteredTools.map((tool) => (

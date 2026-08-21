@@ -380,11 +380,11 @@ export default function ToolAutocompleteSearch({
   const defaultPlaceholder = t('tools.search_placeholder_filter', 'Search PDF, Image, Resume & AI tools...');
 
   return (
-    <div ref={containerRef} className={`relative w-full ${className}`}>
+    <div ref={containerRef} className={`relative w-full ${isOpen ? 'z-50' : 'z-20'} ${className}`}>
       
       {/* Search Input Box */}
       <div className="relative group p-0.5 rounded-[22px] bg-gradient-to-r from-[#2563EB]/20 via-[#7C3AED]/20 to-[#2563EB]/20 bg-[length:200%_auto] focus-within:from-[#2563EB] focus-within:to-[#7C3AED] transition-all shadow-[0_10px_30px_rgba(15,23,42,0.06)] dark:shadow-2xl">
-        <div className={`relative flex items-center bg-white dark:bg-[#090d16]/98 ${inputHeight} rounded-[20px] pl-5 sm:pl-6 pr-3 sm:pr-4 border border-[#E8ECF4] dark:border-white/5 transition-colors`}>
+        <div className={`relative flex items-center bg-white dark:bg-[#090d16] ${inputHeight} rounded-[20px] pl-5 sm:pl-6 pr-3 sm:pr-4 border border-[#E8ECF4] dark:border-white/5 transition-colors`}>
           <div className="text-[#64748B] dark:text-gray-500 mr-2 sm:mr-3 shrink-0 flex items-center justify-center pointer-events-none">
             <Search className="h-5 w-5 sm:h-6 sm:w-6 group-focus-within:text-[#2563EB] dark:group-focus-within:text-blue-500 transition-colors" />
           </div>
@@ -440,7 +440,7 @@ export default function ToolAutocompleteSearch({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className="absolute top-full left-0 right-0 mt-3 z-50 bg-white/95 dark:bg-[#090d16]/98 backdrop-blur-xl border border-[#E8ECF4] dark:border-white/10 shadow-[0_20px_50px_rgba(15,23,42,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.8)] rounded-2xl overflow-hidden text-left"
+            className="absolute top-full left-0 right-0 mt-3 z-50 bg-white dark:bg-[#090d16] border border-[#E8ECF4] dark:border-white/10 shadow-[0_20px_50px_rgba(15,23,42,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.9)] rounded-2xl overflow-hidden text-left"
           >
             
             {/* 1. Live Suggestions Available */}

@@ -4,7 +4,7 @@
     "toolSlug": "passport-photo-maker",
     "locale": "en",
     "title": "Passport Photo Maker",
-    "description": "Create perfectly sized passport photos for any country with AI background removal.",
+    "description": "Create official passport photos for any country with AI background cleaning.",
     "faq": [
       {
         "question": "Are these photos legally acceptable?",
@@ -120,7 +120,7 @@
     "toolSlug": "color-palette-generator",
     "locale": "en",
     "title": "AI Color Palette Generator",
-    "description": "Unlock your creative vision with our advanced AI Color Palette Generator. Create curated, harmonious color schemes, extract tone blocks, and export style templates instantly.",
+    "description": "Generate beautiful harmonious color palettes for design and development.",
     "faq": [
       {
         "question": "Can I generate templates from images?",
@@ -220,7 +220,7 @@
     "toolSlug": "image-compressor",
     "locale": "en",
     "title": "Image Compressor",
-    "description": "Compress images up to 90% without losing visible quality. Fast and secure.",
+    "description": "Compress JPG, PNG, and WebP images up to 90% without quality loss.",
     "faq": [
       {
         "question": "Will my images look blurry?",
@@ -336,7 +336,7 @@
     "toolSlug": "qr-code-generator",
     "locale": "en",
     "title": "QR Code Generator",
-    "description": "Modern, customizable, and high-resolution QR codes for every occasion. Bridge the gap between physical and digital with our professional branding suite.",
+    "description": "Create customized QR codes for URLs, text, Wi-Fi, and contact details.",
     "faq": [
       {
         "question": "Will my QR code ever expire?",
@@ -700,7 +700,7 @@
     "toolSlug": "merge-pdf",
     "locale": "en",
     "title": "Merge PDF",
-    "description": "Combine multiple PDF documents into a single professional-grade file quickly and securely.",
+    "description": "Combine multiple PDF documents into a single organized PDF file securely.",
     "faq": [
       {
         "question": "Is it safe to merge confidential documents here?",
@@ -816,7 +816,7 @@
     "toolSlug": "split-pdf",
     "locale": "en",
     "title": "Split PDF",
-    "description": "Extract specific pages or split your PDF documents into multiple files instantly.",
+    "description": "Extract specific pages or split PDF documents into separate files instantly.",
     "faq": [
       {
         "question": "Are my files uploaded to a remote server?",
@@ -932,7 +932,7 @@
     "toolSlug": "jpg-to-pdf",
     "locale": "en",
     "title": "JPG to PDF",
-    "description": "Convert JPG, JPEG, and PNG images into a single PDF document quickly and securely.",
+    "description": "Convert JPG, PNG, and WebP images into a single clean PDF document.",
     "faq": [
       {
         "question": "Is it safe to convert my ID card or private scans here?",
@@ -1048,7 +1048,7 @@
     "toolSlug": "pdf-to-jpg",
     "locale": "en",
     "title": "PDF to JPG",
-    "description": "Convert PDF documents into high-quality JPG images directly in your browser. Fast, secure, and free.",
+    "description": "Convert PDF pages into high-quality JPG images directly in your browser.",
     "faq": [
       {
         "question": "Is my uploaded PDF document private?",
@@ -1164,7 +1164,7 @@
     "toolSlug": "protect-pdf",
     "locale": "en",
     "title": "Protect PDF with Password",
-    "description": "Lock your PDF documents with secure passwords entirely in your browser. 100% private, fast, and free client-side encryption.",
+    "description": "Lock PDF documents with secure password encryption in your browser.",
     "faq": [
       {
         "question": "Can ToolWala AI recover my password if I forget it?",
@@ -1280,7 +1280,7 @@
     "toolSlug": "unlock-pdf",
     "locale": "en",
     "title": "Unlock PDF Online",
-    "description": "Remove password protection and decryption locks from your PDF files instantly. 100% private, client-side decoding, and free.",
+    "description": "Remove password protection and decryption locks from PDF files instantly.",
     "faq": [
       {
         "question": "Do you store or see my document password?",
@@ -1396,7 +1396,7 @@
     "toolSlug": "watermark-pdf",
     "locale": "en",
     "title": "Add Watermark to PDF Online",
-    "description": "Protect your PDF documents with custom text or image watermarks. 100% private, client-side overlay generator, and free.",
+    "description": "Add custom text or image watermarks to PDF documents securely.",
     "faq": [
       {
         "question": "Is my document private when adding a watermark?",
@@ -1512,7 +1512,7 @@
     "toolSlug": "organize-pdf",
     "locale": "en",
     "title": "Organize PDF Pages",
-    "description": "Take complete control of your PDF structure. Rearrange pages, delete unnecessary sheets, rotate crooked scans, and duplicate important layouts in seconds—all locally in your browser.",
+    "description": "Reorder, rotate, duplicate, or delete pages in PDF documents securely.",
     "faq": [
       {
         "question": "Is my document private when using the PDF Organizer?",
@@ -1628,7 +1628,7 @@
     "toolSlug": "pdf-ocr",
     "locale": "en",
     "title": "PDF OCR Scanner",
-    "description": "Convert scanned PDF documents and images into fully searchable, copyable, and editable text in seconds. No server uploads, 100% private client-side OCR extraction.",
+    "description": "Extract text from scanned PDF files and images locally using OCR.",
     "faq": [
       {
         "question": "Is my PDF file private when scanning text?",
@@ -1744,7 +1744,7 @@
     "toolSlug": "crop-aadhaar-card",
     "locale": "en",
     "title": "Crop & Resize Aadhaar Card Photo",
-    "description": "Quickly resize, crop, and compress your passport-size photo to official UIDAI specifications for Aadhaar card updates, student cards, and government online applications.",
+    "description": "Crop and resize Aadhaar card photos to official standard sizes online.",
     "faq": [
       {
         "question": "What is the official photo size for Aadhaar updates?",
@@ -1860,7 +1860,7 @@
     "toolSlug": "ai-logo-maker",
     "locale": "en",
     "title": "AI Logo Maker",
-    "description": "Your brand's visual identity starts here. Our AI Logo Maker combines professional design principles with advanced artificial intelligence to help you create stunning, high-resolution logos in seconds—no design degree required.",
+    "description": "Generate unique logos for your brand or business using advanced AI.",
     "faq": [
       {
         "question": "Do I own the logos I create?",
@@ -2005,7 +2005,7 @@
     "toolSlug": "ats-resume-checker",
     "locale": "en",
     "title": "ATS Resume Checker",
-    "description": "Audit your resume for compatibility with modern Applicant Tracking Systems (ATS). Detect formatting errors, scan keyword matches against job descriptions, and get actionable suggestions.",
+    "description": "Audit your resume ATS compatibility score and get actionable feedback.",
     "faq": [
       {
         "question": "How does the ATS Resume Checker evaluate my CV?",
@@ -2121,7 +2121,7 @@
     "toolSlug": "caption-generator",
     "locale": "en",
     "title": "AI Caption Generator",
-    "description": "Never run out of things to say. Generate engaging, on-brand captions for Instagram, LinkedIn, and more using our creative AI writing assistant.",
+    "description": "Create engaging, platform-optimized captions for Instagram and LinkedIn.",
     "faq": [
       {
         "question": "Will it sound like a robot wrote it?",
@@ -2237,7 +2237,7 @@
     "toolSlug": "text-humanizer",
     "locale": "en",
     "title": "AI Text Humanizer",
-    "description": "Bridge the gap between artificial intelligence and human connection. Transform robotic AI-generated text into natural, engaging, and undetectable human-like content.",
+    "description": "Make AI text sound more natural, clear, and human-friendly in seconds.",
     "faq": [
       {
         "question": "Is this just an AI rewriter?",
@@ -2353,7 +2353,7 @@
     "toolSlug": "voice-generator",
     "locale": "en",
     "title": "AI Voice Generator",
-    "description": "Professional voiceovers at your fingertips. Transform your text into natural-sounding speech with our state-of-the-art AI vocal synthesizer.",
+    "description": "Transform text into lifelike speech with premium AI voices.",
     "faq": [
       {
         "question": "Can I use the audio for commercial projects?",
@@ -2469,7 +2469,7 @@
     "toolSlug": "invoice-generator",
     "locale": "en",
     "title": "Professional Invoice Generator",
-    "description": "Get paid faster with beautiful, professional invoices. Create, customize, and download high-quality invoices for your business in seconds.",
+    "description": "Create professional invoices and receipts in seconds. Download as PDF.",
     "faq": [
       {
         "question": "Is my financial data saved?",
@@ -2633,7 +2633,7 @@
     "toolSlug": "cover-letter-generator",
     "locale": "en",
     "title": "AI Cover Letter Generator",
-    "description": "Make a powerful first impression. Generate personalized, compelling cover letters that highlight your skills and grab the attention of hiring managers.",
+    "description": "Generate tailored cover letters optimized for any job application.",
     "faq": [
       {
         "question": "Will it look like a template?",
@@ -2749,7 +2749,7 @@
     "toolSlug": "ocr-to-text",
     "locale": "en",
     "title": "OCR Image to Text Converter",
-    "description": "Extract editable text from photographs, receipts, and document scans instantly. Zero server latency, offline OCR processing in your browser.",
+    "description": "Extract editable text from images, screenshots, and scanned documents.",
     "faq": [
       {
         "question": "Is my image uploaded?",
@@ -2849,7 +2849,7 @@
     "toolSlug": "password-generator",
     "locale": "en",
     "title": "Secure Password Generator",
-    "description": "Generate cryptographically secure, randomized passwords locally in your browser. Maintain absolute privacy for your credentials with customizable length and character filters.",
+    "description": "Generate strong, secure random passwords locally in your browser.",
     "faq": [
       {
         "question": "Are my generated passwords stored?",
@@ -2949,7 +2949,7 @@
     "toolSlug": "pdf-to-word-converter",
     "locale": "en",
     "title": "PDF to Word Converter",
-    "description": "Transform PDF documents into editable Word files instantly and securely. Our browser-based conversion engine preserves text structure, headings, and formatting without uploading your files to any external servers.",
+    "description": "Convert PDF files into editable Word documents with layout accuracy.",
     "faq": [
       {
         "question": "How do I convert PDF to Word?",
@@ -3113,7 +3113,7 @@
     "toolSlug": "word-to-pdf-converter",
     "locale": "en",
     "title": "Word to PDF Converter",
-    "description": "Convert Word documents (.docx) into professional PDF files in seconds. 100% private, client-side conversion, with no file limits.",
+    "description": "Convert Word documents (.docx) into clean PDF files securely.",
     "faq": [
       {
         "question": "Is my Word document secure?",
@@ -3213,7 +3213,7 @@
     "toolSlug": "age-calculator",
     "locale": "en",
     "title": "Age Calculator",
-    "description": "Compute your exact age down to months, weeks, and days. Determine days remaining until your next birthday instantly.",
+    "description": "Calculate exact age in years, months, days and next birthday instantly.",
     "faq": [
       {
         "question": "How does it handle leap years?",
@@ -3313,7 +3313,7 @@
     "toolSlug": "sip-calculator",
     "locale": "en",
     "title": "SIP Calculator",
-    "description": "Calculate SIP returns and estimate future wealth. Plan investments with detailed monthly reports and visual charts.",
+    "description": "Calculate SIP returns, future wealth, and investment growth instantly.",
     "faq": [
       {
         "question": "What is the formula for SIP?",
@@ -3413,7 +3413,7 @@
     "toolSlug": "emi-calculator",
     "locale": "en",
     "title": "EMI Calculator",
-    "description": "Calculate home loan, car loan, and personal loan EMIs. Review total interest schedules and amortization schedules instantly.",
+    "description": "Calculate loan EMI, total interest, and monthly amortization schedules.",
     "faq": [
       {
         "question": "How is EMI calculated?",
@@ -3513,7 +3513,7 @@
     "toolSlug": "gst-calculator",
     "locale": "en",
     "title": "GST Calculator",
-    "description": "Calculate GST and reverse GST values. Easily compute net prices, tax rates, and total amounts instantly.",
+    "description": "Calculate GST amount, total price, and reverse GST tax instantly.",
     "faq": [
       {
         "question": "What is reverse GST calculation?",
@@ -3613,7 +3613,7 @@
     "toolSlug": "youtube-money-calculator",
     "locale": "en",
     "title": "YouTube Money Calculator",
-    "description": "Estimate your YouTube channel revenue. Enter daily view counts, niche categories, and CPM rates to predict growth.",
+    "description": "Estimate YouTube revenue from views, CPM, RPM, and monthly traffic.",
     "faq": [
       {
         "question": "What is CPM vs RPM?",
@@ -3713,7 +3713,7 @@
     "toolSlug": "adsense-revenue-calculator",
     "locale": "en",
     "title": "Google AdSense Revenue Calculator",
-    "description": "Estimate your blog or website earnings. Compute potential revenue using page views, click-through rates (CTR), and CPC inputs.",
+    "description": "Estimate Google AdSense earnings from views, CTR, CPC, and RPM rates.",
     "faq": [
       {
         "question": "What is AdSense CPC?",
@@ -3813,7 +3813,7 @@
     "toolSlug": "ai-image-upscaler",
     "locale": "en",
     "title": "AI Image Upscaler",
-    "description": "Enhance photo quality, reduce blur, and upscale image resolution up to 8x locally in your browser. No server uploads, 100% private and secure processing.",
+    "description": "Upscale photos up to 8x with canvas sharpening and resolution enhancement.",
     "faq": [
       {
         "question": "How does the browser-based AI Image Upscaler work?",
@@ -3961,7 +3961,7 @@
     "toolSlug": "signature-crop-tool",
     "locale": "en",
     "title": "Signature Crop Tool",
-    "description": "Resize, crop, and compress signature scans to official standards instantly. Get print-ready layouts and clean transparent/white background signatures for exams, recruitment boards, and bank portals.",
+    "description": "Resize and crop signature scans to official standards for exam portals.",
     "faq": [
       {
         "question": "How do I crop my signature online?",
@@ -4061,7 +4061,7 @@
     "toolSlug": "pan-card-resize",
     "locale": "en",
     "title": "PAN Card Resize",
-    "description": "Resize, crop, and format passport photos to official NSDL and UTIITSL PAN card specifications. Keep head spacing, check background rules, and stay under the 50KB limit.",
+    "description": "Resize and format passport photos for NSDL and UTIITSL PAN cards.",
     "faq": [
       {
         "question": "What is the photo size for PAN card applications?",
@@ -4161,7 +4161,7 @@
     "toolSlug": "exam-photo-resizer",
     "locale": "en",
     "title": "Exam Photo Resizer",
-    "description": "Resize and compress photos for competitive exams and recruitment portals (SSC, UPSC, IBPS, NEET, JEE). Meet pixel ratios and target KB limits in one click.",
+    "description": "Resize and format passport photos for SSC, UPSC, and bank exam portals.",
     "faq": [
       {
         "question": "What is the photo size for SSC and bank exams?",
@@ -4261,7 +4261,7 @@
     "toolSlug": "invoice-cropper",
     "locale": "en",
     "title": "Invoice Cropper",
-    "description": "Crop invoice images or PDFs, auto-detect document edges, clean backgrounds, and download cropped documents locally. Completely private, client-side document layout optimizer.",
+    "description": "Crop invoice images or PDFs, detect edges, and clean backgrounds locally.",
     "faq": [
       {
         "question": "How does Invoice Cropper work?",
@@ -4393,7 +4393,7 @@
     "toolSlug": "aadhaar-masking-tool",
     "locale": "en",
     "title": "Aadhaar Masking Tool",
-    "description": "Automatically detect and mask the first 8 digits of your Aadhaar card for secure privacy protection.",
+    "description": "Mask the first 8 digits of your Aadhaar card for secure privacy protection.",
     "faq": [
       {
         "question": "What is Aadhaar Masking?",
@@ -10061,7 +10061,7 @@
     "toolSlug": "exam-marks-calculator",
     "locale": "en",
     "title": "Exam Marks Calculator",
-    "description": "Calculate marks percentage, average, grades, and GPA with detailed statistics.",
+    "description": "Calculate marks percentage, average, grades, and GPA with statistics.",
     "faq": [
       {
         "question": "How is the exam marks percentage calculated?",
@@ -10248,7 +10248,7 @@
     "toolSlug": "resume-bullet-generator",
     "locale": "en",
     "title": "Resume Bullet Generator",
-    "description": "Generate professional, recruiter-approved, achievement-focused resume bullet points using local AI.",
+    "description": "Generate recruiter-approved, achievement-focused resume bullet points.",
     "faq": [
       {
         "question": "How does the Resume Bullet Generator work?",

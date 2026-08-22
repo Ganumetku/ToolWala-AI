@@ -186,7 +186,7 @@ export default function WorkflowRecommendations({ slug }: WorkflowRecommendation
                         <h5 className="text-base font-black text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase tracking-tight">
                           {title}
                         </h5>
-                        <p className="text-xs text-gray-600 dark:text-gray-400 font-medium font-sans leading-relaxed line-clamp-2">
+                        <p className="text-xs text-gray-600 dark:text-gray-400 font-medium font-sans leading-relaxed line-clamp-3">
                           {desc}
                         </p>
                       </div>

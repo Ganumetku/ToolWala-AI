@@ -71,7 +71,7 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
   {
     id: "passport-photo-maker",
     title: "Passport Photo Maker",
-    description: "Create official passport photos for any country with AI background cleaning & exact sizing.",
+    description: "Create official passport photos for any country with AI background cleaning and exact sizing.",
     icon: "📸",
     href: "/tools/passport-photo-maker",
     category: "Image Tools",
@@ -123,43 +123,41 @@ export default function PopularToolsGrid() {
         </div>
 
         {/* Essential Tools Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-4">
           {ESSENTIAL_TOOLS.map((tool) => (
             <Link
               key={tool.id}
               href={localizeHref(tool.href)}
-              className="group relative p-5 sm:p-6 rounded-[1.5rem] bg-white dark:bg-white/[0.02] border border-gray-200 dark:border-white/10 hover:border-blue-500/40 dark:hover:border-blue-500/40 hover:bg-slate-50/80 dark:hover:bg-white/[0.04] transition-all duration-300 shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_12px_30px_rgba(37,99,235,0.12)] flex flex-col justify-between cursor-pointer"
+              className="group relative p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#0c1222] border border-gray-200/90 dark:border-white/10 hover:border-blue-500/50 dark:hover:border-blue-500/50 hover:bg-slate-50/50 dark:hover:bg-blue-600/5 transition-all duration-300 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_28px_rgba(37,99,235,0.08)] flex flex-col justify-between cursor-pointer"
             >
               <div>
                 {/* Top Badge & Icon */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-blue-50 dark:group-hover:bg-blue-500/10 transition-all shadow-sm">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/70 dark:border-white/10 flex items-center justify-center text-xl group-hover:scale-105 group-hover:bg-blue-50 dark:group-hover:bg-blue-500/20 group-hover:border-blue-200 dark:group-hover:border-blue-500/30 transition-all shadow-sm">
                     {tool.icon}
                   </div>
                   {tool.badge && (
-                    <span className="text-[9px] font-black text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 px-2.5 py-1 rounded-full border border-blue-200 dark:border-blue-500/20 uppercase tracking-wider truncate max-w-[55%]">
+                    <span className="text-[9px] font-black text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 px-2 py-0.5 rounded-full border border-blue-200 dark:border-blue-500/20 uppercase tracking-wider truncate max-w-[60%]">
                       {tool.badge}
                     </span>
                   )}
                 </div>
 
                 {/* Title & Description */}
-                <h3 className="text-base font-black text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-tight mb-2 line-clamp-2 min-h-[2.5rem]">
+                <h3 className="text-[15px] sm:text-[16px] font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-tight mb-1.5 line-clamp-2 min-h-[2.3rem]">
                   {t(`tools.${tool.id}.title`, tool.title)}
                 </h3>
-                <p className="text-xs font-medium text-gray-600 dark:text-gray-400 line-clamp-2 leading-relaxed font-sans min-h-[2.25rem] mb-4">
+                <p className="text-[12px] sm:text-[12.5px] font-normal text-slate-500 dark:text-gray-400 line-clamp-3 leading-relaxed min-h-[3.2rem]">
                   {t(`tools.${tool.id}.desc`, tool.description)}
                 </p>
               </div>
 
               {/* Action Button */}
-              <div className="pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between">
-                <span className="text-[11px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-wider flex items-center gap-1">
-                  {t('tools.open_tool', 'Open Tool')}
+              <div className="pt-2.5 mt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-[11px] font-bold text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                <span className="text-[10px] font-black uppercase tracking-wider">
+                  {t(`categories.${tool.category}`, tool.category)}
                 </span>
-                <div className="w-7 h-7 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                </div>
+                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
               </div>
             </Link>
           ))}

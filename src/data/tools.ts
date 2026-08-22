@@ -42,7 +42,7 @@ export const toolsData: Tool[] = [
   {
     id: "income-tax-calculator",
     title: "Income Tax Calculator (India)",
-    description: "Calculate Indian Income Tax for FY 2026-27 (AY 2027-28). Compare New vs Old regime slabs with official Union Budget rates.",
+    description: "Calculate Indian Income Tax for FY 2026-27. Compare New vs Old regime slabs.",
     icon: "💰",
     href: "/tools/income-tax-calculator",
     slug: "income-tax-calculator",
@@ -59,7 +59,7 @@ export const toolsData: Tool[] = [
   {
     id: "word-counter",
     title: "Word & Character Counter",
-    description: "Count words, characters, sentences, paragraphs, reading time, and keywords live.",
+    description: "Count words, characters, sentences, paragraphs, and reading time live.",
     icon: "📝",
     href: "/tools/word-counter",
     slug: "word-counter",
@@ -76,7 +76,7 @@ export const toolsData: Tool[] = [
   {
     id: "json-formatter-validator",
     title: "JSON Formatter & Validator",
-    description: "Format, beautify, minify, and validate JSON online. Inspect tree view with error checks.",
+    description: "Format, beautify, minify, and validate JSON online with tree view.",
     icon: "⚙️",
     href: "/tools/json-formatter-validator",
     slug: "json-formatter-validator",
@@ -93,7 +93,7 @@ export const toolsData: Tool[] = [
   {
     id: "heic-to-jpg-png-converter",
     title: "HEIC to JPG / PNG Converter",
-    description: "Convert Apple HEIC photos to JPG or PNG format instantly in your browser in batches.",
+    description: "Convert Apple HEIC photos to JPG or PNG format instantly in batches.",
     icon: "🔄",
     href: "/tools/heic-to-jpg-png-converter",
     slug: "heic-to-jpg-png-converter",
@@ -110,7 +110,7 @@ export const toolsData: Tool[] = [
   {
     id: "bmi-calculator",
     title: "BMI Calculator",
-    description: "Calculate your Body Mass Index (BMI) and WHO weight category with health insights.",
+    description: "Calculate Body Mass Index (BMI) and WHO weight category with health insights.",
     icon: "⚖️",
     href: "/tools/bmi-calculator",
     slug: "bmi-calculator",
@@ -127,7 +127,7 @@ export const toolsData: Tool[] = [
   {
     id: "passport-photo-maker",
     title: "Passport Photo Maker",
-    description: "Create perfectly sized passport photos for any country with AI background removal.",
+    description: "Create official passport photos for any country with AI background cleaning.",
     icon: "📸",
     href: "/tools/passport-photo-maker",
     slug: "passport-photo-maker",
@@ -144,7 +144,7 @@ export const toolsData: Tool[] = [
   {
     id: "color-palette-generator",
     title: "AI Color Palette Generator",
-    description: "Generate color schemes, extract palettes from custom photos, lock tones, and export style templates.",
+    description: "Generate beautiful harmonious color palettes for design and development.",
     icon: "🎨",
     href: "/tools/color-palette-generator",
     slug: "color-palette-generator",
@@ -161,7 +161,7 @@ export const toolsData: Tool[] = [
   {
     id: "image-compressor",
     title: "Image Compressor",
-    description: "Compress PNG, JPG, and WebP images up to 90% without losing quality. 100% private.",
+    description: "Compress JPG, PNG, and WebP images up to 90% without quality loss.",
     icon: "📉",
     href: "/tools/image-compressor",
     slug: "image-compressor",
@@ -178,7 +178,7 @@ export const toolsData: Tool[] = [
   {
     id: "webp-to-jpg-png-converter",
     title: "WebP to JPG / PNG Converter",
-    description: "Convert WebP images into JPG or PNG format instantly. Works 100% locally in browser.",
+    description: "Convert WebP images to JPG or PNG format instantly in your browser.",
     icon: "🖼️",
     href: "/tools/webp-to-jpg-png-converter",
     slug: "webp-to-jpg-png-converter",
@@ -195,7 +195,7 @@ export const toolsData: Tool[] = [
   {
     id: "jpg-to-webp",
     title: "JPG to WebP Converter",
-    description: "Convert JPG and JPEG images to WebP online. Reduce file size with high visual quality.",
+    description: "Convert JPG images to WebP format to reduce file size with high quality.",
     icon: "⚡",
     href: "/tools/jpg-to-webp",
     slug: "jpg-to-webp",
@@ -212,7 +212,7 @@ export const toolsData: Tool[] = [
   {
     id: "png-to-webp",
     title: "PNG to WebP Converter",
-    description: "Convert PNG images to WebP online while preserving transparency. Reduce size by 80%.",
+    description: "Convert PNG images to WebP format while preserving transparency.",
     icon: "💎",
     href: "/tools/png-to-webp",
     slug: "png-to-webp",
@@ -229,7 +229,7 @@ export const toolsData: Tool[] = [
   {
     id: "qr-code-generator",
     title: "QR Code Generator",
-    description: "Create custom QR codes for URLs, text, WiFi, and more with your logo.",
+    description: "Create customized QR codes for URLs, text, Wi-Fi, and contact details.",
     icon: "📱",
     href: "/tools/qr-code-generator",
     slug: "qr-code-generator",
@@ -280,7 +280,7 @@ export const toolsData: Tool[] = [
   {
     id: "pdf-to-excel-converter",
     title: "PDF to Excel Converter",
-    description: "Convert PDF tables into editable Excel spreadsheets. Preserve rows, columns, formatting, and data accuracy.",
+    description: "Convert PDF tables into editable Excel spreadsheets (.xlsx) accurately.",
     icon: "📊",
     href: "/tools/pdf-to-excel-converter",
     slug: "pdf-to-excel-converter",
@@ -297,7 +297,7 @@ export const toolsData: Tool[] = [
   {
     id: "excel-to-pdf-converter",
     title: "Excel to PDF Converter",
-    description: "Convert Excel spreadsheets (.xlsx, .xls, .csv) into formatted PDF documents. Works 100% locally in browser.",
+    description: "Convert Excel spreadsheets (.xlsx, .csv) into clean PDF documents.",
     icon: "📄",
     href: "/tools/excel-to-pdf-converter",
     slug: "excel-to-pdf-converter",
@@ -314,7 +314,7 @@ export const toolsData: Tool[] = [
   {
     id: "merge-pdf",
     title: "Merge PDF",
-    description: "Combine multiple PDF documents into a single professional-grade file quickly and securely.",
+    description: "Combine multiple PDF documents into a single organized PDF file securely.",
     icon: "🔀",
     href: "/tools/merge-pdf",
     slug: "merge-pdf",
@@ -331,7 +331,7 @@ export const toolsData: Tool[] = [
   {
     id: "split-pdf",
     title: "Split PDF",
-    description: "Extract specific pages or split your PDF documents into multiple files instantly.",
+    description: "Extract specific pages or split PDF documents into separate files instantly.",
     icon: "✂️",
     href: "/tools/split-pdf",
     slug: "split-pdf",
@@ -348,7 +348,7 @@ export const toolsData: Tool[] = [
   {
     id: "jpg-to-pdf",
     title: "JPG to PDF",
-    description: "Convert JPG, JPEG, and PNG images into a single PDF document quickly and securely.",
+    description: "Convert JPG, PNG, and WebP images into a single clean PDF document.",
     icon: "📑",
     href: "/tools/jpg-to-pdf",
     slug: "jpg-to-pdf",
@@ -365,7 +365,7 @@ export const toolsData: Tool[] = [
   {
     id: "pdf-to-jpg",
     title: "PDF to JPG",
-    description: "Convert PDF documents into high-quality JPG images directly in your browser. Fast, secure, and private.",
+    description: "Convert PDF pages into high-quality JPG images directly in your browser.",
     icon: "🖼️",
     href: "/tools/pdf-to-jpg",
     slug: "pdf-to-jpg",
@@ -382,7 +382,7 @@ export const toolsData: Tool[] = [
   {
     id: "protect-pdf",
     title: "Protect PDF",
-    description: "Password-protect your PDF files with secure client-side encryption. Keep your documents private.",
+    description: "Lock PDF documents with secure password encryption in your browser.",
     icon: "🔐",
     href: "/tools/protect-pdf",
     slug: "protect-pdf",
@@ -399,7 +399,7 @@ export const toolsData: Tool[] = [
   {
     id: "unlock-pdf",
     title: "Unlock PDF",
-    description: "Remove passwords and security restrictions from your PDF files instantly. 100% private.",
+    description: "Remove password protection and decryption locks from PDF files instantly.",
     icon: "🔓",
     href: "/tools/unlock-pdf",
     slug: "unlock-pdf",
@@ -416,7 +416,7 @@ export const toolsData: Tool[] = [
   {
     id: "watermark-pdf",
     title: "Add Watermark to PDF",
-    description: "Add text or image watermarks to your PDF files. Customize opacity, rotation, size, and positions.",
+    description: "Add custom text or image watermarks to PDF documents securely.",
     icon: "🏷️",
     href: "/tools/watermark-pdf",
     slug: "watermark-pdf",
@@ -433,7 +433,7 @@ export const toolsData: Tool[] = [
   {
     id: "organize-pdf",
     title: "Organize PDF Pages",
-    description: "Reorder, rotate, duplicate, or delete pages in your PDF documents visually and securely.",
+    description: "Reorder, rotate, duplicate, or delete pages in PDF documents securely.",
     icon: "🗂️",
     href: "/tools/organize-pdf",
     slug: "organize-pdf",
@@ -450,7 +450,7 @@ export const toolsData: Tool[] = [
   {
     id: "pdf-ocr",
     title: "PDF OCR Scanner",
-    description: "Extract text from scanned PDF files and images locally in your browser using secure OCR.",
+    description: "Extract text from scanned PDF files and images locally using OCR.",
     icon: "📖",
     href: "/tools/pdf-ocr",
     slug: "pdf-ocr",
@@ -467,7 +467,7 @@ export const toolsData: Tool[] = [
   {
     id: "pdf-summarizer",
     title: "AI PDF Summarizer",
-    description: "Summarize large PDF documents locally in your browser. Fast, private, and secure.",
+    description: "Summarize large PDF documents locally in your browser with private AI.",
     icon: "🤖",
     href: "/tools/pdf-summarizer",
     slug: "pdf-summarizer",
@@ -484,7 +484,7 @@ export const toolsData: Tool[] = [
   {
     id: "crop-aadhaar-card",
     title: "Crop Aadhaar Card",
-    description: "Crop Aadhaar Card online securely. Remove unwanted background and margins from your Aadhaar card image.",
+    description: "Crop and resize Aadhaar card photos to official standard sizes online.",
     icon: "🪪",
     href: "/tools/crop-aadhaar-card",
     slug: "crop-aadhaar-card",
@@ -540,7 +540,7 @@ export const toolsData: Tool[] = [
   {
     id: "ats-resume-checker",
     title: "ATS Resume Checker",
-    description: "Audit your resume for compatibility with modern Applicant Tracking Systems (ATS). Detect formatting errors, scan keyword matches against job descriptions, and get actionable suggestions.",
+    description: "Audit your resume ATS compatibility score and get actionable feedback.",
     icon: "🔍",
     href: "/tools/ats-resume-checker",
     slug: "ats-resume-checker",
@@ -557,7 +557,7 @@ export const toolsData: Tool[] = [
   {
     id: "caption-generator",
     title: "AI Caption Generator",
-    description: "Create engaging, platform-optimized captions with AI. Perfect for Instagram, LinkedIn, and more.",
+    description: "Create engaging, platform-optimized captions for Instagram and LinkedIn.",
     icon: "💬",
     href: "/tools/caption-generator",
     slug: "caption-generator",
@@ -574,7 +574,7 @@ export const toolsData: Tool[] = [
   {
     id: "ai-image-describer",
     title: "AI Image Describer & Scene Analyzer",
-    description: "Upload any photo to detect people, clothing, objects, scene environment, SEO alt-text, and reverse AI art prompts.",
+    description: "Analyze photos to detect objects, people, scenes, SEO alt text, and prompts.",
     icon: "👁️",
     href: "/tools/ai-image-describer",
     slug: "ai-image-describer",
@@ -625,7 +625,7 @@ export const toolsData: Tool[] = [
   {
     id: "invoice-generator",
     title: "Invoice Generator",
-    description: "Create professional invoices in seconds. Download as PDF or send directly to clients.",
+    description: "Create professional invoices and receipts in seconds. Download as PDF.",
     icon: "💸",
     href: "/tools/invoice-generator",
     slug: "invoice-generator",
@@ -659,7 +659,7 @@ export const toolsData: Tool[] = [
   {
     id: "cover-letter-generator",
     title: "AI Cover Letter Generator",
-    description: "Generate tailored, professional cover letters optimized for any job application.",
+    description: "Generate tailored cover letters optimized for any job application.",
     icon: "✉️",
     href: "/tools/cover-letter-generator",
     slug: "cover-letter-generator",
@@ -676,7 +676,7 @@ export const toolsData: Tool[] = [
   {
     id: "ocr-to-text",
     title: "OCR Image to Text",
-    description: "Extract text from images, screenshots, and scanned documents instantly using client-side OCR.",
+    description: "Extract editable text from images, screenshots, and scanned documents.",
     icon: "👁️",
     href: "/tools/ocr-to-text",
     slug: "ocr-to-text",
@@ -693,7 +693,7 @@ export const toolsData: Tool[] = [
   {
     id: "password-generator",
     title: "Password Generator",
-    description: "Generate strong, secure random passwords locally in your browser. Privacy-first offline tool.",
+    description: "Generate strong, secure random passwords locally in your browser.",
     icon: "🔑",
     href: "/tools/password-generator",
     slug: "password-generator",
@@ -710,7 +710,7 @@ export const toolsData: Tool[] = [
   {
     id: "pdf-to-word-converter",
     title: "PDF to Word Converter",
-    description: "Convert PDF files into editable Word documents online. Safe and fast browser-based conversion.",
+    description: "Convert PDF files into editable Word documents with layout accuracy.",
     icon: "📘",
     href: "/tools/pdf-to-word-converter",
     slug: "pdf-to-word-converter",
@@ -727,7 +727,7 @@ export const toolsData: Tool[] = [
   {
     id: "word-to-pdf-converter",
     title: "Word to PDF Converter",
-    description: "Convert Word documents (.docx) into PDF files locally and securely.",
+    description: "Convert Word documents (.docx) into clean PDF files securely.",
     icon: "📝",
     href: "/tools/word-to-pdf-converter",
     slug: "word-to-pdf-converter",
@@ -761,7 +761,7 @@ export const toolsData: Tool[] = [
   {
     id: "sip-calculator",
     title: "SIP Calculator",
-    description: "Calculate SIP returns, future value, total investment and estimated wealth instantly.",
+    description: "Calculate SIP returns, future wealth, and investment growth instantly.",
     icon: "📈",
     href: "/tools/sip-calculator",
     slug: "sip-calculator",
@@ -778,7 +778,7 @@ export const toolsData: Tool[] = [
   {
     id: "emi-calculator",
     title: "EMI Calculator",
-    description: "Calculate loan EMI, total interest, and total payment instantly for home loan, car loan, personal loan and more.",
+    description: "Calculate loan EMI, total interest, and monthly amortization schedules.",
     icon: "🏦",
     href: "/tools/emi-calculator",
     slug: "emi-calculator",
@@ -795,7 +795,7 @@ export const toolsData: Tool[] = [
   {
     id: "gst-calculator",
     title: "GST Calculator",
-    description: "Calculate GST amount, total price, and reverse GST instantly with free GST Calculator.",
+    description: "Calculate GST amount, total price, and reverse GST tax instantly.",
     icon: "🧾",
     href: "/tools/gst-calculator",
     slug: "gst-calculator",
@@ -812,7 +812,7 @@ export const toolsData: Tool[] = [
   {
     id: "discount-calculator",
     title: "Discount Calculator",
-    description: "Calculate final sale price, discount amount, double successive discounts, and GST tax instantly.",
+    description: "Calculate final sale price, discount savings, and GST tax instantly.",
     icon: "🏷️",
     href: "/tools/discount-calculator",
     slug: "discount-calculator",
@@ -829,7 +829,7 @@ export const toolsData: Tool[] = [
   {
     id: "youtube-money-calculator",
     title: "YouTube Money Calculator",
-    description: "Estimate YouTube earnings from views, CPM, RPM, niche and monthly traffic instantly.",
+    description: "Estimate YouTube revenue from views, CPM, RPM, and monthly traffic.",
     icon: "▶️",
     href: "/tools/youtube-money-calculator",
     slug: "youtube-money-calculator",
@@ -846,7 +846,7 @@ export const toolsData: Tool[] = [
   {
     id: "adsense-revenue-calculator",
     title: "AdSense Revenue Calculator",
-    description: "Estimate Google AdSense earnings from page views, CTR, CPC, RPM, country and niche instantly.",
+    description: "Estimate Google AdSense earnings from views, CTR, CPC, and RPM rates.",
     icon: "💰",
     href: "/tools/adsense-revenue-calculator",
     slug: "adsense-revenue-calculator",
@@ -863,7 +863,7 @@ export const toolsData: Tool[] = [
   {
     id: "ai-image-upscaler",
     title: "AI Image Upscaler",
-    description: "Upscale your photos by 2x, 4x, or 8x with advanced canvas sharpening and quality enhancement algorithms in your browser.",
+    description: "Upscale photos up to 8x with canvas sharpening and resolution enhancement.",
     icon: "🚀",
     href: "/tools/ai-image-upscaler",
     slug: "ai-image-upscaler",
@@ -880,7 +880,7 @@ export const toolsData: Tool[] = [
   {
     id: "signature-resize",
     title: "Signature Resize",
-    description: "Crop and resize signature scans to official standards for recruitment, banks, and exams.",
+    description: "Resize and crop signature scans to official standards for exams.",
     icon: "✍️",
     href: "/tools/signature-resize",
     slug: "signature-resize",
@@ -897,7 +897,7 @@ export const toolsData: Tool[] = [
   {
     id: "pan-card-resize",
     title: "PAN Card Resize",
-    description: "Format and resize passport photos to official NSDL/UTIITSL PAN card specifications.",
+    description: "Resize and format passport photos for NSDL and UTIITSL PAN cards.",
     icon: "🪪",
     href: "/tools/pan-card-resize",
     slug: "pan-card-resize",
@@ -948,7 +948,7 @@ export const toolsData: Tool[] = [
   {
     id: "exam-photo-resizer",
     title: "Exam Photo Resizer",
-    description: "Resize and format passport photos for SSC, UPSC, and banking online application portals.",
+    description: "Resize and format passport photos for SSC, UPSC, and bank exam portals.",
     icon: "🎓",
     href: "/tools/exam-photo-resizer",
     slug: "exam-photo-resizer",
@@ -965,7 +965,7 @@ export const toolsData: Tool[] = [
   {
     id: "aadhaar-pdf-compressor",
     title: "Aadhaar PDF Compressor",
-    description: "Compress e-Aadhaar PDF files under the official UIDAI 300KB upload limit securely.",
+    description: "Compress e-Aadhaar PDF files under the official 300KB upload limit.",
     icon: "🔒",
     href: "/tools/aadhaar-pdf-compressor",
     slug: "aadhaar-pdf-compressor",
@@ -982,7 +982,7 @@ export const toolsData: Tool[] = [
   {
     id: "gov-form-pdf-compressor",
     title: "Government Form PDF Compressor",
-    description: "Compress government application PDF attachments under standard portal size limits.",
+    description: "Compress government job application PDF attachments under portal limits.",
     icon: "📁",
     href: "/tools/gov-form-pdf-compressor",
     slug: "gov-form-pdf-compressor",
@@ -999,7 +999,7 @@ export const toolsData: Tool[] = [
   {
     id: "invoice-cropper",
     title: "Invoice Cropper",
-    description: "Crop invoice images or PDFs, auto-detect document edges, clean backgrounds, and download cropped documents locally.",
+    description: "Crop invoice images or PDFs, detect edges, and clean backgrounds locally.",
     icon: "🧾",
     href: "/tools/invoice-cropper",
     slug: "invoice-cropper",
@@ -1016,7 +1016,7 @@ export const toolsData: Tool[] = [
   {
     id: "aadhaar-masking-tool",
     title: "Aadhaar Masking Tool",
-    description: "Automatically detect and mask the first 8 digits of your Aadhaar card for maximum privacy protection.",
+    description: "Mask the first 8 digits of your Aadhaar card for secure privacy protection.",
     icon: "🛡️",
     href: "/tools/aadhaar-masking-tool",
     slug: "aadhaar-masking-tool",
@@ -1033,7 +1033,7 @@ export const toolsData: Tool[] = [
   {
     id: "compress-pdf",
     title: "Compress PDF",
-    description: "Reduce PDF file size locally in your browser while preserving document layout and quality.",
+    description: "Reduce PDF file size locally while preserving document layout and quality.",
     icon: "📉",
     href: "/tools/compress-pdf",
     slug: "compress-pdf",
@@ -1050,7 +1050,7 @@ export const toolsData: Tool[] = [
   {
     id: "crop-pdf",
     title: "Crop PDF",
-    description: "Trim PDF page margins and customize visible document borders locally and securely.",
+    description: "Trim PDF page margins and customize document borders securely.",
     icon: "✂️",
     href: "/tools/crop-pdf",
     slug: "crop-pdf",
@@ -1067,7 +1067,7 @@ export const toolsData: Tool[] = [
   {
     id: "rotate-pdf",
     title: "Rotate PDF",
-    description: "Rotate PDF pages by 90, 180, or 270 degrees. Save individual pages or entire documents locally.",
+    description: "Rotate PDF pages by 90, 180, or 270 degrees and download instantly.",
     icon: "🔄",
     href: "/tools/rotate-pdf",
     slug: "rotate-pdf",
@@ -1084,7 +1084,7 @@ export const toolsData: Tool[] = [
   {
     id: "remove-pages",
     title: "Remove PDF Pages",
-    description: "Delete specific pages from your PDF documents. Download optimized files securely.",
+    description: "Delete specific pages from your PDF documents and download instantly.",
     icon: "🗑️",
     href: "/tools/remove-pages",
     slug: "remove-pages",
@@ -1101,7 +1101,7 @@ export const toolsData: Tool[] = [
   {
     id: "add-page-numbers-to-pdf",
     title: "Add Page Numbers to PDF",
-    description: "Add page numbers to your PDF documents. Customize format, position, margins, and fonts locally.",
+    description: "Add custom page numbers to PDF documents with flexible formatting.",
     icon: "🔢",
     href: "/tools/add-page-numbers-to-pdf",
     slug: "add-page-numbers-to-pdf",
@@ -1118,7 +1118,7 @@ export const toolsData: Tool[] = [
   {
     id: "sign-pdf",
     title: "Sign PDF",
-    description: "Sign PDF documents online. Draw, type, or upload your signature to place on pages locally.",
+    description: "Sign PDF documents online. Draw, type, or upload your signature securely.",
     icon: "🖊️",
     href: "/tools/sign-pdf",
     slug: "sign-pdf",
@@ -1135,7 +1135,7 @@ export const toolsData: Tool[] = [
   {
     id: "exam-marks-calculator",
     title: "Exam Marks Calculator",
-    description: "Calculate your exam marks percentage, average, grades, and GPA with detailed statistics.",
+    description: "Calculate marks percentage, average, grades, and GPA with statistics.",
     icon: "📊",
     href: "/tools/exam-marks-calculator",
     slug: "exam-marks-calculator",
@@ -1152,7 +1152,7 @@ export const toolsData: Tool[] = [
   {
     id: "resume-bullet-generator",
     title: "Resume Bullet Generator",
-    description: "Generate professional, recruiter-approved, achievement-focused resume bullet points using local AI.",
+    description: "Generate recruiter-approved, achievement-focused resume bullet points.",
     icon: "📝",
     href: "/tools/resume-bullet-generator",
     slug: "resume-bullet-generator",
@@ -1169,7 +1169,7 @@ export const toolsData: Tool[] = [
   {
     id: "video-compressor",
     title: "Video Compressor",
-    description: "Compress MP4, MOV, WebM, and MKV videos locally in browser with zero quality loss.",
+    description: "Compress MP4, MOV, and WebM videos in your browser without quality loss.",
     icon: "🎥",
     href: "/tools/video-compressor",
     slug: "video-compressor",

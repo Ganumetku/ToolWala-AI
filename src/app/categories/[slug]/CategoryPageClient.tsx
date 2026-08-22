@@ -374,7 +374,7 @@ export default function CategoryPageClient({ slug, category, relatedBlogs = [] }
                 {/* Grid layout (2 columns on mobile) */}
                 <div className="w-full">
                   {filteredTools.length > 0 ? (
-                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3 sm:gap-4.5">
                       {filteredTools.map((tool) => (
                         <ToolCard 
                           key={tool.id} 

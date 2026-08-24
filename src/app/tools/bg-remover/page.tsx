@@ -82,6 +82,8 @@ export default function BackgroundRemover() {
     setLoadingText('Loading AI model...');
     setProgress(0);
     
+    setError(null);
+    
     try {
       const { removeBackground } = await import("@imgly/background-removal");
       
@@ -102,9 +104,14 @@ export default function BackgroundRemover() {
       const url = URL.createObjectURL(blob);
       setResultUrl(url);
       trackToolRun('background-remover');
-    } catch (err) {
-      console.error(err);
-      setError('Failed to process image. Try a smaller file or a different format.');
+    } catch (err: unknown) {
+      console.error('Background removal failed:', err);
+      const errorMessage = err instanceof Error ? err.message : '';
+      if (errorMessage.toLowerCase().includes('memory') || errorMessage.toLowerCase().includes('size')) {
+        setError('Image is too large for in-browser processing. Please try a smaller image (under 5MB).');
+      } else {
+        setError('Failed to process image. Please check your network or try a different format (JPG, PNG).');
+      }
       setSourceFile(null);
       setSourceUrl(null);
     } finally {

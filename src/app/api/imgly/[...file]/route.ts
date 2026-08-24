@@ -9,14 +9,14 @@ export async function GET(
   { params }: { params: Promise<{ file: string[] }> }
 ) {
   const resolvedParams = await params;
-  const filePath = (resolvedParams.file || []).join('/');
+  const rawPath = (resolvedParams.file || []).filter(Boolean).join('/');
 
-  if (!filePath) {
+  if (!rawPath) {
     return new NextResponse('File path required', { status: 400 });
   }
 
-  // Prevent directory traversal
-  const cleanPath = filePath.replace(/\.\./g, '');
+  // Prevent directory traversal and strip trailing slash that Next.js trailingSlash adds
+  const cleanPath = rawPath.replace(/\.\./g, '').replace(/\/+$/, '').trim();
   const targetUrl = `${IMGLY_CDN_BASE}/${cleanPath}`;
 
   try {

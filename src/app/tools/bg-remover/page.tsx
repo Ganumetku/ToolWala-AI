@@ -91,6 +91,7 @@ export default function BackgroundRemover() {
       
       const blob = await removeBackground(file, {
         publicPath,
+        model: 'isnet_quint8',
         progress: (key: string, current: number, total: number) => {
           if (total > 0) {
             const p = Math.round((current / total) * 100);

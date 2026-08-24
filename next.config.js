@@ -16,6 +16,7 @@ const cspHeader = `
 
 const nextConfig = {
   trailingSlash: true,
+  skipTrailingSlashRedirect: true,
   compress: true,
   poweredByHeader: false,
   images: {

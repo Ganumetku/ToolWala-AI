@@ -638,7 +638,8 @@ export default function ImageCropperEngine({
     setLoadingText("Removing background locally...");
     try {
       const { removeBackground } = await import("@imgly/background-removal");
-      const bgRemovedBlob = await removeBackground(uploadedFile);
+      const publicPath = typeof window !== 'undefined' ? `${window.location.origin}/api/imgly/` : undefined;
+      const bgRemovedBlob = await removeBackground(uploadedFile, { publicPath });
       const bgRemovedUrl = URL.createObjectURL(bgRemovedBlob);
       setBgRemovedImgUrl(bgRemovedUrl);
 

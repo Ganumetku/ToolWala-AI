@@ -87,7 +87,10 @@ export default function BackgroundRemover() {
     try {
       const { removeBackground } = await import("@imgly/background-removal");
       
+      const publicPath = `${window.location.origin}/api/imgly/`;
+      
       const blob = await removeBackground(file, {
+        publicPath,
         progress: (key: string, current: number, total: number) => {
           if (total > 0) {
             const p = Math.round((current / total) * 100);
@@ -106,11 +109,11 @@ export default function BackgroundRemover() {
       trackToolRun('background-remover');
     } catch (err: unknown) {
       console.error('Background removal failed:', err);
-      const errorMessage = err instanceof Error ? err.message : '';
+      const errorMessage = err instanceof Error ? err.message : String(err);
       if (errorMessage.toLowerCase().includes('memory') || errorMessage.toLowerCase().includes('size')) {
         setError('Image is too large for in-browser processing. Please try a smaller image (under 5MB).');
       } else {
-        setError('Failed to process image. Please check your network or try a different format (JPG, PNG).');
+        setError(`Failed to process image: ${errorMessage || 'Unknown error'}. Please try again or use a different format (JPG, PNG).`);
       }
       setSourceFile(null);
       setSourceUrl(null);

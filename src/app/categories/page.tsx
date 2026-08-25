@@ -171,7 +171,7 @@ export default async function CategoriesIndexPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="bg-slate-50/50 dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans text-gray-900 dark:text-white transition-colors duration-250">
+      <div className="bg-slate-50/50 dark:bg-[#030712] min-h-screen py-10 sm:py-20 relative overflow-hidden font-sans text-gray-900 dark:text-white transition-colors duration-250">
         <MeshGradient />
         <FloatingParticles />
 

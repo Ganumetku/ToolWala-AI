@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import BottomNavBar from "@/components/BottomNavBar";
 import { useAnalytics } from "@/hooks/useAnalytics";
 
 export default function PublicLayoutWrapper({
@@ -107,8 +108,9 @@ export default function PublicLayoutWrapper({
   return (
     <>
       <Header />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 pb-16 md:pb-0">{children}</main>
       <Footer />
+      <BottomNavBar />
     </>
   );
 }

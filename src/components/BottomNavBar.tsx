@@ -74,7 +74,8 @@ export default function BottomNavBar() {
   return (
     <nav 
       aria-label="Mobile Navigation"
-      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/90 dark:bg-[#090d16]/90 backdrop-blur-xl border-t border-slate-200/80 dark:border-white/10 shadow-[0_-4px_25px_rgba(0,0,0,0.08)] dark:shadow-[0_-8px_30px_rgba(0,0,0,0.6)] px-3 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]"
+      className="md:hidden fixed bottom-0 inset-x-0 z-[999] w-full bg-white/95 dark:bg-[#030712]/95 backdrop-blur-xl border-t border-slate-200 dark:border-white/10 shadow-[0_-4px_25px_rgba(0,0,0,0.12)] px-2 py-1.5 pb-[max(0.6rem,env(safe-area-inset-bottom))] select-none touch-manipulation"
+      style={{ transform: 'translateZ(0)', WebkitTransform: 'translateZ(0)' }}
     >
       <div className="flex items-center justify-around max-w-md mx-auto">
         {navItems.map((item) => {
@@ -83,7 +84,7 @@ export default function BottomNavBar() {
             <Link
               key={item.id}
               href={item.href}
-              className={`flex flex-col items-center justify-center py-1 px-3 rounded-2xl transition-all duration-200 active:scale-90 select-none group relative ${
+              className={`flex flex-col items-center justify-center py-1 px-3.5 rounded-xl transition-colors duration-150 select-none group relative ${
                 item.isActive 
                   ? 'text-blue-600 dark:text-blue-400 font-bold' 
                   : 'text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white'
@@ -91,21 +92,21 @@ export default function BottomNavBar() {
             >
               {/* Active Background Pill */}
               {item.isActive && (
-                <span className="absolute inset-0 bg-blue-50 dark:bg-blue-500/10 rounded-2xl -z-10 animate-in fade-in zoom-in-95 duration-200" />
+                <span className="absolute inset-0 bg-blue-50 dark:bg-blue-500/10 rounded-xl -z-10" />
               )}
 
-              <div className="relative">
-                <Icon className={`w-5 h-5 transition-transform duration-200 ${
-                  item.isActive ? 'scale-110 stroke-[2.5]' : 'stroke-[1.75] group-hover:scale-105'
+              <div className="relative flex items-center justify-center">
+                <Icon className={`w-5 h-5 transition-transform duration-150 ${
+                  item.isActive ? 'scale-110 stroke-[2.25]' : 'stroke-[1.75]'
                 }`} />
                 
                 {/* Active Indicator Glow Dot */}
                 {item.isActive && (
-                  <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-blue-600 dark:bg-blue-400 rounded-full shadow-[0_0_8px_#3b82f6]" />
+                  <span className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-blue-600 dark:bg-blue-400 rounded-full shadow-[0_0_6px_#3b82f6]" />
                 )}
               </div>
 
-              <span className={`text-[10px] tracking-tight mt-1 transition-all truncate max-w-[70px] ${
+              <span className={`text-[10px] tracking-tight mt-1 truncate max-w-[72px] leading-tight ${
                 item.isActive ? 'font-black text-blue-600 dark:text-blue-400' : 'font-medium'
               }`}>
                 {item.label}

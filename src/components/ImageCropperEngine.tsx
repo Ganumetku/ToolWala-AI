@@ -1338,8 +1338,8 @@ export default function ImageCropperEngine({
 
             {/* Layout presets switcher */}
             {presets.length > 1 && (
-              <div className="glass p-5 rounded-[2rem] border border-white/5 bg-white/[0.01] space-y-2.5">
-                <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest ml-1">
+              <div className="glass p-5 rounded-[2rem] border border-slate-200 dark:border-white/5 bg-white/70 dark:bg-white/[0.01] space-y-2.5">
+                <label className="text-[9px] font-black text-slate-500 dark:text-gray-400 uppercase tracking-widest ml-1">
                   Preset Dimensions
                 </label>
                 <div className="space-y-1.5">
@@ -1350,7 +1350,7 @@ export default function ImageCropperEngine({
                       className={`w-full text-left px-3.5 py-2.5 rounded-xl border text-[11px] font-black uppercase transition-all ${
                         activePreset.id === preset.id
                           ? "bg-blue-600 border-blue-500 text-white shadow-md shadow-blue-500/25"
-                          : "bg-white/5 border-white/5 text-gray-400 hover:text-white"
+                          : "bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/5 text-slate-700 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/10"
                       }`}
                     >
                       {preset.label}
@@ -1363,10 +1363,10 @@ export default function ImageCropperEngine({
 
           {/* 2. CENTER PANEL: DRAGGABLE CROP BOX EDITOR */}
           <div className="w-full xl:w-[50%] space-y-6">
-            <div className="glass p-6 sm:p-8 rounded-[2.5rem] border border-white/5 bg-white/[0.01] flex flex-col items-center">
+            <div className="glass p-6 sm:p-8 rounded-[2.5rem] border border-slate-200 dark:border-white/5 bg-white/70 dark:bg-white/[0.01] flex flex-col items-center">
               {/* Header inside workspace */}
               <div className="w-full flex items-center justify-between mb-4 px-2">
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500 flex items-center gap-1.5">
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 dark:text-blue-500 flex items-center gap-1.5">
                   <Crop className="w-3.5 h-3.5" /> Crop Canvas
                 </span>
 
@@ -1376,13 +1376,13 @@ export default function ImageCropperEngine({
                     onClick={() => setIsLocked((prev) => !prev)}
                     className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border text-[11px] font-black uppercase transition-all cursor-pointer ${
                       isLocked
-                        ? "bg-blue-500/10 border-blue-500/30 text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.15)]"
-                        : "bg-white/5 border-white/5 text-gray-500 hover:text-white hover:bg-white/[0.08]"
+                        ? "bg-blue-500/10 border-blue-500/30 text-blue-600 dark:text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.15)]"
+                        : "bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/5 text-slate-600 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/[0.08]"
                     }`}
                     title={isLocked ? "Aspect Ratio Locked" : "Aspect Ratio Free"}
                   >
                     <div className={`w-3.5 h-3.5 rounded border flex items-center justify-center transition-all ${
-                      isLocked ? "bg-blue-500 border-blue-500 text-white" : "border-gray-600"
+                      isLocked ? "bg-blue-500 border-blue-500 text-white" : "border-slate-400 dark:border-gray-600"
                     }`}>
                       {isLocked && <Check className="w-2.5 h-2.5 stroke-[3.5]" />}
                     </div>
@@ -1391,7 +1391,7 @@ export default function ImageCropperEngine({
                   {/* Reset canvas button */}
                   <button
                     onClick={handleReset}
-                    className="p-2.5 bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/5 rounded-xl transition-all cursor-pointer"
+                    className="p-2.5 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-white/5 rounded-xl transition-all cursor-pointer"
                     title="Reset Coordinates"
                   >
                     <RefreshCw className="w-4 h-4" />
@@ -1401,14 +1401,14 @@ export default function ImageCropperEngine({
 
               {/* Aadhaar Scanner Controls Toolbar */}
               {toolSlug === "aadhaar-photo-resizer" && (
-                <div className="w-full flex flex-wrap justify-center gap-2.5 mb-5 border-t border-b border-white/5 py-4 px-2">
+                <div className="w-full flex flex-wrap justify-center gap-2.5 mb-5 border-t border-b border-slate-200 dark:border-white/5 py-4 px-2">
                   <button
                     type="button"
                     onClick={switchToAutoCrop}
                     className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer ${
                       cropMode === "auto"
                         ? "bg-blue-600 border-blue-500 text-white shadow-md shadow-blue-500/25"
-                        : "bg-white/5 border-white/5 text-gray-400 hover:text-white hover:bg-white/[0.08]"
+                        : "bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/5 text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/[0.08]"
                     }`}
                   >
                     <Sparkles className="w-3.5 h-3.5" />
@@ -1420,7 +1420,7 @@ export default function ImageCropperEngine({
                     className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer ${
                       cropMode === "manual"
                         ? "bg-blue-600 border-blue-500 text-white shadow-md shadow-blue-500/25"
-                        : "bg-white/5 border-white/5 text-gray-400 hover:text-white hover:bg-white/[0.08]"
+                        : "bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/5 text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/[0.08]"
                     }`}
                   >
                     <Crop className="w-3.5 h-3.5" />
@@ -1429,7 +1429,7 @@ export default function ImageCropperEngine({
                   <button
                     type="button"
                     onClick={handleReset}
-                    className="flex items-center gap-2 px-4 py-2.5 bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/5 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer"
+                    className="flex items-center gap-2 px-4 py-2.5 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-white/5 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer"
                   >
                     <RefreshCw className="w-3.5 h-3.5" />
                     Reset
@@ -1647,14 +1647,13 @@ export default function ImageCropperEngine({
                   />
                 )}
               </div>
-
               {/* Dimensions specs label */}
               <div className="mt-4 text-center space-y-1">
-                <div className="text-[11px] font-black text-white/90">
+                <div className="text-[11px] font-black text-slate-800 dark:text-white/90">
                   {activePreset.width} x {isLocked ? activePreset.height : Math.round(activePreset.width * (cropH / cropW))} Pixels ({activePreset.specs.split(",")[0]})
                 </div>
                 {downloadSizeInfo && (
-                  <div className="text-[10px] font-mono font-black text-blue-400">
+                  <div className="text-[10px] font-mono font-black text-blue-600 dark:text-blue-400">
                     Compiled File Size: {downloadSizeInfo}
                   </div>
                 )}
@@ -1662,19 +1661,19 @@ export default function ImageCropperEngine({
             </div>
 
             {/* Passport Grid Print Sheet options */}
-            <div className="glass p-6 rounded-[2rem] border border-white/5 bg-white/[0.01] space-y-4">
-              <div className="flex items-center gap-2 border-b border-white/5 pb-3">
+            <div className="glass p-6 rounded-[2rem] border border-slate-200 dark:border-white/5 bg-white/70 dark:bg-white/[0.01] space-y-4">
+              <div className="flex items-center gap-2 border-b border-slate-200 dark:border-white/5 pb-3">
                 <Printer className="w-4 h-4 text-blue-500" />
-                <span className="text-xs font-black text-white uppercase tracking-wider">
+                <span className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">
                   Passport Print Grid
                 </span>
               </div>
 
-              <div className="grid grid-cols-4 gap-1.5 bg-black/40 border border-white/5 p-1 rounded-xl">
+              <div className="grid grid-cols-4 gap-1.5 bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/5 p-1 rounded-xl">
                 <button
                   onClick={() => setGridSize(null)}
                   className={`py-2 text-[8px] font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer ${
-                    gridSize === null ? "bg-white/5 text-white" : "text-gray-500 hover:text-gray-300"
+                    gridSize === null ? "bg-white dark:bg-white/10 text-slate-900 dark:text-white shadow-sm" : "text-slate-600 dark:text-gray-500 hover:text-slate-900 dark:hover:text-gray-300"
                   }`}
                 >
                   Single
@@ -1682,7 +1681,7 @@ export default function ImageCropperEngine({
                 <button
                   onClick={() => setGridSize("4x4")}
                   className={`py-2 text-[8px] font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer ${
-                    gridSize === "4x4" ? "bg-white/5 text-white" : "text-gray-500 hover:text-gray-300"
+                    gridSize === "4x4" ? "bg-white dark:bg-white/10 text-slate-900 dark:text-white shadow-sm" : "text-slate-600 dark:text-gray-500 hover:text-slate-900 dark:hover:text-gray-300"
                   }`}
                 >
                   4x4 Grid
@@ -1690,7 +1689,7 @@ export default function ImageCropperEngine({
                 <button
                   onClick={() => setGridSize("6x6")}
                   className={`py-2 text-[8px] font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer ${
-                    gridSize === "6x6" ? "bg-white/5 text-white" : "text-gray-500 hover:text-gray-300"
+                    gridSize === "6x6" ? "bg-white dark:bg-white/10 text-slate-900 dark:text-white shadow-sm" : "text-slate-600 dark:text-gray-500 hover:text-slate-900 dark:hover:text-gray-300"
                   }`}
                 >
                   6x6 Grid
@@ -1698,7 +1697,7 @@ export default function ImageCropperEngine({
                 <button
                   onClick={() => setGridSize("8x8")}
                   className={`py-2 text-[8px] font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer ${
-                    gridSize === "8x8" ? "bg-white/5 text-white" : "text-gray-500 hover:text-gray-300"
+                    gridSize === "8x8" ? "bg-white dark:bg-white/10 text-slate-900 dark:text-white shadow-sm" : "text-slate-600 dark:text-gray-500 hover:text-slate-900 dark:hover:text-gray-300"
                   }`}
                 >
                   8x8 Grid
@@ -1708,13 +1707,13 @@ export default function ImageCropperEngine({
 
             {/* Optional AI background cleanup toggle */}
             {activePreset.allowBgRemoval && (
-              <div className="glass p-6 rounded-[2rem] border border-white/5 bg-white/[0.01] space-y-3">
+              <div className="glass p-6 rounded-[2rem] border border-slate-200 dark:border-white/5 bg-white/70 dark:bg-white/[0.01] space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col">
-                    <span className="text-xs font-black text-white uppercase tracking-wider">
+                    <span className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">
                       AI Background Cleanup
                     </span>
-                    <span className="text-[10px] text-gray-500 mt-0.5">
+                    <span className="text-[10px] text-slate-500 dark:text-gray-400 mt-0.5">
                       Clears backdrop to official solid color.
                     </span>
                   </div>
@@ -1722,7 +1721,7 @@ export default function ImageCropperEngine({
                     onClick={() => triggerBgCleanup(!aiBgCleanup)}
                     disabled={isRemovingBg}
                     className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                      aiBgCleanup ? "bg-blue-600" : "bg-gray-800"
+                      aiBgCleanup ? "bg-blue-600" : "bg-slate-300 dark:bg-gray-800"
                     }`}
                   >
                     <span
@@ -1736,15 +1735,15 @@ export default function ImageCropperEngine({
             )}
 
             {/* Formatting & background controls */}
-            <div className="glass p-7 rounded-[2rem] border border-white/5 bg-white/[0.01] space-y-6">
-              <div className="flex items-center gap-2 border-b border-white/5 pb-4">
+            <div className="glass p-7 rounded-[2rem] border border-slate-200 dark:border-white/5 bg-white/70 dark:bg-white/[0.01] space-y-6">
+              <div className="flex items-center gap-2 border-b border-slate-200 dark:border-white/5 pb-4">
                 <Palette className="w-5 h-5 text-blue-500" />
                 <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase">Export Adjustments</h3>
               </div>
 
               {/* Background color select */}
               <div className="space-y-3">
-                <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest ml-1">
+                <label className="text-[9px] font-black text-slate-500 dark:text-gray-400 uppercase tracking-widest ml-1">
                   Background Backdrop
                 </label>
                 <div className="flex gap-3 items-center flex-wrap">
@@ -1752,10 +1751,10 @@ export default function ImageCropperEngine({
                     <button
                       key={bg.name}
                       onClick={() => setSelectedBgHex(bg.hex)}
-                      className={`w-9 h-9 rounded-xl border-3 transition-all cursor-pointer ${
+                      className={`w-9 h-9 rounded-xl border-2 transition-all cursor-pointer ${
                         selectedBgHex === bg.hex
-                          ? "border-blue-600 scale-105"
-                          : "border-white/5 hover:border-white/15"
+                          ? "border-blue-600 scale-105 shadow-sm ring-2 ring-blue-500/20"
+                          : "border-slate-300 dark:border-white/15 hover:border-slate-400 dark:hover:border-white/30"
                       }`}
                       style={{
                         backgroundColor: bg.hex === "transparent" ? undefined : bg.hex,
@@ -1768,13 +1767,13 @@ export default function ImageCropperEngine({
                       title={bg.name}
                     />
                   ))}
-                  <div className="w-px h-8 bg-white/10 mx-0.5" />
+                  <div className="w-px h-8 bg-slate-200 dark:bg-white/10 mx-0.5" />
                   <button
                     onClick={() => colorInputRef.current?.click()}
-                    className={`w-9 h-9 rounded-xl border-3 transition-all cursor-pointer flex items-center justify-center overflow-hidden ${
+                    className={`w-9 h-9 rounded-xl border-2 transition-all cursor-pointer flex items-center justify-center overflow-hidden ${
                       !activePreset.bgColors.some((bg) => bg.hex === selectedBgHex)
-                        ? "border-blue-600 scale-105"
-                        : "border-white/5 hover:border-white/15"
+                        ? "border-blue-600 scale-105 shadow-sm ring-2 ring-blue-500/20"
+                        : "border-slate-300 dark:border-white/15 hover:border-slate-400 dark:hover:border-white/30"
                     }`}
                     style={{
                       background:
@@ -1795,12 +1794,12 @@ export default function ImageCropperEngine({
               </div>
 
               {/* Format selection */}
-              <div className="space-y-4 pt-3 border-t border-white/5">
-                <div className="grid grid-cols-2 gap-2 bg-black/40 border border-white/5 p-1 rounded-xl">
+              <div className="space-y-4 pt-3 border-t border-slate-200 dark:border-white/5">
+                <div className="grid grid-cols-2 gap-2 bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/5 p-1 rounded-xl">
                   <button
                     onClick={() => setFormat("jpg")}
                     className={`py-2 text-[9px] font-black uppercase tracking-widest rounded-lg transition-colors cursor-pointer ${
-                      format === "jpg" ? "bg-white/5 text-white" : "text-gray-500 hover:text-gray-300"
+                      format === "jpg" ? "bg-white dark:bg-white/10 text-slate-900 dark:text-white shadow-sm" : "text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-gray-300"
                     }`}
                   >
                     JPEG (Standard)
@@ -1808,7 +1807,7 @@ export default function ImageCropperEngine({
                   <button
                     onClick={() => setFormat("png")}
                     className={`py-2 text-[9px] font-black uppercase tracking-widest rounded-lg transition-colors cursor-pointer ${
-                      format === "png" ? "bg-white/5 text-white" : "text-gray-500 hover:text-gray-300"
+                      format === "png" ? "bg-white dark:bg-white/10 text-slate-900 dark:text-white shadow-sm" : "text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-gray-300"
                     }`}
                   >
                     PNG (High Quality)
@@ -1818,22 +1817,22 @@ export default function ImageCropperEngine({
                 {format === "jpg" && (
                   <div className="space-y-3 pt-2">
                     <div className="flex justify-between items-center">
-                      <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest ml-1">
+                      <label className="text-[9px] font-black text-slate-500 dark:text-gray-400 uppercase tracking-widest ml-1">
                         KB Size limit
                       </label>
                       <div className="flex gap-2">
                         <button
                           onClick={() => setTargetKbMode("preset")}
-                          className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded ${
-                            targetKbMode === "preset" ? "text-blue-400 bg-blue-500/10" : "text-gray-500"
+                          className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded transition-colors ${
+                            targetKbMode === "preset" ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 font-bold" : "text-slate-500 dark:text-gray-400"
                           }`}
                         >
                           Preset
                         </button>
                         <button
                           onClick={() => setTargetKbMode("custom")}
-                          className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded ${
-                            targetKbMode === "custom" ? "text-blue-400 bg-blue-500/10" : "text-gray-500"
+                          className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded transition-colors ${
+                            targetKbMode === "custom" ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 font-bold" : "text-slate-500 dark:text-gray-400"
                           }`}
                         >
                           Custom
@@ -1842,13 +1841,13 @@ export default function ImageCropperEngine({
                     </div>
 
                     {targetKbMode === "preset" ? (
-                      <div className="p-3.5 bg-white/5 border border-white/5 rounded-2xl flex items-center justify-between text-xs font-semibold">
-                        <span className="text-gray-500 uppercase tracking-wider">Limit</span>
-                        <span className="font-mono text-white">&lt; {activePreset.targetKb} KB</span>
+                      <div className="p-3.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl flex items-center justify-between text-xs font-semibold">
+                        <span className="text-slate-500 dark:text-gray-400 uppercase tracking-wider font-bold">Limit</span>
+                        <span className="font-mono font-bold text-slate-900 dark:text-white">&lt; {activePreset.targetKb} KB</span>
                       </div>
                     ) : (
-                      <div className="flex items-center justify-between bg-black/40 border border-white/5 px-4 py-2 rounded-xl">
-                        <span className="text-[10px] font-black text-gray-500 uppercase tracking-wider">
+                      <div className="flex items-center justify-between bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/5 px-4 py-2 rounded-xl">
+                        <span className="text-[10px] font-black text-slate-500 dark:text-gray-400 uppercase tracking-wider">
                           Target Max Size (KB)
                         </span>
                         <input
@@ -1859,7 +1858,7 @@ export default function ImageCropperEngine({
                           onChange={(e) =>
                             setCustomTargetKb(Math.max(5, parseInt(e.target.value) || 20))
                           }
-                          className="w-16 bg-transparent text-right font-mono font-bold text-blue-400 outline-none text-xs"
+                          className="w-16 bg-transparent text-right font-mono font-bold text-blue-600 dark:text-blue-400 outline-none text-xs"
                         />
                       </div>
                     )}
@@ -1868,9 +1867,9 @@ export default function ImageCropperEngine({
               </div>
 
               {/* Filters adjustment */}
-              <div className="space-y-4 pt-4 border-t border-white/5">
+              <div className="space-y-4 pt-4 border-t border-slate-200 dark:border-white/5">
                 <div className="flex items-center justify-between">
-                  <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest ml-1">
+                  <label className="text-[9px] font-black text-slate-500 dark:text-gray-400 uppercase tracking-widest ml-1">
                     Ink / Contrast Enhance
                   </label>
                   <button
@@ -1878,7 +1877,7 @@ export default function ImageCropperEngine({
                     className={`text-[9px] font-black uppercase tracking-widest border px-2.5 py-1 rounded-lg transition-all ${
                       autoEnhance
                         ? "bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-500/20"
-                        : "bg-white/5 text-gray-400 border-white/5 hover:text-white"
+                        : "bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-gray-400 border-slate-200 dark:border-white/5 hover:text-slate-900 dark:hover:text-white"
                     }`}
                   >
                     Auto
@@ -1887,9 +1886,9 @@ export default function ImageCropperEngine({
 
                 <div className={`space-y-4 ${autoEnhance ? "opacity-30 pointer-events-none" : ""}`}>
                   <div className="space-y-1">
-                    <div className="flex justify-between text-[10px] font-semibold text-gray-400">
+                    <div className="flex justify-between text-[10px] font-semibold text-slate-600 dark:text-gray-400">
                       <span className="uppercase tracking-wider">Brightness</span>
-                      <span className="font-mono text-blue-400">{brightness}%</span>
+                      <span className="font-mono font-bold text-blue-600 dark:text-blue-400">{brightness}%</span>
                     </div>
                     <input
                       type="range"
@@ -1897,14 +1896,14 @@ export default function ImageCropperEngine({
                       max="140"
                       value={brightness}
                       onChange={(e) => setBrightness(parseInt(e.target.value))}
-                      className="w-full accent-blue-600 h-1 bg-white/5 rounded-full appearance-none cursor-pointer"
+                      className="w-full accent-blue-600 h-1.5 bg-slate-200 dark:bg-white/10 rounded-full appearance-none cursor-pointer"
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <div className="flex justify-between text-[10px] font-semibold text-gray-400">
+                    <div className="flex justify-between text-[10px] font-semibold text-slate-600 dark:text-gray-400">
                       <span className="uppercase tracking-wider">Contrast</span>
-                      <span className="font-mono text-blue-400">{contrast}%</span>
+                      <span className="font-mono font-bold text-blue-600 dark:text-blue-400">{contrast}%</span>
                     </div>
                     <input
                       type="range"
@@ -1912,22 +1911,22 @@ export default function ImageCropperEngine({
                       max="140"
                       value={contrast}
                       onChange={(e) => setContrast(parseInt(e.target.value))}
-                      className="w-full accent-blue-600 h-1 bg-white/5 rounded-full appearance-none cursor-pointer"
+                      className="w-full accent-blue-600 h-1.5 bg-slate-200 dark:bg-white/10 rounded-full appearance-none cursor-pointer"
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <div className="flex justify-between text-[10px] font-semibold text-gray-400">
+                    <div className="flex justify-between text-[10px] font-semibold text-slate-600 dark:text-gray-400">
                       <span className="uppercase tracking-wider">Sharpness Boost</span>
-                      <span className="font-mono text-blue-400">+{sharpness}</span>
+                      <span className="font-mono font-bold text-blue-600 dark:text-blue-400">+{sharpness}</span>
                     </div>
                     <input
                       type="range"
                       min="0"
-                      max="80"
+                      max="10"
                       value={sharpness}
                       onChange={(e) => setSharpness(parseInt(e.target.value))}
-                      className="w-full accent-blue-600 h-1 bg-white/5 rounded-full appearance-none cursor-pointer"
+                      className="w-full accent-blue-600 h-1.5 bg-slate-200 dark:bg-white/10 rounded-full appearance-none cursor-pointer"
                     />
                   </div>
                 </div>
@@ -1939,21 +1938,21 @@ export default function ImageCropperEngine({
 
       {/* Print Sheet Preview */}
       {step === "editor" && gridSize && previewSheetUrl && (
-        <div className="mt-12 max-w-5xl mx-auto glass rounded-[2.5rem] border border-white/5 p-8 text-center animate-fade-up animate-duration-500">
-          <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 mb-2 block">
+        <div className="mt-12 max-w-5xl mx-auto glass rounded-[2.5rem] border border-slate-200 dark:border-white/5 p-8 text-center animate-fade-up animate-duration-500">
+          <span className="text-[10px] font-black uppercase tracking-widest text-blue-500 mb-2 block">
             Print Sheet Preview
           </span>
           <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 uppercase tracking-tight">
             Passport Grid Layout ({gridSize})
           </h3>
-          <div className="inline-block border border-white/10 rounded-2xl overflow-hidden shadow-2xl bg-white max-w-lg p-3">
+          <div className="inline-block border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-2xl bg-white max-w-lg p-3">
             <img
               src={previewSheetUrl}
               alt="Grid Sheet print"
               className="max-w-full h-auto object-contain rounded-lg shadow-inner"
             />
           </div>
-          <p className="text-xs text-gray-500 mt-6 leading-relaxed max-w-md mx-auto">
+          <p className="text-xs text-slate-500 dark:text-gray-400 mt-6 leading-relaxed max-w-md mx-auto">
             This printable sheet layout packs {gridSize === "4x4" ? "16" : gridSize === "6x6" ? "36" : "64"} copies of your cropped photo on a clean white page with thin boundaries.
           </p>
         </div>
@@ -1961,10 +1960,10 @@ export default function ImageCropperEngine({
 
       {/* 4. BOTTOM ROW: DOWNLOAD SECTION */}
       {step === "editor" && (
-        <div className="glass p-6 rounded-[2.5rem] border border-white/5 bg-white/[0.01] mt-8 flex flex-col sm:flex-row gap-4 justify-between items-center">
+        <div className="glass p-6 rounded-[2.5rem] border border-slate-200 dark:border-white/5 bg-white/70 dark:bg-white/[0.01] mt-8 flex flex-col sm:flex-row gap-4 justify-between items-center">
           <div className="flex items-center gap-3">
             <UserCheck className="w-5 h-5 text-emerald-500" />
-            <span className="text-xs font-black text-gray-300 uppercase tracking-widest">
+            <span className="text-xs font-black text-slate-700 dark:text-gray-300 uppercase tracking-widest">
               Ready for Download • Checked for government validation
             </span>
           </div>
@@ -1972,7 +1971,7 @@ export default function ImageCropperEngine({
           <div className="flex gap-3.5 w-full sm:w-auto">
             <button
               onClick={resetAll}
-              className="flex-1 sm:flex-initial px-6 py-4 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white text-[10px] font-black uppercase tracking-widest rounded-2xl transition-all border border-white/5 cursor-pointer"
+              className="flex-1 sm:flex-initial px-6 py-4 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white text-[10px] font-black uppercase tracking-widest rounded-2xl transition-all border border-slate-200 dark:border-white/5 cursor-pointer"
             >
               Upload Different Photo
             </button>

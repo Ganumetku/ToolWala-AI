@@ -41,7 +41,7 @@ export default function CategoryToolsGrid({ categoryTools }: CategoryToolsGridPr
 
   return (
     <section className="space-y-6">
-      <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white/[0.01] border border-white/5 p-4 rounded-[2rem] glass">
+      <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white dark:bg-white/[0.01] border border-slate-200 dark:border-white/5 p-4 rounded-[2rem] shadow-sm">
         <div className="w-full md:max-w-md">
           <CategorySearch 
             value={searchQuery}
@@ -51,11 +51,13 @@ export default function CategoryToolsGrid({ categoryTools }: CategoryToolsGridPr
         </div>
 
         {/* Switch Filters Tab */}
-        <div className="flex gap-1.5 p-1 bg-black/40 border border-white/5 rounded-2xl w-full md:w-auto overflow-x-auto">
+        <div className="flex gap-1.5 p-1 bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/5 rounded-2xl w-full md:w-auto overflow-x-auto">
           <button
             onClick={() => setActiveFilter('all')}
             className={`flex-1 md:flex-initial px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-wider transition-colors cursor-pointer ${
-              activeFilter === 'all' ? 'bg-white/5 text-white' : 'text-gray-500 hover:text-white'
+              activeFilter === 'all' 
+                ? 'bg-blue-600 text-white shadow-sm' 
+                : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             {t('categories.All', 'All')} ({allCount})
@@ -63,7 +65,9 @@ export default function CategoryToolsGrid({ categoryTools }: CategoryToolsGridPr
           <button
             onClick={() => setActiveFilter('popular')}
             className={`flex-1 md:flex-initial px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-wider transition-colors cursor-pointer ${
-              activeFilter === 'popular' ? 'bg-white/5 text-white' : 'text-gray-500 hover:text-white'
+              activeFilter === 'popular' 
+                ? 'bg-blue-600 text-white shadow-sm' 
+                : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             {t('categories.Popular', 'Popular')} ({popularCount})
@@ -71,7 +75,9 @@ export default function CategoryToolsGrid({ categoryTools }: CategoryToolsGridPr
           <button
             onClick={() => setActiveFilter('trending')}
             className={`flex-1 md:flex-initial px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-wider transition-colors cursor-pointer ${
-              activeFilter === 'trending' ? 'bg-white/5 text-white' : 'text-gray-500 hover:text-white'
+              activeFilter === 'trending' 
+                ? 'bg-blue-600 text-white shadow-sm' 
+                : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             {t('categories.Trending', 'Trending')}
@@ -82,7 +88,7 @@ export default function CategoryToolsGrid({ categoryTools }: CategoryToolsGridPr
       {/* Grid layout (2 columns on mobile) */}
       <div className="w-full">
         {filteredTools.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-4 sm:gap-6">
             {filteredTools.map((tool) => (
               <ToolCard 
                 key={tool.id} 
@@ -93,14 +99,14 @@ export default function CategoryToolsGrid({ categoryTools }: CategoryToolsGridPr
             ))}
           </div>
         ) : (
-          <div className="text-center py-20 glass rounded-[2.5rem] border border-white/5 border-dashed">
-            <div className="bg-white/5 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/5">
-              <Search className="w-8 h-8 text-gray-700" />
+          <div className="text-center py-20 bg-white dark:bg-white/[0.01] rounded-[2.5rem] border border-slate-200 dark:border-white/5 border-dashed shadow-sm">
+            <div className="bg-slate-100 dark:bg-white/5 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-slate-200 dark:border-white/5">
+              <Search className="w-8 h-8 text-slate-400 dark:text-gray-600" />
             </div>
-            <h4 className="text-lg font-black text-white mb-2 uppercase tracking-tight">
+            <h4 className="text-lg font-black text-slate-900 dark:text-white mb-2 uppercase tracking-tight">
               {t('categories.no_tools_match', 'No tools match criteria')}
             </h4>
-            <p className="text-xs text-gray-500 max-w-xs mx-auto font-medium">
+            <p className="text-xs text-slate-500 dark:text-gray-400 max-w-xs mx-auto font-medium">
               {t('categories.no_tools_sub', 'Try checking description filters or reset active tabs.')}
             </p>
             <button

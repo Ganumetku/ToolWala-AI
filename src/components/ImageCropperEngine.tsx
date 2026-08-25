@@ -639,7 +639,7 @@ export default function ImageCropperEngine({
     try {
       const { removeBackground } = await import("@imgly/background-removal");
       const publicPath = typeof window !== 'undefined' ? `${window.location.origin}/api/imgly/` : undefined;
-      const bgRemovedBlob = await removeBackground(uploadedFile, { publicPath, model: 'isnet_quint8' });
+      const bgRemovedBlob = await removeBackground(uploadedFile, { publicPath, model: 'isnet_fp16' });
       const bgRemovedUrl = URL.createObjectURL(bgRemovedBlob);
       setBgRemovedImgUrl(bgRemovedUrl);
 

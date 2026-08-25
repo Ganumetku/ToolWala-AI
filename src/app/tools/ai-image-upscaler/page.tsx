@@ -13,11 +13,7 @@ import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { useAnalytics } from '@/hooks/useAnalytics';
 
-const checkerboardStyle = {
-  backgroundImage: 'repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05)), repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 25%, #030712 25%, #030712 75%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05))',
-  backgroundPosition: '0 0, 12px 12px',
-  backgroundSize: '24px 24px'
-};
+
 
 export default function AIImageUpscaler() {
   const { trackToolRun } = useAnalytics();
@@ -469,7 +465,7 @@ export default function AIImageUpscaler() {
                 >
                   {/* Left Column: Image Canvas / Comparison */}
                   <div className="lg:col-span-2 space-y-6">
-                    <div className="relative w-full aspect-square md:aspect-video rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl group select-none" style={checkerboardStyle}>
+                    <div className="relative w-full aspect-square md:aspect-video rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-white/10 shadow-2xl group select-none bg-checkerboard">
                       {resultUrl ? (
                         <>
                           {/* After Image */}

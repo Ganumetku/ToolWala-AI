@@ -394,10 +394,10 @@ export default function PdfToWord() {
                   onDragLeave={handleDragLeaveUpload}
                   onDrop={handleDropUpload}
                   onClick={() => fileInputRef.current?.click()}
-                  className={`border-2 border-dashed rounded-[3rem] p-12 sm:p-24 text-center transition-all cursor-pointer group relative overflow-hidden
+                  className={`border-2 border-dashed rounded-[1.5rem] py-8 sm:py-12 px-6 sm:px-10 text-center transition-all cursor-pointer group relative overflow-hidden
                     ${isDraggingOverUpload 
                       ? 'border-blue-500 bg-blue-500/10 scale-[1.01] shadow-[0_0_30px_rgba(59,130,246,0.1)]' 
-                      : 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/[0.02] hover:bg-slate-100 dark:hover:bg-white/[0.04] hover:border-slate-300 dark:hover:border-white/20'
+                      : 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/[0.02] hover:bg-slate-100 dark:hover:bg-white/[0.04] hover:border-blue-400 dark:hover:border-white/20'
                     }
                   `}
                 >
@@ -411,14 +411,14 @@ export default function PdfToWord() {
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
                   <div className="relative z-10">
-                    <div className="w-20 h-20 mx-auto mb-8 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 dark:text-gray-500 border border-slate-200 dark:border-white/5 group-hover:text-blue-500 dark:group-hover:text-blue-400 group-hover:bg-blue-500/10 group-hover:scale-110 transition-all duration-300 shadow-2xl">
-                      <UploadCloud className="w-10 h-10" />
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 dark:text-gray-500 border border-slate-200 dark:border-white/5 group-hover:text-blue-500 dark:group-hover:text-blue-400 group-hover:bg-blue-500/10 group-hover:scale-105 transition-all duration-300 shadow-sm">
+                      <UploadCloud className="w-7 h-7 sm:w-8 sm:h-8" />
                     </div>
-                    <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-3">Upload PDF to Convert</h3>
-                    <p className="text-sm text-slate-500 dark:text-gray-500 mb-10 max-w-sm mx-auto font-medium leading-relaxed font-sans">
+                    <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight mb-2 uppercase">Upload PDF to Convert</h3>
+                    <p className="text-xs sm:text-sm text-slate-500 dark:text-gray-500 mb-5 max-w-sm mx-auto font-medium leading-relaxed font-sans">
                       Drag and drop your PDF here, or click to choose from your device. Files remain strictly inside your browser. (Max 50MB)
                     </p>
-                    <button className="rounded-xl bg-blue-600 dark:bg-white text-white dark:text-black px-8 py-3.5 text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-[0_4px_20px_rgba(37,99,235,0.3)] dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)] cursor-pointer">
+                    <button className="rounded-xl bg-blue-600 dark:bg-white text-white dark:text-black px-6 py-2.5 sm:px-7 sm:py-3 text-xs font-black uppercase tracking-wider hover:scale-105 transition-all shadow-[0_4px_20px_rgba(37,99,235,0.3)] dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)] cursor-pointer">
                       Browse File
                     </button>
                   </div>

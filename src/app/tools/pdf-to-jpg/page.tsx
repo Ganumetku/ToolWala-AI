@@ -421,10 +421,10 @@ export default function PdfToJpg() {
                 onDragLeave={handleDragLeaveUpload}
                 onDrop={handleDropUpload}
                 onClick={() => fileInputRef.current?.click()}
-                className={`border-2 border-dashed rounded-[3rem] p-12 sm:p-24 text-center transition-all cursor-pointer group relative overflow-hidden
+                className={`border-2 border-dashed rounded-[1.5rem] py-8 sm:py-12 px-6 sm:px-10 text-center transition-all cursor-pointer group relative overflow-hidden
                   ${isDraggingOverUpload 
                     ? 'border-blue-500 bg-blue-500/10 scale-[1.01] shadow-[0_0_30px_rgba(59,130,246,0.1)]' 
-                    : 'border-white/10 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/20'
+                    : 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/[0.02] hover:bg-slate-100 dark:hover:bg-white/[0.04] hover:border-blue-400 dark:hover:border-white/20'
                   }
                 `}
               >
@@ -437,15 +437,15 @@ export default function PdfToJpg() {
                 />
                 
                 <div className="relative z-10">
-                  <div className="w-24 h-24 rounded-[2rem] bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:border-blue-500/50 transition-all duration-500 shadow-inner">
-                    <UploadCloud className="w-10 h-10 text-gray-400 group-hover:text-blue-500 transition-colors" />
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-blue-50 dark:bg-white/5 border border-blue-100 dark:border-white/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-105 group-hover:border-blue-500/50 transition-all duration-300 shadow-sm">
+                    <UploadCloud className="w-7 h-7 sm:w-8 sm:h-8 text-blue-600 dark:text-gray-400 group-hover:text-blue-500 transition-colors" />
                   </div>
-                  <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-3">Upload your PDF</h3>
-                  <p className="text-gray-400 font-medium max-w-sm mx-auto mb-8 text-sm">
+                  <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-2">Upload your PDF</h3>
+                  <p className="text-slate-500 dark:text-gray-400 font-medium max-w-sm mx-auto mb-5 text-xs sm:text-sm">
                     Drag & drop your PDF file here, or click to browse from your folders.
                   </p>
                   
-                  <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 text-[10px] font-bold text-gray-500 border border-white/5 uppercase tracking-widest">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-white/5 text-[10px] font-bold text-slate-600 dark:text-gray-400 border border-slate-200 dark:border-white/5 uppercase tracking-wider">
                     🔒 Client-side security. Files never leave your browser.
                   </div>
                 </div>

@@ -667,10 +667,10 @@ export default function JPGToWebPConverterPage() {
                 onDragOver={handleDragOverUpload}
                 onDragLeave={handleDragLeaveUpload}
                 onDrop={handleDropUpload}
-                className={`group relative border-2 border-dashed rounded-[2.5rem] p-12 sm:p-20 text-center transition-all duration-300 cursor-pointer overflow-hidden ${
+                className={`group relative border-2 border-dashed rounded-[1.5rem] py-8 sm:py-12 px-6 sm:px-10 text-center transition-all duration-300 cursor-pointer overflow-hidden ${
                   isDraggingOverUpload
                     ? 'border-blue-500 bg-blue-500/10 dark:bg-blue-500/15 scale-[1.015] shadow-[0_0_50px_rgba(59,130,246,0.35)] ring-4 ring-blue-500/30'
-                    : 'border-white/10 hover:border-blue-500/50 hover:bg-white/[0.02]'
+                    : 'border-slate-200 dark:border-white/10 hover:border-blue-500/50 bg-slate-50 dark:bg-white/[0.02] hover:bg-slate-100 dark:hover:bg-white/[0.04]'
                 }`}
               >
                 <input 
@@ -683,27 +683,27 @@ export default function JPGToWebPConverterPage() {
                 />
 
                 <div className="relative z-10 max-w-lg mx-auto">
-                  <div className={`mx-auto h-20 w-20 rounded-[1.5rem] flex items-center justify-center mb-6 border transition-all duration-300 ${
+                  <div className={`mx-auto h-14 w-14 sm:h-16 sm:w-16 rounded-2xl flex items-center justify-center mb-4 border transition-all duration-300 ${
                     isDraggingOverUpload
-                      ? 'bg-blue-500 text-white border-blue-400 scale-125 shadow-[0_0_30px_rgba(59,130,246,0.5)] animate-bounce'
-                      : 'text-blue-400 bg-blue-500/10 border-blue-500/20 group-hover:scale-110 shadow-2xl'
+                      ? 'bg-blue-500 text-white border-blue-400 scale-110 shadow-[0_0_30px_rgba(59,130,246,0.5)] animate-bounce'
+                      : 'text-blue-500 bg-blue-50 dark:bg-blue-500/10 border-blue-100 dark:border-blue-500/20 group-hover:scale-105 shadow-sm'
                   }`}>
-                    <Upload className="w-10 h-10" />
+                    <Upload className="w-7 h-7 sm:w-8 sm:h-8" />
                   </div>
                   
-                  <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-2 tracking-tight transition-colors">
+                  <h2 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mb-1.5 tracking-tight transition-colors">
                     {isDraggingOverUpload ? 'Drop JPG Images Right Here!' : 'Drop your JPG images here or click to browse'}
                   </h2>
                   
-                  <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+                  <p className="text-slate-500 dark:text-gray-400 text-xs sm:text-sm mb-5 leading-relaxed">
                     {isDraggingOverUpload ? 'Release your file now to start WebP conversion immediately.' : 'Supports JPG & JPEG files up to 50 MB each. Batch uploads & paste (Ctrl + V) supported.'}
                   </p>
 
                   <div className="flex flex-wrap items-center justify-center gap-3">
-                    <button className={`rounded-2xl px-8 py-3.5 text-xs font-black uppercase tracking-widest text-white transition-all pointer-events-none ${
+                    <button className={`rounded-xl px-6 py-2.5 sm:px-7 sm:py-3 text-xs font-black uppercase tracking-wider text-white transition-all pointer-events-none ${
                       isDraggingOverUpload
                         ? 'bg-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.6)] scale-105'
-                        : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-[0_0_25px_rgba(37,99,235,0.4)]'
+                        : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-md'
                     }`}>
                       {isDraggingOverUpload ? 'Release To Convert' : 'Browse Files'}
                     </button>

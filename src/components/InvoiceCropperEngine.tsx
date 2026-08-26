@@ -822,7 +822,7 @@ export default function InvoiceCropperEngine({
               handleFileUpload({ target: { files: dt.files } } as any);
             }
           }}
-          className="group relative border-2 border-dashed border-[#E6ECF5] dark:border-white/10 hover:border-blue-400 dark:hover:border-blue-500/50 rounded-[1.125rem] p-12 sm:p-20 text-center hover:bg-[#F0F4FF] dark:hover:bg-white/[0.02] transition-all duration-250 cursor-pointer overflow-hidden bg-[#FBFCFE] dark:bg-white/[0.01] shadow-[0_4px_20px_rgba(15,23,42,0.03)]"
+          className="group relative border-2 border-dashed border-[#E6ECF5] dark:border-white/10 hover:border-blue-400 dark:hover:border-blue-500/50 rounded-[1.125rem] py-8 sm:py-12 px-6 sm:px-10 text-center hover:bg-[#F0F4FF] dark:hover:bg-white/[0.02] transition-all duration-250 cursor-pointer overflow-hidden bg-[#FBFCFE] dark:bg-white/[0.01] shadow-[0_4px_20px_rgba(15,23,42,0.03)]"
         >
           <input
             type="file"
@@ -834,16 +834,16 @@ export default function InvoiceCropperEngine({
           {/* Neon Glow overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
           <div className="relative z-10 animate-in fade-in zoom-in-95 duration-500">
-            <div className="mx-auto h-24 w-24 text-blue-500 bg-blue-500/10 rounded-[2rem] flex items-center justify-center mb-8 border border-blue-500/20 group-hover:scale-110 transition-transform duration-300">
-              <UploadCloud className="w-10 h-10 text-blue-500" />
+            <div className="mx-auto h-14 w-14 sm:h-16 sm:w-16 text-blue-500 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-4 border border-blue-500/20 group-hover:scale-105 transition-transform duration-300">
+              <UploadCloud className="w-7 h-7 sm:w-8 sm:h-8 text-blue-500" />
             </div>
-            <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3 tracking-tight uppercase">
+            <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mb-2 tracking-tight uppercase">
               Drop invoice photo or PDF
             </h3>
-            <p className="text-gray-500 mb-8 max-w-sm mx-auto font-medium text-sm leading-relaxed">
+            <p className="text-gray-500 dark:text-gray-400 mb-5 max-w-sm mx-auto font-medium text-xs sm:text-sm leading-relaxed">
               Supports PDF documents, JPG, PNG, and WebP files. Analyzes page bounds completely client-side for maximum security.
             </p>
-            <div className="inline-flex items-center gap-3 px-6 py-3.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)]">
+            <div className="inline-flex items-center gap-2 px-6 py-2.5 sm:px-7 sm:py-3 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)]">
               Select Document File
             </div>
           </div>

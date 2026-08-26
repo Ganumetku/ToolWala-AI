@@ -434,7 +434,7 @@ Processed 100% Client-Side via ToolWala AI: ${window.location.href}`;
               onDragOver={(e) => e.preventDefault()}
               onDrop={handleDrop}
               onClick={() => fileInputRef.current?.click()}
-              className="max-w-4xl mx-auto bg-white/80 dark:bg-slate-900/80 border-2 border-dashed border-purple-400/50 dark:border-purple-500/30 hover:border-purple-500 dark:hover:border-purple-400 p-10 sm:p-16 rounded-[2.5rem] text-center cursor-pointer transition-all shadow-2xl backdrop-blur-xl group relative overflow-hidden"
+              className="max-w-4xl mx-auto bg-white/80 dark:bg-slate-900/80 border-2 border-dashed border-purple-400/50 dark:border-purple-500/30 hover:border-purple-500 dark:hover:border-purple-400 py-8 sm:py-12 px-6 sm:px-10 rounded-[1.5rem] text-center cursor-pointer transition-all shadow-xl backdrop-blur-xl group relative overflow-hidden"
             >
               <input 
                 type="file"
@@ -445,18 +445,18 @@ Processed 100% Client-Side via ToolWala AI: ${window.location.href}`;
                 className="hidden"
               />
 
-              <div className="w-20 h-20 mx-auto mb-6 rounded-3xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform shadow-lg">
-                <Film className="w-10 h-10" />
+              <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400 group-hover:scale-105 transition-transform shadow-sm">
+                <Film className="w-7 h-7 sm:w-8 sm:h-8" />
               </div>
 
-              <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-2">
+              <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-1.5">
                 Drag & Drop Video Files Here
               </h3>
-              <p className="text-slate-500 dark:text-gray-400 text-xs sm:text-sm font-medium mb-6 max-w-md mx-auto">
+              <p className="text-slate-500 dark:text-gray-400 text-xs sm:text-sm font-medium mb-5 max-w-md mx-auto">
                 Supports MP4, MOV, WebM, AVI, and MKV. Process single or multiple videos in browser RAM.
               </p>
 
-              <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-purple-600/20 group-hover:shadow-purple-600/40">
+              <div className="inline-flex items-center gap-2 px-6 py-2.5 sm:px-7 sm:py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider transition-all shadow-md group-hover:shadow-purple-600/40">
                 <FileVideo className="w-4 h-4" /> Browse Video Files
               </div>
             </div>

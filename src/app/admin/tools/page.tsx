@@ -8,7 +8,6 @@ import { toast } from 'sonner';
 import { adminFetch } from '@/lib/admin-fetch';
 import ToolIcon from '@/components/ToolIcon';
 import ToolIconModal from './ToolIconModal';
-import TopToolsRanking from '@/components/admin/TopToolsRanking';
 import AdminPagination from '@/components/admin/AdminPagination';
 import {
   Search, EyeOff, Star, TrendingUp, Zap, Calendar, Settings,
@@ -311,10 +310,6 @@ export default function AdminToolsDashboard() {
           </div>
         </div>
 
-        {/* Top Performing Tools Ranked Leaderboard */}
-        <div className="mb-10">
-          <TopToolsRanking />
-        </div>
 
         {/* Controls */}
         <div className="rounded-3xl border border-slate-200/80 dark:border-white/5 p-4 flex flex-col lg:flex-row gap-4 mb-8 sticky top-6 z-30 shadow-md bg-white/90 dark:bg-[#030712]/80 backdrop-blur-xl">

@@ -268,10 +268,10 @@ export default function OcrToText() {
                   onDragLeave={onDragLeave}
                   onDrop={onDrop}
                   onClick={() => fileInputRef.current?.click()}
-                  className={`relative border-2 border-dashed rounded-[2.5rem] p-16 sm:p-24 text-center transition-all duration-300 cursor-pointer group overflow-hidden ${
+                  className={`relative border-2 border-dashed rounded-[1.5rem] py-8 sm:py-12 px-6 sm:px-10 text-center transition-all duration-300 cursor-pointer group overflow-hidden ${
                     isDragging 
                       ? 'border-blue-500 bg-blue-500/10 dark:bg-blue-500/15 scale-[1.015] shadow-[0_0_50px_rgba(59,130,246,0.35)] ring-4 ring-blue-500/30' 
-                      : 'border-white/10 hover:border-blue-500/50 hover:bg-white/[0.02]'
+                      : 'border-slate-200 dark:border-white/10 hover:border-blue-500/50 bg-slate-50 dark:bg-white/[0.02] hover:bg-slate-100 dark:hover:bg-white/[0.04]'
                   }`}
                 >
                   <input 
@@ -287,23 +287,23 @@ export default function OcrToText() {
 
                   <div className="relative z-10">
                     <motion.div 
-                      animate={isDragging ? { scale: 1.25, y: -5 } : {}}
-                      className={`mx-auto h-24 w-24 rounded-[2rem] flex items-center justify-center mb-8 border transition-all duration-300 ${
+                      animate={isDragging ? { scale: 1.1, y: -5 } : {}}
+                      className={`mx-auto h-14 w-14 sm:h-16 sm:w-16 rounded-2xl flex items-center justify-center mb-4 border transition-all duration-300 ${
                         isDragging 
                           ? 'bg-blue-500 text-white border-blue-400 shadow-[0_0_30px_rgba(59,130,246,0.5)] animate-bounce' 
-                          : 'text-blue-500 bg-blue-500/10 border-blue-500/20 shadow-2xl'
+                          : 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 border-blue-100 dark:border-blue-500/20 shadow-sm'
                       }`}
                     >
-                      <UploadCloud className="w-12 h-12" />
+                      <UploadCloud className="w-7 h-7 sm:w-8 sm:h-8" />
                     </motion.div>
-                    <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3 tracking-tight transition-colors">
+                    <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mb-2 tracking-tight transition-colors">
                       {isDragging ? 'Drop Image Here to Extract Text!' : 'Drop image here or click to upload'}
                     </h3>
-                    <p className="text-gray-500 mb-6 max-w-sm mx-auto font-medium">Supports JPG, PNG, and WebP. You can also paste screenshots directly (`Ctrl+V` / `Cmd+V`).</p>
+                    <p className="text-slate-500 dark:text-gray-400 mb-5 max-w-sm mx-auto font-medium text-xs sm:text-sm leading-relaxed">Supports JPG, PNG, and WebP. You can also paste screenshots directly (`Ctrl+V` / `Cmd+V`).</p>
                     
-                    <div className="flex justify-center gap-6 text-xs font-black uppercase tracking-widest text-gray-600">
-                      <div className="flex items-center gap-2"><Zap className="w-4 h-4 text-amber-500" /> Free Local OCR</div>
-                      <div className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-emerald-500" /> Private</div>
+                    <div className="flex justify-center gap-6 text-[10px] sm:text-xs font-black uppercase tracking-widest text-slate-500 dark:text-gray-500">
+                      <div className="flex items-center gap-2"><Zap className="w-3.5 h-3.5 text-amber-500" /> Free Local OCR</div>
+                      <div className="flex items-center gap-2"><ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> Private</div>
                     </div>
                   </div>
                 </motion.div>

@@ -82,7 +82,7 @@ export default function ImageUploadPlaceholder({
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
-      className={`group relative border-2 border-dashed rounded-[1.125rem] p-12 sm:p-20 text-center transition-all duration-300 cursor-pointer overflow-hidden
+      className={`group relative border-2 border-dashed rounded-[1.125rem] py-8 sm:py-12 px-6 sm:px-10 text-center transition-all duration-300 cursor-pointer overflow-hidden
         ${isDragging 
           ? 'border-blue-500 bg-blue-50/90 dark:bg-blue-500/20 scale-[1.015] shadow-[0_0_50px_rgba(59,130,246,0.35)] ring-4 ring-blue-500/30 dark:shadow-[0_0_60px_rgba(59,130,246,0.4)]' 
           : 'border-[#E6ECF5] bg-[#FBFCFE] hover:bg-[#F0F4FF] hover:border-blue-400 dark:border-white/10 dark:bg-white/[0.01] dark:hover:bg-white/[0.02] shadow-[0_4px_20px_rgba(15,23,42,0.03)]'
@@ -91,22 +91,22 @@ export default function ImageUploadPlaceholder({
     >
       <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
       <div className="relative z-10 animate-in fade-in zoom-in-95 duration-500 font-sans">
-        <div className={`mx-auto h-20 w-20 rounded-[16px] flex items-center justify-center mb-8 border transition-all duration-300 ${
+        <div className={`mx-auto h-14 w-14 sm:h-16 sm:w-16 rounded-2xl flex items-center justify-center mb-4 border transition-all duration-300 ${
           isDragging
-            ? 'bg-blue-600 text-white border-blue-400 scale-125 shadow-blue-500/50 animate-bounce'
-            : 'bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-500 border-blue-100 dark:border-blue-500/20 group-hover:scale-110 shadow-sm dark:shadow-2xl'
+            ? 'bg-blue-600 text-white border-blue-400 scale-110 shadow-blue-500/50 animate-bounce'
+            : 'bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-500 border-blue-100 dark:border-blue-500/20 group-hover:scale-105 shadow-sm dark:shadow-2xl'
         }`}>
-          <UploadCloud className="w-10 h-10" />
+          <UploadCloud className="w-7 h-7 sm:w-8 sm:h-8" />
         </div>
-        <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3 tracking-tight uppercase transition-colors">
+        <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mb-2 tracking-tight uppercase transition-colors">
           {isDragging ? 'Drop Image Here to Upload!' : title}
         </h3>
-        <p className="text-slate-500 dark:text-gray-400 mb-6 max-w-md mx-auto font-medium text-sm leading-relaxed font-sans">
+        <p className="text-slate-500 dark:text-gray-400 mb-5 max-w-md mx-auto font-medium text-xs sm:text-sm leading-relaxed font-sans">
           {isDragging ? 'Release your file now to start processing.' : description}
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <div className={`inline-flex items-center gap-3.5 px-8 py-3.5 text-white text-xs font-black uppercase tracking-widest rounded-[16px] transition-all ${
+          <div className={`inline-flex items-center gap-2 px-6 py-2.5 sm:px-7 sm:py-3 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all ${
             isDragging
               ? 'bg-blue-600 shadow-[0_0_30px_rgba(37,99,235,0.6)] scale-105'
               : 'bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 shadow-[0_4px_20px_rgba(37,99,235,0.25)] hover:shadow-[0_8px_30px_rgba(99,102,241,0.35)] hover:-translate-y-0.5'

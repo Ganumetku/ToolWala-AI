@@ -316,10 +316,10 @@ export default function ImageCompressor() {
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
-                className={`group relative border-2 border-dashed rounded-[2.5rem] p-16 sm:p-24 text-center transition-all cursor-pointer overflow-hidden ${
+                className={`group relative border-2 border-dashed rounded-[1.5rem] py-8 sm:py-12 px-6 sm:px-10 text-center transition-all cursor-pointer overflow-hidden ${
                   isDragging
                     ? "border-blue-500 bg-blue-500/10 scale-[1.01]"
-                    : "border-white/10 hover:border-blue-500/50 hover:bg-white/[0.02]"
+                    : "border-slate-200 dark:border-white/10 hover:border-blue-500/50 bg-slate-50 dark:bg-white/[0.02] hover:bg-slate-100 dark:hover:bg-white/[0.04]"
                 }`}
               >
                 <input 
@@ -334,15 +334,15 @@ export default function ImageCompressor() {
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
                 <div className="relative z-10">
-                  <div className="mx-auto h-20 w-20 text-blue-500 bg-blue-500/10 rounded-[1.5rem] flex items-center justify-center mb-8 shadow-2xl border border-blue-500/20 group-hover:scale-110 transition-transform">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="mx-auto h-14 w-14 sm:h-16 sm:w-16 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 rounded-2xl flex items-center justify-center mb-4 shadow-sm border border-blue-100 dark:border-blue-500/20 group-hover:scale-105 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 sm:w-8 sm:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">Drop image here or click to upload</h3>
-                  <p className="text-gray-500 mb-10 max-w-sm mx-auto font-medium leading-relaxed">Supports JPG, PNG, and WebP up to 20MB. All processing happens safely in your browser.</p>
+                  <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mb-2 tracking-tight">Drop image here or click to upload</h3>
+                  <p className="text-slate-500 dark:text-gray-400 mb-5 max-w-sm mx-auto font-medium text-xs sm:text-sm leading-relaxed">Supports JPG, PNG, and WebP up to 20MB. All processing happens safely in your browser.</p>
                   
-                  <button className="rounded-2xl bg-blue-600 px-10 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-white hover:bg-blue-500 transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)] pointer-events-none">
+                  <button className="rounded-xl bg-blue-600 px-6 py-2.5 sm:px-7 sm:py-3 text-xs font-black uppercase tracking-wider text-white hover:bg-blue-500 transition-all shadow-md pointer-events-none">
                     Select Image
                   </button>
                 </div>

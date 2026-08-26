@@ -124,17 +124,17 @@ export default function ToolAnalytics() {
 
   if (loading || !stats) {
     return (
-      <div className="space-y-10">
+      <div className="space-y-10 animate-pulse">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="h-10 bg-white/[0.01] border border-white/5 rounded-3xl w-48 animate-pulse" />
-          <div className="h-10 bg-white/[0.01] border border-white/5 rounded-3xl w-64 animate-pulse" />
+          <div className="h-10 bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10 rounded-2xl w-48" />
+          <div className="h-10 bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10 rounded-2xl w-64" />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="h-40 bg-white/[0.01] border border-white/5 rounded-3xl animate-pulse" />
+            <div key={i} className="h-40 bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10 rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)]" />
           ))}
         </div>
-        <div className="h-80 bg-white/[0.01] border border-white/5 rounded-3xl animate-pulse" />
+        <div className="h-80 bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10 rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)]" />
       </div>
     );
   }

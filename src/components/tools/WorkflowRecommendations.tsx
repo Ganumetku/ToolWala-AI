@@ -5,7 +5,7 @@ import { useTranslation } from '@/components/I18nContext';
 import { toolsData, type Tool } from '@/data/tools';
 import { getWorkflowRecommendations } from '@/data/workflow_recommendations';
 import { Zap, TrendingUp, Workflow, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import ToolIcon, { getCategoryStyle } from '@/components/ToolIcon';
 
 interface WorkflowRecommendationsProps {
   slug: string;
@@ -95,7 +95,7 @@ export default function WorkflowRecommendations({ slug }: WorkflowRecommendation
                 <div className="flex flex-col items-center text-center relative z-10 group/step">
                   {/* Step Bubble */}
                   <div 
-                    className={`w-14 h-14 rounded-2xl flex items-center justify-center text-lg font-bold border transition-all duration-300 shadow-sm
+                    className={`w-14 h-14 rounded-2xl flex items-center justify-center border transition-all duration-300 shadow-sm
                       ${isCurrent 
                         ? 'bg-blue-600 border-blue-400 text-white shadow-md scale-110' 
                         : isCompleted
@@ -107,7 +107,7 @@ export default function WorkflowRecommendations({ slug }: WorkflowRecommendation
                     {isCompleted ? (
                       <CheckCircle2 className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
                     ) : (
-                      <span>{step.icon}</span>
+                      <ToolIcon icon={step.icon} className="w-6 h-6" strokeWidth={1.75} />
                     )}
                   </div>
 
@@ -169,6 +169,7 @@ export default function WorkflowRecommendations({ slug }: WorkflowRecommendation
                 const title = t(`tools.${tool.slug}.title`, tool.title);
                 const desc = t(`tools.${tool.slug}.description`, tool.description);
                 const linkHref = localizeHref(tool.href);
+                const catStyle = getCategoryStyle(tool.category);
 
                 return (
                   <Link 
@@ -179,8 +180,8 @@ export default function WorkflowRecommendations({ slug }: WorkflowRecommendation
                     <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-full blur-2xl pointer-events-none group-hover:bg-blue-500/10 transition-colors" />
                     
                     <div className="space-y-3">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-600/10 text-blue-600 dark:text-white border border-blue-100 dark:border-blue-500/10 text-xl">
-                        {tool.icon}
+                      <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${catStyle.bg} ${catStyle.text} border ${catStyle.border}`}>
+                        <ToolIcon icon={tool.icon} className="w-6 h-6" strokeWidth={1.75} />
                       </div>
                       <div className="space-y-1">
                         <h5 className="text-base font-black text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase tracking-tight">
@@ -215,6 +216,7 @@ export default function WorkflowRecommendations({ slug }: WorkflowRecommendation
               {togetherTools.map((tool) => {
                 const title = t(`tools.${tool.slug}.title`, tool.title);
                 const linkHref = localizeHref(tool.href);
+                const catStyle = getCategoryStyle(tool.category);
 
                 return (
                   <Link 
@@ -223,8 +225,8 @@ export default function WorkflowRecommendations({ slug }: WorkflowRecommendation
                     className="flex items-center justify-between p-3.5 rounded-xl border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#0b0f19]/40 hover:border-indigo-500/30 transition-all group cursor-pointer"
                   >
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-600/10 text-indigo-600 dark:text-white text-base">
-                        {tool.icon}
+                      <div className={`flex h-9 w-9 items-center justify-center rounded-lg ${catStyle.bg} ${catStyle.text} border ${catStyle.border}`}>
+                        <ToolIcon icon={tool.icon} className="w-4.5 h-4.5" strokeWidth={1.75} />
                       </div>
                       <span className="text-xs font-black text-gray-900 dark:text-white truncate group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors uppercase tracking-tight">
                         {title}

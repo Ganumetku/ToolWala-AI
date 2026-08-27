@@ -50,7 +50,7 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-20 relative overflow-hidden font-sans transition-colors duration-250">
+    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen pt-8 sm:pt-10 pb-20 relative overflow-hidden font-sans transition-colors duration-250">
       <MeshGradient />
       <FloatingParticles />
 
@@ -60,13 +60,13 @@ export default function PricingPage() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
         
         {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-200 dark:border-blue-500/20 mb-4 shadow-sm">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-200 dark:border-blue-500/20 mb-3 sm:mb-4 shadow-sm">
             <Sparkles className="w-3.5 h-3.5" />
             Simple & Transparent
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-4">
+          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-3 sm:mb-4 leading-tight">
             Free Forever. No Hidden Fees.
           </h1>
 
@@ -74,7 +74,7 @@ export default function PricingPage() {
             Every single utility tool on ToolWala AI is 100% free, private, and powered by client-side browser technology.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-[10px] sm:text-xs font-black text-slate-500 dark:text-gray-400 uppercase tracking-widest mt-6">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-[10px] sm:text-xs font-black text-slate-500 dark:text-gray-400 uppercase tracking-widest mt-5">
             <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-emerald-500" /> 100% Client-Side</span>
             <span className="flex items-center gap-1.5"><Heart className="w-4 h-4 text-rose-500" /> Community Supported</span>
             <span className="flex items-center gap-1.5"><Lock className="w-4 h-4 text-blue-500" /> Zero File Uploads</span>

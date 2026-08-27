@@ -23,7 +23,7 @@ export const categoriesData: CategoryMetadata[] = [
     title: "PDF Tools",
     description: "Professional PDF suite to merge, split, compress, watermark, and convert documents locally.",
     intro: "A collection of 9+ high-performance PDF manipulation utilities designed to streamline your document workflows with complete security.",
-    icon: "📄",
+    icon: "FileText",
     seoTitle: "PDF Tools - Free Online PDF Editor, Splitter & Compressor | ToolWala AI",
     seoDescription: "Edit, merge, split, compress, watermark, protect, and scan PDF files locally. No subscription, no server uploads. Your data stays private.",
     keywords: ["pdf tools", "merge pdf", "split pdf", "compress pdf", "protect pdf", "watermark pdf", "pdf editor", "local pdf scanner"],
@@ -42,17 +42,17 @@ export const categoriesData: CategoryMetadata[] = [
       {
         title: "100% Secure Local Sandbox",
         desc: "Documents are processed in active browser memory. No data is sent to external servers, protecting sensitive files.",
-        icon: "🔒"
+        icon: "Lock"
       },
       {
         title: "Visually Lossless Compression",
         desc: "Optimize file sizes while preserving fonts, vectors, and image clarity using advanced local compression engines.",
-        icon: "📉"
+        icon: "Shrink"
       },
       {
         title: "Complete Format Support",
         desc: "Convert documents easily from [Word to PDF](/tools/word-to-pdf-converter) or [JPG to PDF](/tools/jpg-to-pdf) instantly.",
-        icon: "📂"
+        icon: "Folder"
       }
     ],
     howItWorks: [
@@ -79,7 +79,7 @@ export const categoriesData: CategoryMetadata[] = [
     title: "Image Tools",
     description: "Automated background remover, passport photo resizer, and image optimizer.",
     intro: "Create standardized ID photos, extract subject cutouts, generate QR codes, and compress image file sizes instantly.",
-    icon: "🖼️",
+    icon: "Image",
     seoTitle: "Image Tools & Photo Editors Online | ToolWala AI",
     seoDescription: "Standardize passport photos, crop Aadhaar cards, remove image backgrounds, and compress photos with local browser engines.",
     keywords: ["image tools", "crop passport photo", "crop aadhaar card", "crop aadhar card", "aadhar card cropper", "bg remover", "image compressor", "color palette", "free image editor"],
@@ -98,17 +98,17 @@ export const categoriesData: CategoryMetadata[] = [
       {
         title: "Client-Side AI Engine",
         desc: "Leverage edge models to remove backgrounds and upscale images instantly without server delays.",
-        icon: "⚡"
+        icon: "Zap"
       },
       {
         title: "Official Spec Compliance",
         desc: "Crop and scale photos to exact dimensions required by UIDAI, NSDL, and visa specifications.",
-        icon: "📏"
+        icon: "Ruler"
       },
       {
         title: "Visual Quality Preservation",
         desc: "Advanced canvas algorithms compress file sizes while keeping textures and lines crisp.",
-        icon: "🎨"
+        icon: "Palette"
       }
     ],
     howItWorks: [
@@ -135,7 +135,7 @@ export const categoriesData: CategoryMetadata[] = [
     title: "AI Tools",
     description: "Premium AI resume constructor, voice reader, and social caption generators.",
     intro: "Leverage advanced localized AI models to build ATS resumes, humanize text, and create engaging social media copy.",
-    icon: "🤖",
+    icon: "Sparkles",
     seoTitle: "AI Tools - AI Logo Maker, Resume Builder & Text Humanizer | ToolWala AI",
     seoDescription: "Supercharge your career and content creation with local AI logo generators, resume builders, and voice creators.",
     keywords: ["ai tools", "ai logo maker", "resume builder", "ai resume constructor", "ai text humanizer", "ai voice generator"],
@@ -154,17 +154,17 @@ export const categoriesData: CategoryMetadata[] = [
       {
         title: "ATS Optimization",
         desc: "Resumes are generated using compliant formatting and semantic keywords to pass recruiter screens.",
-        icon: "📝"
+        icon: "FileText"
       },
       {
         title: "Humanized Output",
         desc: "Simplify vocabulary and remove machine patterns to optimize readability and engagement scores.",
-        icon: "👤"
+        icon: "User"
       },
       {
         title: "Custom Brand Assets",
         desc: "Generate vector logo assets and high-fidelity narration audio files in seconds.",
-        icon: "🎯"
+        icon: "Target"
       }
     ],
     howItWorks: [
@@ -191,7 +191,7 @@ export const categoriesData: CategoryMetadata[] = [
     title: "Document Tools",
     description: "Invoice editors, cover letters, and standard business utilities.",
     intro: "Prepare templates, client invoices, and job applications with standardized document layout formats.",
-    icon: "📁",
+    icon: "Folder",
     seoTitle: "Document Tools - Invoice & Resume Builders | ToolWala AI",
     seoDescription: "Create professional business invoices, custom cover letters, and ATS resumes online in seconds.",
     keywords: ["document tools", "invoice generator", "billing utility", "cover letter creator", "ats resume template"],
@@ -206,17 +206,17 @@ export const categoriesData: CategoryMetadata[] = [
       {
         title: "Professional Templates",
         desc: "Layout structures comply with modern billing and corporate communication standards.",
-        icon: "💼"
+        icon: "Briefcase"
       },
       {
         title: "100% Free Business Tools",
         desc: "Generate unlimited billing invoices and cover letters without premium paywalls or subscription traps.",
-        icon: "🆓"
+        icon: "Gift"
       },
       {
         title: "Data Confidentiality",
         desc: "Keep invoice line-item costs, customer names, and bank details completely secure on your machine.",
-        icon: "🔒"
+        icon: "Lock"
       }
     ],
     howItWorks: [
@@ -243,7 +243,7 @@ export const categoriesData: CategoryMetadata[] = [
     title: "Utility Tools",
     description: "Secure data extraction engines, converters, and other helpers.",
     intro: "Process OCR document scans and utility scripts instantly with secure client-side code.",
-    icon: "⚙️",
+    icon: "Wrench",
     seoTitle: "Utility Tools - Online OCR & Secure Scanners | ToolWala AI",
     seoDescription: "Extract metadata and scan image files without sending anything to remote servers.",
     keywords: ["ocr to text", "extract text from screenshot", "utility tools"],
@@ -258,17 +258,17 @@ export const categoriesData: CategoryMetadata[] = [
       {
         title: "Secure Local OCR",
         desc: "Digitise images and documents with zero server exposure using on-device optical character recognition.",
-        icon: "👁️"
+        icon: "Eye"
       },
       {
         title: "Offline Functionality",
         desc: "Access core features without an active internet connection once the page loads, as no server API is required.",
-        icon: "🔌"
+        icon: "Power"
       },
       {
         title: "Developer Helpers",
         desc: "Generate high-entropy passwords, parse file structures, and manage layouts securely.",
-        icon: "🛠️"
+        icon: "Wrench"
       }
     ],
     howItWorks: [
@@ -295,7 +295,7 @@ export const categoriesData: CategoryMetadata[] = [
     title: "Resume & Career",
     description: "ATS Resume constructors, cover letters, and application creators.",
     intro: "Create ATS-compliant layouts and custom cover letters to stand out in hiring pipelines.",
-    icon: "💼",
+    icon: "Briefcase",
     seoTitle: "Resume & Career - CV Builder & Cover Letter Creator | ToolWala AI",
     seoDescription: "Construct clean, ATS-scorable resumes and write custom job cover letters easily and for free.",
     keywords: ["resume builder", "ats cv layout", "cover letter generator", "career utilities"],
@@ -310,17 +310,17 @@ export const categoriesData: CategoryMetadata[] = [
       {
         title: "ATS Score Optimized",
         desc: "Structure text layers and headings specifically for high applicant tracking system readability.",
-        icon: "📈"
+        icon: "TrendingUp"
       },
       {
         title: "Private Local CVs",
         desc: "Keep sensitive personal contacts, credentials, and job histories safe from third-party databases.",
-        icon: "🔒"
+        icon: "Lock"
       },
       {
         title: "Instant Format Customization",
         desc: "Adapt resume designs and draft letters in one click to fit target vacancies.",
-        icon: "✨"
+        icon: "Sparkles"
       }
     ],
     howItWorks: [
@@ -347,7 +347,7 @@ export const categoriesData: CategoryMetadata[] = [
     title: "SEO Tools",
     description: "Content optimizer helpers, OCR text parsers, and tag scanners.",
     intro: "Optimize tags and humanize blog copy for search engines and readabilities.",
-    icon: "📈",
+    icon: "TrendingUp",
     seoTitle: "SEO Tools - AI Text Humanizer & Text Scanners | ToolWala AI",
     seoDescription: "Improve search rankings by humanizing AI structures and scanning document texts.",
     keywords: ["seo tools", "ai humanizer", "blog optimization", "extract tags"],
@@ -362,17 +362,17 @@ export const categoriesData: CategoryMetadata[] = [
       {
         title: "Readability Boost",
         desc: "Adjust sentence flow and phrasing patterns to improve article clarity and score higher on readability tests.",
-        icon: "✍️"
+        icon: "PenTool"
       },
       {
         title: "Clean Text Extractor",
         desc: "Scan print references and extract clean paragraph text without manual typing.",
-        icon: "📄"
+        icon: "FileText"
       },
       {
         title: "Privacy Guaranteed",
         desc: "Modify copy safely without data leaking to external databases or model training servers.",
-        icon: "🔒"
+        icon: "Lock"
       }
     ],
     howItWorks: [
@@ -399,7 +399,7 @@ export const categoriesData: CategoryMetadata[] = [
     title: "Developer Tools",
     description: "QR Code generators, script utilities, and helper tools.",
     intro: "Create vector QR codes and parse screenshots directly on client-side threads.",
-    icon: "💻",
+    icon: "Code2",
     seoTitle: "Developer Tools - QR Code Generator & local OCR | ToolWala AI",
     seoDescription: "Create static vector QR codes and translate images to editable code structures.",
     keywords: ["qr generator", "ocr parser", "developer utilities"],
@@ -414,17 +414,17 @@ export const categoriesData: CategoryMetadata[] = [
       {
         title: "SVG Vector Outputs",
         desc: "Download generated QR codes in clean, high-resolution vector formats.",
-        icon: "🎨"
+        icon: "Palette"
       },
       {
         title: "WASM OCR Scanners",
         desc: "Parse screenshots and mockups to editable code structures directly on client-side threads.",
-        icon: "🖥️"
+        icon: "Monitor"
       },
       {
         title: "100% Serverless",
         desc: "Keep project configurations and sensitive hashes completely secure inside the browser sandbox.",
-        icon: "🔒"
+        icon: "Lock"
       }
     ],
     howItWorks: [
@@ -451,7 +451,7 @@ export const categoriesData: CategoryMetadata[] = [
     title: "Social Media Tools",
     description: "Platform caption makers, AI voices, and background remover clips.",
     intro: "Create engaging social caption drafts and voice files for reels/shorts creators.",
-    icon: "📱",
+    icon: "Share2",
     seoTitle: "Social Media Tools - AI Voice Reader & Captions | ToolWala AI",
     seoDescription: "Design premium reel/shorts voice narrations and platform-optimized caption lines.",
     keywords: ["social media tools", "shorts voice generator", "instagram caption generator"],
@@ -466,17 +466,17 @@ export const categoriesData: CategoryMetadata[] = [
       {
         title: "High-Fidelity Audio",
         desc: "Save narration files as high-fidelity MP3 streams optimized for short video clips.",
-        icon: "🎙️"
+        icon: "Mic"
       },
       {
         title: "Transparent BG Cutouts",
         desc: "Generate background-free PNG cutouts for flyers and thumbnails.",
-        icon: "🖼️"
+        icon: "Image"
       },
       {
         title: "Engaging Caption Drafts",
         desc: "Generate optimized copy drafts complete with hooks and suggested hashtags.",
-        icon: "💬"
+        icon: "MessageSquare"
       }
     ],
     howItWorks: [
@@ -503,7 +503,7 @@ export const categoriesData: CategoryMetadata[] = [
     title: "Calculator Tools",
     description: "SIP, EMI, GST, Age, YouTube Money, and AdSense revenue calculators.",
     intro: "Fast, accurate, and secure client-side calculators for all your daily needs.",
-    icon: "🧮",
+    icon: "Calculator",
     seoTitle: "Online Calculators - Age, SIP, EMI & More | ToolWala AI",
     seoDescription: "Free online calculators for age, finance, and various other metrics. Fast and fully private client-side processing.",
     keywords: ["calculators", "age calculator", "sip calculator", "emi calculator", "online calculator", "free calculator"],
@@ -518,17 +518,17 @@ export const categoriesData: CategoryMetadata[] = [
       {
         title: "Instant Browser Math",
         desc: "Calculations execute locally on client-side JS threads for real-time responsiveness.",
-        icon: "⚡"
+        icon: "Zap"
       },
       {
         title: "Detailed Financial Grids",
         desc: "Get extensive loan amortization schedules and compound wealth projections instantly.",
-        icon: "📊"
+        icon: "BarChart2"
       },
       {
         title: "Secure Operations",
         desc: "Compute payroll, invoices, and debt metrics safely without sending values to remote databases.",
-        icon: "🔒"
+        icon: "Lock"
       }
     ],
     howItWorks: [
@@ -555,7 +555,7 @@ export const categoriesData: CategoryMetadata[] = [
     title: "Video Tools",
     description: "Browser-native video compressor, format converter, and audio extractor powered by WebAssembly.",
     intro: "Compress MP4, MOV, WebM, and MKV video files 100% locally in your browser with zero server uploads.",
-    icon: "🎬",
+    icon: "Video",
     seoTitle: "Video Tools - Client-Side Video Compressor & Converter | ToolWala AI",
     seoDescription: "Compress videos, reduce MP4 file sizes, and extract MP3 audio locally using in-browser WASM. 100% private, no server upload.",
     keywords: ["video compressor", "compress mp4", "reduce video size", "video tools", "wasm video compressor", "in-browser video transcoder"],
@@ -574,17 +574,17 @@ export const categoriesData: CategoryMetadata[] = [
       {
         title: "100% Private WASM Engine",
         desc: "Videos compile in browser memory without sending a single byte to external servers.",
-        icon: "🔒"
+        icon: "Lock"
       },
       {
         title: "Flexible Quality & Size Controls",
         desc: "Adjust CRF compression sliders, resolution limits (1080p, 720p, 480p), and FPS targets.",
-        icon: "🎛️"
+        icon: "Sliders"
       },
       {
         title: "Multi-Format & Audio Extraction",
         desc: "Convert videos to MP4/WebM or extract pristine MP3 audio tracks in one click.",
-        icon: "🎧"
+        icon: "Headphones"
       }
     ],
     howItWorks: [

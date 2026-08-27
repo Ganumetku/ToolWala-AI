@@ -51,7 +51,7 @@ export default function CategoriesIndexClient({
   return (
     <div className="w-full">
       {/* Search Folder filter */}
-      <div className="max-w-xl mx-auto mb-12 animate-in slide-in-from-bottom-2 duration-300">
+      <div className="max-w-xl mx-auto mb-6 sm:mb-8 animate-in slide-in-from-bottom-2 duration-300">
         <CategorySearch 
           value={searchQuery}
           onChange={setSearchQuery}

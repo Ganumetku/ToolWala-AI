@@ -2,8 +2,10 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Wrench, ShieldCheck, Zap } from 'lucide-react';
+import { ArrowRight, Wrench } from 'lucide-react';
 import { useTranslation } from '@/components/I18nContext';
+import ToolIcon, { getCategoryStyle } from '@/components/ToolIcon';
+import PdfToolIcon, { isPdfTool } from '@/components/PdfToolIcon';
 
 export interface EssentialToolItem {
   id: string;
@@ -20,7 +22,7 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
     id: "edit-pdf",
     title: "Edit & Organize PDF",
     description: "Reorder pages, rotate canvas, split sections, and clean PDF documents online for free.",
-    icon: "✏️",
+    icon: "FilePenLine",
     href: "/tools/organize-pdf",
     category: "PDF Tools",
     badge: "Popular"
@@ -29,7 +31,7 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
     id: "pdf-to-word",
     title: "PDF to Word Converter",
     description: "Convert PDF files into editable Microsoft Word (.docx) documents with layout accuracy.",
-    icon: "📄",
+    icon: "FileText",
     href: "/tools/pdf-to-word-converter",
     category: "PDF Tools",
     badge: "High Demand"
@@ -38,7 +40,7 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
     id: "image-compressor",
     title: "Image Compressor",
     description: "Compress JPG, PNG, and WebP images up to 90% without visible quality loss.",
-    icon: "📉",
+    icon: "ImageDown",
     href: "/tools/image-compressor",
     category: "Image Tools",
     badge: "Fast"
@@ -47,7 +49,7 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
     id: "merge-pdf",
     title: "Merge PDF Files",
     description: "Combine multiple PDF documents into a single organized PDF file instantly in your browser.",
-    icon: "🧩",
+    icon: "Merge",
     href: "/tools/merge-pdf",
     category: "PDF Tools",
     badge: "Top Utility"
@@ -56,7 +58,7 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
     id: "split-pdf",
     title: "Split PDF",
     description: "Extract specific pages or split large PDF files into separate individual documents.",
-    icon: "✂️",
+    icon: "SplitSquareHorizontal",
     href: "/tools/split-pdf",
     category: "PDF Tools"
   },
@@ -64,7 +66,7 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
     id: "jpg-to-pdf",
     title: "JPG to PDF Converter",
     description: "Convert JPG, PNG, and WebP images into a clean PDF document with custom margins.",
-    icon: "🖼️",
+    icon: "Image",
     href: "/tools/jpg-to-pdf",
     category: "PDF Tools"
   },
@@ -72,7 +74,7 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
     id: "passport-photo-maker",
     title: "Passport Photo Maker",
     description: "Create official passport photos for any country with AI background cleaning and exact sizing.",
-    icon: "📸",
+    icon: "IdCard",
     href: "/tools/passport-photo-maker",
     category: "Image Tools",
     badge: "AI Powered"
@@ -81,7 +83,7 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
     id: "bg-remover",
     title: "AI Background Remover",
     description: "Remove image backgrounds instantly in your browser using high-precision local AI.",
-    icon: "✨",
+    icon: "Wand2",
     href: "/tools/bg-remover",
     category: "Image Tools",
     badge: "100% Private"
@@ -124,43 +126,51 @@ export default function PopularToolsGrid() {
 
         {/* Essential Tools Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-4">
-          {ESSENTIAL_TOOLS.map((tool) => (
-            <Link
-              key={tool.id}
-              href={localizeHref(tool.href)}
-              className="group relative p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#0c1222] border border-gray-200/90 dark:border-white/10 hover:border-blue-500/50 dark:hover:border-blue-500/50 hover:bg-slate-50/50 dark:hover:bg-blue-600/5 transition-all duration-300 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_28px_rgba(37,99,235,0.08)] flex flex-col justify-between cursor-pointer"
-            >
-              <div>
-                {/* Top Badge & Icon */}
-                <div className="flex items-center justify-between mb-3">
-                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/70 dark:border-white/10 flex items-center justify-center text-xl group-hover:scale-105 group-hover:bg-blue-50 dark:group-hover:bg-blue-500/20 group-hover:border-blue-200 dark:group-hover:border-blue-500/30 transition-all shadow-sm">
-                    {tool.icon}
+          {ESSENTIAL_TOOLS.map((tool) => {
+            const catStyle = getCategoryStyle(tool.category);
+            const isPdf = tool.category === 'PDF Tools' || isPdfTool(tool.id);
+            return (
+              <Link
+                key={tool.id}
+                href={localizeHref(tool.href)}
+                className="group relative p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#0c1222] border border-gray-200/90 dark:border-white/10 hover:border-blue-500/50 dark:hover:border-blue-500/50 hover:bg-slate-50/50 dark:hover:bg-blue-600/5 transition-all duration-300 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_28px_rgba(37,99,235,0.08)] flex flex-col justify-between cursor-pointer"
+              >
+                <div>
+                  {/* Top Badge & Icon */}
+                  <div className="flex items-center justify-between mb-3.5 gap-2">
+                    <PdfToolIcon 
+                      toolId={tool.id} 
+                      iconName={tool.icon} 
+                      category={tool.category} 
+                      size="md" 
+                      className="group-hover:scale-105" 
+                    />
+                    {tool.badge && (
+                      <span className="text-[9px] font-black text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 px-2 py-0.5 rounded-full border border-blue-200 dark:border-blue-500/20 uppercase tracking-wider truncate max-w-[60%]">
+                        {tool.badge}
+                      </span>
+                    )}
                   </div>
-                  {tool.badge && (
-                    <span className="text-[9px] font-black text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 px-2 py-0.5 rounded-full border border-blue-200 dark:border-blue-500/20 uppercase tracking-wider truncate max-w-[60%]">
-                      {tool.badge}
-                    </span>
-                  )}
+
+                  {/* Title & Description */}
+                  <h3 className="text-[15px] sm:text-[16px] font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-tight mb-1.5 line-clamp-2 min-h-[2.3rem]">
+                    {t(`tools.${tool.id}.title`, tool.title)}
+                  </h3>
+                  <p className="text-[12px] sm:text-[12.5px] font-normal text-slate-500 dark:text-gray-400 line-clamp-3 leading-relaxed min-h-[3.2rem]">
+                    {t(`tools.${tool.id}.desc`, tool.description)}
+                  </p>
                 </div>
 
-                {/* Title & Description */}
-                <h3 className="text-[15px] sm:text-[16px] font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-tight mb-1.5 line-clamp-2 min-h-[2.3rem]">
-                  {t(`tools.${tool.id}.title`, tool.title)}
-                </h3>
-                <p className="text-[12px] sm:text-[12.5px] font-normal text-slate-500 dark:text-gray-400 line-clamp-3 leading-relaxed min-h-[3.2rem]">
-                  {t(`tools.${tool.id}.desc`, tool.description)}
-                </p>
-              </div>
-
-              {/* Action Button */}
-              <div className="pt-2.5 mt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-[11px] font-bold text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                <span className="text-[10px] font-black uppercase tracking-wider">
-                  {t(`categories.${tool.category}`, tool.category)}
-                </span>
-                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-              </div>
-            </Link>
-          ))}
+                {/* Action Button */}
+                <div className="pt-2.5 mt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-[11px] font-bold text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  <span className="text-[10px] font-black uppercase tracking-wider">
+                    {t(`categories.${tool.category}`, tool.category)}
+                  </span>
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
+            );
+          })}
         </div>
 
       </div>

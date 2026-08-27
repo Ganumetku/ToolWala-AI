@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { categoriesData } from '@/data/categories';
 import { Grid, Sparkles } from 'lucide-react';
 import { useTranslation } from '@/components/I18nContext';
+import ToolIcon from '@/components/ToolIcon';
 
 interface CategorySidebarProps {
   activeSlug: string;
@@ -33,10 +34,10 @@ export default function CategorySidebar({ activeSlug }: CategorySidebarProps) {
               }`}
             >
               <span className="flex items-center gap-2.5">
-                <span className={`text-base transition-transform group-hover:scale-110 duration-300`}>{cat.icon}</span>
+                <ToolIcon icon={cat.icon} className="w-4 h-4 shrink-0 transition-transform group-hover:scale-110 duration-300" strokeWidth={2} />
                 <span>{t('categories.' + cat.title, cat.title)}</span>
               </span>
-              {isActive && <Sparkles className="w-3.5 h-3.5 text-white" />}
+              {isActive && <Sparkles className="w-3.5 h-3.5 text-white shrink-0" />}
             </Link>
           );
         })}

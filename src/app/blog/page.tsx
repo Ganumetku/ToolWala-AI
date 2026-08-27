@@ -49,22 +49,22 @@ export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps
   const trendingBlogs = getTrendingBlogs(blogs, 5);
 
   return (
-    <div className="bg-slate-50/50 dark:bg-[#030712] min-h-screen py-20 relative overflow-hidden select-none font-sans transition-colors duration-250">
+    <div className="bg-slate-50/50 dark:bg-[#030712] min-h-screen pt-8 sm:pt-10 pb-20 relative overflow-hidden select-none font-sans transition-colors duration-250">
       <MeshGradient />
       <FloatingParticles />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-xs font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 inline-block mb-4 animate-pulse-slow">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+          <span className="px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-xs font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 inline-block mb-3 sm:mb-4 animate-pulse-slow">
             {t('blog.insights_badge', 'ToolWala Insights')}
           </span>
-          <h1 className="text-4xl sm:text-6xl font-black text-gray-900 dark:text-white tracking-tighter uppercase leading-none">
+          <h1 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase mb-3 sm:mb-4 leading-tight">
             {t('blog.insights_title', 'Tech, AI & Design')} <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-500">
               {t('blog.insights_subtitle', 'Without the Servers')}
             </span>
           </h1>
-          <p className="mt-6 text-gray-600 dark:text-gray-400 text-lg sm:text-xl font-medium tracking-wide">
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 font-medium leading-relaxed max-w-2xl mx-auto">
             {t('blog.insights_desc', 'Explore advanced concepts in browser-native processing, data confidentiality, and digital efficiency.')}
           </p>
         </div>

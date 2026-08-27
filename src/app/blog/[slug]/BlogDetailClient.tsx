@@ -16,6 +16,7 @@ import BlogNewsletter from "@/components/blog/BlogNewsletter";
 import BlogTableOfContents from "@/components/blog/BlogTableOfContents";
 import { useTranslation } from "@/components/I18nContext";
 import { categoriesData } from "@/data/categories";
+import ToolIcon from "@/components/ToolIcon";
 import Image from "next/image";
 
 const formatDateLong = (dateString: string, locale: string) => {
@@ -211,7 +212,7 @@ export default function BlogDetailClient({
                       className="p-4 rounded-xl bg-gray-50 dark:bg-white/[0.01] border border-gray-200 dark:border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 transition-all flex items-center justify-between group"
                     >
                       <div className="flex items-center gap-2">
-                        <span className="text-lg shrink-0">{cat.icon}</span>
+                        <ToolIcon icon={cat.icon} className="w-5 h-5 shrink-0 text-blue-600 dark:text-blue-400" />
                         <span className="text-xs font-black text-gray-800 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-white uppercase truncate">
                           {t(`categories.${cat.title}`, cat.title)}
                         </span>
@@ -301,7 +302,7 @@ export default function BlogDetailClient({
                     href={localizeHref(tool.href)}
                     className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/[0.02] border border-gray-200 dark:border-white/5 hover:border-blue-500/30 transition-all group"
                   >
-                    <span className="text-lg">{tool.icon}</span>
+                    <ToolIcon icon={tool.icon} className="w-4.5 h-4.5 shrink-0 text-blue-600 dark:text-blue-400" />
                     <span className="text-xs font-black text-gray-900 dark:text-white uppercase group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-2">
                       {t(`tools.${tool.slug}.title`, tool.title)}
                     </span>
@@ -324,7 +325,7 @@ export default function BlogDetailClient({
                     className="flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-white/[0.02] border border-gray-200 dark:border-white/5 hover:border-blue-500/30 transition-all group"
                   >
                     <div className="flex items-center gap-2.5">
-                      <span className="text-lg shrink-0">{cat.icon}</span>
+                      <ToolIcon icon={cat.icon} className="w-4.5 h-4.5 shrink-0 text-blue-600 dark:text-blue-400" />
                       <span className="text-xs font-black text-gray-900 dark:text-white uppercase group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate">
                         {t(`categories.${cat.title}`, cat.title)}
                       </span>

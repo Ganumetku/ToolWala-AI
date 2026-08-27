@@ -126,7 +126,7 @@ export default function ToolsDirectory({
     <div className="w-full" id="tools-directory">
       {/* Search Bar */}
       {!hideSearch && (
-        <div className="mx-auto max-w-2xl flex flex-col items-center gap-4 mb-16 relative z-30">
+        <div className="mx-auto max-w-2xl flex flex-col items-center gap-4 mb-6 sm:mb-8 relative z-30">
           <ToolAutocompleteSearch
             value={searchQuery}
             onChange={handleSearchChange}
@@ -139,7 +139,7 @@ export default function ToolsDirectory({
       )}
 
       {/* Category Chips */}
-      <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-16 relative z-10">
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-10 relative z-10">
         {toolCategories.map(category => (
           <button
             key={category}

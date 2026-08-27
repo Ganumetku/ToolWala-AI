@@ -23,6 +23,7 @@ import ToolCard from '@/components/ToolCard';
 import CategoryHeader from '@/components/CategoryHeader';
 import CategorySidebar from '@/components/CategorySidebar';
 import CategorySearch from '@/components/CategorySearch';
+import ToolIcon from '@/components/ToolIcon';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
 import Link from 'next/link';
 import { useTranslation } from '@/components/I18nContext';
@@ -145,7 +146,7 @@ export default function CategoryPageClient({ slug, category, relatedBlogs = [] }
 
         <div className="absolute top-0 left-0 w-full h-[600px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500/5 dark:from-blue-900/10 via-transparent to-transparent pointer-events-none z-0" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-24 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-16 sm:pb-24 relative z-10">
           
           {/* Modular Reusable Header Component with H1 */}
           <CategoryHeader 
@@ -283,8 +284,8 @@ export default function CategoryPageClient({ slug, category, relatedBlogs = [] }
                         key={idx} 
                         className="p-6 rounded-2xl bg-white dark:bg-white/[0.01] border border-gray-200 dark:border-white/5 hover:border-blue-500/30 transition-all shadow-sm"
                       >
-                        <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-white/5 flex items-center justify-center text-xl mb-4 border border-blue-100 dark:border-white/5">
-                          {benefit.icon}
+                        <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-white/5 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4 border border-blue-100 dark:border-white/5">
+                          <ToolIcon icon={benefit.icon} className="w-5 h-5" strokeWidth={1.75} />
                         </div>
                         <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wide mb-2">
                           {benefit.title}
@@ -508,7 +509,9 @@ export default function CategoryPageClient({ slug, category, relatedBlogs = [] }
                         className="p-5 rounded-2xl bg-white dark:bg-white/[0.01] border border-gray-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-gray-50 dark:hover:bg-blue-600/5 transition-all group flex items-center justify-between shadow-sm"
                       >
                         <div className="flex items-center gap-3">
-                          <span className="text-xl">{cat.icon}</span>
+                          <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-white/5 flex items-center justify-center text-blue-600 dark:text-blue-400 shrink-0">
+                            <ToolIcon icon={cat.icon} className="w-4 h-4" />
+                          </div>
                           <span className="text-xs font-black text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-white uppercase truncate">
                             {t('categories.' + cat.title, cat.title)}
                           </span>

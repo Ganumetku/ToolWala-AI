@@ -14,32 +14,32 @@ interface ToolIconModalProps {
   onSave: (tool: Tool, newIcon: string) => Promise<void>;
 }
 
-const EMOJI_CATEGORIES = [
+const ICON_CATEGORIES = [
   {
-    name: '🪪 Govt ID & Photo Tools',
-    icons: ['🪪', '📸', '🏛️', '🎯', '🎓', '🛡️', '🔒', '📋', '💳', '🆔', '📷', '👤']
+    name: 'Govt ID & Photo Tools',
+    icons: ['IdCard', 'Crop', 'EyeOff', 'Shrink', 'PenTool', 'GraduationCap', 'ShieldCheck', 'Lock', 'FileMinus']
   },
   {
-    name: '📄 PDF & Document Tools',
-    icons: ['📄', '🔀', '✂️', '🗜️', '✍️', '🔐', '🔓', '🏷️', '🔄', '🗑️', '🔢', '🖊️', '🗂️', '📖', '📘', '📑']
+    name: 'PDF & Document Tools',
+    icons: ['FileText', 'Merge', 'SplitSquareHorizontal', 'Shrink', 'FilePenLine', 'Lock', 'LockOpen', 'Droplets', 'RotateCw', 'FileMinus', 'Hash', 'PenTool', 'LayoutGrid', 'ScanText', 'FileOutput', 'FileSpreadsheet']
   },
   {
-    name: '🤖 AI & Media Tools',
-    icons: ['🤖', '🎙️', '💬', '🧠', '🚀', '🪄', '🎨', '👁️', '🎞️', '✨', '🖼️', '📉']
+    name: 'AI & Media Tools',
+    icons: ['Sparkles', 'UserCheck', 'Mic', 'Shapes', 'ScanEye', 'Wand2', 'Palette', 'Video', 'ImageDown', 'Image', 'ImagePlus']
   },
   {
-    name: '🧮 Calculators & Finance',
-    icons: ['🧮', '📈', '🏦', '💸', '🧾', '💰', '⏳', '📊', '📉', '⚖️', '💲', '➕']
+    name: 'Calculators & Finance',
+    icons: ['IndianRupee', 'Landmark', 'TrendingUp', 'Percent', 'Cake', 'HeartPulse', 'Tag', 'DollarSign', 'Receipt']
   },
   {
-    name: '📱 Dev, Utility & Social',
-    icons: ['📱', '🌐', '⚡', '🔧', '⚙️', '🛠️', '💻', '🔗', '📦', '🏷️', '🔍', '💡']
+    name: 'Dev, Utility & Social',
+    icons: ['QrCode', 'FileJson2', 'Type', 'KeyRound', 'MessageSquareText', 'Youtube', 'Sliders', 'Headphones', 'Zap', 'Wrench']
   }
 ];
 
 export default function ToolIconModal({ tool, onClose, onSave }: ToolIconModalProps) {
-  const [activeTab, setActiveTab] = useState<'upload' | 'preset' | 'custom'>('upload');
-  const [selectedIcon, setSelectedIcon] = useState<string>(tool.icon || '🔧');
+  const [activeTab, setActiveTab] = useState<'upload' | 'preset' | 'custom'>('preset');
+  const [selectedIcon, setSelectedIcon] = useState<string>(tool.icon || 'Sparkles');
   const [customUrl, setCustomUrl] = useState<string>(tool.icon.startsWith('/') || tool.icon.startsWith('http') ? tool.icon : '');
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -118,6 +118,16 @@ export default function ToolIconModal({ tool, onClose, onSave }: ToolIconModalPr
         {/* Navigation Tabs */}
         <div className="flex border-b border-slate-100 dark:border-white/5 px-6 pt-3 gap-2 bg-slate-50/30 dark:bg-transparent">
           <button
+            onClick={() => setActiveTab('preset')}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-t-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer border-b-2 ${
+              activeTab === 'preset'
+                ? 'border-blue-600 text-blue-600 dark:text-blue-400 bg-white dark:bg-white/5'
+                : 'border-transparent text-slate-500 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white'
+            }`}
+          >
+            <Smile className="w-4 h-4" /> Lucide Icons
+          </button>
+          <button
             onClick={() => setActiveTab('upload')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-t-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer border-b-2 ${
               activeTab === 'upload'
@@ -128,16 +138,6 @@ export default function ToolIconModal({ tool, onClose, onSave }: ToolIconModalPr
             <Upload className="w-4 h-4" /> Upload Image
           </button>
           <button
-            onClick={() => setActiveTab('preset')}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-t-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer border-b-2 ${
-              activeTab === 'preset'
-                ? 'border-blue-600 text-blue-600 dark:text-blue-400 bg-white dark:bg-white/5'
-                : 'border-transparent text-slate-500 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white'
-            }`}
-          >
-            <Smile className="w-4 h-4" /> Emoji Gallery
-          </button>
-          <button
             onClick={() => setActiveTab('custom')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-t-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer border-b-2 ${
               activeTab === 'custom'
@@ -145,14 +145,42 @@ export default function ToolIconModal({ tool, onClose, onSave }: ToolIconModalPr
                 : 'border-transparent text-slate-500 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white'
             }`}
           >
-            <LinkIcon className="w-4 h-4" /> Image URL
+            <LinkIcon className="w-4 h-4" /> Image URL / Name
           </button>
         </div>
 
         {/* Tab Contents */}
         <div className="p-6 max-h-[420px] overflow-y-auto">
           
-          {/* 1. UPLOAD IMAGE TAB */}
+          {/* 1. PRESET LUCIDE GALLERY TAB */}
+          {activeTab === 'preset' && (
+            <div className="space-y-6">
+              {ICON_CATEGORIES.map((cat, idx) => (
+                <div key={idx} className="space-y-2">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-400 block">{cat.name}</span>
+                  <div className="grid grid-cols-6 sm:grid-cols-8 gap-2">
+                    {cat.icons.map((ic) => (
+                      <button
+                        key={ic}
+                        type="button"
+                        onClick={() => setSelectedIcon(ic)}
+                        title={ic}
+                        className={`h-12 w-12 rounded-xl flex items-center justify-center transition-all cursor-pointer ${
+                          selectedIcon === ic
+                            ? 'bg-blue-600 text-white ring-2 ring-blue-500 ring-offset-2 scale-110 shadow-md'
+                            : 'bg-slate-100 dark:bg-white/5 hover:bg-blue-50 dark:hover:bg-white/10 border border-slate-200/60 dark:border-white/5 text-slate-700 dark:text-slate-300'
+                        }`}
+                      >
+                        <ToolIcon icon={ic} className="w-6 h-6" strokeWidth={1.75} />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* 2. UPLOAD IMAGE TAB */}
           {activeTab === 'upload' && (
             <div className="space-y-6">
               <div
@@ -207,42 +235,15 @@ export default function ToolIconModal({ tool, onClose, onSave }: ToolIconModalPr
             </div>
           )}
 
-          {/* 2. PRESET EMOJI GALLERY TAB */}
-          {activeTab === 'preset' && (
-            <div className="space-y-6">
-              {EMOJI_CATEGORIES.map((cat, idx) => (
-                <div key={idx} className="space-y-2">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-400 block">{cat.name}</span>
-                  <div className="grid grid-cols-6 sm:grid-cols-8 gap-2">
-                    {cat.icons.map((ic) => (
-                      <button
-                        key={ic}
-                        type="button"
-                        onClick={() => setSelectedIcon(ic)}
-                        className={`h-12 w-12 rounded-xl text-2xl flex items-center justify-center transition-all cursor-pointer ${
-                          selectedIcon === ic
-                            ? 'bg-blue-600 text-white ring-2 ring-blue-500 ring-offset-2 scale-110 shadow-md'
-                            : 'bg-slate-100 dark:bg-white/5 hover:bg-blue-50 dark:hover:bg-white/10 border border-slate-200/60 dark:border-white/5'
-                        }`}
-                      >
-                        {ic}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
           {/* 3. CUSTOM URL TAB */}
           {activeTab === 'custom' && (
             <div className="space-y-4">
               <label className="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-gray-300">
-                Direct Image URL or Symbol
+                Direct Image URL or Lucide Icon Name
               </label>
               <input
                 type="text"
-                placeholder="https://example.com/logo.png or /uploads/my_logo.svg"
+                placeholder="Merge, FileText, Wand2, or https://example.com/logo.png"
                 value={customUrl}
                 onChange={(e) => {
                   setCustomUrl(e.target.value);
@@ -256,8 +257,8 @@ export default function ToolIconModal({ tool, onClose, onSave }: ToolIconModalPr
           {/* Live Preview Card */}
           <div className="mt-6 p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-white/5 border border-blue-100 dark:border-white/10 flex items-center justify-center shadow-sm">
-                <ToolIcon icon={activeTab === 'custom' && customUrl.trim() ? customUrl.trim() : selectedIcon} className="w-8 h-8 text-2xl" />
+              <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-white/5 border border-blue-100 dark:border-white/10 flex items-center justify-center text-blue-600 dark:text-blue-400 shadow-sm">
+                <ToolIcon icon={activeTab === 'custom' && customUrl.trim() ? customUrl.trim() : selectedIcon} className="w-6 h-6" />
               </div>
               <div>
                 <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">Live Preview</span>

@@ -4,12 +4,14 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Shield, Sparkles } from "lucide-react";
 import { useTranslation } from "@/components/I18nContext";
+import ToolIcon from "@/components/ToolIcon";
+import PdfToolIcon from "@/components/PdfToolIcon";
 
 const govTools = [
   {
     title: "Crop Aadhaar Card",
     desc: "Crop Aadhaar Card online quickly and remove unwanted background & margins to official UIDAI specs (3.5cm x 4.5cm).",
-    icon: <span className="text-2xl select-none" role="img" aria-label="Aadhaar Card">🪪</span>,
+    icon: "Crop",
     href: "/tools/crop-aadhaar-card/",
     badge: "Official UIDAI Spec",
     kb: "20KB - 50KB",
@@ -18,7 +20,7 @@ const govTools = [
   {
     title: "Aadhaar PDF Compressor",
     desc: "Compress e-Aadhaar PDF attachments under the official UIDAI 300KB upload limit.",
-    icon: <span className="text-2xl select-none" role="img" aria-label="Aadhaar PDF">📄</span>,
+    icon: "Shrink",
     href: "/tools/aadhaar-pdf-compressor/",
     badge: "UIDAI < 300KB",
     kb: "Under 300KB",
@@ -27,7 +29,7 @@ const govTools = [
   {
     title: "Aadhaar Masking Tool",
     desc: "Automatically detect and redact the first 8 digits of your Aadhaar card for privacy protection.",
-    icon: <span className="text-2xl select-none" role="img" aria-label="Aadhaar Mask">🪪</span>,
+    icon: "EyeOff",
     href: "/tools/aadhaar-masking-tool/",
     badge: "Secure Privacy Mask",
     kb: "Original Size",
@@ -36,7 +38,7 @@ const govTools = [
   {
     title: "PAN Card Resize",
     desc: "Standardize passport photo layout to official NSDL/UTIITSL specifications.",
-    icon: <span className="text-2xl select-none" role="img" aria-label="PAN Card">🪪</span>,
+    icon: "IdCard",
     href: "/tools/pan-card-resize/",
     badge: "NSDL / UTIITSL Ready",
     kb: "Under 50KB",
@@ -45,7 +47,7 @@ const govTools = [
   {
     title: "Signature Resize",
     desc: "Compress and scale signature scans for official banking, passport, and exam uploads.",
-    icon: <span className="text-2xl select-none" role="img" aria-label="Signature">✍️</span>,
+    icon: "PenTool",
     href: "/tools/signature-resize/",
     badge: "SSC / IBPS Compliant",
     kb: "10KB - 20KB",
@@ -54,7 +56,7 @@ const govTools = [
   {
     title: "Passport Photo Maker",
     desc: "Generate professional passport size prints with automatic AI background removal.",
-    icon: <span className="text-2xl select-none" role="img" aria-label="Passport Photo">📸</span>,
+    icon: "IdCard",
     href: "/tools/passport-photo-maker/",
     badge: "Schengen & US Visa Specs",
     kb: "Under 100KB",
@@ -63,7 +65,7 @@ const govTools = [
   {
     title: "SSC Photo Resize",
     desc: "Resize passport photos to official Staff Selection Commission guidelines under 50KB.",
-    icon: <span className="text-2xl select-none" role="img" aria-label="SSC Photo">📝</span>,
+    icon: "IdCard",
     href: "/tools/ssc-photo-resize/",
     badge: "SSC Portal Spec",
     kb: "20KB - 50KB",
@@ -72,7 +74,7 @@ const govTools = [
   {
     title: "UPSC Photo Resize",
     desc: "Resize passport photos to official UPSC registration guidelines under 40KB.",
-    icon: <span className="text-2xl select-none" role="img" aria-label="UPSC Photo">🎓</span>,
+    icon: "GraduationCap",
     href: "/tools/upsc-photo-resize/",
     badge: "UPSC OTR Spec",
     kb: "20KB - 40KB",
@@ -81,7 +83,7 @@ const govTools = [
   {
     title: "Government Form PDF Compressor",
     desc: "Compress government application PDF attachments under standard portal size limits.",
-    icon: <span className="text-2xl select-none" role="img" aria-label="PDF Compressor">🗜️</span>,
+    icon: "FileMinus",
     href: "/tools/gov-form-pdf-compressor/",
     badge: "Portal Presets",
     kb: "Selectable KB",
@@ -93,7 +95,7 @@ export default function GovernmentToolHub() {
   const { t, localizeHref } = useTranslation();
 
   return (
-    <section className="py-24 relative overflow-hidden bg-slate-50/50 dark:bg-black/30 border-b border-gray-200 dark:border-white/5 transition-colors duration-250">
+    <section className="py-24 relative overflow-hidden bg-slate-50/50 dark:bg-black/30 border-b border-gray-200 dark:border-white/5 transition-colors duration-250 font-sans">
       {/* Background Radial Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/5 dark:bg-indigo-600/5 rounded-full blur-[140px] pointer-events-none" />
 
@@ -108,7 +110,7 @@ export default function GovernmentToolHub() {
           <h2 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase">
             {t('gov_hub.title', 'Government Utilities Hub')}
           </h2>
-          <p className="text-gray-600 dark:text-gray-500 mt-4 font-medium max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-500 mt-4 font-medium max-w-2xl mx-auto text-sm">
             {t('gov_hub.subtitle', 'Quickly format documents and photos according to official requirements for NSDL, UIDAI, passport offices, and recruitment boards.')}
           </p>
         </div>
@@ -151,10 +153,14 @@ export default function GovernmentToolHub() {
                     <div className="relative z-10 w-full flex-1 flex flex-col justify-between">
                       <div>
                         {/* Icon & Badge */}
-                        <div className="flex items-center justify-between mb-3 gap-2">
-                          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/70 dark:border-white/10 flex items-center justify-center group-hover:scale-105 group-hover:bg-blue-50 dark:group-hover:bg-blue-500/20 group-hover:border-blue-200 dark:group-hover:border-blue-500/30 transition-all duration-300 relative shrink-0">
-                            <span className="relative z-10 text-xl">{tool.icon}</span>
-                          </div>
+                        <div className="flex items-center justify-between mb-3.5 gap-2">
+                          <PdfToolIcon 
+                            toolId={slug} 
+                            iconName={tool.icon} 
+                            category="Utility Tools" 
+                            size="md" 
+                            className="group-hover:scale-105" 
+                          />
                           <span className="px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-[8px] sm:text-[9px] font-black text-blue-600 dark:text-blue-400 group-hover:border-blue-500/30 transition-all uppercase tracking-wider relative z-10 max-w-[60%] truncate">
                             {displayBadge}
                           </span>

@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { CategoryMetadata } from '@/data/categories';
 import { useTranslation } from '@/components/I18nContext';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 interface CategoryCardProps {
   category: CategoryMetadata;
@@ -30,15 +31,20 @@ export default function CategoryCard({ category, toolCount, featured = false }: 
 
       <Link
         href={localizeHref(`/categories/${category.slug}`)}
-        className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-gray-200 dark:border-white/5 bg-white dark:bg-white/[0.01] hover:bg-gray-50 dark:hover:bg-white/[0.03] hover:border-blue-500/30 p-7 transition-all duration-300 w-full h-full shadow-sm hover:shadow-md dark:glass"
+        className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-gray-200/90 dark:border-white/5 bg-white dark:bg-[#0c1222] hover:bg-gray-50/50 dark:hover:bg-white/[0.03] hover:border-blue-500/30 p-6 sm:p-7 transition-all duration-300 w-full h-full shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_28px_rgba(37,99,235,0.08)] dark:shadow-none"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
         
         <div>
-          {/* Glowing Icon Frame */}
-          <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 dark:bg-white/5 text-3xl shadow-sm dark:shadow-xl border border-blue-100 dark:border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 relative">
-            <div className="absolute inset-0 rounded-2xl bg-blue-500/15 blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
-            <span className="relative z-10">{category.icon}</span>
+          {/* Glowing Premium Category Tile */}
+          <div className="mb-5 flex items-center justify-between">
+            <PdfToolIcon
+              toolId={category.id || category.slug}
+              iconName={category.icon}
+              category={category.title}
+              size="lg"
+              className="group-hover:scale-105 transition-transform duration-300"
+            />
           </div>
 
           <h3 className="mb-2 text-lg font-black text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase leading-none tracking-tight">

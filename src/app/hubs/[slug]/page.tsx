@@ -7,6 +7,7 @@ import FAQAccordion from '@/app/tools/[slug]/FAQAccordion';
 import { hubsData } from '@/data/hubs';
 import { landingPagesData } from '@/data/landingPages';
 import { renderMarkdown } from '@/lib/markdown';
+import ToolIcon from '@/components/ToolIcon';
 import { 
   buildWebPageSchema, 
   buildBreadcrumbJsonLd, 
@@ -130,8 +131,8 @@ export default async function HubPage({ params }: HubPageProps) {
                     className="glass p-6 rounded-[2rem] border border-white/5 bg-white/[0.01] hover:border-blue-500/30 hover:bg-blue-500/[0.02] transition-all group flex flex-col justify-between cursor-pointer"
                   >
                     <div className="space-y-3">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600/10 text-white border border-blue-500/10 text-xl">
-                        {tool.icon}
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600/10 text-blue-600 dark:text-white border border-blue-500/10">
+                        <ToolIcon icon={tool.icon} className="w-6 h-6" strokeWidth={1.75} />
                       </div>
                       <h3 className="text-base font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">
                         {tool.title}

@@ -10,17 +10,20 @@ export default function AboutClient() {
   const { t, localizeHref } = useTranslation();
 
   return (
-    <div className="bg-[#F8FAFC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250">
+    <div className="bg-[#F8FAFC] dark:bg-[#030712] min-h-screen pt-8 sm:pt-10 pb-20 relative overflow-hidden font-sans transition-colors duration-250">
       <MeshGradient />
       
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
-            <SectionTitle 
-              title={t('about.title', 'About ToolWala AI')} 
-              subtitle={t('about.subtitle', 'Democratizing artificial intelligence through simple, powerful, and secure browser utilities.')}
-              as="h1"
-            />
+            <div className="mb-8">
+              <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-gray-900 dark:text-white mb-3 uppercase leading-tight">
+                {t('about.title', 'About ToolWala AI')}
+              </h1>
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 font-medium leading-relaxed">
+                {t('about.subtitle', 'Democratizing artificial intelligence through simple, powerful, and secure browser utilities.')}
+              </p>
+            </div>
             
             <div className="space-y-10">
               <div className="bg-white dark:bg-slate-900/60 backdrop-blur-xl p-8 rounded-[2.5rem] border border-gray-200 dark:border-white/10 relative group shadow-sm">

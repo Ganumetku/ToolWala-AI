@@ -7,6 +7,7 @@ import { Search, X, Clock, TrendingUp, Sparkles, ArrowRight, CornerDownLeft, Tra
 import { Tool, toolsData } from '@/data/tools';
 import { fetchPublicTools } from '@/lib/tools';
 import { useTranslation } from '@/components/I18nContext';
+import ToolIcon from '@/components/ToolIcon';
 
 const RECENT_SEARCHES_KEY = 'toolwala_recent_searches_history';
 const MAX_RECENT_SEARCHES = 5;
@@ -468,8 +469,8 @@ export default function ToolAutocompleteSearch({
                             : 'hover:bg-gray-50 dark:hover:bg-white/5 border-l-4 border-transparent'
                         }`}
                       >
-                        <div className="text-xl w-10 h-10 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center shrink-0 shadow-sm">
-                          {tool.icon}
+                        <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-white/5 border border-blue-100 dark:border-white/10 flex items-center justify-center shrink-0 shadow-sm text-blue-600 dark:text-blue-400">
+                          <ToolIcon icon={tool.icon} className="w-5 h-5" />
                         </div>
 
                         <div className="flex-1 min-w-0">
@@ -526,7 +527,9 @@ export default function ToolAutocompleteSearch({
                       onClick={() => handleSelectTool(tool)}
                       className="flex items-center gap-3 p-2.5 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-blue-50 dark:hover:bg-blue-600/10 border border-gray-200 dark:border-white/5 hover:border-blue-500/30 transition-all text-left group"
                     >
-                      <span className="text-lg">{tool.icon}</span>
+                      <div className="w-7 h-7 rounded-lg bg-blue-50 dark:bg-white/5 flex items-center justify-center text-blue-600 dark:text-blue-400 shrink-0">
+                        <ToolIcon icon={tool.icon} className="w-4 h-4" />
+                      </div>
                       <span className="text-xs font-bold text-gray-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate">
                         {tool.title}
                       </span>

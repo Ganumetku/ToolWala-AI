@@ -11,6 +11,8 @@ import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects'
 import CategorySidebar from '@/components/CategorySidebar';
 import CategoryToolsGrid from './CategoryToolsGrid';
 import ToolCard from '@/components/ToolCard';
+import ToolIcon from '@/components/ToolIcon';
+import PdfToolIcon from '@/components/PdfToolIcon';
 import { getTranslationServer } from '@/lib/i18n-server';
 import { getPublicBlogs } from '@/lib/blogs-server';
 import { getBlogTranslationWithFallback } from '@/lib/blog-translation-service';
@@ -164,11 +166,11 @@ export default async function Page() {
 
         <div className="absolute top-0 left-0 w-full h-[600px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500/5 dark:from-blue-900/10 via-transparent to-transparent pointer-events-none z-0" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 pb-24 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-16 sm:pb-24 relative z-10">
           
           {/* Static Header with Breadcrumbs */}
-          <div className="text-center max-w-4xl mx-auto mb-16">
-            <nav className="flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-400 mb-8">
+          <div className="text-center max-w-4xl mx-auto mb-8 sm:mb-10">
+            <nav className="flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-400 mb-4 sm:mb-5">
               <Link href={localizeHref("/")} className="hover:text-blue-600 dark:hover:text-white transition-colors">{t('nav.home', 'Home')}</Link>
               <ChevronRight className="w-3 h-3 text-slate-400 dark:text-gray-600" />
               <Link href={localizeHref("/categories")} className="hover:text-blue-600 dark:hover:text-white transition-colors">{t('nav.categories', 'Categories')}</Link>
@@ -176,18 +178,24 @@ export default async function Page() {
               <span className="text-blue-600 dark:text-blue-400">{t(`categories.${category.title}`, category.title)}</span>
             </nav>
 
-            <div className="inline-flex h-20 w-20 items-center justify-center rounded-[2rem] bg-gradient-to-br from-blue-600/10 to-purple-600/10 text-5xl border border-slate-200 dark:border-white/10 shadow-lg mb-8 scale-100 hover:scale-105 transition-transform duration-300">
-              {category.icon}
+            <div className="inline-flex items-center justify-center mb-4 sm:mb-5">
+              <PdfToolIcon
+                toolId="pdf-tools"
+                iconName={category.icon}
+                category="PDF Tools"
+                size="xl"
+                className="hover:scale-105 transition-transform duration-300 shadow-lg"
+              />
             </div>
 
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-6 uppercase leading-none">
+            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white mb-3 sm:mb-4 uppercase leading-tight">
               {t(`categories.${category.title}`, category.title)} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400">
                 {t('categories.local_utilities', 'Local Utilities')}
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-600 dark:text-gray-400 leading-relaxed font-medium max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-gray-400 leading-relaxed font-medium max-w-2xl mx-auto">
               {t('categories.' + category.id + '.intro', category.intro)}
             </p>
           </div>
@@ -347,8 +355,8 @@ export default async function Page() {
                       key={idx} 
                       className="p-6 rounded-2xl bg-white dark:bg-white/[0.01] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 transition-all shadow-sm text-left"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-white/5 flex items-center justify-center text-xl mb-4 border border-blue-100 dark:border-white/5">
-                        {benefit.icon}
+                      <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-white/5 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4 border border-blue-100 dark:border-white/5">
+                        <ToolIcon icon={benefit.icon} className="w-5 h-5" strokeWidth={1.75} />
                       </div>
                       <h4 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wide mb-2">
                         {t(`categories.${category.id}.whyUse[${idx}].title`, benefit.title)}
@@ -461,7 +469,9 @@ export default async function Page() {
                         className="p-5 rounded-2xl bg-white dark:bg-white/[0.01] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-slate-50 dark:hover:bg-blue-600/5 transition-all group flex items-center justify-between shadow-sm"
                       >
                         <div className="flex items-center gap-3">
-                          <span className="text-xl">{cat.icon}</span>
+                          <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-white/5 flex items-center justify-center text-blue-600 dark:text-blue-400 shrink-0">
+                            <ToolIcon icon={cat.icon} className="w-4 h-4" />
+                          </div>
                           <span className="text-xs font-black text-slate-800 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-white uppercase truncate">
                             {t('categories.' + cat.title, cat.title)}
                           </span>

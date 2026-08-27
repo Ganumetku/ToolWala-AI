@@ -11,6 +11,8 @@ import { getTranslationServer } from '@/lib/i18n-server';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
 import { hubsData } from '@/data/hubs';
 import { landingPagesData } from '@/data/landingPages';
+import ToolIcon from '@/components/ToolIcon';
+import PdfToolIcon from '@/components/PdfToolIcon';
 import { 
   buildBreadcrumbJsonLd, 
   buildFAQSchema, 
@@ -171,7 +173,7 @@ export default async function CategoriesIndexPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="bg-slate-50/50 dark:bg-[#030712] min-h-screen py-10 sm:py-20 relative overflow-hidden font-sans text-gray-900 dark:text-white transition-colors duration-250">
+      <div className="bg-slate-50/50 dark:bg-[#030712] min-h-screen pt-6 sm:pt-8 pb-16 sm:pb-24 relative overflow-hidden font-sans text-gray-900 dark:text-white transition-colors duration-250">
         <MeshGradient />
         <FloatingParticles />
 
@@ -181,7 +183,7 @@ export default async function CategoriesIndexPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
           
           {/* Breadcrumbs */}
-          <nav className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-gray-600 dark:text-gray-500 mb-10">
+          <nav className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-gray-600 dark:text-gray-500 mb-4 sm:mb-6">
             <Link href={locale === 'en' ? '/' : `/${locale}`} className="hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
               {t('nav.home', 'Home')}
             </Link>
@@ -190,18 +192,18 @@ export default async function CategoriesIndexPage() {
           </nav>
 
           {/* Header Hero */}
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-black uppercase tracking-widest border border-blue-200 dark:border-blue-500/20 mb-6">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-black uppercase tracking-widest border border-blue-200 dark:border-blue-500/20 mb-3 sm:mb-4">
               <Grid className="w-3.5 h-3.5" />
               {t('categories.hub_badge', 'Categorized Hub')}
             </div>
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-gray-900 dark:text-white mb-6 uppercase leading-none">
+            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-gray-900 dark:text-white mb-3 sm:mb-4 uppercase leading-tight">
               Browse Free Online Tools <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400">
                 by Category
               </span>
             </h1>
-            <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 leading-relaxed font-medium">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed font-medium">
               {t('categories.subtitle', 'Explore our comprehensive, categorized directory of 25+ browser-local AI utilities. Secure, private, and sub-second fast.').replace('25+', `${initialMergedTools.length}+`).replace('25', initialMergedTools.length.toString())}
             </p>
           </div>
@@ -271,10 +273,16 @@ export default async function CategoriesIndexPage() {
                     <Link
                       key={cat.id}
                       href={locale === 'en' ? `/categories/${cat.slug}` : `/${locale}/categories/${cat.slug}`}
-                      className="p-5 border border-gray-200 dark:border-white/5 hover:border-blue-500/30 bg-gray-50 dark:bg-white/[0.02] hover:bg-gray-100 dark:hover:bg-blue-600/5 rounded-2xl flex items-center justify-between group transition-all"
+                      className="p-4 sm:p-5 border border-gray-200/90 dark:border-white/5 hover:border-blue-500/30 bg-gray-50/80 dark:bg-white/[0.02] hover:bg-gray-100 dark:hover:bg-blue-600/5 rounded-2xl flex items-center justify-between group transition-all shadow-sm"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="text-2xl">{cat.icon}</span>
+                        <PdfToolIcon
+                          toolId={cat.id}
+                          iconName={cat.icon}
+                          category={cat.title}
+                          size="sm"
+                          className="shrink-0 group-hover:scale-105 transition-transform"
+                        />
                         <div className="text-left">
                           <span className="text-xs font-black text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 uppercase tracking-tight block">
                             {t('categories.' + cat.title, cat.title)}
@@ -305,10 +313,16 @@ export default async function CategoriesIndexPage() {
                     <Link
                       key={cat.id}
                       href={locale === 'en' ? `/categories/${cat.slug}` : `/${locale}/categories/${cat.slug}`}
-                      className="p-4 border border-gray-200 dark:border-white/5 hover:border-blue-500/30 bg-gray-50 dark:bg-white/[0.02] hover:bg-gray-100 dark:hover:bg-blue-600/5 rounded-2xl flex items-center justify-between group transition-all"
+                      className="p-3.5 sm:p-4 border border-gray-200/90 dark:border-white/5 hover:border-blue-500/30 bg-gray-50/80 dark:bg-white/[0.02] hover:bg-gray-100 dark:hover:bg-blue-600/5 rounded-2xl flex items-center justify-between group transition-all shadow-sm"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="text-xl">{cat.icon}</span>
+                        <PdfToolIcon
+                          toolId={cat.id}
+                          iconName={cat.icon}
+                          category={cat.title}
+                          size="sm"
+                          className="shrink-0 group-hover:scale-105 transition-transform"
+                        />
                         <div>
                           <span className="text-xs font-black text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 uppercase tracking-tight block">
                             {t('categories.' + cat.title, cat.title)}
@@ -346,8 +360,8 @@ export default async function CategoriesIndexPage() {
                   className="p-6 rounded-2xl border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#0b0f19]/40 hover:border-blue-500/20 hover:bg-gray-100 dark:hover:bg-blue-500/[0.01] transition-all group flex flex-col justify-between cursor-pointer animate-in fade-in"
                 >
                   <div>
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600/10 border border-blue-500/10 text-xl mb-4 group-hover:scale-110 transition-transform">
-                      {hub.icon}
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600/10 border border-blue-500/10 text-blue-600 dark:text-blue-400 mb-4 group-hover:scale-110 transition-transform">
+                      <ToolIcon icon={hub.icon} className="w-5 h-5" />
                     </div>
                     <h3 className="text-sm font-black text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 uppercase tracking-tight mb-2 transition-colors">
                       {hub.title.split(' | ')[0].split(' - ')[0]}

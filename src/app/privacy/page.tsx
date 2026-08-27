@@ -153,13 +153,13 @@ export default function PrivacyHubPage() {
       <FloatingParticles />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-8 sm:pt-10 pb-16 sm:pb-20 overflow-hidden">
         <div className="container mx-auto px-6 lg:px-8 max-w-7xl text-center relative z-10">
           
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-xs font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-6 shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-xs font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-3 sm:mb-4 shadow-sm"
           >
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>{t('privacy_hub.badge_title', 'PRIVACY-FIRST ASSURANCE')}</span>
@@ -169,7 +169,7 @@ export default function PrivacyHubPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight uppercase leading-[0.95] max-w-5xl mx-auto mb-6 text-slate-900 dark:text-white"
+            className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight uppercase leading-[0.95] max-w-5xl mx-auto mb-3 sm:mb-4 text-slate-900 dark:text-white"
           >
             {t('privacy_hub.hero_title', 'Privacy by Default.')} <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-emerald-600 dark:from-blue-400 dark:via-indigo-400 dark:to-emerald-400">

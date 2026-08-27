@@ -7,9 +7,10 @@ import {
   Sparkles, ShieldCheck, Zap,
   Search, ChevronRight,
   Layers, Clock, ArrowRight, MousePointerClick,
-  Lock, FileText, Cpu
+  Lock, FileText, Cpu, UserX, Gift
 } from 'lucide-react';
 import ToolCard from '@/components/ToolCard';
+import ToolIcon from '@/components/ToolIcon';
 import ToolAutocompleteSearch from '@/components/ToolAutocompleteSearch';
 import { toolsData, Tool } from '@/data/tools';
 import { fetchPublicTools } from '@/lib/tools';
@@ -87,12 +88,12 @@ export default function Home() {
   const [activeCategoryTab, setActiveCategoryTab] = useState<string>("All");
 
   const categoryTabs = [
-    { id: "All", label: t('categories.All', 'All Popular'), icon: "⭐" },
-    { id: "PDF Tools", label: t('categories.PDF Tools', 'PDF'), icon: "📄" },
-    { id: "Image Tools", label: t('categories.Image Tools', 'Images'), icon: "🖼️" },
-    { id: "AI Tools", label: t('categories.AI Tools', 'AI Tools'), icon: "🤖" },
-    { id: "Govt & Exam", label: t('home.tab_govt', 'Govt & Exam'), icon: "🏛️" },
-    { id: "Calculator Tools", label: t('categories.Calculator Tools', 'Calculators'), icon: "🧮" }
+    { id: "All", label: t('categories.All', 'All Popular'), icon: "Sparkles" },
+    { id: "PDF Tools", label: t('categories.PDF Tools', 'PDF'), icon: "FileText" },
+    { id: "Image Tools", label: t('categories.Image Tools', 'Images'), icon: "Image" },
+    { id: "AI Tools", label: t('categories.AI Tools', 'AI Tools'), icon: "Sparkles" },
+    { id: "Govt & Exam", label: t('home.tab_govt', 'Govt & Exam'), icon: "IdCard" },
+    { id: "Calculator Tools", label: t('categories.Calculator Tools', 'Calculators'), icon: "Calculator" }
   ];
 
   // Exact iLovePDF Layout Sequence followed by Image, AI, Govt & Calculators
@@ -102,8 +103,10 @@ export default function Home() {
     "split-pdf",
     "compress-pdf",
     "pdf-to-word-converter",
+    "pdf-to-powerpoint",
     "pdf-to-excel-converter",
     "word-to-pdf-converter",
+    "powerpoint-to-pdf",
     "excel-to-pdf-converter",
     "edit-pdf",
     "pdf-to-jpg",
@@ -306,7 +309,7 @@ export default function Home() {
                       : 'bg-white dark:bg-white/5 text-slate-700 dark:text-gray-300 border border-gray-200/80 dark:border-white/10 hover:border-blue-500/40 hover:bg-blue-50/50 dark:hover:bg-white/10 shadow-sm'
                   }`}
                 >
-                  <span className="text-xs sm:text-sm">{tab.icon}</span>
+                  <ToolIcon icon={tab.icon} className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" strokeWidth={2} />
                   <span>{tab.label}</span>
                 </button>
               );
@@ -390,8 +393,8 @@ export default function Home() {
                     href={localizeHref(tool.href)}
                     className="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-white/5 border border-[#E8ECF4] dark:border-white/10 hover:border-[#2563EB]/40 hover:bg-blue-50/50 dark:hover:bg-blue-600/5 transition-all group animate-in fade-in duration-300 shadow-sm"
                   >
-                    <div className="text-xl w-10 h-10 rounded-xl bg-blue-50 dark:bg-white/5 flex items-center justify-center border border-blue-100 dark:border-white/5 group-hover:scale-110 transition-transform">
-                      {tool.icon}
+                    <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-white/5 flex items-center justify-center text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-white/5 group-hover:scale-110 transition-transform shrink-0">
+                      <ToolIcon icon={tool.icon} className="w-5 h-5" strokeWidth={1.75} />
                     </div>
                     <div className="overflow-hidden">
                       <h4 className="text-xs font-black text-[#0F172A] dark:text-white group-hover:text-[#2563EB] dark:group-hover:text-blue-400 transition-colors truncate">{displayTitle}</h4>
@@ -445,7 +448,7 @@ export default function Home() {
 
             <div className="premium-card p-6 flex flex-col items-start gap-3 border border-gray-200 dark:border-white/5 bg-white dark:bg-white/[0.02]">
               <div className="w-11 h-11 rounded-xl bg-purple-50 dark:bg-purple-500/10 border border-purple-200 dark:border-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400">
-                <Lock className="w-5 h-5" />
+                <UserX className="w-5 h-5" />
               </div>
               <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">No Account Traps</h4>
               <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold">
@@ -455,7 +458,7 @@ export default function Home() {
 
             <div className="premium-card p-6 flex flex-col items-start gap-3 border border-gray-200 dark:border-white/5 bg-white dark:bg-white/[0.02]">
               <div className="w-11 h-11 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400">
-                <Zap className="w-5 h-5" />
+                <Gift className="w-5 h-5" />
               </div>
               <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.trust_banner.free', '100% Free Always')}</h4>
               <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold">

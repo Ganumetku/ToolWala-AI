@@ -14,7 +14,7 @@
     "isPublished": true,
     "publishDate": null,
     "status": "published",
-    "icon": "🖼️",
+    "icon": "Wand2",
     "toolType": "AI Image Tool",
     "ctaButtonText": "Remove Background",
     "inputs": [
@@ -60,7 +60,7 @@
     "isPublished": true,
     "publishDate": null,
     "status": "published",
-    "icon": "📝",
+    "icon": "FileText",
     "toolType": "PDF Tool",
     "ctaButtonText": "Convert to Word",
     "inputs": [
@@ -106,7 +106,7 @@
     "isPublished": true,
     "publishDate": null,
     "status": "published",
-    "icon": "📄",
+    "icon": "FileOutput",
     "toolType": "PDF Tool",
     "ctaButtonText": "Convert to PDF",
     "inputs": [
@@ -152,7 +152,7 @@
     "isPublished": true,
     "publishDate": null,
     "status": "published",
-    "icon": "🤖",
+    "icon": "Sparkles",
     "toolType": "AI PDF Tool",
     "ctaButtonText": "Generate Summary",
     "inputs": [

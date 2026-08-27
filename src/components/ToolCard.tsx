@@ -3,11 +3,14 @@
 import Link from 'next/link';
 import { ToolCategory } from '@/data/tools';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, TrendingUp } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { useTranslation } from '@/components/I18nContext';
-import ToolIcon from '@/components/ToolIcon';
+import ToolIcon, { getCategoryStyle } from '@/components/ToolIcon';
+import PdfToolIcon, { isPdfTool } from '@/components/PdfToolIcon';
 
 export interface ToolCardProps {
+  id?: string;
+  slug?: string;
   title: string;
   description: string;
   icon: string;
@@ -17,17 +20,22 @@ export interface ToolCardProps {
   category?: ToolCategory;
 }
 
-export default function ToolCard({ title, description, icon, href, isPopular, isTrending, category }: ToolCardProps) {
+export default function ToolCard({ id, slug, title, description, icon, href, isPopular, isTrending, category }: ToolCardProps) {
   const { t, localizeHref } = useTranslation();
 
   // Extract the tool's ID/slug from the href to look up translations
   const urlParts = href.replace(/\/$/, '').split('/');
-  const toolId = urlParts[urlParts.length - 1] || '';
+  const rawSlug = urlParts[urlParts.length - 1] || '';
+  const toolId = id || slug || rawSlug;
 
   const displayTitle = toolId ? t(`tools.${toolId}.title`, title) : title;
   const displayDescription = toolId ? t(`tools.${toolId}.description`, description) : description;
   const displayCategory = category ? t(`categories.${category}`, category) : category;
   const localizedHref = localizeHref(href);
+
+  // Category specific accent styles
+  const catStyle = getCategoryStyle(category);
+  const isPdf = category === 'PDF Tools' || isPdfTool(toolId) || isPdfTool(rawSlug);
 
   return (
     <motion.div
@@ -48,15 +56,19 @@ export default function ToolCard({ title, description, icon, href, isPopular, is
         <div className="relative z-10 flex flex-col h-full justify-between">
           <div>
             {/* Top Row: Icon & Minimal Badge */}
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/70 dark:border-white/10 group-hover:scale-105 group-hover:bg-blue-50 dark:group-hover:bg-blue-500/20 group-hover:border-blue-200 dark:group-hover:border-blue-500/30 transition-all duration-300 shrink-0">
-                <ToolIcon icon={icon} className="w-6 h-6 text-xl sm:text-2xl" />
-              </div>
+            <div className="flex items-center justify-between mb-3.5 gap-2">
+              <PdfToolIcon 
+                toolId={toolId || rawSlug} 
+                iconName={icon} 
+                category={category} 
+                size="md" 
+                className="group-hover:scale-105" 
+              />
               
               {isPopular && (
-                <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 dark:bg-blue-500/10 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-[#2563EB] dark:text-blue-400 border border-blue-100 dark:border-blue-500/20">
-                  <Sparkles className="w-2.5 h-2.5" />
-                  Popular
+                <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 dark:bg-blue-500/10 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-[#2563EB] dark:text-blue-400 border border-blue-100 dark:border-blue-500/20 truncate">
+                  <Sparkles className="w-2.5 h-2.5 shrink-0" />
+                  <span>Popular</span>
                 </span>
               )}
             </div>

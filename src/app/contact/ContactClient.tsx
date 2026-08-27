@@ -9,20 +9,22 @@ export default function ContactClient() {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-[#F8FAFC] dark:bg-[#030712] min-h-screen py-16 sm:py-24 relative overflow-hidden font-sans transition-colors duration-250">
+    <div className="bg-[#F8FAFC] dark:bg-[#030712] min-h-screen pt-8 sm:pt-10 pb-20 relative overflow-hidden font-sans transition-colors duration-250">
       {/* Background Glow Accents */}
       <div className="absolute top-0 right-0 w-full h-[500px] bg-gradient-to-b from-blue-500/10 via-indigo-500/5 to-transparent blur-[120px] pointer-events-none -z-10" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-600/5 blur-[100px] pointer-events-none -z-10" />
 
       <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
-        <SectionTitle 
-          title={t('contact.title', 'Get in Touch')} 
-          subtitle={t('contact.subtitle', 'Have questions or feedback? Our team is here to help you scale your productivity.')}
-          centered
-          as="h1"
-        />
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white mb-3 uppercase leading-tight">
+            {t('contact.title', 'Get in Touch')}
+          </h1>
+          <p className="text-sm sm:text-base text-slate-600 dark:text-gray-400 font-medium leading-relaxed">
+            {t('contact.subtitle', 'Have questions or feedback? Our team is here to help you scale your productivity.')}
+          </p>
+        </div>
         
-        <div className="mt-12 sm:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
           
           {/* Left Side: Contact Info Card */}
           <div className="lg:col-span-5 flex">

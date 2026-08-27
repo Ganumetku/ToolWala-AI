@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { toolsData } from '@/data/tools';
 import { useTranslation } from '@/components/I18nContext';
 import ThemeToggle from '@/components/ThemeToggle';
+import ToolIcon from '@/components/ToolIcon';
 
 const LANGUAGES = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
@@ -117,21 +118,21 @@ export default function Header() {
   };
 
   const pdfSuiteTools = [
-    { name: 'Merge PDF', href: '/tools/merge-pdf', icon: '🔀' },
-    { name: 'Split PDF', href: '/tools/split-pdf', icon: '✂️' },
-    { name: 'Compress PDF', href: '/tools/compress-pdf', icon: '📉' },
-    { name: 'PDF to JPG', href: '/tools/pdf-to-jpg', icon: '🖼️' },
-    { name: 'JPG to PDF', href: '/tools/jpg-to-pdf', icon: '🖼️' },
-    { name: 'Word to PDF', href: '/tools/word-to-pdf-converter', icon: '📄' },
-    { name: 'PDF to Word', href: '/tools/pdf-to-word-converter', icon: '📝' },
-    { name: 'Crop PDF', href: '/tools/crop-pdf', icon: '✂️' },
-    { name: 'Rotate PDF', href: '/tools/rotate-pdf', icon: '🔄' },
-    { name: 'Watermark PDF', href: '/tools/watermark-pdf', icon: '🎨' },
-    { name: 'Unlock PDF', href: '/tools/unlock-pdf', icon: '🔓' },
-    { name: 'Protect PDF', href: '/tools/protect-pdf', icon: '🔒' },
-    { name: 'Remove Pages', href: '/tools/remove-pages', icon: '🗑️' },
-    { name: 'Organize PDF', href: '/tools/organize-pdf', icon: '🧩' },
-    { name: 'OCR PDF', href: '/tools/pdf-ocr', icon: '🔍' },
+    { name: 'Merge PDF', href: '/tools/merge-pdf', icon: 'Merge' },
+    { name: 'Split PDF', href: '/tools/split-pdf', icon: 'SplitSquareHorizontal' },
+    { name: 'Compress PDF', href: '/tools/compress-pdf', icon: 'Shrink' },
+    { name: 'PDF to JPG', href: '/tools/pdf-to-jpg', icon: 'FileImage' },
+    { name: 'JPG to PDF', href: '/tools/jpg-to-pdf', icon: 'Image' },
+    { name: 'Word to PDF', href: '/tools/word-to-pdf-converter', icon: 'FileOutput' },
+    { name: 'PDF to Word', href: '/tools/pdf-to-word-converter', icon: 'FileText' },
+    { name: 'Crop PDF', href: '/tools/crop-pdf', icon: 'Crop' },
+    { name: 'Rotate PDF', href: '/tools/rotate-pdf', icon: 'RotateCw' },
+    { name: 'Watermark PDF', href: '/tools/watermark-pdf', icon: 'Droplets' },
+    { name: 'Unlock PDF', href: '/tools/unlock-pdf', icon: 'LockOpen' },
+    { name: 'Protect PDF', href: '/tools/protect-pdf', icon: 'Lock' },
+    { name: 'Remove Pages', href: '/tools/remove-pages', icon: 'FileMinus' },
+    { name: 'Organize PDF', href: '/tools/organize-pdf', icon: 'LayoutGrid' },
+    { name: 'OCR PDF', href: '/tools/pdf-ocr', icon: 'ScanText' },
   ];
 
   const navigation = [
@@ -236,7 +237,7 @@ export default function Header() {
                             onClick={() => setIsPdfDropdownOpen(false)}
                             className="flex items-center gap-2.5 p-3 rounded-xl hover:bg-blue-50/80 dark:hover:bg-white/5 transition-all group"
                           >
-                            <span className="text-base group-hover:scale-110 transition-transform">{sub.icon}</span>
+                            <ToolIcon icon={sub.icon} className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 group-hover:scale-110 transition-transform" strokeWidth={1.75} />
                             <span className="text-[10px] font-black text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase truncate">
                               {t(`tools.${slug}.title`, sub.name)}
                             </span>
@@ -379,7 +380,7 @@ export default function Header() {
                               }}
                               className="flex items-center gap-2.5 p-3 rounded-xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-all"
                             >
-                              <span className="text-base">{sub.icon}</span>
+                              <ToolIcon icon={sub.icon} className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" strokeWidth={1.75} />
                               <span className="text-xs font-black text-gray-700 dark:text-gray-300 uppercase truncate">
                                 {t(`tools.${slug}.title`, sub.name)}
                               </span>

@@ -363,8 +363,7 @@ export default async function RootLayout({
               (function() {
                 try {
                   var saved = localStorage.getItem('theme');
-                  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  if (saved === 'dark' || (!saved && prefersDark)) {
+                  if (saved === 'dark') {
                     document.documentElement.classList.add('dark');
                     document.documentElement.classList.remove('light');
                   } else {

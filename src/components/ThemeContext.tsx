@@ -14,19 +14,20 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("dark");
+  const [theme, setThemeState] = useState<Theme>("light");
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    // Determine initial theme
+    // Determine initial theme (default to light)
     const savedTheme = localStorage.getItem("theme") as Theme | null;
-    let initialTheme: Theme;
+    let initialTheme: Theme = "light";
 
-    if (savedTheme === "light" || savedTheme === "dark") {
-      initialTheme = savedTheme;
+    if (savedTheme === "dark") {
+      initialTheme = "dark";
+    } else if (savedTheme === "light") {
+      initialTheme = "light";
     } else {
-      const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-      initialTheme = prefersDark ? "dark" : "light";
+      initialTheme = "light";
     }
 
     setThemeState(initialTheme);

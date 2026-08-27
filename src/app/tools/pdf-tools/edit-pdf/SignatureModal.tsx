@@ -191,22 +191,22 @@ export default function SignatureModal({ isOpen, onClose, onSave }: SignatureMod
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-xl overflow-hidden shadow-2xl flex flex-col animate-in fade-in zoom-in-95 duration-200">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-xl overflow-hidden shadow-2xl flex flex-col animate-in fade-in zoom-in-95 duration-200">
         
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-800">
           <h3 className="text-lg font-bold text-slate-900 dark:text-white">Create Digital Signature</h3>
-          <button onClick={onClose} className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+          <button onClick={onClose} className="p-1.5 rounded-lg text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Tab Selection */}
-        <div className="flex bg-slate-950/50 p-1.5 mx-6 mt-6 rounded-2xl border border-slate-800">
+        <div className="flex bg-slate-100 dark:bg-slate-950/50 p-1.5 mx-6 mt-6 rounded-2xl border border-slate-200 dark:border-slate-800">
           <button
             onClick={() => setActiveTab('draw')}
             className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold transition-all ${
-              activeTab === 'draw' ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'
+              activeTab === 'draw' ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             <Edit2 className="w-4 h-4" />
@@ -215,7 +215,7 @@ export default function SignatureModal({ isOpen, onClose, onSave }: SignatureMod
           <button
             onClick={() => setActiveTab('type')}
             className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold transition-all ${
-              activeTab === 'type' ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'
+              activeTab === 'type' ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             <Type className="w-4 h-4" />
@@ -224,7 +224,7 @@ export default function SignatureModal({ isOpen, onClose, onSave }: SignatureMod
           <button
             onClick={() => setActiveTab('upload')}
             className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold transition-all ${
-              activeTab === 'upload' ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'
+              activeTab === 'upload' ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             <Upload className="w-4 h-4" />
@@ -236,7 +236,7 @@ export default function SignatureModal({ isOpen, onClose, onSave }: SignatureMod
         <div className="p-6 flex-1">
           {activeTab === 'draw' && (
             <div className="space-y-4">
-              <div className="relative border border-slate-800 rounded-2xl overflow-hidden bg-slate-950 cursor-crosshair">
+              <div className="relative border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-950 cursor-crosshair">
                 <canvas
                   ref={canvasRef}
                   onMouseDown={startDrawing}
@@ -250,7 +250,7 @@ export default function SignatureModal({ isOpen, onClose, onSave }: SignatureMod
                 />
                 <button
                   onClick={clearDrawing}
-                  className="absolute bottom-3 right-3 p-2 bg-slate-900 border border-slate-800 hover:bg-red-950/30 hover:border-red-900/50 hover:text-red-400 rounded-xl text-slate-400 transition-all shadow-md flex items-center gap-1.5 text-[10px] uppercase font-bold tracking-wider"
+                  className="absolute bottom-3 right-3 p-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-red-50 dark:hover:bg-red-950/30 hover:border-red-200 dark:hover:border-red-900/50 hover:text-red-600 dark:hover:text-red-400 rounded-xl text-slate-500 dark:text-slate-400 transition-all shadow-md flex items-center gap-1.5 text-[10px] uppercase font-bold tracking-wider"
                   title="Clear drawing"
                 >
                   <Trash className="w-3.5 h-3.5" />
@@ -264,18 +264,18 @@ export default function SignatureModal({ isOpen, onClose, onSave }: SignatureMod
           {activeTab === 'type' && (
             <div className="space-y-6">
               <div className="space-y-2">
-                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Type Your Name</label>
+                <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Type Your Name</label>
                 <input
                   type="text"
                   value={typedName}
                   onChange={(e) => setTypedName(e.target.value)}
                   placeholder="John Doe"
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:border-blue-500 focus:outline-none transition-colors"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
                 />
               </div>
 
               {/* Live Preview Panel */}
-              <div className="border border-slate-800 rounded-2xl p-8 bg-slate-950 flex items-center justify-center min-h-[140px] relative overflow-hidden select-none">
+              <div className="border border-slate-200 dark:border-slate-800 rounded-2xl p-8 bg-slate-50 dark:bg-slate-950 flex items-center justify-center min-h-[140px] relative overflow-hidden select-none">
                 {typedName ? (
                   <span
                     style={{ fontFamily: selectedFont, color: textColor }}
@@ -284,18 +284,18 @@ export default function SignatureModal({ isOpen, onClose, onSave }: SignatureMod
                     {typedName}
                   </span>
                 ) : (
-                  <span className="text-slate-600 text-sm font-medium">Signature preview will appear here</span>
+                  <span className="text-slate-400 dark:text-slate-600 text-sm font-medium">Signature preview will appear here</span>
                 )}
               </div>
 
               {/* Customizers */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Select Style</label>
+                  <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Select Style</label>
                   <select
                     value={selectedFont}
                     onChange={(e) => setSelectedFont(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white focus:border-blue-500 focus:outline-none transition-colors"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
                   >
                     {SIGNATURE_FONTS.map((font) => (
                       <option key={font.name} value={font.family}>
@@ -305,7 +305,7 @@ export default function SignatureModal({ isOpen, onClose, onSave }: SignatureMod
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Ink Color</label>
+                  <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Ink Color</label>
                   <div className="flex gap-2">
                     {['#000000', '#1e3a8a', '#0284c7', '#ef4444'].map((color) => (
                       <button
@@ -325,11 +325,11 @@ export default function SignatureModal({ isOpen, onClose, onSave }: SignatureMod
           {activeTab === 'upload' && (
             <div className="space-y-4">
               {uploadedImage ? (
-                <div className="relative border border-slate-800 rounded-2xl overflow-hidden bg-slate-950 p-6 min-h-[200px] flex items-center justify-center">
+                <div className="relative border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-950 p-6 min-h-[200px] flex items-center justify-center">
                   <img src={uploadedImage} alt="Uploaded signature" className="max-h-[160px] object-contain" />
                   <button
                     onClick={clearUpload}
-                    className="absolute top-3 right-3 p-1.5 bg-slate-900 border border-slate-800 hover:bg-red-950/30 hover:border-red-900/50 hover:text-red-400 rounded-lg text-slate-400 transition-colors shadow-md"
+                    className="absolute top-3 right-3 p-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-red-50 dark:hover:bg-red-950/30 hover:border-red-200 dark:hover:border-red-900/50 hover:text-red-600 dark:hover:text-red-400 rounded-lg text-slate-400 transition-colors shadow-md"
                   >
                     <Trash className="w-4 h-4" />
                   </button>
@@ -337,7 +337,7 @@ export default function SignatureModal({ isOpen, onClose, onSave }: SignatureMod
               ) : (
                 <div
                   onClick={() => fileInputRef.current?.click()}
-                  className="border-2 border-dashed border-slate-800 hover:border-blue-500 bg-slate-950 hover:bg-blue-950/10 rounded-2xl p-10 text-center cursor-pointer transition-all duration-200"
+                  className="border-2 border-dashed border-slate-200 dark:border-slate-800 hover:border-blue-500 bg-slate-50 dark:bg-slate-950 hover:bg-blue-50/50 dark:hover:bg-blue-950/10 rounded-2xl p-10 text-center cursor-pointer transition-all duration-200"
                 >
                   <input
                     type="file"
@@ -346,9 +346,9 @@ export default function SignatureModal({ isOpen, onClose, onSave }: SignatureMod
                     accept="image/*"
                     className="hidden"
                   />
-                  <Upload className="w-10 h-10 text-slate-600 mx-auto mb-3" />
-                  <span className="block text-xs font-bold text-slate-400 mb-1">Upload image file</span>
-                  <span className="text-[10px] text-slate-600">Supports PNG, JPG, JPEG with transparent or light background</span>
+                  <Upload className="w-10 h-10 text-slate-400 dark:text-slate-600 mx-auto mb-3" />
+                  <span className="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1">Upload image file</span>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-600">Supports PNG, JPG, JPEG with transparent or light background</span>
                 </div>
               )}
             </div>
@@ -356,10 +356,10 @@ export default function SignatureModal({ isOpen, onClose, onSave }: SignatureMod
         </div>
 
         {/* Footer actions */}
-        <div className="flex justify-end items-center gap-3 px-6 py-4 bg-slate-950/40 border-t border-slate-800 select-none">
+        <div className="flex justify-end items-center gap-3 px-6 py-4 bg-slate-50 dark:bg-slate-950/40 border-t border-slate-200 dark:border-slate-800 select-none">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white transition-colors"
+            className="px-4 py-2 text-xs font-bold text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
           >
             Cancel
           </button>

@@ -298,18 +298,18 @@ export default function EditPdfPage() {
 
   if (!doc.isMounted || !doc.pdfjs || !doc.fabricLib) {
     return (
-      <div className="bg-slate-950 min-h-screen flex items-center justify-center text-white">
+      <div className="bg-[#F8FAFC] dark:bg-[#030712] min-h-screen flex items-center justify-center text-slate-900 dark:text-white">
         <div className="flex flex-col items-center gap-4">
           <RefreshCw className="w-10 h-10 text-blue-500 animate-spin" />
-          <p className="text-slate-400 font-bold font-sans">Initializing PDF Editor workspace...</p>
+          <p className="text-slate-500 dark:text-slate-400 font-bold font-sans">Initializing PDF Editor workspace...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-slate-950 min-h-screen text-slate-100 flex flex-col font-sans select-none overflow-hidden relative">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[400px] bg-blue-500/5 blur-[120px] pointer-events-none" />
+    <div className="bg-[#F8FAFC] dark:bg-[#030712] min-h-screen text-slate-900 dark:text-slate-100 flex flex-col font-sans select-none overflow-hidden relative">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[400px] bg-blue-500/5 dark:bg-blue-500/5 blur-[120px] pointer-events-none" />
 
       <PDFToolbar
         pdfFile={doc.pdfFile}

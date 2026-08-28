@@ -358,53 +358,53 @@ export default function PdfToJpg() {
         </Link>
 
         {/* Main Tool Container */}
-        <div className="glass rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl mb-16">
+        <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12">
           
           {/* Header Banner */}
-          <div className="p-8 sm:p-10 border-b border-white/5 bg-white/[0.02]">
+          <div className="p-8 sm:p-10 border-b border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.02]">
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
               <div className="flex items-center gap-6">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_0_25px_rgba(37,99,235,0.4)]">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_4px_20px_rgba(37,99,235,0.35)]">
                   <Image className="w-7 h-7" />
                 </div>
                 <div>
                   <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">PDF to JPG</h1>
-                  <p className="text-gray-400 font-medium mt-1">Convert PDF pages into high-resolution JPG images entirely in your browser.</p>
+                  <p className="text-slate-600 dark:text-gray-400 font-medium mt-1">Convert PDF pages into high-resolution JPG images entirely in your browser.</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 bg-emerald-500/10 px-4 py-2 rounded-xl border border-emerald-500/20 h-fit">
-                <Shield className="w-4 h-4 text-emerald-400" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">Secure Client Processing</span>
+              <div className="flex items-center gap-3 bg-emerald-50 dark:bg-emerald-500/10 px-4 py-2 rounded-xl border border-emerald-200 dark:border-emerald-500/20 h-fit shadow-sm">
+                <Shield className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Secure Client Processing</span>
               </div>
             </div>
           </div>
 
-          <div className="p-8 sm:p-10 bg-white dark:bg-black/[0.15]">
+          <div className="p-8 sm:p-10">
             
             {/* Success state overview */}
             {success && convertedImages.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="mb-10 p-8 border border-emerald-500/20 bg-emerald-500/5 rounded-[2rem] text-center"
+                className="mb-10 p-8 border border-emerald-500/20 bg-emerald-50 dark:bg-emerald-500/5 rounded-3xl text-center shadow-sm"
               >
-                <div className="w-16 h-16 bg-emerald-500/25 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.2)]">
+                <div className="w-16 h-16 bg-emerald-500/20 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-600 dark:text-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.2)]">
                   <CheckCircle className="w-8 h-8" />
                 </div>
                 <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Conversion Complete!</h3>
-                <p className="text-sm text-gray-400 mb-6 max-w-md mx-auto">
+                <p className="text-sm text-slate-600 dark:text-gray-400 mb-6 max-w-md mx-auto">
                   {convertedImages.length} page(s) successfully converted to JPG files. Save them individually or download everything zipped.
                 </p>
                 <div className="flex flex-wrap gap-4 justify-center">
                   <button 
                     onClick={downloadAllAsZip} 
-                    className="flex items-center gap-2.5 px-7 py-4 bg-blue-600 hover:bg-blue-500 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)]"
+                    className="flex items-center gap-2.5 px-7 py-4 bg-blue-600 hover:bg-blue-500 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_4px_20px_rgba(37,99,235,0.3)] cursor-pointer"
                   >
                     <FileArchive className="w-4 h-4" /> Download All as ZIP
                   </button>
                   <button 
                     onClick={resetAll} 
-                    className="px-7 py-4 bg-white/5 border border-white/10 text-gray-300 text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-white/10 transition-all"
+                    className="px-7 py-4 bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-gray-300 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all cursor-pointer shadow-sm"
                   >
                     Convert New PDF
                   </button>
@@ -421,10 +421,10 @@ export default function PdfToJpg() {
                 onDragLeave={handleDragLeaveUpload}
                 onDrop={handleDropUpload}
                 onClick={() => fileInputRef.current?.click()}
-                className={`border-2 border-dashed rounded-[1.5rem] py-8 sm:py-12 px-6 sm:px-10 text-center transition-all cursor-pointer group relative overflow-hidden
+                className={`border-2 border-dashed rounded-3xl py-12 sm:py-20 px-6 sm:px-10 text-center transition-all cursor-pointer group relative overflow-hidden shadow-sm
                   ${isDraggingOverUpload 
-                    ? 'border-blue-500 bg-blue-500/10 scale-[1.01] shadow-[0_0_30px_rgba(59,130,246,0.1)]' 
-                    : 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/[0.02] hover:bg-slate-100 dark:hover:bg-white/[0.04] hover:border-blue-400 dark:hover:border-white/20'
+                    ? 'border-blue-500 bg-blue-500/5 scale-[1.01]' 
+                    : 'border-slate-300 dark:border-white/10 bg-slate-50/50 dark:bg-white/[0.01] hover:border-blue-500/50 hover:bg-blue-500/[0.02]'
                   }
                 `}
               >
@@ -437,11 +437,11 @@ export default function PdfToJpg() {
                 />
                 
                 <div className="relative z-10">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-blue-50 dark:bg-white/5 border border-blue-100 dark:border-white/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-105 group-hover:border-blue-500/50 transition-all duration-300 shadow-sm">
-                    <UploadCloud className="w-7 h-7 sm:w-8 sm:h-8 text-blue-600 dark:text-gray-400 group-hover:text-blue-500 transition-colors" />
+                  <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-105 group-hover:border-blue-500/50 transition-all duration-300 shadow-sm">
+                    <UploadCloud className="w-8 h-8 text-blue-600 dark:text-gray-400 group-hover:text-blue-500 transition-colors" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-2">Upload your PDF</h3>
-                  <p className="text-slate-500 dark:text-gray-400 font-medium max-w-sm mx-auto mb-5 text-xs sm:text-sm">
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-2">Upload your PDF</h3>
+                  <p className="text-slate-500 dark:text-gray-400 font-medium max-w-sm mx-auto mb-5 text-sm">
                     Drag & drop your PDF file here, or click to browse from your folders.
                   </p>
                   
@@ -459,14 +459,14 @@ export default function PdfToJpg() {
               <div className="space-y-10">
                 
                 {/* File overview card */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center p-6 bg-white/[0.02] border border-white/5 rounded-2xl gap-6">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center p-6 bg-slate-50/70 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 rounded-2xl gap-6 shadow-sm">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-500">
+                    <div className="w-12 h-12 rounded-xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-600">
                       <FileText className="w-6 h-6" />
                     </div>
                     <div>
                       <h4 className="text-base font-black text-slate-900 dark:text-white line-clamp-1">{pdfFile.name}</h4>
-                      <p className="text-xs text-gray-500 font-semibold mt-0.5">
+                      <p className="text-xs text-slate-500 dark:text-gray-500 font-semibold mt-0.5">
                         {formatBytes(pdfFile.size)} • {totalPages} Pages
                       </p>
                     </div>
@@ -474,7 +474,7 @@ export default function PdfToJpg() {
                   <button 
                     onClick={resetAll}
                     disabled={isProcessing}
-                    className="flex items-center gap-2 px-4 py-2.5 border border-red-500/20 hover:border-red-500/50 bg-red-500/5 text-[10px] font-black text-red-500 hover:text-white uppercase tracking-widest rounded-xl transition-all disabled:opacity-50 cursor-pointer"
+                    className="flex items-center gap-2 px-4 py-2.5 border border-red-200 dark:border-red-500/20 hover:border-red-300 bg-red-50 dark:bg-red-500/5 text-[10px] font-black text-red-600 dark:text-red-400 uppercase tracking-widest rounded-xl transition-all disabled:opacity-50 cursor-pointer shadow-sm"
                   >
                     <Trash2 className="w-3.5 h-3.5" /> Remove File
                   </button>
@@ -485,26 +485,26 @@ export default function PdfToJpg() {
                   
                   {/* Left Column: Settings Configuration */}
                   <div className="space-y-8 lg:col-span-1">
-                    <div className="glass p-6 sm:p-8 rounded-[2rem] border border-white/5 bg-white/[0.01] space-y-6">
-                      <h3 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white border-b border-white/5 pb-4 flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-blue-500" /> Output Settings
+                    <div className="bg-[#FBFCFE] dark:bg-white/[0.02] p-6 sm:p-8 rounded-3xl border border-[#E6ECF5] dark:border-white/5 space-y-6 shadow-sm">
+                      <h3 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white border-b border-[#E6ECF5] dark:border-white/5 pb-4 flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-500" /> Output Settings
                       </h3>
                       
                       {/* Name Prefix */}
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-1">File Name Prefix</label>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 ml-1">File Name Prefix</label>
                         <input
                           type="text"
                           value={outputPrefix}
                           onChange={(e) => setOutputPrefix(e.target.value.replace(/[^a-zA-Z0-9_\-]/g, "_"))}
-                          className="w-full bg-[#F6F8FC] dark:bg-[#030712]/50 border border-white/5 focus:border-blue-500/50 rounded-xl px-4 py-3 text-white text-sm font-semibold outline-none transition-all focus:ring-4 focus:ring-blue-500/5"
+                          className="w-full bg-white dark:bg-[#030712]/50 border border-slate-200 dark:border-white/5 focus:border-blue-500 rounded-xl px-4 py-3 text-slate-900 dark:text-white text-sm font-semibold outline-none transition-all shadow-sm"
                           placeholder="document_pages"
                         />
                       </div>
 
                       {/* Image Quality Chips */}
                       <div className="space-y-3">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-1">Resolution Quality</label>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 ml-1">Resolution Quality</label>
                         <div className="grid grid-cols-3 gap-2">
                           {(['low', 'medium', 'high'] as ConversionQuality[]).map((q) => (
                             <button
@@ -512,15 +512,15 @@ export default function PdfToJpg() {
                               onClick={() => setQuality(q)}
                               className={`py-3 text-[9px] font-black uppercase tracking-widest rounded-xl transition-all border cursor-pointer ${
                                 quality === q
-                                  ? 'bg-blue-600 text-white border-blue-500 shadow-[0_0_15px_rgba(37,99,235,0.3)]'
-                                  : 'bg-white/5 text-gray-500 border-white/5 hover:border-white/10 hover:text-white'
+                                  ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
+                                  : 'bg-slate-100 hover:bg-slate-200/70 dark:bg-white/5 text-slate-600 dark:text-gray-500 border-slate-200 dark:border-white/5 hover:text-slate-900 dark:hover:text-white'
                               }`}
                             >
                               {q}
                             </button>
                           ))}
                         </div>
-                        <p className="text-[9px] text-gray-600 font-bold leading-normal ml-1">
+                        <p className="text-[9px] text-slate-500 dark:text-gray-600 font-bold leading-normal ml-1">
                           {quality === 'low' && "Low DPI (Fastest, optimized for compact file storage)"}
                           {quality === 'medium' && "Medium DPI (Standard visual resolution, balanced layout)"}
                           {quality === 'high' && "High DPI (300 DPI scale, optimized for zooms & prints)"}
@@ -529,14 +529,14 @@ export default function PdfToJpg() {
 
                       {/* Page selection chips */}
                       <div className="space-y-3">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-1">Pages to Extract</label>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 ml-1">Pages to Extract</label>
                         <div className="grid grid-cols-2 gap-2">
                           <button
                             onClick={() => setSelectionMode('all')}
                             className={`py-3 text-[9px] font-black uppercase tracking-widest rounded-xl transition-all border cursor-pointer ${
                               selectionMode === 'all'
-                                ? 'bg-blue-600 text-white border-blue-500 shadow-[0_0_15px_rgba(37,99,235,0.3)]'
-                                : 'bg-white/5 text-gray-500 border-white/5 hover:border-white/10 hover:text-white'
+                                ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
+                                : 'bg-slate-100 hover:bg-slate-200/70 dark:bg-white/5 text-slate-600 dark:text-gray-500 border-slate-200 dark:border-white/5 hover:text-slate-900 dark:hover:text-white'
                             }`}
                           >
                             All Pages
@@ -545,8 +545,8 @@ export default function PdfToJpg() {
                             onClick={() => setSelectionMode('custom')}
                             className={`py-3 text-[9px] font-black uppercase tracking-widest rounded-xl transition-all border cursor-pointer ${
                               selectionMode === 'custom'
-                                ? 'bg-blue-600 text-white border-blue-500 shadow-[0_0_15px_rgba(37,99,235,0.3)]'
-                                : 'bg-white/5 text-gray-500 border-white/5 hover:border-white/10 hover:text-white'
+                                ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
+                                : 'bg-slate-100 hover:bg-slate-200/70 dark:bg-white/5 text-slate-600 dark:text-gray-500 border-slate-200 dark:border-white/5 hover:text-slate-900 dark:hover:text-white'
                             }`}
                           >
                             Custom Select
@@ -558,7 +558,7 @@ export default function PdfToJpg() {
                       <button
                         onClick={convertPdfToJpg}
                         disabled={isProcessing || (selectionMode === 'custom' && selectedPages.length === 0)}
-                        className="w-full flex items-center justify-center gap-2.5 px-6 py-4.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] disabled:opacity-50 cursor-pointer"
+                        className="w-full flex items-center justify-center gap-2.5 px-6 py-4.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_4px_20px_rgba(37,99,235,0.3)] disabled:opacity-50 cursor-pointer"
                       >
                         {isProcessing ? (
                           <>
@@ -575,11 +575,11 @@ export default function PdfToJpg() {
 
                   {/* Right Column: PDF Preview Grid */}
                   <div className="lg:col-span-2 space-y-6">
-                    <div className="glass p-6 sm:p-8 rounded-[2rem] border border-white/5 bg-white/[0.01]">
-                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/5 pb-4 mb-6 gap-4">
+                    <div className="bg-[#FBFCFE] dark:bg-white/[0.02] p-6 sm:p-8 rounded-3xl border border-[#E6ECF5] dark:border-white/5 shadow-sm">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#E6ECF5] dark:border-white/5 pb-4 mb-6 gap-4">
                         <div>
                           <h3 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">Visual Previewer</h3>
-                          <p className="text-[10px] text-gray-500 font-semibold mt-0.5">
+                          <p className="text-[10px] text-slate-500 dark:text-gray-500 font-semibold mt-0.5">
                             {selectionMode === 'all' 
                               ? "Converting all pages of the document." 
                               : `Selected ${selectedPages.length} of ${totalPages} pages.`
@@ -590,13 +590,13 @@ export default function PdfToJpg() {
                           <div className="flex gap-2">
                             <button 
                               onClick={selectAll} 
-                              className="px-3 py-1.5 border border-white/5 hover:border-white/10 rounded-lg bg-white/[0.02] text-[9px] font-black uppercase tracking-widest text-gray-400 hover:text-white transition-all cursor-pointer"
+                              className="px-3 py-1.5 border border-slate-200 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10 rounded-lg bg-slate-100 dark:bg-white/[0.02] text-[9px] font-black uppercase tracking-widest text-slate-700 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer shadow-sm"
                             >
                               Select All
                             </button>
                             <button 
                               onClick={selectNone} 
-                              className="px-3 py-1.5 border border-white/5 hover:border-white/10 rounded-lg bg-white/[0.02] text-[9px] font-black uppercase tracking-widest text-gray-400 hover:text-white transition-all cursor-pointer"
+                              className="px-3 py-1.5 border border-slate-200 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10 rounded-lg bg-slate-100 dark:bg-white/[0.02] text-[9px] font-black uppercase tracking-widest text-slate-700 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer shadow-sm"
                             >
                               Clear
                             </button>
@@ -605,8 +605,8 @@ export default function PdfToJpg() {
                       </div>
 
                       {thumbnailUrls.length === 0 ? (
-                        <div className="py-20 text-center text-gray-600">
-                          <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-3 text-blue-500" />
+                        <div className="py-20 text-center text-slate-500 dark:text-gray-600">
+                          <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-3 text-blue-600 dark:text-blue-500" />
                           <p className="text-[10px] font-black uppercase tracking-widest">Generating Visual Previews</p>
                         </div>
                       ) : (
@@ -620,11 +620,11 @@ export default function PdfToJpg() {
                               <div
                                 key={idx}
                                 onClick={() => activeCustom && togglePageSelect(pageNum)}
-                                className={`group relative aspect-[3/4] rounded-2xl overflow-hidden border bg-white/5 transition-all
+                                className={`group relative aspect-[3/4] rounded-2xl overflow-hidden border bg-slate-100/90 dark:bg-white/5 transition-all shadow-sm
                                   ${activeCustom ? 'cursor-pointer' : 'cursor-default'}
                                   ${(isSelected || !activeCustom)
-                                    ? 'border-blue-500/50 shadow-[0_0_15px_rgba(37,99,235,0.15)] bg-blue-500/5'
-                                    : 'border-white/5 hover:border-white/15'
+                                    ? 'border-blue-500 shadow-[0_0_15px_rgba(37,99,235,0.2)] bg-blue-50/50 dark:bg-blue-500/5'
+                                    : 'border-slate-200 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/15'
                                   }
                                 `}
                               >
@@ -636,19 +636,19 @@ export default function PdfToJpg() {
                                     className="w-full h-full object-contain p-2"
                                   />
                                 ) : (
-                                  <div className="w-full h-full flex items-center justify-center text-gray-700 bg-black/40">
+                                  <div className="w-full h-full flex items-center justify-center text-slate-400 dark:text-gray-700 bg-slate-200/50 dark:bg-black/40">
                                     <FileText className="w-8 h-8" />
                                   </div>
                                 )}
 
                                 {/* Overlay Label */}
-                                <div className="absolute bottom-2 left-2 right-2 flex justify-between items-center bg-black/75 px-3 py-1.5 rounded-xl border border-white/5 backdrop-blur-md">
-                                  <span className="text-[9px] font-black text-gray-300">PAGE {pageNum}</span>
+                                <div className="absolute bottom-2 left-2 right-2 flex justify-between items-center bg-white/90 dark:bg-black/75 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-white/5 backdrop-blur-md shadow-sm">
+                                  <span className="text-[9px] font-black text-slate-700 dark:text-gray-300">PAGE {pageNum}</span>
                                   {activeCustom && (
                                     <div className={`w-3.5 h-3.5 rounded flex items-center justify-center border transition-colors
                                       ${isSelected 
                                         ? 'bg-blue-600 border-blue-500 text-white' 
-                                        : 'border-white/20'
+                                        : 'border-slate-300 dark:border-white/20'
                                       }
                                     `}>
                                       {isSelected && <div className="w-1.5 h-1.5 bg-white rounded-sm" />}
@@ -672,12 +672,12 @@ export default function PdfToJpg() {
 
                 {/* Progress bar when converting */}
                 {isProcessing && progress > 0 && (
-                  <div className="p-6 bg-white/[0.02] border border-white/5 rounded-2xl space-y-3">
-                    <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-gray-400">
+                  <div className="p-6 bg-slate-50/70 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 rounded-2xl space-y-3 shadow-sm">
+                    <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-slate-600 dark:text-gray-400">
                       <span>Conversion Progress</span>
-                      <span className="text-blue-500">{progress}%</span>
+                      <span className="text-blue-600 dark:text-blue-500">{progress}%</span>
                     </div>
-                    <div className="w-full bg-white/5 h-2.5 rounded-full overflow-hidden">
+                    <div className="w-full bg-slate-200 dark:bg-white/5 h-2.5 rounded-full overflow-hidden">
                       <div 
                         className="bg-blue-600 h-full rounded-full transition-all duration-300 shadow-[0_0_10px_rgba(37,99,235,0.5)]" 
                         style={{ width: `${progress}%` }} 
@@ -694,16 +694,16 @@ export default function PdfToJpg() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-12 space-y-6 pt-10 border-t border-white/5"
+                className="mt-12 space-y-6 pt-10 border-t border-[#E6ECF5] dark:border-white/5"
               >
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                   <div>
                     <h3 className="text-lg font-black uppercase tracking-tight text-slate-900 dark:text-white">Extracted JPEG Images</h3>
-                    <p className="text-xs text-gray-500 font-semibold mt-0.5">Download files individually or compile everything.</p>
+                    <p className="text-xs text-slate-500 dark:text-gray-500 font-semibold mt-0.5">Download files individually or compile everything.</p>
                   </div>
                   <button 
                     onClick={downloadAllAsZip} 
-                    className="flex items-center gap-2 px-5 py-3.5 bg-blue-600 hover:bg-blue-500 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] cursor-pointer"
+                    className="flex items-center gap-2 px-5 py-3.5 bg-blue-600 hover:bg-blue-500 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_4px_20px_rgba(37,99,235,0.3)] cursor-pointer"
                   >
                     <FileArchive className="w-4 h-4" /> Download All as ZIP
                   </button>
@@ -713,16 +713,16 @@ export default function PdfToJpg() {
                   {convertedImages.map((img) => (
                     <div 
                       key={img.pageNumber}
-                      className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.02] p-5 shadow-lg hover:border-white/15 transition-all"
+                      className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/80 dark:border-white/5 bg-slate-50/70 dark:bg-white/[0.02] p-5 shadow-sm hover:border-slate-300 dark:hover:border-white/15 transition-all"
                     >
                       {/* Image card wrapper */}
-                      <div className="aspect-[3/4] w-full overflow-hidden rounded-xl bg-white/5 border border-white/5 relative flex items-center justify-center p-2 mb-4">
+                      <div className="aspect-[3/4] w-full overflow-hidden rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 relative flex items-center justify-center p-2 mb-4 shadow-inner">
                         <img 
                           src={img.dataUrl} 
                           alt={`Page ${img.pageNumber}`} 
                           className="max-w-full max-h-full object-contain"
                         />
-                        <div className="absolute top-3 right-3 bg-black/75 px-2.5 py-1 rounded-lg border border-white/5 text-[9px] font-black text-gray-300">
+                        <div className="absolute top-3 right-3 bg-white/90 dark:bg-black/75 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/5 text-[9px] font-black text-slate-700 dark:text-gray-300 shadow-sm">
                           {img.width} x {img.height}
                         </div>
                       </div>
@@ -731,11 +731,11 @@ export default function PdfToJpg() {
                       <div className="flex items-center justify-between">
                         <div>
                           <h4 className="text-xs font-black text-slate-900 dark:text-white">PAGE {img.pageNumber}</h4>
-                          <p className="text-[9px] text-gray-500 font-bold uppercase tracking-wider mt-0.5">JPEG format</p>
+                          <p className="text-[9px] text-slate-500 dark:text-gray-500 font-bold uppercase tracking-wider mt-0.5">JPEG format</p>
                         </div>
                         <button
                           onClick={() => downloadSingleImage(img)}
-                          className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-blue-600 hover:border-blue-500 transition-all cursor-pointer"
+                          className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-gray-400 hover:text-white hover:bg-blue-600 hover:border-blue-500 transition-all cursor-pointer shadow-sm"
                         >
                           <Download className="w-4 h-4" />
                         </button>
@@ -751,30 +751,30 @@ export default function PdfToJpg() {
 
         {/* RELATED TOOLS LIST */}
         <div className="mb-12 animate-fade-in">
-          <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-6 ml-1">Explore PDF Workspace</h3>
+          <h3 className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-[0.2em] mb-6 ml-1">Explore PDF Workspace</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
             {/* Split PDF Card */}
             <Link 
               href="/tools/split-pdf"
-              className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 glass"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.03] p-7 transition-all duration-300 hover:border-blue-500/50 shadow-sm"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="absolute top-4 right-4 flex flex-col gap-2 items-end z-10">
-                <span className="inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-gray-400 border border-white/10 backdrop-blur-md">
+                <span className="inline-flex items-center rounded-full bg-slate-100 dark:bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-gray-400 border border-slate-200 dark:border-white/10 backdrop-blur-md">
                   PDF
                 </span>
               </div>
               <div className="relative z-10 mt-2">
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
-                  <Grid className="w-5 h-5 text-blue-500" />
+                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 dark:bg-gradient-to-br dark:from-blue-500/10 dark:to-indigo-500/10 text-blue-600 dark:text-white border border-blue-100 dark:border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 shadow-sm">
+                  <Grid className="w-5 h-5 text-blue-600 dark:text-blue-500" />
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors tracking-tight">Split PDF</h3>
-                <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
+                <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-tight">Split PDF</h3>
+                <p className="text-sm text-slate-600 dark:text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-slate-800 dark:group-hover:text-gray-300 transition-colors">
                   Extract specific page segments or split your PDF documents into separate individual files.
                 </p>
               </div>
-              <div className="relative z-10 mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-500 transition-all group-hover:gap-4">
+              <div className="relative z-10 mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-600 dark:text-blue-500 transition-all group-hover:gap-4">
                 Launch Utility
                 <ArrowRight className="w-4 h-4" />
               </div>
@@ -783,24 +783,24 @@ export default function PdfToJpg() {
             {/* Merge PDF Card */}
             <Link 
               href="/tools/merge-pdf"
-              className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 glass"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.03] p-7 transition-all duration-300 hover:border-blue-500/50 shadow-sm"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="absolute top-4 right-4 flex flex-col gap-2 items-end z-10">
-                <span className="inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-gray-400 border border-white/10 backdrop-blur-md">
+                <span className="inline-flex items-center rounded-full bg-slate-100 dark:bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-gray-400 border border-slate-200 dark:border-white/10 backdrop-blur-md">
                   PDF
                 </span>
               </div>
               <div className="relative z-10 mt-2">
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
-                  <Files className="w-5 h-5 text-blue-500" />
+                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 dark:bg-gradient-to-br dark:from-blue-500/10 dark:to-indigo-500/10 text-blue-600 dark:text-white border border-blue-100 dark:border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 shadow-sm">
+                  <Files className="w-5 h-5 text-blue-600 dark:text-blue-500" />
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors tracking-tight">Merge PDF</h3>
-                <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
+                <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-tight">Merge PDF</h3>
+                <p className="text-sm text-slate-600 dark:text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-slate-800 dark:group-hover:text-gray-300 transition-colors">
                   Combine multiple distinct PDF documents into a single professional-grade file quickly and securely.
                 </p>
               </div>
-              <div className="relative z-10 mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-500 transition-all group-hover:gap-4">
+              <div className="relative z-10 mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-600 dark:text-blue-500 transition-all group-hover:gap-4">
                 Launch Utility
                 <ArrowRight className="w-4 h-4" />
               </div>
@@ -809,24 +809,24 @@ export default function PdfToJpg() {
             {/* JPG to PDF Card */}
             <Link 
               href="/tools/jpg-to-pdf"
-              className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 glass"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.03] p-7 transition-all duration-300 hover:border-blue-500/50 shadow-sm"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="absolute top-4 right-4 flex flex-col gap-2 items-end z-10">
-                <span className="inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-gray-400 border border-white/10 backdrop-blur-md">
+                <span className="inline-flex items-center rounded-full bg-slate-100 dark:bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-gray-400 border border-slate-200 dark:border-white/10 backdrop-blur-md">
                   PDF
                 </span>
               </div>
               <div className="relative z-10 mt-2">
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 text-white border border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
-                  <Layers className="w-5 h-5 text-blue-500" />
+                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 dark:bg-gradient-to-br dark:from-blue-500/10 dark:to-indigo-500/10 text-blue-600 dark:text-white border border-blue-100 dark:border-white/5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 shadow-sm">
+                  <Layers className="w-5 h-5 text-blue-600 dark:text-blue-500" />
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors tracking-tight">JPG to PDF</h3>
-                <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-gray-300 transition-colors">
+                <h3 className="mb-3 text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-tight">JPG to PDF</h3>
+                <p className="text-sm text-slate-600 dark:text-gray-400 leading-relaxed font-medium line-clamp-3 group-hover:text-slate-800 dark:group-hover:text-gray-300 transition-colors">
                   Convert JPG, JPEG, and PNG images into a single professional PDF document.
                 </p>
               </div>
-              <div className="relative z-10 mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-500 transition-all group-hover:gap-4">
+              <div className="relative z-10 mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-600 dark:text-blue-500 transition-all group-hover:gap-4">
                 Launch Utility
                 <ArrowRight className="w-4 h-4" />
               </div>

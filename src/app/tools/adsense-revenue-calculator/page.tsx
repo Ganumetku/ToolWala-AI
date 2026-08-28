@@ -455,26 +455,26 @@ export default function AdSenseRevenueCalculatorPage() {
               </span>
             </h1>
 
-            <p className="text-sm sm:text-base text-gray-400 leading-relaxed font-medium mb-8 max-w-2xl mx-auto mt-6">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-gray-400 leading-relaxed font-medium mb-8 max-w-2xl mx-auto mt-6">
               Estimate your Google AdSense earnings from page views, CTR, CPC, RPM, your niche, and your audience country.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-6 text-[10px] sm:text-xs font-black text-gray-500 uppercase tracking-widest mb-10">
-              <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-blue-500" /> 100% Private</span>
-              <span className="flex items-center gap-1.5"><Zap className="w-4 h-4 text-blue-500" /> Instant Results</span>
-              <span className="flex items-center gap-1.5"><Activity className="w-4 h-4 text-blue-500" /> 7 Niches · 5 Countries</span>
+            <div className="flex flex-wrap justify-center gap-6 text-[10px] sm:text-xs font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest mb-10">
+              <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-blue-600 dark:text-blue-500" /> 100% Private</span>
+              <span className="flex items-center gap-1.5"><Zap className="w-4 h-4 text-blue-600 dark:text-blue-500" /> Instant Results</span>
+              <span className="flex items-center gap-1.5"><Activity className="w-4 h-4 text-blue-600 dark:text-blue-500" /> 7 Niches · 5 Countries</span>
             </div>
 
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
               <button
                 onClick={() => document.getElementById("calc-section")?.scrollIntoView({ behavior: "smooth" })}
-                className="w-full sm:w-auto px-8 py-4 bg-blue-500 hover:bg-blue-400 text-white font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-blue-500/20"
+                className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-blue-500/20 cursor-pointer"
               >
                 Estimate Earnings
               </button>
               <button
                 onClick={() => document.getElementById("learn-section")?.scrollIntoView({ behavior: "smooth" })}
-                className="w-full sm:w-auto px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 active:scale-95 border border-white/10"
+                className="w-full sm:w-auto px-8 py-4 bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-white font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 active:scale-95 border border-slate-200 dark:border-white/10 cursor-pointer shadow-sm"
               >
                 How It Works
               </button>
@@ -486,15 +486,15 @@ export default function AdSenseRevenueCalculatorPage() {
 
             {/* ── LEFT: Inputs ──────────────────────────────────────────────── */}
             <div className="w-full lg:w-5/12 space-y-6 shrink-0">
-              <div className="glass rounded-[2.5rem] border border-white/5 shadow-2xl p-6 sm:p-8 bg-white/[0.01]">
+              <div className="bg-[#FBFCFE] dark:bg-white/[0.01] rounded-3xl border border-[#E6ECF5] dark:border-white/5 shadow-2xl p-6 sm:p-8">
 
                 {/* Header */}
-                <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-8">
+                <div className="flex items-center justify-between border-b border-[#E6ECF5] dark:border-white/5 pb-4 mb-8">
                   <div className="flex items-center gap-2">
-                    <Calculator className="w-5 h-5 text-blue-400" />
+                    <Calculator className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                     <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">Site Settings</h3>
                   </div>
-                  <button onClick={handleReset} className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-gray-500 hover:text-blue-400 transition-colors">
+                  <button onClick={handleReset} className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-slate-500 hover:text-blue-600 dark:text-gray-500 dark:hover:text-blue-400 transition-colors cursor-pointer">
                     <RefreshCw className="w-3 h-3" /> Reset
                   </button>
                 </div>
@@ -504,21 +504,21 @@ export default function AdSenseRevenueCalculatorPage() {
                   {/* Mode Toggle */}
                   <div className="space-y-3">
                     <p className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">Calculation Mode</p>
-                    <div className="flex bg-black/40 border border-white/10 rounded-xl p-1.5 gap-1">
+                    <div className="flex bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl p-1.5 gap-1">
                       <button
                         onClick={() => setMode("cpc-ctr")}
-                        className={`flex-1 py-3 rounded-lg text-xs font-bold transition-all ${mode === "cpc-ctr" ? "bg-blue-500 text-white shadow-lg shadow-blue-500/20" : "text-gray-400 hover:text-white hover:bg-white/5"}`}
+                        className={`flex-1 py-3 rounded-lg text-xs font-bold transition-all cursor-pointer ${mode === "cpc-ctr" ? "bg-blue-600 text-white shadow-sm" : "text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/5"}`}
                       >
                         CPC + CTR
                       </button>
                       <button
                         onClick={() => setMode("rpm")}
-                        className={`flex-1 py-3 rounded-lg text-xs font-bold transition-all ${mode === "rpm" ? "bg-blue-500 text-white shadow-lg shadow-blue-500/20" : "text-gray-400 hover:text-white hover:bg-white/5"}`}
+                        className={`flex-1 py-3 rounded-lg text-xs font-bold transition-all cursor-pointer ${mode === "rpm" ? "bg-blue-600 text-white shadow-sm" : "text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/5"}`}
                       >
                         By RPM
                       </button>
                     </div>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-slate-500 dark:text-gray-500">
                       {mode === "cpc-ctr"
                         ? "Use your click-through rate and cost-per-click to estimate revenue."
                         : "Use your known RPM (revenue per 1,000 views) directly."}
@@ -581,7 +581,7 @@ export default function AdSenseRevenueCalculatorPage() {
                         <button
                           key={n.label}
                           onClick={() => applyNiche(n)}
-                          className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-xs font-bold transition-all ${niche === n.label ? "bg-blue-500/20 border-blue-500/50 text-white" : "bg-white/[0.02] border-white/10 text-gray-400 hover:border-blue-500/30 hover:text-white"}`}
+                          className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-xs font-bold transition-all cursor-pointer ${niche === n.label ? "bg-blue-50 dark:bg-blue-500/20 border-blue-500 text-blue-600 dark:text-white shadow-sm" : "bg-slate-100 hover:bg-slate-200/70 dark:bg-white/[0.02] border-slate-200 dark:border-white/10 text-slate-700 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"}`}
                         >
                           <span>{n.emoji}</span><span>{n.label}</span>
                         </button>
@@ -592,7 +592,7 @@ export default function AdSenseRevenueCalculatorPage() {
                   {/* Country */}
                   <div className="space-y-3">
                     <div className="flex items-center gap-2">
-                      <Globe className="w-4 h-4 text-blue-400" />
+                      <Globe className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                       <p className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">Audience Country</p>
                     </div>
 
@@ -604,10 +604,10 @@ export default function AdSenseRevenueCalculatorPage() {
                           <button
                             key={c.label}
                             onClick={() => applyCountry(c)}
-                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all ${
+                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
                               country === c.label
-                                ? "bg-blue-500/20 border-blue-500/50 text-white"
-                                : "bg-white/[0.02] border-white/10 text-gray-400 hover:border-blue-500/30 hover:text-white"
+                                ? "bg-blue-50 dark:bg-blue-500/20 border-blue-500 text-blue-600 dark:text-white shadow-sm"
+                                : "bg-slate-100 hover:bg-slate-200/70 dark:bg-white/[0.02] border-slate-200 dark:border-white/10 text-slate-700 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
                             }`}
                           >
                             <span>{c.flag}</span><span>{c.label}</span>
@@ -622,13 +622,13 @@ export default function AdSenseRevenueCalculatorPage() {
                       <button
                         type="button"
                         onClick={() => { setDropdownOpen(o => !o); setCountrySearch(""); }}
-                        className="w-full flex items-center justify-between gap-3 px-4 py-3 bg-black/40 border border-white/10 hover:border-blue-500/40 rounded-xl text-sm font-bold text-white transition-all focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/30"
+                        className="w-full flex items-center justify-between gap-3 px-4 py-3 bg-white dark:bg-black/40 border border-slate-200 dark:border-white/10 hover:border-blue-500/50 rounded-xl text-sm font-bold text-slate-900 dark:text-white transition-all focus:outline-none focus:border-blue-500 shadow-sm cursor-pointer"
                       >
                         <span className="flex items-center gap-2">
                           <span className="text-base">{selectedCountryConfig.flag}</span>
                           <span>{selectedCountryConfig.label}</span>
                         </span>
-                        <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${dropdownOpen ? "rotate-180 text-blue-400" : ""}`} />
+                        <ChevronDown className={`w-4 h-4 text-slate-500 dark:text-gray-400 transition-transform duration-200 ${dropdownOpen ? "rotate-180 text-blue-600 dark:text-blue-400" : ""}`} />
                       </button>
 
                       {/* Dropdown Panel */}
@@ -639,32 +639,32 @@ export default function AdSenseRevenueCalculatorPage() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -6 }}
                             transition={{ duration: 0.15 }}
-                            className="absolute left-0 right-0 top-full mt-2 z-50 glass rounded-2xl border border-white/10 bg-black/90 backdrop-blur-xl shadow-2xl overflow-hidden"
+                            className="absolute left-0 right-0 top-full mt-2 z-50 rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-black/90 backdrop-blur-xl shadow-2xl overflow-hidden"
                           >
                             {/* Search box */}
-                            <div className="p-3 border-b border-white/5">
+                            <div className="p-3 border-b border-slate-200 dark:border-white/5">
                               <input
                                 autoFocus
                                 type="text"
                                 value={countrySearch}
                                 onChange={e => setCountrySearch(e.target.value)}
                                 placeholder="Search country..."
-                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-blue-500/50 transition-all"
+                                className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-gray-600 focus:outline-none focus:border-blue-500 transition-all shadow-inner"
                               />
                             </div>
 
                             {/* Country list */}
                             <div className="max-h-56 overflow-y-auto no-scrollbar py-1">
                               {filteredCountries.length === 0 ? (
-                                <p className="text-center text-xs text-gray-600 py-4">No countries found</p>
+                                <p className="text-center text-xs text-slate-500 dark:text-gray-600 py-4">No countries found</p>
                               ) : (
                                 filteredCountries.map(c => (
                                   <button
                                     key={c.label}
                                     type="button"
                                     onClick={() => applyCountry(c)}
-                                    className={`w-full flex items-center justify-between gap-3 px-4 py-2.5 text-sm font-semibold transition-all hover:bg-blue-500/10 ${
-                                      country === c.label ? "text-white bg-blue-500/10" : "text-gray-300"
+                                    className={`w-full flex items-center justify-between gap-3 px-4 py-2.5 text-sm font-semibold transition-all hover:bg-slate-100 dark:hover:bg-blue-500/10 cursor-pointer ${
+                                      country === c.label ? "text-blue-600 dark:text-white bg-blue-50 dark:bg-blue-500/10 font-bold" : "text-slate-700 dark:text-gray-300"
                                     }`}
                                   >
                                     <span className="flex items-center gap-2.5">
@@ -672,7 +672,7 @@ export default function AdSenseRevenueCalculatorPage() {
                                       <span>{c.label}</span>
                                     </span>
                                     {country === c.label && (
-                                      <span className="w-2 h-2 rounded-full bg-blue-400 flex-shrink-0" />
+                                      <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400 flex-shrink-0" />
                                     )}
                                   </button>
                                 ))
@@ -684,9 +684,9 @@ export default function AdSenseRevenueCalculatorPage() {
                     </div>
 
                     {/* Tooltip / Info */}
-                    <div className="flex items-start gap-2 mt-1 p-3 rounded-xl bg-blue-500/5 border border-blue-500/10">
-                      <Globe className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
-                      <p className="text-xs text-blue-300/70 font-medium leading-relaxed">
+                    <div className="flex items-start gap-2 mt-1 p-3 rounded-xl bg-blue-50 dark:bg-blue-500/5 border border-blue-200 dark:border-blue-500/10 shadow-sm">
+                      <Globe className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+                      <p className="text-xs text-slate-600 dark:text-blue-300/70 font-medium leading-relaxed">
                         Different countries have different advertising rates. Higher-tier countries (USA, UK, CA) generally generate significantly higher AdSense revenue than Tier 3 countries (India, Pakistan, Nigeria).
                       </p>
                     </div>
@@ -694,17 +694,17 @@ export default function AdSenseRevenueCalculatorPage() {
                     {/* Tier reference */}
                     <div className="flex flex-wrap gap-2">
                       {(["Tier 1", "Tier 2", "Tier 3"] as const).map(t => (
-                        <span key={t} className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest border ${
-                          t === "Tier 1" ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" :
-                          t === "Tier 2" ? "bg-blue-500/10 border-blue-500/20 text-blue-400" :
-                          "bg-gray-500/10 border-gray-500/20 text-gray-400"
+                        <span key={t} className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest border shadow-xs ${
+                          t === "Tier 1" ? "bg-emerald-50 dark:bg-emerald-500/10 border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-400" :
+                          t === "Tier 2" ? "bg-blue-50 dark:bg-blue-500/10 border-blue-200 dark:border-blue-500/20 text-blue-700 dark:text-blue-400" :
+                          "bg-slate-100 dark:bg-gray-500/10 border-slate-200 dark:border-gray-500/20 text-slate-600 dark:text-gray-400"
                         }`}>
                           {t === "Tier 1" ? "🏆" : t === "Tier 2" ? "⭐" : "🌐"} {t}
                         </span>
                       ))}
-                      <span className="text-[10px] text-gray-600 self-center font-medium">· selected: <span className={`font-bold ${
-                        selectedCountryConfig.tier === "Tier 1" ? "text-emerald-400" :
-                        selectedCountryConfig.tier === "Tier 2" ? "text-blue-400" : "text-gray-400"
+                      <span className="text-[10px] text-slate-500 dark:text-gray-600 self-center font-medium">· selected: <span className={`font-bold ${
+                        selectedCountryConfig.tier === "Tier 1" ? "text-emerald-600 dark:text-emerald-400" :
+                        selectedCountryConfig.tier === "Tier 2" ? "text-blue-600 dark:text-blue-400" : "text-slate-600 dark:text-gray-400"
                       }`}>{selectedCountryConfig.tier}</span></span>
                     </div>
                   </div>
@@ -717,63 +717,63 @@ export default function AdSenseRevenueCalculatorPage() {
             <div className="w-full lg:w-7/12 flex flex-col gap-6">
 
               {/* Main result card */}
-              <div className="glass rounded-[2.5rem] border border-white/5 shadow-2xl overflow-hidden bg-white/[0.01] relative group">
+              <div className="bg-[#FBFCFE] dark:bg-white/[0.01] rounded-3xl border border-[#E6ECF5] dark:border-white/5 shadow-2xl overflow-hidden relative group">
                 <div className="absolute top-0 right-0 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none group-hover:scale-110 transition-transform duration-700" />
 
                 <div className="p-8 sm:p-10 relative z-10">
                   <div className="flex items-center justify-between mb-8">
                     <div className="flex items-center gap-2">
-                      <Target className="w-6 h-6 text-blue-400" />
-                      <span className="text-sm font-black uppercase tracking-widest text-white">💰 Revenue Estimate</span>
+                      <Target className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                      <span className="text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white">💰 Revenue Estimate</span>
                     </div>
                     <button
                       onClick={handleCopy}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-bold text-gray-300 transition-colors border border-white/10"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-xs font-bold text-slate-700 dark:text-gray-300 transition-colors border border-slate-200 dark:border-white/10 cursor-pointer shadow-xs"
                     >
-                      {copied ? <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" /> : <Copy className="w-3.5 h-3.5" />}
+                      {copied ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-blue-400" /> : <Copy className="w-3.5 h-3.5" />}
                       {copied ? "Copied!" : "Copy"}
                     </button>
                   </div>
 
                   {/* Daily hero */}
                   <div className="text-center mb-8">
-                    <span className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-2 block">Daily Revenue</span>
+                    <span className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-2 block">Daily Revenue</span>
                     <motion.div
                       key={results.daily}
                       initial={{ scale: 0.9, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      className="text-5xl sm:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400 tracking-tight leading-none"
+                      className="text-5xl sm:text-7xl font-black text-slate-900 dark:text-white tracking-tight leading-none"
                     >
                       {fmt(results.daily)}
                     </motion.div>
-                    <p className="text-xs text-gray-500 mt-2">
-                      From <span className="text-white font-bold">{fmtNum(Number(pageViews) || 0)} daily views</span>
+                    <p className="text-xs text-slate-500 dark:text-gray-500 mt-2">
+                      From <span className="text-slate-900 dark:text-white font-bold">{fmtNum(Number(pageViews) || 0)} daily views</span>
                       {" · "}
-                      <span className="text-blue-400 font-bold">{niche}</span>
+                      <span className="text-blue-600 dark:text-blue-400 font-bold">{niche}</span>
                       {" · "}
-                      <span className="text-blue-400 font-bold">{country}</span>
+                      <span className="text-blue-600 dark:text-blue-400 font-bold">{country}</span>
                     </p>
                   </div>
 
                   {/* Stat grid */}
                   <div className="grid grid-cols-2 sm:grid-cols-2 gap-4 mb-4">
-                    <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-5 text-center">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 block mb-1">Monthly</span>
-                      <span className="text-xl font-black text-white">{fmt(results.monthly)}</span>
+                    <div className="bg-slate-50/70 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 rounded-2xl p-5 text-center shadow-sm">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 block mb-1">Monthly</span>
+                      <span className="text-xl font-black text-slate-900 dark:text-white">{fmt(results.monthly)}</span>
                     </div>
-                    <div className="bg-blue-500/[0.04] border border-blue-500/10 rounded-2xl p-5 text-center">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-blue-400/70 block mb-1">Yearly</span>
-                      <span className="text-xl font-black text-blue-400">{fmt(results.yearly, 0)}</span>
+                    <div className="bg-blue-50/70 dark:bg-blue-500/[0.04] border border-blue-200 dark:border-blue-500/10 rounded-2xl p-5 text-center shadow-sm">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400/70 block mb-1">Yearly</span>
+                      <span className="text-xl font-black text-blue-600 dark:text-blue-400">{fmt(results.yearly, 0)}</span>
                     </div>
-                    <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-5 text-center">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 block mb-1">Page RPM</span>
-                      <span className="text-xl font-black text-white">{fmt(results.pageRpm)}</span>
+                    <div className="bg-slate-50/70 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 rounded-2xl p-5 text-center shadow-sm">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 block mb-1">Page RPM</span>
+                      <span className="text-xl font-black text-slate-900 dark:text-white">{fmt(results.pageRpm)}</span>
                     </div>
-                    <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-5 text-center">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 block mb-1">
+                    <div className="bg-slate-50/70 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 rounded-2xl p-5 text-center shadow-sm">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 block mb-1">
                         {mode === "cpc-ctr" ? "Est. Clicks/Day" : "Mode"}
                       </span>
-                      <span className="text-xl font-black text-white">
+                      <span className="text-xl font-black text-slate-900 dark:text-white">
                         {mode === "cpc-ctr" ? fmtNum(results.clicks) : "RPM"}
                       </span>
                     </div>
@@ -782,9 +782,9 @@ export default function AdSenseRevenueCalculatorPage() {
               </div>
 
               {/* Bar chart */}
-              <div className="glass rounded-3xl border border-white/5 p-6 sm:p-8 bg-white/[0.01]">
-                <h3 className="text-xs font-black uppercase tracking-widest text-blue-400 mb-1">Seasonal Monthly Revenue</h3>
-                <p className="text-xs text-gray-500 mb-6">AdSense earnings peak in Q4 (Oct–Dec) due to higher advertiser spend.</p>
+              <div className="bg-[#FBFCFE] dark:bg-white/[0.01] rounded-3xl border border-[#E6ECF5] dark:border-white/5 p-6 sm:p-8 shadow-sm">
+                <h3 className="text-xs font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-1">Seasonal Monthly Revenue</h3>
+                <p className="text-xs text-slate-500 dark:text-gray-500 mb-6">AdSense earnings peak in Q4 (Oct–Dec) due to higher advertiser spend.</p>
                 <ResponsiveContainer width="100%" height={220}>
                   <BarChart data={chartData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
                     <defs>
@@ -793,9 +793,9 @@ export default function AdSenseRevenueCalculatorPage() {
                         <stop offset="100%" stopColor="#6366f1" stopOpacity={0.6} />
                       </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
-                    <XAxis dataKey="month" tick={{ fill: "#6b7280", fontSize: 10, fontWeight: 700 }} axisLine={false} tickLine={false} />
-                    <YAxis tick={{ fill: "#6b7280", fontSize: 10, fontWeight: 700 }} axisLine={false} tickLine={false} tickFormatter={v => `$${v}`} width={50} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(100,116,139,0.15)" />
+                    <XAxis dataKey="month" tick={{ fill: "#64748b", fontSize: 10, fontWeight: 700 }} axisLine={false} tickLine={false} />
+                    <YAxis tick={{ fill: "#64748b", fontSize: 10, fontWeight: 700 }} axisLine={false} tickLine={false} tickFormatter={v => `$${v}`} width={50} />
                     <RechartsTooltip content={<CustomTooltip />} />
                     <Bar dataKey="revenue" fill="url(#barGrad)" radius={[6, 6, 0, 0]} />
                   </BarChart>
@@ -803,36 +803,36 @@ export default function AdSenseRevenueCalculatorPage() {
               </div>
 
               {/* Disclaimer */}
-              <div className="flex gap-3 items-start glass rounded-2xl border border-yellow-500/10 bg-yellow-500/[0.03] p-5">
-                <span className="text-yellow-400 text-lg shrink-0">⚠️</span>
-                <p className="text-xs text-yellow-300/70 font-medium leading-relaxed">
-                  <strong className="text-yellow-400 font-black">Disclaimer: </strong>
+              <div className="flex gap-3 items-start rounded-2xl border border-yellow-200 dark:border-yellow-500/10 bg-yellow-50 dark:bg-yellow-500/[0.03] p-5 shadow-sm">
+                <span className="text-yellow-600 dark:text-yellow-400 text-lg shrink-0">⚠️</span>
+                <p className="text-xs text-slate-600 dark:text-yellow-300/70 font-medium leading-relaxed">
+                  <strong className="text-slate-900 dark:text-yellow-400 font-black">Disclaimer: </strong>
                   These are estimates only. Actual AdSense earnings vary based on ad fill rate, invalid traffic filtering, seasonality, ad layout, and Google policy changes. Use for planning purposes only.
                 </p>
               </div>
 
               {/* Sanity Warning */}
               {hasConfigWarning && (
-                <div className="flex gap-3 items-start glass rounded-2xl border border-red-500/20 bg-red-500/[0.04] p-5">
-                  <span className="text-red-400 text-lg shrink-0">🚨</span>
-                  <p className="text-xs text-red-300/80 font-medium leading-relaxed">
-                    <strong className="text-red-400 font-black">Config Warning: </strong>
+                <div className="flex gap-3 items-start rounded-2xl border border-red-200 dark:border-red-500/20 bg-red-50 dark:bg-red-500/[0.04] p-5 shadow-sm">
+                  <span className="text-red-600 dark:text-red-400 text-lg shrink-0">🚨</span>
+                  <p className="text-xs text-slate-600 dark:text-red-300/80 font-medium leading-relaxed">
+                    <strong className="text-slate-900 dark:text-red-400 font-black">Config Warning: </strong>
                     Country multiplier configuration may be incorrect — USA revenue should exceed India revenue.
                   </p>
                 </div>
               )}
 
               {/* QA Test Panel */}
-              <div className="glass rounded-3xl border border-white/5 bg-white/[0.01] overflow-hidden">
+              <div className="bg-[#FBFCFE] dark:bg-white/[0.01] rounded-3xl border border-[#E6ECF5] dark:border-white/5 overflow-hidden shadow-sm">
                 <button
                   onClick={() => setShowQaPanel(v => !v)}
-                  className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-white/[0.02] transition-colors"
+                  className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors cursor-pointer"
                 >
-                  <span className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-gray-500">
+                  <span className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-600 dark:text-gray-500">
                     <span>🧪</span>
                     <span>Country Revenue Validation Table</span>
                   </span>
-                  <ChevronDown className={`w-4 h-4 text-gray-600 transition-transform duration-200 ${showQaPanel ? "rotate-180" : ""}`} />
+                  <ChevronDown className={`w-4 h-4 text-slate-400 dark:text-gray-600 transition-transform duration-200 ${showQaPanel ? "rotate-180" : ""}`} />
                 </button>
 
                 <AnimatePresence initial={false}>
@@ -843,12 +843,12 @@ export default function AdSenseRevenueCalculatorPage() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.2, ease: "easeInOut" }}
                     >
-                      <div className="px-4 pb-4 border-t border-white/5">
+                      <div className="px-4 pb-4 border-t border-slate-200 dark:border-white/5">
                         <div className="flex items-center justify-between py-4">
-                          <p className="text-[10px] text-gray-500 font-medium">Test: 100K views · 2% CTR · $0.50 CPC (USA)</p>
+                          <p className="text-[10px] text-slate-500 dark:text-gray-500 font-medium">Test: 100K views · 2% CTR · $0.50 CPC (USA)</p>
                           <button
                             onClick={handleRunQaTest}
-                            className="px-4 py-2 bg-blue-500 hover:bg-blue-400 text-white font-black text-xs uppercase tracking-widest rounded-lg transition-transform hover:scale-105 active:scale-95"
+                            className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-black text-xs uppercase tracking-widest rounded-lg transition-transform hover:scale-105 active:scale-95 cursor-pointer shadow-sm"
                           >
                             Run Calculator Test
                           </button>
@@ -856,18 +856,18 @@ export default function AdSenseRevenueCalculatorPage() {
 
                         {qaSummary && (
                           <>
-                            <div className={`mb-4 p-3 rounded-xl border flex items-center gap-2 text-sm font-black uppercase tracking-widest ${
+                            <div className={`mb-4 p-3 rounded-xl border flex items-center gap-2 text-sm font-black uppercase tracking-widest shadow-xs ${
                               qaSummary.passed 
-                                ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" 
-                                : "bg-red-500/10 border-red-500/20 text-red-400"
+                                ? "bg-emerald-50 dark:bg-emerald-500/10 border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-400" 
+                                : "bg-red-50 dark:bg-red-500/10 border-red-200 dark:border-red-500/20 text-red-700 dark:text-red-400"
                             }`}>
                               {qaSummary.passed ? "✅ Tool is working correctly" : "❌ Logic issue found"}
                             </div>
 
-                            <div className="overflow-x-auto border border-white/[0.05] rounded-xl">
+                            <div className="overflow-x-auto border border-slate-200 dark:border-white/[0.05] rounded-xl shadow-xs">
                               <table className="w-full text-xs">
-                                <thead className="bg-white/[0.02]">
-                                  <tr className="text-gray-600 uppercase tracking-widest text-[10px]">
+                                <thead className="bg-slate-50 dark:bg-white/[0.02]">
+                                  <tr className="text-slate-500 dark:text-gray-600 uppercase tracking-widest text-[10px]">
                                     <th className="text-left py-3 px-4 font-black">Country</th>
                                     <th className="text-left py-3 px-4 font-black">Tier</th>
                                     <th className="text-right py-3 px-4 font-black">Daily Revenue</th>
@@ -876,28 +876,28 @@ export default function AdSenseRevenueCalculatorPage() {
                                 </thead>
                                 <tbody>
                                   {qaSummary.results.map((r, i) => (
-                                    <tr key={r.country} className={`border-t border-white/[0.03] ${
-                                      r.status === "Fail" ? "bg-red-500/5" : (i % 2 === 0 ? "bg-white/[0.01]" : "")
+                                    <tr key={r.country} className={`border-t border-slate-200/80 dark:border-white/[0.03] ${
+                                      r.status === "Fail" ? "bg-red-50 dark:bg-red-500/5" : (i % 2 === 0 ? "bg-slate-50/50 dark:bg-white/[0.01]" : "")
                                     }`}>
-                                      <td className="py-2 px-4 font-bold text-white whitespace-nowrap">
+                                      <td className="py-2 px-4 font-bold text-slate-900 dark:text-white whitespace-nowrap">
                                         {COUNTRIES.find(c => c.label === r.country)?.flag} {r.country}
                                       </td>
                                       <td className="py-2 px-4">
                                         <span className={`px-2 py-0.5 rounded text-[10px] font-black whitespace-nowrap ${
-                                          r.tier === "Tier 1" ? "text-emerald-400 bg-emerald-500/10" :
-                                          r.tier === "Tier 2" ? "text-blue-400 bg-blue-500/10" :
-                                          "text-gray-400 bg-gray-500/10"
+                                          r.tier === "Tier 1" ? "text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10" :
+                                          r.tier === "Tier 2" ? "text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10" :
+                                          "text-slate-600 dark:text-gray-400 bg-slate-100 dark:bg-gray-500/10"
                                         }`}>{r.tier}</span>
                                       </td>
-                                      <td className="py-2 px-4 text-right font-bold text-cyan-400 font-mono">
+                                      <td className="py-2 px-4 text-right font-bold text-blue-600 dark:text-cyan-400 font-mono">
                                         ${r.dailyRev.toFixed(2)}
                                       </td>
                                       <td className={`py-2 px-4 text-right font-bold uppercase text-[10px] tracking-widest ${
-                                        r.status === "Pass" ? "text-emerald-400" : "text-red-400"
+                                        r.status === "Pass" ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
                                       }`}>
                                         {r.status}
                                         {r.warnings.length > 0 && (
-                                          <span className="ml-1 text-red-400" title={r.warnings.join(", ")}>⚠️</span>
+                                          <span className="ml-1 text-red-600 dark:text-red-400" title={r.warnings.join(", ")}>⚠️</span>
                                         )}
                                       </td>
                                     </tr>
@@ -917,16 +917,16 @@ export default function AdSenseRevenueCalculatorPage() {
           </div>
 
           {/* ── Educational Section ───────────────────────────────────────────── */}
-          <section id="learn-section" className="py-20 border-t border-white/5 mt-8 scroll-mt-10">
+          <section id="learn-section" className="py-20 border-t border-[#E6ECF5] dark:border-white/5 mt-8 scroll-mt-10">
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-blue-400 text-xs font-black tracking-widest mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 dark:bg-white/5 border border-blue-200 dark:border-white/10 text-blue-600 dark:text-blue-400 text-xs font-black tracking-widest mb-6 shadow-xs">
                 <BookOpen className="w-4 h-4" />
                 <span>AdSense Mastery Guide</span>
               </div>
               <h2 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-6">
                 📚 How AdSense Revenue Works
               </h2>
-              <p className="text-gray-400 text-base font-medium leading-relaxed">
+              <p className="text-slate-600 dark:text-gray-400 text-base font-medium leading-relaxed">
                 Understand the key metrics that determine how much your website earns from Google AdSense.
               </p>
             </div>
@@ -935,28 +935,28 @@ export default function AdSenseRevenueCalculatorPage() {
               {[
                 {
                   title: "What is AdSense RPM?",
-                  color: "text-blue-400",
+                  color: "text-blue-600 dark:text-blue-400",
                   body: "RPM (Revenue Per Mille) is your earnings per 1,000 page views. It is calculated as (Total Earnings / Total Page Views) × 1000. RPM is the single best metric for comparing revenue across different content types.",
                 },
                 {
                   title: "What is CTR?",
-                  color: "text-cyan-400",
+                  color: "text-blue-600 dark:text-cyan-400",
                   body: "CTR (Click-Through Rate) = (Ad Clicks / Page Views) × 100. A typical AdSense CTR ranges from 0.5% to 3%. Placing ads strategically near content (not blocking it) can boost CTR significantly.",
                 },
                 {
                   title: "CPC & Country Impact",
-                  color: "text-indigo-400",
+                  color: "text-indigo-600 dark:text-indigo-400",
                   body: "CPC is what you earn per click. US visitors generate CPCs 5–10x higher than Indian visitors in the same niche. Targeting English-speaking Tier-1 audiences is the fastest way to improve AdSense revenue.",
                 },
                 {
                   title: "Tips to Increase Revenue",
-                  color: "text-violet-400",
+                  color: "text-violet-600 dark:text-violet-400",
                   body: "Target high-CPC niches (Finance, Health), write for Tier-1 audiences, use auto ads for smart placement, improve Core Web Vitals for better ad viewability, and publish high-intent keyword content.",
                 },
               ].map(card => (
-                <div key={card.title} className="glass rounded-[2rem] border border-white/5 p-8 bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
+                <div key={card.title} className="bg-[#FBFCFE] dark:bg-white/[0.01] rounded-3xl border border-[#E6ECF5] dark:border-white/5 p-8 shadow-sm">
                   <h3 className={`text-xl font-black uppercase tracking-widest mb-4 ${card.color}`}>{card.title}</h3>
-                  <p className="text-gray-300 leading-relaxed font-medium">{card.body}</p>
+                  <p className="text-slate-600 dark:text-gray-300 leading-relaxed font-medium">{card.body}</p>
                 </div>
               ))}
             </div>
@@ -965,19 +965,19 @@ export default function AdSenseRevenueCalculatorPage() {
             <div className="max-w-3xl mx-auto mb-20">
               <div className="text-center mb-8">
                 <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-2">Frequently Asked Questions</h3>
-                <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Everything about Google AdSense</p>
+                <p className="text-xs text-slate-500 dark:text-gray-500 font-bold uppercase tracking-wider">Everything about Google AdSense</p>
               </div>
               <div className="space-y-4">
                 {faqs.map((faq, i) => {
                   const open = faqOpen === i;
                   return (
-                    <div key={i} className="glass rounded-2xl border border-white/5 bg-white/[0.01] overflow-hidden">
+                    <div key={i} className="bg-[#FBFCFE] dark:bg-white/[0.01] rounded-2xl border border-[#E6ECF5] dark:border-white/5 overflow-hidden shadow-sm">
                       <button
                         onClick={() => setFaqOpen(open ? null : i)}
-                        className="w-full flex items-center justify-between p-5 text-left focus:outline-none"
+                        className="w-full flex items-center justify-between p-5 text-left focus:outline-none cursor-pointer"
                       >
-                        <span className="text-sm font-black text-white hover:text-blue-400 transition-colors pr-4">{faq.q}</span>
-                        <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform duration-300 flex-shrink-0 ${open ? "rotate-180 text-blue-400" : ""}`} />
+                        <span className="text-sm font-black text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors pr-4">{faq.q}</span>
+                        <ChevronDown className={`w-4 h-4 text-slate-400 dark:text-gray-500 transition-transform duration-300 flex-shrink-0 ${open ? "rotate-180 text-blue-600 dark:text-blue-400" : ""}`} />
                       </button>
                       <AnimatePresence initial={false}>
                         {open && (
@@ -987,7 +987,7 @@ export default function AdSenseRevenueCalculatorPage() {
                             exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: 0.2, ease: "easeInOut" }}
                           >
-                            <div className="px-5 pb-5 border-t border-white/5 text-xs text-gray-400 leading-relaxed font-semibold pt-3">
+                            <div className="px-5 pb-5 border-t border-[#E6ECF5] dark:border-white/5 text-xs text-slate-600 dark:text-gray-400 leading-relaxed font-semibold pt-3">
                               {faq.a}
                             </div>
                           </motion.div>
@@ -1005,23 +1005,23 @@ export default function AdSenseRevenueCalculatorPage() {
                 <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-8 text-center">Related Tools</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
                   {relatedTools.map(tool => (
-                    <Link key={tool.slug} href={tool.href} className="glass rounded-2xl border border-white/5 p-6 bg-white/[0.01] hover:bg-white/[0.05] transition-all group">
+                    <Link key={tool.slug} href={tool.href} className="bg-[#FBFCFE] dark:bg-white/[0.01] rounded-2xl border border-[#E6ECF5] dark:border-white/5 p-6 hover:border-blue-500/50 transition-all group shadow-sm">
                       <div className="flex items-center gap-3 mb-3">
                         <ToolIcon icon={tool.icon} className="w-6 h-6 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform shrink-0" />
                         <h4 className="text-sm font-black text-slate-900 dark:text-white">{tool.title}</h4>
                       </div>
-                      <p className="text-xs text-gray-400 font-medium">{tool.description}</p>
+                      <p className="text-xs text-slate-500 dark:text-gray-400 font-medium">{tool.description}</p>
                     </Link>
                   ))}
                 </div>
               </div>
             )}
 
-            <div className="text-center py-12 border-t border-white/5 mt-16">
+            <div className="text-center py-12 border-t border-[#E6ECF5] dark:border-white/5 mt-16">
               <h3 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-8">Ready to estimate your AdSense income?</h3>
               <button
                 onClick={() => document.getElementById("calc-section")?.scrollIntoView({ behavior: "smooth" })}
-                className="px-8 py-4 bg-blue-500 hover:bg-blue-400 text-white font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 flex items-center justify-center gap-2 mx-auto shadow-lg shadow-blue-500/20"
+                className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-black uppercase tracking-widest text-sm rounded-full transition-transform hover:scale-105 flex items-center justify-center gap-2 mx-auto shadow-lg shadow-blue-500/20 cursor-pointer"
               >
                 <ArrowUp className="w-5 h-5" />
                 Back to Calculator

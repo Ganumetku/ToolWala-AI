@@ -1,10 +1,15 @@
 "use client";
 
 import React, { useEffect, useCallback, useRef } from 'react';
-import { RefreshCw } from 'lucide-react';
+import { RefreshCw, FilePenLine, AlertCircle } from 'lucide-react';
 import SignatureModal from './SignatureModal';
 import { PDFToolbar } from '@/components/pdf/PDFToolbar';
 import { PDFWorkspace } from '@/components/pdf/PDFWorkspace';
+import ToolLayout from '@/components/tools/ToolLayout';
+import ToolHero from '@/components/tools/ToolHero';
+import UploadZone from '@/components/tools/UploadZone';
+import ToolArticle from '@/components/ToolArticle';
+import { toolArticles } from '@/data/toolArticles';
 import { ZOOM_LEVELS } from '@/lib/twpdf/core';
 import { usePdfDocument } from '@/hooks/usePdfDocument';
 import { useHistory } from '@/hooks/useHistory';
@@ -296,12 +301,54 @@ export default function EditPdfPage() {
     [editor]
   );
 
+  if (!doc.pdfFile) {
+    return (
+      <ToolLayout>
+        <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12">
+          <ToolHero
+            title="Edit PDF Online"
+            description="Rebuild, annotate, edit text, draw shapes, and sign PDF documents directly in your browser."
+            icon={<FilePenLine className="w-6 h-6" />}
+          />
+
+          <div className="p-6 sm:p-10">
+            {doc.error && (
+              <div className="bg-red-50 dark:bg-red-950/20 text-red-600 dark:text-red-400 p-5 rounded-2xl flex items-start gap-4 border border-red-200 dark:border-red-900/50 text-left mb-6">
+                <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                <p className="text-sm font-medium">{doc.error}</p>
+              </div>
+            )}
+
+            <UploadZone
+              onFilesSelected={(selectedFiles) => {
+                if (selectedFiles && selectedFiles.length > 0) {
+                  handleLoadPdf(selectedFiles[0]);
+                }
+              }}
+              accept="application/pdf"
+              multiple={false}
+              title="Upload PDF Document to Edit"
+              description="Drag and drop your PDF here, or click to choose from your device. 100% private and processed locally."
+              buttonText="Select PDF File"
+            />
+          </div>
+        </div>
+
+        {toolArticles['edit-pdf'] && (
+          <ToolArticle {...toolArticles['edit-pdf']} />
+        )}
+      </ToolLayout>
+    );
+  }
+
   if (!doc.isMounted || !doc.pdfjs || !doc.fabricLib) {
     return (
       <div className="bg-[#F8FAFC] dark:bg-[#030712] min-h-screen flex items-center justify-center text-slate-900 dark:text-white">
         <div className="flex flex-col items-center gap-4">
           <RefreshCw className="w-10 h-10 text-blue-500 animate-spin" />
-          <p className="text-slate-500 dark:text-slate-400 font-bold font-sans">Initializing PDF Editor workspace...</p>
+          <p className="text-slate-500 dark:text-slate-400 font-bold font-sans">
+            {doc.processingStatus || 'Initializing PDF Editor workspace...'}
+          </p>
         </div>
       </div>
     );

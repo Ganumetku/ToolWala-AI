@@ -108,14 +108,14 @@ export default function AadhaarPdfCompressor() {
   return (
     <ToolVisibilityGuard slug="aadhaar-pdf-compressor">
       <ToolLayout>
-        <div className="glass rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl mb-16">
+        <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12">
           <ToolHero 
             title="Aadhaar PDF Compressor"
             description="Optimize and compress your e-Aadhaar PDF securely in your browser to meet UIDAI portal limits (< 300KB)."
             icon={<Minimize2 className="w-7 h-7" />}
           />
 
-          <div className="p-8 sm:p-10 bg-white dark:bg-black/[0.15]">
+          <div className="p-8 sm:p-10">
             {!file ? (
               <UploadZone
                 onFilesSelected={handleFiles}
@@ -126,30 +126,30 @@ export default function AadhaarPdfCompressor() {
               />
             ) : (
               <div className="space-y-8 max-w-4xl mx-auto">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 bg-white/5 rounded-[2rem] border border-white/5 gap-6">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 bg-slate-50/70 dark:bg-white/5 rounded-2xl border border-slate-200/80 dark:border-white/5 gap-6 shadow-sm">
                   <div className="flex items-center gap-5 overflow-hidden w-full">
-                    <div className="bg-[#F6F8FC] dark:bg-[#030712] p-4 rounded-2xl border border-white/5 flex-shrink-0">
+                    <div className="bg-white dark:bg-[#030712] p-4 rounded-2xl border border-slate-200 dark:border-white/5 flex-shrink-0 shadow-inner">
                       <FileText className="w-7 h-7 text-red-500" />
                     </div>
                     <div className="overflow-hidden">
                       <p className="text-base font-black text-slate-900 dark:text-white truncate">{file.name}</p>
-                      <p className="text-sm text-gray-500 mt-1">Original Size: <span className="font-bold text-gray-300">{formatBytes(file.size)}</span></p>
+                      <p className="text-sm text-slate-500 dark:text-gray-500 mt-1">Original Size: <span className="font-bold text-slate-800 dark:text-gray-300">{formatBytes(file.size)}</span></p>
                     </div>
                   </div>
                   <button 
                     onClick={resetAll} 
-                    className="flex-shrink-0 text-[10px] font-black uppercase tracking-widest text-red-400 hover:text-red-300 bg-red-500/10 px-6 py-3 rounded-xl border border-red-500/20 transition-all w-full sm:w-auto text-center cursor-pointer"
+                    className="flex-shrink-0 text-[10px] font-black uppercase tracking-widest text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 bg-red-50 dark:bg-red-500/10 px-6 py-3 rounded-xl border border-red-200 dark:border-red-500/20 transition-all w-full sm:w-auto text-center cursor-pointer shadow-sm"
                   >
                     Remove
                   </button>
                 </div>
 
                 {isLocked && (
-                  <div className="p-6 bg-yellow-500/10 border border-yellow-500/20 rounded-2xl flex items-start gap-4">
-                    <Lock className="w-5 h-5 text-yellow-400 shrink-0 mt-0.5" />
+                  <div className="p-6 bg-yellow-50 dark:bg-yellow-500/10 border border-yellow-200 dark:border-yellow-500/20 rounded-2xl flex items-start gap-4 shadow-sm">
+                    <Lock className="w-5 h-5 text-yellow-600 dark:text-yellow-400 shrink-0 mt-0.5" />
                     <div>
                       <h5 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider">Aadhaar PDF is Password-Protected</h5>
-                      <p className="text-xs text-gray-400 mt-1 leading-relaxed">
+                      <p className="text-xs text-slate-600 dark:text-gray-400 mt-1 leading-relaxed">
                         e-Aadhaar PDF files downloaded from UIDAI are locked with a password (format: first 4 letters of your name in CAPITALS followed by your birth year, e.g., KART1990). For security, please decrypt your PDF first using an unlock tool or submit a decrypted file.
                       </p>
                     </div>
@@ -157,43 +157,43 @@ export default function AadhaarPdfCompressor() {
                 )}
 
                 {compressResult && (
-                  <div className={`border rounded-[2.5rem] p-10 text-center shadow-2xl animate-fade-in ${
-                    compressResult.isCompliant ? 'bg-emerald-500/5 border-emerald-500/20' : 'bg-yellow-500/5 border-yellow-500/20'
+                  <div className={`border rounded-3xl p-10 text-center shadow-sm animate-fade-in ${
+                    compressResult.isCompliant ? 'bg-emerald-50 dark:bg-emerald-500/5 border-emerald-200 dark:border-emerald-500/20' : 'bg-yellow-50 dark:bg-yellow-500/5 border-yellow-200 dark:border-yellow-500/20'
                   }`}>
                     <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 ${
-                      compressResult.isCompliant ? 'bg-emerald-500/25 border-emerald-500/30 text-emerald-400' : 'bg-yellow-500/25 border-yellow-500/30 text-yellow-400'
+                      compressResult.isCompliant ? 'bg-emerald-500/20 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400' : 'bg-yellow-500/20 border border-yellow-500/30 text-yellow-600 dark:text-yellow-400'
                     }`}>
                       {compressResult.isCompliant ? <CheckCircle className="w-8 h-8" /> : <ShieldAlert className="w-8 h-8" />}
                     </div>
                     <h4 className="text-2xl font-black tracking-tight mb-2 text-slate-900 dark:text-white">
                       {compressResult.isCompliant ? 'UIDAI-Compliant Output!' : 'Compressed!'}
                     </h4>
-                    <p className="text-xs text-gray-400 max-w-sm mx-auto">
+                    <p className="text-xs text-slate-600 dark:text-gray-400 max-w-sm mx-auto">
                       {compressResult.isCompliant 
                         ? 'Your Aadhaar PDF is optimized and under the 300KB limit, ready for UIDAI portal submissions.' 
                         : 'Optimization finished, but the file size is still above the 300KB UIDAI portal limit.'}
                     </p>
-                    <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs font-black uppercase tracking-widest mt-8 bg-[#F6F8FC] dark:bg-[#030712] w-fit mx-auto px-8 py-5 rounded-2xl border border-white/5 shadow-xl">
+                    <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs font-black uppercase tracking-widest mt-8 bg-white dark:bg-[#030712] w-fit mx-auto px-8 py-5 rounded-2xl border border-slate-200 dark:border-white/5 shadow-sm">
                       <div>
-                        <span className="text-gray-500">Original</span>
-                        <span className="text-white ml-3">{formatBytes(file.size)}</span>
+                        <span className="text-slate-500 dark:text-gray-500">Original</span>
+                        <span className="text-slate-900 dark:text-white ml-3 font-bold">{formatBytes(file.size)}</span>
                       </div>
-                      <div className="hidden sm:block w-px h-6 bg-white/10"></div>
+                      <div className="hidden sm:block w-px h-6 bg-slate-200 dark:bg-white/10"></div>
                       <div>
-                        <span className="text-gray-500">New Size</span>
-                        <span className={`ml-3 ${compressResult.isCompliant ? 'text-emerald-400' : 'text-yellow-400'}`}>{formatBytes(compressResult.size)}</span>
+                        <span className="text-slate-500 dark:text-gray-500">New Size</span>
+                        <span className={`ml-3 font-bold ${compressResult.isCompliant ? 'text-emerald-600 dark:text-emerald-400' : 'text-yellow-600 dark:text-yellow-400'}`}>{formatBytes(compressResult.size)}</span>
                       </div>
-                      <div className="hidden sm:block w-px h-6 bg-white/10"></div>
+                      <div className="hidden sm:block w-px h-6 bg-slate-200 dark:bg-white/10"></div>
                       <div>
-                        <span className="text-gray-500">Reduction</span>
-                        <span className="ml-3 text-emerald-400">{compressResult.reductionPct.toFixed(1)}%</span>
+                        <span className="text-slate-500 dark:text-gray-500">Reduction</span>
+                        <span className="ml-3 text-emerald-600 dark:text-emerald-400 font-bold">{compressResult.reductionPct.toFixed(1)}%</span>
                       </div>
                     </div>
                   </div>
                 )}
 
-                <div className="flex flex-col sm:flex-row justify-end items-center gap-4 pt-8 border-t border-white/5">
-                  <button onClick={resetAll} className="w-full sm:w-auto px-8 py-3.5 text-[10px] font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all cursor-pointer">
+                <div className="flex flex-col sm:flex-row justify-end items-center gap-4 pt-8 border-t border-slate-200 dark:border-white/5">
+                  <button onClick={resetAll} className="w-full sm:w-auto px-8 py-3.5 text-[10px] font-black uppercase tracking-widest text-slate-700 dark:text-gray-400 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl hover:bg-slate-200 dark:hover:bg-white/10 transition-all cursor-pointer shadow-sm">
                     Reset
                   </button>
 
@@ -201,7 +201,7 @@ export default function AadhaarPdfCompressor() {
                     <button
                       onClick={processCompress}
                       disabled={isProcessing}
-                      className="w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-3.5 text-[10px] font-black uppercase tracking-widest text-white bg-blue-600 rounded-2xl hover:bg-blue-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(37,99,235,0.3)] active:scale-95 cursor-pointer"
+                      className="w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-3.5 text-[10px] font-black uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-500 rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_4px_20px_rgba(37,99,235,0.3)] active:scale-95 cursor-pointer"
                     >
                       {isProcessing ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Minimize2 className="w-4 h-4" />}
                       {isProcessing ? 'Optimizing...' : 'Compress PDF'}
@@ -210,7 +210,7 @@ export default function AadhaarPdfCompressor() {
                     <a
                       href={compressResult.url}
                       download={`optimized_aadhaar_${file.name}`}
-                      className="w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-3.5 text-[10px] font-black uppercase tracking-widest text-white bg-emerald-600 rounded-2xl hover:bg-emerald-500 transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] active:scale-95 text-center cursor-pointer"
+                      className="w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-3.5 text-[10px] font-black uppercase tracking-widest text-white bg-emerald-600 hover:bg-emerald-500 rounded-2xl transition-all shadow-[0_4px_20px_rgba(16,185,129,0.3)] active:scale-95 text-center cursor-pointer"
                     >
                       <Download className="w-4 h-4" />
                       Download Result

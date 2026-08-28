@@ -23,7 +23,7 @@ export default function AadhaarMaskingTool() {
           {/* Navigation Breadcrumb */}
           <Link 
             href="/tools" 
-            className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-gray-500 hover:text-white cursor-pointer transition-colors mb-8 group"
+            className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white cursor-pointer transition-colors mb-8 group"
           >
             <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             Back to Directory
@@ -31,17 +31,17 @@ export default function AadhaarMaskingTool() {
 
           {/* Hero Section */}
           <div className="text-center max-w-3xl mx-auto mb-16 animate-in fade-in slide-in-from-top-4 duration-500">
-            <div className="inline-flex items-center gap-2 rounded-full bg-blue-500/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-blue-400 border border-blue-500/20 mb-6 shadow-[0_0_15px_rgba(59,130,246,0.1)]">
+            <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 dark:bg-blue-500/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-500/20 mb-6 shadow-sm">
               <Sparkles className="w-3.5 h-3.5" />
               100% Client-Side Private Processing
             </div>
             <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-6 uppercase">
               Aadhaar Masking Tool <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400">
                 Secure Number Masker
               </span>
             </h1>
-            <p className="text-base sm:text-lg text-gray-400 leading-relaxed font-medium">
+            <p className="text-base sm:text-lg text-slate-600 dark:text-gray-400 leading-relaxed font-medium">
               Obscure your Aadhaar number automatically or manually for privacy protection. Your sensitive files are processed locally inside your browser and never uploaded to any server.
             </p>
           </div>
@@ -57,7 +57,7 @@ export default function AadhaarMaskingTool() {
 
           {/* SEO Article */}
           {toolArticles['aadhaar-masking-tool'] && (
-            <div className="mt-24 border-t border-white/5 pt-20 max-w-6xl mx-auto">
+            <div className="mt-24 max-w-6xl mx-auto">
               <ToolArticle {...toolArticles['aadhaar-masking-tool']} />
             </div>
           )}

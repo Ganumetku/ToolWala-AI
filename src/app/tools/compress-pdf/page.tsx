@@ -240,14 +240,14 @@ export default function CompressPdf() {
 
   return (
     <ToolLayout>
-      <div className="glass rounded-[1.125rem] border border-[#E6ECF5] dark:border-white/5 overflow-hidden shadow-[0_10px_35px_rgba(15,23,42,0.06)] mb-16 font-sans">
+      <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12 font-sans">
         <ToolHero 
           title="Compress PDF"
           description="Reduce PDF file size locally in your browser with full compression control, transparent size estimation, and 100% privacy."
           icon={<Minimize2 className="w-7 h-7" />}
         />
 
-        <div className="p-6 sm:p-10 bg-white dark:bg-black/[0.15]">
+        <div className="p-6 sm:p-10">
           {!file ? (
             <UploadZone
               onFilesSelected={handleFiles}

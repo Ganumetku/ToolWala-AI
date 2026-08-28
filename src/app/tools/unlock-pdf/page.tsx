@@ -204,53 +204,53 @@ export default function UnlockPdf() {
         </Link>
 
         {/* Main Tool Card */}
-        <div className="glass rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl mb-16">
+        <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12">
           
           {/* Header Banner */}
-          <div className="p-8 sm:p-10 border-b border-white/5 bg-white/[0.02]">
+          <div className="p-8 sm:p-10 border-b border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.02]">
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
               <div className="flex items-center gap-6">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_0_25px_rgba(37,99,235,0.4)]">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_4px_20px_rgba(37,99,235,0.35)]">
                   <Unlock className="w-7 h-7" />
                 </div>
                 <div>
                   <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">Unlock PDF</h1>
-                  <p className="text-gray-400 font-medium mt-1">Remove passwords and security restrictions from your encrypted PDF documents instantly.</p>
+                  <p className="text-slate-600 dark:text-gray-400 font-medium mt-1">Remove passwords and security restrictions from your encrypted PDF documents instantly.</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 bg-emerald-500/10 px-4 py-2 rounded-xl border border-emerald-500/20 h-fit">
-                <Shield className="w-4 h-4 text-emerald-400" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">Secure Client Decryption</span>
+              <div className="flex items-center gap-3 bg-emerald-50 dark:bg-emerald-500/10 px-4 py-2 rounded-xl border border-emerald-200 dark:border-emerald-500/20 h-fit shadow-sm">
+                <Shield className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Secure Client Decryption</span>
               </div>
             </div>
           </div>
 
-          <div className="p-8 sm:p-10 bg-white dark:bg-black/[0.15]">
+          <div className="p-8 sm:p-10">
             
             {/* Success state display */}
             {success && decryptedBytes && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="mb-10 p-8 border border-emerald-500/20 bg-emerald-500/5 rounded-[2rem] text-center"
+                className="mb-10 p-8 border border-emerald-500/20 bg-emerald-50 dark:bg-emerald-500/5 rounded-3xl text-center shadow-sm"
               >
-                <div className="w-16 h-16 bg-emerald-500/25 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.2)]">
+                <div className="w-16 h-16 bg-emerald-500/20 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-600 dark:text-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.2)]">
                   <LockKeyholeOpen className="w-8 h-8" />
                 </div>
                 <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Document Unlocked!</h3>
-                <p className="text-sm text-gray-400 mb-6 max-w-md mx-auto">
+                <p className="text-sm text-slate-600 dark:text-gray-400 mb-6 max-w-md mx-auto">
                   Your PDF was decrypted successfully and all security password restrictions have been permanently removed.
                 </p>
                 <div className="flex flex-wrap gap-4 justify-center">
                   <button 
                     onClick={downloadDecrypted} 
-                    className="flex items-center gap-2 px-7 py-4 bg-emerald-600 hover:bg-emerald-500 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] cursor-pointer"
+                    className="flex items-center gap-2 px-7 py-4 bg-emerald-600 hover:bg-emerald-500 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_4px_20px_rgba(16,185,129,0.3)] cursor-pointer"
                   >
                     <Download className="w-4 h-4" /> Download Unlocked PDF
                   </button>
                   <button 
                     onClick={resetAll} 
-                    className="px-7 py-4 bg-white/5 border border-white/10 text-gray-300 text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-white/10 transition-all"
+                    className="px-7 py-4 bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-gray-300 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all cursor-pointer shadow-sm"
                   >
                     Unlock Another File
                   </button>
@@ -267,10 +267,10 @@ export default function UnlockPdf() {
                 onDragLeave={handleDragLeaveUpload}
                 onDrop={handleDropUpload}
                 onClick={() => fileInputRef.current?.click()}
-                className={`border-2 border-dashed rounded-[1.5rem] py-8 sm:py-12 px-6 sm:px-10 text-center transition-all duration-300 cursor-pointer group relative overflow-hidden
+                className={`border-2 border-dashed rounded-3xl py-12 sm:py-20 px-6 sm:px-10 text-center transition-all duration-300 cursor-pointer group relative overflow-hidden shadow-sm
                   ${isDraggingOverUpload 
-                    ? 'border-blue-500 bg-blue-500/10 dark:bg-blue-500/15 scale-[1.015] shadow-[0_0_50px_rgba(59,130,246,0.35)] ring-4 ring-blue-500/30' 
-                    : 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/[0.02] hover:bg-slate-100 dark:hover:bg-white/[0.04] hover:border-blue-400 dark:hover:border-white/20'
+                    ? 'border-blue-500 bg-blue-500/5 scale-[1.01]' 
+                    : 'border-slate-300 dark:border-white/10 bg-slate-50/50 dark:bg-white/[0.01] hover:border-blue-500/50 hover:bg-blue-500/[0.02]'
                   }
                 `}
               >
@@ -283,11 +283,11 @@ export default function UnlockPdf() {
                 />
                 
                 <div className="relative z-10">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-blue-50 dark:bg-white/5 border border-blue-100 dark:border-white/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-105 group-hover:border-blue-500/50 transition-all duration-300 shadow-sm">
-                    <UploadCloud className="w-7 h-7 sm:w-8 sm:h-8 text-blue-600 dark:text-gray-400 group-hover:text-blue-500 transition-colors" />
+                  <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-105 group-hover:border-blue-500/50 transition-all duration-300 shadow-sm">
+                    <UploadCloud className="w-8 h-8 text-blue-600 dark:text-gray-400 group-hover:text-blue-500 transition-colors" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-2">Upload Protected PDF</h3>
-                  <p className="text-slate-500 dark:text-gray-400 font-medium max-w-sm mx-auto mb-5 text-xs sm:text-sm">
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-2">Upload Protected PDF</h3>
+                  <p className="text-slate-500 dark:text-gray-400 font-medium max-w-sm mx-auto mb-5 text-sm">
                     Drag and drop your password-locked PDF here, or click to search files.
                   </p>
                   
@@ -305,14 +305,14 @@ export default function UnlockPdf() {
               <div className="space-y-10">
                 
                 {/* File overview card */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center p-6 bg-white/[0.02] border border-white/5 rounded-2xl gap-6">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center p-6 bg-slate-50/70 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 rounded-2xl gap-6 shadow-sm">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-500">
+                    <div className="w-12 h-12 rounded-xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-600">
                       <FileText className="w-6 h-6" />
                     </div>
                     <div>
                       <h4 className="text-base font-black text-slate-900 dark:text-white line-clamp-1">{pdfFile.name}</h4>
-                      <p className="text-xs text-gray-500 font-semibold mt-0.5">
+                      <p className="text-xs text-slate-500 dark:text-gray-500 font-semibold mt-0.5">
                         {formatBytes(pdfFile.size)} • <span className="text-amber-500 font-bold uppercase">Password Locked</span>
                       </p>
                     </div>
@@ -320,7 +320,7 @@ export default function UnlockPdf() {
                   <button 
                     onClick={resetAll}
                     disabled={isProcessing}
-                    className="flex items-center gap-2 px-4 py-2.5 border border-red-500/20 hover:border-red-500/50 bg-red-500/5 text-[10px] font-black text-red-500 hover:text-white uppercase tracking-widest rounded-xl transition-all disabled:opacity-50 cursor-pointer"
+                    className="flex items-center gap-2 px-4 py-2.5 border border-red-200 dark:border-red-500/20 hover:border-red-300 bg-red-50 dark:bg-red-500/5 text-[10px] font-black text-red-600 dark:text-red-400 uppercase tracking-widest rounded-xl transition-all disabled:opacity-50 cursor-pointer shadow-sm"
                   >
                     <Trash2 className="w-3.5 h-3.5" /> Remove File
                   </button>
@@ -330,34 +330,34 @@ export default function UnlockPdf() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                   
                   {/* Left Column: Password Credentials */}
-                  <div className="glass p-8 rounded-[2rem] border border-white/5 bg-white/[0.01] relative flex flex-col justify-between">
+                  <div className="bg-[#FBFCFE] dark:bg-white/[0.02] p-8 rounded-3xl border border-[#E6ECF5] dark:border-white/5 relative flex flex-col justify-between shadow-sm">
                     <div className="space-y-6">
-                      <h3 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white border-b border-white/5 pb-4 flex items-center gap-2">
-                        <KeyRound className="w-4 h-4 text-blue-500" /> Enter PDF Password
+                      <h3 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white border-b border-[#E6ECF5] dark:border-white/5 pb-4 flex items-center gap-2">
+                        <KeyRound className="w-4 h-4 text-blue-600 dark:text-blue-500" /> Enter PDF Password
                       </h3>
 
                       {/* Password Field */}
                       <div className="space-y-2 relative">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-1">Document Password</label>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 ml-1">Document Password</label>
                         <div className="relative">
                           <input
                             type={showPassword ? "text" : "password"}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             disabled={isProcessing}
-                            className="w-full bg-[#F6F8FC] dark:bg-[#030712]/50 border border-white/5 focus:border-blue-500/50 rounded-xl pl-4 pr-12 py-3.5 text-white text-sm font-semibold outline-none transition-all focus:ring-4 focus:ring-blue-500/5"
+                            className="w-full bg-white dark:bg-[#030712]/50 border border-slate-200 dark:border-white/5 focus:border-blue-500 rounded-xl pl-4 pr-12 py-3.5 text-slate-900 dark:text-white text-sm font-semibold outline-none transition-all shadow-sm"
                             placeholder="Enter password lock to decrypt..."
                             onKeyDown={(e) => e.key === 'Enter' && decryptDocument()}
                           />
                           <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white cursor-pointer"
+                            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 dark:hover:text-white cursor-pointer"
                           >
                             {showPassword ? <EyeOff className="w-4.5 h-4.5" /> : <Eye className="w-4.5 h-4.5" />}
                           </button>
                         </div>
-                        <p className="text-[9px] text-gray-500 font-bold uppercase tracking-wider ml-1 mt-1 leading-normal">
+                        <p className="text-[9px] text-slate-500 dark:text-gray-500 font-bold uppercase tracking-wider ml-1 mt-1 leading-normal">
                           This password will be tested locally in browser memory.
                         </p>
                       </div>
@@ -366,7 +366,7 @@ export default function UnlockPdf() {
                     <button
                       onClick={decryptDocument}
                       disabled={isProcessing || !password}
-                      className="w-full flex items-center justify-center gap-2 px-6 py-4.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] disabled:opacity-50 mt-10 cursor-pointer"
+                      className="w-full flex items-center justify-center gap-2 px-6 py-4.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_4px_20px_rgba(37,99,235,0.3)] disabled:opacity-50 mt-10 cursor-pointer"
                     >
                       {isProcessing ? (
                         <>
@@ -381,44 +381,44 @@ export default function UnlockPdf() {
                   </div>
 
                   {/* Right Column: Educational Security Panels */}
-                  <div className="glass p-8 rounded-[2rem] border border-white/5 bg-white/[0.01] flex flex-col justify-between">
+                  <div className="bg-[#FBFCFE] dark:bg-white/[0.02] p-8 rounded-3xl border border-[#E6ECF5] dark:border-white/5 flex flex-col justify-between shadow-sm">
                     <div className="space-y-6">
-                      <h3 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white border-b border-white/5 pb-4 flex items-center gap-2">
-                        <Shield className="w-4 h-4 text-blue-500" /> Decryption Security Info
+                      <h3 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white border-b border-[#E6ECF5] dark:border-white/5 pb-4 flex items-center gap-2">
+                        <Shield className="w-4 h-4 text-blue-600 dark:text-blue-500" /> Decryption Security Info
                       </h3>
                       
-                      <div className="space-y-5 text-gray-400 text-sm font-medium leading-relaxed">
+                      <div className="space-y-5 text-slate-600 dark:text-gray-400 text-sm font-medium leading-relaxed">
                         <div className="flex gap-4">
-                          <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-blue-400 border border-white/5 flex-shrink-0">
+                          <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-blue-600 border border-slate-200 dark:border-white/5 flex-shrink-0 shadow-sm">
                             🔑
                           </div>
                           <div>
                             <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider mb-1">Local Decoding only</h4>
-                            <p className="text-[11px] font-semibold text-gray-500">
+                            <p className="text-[11px] font-semibold text-slate-500 dark:text-gray-500">
                               Your password is never sent to the network. Cryptographic algorithms decrypt the byte buffers completely on your machine.
                             </p>
                           </div>
                         </div>
 
                         <div className="flex gap-4">
-                          <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-emerald-400 border border-white/5 flex-shrink-0">
+                          <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-emerald-600 border border-slate-200 dark:border-white/5 flex-shrink-0 shadow-sm">
                             🛡️
                           </div>
                           <div>
                             <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider mb-1">Permanent Removal</h4>
-                            <p className="text-[11px] font-semibold text-gray-500">
+                            <p className="text-[11px] font-semibold text-slate-500 dark:text-gray-500">
                               Downloading compiles a standard PDF copy without encryption blocks, meaning it will open anywhere without password prompts.
                             </p>
                           </div>
                         </div>
 
                         <div className="flex gap-4">
-                          <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-amber-400 border border-white/5 flex-shrink-0">
+                          <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-amber-600 border border-slate-200 dark:border-white/5 flex-shrink-0 shadow-sm">
                             ⚠️
                           </div>
                           <div>
                             <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider mb-1">Password Requirement</h4>
-                            <p className="text-[11px] font-semibold text-gray-500">
+                            <p className="text-[11px] font-semibold text-slate-500 dark:text-gray-500">
                               This tool removes restrictions from files you are authorized to access. You must provide the original password once to decode the stream.
                             </p>
                           </div>
@@ -426,8 +426,8 @@ export default function UnlockPdf() {
                       </div>
                     </div>
 
-                    <div className="p-4 bg-blue-500/5 border border-blue-500/10 rounded-2xl flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-blue-400 mt-6">
-                      <Sparkles className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                    <div className="p-4 bg-blue-50 dark:bg-blue-500/5 border border-blue-200 dark:border-blue-500/10 rounded-2xl flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 mt-6 shadow-sm">
+                      <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
                       Client-side processing preserves full document privacy.
                     </div>
                   </div>

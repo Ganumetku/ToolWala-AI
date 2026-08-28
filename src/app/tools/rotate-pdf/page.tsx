@@ -71,14 +71,14 @@ export default function RotatePdf() {
 
   return (
     <ToolLayout>
-      <div className="glass rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl mb-16">
+      <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12">
         <ToolHero 
           title="Rotate PDF"
           description="Rotate PDF pages clockwise by 90, 180, or 270 degrees locally and securely."
           icon={<RotateCw className="w-7 h-7" />}
         />
 
-        <div className="p-8 sm:p-10 bg-white dark:bg-black/[0.15]">
+        <div className="p-8 sm:p-10">
           {!file ? (
             <UploadZone
               onFilesSelected={handleFiles}
@@ -89,27 +89,27 @@ export default function RotatePdf() {
             />
           ) : (
             <div className="space-y-8 max-w-4xl mx-auto">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 bg-white/5 rounded-[2rem] border border-white/5 gap-6">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 bg-slate-50/70 dark:bg-white/[0.02] rounded-3xl border border-slate-200/80 dark:border-white/5 gap-6 shadow-sm">
                 <div className="flex items-center gap-5 overflow-hidden w-full">
-                  <div className="bg-[#F6F8FC] dark:bg-[#030712] p-4 rounded-2xl border border-white/5 flex-shrink-0">
+                  <div className="bg-white dark:bg-[#030712] p-4 rounded-2xl border border-slate-200 dark:border-white/5 flex-shrink-0 shadow-sm">
                     <FileText className="w-7 h-7 text-red-500" />
                   </div>
                   <div className="overflow-hidden">
                     <p className="text-base font-black text-slate-900 dark:text-white truncate">{file.name}</p>
-                    <p className="text-sm text-gray-500 mt-1">{formatBytes(file.size)}</p>
+                    <p className="text-sm text-slate-500 dark:text-gray-500 mt-1">{formatBytes(file.size)}</p>
                   </div>
                 </div>
                 <button 
                   onClick={resetAll} 
-                  className="flex-shrink-0 text-[10px] font-black uppercase tracking-widest text-red-400 hover:text-red-300 bg-red-500/10 px-6 py-3 rounded-xl border border-red-500/20 transition-all w-full sm:w-auto text-center cursor-pointer"
+                  className="flex-shrink-0 text-[10px] font-black uppercase tracking-widest text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 bg-red-50 hover:bg-red-100 dark:bg-red-500/10 px-6 py-3 rounded-xl border border-red-200 dark:border-red-500/20 transition-all w-full sm:w-auto text-center cursor-pointer shadow-sm"
                 >
                   Remove
                 </button>
               </div>
 
               {!rotatedPdfUrl && (
-                <div className="bg-blue-600/5 border border-blue-600/10 rounded-[2rem] p-8 space-y-4">
-                  <label className="block text-[10px] font-black text-blue-400 uppercase tracking-[0.2em] ml-1">Rotation Angle</label>
+                <div className="bg-blue-50/50 dark:bg-blue-600/5 border border-blue-200/60 dark:border-blue-600/10 rounded-3xl p-8 space-y-4 shadow-sm">
+                  <label className="block text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-[0.2em] ml-1">Rotation Angle</label>
                   <div className="grid grid-cols-3 gap-4">
                     {[
                       { label: "90° Clockwise", val: 90 },
@@ -122,7 +122,7 @@ export default function RotatePdf() {
                         className={`px-4 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest border transition-all cursor-pointer ${
                           rotationAngle === opt.val
                             ? 'bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-500/25'
-                            : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'
+                            : 'bg-slate-100 hover:bg-slate-200/70 border-slate-200 text-slate-700 dark:bg-white/5 dark:border-white/10 dark:text-gray-400 dark:hover:bg-white/10'
                         }`}
                       >
                         {opt.label}
@@ -133,21 +133,21 @@ export default function RotatePdf() {
               )}
 
               {success && rotatedPdfUrl && (
-                <div className="border border-emerald-500/20 bg-emerald-500/5 rounded-[2.5rem] p-10 text-center shadow-2xl animate-fade-in">
-                  <div className="w-16 h-16 bg-emerald-500/25 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-6 text-emerald-400">
+                <div className="border border-emerald-500/20 bg-emerald-50 dark:bg-emerald-500/5 rounded-3xl p-10 text-center shadow-sm animate-fade-in">
+                  <div className="w-16 h-16 bg-emerald-500/20 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-6 text-emerald-600 dark:text-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.2)]">
                     <CheckCircle className="w-8 h-8" />
                   </div>
                   <h4 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white mb-2">
                     PDF Rotated Successfully!
                   </h4>
-                  <p className="text-sm text-gray-400 mb-6">
+                  <p className="text-sm text-slate-600 dark:text-gray-400 mb-6">
                     All pages have been rotated by {rotationAngle} degrees.
                   </p>
                 </div>
               )}
 
-              <div className="flex flex-col sm:flex-row justify-end items-center gap-4 pt-8 border-t border-white/5">
-                <button onClick={resetAll} className="w-full sm:w-auto px-8 py-3.5 text-[10px] font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all cursor-pointer">
+              <div className="flex flex-col sm:flex-row justify-end items-center gap-4 pt-8 border-t border-[#E6ECF5] dark:border-white/5">
+                <button onClick={resetAll} className="w-full sm:w-auto px-8 py-3.5 text-[10px] font-black uppercase tracking-widest text-slate-600 dark:text-gray-400 bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 rounded-2xl transition-all cursor-pointer shadow-sm">
                   Reset
                 </button>
 
@@ -155,7 +155,7 @@ export default function RotatePdf() {
                   <button
                     onClick={processRotate}
                     disabled={isProcessing}
-                    className="w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-3.5 text-[10px] font-black uppercase tracking-widest text-white bg-blue-600 rounded-2xl hover:bg-blue-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(37,99,235,0.3)] active:scale-95 cursor-pointer"
+                    className="w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-3.5 text-[10px] font-black uppercase tracking-widest text-white bg-blue-600 rounded-2xl hover:bg-blue-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_4px_20px_rgba(37,99,235,0.3)] active:scale-95 cursor-pointer"
                   >
                     {isProcessing ? <RefreshCw className="w-4 h-4 animate-spin" /> : <RotateCw className="w-4 h-4" />}
                     {isProcessing ? 'Rotating...' : 'Rotate PDF Pages'}
@@ -164,7 +164,7 @@ export default function RotatePdf() {
                   <a
                     href={rotatedPdfUrl}
                     download={`rotated_${file.name}`}
-                    className="w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-3.5 text-[10px] font-black uppercase tracking-widest text-white bg-emerald-600 rounded-2xl hover:bg-emerald-500 transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] active:scale-95 text-center cursor-pointer"
+                    className="w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-3.5 text-[10px] font-black uppercase tracking-widest text-white bg-emerald-600 rounded-2xl hover:bg-emerald-500 transition-all shadow-[0_4px_20px_rgba(16,185,129,0.3)] active:scale-95 text-center cursor-pointer"
                   >
                     <Download className="w-4 h-4" />
                     Download Rotated PDF

@@ -597,14 +597,14 @@ export default function CropPdfEngine({ seoArticle }: CropPdfEngineProps) {
 
   return (
     <ToolLayout>
-      <div className="glass rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl mb-16">
+      <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12">
         <ToolHero
-          title="Crop PDF Editor"
+          title="Crop PDF"
           description="Visual, high-resolution PDF margin cropper with interactive handles, auto white margin detection, and multi-unit synchronization."
-          icon={<Scissors className="w-7 h-7" />}
+          icon={<Scissors className="w-6 h-6" />}
         />
 
-        <div className="p-6 sm:p-10 bg-black/[0.15]">
+        <div className="p-6 sm:p-10">
           {!file ? (
             <UploadZone
               onFilesSelected={handleFilesSelected}
@@ -612,6 +612,7 @@ export default function CropPdfEngine({ seoArticle }: CropPdfEngineProps) {
               multiple={false}
               title="Upload PDF to Crop Margins"
               description="Drag & drop your PDF file here. 100% private & client-side processing."
+              buttonText="Select PDF File"
             />
           ) : (
             <div className="space-y-6">

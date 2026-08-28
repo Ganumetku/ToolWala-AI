@@ -499,29 +499,29 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
         </Link>
         
         {/* Main Header Banner */}
-        <div className="glass rounded-[2.5rem] overflow-hidden border border-white/5 shadow-2xl mb-12 bg-white/[0.01] print:border-none print:shadow-none print:bg-transparent">
+        <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12 print:border-none print:shadow-none print:bg-transparent">
           
-          <div className="p-8 sm:p-12 border-b border-white/5 bg-white/[0.02] print:border-b-2 print:border-black print:p-0 print:pb-6 print:bg-transparent">
+          <div className="p-8 sm:p-12 border-b border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.02] print:border-b-2 print:border-black print:p-0 print:pb-6 print:bg-transparent">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
               <div className="flex items-center gap-6">
-                <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-blue-600 text-white shadow-[0_0_30px_rgba(37,99,235,0.4)] text-2xl font-bold print:hidden">
+                <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-blue-600 text-white shadow-[0_4px_20px_rgba(37,99,235,0.35)] text-2xl font-bold print:hidden">
                   🎓
                 </div>
                 <div>
                   <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tighter uppercase print:text-black print:text-4xl">
                     {tStrings.title}
                   </h1>
-                  <p className="text-gray-400 font-medium mt-1 font-sans print:text-gray-700">
+                  <p className="text-slate-600 dark:text-gray-400 font-medium mt-1 font-sans print:text-gray-700">
                     {tStrings.subtitle}
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-4 print:hidden">
                 <div className="flex flex-col items-end">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">{tStrings.secureProcess}</span>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">{tStrings.deviceOnly}</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-500">{tStrings.secureProcess}</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-500">{tStrings.deviceOnly}</span>
                 </div>
-                <GraduationCap className="w-8 h-8 text-emerald-500/50" />
+                <GraduationCap className="w-8 h-8 text-emerald-600/50 dark:text-emerald-500/50" />
               </div>
             </div>
           </div>
@@ -529,21 +529,21 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 print:flex print:flex-col">
             
             {/* Input workspace: 7 columns */}
-            <div className="lg:col-span-7 p-8 sm:p-12 bg-white dark:bg-black/[0.15] border-r border-white/5 space-y-8 print:p-0 print:border-none print:bg-transparent">
+            <div className="lg:col-span-7 p-8 sm:p-12 bg-[#FBFCFE] dark:bg-black/[0.15] border-r border-[#E6ECF5] dark:border-white/5 space-y-8 print:p-0 print:border-none print:bg-transparent">
               
               {/* Settings Trigger Panel */}
-              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-6 print:hidden">
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#E6ECF5] dark:border-white/5 pb-6 print:hidden">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-black uppercase text-gray-400">{tStrings.passingPercentage}:</span>
-                  <div className="flex bg-black/40 rounded-xl p-1 border border-white/10">
+                  <span className="text-xs font-black uppercase text-slate-500 dark:text-gray-400">{tStrings.passingPercentage}:</span>
+                  <div className="flex bg-slate-100 dark:bg-black/40 rounded-xl p-1 border border-slate-200 dark:border-white/10">
                     {[30, 33, 35, 40, 50].map((num) => (
                       <button
                         key={num}
                         onClick={() => setPassingPercent(num)}
                         className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                           passingPercent === num 
-                            ? 'bg-blue-600 text-white shadow-md' 
-                            : 'text-gray-400 hover:text-white'
+                            ? 'bg-blue-600 text-white shadow-sm' 
+                            : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white'
                         }`}
                       >
                         {num}%
@@ -554,7 +554,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
 
                 <button
                   onClick={() => setShowConfig(!showConfig)}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs font-bold text-gray-300 transition-all cursor-pointer"
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:bg-slate-200/70 dark:hover:bg-white/10 text-xs font-bold text-slate-700 dark:text-gray-300 transition-all cursor-pointer shadow-sm"
                 >
                   <Settings className={`w-4 h-4 ${showConfig ? 'rotate-90' : ''} transition-transform duration-300`} />
                   {showConfig ? (locale === 'hi' ? 'स्केल छिपाएं' : 'Hide Scale') : (locale === 'hi' ? 'स्केल बदलें' : 'Configure Scale')}
@@ -568,16 +568,16 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="overflow-hidden border border-white/5 bg-white/[0.02] rounded-2xl p-6 space-y-4 print:hidden"
+                    className="overflow-hidden border border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-white/[0.02] rounded-2xl p-6 space-y-4 print:hidden shadow-sm"
                   >
-                    <h3 className="text-xs font-black uppercase tracking-widest text-blue-400 flex items-center gap-2">
+                    <h3 className="text-xs font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 flex items-center gap-2">
                       <Award className="w-4 h-4" />
                       {tStrings.gradeSystem}
                     </h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                      {grades.map((g, idx) => (
+                      {grades.map((g) => (
                         <div key={g.grade} className="space-y-1">
-                          <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
+                          <label className="text-[10px] font-bold text-slate-500 dark:text-gray-500 uppercase tracking-wider">
                             {tStrings.gradeLabel} {g.grade} ({tStrings.minPercentage})
                           </label>
                           <input
@@ -586,7 +586,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
                             max="100"
                             value={g.min}
                             onChange={(e) => handleGradeMinChange(g.grade, e.target.value)}
-                            className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-white font-semibold text-xs focus:outline-none focus:border-blue-500"
+                            className="w-full bg-white dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-3 py-2 text-slate-900 dark:text-white font-semibold text-xs focus:outline-none focus:border-blue-500 shadow-sm"
                           />
                         </div>
                       ))}
@@ -597,7 +597,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
 
               {/* Validation Warning Area */}
               {validationErrors && (
-                <div className="flex items-center gap-3 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-semibold print:hidden">
+                <div className="flex items-center gap-3 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-xs font-semibold print:hidden">
                   <AlertTriangle className="w-5 h-5 shrink-0" />
                   <span>{validationErrors}</span>
                 </div>
@@ -612,14 +612,14 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, x: -30 }}
-                      className="grid grid-cols-12 gap-3 items-center bg-white/[0.02] hover:bg-white/[0.04] p-4 rounded-2xl border border-white/5 transition-all print:border-none print:border-b print:border-gray-200 print:bg-transparent print:p-2"
+                      className="grid grid-cols-12 gap-3 items-center bg-slate-50/70 dark:bg-white/[0.02] hover:bg-slate-100/70 dark:hover:bg-white/[0.04] p-4 rounded-2xl border border-slate-200/80 dark:border-white/5 transition-all print:border-none print:border-b print:border-gray-200 print:bg-transparent print:p-2"
                     >
                       {/* Drag & Move order handles */}
                       <div className="col-span-12 sm:col-span-1 flex items-center justify-start gap-1 print:hidden">
                         <button
                           disabled={idx === 0}
                           onClick={() => moveRow(idx, 'up')}
-                          className="p-1 hover:text-blue-400 text-gray-600 disabled:opacity-20 cursor-pointer"
+                          className="p-1 hover:text-blue-600 dark:hover:text-blue-400 text-slate-400 dark:text-gray-600 disabled:opacity-20 cursor-pointer"
                           aria-label={tStrings.moveUp}
                         >
                           <ArrowUp className="w-4 h-4" />
@@ -627,7 +627,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
                         <button
                           disabled={idx === subjects.length - 1}
                           onClick={() => moveRow(idx, 'down')}
-                          className="p-1 hover:text-blue-400 text-gray-600 disabled:opacity-20 cursor-pointer"
+                          className="p-1 hover:text-blue-600 dark:hover:text-blue-400 text-slate-400 dark:text-gray-600 disabled:opacity-20 cursor-pointer"
                           aria-label={tStrings.moveDown}
                         >
                           <ArrowDown className="w-4 h-4" />
@@ -636,7 +636,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
 
                       {/* Subject Name Column */}
                       <div className="col-span-12 sm:col-span-4 print:col-span-6">
-                        <span className="text-[9px] font-bold text-gray-500 uppercase tracking-widest block pl-1 mb-1 sm:hidden print:hidden">
+                        <span className="text-[9px] font-bold text-slate-500 dark:text-gray-500 uppercase tracking-widest block pl-1 mb-1 sm:hidden print:hidden">
                           {tStrings.subjectName}
                         </span>
                         <input
@@ -644,14 +644,14 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
                           placeholder={tStrings.subjectName}
                           value={s.name}
                           onChange={(e) => handleRowChange(s.id, 'name', e.target.value)}
-                          className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white font-semibold text-sm focus:outline-none focus:border-blue-500/50 transition-colors print:bg-transparent print:border-none print:text-black print:p-0 print:font-bold"
+                          className="w-full bg-white dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white font-semibold text-sm focus:outline-none focus:border-blue-500 transition-colors shadow-sm print:bg-transparent print:border-none print:text-black print:p-0 print:font-bold placeholder:text-slate-400 dark:placeholder:text-gray-600"
                           aria-label={`Subject Name Row ${idx + 1}`}
                         />
                       </div>
 
                       {/* Obtained Marks Column */}
                       <div className="col-span-6 sm:col-span-3 print:col-span-3">
-                        <span className="text-[9px] font-bold text-gray-500 uppercase tracking-widest block pl-1 mb-1 sm:hidden print:hidden">
+                        <span className="text-[9px] font-bold text-slate-500 dark:text-gray-500 uppercase tracking-widest block pl-1 mb-1 sm:hidden print:hidden">
                           {tStrings.obtainedMarks}
                         </span>
                         <input
@@ -666,14 +666,14 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
                             if (!inputRefs.current[idx]) inputRefs.current[idx] = [];
                             if (el) inputRefs.current[idx][0] = el;
                           }}
-                          className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white font-semibold text-sm focus:outline-none focus:border-blue-500/50 transition-colors print:bg-transparent print:border-none print:text-black print:p-0"
+                          className="w-full bg-white dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white font-semibold text-sm focus:outline-none focus:border-blue-500 transition-colors shadow-sm print:bg-transparent print:border-none print:text-black print:p-0 placeholder:text-slate-400 dark:placeholder:text-gray-600"
                           aria-label={`Obtained Marks Row ${idx + 1}`}
                         />
                       </div>
 
                       {/* Maximum Marks Column */}
                       <div className="col-span-6 sm:col-span-2 print:col-span-3">
-                        <span className="text-[9px] font-bold text-gray-500 uppercase tracking-widest block pl-1 mb-1 sm:hidden print:hidden">
+                        <span className="text-[9px] font-bold text-slate-500 dark:text-gray-500 uppercase tracking-widest block pl-1 mb-1 sm:hidden print:hidden">
                           {tStrings.maxMarks}
                         </span>
                         <input
@@ -688,7 +688,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
                             if (!inputRefs.current[idx]) inputRefs.current[idx] = [];
                             if (el) inputRefs.current[idx][1] = el;
                           }}
-                          className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white font-semibold text-sm focus:outline-none focus:border-blue-500/50 transition-colors print:bg-transparent print:border-none print:text-black print:p-0"
+                          className="w-full bg-white dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white font-semibold text-sm focus:outline-none focus:border-blue-500 transition-colors shadow-sm print:bg-transparent print:border-none print:text-black print:p-0 placeholder:text-slate-400 dark:placeholder:text-gray-600"
                           aria-label={`Maximum Marks Row ${idx + 1}`}
                         />
                       </div>
@@ -697,14 +697,14 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
                       <div className="col-span-12 sm:col-span-2 flex items-center justify-end gap-2 print:hidden">
                         <button
                           onClick={() => handleDuplicateSubject(s.id)}
-                          className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-blue-500/50 text-gray-400 hover:text-blue-400 transition-all cursor-pointer"
+                          className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:bg-slate-200/80 dark:hover:bg-white/10 hover:border-blue-500/50 text-slate-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all cursor-pointer shadow-sm"
                           title={tStrings.duplicate}
                         >
                           <Copy className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => handleRemoveSubject(s.id)}
-                          className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 text-gray-400 hover:text-red-400 transition-all cursor-pointer"
+                          className="p-2.5 rounded-xl bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 hover:bg-red-100 dark:hover:bg-red-500/20 text-red-600 dark:text-red-400 transition-all cursor-pointer shadow-sm"
                           title={tStrings.delete}
                         >
                           <Trash2 className="w-3.5 h-3.5" />
@@ -719,7 +719,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
               <div className="flex flex-wrap gap-4 pt-4 print:hidden">
                 <button
                   onClick={handleAddSubject}
-                  className="px-6 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl text-xs font-black uppercase tracking-[0.2em] text-white flex items-center gap-2 transition-all cursor-pointer hover:scale-105 active:scale-95"
+                  className="px-6 py-4 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 text-slate-800 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-white rounded-2xl text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2 transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-sm"
                 >
                   <Plus className="w-4 h-4" />
                   {tStrings.addSubject}
@@ -727,7 +727,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
 
                 <button
                   onClick={handleCalculate}
-                  className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2 transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)] cursor-pointer hover:scale-105 active:scale-95 ml-auto"
+                  className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2 transition-all shadow-[0_4px_20px_rgba(37,99,235,0.3)] cursor-pointer hover:scale-105 active:scale-95 ml-auto"
                 >
                   <Sparkles className="w-4 h-4" />
                   {tStrings.calculate}
@@ -735,7 +735,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
 
                 <button
                   onClick={handleReset}
-                  className="px-6 py-4 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-400 rounded-2xl text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2 transition-all cursor-pointer"
+                  className="px-6 py-4 bg-red-50 hover:bg-red-100 border border-red-200 text-red-600 dark:bg-red-500/10 dark:hover:bg-red-500/20 dark:border-red-500/20 dark:text-red-400 rounded-2xl text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2 transition-all cursor-pointer shadow-sm"
                 >
                   <RefreshCw className="w-4 h-4" />
                   {tStrings.reset}
@@ -744,10 +744,10 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
             </div>
 
             {/* Calculations display panel: 5 columns */}
-            <div className="lg:col-span-5 p-8 sm:p-12 bg-white/[0.01] flex flex-col justify-between space-y-8 print:p-0 print:border-none print:bg-transparent">
+            <div className="lg:col-span-5 p-8 sm:p-12 bg-[#FBFCFE] dark:bg-white/[0.01] flex flex-col justify-between space-y-8 print:p-0 print:border-none print:bg-transparent">
               
               <div className="space-y-8">
-                <h2 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-wider border-b border-white/5 pb-4 print:text-black print:border-black">
+                <h2 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-wider border-b border-[#E6ECF5] dark:border-white/5 pb-4 print:text-black print:border-black">
                   {tStrings.results}
                 </h2>
 
@@ -758,7 +758,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0 }}
-                      className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center gap-3 text-emerald-400 text-xs font-bold print:hidden"
+                      className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 flex items-center gap-3 text-emerald-700 dark:text-emerald-400 text-xs font-bold print:hidden shadow-sm"
                     >
                       <CheckCircle className="w-5 h-5 animate-bounce shrink-0" />
                       <span>{tStrings.successCalc}</span>
@@ -767,7 +767,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
                 </AnimatePresence>
 
                 {/* Ring Gauge & Big Status Cards */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-8 bg-black/40 border border-white/5 p-6 rounded-[2rem] print:bg-transparent print:border-none print:p-0">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-8 bg-slate-100/90 dark:bg-black/40 border border-slate-200 dark:border-white/5 p-6 rounded-3xl print:bg-transparent print:border-none print:p-0 shadow-sm">
                   
                   {/* Gauge Ring */}
                   <div className="relative h-40 w-40 flex items-center justify-center">
@@ -776,7 +776,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
                         cx="80"
                         cy="80"
                         r={radius}
-                        className="stroke-white/5 fill-none"
+                        className="stroke-slate-200 dark:stroke-white/5 fill-none"
                         strokeWidth="10"
                       />
                       <motion.circle
@@ -796,13 +796,13 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
                     {/* Ring Percentage Inner Label */}
                     <div className="text-center">
                       <motion.span 
-                        className="text-3xl font-black text-white tracking-tighter block print:text-black"
+                        className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter block print:text-black"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                       >
                         {stats.percentage.toFixed(1)}%
                       </motion.span>
-                      <span className="text-[9px] font-black uppercase text-gray-500 block tracking-widest mt-0.5">
+                      <span className="text-[9px] font-black uppercase text-slate-500 dark:text-gray-500 block tracking-widest mt-0.5">
                         {tStrings.percentage}
                       </span>
                     </div>
@@ -811,8 +811,8 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
                   {/* Status Badges */}
                   <div className="flex flex-col gap-3 justify-center text-center sm:text-left">
                     <div className="space-y-1">
-                      <span className="text-[9px] font-black uppercase text-gray-500 tracking-widest">{tStrings.grade}</span>
-                      <div className="text-3xl font-black text-white print:text-black uppercase">
+                      <span className="text-[9px] font-black uppercase text-slate-500 dark:text-gray-500 tracking-widest">{tStrings.grade}</span>
+                      <div className="text-3xl font-black text-slate-900 dark:text-white print:text-black uppercase">
                         {stats.grade}
                       </div>
                     </div>
@@ -821,8 +821,8 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
                       {stats.totalMax > 0 && (
                         <div className={`inline-flex items-center px-4 py-2 rounded-xl text-xs font-black uppercase tracking-[0.2em] border ${
                           stats.isPassed 
-                            ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400 print:text-black print:border-black' 
-                            : 'bg-red-500/10 border-red-500/20 text-red-400 print:text-black print:border-black'
+                            ? 'bg-emerald-50 dark:bg-emerald-500/10 border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-400 print:text-black print:border-black' 
+                            : 'bg-red-50 dark:bg-red-500/10 border-red-200 dark:border-red-500/20 text-red-700 dark:text-red-400 print:text-black print:border-black'
                         }`}>
                           {stats.isPassed ? tStrings.pass : tStrings.fail}
                         </div>
@@ -833,38 +833,38 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
 
                 {/* Aggregate Summary Mini Cards */}
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-4 print:bg-transparent print:border-none print:border-b print:border-gray-200">
-                    <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest block mb-1">
+                  <div className="bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 rounded-2xl p-4 shadow-sm print:bg-transparent print:border-none print:border-b print:border-gray-200">
+                    <span className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest block mb-1">
                       {tStrings.totalObtained}
                     </span>
-                    <div className="text-xl font-black text-white print:text-black">
+                    <div className="text-xl font-black text-slate-900 dark:text-white print:text-black">
                       {stats.totalObtained.toFixed(1)} / {stats.totalMax.toFixed(1)}
                     </div>
                   </div>
 
-                  <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-4 print:bg-transparent print:border-none print:border-b print:border-gray-200">
-                    <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest block mb-1">
+                  <div className="bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 rounded-2xl p-4 shadow-sm print:bg-transparent print:border-none print:border-b print:border-gray-200">
+                    <span className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest block mb-1">
                       {tStrings.average}
                     </span>
-                    <div className="text-xl font-black text-white print:text-black">
+                    <div className="text-xl font-black text-slate-900 dark:text-white print:text-black">
                       {stats.average.toFixed(2)}
                     </div>
                   </div>
 
-                  <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-4 print:bg-transparent print:border-none print:border-b print:border-gray-200">
-                    <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest block mb-1">
+                  <div className="bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 rounded-2xl p-4 shadow-sm print:bg-transparent print:border-none print:border-b print:border-gray-200">
+                    <span className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest block mb-1">
                       {tStrings.highestMarks}
                     </span>
-                    <div className="text-sm font-black text-white print:text-black line-clamp-1">
+                    <div className="text-sm font-black text-slate-900 dark:text-white print:text-black line-clamp-1">
                       {stats.highest > -Infinity ? `${stats.highest.toFixed(1)} (${stats.highestSubject})` : '-'}
                     </div>
                   </div>
 
-                  <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-4 print:bg-transparent print:border-none print:border-b print:border-gray-200">
-                    <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest block mb-1">
+                  <div className="bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 rounded-2xl p-4 shadow-sm print:bg-transparent print:border-none print:border-b print:border-gray-200">
+                    <span className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest block mb-1">
                       {tStrings.lowestMarks}
                     </span>
-                    <div className="text-sm font-black text-white print:text-black line-clamp-1">
+                    <div className="text-sm font-black text-slate-900 dark:text-white print:text-black line-clamp-1">
                       {stats.lowest < Infinity ? `${stats.lowest.toFixed(1)} (${stats.lowestSubject})` : '-'}
                     </div>
                   </div>
@@ -872,10 +872,10 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
               </div>
 
               {/* Utility Exports Section */}
-              <div className="flex flex-wrap gap-3 pt-6 border-t border-white/5 print:hidden">
+              <div className="flex flex-wrap gap-3 pt-6 border-t border-[#E6ECF5] dark:border-white/5 print:hidden">
                 <button
                   onClick={handleCopyResult}
-                  className="flex-1 min-w-[120px] px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest text-white flex items-center justify-center gap-2 transition-all cursor-pointer"
+                  className="flex-1 min-w-[120px] px-4 py-3 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 text-slate-700 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-white rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm"
                 >
                   <Copy className="w-3.5 h-3.5" />
                   {tStrings.copyResult}
@@ -883,7 +883,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
 
                 <button
                   onClick={handlePrint}
-                  className="flex-1 min-w-[120px] px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest text-white flex items-center justify-center gap-2 transition-all cursor-pointer"
+                  className="flex-1 min-w-[120px] px-4 py-3 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 text-slate-700 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-white rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm"
                 >
                   <Printer className="w-3.5 h-3.5" />
                   {tStrings.printResult}
@@ -891,7 +891,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
 
                 <button
                   onClick={handleShareResult}
-                  className="flex-1 min-w-[120px] px-4 py-3 bg-blue-600/10 hover:bg-blue-600/20 border border-blue-600/20 rounded-xl text-[10px] font-black uppercase tracking-widest text-blue-400 flex items-center justify-center gap-2 transition-all cursor-pointer"
+                  className="flex-1 min-w-[120px] px-4 py-3 bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-600 dark:bg-blue-600/10 dark:hover:bg-blue-600/20 dark:border-blue-600/20 dark:text-blue-400 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm"
                 >
                   <Share2 className="w-3.5 h-3.5" />
                   {tStrings.shareResult}
@@ -905,63 +905,63 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 print:hidden">
           
           {/* Formula & examples card */}
-          <div className="glass rounded-[2rem] border border-white/5 p-8 bg-white/[0.01]">
+          <div className="bg-[#FBFCFE] dark:bg-white/[0.01] rounded-3xl border border-[#E6ECF5] dark:border-white/5 p-8 shadow-sm">
             <h3 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight mb-4 flex items-center gap-2">
-              <Award className="w-5 h-5 text-blue-400" />
+              <Award className="w-5 h-5 text-blue-600 dark:text-blue-400" />
               {tStrings.formulaTitle}
             </h3>
             
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+            <p className="text-slate-600 dark:text-gray-400 text-sm leading-relaxed mb-6">
               {tStrings.formulaText}
             </p>
 
-            <div className="bg-black/40 border border-white/5 rounded-xl p-4 font-mono text-xs text-blue-400 mb-6">
-              <span className="text-gray-500 font-bold block mb-1">{tStrings.formulaLabel}</span>
+            <div className="bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/5 rounded-xl p-4 font-mono text-xs text-blue-600 dark:text-blue-400 mb-6 shadow-sm">
+              <span className="text-slate-500 dark:text-gray-500 font-bold block mb-1">{tStrings.formulaLabel}</span>
               Percentage = (Total Obtained Marks / Total Maximum Marks) * 100
             </div>
 
             <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white mb-2">
               {tStrings.exampleTitle}
             </h4>
-            <p className="text-gray-400 text-xs leading-relaxed whitespace-pre-line">
+            <p className="text-slate-600 dark:text-gray-400 text-xs leading-relaxed whitespace-pre-line">
               {tStrings.exampleText}
             </p>
           </div>
 
           {/* Exam Tips card */}
-          <div className="glass rounded-[2rem] border border-white/5 p-8 bg-white/[0.01]">
+          <div className="bg-[#FBFCFE] dark:bg-white/[0.01] rounded-3xl border border-[#E6ECF5] dark:border-white/5 p-8 shadow-sm">
             <h3 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight mb-6 flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-blue-400" />
+              <Sparkles className="w-5 h-5 text-blue-600 dark:text-blue-400" />
               {tStrings.tipsTitle}
             </h3>
-            <ul className="space-y-4 text-sm text-gray-400">
-              <li className="p-3 bg-white/[0.02] border border-white/5 rounded-xl hover:bg-white/[0.04] transition-colors">{tStrings.tip1}</li>
-              <li className="p-3 bg-white/[0.02] border border-white/5 rounded-xl hover:bg-white/[0.04] transition-colors">{tStrings.tip2}</li>
-              <li className="p-3 bg-white/[0.02] border border-white/5 rounded-xl hover:bg-white/[0.04] transition-colors">{tStrings.tip3}</li>
-              <li className="p-3 bg-white/[0.02] border border-white/5 rounded-xl hover:bg-white/[0.04] transition-colors">{tStrings.tip4}</li>
+            <ul className="space-y-4 text-sm text-slate-600 dark:text-gray-400">
+              <li className="p-3 bg-slate-50 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/[0.04] transition-colors">{tStrings.tip1}</li>
+              <li className="p-3 bg-slate-50 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/[0.04] transition-colors">{tStrings.tip2}</li>
+              <li className="p-3 bg-slate-50 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/[0.04] transition-colors">{tStrings.tip3}</li>
+              <li className="p-3 bg-slate-50 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/[0.04] transition-colors">{tStrings.tip4}</li>
             </ul>
           </div>
         </div>
 
         {/* FAQs section */}
-        <div className="glass rounded-[2rem] border border-white/5 p-8 sm:p-12 bg-white/[0.01] mb-16 print:hidden">
+        <div className="bg-[#FBFCFE] dark:bg-white/[0.01] rounded-3xl border border-[#E6ECF5] dark:border-white/5 p-8 sm:p-12 mb-16 shadow-sm print:hidden">
           <h3 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tighter mb-8 flex items-center gap-3">
-            <HelpCircle className="w-6 h-6 text-blue-400" />
+            <HelpCircle className="w-6 h-6 text-blue-600 dark:text-blue-400" />
             {tStrings.faqTitle}
           </h3>
 
           <div className="space-y-6">
-            <div className="border-b border-white/5 pb-6">
+            <div className="border-b border-[#E6ECF5] dark:border-white/5 pb-6">
               <h4 className="text-base font-black text-slate-900 dark:text-white mb-2">{tStrings.faqQ1}</h4>
-              <p className="text-gray-400 text-sm leading-relaxed">{tStrings.faqA1}</p>
+              <p className="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">{tStrings.faqA1}</p>
             </div>
-            <div className="border-b border-white/5 pb-6">
+            <div className="border-b border-[#E6ECF5] dark:border-white/5 pb-6">
               <h4 className="text-base font-black text-slate-900 dark:text-white mb-2">{tStrings.faqQ2}</h4>
-              <p className="text-gray-400 text-sm leading-relaxed">{tStrings.faqA2}</p>
+              <p className="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">{tStrings.faqA2}</p>
             </div>
             <div>
               <h4 className="text-base font-black text-slate-900 dark:text-white mb-2">{tStrings.faqQ3}</h4>
-              <p className="text-gray-400 text-sm leading-relaxed">{tStrings.faqA3}</p>
+              <p className="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">{tStrings.faqA3}</p>
             </div>
           </div>
         </div>

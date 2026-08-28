@@ -1153,17 +1153,17 @@ export default function AadhaarMaskingEngine({
   return (
     <div className="space-y-12">
       {/* Visual interactive workbench card */}
-      <div className="glass rounded-[2.5rem] overflow-hidden border border-white/5 shadow-2xl relative bg-[#090d16]/30">
+      <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl relative">
         
         {/* Dynamic header summary banner */}
-        <div className="p-8 sm:p-10 border-b border-white/5 bg-white/[0.01] flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="p-8 sm:p-10 border-b border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.02] flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-5">
-            <div className="h-12 w-12 rounded-2xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-400 font-bold shadow-lg">
+            <div className="h-12 w-12 rounded-2xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold shadow-lg">
               <Scissors className="w-5.5 h-5.5" />
             </div>
             <div>
               <h2 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">{title}</h2>
-              <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mt-0.5">Secure Document Redaction</p>
+              <p className="text-xs text-slate-500 dark:text-gray-500 font-bold uppercase tracking-wider mt-0.5">Secure Document Redaction</p>
             </div>
           </div>
 
@@ -1171,18 +1171,15 @@ export default function AadhaarMaskingEngine({
             {step === "editor" && (
               <button
                 onClick={resetAll}
-                className="px-4 py-2 border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/10 text-gray-400 hover:text-white text-[10px] font-black uppercase tracking-widest rounded-xl cursor-pointer transition-all flex items-center gap-1.5"
+                className="px-4 py-2 border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/[0.02] hover:bg-slate-200/70 dark:hover:bg-white/[0.05] text-slate-700 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white text-[10px] font-black uppercase tracking-widest rounded-xl cursor-pointer transition-all flex items-center gap-1.5 shadow-sm"
               >
                 <UploadCloud className="w-3.5 h-3.5" /> Upload another photo
               </button>
             )}
-            <div className="flex items-center gap-3">
-              <div className="flex flex-col items-end">
-                <span className="text-[9px] font-black uppercase tracking-widest text-emerald-400">No Server Uploads</span>
-                <span className="text-[9px] font-black uppercase tracking-widest text-gray-600 mt-0.5">100% Client-Side</span>
-              </div>
-              <div className="h-10 w-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                <ShieldCheck className="w-5 h-5" />
+            <div className="flex items-center gap-2.5 bg-emerald-50 dark:bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-200 dark:border-emerald-500/20 h-fit self-start shadow-sm">
+              <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              <div className="flex flex-col">
+                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-700 dark:text-emerald-400">100% Client-Side</span>
               </div>
             </div>
           </div>
@@ -1247,21 +1244,21 @@ export default function AadhaarMaskingEngine({
                 </div>
 
                 {/* Upload Image Guidelines */}
-                <div className="glass p-8 rounded-[2rem] border border-white/5 bg-white/[0.01] space-y-6">
+                <div className="bg-[#FBFCFE] dark:bg-white/[0.02] p-8 rounded-3xl border border-[#E6ECF5] dark:border-white/5 space-y-6 shadow-sm">
                   <div className="space-y-1">
-                    <h4 className="text-xs font-black uppercase tracking-wider text-blue-400 flex items-center gap-2">
-                      <Info className="w-4 h-4 text-blue-400" />
+                    <h4 className="text-xs font-black uppercase tracking-wider text-blue-600 dark:text-blue-400 flex items-center gap-2">
+                      <Info className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                       Aadhaar Upload Guidelines & Examples
                     </h4>
-                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest leading-relaxed">
+                    <p className="text-[10px] text-slate-500 dark:text-gray-500 font-bold uppercase tracking-widest leading-relaxed">
                       Please follow the visual examples below. Auto-scanner requires clean character contrast to run client-side OCR.
                     </p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {/* Good Scan */}
-                    <div className="glass p-5 rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.01] hover:bg-emerald-500/[0.03] transition-all flex flex-col items-center space-y-4">
-                      <div className="relative h-28 w-full bg-slate-950/60 rounded-xl flex items-center justify-center overflow-hidden border border-emerald-500/30">
+                    <div className="bg-emerald-50/50 dark:bg-emerald-500/[0.01] p-5 rounded-2xl border border-emerald-200 dark:border-emerald-500/20 hover:border-emerald-300 dark:hover:bg-emerald-500/[0.03] transition-all flex flex-col items-center space-y-4 shadow-sm">
+                      <div className="relative h-28 w-full bg-slate-900/10 dark:bg-slate-950/60 rounded-xl flex items-center justify-center overflow-hidden border border-emerald-500/30">
                         {/* Miniature simulated Aadhaar card */}
                         <div className="w-[110px] h-[70px] bg-white rounded-md p-1.5 flex flex-col justify-between shadow-lg border border-emerald-500 relative select-none animate-pulse-slow">
                           {/* Tricolor top strip */}
@@ -1296,15 +1293,15 @@ export default function AadhaarMaskingEngine({
                       </div>
                       <div className="text-center space-y-1">
                         <h5 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-tight">Clear & Straight</h5>
-                        <p className="text-[10px] text-gray-500 leading-normal font-sans font-medium">
+                        <p className="text-[10px] text-slate-600 dark:text-gray-500 leading-normal font-sans font-medium">
                           Numbers are sharp, card orientation is flat and horizontal.
                         </p>
                       </div>
                     </div>
 
                     {/* Blurry Scan */}
-                    <div className="glass p-5 rounded-2xl border border-red-500/10 bg-red-500/[0.005] hover:bg-red-500/[0.02] transition-all flex flex-col items-center space-y-4">
-                      <div className="relative h-28 w-full bg-slate-950/60 rounded-xl flex items-center justify-center overflow-hidden border border-red-500/10">
+                    <div className="bg-red-50/40 dark:bg-red-500/[0.005] p-5 rounded-2xl border border-red-200 dark:border-red-500/10 hover:border-red-300 dark:hover:bg-red-500/[0.02] transition-all flex flex-col items-center space-y-4 shadow-sm">
+                      <div className="relative h-28 w-full bg-slate-900/10 dark:bg-slate-950/60 rounded-xl flex items-center justify-center overflow-hidden border border-red-500/10">
                         {/* Miniature simulated Aadhaar card blurred */}
                         <div className="w-[110px] h-[70px] bg-white rounded-md p-1.5 flex flex-col justify-between shadow-lg border border-red-500/20 relative select-none blur-[1.2px]">
                           <div className="h-1 w-full flex">
@@ -1329,15 +1326,15 @@ export default function AadhaarMaskingEngine({
                       </div>
                       <div className="text-center space-y-1">
                         <h5 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-tight">Out of Focus</h5>
-                        <p className="text-[10px] text-gray-500 leading-normal font-sans font-medium">
+                        <p className="text-[10px] text-slate-600 dark:text-gray-500 leading-normal font-sans font-medium">
                           Low lighting or shaky camera results in fuzzy characters.
                         </p>
                       </div>
                     </div>
 
                     {/* Glare Scan */}
-                    <div className="glass p-5 rounded-2xl border border-red-500/10 bg-red-500/[0.005] hover:bg-red-500/[0.02] transition-all flex flex-col items-center space-y-4">
-                      <div className="relative h-28 w-full bg-slate-950/60 rounded-xl flex items-center justify-center overflow-hidden border border-red-500/10">
+                    <div className="bg-red-50/40 dark:bg-red-500/[0.005] p-5 rounded-2xl border border-red-200 dark:border-red-500/10 hover:border-red-300 dark:hover:bg-red-500/[0.02] transition-all flex flex-col items-center space-y-4 shadow-sm">
+                      <div className="relative h-28 w-full bg-slate-900/10 dark:bg-slate-950/60 rounded-xl flex items-center justify-center overflow-hidden border border-red-500/10">
                         {/* Miniature simulated Aadhaar card with glare */}
                         <div className="w-[110px] h-[70px] bg-white rounded-md p-1.5 flex flex-col justify-between shadow-lg border border-red-500/20 relative overflow-hidden select-none">
                           <div className="h-1 w-full flex">
@@ -1364,15 +1361,15 @@ export default function AadhaarMaskingEngine({
                       </div>
                       <div className="text-center space-y-1">
                         <h5 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-tight">Reflections</h5>
-                        <p className="text-[10px] text-gray-500 leading-normal font-sans font-medium">
+                        <p className="text-[10px] text-slate-600 dark:text-gray-500 leading-normal font-sans font-medium">
                           Shiny card lamination or heavy light flash washes out digits.
                         </p>
                       </div>
                     </div>
 
                     {/* Tilted Scan */}
-                    <div className="glass p-5 rounded-2xl border border-red-500/10 bg-red-500/[0.005] hover:bg-red-500/[0.02] transition-all flex flex-col items-center space-y-4">
-                      <div className="relative h-28 w-full bg-slate-950/60 rounded-xl flex items-center justify-center overflow-hidden border border-red-500/10">
+                    <div className="bg-red-50/40 dark:bg-red-500/[0.005] p-5 rounded-2xl border border-red-200 dark:border-red-500/10 hover:border-red-300 dark:hover:bg-red-500/[0.02] transition-all flex flex-col items-center space-y-4 shadow-sm">
+                      <div className="relative h-28 w-full bg-slate-900/10 dark:bg-slate-950/60 rounded-xl flex items-center justify-center overflow-hidden border border-red-500/10">
                         {/* Miniature simulated Aadhaar card rotated */}
                         <div className="w-[110px] h-[70px] bg-white rounded-md p-1.5 flex flex-col justify-between shadow-lg border border-red-500/20 relative select-none transform rotate-[-15deg] translate-y-1.5">
                           <div className="h-1 w-full flex">
@@ -1397,7 +1394,7 @@ export default function AadhaarMaskingEngine({
                       </div>
                       <div className="text-center space-y-1">
                         <h5 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-tight">Tilted / Cropped</h5>
-                        <p className="text-[10px] text-gray-500 leading-normal font-sans font-medium">
+                        <p className="text-[10px] text-slate-600 dark:text-gray-500 leading-normal font-sans font-medium">
                           Sideways text or cropped bounds prevent standard layout scan.
                         </p>
                       </div>
@@ -1454,16 +1451,16 @@ export default function AadhaarMaskingEngine({
                 <div className="lg:col-span-8 flex flex-col gap-6">
                   
                   {/* Before vs After interactive layout */}
-                  <div className="glass p-5 rounded-[2rem] border border-white/5 bg-black/30 flex-1 flex flex-col items-center justify-center min-h-[380px] relative overflow-hidden select-none">
+                  <div className="bg-[#FBFCFE] dark:bg-black/30 border border-[#E6ECF5] dark:border-white/5 rounded-3xl p-5 shadow-sm flex-1 flex flex-col items-center justify-center min-h-[380px] relative overflow-hidden select-none">
                     
                     {/* Floating guide badges */}
                     <div className="absolute top-5 left-5 z-20 flex gap-2">
-                      <span className="px-2.5 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] font-bold text-gray-400 uppercase tracking-wider select-none">
+                      <span className="px-2.5 py-1 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg text-[9px] font-bold text-slate-600 dark:text-gray-400 uppercase tracking-wider select-none shadow-sm">
                         Before (Original)
                       </span>
                     </div>
                     <div className="absolute top-5 right-5 z-20 flex gap-2">
-                      <span className="px-2.5 py-1 bg-blue-600/10 border border-blue-500/20 rounded-lg text-[9px] font-bold text-blue-400 uppercase tracking-wider select-none">
+                      <span className="px-2.5 py-1 bg-blue-50 dark:bg-blue-600/10 border border-blue-200 dark:border-blue-500/20 rounded-lg text-[9px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider select-none shadow-sm">
                         After (Masked Preview)
                       </span>
                     </div>
@@ -1471,7 +1468,7 @@ export default function AadhaarMaskingEngine({
                     <div className="w-full flex justify-center py-6">
                       <div 
                         ref={containerRef}
-                        className="relative max-w-full border border-white/10 rounded-xl overflow-hidden shadow-2xl bg-slate-950 inline-flex items-center justify-center"
+                        className="relative max-w-full border border-slate-200 dark:border-white/10 rounded-xl overflow-hidden shadow-2xl bg-slate-950 inline-flex items-center justify-center"
                         style={{ cursor: maskType === "redact" ? "crosshair" : "cell" }}
                       >
                         {/* 1. Original Source Image */}
@@ -1574,23 +1571,23 @@ export default function AadhaarMaskingEngine({
                       </div>
                     </div>
 
-                    <div className="w-full flex justify-between items-center text-[10px] text-gray-500 font-bold uppercase tracking-wider border-t border-white/5 pt-4 mt-2">
+                    <div className="w-full flex justify-between items-center text-[10px] text-slate-500 dark:text-gray-500 font-bold uppercase tracking-wider border-t border-[#E6ECF5] dark:border-white/5 pt-4 mt-2">
                       <span>Interactive Split Preview</span>
-                      <span className="text-gray-400">Drag comparison slider left/right</span>
+                      <span className="text-slate-600 dark:text-gray-400">Drag comparison slider left/right</span>
                     </div>
                   </div>
 
                   {/* Bottom Workspace Action Toolbar */}
-                  <div className="glass p-5 rounded-[2rem] border border-white/5 bg-[#090d16]/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl p-5 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div className="flex flex-wrap items-center gap-2 justify-center sm:justify-start w-full sm:w-auto">
-                      <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest mr-1 hidden md:inline">Mask Mode:</span>
-                      <div className="flex bg-black/40 border border-white/5 p-1 rounded-xl shrink-0">
+                      <span className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest mr-1 hidden md:inline">Mask Mode:</span>
+                      <div className="flex bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/5 p-1 rounded-xl shrink-0">
                         <button
                           onClick={() => setMaskFullDigits(false)}
                           className={`py-1.5 px-3 text-[9px] font-black uppercase tracking-widest rounded-lg cursor-pointer transition-all ${
                             !maskFullDigits
                               ? "bg-blue-600 text-white shadow-[0_0_12px_rgba(37,99,235,0.3)]"
-                              : "text-gray-500 hover:text-gray-300"
+                              : "text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
                           }`}
                           title="Mask first 8 digits (XXXX XXXX 1234)"
                         >
@@ -1601,7 +1598,7 @@ export default function AadhaarMaskingEngine({
                           className={`py-1.5 px-3 text-[9px] font-black uppercase tracking-widest rounded-lg cursor-pointer transition-all ${
                             maskFullDigits
                               ? "bg-blue-600 text-white shadow-[0_0_12px_rgba(37,99,235,0.3)]"
-                              : "text-gray-500 hover:text-gray-300"
+                              : "text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
                           }`}
                           title="Mask all 12 digits (XXXX XXXX XXXX)"
                         >
@@ -1609,12 +1606,12 @@ export default function AadhaarMaskingEngine({
                         </button>
                       </div>
 
-                      <div className="w-px h-6 bg-white/5 hidden md:block" />
+                      <div className="w-px h-6 bg-slate-200 dark:bg-white/5 hidden md:block" />
 
                       <button
                         onClick={handleUndoMask}
                         disabled={overlays.length === 0}
-                        className="h-9 px-4 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] disabled:opacity-30 disabled:cursor-not-allowed rounded-xl text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
+                        className="h-9 px-4 border border-slate-200 dark:border-white/10 bg-slate-100 hover:bg-slate-200/70 text-slate-700 dark:bg-white/[0.02] dark:hover:bg-white/[0.05] dark:text-gray-400 dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
                         title="Undo last mask box"
                       >
                         <Undo2 className="w-3.5 h-3.5 text-amber-500" />
@@ -1624,7 +1621,7 @@ export default function AadhaarMaskingEngine({
                       <button
                         onClick={clearAllOverlays}
                         disabled={overlays.length === 0}
-                        className="h-9 px-4 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] disabled:opacity-30 disabled:cursor-not-allowed rounded-xl text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
+                        className="h-9 px-4 border border-slate-200 dark:border-white/10 bg-slate-100 hover:bg-slate-200/70 text-slate-700 dark:bg-white/[0.02] dark:hover:bg-white/[0.05] dark:text-gray-400 dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
                         title="Remove all mask boxes"
                       >
                         <Trash2 className="w-3.5 h-3.5 text-red-500" />
@@ -1634,7 +1631,7 @@ export default function AadhaarMaskingEngine({
 
                     <button
                       onClick={resetAll}
-                      className="h-9 px-4 w-full sm:w-auto border border-blue-500/20 bg-blue-500/5 hover:bg-blue-500/10 text-blue-400 hover:text-blue-300 text-[10px] font-black uppercase tracking-widest rounded-xl cursor-pointer transition-all flex items-center justify-center gap-1.5"
+                      className="h-9 px-4 w-full sm:w-auto border border-blue-500/20 bg-blue-50 dark:bg-blue-500/5 hover:bg-blue-100 dark:hover:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-widest rounded-xl cursor-pointer transition-all flex items-center justify-center gap-1.5 shadow-sm"
                     >
                       <UploadCloud className="w-3.5 h-3.5" /> Upload Another Photo
                     </button>
@@ -1642,8 +1639,8 @@ export default function AadhaarMaskingEngine({
 
                   {/* Multi-page PDF page indicators */}
                   {pdfDoc && pdfPagesCount > 1 && (
-                    <div className="glass p-4 rounded-xl border border-white/5 bg-white/[0.01] flex items-center justify-between">
-                      <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">PDF Page Viewer</span>
+                    <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl p-4 shadow-sm flex items-center justify-between">
+                      <span className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">PDF Page Viewer</span>
                       <div className="flex gap-2.5">
                         {Array.from({ length: pdfPagesCount }).map((_, i) => {
                           const pageNum = i + 1;
@@ -1654,7 +1651,7 @@ export default function AadhaarMaskingEngine({
                               className={`h-9 px-4 rounded-lg text-xs font-black transition-all cursor-pointer ${
                                 pdfCurrentPage === pageNum
                                   ? "bg-blue-600 text-white shadow-md shadow-blue-500/20"
-                                  : "bg-white/5 text-gray-400 border border-white/10 hover:bg-white/10"
+                                  : "bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-gray-400 border border-slate-200 dark:border-white/10 hover:bg-slate-200 dark:hover:bg-white/10"
                               }`}
                             >
                               Page {pageNum}
@@ -1670,20 +1667,20 @@ export default function AadhaarMaskingEngine({
                 <div className="lg:col-span-4 flex flex-col gap-6">
                   
                   {/* Manual Redact additions */}
-                  <div className="glass p-6 rounded-[2rem] border border-white/5 bg-white/[0.01] space-y-6">
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 block">Workspace Actions</span>
+                  <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl p-6 shadow-sm space-y-6">
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-gray-500 block">Workspace Actions</span>
                     
                     <div className="space-y-5">
                       {/* Mask Length Toggle options */}
                       <div className="space-y-2">
-                        <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest ml-1">Aadhaar Number Masking Option</label>
-                        <div className="grid grid-cols-2 gap-2 bg-black/40 border border-white/5 p-1 rounded-xl">
+                        <label className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest ml-1">Aadhaar Number Masking Option</label>
+                        <div className="grid grid-cols-2 gap-2 bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/5 p-1 rounded-xl">
                           <button
                             onClick={() => setMaskFullDigits(false)}
                             className={`py-2 px-1 text-[10px] font-black uppercase tracking-widest rounded-lg cursor-pointer transition-all ${
                               !maskFullDigits
-                                ? "bg-blue-600 text-white"
-                                : "text-gray-500 hover:text-gray-300"
+                                ? "bg-blue-600 text-white shadow-sm"
+                                : "text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
                             }`}
                           >
                             Hide First 8 Digits
@@ -1692,8 +1689,8 @@ export default function AadhaarMaskingEngine({
                             onClick={() => setMaskFullDigits(true)}
                             className={`py-2 px-1 text-[10px] font-black uppercase tracking-widest rounded-lg cursor-pointer transition-all ${
                               maskFullDigits
-                                ? "bg-blue-600 text-white"
-                                : "text-gray-500 hover:text-gray-300"
+                                ? "bg-blue-600 text-white shadow-sm"
+                                : "text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
                             }`}
                           >
                             Hide All 12 Digits
@@ -1703,14 +1700,14 @@ export default function AadhaarMaskingEngine({
 
                       {/* Manual drawing type toggle */}
                       <div className="space-y-2">
-                        <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest ml-1">Manual Drawing Mode</label>
-                        <div className="grid grid-cols-2 gap-2.5 bg-black/40 border border-white/5 p-1 rounded-xl">
+                        <label className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest ml-1">Manual Drawing Mode</label>
+                        <div className="grid grid-cols-2 gap-2.5 bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/5 p-1 rounded-xl">
                           <button
                             onClick={() => setMaskType("redact")}
                             className={`py-2 px-3 text-[10px] font-black uppercase tracking-widest rounded-lg cursor-pointer transition-colors ${
                               maskType === "redact"
-                                ? "bg-blue-600 text-white"
-                                : "text-gray-500 hover:text-gray-300"
+                                ? "bg-blue-600 text-white shadow-sm"
+                                : "text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
                             }`}
                           >
                             Redact (Hide)
@@ -1719,14 +1716,14 @@ export default function AadhaarMaskingEngine({
                             onClick={() => setMaskType("blur")}
                             className={`py-2 px-3 text-[10px] font-black uppercase tracking-widest rounded-lg cursor-pointer transition-colors ${
                               maskType === "blur"
-                                ? "bg-blue-600 text-white"
-                                : "text-gray-500 hover:text-gray-300"
+                                ? "bg-blue-600 text-white shadow-sm"
+                                : "text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
                             }`}
                           >
                             Blur Area
                           </button>
                         </div>
-                        <p className="text-[10px] text-gray-500 font-bold uppercase tracking-wide mt-1 leading-relaxed">
+                        <p className="text-[10px] text-slate-500 dark:text-gray-500 font-bold uppercase tracking-wide mt-1 leading-relaxed">
                           💡 Tip: Select a mode, then click and drag directly on the image to draw a custom mask box.
                         </p>
                       </div>
@@ -1734,16 +1731,16 @@ export default function AadhaarMaskingEngine({
                       <div className="grid grid-cols-2 gap-3.5">
                         <button
                           onClick={addManualRedactBox}
-                          className="py-3 px-4 bg-white/5 border border-white/10 hover:border-blue-500/20 rounded-xl hover:bg-white/10 text-[9px] font-black uppercase tracking-widest text-gray-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                          className="py-3 px-4 bg-slate-100 hover:bg-slate-200/70 text-slate-700 border-slate-200 dark:bg-white/5 dark:hover:bg-white/10 dark:text-gray-300 dark:border-white/10 hover:border-blue-500/30 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
                         >
-                          <Plus className="w-3.5 h-3.5 text-blue-500" />
+                          <Plus className="w-3.5 h-3.5 text-blue-600 dark:text-blue-500" />
                           Redact Box
                         </button>
                         <button
                           onClick={addManualBlurBox}
-                          className="py-3 px-4 bg-white/5 border border-white/10 hover:border-blue-500/20 rounded-xl hover:bg-white/10 text-[9px] font-black uppercase tracking-widest text-gray-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                          className="py-3 px-4 bg-slate-100 hover:bg-slate-200/70 text-slate-700 border-slate-200 dark:bg-white/5 dark:hover:bg-white/10 dark:text-gray-300 dark:border-white/10 hover:border-blue-500/30 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
                         >
-                          <Plus className="w-3.5 h-3.5 text-blue-500" />
+                          <Plus className="w-3.5 h-3.5 text-blue-600 dark:text-blue-500" />
                           Blur Box
                         </button>
                       </div>
@@ -1752,7 +1749,7 @@ export default function AadhaarMaskingEngine({
                         <button
                           onClick={handleUndoMask}
                           disabled={overlays.length === 0}
-                          className="py-3 px-4 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] disabled:opacity-40 rounded-xl text-[9px] font-black uppercase tracking-widest text-gray-400 hover:text-white transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                          className="py-3 px-4 border border-slate-200 dark:border-white/10 bg-slate-100 hover:bg-slate-200/70 text-slate-700 dark:bg-white/[0.02] dark:hover:bg-white/[0.05] dark:text-gray-400 dark:hover:text-white disabled:opacity-40 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
                         >
                           <Undo2 className="w-3.5 h-3.5 text-amber-500" />
                           Undo Mask
@@ -1760,47 +1757,47 @@ export default function AadhaarMaskingEngine({
                         <button
                           onClick={clearAllOverlays}
                           disabled={overlays.length === 0}
-                          className="py-3 px-4 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] disabled:opacity-40 rounded-xl text-[9px] font-black uppercase tracking-widest text-gray-400 hover:text-white transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                          className="py-3 px-4 border border-slate-200 dark:border-white/10 bg-slate-100 hover:bg-slate-200/70 text-slate-700 dark:bg-white/[0.02] dark:hover:bg-white/[0.05] dark:text-gray-400 dark:hover:text-white disabled:opacity-40 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
                         >
                           <Trash2 className="w-3.5 h-3.5 text-red-500" />
                           Clear All
                         </button>
                       </div>
 
-                      <div className="h-px bg-white/5 w-full" />
+                      <div className="h-px bg-[#E6ECF5] dark:bg-white/5 w-full" />
 
                       {/* Utilities controls */}
                       <div className="space-y-3.5">
                         {/* Blur QR */}
                         <div className="flex items-center justify-between">
-                          <span className="text-[10px] font-black text-gray-400 uppercase tracking-wider">Blur QR Code</span>
+                          <span className="text-[10px] font-black text-slate-600 dark:text-gray-400 uppercase tracking-wider">Blur QR Code</span>
                           <input
                             type="checkbox"
                             checked={blurQR}
                             onChange={(e) => setBlurQR(e.target.checked)}
-                            className="w-4 h-4 rounded border-white/10 bg-white/5 text-blue-600 outline-none cursor-pointer focus:ring-0"
+                            className="w-4 h-4 rounded border-slate-300 dark:border-white/10 bg-white dark:bg-white/5 text-blue-600 outline-none cursor-pointer focus:ring-0"
                             id="blur-qr-checkbox"
                           />
                         </div>
 
                         {/* Watermark */}
                         <div className="flex items-center justify-between">
-                          <span className="text-[10px] font-black text-gray-400 uppercase tracking-wider">Watermark Document</span>
+                          <span className="text-[10px] font-black text-slate-600 dark:text-gray-400 uppercase tracking-wider">Watermark Document</span>
                           <input
                             type="checkbox"
                             checked={watermark}
                             onChange={(e) => setWatermark(e.target.checked)}
-                            className="w-4 h-4 rounded border-white/10 bg-white/5 text-blue-600 outline-none cursor-pointer focus:ring-0"
+                            className="w-4 h-4 rounded border-slate-300 dark:border-white/10 bg-white dark:bg-white/5 text-blue-600 outline-none cursor-pointer focus:ring-0"
                             id="watermark-checkbox"
                           />
                         </div>
 
                         {/* Rotate */}
                         <div className="flex items-center justify-between">
-                          <span className="text-[10px] font-black text-gray-400 uppercase tracking-wider">Rotate Document</span>
+                          <span className="text-[10px] font-black text-slate-600 dark:text-gray-400 uppercase tracking-wider">Rotate Document</span>
                           <button
                             onClick={() => setRotation((prev) => (prev + 90) % 360)}
-                            className="p-2 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 text-gray-400 hover:text-white transition-all cursor-pointer flex items-center gap-1"
+                            className="p-2 bg-slate-100 hover:bg-slate-200/70 text-slate-700 border-slate-200 dark:bg-white/5 dark:border-white/10 dark:text-gray-400 dark:hover:text-white rounded-xl transition-all cursor-pointer flex items-center gap-1 shadow-sm"
                             title="Rotate 90 deg"
                           >
                             <RotateCw className="w-3.5 h-3.5" />
@@ -1812,67 +1809,67 @@ export default function AadhaarMaskingEngine({
                   </div>
 
                   {/* Results Section Verification Checklist */}
-                  <div className="glass p-6 rounded-[2rem] border border-white/5 bg-white/[0.01] space-y-4">
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 block">Redaction Audit</span>
+                  <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl p-6 shadow-sm space-y-4">
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-gray-500 block">Redaction Audit</span>
                     
                     <div className="space-y-3">
                       <div className="flex items-center justify-between text-xs font-bold">
-                        <span className="text-gray-400">Aadhaar Bbox Scanning</span>
+                        <span className="text-slate-600 dark:text-gray-400">Aadhaar Bbox Scanning</span>
                         {detectionSuccess === "success" ? (
-                          <span className="text-emerald-400 flex items-center gap-1">✅ Detected</span>
+                          <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1">✅ Detected</span>
                         ) : detectionSuccess === "none" ? (
-                          <span className="text-amber-400 flex items-center gap-1">⚠️ Manual Mode</span>
+                          <span className="text-amber-600 dark:text-amber-400 flex items-center gap-1">⚠️ Manual Mode</span>
                         ) : (
-                          <span className="text-gray-600">Idle</span>
+                          <span className="text-slate-400 dark:text-gray-600">Idle</span>
                         )}
                       </div>
                       <div className="flex items-center justify-between text-xs font-bold">
-                        <span className="text-gray-400">Digit Redaction ({maskFullDigits ? "All 12" : "First 8"})</span>
+                        <span className="text-slate-600 dark:text-gray-400">Digit Redaction ({maskFullDigits ? "All 12" : "First 8"})</span>
                         {overlays.length > 0 ? (
-                          <span className="text-emerald-400 flex items-center gap-1">
+                          <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
                             ✅ Masked {overlays.some((o) => o.id.startsWith("manual-")) ? "(Manual)" : "(Auto)"}
                           </span>
                         ) : (
-                          <span className="text-red-400 flex items-center gap-1">
+                          <span className="text-red-600 dark:text-red-400 flex items-center gap-1">
                             ❌ Not Masked
                           </span>
                         )}
                       </div>
                       {overlays.length === 0 && (
-                        <div className="text-[10px] text-amber-400/90 font-bold bg-amber-500/10 border border-amber-500/20 p-3 rounded-xl mt-2 leading-relaxed">
+                        <div className="text-[10px] text-amber-700 dark:text-amber-400/90 font-bold bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 p-3 rounded-xl mt-2 leading-relaxed">
                           ⚠️ Auto-detection could not locate the Aadhaar number. Please use manual mode: select "Redact (Hide)" above, then click and drag directly on the image to mask the numbers.
                         </div>
                       )}
                       <div className="flex items-center justify-between text-xs font-bold">
-                        <span className="text-gray-400">Client Sandbox Compliance</span>
-                        <span className="text-emerald-400 flex items-center gap-1">✅ Protected</span>
+                        <span className="text-slate-600 dark:text-gray-400">Client Sandbox Compliance</span>
+                        <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1">✅ Protected</span>
                       </div>
                     </div>
 
-                    <div className="h-px bg-white/5 w-full" />
+                    <div className="h-px bg-[#E6ECF5] dark:bg-white/5 w-full" />
                     
-                    <div className="flex justify-between items-center text-[9px] text-gray-500 font-bold uppercase tracking-wider leading-relaxed">
+                    <div className="flex justify-between items-center text-[9px] text-slate-500 dark:text-gray-500 font-bold uppercase tracking-wider leading-relaxed">
                       <span>Verification checklist validated</span>
                     </div>
                   </div>
 
                   {/* Exporter widget */}
-                  <div className="glass p-6 rounded-[2rem] border border-white/5 bg-white/[0.01] space-y-6">
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 block">Export Parameters</span>
+                  <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl p-6 shadow-sm space-y-6">
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-gray-500 block">Export Parameters</span>
                     
                     <div className="space-y-4">
                       {/* Format toggle */}
                       <div className="space-y-2">
-                        <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest ml-1">Export Format</label>
-                        <div className="grid grid-cols-3 gap-2 bg-black/40 border border-white/5 p-1 rounded-xl">
+                        <label className="text-[9px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest ml-1">Export Format</label>
+                        <div className="grid grid-cols-3 gap-2 bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/5 p-1 rounded-xl">
                           {(["png", "jpg", "pdf"] as const).map((fmt) => (
                             <button
                               key={fmt}
                               onClick={() => setExportFormat(fmt)}
                               className={`py-2 px-1 text-[10px] font-black uppercase tracking-widest rounded-lg cursor-pointer transition-colors ${
                                 exportFormat === fmt
-                                  ? "bg-blue-600 text-white"
-                                  : "text-gray-500 hover:text-gray-300"
+                                  ? "bg-blue-600 text-white shadow-sm"
+                                  : "text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
                               }`}
                             >
                               {fmt}
@@ -1883,16 +1880,16 @@ export default function AadhaarMaskingEngine({
 
                       <button
                         onClick={triggerDownload}
-                        className="w-full flex items-center justify-center gap-2.5 px-6 py-4.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] active:scale-98 cursor-pointer"
+                        className="w-full flex items-center justify-center gap-2.5 px-6 py-4.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_4px_20px_rgba(37,99,235,0.25)] active:scale-98 cursor-pointer"
                       >
                         <Download className="w-4 h-4" /> Download masked document
                       </button>
 
-                      <div className="flex justify-between items-center text-[9px] text-gray-500 font-bold uppercase tracking-wider">
-                        <span>Est size: <span className="text-gray-400">{downloadSizeInfo || "Calculating..."}</span></span>
+                      <div className="flex justify-between items-center text-[9px] text-slate-500 dark:text-gray-500 font-bold uppercase tracking-wider">
+                        <span>Est size: <span className="text-slate-700 dark:text-gray-400">{downloadSizeInfo || "Calculating..."}</span></span>
                         <button
                           onClick={resetAll}
-                          className="text-gray-400 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5"
+                          className="text-slate-500 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white transition-colors cursor-pointer flex items-center gap-1.5"
                         >
                           <RefreshCw className="w-3 h-3" /> Reset Workspace
                         </button>
@@ -1907,14 +1904,14 @@ export default function AadhaarMaskingEngine({
         </div>
 
         {/* Global Security Privacy Banner */}
-        <div className="border-t border-white/5 p-6 bg-white/[0.01]">
+        <div className="border-t border-[#E6ECF5] dark:border-white/5 p-6 bg-[#FBFCFE] dark:bg-white/[0.01]">
           <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-            <div className="h-10 w-10 bg-blue-500/10 border border-blue-500/20 rounded-xl flex items-center justify-center text-blue-400 shrink-0 shadow-md">
+            <div className="h-10 w-10 bg-blue-500/10 border border-blue-500/20 rounded-xl flex items-center justify-center text-blue-600 dark:text-blue-400 shrink-0 shadow-md">
               <Lock className="w-5 h-5" />
             </div>
             <div className="space-y-1">
               <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">Absolute Client-Side Document Security</h4>
-              <p className="text-[10px] text-gray-500 font-semibold leading-relaxed">
+              <p className="text-[10px] text-slate-600 dark:text-gray-500 font-semibold leading-relaxed">
                 Your files never leave your device. All OCR character scanning, mask rendering, blurs, and PDF compilation are executed 100% locally in your web browser. Completely safe to use offline.
               </p>
             </div>
@@ -1924,43 +1921,43 @@ export default function AadhaarMaskingEngine({
       </div>
 
       {/* Feature Highlights Grid */}
-      <div className="max-w-5xl mx-auto border-t border-white/5 pt-20">
+      <div className="max-w-5xl mx-auto border-t border-[#E6ECF5] dark:border-white/5 pt-20">
         <div className="grid sm:grid-cols-3 gap-8">
-          <div className="glass p-7 rounded-[2rem] border border-white/5 bg-white/[0.01] relative overflow-hidden group">
+          <div className="bg-[#FBFCFE] dark:bg-white/[0.02] p-7 rounded-3xl border border-[#E6ECF5] dark:border-white/5 shadow-sm relative overflow-hidden group">
             <div className="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-opacity">
-              <Sparkles className="w-12 h-12 text-white" />
+              <Sparkles className="w-12 h-12 text-slate-900 dark:text-white" />
             </div>
-            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
+            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400">
               <Sparkles className="w-5.5 h-5.5" />
             </div>
             <h4 className="text-base font-black text-slate-900 dark:text-white mb-2 uppercase tracking-tight">Auto Aadhaar Detection</h4>
-            <p className="text-xs text-gray-500 leading-relaxed font-semibold group-hover:text-gray-400 transition-colors font-sans">
+            <p className="text-xs text-slate-600 dark:text-gray-500 leading-relaxed font-semibold group-hover:text-slate-800 dark:group-hover:text-gray-400 transition-colors font-sans">
               Dynamic character scanning locates your 12-digit layout bounds and automatically masks numbers correctly.
             </p>
           </div>
 
-          <div className="glass p-7 rounded-[2rem] border border-white/5 bg-white/[0.01] relative overflow-hidden group">
+          <div className="bg-[#FBFCFE] dark:bg-white/[0.02] p-7 rounded-3xl border border-[#E6ECF5] dark:border-white/5 shadow-sm relative overflow-hidden group">
             <div className="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-opacity">
-              <Scissors className="w-12 h-12 text-white" />
+              <Scissors className="w-12 h-12 text-slate-900 dark:text-white" />
             </div>
-            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
+            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400">
               <Scissors className="w-5.5 h-5.5" />
             </div>
             <h4 className="text-base font-black text-slate-900 dark:text-white mb-2 uppercase tracking-tight">Custom Blurs & QR Hiding</h4>
-            <p className="text-xs text-gray-500 leading-relaxed font-semibold group-hover:text-gray-400 transition-colors font-sans">
+            <p className="text-xs text-slate-600 dark:text-gray-500 leading-relaxed font-semibold group-hover:text-slate-800 dark:group-hover:text-gray-400 transition-colors font-sans">
               Draw custom regions to hide portrait images, addresses, or apply pixelated overlays on Aadhaar QR barcodes.
             </p>
           </div>
 
-          <div className="glass p-7 rounded-[2rem] border border-white/5 bg-white/[0.01] relative overflow-hidden group">
+          <div className="bg-[#FBFCFE] dark:bg-white/[0.02] p-7 rounded-3xl border border-[#E6ECF5] dark:border-white/5 shadow-sm relative overflow-hidden group">
             <div className="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-opacity">
-              <ShieldCheck className="w-12 h-12 text-white" />
+              <ShieldCheck className="w-12 h-12 text-slate-900 dark:text-white" />
             </div>
-            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
+            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400">
               <ShieldCheck className="w-5.5 h-5.5" />
             </div>
             <h4 className="text-base font-black text-slate-900 dark:text-white mb-2 uppercase tracking-tight">Watermark Protection</h4>
-            <p className="text-xs text-gray-500 leading-relaxed font-semibold group-hover:text-gray-400 transition-colors font-sans">
+            <p className="text-xs text-slate-600 dark:text-gray-500 leading-relaxed font-semibold group-hover:text-slate-800 dark:group-hover:text-gray-400 transition-colors font-sans">
               Overlay diagonal semi-transparent secure indicators to identify your files for standard KYC verifications.
             </p>
           </div>
@@ -1968,22 +1965,22 @@ export default function AadhaarMaskingEngine({
       </div>
 
       {/* Trust badging center */}
-      <div className="max-w-5xl mx-auto pt-10 border-t border-white/5">
+      <div className="max-w-5xl mx-auto pt-10 border-t border-[#E6ECF5] dark:border-white/5">
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
-          <div className="premium-card p-4 hover:border-blue-500/20 text-center flex flex-col items-center justify-center">
-            <span className="text-[10px] font-black uppercase tracking-wider text-gray-300">100% Private</span>
+          <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-2xl p-4 hover:border-blue-500/30 text-center flex flex-col items-center justify-center shadow-sm">
+            <span className="text-[10px] font-black uppercase tracking-wider text-slate-700 dark:text-gray-300">100% Private</span>
           </div>
-          <div className="premium-card p-4 hover:border-purple-500/20 text-center flex flex-col items-center justify-center">
-            <span className="text-[10px] font-black uppercase tracking-wider text-gray-300">Browser Process</span>
+          <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-2xl p-4 hover:border-purple-500/30 text-center flex flex-col items-center justify-center shadow-sm">
+            <span className="text-[10px] font-black uppercase tracking-wider text-slate-700 dark:text-gray-300">Browser Process</span>
           </div>
-          <div className="premium-card p-4 hover:border-amber-500/20 text-center flex flex-col items-center justify-center">
-            <span className="text-[10px] font-black uppercase tracking-wider text-gray-300">No Upload</span>
+          <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-2xl p-4 hover:border-amber-500/30 text-center flex flex-col items-center justify-center shadow-sm">
+            <span className="text-[10px] font-black uppercase tracking-wider text-slate-700 dark:text-gray-300">No Upload</span>
           </div>
-          <div className="premium-card p-4 hover:border-emerald-500/20 text-center flex flex-col items-center justify-center">
-            <span className="text-[10px] font-black uppercase tracking-wider text-gray-300">Secure Masking</span>
+          <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-2xl p-4 hover:border-emerald-500/30 text-center flex flex-col items-center justify-center shadow-sm">
+            <span className="text-[10px] font-black uppercase tracking-wider text-slate-700 dark:text-gray-300">Secure Masking</span>
           </div>
-          <div className="premium-card p-4 hover:border-sky-500/20 text-center flex flex-col items-center justify-center">
-            <span className="text-[10px] font-black uppercase tracking-wider text-gray-300">Instant Process</span>
+          <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-2xl p-4 hover:border-sky-500/30 text-center flex flex-col items-center justify-center shadow-sm">
+            <span className="text-[10px] font-black uppercase tracking-wider text-slate-700 dark:text-gray-300">Instant Process</span>
           </div>
         </div>
       </div>

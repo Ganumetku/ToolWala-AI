@@ -186,7 +186,7 @@ export function PDFWorkspace({
           </div>
 
           {toolArticles['edit-pdf'] && (
-            <div className="w-full max-w-5xl mt-20 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-900 shadow-xl dark:shadow-2xl glass p-1">
+            <div className="w-full mt-20">
               <ToolArticle {...toolArticles['edit-pdf']} />
             </div>
           )}

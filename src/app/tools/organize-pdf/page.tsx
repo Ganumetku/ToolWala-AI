@@ -385,7 +385,7 @@ export default function OrganizePdf() {
   return (
     <ToolLayout>
       {/* Main Tool Container */}
-      <div className="glass rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl mb-16">
+      <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12">
         
         {/* Header Banner */}
         <ToolHero 
@@ -394,11 +394,11 @@ export default function OrganizePdf() {
           icon={<Grid className="w-7 h-7" />}
         />
 
-        <div className="p-8 sm:p-10 bg-white dark:bg-black/[0.15]">
+        <div className="p-8 sm:p-10">
           {!pdfFile ? (
             <div className="relative">
               {isProcessing && processingMessage && (
-                <div className="absolute inset-0 bg-black/80 backdrop-blur-md flex flex-col items-center justify-center z-50 rounded-[3rem]">
+                <div className="absolute inset-0 bg-black/80 backdrop-blur-md flex flex-col items-center justify-center z-50 rounded-3xl">
                   <RefreshCw className="w-10 h-10 text-blue-500 animate-spin mb-4" />
                   <p className="text-sm font-bold text-gray-300 uppercase tracking-widest animate-pulse">
                     {processingMessage}
@@ -422,14 +422,14 @@ export default function OrganizePdf() {
             <div className="space-y-6">
               
               {/* Document Overview Bar */}
-              <div className="glass p-5 rounded-2xl border border-white/5 bg-white/[0.01] flex flex-wrap items-center justify-between gap-4">
+              <div className="p-5 rounded-2xl border border-slate-200/80 dark:border-white/5 bg-slate-50/70 dark:bg-white/[0.01] flex flex-wrap items-center justify-between gap-4 shadow-sm">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-blue-500/10 border border-blue-500/20 text-blue-400 rounded-xl">
+                  <div className="p-3 bg-blue-600/10 border border-blue-500/20 text-blue-600 rounded-xl">
                     <FileText className="w-6 h-6" />
                   </div>
                   <div>
                     <h4 className="text-sm font-black text-slate-900 dark:text-white line-clamp-1">{pdfFile.name}</h4>
-                    <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider mt-0.5">
+                    <p className="text-[10px] text-slate-500 dark:text-gray-500 font-semibold uppercase tracking-wider mt-0.5">
                       Size: {formatBytes(pdfFile.size)} • Total: {pages.length} Pages
                     </p>
                   </div>
@@ -439,14 +439,14 @@ export default function OrganizePdf() {
                   <button
                     onClick={handleResetWorkspace}
                     disabled={isProcessing}
-                    className="px-4 py-2.5 border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/10 text-gray-400 hover:text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all disabled:opacity-50 cursor-pointer"
+                    className="px-4 py-2.5 border border-slate-200 dark:border-white/5 bg-slate-100 hover:bg-slate-200/80 dark:bg-white/[0.02] dark:hover:bg-white/[0.05] text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all disabled:opacity-50 cursor-pointer shadow-sm"
                   >
                     Reset Layout
                   </button>
                   <button
                     onClick={resetAll}
                     disabled={isProcessing}
-                    className="px-4 py-2.5 border border-red-500/10 bg-red-500/5 hover:bg-red-500/10 hover:border-red-500/20 text-red-400 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all disabled:opacity-50 cursor-pointer"
+                    className="px-4 py-2.5 border border-red-200 dark:border-red-500/10 bg-red-50 hover:bg-red-100 dark:bg-red-500/5 dark:hover:bg-red-500/10 text-red-600 dark:text-red-400 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all disabled:opacity-50 cursor-pointer shadow-sm"
                   >
                     Remove File
                   </button>
@@ -454,25 +454,25 @@ export default function OrganizePdf() {
               </div>
 
               {/* Action Toolbar Deck */}
-              <div className="sticky top-6 z-25 glass p-4 sm:p-5 rounded-2xl border border-white/5 bg-black/80 backdrop-blur-xl flex flex-wrap items-center justify-between gap-4 shadow-[0_15px_30px_rgba(0,0,0,0.5)]">
+              <div className="sticky top-6 z-25 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-white/5 bg-white/95 dark:bg-black/80 backdrop-blur-xl flex flex-wrap items-center justify-between gap-4 shadow-lg">
                 
                 {/* Selection Counter & Selectors */}
                 <div className="flex items-center gap-3">
-                  <div className="text-xs font-semibold text-gray-400">
-                    Selected: <span className="font-mono text-blue-400 font-black">{selectedPageIds.size}</span> / {pages.length}
+                  <div className="text-xs font-semibold text-slate-600 dark:text-gray-400">
+                    Selected: <span className="font-mono text-blue-600 dark:text-blue-400 font-black">{selectedPageIds.size}</span> / {pages.length}
                   </div>
-                  <div className="h-4 w-px bg-white/10" />
+                  <div className="h-4 w-px bg-slate-200 dark:bg-white/10" />
                   <div className="flex gap-1.5">
                     <button
                       onClick={selectAll}
-                      className="px-2.5 py-1.5 bg-white/5 hover:bg-white/10 text-[9px] font-black uppercase tracking-widest rounded-lg cursor-pointer text-gray-300 transition-colors"
+                      className="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-[9px] font-black uppercase tracking-widest rounded-lg cursor-pointer text-slate-700 dark:text-gray-300 transition-colors border border-slate-200 dark:border-transparent"
                     >
                       Select All
                     </button>
                     {selectedPageIds.size > 0 && (
                       <button
                         onClick={clearSelection}
-                        className="px-2.5 py-1.5 bg-white/5 hover:bg-white/10 text-[9px] font-black uppercase tracking-widest rounded-lg cursor-pointer text-gray-300 transition-colors"
+                        className="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-[9px] font-black uppercase tracking-widest rounded-lg cursor-pointer text-slate-700 dark:text-gray-300 transition-colors border border-slate-200 dark:border-transparent"
                       >
                         Clear
                       </button>
@@ -482,11 +482,11 @@ export default function OrganizePdf() {
 
                 {/* Batch Actions Group */}
                 <div className="flex flex-wrap items-center gap-2">
-                  <div className="flex items-center gap-1.5 bg-white/[0.02] border border-white/5 p-1 rounded-xl">
+                  <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 p-1 rounded-xl">
                     <button
                       onClick={() => rotatePages('ccw')}
                       disabled={selectedPageIds.size === 0}
-                      className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer transition-colors"
+                      className="p-2 text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-white/5 rounded-lg disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer transition-colors shadow-sm"
                       title="Rotate Counter-Clockwise"
                     >
                       <RotateCcw className="w-4 h-4" />
@@ -494,25 +494,25 @@ export default function OrganizePdf() {
                     <button
                       onClick={() => rotatePages('cw')}
                       disabled={selectedPageIds.size === 0}
-                      className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer transition-colors"
+                      className="p-2 text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-white/5 rounded-lg disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer transition-colors shadow-sm"
                       title="Rotate Clockwise"
                     >
                       <RotateCw className="w-4 h-4" />
                     </button>
-                    <div className="w-px h-5 bg-white/10 mx-1" />
+                    <div className="w-px h-5 bg-slate-300 dark:bg-white/10 mx-1" />
                     <button
                       onClick={() => duplicatePages()}
                       disabled={selectedPageIds.size === 0}
-                      className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer transition-colors"
+                      className="p-2 text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-white/5 rounded-lg disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer transition-colors shadow-sm"
                       title="Duplicate Selected Pages"
                     >
                       <Copy className="w-4 h-4" />
                     </button>
-                    <div className="w-px h-5 bg-white/10 mx-1" />
+                    <div className="w-px h-5 bg-slate-300 dark:bg-white/10 mx-1" />
                     <button
                       onClick={() => deletePages()}
                       disabled={selectedPageIds.size === 0}
-                      className="p-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer transition-colors"
+                      className="p-2 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 hover:bg-red-100 dark:hover:bg-red-500/10 rounded-lg disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer transition-colors shadow-sm"
                       title="Delete Selected Pages"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -524,7 +524,7 @@ export default function OrganizePdf() {
                     <button
                       onClick={compilePdf}
                       disabled={isProcessing || pages.length === 0}
-                      className="flex items-center gap-2 px-5 py-3.5 bg-blue-600 hover:bg-blue-500 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)] disabled:opacity-50 cursor-pointer"
+                      className="flex items-center gap-2 px-5 py-3.5 bg-blue-600 hover:bg-blue-500 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_4px_20px_rgba(37,99,235,0.3)] disabled:opacity-50 cursor-pointer"
                     >
                       {isProcessing ? (
                         <>
@@ -539,7 +539,7 @@ export default function OrganizePdf() {
                   ) : (
                     <button
                       onClick={downloadResult}
-                      className="flex items-center gap-2 px-5 py-3.5 bg-green-600 hover:bg-green-500 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_15px_rgba(22,163,74,0.3)] cursor-pointer"
+                      className="flex items-center gap-2 px-5 py-3.5 bg-green-600 hover:bg-green-500 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_4px_20px_rgba(22,163,74,0.3)] cursor-pointer"
                     >
                       <Download className="w-4 h-4 animate-bounce" /> Download PDF
                     </button>
@@ -551,20 +551,20 @@ export default function OrganizePdf() {
               {/* PDF compiler processing barrier */}
               {isProcessing && processingMessage && (
                 <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center z-50">
-                  <div className="bg-[#0b0f19] border border-white/5 p-8 rounded-3xl flex flex-col items-center max-w-sm text-center shadow-2xl">
-                    <RefreshCw className="w-10 h-10 text-blue-500 animate-spin mb-4" />
+                  <div className="bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-white/5 p-8 rounded-3xl flex flex-col items-center max-w-sm text-center shadow-2xl">
+                    <RefreshCw className="w-10 h-10 text-blue-600 dark:text-blue-500 animate-spin mb-4" />
                     <p className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-widest mb-1">Processing PDF</p>
-                    <p className="text-xs text-gray-500 font-medium leading-relaxed">{processingMessage}</p>
+                    <p className="text-xs text-slate-500 dark:text-gray-500 font-medium leading-relaxed">{processingMessage}</p>
                   </div>
                 </div>
               )}
 
               {/* Main Workspace Thumbnail Grid */}
               {pages.length === 0 ? (
-                <div className="glass p-16 rounded-[2.5rem] text-center border border-white/5 flex flex-col items-center">
-                  <AlertCircle className="w-12 h-12 text-gray-600 mb-4" />
+                <div className="p-16 rounded-3xl text-center border border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-white/[0.01] flex flex-col items-center shadow-sm">
+                  <AlertCircle className="w-12 h-12 text-slate-400 dark:text-gray-600 mb-4" />
                   <h3 className="text-lg font-black text-slate-900 dark:text-white mb-2">No pages remaining</h3>
-                  <p className="text-sm text-gray-500 max-w-xs font-semibold leading-relaxed">
+                  <p className="text-sm text-slate-500 dark:text-gray-500 max-w-xs font-semibold leading-relaxed">
                     You have deleted all pages from the document. Click 'Reset Layout' above to start over.
                   </p>
                 </div>
@@ -579,12 +579,12 @@ export default function OrganizePdf() {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.8 }}
                         transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                        className={`group relative rounded-2xl border bg-[#0b0f19]/60 flex flex-col justify-between overflow-hidden cursor-grab active:cursor-grabbing ${
+                        className={`group relative rounded-2xl border bg-slate-50/80 dark:bg-[#0b0f19]/60 flex flex-col justify-between overflow-hidden cursor-grab active:cursor-grabbing shadow-sm ${
                           selectedPageIds.has(page.id)
-                            ? 'border-blue-500/70 shadow-[0_0_20px_rgba(59,130,246,0.15)] ring-1 ring-blue-500/40'
+                            ? 'border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.25)] ring-2 ring-blue-500/40'
                             : draggedIndex === index
-                            ? 'border-white/20 opacity-40'
-                            : 'border-white/5 hover:border-white/10'
+                            ? 'border-slate-300 dark:border-white/20 opacity-40'
+                            : 'border-slate-200 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10'
                         }`}
                         draggable
                         onDragStart={() => handleDragStart(index)}
@@ -595,7 +595,7 @@ export default function OrganizePdf() {
                         
                         {/* Image Canvas / Card Core */}
                         <div 
-                          className="relative p-3 flex-grow flex items-center justify-center aspect-[3/4] bg-black/30 overflow-hidden"
+                          className="relative p-3 flex-grow flex items-center justify-center aspect-[3/4] bg-slate-100/90 dark:bg-black/30 overflow-hidden"
                           onClick={() => togglePageSelect(page.id)}
                         >
                           
@@ -606,7 +606,7 @@ export default function OrganizePdf() {
                               className={`w-5.5 h-5.5 rounded-lg border flex items-center justify-center cursor-pointer transition-all ${
                                 selectedPageIds.has(page.id)
                                   ? 'bg-blue-600 border-blue-500 text-white shadow-[0_0_10px_rgba(37,99,235,0.4)]'
-                                  : 'bg-black/40 border-white/10 text-transparent hover:border-white/20 hover:bg-black/60'
+                                  : 'bg-white/80 dark:bg-black/40 border-slate-300 dark:border-white/10 text-transparent hover:border-slate-400 hover:bg-white dark:hover:bg-black/60 shadow-sm'
                               }`}
                             >
                               <Check className="w-3.5 h-3.5" />
@@ -617,21 +617,21 @@ export default function OrganizePdf() {
                           <div className="absolute top-2 right-2 z-10 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                             <button
                               onClick={(e) => { e.stopPropagation(); rotatePages('cw', page.id); }}
-                              className="p-1.5 bg-black/60 hover:bg-blue-600/80 border border-white/5 rounded-lg text-gray-400 hover:text-white cursor-pointer transition-all"
+                              className="p-1.5 bg-white/90 hover:bg-blue-600 hover:text-white dark:bg-black/60 dark:hover:bg-blue-600/80 border border-slate-200 dark:border-white/5 rounded-lg text-slate-700 dark:text-gray-400 cursor-pointer transition-all shadow-sm"
                               title="Rotate Clockwise"
                             >
                               <RotateCw className="w-3.5 h-3.5" />
                             </button>
                             <button
                               onClick={(e) => { e.stopPropagation(); duplicatePages(page.id); }}
-                              className="p-1.5 bg-black/60 hover:bg-blue-600/80 border border-white/5 rounded-lg text-gray-400 hover:text-white cursor-pointer transition-all"
+                              className="p-1.5 bg-white/90 hover:bg-blue-600 hover:text-white dark:bg-black/60 dark:hover:bg-blue-600/80 border border-slate-200 dark:border-white/5 rounded-lg text-slate-700 dark:text-gray-400 cursor-pointer transition-all shadow-sm"
                               title="Duplicate Page"
                             >
                               <Copy className="w-3.5 h-3.5" />
                             </button>
                             <button
                               onClick={(e) => { e.stopPropagation(); deletePages(page.id); }}
-                              className="p-1.5 bg-black/60 hover:bg-red-600/80 border border-white/5 rounded-lg text-red-400 hover:text-white cursor-pointer transition-all"
+                              className="p-1.5 bg-white/90 hover:bg-red-600 hover:text-white dark:bg-black/60 dark:hover:bg-red-600/80 border border-slate-200 dark:border-white/5 rounded-lg text-red-600 dark:text-red-400 cursor-pointer transition-all shadow-sm"
                               title="Delete Page"
                             >
                               <Trash className="w-3.5 h-3.5" />
@@ -649,35 +649,35 @@ export default function OrganizePdf() {
                             />
                           ) : (
                             <div className="flex flex-col items-center text-center">
-                              <FileText className="w-8 h-8 text-gray-600 mb-2" />
-                              <span className="text-[10px] text-gray-500 font-semibold">Error Loading Preview</span>
+                              <FileText className="w-8 h-8 text-slate-400 dark:text-gray-600 mb-2" />
+                              <span className="text-[10px] text-slate-500 dark:text-gray-500 font-semibold">Error Loading Preview</span>
                             </div>
                           )}
                         </div>
 
                         {/* Page Index Card Footer */}
-                        <div className="px-3 py-2 bg-black/20 border-t border-white/5 flex items-center justify-between text-[10px] font-bold text-gray-400">
-                          <span className="font-semibold text-gray-500">Page {index + 1}</span>
+                        <div className="px-3 py-2 bg-slate-100/90 dark:bg-black/20 border-t border-slate-200/80 dark:border-white/5 flex items-center justify-between text-[10px] font-bold text-slate-600 dark:text-gray-400">
+                          <span className="font-semibold text-slate-600 dark:text-gray-500">Page {index + 1}</span>
                           
                           {/* Navigation Buttons for mobile (Left / Right) */}
                           <div className="flex gap-0.5 sm:hidden">
                             <button
                               disabled={index === 0}
                               onClick={(e) => { e.stopPropagation(); movePage(index, 'left'); }}
-                              className="p-1 bg-white/5 hover:bg-white/10 rounded disabled:opacity-30 cursor-pointer"
+                              className="p-1 bg-slate-200/80 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/10 rounded disabled:opacity-30 cursor-pointer"
                             >
                               <ArrowLeft className="w-3 h-3" />
                             </button>
                             <button
                               disabled={index === pages.length - 1}
                               onClick={(e) => { e.stopPropagation(); movePage(index, 'right'); }}
-                              className="p-1 bg-white/5 hover:bg-white/10 rounded disabled:opacity-30 cursor-pointer"
+                              className="p-1 bg-slate-200/80 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/10 rounded disabled:opacity-30 cursor-pointer"
                             >
                               <ArrowRightIcon className="w-3 h-3" />
                             </button>
                           </div>
 
-                          <span className="hidden sm:inline font-mono font-black text-gray-600 tracking-tighter">
+                          <span className="hidden sm:inline font-mono font-black text-slate-400 dark:text-gray-600 tracking-tighter">
                             #{page.originalIndex + 1}
                           </span>
                         </div>
@@ -694,32 +694,32 @@ export default function OrganizePdf() {
       </div>
 
         {/* Feature Highlights Grid */}
-        <div className="mt-32 max-w-5xl mx-auto border-t border-white/5 pt-24">
+        <div className="mt-32 max-w-5xl mx-auto border-t border-[#E6ECF5] dark:border-white/5 pt-24">
           <div className="grid sm:grid-cols-3 gap-8">
-            <div className="glass p-7 rounded-[2rem] border border-white/5 bg-white/[0.01]">
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
+            <div className="bg-[#FBFCFE] dark:bg-white/[0.01] p-7 rounded-3xl border border-[#E6ECF5] dark:border-white/5 shadow-sm">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-600 dark:text-blue-400 shadow-sm">
                 <Grid className="w-5.5 h-5.5" />
               </div>
               <h4 className="text-lg font-black text-slate-900 dark:text-white mb-2">Visual Order Grids</h4>
-              <p className="text-sm text-gray-400 leading-relaxed font-medium">
+              <p className="text-sm text-slate-600 dark:text-gray-400 leading-relaxed font-medium">
                 Arrange page sequence visually by dragging cards around. What you see is exactly what gets compiled.
               </p>
             </div>
-            <div className="glass p-7 rounded-[2rem] border border-white/5 bg-white/[0.01]">
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
+            <div className="bg-[#FBFCFE] dark:bg-white/[0.01] p-7 rounded-3xl border border-[#E6ECF5] dark:border-white/5 shadow-sm">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-600 dark:text-blue-400 shadow-sm">
                 <Copy className="w-5.5 h-5.5" />
               </div>
               <h4 className="text-lg font-black text-slate-900 dark:text-white mb-2">Visual Page Duplicates</h4>
-              <p className="text-sm text-gray-400 leading-relaxed font-medium">
+              <p className="text-sm text-slate-600 dark:text-gray-400 leading-relaxed font-medium">
                 Instantly duplicate forms, agreements, or cover sheets to distribute duplicates across the PDF.
               </p>
             </div>
-            <div className="glass p-7 rounded-[2rem] border border-white/5 bg-white/[0.01]">
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400">
+            <div className="bg-[#FBFCFE] dark:bg-white/[0.01] p-7 rounded-3xl border border-[#E6ECF5] dark:border-white/5 shadow-sm">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-600 dark:text-blue-400 shadow-sm">
                 <Shield className="w-5.5 h-5.5" />
               </div>
               <h4 className="text-lg font-black text-slate-900 dark:text-white mb-2">Zero Cloud Uploads</h4>
-              <p className="text-sm text-gray-400 leading-relaxed font-medium">
+              <p className="text-sm text-slate-600 dark:text-gray-400 leading-relaxed font-medium">
                 Parsed and reassembled on your local browser thread. Your sensitive data never leaves your computer.
               </p>
             </div>

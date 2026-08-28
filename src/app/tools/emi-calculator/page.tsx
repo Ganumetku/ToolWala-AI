@@ -12,6 +12,7 @@ import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { toolsData } from '@/data/tools';
 import { toolArticles } from '@/data/toolArticles';
 import ToolArticle from '@/components/ToolArticle';
+import ToolIcon from '@/components/ToolIcon';
 
 const SEO_DESC = "Calculate loan EMI, total interest, and total payment instantly for home loan, car loan, personal loan and more.";
 
@@ -855,11 +856,11 @@ export default function EmiCalculatorPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
                   {relatedTools.map(tool => (
                     <Link key={tool.slug} href={tool.href} className="glass rounded-2xl border border-white/5 p-6 bg-white/[0.01] hover:bg-white/[0.05] transition-all group">
-                      <div className="flex items-center gap-4 mb-3">
-                        <span className="text-3xl group-hover:scale-110 transition-transform">{tool.icon}</span>
-                        <h4 className="text-lg font-black text-slate-900 dark:text-white">{tool.title}</h4>
+                      <div className="flex items-center gap-3 mb-3">
+                        <ToolIcon icon={tool.icon} className="w-6 h-6 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform shrink-0" />
+                        <h4 className="text-sm font-black text-slate-900 dark:text-white">{tool.title}</h4>
                       </div>
-                      <p className="text-sm text-gray-400 font-medium">{tool.description}</p>
+                      <p className="text-xs text-gray-400 font-medium">{tool.description}</p>
                     </Link>
                   ))}
                 </div>

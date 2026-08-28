@@ -11,6 +11,7 @@ import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { toolsData } from '@/data/tools';
 import { toolArticles } from '@/data/toolArticles';
 import ToolArticle from '@/components/ToolArticle';
+import ToolIcon from '@/components/ToolIcon';
 
 const SEO_TITLE = "Free GST Calculator Online - ToolWala AI";
 const SEO_DESC = "Calculate GST amount, total price, and reverse GST instantly with free GST Calculator.";
@@ -1850,7 +1851,7 @@ Calculated via ToolWala AI (https://toolwala.co/tools/gst-calculator)`;
                   {relatedTools.map(tool => (
                     <Link key={tool.slug} href={tool.href} className="glass rounded-2xl border border-slate-200 dark:border-white/5 p-6 bg-white dark:bg-white/[0.01] hover:bg-slate-50 dark:hover:bg-white/[0.05] transition-all group shadow-sm dark:shadow-none">
                       <div className="flex items-center gap-4 mb-3">
-                        <span className="text-3xl group-hover:scale-110 transition-transform">{tool.icon}</span>
+                        <ToolIcon icon={tool.icon} className="w-8 h-8 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform" />
                         <h4 className="text-lg font-black text-slate-900 dark:text-white">{tool.title}</h4>
                       </div>
                       <p className="text-sm text-slate-600 dark:text-gray-400 font-medium">{tool.description}</p>

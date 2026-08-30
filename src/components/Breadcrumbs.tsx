@@ -16,19 +16,24 @@ interface BreadcrumbsProps {
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
   const { t, localizeHref } = useTranslation();
 
+  // Strip redundant Home item if caller already passed Home as first item
+  const filteredItems = items.filter(
+    (it, idx) => !(idx === 0 && (it.href === '/' || it.label.toLowerCase() === 'home' || it.label.toLowerCase() === t('nav.home', 'Home').toLowerCase()))
+  );
+
   return (
-    <nav className="flex flex-wrap items-center gap-2 text-[10px] sm:text-xs font-black text-gray-500 uppercase tracking-widest mb-8 select-none">
+    <nav className="flex flex-wrap items-center gap-2 text-[10px] sm:text-xs font-black text-gray-500 uppercase tracking-widest mb-6 select-none">
       <Link
         href={localizeHref('/')}
         className="flex items-center gap-1.5 hover:text-blue-500 transition-colors"
       >
-        <Home className="w-3.5 h-3.5" />
-        {t('nav.home', 'Home')}
+        <Home className="w-3.5 h-3.5 shrink-0" />
+        <span>{t('nav.home', 'Home')}</span>
       </Link>
 
-      {items.map((item, idx) => (
+      {filteredItems.map((item, idx) => (
         <div key={idx} className="flex items-center gap-2">
-          <ChevronRight className="w-3.5 h-3.5 text-gray-700" />
+          <ChevronRight className="w-3.5 h-3.5 text-gray-400 dark:text-gray-600 shrink-0" />
           {item.href ? (
             <Link
               href={localizeHref(item.href)}
@@ -37,7 +42,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
               {item.label}
             </Link>
           ) : (
-            <span className="text-gray-300 font-black truncate max-w-[150px] sm:max-w-xs">{item.label}</span>
+            <span className="text-slate-900 dark:text-gray-300 font-black truncate max-w-[150px] sm:max-w-xs">{item.label}</span>
           )}
         </div>
       ))}

@@ -9,12 +9,13 @@ import {
   Shield, RefreshCw, AlertCircle, CheckCircle,
   ChevronLeft, ArrowRight, Sparkles, Copy, Check,
   Sliders, Grid, Zap, ShieldCheck, Eye, FileDown,
-  Share2, ChevronRight, Files
+  Share2, ChevronRight, Files, ScanText
 } from 'lucide-react';
 import { toast } from 'sonner';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
-import { MeshGradient } from '@/components/BackgroundEffects';
+import ToolLayout from '@/components/tools/ToolLayout';
+import ToolHero from '@/components/tools/ToolHero';
 
 // Helper to slice buffer to avoid Detached/Neutered ArrayBuffer error from PDF.js workers
 const uint8ArrayToArrayBuffer = (bytes: Uint8Array): ArrayBuffer => {
@@ -354,42 +355,16 @@ export default function PdfOcrScanner() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F6F8FC] dark:bg-[#030712] text-slate-900 dark:text-gray-100 relative overflow-hidden font-sans">
-      <MeshGradient />
+    <ToolLayout>
+      {/* Main Workspace Card */}
+      <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12">
+        <ToolHero
+          title={t('tools.pdf-ocr.title', 'PDF OCR Scanner')}
+          description={t('tools.pdf-ocr.description', 'Convert scanned documents, images, and flat PDFs into copyable, searchable text layouts instantly.')}
+          icon={<ScanText className="w-6 h-6 sm:w-7 sm:h-7" />}
+        />
 
-      {/* Decorative Glow Grid */}
-      <div className="absolute top-0 left-0 w-full h-[600px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent pointer-events-none z-0" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 relative z-10">
-        
-        {/* Navigation Breadcrumb */}
-        <Link 
-          href={localizeHref("/tools")} 
-          className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-gray-500 hover:text-white cursor-pointer transition-colors mb-8 group"
-        >
-          <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-          {t('tools.back_to_directory', 'Back to Directory')}
-        </Link>
-
-        {/* Hero Section */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 rounded-full bg-blue-500/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-blue-400 border border-blue-500/20 mb-6 shadow-[0_0_15px_rgba(59,130,246,0.1)]">
-            <Sparkles className="w-3.5 h-3.5" />
-            {t('pdf_ocr.badge_secure', '100% Secure Client Edge Processing')}
-          </div>
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-6 uppercase">
-            {t('tools.pdf-ocr.title', 'PDF OCR Scanner')} <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
-              {t('pdf_ocr.digitize_title', 'Digitize scanned files')}
-            </span>
-          </h1>
-          <p className="text-base sm:text-lg text-gray-400 leading-relaxed font-medium">
-            {t('tools.pdf-ocr.description', 'Convert scanned documents, images, and flat PDFs into copyable, searchable text layouts instantly. Your private files never touch a remote server.')}
-          </p>
-        </div>
-
-        {/* Workspace Console */}
-        <div className="max-w-6xl mx-auto">
+        <div className="p-4 sm:p-8 lg:p-10">
           {!pdfFile ? (
             // Upload Area
             <div
@@ -840,6 +815,6 @@ export default function PdfOcrScanner() {
         </div>
 
       </div>
-    </div>
+    </ToolLayout>
   );
 }

@@ -1,13 +1,14 @@
 "use client";
 
 import Link from 'next/link';
-import { ChevronLeft, Sparkles } from 'lucide-react';
+import { Camera } from 'lucide-react';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
-import { MeshGradient } from '@/components/BackgroundEffects';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import ImageCropperEngine, { CropperPreset } from '@/components/ImageCropperEngine';
 import WorkflowRecommendations from '@/components/tools/WorkflowRecommendations';
+import ToolLayout from '@/components/tools/ToolLayout';
+import ToolHero from '@/components/tools/ToolHero';
 
 const PASSPORT_PRESETS: CropperPreset[] = [
   {
@@ -76,42 +77,16 @@ const PASSPORT_PRESETS: CropperPreset[] = [
 export default function PassportPhotoMaker() {
   return (
     <ToolVisibilityGuard slug="passport-photo-maker">
-      <div className="min-h-screen bg-[#F6F8FC] dark:bg-[#030712] text-slate-900 dark:text-gray-100 relative overflow-hidden font-sans">
-        <MeshGradient />
+      <ToolLayout>
+        {/* Main Workspace Card */}
+        <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12">
+          <ToolHero
+            title="Passport Photo Maker"
+            description="Create professional passport size photos with AI background removal and multi-country specs."
+            icon={<Camera className="w-6 h-6 sm:w-7 sm:h-7" />}
+          />
 
-        {/* Decorative Glow Grid */}
-        <div className="absolute top-0 left-0 w-full h-[600px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent pointer-events-none z-0" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 relative z-10">
-          
-          {/* Navigation Breadcrumb */}
-          <Link 
-            href="/tools" 
-            className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-white cursor-pointer transition-colors mb-8 group"
-          >
-            <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            Back to Directory
-          </Link>
-
-          {/* Hero Section */}
-          <div className="text-center max-w-3xl mx-auto mb-16 animate-in fade-in slide-in-from-top-4 duration-500">
-            <div className="inline-flex items-center gap-2 rounded-full bg-blue-500/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-blue-400 border border-blue-500/20 mb-6 shadow-[0_0_15px_rgba(59,130,246,0.1)]">
-              <Sparkles className="w-3.5 h-3.5" />
-              100% Client-Side Image Processing
-            </div>
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-6">
-              Passport Photo Maker <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
-                Premium AI Editor
-              </span>
-            </h1>
-            <p className="text-base sm:text-lg text-gray-400 leading-relaxed font-medium">
-              Create professional passport size prints online. Automatically remove backgrounds, adjust lighting details, align eye positions, and download printable multi-copy sheets.
-            </p>
-          </div>
-
-          {/* Workspace Console */}
-          <div className="max-w-6xl mx-auto">
+          <div className="p-4 sm:p-8 lg:p-10">
             <ImageCropperEngine
               toolSlug="passport-photo-maker"
               title="Passport Photo Maker"
@@ -119,32 +94,27 @@ export default function PassportPhotoMaker() {
               presets={PASSPORT_PRESETS}
             />
           </div>
-
-          {/* Contextual Hub Banner */}
-          <div className="my-12 max-w-6xl mx-auto bg-blue-50/60 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-500/20 p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
-            <div>
-              <h4 className="text-sm font-black uppercase text-slate-900 dark:text-white tracking-wide">Passport Seva & PSK Document Guidance</h4>
-              <p className="text-xs text-slate-600 dark:text-gray-400 mt-1 font-medium">Need help formatting passport application certificates, birth proofs, and size limits for PSK uploads?</p>
-            </div>
-            <Link href="/hubs/passport-seva-utilities/" className="px-5 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-black uppercase tracking-wider hover:bg-blue-700 transition-all shrink-0">
-              Visit Passport Seva Hub →
-            </Link>
-          </div>
-
-          {/* SEO Article */}
-          {toolArticles['passport-photo-maker'] && (
-            <div className="mt-12 border-t border-white/5 pt-12 max-w-6xl mx-auto">
-              <ToolArticle {...toolArticles['passport-photo-maker']} />
-            </div>
-          )}
-
-          {/* Workflow Recommendations */}
-          <div className="max-w-6xl mx-auto">
-            <WorkflowRecommendations slug="passport-photo-maker" />
-          </div>
-
         </div>
-      </div>
+
+        {/* Contextual Hub Banner */}
+        <div className="my-12 bg-blue-50/60 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-500/20 p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+          <div>
+            <h4 className="text-sm font-black uppercase text-slate-900 dark:text-white tracking-wide">Passport Seva & PSK Document Guidance</h4>
+            <p className="text-xs text-slate-600 dark:text-gray-400 mt-1 font-medium">Need help formatting passport application certificates, birth proofs, and size limits for PSK uploads?</p>
+          </div>
+          <Link href="/hubs/passport-seva-utilities/" className="px-5 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-black uppercase tracking-wider hover:bg-blue-700 transition-all shrink-0">
+            Visit Passport Seva Hub →
+          </Link>
+        </div>
+
+        {/* SEO Article */}
+        {toolArticles['passport-photo-maker'] && (
+          <ToolArticle {...toolArticles['passport-photo-maker']} />
+        )}
+
+        {/* Workflow Recommendations */}
+        <WorkflowRecommendations slug="passport-photo-maker" />
+      </ToolLayout>
     </ToolVisibilityGuard>
   );
 }

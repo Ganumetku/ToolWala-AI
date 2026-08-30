@@ -252,7 +252,7 @@ export default function ToolArticle({
   }, [t, translatedTitle, parentCategory, locale]);
 
   return (
-    <section className="py-24 relative overflow-hidden bg-[#F6F8FC] dark:bg-[#030712] border-t border-[#E6ECF5] dark:border-white/5 transition-colors duration-250 font-sans">
+    <section className="pt-8 pb-16 sm:pt-12 sm:pb-24 relative overflow-hidden bg-[#F6F8FC] dark:bg-[#030712] border-t border-[#E6ECF5] dark:border-white/5 transition-colors duration-250 font-sans">
       {/* Dynamic structured data */}
       {softwareAppSchema && (
         <script

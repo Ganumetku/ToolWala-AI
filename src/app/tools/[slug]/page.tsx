@@ -119,28 +119,28 @@ export default async function DynamicToolPage({ params }: PageProps) {
           <div className="glass rounded-[1.125rem] overflow-hidden border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)] mb-16">
             
             {/* Header Banner */}
-            <div className="p-8 sm:p-12 border-b border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.02]">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-                <div className="flex items-center gap-6">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-[16px] bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white shadow-[0_4px_20px_rgba(37,99,235,0.3)] text-2xl font-bold">
+            <div className="p-5 sm:p-8 lg:p-12 border-b border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.02]">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-8">
+                <div className="flex items-start sm:items-center gap-3.5 sm:gap-6 flex-1 min-w-0">
+                  <div className="flex h-12 w-12 sm:h-14 sm:w-14 aspect-square shrink-0 min-w-[3rem] min-h-[3rem] sm:min-w-[3.5rem] sm:min-h-[3.5rem] items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white shadow-[0_4px_20px_rgba(37,99,235,0.3)] text-xl sm:text-2xl font-bold">
                     {tool.icon || '🔧'}
                   </div>
-                  <div>
-                    <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">{tool.title}</h1>
-                    <p className="text-slate-600 dark:text-gray-400 font-medium mt-1 font-sans">{tool.description}</p>
+                  <div className="min-w-0 flex-1">
+                    <h1 className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">{tool.title}</h1>
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-gray-400 font-medium mt-1 font-sans leading-relaxed">{tool.description}</p>
                     
                     {/* Reusable share component */}
-                    <div className="mt-4">
+                    <div className="mt-3 sm:mt-4">
                       <ShareButtons title={tool.title} />
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="flex flex-col items-end">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-500">{t('tools.secure_processing', 'Secure Processing')}</span>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-400">{t('tools.local_managed', '100% On-Device')}</span>
+                <div className="flex items-center gap-3 self-start sm:self-center shrink-0 bg-emerald-50 dark:bg-emerald-500/10 px-3.5 py-2 rounded-2xl border border-emerald-200 dark:border-emerald-500/20">
+                  <div className="flex flex-col items-start sm:items-end">
+                    <span className="text-[9.5px] sm:text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-500">{t('tools.secure_processing', 'Secure Processing')}</span>
+                    <span className="text-[9.5px] sm:text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-400">{t('tools.local_managed', '100% On-Device')}</span>
                   </div>
-                  <ShieldCheck className="w-8 h-8 text-emerald-600/60 dark:text-emerald-500/50" />
+                  <ShieldCheck className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-600/70 dark:text-emerald-500/60 shrink-0" />
                 </div>
               </div>
             </div>

@@ -87,23 +87,23 @@ export default function SEOPageTemplate({ slug }: SEOPageTemplateProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="bg-slate-50/50 dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250">
+      <div className="bg-slate-50/50 dark:bg-[#030712] min-h-screen pt-4 pb-20 sm:pt-12 sm:pb-24 relative overflow-hidden font-sans transition-colors duration-250">
         <MeshGradient />
         
         {/* Decorative Glow Grid */}
         <div className="absolute top-0 left-0 w-full h-[600px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500/5 dark:from-blue-900/20 via-transparent to-transparent pointer-events-none z-0" />
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative z-10 text-left animate-in fade-in duration-500">
+        <div className="container mx-auto px-3 sm:px-6 lg:px-8 max-w-5xl relative z-10 text-left animate-in fade-in duration-500">
           {/* Breadcrumb Back Navigation */}
           <Link 
             href={localizeHref('/tools')} 
-            className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-600 dark:hover:text-blue-500 transition-colors mb-10 group cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-black uppercase tracking-wider sm:tracking-widest text-gray-500 hover:text-blue-600 dark:hover:text-blue-500 transition-colors mb-4 sm:mb-8 group cursor-pointer"
           >
             <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             {t('tools.back_to_directory', 'Back to Directory')}
           </Link>
 
-          <div className="bg-white dark:glass rounded-[2.5rem] border border-gray-200 dark:border-white/5 p-8 sm:p-14 shadow-sm dark:shadow-2xl space-y-12">
+          <div className="bg-white dark:glass rounded-3xl sm:rounded-[2.5rem] border border-gray-200 dark:border-white/5 p-5 sm:p-14 shadow-sm dark:shadow-2xl space-y-8 sm:space-y-12">
             {/* Hero Header */}
             <div className="text-center max-w-3xl mx-auto space-y-6">
               <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 dark:bg-blue-500/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-500/20 shadow-sm">

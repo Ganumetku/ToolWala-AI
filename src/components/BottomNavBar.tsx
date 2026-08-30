@@ -84,7 +84,8 @@ export default function BottomNavBar() {
             <Link
               key={item.id}
               href={item.href}
-              className={`flex flex-col items-center justify-center py-1 px-3.5 rounded-xl transition-colors duration-150 select-none group relative ${
+              prefetch={true}
+              className={`flex flex-col items-center justify-center py-1 px-3.5 rounded-xl transition-all duration-150 active:scale-95 select-none group relative ${
                 item.isActive 
                   ? 'text-blue-600 dark:text-blue-400 font-bold' 
                   : 'text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white'

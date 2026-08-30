@@ -482,20 +482,20 @@ export default function WatermarkPdf() {
         <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12">
           
           {/* Header Banner */}
-          <div className="p-8 sm:p-10 border-b border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.02]">
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
-              <div className="flex items-center gap-6">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_4px_20px_rgba(37,99,235,0.35)]">
-                  <Type className="w-7 h-7" />
+          <div className="p-5 sm:p-8 lg:p-10 border-b border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.02]">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6">
+              <div className="flex items-start sm:items-center gap-3.5 sm:gap-6 flex-1 min-w-0">
+                <div className="flex h-12 w-12 sm:h-14 sm:w-14 aspect-square shrink-0 min-w-[3rem] min-h-[3rem] sm:min-w-[3.5rem] sm:min-h-[3.5rem] items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_4px_20px_rgba(37,99,235,0.35)]">
+                  <Type className="w-6 h-6 sm:w-7 sm:h-7 shrink-0" />
                 </div>
-                <div>
-                  <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">Add Watermark to PDF</h1>
-                  <p className="text-slate-600 dark:text-gray-400 font-medium mt-1">Design and embed secure text or image watermarks client-side with visual preview.</p>
+                <div className="min-w-0 flex-1">
+                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">Add Watermark to PDF</h1>
+                  <p className="text-slate-600 dark:text-gray-400 text-xs sm:text-sm font-medium mt-1 leading-relaxed">Design and embed secure text or image watermarks client-side with visual preview.</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 bg-emerald-50 dark:bg-emerald-500/10 px-4 py-2 rounded-xl border border-emerald-200 dark:border-emerald-500/20 h-fit shadow-sm">
-                <Shield className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Secure Client Processing</span>
+              <div className="flex items-center gap-2.5 bg-emerald-50 dark:bg-emerald-500/10 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl border border-emerald-200 dark:border-emerald-500/20 h-fit self-start sm:self-center shadow-xs shrink-0">
+                <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                <span className="text-[9.5px] sm:text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 whitespace-nowrap">Secure Client Processing</span>
               </div>
             </div>
           </div>

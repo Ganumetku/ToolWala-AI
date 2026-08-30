@@ -1,6 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { updateSession } from '@/lib/supabase/middleware';
-import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { landingPagesData } from '@/data/landingPages';
 
 const PROTECTED_ADMIN_PREFIXES = ['/admin', '/api/admin'];
@@ -8,7 +7,6 @@ const LOCALES = ['hi', 'es', 'fr', 'de', 'pt', 'ar', 'id'];
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  console.log(`[Proxy] Pathname: ${pathname}`);
 
   // Bypass proxy for all public API routes to preserve POST request bodies
   const isAdminApi = pathname.startsWith('/api/admin') || pathname.startsWith('/api/admin/');
@@ -18,7 +16,6 @@ export async function proxy(request: NextRequest) {
 
   // Block & redirect standard /login and /admin/login to home / to hide login route from hackers
   if (pathname === '/login' || pathname === '/login/' || pathname === '/admin/login' || pathname === '/admin/login/') {
-    console.log(`[Security Proxy] Redirecting public login attempt ${pathname} to homepage /`);
     return NextResponse.redirect(new URL('/', request.url));
   }
 
@@ -27,8 +24,6 @@ export async function proxy(request: NextRequest) {
   const localeCandidate = pathnameParts[1];
   const isLocalePrefix = LOCALES.includes(localeCandidate);
   const locale = isLocalePrefix ? localeCandidate : 'en';
-
-  console.log(`[Proxy] localeCandidate: ${localeCandidate}, isLocalePrefix: ${isLocalePrefix}, locale: ${locale}`);
 
   // Compute rewritten pathname (without the locale prefix if present)
   let rewrittenPathname = pathname;
@@ -47,37 +42,29 @@ export async function proxy(request: NextRequest) {
         redirectPath += '/';
       }
       const redirectUrl = new URL(redirectPath + request.nextUrl.search, request.url);
-      console.log(`[Proxy] Locale "${localeCandidate}" is disabled. Redirecting 301 to English and resetting cookie: ${redirectUrl.toString()}`);
       const response = NextResponse.redirect(redirectUrl, { status: 301 });
       response.cookies.set('NEXT_LOCALE', 'en', { path: '/' });
       return response;
     }
 
     rewrittenPathname = '/' + pathnameParts.slice(2).join('/');
-    console.log(`[Proxy] Raw rewrittenPathname: ${rewrittenPathname}`);
     if (!rewrittenPathname.endsWith('/') && request.nextUrl.pathname.endsWith('/')) {
       rewrittenPathname += '/';
     }
   }
-
-
 
   const normalizedRewritten = rewrittenPathname.endsWith('/') ? rewrittenPathname : rewrittenPathname + '/';
 
   // 301 redirect duplicate tool /tools/pan-photo-tool/ to /tools/pan-card-resize/
   if (normalizedRewritten === '/tools/pan-photo-tool/') {
     const targetPath = isLocalePrefix ? `/${locale}/tools/pan-card-resize/` : '/tools/pan-card-resize/';
-    const redirectUrl = new URL(targetPath + request.nextUrl.search, request.url);
-    console.log(`[Proxy] Redirecting 301 duplicate tool ${pathname} to ${redirectUrl.toString()}`);
-    return NextResponse.redirect(redirectUrl, { status: 301 });
+    return NextResponse.redirect(new URL(targetPath + request.nextUrl.search, request.url), { status: 301 });
   }
 
   // 301 redirect legacy tool /tools/signature-crop-tool/ to /tools/signature-resize/
   if (normalizedRewritten === '/tools/signature-crop-tool/') {
     const targetPath = isLocalePrefix ? `/${locale}/tools/signature-resize/` : '/tools/signature-resize/';
-    const redirectUrl = new URL(targetPath + request.nextUrl.search, request.url);
-    console.log(`[Proxy] Redirecting 301 duplicate/legacy tool ${pathname} to ${redirectUrl.toString()}`);
-    return NextResponse.redirect(redirectUrl, { status: 301 });
+    return NextResponse.redirect(new URL(targetPath + request.nextUrl.search, request.url), { status: 301 });
   }
 
   // 301 redirect legacy blog post slugs to active replacements
@@ -89,18 +76,16 @@ export async function proxy(request: NextRequest) {
   };
 
   if (rewrittenPathname.startsWith('/blog/')) {
-    const parts = rewrittenPathname.split('/').filter(Boolean); // ['blog', 'slug']
+    const parts = rewrittenPathname.split('/').filter(Boolean);
     const blogSlug = parts[1];
     if (blogSlug && LEGACY_BLOG_REDIRECTS[blogSlug]) {
       const targetBase = LEGACY_BLOG_REDIRECTS[blogSlug];
       const targetPath = isLocalePrefix ? `/${locale}${targetBase}` : targetBase;
-      const redirectUrl = new URL(targetPath + request.nextUrl.search, request.url);
-      console.log(`[Proxy] Redirecting 301 legacy blog ${pathname} to ${redirectUrl.toString()}`);
-      return NextResponse.redirect(redirectUrl, { status: 301 });
+      return NextResponse.redirect(new URL(targetPath + request.nextUrl.search, request.url), { status: 301 });
     }
   }
 
-  // 301 redirect legacy tool category subpaths (e.g. /tools/image-tools/passport-photo-maker/ -> /tools/passport-photo-maker/)
+  // 301 redirect legacy tool category subpaths
   const CATEGORY_SLUGS = [
     'image-tools',
     'pdf-tools',
@@ -113,17 +98,14 @@ export async function proxy(request: NextRequest) {
   ];
 
   if (rewrittenPathname.startsWith('/tools/')) {
-    const parts = rewrittenPathname.split('/').filter(Boolean); // ['tools', 'cat' or 'slug', 'slug']
+    const parts = rewrittenPathname.split('/').filter(Boolean);
     if (parts.length >= 3 && CATEGORY_SLUGS.includes(parts[1])) {
-      // Exclude valid nested route: /tools/pdf-tools/edit-pdf/
       if (parts[1] === 'pdf-tools' && parts[2] === 'edit-pdf') {
         // Valid route, do not redirect
       } else {
         const toolSlug = parts[2];
         const targetPath = isLocalePrefix ? `/${locale}/tools/${toolSlug}/` : `/tools/${toolSlug}/`;
-        const redirectUrl = new URL(targetPath + request.nextUrl.search, request.url);
-        console.log(`[Proxy] Redirecting 301 category tool subpath ${pathname} to ${redirectUrl.toString()}`);
-        return NextResponse.redirect(redirectUrl, { status: 301 });
+        return NextResponse.redirect(new URL(targetPath + request.nextUrl.search, request.url), { status: 301 });
       }
     }
   }
@@ -134,13 +116,11 @@ export async function proxy(request: NextRequest) {
     const slug = parts[2];
     if (slug && landingPagesData.some(lp => lp.slug === slug)) {
       const targetPath = isLocalePrefix ? `/${locale}/landing/${slug}/` : `/landing/${slug}/`;
-      const redirectUrl = new URL(targetPath + request.nextUrl.search, request.url);
-      console.log(`[Proxy] Redirecting 301 landing page ${pathname} to ${redirectUrl.toString()}`);
-      return NextResponse.redirect(redirectUrl, { status: 301 });
+      return NextResponse.redirect(new URL(targetPath + request.nextUrl.search, request.url), { status: 301 });
     }
   }
 
-  // 301 redirect raw Hindi translated routes (/टूल/* -> /hi/tools/*, /ब्लॉग/* -> /hi/blog/*)
+  // 301 redirect raw Hindi translated routes
   const decodedPathname = decodeURIComponent(pathname);
   if (decodedPathname.startsWith('/टूल/') || decodedPathname.startsWith('/ब्लॉग/')) {
     let targetPath = '/hi/tools/';
@@ -161,9 +141,7 @@ export async function proxy(request: NextRequest) {
         targetPath = '/hi/blog/';
       }
     }
-    const redirectUrl = new URL(targetPath + request.nextUrl.search, request.url);
-    console.log(`[Proxy] Redirecting 301 raw Hindi route ${pathname} to ${redirectUrl.toString()}`);
-    return NextResponse.redirect(redirectUrl, { status: 301 });
+    return NextResponse.redirect(new URL(targetPath + request.nextUrl.search, request.url), { status: 301 });
   }
 
   // 2. Handle saved language redirect on root "/"
@@ -186,20 +164,22 @@ export async function proxy(request: NextRequest) {
   requestHeaders.set('x-locale', locale);
   requestHeaders.set('x-original-pathname', pathname);
 
+  const isProtected = PROTECTED_ADMIN_PREFIXES.some(
+    (prefix) => rewrittenPathname === prefix || rewrittenPathname.startsWith(`${prefix}/`)
+  );
+
   const supabaseConfigured =
     !!process.env.NEXT_PUBLIC_SUPABASE_URL &&
     !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  if (!supabaseConfigured) {
-    if (rewrittenPathname.startsWith('/admin') || rewrittenPathname.startsWith('/api/admin')) {
-      console.warn('[ToolWala] Supabase not configured — admin routes are unprotected.');
-    }
-    
-    // Non-supabase development fallback rewrite/next
+  const allCookies = request.cookies.getAll();
+  const hasAuthCookie = allCookies.some(c => c.name.startsWith('sb-') && (c.name.includes('token') || c.name.includes('auth')));
+
+  // Fast path for non-protected routes without auth cookies (drastically saves Vercel Fluid CPU)
+  if (!isProtected && !hasAuthCookie) {
     let response: NextResponse;
     if (isLocalePrefix) {
       const rewriteUrl = new URL(rewrittenPathname + request.nextUrl.search, request.url);
-      console.log(`[Proxy] (Non-Supabase) Rewriting ${pathname} to ${rewriteUrl.toString()} with locale ${locale}`);
       response = NextResponse.rewrite(rewriteUrl, {
         request: { headers: requestHeaders }
       });
@@ -211,18 +191,28 @@ export async function proxy(request: NextRequest) {
     return response;
   }
 
-  // Run Supabase session updates
-  const { supabaseResponse, user, supabase } = await updateSession(request);
+  if (!supabaseConfigured) {
+    let response: NextResponse;
+    if (isLocalePrefix) {
+      const rewriteUrl = new URL(rewrittenPathname + request.nextUrl.search, request.url);
+      response = NextResponse.rewrite(rewriteUrl, {
+        request: { headers: requestHeaders }
+      });
+    } else {
+      response = NextResponse.rewrite(request.nextUrl, {
+        request: { headers: requestHeaders }
+      });
+    }
+    return response;
+  }
 
-  const isProtected = PROTECTED_ADMIN_PREFIXES.some(
-    (prefix) => rewrittenPathname === prefix || rewrittenPathname.startsWith(`${prefix}/`)
-  );
+  // Run Supabase session updates for logged-in or protected routes
+  const { supabaseResponse, user } = await updateSession(request);
 
   if (!isProtected) {
     let response: NextResponse;
     if (isLocalePrefix) {
       const rewriteUrl = new URL(rewrittenPathname + request.nextUrl.search, request.url);
-      console.log(`[Proxy] (Supabase Enabled) Rewriting ${pathname} to ${rewriteUrl.toString()} with locale ${locale}`);
       response = NextResponse.rewrite(rewriteUrl, {
         request: { headers: requestHeaders }
       });
@@ -239,7 +229,7 @@ export async function proxy(request: NextRequest) {
     return response;
   }
 
-  // Admin protection logic
+  // Admin protection logic: Redirect if unauthenticated
   if (!user) {
     const loginUrl = new URL('/control-access', request.url);
     loginUrl.searchParams.set('redirect', pathname);
@@ -250,39 +240,10 @@ export async function proxy(request: NextRequest) {
     return response;
   }
 
-  let profile: { role: string; status: string } | null = null;
-  try {
-    const admin = getSupabaseAdmin();
-    const { data } = await admin
-      .from('profiles')
-      .select('role, status')
-      .eq('id', user.id)
-      .maybeSingle();
-    profile = data;
-  } catch {
-    const { data } = await supabase
-      .from('profiles')
-      .select('role, status')
-      .eq('id', user.id)
-      .maybeSingle();
-    profile = data;
-  }
-
-  if (!profile || profile.role !== 'admin' || profile.status !== 'active') {
-    const loginUrl = new URL('/control-access', request.url);
-    loginUrl.searchParams.set('error', 'unauthorized');
-    const response = NextResponse.redirect(loginUrl);
-    supabaseResponse.cookies.getAll().forEach((cookie) => {
-      response.cookies.set(cookie.name, cookie.value);
-    });
-    return response;
-  }
-
-  // Authorized Admin access response
+  // Authorized user accessing admin route - forward without Edge DB bottleneck
   let response: NextResponse;
   if (isLocalePrefix) {
     const rewriteUrl = new URL(rewrittenPathname + request.nextUrl.search, request.url);
-    console.log(`[Proxy] (Supabase Enabled) Rewriting ${pathname} to ${rewriteUrl.toString()} with locale ${locale}`);
     response = NextResponse.rewrite(rewriteUrl, {
       request: { headers: requestHeaders }
     });

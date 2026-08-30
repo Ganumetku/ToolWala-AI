@@ -8,6 +8,7 @@ import { Tool, toolsData } from '@/data/tools';
 import { fetchPublicTools } from '@/lib/tools';
 import { useTranslation } from '@/components/I18nContext';
 import ToolIcon from '@/components/ToolIcon';
+import { startTopProgress } from '@/components/TopProgressBar';
 
 const RECENT_SEARCHES_KEY = 'toolwala_recent_searches_history';
 const MAX_RECENT_SEARCHES = 5;
@@ -264,6 +265,7 @@ export default function ToolAutocompleteSearch({
   const handleSelectTool = (tool: Tool) => {
     addRecentSearch(tool.title);
     setIsOpen(false);
+    startTopProgress();
     if (onSelectTool) {
       onSelectTool(tool);
     } else {
@@ -278,6 +280,7 @@ export default function ToolAutocompleteSearch({
       addRecentSearch(finalQuery.trim());
     }
     setIsOpen(false);
+    startTopProgress();
     if (onSubmitSearch) {
       onSubmitSearch(finalQuery);
     } else {

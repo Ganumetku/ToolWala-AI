@@ -12,6 +12,7 @@ import { headers } from 'next/headers';
 import { I18nProvider } from '@/components/I18nContext';
 import LocaleDomTranslator from '@/components/LocaleDomTranslator';
 import { ThemeProvider } from '@/components/ThemeContext';
+import TopProgressBar from '@/components/TopProgressBar';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -382,6 +383,7 @@ export default async function RootLayout({
       </head>
       <body className="min-h-full flex flex-col font-sans bg-[#F8FAFC] dark:bg-[#030712] text-[#111827] dark:text-white">
         <ThemeProvider>
+          <TopProgressBar />
           <GoogleAnalytics />
           <Toaster position="top-center" richColors />
           <PwaInstallPrompt />

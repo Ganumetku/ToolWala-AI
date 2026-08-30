@@ -6,6 +6,7 @@ import { ArrowRight, Shield, Sparkles } from "lucide-react";
 import { useTranslation } from "@/components/I18nContext";
 import ToolIcon from "@/components/ToolIcon";
 import PdfToolIcon from "@/components/PdfToolIcon";
+import { startTopProgress } from "@/components/TopProgressBar";
 
 const govTools = [
   {
@@ -145,6 +146,7 @@ export default function GovernmentToolHub() {
 
                   <Link
                     href={localizeHref(tool.href)}
+                    onClick={() => startTopProgress()}
                     className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-gray-200/90 dark:border-white/10 bg-white dark:bg-[#0c1222] p-4 sm:p-5 transition-all duration-300 hover:bg-slate-50/50 dark:hover:bg-blue-600/5 hover:border-blue-500/50 dark:hover:border-blue-500/50 w-full h-full shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_28px_rgba(37,99,235,0.08)]"
                   >
                     {/* Glow Overlay */}

@@ -16,6 +16,7 @@ import { toolsData, Tool } from '@/data/tools';
 import { fetchPublicTools } from '@/lib/tools';
 import dynamic from 'next/dynamic';
 import { useTranslation } from '@/components/I18nContext';
+import { startTopProgress } from '@/components/TopProgressBar';
 
 // Dynamic Import of Background Effects
 const MeshGradient = dynamic(
@@ -74,6 +75,7 @@ export default function Home() {
   // Redirection Search Submission
   const handleSearchSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
+    startTopProgress();
     if (searchQuery.trim()) {
       router.push(localizeHref('/tools') + '?search=' + encodeURIComponent(searchQuery.trim()));
     } else {
@@ -82,6 +84,7 @@ export default function Home() {
   };
 
   const handleSuggestionClick = (query: string) => {
+    startTopProgress();
     router.push(localizeHref('/tools') + '?search=' + encodeURIComponent(query));
   };
 

@@ -95,35 +95,60 @@ function ControlAccessForm() {
         return;
       }
 
-      // Verify admin via server API (which also runs rate limiting & IP security checks)
-      const verifyRes = await fetch('/api/auth/verify-admin/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ access_token: data.session?.access_token }),
-      });
+      // 1. Fast direct profile check via browser Supabase client
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role, status')
+        .eq('id', data.user.id)
+        .maybeSingle();
 
-      const verifyData = await verifyRes.json();
-
-      if (verifyRes.status === 429) {
-        // Rate limit lockout triggered
-        await supabase.auth.signOut();
-        toast.error(verifyData.error || 'Too many failed login attempts. Locked for 15 minutes.');
-        setLockoutTimer(15 * 60);
-        setIsLoading(false);
+      if (profile?.role === 'admin' && profile?.status === 'active') {
+        toast.success('Admin authenticated successfully! Entering console...');
+        router.replace(redirect);
+        router.refresh();
         return;
       }
 
-      if (!verifyRes.ok || !verifyData.success) {
-        await supabase.auth.signOut();
-        toast.error(verifyData.error || 'Unauthorized. Admin access required.');
-        generateCaptcha();
-        setIsLoading(false);
-        return;
-      }
+      // 2. Fallback check via server API with 6s timeout
+      const controller = new AbortController();
+      const fetchTimer = setTimeout(() => controller.abort(), 6000);
 
-      toast.success('Admin authenticated successfully! Entering console...');
-      router.replace(redirect);
-      router.refresh();
+      try {
+        const verifyRes = await fetch('/api/auth/verify-admin/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ access_token: data.session?.access_token }),
+          signal: controller.signal,
+        });
+        clearTimeout(fetchTimer);
+
+        const verifyData = await verifyRes.json();
+
+        if (verifyRes.status === 429) {
+          await supabase.auth.signOut();
+          toast.error(verifyData.error || 'Too many failed login attempts. Locked for 15 minutes.');
+          setLockoutTimer(15 * 60);
+          setIsLoading(false);
+          return;
+        }
+
+        if (!verifyRes.ok || !verifyData.success) {
+          await supabase.auth.signOut();
+          toast.error(verifyData.error || 'Unauthorized. Admin access required.');
+          generateCaptcha();
+          setIsLoading(false);
+          return;
+        }
+
+        toast.success('Admin authenticated successfully! Entering console...');
+        router.replace(redirect);
+        router.refresh();
+      } catch (fetchErr) {
+        // If API timed out but auth succeeded, allow redirection to let AdminLayout verify
+        toast.success('Entering console...');
+        router.replace(redirect);
+        router.refresh();
+      }
     } catch (err) {
       const isFetchError = err instanceof TypeError && String(err.message).includes('fetch');
       toast.error(

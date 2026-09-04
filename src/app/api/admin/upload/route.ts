@@ -6,6 +6,21 @@ import path from 'path';
 
 export const dynamic = 'force-dynamic';
 
+// Allowed MIME types for admin uploads (blog images, tool images)
+const ALLOWED_MIME_TYPES = new Set([
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+  'image/gif',
+]);
+
+// Allowed extensions (must match MIME)
+const ALLOWED_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif']);
+
+// Max upload size: 5 MB
+const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
+
 export async function POST(request: NextRequest) {
   if (!(await isAdmin(request))) {
     return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
@@ -19,14 +34,39 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: 'No file provided' }, { status: 400 });
     }
 
+    // File size validation
+    if (file.size > MAX_FILE_SIZE_BYTES) {
+      return NextResponse.json(
+        { success: false, error: 'File too large. Maximum upload size is 5 MB.' },
+        { status: 413 }
+      );
+    }
+
+    // MIME type validation
+    const mimeType = (file.type || '').toLowerCase();
+    if (!ALLOWED_MIME_TYPES.has(mimeType)) {
+      return NextResponse.json(
+        { success: false, error: 'Unsupported file type. Please upload a JPG, PNG, WebP, or GIF image.' },
+        { status: 415 }
+      );
+    }
+
+    // Extension validation
+    const rawExt = path.extname(file.name).toLowerCase();
+    if (!ALLOWED_EXTENSIONS.has(rawExt)) {
+      return NextResponse.json(
+        { success: false, error: 'Unsupported file extension. Please upload a JPG, PNG, WebP, or GIF image.' },
+        { status: 415 }
+      );
+    }
+
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Sanitize filename
-    const ext = path.extname(file.name) || '.jpg';
-    const base = path.basename(file.name, ext).replace(/[^a-zA-Z0-9_-]/g, '_');
+    // Sanitize filename: keep only safe characters, cap length
+    const base = path.basename(file.name, rawExt).replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 60);
     const timestamp = Date.now();
-    const filename = `${base}_${timestamp}${ext}`;
+    const filename = `${base}_${timestamp}${rawExt}`;
 
     // 1. Try Supabase Storage (Cloud / Production)
     if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
@@ -38,7 +78,6 @@ export async function POST(request: NextRequest) {
           await supabaseAdmin.storage.createBucket(bucketName, { public: true });
         }
 
-        const mimeType = file.type || 'image/jpeg';
         const { error: uploadError } = await supabaseAdmin.storage
           .from(bucketName)
           .upload(filename, buffer, {
@@ -78,8 +117,7 @@ export async function POST(request: NextRequest) {
       console.warn('Local filesystem write failed (read-only / serverless environment):', fsErr);
     }
 
-    // 3. Data URL Fallback (Guaranteed to work in serverless read-only environments without cloud storage)
-    const mimeType = file.type || 'image/png';
+    // 3. Data URL Fallback (for serverless read-only environments without cloud storage)
     const base64 = buffer.toString('base64');
     const dataUrl = `data:${mimeType};base64,${base64}`;
 
@@ -89,7 +127,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        error: err instanceof Error ? err.message : 'Upload failed',
+        error: 'Upload failed. Please try again.',
       },
       { status: 500 }
     );

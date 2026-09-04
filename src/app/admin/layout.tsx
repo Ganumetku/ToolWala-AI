@@ -84,8 +84,9 @@ export default function AdminLayout({
       } catch (err) {
         console.error('[Admin Guard Error]', err);
         if (isMounted) {
-          // If we already verified or have a session, allow pass to avoid blocking
-          setIsAuthorized(true);
+          // Fail closed on any error — redirect to login, never grant access
+          await supabase.auth.signOut();
+          router.replace('/control-access?error=session_error');
           setIsVerifying(false);
         }
       }
@@ -99,7 +100,7 @@ export default function AdminLayout({
     };
   }, [pathname, router]);
 
-  if (isVerifying && !isAuthorized) {
+  if (!isAuthorized) {
     return (
       <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#030712] flex flex-col items-center justify-center gap-4">
         <Loader2 className="w-10 h-10 animate-spin text-blue-600" />

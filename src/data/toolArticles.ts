@@ -369,7 +369,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
     relatedTools: [
       { name: "Background Remover", href: "/tools/bg-remover" },
       { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-      { name: "AI Image Upscaler", href: "/tools/ai-image-upscaler" }
+      { name: "AI Image Upscaler", href: "/tools/ai-image-upscaler" },
+      { name: "JPG to WebP", href: "/tools/jpg-to-webp" },
+      { name: "PNG to WebP", href: "/tools/png-to-webp" },
+      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" }
     ]
   },
   "passport-photo-maker": {
@@ -412,7 +415,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     relatedTools: [
       { name: "Background Remover", href: "/tools/bg-remover" },
       { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "Exam Photo Resizer", href: "/tools/exam-photo-resizer" }
+      { name: "Exam Photo Resizer", href: "/tools/exam-photo-resizer" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" },
+      { name: "JPG to WebP", href: "/tools/jpg-to-webp" }
     ]
   },
   "pdf-tools": {
@@ -930,7 +935,12 @@ export const toolArticles: Record<string, ToolArticleData> = {
     relatedTools: [
       { name: "PDF Tools Suite", href: "/tools/pdf-tools" },
       { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "Split PDF", href: "/tools/split-pdf" }
+      { name: "Split PDF", href: "/tools/split-pdf" },
+      { name: "Compress PDF", href: "/tools/compress-pdf" },
+      { name: "PDF to JPG", href: "/tools/pdf-to-jpg" },
+      { name: "JPG to WebP", href: "/tools/jpg-to-webp" },
+      { name: "Image Compressor", href: "/tools/image-compressor" },
+      { name: "PNG to WebP", href: "/tools/png-to-webp" }
     ]
   },
   "pdf-to-jpg": {
@@ -973,7 +983,11 @@ export const toolArticles: Record<string, ToolArticleData> = {
     relatedTools: [
       { name: "Merge PDF", href: "/tools/merge-pdf" },
       { name: "Split PDF", href: "/tools/split-pdf" },
-      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" }
+      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" },
+      { name: "Compress PDF", href: "/tools/compress-pdf" },
+      { name: "PDF to Word", href: "/tools/pdf-to-word-converter" },
+      { name: "PDF to Excel", href: "/tools/pdf-to-excel-converter" },
+      { name: "JPG to WebP", href: "/tools/jpg-to-webp" }
     ]
   },
   "protect-pdf": {
@@ -2276,6 +2290,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
     relatedTools: [
       { name: "Merge PDF", href: "/tools/merge-pdf" },
       { name: "Split PDF", href: "/tools/split-pdf" },
+      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" },
+      { name: "PDF to JPG", href: "/tools/pdf-to-jpg" },
+      { name: "PDF to Word", href: "/tools/pdf-to-word-converter" },
+      { name: "Add Page Numbers", href: "/tools/add-page-numbers-to-pdf" },
       { name: "Protect PDF", href: "/tools/protect-pdf" },
       { name: "Crop PDF", href: "/tools/crop-pdf" }
     ]
@@ -2738,9 +2756,11 @@ export const toolArticles: Record<string, ToolArticleData> = {
     conclusion: "Convert your PDF tables into clean, editable Excel spreadsheets in seconds. Experience fast, private, and precise document conversion with ToolWala AI today.",
     relatedTools: [
       { name: "PDF to Word Converter", href: "/tools/pdf-to-word-converter" },
+      { name: "PDF to JPG", href: "/tools/pdf-to-jpg" },
+      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" },
       { name: "Merge PDF", href: "/tools/merge-pdf" },
       { name: "Compress PDF", href: "/tools/compress-pdf" },
-      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr" }
+      { name: "OCR to Text", href: "/tools/ocr-to-text" }
     ]
   },
   "excel-to-pdf-converter": {
@@ -2845,9 +2865,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "WebP to JPG", href: "/tools/webp-to-jpg-png-converter" },
       { name: "PNG to WebP", href: "/tools/png-to-webp" },
       { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" },
-      { name: "Crop Image", href: "/tools/invoice-cropper" },
-      { name: "Convert Image", href: "/tools/gov-form-image-compressor" }
+      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" },
+      { name: "Background Remover", href: "/tools/bg-remover" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" }
     ]
   },
   "png-to-webp": {

@@ -458,9 +458,7 @@ export async function generateToolMetadataHelper(
     }
   }
   try {
-    const fs = require('fs');
-    const pathLib = require('path');
-    fs.appendFileSync(pathLib.join(process.cwd(), 'scratch/seo_debug.log'), `toolId=${toolId} dbTranslation=${JSON.stringify(dbTranslation)} lpFound=${!!landingPage} lpTitle=${landingPage?.title} resolvedTitle=${title}\n`);
+    // Debug logging removed — was writing to scratch/seo_debug.log in production
   } catch (e) {
     // ignore
   }
@@ -490,7 +488,9 @@ export async function generateToolMetadataHelper(
   const canonicalUrl = `${siteUrl}${canonicalPath}`;
 
   return {
-    title,
+    // Use absolute title to bypass root template — this helper already builds final titles
+    // without the template, so we avoid double-branding like "Title | ToolWala AI | ToolWala AI"
+    title: { absolute: title },
     description,
     alternates: {
       canonical: canonicalUrl,

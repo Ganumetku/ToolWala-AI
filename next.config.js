@@ -16,7 +16,6 @@ const cspHeader = `
 
 const nextConfig = {
   trailingSlash: true,
-  skipTrailingSlashRedirect: true,
   compress: true,
   poweredByHeader: false,
   images: {
@@ -56,7 +55,7 @@ const nextConfig = {
           },
           {
             key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin',
+            value: 'strict-origin-when-cross-origin',
           },
           {
             key: 'Permissions-Policy',

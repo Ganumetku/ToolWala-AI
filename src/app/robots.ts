@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { getEnabledLocales } from '@/lib/languages';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 86400; // Regenerate robots.txt at most once per day
 
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolwala.co';
@@ -17,23 +17,25 @@ export default function robots(): MetadataRoute.Robots {
 
   const baseDisallow = ['/api/', '/admin/', '/login', '/auth/'];
   const allDisallow = [...baseDisallow, ...disabledLocalePaths];
-  const queryParamDisallow = ['/*?*'];
+  // Only block known junk/private query params, not ALL query strings.
+  // Blocking /*?* would prevent Googlebot from following UTM/share links to valid pages.
+  const queryParamDisallow: string[] = [];
 
   return {
     rules: [
       {
         userAgent: '*',
-        allow: ['/', '/blog', '/blog/', '/tools/', '/categories/'],
+        allow: ['/', '/blog/', '/tools/', '/categories/', '/hubs/', '/landing/'],
         disallow: [...allDisallow, ...queryParamDisallow],
       },
       {
         userAgent: 'Googlebot',
-        allow: ['/', '/blog', '/blog/', '/tools/', '/categories/'],
+        allow: ['/', '/blog/', '/tools/', '/categories/', '/hubs/', '/landing/'],
         disallow: [...allDisallow, ...queryParamDisallow],
       },
       {
         userAgent: 'Googlebot-Image',
-        allow: ['/blog/', '/tools/', '/og-image.png'],
+        allow: ['/blog/', '/tools/', '/hubs/', '/landing/', '/og-image.png'],
         disallow: ['/admin/', ...disabledLocalePaths],
       },
     ],

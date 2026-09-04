@@ -11,7 +11,9 @@ import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects'
 function ControlAccessForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirect = searchParams.get('redirect') || '/admin';
+  const rawRedirect = searchParams.get('redirect') || '/admin';
+  // Sanitize: only allow same-origin relative paths (not //evil.com, javascript:, etc.)
+  const redirect = /^\/(?!\/)/.test(rawRedirect) && !/^\/[a-z]+:/i.test(rawRedirect) ? rawRedirect : '/admin';
   const errorParam = searchParams.get('error');
 
   const [email, setEmail] = useState('');
@@ -144,10 +146,12 @@ function ControlAccessForm() {
         router.replace(redirect);
         router.refresh();
       } catch (fetchErr) {
-        // If API timed out but auth succeeded, allow redirection to let AdminLayout verify
-        toast.success('Entering console...');
-        router.replace(redirect);
-        router.refresh();
+        // API timed out — do NOT redirect. Show error and let user retry.
+        await supabase.auth.signOut();
+        toast.error('Authentication timed out. Please try again.');
+        generateCaptcha();
+        setIsLoading(false);
+        return;
       }
     } catch (err) {
       const isFetchError = err instanceof TypeError && String(err.message).includes('fetch');

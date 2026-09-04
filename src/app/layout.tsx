@@ -301,10 +301,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Trigger language DB sync in the background so it does not block page delivery
-  import('@/lib/languages')
-    .then(({ syncLanguagesDbToJSON }) => syncLanguagesDbToJSON())
-    .catch((e) => console.error('Failed to sync languages from DB in background:', e));
+  // NOTE: syncLanguagesDbToJSON() intentionally NOT called here.
+  // Running a DB sync on every single SSR request is wasteful and writes to disk
+  // (which doesn't work in serverless anyway). Trigger this via a cron job,
+  // webhook, or the admin panel instead.
 
   let locale = "en";
   try {

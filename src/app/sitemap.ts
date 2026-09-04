@@ -7,8 +7,7 @@ import { getEnabledLocales, getLanguagesConfig } from '@/lib/languages';
 import { hubsData } from '@/data/hubs';
 import { landingPagesData } from '@/data/landingPages';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 3600;
+export const revalidate = 3600; // Regenerate sitemap at most once per hour
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolwala.co';
@@ -53,31 +52,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     };
   };
 
+  // IMPORTANT: Do NOT include /tools/* paths here — they are emitted by toolEntries
+  // (from the DB / seed). Adding them here causes duplicate sitemap URLs.
+  // Landing pages live under /landing/ (not /tools/) so they don't conflict with toolEntries.
   const staticRoutes = [
     '',
     '/tools',
     '/categories',
-    // '/pricing',
+    // '/pricing', // Not yet published — uncomment when the page is live
     '/blog',
     '/about',
     '/contact',
     '/privacy-policy',
     '/terms',
     '/disclaimer',
-    '/tools/add-page-numbers-to-pdf',
-    '/tools/sign-pdf',
-    '/landing/compress-pdf-to-100kb',
-    '/landing/compress-pdf-to-200kb',
-    '/tools/crop-aadhaar-card',
-    '/tools/gov-form-image-compressor',
-    // Image compression landing pages (Programmatic SEO)
-    '/landing/compress-image-to-20kb',
-    '/landing/compress-image-to-50kb',
-    '/landing/compress-image-to-100kb',
-    '/landing/compress-image-to-200kb',
-    '/landing/compress-image-to-300kb',
-    '/landing/compress-image-to-500kb',
-    '/landing/compress-image-to-1mb',
   ];
 
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.flatMap((route) => {

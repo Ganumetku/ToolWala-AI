@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'pdf-tools',
-    'Merge PDF Online – Free PDF Joiner Tool | ToolWala AI',
-    'Merge PDF files online for free. Combine, compress, and split PDF documents instantly in your browser. 100% client-side security with no limits.',
+    'PDF Tools – Free Online PDF Utilities | ToolWala AI',
+    'All-in-one free PDF tools online. Merge, compress, split, convert, rotate, protect, and edit PDF files instantly in your browser. 100% private & client-side.',
     '/tools/pdf-tools'
   );
 }

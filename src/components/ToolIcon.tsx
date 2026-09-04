@@ -1,8 +1,28 @@
 "use client";
 
 import React from 'react';
-import * as LucideIcons from 'lucide-react';
+import {
+  IndianRupee, Type, FileJson2, Image, HeartPulse, IdCard, Palette, ImageDown,
+  ImagePlus, QrCode, FileText, FilePenLine, FileSpreadsheet, FileOutput, Merge,
+  SplitSquareHorizontal, FileImage, Lock, LockOpen, Droplets, LayoutGrid, ScanText,
+  Sparkles, Crop, Shapes, FileUser, CheckCircle2, MessageSquareText, ScanEye,
+  UserCheck, Mic, Receipt, Wand2, Mail, KeyRound, Presentation, Cake, TrendingUp,
+  Landmark, Percent, Tag, DollarSign, PenTool, Shrink, FileMinus, EyeOff, RotateCw,
+  Hash, GraduationCap, ListChecks, Video, FileArchive, FileCheck, FileCog,
+  type LucideProps,
+} from 'lucide-react';
 import PdfToolIcon, { isPdfTool } from '@/components/PdfToolIcon';
+
+// Explicit icon lookup map — avoids namespace import that defeats tree-shaking
+const ICON_MAP: Record<string, React.ComponentType<LucideProps>> = {
+  IndianRupee, Type, FileJson2, Image, HeartPulse, IdCard, Palette, ImageDown,
+  ImagePlus, QrCode, FileText, FilePenLine, FileSpreadsheet, FileOutput, Merge,
+  SplitSquareHorizontal, FileImage, Lock, LockOpen, Droplets, LayoutGrid, ScanText,
+  Sparkles, Crop, Shapes, FileUser, CheckCircle2, MessageSquareText, ScanEye,
+  UserCheck, Mic, Receipt, Wand2, Mail, KeyRound, Presentation, Cake, TrendingUp,
+  Landmark, Percent, Tag, DollarSign, PenTool, Shrink, FileMinus, EyeOff, RotateCw,
+  Hash, GraduationCap, ListChecks, Video, FileArchive, FileCheck, FileCog,
+};
 
 export interface ToolIconProps {
   icon?: React.ReactNode | string;
@@ -185,7 +205,7 @@ export default function ToolIcon({
   const raw = (name || (typeof icon === 'string' ? icon : '')).trim();
 
   if (!raw) {
-    const FallbackIcon = (LucideIcons as any)[fallback] || LucideIcons.Sparkles;
+    const FallbackIcon = ICON_MAP[fallback] || Sparkles;
     return <FallbackIcon className={className} strokeWidth={strokeWidth} size={size} />;
   }
 
@@ -230,12 +250,12 @@ export default function ToolIcon({
     );
   }
 
-  // Dynamically resolve Lucide Icon component
+  // Dynamically resolve Lucide Icon component from the explicit map
   const IconComponent =
-    (LucideIcons as any)[resolvedName] ||
-    (LucideIcons as any)[resolvedName + "Icon"] ||
-    (LucideIcons as any)[fallback] ||
-    LucideIcons.Sparkles;
+    ICON_MAP[resolvedName] ||
+    ICON_MAP[resolvedName + "Icon"] ||
+    ICON_MAP[fallback] ||
+    Sparkles;
 
   return <IconComponent className={className} strokeWidth={strokeWidth} size={size} />;
 }

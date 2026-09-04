@@ -43,9 +43,6 @@ export default function HomepageTestimonials() {
 
   return (
     <section className="py-24 relative overflow-hidden bg-white dark:bg-black/10 border-b border-gray-200 dark:border-white/5 transition-colors duration-250">
-      {/* Background Radial Glow */}
-      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 w-[600px] h-[600px] bg-blue-500/5 dark:bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
-
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header Section */}
@@ -54,7 +51,7 @@ export default function HomepageTestimonials() {
             <CheckCircle className="w-3.5 h-3.5" />
             {t('testimonials.badge', 'USER REVIEWS')}
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
             {t('testimonials.title', 'Loved by 50,000+ Professionals')}
           </h2>
           <p className="text-gray-600 dark:text-gray-500 mt-4 font-medium max-w-2xl mx-auto">
@@ -67,7 +64,7 @@ export default function HomepageTestimonials() {
           {testimonials.map((tItem) => (
             <div
               key={tItem.author}
-              className="p-8 rounded-2xl border border-gray-200 dark:border-white/5 bg-white dark:bg-[#0f172a] shadow-sm hover:shadow-md dark:glass hover:border-blue-500/30 group relative overflow-hidden transition-all duration-300"
+              className="p-8 rounded-2xl border border-slate-200/70 dark:border-white/5 bg-white dark:bg-[#0f172a] shadow-[0_2px_8px_-2px_rgba(37,99,235,0.05),0_1px_4px_rgba(15,23,42,0.03)] hover:shadow-[0_12px_24px_-4px_rgba(37,99,235,0.08),0_4px_10px_-2px_rgba(15,23,42,0.04)] hover:-translate-y-1 hover:border-slate-300 dark:hover:border-white/10 group relative overflow-hidden transition-all duration-300"
             >
               {/* Quote Icon Background */}
               <div className="absolute top-6 right-6 opacity-[0.03] text-gray-900 dark:text-white">

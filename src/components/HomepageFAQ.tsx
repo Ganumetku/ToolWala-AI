@@ -37,10 +37,7 @@ export default function HomepageFAQ() {
   ];
 
   return (
-    <section className="py-24 relative overflow-hidden bg-slate-50/50 dark:bg-black/20 border-b border-gray-200 dark:border-white/5 transition-colors duration-250">
-      {/* Background Radial Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-blue-500/5 dark:bg-indigo-600/5 rounded-full blur-[140px] pointer-events-none" />
-
+    <section className="py-24 relative overflow-hidden bg-gray-50/50 dark:bg-black/20 border-b border-gray-200 dark:border-white/5 transition-colors duration-250">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-4xl">
         
         {/* Header Section */}
@@ -49,7 +46,7 @@ export default function HomepageFAQ() {
             <HelpCircle className="w-3.5 h-3.5" />
             {t('faq.support_center', 'SUPPORT CENTER')}
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
             {t('faq.title', 'Frequently Asked Questions')}
           </h2>
           <p className="text-gray-600 dark:text-gray-500 mt-4 font-medium">
@@ -66,8 +63,8 @@ export default function HomepageFAQ() {
                 key={index} 
                 className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
                   isExpanded 
-                    ? "border-blue-500/40 bg-white dark:bg-white/[0.02] shadow-md dark:shadow-[0_0_30px_rgba(37,99,235,0.02)]" 
-                    : "border-gray-200 dark:border-white/5 bg-white dark:bg-[#0f172a] shadow-sm hover:border-gray-300 dark:hover:border-white/10"
+                    ? "border-blue-500/30 dark:border-white/15 bg-white dark:bg-white/[0.03] shadow-[0_4px_16px_rgba(37,99,235,0.06)]" 
+                    : "border-slate-200/70 dark:border-white/5 bg-white dark:bg-[#0f172a] shadow-[0_1px_3px_rgba(0,0,0,0.02)] hover:border-slate-300 dark:hover:border-white/10 hover:shadow-[0_4px_12px_rgba(0,0,0,0.04)]"
                 }`}
               >
                 <button

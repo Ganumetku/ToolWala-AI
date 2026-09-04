@@ -7,30 +7,24 @@ import {
   Sparkles, ShieldCheck, Zap,
   Search, ChevronRight,
   Layers, Clock, ArrowRight, MousePointerClick,
-  Lock, FileText, Cpu, UserX, Gift
+  Lock, FileText, Cpu, UserX, Gift,
+  FileCheck, Users, Star
 } from 'lucide-react';
 import ToolCard from '@/components/ToolCard';
 import ToolIcon from '@/components/ToolIcon';
+import PdfToolIcon, { isPdfTool } from '@/components/PdfToolIcon';
 import ToolAutocompleteSearch from '@/components/ToolAutocompleteSearch';
 import { toolsData, Tool } from '@/data/tools';
 import { fetchPublicTools } from '@/lib/tools';
 import dynamic from 'next/dynamic';
 import { useTranslation } from '@/components/I18nContext';
 import { startTopProgress } from '@/components/TopProgressBar';
+import PageBackground from '@/components/PageBackground';
 
-// Dynamic Import of Background Effects
-const MeshGradient = dynamic(
-  () => import('@/components/BackgroundEffects').then((m) => m.MeshGradient),
-  { ssr: false }
-);
-const FloatingParticles = dynamic(
-  () => import('@/components/BackgroundEffects').then((m) => m.FloatingParticles),
-  { ssr: false }
-);
+
 
 // Dynamic Import of Premium Hubs/Sections
 const GovernmentToolHub = dynamic(() => import('@/components/GovernmentToolHub'), { ssr: false });
-const HomepageTestimonials = dynamic(() => import('@/components/HomepageTestimonials'), { ssr: false });
 const HomepageFAQ = dynamic(() => import('@/components/HomepageFAQ'), { ssr: false });
 const PopularToolsGrid = dynamic(() => import('@/components/PopularToolsGrid'), { ssr: false });
 
@@ -252,38 +246,36 @@ export default function Home() {
   }, [mergedTools, activeCategoryTab, searchQuery]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F7F8FC] dark:bg-[#030712] text-[#0F172A] dark:text-white relative overflow-hidden transition-colors duration-250 font-sans">
+    <div className="flex flex-col min-h-screen bg-[#F6F8FC] dark:bg-[#030712] text-[#0F172A] dark:text-white relative transition-colors duration-250 font-sans">
+
+      {/* iLovePDF-inspired Organic Background Waves & Pastels */}
+      <PageBackground />
 
       {/* 1. Hero & Direct Interactive Tools Workspace (Above the Fold) */}
-      <section className="relative pt-6 sm:pt-8 pb-14 overflow-hidden border-b border-[#E8ECF4] dark:border-white/5">
-        {loadEffects && <MeshGradient />}
-        {loadEffects && <FloatingParticles />}
-
-        {/* Background Radial Glow */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[550px] bg-gradient-to-tr from-blue-500/10 via-purple-500/5 to-transparent rounded-full blur-[140px] pointer-events-none" />
+      <section className="relative pt-6 sm:pt-10 pb-16 border-b border-[#E5E7EB] dark:border-white/5 overflow-hidden">
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 max-w-7xl">
 
-          {/* Privacy Pill */}
-          <div className="animate-fade-in inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-white/5 border border-blue-100 dark:border-white/10 backdrop-blur-md text-[#2563EB] dark:text-blue-400 text-[10px] sm:text-[11px] font-black uppercase tracking-widest mb-2.5 shadow-sm select-none">
-            <span className="flex h-2 w-2 rounded-full bg-[#2563EB] dark:bg-blue-400 animate-pulse" />
+          {/* Integrated Privacy Pill Badge */}
+          <div className="animate-fade-in inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-50/90 dark:bg-slate-900/60 border border-slate-200/90 dark:border-white/10 text-slate-600 dark:text-slate-300 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest mb-3.5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] select-none backdrop-blur-sm">
+            <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-500 ring-2 ring-emerald-500/20" />
             <span>{t('home.badge', '🔒 100% In-Browser • Zero Uploads • Free & Private')}</span>
           </div>
 
-          {/* Compact Headline */}
-          <h1 className="animate-fade-up font-black text-2xl sm:text-4xl md:text-5xl tracking-tight text-[#0F172A] dark:text-white leading-[1.15] mb-2">
+          {/* Punchy, Confident Headline with tighter tracking */}
+          <h1 className="animate-fade-up font-black text-3xl sm:text-5xl md:text-6xl tracking-tight sm:tracking-tighter text-[#0F172A] dark:text-white leading-[1.12] mb-3 max-w-4xl mx-auto">
             {t('home.hero_title_1', 'Free ')}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] via-indigo-600 to-[#7C3AED] dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400">
+            <span className="text-[#2563EB] dark:text-blue-400">
               {t('home.hero_title_highlight', 'PDF, Image & AI Tools')}
             </span>
           </h1>
 
-          <p className="animate-fade-up mx-auto max-w-xl text-xs sm:text-sm font-medium text-slate-600 dark:text-gray-400 leading-relaxed mb-4">
+          <p className="animate-fade-up mx-auto max-w-xl text-xs sm:text-sm font-medium text-slate-500/90 dark:text-gray-400 leading-relaxed mb-5">
             {t('home.hero_subtitle', 'Edit PDFs, compress images, remove backgrounds, and use AI utilities locally in your browser with zero data retention.')}
           </p>
 
-          {/* Instant Search Bar */}
-          <div className="animate-fade-up mx-auto max-w-xl mb-4 relative z-30">
+          {/* Instant Search Bar with subtle shadow & tactile feel */}
+          <div className="animate-fade-up mx-auto max-w-xl mb-5 relative z-30">
             <ToolAutocompleteSearch
               value={searchQuery}
               onChange={setSearchQuery}
@@ -295,8 +287,8 @@ export default function Home() {
             />
           </div>
 
-          {/* Interactive Category Filter Tabs (iLovePDF Style - Single Clean Row) */}
-          <div className="animate-fade-in flex flex-wrap justify-center items-center gap-1.5 sm:gap-2.5 mb-8 relative z-10 max-w-3xl mx-auto">
+          {/* Interactive Category Filter Tabs (Tactile pills with smooth transition & subtle hover) */}
+          <div className="animate-fade-in flex flex-wrap justify-center items-center gap-1.5 sm:gap-2 mb-7 sm:mb-9 relative z-10 max-w-3xl mx-auto">
             {categoryTabs.map((tab) => {
               const isActive = activeCategoryTab === tab.id && !searchQuery;
               return (
@@ -306,10 +298,10 @@ export default function Home() {
                     setSearchQuery("");
                     setActiveCategoryTab(tab.id);
                   }}
-                  className={`inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-[10px] sm:text-[11px] font-black uppercase tracking-wider transition-all duration-200 active:scale-95 cursor-pointer select-none ${
+                  className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wider transition-all duration-200 ease-out active:scale-95 cursor-pointer select-none ${
                     isActive
-                      ? 'bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white shadow-md shadow-blue-500/25 scale-105 border border-transparent'
-                      : 'bg-white dark:bg-white/5 text-slate-700 dark:text-gray-300 border border-gray-200/80 dark:border-white/10 hover:border-blue-500/40 hover:bg-blue-50/50 dark:hover:bg-white/10 shadow-sm'
+                      ? 'bg-[#2563EB] text-white shadow-sm shadow-blue-500/25 border border-blue-600'
+                      : 'bg-slate-50/70 dark:bg-white/[0.03] text-slate-600 dark:text-slate-400 border border-slate-200/70 dark:border-white/8 hover:border-slate-300 dark:hover:border-white/15 hover:bg-white dark:hover:bg-white/[0.07] hover:text-slate-900 dark:hover:text-white hover:shadow-[0_2px_6px_rgba(0,0,0,0.04)]'
                   }`}
                 >
                   <ToolIcon icon={tab.icon} className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" strokeWidth={2} />
@@ -321,14 +313,14 @@ export default function Home() {
 
           {/* Search Result Count Notice */}
           {searchQuery && (
-            <div className="mb-5 text-sm font-bold text-blue-600 dark:text-blue-400">
+            <div className="mb-6 text-sm font-bold text-blue-600 dark:text-blue-400">
               {t('tools.showing_results', `Showing results for "${searchQuery}"`)} ({workspaceTools.length} tools)
             </div>
           )}
 
-          {/* DIRECT TOOLS GRID (Visible Above the Fold - 5 Column iLovePDF Layout) */}
+          {/* DIRECT TOOLS GRID (Generous breathing room & tactile elevation) */}
           {workspaceTools.length > 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 text-left mb-8">
+            <div className="grid grid-cols-1 min-[480px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 text-left mb-8 sm:mb-10">
               {workspaceTools.map((tool) => (
                 <ToolCard 
                   key={tool.id} 
@@ -342,7 +334,7 @@ export default function Home() {
               <p className="text-sm font-bold text-gray-500">{t('home.no_tools_found', 'No tools found matching your query.')}</p>
               <button
                 onClick={() => setSearchQuery("")}
-                className="mt-3 px-5 py-2 rounded-xl bg-blue-600 text-white text-xs font-black uppercase tracking-wider"
+                className="mt-3 px-5 py-2 rounded-xl bg-blue-600 text-white text-xs font-black uppercase tracking-wider shadow-sm hover:brightness-105 active:scale-95 transition-all"
               >
                 {t('tools.clear_search', 'Clear Search')}
               </button>
@@ -350,10 +342,10 @@ export default function Home() {
           )}
 
           {/* Explore All Tools Banner Action */}
-          <div className="flex flex-wrap justify-center items-center gap-4 pt-2">
+          <div className="flex flex-wrap justify-center items-center gap-4 mt-10 sm:mt-12">
             <Link
               href={localizeHref('/tools')}
-              className="inline-flex items-center gap-2.5 px-8 py-4 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:border-blue-500/50 hover:bg-blue-50/50 dark:hover:bg-white/[0.08] text-xs font-black uppercase tracking-widest text-[#0F172A] dark:text-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 active:scale-95 group"
+              className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-white dark:bg-white/5 border border-slate-200/90 dark:border-white/10 hover:border-blue-500/40 dark:hover:border-white/20 text-xs font-bold uppercase tracking-widest text-[#0F172A] dark:text-white rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.08)] hover:-translate-y-0.5 active:scale-95 transition-all duration-200 group"
             >
               <span>{t('tools.explore_all_count', 'Explore All 60+ Browser Tools')}</span>
               <ArrowRight className="w-4 h-4 text-blue-600 dark:text-blue-400 transition-transform group-hover:translate-x-1" />
@@ -361,7 +353,7 @@ export default function Home() {
 
             <Link
               href={localizeHref('/categories')}
-              className="inline-flex items-center gap-2 px-6 py-4 rounded-2xl bg-transparent border border-gray-200 dark:border-white/10 hover:border-gray-300 text-xs font-black uppercase tracking-widest text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all active:scale-95"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-50/70 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 text-xs font-bold uppercase tracking-widest text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-white/[0.05] hover:shadow-sm hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
             >
               <span>{t('home.browse_categories', 'Browse 13 Categories')}</span>
               <ChevronRight className="w-4 h-4 text-gray-400" />
@@ -379,8 +371,7 @@ export default function Home() {
 
       {/* 4. Recently Used Tray (if any) */}
       {mounted && recentTools.length > 0 && (
-        <section className="py-12 border-b border-[#E8ECF4] dark:border-white/5 bg-[#F8FAFC] dark:bg-white/[0.01] relative overflow-hidden transition-colors duration-250">
-          <div className="absolute inset-0 bg-blue-600/[0.02] blur-3xl pointer-events-none" />
+        <section className="py-14 border-b border-[#E5E7EB] dark:border-white/5 bg-[#F6F8FC] dark:bg-white/[0.01] relative overflow-hidden transition-colors duration-250">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
             <div className="flex items-center gap-2.5 mb-5 relative z-10">
               <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -412,15 +403,14 @@ export default function Home() {
       )}
 
       {/* 5. The ToolWala Edge (Unified Trust, Speed & Privacy Architecture) */}
-      <section className="py-20 bg-white dark:bg-[#030712] relative overflow-hidden border-b border-gray-200 dark:border-white/5 transition-colors duration-250">
-        <div className="absolute top-1/2 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-[120px] -z-10 pointer-events-none" />
+      <section className="py-24 bg-[#F6F8FC] dark:bg-[#030712] relative overflow-hidden border-b border-gray-200 dark:border-white/5 transition-colors duration-250">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-200 dark:border-blue-500/20 mb-3 shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 fill-blue-600/20 dark:fill-blue-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-400 text-[10px] font-bold uppercase tracking-widest border border-gray-200 dark:border-white/10 mb-3">
+              <Sparkles className="w-3.5 h-3.5" />
               {t('home.edge_title', 'The ToolWala Edge')}
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight uppercase">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
               {t('home.why_use_title', 'Why Professionals Choose ToolWala AI')}
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm font-medium">
@@ -472,10 +462,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. Testimonials Section */}
-      <HomepageTestimonials />
-
-      {/* 7. FAQ Section */}
+      {/* 6. FAQ Section */}
       <HomepageFAQ />
 
     </div>

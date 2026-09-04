@@ -387,8 +387,8 @@ export default function ToolAutocompleteSearch({
     <div ref={containerRef} className={`relative w-full ${isOpen ? 'z-50' : 'z-20'} ${className}`}>
       
       {/* Search Input Box */}
-      <div className="relative group p-0.5 rounded-[22px] bg-gradient-to-r from-[#2563EB]/20 via-[#7C3AED]/20 to-[#2563EB]/20 bg-[length:200%_auto] focus-within:from-[#2563EB] focus-within:to-[#7C3AED] transition-all shadow-[0_10px_30px_rgba(15,23,42,0.06)] dark:shadow-2xl">
-        <div className={`relative flex items-center bg-white dark:bg-[#090d16] ${inputHeight} rounded-[20px] pl-5 sm:pl-6 pr-3 sm:pr-4 border border-[#E8ECF4] dark:border-white/5 transition-colors`}>
+      <div className="relative">
+        <div className={`relative flex items-center bg-white dark:bg-[#090d16] ${inputHeight} rounded-2xl pl-5 sm:pl-6 pr-3 sm:pr-4 border border-slate-200/90 dark:border-white/10 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.06)] dark:shadow-none focus-within:border-[#2563EB] dark:focus-within:border-blue-500 focus-within:shadow-[0_8px_30px_-4px_rgba(37,99,235,0.12)] transition-all duration-300`}>
           <div className="text-[#64748B] dark:text-gray-500 mr-2 sm:mr-3 shrink-0 flex items-center justify-center pointer-events-none">
             <Search className="h-5 w-5 sm:h-6 sm:w-6 group-focus-within:text-[#2563EB] dark:group-focus-within:text-blue-500 transition-colors" />
           </div>
@@ -429,7 +429,7 @@ export default function ToolAutocompleteSearch({
           <button
             type="button"
             onClick={() => handleSearchSubmit()}
-            className="hidden sm:flex items-center gap-2 bg-gradient-to-r from-[#2563EB] to-[#7C3AED] hover:opacity-95 text-white font-black px-6 py-3 rounded-xl text-xs uppercase tracking-widest transition-all shadow-md shrink-0 cursor-pointer ml-2"
+            className="hidden sm:flex items-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold px-6 py-3 rounded-xl text-xs uppercase tracking-widest shadow-[0_2px_8px_-1px_rgba(37,99,235,0.35)] hover:shadow-[0_4px_14px_-2px_rgba(37,99,235,0.45)] hover:brightness-105 active:scale-[0.98] transition-all duration-200 shrink-0 cursor-pointer ml-2"
           >
             {t('home.search_btn', 'Search')}
           </button>
@@ -546,7 +546,7 @@ export default function ToolAutocompleteSearch({
                     else setInternalValue('');
                     setIsOpen(false);
                   }}
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white font-black text-xs uppercase tracking-widest hover:opacity-95 transition-all shadow-md cursor-pointer"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold text-xs uppercase tracking-widest shadow-[0_2px_8px_-1px_rgba(37,99,235,0.35)] hover:shadow-[0_4px_14px_-2px_rgba(37,99,235,0.45)] hover:brightness-105 active:scale-[0.98] transition-all duration-200 cursor-pointer"
                 >
                   <span>{t('tools.browse_all_tools', 'Browse All Tools')}</span>
                   <ArrowRight className="w-3.5 h-3.5" />

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { Mail, ShieldCheck, Heart, Sparkles, Send, Globe } from 'lucide-react';
+import { Mail, ShieldCheck, Heart, Sparkles, Send, Globe, UserCheck, Lock, Clock, Zap } from 'lucide-react';
 import { toast } from 'sonner';
 import { useTranslation } from '@/components/I18nContext';
 
@@ -145,21 +145,54 @@ export default function Footer() {
   });
 
   return (
-    <footer className="bg-[#F7F8FC] dark:bg-[#030712] border-t border-[#E8ECF4] dark:border-white/5 pt-24 pb-12 relative overflow-hidden transition-colors duration-250">
+    <footer className="bg-[#F7F8FC] dark:bg-[#030712] border-t border-[#E8ECF4] dark:border-white/5 pt-16 pb-12 relative overflow-hidden transition-colors duration-250">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
       <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-blue-50/50 dark:from-blue-950/10 to-transparent -z-10 pointer-events-none" />
+
+      {/* Trust Strip — Minimalist Trust Signals Row */}
+      <div className="border-b border-slate-200/70 dark:border-white/5 pb-12 mb-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 py-4 px-5 sm:px-8 rounded-2xl bg-white dark:bg-white/[0.02] border border-slate-200/70 dark:border-white/5 shadow-sm">
+            <div className="flex items-center gap-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
+              <UserCheck className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
+              <span>No signup required</span>
+            </div>
+            <div className="flex items-center gap-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
+              <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+              <span>100% In-Browser Privacy</span>
+            </div>
+            <div className="flex items-center gap-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
+              <Lock className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0" />
+              <span>Zero server uploads</span>
+            </div>
+            <div className="flex items-center gap-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
+              <Clock className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
+              <span>Instant local processing</span>
+            </div>
+            <div className="flex items-center gap-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 col-span-2 sm:col-span-1">
+              <Zap className="w-4 h-4 text-teal-600 dark:text-teal-400 shrink-0" />
+              <span>Free forever utilities</span>
+            </div>
+          </div>
+        </div>
+      </div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 lg:gap-12">
           
           <div className="lg:col-span-3 space-y-8">
             <Link href={localizeHref('/')} translate="no" data-no-translate className="flex items-center gap-3 group select-none no-translate notranslate">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white font-black text-2xl shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-transform group-hover:scale-110 group-hover:rotate-3 no-translate notranslate" translate="no" data-no-translate>
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white font-black text-2xl shadow-sm shadow-blue-600/20 transition-transform group-hover:scale-105 no-translate notranslate" translate="no" data-no-translate>
                 T
               </div>
-              <span translate="no" data-no-translate className="text-2xl font-black tracking-tighter text-gray-900 dark:text-white no-translate notranslate">
-                ToolWala <span translate="no" data-no-translate className="text-blue-600 dark:text-blue-500 no-translate notranslate">AI</span>
-              </span>
+              <div className="flex flex-col">
+                <span translate="no" data-no-translate className="text-xl font-extrabold tracking-tight text-gray-900 dark:text-white no-translate notranslate leading-none">
+                  ToolWala <span translate="no" data-no-translate className="text-blue-600 dark:text-blue-500 font-black no-translate notranslate">AI</span>
+                </span>
+                <span className="text-[9px] font-semibold text-slate-400 dark:text-slate-500 tracking-wider uppercase mt-1">
+                  Your Files • Your Privacy
+                </span>
+              </div>
             </Link>
             
             <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-medium text-sm">

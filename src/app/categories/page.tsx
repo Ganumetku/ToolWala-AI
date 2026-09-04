@@ -8,7 +8,6 @@ import CategoriesIndexClient from './CategoriesIndexClient';
 import { categoriesData, getToolsByCategory } from '@/data/categories';
 import { toolsData } from '@/data/tools';
 import { getTranslationServer } from '@/lib/i18n-server';
-import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
 import { hubsData } from '@/data/hubs';
 import { landingPagesData } from '@/data/landingPages';
 import ToolIcon from '@/components/ToolIcon';
@@ -173,12 +172,7 @@ export default async function CategoriesIndexPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="bg-slate-50/50 dark:bg-[#030712] min-h-screen pt-6 sm:pt-8 pb-16 sm:pb-24 relative overflow-hidden font-sans text-gray-900 dark:text-white transition-colors duration-250">
-        <MeshGradient />
-        <FloatingParticles />
-
-        {/* Glow grid background */}
-        <div className="absolute top-0 left-0 w-full h-[600px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500/5 dark:from-blue-900/10 via-transparent to-transparent pointer-events-none z-0" />
+      <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen pt-6 sm:pt-8 pb-16 sm:pb-24 relative overflow-hidden font-sans text-gray-900 dark:text-white transition-colors duration-250">
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
           

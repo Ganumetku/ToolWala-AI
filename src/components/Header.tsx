@@ -188,27 +188,31 @@ export default function Header() {
     <header 
       className={`sticky top-0 z-[9999] w-full transition-all duration-300 ${
         isMobileMenuOpen
-          ? 'bg-white dark:bg-[#030712] border-b border-gray-200 dark:border-white/5 py-3.5'
+          ? 'bg-white dark:bg-[#030712] border-b border-slate-200/80 dark:border-white/5 py-3.5'
           : isScrolled 
-            ? 'bg-white/90 dark:bg-[#030712]/85 backdrop-blur-md border-b border-gray-200 dark:border-white/5 py-3.5 sm:py-3 shadow-sm' 
-            : 'bg-white/80 dark:bg-[#030712]/85 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border-b border-gray-200 dark:border-white/5 sm:border-b-0 py-3.5 sm:py-6'
+            ? 'bg-white/95 dark:bg-[#030712]/90 backdrop-blur-md border-b border-slate-200/80 dark:border-white/5 py-3.5 sm:py-3 shadow-sm' 
+            : 'bg-white/85 dark:bg-[#030712]/85 backdrop-blur-md border-b border-slate-200/60 dark:border-white/5 py-3.5 sm:py-4 shadow-[0_1px_2px_rgba(0,0,0,0.02)]'
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-3 sm:px-4 lg:px-4 xl:px-6 gap-2 xl:gap-4 2xl:gap-8">
         <div className="flex items-center gap-1 sm:gap-2">
-          <Link href={localizeHref('/')} translate="no" data-no-translate className="flex items-center gap-2 sm:gap-3 group whitespace-nowrap shrink-0 no-translate notranslate">
-            <div className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-blue-600 text-white font-black text-xl sm:text-2xl transition-all group-hover:scale-110 group-hover:rotate-3 shadow-[0_0_20px_rgba(37,99,235,0.4)] relative overflow-hidden no-translate notranslate" translate="no" data-no-translate>
-              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
+          <Link href={localizeHref('/')} translate="no" data-no-translate className="flex items-center gap-2.5 sm:gap-3 group whitespace-nowrap shrink-0 no-translate notranslate">
+            <div className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-blue-600 text-white font-black text-xl sm:text-2xl transition-all group-hover:scale-105 shadow-sm shadow-blue-600/20 relative overflow-hidden no-translate notranslate" translate="no" data-no-translate>
               T
             </div>
-            <span translate="no" data-no-translate className="text-lg sm:text-2xl font-black tracking-tighter text-gray-900 dark:text-white whitespace-nowrap no-translate notranslate">
-              ToolWala <span translate="no" data-no-translate className="text-blue-600 dark:text-blue-500 no-translate notranslate">AI</span>
-            </span>
+            <div className="flex flex-col">
+              <span translate="no" data-no-translate className="text-lg sm:text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white whitespace-nowrap no-translate notranslate leading-none">
+                ToolWala <span translate="no" data-no-translate className="text-blue-600 dark:text-blue-500 font-black no-translate notranslate">AI</span>
+              </span>
+              <span className="hidden sm:block text-[9px] font-semibold text-slate-400 dark:text-slate-500 tracking-wider uppercase mt-1">
+                Your Files • Your Privacy
+              </span>
+            </div>
           </Link>
         </div>
         
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-0.5 2xl:gap-1 bg-white/80 dark:bg-white/5 p-1.5 rounded-[24px] border border-black/[0.06] dark:border-white/10 shadow-[0_8px_30px_rgba(15,23,42,0.06)] backdrop-blur-[20px]">
+        <nav className="hidden lg:flex items-center gap-0.5 2xl:gap-1 bg-white/90 dark:bg-white/5 p-1.5 rounded-[24px] border border-gray-200 dark:border-white/10 shadow-sm backdrop-blur-[20px]">
           {navigation.map((item) => {
             if (item.submenu) {
               const hasActiveSub = item.submenu.some(sub => pathname === localizeHref(sub.href));
@@ -218,8 +222,8 @@ export default function Header() {
                     onClick={() => setIsPdfDropdownOpen(!isPdfDropdownOpen)}
                     className={`px-2.5 xl:px-3.5 2xl:px-5 py-2 rounded-full text-[9px] min-[1100px]:text-[10px] 2xl:text-xs font-semibold uppercase tracking-wider 2xl:tracking-widest transition-all whitespace-nowrap flex items-center gap-1 cursor-pointer select-none ${
                       isPdfDropdownOpen || hasActiveSub
-                        ? 'bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white shadow-md shadow-blue-500/20' 
-                        : 'text-slate-700 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white hover:bg-blue-50/80 dark:hover:bg-white/5'
+                        ? 'bg-[#2563EB] text-white' 
+                        : 'text-slate-700 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-white/5'
                     }`}
                   >
                     {item.name}
@@ -259,8 +263,8 @@ export default function Header() {
                 href={localizedHrefValue} 
                 className={`px-2.5 xl:px-3.5 2xl:px-5 py-2 rounded-full text-[9px] min-[1100px]:text-[10px] 2xl:text-xs font-semibold uppercase tracking-wider 2xl:tracking-widest transition-all whitespace-nowrap ${
                   isActive
-                    ? 'bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white shadow-md shadow-blue-500/20' 
-                    : 'text-slate-700 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white hover:bg-blue-50/80 dark:hover:bg-white/5'
+                    ? 'bg-[#2563EB] text-white' 
+                    : 'text-slate-700 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-white/5'
                 }`}
               >
                 {item.name}
@@ -306,7 +310,7 @@ export default function Header() {
                         <span className="text-base leading-none">{lang.flag}</span>
                         <span translate="no">{lang.name}</span>
                       </span>
-                      {locale === lang.code && <span className="h-1.5 w-1.5 rounded-full bg-blue-600 dark:bg-blue-500 shadow-[0_0_8px_#2563eb]" />}
+                      {locale === lang.code && <span className="h-1.5 w-1.5 rounded-full bg-blue-600 dark:bg-blue-500" />}
                     </button>
                   ))}
                 </div>
@@ -316,7 +320,7 @@ export default function Header() {
 
           <Link 
             href={localizeHref('/tools')} 
-            className="group relative flex items-center gap-1 xl:gap-1.5 2xl:gap-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 dark:bg-white dark:text-black dark:hover:bg-gray-100 px-2.5 xl:px-4 2xl:px-6 py-2 text-[10px] min-[1100px]:text-[11px] 2xl:text-sm font-black hover:scale-105 active:scale-95 transition-all shadow-md overflow-hidden whitespace-nowrap shrink-0"
+            className="group relative flex items-center gap-1 xl:gap-1.5 2xl:gap-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 dark:bg-white dark:text-black dark:hover:bg-gray-100 px-2.5 xl:px-4 2xl:px-6 py-2 text-[10px] min-[1100px]:text-[11px] 2xl:text-sm font-bold shadow-[0_2px_8px_-1px_rgba(37,99,235,0.35)] hover:shadow-[0_4px_14px_-2px_rgba(37,99,235,0.45)] hover:brightness-105 hover:scale-[1.02] active:scale-95 transition-all duration-200 overflow-hidden whitespace-nowrap shrink-0"
           >
             <Rocket className="w-3.5 h-3.5 xl:w-4 xl:h-4 relative z-10" suppressHydrationWarning />
             <span className="relative z-10 whitespace-nowrap">{t('nav.start_free', 'Start Free')}</span>

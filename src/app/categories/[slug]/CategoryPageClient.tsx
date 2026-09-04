@@ -233,7 +233,7 @@ export default function CategoryPageClient({ slug, category, relatedBlogs = [] }
                       {t('categories.popular_shelf_title', 'Popular Utilities')}
                     </h2>
                   </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                  <div className="grid grid-cols-1 min-[480px]:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                     {popularToolsList.map((tool) => (
                       <ToolCard 
                         key={tool.id} 

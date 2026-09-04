@@ -381,7 +381,7 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-sans bg-[#F8FAFC] dark:bg-[#030712] text-[#111827] dark:text-white">
+      <body className="min-h-full flex flex-col font-sans bg-[#F6F8FC] dark:bg-[#030712] text-[#111827] dark:text-white">
         <ThemeProvider>
           <TopProgressBar />
           <GoogleAnalytics />

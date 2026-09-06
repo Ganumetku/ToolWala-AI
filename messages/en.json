@@ -1,17 +1,22 @@
 {
   "nav": {
     "home": "Home",
+    "convert_pdf": "Convert PDF",
+    "all_pdf_tools": "All PDF Tools",
+    "convert_to_pdf": "Convert to PDF",
+    "convert_from_pdf": "Convert from PDF",
     "tools": "Tools",
     "categories": "Categories",
     "pricing": "Pricing",
     "blog": "Blog",
     "about": "About",
     "contact": "Contact Us",
+    "privacy": "Privacy Hub",
+    "company_and_trust": "Company & Trust",
     "start_free": "Start Free",
     "get_started_free": "Get Started Free",
     "select_language": "Select Language",
-    "pdf_suite": "PDF Suite",
-    "privacy": "Privacy Hub"
+    "pdf_suite": "PDF Suite"
   },
   "footer": {
     "copyright": "© 2026 ToolWala AI. All rights reserved.",

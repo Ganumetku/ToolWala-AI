@@ -1,12 +1,18 @@
 {
   "nav": {
     "home": "Rumah",
+    "convert_pdf": "Konversi PDF",
+    "all_pdf_tools": "Semua Alat PDF",
+    "convert_to_pdf": "Konversi ke PDF",
+    "convert_from_pdf": "Konversi dari PDF",
     "tools": "Alat",
     "categories": "Kategori",
     "pricing": "Harga",
     "blog": "blog",
     "about": "Tentang",
     "contact": "Hubungi Kami",
+    "privacy": "Pusat Privasi",
+    "company_and_trust": "Perusahaan & Kepercayaan",
     "start_free": "Mulai Gratis",
     "get_started_free": "Memulai Gratis",
     "select_language": "Pilih Bahasa"

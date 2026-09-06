@@ -1,12 +1,18 @@
 {
   "nav": {
     "home": "الصفحة الرئيسية",
+    "convert_pdf": "تحويل PDF",
+    "all_pdf_tools": "جميع أدوات PDF",
+    "convert_to_pdf": "تحويل إلى PDF",
+    "convert_from_pdf": "تحويل من PDF",
     "tools": "أدوات",
     "categories": "الفئات",
     "pricing": "التسعير",
     "blog": "مدونة",
     "about": "من نحن",
     "contact": "اتصل بنا",
+    "privacy": "مركز الخصوصية",
+    "company_and_trust": "الشركة والثقة",
     "start_free": "ابدأ مجانًا",
     "get_started_free": "ابدأ مجانًا",
     "select_language": "اختر اللغة"

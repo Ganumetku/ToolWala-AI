@@ -474,7 +474,7 @@ export default function Header() {
                           onClick={() => setIsConvertDropdownOpen(false)}
                           className="font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
                         >
-                          <span>All PDF Tools</span>
+                          <span>{t('nav.all_pdf_tools', 'All PDF Tools')}</span>
                           <ArrowRight className="w-3 h-3" />
                         </Link>
                       </div>

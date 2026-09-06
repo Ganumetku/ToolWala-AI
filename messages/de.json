@@ -1,12 +1,18 @@
 {
   "nav": {
     "home": "Zuhause",
+    "convert_pdf": "PDF umwandeln",
+    "all_pdf_tools": "Alle PDF-Tools",
+    "convert_to_pdf": "In PDF umwandeln",
+    "convert_from_pdf": "Aus PDF umwandeln",
     "tools": "Werkzeuge",
     "categories": "Kategorien",
     "pricing": "Preise",
     "blog": "Blog",
     "about": "Über uns",
     "contact": "Kontakt",
+    "privacy": "Datenschutz-Hub",
+    "company_and_trust": "Unternehmen & Vertrauen",
     "start_free": "Kostenlos starten",
     "get_started_free": "Starten Sie kostenlos durch",
     "select_language": "Wählen Sie Sprache aus"

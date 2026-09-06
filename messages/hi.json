@@ -1,12 +1,18 @@
 {
   "nav": {
     "home": "मुख्य पृष्ठ",
+    "convert_pdf": "पीडीएफ बदलें",
+    "all_pdf_tools": "सभी पीडीएफ टूल्स",
+    "convert_to_pdf": "पीडीएफ में बदलें",
+    "convert_from_pdf": "पीडीएफ से बदलें",
     "tools": "टूल",
     "categories": "श्रेणियाँ",
     "pricing": "मूल्य निर्धारण",
     "blog": "ब्लॉग",
     "about": "हमारे बारे में",
     "contact": "संपर्क करें",
+    "privacy": "गोपनीयता हब",
+    "company_and_trust": "कंपनी और भरोसा",
     "start_free": "मुफ्त शुरू करें",
     "get_started_free": "मुफ्त में शुरू करें",
     "select_language": "भाषा चुनें",

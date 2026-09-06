@@ -11322,5 +11322,58 @@
     "seoDescription": "अंतिम बिक्री मूल्य, छूट राशि, लगातार दोगुनी छूट और जीएसटी कर की तुरंत गणना करें।",
     "createdAt": "2026-08-18T03:24:53.739Z",
     "updatedAt": "2026-08-18T03:24:53.739Z"
+  },
+  {
+    "id": "rr8on23",
+    "toolSlug": "pdf-to-powerpoint",
+    "locale": "hi",
+    "title": "PDF to PowerPoint",
+    "description": "Convert PDF presentations into editable PowerPoint (.pptx) slides accurately.",
+    "faq": [],
+    "seoTitle": "PDF to PowerPoint",
+    "seoDescription": "Convert PDF presentations into editable PowerPoint (.pptx) slides accurately.",
+    "createdAt": "2026-09-06T14:31:40.858Z",
+    "updatedAt": "2026-09-06T14:31:40.858Z"
+  },
+  {
+    "id": "n3bt1uy",
+    "toolSlug": "powerpoint-to-pdf",
+    "locale": "hi",
+    "title": "PowerPoint to PDF",
+    "description": "Convert PowerPoint slides (.pptx, .ppt) into clean PDF presentations securely.",
+    "faq": [],
+    "seoTitle": "PowerPoint to PDF",
+    "seoDescription": "Convert PowerPoint slides (.pptx, .ppt) into clean PDF presentations securely.",
+    "createdAt": "2026-09-06T14:31:41.033Z",
+    "updatedAt": "2026-09-06T14:31:41.033Z"
+  },
+  {
+    "id": "r66lcrf",
+    "toolSlug": "ai-image-describer",
+    "locale": "hi",
+    "title": "एआई Image Describer & Scene Analyzer",
+    "description": "Analyze photos to detect objects, people, scenes, SEO alt text, and prompts.",
+    "faq": [
+      {
+        "question": "How does this differ from OCR (Image to Text)?",
+        "answer": "OCR tools only extract written or printed letters from documents and receipts. AI Image Describer uses Computer Vision to describe what is visually happening in the picture (people, clothes, scenery, colors, objects)."
+      },
+      {
+        "question": "Are my uploaded photos stored on your servers?",
+        "answer": "No. Your images are processed securely in memory and immediately discarded. ToolWala AI never retains, logs, or trains on your uploaded files."
+      },
+      {
+        "question": "Can it generate social media captions in Hinglish?",
+        "answer": "Yes! Select Hinglish from the language dropdown to generate natural Indian social media captions in Latin script."
+      },
+      {
+        "question": "Is this tool free to use?",
+        "answer": "Yes, the AI Image Describer & Scene Analyzer is completely free to use on ToolWala AI."
+      }
+    ],
+    "seoTitle": "एआई Image Describer & Scene Analyzer",
+    "seoDescription": "Analyze photos to detect objects, people, scenes, SEO alt text, and prompts.",
+    "createdAt": "2026-09-06T14:31:44.269Z",
+    "updatedAt": "2026-09-06T14:31:44.269Z"
   }
 ]

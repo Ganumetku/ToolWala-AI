@@ -87,13 +87,13 @@ export default function ToolCard({ id, slug, title, description, icon, href, isP
               )}
             </div>
 
-            {/* Title — bold, high contrast */}
-            <h3 className="text-[15.5px] sm:text-[16.5px] font-bold leading-snug text-slate-900 dark:text-white mb-1.5 group-hover:text-[#2563EB] dark:group-hover:text-blue-400 transition-colors tracking-tight line-clamp-2">
+            {/* Title — matching exact iLovePDF font weight and color */}
+            <h3 className="text-[16px] sm:text-[17px] font-semibold leading-snug text-[#33333b] dark:text-white mb-1.5 group-hover:text-[#161616] dark:group-hover:text-blue-400 transition-colors tracking-tight line-clamp-2">
               {displayTitle}
             </h3>
 
-            {/* Description — regular weight, lighter gray, spacious line-height */}
-            <p className="text-[12px] sm:text-[12.5px] font-normal leading-[1.6] text-slate-500/90 dark:text-slate-400 line-clamp-2 sm:line-clamp-3">
+            {/* Description — matching exact iLovePDF font color and line-height */}
+            <p className="text-[12.5px] sm:text-[13px] font-normal leading-[1.5] text-[#707078] dark:text-slate-400 line-clamp-2 sm:line-clamp-3">
               {displayDescription}
             </p>
           </div>

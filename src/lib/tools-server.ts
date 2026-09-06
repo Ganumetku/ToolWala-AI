@@ -110,9 +110,21 @@ export async function findToolBySlugServer(slug: string, includeFull = false) {
         seoMetadata: true
       }
     });
-  } else {
+  }
+  if (!tool) {
     const tools = jsonDb.getTools();
     tool = tools.find((t: any) => t.slug === slug);
+  }
+  if (!tool) {
+    const rawTool = toolsData.find((t: any) => t.slug === slug);
+    if (rawTool) {
+      tool = {
+        ...rawTool,
+        inputs: [],
+        faqs: [],
+        articles: [],
+      };
+    }
   }
   return tool;
 }

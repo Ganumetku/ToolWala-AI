@@ -246,7 +246,7 @@ export default function Home() {
   }, [mergedTools, activeCategoryTab, searchQuery]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F6F8FC] dark:bg-[#030712] text-[#0F172A] dark:text-white relative transition-colors duration-250 font-sans">
+    <div className="flex flex-col min-h-screen bg-[#F6F8FC] dark:bg-[#030712] text-[#33333b] dark:text-white relative transition-colors duration-250 font-sans">
 
       {/* iLovePDF-inspired Organic Background Waves & Pastels */}
       <PageBackground />
@@ -263,14 +263,14 @@ export default function Home() {
           </div>
 
           {/* Punchy, Confident Headline with tighter tracking */}
-          <h1 className="animate-fade-up font-black text-3xl sm:text-5xl md:text-6xl tracking-tight sm:tracking-tighter text-[#0F172A] dark:text-white leading-[1.12] mb-3 max-w-4xl mx-auto">
+          <h1 className="animate-fade-up font-bold text-3xl sm:text-5xl md:text-6xl tracking-tight sm:tracking-tighter text-[#33333b] dark:text-white leading-[1.12] mb-3 max-w-4xl mx-auto">
             {t('home.hero_title_1', 'Free ')}
             <span className="text-[#2563EB] dark:text-blue-400">
               {t('home.hero_title_highlight', 'PDF, Image & AI Tools')}
             </span>
           </h1>
 
-          <p className="animate-fade-up mx-auto max-w-xl text-xs sm:text-sm font-medium text-slate-500/90 dark:text-gray-400 leading-relaxed mb-5">
+          <p className="animate-fade-up mx-auto max-w-xl text-xs sm:text-sm font-normal text-[#707078] dark:text-gray-400 leading-relaxed mb-5">
             {t('home.hero_subtitle', 'Edit PDFs, compress images, remove backgrounds, and use AI utilities locally in your browser with zero data retention.')}
           </p>
 
@@ -458,6 +458,30 @@ export default function Home() {
                 Enjoy unlimited document splits, PDF compressions, background removals, and calculations without fees.
               </p>
             </div>
+          </div>
+
+          {/* Privacy Hub Banner Callout */}
+          <div className="mt-10 p-6 sm:p-7 rounded-3xl bg-white dark:bg-white/[0.03] border border-blue-500/20 dark:border-blue-500/30 flex flex-col sm:flex-row items-center justify-between gap-5 shadow-sm">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-lg shadow-blue-500/20 shrink-0">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <div className="text-left">
+                <h4 className="text-base sm:text-lg font-black text-gray-900 dark:text-white tracking-tight">
+                  {t('home.privacy_callout_title', 'Zero-Upload Privacy Architecture')}
+                </h4>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium">
+                  {t('home.privacy_callout_desc', 'Explore our interactive Privacy Hub to see how WebAssembly and in-browser processing keep your data 100% on your device.')}
+                </p>
+              </div>
+            </div>
+            <Link
+              href={localizeHref('/privacy')}
+              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl text-xs font-bold tracking-wider uppercase transition-all shadow-md shadow-blue-600/20 shrink-0 hover:scale-[1.02] active:scale-95 whitespace-nowrap"
+            >
+              <span>{t('home.explore_privacy_hub', 'Visit Privacy Hub')}</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>

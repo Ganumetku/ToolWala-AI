@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import PublicLayoutWrapper from "@/components/PublicLayoutWrapper";
@@ -13,6 +14,34 @@ import { I18nProvider } from '@/components/I18nContext';
 import LocaleDomTranslator from '@/components/LocaleDomTranslator';
 import { ThemeProvider } from '@/components/ThemeContext';
 import TopProgressBar from '@/components/TopProgressBar';
+
+const graphik = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Graphik-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Graphik-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Graphik-Semibold.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Graphik-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-graphik",
+  display: "swap",
+  fallback: ["-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -352,7 +381,7 @@ export default async function RootLayout({
     <html
       lang={locale}
       dir={locale === 'ar' ? 'rtl' : 'ltr'}
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${graphik.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>
@@ -381,7 +410,7 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-sans bg-[#F6F8FC] dark:bg-[#030712] text-[#111827] dark:text-white">
+      <body className="min-h-full flex flex-col font-sans bg-[#F6F8FC] dark:bg-[#030712] text-[#33333b] dark:text-white">
         <ThemeProvider>
           <TopProgressBar />
           <GoogleAnalytics />

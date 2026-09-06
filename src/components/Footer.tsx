@@ -99,13 +99,13 @@ export default function Footer() {
     { name: "Passport Seva Hub", href: "/hubs/passport-seva-utilities/" }
   ];
 
-  const sitemap = [
-    { name: "All Utilities", href: "/tools/" },
-    { name: "Browse Folders", href: "/categories/" },
-    { name: "Pricing Beta", href: "/pricing/" },
-    { name: "Privacy Hub", href: "/privacy/" },
-    { name: "Insights Blog", href: "/blog/" },
-    { name: "Platform Guide", href: "/about/" }
+  const companyLinks = [
+    { name: t('nav.privacy', 'Privacy Hub'), href: "/privacy/", highlight: true, badge: "Zero-Log" },
+    { name: t('nav.about', 'About Us'), href: "/about/" },
+    { name: t('nav.contact', 'Contact Us'), href: "/contact/" },
+    { name: t('nav.blog', 'Insights Blog'), href: "/blog/" },
+    { name: t('nav.pricing', 'Pricing Beta'), href: "/pricing/" },
+    { name: t('nav.tools', 'All Utilities'), href: "/tools/" }
   ];
 
   const localizedCategories = categories.map((cat) => ({
@@ -128,21 +128,10 @@ export default function Footer() {
     href: localizeHref(hub.href)
   }));
 
-  const localizedSitemap = sitemap.map((item) => {
-    let key = '';
-    if (item.href === '/tools/') key = 'nav.tools';
-    else if (item.href === '/categories/') key = 'nav.categories';
-    else if (item.href === '/pricing/') key = 'nav.pricing';
-    else if (item.href === '/privacy/') key = 'nav.privacy';
-    else if (item.href === '/blog/') key = 'nav.blog';
-    else if (item.href === '/about/') key = 'nav.about';
-    
-    const name = key ? t(key, item.name) : item.name;
-    return {
-      name,
-      href: localizeHref(item.href)
-    };
-  });
+  const localizedCompanyLinks = companyLinks.map((item) => ({
+    ...item,
+    href: localizeHref(item.href)
+  }));
 
   return (
     <footer className="bg-[#F7F8FC] dark:bg-[#030712] border-t border-[#E8ECF4] dark:border-white/5 pt-16 pb-12 relative overflow-hidden transition-colors duration-250">
@@ -279,37 +268,45 @@ export default function Footer() {
             </ul>
           </div>
           
-          <div className="lg:col-span-1 space-y-6">
-            <h3 className="text-xs font-black text-gray-900 dark:text-white uppercase tracking-[0.2em]">{t('footer.sitemap', 'Sitemap')}</h3>
-            <ul className="space-y-4">
-              {localizedSitemap.map((item) => (
+          <div className="lg:col-span-3 space-y-6 min-w-0">
+            <h3 className="text-xs font-black text-gray-900 dark:text-white uppercase tracking-[0.2em]">{t('footer.company_trust', 'Company & Trust')}</h3>
+            <ul className="space-y-3.5">
+              {localizedCompanyLinks.map((item) => (
                 <li key={item.name}>
                   <Link 
                     href={item.href} 
-                    className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white text-xs font-bold transition-colors block"
+                    className={`text-xs font-bold transition-all flex items-center gap-2 group ${
+                      item.highlight 
+                        ? 'text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-black' 
+                        : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white'
+                    }`}
                   >
-                    {item.name}
+                    {item.highlight && <ShieldCheck className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0 group-hover:scale-110 transition-transform" />}
+                    <span>{item.name}</span>
+                    {item.badge && (
+                      <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                        {item.badge}
+                      </span>
+                    )}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
-          
-          <div className="lg:col-span-2 space-y-6 min-w-0">
-            <h3 className="text-xs font-black text-gray-900 dark:text-white uppercase tracking-[0.2em]">{t('footer.contact_header', 'Contact')}</h3>
-            <a 
-              href="mailto:developtechx@gmail.com" 
-              className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 text-xs font-bold transition-all group whitespace-nowrap"
-            >
-              <div className="w-9 h-9 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center border border-black/10 dark:border-white/10 group-hover:bg-blue-600/10 group-hover:border-blue-600/20 transition-all shrink-0">
-                <Mail className="w-4 h-4 text-gray-700 dark:text-gray-300" />
-              </div>
-              <span translate="no" data-no-translate className="notranslate font-bold text-xs">
-                developtechx@gmail.com
-              </span>
-            </a>
- 
-            <div className="pt-2">
+
+            {/* Direct Support & Status */}
+            <div className="pt-2 border-t border-slate-200/70 dark:border-white/5 space-y-2.5">
+              <a 
+                href="mailto:developtechx@gmail.com" 
+                className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 text-xs font-bold transition-all group whitespace-nowrap"
+              >
+                <div className="w-8 h-8 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center border border-black/10 dark:border-white/10 group-hover:bg-blue-600/10 group-hover:border-blue-600/20 transition-all shrink-0">
+                  <Mail className="w-3.5 h-3.5 text-gray-700 dark:text-gray-300" />
+                </div>
+                <span translate="no" data-no-translate className="notranslate font-bold text-xs truncate">
+                  developtechx@gmail.com
+                </span>
+              </a>
+
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
                 <span>100% Client-Side & Operational</span>
@@ -324,10 +321,15 @@ export default function Footer() {
               &copy; {currentYear} <span translate="no" data-no-translate className="no-translate notranslate">ToolWala AI</span>. {t('footer.copyright_notice', 'All rights reserved.')}
             </p>
             <div className="flex flex-wrap justify-center lg:justify-start gap-4.5 text-[10px] font-black uppercase tracking-wider text-gray-500">
+              <Link href={localizeHref('/privacy')} prefetch={false} className="text-blue-600 dark:text-blue-400 font-extrabold hover:underline transition-colors flex items-center gap-1">
+                <ShieldCheck className="w-3 h-3" />
+                <span>{t('nav.privacy', 'Privacy Hub')}</span>
+              </Link>
+              <Link href={localizeHref('/about')} prefetch={false} className="hover:text-gray-900 dark:hover:text-gray-400 transition-colors">{t('nav.about', 'About')}</Link>
+              <Link href={localizeHref('/contact')} prefetch={false} className="hover:text-gray-900 dark:hover:text-gray-400 transition-colors">{t('nav.contact', 'Contact Support')}</Link>
               <Link href={localizeHref('/privacy-policy')} prefetch={false} className="hover:text-gray-900 dark:hover:text-gray-400 transition-colors">{t('footer.privacy', 'Privacy Policy')}</Link>
               <Link href={localizeHref('/terms')} prefetch={false} className="hover:text-gray-900 dark:hover:text-gray-400 transition-colors">{t('footer.terms', 'Terms of Service')}</Link>
               <Link href={localizeHref('/disclaimer')} prefetch={false} className="hover:text-gray-900 dark:hover:text-gray-400 transition-colors">{t('footer.disclaimer', 'Disclaimer')}</Link>
-              <Link href={localizeHref('/contact')} prefetch={false} className="hover:text-gray-900 dark:hover:text-gray-400 transition-colors">{t('footer.contact', 'Contact Support')}</Link>
             </div>
             
             {/* Horizontal Footer Language Selector Grid */}

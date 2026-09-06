@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, Rocket, Sparkles, Globe, ChevronDown } from 'lucide-react';
+import { Menu, X, Rocket, Sparkles, Globe, ChevronDown, ShieldCheck, Mail, ArrowRight } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { toolsData } from '@/data/tools';
 import { useTranslation } from '@/components/I18nContext';
@@ -117,43 +117,184 @@ export default function Header() {
     window.location.href = newPathname + search;
   };
 
-  const pdfSuiteTools = [
-    { name: 'Merge PDF', href: '/tools/merge-pdf', icon: 'Merge' },
-    { name: 'Split PDF', href: '/tools/split-pdf', icon: 'SplitSquareHorizontal' },
-    { name: 'Compress PDF', href: '/tools/compress-pdf', icon: 'Shrink' },
-    { name: 'PDF to JPG', href: '/tools/pdf-to-jpg', icon: 'FileImage' },
-    { name: 'JPG to PDF', href: '/tools/jpg-to-pdf', icon: 'Image' },
-    { name: 'Word to PDF', href: '/tools/word-to-pdf-converter', icon: 'FileOutput' },
-    { name: 'PDF to Word', href: '/tools/pdf-to-word-converter', icon: 'FileText' },
-    { name: 'Crop PDF', href: '/tools/crop-pdf', icon: 'Crop' },
-    { name: 'Rotate PDF', href: '/tools/rotate-pdf', icon: 'RotateCw' },
-    { name: 'Watermark PDF', href: '/tools/watermark-pdf', icon: 'Droplets' },
-    { name: 'Unlock PDF', href: '/tools/unlock-pdf', icon: 'LockOpen' },
-    { name: 'Protect PDF', href: '/tools/protect-pdf', icon: 'Lock' },
-    { name: 'Remove Pages', href: '/tools/remove-pages', icon: 'FileMinus' },
-    { name: 'Organize PDF', href: '/tools/organize-pdf', icon: 'LayoutGrid' },
-    { name: 'OCR PDF', href: '/tools/pdf-ocr', icon: 'ScanText' },
+  const convertPdfTools = {
+    toPdf: [
+      { 
+        name: 'JPG to PDF', 
+        href: '/tools/jpg-to-pdf', 
+        badge: 'JPG',
+        badgeColor: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20',
+        desc: 'Convert JPG, PNG to PDF' 
+      },
+      { 
+        name: 'WORD to PDF', 
+        href: '/tools/word-to-pdf-converter', 
+        badge: 'DOC',
+        badgeColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20',
+        desc: 'Convert DOC, DOCX to PDF' 
+      },
+      { 
+        name: 'POWERPOINT to PDF', 
+        href: '/tools/powerpoint-to-pdf', 
+        badge: 'PPT',
+        badgeColor: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20',
+        desc: 'Convert PPTX to PDF' 
+      },
+      { 
+        name: 'EXCEL to PDF', 
+        href: '/tools/excel-to-pdf-converter', 
+        badge: 'XLS',
+        badgeColor: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20',
+        desc: 'Spreadsheet to PDF' 
+      },
+      { 
+        name: 'HEIC to PDF', 
+        href: '/tools/heic-to-jpg-png-converter', 
+        badge: 'HEIC',
+        badgeColor: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20',
+        desc: 'Apple photos to PDF' 
+      },
+    ],
+    fromPdf: [
+      { 
+        name: 'PDF to JPG', 
+        href: '/tools/pdf-to-jpg', 
+        badge: 'JPG',
+        badgeColor: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20',
+        desc: 'Extract pages as JPG' 
+      },
+      { 
+        name: 'PDF to WORD', 
+        href: '/tools/pdf-to-word-converter', 
+        badge: 'DOC',
+        badgeColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20',
+        desc: 'Convert to editable DOCX' 
+      },
+      { 
+        name: 'PDF to POWERPOINT', 
+        href: '/tools/pdf-to-powerpoint', 
+        badge: 'PPT',
+        badgeColor: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20',
+        desc: 'Convert PDF to PPTX' 
+      },
+      { 
+        name: 'PDF to EXCEL', 
+        href: '/tools/pdf-to-excel-converter', 
+        badge: 'XLS',
+        badgeColor: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20',
+        desc: 'Extract tables to Excel' 
+      },
+      { 
+        name: 'PDF to TEXT / OCR', 
+        href: '/tools/pdf-ocr', 
+        badge: 'OCR',
+        badgeColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20',
+        desc: 'Extract selectable text' 
+      },
+    ]
+  };
+
+  const allPdfCategories = [
+    {
+      id: 'organize',
+      label: 'Organize & Pages',
+      icon: 'LayoutGrid',
+      accentColor: 'text-blue-500 dark:text-blue-400',
+      tools: [
+        { name: 'Merge PDF', href: '/tools/merge-pdf', icon: 'Merge', badge: 'Combine', desc: 'Join multiple files into one' },
+        { name: 'Split PDF', href: '/tools/split-pdf', icon: 'SplitSquareHorizontal', badge: 'Extract', desc: 'Extract pages to separate files' },
+        { name: 'Organize PDF', href: '/tools/organize-pdf', icon: 'LayoutGrid', badge: 'Sort', desc: 'Reorder, rotate & delete pages' },
+        { name: 'Remove Pages', href: '/tools/remove-pages', icon: 'FileMinus', badge: 'Delete', desc: 'Delete unwanted pages' },
+        { name: 'Add Page Numbers', href: '/tools/add-page-numbers-to-pdf', icon: 'Hash', badge: 'Number', desc: 'Custom numbering' },
+      ]
+    },
+    {
+      id: 'convert',
+      label: 'Convert PDF',
+      icon: 'FileOutput',
+      accentColor: 'text-emerald-500 dark:text-emerald-400',
+      tools: [
+        { name: 'Word to PDF', href: '/tools/word-to-pdf-converter', icon: 'FileOutput', badge: 'DOC', badgeColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20', desc: 'DOCX to clean PDF' },
+        { name: 'PDF to Word', href: '/tools/pdf-to-word-converter', icon: 'FileText', badge: 'DOC', badgeColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20', desc: 'PDF to editable DOCX' },
+        { name: 'Excel to PDF', href: '/tools/excel-to-pdf-converter', icon: 'FileSpreadsheet', badge: 'XLS', badgeColor: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20', desc: 'Spreadsheet to PDF' },
+        { name: 'PDF to Excel', href: '/tools/pdf-to-excel-converter', icon: 'FileSpreadsheet', badge: 'XLS', badgeColor: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20', desc: 'Extract table data' },
+        { name: 'PowerPoint to PDF', href: '/tools/powerpoint-to-pdf', icon: 'Presentation', badge: 'PPT', badgeColor: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20', desc: 'PPTX to PDF slides' },
+        { name: 'PDF to PowerPoint', href: '/tools/pdf-to-powerpoint', icon: 'Presentation', badge: 'PPT', badgeColor: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20', desc: 'PDF to PPTX slides' },
+        { name: 'JPG to PDF', href: '/tools/jpg-to-pdf', icon: 'Image', badge: 'JPG', badgeColor: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20', desc: 'Images to single PDF' },
+        { name: 'PDF to JPG', href: '/tools/pdf-to-jpg', icon: 'FileImage', badge: 'JPG', badgeColor: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20', desc: 'Extract high-res JPG' },
+      ]
+    },
+    {
+      id: 'edit',
+      label: 'Edit & Sign',
+      icon: 'FilePenLine',
+      accentColor: 'text-violet-500 dark:text-violet-400',
+      tools: [
+        { name: 'Edit PDF', href: '/tools/pdf-tools/edit-pdf', icon: 'FilePenLine', badge: 'POPULAR', badgeColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20', desc: 'Add text, forms & draw' },
+        { name: 'Sign PDF', href: '/tools/sign-pdf', icon: 'PenTool', badge: 'E-SIGN', badgeColor: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20', desc: 'Draw, type signature' },
+        { name: 'Crop PDF', href: '/tools/crop-pdf', icon: 'Crop', badge: 'Trim', desc: 'Trim page margins' },
+        { name: 'Rotate PDF', href: '/tools/rotate-pdf', icon: 'RotateCw', badge: 'Turn', desc: 'Rotate 90° or 180°' },
+        { name: 'Watermark PDF', href: '/tools/watermark-pdf', icon: 'Droplets', badge: 'Stamp', desc: 'Stamp text or image' },
+      ]
+    },
+    {
+      id: 'security',
+      label: 'Security & Optimize',
+      icon: 'Lock',
+      accentColor: 'text-amber-500 dark:text-amber-400',
+      tools: [
+        { name: 'Compress PDF', href: '/tools/compress-pdf', icon: 'Shrink', badge: 'FAST', badgeColor: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20', desc: 'Shrink MB size' },
+        { name: 'Protect PDF', href: '/tools/protect-pdf', icon: 'Lock', badge: 'Lock', desc: 'Add password encryption' },
+        { name: 'Unlock PDF', href: '/tools/unlock-pdf', icon: 'LockOpen', badge: 'Unlock', desc: 'Remove password' },
+        { name: 'Aadhaar Masking', href: '/tools/aadhaar-masking-tool', icon: 'EyeOff', badge: 'PRIVACY', badgeColor: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20', desc: 'Mask first 8 digits' },
+        { name: 'Aadhaar 300KB', href: '/tools/aadhaar-pdf-compressor', icon: 'Shrink', badge: '300KB', badgeColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20', desc: 'UIDAI portal limit' },
+        { name: 'Govt Form PDF', href: '/tools/gov-form-pdf-compressor', icon: 'FileMinus', badge: 'GOVT', badgeColor: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20', desc: 'UPSC / SSC forms' },
+      ]
+    },
+    {
+      id: 'intelligence',
+      label: 'AI & Smart Tools',
+      icon: 'Sparkles',
+      accentColor: 'text-purple-500 dark:text-purple-400',
+      tools: [
+        { name: 'AI PDF Summarizer', href: '/tools/pdf-summarizer', icon: 'Sparkles', badge: 'AI LAB', badgeColor: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/30', desc: 'Client-side summary' },
+        { name: 'PDF OCR Scanner', href: '/tools/pdf-ocr', icon: 'ScanText', badge: 'OCR', badgeColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20', desc: 'Scan & extract text' },
+        { name: 'All PDF Directory', href: '/categories/pdf-tools', icon: 'ArrowRight', badge: '26 TOOLS', badgeColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20', desc: 'View all category tools' },
+      ]
+    }
   ];
 
   const navigation = [
     { name: t('nav.home', 'Home'), href: '/' },
-    { name: t('nav.tools', 'Tools'), href: '/tools' },
     { 
-      name: t('nav.pdf_suite', 'PDF Suite'), 
+      name: t('nav.convert_pdf', 'Convert PDF'), 
       href: '#', 
-      submenu: pdfSuiteTools 
+      isConvert: true 
     },
+    { 
+      name: t('nav.all_pdf_tools', 'All PDF Tools'), 
+      href: '#', 
+      isAllPdf: true 
+    },
+    { name: t('nav.tools', 'All Tools'), href: '/tools' },
     { name: t('nav.categories', 'Categories'), href: '/categories' },
     { name: t('nav.pricing', 'Pricing'), href: '/pricing' },
-    { name: t('nav.privacy', 'Privacy Hub'), href: '/privacy' },
     { name: t('nav.blog', 'Blog'), href: '/blog' },
-    { name: t('nav.about', 'About'), href: '/about' },
-    { name: t('nav.contact', 'Contact Us'), href: '/contact' },
+  ];
+
+  const secondaryNavigation = [
+    { name: t('nav.privacy', 'Privacy Hub'), href: '/privacy', icon: 'ShieldCheck' },
+    { name: t('nav.about', 'About'), href: '/about', icon: 'Sparkles' },
+    { name: t('nav.contact', 'Contact Us'), href: '/contact', icon: 'Mail' },
   ];
 
   const [isPdfDropdownOpen, setIsPdfDropdownOpen] = useState(false);
+  const [isConvertDropdownOpen, setIsConvertDropdownOpen] = useState(false);
   const [isMobilePdfOpen, setIsMobilePdfOpen] = useState(false);
+  const [isMobileConvertOpen, setIsMobileConvertOpen] = useState(false);
+  const [pdfActiveFilter, setPdfActiveFilter] = useState<'all' | 'organize' | 'convert' | 'edit' | 'security' | 'intelligence'>('all');
   const pdfDropdownRef = useRef<HTMLDivElement>(null);
+  const convertDropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -163,6 +304,9 @@ export default function Header() {
       }
       if (pdfDropdownRef.current && !pdfDropdownRef.current.contains(event.target as Node)) {
         setIsPdfDropdownOpen(false);
+      }
+      if (convertDropdownRef.current && !convertDropdownRef.current.contains(event.target as Node)) {
+        setIsConvertDropdownOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -186,25 +330,25 @@ export default function Header() {
 
   return (
     <header 
-      className={`sticky top-0 z-[9999] w-full transition-all duration-300 ${
+      className={`sticky top-0 z-[9999] w-full h-[60px] transition-all duration-200 ${
         isMobileMenuOpen
-          ? 'bg-white dark:bg-[#030712] border-b border-slate-200/80 dark:border-white/5 py-3.5'
+          ? 'bg-white dark:bg-[#030712] border-b border-slate-200/80 dark:border-white/5'
           : isScrolled 
-            ? 'bg-white/95 dark:bg-[#030712]/90 backdrop-blur-md border-b border-slate-200/80 dark:border-white/5 py-3.5 sm:py-3 shadow-sm' 
-            : 'bg-white/85 dark:bg-[#030712]/85 backdrop-blur-md border-b border-slate-200/60 dark:border-white/5 py-3.5 sm:py-4 shadow-[0_1px_2px_rgba(0,0,0,0.02)]'
+            ? 'bg-white/95 dark:bg-[#030712]/90 backdrop-blur-md border-b border-slate-200/80 dark:border-white/5 shadow-sm' 
+            : 'bg-white/90 dark:bg-[#030712]/85 backdrop-blur-md border-b border-slate-200/60 dark:border-white/5'
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between px-3 sm:px-4 lg:px-4 xl:px-6 gap-2 xl:gap-4 2xl:gap-8">
-        <div className="flex items-center gap-1 sm:gap-2">
-          <Link href={localizeHref('/')} translate="no" data-no-translate className="flex items-center gap-2.5 sm:gap-3 group whitespace-nowrap shrink-0 no-translate notranslate">
-            <div className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-xl sm:rounded-2xl bg-blue-600 text-white font-black text-xl sm:text-2xl transition-all group-hover:scale-105 shadow-sm shadow-blue-600/20 relative overflow-hidden no-translate notranslate" translate="no" data-no-translate>
+      <div className="w-full max-w-[1720px] mx-auto h-full flex items-center justify-between px-4 sm:px-6 lg:px-6 xl:px-8 2xl:px-10 gap-3 xl:gap-4">
+        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+          <Link href={localizeHref('/')} translate="no" data-no-translate className="flex items-center gap-2.5 group whitespace-nowrap shrink-0 no-translate notranslate">
+            <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-blue-600 text-white font-black text-lg sm:text-xl transition-all group-hover:scale-105 shadow-sm shadow-blue-600/20 relative overflow-hidden no-translate notranslate" translate="no" data-no-translate>
               T
             </div>
             <div className="flex flex-col">
-              <span translate="no" data-no-translate className="text-lg sm:text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white whitespace-nowrap no-translate notranslate leading-none">
+              <span translate="no" data-no-translate className="text-base sm:text-lg font-extrabold tracking-tight text-gray-900 dark:text-white whitespace-nowrap no-translate notranslate leading-none">
                 ToolWala <span translate="no" data-no-translate className="text-blue-600 dark:text-blue-500 font-black no-translate notranslate">AI</span>
               </span>
-              <span className="hidden sm:block text-[9px] font-semibold text-slate-400 dark:text-slate-500 tracking-wider uppercase mt-1">
+              <span className="hidden sm:block text-[8px] sm:text-[8.5px] font-semibold text-slate-400 dark:text-slate-500 tracking-wider uppercase mt-0.5 leading-none">
                 Your Files • Your Privacy
               </span>
             </div>
@@ -212,42 +356,330 @@ export default function Header() {
         </div>
         
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-0.5 2xl:gap-1 bg-white/90 dark:bg-white/5 p-1.5 rounded-[24px] border border-gray-200 dark:border-white/10 shadow-sm backdrop-blur-[20px]">
+        <nav className="hidden lg:flex items-center h-10 gap-0.5 min-[1200px]:gap-1 bg-slate-100/60 dark:bg-white/[0.04] p-1 rounded-full border border-slate-200/70 dark:border-white/10 backdrop-blur-md">
           {navigation.map((item) => {
-            if (item.submenu) {
-              const hasActiveSub = item.submenu.some(sub => pathname === localizeHref(sub.href));
+            if (item.isConvert) {
+              const allConvertHrefs = [
+                ...convertPdfTools.toPdf.map(t => t.href),
+                ...convertPdfTools.fromPdf.map(t => t.href)
+              ];
+              const hasActiveConvert = allConvertHrefs.some(href => pathname === localizeHref(href));
               return (
-                <div className="relative" key={item.name} ref={pdfDropdownRef}>
+                <div className="relative" key={item.name} ref={convertDropdownRef}>
                   <button
-                    onClick={() => setIsPdfDropdownOpen(!isPdfDropdownOpen)}
-                    className={`px-2.5 xl:px-3.5 2xl:px-5 py-2 rounded-full text-[9px] min-[1100px]:text-[10px] 2xl:text-xs font-semibold uppercase tracking-wider 2xl:tracking-widest transition-all whitespace-nowrap flex items-center gap-1 cursor-pointer select-none ${
-                      isPdfDropdownOpen || hasActiveSub
-                        ? 'bg-[#2563EB] text-white' 
-                        : 'text-slate-700 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-white/5'
+                    onClick={() => {
+                      setIsConvertDropdownOpen(!isConvertDropdownOpen);
+                      setIsPdfDropdownOpen(false);
+                    }}
+                    className={`h-8 px-2.5 min-[1150px]:px-3 xl:px-3.5 rounded-full text-[11px] min-[1200px]:text-xs font-semibold uppercase tracking-wider transition-all whitespace-nowrap flex items-center gap-1 cursor-pointer select-none ${
+                      isConvertDropdownOpen || hasActiveConvert
+                        ? 'bg-[#2563EB] text-white shadow-sm' 
+                        : 'text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white hover:bg-white dark:hover:bg-white/5'
                     }`}
                   >
                     {item.name}
-                    <ChevronDown className={`w-3 h-3 xl:w-3.5 xl:h-3.5 transition-transform duration-300 ${isPdfDropdownOpen ? 'rotate-180' : ''}`} />
+                    <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${isConvertDropdownOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {isConvertDropdownOpen && (
+                    <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2.5 w-[580px] min-[1250px]:w-[620px] rounded-3xl border border-gray-200/90 dark:border-white/10 bg-white dark:bg-[#090d16]/98 p-6 shadow-2xl dark:shadow-[0_20px_60px_rgba(0,0,0,0.85)] backdrop-blur-xl animate-fade-in z-50">
+                      {/* Top Triangle Caret Pointer */}
+                      <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rotate-45 bg-white dark:bg-[#090d16] border-t border-l border-gray-200/90 dark:border-white/10" />
+
+                      {/* Top subtle glow */}
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[1px] w-28 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+
+                      <div className="grid grid-cols-2 gap-6 relative z-10">
+                        {/* Column 1: CONVERT TO PDF */}
+                        <div>
+                          <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-gray-500 mb-2 px-2">
+                            {t('nav.convert_to_pdf', 'CONVERT TO PDF')}
+                          </div>
+                          <div className="space-y-1">
+                            {convertPdfTools.toPdf.map((sub) => (
+                              <Link
+                                key={sub.href}
+                                href={localizeHref(sub.href)}
+                                onClick={() => setIsConvertDropdownOpen(false)}
+                                className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-white/5 transition-all group select-none"
+                              >
+                                <div className={`w-7 h-7 rounded-lg flex items-center justify-center font-black text-[9px] shrink-0 group-hover:scale-105 transition-transform ${sub.badgeColor}`}>
+                                  {sub.badge}
+                                </div>
+                                <div className="flex flex-col min-w-0">
+                                  <span className="text-xs font-bold text-slate-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase tracking-tight truncate">
+                                    {sub.name}
+                                  </span>
+                                  <span className="text-[10px] text-slate-400 dark:text-gray-500 font-medium truncate">
+                                    {sub.desc}
+                                  </span>
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Column 2: CONVERT FROM PDF */}
+                        <div>
+                          <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-gray-500 mb-2 px-2">
+                            {t('nav.convert_from_pdf', 'CONVERT FROM PDF')}
+                          </div>
+                          <div className="space-y-1">
+                            {convertPdfTools.fromPdf.map((sub) => (
+                              <Link
+                                key={sub.href}
+                                href={localizeHref(sub.href)}
+                                onClick={() => setIsConvertDropdownOpen(false)}
+                                className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-white/5 transition-all group select-none"
+                              >
+                                <div className={`w-7 h-7 rounded-lg flex items-center justify-center font-black text-[9px] shrink-0 group-hover:scale-105 transition-transform ${sub.badgeColor}`}>
+                                  {sub.badge}
+                                </div>
+                                <div className="flex flex-col min-w-0">
+                                  <span className="text-xs font-bold text-slate-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase tracking-tight truncate">
+                                    {sub.name}
+                                  </span>
+                                  <span className="text-[10px] text-slate-400 dark:text-gray-500 font-medium truncate">
+                                    {sub.desc}
+                                  </span>
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Bottom strip */}
+                      <div className="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between px-2 text-[11px]">
+                        <div className="flex items-center gap-2 text-slate-500 dark:text-gray-400 font-medium">
+                          <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
+                          <span>Image Converters:</span>
+                          <Link 
+                            href={localizeHref('/tools/heic-to-jpg-png-converter')} 
+                            onClick={() => setIsConvertDropdownOpen(false)}
+                            className="font-bold text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                          >
+                            HEIC
+                          </Link>
+                          <span>•</span>
+                          <Link 
+                            href={localizeHref('/tools/webp-to-jpg-png-converter')} 
+                            onClick={() => setIsConvertDropdownOpen(false)}
+                            className="font-bold text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                          >
+                            WebP
+                          </Link>
+                        </div>
+                        <Link 
+                          href={localizeHref('/categories/pdf-tools')} 
+                          onClick={() => setIsConvertDropdownOpen(false)}
+                          className="font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
+                        >
+                          <span>All PDF Tools</span>
+                          <ArrowRight className="w-3 h-3" />
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
+            if (item.isAllPdf) {
+              const allPdfHrefs = allPdfCategories.flatMap(c => c.tools.map(t => t.href));
+              const hasActiveSub = allPdfHrefs.some(href => pathname === localizeHref(href));
+              return (
+                <div className="relative" key={item.name} ref={pdfDropdownRef}>
+                  <button
+                    onClick={() => {
+                      setIsPdfDropdownOpen(!isPdfDropdownOpen);
+                      setIsConvertDropdownOpen(false);
+                    }}
+                    className={`h-8 px-2.5 min-[1150px]:px-3 xl:px-3.5 rounded-full text-[11px] min-[1200px]:text-xs font-semibold uppercase tracking-wider transition-all whitespace-nowrap flex items-center gap-1 cursor-pointer select-none ${
+                      isPdfDropdownOpen || hasActiveSub
+                        ? 'bg-[#2563EB] text-white shadow-sm' 
+                        : 'text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white hover:bg-white dark:hover:bg-white/5'
+                    }`}
+                  >
+                    {item.name}
+                    <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${isPdfDropdownOpen ? 'rotate-180' : ''}`} />
                   </button>
                   {isPdfDropdownOpen && (
-                    <div className="absolute left-1/2 -translate-x-1/2 mt-4 w-[600px] rounded-3xl border border-gray-200 dark:border-white/10 bg-white dark:bg-[#090d16]/98 p-6 shadow-xl dark:shadow-[0_10px_50px_rgba(0,0,0,0.8)] backdrop-blur-xl animate-fade-in z-50 grid grid-cols-3 gap-3">
-                      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[1px] w-24 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
-                      {item.submenu.map((sub) => {
-                        const slug = sub.href.split('/').pop() || '';
-                        return (
-                          <Link
-                            key={sub.href}
-                            href={localizeHref(sub.href)}
-                            onClick={() => setIsPdfDropdownOpen(false)}
-                            className="flex items-center gap-2.5 p-3 rounded-xl hover:bg-blue-50/80 dark:hover:bg-white/5 transition-all group"
-                          >
-                            <ToolIcon icon={sub.icon} className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 group-hover:scale-110 transition-transform" strokeWidth={1.75} />
-                            <span className="text-[10px] font-black text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase truncate">
-                              {t(`tools.${slug}.title`, sub.name)}
+                    <div className="absolute left-1/2 -translate-x-[36%] min-[1350px]:-translate-x-1/2 top-full mt-2.5 w-[920px] min-[1300px]:w-[980px] max-w-[96vw] max-h-[85vh] overflow-y-auto rounded-3xl border border-gray-200/90 dark:border-white/10 bg-white dark:bg-[#090d16]/98 p-5 sm:p-6 shadow-2xl dark:shadow-[0_20px_60px_rgba(0,0,0,0.85)] backdrop-blur-xl animate-fade-in z-50">
+                      {/* Top Triangle Caret Pointer */}
+                      <div className="absolute -top-1.5 left-[36%] min-[1350px]:left-1/2 -translate-x-1/2 w-3.5 h-3.5 rotate-45 bg-white dark:bg-[#090d16] border-t border-l border-gray-200/90 dark:border-white/10" />
+
+                      {/* Top subtle glow */}
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[1.5px] w-48 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+
+                      {/* Top Bar: Brand, Counts & In-Browser Privacy Badge */}
+                      <div className="flex flex-wrap items-center justify-between gap-3 pb-3.5 border-b border-gray-100 dark:border-white/5 relative z-10">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-7 h-7 rounded-xl bg-blue-600/10 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center font-black">
+                            <Sparkles className="w-4 h-4" />
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-black tracking-tight text-gray-900 dark:text-white uppercase">
+                              ToolWala PDF Studio
                             </span>
-                          </Link>
-                        );
-                      })}
+                            <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                              26 WASM Tools
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-[11px] font-bold">
+                          <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
+                          <span>100% In-Browser Engine • Zero File Uploads</span>
+                        </div>
+                      </div>
+
+                      {/* Interactive Category Filter Pills */}
+                      <div className="flex items-center gap-1.5 py-3 border-b border-gray-100 dark:border-white/5 overflow-x-auto no-scrollbar relative z-10">
+                        {[
+                          { id: 'all', label: 'All Tools', count: 26 },
+                          { id: 'organize', label: 'Organize', count: 5 },
+                          { id: 'convert', label: 'Convert', count: 8 },
+                          { id: 'edit', label: 'Edit & Sign', count: 5 },
+                          { id: 'security', label: 'Security & Size', count: 6 },
+                          { id: 'intelligence', label: 'AI & Smart', count: 3 },
+                        ].map((tab) => (
+                          <button
+                            key={tab.id}
+                            onClick={() => setPdfActiveFilter(tab.id as any)}
+                            className={`px-3 py-1 rounded-full text-[10px] min-[1200px]:text-[11px] font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
+                              pdfActiveFilter === tab.id
+                                ? 'bg-blue-600 text-white shadow-sm'
+                                : 'bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-gray-400 hover:bg-slate-200 dark:hover:bg-white/10'
+                            }`}
+                          >
+                            <span>{tab.label}</span>
+                            <span className={`text-[9px] px-1.5 py-0.5 rounded-full ${
+                              pdfActiveFilter === tab.id
+                                ? 'bg-white/20 text-white'
+                                : 'bg-black/5 dark:bg-white/10 text-slate-500 dark:text-gray-400'
+                            }`}>
+                              {tab.count}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+
+                      {/* Main Category Grid */}
+                      {pdfActiveFilter === 'all' ? (
+                        <div className="grid grid-cols-5 gap-3 min-[1350px]:gap-4.5 pt-3.5 relative z-10">
+                          {allPdfCategories.map((cat) => (
+                            <div key={cat.id} className="flex flex-col min-w-0">
+                              <div className="flex items-center gap-1.5 pb-2 mb-2 border-b border-slate-100 dark:border-white/5">
+                                <div className={`p-1 rounded-md bg-slate-100 dark:bg-white/5 ${cat.accentColor} shrink-0`}>
+                                  <ToolIcon icon={cat.icon} className="w-3.5 h-3.5" />
+                                </div>
+                                <span className="text-[10px] font-black uppercase tracking-wider text-slate-600 dark:text-gray-300 truncate">
+                                  {cat.label}
+                                </span>
+                              </div>
+                              <div className="space-y-0.5">
+                                {cat.tools.map((sub) => {
+                                  const isCurrent = pathname === localizeHref(sub.href);
+                                  return (
+                                    <Link
+                                      key={sub.href}
+                                      href={localizeHref(sub.href)}
+                                      onClick={() => setIsPdfDropdownOpen(false)}
+                                      className={`flex items-center justify-between p-1.5 rounded-xl hover:bg-slate-100/90 dark:hover:bg-white/5 transition-all group select-none ${
+                                        isCurrent ? 'bg-blue-50 dark:bg-white/10 font-bold' : ''
+                                      }`}
+                                    >
+                                      <div className="flex items-center gap-1.5 min-w-0">
+                                        <div className="w-5 h-5 rounded-md bg-slate-100 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                          <ToolIcon icon={sub.icon} className="w-3 h-3 text-slate-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
+                                        </div>
+                                        <span className="text-[10.5px] font-bold text-slate-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
+                                          {sub.name}
+                                        </span>
+                                      </div>
+                                      {sub.badge && (
+                                        <span className={`text-[8px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider shrink-0 ml-1 ${sub.badgeColor || 'bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-gray-400'}`}>
+                                          {sub.badge}
+                                        </span>
+                                      )}
+                                    </Link>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="pt-3.5 relative z-10">
+                          {allPdfCategories
+                            .filter((c) => c.id === pdfActiveFilter)
+                            .map((cat) => (
+                              <div key={cat.id}>
+                                <div className="flex items-center justify-between mb-3 px-1">
+                                  <div className="flex items-center gap-2">
+                                    <ToolIcon icon={cat.icon} className={`w-4 h-4 ${cat.accentColor}`} />
+                                    <h4 className="text-xs font-black uppercase tracking-wider text-slate-800 dark:text-white">
+                                      {cat.label} ({cat.tools.length} Tools)
+                                    </h4>
+                                  </div>
+                                  <button
+                                    onClick={() => setPdfActiveFilter('all')}
+                                    className="text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+                                  >
+                                    ← View All Categories
+                                  </button>
+                                </div>
+                                <div className="grid grid-cols-2 min-[1250px]:grid-cols-3 gap-2.5">
+                                  {cat.tools.map((sub) => (
+                                    <Link
+                                      key={sub.href}
+                                      href={localizeHref(sub.href)}
+                                      onClick={() => setIsPdfDropdownOpen(false)}
+                                      className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50/80 dark:bg-white/[0.03] border border-slate-100 dark:border-white/5 hover:border-blue-500/30 hover:bg-white dark:hover:bg-white/[0.07] transition-all group"
+                                    >
+                                      <div className="w-8 h-8 rounded-xl bg-blue-600/10 dark:bg-blue-500/15 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform mt-0.5">
+                                        <ToolIcon icon={sub.icon} className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                                      </div>
+                                      <div className="flex flex-col min-w-0">
+                                        <div className="flex items-center gap-1.5">
+                                          <span className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
+                                            {sub.name}
+                                          </span>
+                                          {sub.badge && (
+                                            <span className={`text-[8px] font-black px-1.5 py-0.5 rounded uppercase shrink-0 ${sub.badgeColor || 'bg-blue-500/10 text-blue-600'}`}>
+                                              {sub.badge}
+                                            </span>
+                                          )}
+                                        </div>
+                                        {sub.desc && (
+                                          <span className="text-[10px] text-slate-500 dark:text-gray-400 mt-0.5">
+                                            {sub.desc}
+                                          </span>
+                                        )}
+                                      </div>
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                      )}
+
+                      {/* Bottom Strip: Privacy Guarantee & Category Directory Link */}
+                      <div className="mt-4 pt-3.5 border-t border-slate-100 dark:border-white/5 flex items-center justify-between px-1 text-[11px] relative z-10">
+                        <div className="flex items-center gap-2 text-slate-500 dark:text-gray-400 font-medium text-[10.5px]">
+                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />
+                          <span>Client-Side Sandbox: Files stay 100% on your machine & never upload to any cloud.</span>
+                        </div>
+                        <Link 
+                          href={localizeHref('/categories/pdf-tools')} 
+                          onClick={() => setIsPdfDropdownOpen(false)}
+                          className="font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 shrink-0 ml-2"
+                        >
+                          <span>Explore PDF Category</span>
+                          <ArrowRight className="w-3 h-3" />
+                        </Link>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -261,10 +693,10 @@ export default function Header() {
               <Link 
                 key={item.name} 
                 href={localizedHrefValue} 
-                className={`px-2.5 xl:px-3.5 2xl:px-5 py-2 rounded-full text-[9px] min-[1100px]:text-[10px] 2xl:text-xs font-semibold uppercase tracking-wider 2xl:tracking-widest transition-all whitespace-nowrap ${
+                className={`h-8 flex items-center px-2.5 min-[1150px]:px-3 xl:px-3.5 rounded-full text-[11px] min-[1200px]:text-xs font-semibold uppercase tracking-wider transition-all whitespace-nowrap ${
                   isActive
-                    ? 'bg-[#2563EB] text-white' 
-                    : 'text-slate-700 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-white/5'
+                    ? 'bg-[#2563EB] text-white shadow-sm' 
+                    : 'text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white hover:bg-white dark:hover:bg-white/5'
                 }`}
               >
                 {item.name}
@@ -273,7 +705,7 @@ export default function Header() {
           })}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-1.5 xl:gap-2 2xl:gap-3">
+        <div className="hidden lg:flex items-center gap-1.5 xl:gap-2.5 shrink-0">
           {/* Theme Toggle Button */}
           <ThemeToggle />
 
@@ -281,15 +713,15 @@ export default function Header() {
           <div className="relative" ref={langDropdownRef}>
             <button
               onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-              className="flex items-center gap-1 xl:gap-1.5 2xl:gap-2.5 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 px-2 xl:px-2.5 2xl:px-4 py-2 text-[9px] min-[1100px]:text-[10px] 2xl:text-xs font-bold text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white border border-black/10 dark:border-white/10 hover:border-blue-500/30 transition-all select-none cursor-pointer whitespace-nowrap shrink-0"
+              className="h-9 flex items-center gap-1 xl:gap-1.5 px-2.5 xl:px-3 rounded-full bg-slate-100/80 dark:bg-white/5 hover:bg-slate-200/80 dark:hover:bg-white/10 text-[11px] min-[1100px]:text-xs font-bold text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white border border-slate-200/80 dark:border-white/10 hover:border-blue-500/30 transition-all select-none cursor-pointer whitespace-nowrap shrink-0"
             >
-              <Globe className="w-3 xl:w-3.5 xl:h-3.5 h-3.5 text-blue-600 dark:text-blue-500" />
+              <Globe className="w-3.5 h-3.5 text-blue-600 dark:text-blue-500" />
               <span translate="no" className="whitespace-nowrap">{currentLanguage.flag} {currentLanguage.name}</span>
-              <ChevronDown className={`w-3 xl:w-3.5 xl:h-3.5 h-3.5 text-gray-500 transition-transform duration-300 ${isLangDropdownOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-3 h-3 text-gray-500 transition-transform duration-300 ${isLangDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {isLangDropdownOpen && (
-              <div className="absolute right-0 mt-2.5 w-56 rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-[#090d16]/98 p-2.5 shadow-xl dark:shadow-[0_10px_40px_rgba(0,0,0,0.6)] backdrop-blur-xl animate-fade-in z-50">
+              <div className="absolute right-0 top-full mt-2 w-56 rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-[#090d16]/98 p-2.5 shadow-xl dark:shadow-[0_10px_40px_rgba(0,0,0,0.6)] backdrop-blur-xl animate-fade-in z-50">
                 <div className="absolute top-0 right-8 h-[1px] w-12 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
                 <div className="text-[9px] font-black uppercase tracking-widest text-gray-500 px-3.5 py-2">{t('nav.select_language', 'Select Language')}</div>
                 <div className="space-y-1">
@@ -320,9 +752,9 @@ export default function Header() {
 
           <Link 
             href={localizeHref('/tools')} 
-            className="group relative flex items-center gap-1 xl:gap-1.5 2xl:gap-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 dark:bg-white dark:text-black dark:hover:bg-gray-100 px-2.5 xl:px-4 2xl:px-6 py-2 text-[10px] min-[1100px]:text-[11px] 2xl:text-sm font-bold shadow-[0_2px_8px_-1px_rgba(37,99,235,0.35)] hover:shadow-[0_4px_14px_-2px_rgba(37,99,235,0.45)] hover:brightness-105 hover:scale-[1.02] active:scale-95 transition-all duration-200 overflow-hidden whitespace-nowrap shrink-0"
+            className="h-9 group relative flex items-center gap-1.5 rounded-full bg-blue-600 text-white hover:bg-blue-700 dark:bg-white dark:text-black dark:hover:bg-gray-100 px-3.5 xl:px-5 text-xs xl:text-[13px] font-bold shadow-sm hover:brightness-105 active:scale-95 transition-all duration-150 overflow-hidden whitespace-nowrap shrink-0"
           >
-            <Rocket className="w-3.5 h-3.5 xl:w-4 xl:h-4 relative z-10" suppressHydrationWarning />
+            <Rocket className="w-3.5 h-3.5 relative z-10" suppressHydrationWarning />
             <span className="relative z-10 whitespace-nowrap">{t('nav.start_free', 'Start Free')}</span>
           </Link>
         </div>
@@ -357,40 +789,127 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[60px] sm:top-[64px] bottom-0 z-[9999] bg-white dark:bg-[#030712] border-t border-gray-200 dark:border-white/5 overflow-y-auto pb-20 animate-fade-in">
+        <div className="lg:hidden fixed inset-x-0 top-[60px] bottom-0 z-[9999] bg-white dark:bg-[#030712] border-t border-gray-200 dark:border-white/5 overflow-y-auto pb-20 animate-fade-in">
           <div className="flex flex-col p-6 gap-4">
             {navigation.map((item) => {
-              if (item.submenu) {
+              if (item.isConvert) {
+                return (
+                  <div className="space-y-2" key={item.name}>
+                    <button
+                      onClick={() => setIsMobileConvertOpen(!isMobileConvertOpen)}
+                      className="w-full flex items-center justify-between p-4.5 rounded-2xl text-lg font-black bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-gray-900 dark:text-white"
+                    >
+                      <span>{item.name}</span>
+                      <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform ${isMobileConvertOpen ? 'rotate-180 text-blue-600 dark:text-blue-500' : ''}`} />
+                    </button>
+                    {isMobileConvertOpen && (
+                      <div className="space-y-4 p-3.5 bg-black/5 dark:bg-black/20 border border-black/5 dark:border-white/5 rounded-2xl animate-fade-in">
+                        <div>
+                          <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-gray-500 mb-2 px-1">
+                            {t('nav.convert_to_pdf', 'CONVERT TO PDF')}
+                          </div>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                            {convertPdfTools.toPdf.map((sub) => (
+                              <Link
+                                key={sub.href}
+                                href={localizeHref(sub.href)}
+                                onClick={() => {
+                                  setIsMobileMenuOpen(false);
+                                  setIsMobileConvertOpen(false);
+                                }}
+                                className="flex items-center gap-2.5 p-2.5 rounded-xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-all"
+                              >
+                                <div className={`w-7 h-7 rounded-lg flex items-center justify-center font-black text-[9px] shrink-0 ${sub.badgeColor}`}>
+                                  {sub.badge}
+                                </div>
+                                <span className="text-xs font-bold text-gray-800 dark:text-gray-200 uppercase truncate">
+                                  {sub.name}
+                                </span>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="pt-2 border-t border-black/5 dark:border-white/5">
+                          <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-gray-500 mb-2 px-1">
+                            {t('nav.convert_from_pdf', 'CONVERT FROM PDF')}
+                          </div>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                            {convertPdfTools.fromPdf.map((sub) => (
+                              <Link
+                                key={sub.href}
+                                href={localizeHref(sub.href)}
+                                onClick={() => {
+                                  setIsMobileMenuOpen(false);
+                                  setIsMobileConvertOpen(false);
+                                }}
+                                className="flex items-center gap-2.5 p-2.5 rounded-xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-all"
+                              >
+                                <div className={`w-7 h-7 rounded-lg flex items-center justify-center font-black text-[9px] shrink-0 ${sub.badgeColor}`}>
+                                  {sub.badge}
+                                </div>
+                                <span className="text-xs font-bold text-gray-800 dark:text-gray-200 uppercase truncate">
+                                  {sub.name}
+                                </span>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              if (item.isAllPdf) {
                 return (
                   <div className="space-y-2" key={item.name}>
                     <button
                       onClick={() => setIsMobilePdfOpen(!isMobilePdfOpen)}
                       className="w-full flex items-center justify-between p-4.5 rounded-2xl text-lg font-black bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-gray-900 dark:text-white"
                     >
-                      <span>{item.name}</span>
+                      <div className="flex items-center gap-2">
+                        <span>{item.name}</span>
+                        <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                          26 Tools
+                        </span>
+                      </div>
                       <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform ${isMobilePdfOpen ? 'rotate-180 text-blue-600 dark:text-blue-500' : ''}`} />
                     </button>
                     {isMobilePdfOpen && (
-                      <div className="grid grid-cols-2 gap-2 p-2 bg-black/5 dark:bg-black/20 border border-black/5 dark:border-white/5 rounded-2xl animate-fade-in">
-                        {item.submenu.map((sub) => {
-                          const slug = sub.href.split('/').pop() || '';
-                          return (
-                            <Link
-                              key={sub.href}
-                              href={localizeHref(sub.href)}
-                              onClick={() => {
-                                setIsMobileMenuOpen(false);
-                                setIsMobilePdfOpen(false);
-                              }}
-                              className="flex items-center gap-2.5 p-3 rounded-xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-all"
-                            >
-                              <ToolIcon icon={sub.icon} className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" strokeWidth={1.75} />
-                              <span className="text-xs font-black text-gray-700 dark:text-gray-300 uppercase truncate">
-                                {t(`tools.${slug}.title`, sub.name)}
-                              </span>
-                            </Link>
-                          );
-                        })}
+                      <div className="space-y-4 p-3.5 bg-black/5 dark:bg-black/20 border border-black/5 dark:border-white/5 rounded-2xl animate-fade-in">
+                        {allPdfCategories.map((cat) => (
+                          <div key={cat.id}>
+                            <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-gray-500 mb-2 px-1">
+                              <ToolIcon icon={cat.icon} className={`w-3.5 h-3.5 ${cat.accentColor}`} />
+                              <span>{cat.label}</span>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                              {cat.tools.map((sub) => (
+                                <Link
+                                  key={sub.href}
+                                  href={localizeHref(sub.href)}
+                                  onClick={() => {
+                                    setIsMobileMenuOpen(false);
+                                    setIsMobilePdfOpen(false);
+                                  }}
+                                  className="flex items-center justify-between p-2.5 rounded-xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-all"
+                                >
+                                  <div className="flex items-center gap-2 min-w-0">
+                                    <ToolIcon icon={sub.icon} className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
+                                    <span className="text-xs font-bold text-gray-800 dark:text-gray-200 truncate">
+                                      {sub.name}
+                                    </span>
+                                  </div>
+                                  {sub.badge && (
+                                    <span className={`text-[8.5px] font-black px-1.5 py-0.5 rounded uppercase shrink-0 ${sub.badgeColor || 'bg-blue-500/10 text-blue-600 dark:text-blue-400'}`}>
+                                      {sub.badge}
+                                    </span>
+                                  )}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     )}
                   </div>
@@ -416,6 +935,44 @@ export default function Header() {
                 </Link>
               );
             })}
+
+            {/* Mobile Company & Trust Links (Privacy Hub, About, Contact) */}
+            <div className="mt-2 pt-3 border-t border-gray-200/80 dark:border-white/5 space-y-2">
+              <div className="text-[10px] font-black uppercase tracking-widest text-gray-500 px-1">
+                {t('nav.company_and_trust', 'Company & Trust')}
+              </div>
+              <div className="grid grid-cols-1 gap-2">
+                {secondaryNavigation.map((sec) => {
+                  const localizedHrefValue = localizeHref(sec.href);
+                  const isActive = pathname === localizedHrefValue || 
+                    (sec.href !== '/' && pathname?.startsWith(localizedHrefValue));
+                  return (
+                    <Link
+                      key={sec.name}
+                      href={localizedHrefValue}
+                      className={`flex items-center justify-between p-3.5 rounded-2xl font-bold text-sm transition-all ${
+                        isActive
+                          ? 'bg-blue-600/10 text-blue-600 dark:text-blue-400 border border-blue-500/20' 
+                          : 'text-gray-800 dark:text-gray-200 bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 hover:border-blue-500/30'
+                      }`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <div className="flex items-center gap-2.5">
+                        {sec.icon === 'ShieldCheck' && <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-blue-400" />}
+                        {sec.icon === 'Sparkles' && <Sparkles className="w-4 h-4 text-amber-500" />}
+                        {sec.icon === 'Mail' && <Mail className="w-4 h-4 text-emerald-500" />}
+                        <span>{sec.name}</span>
+                      </div>
+                      {sec.href === '/privacy' && (
+                        <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                          100% In-Browser
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
 
             {/* Mobile Language Selector Grid */}
             <div className="mt-4 p-5 rounded-2xl bg-black/5 dark:bg-white/[0.01] border border-black/5 dark:border-white/5 space-y-4">

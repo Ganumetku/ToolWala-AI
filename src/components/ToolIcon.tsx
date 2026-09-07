@@ -9,6 +9,7 @@ import {
   UserCheck, Mic, Receipt, Wand2, Mail, KeyRound, Presentation, Cake, TrendingUp,
   Landmark, Percent, Tag, DollarSign, PenTool, Shrink, FileMinus, EyeOff, RotateCw,
   Hash, GraduationCap, ListChecks, Video, FileArchive, FileCheck, FileCog,
+  ShieldCheck, Sliders, Headphones, Zap, Wrench,
   type LucideProps,
 } from 'lucide-react';
 import PdfToolIcon, { isPdfTool } from '@/components/PdfToolIcon';
@@ -22,6 +23,7 @@ const ICON_MAP: Record<string, React.ComponentType<LucideProps>> = {
   UserCheck, Mic, Receipt, Wand2, Mail, KeyRound, Presentation, Cake, TrendingUp,
   Landmark, Percent, Tag, DollarSign, PenTool, Shrink, FileMinus, EyeOff, RotateCw,
   Hash, GraduationCap, ListChecks, Video, FileArchive, FileCheck, FileCog,
+  ShieldCheck, Sliders, Headphones, Zap, Wrench,
 };
 
 export interface ToolIconProps {
@@ -253,11 +255,19 @@ export default function ToolIcon({
   // Dynamically resolve Lucide Icon component from the explicit map
   const IconComponent =
     ICON_MAP[resolvedName] ||
-    ICON_MAP[resolvedName + "Icon"] ||
-    ICON_MAP[fallback] ||
-    Sparkles;
+    ICON_MAP[resolvedName + "Icon"];
 
-  return <IconComponent className={className} strokeWidth={strokeWidth} size={size} />;
+  if (IconComponent) {
+    return <IconComponent className={className} strokeWidth={strokeWidth} size={size} />;
+  }
+
+  // If the icon is an emoji or symbol, render it as text
+  if (/\p{Extended_Pictographic}/u.test(raw)) {
+    return <span className={`inline-flex items-center justify-center leading-none select-none ${className}`}>{raw}</span>;
+  }
+
+  const FallbackComponent = ICON_MAP[fallback] || Sparkles;
+  return <FallbackComponent className={className} strokeWidth={strokeWidth} size={size} />;
 }
 
 export { ToolIcon };

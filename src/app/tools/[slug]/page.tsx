@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { ChevronLeft, ShieldCheck, Sparkles, HelpCircle, Layers, ChevronDown, ArrowRight } from 'lucide-react';
 import { findToolBySlugServer } from '@/lib/tools-server';
 import ToolFormRenderer from '@/components/ToolFormRenderer';
+import ToolIcon from '@/components/ToolIcon';
 import { MeshGradient } from '@/components/BackgroundEffects';
 import FAQAccordion from './FAQAccordion';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
@@ -123,7 +124,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-8">
                 <div className="flex items-start sm:items-center gap-3.5 sm:gap-6 flex-1 min-w-0">
                   <div className="flex h-12 w-12 sm:h-14 sm:w-14 aspect-square shrink-0 min-w-[3rem] min-h-[3rem] sm:min-w-[3.5rem] sm:min-h-[3.5rem] items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white shadow-[0_4px_20px_rgba(37,99,235,0.3)] text-xl sm:text-2xl font-bold">
-                    {tool.icon || '🔧'}
+                    <ToolIcon icon={tool.icon} className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <h1 className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">{tool.title}</h1>

@@ -7,6 +7,7 @@ import type { ToolUpdateInput, CreateToolInput } from '@/lib/tool-service';
 import { toast } from 'sonner';
 import { adminFetch } from '@/lib/admin-fetch';
 import ToolIcon from '@/components/ToolIcon';
+import PdfToolIcon from '@/components/PdfToolIcon';
 import ToolIconModal from './ToolIconModal';
 import AdminPagination from '@/components/admin/AdminPagination';
 import {
@@ -383,11 +384,16 @@ export default function AdminToolsDashboard() {
                             <button
                               type="button"
                               onClick={() => setActiveIconTool(tool)}
-                              className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-lg shadow-xs hover:border-blue-500 hover:scale-105 transition-all group relative cursor-pointer"
+                              className="relative cursor-pointer transition-transform hover:scale-105 group shrink-0"
                               title="Click to edit logo / icon"
                             >
-                              <ToolIcon icon={tool.icon} className="w-6 h-6 text-xl" />
-                              <div className="absolute -top-1 -right-1 w-4 h-4 bg-blue-600 text-white rounded-full flex items-center justify-center text-[8px] opacity-0 group-hover:opacity-100 transition-opacity shadow-xs">
+                              <PdfToolIcon 
+                                toolId={tool.slug || tool.id}
+                                iconName={tool.icon}
+                                category={tool.category}
+                                size="sm"
+                              />
+                              <div className="absolute -top-1 -right-1 w-4 h-4 bg-blue-600 text-white rounded-full flex items-center justify-center text-[8px] opacity-0 group-hover:opacity-100 transition-opacity shadow-xs z-30">
                                 ✏️
                               </div>
                             </button>

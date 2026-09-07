@@ -17,6 +17,8 @@ import PublishToggle from '@/components/admin/PublishToggle';
 import ScheduleModal from '@/components/admin/ScheduleModal';
 import ToolSchedulerCard from '@/components/admin/ToolSchedulerCard';
 import AdminPagination from '@/components/admin/AdminPagination';
+import ToolIcon from '@/components/ToolIcon';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 interface ToolCMSItem {
   id: string;
@@ -558,10 +560,13 @@ export default function ContentCMS() {
               {paginatedTools.map((t) => (
                 <tr key={t.id} className="hover:bg-slate-50/80 dark:hover:bg-white/[0.01] transition-colors">
                   <td className="py-5 pl-6">
-                    <div className="flex items-center gap-3">
-                      <div className="h-8 w-8 rounded-xl bg-blue-50 dark:bg-blue-600/10 border border-blue-200 dark:border-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 font-bold">
-                        {t.icon || '🔧'}
-                      </div>
+                    <div className="flex items-center gap-3.5">
+                      <PdfToolIcon 
+                        toolId={t.slug || t.id}
+                        iconName={t.icon || undefined}
+                        category={t.categoryName}
+                        size="sm"
+                      />
                       <div>
                         <span className="font-black text-slate-900 dark:text-white block">{t.title}</span>
                         <span className="text-[10px] text-slate-400 dark:text-gray-500 font-bold block mt-0.5">Route: /tools/{t.slug}</span>
@@ -824,13 +829,19 @@ export default function ContentCMS() {
                     {/* Media uploads */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Emoji Icon or URL</label>
-                        <div className="flex gap-4">
+                        <label className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">Icon (Lucide name, Emoji, or URL)</label>
+                        <div className="flex items-center gap-3">
+                          <PdfToolIcon 
+                            toolId={slug}
+                            iconName={icon}
+                            category={categoryName}
+                            size="sm"
+                          />
                           <input 
                             type="text" 
                             value={icon}
                             onChange={(e) => setIcon(e.target.value)}
-                            placeholder="e.g. 📸 or /uploads/image.png"
+                            placeholder="e.g. GraduationCap, 📸, or /uploads/image.png"
                             className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500"
                           />
                           <label className="px-5 py-3.5 border border-slate-200 dark:border-white/10 hover:border-blue-500/50 rounded-2xl bg-slate-50 dark:bg-white/5 hover:bg-blue-50 dark:hover:bg-blue-600/10 cursor-pointer transition-colors flex items-center justify-center shrink-0">

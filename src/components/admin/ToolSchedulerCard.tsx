@@ -1,7 +1,10 @@
 import { Calendar, Clock, ArrowRight, Hourglass } from 'lucide-react';
 import { motion } from 'framer-motion';
+import ToolIcon from '@/components/ToolIcon';
+import PdfToolIcon from '@/components/PdfToolIcon';
 interface ScheduledItemInfo {
   id: string;
+  slug?: string;
   title: string;
   publishDate?: string | null;
   categoryName?: string;
@@ -106,9 +109,12 @@ export default function ToolSchedulerCard({
                 className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.01] hover:bg-slate-100 dark:hover:bg-white/[0.02] border border-slate-200/60 dark:border-white/5 transition-all"
               >
                 <div className="flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-xl bg-purple-50 dark:bg-purple-600/10 border border-purple-200 dark:border-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 text-sm font-bold">
-                    {t.icon || '🔧'}
-                  </div>
+                  <PdfToolIcon 
+                    toolId={t.slug || t.id}
+                    iconName={t.icon || undefined}
+                    category={t.categoryName}
+                    size="sm"
+                  />
                   <div>
                     <span className="text-xs font-black text-slate-900 dark:text-white block leading-tight">{t.title}</span>
                     <span className="text-[9px] text-slate-400 dark:text-gray-500 font-bold block mt-0.5 uppercase tracking-wider">

@@ -123,35 +123,35 @@ export default function Header() {
         name: 'JPG to PDF', 
         href: '/tools/jpg-to-pdf', 
         badge: 'JPG',
-        badgeColor: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20',
+        badgeColor: 'bg-amber-50/80 dark:bg-amber-500/10 text-amber-600/90 dark:text-amber-400/90 border border-amber-200/50 dark:border-amber-500/15',
         desc: 'Convert JPG, PNG to PDF' 
       },
       { 
-        name: 'WORD to PDF', 
+        name: 'Word to PDF', 
         href: '/tools/word-to-pdf-converter', 
         badge: 'DOC',
-        badgeColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20',
+        badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15',
         desc: 'Convert DOC, DOCX to PDF' 
       },
       { 
-        name: 'POWERPOINT to PDF', 
+        name: 'PowerPoint to PDF', 
         href: '/tools/powerpoint-to-pdf', 
         badge: 'PPT',
-        badgeColor: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20',
+        badgeColor: 'bg-rose-50/80 dark:bg-rose-500/10 text-rose-600/90 dark:text-rose-400/90 border border-rose-200/50 dark:border-rose-500/15',
         desc: 'Convert PPTX to PDF' 
       },
       { 
-        name: 'EXCEL to PDF', 
+        name: 'Excel to PDF', 
         href: '/tools/excel-to-pdf-converter', 
         badge: 'XLS',
-        badgeColor: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20',
+        badgeColor: 'bg-emerald-50/80 dark:bg-emerald-500/10 text-emerald-600/90 dark:text-emerald-400/90 border border-emerald-200/50 dark:border-emerald-500/15',
         desc: 'Spreadsheet to PDF' 
       },
       { 
         name: 'HEIC to PDF', 
         href: '/tools/heic-to-jpg-png-converter', 
         badge: 'HEIC',
-        badgeColor: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20',
+        badgeColor: 'bg-purple-50/80 dark:bg-purple-500/10 text-purple-600/90 dark:text-purple-400/90 border border-purple-200/50 dark:border-purple-500/15',
         desc: 'Apple photos to PDF' 
       },
     ],
@@ -160,35 +160,35 @@ export default function Header() {
         name: 'PDF to JPG', 
         href: '/tools/pdf-to-jpg', 
         badge: 'JPG',
-        badgeColor: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20',
+        badgeColor: 'bg-amber-50/80 dark:bg-amber-500/10 text-amber-600/90 dark:text-amber-400/90 border border-amber-200/50 dark:border-amber-500/15',
         desc: 'Extract pages as JPG' 
       },
       { 
-        name: 'PDF to WORD', 
+        name: 'PDF to Word', 
         href: '/tools/pdf-to-word-converter', 
         badge: 'DOC',
-        badgeColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20',
+        badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15',
         desc: 'Convert to editable DOCX' 
       },
       { 
-        name: 'PDF to POWERPOINT', 
+        name: 'PDF to PowerPoint', 
         href: '/tools/pdf-to-powerpoint', 
         badge: 'PPT',
-        badgeColor: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20',
+        badgeColor: 'bg-rose-50/80 dark:bg-rose-500/10 text-rose-600/90 dark:text-rose-400/90 border border-rose-200/50 dark:border-rose-500/15',
         desc: 'Convert PDF to PPTX' 
       },
       { 
-        name: 'PDF to EXCEL', 
+        name: 'PDF to Excel', 
         href: '/tools/pdf-to-excel-converter', 
         badge: 'XLS',
-        badgeColor: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20',
+        badgeColor: 'bg-emerald-50/80 dark:bg-emerald-500/10 text-emerald-600/90 dark:text-emerald-400/90 border border-emerald-200/50 dark:border-emerald-500/15',
         desc: 'Extract tables to Excel' 
       },
       { 
-        name: 'PDF to TEXT / OCR', 
+        name: 'PDF to Text / OCR', 
         href: '/tools/pdf-ocr', 
         badge: 'OCR',
-        badgeColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20',
+        badgeColor: 'bg-indigo-50/80 dark:bg-indigo-500/10 text-indigo-600/90 dark:text-indigo-400/90 border border-indigo-200/50 dark:border-indigo-500/15',
         desc: 'Extract selectable text' 
       },
     ]
@@ -421,25 +421,31 @@ export default function Header() {
                       <div className="grid grid-cols-2 gap-6 relative z-10">
                         {/* Column 1: CONVERT TO PDF */}
                         <div>
-                          <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-gray-500 mb-2 px-2">
-                            {t('nav.convert_to_pdf', 'CONVERT TO PDF')}
+                          <div className="flex items-center gap-1.5 pb-2 mb-2 border-b border-slate-100 dark:border-white/5 px-1 relative">
+                            <div className="w-5 h-5 rounded-md flex items-center justify-center shrink-0 bg-blue-50/90 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-200/50 dark:border-blue-500/20">
+                              <ToolIcon icon="FileOutput" className="w-3 h-3" />
+                            </div>
+                            <span className="text-[10.5px] font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-300 truncate">
+                              {t('nav.convert_to_pdf', 'Convert to PDF')}
+                            </span>
+                            <div className="absolute -bottom-px left-0 w-6 h-[1.5px] rounded-full bg-blue-500/80" />
                           </div>
-                          <div className="space-y-1">
+                          <div className="space-y-0.5">
                             {convertPdfTools.toPdf.map((sub) => (
                               <Link
                                 key={sub.href}
                                 href={localizeHref(sub.href)}
                                 onClick={() => setIsConvertDropdownOpen(false)}
-                                className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-white/5 transition-all group select-none"
+                                className="flex items-center gap-2.5 px-2 py-1.5 rounded-xl hover:bg-slate-50 dark:hover:bg-white/[0.04] transition-colors group select-none"
                               >
-                                <div className={`w-7 h-7 rounded-lg flex items-center justify-center font-black text-[9px] shrink-0 group-hover:scale-105 transition-transform ${sub.badgeColor}`}>
+                                <div className={`w-7 h-7 rounded-lg flex items-center justify-center font-medium text-[8.5px] shrink-0 group-hover:scale-105 transition-transform ${sub.badgeColor}`}>
                                   {sub.badge}
                                 </div>
                                 <div className="flex flex-col min-w-0">
-                                  <span className="text-xs font-bold text-slate-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase tracking-tight truncate">
+                                  <span className="text-[11.5px] font-medium text-slate-700 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-tight truncate">
                                     {sub.name}
                                   </span>
-                                  <span className="text-[10px] text-slate-400 dark:text-gray-500 font-medium truncate">
+                                  <span className="text-[9.5px] text-slate-400 dark:text-slate-500 font-normal leading-tight truncate">
                                     {sub.desc}
                                   </span>
                                 </div>
@@ -450,25 +456,31 @@ export default function Header() {
 
                         {/* Column 2: CONVERT FROM PDF */}
                         <div>
-                          <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-gray-500 mb-2 px-2">
-                            {t('nav.convert_from_pdf', 'CONVERT FROM PDF')}
+                          <div className="flex items-center gap-1.5 pb-2 mb-2 border-b border-slate-100 dark:border-white/5 px-1 relative">
+                            <div className="w-5 h-5 rounded-md flex items-center justify-center shrink-0 bg-emerald-50/90 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200/50 dark:border-emerald-500/20">
+                              <ToolIcon icon="FileInput" className="w-3 h-3" />
+                            </div>
+                            <span className="text-[10.5px] font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-300 truncate">
+                              {t('nav.convert_from_pdf', 'Convert from PDF')}
+                            </span>
+                            <div className="absolute -bottom-px left-0 w-6 h-[1.5px] rounded-full bg-emerald-500/80" />
                           </div>
-                          <div className="space-y-1">
+                          <div className="space-y-0.5">
                             {convertPdfTools.fromPdf.map((sub) => (
                               <Link
                                 key={sub.href}
                                 href={localizeHref(sub.href)}
                                 onClick={() => setIsConvertDropdownOpen(false)}
-                                className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-white/5 transition-all group select-none"
+                                className="flex items-center gap-2.5 px-2 py-1.5 rounded-xl hover:bg-slate-50 dark:hover:bg-white/[0.04] transition-colors group select-none"
                               >
-                                <div className={`w-7 h-7 rounded-lg flex items-center justify-center font-black text-[9px] shrink-0 group-hover:scale-105 transition-transform ${sub.badgeColor}`}>
+                                <div className={`w-7 h-7 rounded-lg flex items-center justify-center font-medium text-[8.5px] shrink-0 group-hover:scale-105 transition-transform ${sub.badgeColor}`}>
                                   {sub.badge}
                                 </div>
                                 <div className="flex flex-col min-w-0">
-                                  <span className="text-xs font-bold text-slate-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase tracking-tight truncate">
+                                  <span className="text-[11.5px] font-medium text-slate-700 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors tracking-tight truncate">
                                     {sub.name}
                                   </span>
-                                  <span className="text-[10px] text-slate-400 dark:text-gray-500 font-medium truncate">
+                                  <span className="text-[9.5px] text-slate-400 dark:text-slate-500 font-normal leading-tight truncate">
                                     {sub.desc}
                                   </span>
                                 </div>
@@ -479,14 +491,14 @@ export default function Header() {
                       </div>
 
                       {/* Bottom strip */}
-                      <div className="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between px-2 text-[11px]">
-                        <div className="flex items-center gap-2 text-slate-500 dark:text-gray-400 font-medium">
+                      <div className="mt-3.5 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between px-2 text-[11px]">
+                        <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 font-normal text-[10.5px]">
                           <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
                           <span>Image Converters:</span>
                           <Link 
                             href={localizeHref('/tools/heic-to-jpg-png-converter')} 
                             onClick={() => setIsConvertDropdownOpen(false)}
-                            className="font-bold text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                            className="font-medium text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
                           >
                             HEIC
                           </Link>
@@ -494,7 +506,7 @@ export default function Header() {
                           <Link 
                             href={localizeHref('/tools/webp-to-jpg-png-converter')} 
                             onClick={() => setIsConvertDropdownOpen(false)}
-                            className="font-bold text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                            className="font-medium text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
                           >
                             WebP
                           </Link>
@@ -502,9 +514,9 @@ export default function Header() {
                         <Link 
                           href={localizeHref('/categories/pdf-tools')} 
                           onClick={() => setIsConvertDropdownOpen(false)}
-                          className="font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
+                          className="font-medium text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
                         >
-                          <span>{t('nav.all_pdf_tools', 'All PDF Tools')}</span>
+                          <span>All PDF Tools</span>
                           <ArrowRight className="w-3 h-3" />
                         </Link>
                       </div>
@@ -838,8 +850,11 @@ export default function Header() {
                     {isMobileConvertOpen && (
                       <div className="space-y-4 p-3.5 bg-black/5 dark:bg-black/20 border border-black/5 dark:border-white/5 rounded-2xl animate-fade-in">
                         <div>
-                          <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-gray-500 mb-2 px-1">
-                            {t('nav.convert_to_pdf', 'CONVERT TO PDF')}
+                          <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 px-1">
+                            <div className="w-4 h-4 rounded flex items-center justify-center shrink-0 bg-blue-50/90 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-200/50 dark:border-blue-500/20">
+                              <ToolIcon icon="FileOutput" className="w-2.5 h-2.5" />
+                            </div>
+                            <span>{t('nav.convert_to_pdf', 'Convert to PDF')}</span>
                           </div>
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                             {convertPdfTools.toPdf.map((sub) => (
@@ -850,12 +865,12 @@ export default function Header() {
                                   setIsMobileMenuOpen(false);
                                   setIsMobileConvertOpen(false);
                                 }}
-                                className="flex items-center gap-2.5 p-2.5 rounded-xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-all"
+                                className="flex items-center gap-2.5 p-2 rounded-xl bg-black/[0.03] dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-all"
                               >
-                                <div className={`w-7 h-7 rounded-lg flex items-center justify-center font-black text-[9px] shrink-0 ${sub.badgeColor}`}>
+                                <div className={`w-6 h-6 rounded-lg flex items-center justify-center font-medium text-[8px] shrink-0 ${sub.badgeColor}`}>
                                   {sub.badge}
                                 </div>
-                                <span className="text-xs font-bold text-gray-800 dark:text-gray-200 uppercase truncate">
+                                <span className="text-xs font-medium text-slate-700 dark:text-slate-200 truncate">
                                   {sub.name}
                                 </span>
                               </Link>
@@ -864,8 +879,11 @@ export default function Header() {
                         </div>
 
                         <div className="pt-2 border-t border-black/5 dark:border-white/5">
-                          <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-gray-500 mb-2 px-1">
-                            {t('nav.convert_from_pdf', 'CONVERT FROM PDF')}
+                          <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 px-1">
+                            <div className="w-4 h-4 rounded flex items-center justify-center shrink-0 bg-emerald-50/90 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200/50 dark:border-emerald-500/20">
+                              <ToolIcon icon="FileInput" className="w-2.5 h-2.5" />
+                            </div>
+                            <span>{t('nav.convert_from_pdf', 'Convert from PDF')}</span>
                           </div>
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                             {convertPdfTools.fromPdf.map((sub) => (
@@ -876,12 +894,12 @@ export default function Header() {
                                   setIsMobileMenuOpen(false);
                                   setIsMobileConvertOpen(false);
                                 }}
-                                className="flex items-center gap-2.5 p-2.5 rounded-xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-all"
+                                className="flex items-center gap-2.5 p-2 rounded-xl bg-black/[0.03] dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-all"
                               >
-                                <div className={`w-7 h-7 rounded-lg flex items-center justify-center font-black text-[9px] shrink-0 ${sub.badgeColor}`}>
+                                <div className={`w-6 h-6 rounded-lg flex items-center justify-center font-medium text-[8px] shrink-0 ${sub.badgeColor}`}>
                                   {sub.badge}
                                 </div>
-                                <span className="text-xs font-bold text-gray-800 dark:text-gray-200 uppercase truncate">
+                                <span className="text-xs font-medium text-slate-700 dark:text-slate-200 truncate">
                                   {sub.name}
                                 </span>
                               </Link>

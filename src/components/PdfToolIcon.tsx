@@ -701,15 +701,6 @@ export default function PdfToolIcon({
 
   const s = sizeMap[size] || sizeMap.md;
 
-  const isImage = typeof iconName === 'string' && (
-    iconName.startsWith('/') ||
-    iconName.startsWith('http://') ||
-    iconName.startsWith('https://') ||
-    iconName.startsWith('data:image/') ||
-    /\.(png|jpe?g|svg|webp|gif|ico)$/i.test(iconName)
-  );
-  const isEmoji = typeof iconName === 'string' && !isImage && /\p{Extended_Pictographic}/u.test(iconName);
-
   return (
     <div className={`relative shrink-0 ${s.container} ${className}`}>
       {/* Back layer — light tinted tile, pinned top-left */}
@@ -726,16 +717,10 @@ export default function PdfToolIcon({
           right: 0,
         }}
       >
-        {isImage ? (
-          <img src={iconName} alt="" className={`${s.iconSize} object-contain rounded-xs`} />
-        ) : isEmoji ? (
-          <span className="text-xs leading-none select-none">{iconName}</span>
-        ) : (
-          <IconComponent
-            className={`${s.iconSize} text-white`}
-            strokeWidth={2}
-          />
-        )}
+        <IconComponent
+          className={`${s.iconSize} text-white`}
+          strokeWidth={2}
+        />
       </div>
 
       {/* Tiny format badge — attached to top-right corner of front tile */}

@@ -200,6 +200,12 @@ export default function Header() {
       label: 'Organize & Pages',
       icon: 'LayoutGrid',
       accentColor: 'text-blue-500 dark:text-blue-400',
+      theme: {
+        iconBox: 'bg-blue-50/90 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-200/50 dark:border-blue-500/20',
+        indicator: 'bg-blue-500/80',
+        hoverBg: 'hover:bg-blue-50/40 dark:hover:bg-blue-500/5',
+        toolHoverText: 'group-hover:text-blue-600 dark:group-hover:text-blue-400',
+      },
       tools: [
         { name: 'Merge PDF', href: '/tools/merge-pdf', icon: 'Merge', badge: 'Combine', desc: 'Join multiple files into one' },
         { name: 'Split PDF', href: '/tools/split-pdf', icon: 'SplitSquareHorizontal', badge: 'Extract', desc: 'Extract pages to separate files' },
@@ -213,15 +219,21 @@ export default function Header() {
       label: 'Convert PDF',
       icon: 'FileOutput',
       accentColor: 'text-emerald-500 dark:text-emerald-400',
+      theme: {
+        iconBox: 'bg-emerald-50/90 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200/50 dark:border-emerald-500/20',
+        indicator: 'bg-emerald-500/80',
+        hoverBg: 'hover:bg-emerald-50/40 dark:hover:bg-emerald-500/5',
+        toolHoverText: 'group-hover:text-emerald-600 dark:group-hover:text-emerald-400',
+      },
       tools: [
-        { name: 'Word to PDF', href: '/tools/word-to-pdf-converter', icon: 'FileOutput', badge: 'DOC', badgeColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20', desc: 'DOCX to clean PDF' },
-        { name: 'PDF to Word', href: '/tools/pdf-to-word-converter', icon: 'FileText', badge: 'DOC', badgeColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20', desc: 'PDF to editable DOCX' },
-        { name: 'Excel to PDF', href: '/tools/excel-to-pdf-converter', icon: 'FileSpreadsheet', badge: 'XLS', badgeColor: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20', desc: 'Spreadsheet to PDF' },
-        { name: 'PDF to Excel', href: '/tools/pdf-to-excel-converter', icon: 'FileSpreadsheet', badge: 'XLS', badgeColor: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20', desc: 'Extract table data' },
-        { name: 'PowerPoint to PDF', href: '/tools/powerpoint-to-pdf', icon: 'Presentation', badge: 'PPT', badgeColor: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20', desc: 'PPTX to PDF slides' },
-        { name: 'PDF to PowerPoint', href: '/tools/pdf-to-powerpoint', icon: 'Presentation', badge: 'PPT', badgeColor: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20', desc: 'PDF to PPTX slides' },
-        { name: 'JPG to PDF', href: '/tools/jpg-to-pdf', icon: 'Image', badge: 'JPG', badgeColor: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20', desc: 'Images to single PDF' },
-        { name: 'PDF to JPG', href: '/tools/pdf-to-jpg', icon: 'FileImage', badge: 'JPG', badgeColor: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20', desc: 'Extract high-res JPG' },
+        { name: 'Word to PDF', href: '/tools/word-to-pdf-converter', icon: 'FileOutput', badge: 'DOC', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'DOCX to clean PDF' },
+        { name: 'PDF to Word', href: '/tools/pdf-to-word-converter', icon: 'FileText', badge: 'DOC', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'PDF to editable DOCX' },
+        { name: 'Excel to PDF', href: '/tools/excel-to-pdf-converter', icon: 'FileSpreadsheet', badge: 'XLS', badgeColor: 'bg-emerald-50/80 dark:bg-emerald-500/10 text-emerald-600/90 dark:text-emerald-400/90 border border-emerald-200/50 dark:border-emerald-500/15', desc: 'Spreadsheet to PDF' },
+        { name: 'PDF to Excel', href: '/tools/pdf-to-excel-converter', icon: 'FileSpreadsheet', badge: 'XLS', badgeColor: 'bg-emerald-50/80 dark:bg-emerald-500/10 text-emerald-600/90 dark:text-emerald-400/90 border border-emerald-200/50 dark:border-emerald-500/15', desc: 'Extract table data' },
+        { name: 'PowerPoint to PDF', href: '/tools/powerpoint-to-pdf', icon: 'Presentation', badge: 'PPT', badgeColor: 'bg-rose-50/80 dark:bg-rose-500/10 text-rose-600/90 dark:text-rose-400/90 border border-rose-200/50 dark:border-rose-500/15', desc: 'PPTX to PDF slides' },
+        { name: 'PDF to PowerPoint', href: '/tools/pdf-to-powerpoint', icon: 'Presentation', badge: 'PPT', badgeColor: 'bg-rose-50/80 dark:bg-rose-500/10 text-rose-600/90 dark:text-rose-400/90 border border-rose-200/50 dark:border-rose-500/15', desc: 'PDF to PPTX slides' },
+        { name: 'JPG to PDF', href: '/tools/jpg-to-pdf', icon: 'Image', badge: 'JPG', badgeColor: 'bg-amber-50/80 dark:bg-amber-500/10 text-amber-600/90 dark:text-amber-400/90 border border-amber-200/50 dark:border-amber-500/15', desc: 'Images to single PDF' },
+        { name: 'PDF to JPG', href: '/tools/pdf-to-jpg', icon: 'FileImage', badge: 'JPG', badgeColor: 'bg-amber-50/80 dark:bg-amber-500/10 text-amber-600/90 dark:text-amber-400/90 border border-amber-200/50 dark:border-amber-500/15', desc: 'Extract high-res JPG' },
       ]
     },
     {
@@ -229,9 +241,15 @@ export default function Header() {
       label: 'Edit & Sign',
       icon: 'FilePenLine',
       accentColor: 'text-violet-500 dark:text-violet-400',
+      theme: {
+        iconBox: 'bg-purple-50/90 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-200/50 dark:border-purple-500/20',
+        indicator: 'bg-purple-500/80',
+        hoverBg: 'hover:bg-purple-50/40 dark:hover:bg-purple-500/5',
+        toolHoverText: 'group-hover:text-purple-600 dark:group-hover:text-purple-400',
+      },
       tools: [
-        { name: 'Edit PDF', href: '/tools/pdf-tools/edit-pdf', icon: 'FilePenLine', badge: 'POPULAR', badgeColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20', desc: 'Add text, forms & draw' },
-        { name: 'Sign PDF', href: '/tools/sign-pdf', icon: 'PenTool', badge: 'E-SIGN', badgeColor: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20', desc: 'Draw, type signature' },
+        { name: 'Edit PDF', href: '/tools/pdf-tools/edit-pdf', icon: 'FilePenLine', badge: 'POPULAR', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'Add text, forms & draw' },
+        { name: 'Sign PDF', href: '/tools/sign-pdf', icon: 'PenTool', badge: 'E-SIGN', badgeColor: 'bg-purple-50/80 dark:bg-purple-500/10 text-purple-600/90 dark:text-purple-400/90 border border-purple-200/50 dark:border-purple-500/15', desc: 'Draw, type signature' },
         { name: 'Crop PDF', href: '/tools/crop-pdf', icon: 'Crop', badge: 'Trim', desc: 'Trim page margins' },
         { name: 'Rotate PDF', href: '/tools/rotate-pdf', icon: 'RotateCw', badge: 'Turn', desc: 'Rotate 90° or 180°' },
         { name: 'Watermark PDF', href: '/tools/watermark-pdf', icon: 'Droplets', badge: 'Stamp', desc: 'Stamp text or image' },
@@ -242,13 +260,19 @@ export default function Header() {
       label: 'Security & Optimize',
       icon: 'Lock',
       accentColor: 'text-amber-500 dark:text-amber-400',
+      theme: {
+        iconBox: 'bg-amber-50/90 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-200/50 dark:border-amber-500/20',
+        indicator: 'bg-amber-500/80',
+        hoverBg: 'hover:bg-amber-50/40 dark:hover:bg-amber-500/5',
+        toolHoverText: 'group-hover:text-amber-600 dark:group-hover:text-amber-400',
+      },
       tools: [
-        { name: 'Compress PDF', href: '/tools/compress-pdf', icon: 'Shrink', badge: 'FAST', badgeColor: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20', desc: 'Shrink MB size' },
+        { name: 'Compress PDF', href: '/tools/compress-pdf', icon: 'Shrink', badge: 'FAST', badgeColor: 'bg-emerald-50/80 dark:bg-emerald-500/10 text-emerald-600/90 dark:text-emerald-400/90 border border-emerald-200/50 dark:border-emerald-500/15', desc: 'Shrink MB size' },
         { name: 'Protect PDF', href: '/tools/protect-pdf', icon: 'Lock', badge: 'Lock', desc: 'Add password encryption' },
         { name: 'Unlock PDF', href: '/tools/unlock-pdf', icon: 'LockOpen', badge: 'Unlock', desc: 'Remove password' },
-        { name: 'Aadhaar Masking', href: '/tools/aadhaar-masking-tool', icon: 'EyeOff', badge: 'PRIVACY', badgeColor: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20', desc: 'Mask first 8 digits' },
-        { name: 'Aadhaar 300KB', href: '/tools/aadhaar-pdf-compressor', icon: 'Shrink', badge: '300KB', badgeColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20', desc: 'UIDAI portal limit' },
-        { name: 'Govt Form PDF', href: '/tools/gov-form-pdf-compressor', icon: 'FileMinus', badge: 'GOVT', badgeColor: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20', desc: 'UPSC / SSC forms' },
+        { name: 'Aadhaar Masking', href: '/tools/aadhaar-masking-tool', icon: 'EyeOff', badge: 'PRIVACY', badgeColor: 'bg-rose-50/80 dark:bg-rose-500/10 text-rose-600/90 dark:text-rose-400/90 border border-rose-200/50 dark:border-rose-500/15', desc: 'Mask first 8 digits' },
+        { name: 'Aadhaar 300KB', href: '/tools/aadhaar-pdf-compressor', icon: 'Shrink', badge: '300KB', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'UIDAI portal limit' },
+        { name: 'Govt Form PDF', href: '/tools/gov-form-pdf-compressor', icon: 'FileMinus', badge: 'GOVT', badgeColor: 'bg-amber-50/80 dark:bg-amber-500/10 text-amber-600/90 dark:text-amber-400/90 border border-amber-200/50 dark:border-amber-500/15', desc: 'UPSC / SSC forms' },
       ]
     },
     {
@@ -256,10 +280,16 @@ export default function Header() {
       label: 'AI & Smart Tools',
       icon: 'Sparkles',
       accentColor: 'text-purple-500 dark:text-purple-400',
+      theme: {
+        iconBox: 'bg-violet-50/90 dark:bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-200/50 dark:border-violet-500/20',
+        indicator: 'bg-violet-500/80',
+        hoverBg: 'hover:bg-violet-50/40 dark:hover:bg-violet-500/5',
+        toolHoverText: 'group-hover:text-violet-600 dark:group-hover:text-violet-400',
+      },
       tools: [
-        { name: 'AI PDF Summarizer', href: '/tools/pdf-summarizer', icon: 'Sparkles', badge: 'AI LAB', badgeColor: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/30', desc: 'Client-side summary' },
-        { name: 'PDF OCR Scanner', href: '/tools/pdf-ocr', icon: 'ScanText', badge: 'OCR', badgeColor: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20', desc: 'Scan & extract text' },
-        { name: 'All PDF Directory', href: '/categories/pdf-tools', icon: 'ArrowRight', badge: '26 TOOLS', badgeColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20', desc: 'View all category tools' },
+        { name: 'AI PDF Summarizer', href: '/tools/pdf-summarizer', icon: 'Sparkles', badge: 'AI LAB', badgeColor: 'bg-purple-50/80 dark:bg-purple-500/10 text-purple-600/90 dark:text-purple-400/90 border border-purple-200/50 dark:border-purple-500/15', desc: 'Client-side summary' },
+        { name: 'PDF OCR Scanner', href: '/tools/pdf-ocr', icon: 'ScanText', badge: 'OCR', badgeColor: 'bg-indigo-50/80 dark:bg-indigo-500/10 text-indigo-600/90 dark:text-indigo-400/90 border border-indigo-200/50 dark:border-indigo-500/15', desc: 'Scan & extract text' },
+        { name: 'All PDF Directory', href: '/categories/pdf-tools', icon: 'ArrowRight', badge: '26 TOOLS', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'View all category tools' },
       ]
     }
   ];
@@ -566,16 +596,17 @@ export default function Header() {
 
                       {/* Main Category Grid */}
                       {pdfActiveFilter === 'all' ? (
-                        <div className="grid grid-cols-5 gap-3 min-[1350px]:gap-4.5 pt-3.5 relative z-10">
+                        <div className="grid grid-cols-5 gap-3.5 min-[1350px]:gap-5 pt-3.5 relative z-10">
                           {allPdfCategories.map((cat) => (
                             <div key={cat.id} className="flex flex-col min-w-0">
-                              <div className="flex items-center gap-1.5 pb-2 mb-2 border-b border-slate-100 dark:border-white/5">
-                                <div className={`p-1 rounded-md bg-slate-100 dark:bg-white/5 ${cat.accentColor} shrink-0`}>
-                                  <ToolIcon icon={cat.icon} className="w-3.5 h-3.5" />
+                              <div className="flex items-center gap-1.5 pb-2 mb-2 border-b border-slate-100 dark:border-white/5 relative">
+                                <div className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 ${cat.theme.iconBox}`}>
+                                  <ToolIcon icon={cat.icon} className="w-3 h-3" />
                                 </div>
-                                <span className="text-[10px] font-black uppercase tracking-wider text-slate-600 dark:text-gray-300 truncate">
+                                <span className="text-[10.5px] font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-300 truncate">
                                   {cat.label}
                                 </span>
+                                <div className={`absolute -bottom-px left-0 w-6 h-[1.5px] rounded-full ${cat.theme.indicator}`} />
                               </div>
                               <div className="space-y-0.5">
                                 {cat.tools.map((sub) => {
@@ -585,20 +616,20 @@ export default function Header() {
                                       key={sub.href}
                                       href={localizeHref(sub.href)}
                                       onClick={() => setIsPdfDropdownOpen(false)}
-                                      className={`flex items-center justify-between p-1.5 rounded-xl hover:bg-slate-100/90 dark:hover:bg-white/5 transition-all group select-none ${
-                                        isCurrent ? 'bg-blue-50 dark:bg-white/10 font-bold' : ''
+                                      className={`flex items-center justify-between px-1.5 py-1 rounded-lg ${cat.theme.hoverBg} transition-colors group select-none min-h-[28px] ${
+                                        isCurrent ? 'bg-blue-50/70 dark:bg-blue-500/10 font-semibold' : ''
                                       }`}
                                     >
                                       <div className="flex items-center gap-1.5 min-w-0">
-                                        <div className="w-5 h-5 rounded-md bg-slate-100 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                                          <ToolIcon icon={sub.icon} className="w-3 h-3 text-slate-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
+                                        <div className="w-5 h-5 rounded-md bg-slate-50 dark:bg-white/5 flex items-center justify-center shrink-0 border border-slate-100/80 dark:border-white/5 group-hover:border-slate-200 dark:group-hover:border-white/10 group-hover:scale-105 transition-all">
+                                          <ToolIcon icon={sub.icon} className={`w-3 h-3 text-slate-400 dark:text-slate-500 ${cat.theme.toolHoverText} transition-colors`} />
                                         </div>
-                                        <span className="text-[10.5px] font-bold text-slate-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
+                                        <span className={`text-[11px] font-medium text-slate-700 dark:text-slate-200 ${cat.theme.toolHoverText} transition-colors truncate`}>
                                           {sub.name}
                                         </span>
                                       </div>
                                       {sub.badge && (
-                                        <span className={`text-[8px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider shrink-0 ml-1 ${sub.badgeColor || 'bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-gray-400'}`}>
+                                        <span className={`text-[8px] font-medium px-1.5 py-[1px] rounded uppercase tracking-wide shrink-0 ml-1 select-none transition-colors ${sub.badgeColor || 'bg-slate-100/80 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-200/50 dark:border-white/5'}`}>
                                           {sub.badge}
                                         </span>
                                       )}
@@ -617,14 +648,16 @@ export default function Header() {
                               <div key={cat.id}>
                                 <div className="flex items-center justify-between mb-3 px-1">
                                   <div className="flex items-center gap-2">
-                                    <ToolIcon icon={cat.icon} className={`w-4 h-4 ${cat.accentColor}`} />
-                                    <h4 className="text-xs font-black uppercase tracking-wider text-slate-800 dark:text-white">
+                                    <div className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 ${cat.theme.iconBox}`}>
+                                      <ToolIcon icon={cat.icon} className="w-3.5 h-3.5" />
+                                    </div>
+                                    <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200">
                                       {cat.label} ({cat.tools.length} Tools)
                                     </h4>
                                   </div>
                                   <button
                                     onClick={() => setPdfActiveFilter('all')}
-                                    className="text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+                                    className="text-[11px] font-medium text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
                                   >
                                     ← View All Categories
                                   </button>
@@ -635,18 +668,18 @@ export default function Header() {
                                       key={sub.href}
                                       href={localizeHref(sub.href)}
                                       onClick={() => setIsPdfDropdownOpen(false)}
-                                      className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50/80 dark:bg-white/[0.03] border border-slate-100 dark:border-white/5 hover:border-blue-500/30 hover:bg-white dark:hover:bg-white/[0.07] transition-all group"
+                                      className={`flex items-start gap-3 p-2.5 rounded-xl bg-slate-50/60 dark:bg-white/[0.02] border border-slate-100 dark:border-white/5 ${cat.theme.hoverBg} hover:bg-white dark:hover:bg-white/[0.05] transition-all group`}
                                     >
-                                      <div className="w-8 h-8 rounded-xl bg-blue-600/10 dark:bg-blue-500/15 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform mt-0.5">
-                                        <ToolIcon icon={sub.icon} className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                                      <div className="w-7 h-7 rounded-lg bg-slate-100 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform mt-0.5">
+                                        <ToolIcon icon={sub.icon} className={`w-3.5 h-3.5 text-slate-400 dark:text-slate-500 ${cat.theme.toolHoverText} transition-colors`} />
                                       </div>
                                       <div className="flex flex-col min-w-0">
                                         <div className="flex items-center gap-1.5">
-                                          <span className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
+                                          <span className={`text-xs font-medium text-slate-700 dark:text-slate-200 ${cat.theme.toolHoverText} transition-colors truncate`}>
                                             {sub.name}
                                           </span>
                                           {sub.badge && (
-                                            <span className={`text-[8px] font-black px-1.5 py-0.5 rounded uppercase shrink-0 ${sub.badgeColor || 'bg-blue-500/10 text-blue-600'}`}>
+                                            <span className={`text-[8px] font-medium px-1.5 py-[1px] rounded uppercase shrink-0 ${sub.badgeColor || 'bg-slate-100/80 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-200/50 dark:border-white/5'}`}>
                                               {sub.badge}
                                             </span>
                                           )}
@@ -879,8 +912,10 @@ export default function Header() {
                       <div className="space-y-4 p-3.5 bg-black/5 dark:bg-black/20 border border-black/5 dark:border-white/5 rounded-2xl animate-fade-in">
                         {allPdfCategories.map((cat) => (
                           <div key={cat.id}>
-                            <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-gray-500 mb-2 px-1">
-                              <ToolIcon icon={cat.icon} className={`w-3.5 h-3.5 ${cat.accentColor}`} />
+                            <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 px-1">
+                              <div className={`w-4 h-4 rounded flex items-center justify-center shrink-0 ${cat.theme.iconBox}`}>
+                                <ToolIcon icon={cat.icon} className="w-2.5 h-2.5" />
+                              </div>
                               <span>{cat.label}</span>
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
@@ -892,16 +927,16 @@ export default function Header() {
                                     setIsMobileMenuOpen(false);
                                     setIsMobilePdfOpen(false);
                                   }}
-                                  className="flex items-center justify-between p-2.5 rounded-xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-all"
+                                  className="flex items-center justify-between p-2 rounded-xl bg-black/[0.03] dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-all"
                                 >
                                   <div className="flex items-center gap-2 min-w-0">
-                                    <ToolIcon icon={sub.icon} className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
-                                    <span className="text-xs font-bold text-gray-800 dark:text-gray-200 truncate">
+                                    <ToolIcon icon={sub.icon} className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 shrink-0" />
+                                    <span className="text-xs font-medium text-slate-700 dark:text-slate-200 truncate">
                                       {sub.name}
                                     </span>
                                   </div>
                                   {sub.badge && (
-                                    <span className={`text-[8.5px] font-black px-1.5 py-0.5 rounded uppercase shrink-0 ${sub.badgeColor || 'bg-blue-500/10 text-blue-600 dark:text-blue-400'}`}>
+                                    <span className={`text-[8px] font-medium px-1.5 py-[1px] rounded uppercase shrink-0 ${sub.badgeColor || 'bg-slate-100/80 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-200/50 dark:border-white/5'}`}>
                                       {sub.badge}
                                     </span>
                                   )}

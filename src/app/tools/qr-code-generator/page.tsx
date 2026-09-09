@@ -12,21 +12,24 @@ import {
   MessageSquare, 
   Download, 
   RotateCcw, 
-  Image as ImageIcon,
+  Copy,
   Check,
-  Smartphone,
-  Settings,
-  Palette,
-  Layout,
-  Globe,
-  Upload,
-  XCircle,
-  Eye,
-  Sparkles
+  Palette, 
+  Layout, 
+  Globe, 
+  Upload, 
+  Trash2, 
+  Eye, 
+  Sparkles,
+  QrCode,
+  FileCode,
+  ShieldCheck,
+  HelpCircle
 } from 'lucide-react';
+import ToolLayout from '@/components/tools/ToolLayout';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
-import { motion, AnimatePresence } from 'framer-motion';
+import { toast } from 'sonner';
 
 // QR Types
 type QRType = 'URL' | 'Text' | 'WiFi' | 'Email' | 'Phone' | 'SMS';
@@ -49,9 +52,18 @@ const FRAMES: FrameConfig[] = [
   { id: 'WiFiAccess', label: 'WiFi', text: 'WIFI ACCESS' },
 ];
 
+const COLOR_PRESETS = [
+  { name: 'Obsidian', fg: '#000000', bg: '#FFFFFF' },
+  { name: 'Royal Blue', fg: '#2563EB', bg: '#FFFFFF' },
+  { name: 'Emerald', fg: '#059669', bg: '#FFFFFF' },
+  { name: 'Violet', fg: '#7C3AED', bg: '#FFFFFF' },
+  { name: 'Sunset Red', fg: '#DC2626', bg: '#FFFFFF' },
+  { name: 'Midnight', fg: '#0F172A', bg: '#F8FAFC' },
+];
+
 export default function ProfessionalQRCodeGenerator() {
   const [activeTab, setActiveTab] = useState<QRType>('URL');
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState('https://toolwala.co');
   
   // WiFi Fields
   const [wifiSsid, setWifiSsid] = useState('');
@@ -70,7 +82,6 @@ export default function ProfessionalQRCodeGenerator() {
   // Customization
   const [fgColor, setFgColor] = useState('#000000');
   const [bgColor, setBgColor] = useState('#ffffff');
-  const [size, setSize] = useState(300);
   const [margin, setMargin] = useState(1);
   const [errorLevel, setErrorLevel] = useState<'L' | 'M' | 'Q' | 'H'>('H');
   const [includeMargin, setIncludeMargin] = useState(true);
@@ -82,9 +93,10 @@ export default function ProfessionalQRCodeGenerator() {
   // Frame
   const [selectedFrame, setSelectedFrame] = useState<FrameType>('None');
 
-  // Preview
+  // Preview & Status
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   // Get content based on active tab
   const getQRContent = useCallback(() => {
@@ -126,15 +138,15 @@ export default function ProfessionalQRCodeGenerator() {
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
 
-      // Reset canvas size for higher resolution output
+      // Base high resolution canvas output
       const baseSize = 1000; 
-      const padding = 60; // Internal high-res padding
+      const padding = 60;
       const totalWidth = baseSize + (padding * 2);
       
       let totalHeight = totalWidth;
       let qrYOffset = padding;
       
-      const frameHeight = selectedFrame !== 'None' ? baseSize * 0.25 : 0;
+      const frameHeight = selectedFrame !== 'None' ? baseSize * 0.22 : 0;
       if (selectedFrame !== 'None') {
         totalHeight += frameHeight;
       }
@@ -142,7 +154,7 @@ export default function ProfessionalQRCodeGenerator() {
       canvas.width = totalWidth;
       canvas.height = totalHeight;
 
-      // Draw Background
+      // Draw Canvas Background
       ctx.fillStyle = bgColor;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -172,10 +184,18 @@ export default function ProfessionalQRCodeGenerator() {
         const lSize = (baseSize * logoSize) / 100;
         const lx = (totalWidth - lSize) / 2;
         const ly = (baseSize - lSize) / 2 + qrYOffset;
+        const pad = 12;
 
-        // Draw white background for logo area
+        // Draw soft rounded background for logo area
         ctx.fillStyle = bgColor;
-        ctx.fillRect(lx - 10, ly - 10, lSize + 20, lSize + 20);
+        ctx.beginPath();
+        const rx = lx - pad;
+        const ry = ly - pad;
+        const rw = lSize + (pad * 2);
+        const rh = lSize + (pad * 2);
+        const radius = 16;
+        ctx.roundRect(rx, ry, rw, rh, radius);
+        ctx.fill();
         
         ctx.drawImage(logoImg, lx, ly, lSize, lSize);
       }
@@ -184,17 +204,20 @@ export default function ProfessionalQRCodeGenerator() {
       if (selectedFrame !== 'None') {
         const frameConfig = FRAMES.find(f => f.id === selectedFrame);
         if (frameConfig) {
-          // Add bottom frame area
-          ctx.fillStyle = fgColor;
           const frameY = baseSize + padding;
-          ctx.fillRect(padding, frameY, baseSize, frameHeight);
+          
+          // Draw frame container
+          ctx.fillStyle = fgColor;
+          ctx.beginPath();
+          ctx.roundRect(padding, frameY, baseSize, frameHeight - 10, 16);
+          ctx.fill();
 
-          // Add text
+          // Draw frame text
           ctx.fillStyle = bgColor;
-          ctx.font = `bold ${baseSize * 0.08}px Inter, system-ui, sans-serif`;
+          ctx.font = `bold ${baseSize * 0.075}px Inter, -apple-system, system-ui, sans-serif`;
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-          ctx.fillText(frameConfig.text, totalWidth / 2, frameY + frameHeight / 2);
+          ctx.fillText(frameConfig.text, totalWidth / 2, frameY + (frameHeight - 10) / 2);
         }
       }
     } catch (err) {
@@ -207,369 +230,646 @@ export default function ProfessionalQRCodeGenerator() {
   useEffect(() => {
     const timer = setTimeout(() => {
       renderQRCode();
-    }, 300);
+    }, 250);
     return () => clearTimeout(timer);
   }, [renderQRCode]);
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      if (!file.type.startsWith('image/')) {
+        toast.error('Please upload an image file (PNG, JPG, SVG, etc.)');
+        return;
+      }
       const reader = new FileReader();
       reader.onload = (event) => {
         setLogo(event.target?.result as string);
+        toast.success('Logo added to QR code');
       };
       reader.readAsDataURL(file);
     }
   };
 
   const downloadPNG = () => {
-    if (!canvasRef.current) return;
+    if (!canvasRef.current || !getQRContent()) return;
     const link = document.createElement('a');
-    link.download = `qrcode_${activeTab.toLowerCase()}.png`;
+    link.download = `qrcode_${activeTab.toLowerCase()}_toolwala.png`;
     link.href = canvasRef.current.toDataURL('image/png', 1.0);
     link.click();
+    toast.success('High-resolution PNG downloaded!');
+  };
+
+  const downloadSVG = async () => {
+    const content = getQRContent();
+    if (!content) return;
+    try {
+      const svgString = await QRCode.toString(content, {
+        type: 'svg',
+        margin: includeMargin ? margin : 0,
+        errorCorrectionLevel: errorLevel,
+        color: {
+          dark: fgColor,
+          light: bgColor,
+        }
+      });
+      const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+      const link = document.createElement('a');
+      link.download = `qrcode_${activeTab.toLowerCase()}_toolwala.svg`;
+      link.href = URL.createObjectURL(blob);
+      link.click();
+      URL.revokeObjectURL(link.href);
+      toast.success('Vector SVG downloaded!');
+    } catch (err) {
+      console.error('SVG export failed:', err);
+      toast.error('Could not generate SVG vector');
+    }
+  };
+
+  const copyToClipboard = async () => {
+    if (!canvasRef.current || !getQRContent()) return;
+    try {
+      canvasRef.current.toBlob(async (blob) => {
+        if (!blob) {
+          toast.error('Failed to copy QR code');
+          return;
+        }
+        await navigator.clipboard.write([
+          new ClipboardItem({ 'image/png': blob })
+        ]);
+        setCopied(true);
+        toast.success('QR Code copied to clipboard!');
+        setTimeout(() => setCopied(false), 2000);
+      }, 'image/png', 1.0);
+    } catch (err) {
+      console.error('Clipboard copy failed:', err);
+      toast.error('Clipboard copy is not supported in this browser');
+    }
   };
 
   const resetAll = () => {
-    setInputText('');
+    setInputText('https://toolwala.co');
     setWifiSsid('');
     setWifiPassword('');
     setEmailTo('');
     setPhone('');
+    setSmsMessage('');
     setLogo(null);
     setSelectedFrame('None');
     setFgColor('#000000');
     setBgColor('#ffffff');
+    setErrorLevel('H');
+    setIncludeMargin(true);
+    toast.info('Studio reset to default configuration');
   };
 
   return (
-    <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden transition-colors duration-250 font-sans">
-      {/* Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10" />
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
-        <Link href="/tools" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group">
-          <RotateCcw className="h-4 w-4 group-hover:-rotate-45 transition-transform" />
-          Back to Directory
-        </Link>
-        
-        {/* HEADER */}
-        <div className="glass rounded-[2.5rem] border border-white/5 p-8 sm:p-10 mb-10 shadow-2xl relative overflow-hidden">
-          <div className="absolute inset-0 bg-blue-600/5 blur-[80px] -z-10" />
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-8">
-            <div className="flex items-center gap-6">
-              <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-blue-600 text-white shadow-[0_0_30px_rgba(37,99,235,0.4)] border border-blue-400/20">
-                <Globe className="w-8 h-8" />
-              </div>
-              <div>
-                <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">Professional QR Generator</h1>
-                <p className="text-gray-400 font-medium mt-1">Create, customize, and brand your QR codes instantly.</p>
-              </div>
+    <ToolLayout>
+      {/* COMPACT STUDIO HEADER */}
+      <div className="bg-white dark:bg-slate-900/75 border border-slate-200/80 dark:border-white/10 rounded-2xl p-4 sm:p-5 mb-6 shadow-xs backdrop-blur-md">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-xs">
+              <QrCode className="w-5 h-5" />
             </div>
-            <div className="flex gap-4 shrink-0">
-              <button onClick={resetAll} className="px-6 py-3.5 text-[10px] font-black uppercase tracking-widest text-gray-400 bg-white/5 border border-white/5 rounded-2xl hover:bg-white/10 hover:text-white transition-all active:scale-95">
-                <RotateCcw className="w-4 h-4 mr-2" /> Reset Studio
-              </button>
+            <div>
+              <div className="flex items-center gap-2">
+                <h1 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight">
+                  Professional QR Generator
+                </h1>
+                <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-500/20">
+                  <ShieldCheck className="w-3 h-3" /> 100% Client-Side
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">
+                Create, customize, and download high-resolution QR codes with custom branding and frames.
+              </p>
             </div>
           </div>
+          <div className="flex items-center gap-2 self-start sm:self-center shrink-0">
+            <button 
+              type="button"
+              onClick={resetAll} 
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-600 dark:text-slate-400 bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200/80 dark:border-white/5 rounded-xl transition-all cursor-pointer active:scale-95"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              Reset
+            </button>
+          </div>
         </div>
+      </div>
 
-        <div className="flex flex-col lg:flex-row gap-10">
+      {/* 2-COLUMN STUDIO WORKSPACE */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start mb-12">
+        
+        {/* LEFT COLUMN: CONTROLS & SETTINGS (7 COLS) */}
+        <div className="lg:col-span-7 space-y-5">
           
-          {/* LEFT: SETTINGS */}
-          <div className="w-full lg:w-[60%] space-y-10">
-            
-            {/* TYPE SELECTION */}
-            <div className="glass p-8 rounded-[2.5rem] border border-white/5 shadow-2xl">
-              <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-6">
-                <Settings className="w-5 h-5 text-blue-500" />
-                <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase">1. Select Data Type</h2>
+          {/* STEP 1: TYPE SELECTION & CONTENT */}
+          <div className="bg-white dark:bg-slate-900/75 border border-slate-200/80 dark:border-white/10 rounded-2xl p-5 shadow-xs backdrop-blur-md">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-white/5 pb-3.5 mb-4">
+              <div className="flex items-center gap-2">
+                <span className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white text-[10px] font-bold">1</span>
+                <h2 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Select Data Type</h2>
               </div>
-              
-              <div className="grid grid-cols-3 sm:grid-cols-6 gap-4">
-                {[
-                  { id: 'URL', icon: LinkIcon, label: 'URL' },
-                  { id: 'Text', icon: Type, label: 'Text' },
-                  { id: 'WiFi', icon: Wifi, label: 'WiFi' },
-                  { id: 'Email', icon: Mail, label: 'Email' },
-                  { id: 'Phone', icon: Phone, label: 'Phone' },
-                  { id: 'SMS', icon: MessageSquare, label: 'SMS' },
-                ].map((type) => (
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Step 1 of 3</span>
+            </div>
+            
+            {/* DATA TYPE BUTTONS */}
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+              {[
+                { id: 'URL', icon: LinkIcon, label: 'URL' },
+                { id: 'Text', icon: Type, label: 'Text' },
+                { id: 'WiFi', icon: Wifi, label: 'WiFi' },
+                { id: 'Email', icon: Mail, label: 'Email' },
+                { id: 'Phone', icon: Phone, label: 'Phone' },
+                { id: 'SMS', icon: MessageSquare, label: 'SMS' },
+              ].map((type) => {
+                const isActive = activeTab === type.id;
+                return (
                   <button
                     key={type.id}
+                    type="button"
                     onClick={() => setActiveTab(type.id as QRType)}
-                    className={`flex flex-col items-center gap-3 p-4 rounded-[1.5rem] transition-all border-2 ${
-                      activeTab === type.id 
-                        ? 'bg-blue-600/10 border-blue-600 text-blue-500 shadow-[0_0_20px_rgba(37,99,235,0.2)]' 
-                        : 'bg-white/5 border-transparent text-gray-500 hover:bg-white/10 hover:border-white/10'
+                    className={`flex flex-col items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl transition-all border font-semibold text-xs cursor-pointer ${
+                      isActive
+                        ? 'bg-blue-600 text-white border-blue-600 shadow-xs shadow-blue-500/20' 
+                        : 'bg-slate-50 dark:bg-white/5 border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white'
                     }`}
                   >
-                    <type.icon className="w-6 h-6" />
-                    <span className="text-[10px] font-black uppercase tracking-widest">{type.label}</span>
+                    <type.icon className="w-4 h-4" />
+                    <span>{type.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* INPUT FIELDS ACCORDING TO TYPE */}
+            <div className="mt-4 pt-4 border-t border-slate-100 dark:border-white/5">
+              {activeTab === 'URL' && (
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Target Website URL</label>
+                    <span className="text-[11px] text-slate-400">e.g. https://domain.com</span>
+                  </div>
+                  <input 
+                    type="text" 
+                    value={inputText}
+                    onChange={(e) => setInputText(e.target.value)}
+                    className="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm font-medium text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-slate-800 focus:border-blue-600 dark:focus:border-blue-500 focus:ring-2 focus:ring-blue-600/10 dark:focus:ring-blue-500/20 outline-none transition-all"
+                    placeholder="https://example.com"
+                  />
+                </div>
+              )}
+              
+              {activeTab === 'Text' && (
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Plain Text Content</label>
+                    <span className="text-[11px] text-slate-400">{inputText.length} characters</span>
+                  </div>
+                  <textarea 
+                    rows={3}
+                    value={inputText}
+                    onChange={(e) => setInputText(e.target.value)}
+                    className="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm font-medium text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-slate-800 focus:border-blue-600 dark:focus:border-blue-500 focus:ring-2 focus:ring-blue-600/10 dark:focus:ring-blue-500/20 outline-none transition-all resize-none"
+                    placeholder="Enter any text you want to encode..."
+                  />
+                </div>
+              )}
+
+              {activeTab === 'WiFi' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div className="sm:col-span-2 space-y-1.5">
+                    <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Network Name (SSID)</label>
+                    <input 
+                      type="text" 
+                      value={wifiSsid} 
+                      onChange={e => setWifiSsid(e.target.value)} 
+                      className="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm font-medium text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-slate-800 focus:border-blue-600 outline-none transition-all" 
+                      placeholder="e.g. Home_WiFi_5G" 
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Password</label>
+                    <input 
+                      type="password" 
+                      value={wifiPassword} 
+                      onChange={e => setWifiPassword(e.target.value)} 
+                      className="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm font-medium text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-slate-800 focus:border-blue-600 outline-none transition-all" 
+                      placeholder="••••••••" 
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Security Encryption</label>
+                    <select 
+                      value={wifiEncryption} 
+                      onChange={e => setWifiEncryption(e.target.value)} 
+                      className="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm font-medium text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-800 focus:border-blue-600 outline-none transition-all cursor-pointer"
+                    >
+                      <option value="WPA">WPA / WPA2 / WPA3 (Recommended)</option>
+                      <option value="WEP">WEP</option>
+                      <option value="nopass">None (Open Network)</option>
+                    </select>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'Email' && (
+                <div className="space-y-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Email Recipient</label>
+                      <input 
+                        type="email" 
+                        value={emailTo} 
+                        onChange={e => setEmailTo(e.target.value)} 
+                        className="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm font-medium text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-slate-800 focus:border-blue-600 outline-none transition-all" 
+                        placeholder="contact@company.com" 
+                      />
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Subject</label>
+                      <input 
+                        type="text" 
+                        value={emailSubject} 
+                        onChange={e => setEmailSubject(e.target.value)} 
+                        className="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm font-medium text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-slate-800 focus:border-blue-600 outline-none transition-all" 
+                        placeholder="Inquiry or Feedback" 
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Pre-filled Body</label>
+                    <textarea 
+                      rows={2} 
+                      value={emailBody} 
+                      onChange={e => setEmailBody(e.target.value)} 
+                      className="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm font-medium text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-slate-800 focus:border-blue-600 outline-none transition-all resize-none" 
+                      placeholder="Hi there, I wanted to reach out regarding..." 
+                    />
+                  </div>
+                </div>
+              )}
+
+              {(activeTab === 'Phone' || activeTab === 'SMS') && (
+                <div className="space-y-3">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Phone Number (with Country Code)</label>
+                    <input 
+                      type="text" 
+                      value={phone} 
+                      onChange={e => setPhone(e.target.value)} 
+                      className="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm font-medium text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-slate-800 focus:border-blue-600 outline-none transition-all" 
+                      placeholder="+1 (555) 000-0000" 
+                    />
+                  </div>
+                  {activeTab === 'SMS' && (
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Pre-filled SMS Message</label>
+                      <textarea 
+                        rows={2} 
+                        value={smsMessage} 
+                        onChange={e => setSmsMessage(e.target.value)} 
+                        className="w-full bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm font-medium text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-slate-800 focus:border-blue-600 outline-none transition-all resize-none" 
+                        placeholder="Type your SMS message..." 
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* STEP 2: DESIGN & BRANDING */}
+          <div className="bg-white dark:bg-slate-900/75 border border-slate-200/80 dark:border-white/10 rounded-2xl p-5 shadow-xs backdrop-blur-md">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-white/5 pb-3.5 mb-4">
+              <div className="flex items-center gap-2">
+                <span className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white text-[10px] font-bold">2</span>
+                <h2 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Design & Colors</h2>
+              </div>
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Step 2 of 3</span>
+            </div>
+
+            {/* COLOR PRESETS */}
+            <div className="mb-4">
+              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2 block">Quick Color Presets</label>
+              <div className="flex flex-wrap gap-2">
+                {COLOR_PRESETS.map((preset) => (
+                  <button
+                    key={preset.name}
+                    type="button"
+                    onClick={() => {
+                      setFgColor(preset.fg);
+                      setBgColor(preset.bg);
+                    }}
+                    className={`inline-flex items-center gap-2 px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-all cursor-pointer ${
+                      fgColor === preset.fg && bgColor === preset.bg
+                        ? 'border-blue-600 bg-blue-50 dark:bg-blue-600/10 text-blue-600 dark:text-blue-400 ring-1 ring-blue-600'
+                        : 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-white/20'
+                    }`}
+                  >
+                    <span className="w-3 h-3 rounded-full border border-black/10 shrink-0" style={{ backgroundColor: preset.fg }} />
+                    <span>{preset.name}</span>
                   </button>
                 ))}
               </div>
+            </div>
 
-              {/* INPUT FIELDS */}
-              <div className="mt-10 space-y-6">
-                {activeTab === 'URL' && (
-                  <div className="space-y-3">
-                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Website URL</label>
-                    <input 
-                      type="text" 
-                      value={inputText}
-                      onChange={(e) => setInputText(e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700"
-                      placeholder="e.g. www.toolwala.co"
-                    />
-                  </div>
-                )}
+            {/* CUSTOM COLORS & MARGIN */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+              {/* Foreground Color */}
+              <div className="flex items-center justify-between p-2.5 bg-slate-50 dark:bg-white/5 rounded-xl border border-slate-200/80 dark:border-white/10">
+                <div className="min-w-0 pr-2">
+                  <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 block uppercase">QR Color</span>
+                  <span className="text-xs font-mono font-bold text-slate-900 dark:text-white uppercase">{fgColor}</span>
+                </div>
+                <input 
+                  type="color" 
+                  value={fgColor} 
+                  onChange={e => setFgColor(e.target.value)} 
+                  className="w-8 h-8 rounded-lg cursor-pointer border border-slate-300 dark:border-slate-600 bg-transparent shrink-0" 
+                />
+              </div>
+
+              {/* Background Color */}
+              <div className="flex items-center justify-between p-2.5 bg-slate-50 dark:bg-white/5 rounded-xl border border-slate-200/80 dark:border-white/10">
+                <div className="min-w-0 pr-2">
+                  <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 block uppercase">Background</span>
+                  <span className="text-xs font-mono font-bold text-slate-900 dark:text-white uppercase">{bgColor}</span>
+                </div>
+                <input 
+                  type="color" 
+                  value={bgColor} 
+                  onChange={e => setBgColor(e.target.value)} 
+                  className="w-8 h-8 rounded-lg cursor-pointer border border-slate-300 dark:border-slate-600 bg-transparent shrink-0" 
+                />
+              </div>
+
+              {/* Include Margin Toggle */}
+              <div className="flex items-center justify-between p-2.5 bg-slate-50 dark:bg-white/5 rounded-xl border border-slate-200/80 dark:border-white/10">
+                <div className="min-w-0 pr-2">
+                  <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 block uppercase">Quiet Zone</span>
+                  <span className="text-xs font-medium text-slate-700 dark:text-slate-300">
+                    {includeMargin ? 'Enabled' : 'Disabled'}
+                  </span>
+                </div>
+                <button 
+                  type="button"
+                  onClick={() => setIncludeMargin(!includeMargin)}
+                  className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer ${
+                    includeMargin ? 'bg-blue-600' : 'bg-slate-300 dark:bg-slate-700'
+                  }`}
+                >
+                  <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform shadow-xs ${
+                    includeMargin ? 'left-6' : 'left-1'
+                  }`} />
+                </button>
+              </div>
+            </div>
+
+            {/* ADVANCED: ERROR CORRECTION & LOGO */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-slate-100 dark:border-white/5">
+              
+              {/* Error Correction Selection */}
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Error Correction</label>
+                  <span className="text-[10px] text-blue-600 dark:text-blue-400 font-bold">Recommended: High</span>
+                </div>
+                <div className="grid grid-cols-4 gap-1.5">
+                  {(['L', 'M', 'Q', 'H'] as const).map((lvl) => (
+                    <button
+                      key={lvl}
+                      type="button"
+                      onClick={() => setErrorLevel(lvl)}
+                      className={`py-1.5 text-xs font-bold rounded-lg border transition-all cursor-pointer ${
+                        errorLevel === lvl
+                          ? 'bg-blue-600 text-white border-blue-600 shadow-xs'
+                          : 'bg-slate-50 dark:bg-white/5 border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/10'
+                      }`}
+                    >
+                      {lvl} ({lvl === 'L' ? '7%' : lvl === 'M' ? '15%' : lvl === 'Q' ? '25%' : '30%'})
+                    </button>
+                  ))}
+                </div>
+                <p className="text-[11px] text-slate-400 dark:text-slate-500">
+                  Higher redundancy allows QR codes to scan smoothly even when damaged or covered by logos.
+                </p>
+              </div>
+
+              {/* Logo Upload Dropzone */}
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Center Logo / Icon</label>
                 
-                {activeTab === 'Text' && (
-                  <div className="space-y-3">
-                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Plain Text Content</label>
-                    <textarea 
-                      rows={4}
-                      value={inputText}
-                      onChange={(e) => setInputText(e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 rounded-[2rem] px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700 resize-none custom-scrollbar"
-                      placeholder="Enter any text you want to encode..."
+                {logo ? (
+                  <div className="flex items-center justify-between p-2.5 bg-slate-50 dark:bg-white/5 rounded-xl border border-slate-200/80 dark:border-white/10">
+                    <div className="flex items-center gap-2.5">
+                      <img src={logo} alt="Custom Logo" className="w-9 h-9 object-contain rounded-lg border border-slate-200 bg-white p-1" />
+                      <div className="text-xs">
+                        <span className="font-semibold text-slate-900 dark:text-white block">Logo Loaded</span>
+                        <span className="text-[11px] text-slate-400">Size: {logoSize}%</span>
+                      </div>
+                    </div>
+                    <button 
+                      type="button"
+                      onClick={() => setLogo(null)}
+                      className="p-1.5 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 rounded-lg transition-colors cursor-pointer"
+                      title="Remove Logo"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                ) : (
+                  <label className="flex items-center justify-center gap-2 p-2.5 border border-dashed border-slate-300 dark:border-white/20 rounded-xl cursor-pointer bg-slate-50 dark:bg-white/5 hover:bg-slate-100/80 dark:hover:bg-white/10 hover:border-blue-500 transition-all text-xs font-semibold text-slate-600 dark:text-slate-400 group">
+                    <Upload className="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors" />
+                    <span>Upload Logo (PNG / JPG)</span>
+                    <input type="file" className="hidden" onChange={handleLogoUpload} accept="image/*" />
+                  </label>
+                )}
+
+                {logo && (
+                  <div className="flex items-center gap-3 pt-1">
+                    <span className="text-[10px] font-semibold text-slate-400 uppercase">Scale</span>
+                    <input 
+                      type="range" 
+                      min="12" 
+                      max="28" 
+                      value={logoSize} 
+                      onChange={e => setLogoSize(parseInt(e.target.value))} 
+                      className="w-full h-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-600" 
                     />
+                    <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300 w-8 text-right">{logoSize}%</span>
                   </div>
                 )}
+              </div>
+            </div>
+          </div>
 
-                {activeTab === 'WiFi' && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div className="sm:col-span-2 space-y-3">
-                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Network Name (SSID)</label>
-                      <input type="text" value={wifiSsid} onChange={e => setWifiSsid(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700" placeholder="My Home WiFi" />
+          {/* STEP 3: FRAMES & CALL TO ACTION */}
+          <div className="bg-white dark:bg-slate-900/75 border border-slate-200/80 dark:border-white/10 rounded-2xl p-5 shadow-xs backdrop-blur-md">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-white/5 pb-3.5 mb-4">
+              <div className="flex items-center gap-2">
+                <span className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white text-[10px] font-bold">3</span>
+                <h2 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Select Frame Template</h2>
+              </div>
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Step 3 of 3</span>
+            </div>
+
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+              {FRAMES.map((frame) => {
+                const isSelected = selectedFrame === frame.id;
+                return (
+                  <button
+                    key={frame.id}
+                    type="button"
+                    onClick={() => setSelectedFrame(frame.id)}
+                    className={`py-2 px-2 rounded-xl border text-center transition-all cursor-pointer flex flex-col items-center gap-1.5 ${
+                      isSelected
+                        ? 'bg-blue-50 dark:bg-blue-600/10 border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-400 ring-1 ring-blue-600/30'
+                        : 'bg-slate-50 dark:bg-white/5 border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-white/20'
+                    }`}
+                  >
+                    <div className={`w-8 h-10 border rounded flex flex-col items-center justify-center relative ${
+                      isSelected ? 'border-blue-500 bg-white dark:bg-slate-900' : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900'
+                    }`}>
+                      <div className={`w-5 h-5 rounded-xs ${isSelected ? 'bg-blue-600/20' : 'bg-slate-200 dark:bg-slate-700'}`} />
+                      {frame.id !== 'None' && (
+                        <div className={`w-full h-1.5 mt-0.5 rounded-b-xs ${isSelected ? 'bg-blue-600' : 'bg-slate-400 dark:bg-slate-600'}`} />
+                      )}
                     </div>
-                    <div className="space-y-3">
-                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Password</label>
-                      <input type="password" value={wifiPassword} onChange={e => setWifiPassword(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700" placeholder="••••••••" />
+                    <span className="text-[11px] font-medium leading-none">{frame.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+        </div>
+
+        {/* RIGHT COLUMN: STICKY LIVE PREVIEW & EXPORT (5 COLS) */}
+        <div className="lg:col-span-5">
+          <div className="lg:sticky lg:top-8 space-y-4">
+            
+            {/* STUDIO PREVIEW CARD */}
+            <div className="bg-white dark:bg-slate-900/75 border border-slate-200/80 dark:border-white/10 rounded-2xl p-5 shadow-xs dark:shadow-xl backdrop-blur-md">
+              
+              {/* Preview Header */}
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-white/5 mb-4">
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Live Preview</h3>
+                  <p className="text-[11px] text-slate-400 mt-0.5">Real-time vector rendering engine</p>
+                </div>
+                <div className="flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-emerald-200 dark:border-emerald-500/20">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Live
+                </div>
+              </div>
+
+              {/* QR Code Canvas Frame */}
+              <div className="relative rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/70 dark:bg-slate-950/70 p-4 sm:p-6 flex flex-col items-center justify-center min-h-[300px] sm:min-h-[340px] shadow-inner overflow-hidden">
+                
+                {/* Subtle dot pattern */}
+                <div 
+                  className="absolute inset-0 opacity-[0.25] dark:opacity-[0.1] pointer-events-none"
+                  style={{
+                    backgroundImage: 'radial-gradient(#64748b 1px, transparent 1px)',
+                    backgroundSize: '16px 16px'
+                  }}
+                />
+
+                {!getQRContent() ? (
+                  <div className="text-center p-6 space-y-3 relative z-10">
+                    <div className="w-14 h-14 bg-white dark:bg-slate-900 rounded-2xl flex items-center justify-center mx-auto border border-slate-200 dark:border-slate-800 shadow-xs text-slate-400">
+                      <QrCode className="w-7 h-7" />
                     </div>
-                    <div className="space-y-3">
-                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Encryption</label>
-                      <select value={wifiEncryption} onChange={e => setWifiEncryption(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all appearance-none cursor-pointer">
-                        <option className="bg-slate-900" value="WPA">WPA/WPA2</option>
-                        <option className="bg-slate-900" value="WEP">WEP</option>
-                        <option className="bg-slate-900" value="nopass">None</option>
-                      </select>
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">Ready to Generate</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-[200px] mx-auto">Enter text or URL to preview your branded QR code</p>
                     </div>
                   </div>
-                )}
-
-                {activeTab === 'Email' && (
-                  <div className="space-y-6">
-                    <div className="space-y-3">
-                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Email Recipient</label>
-                      <input type="email" value={emailTo} onChange={e => setEmailTo(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700" placeholder="hello@example.com" />
-                    </div>
-                    <div className="space-y-3">
-                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Subject</label>
-                      <input type="text" value={emailSubject} onChange={e => setEmailSubject(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700" placeholder="Inquiry" />
-                    </div>
-                    <div className="space-y-3">
-                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Message Body</label>
-                      <textarea rows={3} value={emailBody} onChange={e => setEmailBody(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-[2rem] px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700 resize-none custom-scrollbar" placeholder="Type your email content..." />
-                    </div>
-                  </div>
-                )}
-
-                {(activeTab === 'Phone' || activeTab === 'SMS') && (
-                  <div className="space-y-6">
-                    <div className="space-y-3">
-                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Phone Number</label>
-                      <input type="text" value={phone} onChange={e => setPhone(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700" placeholder="+1 (555) 000-0000" />
-                    </div>
-                    {activeTab === 'SMS' && (
-                      <div className="space-y-3">
-                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">SMS Message</label>
-                        <textarea rows={3} value={smsMessage} onChange={e => setSmsMessage(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-[2rem] px-6 py-5 text-sm font-black text-white focus:border-blue-500/50 outline-none transition-all placeholder:text-gray-700 resize-none custom-scrollbar" placeholder="Type your text message..." />
+                ) : (
+                  <div className="relative bg-white p-3 rounded-xl shadow-lg border border-slate-200/80 dark:border-slate-700/80 transition-transform duration-300 hover:scale-[1.02] z-10 max-w-[260px] sm:max-w-[280px]">
+                    <canvas 
+                      ref={canvasRef} 
+                      className="w-full h-auto rounded-lg block"
+                      style={{ maxWidth: '100%', objectFit: 'contain' }}
+                    />
+                    {isGenerating && (
+                      <div className="absolute inset-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xs flex items-center justify-center rounded-xl">
+                        <div className="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin" />
                       </div>
                     )}
                   </div>
                 )}
               </div>
-            </div>
 
-            {/* CUSTOMIZATION */}
-            <div className="glass p-8 rounded-[2.5rem] border border-white/5 shadow-2xl">
-              <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-6">
-                <Palette className="w-5 h-5 text-blue-500" />
-                <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase">2. Design & Branding</h2>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                {/* Colors */}
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between p-5 bg-white/5 rounded-2xl border border-white/10 group hover:border-blue-500/30 transition-all">
-                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">QR Color</span>
-                    <input type="color" value={fgColor} onChange={e => setFgColor(e.target.value)} className="w-12 h-12 rounded-xl cursor-pointer border-2 border-white/10 bg-transparent overflow-hidden" />
-                  </div>
-                  <div className="flex items-center justify-between p-5 bg-white/5 rounded-2xl border border-white/10 group hover:border-blue-500/30 transition-all">
-                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Background</span>
-                    <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-12 h-12 rounded-xl cursor-pointer border-2 border-white/10 bg-transparent overflow-hidden" />
-                  </div>
-                  <div className="flex items-center justify-between p-5 bg-white/5 rounded-2xl border border-white/10">
-                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Include Margin</span>
-                    <button 
-                      onClick={() => setIncludeMargin(!includeMargin)}
-                      className={`w-14 h-7 rounded-full transition-all relative ${includeMargin ? 'bg-blue-600' : 'bg-white/10'}`}
-                    >
-                      <div className={`absolute top-1 w-5 h-5 bg-white rounded-full transition-all shadow-xl ${includeMargin ? 'left-8' : 'left-1'}`} />
-                    </button>
-                  </div>
+              {/* SPECIFICATIONS BAR */}
+              <div className="grid grid-cols-3 gap-2 text-center py-2 px-3 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-white/5 text-[11px] text-slate-600 dark:text-slate-400 mt-4">
+                <div>
+                  <span className="text-[10px] text-slate-400 uppercase block font-semibold">Format</span>
+                  <span className="font-bold text-slate-900 dark:text-white">PNG & SVG</span>
                 </div>
-
-                {/* Logo Upload */}
-                <div className="space-y-5">
-                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Center Logo</label>
-                  <div className="relative group">
-                    <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-white/10 rounded-[2rem] cursor-pointer bg-white/5 hover:bg-white/[0.08] hover:border-blue-500/50 transition-all group overflow-hidden">
-                      {logo ? (
-                        <div className="relative z-10">
-                          <img src={logo} alt="Logo" className="w-20 h-20 object-contain rounded-xl shadow-2xl" />
-                          <button 
-                            onClick={(e) => { e.preventDefault(); setLogo(null); }}
-                            className="absolute -top-3 -right-3 bg-red-600 text-white p-1.5 rounded-full shadow-2xl transition-all hover:scale-110"
-                          >
-                            <XCircle className="w-5 h-5" />
-                          </button>
-                        </div>
-                      ) : (
-                        <div className="flex flex-col items-center gap-3">
-                          <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-gray-500 group-hover:text-blue-400 transition-colors">
-                            <Upload className="w-6 h-6" />
-                          </div>
-                          <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Upload Branding</span>
-                        </div>
-                      )}
-                      <input type="file" className="hidden" onChange={handleLogoUpload} accept="image/*" />
-                      <div className="absolute inset-0 bg-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </label>
-                  </div>
-                  {logo && (
-                    <div className="pt-4 space-y-4">
-                      <div className="flex justify-between text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">
-                        <span>Logo Size</span>
-                        <span className="text-blue-500">{logoSize}%</span>
-                      </div>
-                      <input type="range" min="10" max="30" value={logoSize} onChange={e => setLogoSize(parseInt(e.target.value))} className="w-full h-2 bg-white/5 rounded-full appearance-none cursor-pointer accent-blue-600" />
-                    </div>
-                  )}
+                <div className="border-x border-slate-200/60 dark:border-white/5">
+                  <span className="text-[10px] text-slate-400 uppercase block font-semibold">Resolution</span>
+                  <span className="font-bold text-slate-900 dark:text-white">1000×1000</span>
+                </div>
+                <div>
+                  <span className="text-[10px] text-slate-400 uppercase block font-semibold">ECC Level</span>
+                  <span className="font-bold text-slate-900 dark:text-white">{errorLevel} ({errorLevel === 'H' ? '30%' : errorLevel === 'Q' ? '25%' : errorLevel === 'M' ? '15%' : '7%'})</span>
                 </div>
               </div>
-            </div>
 
-            {/* FRAMES */}
-            <div className="glass p-8 rounded-[2.5rem] border border-white/5 shadow-2xl">
-              <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-6">
-                <Layout className="w-5 h-5 text-blue-500" />
-                <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase">3. Select Frame Template</h2>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
-                {FRAMES.map((frame) => (
+              {/* ACTION CONTROLS */}
+              <div className="space-y-2.5 pt-3">
+                <button 
+                  type="button"
+                  onClick={downloadPNG}
+                  disabled={!getQRContent()}
+                  className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md shadow-blue-500/25 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none active:scale-[0.98] cursor-pointer"
+                >
+                  <Download className="w-4 h-4" />
+                  Download Master PNG (1000px)
+                </button>
+                
+                <div className="grid grid-cols-2 gap-2">
                   <button
-                    key={frame.id}
-                    onClick={() => setSelectedFrame(frame.id)}
-                    className={`p-6 rounded-[2rem] border-2 transition-all flex flex-col items-center gap-4 group ${
-                      selectedFrame === frame.id 
-                        ? 'border-blue-600 bg-blue-600/10 text-blue-500 shadow-[0_0_20px_rgba(37,99,235,0.2)]' 
-                        : 'border-white/5 bg-white/5 text-gray-500 hover:border-white/10 hover:bg-white/[0.08]'
-                    }`}
-                  >
-                    <div className={`w-14 h-20 border-2 rounded-lg relative flex flex-col items-center justify-center transition-all ${selectedFrame === frame.id ? 'border-blue-400' : 'border-white/20 group-hover:border-white/40'}`}>
-                      <div className={`w-10 h-10 rounded-sm mb-1 ${selectedFrame === frame.id ? 'bg-blue-600/20' : 'bg-white/10'}`} />
-                      {frame.id !== 'None' && (
-                        <div className="absolute bottom-0 w-full h-4 bg-current opacity-20" />
-                      )}
-                    </div>
-                    <span className="text-[10px] font-black uppercase tracking-widest transition-colors group-hover:text-white">{frame.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT: LIVE PREVIEW */}
-          <div className="w-full lg:w-[40%]">
-            <div className="sticky top-32 space-y-8">
-              <div className="glass p-10 rounded-[3rem] shadow-[0_0_80px_rgba(37,99,235,0.15)] border border-white/5 flex flex-col items-center relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-10">
-                   <div className="bg-blue-600/10 text-blue-500 text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-xl border border-blue-500/20 flex items-center gap-2 backdrop-blur-md">
-                    <Eye className="w-4 h-4" /> Live
-                  </div>
-                </div>
-
-                <div className="w-full mb-12">
-                  <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight uppercase">Studio Preview</h3>
-                  <p className="text-gray-500 font-medium mt-1">Real-time generation engine.</p>
-                </div>
-
-                {/* QR PREVIEW CARD */}
-                <div className="w-full aspect-square relative group bg-black/40 rounded-[2.5rem] p-10 shadow-inner flex items-center justify-center border border-white/5">
-                  <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] rounded-[2.5rem]" />
-                  
-                  {!getQRContent() ? (
-                    <div className="text-center p-8 space-y-6 relative z-10 opacity-30">
-                      <div className="w-24 h-24 bg-white/5 rounded-[2rem] flex items-center justify-center mx-auto border border-white/10">
-                        <Smartphone className="w-12 h-12 text-gray-500" />
-                      </div>
-                      <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em] leading-loose">Enter configuration to <br /> initiate preview</p>
-                    </div>
-                  ) : (
-                    <div className="relative bg-white p-2 rounded-[1.5rem] shadow-[0_0_50px_rgba(255,255,255,0.1)] transition-all duration-700 hover:scale-[1.05] z-10 group-hover:shadow-[0_0_80px_rgba(37,99,235,0.3)]">
-                      <canvas 
-                        ref={canvasRef} 
-                        className="w-full h-auto rounded-xl block"
-                        style={{ maxWidth: '100%', objectFit: 'contain' }}
-                      />
-                      {isGenerating && (
-                        <div className="absolute inset-0 bg-white/80 backdrop-blur-[2px] flex items-center justify-center rounded-xl">
-                          <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-
-                {/* DOWNLOAD CONTROLS */}
-                <div className="w-full mt-12 space-y-4">
-                  <button 
-                    onClick={downloadPNG}
+                    type="button"
+                    onClick={copyToClipboard}
                     disabled={!getQRContent()}
-                    className="w-full flex items-center justify-center gap-4 bg-blue-600 text-white py-6 rounded-3xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-500 transition-all shadow-[0_0_40px_rgba(37,99,235,0.4)] disabled:opacity-20 disabled:grayscale active:scale-95 group"
+                    className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer active:scale-95"
                   >
-                    <Download className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
-                    Download Master Assets
+                    {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copied ? 'Copied!' : 'Copy Image'}</span>
                   </button>
-                  <p className="text-[10px] text-gray-600 font-black uppercase tracking-[0.2em] text-center">Ultra-High Res 1000x1000px Output</p>
+                  
+                  <button
+                    type="button"
+                    onClick={downloadSVG}
+                    disabled={!getQRContent()}
+                    className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer active:scale-95"
+                  >
+                    <FileCode className="w-3.5 h-3.5" />
+                    <span>Vector SVG</span>
+                  </button>
                 </div>
               </div>
+            </div>
 
-              {/* QUICK TIP */}
-              <div className="bg-gradient-to-br from-blue-600 to-indigo-900 rounded-[3rem] p-10 text-white shadow-2xl relative overflow-hidden group">
-                <div className="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-[60px] pointer-events-none group-hover:scale-150 transition-transform duration-1000" />
-                <h4 className="text-xl font-black mb-3 flex items-center gap-3 uppercase tracking-tight">
-                  <Sparkles className="w-6 h-6 text-amber-400" /> Marketing Tip
-                </h4>
-                <p className="text-sm text-blue-100 font-medium leading-relaxed">
-                  Branded QR codes with custom frames increase user engagement by up to 40% compared to standard generic codes.
-                </p>
+            {/* MARKETING & SCAN PRO-TIP */}
+            <div className="p-3.5 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50/50 dark:from-blue-950/30 dark:to-indigo-950/20 border border-blue-100 dark:border-blue-900/40 text-xs flex items-start gap-2.5">
+              <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+              <div className="text-slate-600 dark:text-slate-300 leading-relaxed text-[11.5px]">
+                <strong className="text-slate-900 dark:text-white font-semibold">Pro Scannability Tip:</strong> Maintain sufficient contrast between your QR foreground and background. Branded frames increase user scan conversions by over 35%.
               </div>
             </div>
+
           </div>
         </div>
-      </div>
-      
-      {/* Hidden Download Helpers */}
-      <canvas ref={canvasRef} className="hidden" />
-      
-      {/* SEO Article Section */}
-      <ToolArticle {...toolArticles['qr-code-generator']} />
-    </div>
-  );
 
+      </div>
+
+      {/* SEO ARTICLE CONTENT */}
+      <ToolArticle {...toolArticles['qr-code-generator']} />
+    </ToolLayout>
+  );
 }

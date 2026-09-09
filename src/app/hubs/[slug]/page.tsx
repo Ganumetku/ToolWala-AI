@@ -7,6 +7,8 @@ import FAQAccordion from '@/app/tools/[slug]/FAQAccordion';
 import { hubsData } from '@/data/hubs';
 import { landingPagesData } from '@/data/landingPages';
 import { renderMarkdown } from '@/lib/markdown';
+import { toolsData } from '@/data/tools';
+import ToolCard from '@/components/ToolCard';
 import ToolIcon from '@/components/ToolIcon';
 import { 
   buildWebPageSchema, 
@@ -123,27 +125,24 @@ export default async function HubPage({ params }: HubPageProps) {
             {/* Core Category Tools Grid */}
             <section className="space-y-6 pt-6 border-t border-white/5">
               <h2 className="text-xs font-black uppercase tracking-[0.2em] text-gray-500">Core Utilities & Tools</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {hub.relatedTools.map((tool) => (
-                  <Link
-                    key={tool.slug}
-                    href={localizeHref(`/tools/${tool.slug}`)}
-                    className="glass p-6 rounded-[2rem] border border-white/5 bg-white/[0.01] hover:border-blue-500/30 hover:bg-blue-500/[0.02] transition-all group flex flex-col justify-between cursor-pointer"
-                  >
-                    <div className="space-y-3">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600/10 text-blue-600 dark:text-white border border-blue-500/10">
-                        <ToolIcon icon={tool.icon} className="w-6 h-6" strokeWidth={1.75} />
-                      </div>
-                      <h3 className="text-base font-black text-white group-hover:text-blue-400 transition-colors tracking-tight">
-                        {tool.title}
-                      </h3>
-                    </div>
-                    <div className="flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-blue-400 mt-6 group-hover:text-white transition-colors">
-                      Open Tool
-                      <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </Link>
-                ))}
+              <div className="grid grid-cols-1 min-[480px]:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                {hub.relatedTools.map((tool) => {
+                  const fullTool = toolsData.find((t) => t.slug === tool.slug || t.id === tool.slug);
+                  return (
+                    <ToolCard
+                      key={tool.slug}
+                      id={fullTool?.id || tool.slug}
+                      slug={tool.slug}
+                      title={fullTool?.title || tool.title}
+                      description={fullTool?.description || 'Fast, secure online utility.'}
+                      icon={fullTool?.icon || tool.icon}
+                      href={fullTool?.href || `/tools/${tool.slug}`}
+                      category={fullTool?.category}
+                      isPopular={fullTool?.popular}
+                      isTrending={fullTool?.trending}
+                    />
+                  );
+                })}
               </div>
             </section>
 

@@ -16,6 +16,7 @@ import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { toolsData } from '@/data/tools';
 import { toolArticles } from '@/data/toolArticles';
 import ToolArticle from '@/components/ToolArticle';
+import ToolCard from '@/components/ToolCard';
 import ToolIcon from '@/components/ToolIcon';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -564,15 +565,14 @@ export default function YoutubeMoneyCalculatorPage() {
             {relatedTools.length > 0 && (
               <div className="mt-16">
                 <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-8 text-center">Related Tools</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
                   {relatedTools.map(tool => (
-                    <Link key={tool.slug} href={tool.href} className="glass rounded-2xl border border-white/5 p-6 bg-white/[0.01] hover:bg-white/[0.05] transition-all group">
-                      <div className="flex items-center gap-3 mb-3">
-                        <ToolIcon icon={tool.icon} className="w-6 h-6 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform shrink-0" />
-                        <h4 className="text-sm font-black text-slate-900 dark:text-white">{tool.title}</h4>
-                      </div>
-                      <p className="text-xs text-gray-400 font-medium">{tool.description}</p>
-                    </Link>
+                    <ToolCard
+                      key={tool.id || tool.slug}
+                      {...tool}
+                      isPopular={tool.popular}
+                      isTrending={tool.trending}
+                    />
                   ))}
                 </div>
               </div>

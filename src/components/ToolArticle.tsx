@@ -7,6 +7,7 @@ import Link from 'next/link';
 import ShareButtons from './ShareButtons';
 import { toolsData, ToolCategory } from '@/data/tools';
 import ToolIcon from '@/components/ToolIcon';
+import ToolCard from '@/components/ToolCard';
 import { useTranslation } from '@/components/I18nContext';
 import { getTranslation } from '@/lib/i18n';
 import Breadcrumbs from './Breadcrumbs';
@@ -580,38 +581,14 @@ export default function ToolArticle({
                     </h3>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                  <div className="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                     {resolvedRelatedTools.map((tool, i) => (
-                      <Link 
-                        key={i} 
-                        href={localizeHref(tool.href)}
-                        className="group relative p-5 rounded-2xl bg-white dark:bg-white/[0.04] border border-[#E6ECF5] dark:border-white/10 hover:border-blue-500/60 dark:hover:border-blue-400/60 transition-all duration-300 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(37,99,235,0.2)] flex flex-col justify-between hover:-translate-y-1 min-h-[140px]"
-                      >
-                        <div>
-                          <div className="flex items-center justify-between mb-3">
-                            <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                              <ToolIcon icon={tool.icon} className="w-5 h-5 text-xl" />
-                            </div>
-                            <span className="text-[9px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest bg-blue-50 dark:bg-blue-500/10 px-2 py-0.5 rounded border border-blue-100 dark:border-blue-500/20">
-                              {t(`categories.${tool.category}`, tool.category)}
-                            </span>
-                          </div>
-
-                          <h4 className="text-sm font-black text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase tracking-tight leading-snug line-clamp-2">
-                            {t(`tools.${tool.id}.title`, tool.title)}
-                          </h4>
-                        </div>
-
-                        <div className="flex items-center justify-between pt-3 mt-3 border-t border-[#E6ECF5] dark:border-white/5">
-                          <span className="text-[10px] text-slate-500 dark:text-gray-400 font-semibold truncate max-w-[65%]">
-                            {tool.description || 'Free Online Utility'}
-                          </span>
-                          <span className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-wider flex items-center gap-1 shrink-0 group-hover:translate-x-1 transition-transform">
-                            <span>{t('article.tryTool', 'Try Tool')}</span>
-                            <ArrowRight className="w-3.5 h-3.5" />
-                          </span>
-                        </div>
-                      </Link>
+                      <ToolCard
+                        key={tool.id || tool.slug || i}
+                        {...tool}
+                        isPopular={tool.popular}
+                        isTrending={tool.trending}
+                      />
                     ))}
                   </div>
                 </div>

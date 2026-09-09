@@ -33,6 +33,7 @@ import {
   QrCode,
   KeyRound,
   FileJson2,
+  Binary,
   Type,
   Receipt,
   Cake,
@@ -438,6 +439,18 @@ export const ALL_TOOL_TILES: Record<string, PremiumTileConfig> = {
     id: "json-formatter-validator",
     icon: FileJson2,
     solidColor: "#3B82F6",
+  },
+  "base64-encoder-decoder": {
+    id: "base64-encoder-decoder",
+    icon: Binary,
+    solidColor: "#10B981",
+    conversionBadge: { to: "B64" },
+  },
+  "base64-url-encoder-decoder": {
+    id: "base64-encoder-decoder",
+    icon: Binary,
+    solidColor: "#10B981",
+    conversionBadge: { to: "B64" },
   },
   "qr-code-generator": {
     id: "qr-code-generator",

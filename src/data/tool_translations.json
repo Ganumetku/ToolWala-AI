@@ -10746,6 +10746,30 @@
     "updatedAt": "2026-08-14T05:37:04.229Z"
   },
   {
+    "id": "trans-base64-encoder-decoder-hi",
+    "toolSlug": "base64-encoder-decoder",
+    "locale": "hi",
+    "title": "बेस64 और यूआरएल एनकोडर-डिकोडर",
+    "description": "Base64 स्ट्रिंग्स और प्रतिशत-एनकोडेड URL को UTF-8 यूनिकोड सपोर्ट के साथ एनकोड और डिकोड करें।",
+    "faq": [],
+    "seoTitle": "बेस64 और यूआरएल एनकोडर डिकोडर - ToolWala AI",
+    "seoDescription": "Base64 स्ट्रिंग्स और प्रतिशत-एनकोडेड URL को UTF-8 यूनिकोड सपोर्ट के साथ मुफ्त में एनकोड और डिकोड करें।",
+    "createdAt": "2026-08-14T05:37:04.229Z",
+    "updatedAt": "2026-08-14T05:37:04.229Z"
+  },
+  {
+    "id": "trans-base64-encoder-decoder-en",
+    "toolSlug": "base64-encoder-decoder",
+    "locale": "en",
+    "title": "Base64 & URL Encoder-Decoder",
+    "description": "Encode and decode Base64 strings and percent-encoded URLs with UTF-8 Unicode support.",
+    "faq": [],
+    "seoTitle": "Base64 & URL Encoder Decoder Online Free | ToolWala AI",
+    "seoDescription": "Free, instant, browser-based Base64 and URL encoder-decoder. Safe for developers with zero server uploads. Encode or decode text, strings, and URLs with complete UTF-8 Unicode support.",
+    "createdAt": "2026-08-14T05:37:04.229Z",
+    "updatedAt": "2026-08-14T05:37:04.229Z"
+  },
+  {
     "id": "trans-heic-to-jpg-png-converter-hi",
     "toolSlug": "heic-to-jpg-png-converter",
     "locale": "hi",

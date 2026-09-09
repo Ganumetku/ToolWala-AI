@@ -754,6 +754,10 @@
       "title": "JSON फॉर्मेटर और वैलिडेटर",
       "description": "JSON डेटा को सुंदर प्रारूपित करें, वैलिडेट करें, मिनिफाई करें और त्रुटियों को ठीक करें।"
     },
+    "base64-encoder-decoder": {
+      "title": "बेस64 और यूआरएल एनकोडर-डिकोडर",
+      "description": "Base64 स्ट्रिंग्स और प्रतिशत-एनकोडेड URL को UTF-8 यूनिकोड सपोर्ट के साथ एनकोड और डिकोड करें।"
+    },
     "heic-to-jpg-png-converter": {
       "title": "HEIC से JPG / PNG कन्वर्टर",
       "description": "iPhone HEIC तस्वीरों को तुरंत JPG या PNG प्रारूप में बदलें।"

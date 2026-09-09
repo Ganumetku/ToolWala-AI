@@ -165,6 +165,7 @@ export default function Home() {
     "adsense-revenue-calculator",
     "qr-code-generator",
     "json-formatter-validator",
+    "base64-encoder-decoder",
     "word-counter",
     "password-generator",
     "invoice-generator",
@@ -387,9 +388,13 @@ export default function Home() {
                     href={localizeHref(tool.href)}
                     className="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-white/5 border border-[#E8ECF4] dark:border-white/10 hover:border-[#2563EB]/40 hover:bg-blue-50/50 dark:hover:bg-blue-600/5 transition-all group animate-in fade-in duration-300 shadow-sm"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-white/5 flex items-center justify-center text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-white/5 group-hover:scale-110 transition-transform shrink-0">
-                      <ToolIcon icon={tool.icon} className="w-5 h-5" strokeWidth={1.75} />
-                    </div>
+                    <PdfToolIcon
+                      toolId={tool.id}
+                      iconName={tool.icon}
+                      category={tool.category}
+                      size="sm"
+                      className="shrink-0 group-hover:scale-105 transition-transform"
+                    />
                     <div className="overflow-hidden">
                       <h4 className="text-xs font-black text-[#0F172A] dark:text-white group-hover:text-[#2563EB] dark:group-hover:text-blue-400 transition-colors truncate">{displayTitle}</h4>
                       <p className="text-[9px] text-[#64748B] dark:text-gray-600 font-bold uppercase tracking-wider mt-0.5">{displayCategory}</p>

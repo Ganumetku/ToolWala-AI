@@ -91,6 +91,23 @@ export const toolsData: Tool[] = [
     updatedAt: '2026-08-12T00:00:00Z'
   },
   {
+    id: "base64-encoder-decoder",
+    title: "Base64 & URL Encoder-Decoder",
+    description: "Encode and decode Base64 strings and percent-encoded URLs with UTF-8 Unicode support.",
+    icon: "Binary",
+    href: "/tools/base64-encoder-decoder",
+    slug: "base64-encoder-decoder",
+    category: "Developer Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["base64", "url encoder", "url decoder", "encode", "decode", "percent encoding", "utf-8", "developer", "unicode", "privacy"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2026-08-12T00:00:00Z',
+    updatedAt: '2026-08-12T00:00:00Z'
+  },
+  {
     id: "heic-to-jpg-png-converter",
     title: "HEIC to JPG / PNG Converter",
     description: "Convert Apple HEIC photos to JPG or PNG format instantly in batches.",

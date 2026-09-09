@@ -797,6 +797,10 @@
       "title": "JSON Formatter & Validator",
       "description": "Format, beautify, minify, and validate JSON online. Inspect tree view with error checks."
     },
+    "base64-encoder-decoder": {
+      "title": "Base64 & URL Encoder-Decoder",
+      "description": "Encode and decode Base64 strings and percent-encoded URLs with UTF-8 Unicode support."
+    },
     "heic-to-jpg-png-converter": {
       "title": "HEIC to JPG / PNG Converter",
       "description": "Convert Apple HEIC photos to JPG or PNG format instantly in your browser in batches."

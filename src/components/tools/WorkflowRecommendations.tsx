@@ -6,6 +6,7 @@ import { toolsData, type Tool } from '@/data/tools';
 import { getWorkflowRecommendations } from '@/data/workflow_recommendations';
 import { Zap, TrendingUp, Workflow, ArrowRight, CheckCircle2 } from 'lucide-react';
 import ToolIcon, { getCategoryStyle } from '@/components/ToolIcon';
+import ToolCard from '@/components/ToolCard';
 
 interface WorkflowRecommendationsProps {
   slug: string;
@@ -164,42 +165,15 @@ export default function WorkflowRecommendations({ slug }: WorkflowRecommendation
               {t('growth.next_recommended', 'Next Recommended Actions')}
             </h4>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {nextTools.map((tool) => {
-                const title = t(`tools.${tool.slug}.title`, tool.title);
-                const desc = t(`tools.${tool.slug}.description`, tool.description);
-                const linkHref = localizeHref(tool.href);
-                const catStyle = getCategoryStyle(tool.category);
-
-                return (
-                  <Link 
-                    key={tool.slug} 
-                    href={linkHref}
-                    className="bg-white dark:glass p-6 rounded-[2rem] border border-gray-200 dark:border-white/5 hover:border-blue-500/30 transition-all group flex flex-col justify-between h-full relative overflow-hidden cursor-pointer shadow-sm"
-                  >
-                    <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-full blur-2xl pointer-events-none group-hover:bg-blue-500/10 transition-colors" />
-                    
-                    <div className="space-y-3">
-                      <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${catStyle.bg} ${catStyle.text} border ${catStyle.border}`}>
-                        <ToolIcon icon={tool.icon} className="w-6 h-6" strokeWidth={1.75} />
-                      </div>
-                      <div className="space-y-1">
-                        <h5 className="text-base font-black text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase tracking-tight">
-                          {title}
-                        </h5>
-                        <p className="text-xs text-gray-600 dark:text-gray-400 font-medium font-sans leading-relaxed line-clamp-3">
-                          {desc}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 mt-4 group-hover:text-blue-700 dark:group-hover:text-white transition-colors">
-                      {t('tools.try_tool', 'Try Tool')}
-                      <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </Link>
-                );
-              })}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              {nextTools.map((tool) => (
+                <ToolCard
+                  key={tool.id || tool.slug}
+                  {...tool}
+                  isPopular={tool.popular}
+                  isTrending={tool.trending}
+                />
+              ))}
             </div>
           </div>
         )}

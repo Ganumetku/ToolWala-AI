@@ -126,6 +126,48 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { question: "What is the difference between Beautify and Minify?", answer: "Beautify adds line breaks and indentation (2 or 4 spaces) for human readability. Minify strips all white space, newlines, and indentation to produce a compact single line suitable for network transfer." }
     ]
   },
+  "base64-encoder-decoder": {
+    title: "Base64 & URL Encoder-Decoder – Free Online Developer Tool",
+    intro: "Encode and decode Base64 strings and percent-encoded URLs instantly in your web browser with 100% client-side privacy, UTF-8 Unicode support (emojis and multilingual text), live conversion, and zero server uploads.",
+    whatItDoes: "The ToolWala AI Base64 / URL Encoder-Decoder provides developers and technical professionals with a secure, instant utility to convert strings, tokens, query parameters, and binary data representations. Whether you need standard Base64 encoding, URL-safe Base64 without padding, or percent-encoding (encodeURIComponent / encodeURI), everything executes 100% locally in your browser memory without transmitting sensitive keys or payloads over the network.",
+    howToUse: [
+      "Select your desired mode: 'Base64' or 'URL Encoding' from the top toggle tabs.",
+      "Choose the operation direction: 'Encode' (plain text → encoded format) or 'Decode' (encoded format → plain text).",
+      "Type or paste your input into the left panel, or click 'Upload File' to load from disk.",
+      "Review live instant results in the right output panel with real-time character and UTF-8 byte counts.",
+      "Click 'Copy to Clipboard' to copy output or 'Download' to save as a file. Use 'Swap' to reverse the operation instantly."
+    ],
+    keyFeatures: [
+      { title: "Full UTF-8 & Unicode Support", desc: "Correctly handles multi-byte characters, Hindi/Arabic scripts, and emojis without garbled ASCII corruption." },
+      { title: "Dual Base64 & URL Encoding Modes", desc: "Switch seamlessly between Base64 (Standard & URL-Safe) and percent-encoding (URI Component & Full URI)." },
+      { title: "Instant Live Conversion", desc: "Converts strings in real time as you type, with zero delay and an explicit accessibility button." },
+      { title: "Zero-Upload Developer Privacy", desc: "Never sends tokens, passwords, or API parameters to any server. 100% browser sandbox execution." }
+    ],
+    benefits: [
+      "Eliminates security risks when inspecting sensitive Bearer tokens or secret keys.",
+      "Accurate character and byte length counters for payload size tracking.",
+      "Fast encode ↔ decode reversing with the instant Swap button.",
+      "Works completely offline without requiring an active internet connection."
+    ],
+    whyChoose: "Many web encoder tools transmit user inputs to remote logging services, putting credentials and API query parameters at risk. ToolWala AI executes all encoding and decoding operations purely inside your browser memory using native JavaScript Web APIs.",
+    useCases: [
+      "Encoding authorization headers, Basic Auth credentials, and JWT payloads.",
+      "Sanitizing URL query parameters, redirect URLs, and API endpoints.",
+      "Embedding inline Base64 data URIs into HTML or CSS stylesheets.",
+      "Debugging percent-encoded webhook payloads and tracking parameters."
+    ],
+    faqs: [
+      { question: "What is Base64 encoding used for?", answer: "Base64 is a binary-to-text encoding scheme that translates binary data into an ASCII string format using 64 printable characters (A-Z, a-z, 0-9, +, /). It is commonly used to safely transmit binary data through media designed for text, such as embedding images in HTML/CSS, sending email attachments (MIME), or passing authorization tokens." },
+      { question: "Is URL encoding the same as Base64?", answer: "No. URL encoding (also known as percent-encoding) replaces unsafe or reserved ASCII characters with a '%' followed by their two-digit hexadecimal representation (e.g., a space becomes '%20'). It ensures URLs conform to the URI standard. Base64, by contrast, encodes entire strings or binary blobs into a uniform 6-bit representation." },
+      { question: "Is my data safe when I use this tool?", answer: "Yes, 100%. All Base64 and URL encoding and decoding operations happen locally inside your web browser using client-side JavaScript APIs (TextEncoder, TextDecoder, btoa, atob, encodeURIComponent). No text or files are ever sent to our servers or stored anywhere." },
+      { question: "Does this Base64 tool support emojis and non-English text (UTF-8)?", answer: "Yes! Unlike traditional web tools that throw 'InvalidCharacterError' on characters outside the Latin1 range, ToolWala AI uses a UTF-8 safe TextEncoder/TextDecoder wrapper, correctly preserving Hindi, Arabic, Japanese, accents, and emojis." }
+    ],
+    relatedTools: [
+      { name: "JSON Formatter & Validator", href: "/tools/json-formatter-validator" },
+      { name: "Password Generator", href: "/tools/password-generator" },
+      { name: "QR Code Generator", href: "/tools/qr-code-generator" }
+    ]
+  },
   "heic-to-jpg-png-converter": {
     title: "HEIC to JPG / PNG Converter – Free Batch Converter Online",
     intro: "Convert Apple iPhone HEIC & HEIF photos into universal JPG or PNG images instantly in your web browser with 100% privacy, batch conversion, quality control, and zero server uploads.",

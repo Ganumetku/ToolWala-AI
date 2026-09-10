@@ -319,6 +319,12 @@ export default function Header() {
     { name: t('nav.contact', 'Contact Us'), href: '/contact', icon: 'Mail' },
   ];
 
+  const getToolDisplayName = (href: string, fallbackName: string) => {
+    const slug = href.replace(/\/$/, '').split('/').pop() || '';
+    if (slug === 'pdf-tools') return t('pdf_mega_menu.all_pdf_directory', fallbackName);
+    return t(`tools.${slug}.short_title`, t(`tools.${slug}.title`, fallbackName));
+  };
+
   const [isPdfDropdownOpen, setIsPdfDropdownOpen] = useState(false);
   const [isConvertDropdownOpen, setIsConvertDropdownOpen] = useState(false);
   const [isMobilePdfOpen, setIsMobilePdfOpen] = useState(false);
@@ -432,26 +438,32 @@ export default function Header() {
                             <div className="absolute -bottom-px left-0 w-6 h-[1.5px] rounded-full bg-blue-500/80" />
                           </div>
                           <div className="space-y-0.5">
-                            {convertPdfTools.toPdf.map((sub) => (
-                              <Link
-                                key={sub.href}
-                                href={localizeHref(sub.href)}
-                                onClick={() => setIsConvertDropdownOpen(false)}
-                                className="flex items-center gap-2.5 px-2 py-1.5 rounded-xl hover:bg-slate-50 dark:hover:bg-white/[0.04] transition-colors group select-none"
-                              >
-                                <div className={`w-7 h-7 rounded-lg flex items-center justify-center font-medium text-[8.5px] shrink-0 group-hover:scale-105 transition-transform ${sub.badgeColor}`}>
-                                  {sub.badge}
-                                </div>
-                                <div className="flex flex-col min-w-0">
-                                  <span className="text-[11.5px] font-medium text-slate-700 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-tight truncate">
-                                    {sub.name}
-                                  </span>
-                                  <span className="text-[9.5px] text-slate-400 dark:text-slate-500 font-normal leading-tight truncate">
-                                    {sub.desc}
-                                  </span>
-                                </div>
-                              </Link>
-                            ))}
+                            {convertPdfTools.toPdf.map((sub) => {
+                              const displayName = getToolDisplayName(sub.href, sub.name);
+                              const slug = sub.href.replace(/\/$/, '').split('/').pop() || '';
+                              const displayDesc = slug ? t(`tools.${slug}.description`, sub.desc) : sub.desc;
+                              return (
+                                <Link
+                                  key={sub.href}
+                                  href={localizeHref(sub.href)}
+                                  onClick={() => setIsConvertDropdownOpen(false)}
+                                  title={displayName}
+                                  className="flex items-center gap-2.5 px-2 py-1.5 rounded-xl hover:bg-slate-50 dark:hover:bg-white/[0.04] transition-colors group select-none"
+                                >
+                                  <div data-no-translate="true" className={`w-7 h-7 rounded-lg flex items-center justify-center font-medium text-[8.5px] shrink-0 group-hover:scale-105 transition-transform ${sub.badgeColor}`}>
+                                    {sub.badge}
+                                  </div>
+                                  <div className="flex flex-col min-w-0">
+                                    <span className="text-[11.5px] font-medium text-slate-700 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-tight truncate">
+                                      {displayName}
+                                    </span>
+                                    <span className="text-[9.5px] text-slate-400 dark:text-slate-500 font-normal leading-tight truncate">
+                                      {displayDesc}
+                                    </span>
+                                  </div>
+                                </Link>
+                              );
+                            })}
                           </div>
                         </div>
 
@@ -467,26 +479,32 @@ export default function Header() {
                             <div className="absolute -bottom-px left-0 w-6 h-[1.5px] rounded-full bg-emerald-500/80" />
                           </div>
                           <div className="space-y-0.5">
-                            {convertPdfTools.fromPdf.map((sub) => (
-                              <Link
-                                key={sub.href}
-                                href={localizeHref(sub.href)}
-                                onClick={() => setIsConvertDropdownOpen(false)}
-                                className="flex items-center gap-2.5 px-2 py-1.5 rounded-xl hover:bg-slate-50 dark:hover:bg-white/[0.04] transition-colors group select-none"
-                              >
-                                <div className={`w-7 h-7 rounded-lg flex items-center justify-center font-medium text-[8.5px] shrink-0 group-hover:scale-105 transition-transform ${sub.badgeColor}`}>
-                                  {sub.badge}
-                                </div>
-                                <div className="flex flex-col min-w-0">
-                                  <span className="text-[11.5px] font-medium text-slate-700 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors tracking-tight truncate">
-                                    {sub.name}
-                                  </span>
-                                  <span className="text-[9.5px] text-slate-400 dark:text-slate-500 font-normal leading-tight truncate">
-                                    {sub.desc}
-                                  </span>
-                                </div>
-                              </Link>
-                            ))}
+                            {convertPdfTools.fromPdf.map((sub) => {
+                              const displayName = getToolDisplayName(sub.href, sub.name);
+                              const slug = sub.href.replace(/\/$/, '').split('/').pop() || '';
+                              const displayDesc = slug ? t(`tools.${slug}.description`, sub.desc) : sub.desc;
+                              return (
+                                <Link
+                                  key={sub.href}
+                                  href={localizeHref(sub.href)}
+                                  onClick={() => setIsConvertDropdownOpen(false)}
+                                  title={displayName}
+                                  className="flex items-center gap-2.5 px-2 py-1.5 rounded-xl hover:bg-slate-50 dark:hover:bg-white/[0.04] transition-colors group select-none"
+                                >
+                                  <div data-no-translate="true" className={`w-7 h-7 rounded-lg flex items-center justify-center font-medium text-[8.5px] shrink-0 group-hover:scale-105 transition-transform ${sub.badgeColor}`}>
+                                    {sub.badge}
+                                  </div>
+                                  <div className="flex flex-col min-w-0">
+                                    <span className="text-[11.5px] font-medium text-slate-700 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors tracking-tight truncate">
+                                      {displayName}
+                                    </span>
+                                    <span className="text-[9.5px] text-slate-400 dark:text-slate-500 font-normal leading-tight truncate">
+                                      {displayDesc}
+                                    </span>
+                                  </div>
+                                </Link>
+                              );
+                            })}
                           </div>
                         </div>
                       </div>
@@ -495,7 +513,7 @@ export default function Header() {
                       <div className="mt-3.5 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between px-2 text-[11px]">
                         <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 font-normal text-[10.5px]">
                           <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
-                          <span>Image Converters:</span>
+                          <span>{t('nav.image_converters', 'Image Converters:')}</span>
                           <Link 
                             href={localizeHref('/tools/heic-to-jpg-png-converter')} 
                             onClick={() => setIsConvertDropdownOpen(false)}
@@ -517,7 +535,7 @@ export default function Header() {
                           onClick={() => setIsConvertDropdownOpen(false)}
                           className="font-medium text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
                         >
-                          <span>All PDF Tools</span>
+                          <span>{t('nav.all_pdf_tools', 'All PDF Tools')}</span>
                           <ArrowRight className="w-3 h-3" />
                         </Link>
                       </div>
@@ -547,7 +565,7 @@ export default function Header() {
                     <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${isPdfDropdownOpen ? 'rotate-180' : ''}`} />
                   </button>
                   {isPdfDropdownOpen && (
-                    <div className="absolute left-1/2 -translate-x-[36%] min-[1350px]:-translate-x-1/2 top-full mt-2.5 w-[920px] min-[1300px]:w-[980px] max-w-[96vw] max-h-[85vh] overflow-y-auto rounded-3xl border border-gray-200/90 dark:border-white/10 bg-white dark:bg-[#090d16]/98 p-5 sm:p-6 shadow-2xl dark:shadow-[0_20px_60px_rgba(0,0,0,0.85)] backdrop-blur-xl animate-fade-in z-50">
+                    <div className="absolute left-1/2 -translate-x-[36%] min-[1350px]:-translate-x-1/2 top-full mt-2.5 w-[960px] min-[1350px]:w-[1020px] max-w-[96vw] max-h-[85vh] overflow-y-auto rounded-3xl border border-gray-200/90 dark:border-white/10 bg-white dark:bg-[#090d16]/98 p-5 sm:p-6 shadow-2xl dark:shadow-[0_20px_60px_rgba(0,0,0,0.85)] backdrop-blur-xl animate-fade-in z-50">
                       {/* Top Triangle Caret Pointer */}
                       <div className="absolute -top-1.5 left-[36%] min-[1350px]:left-1/2 -translate-x-1/2 w-3.5 h-3.5 rotate-45 bg-white dark:bg-[#090d16] border-t border-l border-gray-200/90 dark:border-white/10" />
 
@@ -562,29 +580,29 @@ export default function Header() {
                           </div>
                           <div className="flex items-center gap-2">
                             <span className="text-xs font-black tracking-tight text-gray-900 dark:text-white uppercase">
-                              ToolWala PDF Studio
+                              {t('pdf_mega_menu.studio_title', 'ToolWala PDF Studio')}
                             </span>
-                            <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
-                              26 WASM Tools
+                            <span data-no-translate="true" className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                              {t('pdf_mega_menu.tools_count', '26 WASM Tools')}
                             </span>
                           </div>
                         </div>
 
                         <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-[11px] font-bold">
                           <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
-                          <span>100% In-Browser Engine • Zero File Uploads</span>
+                          <span>{t('pdf_mega_menu.badge_privacy', '100% In-Browser Engine • Zero File Uploads')}</span>
                         </div>
                       </div>
 
                       {/* Interactive Category Filter Pills */}
                       <div className="flex items-center gap-1.5 py-3 border-b border-gray-100 dark:border-white/5 overflow-x-auto no-scrollbar relative z-10">
                         {[
-                          { id: 'all', label: 'All Tools', count: 26 },
-                          { id: 'organize', label: 'Organize', count: 5 },
-                          { id: 'convert', label: 'Convert', count: 8 },
-                          { id: 'edit', label: 'Edit & Sign', count: 5 },
-                          { id: 'security', label: 'Security & Size', count: 6 },
-                          { id: 'intelligence', label: 'AI & Smart', count: 3 },
+                          { id: 'all', label: t('pdf_mega_menu.tab_all', 'All Tools'), count: 26 },
+                          { id: 'organize', label: t('pdf_mega_menu.tab_organize', 'Organize'), count: 5 },
+                          { id: 'convert', label: t('pdf_mega_menu.tab_convert', 'Convert'), count: 8 },
+                          { id: 'edit', label: t('pdf_mega_menu.tab_edit', 'Edit & Sign'), count: 5 },
+                          { id: 'security', label: t('pdf_mega_menu.tab_security', 'Security & Size'), count: 6 },
+                          { id: 'intelligence', label: t('pdf_mega_menu.tab_intelligence', 'AI & Smart'), count: 3 },
                         ].map((tab) => (
                           <button
                             key={tab.id}
@@ -596,7 +614,7 @@ export default function Header() {
                             }`}
                           >
                             <span>{tab.label}</span>
-                            <span className={`text-[9px] px-1.5 py-0.5 rounded-full ${
+                            <span data-no-translate="true" className={`text-[9px] px-1.5 py-0.5 rounded-full ${
                               pdfActiveFilter === tab.id
                                 ? 'bg-white/20 text-white'
                                 : 'bg-black/5 dark:bg-white/10 text-slate-500 dark:text-gray-400'
@@ -617,18 +635,20 @@ export default function Header() {
                                   <ToolIcon icon={cat.icon} className="w-3 h-3" />
                                 </div>
                                 <span className="text-[10.5px] font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-300 truncate">
-                                  {cat.label}
+                                  {t(`pdf_mega_menu.cat_${cat.id}`, cat.label)}
                                 </span>
                                 <div className={`absolute -bottom-px left-0 w-6 h-[1.5px] rounded-full ${cat.theme.indicator}`} />
                               </div>
                               <div className="space-y-0.5">
                                 {cat.tools.map((sub) => {
                                   const isCurrent = pathname === localizeHref(sub.href);
+                                  const displayName = getToolDisplayName(sub.href, sub.name);
                                   return (
                                     <Link
                                       key={sub.href}
                                       href={localizeHref(sub.href)}
                                       onClick={() => setIsPdfDropdownOpen(false)}
+                                      title={displayName}
                                       className={`flex items-center justify-between px-1.5 py-1 rounded-lg ${cat.theme.hoverBg} transition-colors group select-none min-h-[28px] ${
                                         isCurrent ? 'bg-blue-50/70 dark:bg-blue-500/10 font-semibold' : ''
                                       }`}
@@ -638,11 +658,11 @@ export default function Header() {
                                           <ToolIcon icon={sub.icon} className={`w-3 h-3 text-slate-400 dark:text-slate-500 ${cat.theme.toolHoverText} transition-colors`} />
                                         </div>
                                         <span className={`text-[11px] font-medium text-slate-700 dark:text-slate-200 ${cat.theme.toolHoverText} transition-colors truncate`}>
-                                          {sub.name}
+                                          {displayName}
                                         </span>
                                       </div>
                                       {sub.badge && (
-                                        <span className={`text-[8px] font-medium px-1.5 py-[1px] rounded uppercase tracking-wide shrink-0 ml-1 select-none transition-colors ${sub.badgeColor || 'bg-slate-100/80 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-200/50 dark:border-white/5'}`}>
+                                        <span data-no-translate="true" className={`text-[8px] font-medium px-1.5 py-[1px] rounded uppercase tracking-wide shrink-0 ml-1 select-none transition-colors ${sub.badgeColor || 'bg-slate-100/80 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-200/50 dark:border-white/5'}`}>
                                           {sub.badge}
                                         </span>
                                       )}
@@ -665,46 +685,52 @@ export default function Header() {
                                       <ToolIcon icon={cat.icon} className="w-3.5 h-3.5" />
                                     </div>
                                     <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200">
-                                      {cat.label} ({cat.tools.length} Tools)
+                                      {t(`pdf_mega_menu.cat_${cat.id}`, cat.label)} ({cat.tools.length} Tools)
                                     </h4>
                                   </div>
                                   <button
                                     onClick={() => setPdfActiveFilter('all')}
                                     className="text-[11px] font-medium text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
                                   >
-                                    ← View All Categories
+                                    {t('pdf_mega_menu.view_all', '← View All Categories')}
                                   </button>
                                 </div>
                                 <div className="grid grid-cols-2 min-[1250px]:grid-cols-3 gap-2.5">
-                                  {cat.tools.map((sub) => (
-                                    <Link
-                                      key={sub.href}
-                                      href={localizeHref(sub.href)}
-                                      onClick={() => setIsPdfDropdownOpen(false)}
-                                      className={`flex items-start gap-3 p-2.5 rounded-xl bg-slate-50/60 dark:bg-white/[0.02] border border-slate-100 dark:border-white/5 ${cat.theme.hoverBg} hover:bg-white dark:hover:bg-white/[0.05] transition-all group`}
-                                    >
-                                      <div className="w-7 h-7 rounded-lg bg-slate-100 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform mt-0.5">
-                                        <ToolIcon icon={sub.icon} className={`w-3.5 h-3.5 text-slate-400 dark:text-slate-500 ${cat.theme.toolHoverText} transition-colors`} />
-                                      </div>
-                                      <div className="flex flex-col min-w-0">
-                                        <div className="flex items-center gap-1.5">
-                                          <span className={`text-xs font-medium text-slate-700 dark:text-slate-200 ${cat.theme.toolHoverText} transition-colors truncate`}>
-                                            {sub.name}
-                                          </span>
-                                          {sub.badge && (
-                                            <span className={`text-[8px] font-medium px-1.5 py-[1px] rounded uppercase shrink-0 ${sub.badgeColor || 'bg-slate-100/80 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-200/50 dark:border-white/5'}`}>
-                                              {sub.badge}
+                                  {cat.tools.map((sub) => {
+                                    const displayName = getToolDisplayName(sub.href, sub.name);
+                                    const slug = sub.href.replace(/\/$/, '').split('/').pop() || '';
+                                    const displayDesc = slug ? t(`tools.${slug}.description`, sub.desc) : sub.desc;
+                                    return (
+                                      <Link
+                                        key={sub.href}
+                                        href={localizeHref(sub.href)}
+                                        onClick={() => setIsPdfDropdownOpen(false)}
+                                        title={displayName}
+                                        className={`flex items-start gap-3 p-2.5 rounded-xl bg-slate-50/60 dark:bg-white/[0.02] border border-slate-100 dark:border-white/5 ${cat.theme.hoverBg} hover:bg-white dark:hover:bg-white/[0.05] transition-all group`}
+                                      >
+                                        <div className="w-7 h-7 rounded-lg bg-slate-100 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform mt-0.5">
+                                          <ToolIcon icon={sub.icon} className={`w-3.5 h-3.5 text-slate-400 dark:text-slate-500 ${cat.theme.toolHoverText} transition-colors`} />
+                                        </div>
+                                        <div className="flex flex-col min-w-0">
+                                          <div className="flex items-center gap-1.5">
+                                            <span className={`text-xs font-medium text-slate-700 dark:text-slate-200 ${cat.theme.toolHoverText} transition-colors truncate`}>
+                                              {displayName}
+                                            </span>
+                                            {sub.badge && (
+                                              <span data-no-translate="true" className={`text-[8px] font-medium px-1.5 py-[1px] rounded uppercase shrink-0 ${sub.badgeColor || 'bg-slate-100/80 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-200/50 dark:border-white/5'}`}>
+                                                {sub.badge}
+                                              </span>
+                                            )}
+                                          </div>
+                                          {displayDesc && (
+                                            <span className="text-[10px] text-slate-500 dark:text-gray-400 mt-0.5">
+                                              {displayDesc}
                                             </span>
                                           )}
                                         </div>
-                                        {sub.desc && (
-                                          <span className="text-[10px] text-slate-500 dark:text-gray-400 mt-0.5">
-                                            {sub.desc}
-                                          </span>
-                                        )}
-                                      </div>
-                                    </Link>
-                                  ))}
+                                      </Link>
+                                    );
+                                  })}
                                 </div>
                               </div>
                             ))}
@@ -715,14 +741,14 @@ export default function Header() {
                       <div className="mt-4 pt-3.5 border-t border-slate-100 dark:border-white/5 flex items-center justify-between px-1 text-[11px] relative z-10">
                         <div className="flex items-center gap-2 text-slate-500 dark:text-gray-400 font-medium text-[10.5px]">
                           <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />
-                          <span>Client-Side Sandbox: Files stay 100% on your machine & never upload to any cloud.</span>
+                          <span>{t('pdf_mega_menu.footer_sandbox', 'Client-Side Sandbox: Files stay 100% on your machine & never upload to any cloud.')}</span>
                         </div>
                         <Link 
                           href={localizeHref('/categories/pdf-tools')} 
                           onClick={() => setIsPdfDropdownOpen(false)}
                           className="font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 shrink-0 ml-2"
                         >
-                          <span>Explore PDF Category</span>
+                          <span>{t('pdf_mega_menu.footer_explore', 'Explore PDF Category')}</span>
                           <ArrowRight className="w-3 h-3" />
                         </Link>
                       </div>
@@ -868,11 +894,11 @@ export default function Header() {
                                 }}
                                 className="flex items-center gap-2.5 p-2 rounded-xl bg-black/[0.03] dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-all"
                               >
-                                <div className={`w-6 h-6 rounded-lg flex items-center justify-center font-medium text-[8px] shrink-0 ${sub.badgeColor}`}>
+                                <div data-no-translate="true" className={`w-6 h-6 rounded-lg flex items-center justify-center font-medium text-[8px] shrink-0 ${sub.badgeColor}`}>
                                   {sub.badge}
                                 </div>
                                 <span className="text-xs font-medium text-slate-700 dark:text-slate-200 truncate">
-                                  {sub.name}
+                                  {getToolDisplayName(sub.href, sub.name)}
                                 </span>
                               </Link>
                             ))}
@@ -897,11 +923,11 @@ export default function Header() {
                                 }}
                                 className="flex items-center gap-2.5 p-2 rounded-xl bg-black/[0.03] dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-all"
                               >
-                                <div className={`w-6 h-6 rounded-lg flex items-center justify-center font-medium text-[8px] shrink-0 ${sub.badgeColor}`}>
+                                <div data-no-translate="true" className={`w-6 h-6 rounded-lg flex items-center justify-center font-medium text-[8px] shrink-0 ${sub.badgeColor}`}>
                                   {sub.badge}
                                 </div>
                                 <span className="text-xs font-medium text-slate-700 dark:text-slate-200 truncate">
-                                  {sub.name}
+                                  {getToolDisplayName(sub.href, sub.name)}
                                 </span>
                               </Link>
                             ))}
@@ -921,8 +947,8 @@ export default function Header() {
                     >
                       <div className="flex items-center gap-2">
                         <span>{item.name}</span>
-                        <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
-                          26 Tools
+                        <span data-no-translate="true" className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                          {t('pdf_mega_menu.tools_count', '26 Tools')}
                         </span>
                       </div>
                       <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform ${isMobilePdfOpen ? 'rotate-180 text-blue-600 dark:text-blue-500' : ''}`} />
@@ -935,7 +961,7 @@ export default function Header() {
                               <div className={`w-4 h-4 rounded flex items-center justify-center shrink-0 ${cat.theme.iconBox}`}>
                                 <ToolIcon icon={cat.icon} className="w-2.5 h-2.5" />
                               </div>
-                              <span>{cat.label}</span>
+                              <span>{t(`pdf_mega_menu.cat_${cat.id}`, cat.label)}</span>
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                               {cat.tools.map((sub) => (
@@ -951,11 +977,11 @@ export default function Header() {
                                   <div className="flex items-center gap-2 min-w-0">
                                     <ToolIcon icon={sub.icon} className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 shrink-0" />
                                     <span className="text-xs font-medium text-slate-700 dark:text-slate-200 truncate">
-                                      {sub.name}
+                                      {getToolDisplayName(sub.href, sub.name)}
                                     </span>
                                   </div>
                                   {sub.badge && (
-                                    <span className={`text-[8px] font-medium px-1.5 py-[1px] rounded uppercase shrink-0 ${sub.badgeColor || 'bg-slate-100/80 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-200/50 dark:border-white/5'}`}>
+                                    <span data-no-translate="true" className={`text-[8px] font-medium px-1.5 py-[1px] rounded uppercase shrink-0 ${sub.badgeColor || 'bg-slate-100/80 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-200/50 dark:border-white/5'}`}>
                                       {sub.badge}
                                     </span>
                                   )}

@@ -14,8 +14,27 @@
     "privacy": "Central de privacidade",
     "company_and_trust": "Empresa e confiança",
     "start_free": "Comece grátis",
-    "get_started_free": "Comece gratuitamente",
-    "select_language": "Selecione o idioma"
+    "select_language": "Selecione o idioma",
+    "pdf_suite": "Suite PDF"
+  },
+  "pdf_mega_menu": {
+    "studio_title": "ToolWala PDF Studio",
+    "tools_count": "26 Ferramentas WASM",
+    "badge_privacy": "Motor 100% no navegador • Zero envio de arquivos",
+    "tab_all": "Todas",
+    "tab_organize": "Organizar",
+    "tab_convert": "Converter",
+    "tab_edit": "Editar e assinar",
+    "tab_security": "Segurança e tamanho",
+    "tab_intelligence": "IA e Smart",
+    "cat_organize": "Organizar e páginas",
+    "cat_convert": "Converter PDF",
+    "cat_edit": "Editar e assinar",
+    "cat_security": "Segurança e otimização",
+    "cat_intelligence": "Ferramentas IA e Smart",
+    "footer_sandbox": "Sandbox local: os arquivos permanecem 100% no seu dispositivo e nunca são enviados para a nuvem.",
+    "footer_explore": "Explorar categoria PDF",
+    "view_all": "← Ver todas as categorias"
   },
   "footer": {
     "copyright": "© 2026 ToolWala AI. Todos os direitos reservados.",
@@ -307,8 +326,23 @@
     "search_placeholder_filter": "Filtre por nome, tag ou categoria...",
     "found_count": "Ferramentas {count} encontradas para \"{query}\"",
     "in_category": " in {category}",
-    "no_tools_sub": "Experimente ampliar sua pesquisa ou explorar uma categoria diferente.",
-    "clear_filters": "Limpar filtros"
+    "clear_filters": "Limpar filtros",
+    "pdf-compare": {
+      "title": "Comparar PDF",
+      "description": "Compare dois documentos PDF lado a lado para destacar diferenças de texto e alterações."
+    },
+    "merge-pdf": {
+      "title": "Juntar PDF",
+      "description": "Combine vários documentos PDF em um único arquivo de forma rápida e segura."
+    },
+    "split-pdf": {
+      "title": "Dividir PDF",
+      "description": "Extraia páginas específicas ou divida arquivos PDF grandes em documentos separados."
+    },
+    "compress-pdf": {
+      "title": "Comprimir PDF",
+      "description": "Reduza o tamanho do arquivo PDF mantendo a qualidade visual."
+    }
   },
   "form": {
     "copied_success": "Geração copiada para a área de transferência!",

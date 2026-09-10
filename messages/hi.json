@@ -18,6 +18,26 @@
     "select_language": "भाषा चुनें",
     "pdf_suite": "पीडीएफ सूट"
   },
+  "pdf_mega_menu": {
+    "studio_title": "ToolWala PDF Studio",
+    "tools_count": "26 WASM टूल्स",
+    "badge_privacy": "100% इन-ब्राउज़र इंजन • शून्य फ़ाइल अपलोड",
+    "tab_all": "सभी टूल्स",
+    "tab_organize": "पेज व्यवस्था",
+    "tab_convert": "कन्वर्ट",
+    "tab_edit": "एडिट व साइन",
+    "tab_security": "सुरक्षा व साइज",
+    "tab_intelligence": "AI व स्मार्ट",
+    "cat_organize": "पेज व व्यवस्था",
+    "cat_convert": "PDF कन्वर्ट",
+    "cat_edit": "एडिट व साइन",
+    "cat_security": "सुरक्षा व साइज",
+    "cat_intelligence": "AI व स्मार्ट टूल्स",
+    "footer_sandbox": "क्लाइंट-साइड सैंडबॉक्स: फ़ाइलें 100% आपके डिवाइस पर रहती हैं और कभी किसी सर्वर पर अपलोड नहीं होतीं।",
+    "footer_explore": "सभी PDF टूल्स देखें",
+    "view_all": "← सभी श्रेणियां देखें",
+    "all_pdf_directory": "सभी PDF टूल्स"
+  },
   "footer": {
     "copyright": "© 2026 ToolWala AI. सर्वाधिकार सुरक्षित।",
     "tagline": "मुफ़्त AI उपयोगिताएँ जो आपके ब्राउज़र में 100% स्थानीय रूप से चलती हैं। कोई पंजीकरण नहीं, कोई विलंबता नहीं, कोई सर्वर अपलोड नहीं। गोपनीयता-प्रथम प्रसंस्करण का अनुभव करें।",
@@ -682,6 +702,20 @@
     "in_category": " {category} में",
     "no_tools_sub": "अपनी खोज को व्यापक बनाने या किसी भिन्न श्रेणी को तलाशने का प्रयास करें।",
     "clear_filters": "फ़िल्टर साफ़ करें",
+    "pdf-compare": {
+      "title": "PDF तुलना करें",
+      "description": "दो PDF दस्तावेज़ों के टेक्स्ट अंतर और बदलावों को ऑनलाइन साइड-बाय-साइड देखें।"
+    },
+    "powerpoint-to-pdf": {
+      "title": "PowerPoint से PDF",
+      "short_title": "PPT से PDF",
+      "description": "PPT और PPTX प्रस्तुतियों को सुरक्षित PDF दस्तावेज़ में बदलें।"
+    },
+    "pdf-to-powerpoint": {
+      "title": "PDF से PowerPoint",
+      "short_title": "PDF से PPT",
+      "description": "PDF फाइलों को संपादन योग्य PPTX स्लाइड्स में बदलें।"
+    },
     "merge-pdf": {
       "title": "PDF मर्ज करें",
       "description": "एकाधिक PDF दस्तावेजों को एक साथ जोड़ें।"
@@ -704,10 +738,12 @@
     },
     "word-to-pdf-converter": {
       "title": "Word से PDF कन्वर्टर",
+      "short_title": "Word से PDF",
       "description": "Word (.docx) फाइलों को PDF में सुरक्षित रूप से बदलें।"
     },
     "pdf-to-word-converter": {
       "title": "PDF से Word कन्वर्टर",
+      "short_title": "PDF से Word",
       "description": "PDF फाइलों को एडिट योग्य Word दस्तावेज़ में बदलें।"
     },
     "crop-pdf": {
@@ -804,14 +840,17 @@
     },
     "pdf-to-excel-converter": {
       "title": "PDF से Excel कन्वर्टर",
+      "short_title": "PDF से Excel",
       "description": "PDF तालिकाओं को संपादन योग्य Excel स्प्रेडशीट में बदलें।"
     },
     "excel-to-pdf-converter": {
       "title": "Excel से PDF कन्वर्टर",
+      "short_title": "Excel से PDF",
       "description": "XLSX और XLS स्प्रेडशीट को PDF दस्तावेज़ में बदलें।"
     },
     "pdf-summarizer": {
       "title": "AI PDF समराइज़र",
+      "short_title": "AI समराइज़र",
       "description": "लंबी PDF रिपोर्ट का मुख्य निष्कर्ष और सारांश तुरंत प्राप्त करें।"
     },
     "crop-aadhaar-card": {
@@ -912,10 +951,12 @@
     },
     "aadhaar-pdf-compressor": {
       "title": "आधार PDF कंप्रेसर",
+      "short_title": "आधार 300KB",
       "description": "आधार कार्ड PDF फाइल का आकार 200KB से कम करें।"
     },
     "gov-form-pdf-compressor": {
       "title": "सरकारी फॉर्म PDF कंप्रेसर",
+      "short_title": "सरकारी फॉर्म PDF",
       "description": "सरकारी ऑनलाइन आवेदनों के लिए PDF का आकार कम करें।"
     },
     "invoice-cropper": {
@@ -924,10 +965,12 @@
     },
     "aadhaar-masking-tool": {
       "title": "आधार मास्किंग टूल",
+      "short_title": "आधार मास्किंग",
       "description": "सुरक्षा के लिए आधार नंबर के पहले 8 अंकों को छिपाएं।"
     },
     "add-page-numbers-to-pdf": {
       "title": "PDF पेज नंबर जोड़ें",
+      "short_title": "पेज नंबर जोड़ें",
       "description": "PDF दस्तावेज़ों के सभी पृष्ठों पर पेज नंबर डालें।"
     },
     "sign-pdf": {

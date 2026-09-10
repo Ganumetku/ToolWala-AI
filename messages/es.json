@@ -18,6 +18,25 @@
     "select_language": "Seleccionar idioma",
     "pdf_suite": "Suite PDF"
   },
+  "pdf_mega_menu": {
+    "studio_title": "ToolWala PDF Studio",
+    "tools_count": "26 Herramientas WASM",
+    "badge_privacy": "Motor 100% en el navegador • Cero subida de archivos",
+    "tab_all": "Todas",
+    "tab_organize": "Organizar",
+    "tab_convert": "Convertir",
+    "tab_edit": "Editar y firmar",
+    "tab_security": "Seguridad y tamaño",
+    "tab_intelligence": "IA y Smart",
+    "cat_organize": "Organizar y páginas",
+    "cat_convert": "Convertir PDF",
+    "cat_edit": "Editar y firmar",
+    "cat_security": "Seguridad y optimización",
+    "cat_intelligence": "Herramientas IA y Smart",
+    "footer_sandbox": "Sandbox local: los archivos permanecen 100% en tu máquina y nunca se suben a la nube.",
+    "footer_explore": "Explorar categoría PDF",
+    "view_all": "← Ver todas las categorías"
+  },
   "footer": {
     "copyright": "© 2026 ToolWala AI. Todos los derechos reservados.",
     "tagline": "Utilidades de IA gratuitas que se ejecutan 100% localmente en su navegador. Sin registro, sin latencia, sin cargas al servidor. Experimente un procesamiento que prioriza la privacidad.",
@@ -680,6 +699,18 @@
     "in_category": " in {category}",
     "no_tools_sub": "Intente ampliar su búsqueda o explorar una categoría diferente.",
     "clear_filters": "Borrar filtros",
+    "pdf-compare": {
+      "title": "Comparar PDF",
+      "description": "Compara dos documentos PDF en paralelo para resaltar diferencias y cambios en el texto."
+    },
+    "powerpoint-to-pdf": {
+      "title": "PowerPoint a PDF",
+      "description": "Convierte presentaciones de PowerPoint (PPT, PPTX) a documentos PDF."
+    },
+    "pdf-to-powerpoint": {
+      "title": "PDF a PowerPoint",
+      "description": "Convierte archivos PDF en presentaciones editables de PowerPoint (PPTX)."
+    },
     "merge-pdf": {
       "title": "Unir PDF",
       "description": "Combine múltiples documentos PDF en un solo archivo de forma rápida y segura."

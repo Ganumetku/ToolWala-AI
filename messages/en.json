@@ -15,8 +15,27 @@
     "company_and_trust": "Company & Trust",
     "start_free": "Start Free",
     "get_started_free": "Get Started Free",
-    "select_language": "Select Language",
+    "select_language": "Language",
     "pdf_suite": "PDF Suite"
+  },
+  "pdf_mega_menu": {
+    "studio_title": "ToolWala PDF Studio",
+    "tools_count": "26 WASM Tools",
+    "badge_privacy": "100% In-Browser Engine • Zero File Uploads",
+    "tab_all": "All Tools",
+    "tab_organize": "Organize",
+    "tab_convert": "Convert",
+    "tab_edit": "Edit & Sign",
+    "tab_security": "Security & Size",
+    "tab_intelligence": "AI & Smart",
+    "cat_organize": "Organize & Pages",
+    "cat_convert": "Convert PDF",
+    "cat_edit": "Edit & Sign",
+    "cat_security": "Security & Optimize",
+    "cat_intelligence": "AI & Smart Tools",
+    "footer_sandbox": "Client-Side Sandbox: Files stay 100% on your machine & never upload to any cloud.",
+    "footer_explore": "Explore PDF Category",
+    "view_all": "← View All Categories"
   },
   "footer": {
     "copyright": "© 2026 ToolWala AI. All rights reserved.",
@@ -693,6 +712,18 @@
     "in_category": " in {category}",
     "no_tools_sub": "Try broadening your search or exploring a different category.",
     "clear_filters": "Clear Filters",
+    "pdf-compare": {
+      "title": "PDF Compare",
+      "description": "Compare two PDF documents side-by-side online to highlight text differences and changes."
+    },
+    "powerpoint-to-pdf": {
+      "title": "PowerPoint to PDF",
+      "description": "Convert PowerPoint presentations (PPT, PPTX) to PDF documents."
+    },
+    "pdf-to-powerpoint": {
+      "title": "PDF to PowerPoint",
+      "description": "Convert PDF files into editable PowerPoint (PPTX) presentations."
+    },
     "merge-pdf": {
       "title": "Merge PDF",
       "description": "Combine multiple PDF documents into a single file quickly and securely."

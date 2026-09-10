@@ -152,11 +152,11 @@ export default function PopularToolsGrid() {
                     )}
                   </div>
 
-                  {/* Title & Description */}
-                  <h3 className="text-[16px] sm:text-[17px] font-bold text-slate-900 dark:text-white group-hover:text-[#2563EB] dark:group-hover:text-blue-400 transition-colors tracking-tight mb-2 line-clamp-2 min-h-[2.3rem]">
+                  {/* Title & Description — matching exact ToolCard font weight and styling */}
+                  <h3 className="text-[16px] sm:text-[17px] font-semibold leading-snug text-[#33333b] dark:text-white mb-1.5 group-hover:text-[#161616] dark:group-hover:text-blue-400 transition-colors tracking-tight line-clamp-2 min-h-[2.3rem]">
                     {t(`tools.${tool.id}.title`, tool.title)}
                   </h3>
-                  <p className="text-[12px] sm:text-[12.5px] font-normal text-slate-500/90 dark:text-slate-400 line-clamp-3 leading-[1.65] min-h-[3.2rem]">
+                  <p className="text-[12.5px] sm:text-[13px] font-normal leading-[1.5] text-[#707078] dark:text-slate-400 line-clamp-3 min-h-[3.2rem]">
                     {t(`tools.${tool.id}.desc`, tool.description)}
                   </p>
                 </div>

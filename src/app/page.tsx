@@ -397,7 +397,7 @@ export default function Home() {
                       className="shrink-0 group-hover:scale-105 transition-transform"
                     />
                     <div className="overflow-hidden">
-                      <h4 className="text-xs font-black text-[#0F172A] dark:text-white group-hover:text-[#2563EB] dark:group-hover:text-blue-400 transition-colors truncate">{displayTitle}</h4>
+                      <h4 className="text-xs font-semibold text-[#33333b] dark:text-white group-hover:text-[#2563EB] dark:group-hover:text-blue-400 transition-colors truncate">{displayTitle}</h4>
                       <p className="text-[9px] text-[#64748B] dark:text-gray-600 font-bold uppercase tracking-wider mt-0.5">{displayCategory}</p>
                     </div>
                   </Link>

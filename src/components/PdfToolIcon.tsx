@@ -4,6 +4,7 @@ import React from "react";
 import * as LucideIcons from "lucide-react";
 import {
   GitMerge,
+  GitCompare,
   Scissors,
   Minimize2,
   RotateCw,
@@ -74,6 +75,11 @@ export const ALL_TOOL_TILES: Record<string, PremiumTileConfig> = {
   // ==========================================
   // 1. PDF Tools: Organize & Manage (Blue/Cyan)
   // ==========================================
+  "pdf-compare": {
+    id: "pdf-compare",
+    icon: GitCompare,
+    solidColor: "#6366F1",
+  },
   "merge-pdf": {
     id: "merge-pdf",
     icon: GitMerge,

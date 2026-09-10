@@ -207,6 +207,7 @@ export default function Header() {
         toolHoverText: 'group-hover:text-blue-600 dark:group-hover:text-blue-400',
       },
       tools: [
+        { name: 'PDF Compare', href: '/tools/pdf-compare', icon: 'GitCompare', badge: 'DIFF', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'Side-by-side text diff' },
         { name: 'Merge PDF', href: '/tools/merge-pdf', icon: 'Merge', badge: 'Combine', desc: 'Join multiple files into one' },
         { name: 'Split PDF', href: '/tools/split-pdf', icon: 'SplitSquareHorizontal', badge: 'Extract', desc: 'Extract pages to separate files' },
         { name: 'Organize PDF', href: '/tools/organize-pdf', icon: 'LayoutGrid', badge: 'Sort', desc: 'Reorder, rotate & delete pages' },

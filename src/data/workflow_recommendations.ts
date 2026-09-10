@@ -13,6 +13,15 @@ export interface ToolWorkflow {
 // Visual Workflows Map
 const WORKFLOWS: Record<string, ToolWorkflow> = {
   // 1. PDF Creation & Compiling
+  'pdf-compare': {
+    nextRecommended: ['merge-pdf', 'pdf-ocr', 'compress-pdf'],
+    mostUsedTogether: ['pdf-to-word-converter', 'unlock-pdf', 'sign-pdf'],
+    workflow: [
+      { slug: 'unlock-pdf', label: 'Unlock PDF', icon: 'LockOpen' },
+      { slug: 'pdf-compare', label: 'Compare Diff', icon: 'GitCompare' },
+      { slug: 'merge-pdf', label: 'Merge Document', icon: 'Merge' }
+    ]
+  },
   'jpg-to-pdf': {
     nextRecommended: ['compress-pdf', 'merge-pdf', 'watermark-pdf'],
     mostUsedTogether: ['sign-pdf', 'protect-pdf', 'organize-pdf'],

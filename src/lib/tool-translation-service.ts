@@ -289,6 +289,15 @@ export async function getToolTranslationWithFallback(slug: string, locale: strin
       fallbackTitle = tool.title;
       fallbackDesc = tool.description;
       fallbackFaqs = article?.faqs || [];
+      return {
+        toolSlug: slug,
+        locale,
+        title: fallbackTitle,
+        description: fallbackDesc,
+        faq: fallbackFaqs,
+        seoTitle: tool.seoMetadata?.title || fallbackTitle,
+        seoDescription: tool.seoMetadata?.description || fallbackDesc
+      };
     } else if (article) {
       fallbackTitle = article.title;
       fallbackDesc = article.intro;

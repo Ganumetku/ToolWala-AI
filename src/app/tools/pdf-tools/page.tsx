@@ -24,7 +24,7 @@ export default async function Page() {
       title: t('pdf_dashboard.organize', 'Organize PDF'),
       icon: '🧩',
       description: t('pdf_dashboard.organize_desc', 'Merge, split, remove pages, or organize PDF files visually.'),
-      toolIds: ['merge-pdf', 'split-pdf', 'remove-pages', 'organize-pdf', 'add-page-numbers-to-pdf', 'rotate-pdf']
+      toolIds: ['pdf-compare', 'merge-pdf', 'split-pdf', 'remove-pages', 'organize-pdf', 'add-page-numbers-to-pdf', 'rotate-pdf']
     },
     {
       title: t('pdf_dashboard.convert', 'Convert PDF'),

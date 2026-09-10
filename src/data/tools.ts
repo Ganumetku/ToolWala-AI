@@ -329,6 +329,28 @@ export const toolsData: Tool[] = [
     updatedAt: '2024-01-01T00:00:00Z'
   },
   {
+    id: "pdf-compare",
+    title: "PDF Compare",
+    description: "Compare two PDF documents side-by-side online to highlight text differences and changes.",
+    icon: "GitCompare",
+    href: "/tools/pdf-compare",
+    slug: "pdf-compare",
+    category: "PDF Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["pdf compare", "compare pdf", "pdf diff", "pdf difference finder", "diff checker", "document compare"],
+    status: 'published',
+    isVisible: true,
+    seoMetadata: {
+      title: "Compare Two PDF Files Online Free | PDF Diff Checker | ToolWala AI",
+      description: "Compare two PDF files online free. Instant browser-based text diff checker highlights additions, deletions, and differences side-by-side with zero file uploads and 100% privacy.",
+      keywords: ["pdf compare online", "compare two pdf files", "pdf diff checker", "pdf difference finder", "pdf comparison tool", "diff pdf free"]
+    },
+    createdAt: '2026-09-10T00:00:00Z',
+    updatedAt: '2026-09-10T00:00:00Z'
+  },
+  {
     id: "merge-pdf",
     title: "Merge PDF",
     description: "Combine multiple PDF documents into a single organized PDF file securely.",

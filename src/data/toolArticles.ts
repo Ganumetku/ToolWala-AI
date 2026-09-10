@@ -851,6 +851,51 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "ATS Resume Checker", href: "/tools/ats-resume-checker" }
     ]
   },
+  "pdf-compare": {
+    title: "PDF Compare",
+    intro: "Compare two PDF documents side-by-side to highlight text differences, additions, and deletions with 100% client-side privacy.",
+    whatItDoes: "Our PDF Compare tool is designed for legal professionals, researchers, editors, and students who need to review changes between different document drafts without uploading confidential files to third-party servers. Traditional PDF comparison services require you to upload agreements, financial statements, or personal records to external cloud databases, posing significant security and compliance risks. ToolWala AI solves this with our Zero-Upload Privacy architecture. By running high-performance PDF text extraction and difference algorithms directly inside your web browser sandbox, your files remain completely in your computer's local memory. You can compare single or multi-page documents, inspect changes side-by-side or in a unified git-diff-style view, and download an offline comparison report with zero privacy risk.",
+    howToUse: [
+      "Upload your original or baseline PDF file into the Document A dropzone.",
+      "Upload your updated or modified PDF file into the Document B dropzone.",
+      "Click the 'Compare Documents' button to initiate client-side text extraction and difference analysis.",
+      "Review the executive summary showing total differences found, similarity percentage, and added or removed word counts.",
+      "Switch between 'Side-by-Side View' and 'Unified / Inline View', and use the page tabs to inspect diffs page-by-page.",
+      "Click 'Download Report' to save an offline, self-contained HTML comparison report for documentation or sharing."
+    ],
+    keyFeatures: [
+      { title: "Zero-Upload Privacy", desc: "All PDF parsing and diff computation happens locally in your browser memory. Your files are never sent across the internet." },
+      { title: "Dual View Modes", desc: "Toggle effortlessly between Side-by-Side dual-column view and Unified inline view with clear color-coded highlights." },
+      { title: "Page-by-Page Navigation", desc: "Jump directly to specific pages with change counters, or inspect an overall multi-page overview." },
+      { title: "Mismatched Page Handling", desc: "Detects added or missing pages when documents have different page counts and highlights them accordingly." },
+      { title: "Exportable Comparison Report", desc: "Download a clean, printable HTML report summarizing all changes with full diff tables." }
+    ],
+    benefits: [
+      "Save hours of tedious manual proofreading when reviewing contract revisions and agreements.",
+      "Eliminate data privacy and compliance risks for sensitive NDA documents and financial records.",
+      "Works instantly in any modern web browser without installing heavy software suites.",
+      "Completely free with no file limits, watermarks, or account registration required."
+    ],
+    whyChoose: "Most free PDF comparison tools upload your sensitive legal agreements or financial statements to remote servers, retaining copies or using your text for AI training. ToolWala AI takes a fundamentally different privacy-first approach. By leveraging cutting-edge WebAssembly and local JavaScript processing, our tool parses your files entirely inside your device's browser. It offers enterprise-grade visual diffing without the enterprise price tag or privacy vulnerabilities.",
+    useCases: [
+      "Legal teams comparing draft versions of contracts, NDAs, leases, and terms of service.",
+      "Publishing editors and academic researchers checking revised manuscripts against original submissions.",
+      "Procurement officers and businesses tracking pricing changes and clause revisions in vendor proposals.",
+      "Students comparing essay drafts and revision notes across semesters."
+    ],
+    faqs: [
+      { question: "How do I compare two PDF files for differences?", answer: "Upload your baseline PDF (Document A) and modified PDF (Document B) into the dual upload zones, then click Compare Documents. The tool processes both files locally in your browser and highlights all additions in green, deletions in red, and unchanged text in gray." },
+      { question: "Can I compare scanned PDFs?", answer: "Scanned or image-only PDFs do not have selectable text layers. If a scanned document is detected, the tool displays a warning. You can first run the scanned file through our free PDF OCR Scanner tool to extract selectable text before comparing." },
+      { question: "Is my document data safe?", answer: "Yes, 100%. ToolWala AI operates under a strict Zero-Upload Privacy architecture. Both documents are processed directly in your web browser memory. No data, text, or files are ever transmitted to any external server." },
+      { question: "Does this work with password-protected PDFs?", answer: "Password-encrypted PDFs must be decrypted before parsing. If an encrypted file is uploaded, the tool displays an alert guiding you to our free Unlock PDF tool to remove the password before comparing." }
+    ],
+    conclusion: "Comparing document revisions should be fast, accurate, and completely confidential. With ToolWala AI's PDF Compare, you get instant side-by-side text diffing that preserves your privacy and eliminates manual review errors. Try comparing your documents today.",
+    relatedTools: [
+      { name: "Merge PDF", href: "/tools/merge-pdf" },
+      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr" },
+      { name: "PDF to Word Converter", href: "/tools/pdf-to-word-converter" }
+    ]
+  },
   "merge-pdf": {
     title: "Merge PDF",
     intro: "Combine multiple PDF files into one in a matter of seconds. No signup, no limits, and absolute privacy since your files never leave your device.",

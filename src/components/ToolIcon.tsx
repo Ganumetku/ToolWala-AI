@@ -9,7 +9,7 @@ import {
   UserCheck, Mic, Receipt, Wand2, Mail, KeyRound, Presentation, Cake, TrendingUp,
   Landmark, Percent, Tag, DollarSign, PenTool, Shrink, FileMinus, EyeOff, RotateCw,
   Hash, GraduationCap, ListChecks, Video, FileArchive, FileCheck, FileCog,
-  ShieldCheck, Sliders, Headphones, Zap, Wrench,
+  ShieldCheck, Sliders, Headphones, Zap, Wrench, GitCompare,
   type LucideProps,
 } from 'lucide-react';
 import PdfToolIcon, { isPdfTool } from '@/components/PdfToolIcon';
@@ -23,7 +23,7 @@ const ICON_MAP: Record<string, React.ComponentType<LucideProps>> = {
   UserCheck, Mic, Receipt, Wand2, Mail, KeyRound, Presentation, Cake, TrendingUp,
   Landmark, Percent, Tag, DollarSign, PenTool, Shrink, FileMinus, EyeOff, RotateCw,
   Hash, GraduationCap, ListChecks, Video, FileArchive, FileCheck, FileCog,
-  ShieldCheck, Sliders, Headphones, Zap, Wrench,
+  ShieldCheck, Sliders, Headphones, Zap, Wrench, GitCompare,
 };
 
 export interface ToolIconProps {

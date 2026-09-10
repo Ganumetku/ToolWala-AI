@@ -96,6 +96,7 @@ export default function Home() {
   // Exact iLovePDF Layout Sequence followed by Image, AI, Govt & Calculators
   const ILOVEPDF_ORDERED_IDS = [
     // 1. iLovePDF Core PDF Suite (Exact Screenshot Sequence)
+    "pdf-compare",
     "merge-pdf",
     "split-pdf",
     "compress-pdf",

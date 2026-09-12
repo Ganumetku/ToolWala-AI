@@ -47,7 +47,11 @@ next-env.d.ts
 /test-results/
 /playwright-report/
 /.playwright/
+/tests/edit-pdf/output/
 
 # Scratch directory
 /scratch/
+
+# PDF engine
+/services/pdf-engine/.venv/
 

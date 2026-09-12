@@ -8,6 +8,7 @@ import type {
   TWPDFTextObject,
 } from '@/types/twpdf';
 import { isOriginalTextEdited } from '@/lib/twpdf/editor';
+import { ORIGINAL_TEXT_HIT_BG } from '@/lib/twpdf/parser/textMask';
 import { LegacyFabricBridge } from './LegacyFabricBridge';
 
 const FABRIC_CONTROL_PROPS = {
@@ -65,7 +66,7 @@ function textToFabric(obj: TWPDFTextObject): Record<string, unknown> {
     fontName: obj.fontName || obj.fontFamily,
     originalBBox: obj.originalBBox,
     pdfObject: obj.pdfObject,
-    backgroundColor: obj.isOriginalText && !isEdited ? 'rgba(255, 255, 255, 0.001)' : 'transparent',
+    backgroundColor: obj.isOriginalText && !isEdited ? ORIGINAL_TEXT_HIT_BG : 'transparent',
     lockScalingY: true,
     ...FABRIC_CONTROL_PROPS,
   };

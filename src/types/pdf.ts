@@ -46,6 +46,8 @@ export interface PageDimensions {
 
 export interface TextBoxInfo {
   id: string;
+  /** Stable per-page run id (`orig_{page}_{index}`). */
+  runId?: string;
   text: string;
   x: number;
   y: number;
@@ -63,7 +65,14 @@ export interface TextBoxInfo {
   fontWeight?: string;
   fontStyle?: string;
   angle?: number;
+  detectedColor?: string;
   detectedBgColor?: string;
+  maskInsets?: {
+    left: number;
+    top: number;
+    right: number;
+    bottom: number;
+  };
   /** Viewport Y of the PDF.js text origin (typographic baseline). */
   baseline?: number;
   ascent?: number;
@@ -85,6 +94,12 @@ export interface OriginalTextData {
   fontFamily?: string;
   detectedColor?: string;
   detectedBgColor?: string;
+  maskInsets?: {
+    left: number;
+    top: number;
+    right: number;
+    bottom: number;
+  };
   /** Viewport Y of the PDF.js text origin (typographic baseline). */
   baseline?: number;
   ascent?: number;

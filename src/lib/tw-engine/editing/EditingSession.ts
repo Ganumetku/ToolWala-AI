@@ -23,6 +23,7 @@ export class EditingSession {
   private listeners: Set<EditingSessionListener> = new Set();
 
   private selectionAnchor = 0;
+  private preferDomOverlay = false;
 
   static getInstance(): EditingSession {
     if (!EditingSession.instance) {
@@ -39,7 +40,12 @@ export class EditingSession {
     this.listeners.delete(l);
   }
 
-  startSession(objId: string, pageNum: number, initialText: string): void {
+  startSession(
+    objId: string,
+    pageNum: number,
+    initialText: string,
+    options?: { preferDomOverlay?: boolean }
+  ): void {
     this.activeObjectId = objId;
     this.activePageNum = pageNum;
     this.text = initialText;
@@ -47,6 +53,7 @@ export class EditingSession {
     this.selectionStart = initialText.length;
     this.selectionEnd = initialText.length;
     this.selectionAnchor = initialText.length;
+    this.preferDomOverlay = options?.preferDomOverlay === true;
 
     EditModeManager.getInstance().transitionTo(EditingState.TEXT_EDITING);
 
@@ -68,6 +75,11 @@ export class EditingSession {
     EditModeManager.getInstance().transitionTo(EditingState.IDLE);
 
     this.listeners.forEach((l) => l.onSessionEnd());
+    this.preferDomOverlay = false;
+  }
+
+  usesDomOverlay(): boolean {
+    return this.preferDomOverlay;
   }
 
   getActiveObjectId(): string | null {

@@ -3,6 +3,8 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { ZOOM_LEVELS } from '@/lib/twpdf/core';
 import { exportPdf, downloadPdfBytes } from '@/lib/twpdf/export';
+import { applyPdfEditsViaEngine } from '@/lib/pdf-engine/client';
+import { collectOriginalTextEdits } from '@/lib/pdf-engine/collectEdits';
 import {
   buildTextObject,
   buildShapeObject,
@@ -88,13 +90,27 @@ export function usePdfEditor({
   useEffect(() => {
     if (typeof window !== 'undefined') {
       (window as any).setEditMode = setEditMode;
+      (window as any).__twPdfE2e = {
+        countInkObjects: () => {
+          let n = 0;
+          Object.values(canvasInstances.current).forEach((canvas) => {
+            const c = canvas as { forEachObject?: (cb: (o: { isOriginalText?: boolean; type?: string }) => void) => void };
+            c.forEachObject?.((o) => {
+              const t = o.type || '';
+              if (!o.isOriginalText && t !== 'textbox' && t !== 'i-text' && t !== 'text') n += 1;
+            });
+          });
+          return n;
+        },
+      };
     }
     return () => {
       if (typeof window !== 'undefined') {
         delete (window as any).setEditMode;
+        delete (window as any).__twPdfE2e;
       }
     };
-  }, [setEditMode]);
+  }, [setEditMode, canvasInstances]);
 
   const handleZoomOut = useCallback(() => {
     setZoomIndex((prev) => (prev > 0 ? prev - 1 : prev));
@@ -279,11 +295,32 @@ export function usePdfEditor({
     if (!pdfBytes || pageList.length === 0 || !fabricLib) return;
 
     setIsProcessing(true);
-    setProcessingStatus('Starting high-resolution flattening export...');
+    setProcessingStatus('Compiling vector PDF (unedited pages copied as-is)...');
     setError(null);
     setSuccess(null);
 
     try {
+      const { edits, hasNonTextMarkup } = collectOriginalTextEdits({
+        pageList,
+        canvasStates,
+        canvasInstances: canvasInstances.current,
+      });
+
+      if (pdfFile && edits.length > 0 && !hasNonTextMarkup) {
+        try {
+          setProcessingStatus('Rewriting text with original PDF fonts...');
+          const blob = await applyPdfEditsViaEngine(pdfFile, edits);
+          const finalBytes = new Uint8Array(await blob.arrayBuffer());
+          downloadPdfBytes(finalBytes, `edited_${pdfFile.name || 'document.pdf'}`);
+          setSuccess('PDF saved — original font operators rewritten.');
+          setTimeout(() => setSuccess(null), 4000);
+          return;
+        } catch (engineErr) {
+          console.warn('PDF engine unavailable, using browser export', engineErr);
+          setProcessingStatus('Engine offline — compiling in the browser...');
+        }
+      }
+
       const finalBytes = await exportPdf({
         pdfBytes,
         pageList,
@@ -299,7 +336,7 @@ export function usePdfEditor({
 
       downloadPdfBytes(finalBytes, `edited_${pdfFile?.name || 'document.pdf'}`);
 
-      setSuccess('PDF flattened and exported successfully!');
+      setSuccess('PDF exported successfully!');
       setTimeout(() => setSuccess(null), 4000);
     } catch (err) {
       console.error(err);

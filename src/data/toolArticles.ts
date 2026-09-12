@@ -1818,7 +1818,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Correcting typos or modifying PDF text inside official certificates, business invoices, and receipts.",
       "Filling out structured registration forms, job applications, and declarations directly in-browser.",
       "Signing agreements, NDA forms, and contracts with your custom drawn initials locally.",
-      "Annotating study materials, redacting sensitive IDs, and adding notes to e-books.",
+      "Annotating study materials and adding notes to e-books.",
       "Updating business templates, price quotes, and resumes with new details."
     ],
     faqs: [

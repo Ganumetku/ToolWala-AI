@@ -1,7 +1,6 @@
 "use client";
 
 import { useTheme } from "@/components/ThemeContext";
-import { motion } from "framer-motion";
 
 export default function ThemeToggle() {
   const { theme, toggleTheme, isMounted } = useTheme();
@@ -50,21 +49,13 @@ export default function ThemeToggle() {
       </div>
 
       {/* 2. 3D Sliding Thumb / Knob */}
-      <motion.div
-        layout
-        transition={{
-          type: "spring",
-          stiffness: 400,
-          damping: 28
-        }}
-        animate={{
-          x: isDark ? 34 : 0
-        }}
-        className="z-10 h-[26px] w-[26px] rounded-full bg-gradient-to-b from-white to-[#e6e6e6] shadow-[0_3px_8px_rgba(0,0,0,0.35),inset_0_-2px_4px_rgba(0,0,0,0.1),inset_0_2px_4px_rgba(255,255,255,0.9)] flex items-center justify-center no-theme-transition"
+      <div
+        className={`z-10 h-[26px] w-[26px] rounded-full bg-gradient-to-b from-white to-[#e6e6e6] shadow-[0_3px_8px_rgba(0,0,0,0.35),inset_0_-2px_4px_rgba(0,0,0,0.1),inset_0_2px_4px_rgba(255,255,255,0.9)] flex items-center justify-center no-theme-transition transition-transform duration-300 ease-out ${
+          isDark ? "translate-x-[34px]" : "translate-x-0"
+        }`}
       >
-        {/* Subtle inner highlight dot on knob */}
         <div className="h-2 w-2 rounded-full bg-slate-200/50 dark:bg-slate-400/40 shadow-inner" />
-      </motion.div>
+      </div>
 
       <span className="sr-only">Toggle theme</span>
     </button>

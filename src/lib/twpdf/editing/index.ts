@@ -1,3 +1,4 @@
+export * from './runEditHistory';
 export * from './commands/objectCommands';
 export * from './commands/base';
 export * from './types';

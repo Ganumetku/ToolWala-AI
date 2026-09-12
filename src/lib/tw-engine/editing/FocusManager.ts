@@ -16,15 +16,18 @@ export class FocusManager implements EditingSessionListener {
   }
 
   onSessionStart(objId: string, pageNum: number): void {
+    if (EditingSession.getInstance().usesDomOverlay()) return;
     TextInputController.getInstance().mount();
     TextInputController.getInstance().focus();
   }
 
   onSessionUpdate(text: string, caretIndex: number, selStart: number, selEnd: number): void {
+    if (EditingSession.getInstance().usesDomOverlay()) return;
     TextInputController.getInstance().updateSelectionState();
   }
 
   onSessionEnd(): void {
+    if (EditingSession.getInstance().usesDomOverlay()) return;
     TextInputController.getInstance().blur();
     TextInputController.getInstance().unmount();
   }

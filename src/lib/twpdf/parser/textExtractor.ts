@@ -1,7 +1,17 @@
-import { mapPdfFontToLoadedFont, mapPdfFontToWebFont } from '@/lib/twpdf/fonts';
+import { resolveRunFontStyle } from '@/lib/twpdf/fonts';
 import type { TextBoxInfo } from '@/types/pdf';
 import type { PDFTextObject } from '@/lib/tw-engine/types';
 import { PDFDocument, PDFName, PDFRef } from 'pdf-lib';
+import {
+  computeRunViewportBox,
+  explodeItemsOnWhitespace,
+  fontMetricsForName,
+  fontSizeFromTransform,
+  groupAdjacentTextRuns,
+  readCommonFontObject,
+  type PdfTextItem,
+} from './textRuns';
+import { extractShowTextOps, matchRunColor } from './textColor';
 
 export function detectTextColorFromCanvas(
   canvas: HTMLCanvasElement | null,
@@ -48,83 +58,26 @@ export function detectTextColorFromCanvas(
     if (samplePoints.length === 0) return '#000000';
 
     const textPixels = samplePoints.filter((p) => p.L < 235);
-    if (textPixels.length === 0) {
-      return '#000000';
-    }
-
-    textPixels.sort((a, b) => a.L - b.L);
-    const best = textPixels[0];
+    const pool = textPixels.length > 0 ? textPixels : samplePoints;
+    pool.sort((a, b) => a.L - b.L);
+    const mid = Math.floor(pool.length / 2);
+    const median =
+      pool.length % 2 === 1
+        ? pool[mid]
+        : {
+            r: Math.round((pool[mid - 1].r + pool[mid].r) / 2),
+            g: Math.round((pool[mid - 1].g + pool[mid].g) / 2),
+            b: Math.round((pool[mid - 1].b + pool[mid].b) / 2),
+          };
 
     const toHex = (c: number) => {
       const hex = c.toString(16);
       return hex.length === 1 ? '0' + hex : hex;
     };
-    return `#${toHex(best.r)}${toHex(best.g)}${toHex(best.b)}`;
+    return `#${toHex(median.r)}${toHex(median.g)}${toHex(median.b)}`;
   } catch (e) {
     console.error('Failed to detect text color from canvas', e);
     return '#000000';
-  }
-}
-
-export function detectBackgroundColorFromCanvas(
-  canvas: HTMLCanvasElement | null,
-  box: { x: number; y: number; width: number; height: number },
-  scale: number
-): string {
-  if (!canvas) return '#ffffff';
-  try {
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return '#ffffff';
-
-    const x = box.x * scale;
-    const y = box.y * scale;
-    const w = box.width * scale;
-    const h = box.height * scale;
-
-    const pixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
-    const renderScale = Math.max(2.0, pixelRatio);
-
-    const colorCounts: Record<string, number> = {};
-    const steps = 10;
-
-    for (let i = 1; i < steps; i++) {
-      for (let j = 1; j < steps; j++) {
-        const px = x + (w * i) / steps;
-        const py = y + (h * j) / steps;
-
-        const bitmapX = Math.floor(px * renderScale);
-        const bitmapY = Math.floor(py * renderScale);
-
-        if (bitmapX >= 0 && bitmapX < canvas.width && bitmapY >= 0 && bitmapY < canvas.height) {
-          const imgData = ctx.getImageData(bitmapX, bitmapY, 1, 1).data;
-          const r = imgData[0];
-          const g = imgData[1];
-          const b = imgData[2];
-          const a = imgData[3];
-          if (a > 0) {
-            const roundedR = Math.round(r / 8) * 8;
-            const roundedG = Math.round(g / 8) * 8;
-            const roundedB = Math.round(b / 8) * 8;
-
-            const toHex = (c: number) => {
-              const hex = Math.min(255, Math.max(0, c)).toString(16);
-              return hex.length === 1 ? '0' + hex : hex;
-            };
-            const hex = `#${toHex(roundedR)}${toHex(roundedG)}${toHex(roundedB)}`;
-            colorCounts[hex] = (colorCounts[hex] || 0) + 1;
-          }
-        }
-      }
-    }
-
-    const entries = Object.entries(colorCounts);
-    if (entries.length === 0) return '#ffffff';
-
-    entries.sort((a, b) => b[1] - a[1]);
-    return entries[0][0];
-  } catch (e) {
-    console.error('Failed to detect background color from canvas', e);
-    return '#ffffff';
   }
 }
 
@@ -234,213 +187,56 @@ export async function detectOriginalText(
       }
     }
 
-    // Track graphics and text states from operatorList
-    const textOps: any[] = [];
-    const resolvedOPS = page.OPS || (page._transport && page._transport.messageHandler && page._transport.messageHandler.OPS) || {};
-    try {
-      const opList = await page.getOperatorList();
-      const { fnArray, argsArray } = opList;
+    const textOps = await extractShowTextOps(page);
 
-      let currentFont = '';
-      let currentTm = [1, 0, 0, 1, 0, 0];
-      let currentTd = [0, 0];
-      let currentGs = '';
-
-      for (let i = 0; i < fnArray.length; i++) {
-        const fn = fnArray[i];
-        const args = argsArray[i];
-
-        if (fn === resolvedOPS.setFont) {
-          currentFont = args[0];
-        } else if (fn === resolvedOPS.setTextMatrix) {
-          currentTm = args;
-        } else if (fn === resolvedOPS.moveText || fn === resolvedOPS.moveTextWithLeading) {
-          currentTd = args;
-        } else if (fn === resolvedOPS.setGState) {
-          currentGs = args[0];
-        } else if (
-          fn === resolvedOPS.showText ||
-          fn === resolvedOPS.showTextGlyphs ||
-          fn === resolvedOPS.nextLineShowText ||
-          fn === resolvedOPS.nextLineSetSpacingShowText
-        ) {
-          let operatorType = 'Tj';
-          if (fn === resolvedOPS.showTextGlyphs) operatorType = 'TJ';
-          else if (fn === resolvedOPS.nextLineShowText) operatorType = "'";
-          else if (fn === resolvedOPS.nextLineSetSpacingShowText) operatorType = '"';
-
-          let originalEncodedString = '';
-          let originalOperatorBytes = '';
-
-          if (fn === resolvedOPS.showText) {
-            const glyphs = args[0] || [];
-            originalEncodedString = glyphs.map((g: any) => g.unicode || g.fontChar || '').join('');
-            originalOperatorBytes = `(${originalEncodedString}) Tj`;
-          } else if (fn === resolvedOPS.showTextGlyphs) {
-            const elements = args[0] || [];
-            originalEncodedString = elements
-              .map((el: any) => {
-                if (typeof el === 'number') return '';
-                return el.unicode || el.fontChar || '';
-              })
-              .join('');
-            const parts = elements.map((el: any) => {
-              if (typeof el === 'number') return el.toString();
-              return `(${el.unicode || el.fontChar || ''})`;
-            });
-            originalOperatorBytes = `[ ${parts.join(' ')} ] TJ`;
-          } else if (fn === resolvedOPS.nextLineShowText) {
-            const glyphs = args[0] || [];
-            originalEncodedString = glyphs.map((g: any) => g.unicode || g.fontChar || '').join('');
-            originalOperatorBytes = `(${originalEncodedString}) '`;
-          } else if (fn === resolvedOPS.nextLineSetSpacingShowText) {
-            const aw = args[0] || 0;
-            const ac = args[1] || 0;
-            const glyphs = args[2] || [];
-            originalEncodedString = glyphs.map((g: any) => g.unicode || g.fontChar || '').join('');
-            originalOperatorBytes = `${aw} ${ac} (${originalEncodedString}) "`;
-          }
-
-          textOps.push({
-            operatorType,
-            operatorIndex: i,
-            originalOperatorBytes,
-            originalEncodedString,
-            originalTextMatrix: [...currentTm],
-            originalTextPosition: [...currentTd],
-            fontResourceName: currentFont,
-            graphicsStateId: currentGs || undefined,
-          });
-        }
-      }
-    } catch (e) {
-      console.warn('Failed to parse page operator list for metadata mapping in detectOriginalText:', e);
-    }
-
-    // Filter and sanitize items, preserving original index
-    const rawItemsWithIndex = rawItems.map((item, index) => ({ item, index }));
-    const validItems = rawItemsWithIndex
-      .filter(({ item }) => item && typeof item.str === 'string' && item.str.trim().length > 0)
-      .map(({ item, index }) => {
-        const a = item.transform[0];
-        const b = item.transform[1];
-        const c = item.transform[2];
-        const d = item.transform[3];
-        const calculatedFontSize = Math.sqrt(c * c + d * d) || Math.sqrt(a * a + b * b) || 10;
-        return {
-          str: item.str,
-          transform: item.transform,
-          fontName: item.fontName || '',
-          width: item.width || 0,
-          height: item.height || calculatedFontSize || 10,
-          rawIndex: index,
-        };
+    const validItems: PdfTextItem[] = [];
+    rawItems.forEach((item, index) => {
+      if (!item || typeof item.str !== 'string' || item.str.trim().length === 0) return;
+      const fontSize = fontSizeFromTransform(item.transform);
+      validItems.push({
+        str: item.str,
+        transform: item.transform,
+        fontName: item.fontName || '',
+        width: item.width || 0,
+        height: item.height || fontSize || 10,
+        rawIndex: index,
       });
+    });
 
     if (validItems.length === 0) return [];
 
-    const merged: Array<typeof validItems[0] & { rawIndices: number[] }> = [];
-    let current = { ...validItems[0], rawIndices: [validItems[0].rawIndex] };
-
-    for (let i = 1; i < validItems.length; i++) {
-      const item = validItems[i];
-      const currT = current.transform;
-      const itemT = item.transform;
-
-      const currA = currT[0];
-      const currB = currT[1];
-      const currC = currT[2];
-      const currD = currT[3];
-      const currFontSize =
-        Math.sqrt(currC * currC + currD * currD) || Math.sqrt(currA * currA + currB * currB) || 12;
-
-      const itemA = itemT[0];
-      const itemB = itemT[1];
-      const itemC = itemT[2];
-      const itemD = itemT[3];
-      const itemFontSize =
-        Math.sqrt(itemC * itemC + itemD * itemD) || Math.sqrt(itemA * itemA + itemB * itemB) || 12;
-
-      const sameLine = Math.abs(currT[5] - itemT[5]) < 2;
-      const prevEndX = currT[4] + current.width;
-      const distance = itemT[4] - prevEndX;
-      const closeHorizontally = distance >= -3 && distance < currFontSize * 1.25;
-      const sameFontSize = Math.abs(currFontSize - itemFontSize) < 1.5;
-
-      if (sameLine && closeHorizontally && sameFontSize) {
-        const hasSpace =
-          distance > currFontSize * 0.15 && !current.str.endsWith(' ') && !item.str.startsWith(' ');
-        current.str += (hasSpace ? ' ' : '') + item.str;
-        current.width = itemT[4] - currT[4] + item.width;
-        current.rawIndices.push(item.rawIndex);
-      } else {
-        merged.push(current);
-        current = { ...item, rawIndices: [item.rawIndex] };
-      }
-    }
-    merged.push(current);
+    const wordItems = explodeItemsOnWhitespace(validItems);
+    const merged = groupAdjacentTextRuns(wordItems);
+    const styles = (textContent.styles || {}) as Record<string, { fontFamily?: string; ascent?: number; descent?: number }>;
+    const metricsCache = new Map<string, { ascent: number; descent: number }>();
 
     return merged.map((item, idx) => {
-      const tx = item.transform[4];
-      const ty = item.transform[5];
-      const a = item.transform[0];
-      const b = item.transform[1];
-      const c = item.transform[2];
-      const d = item.transform[3];
-      const fontSizePdf = Math.sqrt(c * c + d * d) || Math.sqrt(a * a + b * b) || 12;
-      const angle = Math.atan2(b, a) * (180 / Math.PI);
-      const widthPdf = item.width;
+      let metrics = metricsCache.get(item.fontName);
+      if (!metrics) {
+        metrics = fontMetricsForName(page, item.fontName, styles);
+        metricsCache.set(item.fontName, metrics);
+      }
 
-      const [vx, vy] = viewport.convertToViewportPoint(tx, ty) as [number, number];
-      const boxHeight = fontSizePdf;
-      const boxWidth = widthPdf > 0 ? widthPdf : fontSizePdf * 0.55 * item.str.length;
-
-      const fontStyleObj = textContent.styles ? textContent.styles[item.fontName] : null;
+      const box = computeRunViewportBox(item, viewport, metrics);
+      const fontStyleObj = styles[item.fontName] || null;
       const resolvedFontFamily = fontStyleObj ? fontStyleObj.fontFamily : '';
-
-      const fName = (item.fontName || '').toLowerCase();
-      const resFontFamily = (resolvedFontFamily || '').toLowerCase();
-
-      const isBold =
-        fName.includes('bold') ||
-        fName.includes('black') ||
-        fName.includes('heavy') ||
-        fName.includes('semibold') ||
-        fName.includes('medium') ||
-        fName.includes('w700') ||
-        fName.includes('w600') ||
-        fName.includes('w-700') ||
-        fName.includes('w-600') ||
-        resFontFamily.includes('bold') ||
-        resFontFamily.includes('black') ||
-        resFontFamily.includes('heavy') ||
-        resFontFamily.includes('semibold') ||
-        resFontFamily.includes('medium') ||
-        resFontFamily.includes('w700') ||
-        resFontFamily.includes('w600') ||
-        resFontFamily.includes('w-700') ||
-        resFontFamily.includes('w-600');
-
-      const isItalic =
-        fName.includes('italic') ||
-        fName.includes('oblique') ||
-        resFontFamily.includes('italic') ||
-        resFontFamily.includes('oblique');
-
-      const webFontFamily = mapPdfFontToWebFont(item.fontName, resolvedFontFamily);
-      const loadedFontFamily = mapPdfFontToLoadedFont(item.fontName, resolvedFontFamily);
-      const activeFontFamily = loadedFontFamily
-        ? `"${loadedFontFamily}", ${webFontFamily}, sans-serif`
-        : resolvedFontFamily
-          ? `"${resolvedFontFamily}", ${webFontFamily}, sans-serif`
-          : `${webFontFamily}, sans-serif`;
-
+      const fontObject = readCommonFontObject(page, item.fontName);
       const rawFontName = item.fontName || '';
       const subsetMatch = rawFontName.match(/^([A-Z]{6})\+/);
       const subsetName = subsetMatch ? subsetMatch[1] : undefined;
-
       const firstRawIndex = item.rawIndices[0];
-      const matchedOp = textOps[firstRawIndex];
+      const matchedOp =
+        textOps.find((op) => (op.originalEncodedString || '').includes(item.str)) ||
+        textOps[firstRawIndex];
+      const runColor = matchRunColor(item.str, firstRawIndex, textOps) || matchedOp?.fillColor || '#000000';
+      const renderMode = matchedOp?.renderMode ?? 0;
+      const runFont = resolveRunFontStyle({
+        pdfFontName: item.fontName,
+        resolvedFontFamily,
+        text: item.str,
+        fontObject,
+        renderMode,
+      });
 
       const pdfObject: PDFTextObject = {
         objectNumber,
@@ -458,46 +254,49 @@ export async function detectOriginalText(
         fontResource: item.fontName,
         fontName: resolvedFontFamily || item.fontName || 'Helvetica',
         subsetName,
-        fontSize: fontSizePdf,
-        color: '#000000',
+        fontSize: box.fontSize,
+        color: runColor,
         transformationMatrix: [...item.transform],
-        boundingBox: { x: vx, y: vy - boxHeight, width: boxWidth, height: boxHeight * 1.15 },
-        baseline: vy,
-        ascent: fontStyleObj ? fontStyleObj.ascent : undefined,
-        descent: fontStyleObj ? fontStyleObj.descent : undefined,
+        boundingBox: { x: box.x, y: box.y, width: box.width, height: box.height },
+        baseline: box.baseline,
+        ascent: metrics.ascent,
+        descent: metrics.descent,
         glyphIds: [],
         glyphWidths: [],
         unicodeMapping: {},
         cidMapping: {},
         originalText: item.str,
         currentText: item.str,
-        renderMode: 0,
+        renderMode,
         writingMode: 0,
-        rotation: angle,
+        rotation: box.angleDeg,
         graphicsStateId: matchedOp?.graphicsStateId,
       };
 
+      const runId = `orig_${pageNum}_${idx}`;
       return {
-        id: `orig_${pageNum}_${idx}_${Date.now()}`,
+        id: runId,
+        runId,
         text: item.str,
-        x: vx,
-        y: vy - boxHeight,
-        width: boxWidth,
-        height: boxHeight * 1.15,
-        fontSize: fontSizePdf,
-        angle: angle,
-        fontWeight: isBold ? 'bold' : 'normal',
-        fontStyle: isItalic ? 'italic' : 'normal',
-        fontFamily: activeFontFamily,
-        originalPdfX: tx,
-        originalPdfY: ty,
-        originalPdfWidth: widthPdf > 0 ? widthPdf : fontSizePdf * 0.55 * item.str.length,
-        originalPdfHeight: fontSizePdf,
-        originalPdfFontSize: fontSizePdf,
-        baseline: vy,
+        x: box.x,
+        y: box.y,
+        width: box.width,
+        height: box.height,
+        fontSize: box.fontSize,
+        angle: box.angleDeg,
+        fontWeight: runFont.fontWeight,
+        fontStyle: runFont.fontStyle,
+        fontFamily: runFont.cssFamily,
+        originalPdfX: box.originalPdfX,
+        originalPdfY: box.originalPdfY,
+        originalPdfWidth: box.originalPdfWidth,
+        originalPdfHeight: box.originalPdfHeight,
+        originalPdfFontSize: box.originalPdfFontSize,
+        baseline: box.baseline,
         pdfFontName: item.fontName,
-        ascent: fontStyleObj ? fontStyleObj.ascent : undefined,
-        descent: fontStyleObj ? fontStyleObj.descent : undefined,
+        ascent: metrics.ascent,
+        descent: metrics.descent,
+        detectedColor: runColor,
         pdfObject,
       };
     });

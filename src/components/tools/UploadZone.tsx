@@ -64,13 +64,14 @@ export default function UploadZone({
           }
         `}
       >
-        <input 
-          type="file" 
-          ref={fileInputRef} 
-          onChange={handleFileChange} 
-          multiple={multiple} 
-          accept={accept} 
-          className="hidden" 
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          multiple={multiple}
+          accept={accept}
+          data-testid="tool-file-input"
+          className="hidden"
         />
         
         {/* Decorative background glow */}

@@ -3,10 +3,8 @@
 import Link from 'next/link';
 import { ToolCategory } from '@/data/tools';
 import { ArrowRight, Star } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { useTranslation } from '@/components/I18nContext';
-import ToolIcon, { getCategoryStyle } from '@/components/ToolIcon';
-import PdfToolIcon, { isPdfTool } from '@/components/PdfToolIcon';
+import PdfToolIcon from '@/components/PdfToolIcon';
 import { startTopProgress } from '@/components/TopProgressBar';
 
 export interface ToolCardProps {
@@ -34,10 +32,6 @@ export default function ToolCard({ id, slug, title, description, icon, href, isP
   const displayCategory = category ? t(`categories.${category}`, category) : category;
   const localizedHref = localizeHref(href);
 
-  // Category specific accent styles
-  const catStyle = getCategoryStyle(category);
-  const isPdf = category === 'PDF Tools' || isPdfTool(toolId) || isPdfTool(rawSlug);
-
   // Selective visual hierarchy for 1-2 top essential tools per category (clean UX, no badge overload)
   const TOP_PICK_IDS = new Set([
     'merge-pdf',
@@ -51,13 +45,7 @@ export default function ToolCard({ id, slug, title, description, icon, href, isP
   const isTopFeatured = Boolean(isPopular && toolId && TOP_PICK_IDS.has(toolId));
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-30px" }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-      className="h-full relative group"
-    >
+    <div className="h-full relative group">
       <Link 
         href={localizedHref}
         onClick={() => startTopProgress()}
@@ -107,6 +95,6 @@ export default function ToolCard({ id, slug, title, description, icon, href, isP
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }

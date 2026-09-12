@@ -1,5 +1,6 @@
 import type { TWTextObject, TWTextState, PDFTextObject } from './types';
 import { PDFName, PDFRef } from 'pdf-lib';
+import { fabricFontWeight, resolveNumericFontWeight } from '@/lib/twpdf/fonts/fontWeight';
 
 /**
  * TextParser parses raw text content elements from a PDFJS page
@@ -229,34 +230,17 @@ export class TextParser {
 
         const fName = (item.fontName || '').toLowerCase();
         const resFontFamily = (fontName || '').toLowerCase();
-
-        const isBold =
-          fName.includes('bold') ||
-          fName.includes('black') ||
-          fName.includes('heavy') ||
-          fName.includes('semibold') ||
-          fName.includes('medium') ||
-          fName.includes('w700') ||
-          fName.includes('w600') ||
-          fName.includes('w-700') ||
-          fName.includes('w-600') ||
-          resFontFamily.includes('bold') ||
-          resFontFamily.includes('black') ||
-          resFontFamily.includes('heavy') ||
-          resFontFamily.includes('semibold') ||
-          resFontFamily.includes('medium') ||
-          resFontFamily.includes('w700') ||
-          resFontFamily.includes('w600') ||
-          resFontFamily.includes('w-700') ||
-          resFontFamily.includes('w-600');
-
         const isItalic =
           fName.includes('italic') ||
           fName.includes('oblique') ||
           resFontFamily.includes('italic') ||
           resFontFamily.includes('oblique');
 
-        const fontWeight = isBold ? 'bold' : 'normal';
+        const numericWeight = resolveNumericFontWeight({
+          fontName: item.fontName,
+          resolvedFontFamily: fontName,
+        });
+        const fontWeight = fabricFontWeight(numericWeight);
         const fontStyle = isItalic ? 'italic' : 'normal';
 
         const ascent = fontStyleObj ? fontStyleObj.ascent : undefined;

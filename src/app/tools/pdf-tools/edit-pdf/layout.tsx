@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { generateToolMetadataHelper } from '@/lib/seo';
+import './edit-pdf-fonts.css';
 
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(

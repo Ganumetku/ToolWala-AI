@@ -1,0 +1,18 @@
+{
+  "invoiceEdit": "INV-EDIT-ME",
+  "invoiceKeep": "INV-KEEP-TOTAL",
+  "hindiTarget": "HINDI-WRAP-TARGET",
+  "hindiLong": "श्रीक्षेत्रक्षेत्रक्षेत्र श्री कृष्ण चन्द्र",
+  "rotatedStamp": "ROTATED-STAMP",
+  "colLeft": "LEFT-COL-EDIT",
+  "colRight": "RIGHT-COL-KEEP",
+  "weightRegular": "WEIGHT-REGULAR",
+  "weightMedium": "WEIGHT-MEDIUM",
+  "weightSemibold": "WEIGHT-SEMIBOLD",
+  "weightBold": "WEIGHT-BOLD",
+  "weightBlack": "WEIGHT-BLACK",
+  "shortRun": "GO",
+  "digitalKeep": "DIGITAL-KEEP",
+  "replacement": "EDITED-RUN-OK",
+  "longReplacement": "THIS REPLACEMENT STRING IS INTENTIONALLY VERY LONG TO FORCE WRAP OR MARGIN CLAMP ON EXPORT"
+}

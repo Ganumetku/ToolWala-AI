@@ -18,6 +18,7 @@ import {
 import { FONT_SIZES } from '@/types/pdf';
 import type { SelectedObjectInfo } from '@/types/pdf';
 import { rgbaToHex } from '@/lib/twpdf/utils';
+import { isHeavyFontWeight } from '@/lib/twpdf/fonts/fontWeight';
 
 export interface PropertyPanelProps {
   selectedObjectInfo: SelectedObjectInfo | null;
@@ -114,9 +115,9 @@ export function PropertyPanel({
                 <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Text Style</label>
                 <div className="grid grid-cols-4 gap-1.5">
                   <button
-                    onClick={() => changeSelectedProperty('fontWeight', selectedObjectInfo.fontWeight === 'bold' ? 'normal' : 'bold')}
+                    onClick={() => changeSelectedProperty('fontWeight', isHeavyFontWeight(selectedObjectInfo.fontWeight) ? 'normal' : 'bold')}
                     className={`p-2.5 rounded-xl border text-xs font-bold transition-all ${
-                      selectedObjectInfo.fontWeight === 'bold' ? 'bg-blue-600 border-blue-500 text-white' : 'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                      isHeavyFontWeight(selectedObjectInfo.fontWeight) ? 'bg-blue-600 border-blue-500 text-white' : 'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                     }`}
                   >
                     <Bold className="w-3.5 h-3.5 mx-auto" />

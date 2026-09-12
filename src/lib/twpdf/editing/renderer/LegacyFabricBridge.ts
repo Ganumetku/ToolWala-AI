@@ -8,6 +8,7 @@ import type {
   TWPDFAnnotationObject,
 } from '@/types/twpdf';
 import { isOriginalTextEdited } from '@/lib/twpdf/editor';
+import { ORIGINAL_TEXT_HIT_BG } from '@/lib/twpdf/parser/textMask';
 
 const FABRIC_CONTROL_PROPS = {
   borderColor: '#3b82f6',
@@ -140,7 +141,7 @@ export class LegacyFabricBridge {
       originalBBox: obj.originalBBox,
       pdfObject: obj.pdfObject,
       backgroundColor: obj.isOriginalText
-        ? (isEdited ? (obj.originalTextData?.detectedBgColor || '#ffffff') : 'rgba(255, 255, 255, 0.001)')
+        ? ORIGINAL_TEXT_HIT_BG
         : (obj.backgroundColor || '#ffffff'),
       lockScalingY: true,
       styles: [],

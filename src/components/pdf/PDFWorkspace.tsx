@@ -67,6 +67,8 @@ export interface PDFWorkspaceProps {
   changeSelectedProperty: (key: string, value: unknown) => void;
   adjustLayer: (action: 'front' | 'back' | 'forward' | 'backward') => void;
   handleDeleteSelected: () => void;
+  infoNotice?: string | null;
+  onDismissInfoNotice?: () => void;
 }
 
 export function PDFWorkspace({
@@ -127,6 +129,8 @@ export function PDFWorkspace({
   changeSelectedProperty,
   adjustLayer,
   handleDeleteSelected,
+  infoNotice,
+  onDismissInfoNotice,
 }: PDFWorkspaceProps) {
   if (!pdfFile) {
     return (
@@ -242,6 +246,20 @@ export function PDFWorkspace({
               </button>
             </div>
           )}
+          {infoNotice && (
+            <div
+              data-testid="edit-pdf-info-notice"
+              className="bg-amber-50 dark:bg-amber-950/30 text-amber-800 dark:text-amber-200 px-5 py-4 rounded-2xl flex items-center gap-3 border border-amber-200 dark:border-amber-900/40 animate-fade-in shadow-lg"
+            >
+              <AlertCircle className="w-5 h-5 flex-shrink-0" />
+              <p className="text-xs font-bold leading-normal">{infoNotice}</p>
+              {onDismissInfoNotice && (
+                <button onClick={onDismissInfoNotice} className="ml-auto text-amber-500/70 hover:text-amber-700 p-1">
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col gap-10 items-center justify-start pb-20">
@@ -293,6 +311,14 @@ export function PDFWorkspace({
                 <div className="absolute top-2 -left-16 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-[9px] font-black tracking-widest uppercase text-slate-600 dark:text-slate-400 px-3 py-1.5 rounded-full select-none shadow">
                   P. {idx + 1}
                 </div>
+                {editMode === 'edit-text' && (originalTexts[item.originalPageNum] || []).length === 0 && (
+                  <div
+                    data-testid="edit-pdf-no-text-page-hint"
+                    className="absolute left-1/2 -translate-x-1/2 bottom-3 z-30 pointer-events-none bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700 text-[10px] font-semibold text-slate-600 dark:text-slate-300 px-3 py-1.5 rounded-full shadow"
+                  >
+                    No selectable text on this page — use Add Text
+                  </div>
+                )}
               </div>
             );
           })}

@@ -4,15 +4,12 @@ import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import {
-  Sparkles, ShieldCheck, Zap,
-  Search, ChevronRight,
-  Layers, Clock, ArrowRight, MousePointerClick,
-  Lock, FileText, Cpu, UserX, Gift,
-  FileCheck, Users, Star
+  Sparkles, ShieldCheck, ChevronRight, ArrowRight,
+  Cpu, UserX, Gift,
 } from 'lucide-react';
 import ToolCard from '@/components/ToolCard';
 import ToolIcon from '@/components/ToolIcon';
-import PdfToolIcon, { isPdfTool } from '@/components/PdfToolIcon';
+import PdfToolIcon from '@/components/PdfToolIcon';
 import ToolAutocompleteSearch from '@/components/ToolAutocompleteSearch';
 import { toolsData, Tool } from '@/data/tools';
 import { fetchPublicTools } from '@/lib/tools';
@@ -57,7 +54,13 @@ export default function Home() {
 
   useEffect(() => {
     if (!mounted) return;
-    fetchPublicTools().then(setMergedTools).catch(() => { });
+    const load = () => fetchPublicTools().then(setMergedTools).catch(() => {});
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(load, { timeout: 2500 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const timer = setTimeout(load, 800);
+    return () => clearTimeout(timer);
   }, [mounted]);
 
   const recentTools = useMemo(() => {
@@ -259,25 +262,25 @@ export default function Home() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 max-w-7xl">
 
           {/* Integrated Privacy Pill Badge */}
-          <div className="animate-fade-in inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-50/90 dark:bg-slate-900/60 border border-slate-200/90 dark:border-white/10 text-slate-600 dark:text-slate-300 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest mb-3.5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] select-none backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-50/90 dark:bg-slate-900/60 border border-slate-200/90 dark:border-white/10 text-slate-600 dark:text-slate-300 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest mb-3.5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] select-none backdrop-blur-sm">
             <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-500 ring-2 ring-emerald-500/20" />
             <span>{t('home.badge', '🔒 100% In-Browser • Zero Uploads • Free & Private')}</span>
           </div>
 
           {/* Punchy, Confident Headline with tighter tracking */}
-          <h1 className="animate-fade-up font-bold text-3xl sm:text-5xl md:text-6xl tracking-tight sm:tracking-tighter text-[#33333b] dark:text-white leading-[1.12] mb-3 max-w-4xl mx-auto">
+          <h1 className="font-bold text-3xl sm:text-5xl md:text-6xl tracking-tight sm:tracking-tighter text-[#33333b] dark:text-white leading-[1.12] mb-3 max-w-4xl mx-auto">
             {t('home.hero_title_1', 'Free ')}
             <span className="text-[#2563EB] dark:text-blue-400">
               {t('home.hero_title_highlight', 'PDF, Image & AI Tools')}
             </span>
           </h1>
 
-          <p className="animate-fade-up mx-auto max-w-xl text-xs sm:text-sm font-normal text-[#707078] dark:text-gray-400 leading-relaxed mb-5">
+          <p className="mx-auto max-w-xl text-xs sm:text-sm font-normal text-[#707078] dark:text-gray-400 leading-relaxed mb-5">
             {t('home.hero_subtitle', 'Edit PDFs, compress images, remove backgrounds, and use AI utilities locally in your browser with zero data retention.')}
           </p>
 
           {/* Instant Search Bar with subtle shadow & tactile feel */}
-          <div className="animate-fade-up mx-auto max-w-xl mb-5 relative z-30">
+          <div className="mx-auto max-w-xl mb-5 relative z-30">
             <ToolAutocompleteSearch
               value={searchQuery}
               onChange={setSearchQuery}
@@ -290,7 +293,7 @@ export default function Home() {
           </div>
 
           {/* Interactive Category Filter Tabs (Tactile pills with smooth transition & subtle hover) */}
-          <div className="animate-fade-in flex flex-wrap justify-center items-center gap-1.5 sm:gap-2 mb-7 sm:mb-9 relative z-10 max-w-3xl mx-auto">
+          <div className="flex flex-wrap justify-center items-center gap-1.5 sm:gap-2 mb-7 sm:mb-9 relative z-10 max-w-3xl mx-auto">
             {categoryTabs.map((tab) => {
               const isActive = activeCategoryTab === tab.id && !searchQuery;
               return (

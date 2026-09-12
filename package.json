@@ -9,6 +9,11 @@
     "lint": "next lint",
     "test": "playwright test",
     "test:smoke": "playwright test tests/smoke",
+    "test:edit-pdf": "playwright test tests/edit-pdf",
+    "test:visual:update": "UPDATE_EDIT_PDF_BASELINES=1 playwright test tests/edit-pdf",
+    "fixtures:edit-pdf": "node scripts/generate-edit-pdf-fixtures.mjs",
+    "pdf-engine:install": "python3 -m venv services/pdf-engine/.venv && services/pdf-engine/.venv/bin/pip install -r services/pdf-engine/requirements.txt",
+    "pdf-engine": "services/pdf-engine/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8787 --app-dir services/pdf-engine",
     "db:setup": "node scripts/setup-supabase.mjs",
     "db:seed-blogs": "node scripts/seed-blogs.mjs"
   },
@@ -17,6 +22,7 @@
     "@ffmpeg/ffmpeg": "^0.12.15",
     "@ffmpeg/util": "^0.12.2",
     "@imgly/background-removal": "^1.7.0",
+    "@pdf-lib/fontkit": "^1.1.1",
     "@pdfsmaller/pdf-decrypt": "^1.0.1",
     "@pdfsmaller/pdf-encrypt-lite": "^1.0.2",
     "@prisma/client": "^5.22.0",
@@ -56,6 +62,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@napi-rs/canvas": "^1.0.9",
     "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4",
     "@types/fabric": "^5.3.0",
@@ -63,21 +70,24 @@
     "@types/node": "^20",
     "@types/nodemailer": "^8.0.0",
     "@types/pg": "^8.20.0",
+    "@types/pixelmatch": "^5.2.6",
+    "@types/pngjs": "^6.0.5",
     "@types/qrcode": "^1.5.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "pixelmatch": "^7.2.0",
+    "pngjs": "^7.0.0",
     "prisma": "^5.22.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
   "browserslist": [
-    "> 0.5%",
-    "last 2 versions",
-    "Firefox ESR",
-    "not dead",
-    "not IE 11",
-    "not op_mini all"
+    "chrome >= 111",
+    "edge >= 111",
+    "firefox >= 111",
+    "safari >= 16.4",
+    "not dead"
   ]
 }

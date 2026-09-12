@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, Clock, TrendingUp, Sparkles, ArrowRight, CornerDownLeft, Trash2 } from 'lucide-react';
 import { Tool, toolsData } from '@/data/tools';
 import { fetchPublicTools } from '@/lib/tools';
@@ -437,13 +436,8 @@ export default function ToolAutocompleteSearch({
       </div>
 
       {/* Autocomplete Dropdown */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.98 }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
+      {isOpen && (
+          <div
             className="absolute top-full left-0 right-0 mt-3 z-50 bg-white dark:bg-[#090d16] border border-[#E8ECF4] dark:border-white/10 shadow-[0_20px_50px_rgba(15,23,42,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.9)] rounded-2xl overflow-hidden text-left"
           >
             
@@ -628,9 +622,8 @@ export default function ToolAutocompleteSearch({
               </div>
             )}
 
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+      )}
     </div>
   );
 }

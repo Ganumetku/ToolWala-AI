@@ -10,6 +10,7 @@ import { EditingSession } from '../editing/EditingSession';
 import { CaretRenderer } from '../editing/CaretRenderer';
 import { SelectionRenderer } from '../editing/SelectionRenderer';
 import { isOriginalTextEdited } from '../../twpdf/editor/textEdit';
+import { computeLocalMaskRect, ORIGINAL_TEXT_HIT_BG } from '../../twpdf/parser/textMask';
 import { BaselineEngine } from '../typography/BaselineEngine';
 import { mapPdfFontToLoadedFont, mapPdfFontToWebFont } from '../../twpdf/fonts/fontMapping';
 
@@ -145,7 +146,7 @@ export class RenderEngine {
 
             // Resolve actual CSS Font Face and map subset fonts
             const loadedFontFamily = mapPdfFontToLoadedFont(pdfFontName, fontName);
-            const webFontFamily = mapPdfFontToWebFont(pdfFontName, fontName);
+            const webFontFamily = mapPdfFontToWebFont(pdfFontName, fontName, { text: currentText });
             const finalFontFamily = loadedFontFamily
               ? `"${loadedFontFamily}", ${webFontFamily}, sans-serif`
               : fontName;
@@ -286,23 +287,37 @@ export class RenderEngine {
         ctx.scale(scaleX * scale, scaleY * scale);
 
         // Draw solid background patch if one is defined/active (especially during PDF high-res export)
-        const hasBgColor = obj.backgroundColor && obj.backgroundColor !== 'transparent' && obj.backgroundColor !== 'rgba(255, 255, 255, 0.001)';
+        const hasBgColor = obj.backgroundColor && obj.backgroundColor !== 'transparent' && obj.backgroundColor !== ORIGINAL_TEXT_HIT_BG;
         const isOriginalEdited = obj.isOriginalText && isEdited;
         const isNewTextbox = !obj.isOriginalText;
 
         if (hasBgColor || isOriginalEdited || isNewTextbox) {
-          const bgColor = hasBgColor
+          const sampledBg = obj.originalTextData?.detectedBgColor;
+          const bgColor = hasBgColor && obj.backgroundColor !== ORIGINAL_TEXT_HIT_BG
             ? obj.backgroundColor
-            : (obj.originalTextData?.detectedBgColor || '#ffffff');
-          
-          if (bgColor && bgColor !== 'transparent' && bgColor !== 'rgba(255, 255, 255, 0.001)') {
+            : (sampledBg || '#ffffff');
+
+          const paintMask = obj.isOriginalText
+            ? (isEditing || isOriginalEdited)
+            : (bgColor && bgColor !== 'transparent' && bgColor !== ORIGINAL_TEXT_HIT_BG);
+
+          if (paintMask && bgColor && bgColor !== 'transparent' && bgColor !== ORIGINAL_TEXT_HIT_BG) {
             ctx.save();
-            ctx.fillStyle = bgColor;
-            const padX = 2;
-            const padY = 2;
-            ctx.fillRect(-padX, -padY, (obj.width || 0) + padX * 2, (obj.height || 0) + padY * 2);
+            ctx.fillStyle = sampledBg || bgColor;
+            const orig = obj.originalTextData || obj.originalBBox;
+            const maskW = orig?.width ?? obj.width ?? 0;
+            const maskH = orig?.height ?? obj.height ?? 0;
+            const dx = orig && typeof orig.x === 'number' ? orig.x - (obj.left || 0) : 0;
+            const dy = orig && typeof orig.y === 'number' ? orig.y - (obj.top || 0) : 0;
+            const rect = computeLocalMaskRect(maskW, maskH, orig?.maskInsets);
+            ctx.fillRect(dx + rect.x, dy + rect.y, rect.width, rect.height);
             ctx.restore();
           }
+        }
+
+        if (isEditing && session.usesDomOverlay()) {
+          ctx.restore();
+          return;
         }
 
         // Calculate baseline shift using BaselineEngine to ensure perfect alignment.
@@ -318,10 +333,10 @@ export class RenderEngine {
         ctx.translate(0, baselineShift);
 
         const loadedFontFamily = mapPdfFontToLoadedFont(pdfFontName, fontFamily);
-        const webFontFamily = mapPdfFontToWebFont(pdfFontName, fontFamily);
+        const webFontFamily = mapPdfFontToWebFont(pdfFontName, fontFamily, { text: currentText });
         const finalFontFamily = loadedFontFamily
-          ? `"${loadedFontFamily}", ${webFontFamily}, sans-serif`
-          : fontFamily;
+          ? `"${loadedFontFamily}", ${fontFamily || webFontFamily}, sans-serif`
+          : fontFamily || `${webFontFamily}, sans-serif`;
 
         let activeStyle = fontStyle;
         let activeWeight = fontWeight;

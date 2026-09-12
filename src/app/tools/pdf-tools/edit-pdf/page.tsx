@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useCallback, useRef } from 'react';
+import React, { useEffect, useCallback, useRef, useState, useMemo } from 'react';
 import { RefreshCw, FilePenLine, AlertCircle } from 'lucide-react';
 import SignatureModal from './SignatureModal';
 import { PDFToolbar } from '@/components/pdf/PDFToolbar';
@@ -18,10 +18,16 @@ import { usePdfEditor } from '@/hooks/usePdfEditor';
 import { useTWPdfDocument } from '@/hooks/useTWPdfDocument';
 import { useTWPdfEditingEngine } from '@/hooks/useTWPdfEditingEngine';
 import { SelectionEngine } from '@/lib/tw-engine/editor/SelectionEngine';
+import { runEditHistory } from '@/lib/twpdf/editing/runEditHistory';
+import { CANVAS_JSON_PROPS } from '@/lib/twpdf/core';
+import { documentHasSelectableText } from '@/lib/twpdf/parser/textRuns';
 
 export default function EditPdfPage() {
   const canvasInstances = useRef<Record<string, unknown>>({});
   const zoomScaleRef = useRef<number>(ZOOM_LEVELS[2]);
+  const [textLayerNotice, setTextLayerNotice] = useState<string | null>(null);
+  const SCAN_NOTICE =
+    'This PDF has no selectable text layer. It may be a scan or image-only file. Use Add Text to place new text.';
 
   const doc = usePdfDocument();
   const twpdf = useTWPdfDocument();
@@ -93,6 +99,47 @@ export default function EditPdfPage() {
 
   zoomScaleRef.current = editor.zoomScale;
 
+  const hasSelectableText = useMemo(
+    () => documentHasSelectableText(doc.originalTexts),
+    [doc.originalTexts]
+  );
+
+  useEffect(() => {
+    if (!doc.pdfFile || doc.isProcessing || doc.pageList.length === 0) return;
+    if (!hasSelectableText) {
+      setTextLayerNotice(SCAN_NOTICE);
+      if (editor.editMode === 'edit-text') {
+        editor.setEditMode('text');
+      }
+    } else {
+      setTextLayerNotice(null);
+    }
+  }, [doc.pdfFile, doc.isProcessing, doc.pageList.length, hasSelectableText, editor.editMode, editor.setEditMode]);
+
+  useEffect(() => {
+    runEditHistory.setApplyHandler((record, direction) => {
+      const canvas = (canvasInstances.current as Record<string, any>)[record.pageId];
+      if (!canvas?.forEachObject) return;
+      const text = direction === 'undo' ? record.originalRun.text : record.newText;
+      const width =
+        direction === 'undo'
+          ? record.originalRun.width
+          : (record.styleOverrides?.width ?? record.originalRun.width);
+      canvas.forEachObject((o: { id?: string; set: (p: Record<string, unknown>) => void; dirty?: boolean }) => {
+        if (o.id === record.runId) {
+          o.set({ text, width });
+          o.dirty = true;
+        }
+      });
+      canvas.requestRenderAll?.();
+      const state = canvas.toJSON?.([...CANVAS_JSON_PROPS]);
+      if (state) {
+        setCanvasStates((prev) => ({ ...prev, [record.pageId]: state }));
+      }
+    });
+    return () => runEditHistory.setApplyHandler(null);
+  }, [setCanvasStates]);
+
   useEffect(() => {
     if (doc.pdfFile && doc.pageList.length > 0 && Object.keys(doc.pageDimensions).length > 0) {
       twpdf.initializeFromPdfLoad({
@@ -124,17 +171,27 @@ export default function EditPdfPage() {
   );
 
   const handleUndo = useCallback(() => {
+    if (runEditHistory.canUndo()) {
+      runEditHistory.undo();
+      return;
+    }
     triggerUndo();
   }, [triggerUndo]);
 
   const handleRedo = useCallback(() => {
+    if (runEditHistory.canRedo()) {
+      runEditHistory.redo();
+      return;
+    }
     triggerRedo();
   }, [triggerRedo]);
 
   const handleLoadPdf = useCallback(
     (file: File) => {
+      setTextLayerNotice(null);
       resetHistory();
       resetEngine();
+      runEditHistory.clear();
       twpdf.resetTWPdfDocument();
       doc.loadPdfFile(file);
     },
@@ -142,9 +199,11 @@ export default function EditPdfPage() {
   );
 
   const handleReset = useCallback(() => {
+    setTextLayerNotice(null);
     editor.handleReset();
     resetHistory();
     resetEngine();
+    runEditHistory.clear();
     twpdf.resetTWPdfDocument();
   }, [editor, resetHistory, resetEngine, twpdf]);
 
@@ -188,11 +247,28 @@ export default function EditPdfPage() {
 
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      const isMac = typeof window !== 'undefined' && navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+      const modifierPressed = isMac ? e.metaKey : e.ctrlKey;
+      const isUndo = modifierPressed && e.key.toLowerCase() === 'z' && !e.shiftKey;
+      const isRedo =
+        (modifierPressed && e.key.toLowerCase() === 'z' && e.shiftKey) ||
+        (modifierPressed && e.key.toLowerCase() === 'y');
+
       if (
         e.target instanceof HTMLInputElement ||
         e.target instanceof HTMLTextAreaElement ||
         (e.target as HTMLElement).isContentEditable
       ) {
+        if (isUndo) {
+          e.preventDefault();
+          handleUndo();
+          return;
+        }
+        if (isRedo) {
+          e.preventDefault();
+          handleRedo();
+          return;
+        }
         return;
       }
 
@@ -250,18 +326,12 @@ export default function EditPdfPage() {
         }
       }
 
-      const isMac = typeof window !== 'undefined' && navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-      const modifierPressed = isMac ? e.metaKey : e.ctrlKey;
-
-      if (modifierPressed && e.key.toLowerCase() === 'z' && !e.shiftKey) {
+      if (isUndo) {
         e.preventDefault();
         handleUndo();
       }
 
-      if (
-        (modifierPressed && e.key.toLowerCase() === 'z' && e.shiftKey) ||
-        (modifierPressed && e.key.toLowerCase() === 'y')
-      ) {
+      if (isRedo) {
         e.preventDefault();
         handleRedo();
       }
@@ -304,7 +374,11 @@ export default function EditPdfPage() {
   if (!doc.pdfFile) {
     return (
       <ToolLayout>
-        <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12">
+        <div
+          data-testid="edit-pdf-landing"
+          data-libs-ready={doc.pdfjs && doc.fabricLib ? 'true' : 'false'}
+          className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12"
+        >
           <ToolHero
             title="Edit PDF Online"
             description="Rebuild, annotate, edit text, draw shapes, and sign PDF documents directly in your browser."
@@ -375,6 +449,8 @@ export default function EditPdfPage() {
         handleReset={handleReset}
         handleExportPDF={editor.handleExportPDF}
         isProcessing={doc.isProcessing}
+        hasSelectableText={hasSelectableText}
+        onNoSelectableText={() => setTextLayerNotice(SCAN_NOTICE)}
       />
 
       <PDFWorkspace
@@ -435,6 +511,8 @@ export default function EditPdfPage() {
         changeSelectedProperty={selection.changeSelectedProperty}
         adjustLayer={selection.adjustLayer}
         handleDeleteSelected={selection.handleDeleteSelected}
+        infoNotice={textLayerNotice}
+        onDismissInfoNotice={() => setTextLayerNotice(null)}
       />
 
       <SignatureModal

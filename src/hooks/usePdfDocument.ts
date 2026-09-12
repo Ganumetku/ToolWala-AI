@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { loadPdfLibraries } from '@/lib/twpdf/core';
 import { detectOriginalText } from '@/lib/twpdf/parser';
+import { loadBundledEditorFonts } from '@/lib/twpdf/fonts';
 import { generateThumbnails } from '@/lib/twpdf/renderer';
 import type { PageDimensions, PageItem, TextBoxInfo } from '@/types/pdf';
 
@@ -32,6 +33,9 @@ export function usePdfDocument() {
     const initLibraries = async () => {
       try {
         const { pdfjs: pLib, fabricLib: fLib } = await loadPdfLibraries();
+        await loadBundledEditorFonts().catch((err) => {
+          console.warn('Bundled editor fonts failed to load', err);
+        });
         setPdfjs(pLib);
         setFabricLib(fLib);
       } catch (err) {

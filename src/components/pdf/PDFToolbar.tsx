@@ -30,6 +30,8 @@ export interface PDFToolbarProps {
   handleReset: () => void;
   handleExportPDF: () => void | Promise<void>;
   isProcessing?: boolean;
+  hasSelectableText?: boolean;
+  onNoSelectableText?: () => void;
 }
 
 export function PDFToolbar({
@@ -49,6 +51,8 @@ export function PDFToolbar({
   handleReset,
   handleExportPDF,
   isProcessing,
+  hasSelectableText = true,
+  onNoSelectableText,
 }: PDFToolbarProps) {
   const { localizeHref } = useTranslation();
 
@@ -87,14 +91,27 @@ export function PDFToolbar({
             }}
             className={`p-2 rounded-xl transition-all ${editMode === 'select' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800'}`}
             title="Select / Pointer Tool"
+            data-testid="edit-pdf-tool-select"
           >
             <MousePointer className="w-4 h-4" />
           </button>
           
           <button
-            onClick={() => setEditMode('edit-text')}
+            onClick={() => {
+              if (!hasSelectableText) {
+                onNoSelectableText?.();
+                setEditMode('text');
+                return;
+              }
+              setEditMode('edit-text');
+            }}
             className={`p-2 rounded-xl transition-all ${editMode === 'edit-text' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800'}`}
-            title="Select & Edit PDF Text"
+            title={
+              hasSelectableText
+                ? 'Select & Edit PDF Text'
+                : 'No selectable text layer — use Add Text'
+            }
+            data-testid="edit-pdf-tool-edit-text"
           >
             <Edit3 className="w-4 h-4" />
           </button>
@@ -103,6 +120,7 @@ export function PDFToolbar({
             onClick={() => setEditMode(editMode === 'text' ? 'select' : 'text')}
             className={`p-2 rounded-xl transition-all ${editMode === 'text' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800'}`}
             title="Add New Text Box"
+            data-testid="edit-pdf-tool-add-text"
           >
             <Type className="w-4 h-4" />
           </button>
@@ -120,6 +138,7 @@ export function PDFToolbar({
             onClick={() => setEditMode('draw')}
             className={`p-2 rounded-xl transition-all ${editMode === 'draw' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800'}`}
             title="Freehand Drawing Brush"
+            data-testid="edit-pdf-tool-draw"
           >
             <Paintbrush className="w-4 h-4" />
           </button>
@@ -150,6 +169,7 @@ export function PDFToolbar({
             onClick={() => handleAddShape('rect')}
             className="p-2 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-all"
             title="Insert Rectangle Shape"
+            data-testid="edit-pdf-tool-rect"
           >
             <Square className="w-4 h-4" />
           </button>
@@ -192,6 +212,7 @@ export function PDFToolbar({
                 disabled={historyIndex <= 0}
                 className="p-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 disabled:opacity-20 transition-all"
                 title="Undo last modification"
+                data-testid="edit-pdf-undo"
               >
                 <Undo2 className="w-3.5 h-3.5" />
               </button>
@@ -216,6 +237,7 @@ export function PDFToolbar({
               onClick={handleExportPDF}
               disabled={isProcessing}
               className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all active:scale-95 shadow-lg shadow-blue-500/20 disabled:opacity-40"
+              data-testid="edit-pdf-export"
             >
               {isProcessing ? (
                 <RefreshCw className="w-3.5 h-3.5 animate-spin" />

@@ -2,16 +2,14 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import { RefreshCw } from 'lucide-react';
-import {
-  detectTextColorFromCanvas,
-  detectBackgroundColorFromCanvas,
-} from '@/lib/twpdf/parser';
+import { detectTextColorFromCanvas } from '@/lib/twpdf/parser/textExtractor';
+import { analyzeRunMask, ORIGINAL_TEXT_HIT_BG } from '@/lib/twpdf/parser/textMask';
 import {
   isOriginalTextEdited,
   setupBrushes,
   applyObjectSnapping,
 } from '@/lib/twpdf/editor';
-import { mapPdfFontToLoadedFont, mapPdfFontToWebFont } from '@/lib/twpdf/fonts';
+import { fabricFontWeight } from '@/lib/twpdf/fonts/fontWeight';
 import { CANVAS_JSON_PROPS } from '@/lib/twpdf/core';
 import { getIsRenderingFromEngine } from '@/lib/twpdf/editing/renderer/fabricRenderer';
 import { hexToRgbaStr } from '@/lib/twpdf/utils';
@@ -25,6 +23,7 @@ import { EditingValidator } from '@/lib/tw-engine/editing/EditingValidator';
 import { FocusManager } from '@/lib/tw-engine/editing/FocusManager';
 import { CursorManager } from '@/lib/tw-engine/editing/CursorManager';
 import { PDFContentStreamManager } from '@/lib/tw-engine/pdf-writer/content-stream/PDFContentStreamManager';
+import { TextRunOverlayLayer } from './TextRunOverlayLayer';
 
 // -------------------------------------------------------------
 // VIRTUALIZED PAGE CONTAINER WRAPPER USING INTERSECTION OBSERVER
@@ -85,7 +84,7 @@ const PDFPageWrapper = ({
   onFabricAdded
 }: PageWrapperProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [isIntersecting, setIsIntersecting] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -205,6 +204,7 @@ const PageRenderer = ({
   const [isBackgroundRendered, setIsBackgroundRendered] = useState(false);
   const [activeEditingId, setActiveEditingId] = useState<string | null>(null);
   const [suppressionVersion, setSuppressionVersion] = useState(0);
+  const [fabricReady, setFabricReady] = useState(false);
   const bgRenderCountRef = useRef(0);
 
   const editModeRef = useRef(editMode);
@@ -445,7 +445,7 @@ const PageRenderer = ({
         console.log('[editing:entered event fired]', { id: obj.id, pageNum });
         obj.set({
           fill: 'transparent',
-          backgroundColor: obj.originalTextData?.detectedBgColor || obj.backgroundColor || '#ffffff',
+          backgroundColor: obj.isOriginalText ? ORIGINAL_TEXT_HIT_BG : (obj.backgroundColor || '#ffffff'),
           stroke: 'transparent'
         });
         setActiveEditingId(obj.id);
@@ -454,11 +454,10 @@ const PageRenderer = ({
 
       obj.on('editing:exited', () => {
         console.log('[editing:exited event fired]', { id: obj.id, pageNum });
-        const isEdited = isOriginalTextEdited(obj);
         obj.set({
           fill: 'transparent',
           backgroundColor: obj.isOriginalText
-            ? (isEdited ? (obj.originalTextData?.detectedBgColor || '#ffffff') : 'rgba(255, 255, 255, 0.001)')
+            ? ORIGINAL_TEXT_HIT_BG
             : (obj.backgroundColor || '#ffffff'),
           stroke: 'transparent'
         });
@@ -488,6 +487,7 @@ const PageRenderer = ({
     if (registerCanvasInstance) {
       registerCanvasInstance(pageId, fbCanvas);
     }
+    setFabricReady(true);
 
     // Apply zoom
     fbCanvas.setZoom(zoomScale);
@@ -563,6 +563,7 @@ const PageRenderer = ({
         fbCanvas.forEachObject((obj: any) => {
           if (obj.isOriginalText && obj.originalTextData) {
             obj._renderText = function(ctx: CanvasRenderingContext2D) {};
+            obj._renderBackground = function () {};
             // Rehydrate top-level baseline after loadFromJSON if the allowlist previously dropped it
             if (obj.baseline === undefined || obj.baseline === null) {
               const orig = obj.originalTextData;
@@ -574,11 +575,16 @@ const PageRenderer = ({
             } else if (obj.originalTextData.baseline === undefined) {
               obj.originalTextData.baseline = obj.baseline;
             }
-            if (!obj.originalTextData.detectedColor) {
-              const color = detectTextColorFromCanvas(pdfCanvasRef.current, obj.originalTextData, zoomScale);
-              const bgColor = detectBackgroundColorFromCanvas(pdfCanvasRef.current, obj.originalTextData, zoomScale);
+            if (!obj.originalTextData.detectedColor || !obj.originalTextData.detectedBgColor) {
+              const operatorColor = obj.originalTextData.pdfObject?.color;
+              const color =
+                obj.originalTextData.detectedColor ||
+                operatorColor ||
+                detectTextColorFromCanvas(pdfCanvasRef.current, obj.originalTextData, zoomScale);
+              const mask = analyzeRunMask(pdfCanvasRef.current, obj.originalTextData, zoomScale);
               obj.originalTextData.detectedColor = color;
-              obj.originalTextData.detectedBgColor = bgColor;
+              obj.originalTextData.detectedBgColor = obj.originalTextData.detectedBgColor || mask.backgroundColor;
+              obj.originalTextData.maskInsets = obj.originalTextData.maskInsets || mask.insets;
               if (obj.fill === '#0b2c8c') {
                 obj.set({ fill: color });
               }
@@ -602,13 +608,18 @@ const PageRenderer = ({
       if (textBoxesForPage.length > 0) {
         textBoxesForPage.forEach((box: any) => {
           // Detect properties from background canvas
-          const detectedColor = detectTextColorFromCanvas(pdfCanvasRef.current, box, zoomScale);
-          const detectedBgColor = detectBackgroundColorFromCanvas(pdfCanvasRef.current, box, zoomScale);
+          const detectedColor =
+            box.detectedColor ||
+            box.pdfObject?.color ||
+            detectTextColorFromCanvas(pdfCanvasRef.current, box, zoomScale);
+          const mask = analyzeRunMask(pdfCanvasRef.current, box, zoomScale);
+          const detectedBgColor = box.detectedBgColor || mask.backgroundColor;
+          const maskInsets = box.maskInsets || mask.insets;
 
           const isReplaced = box.replacedText !== undefined;
           const displayText = isReplaced ? box.replacedText : box.text;
 
-          const activeWeight = box.fontWeight === 'bold' ? 'bold' : 'normal';
+          const activeWeight = fabricFontWeight(box.fontWeight);
           const resolvedBaseline = box.baseline ?? (box.y + box.fontSize * 0.8);
 
           const textbox = new fabricLib.Textbox(displayText, {
@@ -625,7 +636,7 @@ const PageRenderer = ({
             padding: 0,
             lineHeight: 1.0,
             fill: 'transparent',
-            backgroundColor: isReplaced ? 'transparent' : 'rgba(255, 255, 255, 0.001)', // invisible but registers clicks perfectly
+            backgroundColor: isReplaced ? 'transparent' : ORIGINAL_TEXT_HIT_BG,
             isOriginalText: true,
             baseline: resolvedBaseline,
             ascent: box.ascent,
@@ -646,10 +657,12 @@ const PageRenderer = ({
               fontFamily: box.fontFamily || 'Helvetica',
               detectedColor: detectedColor,
               detectedBgColor: detectedBgColor,
+              maskInsets,
               baseline: resolvedBaseline,
               ascent: box.ascent,
               descent: box.descent,
-              pdfFontName: box.pdfFontName
+              pdfFontName: box.pdfFontName,
+              pdfObject: box.pdfObject
             },
             selectable: true,
             editable: false,
@@ -670,6 +683,7 @@ const PageRenderer = ({
           (textbox as any)._renderText = function(ctx: CanvasRenderingContext2D) {
             // Do nothing. Native RenderEngine handles visible text drawing during after:render.
           };
+          (textbox as any)._renderBackground = function () {};
 
           setupObjectEditingEvents(textbox, fbCanvas);
 
@@ -716,11 +730,11 @@ const PageRenderer = ({
           if (obj.isOriginalText) {
             if (isActive || isEdited) {
               obj.set({
-                backgroundColor: obj.originalTextData?.detectedBgColor || '#ffffff'
+                backgroundColor: ORIGINAL_TEXT_HIT_BG
               });
             } else {
               obj.set({
-                backgroundColor: 'rgba(255, 255, 255, 0.001)'
+                backgroundColor: ORIGINAL_TEXT_HIT_BG
               });
             }
           } else {
@@ -749,12 +763,12 @@ const PageRenderer = ({
           if (obj.isOriginalText) {
             if (isEdited) {
               obj.set({
-                backgroundColor: obj.originalTextData?.detectedBgColor || '#ffffff'
+                backgroundColor: ORIGINAL_TEXT_HIT_BG
               });
             } else {
               obj.set({
                 fill: 'transparent',
-                backgroundColor: 'rgba(255, 255, 255, 0.001)',
+                backgroundColor: ORIGINAL_TEXT_HIT_BG,
                 stroke: 'transparent'
               });
             }
@@ -956,7 +970,7 @@ const PageRenderer = ({
           if (o.isOriginalText && o.id !== obj.id && !isOriginalTextEdited(o)) {
             o.set({
               fill: 'transparent',
-              backgroundColor: 'rgba(255, 255, 255, 0.001)',
+              backgroundColor: ORIGINAL_TEXT_HIT_BG,
               stroke: 'transparent'
             });
           }
@@ -1006,7 +1020,7 @@ const PageRenderer = ({
           if (o.isOriginalText && !isOriginalTextEdited(o)) {
             o.set({
               fill: 'transparent',
-              backgroundColor: 'rgba(255, 255, 255, 0.001)',
+              backgroundColor: ORIGINAL_TEXT_HIT_BG,
               stroke: 'transparent'
             });
           }
@@ -1191,6 +1205,7 @@ const PageRenderer = ({
       }
       fbCanvas.dispose();
       fabricCanvasInstance.current = null;
+      setFabricReady(false);
     };
   }, [fabricLib, isBackgroundRendered, zoomScale]);
 
@@ -1248,7 +1263,8 @@ const PageRenderer = ({
 
     fbCanvas.forEachObject((obj: any) => {
       if (obj.isOriginalText) {
-        obj.selectable = editMode === 'edit-text' || editMode === 'select';
+        obj.selectable = editMode === 'select';
+        obj.evented = editMode === 'select';
         obj.editable = false;
         if (editMode === 'edit-text') {
           obj.hasControls = false;
@@ -1284,6 +1300,32 @@ const PageRenderer = ({
       <div className="absolute inset-0 z-10 rounded-2xl">
         <canvas ref={fabricCanvasRef} />
       </div>
+      {fabricReady && (
+        <TextRunOverlayLayer
+          pageId={pageId}
+          pageIndex={pageNum - 1}
+          pageNum={pageNum}
+          pageWidth={width}
+          pageHeight={height}
+          zoomScale={zoomScale}
+          runs={(originalTexts[originalPageNum] || []).map((box) => {
+            const obj = fabricCanvasInstance.current
+              ?.getObjects?.()
+              ?.find((o: { id?: string }) => o.id === box.id);
+            return {
+              ...box,
+              currentText: obj?.text,
+              currentWidth: obj?.width,
+            };
+          })}
+          enabled={editMode === 'edit-text'}
+          fabricCanvas={fabricCanvasInstance.current}
+          saveCanvasState={saveCanvasState}
+          getCanvasJson={() => fabricCanvasInstance.current?.toJSON?.([...CANVAS_JSON_PROPS])}
+          onObjectSelected={onObjectSelected}
+          onObjectCleared={onObjectCleared}
+        />
+      )}
     </div>
   );
 };

@@ -1,7 +1,29 @@
 import { CANVAS_JSON_PROPS } from '@/lib/twpdf/core';
 import { isOriginalTextEdited } from '@/lib/twpdf/editor';
+import { computeLocalMaskRect, ORIGINAL_TEXT_HIT_BG } from '@/lib/twpdf/parser/textMask';
 import { dataUrlToUint8Array } from '@/lib/twpdf/utils';
 import type { ExportContext } from '@/types/pdf';
+import { containsDevanagari } from '@/lib/twpdf/fonts/fontMapping';
+import { embedFontForText } from './embedFonts';
+import { wrapText } from './textWrap';
+
+function rotatedAabb(left: number, top: number, w: number, h: number, angleDeg: number) {
+  if (Math.abs(angleDeg) < 0.5) return { x: left, y: top, width: w, height: h };
+  const r = (angleDeg * Math.PI) / 180;
+  const cos = Math.cos(r);
+  const sin = Math.sin(r);
+  const corners = [
+    [0, 0],
+    [w, 0],
+    [w, h],
+    [0, h],
+  ].map(([dx, dy]) => [left + dx * cos - dy * sin, top + dx * sin + dy * cos]);
+  const xs = corners.map((c) => c[0]);
+  const ys = corners.map((c) => c[1]);
+  const minX = Math.min(...xs);
+  const minY = Math.min(...ys);
+  return { x: minX, y: minY, width: Math.max(...xs) - minX, height: Math.max(...ys) - minY };
+}
 
 export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
   const {
@@ -10,25 +32,20 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
     pageDimensions,
     canvasStates,
     canvasInstances,
-    pdfDoc,
     fabricLib,
     zoomScale,
     onStatus,
   } = context;
 
-  const { PDFDocument, rgb, StandardFonts } = await import('pdf-lib');
-  const newDoc = await PDFDocument.create();
-  const originalPdfDoc = await PDFDocument.load(pdfBytes);
+  const { PDFDocument, rgb, degrees } = await import('pdf-lib');
+  const fontkitMod = await import('@pdf-lib/fontkit');
+  const fontkit = (fontkitMod as { default?: unknown }).default ?? fontkitMod;
 
-  const doc = pdfDoc as {
-    getPage: (n: number) => Promise<{
-      getViewport: (opts: { scale: number }) => { width: number; height: number };
-      render: (opts: {
-        canvasContext: CanvasRenderingContext2D;
-        viewport: { width: number; height: number };
-      }) => { promise: Promise<void> };
-    }>;
-  };
+  const newDoc = await PDFDocument.create();
+  newDoc.registerFontkit(fontkit);
+  const originalPdfDoc = await PDFDocument.load(pdfBytes);
+  const fontCache = new Map<string, Awaited<ReturnType<typeof embedFontForText>>>();
+
   const fabric = fabricLib as {
     Canvas: new (el: HTMLCanvasElement, opts: Record<string, unknown>) => FabricCanvas;
   };
@@ -63,6 +80,7 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
     fontStyle?: string;
     fill?: string;
     lineHeight?: number;
+    opacity?: number;
     originalTextData?: {
       text: string;
       x: number;
@@ -70,16 +88,18 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
       width: number;
       height: number;
       fontSize: number;
+      angle?: number;
+      fontFamily?: string;
       detectedColor?: string;
       detectedBgColor?: string;
+      baseline?: number;
+      maskInsets?: { left: number; top: number; right: number; bottom: number };
+      pdfObject?: { renderMode?: number };
     };
     set: (props: Record<string, unknown>) => void;
     baseline?: number;
   };
 
-  const renderScale = 2.0;
-
-  // Helper to parse hex or rgb to pdf-lib rgb format
   const parseColorToRgb = (colorStr: string) => {
     if (!colorStr || colorStr === 'transparent') return rgb(0, 0, 0);
 
@@ -107,28 +127,10 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
     return rgb(0, 0, 0);
   };
 
-  // Helper to map font family to standard PDF PostScript font
-  const resolveStandardFontName = (obj: FabricObject) => {
-    const family = (obj.fontFamily || '').toLowerCase();
-    const isBold = obj.fontWeight === 'bold';
-    const isItalic = obj.fontStyle === 'italic';
-
-    if (family.includes('times') || family.includes('serif') || family.includes('georgia')) {
-      if (isBold && isItalic) return StandardFonts.TimesRomanBoldItalic;
-      if (isBold) return StandardFonts.TimesRomanBold;
-      if (isItalic) return StandardFonts.TimesRomanItalic;
-      return StandardFonts.TimesRoman;
-    }
-    if (family.includes('courier') || family.includes('mono')) {
-      if (isBold && isItalic) return StandardFonts.CourierBoldOblique;
-      if (isBold) return StandardFonts.CourierBold;
-      if (isItalic) return StandardFonts.CourierOblique;
-      return StandardFonts.Courier;
-    }
-    if (isBold && isItalic) return StandardFonts.HelveticaBoldOblique;
-    if (isBold) return StandardFonts.HelveticaBold;
-    if (isItalic) return StandardFonts.HelveticaOblique;
-    return StandardFonts.Helvetica;
+  const isInkObject = (obj: FabricObject) => {
+    if (obj.isOriginalText) return false;
+    const t = obj.type || '';
+    return t !== 'textbox' && t !== 'i-text' && t !== 'text';
   };
 
   for (let idx = 0; idx < pageList.length; idx++) {
@@ -169,7 +171,6 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
       continue;
     }
 
-    // Load original vector PDF page content natively to preserve pure vector quality
     const [copiedPage] = await newDoc.copyPages(originalPdfDoc, [pageItem.originalPageNum - 1]);
     const addedPage = newDoc.addPage(copiedPage);
 
@@ -196,98 +197,143 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
     }
 
     if (activeCanvas) {
-      const fabricObjects: any[] = [];
+      const fabricObjects: FabricObject[] = [];
       activeCanvas.forEachObject((obj) => fabricObjects.push(obj));
 
-      // 1. Hide all text boxes from Fabric canvas to render only drawings/signatures in transparent PNG overlay
-      const originalOpacities = new Map<any, number>();
-      fabricObjects.forEach((obj) => {
-        if (obj.isOriginalText || obj.type === 'textbox' || obj.type === 'i-text') {
-          originalOpacities.set(obj, obj.opacity ?? 1);
-          obj.set({ opacity: 0 });
-        }
-      });
-      activeCanvas.renderAll();
-
-      const multiplier = renderScale / zoomScale;
-      const overlayDataUrl = activeCanvas.toDataURL({
-        format: 'png',
-        multiplier: multiplier,
-      });
-
-      // Restore original opacities
-      fabricObjects.forEach((obj) => {
-        if (originalOpacities.has(obj)) {
-          obj.set({ opacity: originalOpacities.get(obj) });
-        }
-      });
-      activeCanvas.renderAll();
-
-      // 2. Draw transparent drawings/shapes overlay onto page natively
-      const overlayImgBytes = dataUrlToUint8Array(overlayDataUrl);
-      const embeddedPng = await newDoc.embedPng(overlayImgBytes);
-      addedPage.drawImage(embeddedPng, {
-        x: 0,
-        y: 0,
-        width,
-        height,
-      });
-
-      // 3. Process all text boxes natively using pdf-lib vectors
-      for (const obj of fabricObjects) {
-        if (obj.type === 'textbox' || obj.type === 'i-text') {
-          const isOriginal = obj.isOriginalText;
-          const isEdited = isOriginalTextEdited(obj);
-          const isDeleted = obj.isDeletedOriginal || obj.opacity === 0;
-
-          const scaleX = obj.scaleX || 1;
-          const scaleY = obj.scaleY || 1;
-          const objWidth = (obj.width || 0) * scaleX;
-          const objHeight = (obj.height || 0) * scaleY;
-
-          // Coordinate inversion: Top-Left (Fabric) to Bottom-Left (PDF points)
-          const pdfX = obj.left || 0;
-          const pdfY = height - (obj.top || 0) - objHeight;
-
-          // Draw solid white or custom background covers to whiteout original text underneath
-          const hasBgColor = obj.backgroundColor && obj.backgroundColor !== 'transparent' && obj.backgroundColor !== 'rgba(255, 255, 255, 0.001)';
-
-          if (isDeleted || isEdited || hasBgColor) {
-            const bgColorStr = hasBgColor
-              ? obj.backgroundColor
-              : (obj.originalTextData?.detectedBgColor || '#ffffff');
-
-            if (bgColorStr && bgColorStr !== 'transparent' && bgColorStr !== 'rgba(255, 255, 255, 0.001)') {
-              const bgRgb = parseColorToRgb(bgColorStr);
-              addedPage.drawRectangle({
-                x: pdfX - 1.5,
-                y: pdfY - 1.5,
-                width: objWidth + 3.0,
-                height: objHeight + 3.0,
-                color: bgRgb,
-              });
-            }
+      const hasInk = fabricObjects.some(isInkObject);
+      if (hasInk) {
+        const originalOpacities = new Map<FabricObject, number>();
+        fabricObjects.forEach((obj) => {
+          if (obj.isOriginalText || obj.type === 'textbox' || obj.type === 'i-text') {
+            originalOpacities.set(obj, obj.opacity ?? 1);
+            obj.set({ opacity: 0 });
           }
+        });
+        activeCanvas.renderAll();
 
-          // If not deleted, draw new/modified text natively
-          if (!isDeleted && (!isOriginal || isEdited)) {
-            const standardFontName = resolveStandardFontName(obj);
-            const embeddedFont = await newDoc.embedFont(standardFontName);
-            const fontSize = (obj.fontSize || 12) * scaleY;
-            const textColor = parseColorToRgb(obj.fill || '#000000');
+        const overlayDataUrl = activeCanvas.toDataURL({
+          format: 'png',
+          multiplier: 2.0 / zoomScale,
+        });
 
-            // Align baseline precisely: Y-coordinate in pdf-lib is the typographic baseline of the text.
-            const yBaseline = obj.baseline ? (height - obj.baseline) : (pdfY + (objHeight * 0.15));
+        fabricObjects.forEach((obj) => {
+          if (originalOpacities.has(obj)) {
+            obj.set({ opacity: originalOpacities.get(obj) });
+          }
+        });
+        activeCanvas.renderAll();
 
-            addedPage.drawText(obj.text || '', {
-              x: pdfX,
-              y: yBaseline,
-              size: fontSize,
-              font: embeddedFont,
-              color: textColor,
-              lineHeight: (obj.lineHeight || 1.0) * fontSize,
+        const overlayImgBytes = dataUrlToUint8Array(overlayDataUrl);
+        const embeddedPng = await newDoc.embedPng(overlayImgBytes);
+        addedPage.drawImage(embeddedPng, {
+          x: 0,
+          y: 0,
+          width,
+          height,
+        });
+      }
+
+      for (const obj of fabricObjects) {
+        if (obj.type !== 'textbox' && obj.type !== 'i-text') continue;
+
+        const isOriginal = obj.isOriginalText;
+        const isEdited = isOriginalTextEdited(obj);
+        const isDeleted = obj.isDeletedOriginal || obj.opacity === 0;
+        const scaleY = obj.scaleY || 1;
+        const orig = obj.originalTextData;
+        const maskW = orig?.width ?? (obj.width || 0) * (obj.scaleX || 1);
+        const maskH = orig?.height ?? (obj.height || 0) * scaleY;
+        const maskLeft = orig?.x ?? obj.left ?? 0;
+        const maskTop = orig?.y ?? obj.top ?? 0;
+        const rect = computeLocalMaskRect(maskW, maskH, orig?.maskInsets);
+        const sampledBg = orig?.detectedBgColor;
+        const hasOpaqueFabricBg =
+          obj.backgroundColor &&
+          obj.backgroundColor !== 'transparent' &&
+          obj.backgroundColor !== ORIGINAL_TEXT_HIT_BG;
+        const angle = obj.angle || orig?.angle || 0;
+
+        if (isDeleted || isEdited || (hasOpaqueFabricBg && !isOriginal)) {
+          const bgColorStr = sampledBg || (hasOpaqueFabricBg ? obj.backgroundColor : undefined);
+          if (bgColorStr && bgColorStr !== 'transparent' && bgColorStr !== ORIGINAL_TEXT_HIT_BG) {
+            const box = rotatedAabb(maskLeft + rect.x, maskTop + rect.y, rect.width, rect.height, angle);
+            addedPage.drawRectangle({
+              x: box.x,
+              y: height - box.y - box.height,
+              width: box.width,
+              height: box.height,
+              color: parseColorToRgb(bgColorStr),
             });
           }
+        }
+
+        if (!isDeleted && (!isOriginal || isEdited)) {
+          const fillStr =
+            obj.fill && obj.fill !== 'transparent'
+              ? obj.fill
+              : orig?.detectedColor || '#000000';
+          const fontSize = (obj.fontSize || orig?.fontSize || 12) * scaleY;
+          const pdfX = isOriginal ? maskLeft : obj.left || 0;
+          const yBaseline = obj.baseline
+            ? height - obj.baseline
+            : orig?.baseline
+              ? height - orig.baseline
+              : height - (obj.top || 0) - fontSize * 0.2;
+
+          const font = await embedFontForText(
+            newDoc,
+            {
+              fontFamily: obj.fontFamily || orig?.fontFamily,
+              fontWeight: obj.fontWeight,
+              fontStyle: obj.fontStyle,
+              text: obj.text || '',
+            },
+            fontCache
+          );
+
+            const lineHeight = (obj.lineHeight || 1.15) * fontSize;
+            const strokeSim =
+              orig?.pdfObject?.renderMode === 1 || orig?.pdfObject?.renderMode === 2;
+            const paint = (
+              usedFont: typeof font,
+              linesToDraw: string[],
+              x: number
+            ) => {
+              linesToDraw.forEach((line, lineIdx) => {
+                addedPage.drawText(line, {
+                  x,
+                  y: yBaseline - lineIdx * lineHeight,
+                  size: fontSize,
+                  font: usedFont,
+                  color: parseColorToRgb(fillStr),
+                  rotate: angle ? degrees(angle) : undefined,
+                });
+              });
+            };
+            try {
+              const maxWidth = Math.max(8, (obj.width || orig?.width || maskW) * (obj.scaleX || 1));
+              const shouldWrap = Math.abs(angle) < 4;
+              const lines = shouldWrap
+                ? wrapText(obj.text || '', maxWidth, font, fontSize)
+                : [obj.text || ''];
+              paint(font, lines, pdfX);
+              if (strokeSim) paint(font, lines, pdfX + Math.max(0.2, fontSize * 0.03));
+            } catch {
+              const fallback = await embedFontForText(
+                newDoc,
+                {
+                  fontFamily: containsDevanagari(obj.text || '') ? 'Noto Sans Devanagari' : 'Noto Sans',
+                  fontWeight: obj.fontWeight,
+                  fontStyle: obj.fontStyle,
+                  text: obj.text || ' ',
+                },
+                fontCache
+              );
+              const maxWidth = Math.max(8, (obj.width || orig?.width || maskW) * (obj.scaleX || 1));
+              const lines = wrapText(obj.text || '', maxWidth, fallback, fontSize);
+              paint(fallback, lines, pdfX);
+              if (strokeSim) paint(fallback, lines, pdfX + Math.max(0.2, fontSize * 0.03));
+            }
         }
       }
 

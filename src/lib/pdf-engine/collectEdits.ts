@@ -16,12 +16,23 @@ type FabricObj = {
   text?: string;
   left?: number;
   top?: number;
+  fontSize?: number;
+  fontFamily?: string;
+  fontWeight?: string;
+  fontStyle?: string;
+  fill?: string;
+  color?: string;
   originalTextData?: {
     text: string;
     x: number;
     y: number;
     width: number;
     height: number;
+    fontSize: number;
+    fontFamily?: string;
+    fontWeight?: string;
+    fontStyle?: string;
+    detectedColor?: string;
   };
 };
 

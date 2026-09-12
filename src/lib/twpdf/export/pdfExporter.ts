@@ -42,7 +42,7 @@ export async function exportPdf(context: ExportContext): Promise<Uint8Array> {
   const fontkit = (fontkitMod as { default?: unknown }).default ?? fontkitMod;
 
   const newDoc = await PDFDocument.create();
-  newDoc.registerFontkit(fontkit);
+  newDoc.registerFontkit(fontkit as Parameters<typeof newDoc.registerFontkit>[0]);
   const originalPdfDoc = await PDFDocument.load(pdfBytes);
   const fontCache = new Map<string, Awaited<ReturnType<typeof embedFontForText>>>();
 

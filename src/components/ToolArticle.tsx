@@ -90,7 +90,9 @@ export default function ToolArticle({
   // Try to load translated values from messages for this tool
   const translatedTitle = resolvedToolId ? t(`tools.${resolvedToolId}.title`, title) : title;
   const translatedIntro = resolvedToolId ? t(`tools.${resolvedToolId}.intro`, intro) : intro;
-  const translatedWhatItDoes = resolvedToolId ? t(`tools.${resolvedToolId}.whatItDoes`, whatItDoes) : whatItDoes;
+  const translatedWhatItDoes: string = String(
+    resolvedToolId ? t(`tools.${resolvedToolId}.whatItDoes`, whatItDoes) : whatItDoes
+  );
   
   const translatedHowToUse = useMemo(() => {
     if (!resolvedToolId) return howToUse || [];

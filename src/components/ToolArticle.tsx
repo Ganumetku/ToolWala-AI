@@ -24,8 +24,11 @@ interface ToolArticleProps {
   intro: string;
   whatItDoes?: string;
   howToUse?: string[];
+  screenshotCaptions?: string[];
   specificationTable?: { requirement: string; specification: string }[];
   commonMistakes?: string[];
+  limitations?: string[];
+  privacyNote?: string;
   keyFeatures?: { title: string; desc: string }[];
   benefits?: string[];
   whyChoose?: string;
@@ -41,8 +44,11 @@ export default function ToolArticle({
   intro,
   whatItDoes = "",
   howToUse = [],
+  screenshotCaptions = [],
   specificationTable = [],
   commonMistakes = [],
+  limitations = [],
+  privacyNote = "",
   keyFeatures = [],
   benefits = [],
   whyChoose = "",
@@ -300,12 +306,16 @@ export default function ToolArticle({
                   </Link>
                 </div>
               )}
-              <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tighter mb-4 leading-[1.1] uppercase">
-                {t('article.mastering', 'Mastering the')} <br />
+              <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tighter mb-4 leading-[1.1]">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:to-indigo-400">
                   {translatedTitle}
                 </span>
               </h2>
+              {translatedIntro && (
+                <p className="text-slate-600 dark:text-gray-400 text-base sm:text-lg font-medium leading-relaxed max-w-2xl mx-auto">
+                  {translatedIntro}
+                </p>
+              )}
               
               <div className="flex justify-center pt-2">
                 <ShareButtons title={translatedTitle} />
@@ -349,9 +359,11 @@ export default function ToolArticle({
                             </tbody>
                           </table>
                         </div>
-                        <p className="text-[11px] font-semibold text-slate-500 dark:text-gray-400 italic">
-                          * Official notification se cross-verify zaroor karein apply karne se pehle.
-                        </p>
+                        {commonMistakes.length > 0 && (
+                          <p className="text-[11px] font-semibold text-slate-500 dark:text-gray-400 italic">
+                            * Official notification se cross-verify zaroor karein apply karne se pehle.
+                          </p>
+                        )}
                       </div>
                     )}
                   </div>
@@ -393,7 +405,19 @@ export default function ToolArticle({
                         <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-600/10 border border-blue-200 dark:border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400 font-black text-sm">
                           {i + 1}
                         </div>
-                        <p className="text-slate-800 dark:text-gray-200 font-medium leading-relaxed font-sans text-sm sm:text-base">{step}</p>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-slate-800 dark:text-gray-200 font-medium leading-relaxed font-sans text-sm sm:text-base">{step}</p>
+                          {screenshotCaptions[i] && (
+                            <figure className="mt-3 rounded-xl border border-dashed border-slate-300 dark:border-white/15 bg-slate-50 dark:bg-white/[0.03] p-3">
+                              <div className="aspect-[16/6] rounded-lg bg-slate-200/80 dark:bg-white/5 flex items-center justify-center text-[10px] font-black uppercase tracking-[0.18em] text-slate-500 dark:text-gray-500">
+                                Screenshot placeholder
+                              </div>
+                              <figcaption className="mt-2 text-xs text-slate-500 dark:text-gray-400 font-medium leading-relaxed">
+                                {screenshotCaptions[i]}
+                              </figcaption>
+                            </figure>
+                          )}
+                        </div>
                       </motion.div>
                     ))}
                   </div>
@@ -464,6 +488,23 @@ export default function ToolArticle({
                 </div>
               )}
 
+              {limitations.length > 0 && (
+                <div className="p-8 sm:p-10 rounded-[1.125rem] bg-amber-50/70 dark:bg-amber-950/15 border border-amber-200 dark:border-amber-500/20 shadow-sm">
+                  <h3 className="text-xl font-black text-amber-950 dark:text-amber-200 mb-6 flex items-center gap-3 uppercase tracking-tight">
+                    <span className="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center text-sm font-black shadow-sm">!</span>
+                    Limits and important notes
+                  </h3>
+                  <ul className="space-y-3 list-none p-0">
+                    {limitations.map((note, i) => (
+                      <li key={i} className="flex items-start gap-3 text-amber-950 dark:text-amber-100 font-medium font-sans text-sm">
+                        <span className="text-amber-600 font-black flex-shrink-0 mt-0.5">•</span>
+                        {note}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {/* Privacy Trust Section: Files Never Leave Your Device */}
               <div className="p-8 sm:p-10 rounded-[1.125rem] bg-slate-900 dark:bg-white/[0.02] text-white border border-slate-800 dark:border-white/10 shadow-xl relative overflow-hidden">
                 <div className="flex items-start gap-4">
@@ -472,10 +513,10 @@ export default function ToolArticle({
                   </div>
                   <div className="space-y-2">
                     <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-white">
-                      Files Never Leave Your Device
+                      Files never leave your device
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-300 dark:text-gray-300 leading-relaxed font-sans font-medium">
-                      All photo editing, scaling, cropping, and document compression on ToolWala AI happen 100% locally inside your browser active memory using HTML5 Canvas & WebAssembly. Your confidential identity files and photos are never transmitted to or saved on any remote cloud server.
+                      {privacyNote || 'This tool runs in your browser tab. The file you drop is read in local memory and is not uploaded to ToolWala servers.'}
                     </p>
                   </div>
                 </div>

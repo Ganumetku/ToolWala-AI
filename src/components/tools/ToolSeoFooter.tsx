@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { toolsData } from '@/data/tools';
+import { getRelatedTools } from '@/lib/relatedTools';
 import { categoriesData } from '@/data/categories';
 import blogsData from '@/data/dynamic_blogs.json';
 import { useTranslation } from '@/components/I18nContext';
@@ -28,21 +29,9 @@ export default function ToolSeoFooter({ currentSlug }: ToolSeoFooterProps) {
     return categoriesData.find(c => c.title === tool.category);
   }, [tool]);
 
-  // Find 5 related tools in same category
   const relatedTools = useMemo(() => {
     if (!tool) return [];
-    return toolsData
-      .filter(t => t.isVisible && t.status === 'published' && t.slug !== tool.slug)
-      .sort((a, b) => {
-        // Prioritize same category
-        if (a.category === tool.category && b.category !== tool.category) return -1;
-        if (a.category !== tool.category && b.category === tool.category) return 1;
-        // Prioritize trending/featured
-        if (a.trending && !b.trending) return -1;
-        if (!a.trending && b.trending) return 1;
-        return 0;
-      })
-      .slice(0, 5);
+    return getRelatedTools(tool.slug, 5);
   }, [tool]);
 
   // Find 3 related blog posts

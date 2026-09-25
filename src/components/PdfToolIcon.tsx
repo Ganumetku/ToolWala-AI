@@ -668,6 +668,7 @@ export interface PdfToolIconProps {
   category?: string;
   className?: string;
   size?: "sm" | "md" | "lg" | "xl";
+  loading?: "eager" | "lazy";
 }
 
 /**
@@ -681,6 +682,7 @@ export default function PdfToolIcon({
   category,
   className = "",
   size = "md",
+  loading = "eager",
 }: PdfToolIconProps) {
   const config = getPdfToolConfig(toolId, iconName, category);
   const IconComponent = config.icon;
@@ -721,7 +723,10 @@ export default function PdfToolIcon({
   const s = sizeMap[size] || sizeMap.md;
 
   return (
-    <div className={`relative shrink-0 ${s.container} ${className}`}>
+    <div
+      className={`relative shrink-0 ${s.container} ${className}`}
+      data-loading={loading}
+    >
       {/* Back layer — light tinted tile, pinned top-left */}
       <div
         className={`absolute top-0 left-0 ${s.back}`}

@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'word-to-pdf-converter',
-    'Word to PDF Converter Online Free | ToolWala AI',
-    'Convert Word documents (.docx) into PDF files instantly. Free online DOCX to PDF converter with secure browser-based processing.',
+    'Word to PDF – Convert DOCX Offline, 50MB Limit',
+    'Turn a .docx file into PDF in this tab. 50 MB cap. Legacy .doc not supported. Tables and lists kept. No upload, no account.',
     '/tools/word-to-pdf-converter'
   );
 }

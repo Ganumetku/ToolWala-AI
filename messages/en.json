@@ -745,12 +745,14 @@
       "description": "Convert JPG, JPEG, and PNG images into a PDF document easily."
     },
     "word-to-pdf-converter": {
-      "title": "Word to PDF",
-      "description": "Convert Word documents (.docx) to PDF format locally."
+      "title": "Word to PDF Converter",
+      "description": "Turn a .docx file into PDF in this tab. 50 MB cap. Legacy .doc not supported. No upload.",
+      "intro": "Lock a Word file as PDF without printing or uploading. Accepts .docx only, up to 50 MB. The PDF is built in this tab. Legacy .doc files must be saved as .docx first."
     },
     "pdf-to-word-converter": {
-      "title": "PDF to Word",
-      "description": "Convert PDF files back to editable Word documents."
+      "title": "PDF to Word Converter",
+      "description": "Turn a text PDF into an editable .docx in this tab. 50 MB limit. Files stay on your device.",
+      "intro": "Turn a text-based PDF into an editable .docx file in this browser tab. The file stays on your device. Hard cap is 50 MB. Output opens in Microsoft Word, Google Docs, and LibreOffice."
     },
     "crop-pdf": {
       "title": "Crop PDF",

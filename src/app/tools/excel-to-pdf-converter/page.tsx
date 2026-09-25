@@ -199,7 +199,7 @@ export default function ExcelToPdfConverter() {
   const article = toolArticles['excel-to-pdf-converter'];
 
   return (
-    <div className="relative min-h-screen py-10 px-4 sm:px-6 lg:px-8 text-neutral-100 bg-neutral-950 transition-colors">
+    <div className="relative min-h-screen py-10 px-4 sm:px-6 lg:px-8 text-slate-900 dark:text-neutral-100 bg-[#F6F8FC] dark:bg-[#030712] transition-colors">
       <MeshGradient />
 
       <div className="max-w-6xl mx-auto relative z-10 space-y-8">
@@ -208,7 +208,7 @@ export default function ExcelToPdfConverter() {
         <div>
           <Link
             href="/tools/pdf-tools"
-            className="inline-flex items-center text-xs font-semibold text-neutral-400 hover:text-blue-400 transition-colors group"
+            className="inline-flex items-center text-xs font-semibold text-slate-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group"
           >
             <ChevronLeft className="w-4 h-4 mr-1 group-hover:-translate-x-1 transition-transform" />
             Back to PDF Tools
@@ -221,16 +221,16 @@ export default function ExcelToPdfConverter() {
             <FileSpreadsheet className="w-9 h-9 text-blue-400" />
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight bg-gradient-to-r from-blue-400 via-purple-300 to-indigo-400 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight bg-gradient-to-r from-blue-700 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-purple-300 dark:to-indigo-400 bg-clip-text text-transparent">
             Free Excel to PDF Converter
           </h1>
 
-          <p className="text-sm sm:text-base text-neutral-300 leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-neutral-300 leading-relaxed">
             Convert Excel spreadsheets (.xlsx, .xls, .csv) into clean, professional PDF documents instantly. Preserve table layout, formatting, gridlines, and page structure.
           </p>
 
           {/* Privacy Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-950/70 border border-blue-800/80 text-[11px] font-semibold text-blue-300 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800/80 text-[11px] font-semibold text-blue-700 dark:text-blue-300 shadow-sm">
             <span>🔒 100% Client-Side Processing</span>
             <span>•</span>
             <span>No Upload Required</span>
@@ -240,7 +240,7 @@ export default function ExcelToPdfConverter() {
         </div>
 
         {/* MAIN CONTAINER */}
-        <div className="bg-neutral-900/80 backdrop-blur-xl rounded-3xl border border-neutral-800 shadow-2xl overflow-hidden p-6 sm:p-8 space-y-8">
+        <div className="bg-white dark:bg-neutral-900/80 backdrop-blur-xl rounded-3xl border border-slate-200 dark:border-neutral-800 shadow-2xl overflow-hidden p-6 sm:p-8 space-y-8">
 
           {/* STATE 1: UPLOAD ZONE */}
           {!excelFile && (
@@ -262,8 +262,8 @@ export default function ExcelToPdfConverter() {
                 onClick={() => fileInputRef.current?.click()}
                 className={`relative border-2 border-dashed rounded-2xl p-8 sm:p-12 text-center cursor-pointer transition-all ${
                   isDraggingOverUpload
-                    ? 'border-blue-500 bg-blue-950/40 scale-[1.01]'
-                    : 'border-neutral-700 hover:border-blue-500/80 hover:bg-neutral-800/50'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/40 scale-[1.01]'
+                    : 'border-slate-300 dark:border-neutral-700 hover:border-blue-500/80 hover:bg-blue-50/80 dark:hover:bg-neutral-800/50'
                 }`}
               >
                 <input
@@ -282,18 +282,18 @@ export default function ExcelToPdfConverter() {
                   <UploadCloud className="w-7 h-7 animate-bounce" />
                 </div>
 
-                <h3 className="text-lg font-bold text-neutral-100 mb-1">
+                <h3 className="text-lg font-bold text-slate-900 dark:text-neutral-100 mb-1">
                   Drag & Drop Excel file here
                 </h3>
-                <p className="text-xs text-neutral-400 mb-4">
+                <p className="text-xs text-slate-500 dark:text-neutral-400 mb-4">
                   or click to select .xlsx, .xls, or .csv from your device
                 </p>
 
-                <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] text-neutral-400">
-                  <span className="px-2.5 py-1 rounded-md bg-neutral-800 border border-neutral-700 font-medium">
+                <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] text-slate-500 dark:text-neutral-400">
+                  <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-neutral-800 border border-slate-200 dark:border-neutral-700 font-medium">
                     Supported: .xlsx, .xls, .csv
                   </span>
-                  <span className="px-2.5 py-1 rounded-md bg-neutral-800 border border-neutral-700 font-medium">
+                  <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-neutral-800 border border-slate-200 dark:border-neutral-700 font-medium">
                     Maximum Size: 100 MB
                   </span>
                 </div>
@@ -305,16 +305,16 @@ export default function ExcelToPdfConverter() {
           {excelFile && (
             <div className="space-y-6">
               
-              <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-neutral-800/70 border border-neutral-700/80">
+              <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-neutral-800/70 border border-slate-200 dark:border-neutral-700/80">
                 <div className="flex items-center space-x-3 overflow-hidden">
                   <div className="p-2.5 bg-blue-500/20 rounded-xl text-blue-400 shrink-0">
                     <FileSpreadsheet className="w-5 h-5" />
                   </div>
                   <div className="min-w-0">
-                    <p className="font-semibold text-neutral-100 truncate text-sm">
+                    <p className="font-semibold text-slate-900 dark:text-neutral-100 truncate text-sm">
                       {excelFile.name}
                     </p>
-                    <div className="flex items-center space-x-2 text-xs text-neutral-400">
+                    <div className="flex items-center space-x-2 text-xs text-slate-500 dark:text-neutral-400">
                       <span>Size: {formatBytes(excelFile.size)}</span>
                       <span>•</span>
                       <span>Sheets: {sheets.length}</span>
@@ -326,14 +326,14 @@ export default function ExcelToPdfConverter() {
                   <button
                     onClick={() => fileInputRef.current?.click()}
                     disabled={isParsing || isConverting}
-                    className="px-3 py-1.5 rounded-xl border border-neutral-600 hover:bg-neutral-700 text-xs font-semibold transition-colors disabled:opacity-50"
+                    className="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-neutral-600 hover:bg-slate-100 dark:hover:bg-neutral-700 text-xs font-semibold transition-colors disabled:opacity-50"
                   >
                     Change File
                   </button>
                   <button
                     onClick={handleReset}
                     disabled={isParsing || isConverting}
-                    className="p-2 rounded-xl text-rose-400 hover:bg-rose-950/40 transition-colors disabled:opacity-50"
+                    className="p-2 rounded-xl text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors disabled:opacity-50"
                     title="Remove File"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -345,7 +345,7 @@ export default function ExcelToPdfConverter() {
               {isParsing && (
                 <div className="space-y-4 py-8 text-center">
                   <div className="w-10 h-10 mx-auto rounded-full border-4 border-blue-500 border-t-transparent animate-spin" />
-                  <p className="text-xs font-medium text-neutral-300 animate-pulse">
+                  <p className="text-xs font-medium text-slate-600 dark:text-neutral-300 animate-pulse">
                     Parsing Excel worksheets & cell grid structure...
                   </p>
                 </div>
@@ -356,9 +356,9 @@ export default function ExcelToPdfConverter() {
                 <div className="space-y-6">
                   
                   {/* MULTI-SHEET SELECTOR */}
-                  <div className="p-4 rounded-2xl bg-neutral-800/40 border border-neutral-800 space-y-3">
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-neutral-800/40 border border-slate-200 dark:border-neutral-800 space-y-3">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-300 flex items-center space-x-2">
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-neutral-300 flex items-center space-x-2">
                         <Layers className="w-4 h-4 text-blue-400" />
                         <span>Worksheets to Convert ({sheets.filter(s => s.isSelected).length} selected)</span>
                       </h4>
@@ -371,22 +371,22 @@ export default function ExcelToPdfConverter() {
                           onClick={() => toggleSheetSelection(sheet.id)}
                           className={`px-3 py-1.5 rounded-xl text-xs font-medium flex items-center space-x-2 transition-all ${
                             sheet.isSelected
-                              ? 'bg-blue-900/60 border border-blue-500 text-blue-200'
-                              : 'bg-neutral-800 border border-neutral-700 text-neutral-500 hover:text-neutral-300'
+                              ? 'bg-blue-50 dark:bg-blue-900/60 border border-blue-500 text-blue-800 dark:text-blue-200'
+                              : 'bg-slate-100 dark:bg-neutral-800 border border-slate-200 dark:border-neutral-700 text-slate-400 dark:text-neutral-500 hover:text-slate-600 dark:hover:text-neutral-300'
                           }`}
                         >
                           {sheet.isSelected ? <CheckSquare className="w-3.5 h-3.5 text-blue-400" /> : <Square className="w-3.5 h-3.5 text-neutral-600" />}
                           <span>{sheet.name}</span>
-                          <span className="text-[10px] text-neutral-400 font-mono">({sheet.rowCount} rows)</span>
+                          <span className="text-[10px] text-slate-500 dark:text-neutral-400 font-mono">({sheet.rowCount} rows)</span>
                         </button>
                       ))}
                     </div>
                   </div>
 
                   {/* SPREADSHEET TABLE PREVIEW GRID */}
-                  <div className="space-y-3 border border-neutral-800 rounded-2xl p-4 bg-neutral-950/60">
-                    <div className="flex items-center justify-between pb-2 border-b border-neutral-800">
-                      <span className="text-xs font-bold text-neutral-200 flex items-center space-x-2">
+                  <div className="space-y-3 border border-slate-200 dark:border-neutral-800 rounded-2xl p-4 bg-slate-50 dark:bg-neutral-950/60">
+                    <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-neutral-800">
+                      <span className="text-xs font-bold text-slate-800 dark:text-neutral-200 flex items-center space-x-2">
                         <Eye className="w-4 h-4 text-purple-400" />
                         <span>Spreadsheet Preview ({sheets[activeSheetIndex]?.name})</span>
                       </span>
@@ -399,7 +399,7 @@ export default function ExcelToPdfConverter() {
                             className={`px-2.5 py-1 rounded-lg text-xs transition-colors ${
                               activeSheetIndex === idx
                                 ? 'bg-purple-600 text-white font-bold'
-                                : 'bg-neutral-800 text-neutral-400 hover:bg-neutral-700'
+                                : 'bg-slate-100 dark:bg-neutral-800 text-slate-500 dark:text-neutral-400 hover:bg-slate-200 dark:hover:bg-neutral-700'
                             }`}
                           >
                             {s.name}
@@ -409,13 +409,13 @@ export default function ExcelToPdfConverter() {
                     </div>
 
                     {sheets[activeSheetIndex] && (
-                      <div className="overflow-x-auto border border-neutral-800 rounded-xl max-h-80 shadow-inner">
+                      <div className="overflow-x-auto border border-slate-200 dark:border-neutral-800 rounded-xl max-h-80 shadow-inner">
                         <table className="w-full text-xs text-left border-collapse min-w-[500px]">
                           <thead>
-                            <tr className="bg-neutral-800 text-neutral-400 font-mono text-[11px] border-b border-neutral-700">
-                              <th className="p-2 border-r border-neutral-700 text-center w-10">#</th>
+                            <tr className="bg-slate-100 dark:bg-neutral-800 text-slate-500 dark:text-neutral-400 font-mono text-[11px] border-b border-slate-200 dark:border-neutral-700">
+                              <th className="p-2 border-r border-slate-200 dark:border-neutral-700 text-center w-10">#</th>
                               {Array.from({ length: sheets[activeSheetIndex].columnCount }).map((_, cIdx) => (
-                                <th key={cIdx} className="p-2 border-r border-neutral-700 text-center font-bold">
+                                <th key={cIdx} className="p-2 border-r border-slate-200 dark:border-neutral-700 text-center font-bold">
                                   {getColLabel(cIdx)}
                                 </th>
                               ))}
@@ -425,21 +425,21 @@ export default function ExcelToPdfConverter() {
                             {sheets[activeSheetIndex].rows.map((row, rIdx) => (
                               <tr
                                 key={rIdx}
-                                className={`border-b border-neutral-800/80 hover:bg-purple-950/20 transition-colors ${
-                                  row.isHeader ? 'bg-purple-950/30 font-semibold text-purple-200' : ''
+                                className={`border-b border-slate-100 dark:border-neutral-800/80 hover:bg-purple-50 dark:hover:bg-purple-950/20 transition-colors ${
+                                  row.isHeader ? 'bg-purple-50 dark:bg-purple-950/30 font-semibold text-purple-800 dark:text-purple-200' : ''
                                 }`}
                               >
-                                <td className="p-2 border-r border-neutral-800 bg-neutral-800/40 text-center font-mono text-[11px] text-neutral-500">
+                                <td className="p-2 border-r border-slate-100 dark:border-neutral-800 bg-slate-50 dark:bg-neutral-800/40 text-center font-mono text-[11px] text-slate-400 dark:text-neutral-500">
                                   {rIdx + 1}
                                 </td>
                                 {row.cells.map((cell, cIdx) => (
                                   <td
                                     key={cIdx}
-                                    className={`p-2 border-r border-neutral-800/80 truncate max-w-[200px] ${
+                                    className={`p-2 border-r border-slate-100 dark:border-neutral-800/80 truncate max-w-[200px] ${
                                       cell.align === 'right' ? 'text-right' : 'text-left'
                                     }`}
                                   >
-                                    {cell.text || <span className="text-neutral-600 italic">empty</span>}
+                                    {cell.text || <span className="text-slate-400 dark:text-neutral-600 italic">empty</span>}
                                   </td>
                                 ))}
                               </tr>
@@ -451,8 +451,8 @@ export default function ExcelToPdfConverter() {
                   </div>
 
                   {/* PDF LAYOUT CONFIGURATION PANEL */}
-                  <div className="p-5 rounded-2xl bg-neutral-800/40 border border-neutral-800 space-y-4">
-                    <h3 className="font-bold text-xs text-neutral-300 uppercase tracking-wider flex items-center space-x-2">
+                  <div className="p-5 rounded-2xl bg-slate-50 dark:bg-neutral-800/40 border border-slate-200 dark:border-neutral-800 space-y-4">
+                    <h3 className="font-bold text-xs text-slate-600 dark:text-neutral-300 uppercase tracking-wider flex items-center space-x-2">
                       <Sliders className="w-4 h-4 text-blue-400" />
                       <span>PDF Layout & Page Settings</span>
                     </h3>
@@ -461,7 +461,7 @@ export default function ExcelToPdfConverter() {
                       
                       {/* Orientation */}
                       <div>
-                        <label className="block text-xs font-semibold text-neutral-400 mb-1.5">
+                        <label className="block text-xs font-semibold text-slate-500 dark:text-neutral-400 mb-1.5">
                           Page Orientation
                         </label>
                         <div className="grid grid-cols-2 gap-2">
@@ -471,7 +471,7 @@ export default function ExcelToPdfConverter() {
                             className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all ${
                               pdfOptions.orientation === 'portrait'
                                 ? 'bg-blue-600 text-white border-blue-500 shadow-md'
-                                : 'bg-neutral-900 text-neutral-400 border-neutral-700 hover:bg-neutral-800'
+                                : 'bg-white dark:bg-neutral-900 text-slate-500 dark:text-neutral-400 border-slate-200 dark:border-neutral-700 hover:bg-slate-50 dark:hover:bg-neutral-800'
                             }`}
                           >
                             Portrait
@@ -482,7 +482,7 @@ export default function ExcelToPdfConverter() {
                             className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all ${
                               pdfOptions.orientation === 'landscape'
                                 ? 'bg-blue-600 text-white border-blue-500 shadow-md'
-                                : 'bg-neutral-900 text-neutral-400 border-neutral-700 hover:bg-neutral-800'
+                                : 'bg-white dark:bg-neutral-900 text-slate-500 dark:text-neutral-400 border-slate-200 dark:border-neutral-700 hover:bg-slate-50 dark:hover:bg-neutral-800'
                             }`}
                           >
                             Landscape
@@ -492,13 +492,13 @@ export default function ExcelToPdfConverter() {
 
                       {/* Paper Size */}
                       <div>
-                        <label className="block text-xs font-semibold text-neutral-400 mb-1.5">
+                        <label className="block text-xs font-semibold text-slate-500 dark:text-neutral-400 mb-1.5">
                           Paper Size
                         </label>
                         <select
                           value={pdfOptions.pageSize}
                           onChange={(e) => setPdfOptions(p => ({ ...p, pageSize: e.target.value as PdfPageSize }))}
-                          className="w-full px-3 py-2 rounded-xl bg-neutral-900 border border-neutral-700 text-xs font-medium text-neutral-200 focus:ring-1 focus:ring-blue-500"
+                          className="w-full px-3 py-2 rounded-xl bg-white dark:bg-neutral-900 border border-slate-200 dark:border-neutral-700 text-xs font-medium text-slate-800 dark:text-neutral-200 focus:ring-1 focus:ring-blue-500"
                         >
                           <option value="a4">A4 (Standard 210 x 297 mm)</option>
                           <option value="letter">Letter (8.5 x 11 in)</option>
@@ -509,13 +509,13 @@ export default function ExcelToPdfConverter() {
 
                       {/* Margins */}
                       <div>
-                        <label className="block text-xs font-semibold text-neutral-400 mb-1.5">
+                        <label className="block text-xs font-semibold text-slate-500 dark:text-neutral-400 mb-1.5">
                           Margin Spacing
                         </label>
                         <select
                           value={pdfOptions.margins}
                           onChange={(e) => setPdfOptions(p => ({ ...p, margins: e.target.value as PdfMargins }))}
-                          className="w-full px-3 py-2 rounded-xl bg-neutral-900 border border-neutral-700 text-xs font-medium text-neutral-200 focus:ring-1 focus:ring-blue-500"
+                          className="w-full px-3 py-2 rounded-xl bg-white dark:bg-neutral-900 border border-slate-200 dark:border-neutral-700 text-xs font-medium text-slate-800 dark:text-neutral-200 focus:ring-1 focus:ring-blue-500"
                         >
                           <option value="normal">Normal Margins (15 mm)</option>
                           <option value="narrow">Narrow Margins (8 mm)</option>
@@ -526,19 +526,19 @@ export default function ExcelToPdfConverter() {
                     </div>
 
                     {/* Layout Toggles */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 border-t border-neutral-800">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 border-t border-slate-200 dark:border-neutral-800">
                       {[
                         { key: 'fitToWidth', label: 'Fit Table to Page Width' },
                         { key: 'includeGridlines', label: 'Include Table Gridlines' },
                         { key: 'highlightHeaders', label: 'Highlight Header Rows' },
                         { key: 'showPageNumbers', label: 'Show Page Numbers' }
                       ].map(opt => (
-                        <label key={opt.key} className="flex items-center space-x-2 text-xs font-medium cursor-pointer text-neutral-300">
+                        <label key={opt.key} className="flex items-center space-x-2 text-xs font-medium cursor-pointer text-slate-600 dark:text-neutral-300">
                           <input
                             type="checkbox"
                             checked={Boolean((pdfOptions as any)[opt.key])}
                             onChange={(e) => setPdfOptions(p => ({ ...p, [opt.key]: e.target.checked }))}
-                            className="rounded border-neutral-700 text-blue-600 focus:ring-blue-500 w-3.5 h-3.5"
+                            className="rounded border-slate-300 dark:border-neutral-700 text-blue-600 focus:ring-blue-500 w-3.5 h-3.5"
                           />
                           <span>{opt.label}</span>
                         </label>
@@ -569,11 +569,11 @@ export default function ExcelToPdfConverter() {
           {isConverting && (
             <div className="space-y-6 py-6 text-center">
               <div className="max-w-md mx-auto space-y-2">
-                <div className="flex justify-between text-xs font-bold text-neutral-300">
+                <div className="flex justify-between text-xs font-bold text-slate-600 dark:text-neutral-300">
                   <span>{statusMessage}</span>
                   <span>{progressPct}%</span>
                 </div>
-                <div className="w-full bg-neutral-800 h-3 rounded-full overflow-hidden shadow-inner">
+                <div className="w-full bg-slate-200 dark:bg-neutral-800 h-3 rounded-full overflow-hidden shadow-inner">
                   <motion.div
                     className="bg-gradient-to-r from-blue-500 to-purple-500 h-full rounded-full"
                     initial={{ width: 0 }}
@@ -589,13 +589,13 @@ export default function ExcelToPdfConverter() {
                     key={step.id}
                     className={`p-2 rounded-xl border text-[11px] font-semibold flex flex-col items-center transition-all ${
                       step.status === 'completed'
-                        ? 'bg-blue-950/60 border-blue-700 text-blue-300'
+                        ? 'bg-blue-50 dark:bg-blue-950/60 border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300'
                         : step.status === 'in-progress'
-                        ? 'bg-purple-950/60 border-purple-500 text-purple-300 animate-pulse'
-                        : 'bg-neutral-800/40 border-neutral-800 text-neutral-500'
+                        ? 'bg-purple-50 dark:bg-purple-950/60 border-purple-300 dark:border-purple-500 text-purple-700 dark:text-purple-300 animate-pulse'
+                        : 'bg-slate-50 dark:bg-neutral-800/40 border-slate-200 dark:border-neutral-800 text-slate-400 dark:text-neutral-500'
                     }`}
                   >
-                    <span className="text-[9px] uppercase font-mono text-neutral-500 mb-0.5">Step {idx + 1}</span>
+                    <span className="text-[9px] uppercase font-mono text-slate-400 dark:text-neutral-500 mb-0.5">Step {idx + 1}</span>
                     <span>{step.label}</span>
                   </div>
                 ))}
@@ -610,43 +610,43 @@ export default function ExcelToPdfConverter() {
               animate={{ opacity: 1, scale: 1 }}
               className="space-y-6 py-4 text-center"
             >
-              <div className="inline-flex items-center justify-center p-4 bg-blue-950 text-blue-400 rounded-full shadow-lg border border-blue-800">
+              <div className="inline-flex items-center justify-center p-4 bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400 rounded-full shadow-lg border border-blue-200 dark:border-blue-800">
                 <CheckCircle className="w-10 h-10" />
               </div>
 
               <div>
-                <h2 className="text-2xl font-black text-neutral-100">
+                <h2 className="text-2xl font-black text-slate-900 dark:text-neutral-100">
                   PDF Document Created!
                 </h2>
-                <p className="text-xs text-neutral-400 mt-1">
+                <p className="text-xs text-slate-500 dark:text-neutral-400 mt-1">
                   Your Excel spreadsheet has been formatted into a high-density PDF.
                 </p>
               </div>
 
               {/* RESULT METRICS */}
               <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 max-w-3xl mx-auto">
-                <div className="p-3 rounded-2xl bg-neutral-800/50 border border-neutral-700/60">
-                  <p className="text-[10px] text-neutral-400 font-medium uppercase">Pages Generated</p>
-                  <p className="text-lg font-black text-neutral-100 mt-0.5">{conversionResult.pagesGenerated}</p>
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700/60">
+                  <p className="text-[10px] text-slate-500 dark:text-neutral-400 font-medium uppercase">Pages Generated</p>
+                  <p className="text-lg font-black text-slate-900 dark:text-neutral-100 mt-0.5">{conversionResult.pagesGenerated}</p>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-neutral-800/50 border border-neutral-700/60">
-                  <p className="text-[10px] text-neutral-400 font-medium uppercase">Sheets Converted</p>
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700/60">
+                  <p className="text-[10px] text-slate-500 dark:text-neutral-400 font-medium uppercase">Sheets Converted</p>
                   <p className="text-lg font-black text-blue-400 mt-0.5">{conversionResult.sheetsConverted}</p>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-neutral-800/50 border border-neutral-700/60">
-                  <p className="text-[10px] text-neutral-400 font-medium uppercase">Rows Processed</p>
-                  <p className="text-lg font-black text-neutral-100 mt-0.5">{conversionResult.totalRows}</p>
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700/60">
+                  <p className="text-[10px] text-slate-500 dark:text-neutral-400 font-medium uppercase">Rows Processed</p>
+                  <p className="text-lg font-black text-slate-900 dark:text-neutral-100 mt-0.5">{conversionResult.totalRows}</p>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-neutral-800/50 border border-neutral-700/60">
-                  <p className="text-[10px] text-neutral-400 font-medium uppercase">Processing Time</p>
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700/60">
+                  <p className="text-[10px] text-slate-500 dark:text-neutral-400 font-medium uppercase">Processing Time</p>
                   <p className="text-lg font-black text-indigo-400 mt-0.5">{(conversionResult.processingTimeMs / 1000).toFixed(2)}s</p>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-neutral-800/50 border border-neutral-700/60">
-                  <p className="text-[10px] text-neutral-400 font-medium uppercase">PDF File Size</p>
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700/60">
+                  <p className="text-[10px] text-slate-500 dark:text-neutral-400 font-medium uppercase">PDF File Size</p>
                   <p className="text-lg font-black text-emerald-400 mt-0.5">{conversionResult.outputFileSizeFormatted}</p>
                 </div>
               </div>
@@ -663,7 +663,7 @@ export default function ExcelToPdfConverter() {
 
                 <button
                   onClick={handleReset}
-                  className="px-6 py-3.5 rounded-2xl border border-neutral-700 hover:bg-neutral-800 text-neutral-200 font-semibold text-xs transition-colors flex items-center space-x-2"
+                  className="px-6 py-3.5 rounded-2xl border border-slate-300 dark:border-neutral-700 hover:bg-slate-100 dark:hover:bg-neutral-800 text-slate-700 dark:text-neutral-200 font-semibold text-xs transition-colors flex items-center space-x-2"
                 >
                   <RefreshCw className="w-4 h-4" />
                   <span>Convert Another Spreadsheet</span>

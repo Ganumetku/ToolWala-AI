@@ -2949,39 +2949,27 @@
     "toolSlug": "pdf-to-word-converter",
     "locale": "en",
     "title": "PDF to Word Converter",
-    "description": "Convert PDF files into editable Word documents with layout accuracy.",
+    "description": "Turn a text PDF into an editable .docx in this tab. 50 MB limit. Scanned PDFs need OCR first. Files stay on your device.",
     "faq": [
       {
-        "question": "How do I convert PDF to Word?",
-        "answer": "Upload your PDF file, wait for our local browser engine to analyze the content, and download the compiled DOCX file."
+        "question": "Does PDF to Word keep the original formatting?",
+        "answer": "Headings, paragraphs, and page breaks are rebuilt from text positions. Simple one-column docs look close to the PDF. Multi-column pages, text boxes, and form grids often flatten. Always proof the .docx before you file it."
       },
       {
-        "question": "Is this PDF to Word converter free?",
-        "answer": "Yes, it is 100% free with no conversion limits, hidden watermarks, or account registration required."
+        "question": "Can I convert a scanned PDF to Word?",
+        "answer": "Not on this page. If you see the scanned-PDF warning, the file is mostly images. Run it through PDF OCR to get selectable text, then convert that result — or type from the scan."
       },
       {
-        "question": "Is my converted file secure?",
-        "answer": "Yes, absolutely. The conversion process is executed entirely on your client-side browser thread. No files are uploaded to any server."
+        "question": "What is the PDF to Word file size limit?",
+        "answer": "50 MB. The tool blocks anything larger. For a smaller file, use Compress PDF first, then convert."
       },
       {
-        "question": "Does formatting stay intact?",
-        "answer": "Our tool extracts text blocks and preserves paragraphs, headings, and page structures. However, complex multi-column grid layouts may be simplified to standard flow text for better editability."
-      },
-      {
-        "question": "Can I convert large PDF files?",
-        "answer": "Since the tool runs locally, the limit is bound by your system's memory. Most modern browsers can convert documents up to 50MB with ease."
-      },
-      {
-        "question": "Can I edit the output file in Google Docs?",
-        "answer": "Yes, the converted file is saved as a standard DOCX format, which is fully compatible with Microsoft Word, Google Docs, LibreOffice, and Pages."
-      },
-      {
-        "question": "Do you support scanned PDFs (OCR)?",
-        "answer": "Our PDF to Word converter extracts selectable text. For scanned PDFs containing flat image text, you can use our PDF OCR Scanner tool to extract text."
+        "question": "Is my PDF uploaded when I convert to Word?",
+        "answer": "No. Conversion stays in the browser. We do not receive a copy of the file."
       }
     ],
-    "seoTitle": "PDF to Word Converter – Free Online Tool",
-    "seoDescription": "Convert PDF files into editable Word documents online. Safe and fast browser-based conversion.",
+    "seoTitle": "PDF to Word Converter – Free DOCX, 50MB, No Upload",
+    "seoDescription": "Convert a text PDF to editable .docx in your browser. 50 MB limit. Scanned PDFs need OCR first. Files stay on your device — ToolWala never uploads them.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-18T02:01:06.127Z"
   },
@@ -3113,23 +3101,27 @@
     "toolSlug": "word-to-pdf-converter",
     "locale": "en",
     "title": "Word to PDF Converter",
-    "description": "Convert Word documents (.docx) into clean PDF files securely.",
+    "description": "Turn a .docx file into PDF in this tab. 50 MB cap. Legacy .doc not supported. No upload.",
     "faq": [
       {
-        "question": "Is my Word document secure?",
-        "answer": "Yes, 100%. All parsing, layout calculation, and PDF compiling run locally in your web browser. No file contents or metadata are sent to our servers."
+        "question": "Why won’t my .doc file convert to PDF?",
+        "answer": "This tool only accepts .docx. Open the old .doc in Word or LibreOffice, use Save As → .docx, then drop that file here."
       },
       {
-        "question": "What document formats are supported?",
-        "answer": "We support standard Microsoft Word formats (.docx). For legacy files (.doc), save them as .docx before uploading."
+        "question": "Does Word to PDF upload my document?",
+        "answer": "No. The .docx stays in the browser. We do not receive the file."
       },
       {
-        "question": "Does the PDF preserve tables and lists?",
-        "answer": "Yes. Our client-side rendering engine supports normal tables, cell grids, borders, bullet points, and numbered lists."
+        "question": "Will tables and bullet lists look right in the PDF?",
+        "answer": "Standard tables and lists usually do. Nested tables, text boxes, and SmartArt often do not. Check the preview before you send it."
+      },
+      {
+        "question": "What is the Word to PDF size limit?",
+        "answer": "50 MB. Compress images inside the Word file, or split the document, if you are over the cap."
       }
     ],
-    "seoTitle": "Word to PDF Converter – Free Online Tool",
-    "seoDescription": "Convert Word documents (.docx) into PDF files locally and securely.",
+    "seoTitle": "Word to PDF – Convert DOCX Offline, 50MB Limit",
+    "seoDescription": "Turn a .docx file into PDF in this tab. 50 MB cap. Legacy .doc not supported. Tables and lists kept. No upload, no account.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-18T02:01:06.127Z"
   },
@@ -11682,5 +11674,59 @@
     "seoDescription": "Calculate final sale price, discount savings, and GST tax instantly.",
     "createdAt": "2026-09-10T03:34:30.581Z",
     "updatedAt": "2026-09-10T03:34:30.581Z"
+  },
+  {
+    "id": "trans-pdf-to-excel-converter-en",
+    "toolSlug": "pdf-to-excel-converter",
+    "locale": "en",
+    "title": "PDF to Excel Converter",
+    "description": "Pull PDF tables into Excel in the browser. Digital PDFs or scanned sheets with on-device OCR. 100 MB limit. File never leaves the tab.",
+    "faq": [
+      {
+        "question": "How do I extract a table from a PDF to Excel?",
+        "answer": "Drop the PDF, wait for table detection, check the preview grid, then download .xlsx. If no table is found, the PDF is probably prose or a bad scan."
+      },
+      {
+        "question": "Can I convert a PDF bank statement to Excel?",
+        "answer": "Yes, if the statement is a real table (or a readable scan with OCR on). Always match closing balance and a few line amounts to the PDF. ToolWala never sees the statement."
+      },
+      {
+        "question": "Does PDF to Excel work on scanned pages?",
+        "answer": "Enable OCR when the tool marks the file as scanned. English and Hindi are supported. Expect some wrong characters on poor scans."
+      },
+      {
+        "question": "What is the PDF to Excel file size limit?",
+        "answer": "100 MB. There is no daily conversion quota because the work runs on your machine."
+      }
+    ],
+    "seoTitle": "PDF to Excel – Extract Tables to XLSX (100MB)",
+    "seoDescription": "Pull PDF tables into Excel in the browser. Digital PDFs or scanned sheets with on-device OCR (English/Hindi). 100 MB limit. File never leaves the tab."
+  },
+  {
+    "id": "trans-excel-to-pdf-converter-en",
+    "toolSlug": "excel-to-pdf-converter",
+    "locale": "en",
+    "title": "Excel to PDF Converter",
+    "description": "Convert spreadsheets to printable PDF in the browser. Multi-sheet, A4/Letter/Legal, landscape. 100 MB. Charts not drawn. No upload.",
+    "faq": [
+      {
+        "question": "How do I convert Excel to PDF in landscape A4?",
+        "answer": "After the file loads, set paper size to A4 and orientation to Landscape, then convert. Use auto-fit if columns still clip."
+      },
+      {
+        "question": "Can I convert a CSV file to PDF?",
+        "answer": "Yes. Drop the .csv the same way as .xlsx. You get a plain table, not Excel colors or charts."
+      },
+      {
+        "question": "Why are my Excel charts missing in the PDF?",
+        "answer": "This converter draws cells, not chart objects. Copy a chart as an image into Word and use Word to PDF, or print those sheets from desktop Excel."
+      },
+      {
+        "question": "Is the Excel file uploaded?",
+        "answer": "No. Sheet parsing and PDF drawing stay in the browser. Limit is 100 MB."
+      }
+    ],
+    "seoTitle": "Excel to PDF – XLSX, XLS, CSV to A4 PDF",
+    "seoDescription": "Convert spreadsheets to printable PDF in the browser. Multi-sheet, A4/Letter/Legal, landscape, gridlines. 100 MB. Charts not drawn. No upload."
   }
 ]

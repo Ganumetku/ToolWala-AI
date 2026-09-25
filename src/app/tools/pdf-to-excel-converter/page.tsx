@@ -387,7 +387,7 @@ export default function PdfToExcelConverter() {
   const article = toolArticles['pdf-to-excel-converter'];
 
   return (
-    <div className="relative min-h-screen py-10 px-4 sm:px-6 lg:px-8 text-neutral-100 bg-neutral-950 transition-colors">
+    <div className="relative min-h-screen py-10 px-4 sm:px-6 lg:px-8 text-slate-900 dark:text-neutral-100 bg-[#F6F8FC] dark:bg-[#030712] transition-colors">
       <MeshGradient />
 
       <div className="max-w-6xl mx-auto relative z-10 space-y-8">
@@ -396,7 +396,7 @@ export default function PdfToExcelConverter() {
         <div>
           <Link
             href="/tools/pdf-tools"
-            className="inline-flex items-center text-xs font-semibold text-neutral-400 hover:text-blue-400 transition-colors group"
+            className="inline-flex items-center text-xs font-semibold text-slate-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group"
           >
             <ChevronLeft className="w-4 h-4 mr-1 group-hover:-translate-x-1 transition-transform" />
             Back to PDF Tools
@@ -409,16 +409,16 @@ export default function PdfToExcelConverter() {
             <FileSpreadsheet className="w-9 h-9 text-blue-400" />
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight bg-gradient-to-r from-blue-400 via-purple-300 to-indigo-400 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight bg-gradient-to-r from-blue-700 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-purple-300 dark:to-indigo-400 bg-clip-text text-transparent">
             Free PDF to Excel Converter
           </h1>
 
-          <p className="text-sm sm:text-base text-neutral-300 leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-neutral-300 leading-relaxed">
             Convert PDF tables, invoices, reports, and bank statements into editable Excel spreadsheets (.xlsx) with browser-first processing.
           </p>
 
           {/* Privacy Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-950/70 border border-blue-800/80 text-[11px] font-semibold text-blue-300 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800/80 text-[11px] font-semibold text-blue-700 dark:text-blue-300 shadow-sm">
             <span>🔒 100% Client-Side Processing</span>
             <span>•</span>
             <span>No Upload Required</span>
@@ -428,7 +428,7 @@ export default function PdfToExcelConverter() {
         </div>
 
         {/* MAIN CONTAINER */}
-        <div className="bg-neutral-900/80 backdrop-blur-xl rounded-3xl border border-neutral-800 shadow-2xl overflow-hidden p-6 sm:p-8 space-y-8">
+        <div className="bg-white dark:bg-neutral-900/80 backdrop-blur-xl rounded-3xl border border-slate-200 dark:border-neutral-800 shadow-2xl overflow-hidden p-6 sm:p-8 space-y-8">
 
           {/* STATE 1: UPLOAD AREA */}
           {!pdfFile && (
@@ -450,8 +450,8 @@ export default function PdfToExcelConverter() {
                 onClick={() => fileInputRef.current?.click()}
                 className={`relative border-2 border-dashed rounded-2xl p-8 sm:p-12 text-center cursor-pointer transition-all ${
                   isDraggingOverUpload
-                    ? 'border-blue-500 bg-blue-950/40 scale-[1.01]'
-                    : 'border-neutral-700 hover:border-blue-500/80 hover:bg-neutral-800/50'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/40 scale-[1.01]'
+                    : 'border-slate-300 dark:border-neutral-700 hover:border-blue-500/80 hover:bg-blue-50/80 dark:hover:bg-neutral-800/50'
                 }`}
               >
                 <input
@@ -470,18 +470,18 @@ export default function PdfToExcelConverter() {
                   <UploadCloud className="w-7 h-7 animate-bounce" />
                 </div>
 
-                <h3 className="text-lg font-bold text-neutral-100 mb-1">
+                <h3 className="text-lg font-bold text-slate-900 dark:text-neutral-100 mb-1">
                   Drag & Drop PDF file here
                 </h3>
-                <p className="text-xs text-neutral-400 mb-4">
+                <p className="text-xs text-slate-500 dark:text-neutral-400 mb-4">
                   or click to select from your computer
                 </p>
 
-                <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] text-neutral-400">
-                  <span className="px-2.5 py-1 rounded-md bg-neutral-800 border border-neutral-700 font-medium">
+                <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] text-slate-500 dark:text-neutral-400">
+                  <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-neutral-800 border border-slate-200 dark:border-neutral-700 font-medium">
                     PDF Document
                   </span>
-                  <span className="px-2.5 py-1 rounded-md bg-neutral-800 border border-neutral-700 font-medium">
+                  <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-neutral-800 border border-slate-200 dark:border-neutral-700 font-medium">
                     Max 100 MB
                   </span>
                 </div>
@@ -494,16 +494,16 @@ export default function PdfToExcelConverter() {
             <div className="space-y-6">
               
               {/* File Info Card */}
-              <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-neutral-800/70 border border-neutral-700/80">
+              <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-neutral-800/70 border border-slate-200 dark:border-neutral-700/80">
                 <div className="flex items-center space-x-3 overflow-hidden">
                   <div className="p-2.5 bg-blue-500/20 rounded-xl text-blue-400 shrink-0">
                     <FileText className="w-5 h-5" />
                   </div>
                   <div className="min-w-0">
-                    <p className="font-semibold text-neutral-100 truncate text-sm">
+                    <p className="font-semibold text-slate-900 dark:text-neutral-100 truncate text-sm">
                       {pdfFile.name}
                     </p>
-                    <div className="flex items-center space-x-2 text-xs text-neutral-400">
+                    <div className="flex items-center space-x-2 text-xs text-slate-500 dark:text-neutral-400">
                       <span>Size: {formatBytes(pdfFile.size)}</span>
                       <span>•</span>
                       <span>Pages: {classification ? classification.pageCount : '...'}</span>
@@ -515,14 +515,14 @@ export default function PdfToExcelConverter() {
                   <button
                     onClick={() => fileInputRef.current?.click()}
                     disabled={isAnalyzing || isConverting}
-                    className="px-3 py-1.5 rounded-xl border border-neutral-600 hover:bg-neutral-700 text-xs font-semibold transition-colors disabled:opacity-50"
+                    className="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-neutral-600 hover:bg-slate-100 dark:hover:bg-neutral-700 text-xs font-semibold transition-colors disabled:opacity-50"
                   >
                     Change File
                   </button>
                   <button
                     onClick={handleReset}
                     disabled={isAnalyzing || isConverting}
-                    className="p-2 rounded-xl text-rose-400 hover:bg-rose-950/40 transition-colors disabled:opacity-50"
+                    className="p-2 rounded-xl text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors disabled:opacity-50"
                     title="Remove File"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -532,40 +532,40 @@ export default function PdfToExcelConverter() {
 
               {/* AUTO-DETECTION INFORMATION BADGES */}
               {classification && !isAnalyzing && (
-                <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-950/60 to-purple-950/60 border border-blue-800/60 space-y-2">
+                <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/60 dark:to-purple-950/60 border border-blue-200 dark:border-blue-800/60 space-y-2">
                   <div className="flex items-center space-x-2">
                     <Zap className="w-4 h-4 text-blue-400 animate-pulse" />
-                    <span className="text-xs font-bold text-blue-300 uppercase tracking-wide">
+                    <span className="text-xs font-bold text-blue-700 dark:text-blue-300 uppercase tracking-wide">
                       Automated Layout & Document Classification
                     </span>
                   </div>
 
                   <div className="flex flex-wrap gap-2 text-xs font-medium pt-1">
-                    <span className="px-2.5 py-1 rounded-lg bg-blue-900/60 border border-blue-700/60 text-blue-200">
+                    <span className="px-2.5 py-1 rounded-lg bg-blue-100 dark:bg-blue-900/60 border border-blue-200 dark:border-blue-700/60 text-blue-800 dark:text-blue-200">
                       ✓ {classification.isTextBased ? 'Text PDF' : 'Scanned PDF'}
                     </span>
 
-                    <span className="px-2.5 py-1 rounded-lg bg-purple-900/60 border border-purple-700/60 text-purple-200">
+                    <span className="px-2.5 py-1 rounded-lg bg-purple-100 dark:bg-purple-900/60 border border-purple-200 dark:border-purple-700/60 text-purple-800 dark:text-purple-200">
                       ✓ Document Type: {classification.docType}
                     </span>
 
-                    <span className="px-2.5 py-1 rounded-lg bg-indigo-900/60 border border-indigo-700/60 text-indigo-200">
+                    <span className="px-2.5 py-1 rounded-lg bg-indigo-100 dark:bg-indigo-900/60 border border-indigo-200 dark:border-indigo-700/60 text-indigo-800 dark:text-indigo-200">
                       ✓ Tables Detected ({classification.tablesDetectedCount})
                     </span>
 
                     {classification.hasInvoices && (
-                      <span className="px-2.5 py-1 rounded-lg bg-emerald-900/60 border border-emerald-700/60 text-emerald-200">
+                      <span className="px-2.5 py-1 rounded-lg bg-emerald-100 dark:bg-emerald-900/60 border border-emerald-200 dark:border-emerald-700/60 text-emerald-800 dark:text-emerald-200">
                         ✓ Invoices Identified
                       </span>
                     )}
 
                     {classification.hasBankStatements && (
-                      <span className="px-2.5 py-1 rounded-lg bg-amber-900/60 border border-amber-700/60 text-amber-200">
+                      <span className="px-2.5 py-1 rounded-lg bg-amber-100 dark:bg-amber-900/60 border border-amber-200 dark:border-amber-700/60 text-amber-800 dark:text-amber-200">
                         ✓ Bank Statement Identified
                       </span>
                     )}
 
-                    <span className="px-2.5 py-1 rounded-lg bg-teal-900/60 border border-teal-700/60 text-teal-200">
+                    <span className="px-2.5 py-1 rounded-lg bg-teal-100 dark:bg-teal-900/60 border border-teal-200 dark:border-teal-700/60 text-teal-800 dark:text-teal-200">
                       ✓ {classification.ocrRequired ? 'OCR Required' : 'OCR Not Required'}
                     </span>
                   </div>
@@ -575,7 +575,7 @@ export default function PdfToExcelConverter() {
               {/* THREE EXTRACTION MODES SELECTOR */}
               {classification && !isAnalyzing && !isCompleted && (
                 <div className="space-y-3">
-                  <label className="text-xs font-bold uppercase tracking-wider text-neutral-400">
+                  <label className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-neutral-400">
                     Select Extraction Mode
                   </label>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -585,15 +585,15 @@ export default function PdfToExcelConverter() {
                       onClick={() => { setExtractionMode('tables'); handleReExtract('tables'); }}
                       className={`p-4 rounded-2xl border cursor-pointer transition-all ${
                         extractionMode === 'tables'
-                          ? 'bg-blue-950/70 border-blue-500 ring-2 ring-blue-500/30'
-                          : 'bg-neutral-800/40 border-neutral-700 hover:border-neutral-600'
+                          ? 'bg-blue-50 dark:bg-blue-950/70 border-blue-500 ring-2 ring-blue-500/30'
+                          : 'bg-slate-50 dark:bg-neutral-800/40 border-slate-200 dark:border-neutral-700 hover:border-slate-300 dark:hover:border-neutral-600'
                       }`}
                     >
                       <div className="flex items-center space-x-2 mb-1">
                         <Table className="w-4 h-4 text-blue-400" />
-                        <h4 className="font-bold text-xs text-neutral-100">Mode 1: Extract Tables Only</h4>
+                        <h4 className="font-bold text-xs text-slate-900 dark:text-neutral-100">Mode 1: Extract Tables Only</h4>
                       </div>
-                      <p className="text-[11px] text-neutral-400 leading-tight">
+                      <p className="text-[11px] text-slate-500 dark:text-neutral-400 leading-tight">
                         Extract structured tables for invoices, bank statements, reports, and attendance lists.
                       </p>
                     </div>
@@ -603,15 +603,15 @@ export default function PdfToExcelConverter() {
                       onClick={() => { setExtractionMode('text'); handleReExtract('text'); }}
                       className={`p-4 rounded-2xl border cursor-pointer transition-all ${
                         extractionMode === 'text'
-                          ? 'bg-purple-950/70 border-purple-500 ring-2 ring-purple-500/30'
-                          : 'bg-neutral-800/40 border-neutral-700 hover:border-neutral-600'
+                          ? 'bg-purple-50 dark:bg-purple-950/70 border-purple-500 ring-2 ring-purple-500/30'
+                          : 'bg-slate-50 dark:bg-neutral-800/40 border-slate-200 dark:border-neutral-700 hover:border-slate-300 dark:hover:border-neutral-600'
                       }`}
                     >
                       <div className="flex items-center space-x-2 mb-1">
                         <FileCode className="w-4 h-4 text-purple-400" />
-                        <h4 className="font-bold text-xs text-neutral-100">Mode 2: Extract Text</h4>
+                        <h4 className="font-bold text-xs text-slate-900 dark:text-neutral-100">Mode 2: Extract Text</h4>
                       </div>
-                      <p className="text-[11px] text-neutral-400 leading-tight">
+                      <p className="text-[11px] text-slate-500 dark:text-neutral-400 leading-tight">
                         Convert all paragraphs into clean Excel rows without sentence fragmenting.
                       </p>
                     </div>
@@ -621,8 +621,8 @@ export default function PdfToExcelConverter() {
                       onClick={() => { setExtractionMode('smart'); handleReExtract('smart'); }}
                       className={`p-4 rounded-2xl border cursor-pointer transition-all relative ${
                         extractionMode === 'smart'
-                          ? 'bg-indigo-950/80 border-indigo-500 ring-2 ring-indigo-500/30'
-                          : 'bg-neutral-800/40 border-neutral-700 hover:border-neutral-600'
+                          ? 'bg-indigo-50 dark:bg-indigo-950/80 border-indigo-500 ring-2 ring-indigo-500/30'
+                          : 'bg-slate-50 dark:bg-neutral-800/40 border-slate-200 dark:border-neutral-700 hover:border-slate-300 dark:hover:border-neutral-600'
                       }`}
                     >
                       <span className="absolute -top-2 -right-2 px-2 py-0.5 rounded-md bg-gradient-to-r from-blue-600 to-purple-600 text-[10px] font-black uppercase text-white shadow">
@@ -630,9 +630,9 @@ export default function PdfToExcelConverter() {
                       </span>
                       <div className="flex items-center space-x-2 mb-1">
                         <Sparkles className="w-4 h-4 text-indigo-400" />
-                        <h4 className="font-bold text-xs text-neutral-100">Mode 3: Smart AI Detection</h4>
+                        <h4 className="font-bold text-xs text-slate-900 dark:text-neutral-100">Mode 3: Smart AI Detection</h4>
                       </div>
-                      <p className="text-[11px] text-neutral-400 leading-tight">
+                      <p className="text-[11px] text-slate-500 dark:text-neutral-400 leading-tight">
                         Auto-detect document type. Exports tables if present, or clean layout text.
                       </p>
                     </div>
@@ -645,10 +645,10 @@ export default function PdfToExcelConverter() {
               {isAnalyzing && (
                 <div className="space-y-4 py-8 text-center">
                   <div className="w-10 h-10 mx-auto rounded-full border-4 border-blue-500 border-t-transparent animate-spin" />
-                  <p className="text-xs font-medium text-neutral-300 animate-pulse">
+                  <p className="text-xs font-medium text-slate-600 dark:text-neutral-300 animate-pulse">
                     {statusMessage || 'Processing layout & extracting data...'}
                   </p>
-                  <div className="w-48 mx-auto bg-neutral-800 h-2 rounded-full overflow-hidden">
+                  <div className="w-48 mx-auto bg-slate-200 dark:bg-neutral-800 h-2 rounded-full overflow-hidden">
                     <div className="bg-gradient-to-r from-blue-500 to-purple-500 h-full transition-all duration-300" style={{ width: `${progressPct}%` }} />
                   </div>
                 </div>
@@ -656,10 +656,10 @@ export default function PdfToExcelConverter() {
 
               {/* ERROR STATE: NO TABLES FOUND */}
               {errorMsg && !isAnalyzing && (
-                <div className="p-5 rounded-2xl bg-amber-950/40 border border-amber-800 text-center space-y-3">
+                <div className="p-5 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-center space-y-3">
                   <FileWarning className="w-8 h-8 text-amber-400 mx-auto" />
                   <div>
-                    <h4 className="font-bold text-amber-200 text-sm">{errorMsg}</h4>
+                    <h4 className="font-bold text-amber-800 dark:text-amber-200 text-sm">{errorMsg}</h4>
                   </div>
                   <div className="flex justify-center gap-3">
                     <button
@@ -674,10 +674,10 @@ export default function PdfToExcelConverter() {
 
               {/* INTERACTIVE EDITABLE SPREADSHEET PREVIEW */}
               {sheets.length > 0 && !isAnalyzing && !isCompleted && (
-                <div className="space-y-4 border border-neutral-800 rounded-2xl p-4 sm:p-6 bg-neutral-900/60">
+                <div className="space-y-4 border border-slate-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-6 bg-slate-50 dark:bg-neutral-900/60">
                   
                   {/* PREVIEW TOOLBAR */}
-                  <div className="flex flex-wrap items-center justify-between gap-3 border-b border-neutral-800 pb-3">
+                  <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 dark:border-neutral-800 pb-3">
                     
                     {/* SHEET TABS */}
                     <div className="flex items-center space-x-1.5 overflow-x-auto max-w-full py-1">
@@ -688,7 +688,7 @@ export default function PdfToExcelConverter() {
                             className={`flex items-center space-x-1 px-3 py-1.5 rounded-xl text-xs font-medium cursor-pointer transition-all ${
                               activeSheetIndex === idx
                                 ? 'bg-blue-600 text-white shadow-md'
-                                : 'bg-neutral-800 text-neutral-400 hover:bg-neutral-700'
+                                : 'bg-slate-100 dark:bg-neutral-800 text-slate-500 dark:text-neutral-400 hover:bg-slate-200 dark:hover:bg-neutral-700'
                             }`}
                             onClick={() => setActiveSheetIndex(idx)}
                           >
@@ -713,19 +713,19 @@ export default function PdfToExcelConverter() {
 
                     {/* SHEET CONTROLS */}
                     <div className="flex items-center space-x-3 text-xs">
-                      <label className="flex items-center space-x-1.5 text-neutral-300 cursor-pointer">
+                      <label className="flex items-center space-x-1.5 text-slate-600 dark:text-neutral-300 cursor-pointer">
                         <input
                           type="checkbox"
                           checked={mergeAllIntoOneSheet}
                           onChange={(e) => setMergeAllIntoOneSheet(e.target.checked)}
-                          className="rounded border-neutral-700 text-blue-600 focus:ring-blue-500 w-3.5 h-3.5"
+                          className="rounded border-slate-300 dark:border-neutral-700 text-blue-600 focus:ring-blue-500 w-3.5 h-3.5"
                         />
                         <span>Merge All Sheets into One</span>
                       </label>
 
                       <button
                         onClick={handleDeleteCurrentSheet}
-                        className="px-2.5 py-1 rounded-lg bg-rose-950/60 text-rose-300 border border-rose-800 hover:bg-rose-900/60 transition-colors text-xs"
+                        className="px-2.5 py-1 rounded-lg bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 hover:bg-rose-100 dark:hover:bg-rose-900/60 transition-colors text-xs"
                       >
                         Delete Sheet
                       </button>
@@ -735,28 +735,28 @@ export default function PdfToExcelConverter() {
 
                   {/* RENAME MODAL INLINE */}
                   {isRenamingSheet && (
-                    <div className="flex items-center space-x-2 p-2 bg-neutral-800 rounded-xl border border-neutral-700">
+                    <div className="flex items-center space-x-2 p-2 bg-slate-100 dark:bg-neutral-800 rounded-xl border border-slate-200 dark:border-neutral-700">
                       <input
                         type="text"
                         value={sheetNameInput}
                         onChange={(e) => setSheetNameInput(e.target.value)}
-                        className="px-3 py-1 bg-neutral-900 border border-neutral-700 rounded-lg text-xs text-neutral-100 focus:ring-1 focus:ring-blue-500"
+                        className="px-3 py-1 bg-white dark:bg-neutral-900 border border-slate-200 dark:border-neutral-700 rounded-lg text-xs text-slate-900 dark:text-neutral-100 focus:ring-1 focus:ring-blue-500"
                         placeholder="Enter sheet name"
                       />
                       <button onClick={handleRenameSheet} className="p-1 bg-blue-600 text-white rounded-lg"><Check className="w-3.5 h-3.5" /></button>
-                      <button onClick={() => setIsRenamingSheet(false)} className="p-1 bg-neutral-700 text-neutral-300 rounded-lg"><X className="w-3.5 h-3.5" /></button>
+                      <button onClick={() => setIsRenamingSheet(false)} className="p-1 bg-slate-200 dark:bg-neutral-700 text-slate-700 dark:text-neutral-300 rounded-lg"><X className="w-3.5 h-3.5" /></button>
                     </div>
                   )}
 
                   {/* EDITABLE SPREADSHEET GRID */}
                   {sheets[activeSheetIndex] && !sheets[activeSheetIndex].isDeleted && (
-                    <div className="overflow-x-auto border border-neutral-800 rounded-xl max-h-96 shadow-inner bg-neutral-950/70">
+                    <div className="overflow-x-auto border border-slate-200 dark:border-neutral-800 rounded-xl max-h-96 shadow-inner bg-white dark:bg-neutral-950/70">
                       <table className="w-full text-xs text-left border-collapse min-w-[500px]">
                         <thead>
-                          <tr className="bg-neutral-800/90 text-neutral-400 font-mono text-[11px] border-b border-neutral-700">
-                            <th className="p-2 border-r border-neutral-700 text-center w-10 font-normal select-none">#</th>
+                          <tr className="bg-slate-100 dark:bg-neutral-800/90 text-slate-500 dark:text-neutral-400 font-mono text-[11px] border-b border-slate-200 dark:border-neutral-700">
+                            <th className="p-2 border-r border-slate-200 dark:border-neutral-700 text-center w-10 font-normal select-none">#</th>
                             {Array.from({ length: sheets[activeSheetIndex].columnCount }).map((_, colIdx) => (
-                              <th key={colIdx} className="p-2 border-r border-neutral-700 text-center font-bold">
+                              <th key={colIdx} className="p-2 border-r border-slate-200 dark:border-neutral-700 text-center font-bold">
                                 {getColLabel(colIdx)}
                               </th>
                             ))}
@@ -766,18 +766,18 @@ export default function PdfToExcelConverter() {
                           {sheets[activeSheetIndex].rows.map((row, rIdx) => (
                             <tr
                               key={rIdx}
-                              className={`border-b border-neutral-800/80 hover:bg-blue-950/20 transition-colors ${
-                                row.isHeader ? 'bg-blue-950/30 font-semibold text-blue-200' : ''
+                              className={`border-b border-slate-100 dark:border-neutral-800/80 hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-colors ${
+                                row.isHeader ? 'bg-blue-50 dark:bg-blue-950/30 font-semibold text-blue-800 dark:text-blue-200' : ''
                               }`}
                             >
-                              <td className="p-2 border-r border-neutral-800 bg-neutral-800/40 text-center font-mono text-[11px] text-neutral-500 select-none">
+                              <td className="p-2 border-r border-slate-100 dark:border-neutral-800 bg-slate-50 dark:bg-neutral-800/40 text-center font-mono text-[11px] text-slate-400 dark:text-neutral-500 select-none">
                                 {rIdx + 1}
                               </td>
                               {row.cells.map((cell, cIdx) => (
                                 <td
                                   key={cIdx}
                                   onClick={() => handleCellClick(rIdx, cIdx, cell.text)}
-                                  className={`p-2 border-r border-neutral-800/80 truncate max-w-[220px] cursor-pointer hover:bg-blue-900/30 ${
+                                  className={`p-2 border-r border-slate-100 dark:border-neutral-800/80 truncate max-w-[220px] cursor-pointer hover:bg-blue-50 dark:hover:bg-blue-900/30 ${
                                     cell.align === 'right' ? 'text-right' : cell.align === 'center' ? 'text-center' : 'text-left'
                                   }`}
                                   title="Click cell to edit value"
@@ -790,10 +790,10 @@ export default function PdfToExcelConverter() {
                                       onChange={(e) => setCellEditValue(e.target.value)}
                                       onBlur={handleCellSave}
                                       onKeyDown={(e) => { if (e.key === 'Enter') handleCellSave(); }}
-                                      className="w-full px-1.5 py-0.5 bg-neutral-900 border border-blue-500 rounded text-xs text-white"
+                                      className="w-full px-1.5 py-0.5 bg-white dark:bg-neutral-900 border border-blue-500 rounded text-xs text-slate-900 dark:text-white"
                                     />
                                   ) : (
-                                    cell.text || <span className="text-neutral-600 italic">empty</span>
+                                    cell.text || <span className="text-slate-400 dark:text-neutral-600 italic">empty</span>
                                   )}
                                 </td>
                               ))}
@@ -804,18 +804,18 @@ export default function PdfToExcelConverter() {
                     </div>
                   )}
 
-                  <p className="text-[11px] text-neutral-500 italic text-right">
+                  <p className="text-[11px] text-slate-400 dark:text-neutral-500 italic text-right">
                     💡 Click any table cell above to edit its value directly before downloading as Excel.
                   </p>
                 </div>
               )}
 
               {/* OCR MULTI-LANGUAGE CONTROLS */}
-              <div className="p-4 rounded-2xl bg-neutral-800/40 border border-neutral-800 space-y-3">
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-neutral-800/40 border border-slate-200 dark:border-neutral-800 space-y-3">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div className="flex items-center space-x-2">
                     <Cpu className="w-4 h-4 text-purple-400" />
-                    <span className="text-xs font-bold text-neutral-200">OCR Engine Settings</span>
+                    <span className="text-xs font-bold text-slate-800 dark:text-neutral-200">OCR Engine Settings</span>
                   </div>
 
                   <div className="flex items-center space-x-3">
@@ -824,7 +824,7 @@ export default function PdfToExcelConverter() {
                         type="checkbox"
                         checked={enableOcr}
                         onChange={(e) => { setEnableOcr(e.target.checked); handleReExtract(); }}
-                        className="rounded border-neutral-700 text-blue-600 focus:ring-blue-500 w-3.5 h-3.5"
+                        className="rounded border-slate-300 dark:border-neutral-700 text-blue-600 focus:ring-blue-500 w-3.5 h-3.5"
                       />
                       <span>Enable OCR</span>
                     </label>
@@ -833,7 +833,7 @@ export default function PdfToExcelConverter() {
                       value={ocrLanguage}
                       onChange={(e) => { setOcrLanguage(e.target.value as OcrLanguage); handleReExtract(); }}
                       disabled={!enableOcr}
-                      className="px-2.5 py-1 rounded-lg border border-neutral-700 bg-neutral-900 text-xs text-neutral-200 focus:ring-1 focus:ring-blue-500 disabled:opacity-50"
+                      className="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-xs text-slate-800 dark:text-neutral-200 focus:ring-1 focus:ring-blue-500 disabled:opacity-50"
                     >
                       <option value="eng">English</option>
                       <option value="hin">Hindi</option>
@@ -845,8 +845,8 @@ export default function PdfToExcelConverter() {
               </div>
 
               {/* ADVANCED USER EXPORT OPTIONS (8 Checkboxes) */}
-              <div className="p-5 rounded-2xl bg-neutral-800/40 border border-neutral-800 space-y-3">
-                <h3 className="font-bold text-xs text-neutral-300 uppercase tracking-wider flex items-center space-x-2">
+              <div className="p-5 rounded-2xl bg-slate-50 dark:bg-neutral-800/40 border border-slate-200 dark:border-neutral-800 space-y-3">
+                <h3 className="font-bold text-xs text-slate-600 dark:text-neutral-300 uppercase tracking-wider flex items-center space-x-2">
                   <Settings className="w-4 h-4 text-blue-400" />
                   <span>Advanced Export Settings</span>
                 </h3>
@@ -862,12 +862,12 @@ export default function PdfToExcelConverter() {
                     { key: 'detectCurrency', label: 'Detect Currency' },
                     { key: 'detectPercentages', label: 'Detect Percentages' }
                   ].map(opt => (
-                    <label key={opt.key} className="flex items-center space-x-2 text-xs font-medium cursor-pointer text-neutral-300">
+                    <label key={opt.key} className="flex items-center space-x-2 text-xs font-medium cursor-pointer text-slate-600 dark:text-neutral-300">
                       <input
                         type="checkbox"
                         checked={Boolean((advancedSettings as any)[opt.key])}
                         onChange={(e) => setAdvancedSettings(prev => ({ ...prev, [opt.key]: e.target.checked }))}
-                        className="rounded border-neutral-700 text-blue-600 focus:ring-blue-500 w-3.5 h-3.5"
+                        className="rounded border-slate-300 dark:border-neutral-700 text-blue-600 focus:ring-blue-500 w-3.5 h-3.5"
                       />
                       <span>{opt.label}</span>
                     </label>
@@ -895,11 +895,11 @@ export default function PdfToExcelConverter() {
           {isConverting && (
             <div className="space-y-6 py-6 text-center">
               <div className="max-w-md mx-auto space-y-2">
-                <div className="flex justify-between text-xs font-bold text-neutral-300">
+                <div className="flex justify-between text-xs font-bold text-slate-600 dark:text-neutral-300">
                   <span>{statusMessage}</span>
                   <span>{progressPct}%</span>
                 </div>
-                <div className="w-full bg-neutral-800 h-3 rounded-full overflow-hidden shadow-inner">
+                <div className="w-full bg-slate-200 dark:bg-neutral-800 h-3 rounded-full overflow-hidden shadow-inner">
                   <motion.div
                     className="bg-gradient-to-r from-blue-500 to-purple-500 h-full rounded-full"
                     initial={{ width: 0 }}
@@ -915,13 +915,13 @@ export default function PdfToExcelConverter() {
                     key={step.id}
                     className={`p-2 rounded-xl border text-[11px] font-semibold flex flex-col items-center transition-all ${
                       step.status === 'completed'
-                        ? 'bg-blue-950/60 border-blue-700 text-blue-300'
+                        ? 'bg-blue-50 dark:bg-blue-950/60 border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300'
                         : step.status === 'in-progress'
-                        ? 'bg-purple-950/60 border-purple-500 text-purple-300 animate-pulse'
-                        : 'bg-neutral-800/40 border-neutral-800 text-neutral-500'
+                        ? 'bg-purple-50 dark:bg-purple-950/60 border-purple-300 dark:border-purple-500 text-purple-700 dark:text-purple-300 animate-pulse'
+                        : 'bg-slate-50 dark:bg-neutral-800/40 border-slate-200 dark:border-neutral-800 text-slate-400 dark:text-neutral-500'
                     }`}
                   >
-                    <span className="text-[9px] uppercase font-mono text-neutral-500 mb-0.5">Step {idx + 1}</span>
+                    <span className="text-[9px] uppercase font-mono text-slate-400 dark:text-neutral-500 mb-0.5">Step {idx + 1}</span>
                     <span>{step.label}</span>
                   </div>
                 ))}
@@ -936,48 +936,48 @@ export default function PdfToExcelConverter() {
               animate={{ opacity: 1, scale: 1 }}
               className="space-y-6 py-4 text-center"
             >
-              <div className="inline-flex items-center justify-center p-4 bg-blue-950 text-blue-400 rounded-full shadow-lg border border-blue-800">
+              <div className="inline-flex items-center justify-center p-4 bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400 rounded-full shadow-lg border border-blue-200 dark:border-blue-800">
                 <CheckCircle className="w-10 h-10" />
               </div>
 
               <div>
-                <h2 className="text-2xl font-black text-neutral-100">
+                <h2 className="text-2xl font-black text-slate-900 dark:text-neutral-100">
                   Conversion Complete!
                 </h2>
-                <p className="text-xs text-neutral-400 mt-1">
+                <p className="text-xs text-slate-500 dark:text-neutral-400 mt-1">
                   Your PDF tables and data have been formatted into a clean Excel workbook.
                 </p>
               </div>
 
               {/* RESULT METRICS */}
               <div className="grid grid-cols-2 sm:grid-cols-6 gap-3 max-w-4xl mx-auto">
-                <div className="p-3 rounded-2xl bg-neutral-800/50 border border-neutral-700/60">
-                  <p className="text-[10px] text-neutral-400 font-medium uppercase">Pages Processed</p>
-                  <p className="text-lg font-black text-neutral-100 mt-0.5">{conversionResult.pagesConverted}</p>
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700/60">
+                  <p className="text-[10px] text-slate-500 dark:text-neutral-400 font-medium uppercase">Pages Processed</p>
+                  <p className="text-lg font-black text-slate-900 dark:text-neutral-100 mt-0.5">{conversionResult.pagesConverted}</p>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-neutral-800/50 border border-neutral-700/60">
-                  <p className="text-[10px] text-neutral-400 font-medium uppercase">Tables Extracted</p>
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700/60">
+                  <p className="text-[10px] text-slate-500 dark:text-neutral-400 font-medium uppercase">Tables Extracted</p>
                   <p className="text-lg font-black text-blue-400 mt-0.5">{conversionResult.tablesExtracted}</p>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-neutral-800/50 border border-neutral-700/60">
-                  <p className="text-[10px] text-neutral-400 font-medium uppercase">Rows Extracted</p>
-                  <p className="text-lg font-black text-neutral-100 mt-0.5">{conversionResult.totalRows}</p>
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700/60">
+                  <p className="text-[10px] text-slate-500 dark:text-neutral-400 font-medium uppercase">Rows Extracted</p>
+                  <p className="text-lg font-black text-slate-900 dark:text-neutral-100 mt-0.5">{conversionResult.totalRows}</p>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-neutral-800/50 border border-neutral-700/60">
-                  <p className="text-[10px] text-neutral-400 font-medium uppercase">OCR Confidence</p>
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700/60">
+                  <p className="text-[10px] text-slate-500 dark:text-neutral-400 font-medium uppercase">OCR Confidence</p>
                   <p className="text-lg font-black text-purple-400 mt-0.5">{conversionResult.ocrConfidence}%</p>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-neutral-800/50 border border-neutral-700/60">
-                  <p className="text-[10px] text-neutral-400 font-medium uppercase">Processing Time</p>
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700/60">
+                  <p className="text-[10px] text-slate-500 dark:text-neutral-400 font-medium uppercase">Processing Time</p>
                   <p className="text-lg font-black text-indigo-400 mt-0.5">{(conversionResult.processingTimeMs / 1000).toFixed(2)}s</p>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-neutral-800/50 border border-neutral-700/60">
-                  <p className="text-[10px] text-neutral-400 font-medium uppercase">File Size</p>
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700/60">
+                  <p className="text-[10px] text-slate-500 dark:text-neutral-400 font-medium uppercase">File Size</p>
                   <p className="text-lg font-black text-emerald-400 mt-0.5">{conversionResult.outputFileSizeFormatted}</p>
                 </div>
               </div>
@@ -994,7 +994,7 @@ export default function PdfToExcelConverter() {
 
                 <button
                   onClick={handleReset}
-                  className="px-6 py-3.5 rounded-2xl border border-neutral-700 hover:bg-neutral-800 text-neutral-200 font-semibold text-xs transition-colors flex items-center space-x-2"
+                  className="px-6 py-3.5 rounded-2xl border border-slate-300 dark:border-neutral-700 hover:bg-slate-100 dark:hover:bg-neutral-800 text-slate-700 dark:text-neutral-200 font-semibold text-xs transition-colors flex items-center space-x-2"
                 >
                   <RefreshCw className="w-4 h-4" />
                   <span>Convert Another PDF</span>

@@ -6,6 +6,7 @@ import { ArrowRight, Star } from 'lucide-react';
 import { useTranslation } from '@/components/I18nContext';
 import PdfToolIcon from '@/components/PdfToolIcon';
 import { startTopProgress } from '@/components/TopProgressBar';
+import { HOMEPAGE_TOP_PICK_IDS } from '@/data/homepageTools';
 
 export interface ToolCardProps {
   id?: string;
@@ -17,9 +18,10 @@ export interface ToolCardProps {
   isPopular?: boolean;
   isTrending?: boolean;
   category?: ToolCategory;
+  priority?: boolean;
 }
 
-export default function ToolCard({ id, slug, title, description, icon, href, isPopular, isTrending, category }: ToolCardProps) {
+export default function ToolCard({ id, slug, title, description, icon, href, isPopular, isTrending, category, priority = false }: ToolCardProps) {
   const { t, localizeHref } = useTranslation();
 
   // Extract the tool's ID/slug from the href to look up translations
@@ -33,16 +35,7 @@ export default function ToolCard({ id, slug, title, description, icon, href, isP
   const localizedHref = localizeHref(href);
 
   // Selective visual hierarchy for 1-2 top essential tools per category (clean UX, no badge overload)
-  const TOP_PICK_IDS = new Set([
-    'merge-pdf',
-    'compress-pdf',
-    'image-compressor',
-    'passport-photo-maker',
-    'resume-builder',
-    'govt-photo-resizer',
-    'gst-calculator',
-  ]);
-  const isTopFeatured = Boolean(isPopular && toolId && TOP_PICK_IDS.has(toolId));
+  const isTopFeatured = Boolean(toolId && HOMEPAGE_TOP_PICK_IDS.has(toolId));
 
   return (
     <div className="h-full relative group">
@@ -50,6 +43,8 @@ export default function ToolCard({ id, slug, title, description, icon, href, isP
         href={localizedHref}
         onClick={() => startTopProgress()}
         className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white dark:bg-[#0c1222] p-4.5 sm:p-5 transition-all duration-300 ease-out hover:-translate-y-1 w-full h-full shadow-[0_2px_8px_-2px_rgba(37,99,235,0.05),0_1px_4px_rgba(15,23,42,0.03)] hover:shadow-[0_14px_30px_-6px_rgba(37,99,235,0.12),0_4px_10px_-2px_rgba(15,23,42,0.04)] dark:shadow-none ${
+          !priority ? '[content-visibility:auto] [contain-intrinsic-size:220px]' : ''
+        } ${
           isTopFeatured
             ? 'border border-blue-400/50 dark:border-blue-500/40 ring-1 ring-blue-500/10 dark:ring-blue-400/15 hover:border-blue-500 dark:hover:border-blue-400 hover:ring-blue-500/20'
             : 'border border-slate-200/70 dark:border-white/[0.08] hover:border-blue-500 dark:hover:border-blue-400 hover:ring-1 hover:ring-blue-500/15 dark:hover:ring-blue-400/20'
@@ -63,7 +58,8 @@ export default function ToolCard({ id, slug, title, description, icon, href, isP
                 toolId={toolId || rawSlug} 
                 iconName={icon} 
                 category={category} 
-                size="md" 
+                size="md"
+                loading={priority ? 'eager' : 'lazy'}
                 className="transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-rotate-3"
               />
 

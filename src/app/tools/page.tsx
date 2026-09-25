@@ -9,8 +9,8 @@ export async function generateMetadata(): Promise<Metadata> {
     locale = headerList.get('x-locale') || 'en';
   } catch (e) {}
 
-  let title = "AI Tools Directory | ToolWala AI";
-  let description = "Browse our comprehensive collection of powerful, AI-driven utility tools designed for maximum productivity and privacy.";
+  let title = "All PDF, Image & Resume Tools";
+  let description = "Browse ToolWala's full directory of free PDF, image, AI, government exam, and calculator tools. Search and filter by category."
 
   if (locale === 'hi') {
     title = "एआई टूल्स निर्देशिका | टूलवाला AI";

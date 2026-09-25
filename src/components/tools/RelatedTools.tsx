@@ -1,8 +1,8 @@
 "use client";
 
 import React from 'react';
-import { toolsData } from '@/data/tools';
 import ToolCard from '@/components/ToolCard';
+import { getRelatedTools } from '@/lib/relatedTools';
 
 interface RelatedToolsProps {
   currentSlug: string;
@@ -10,23 +10,7 @@ interface RelatedToolsProps {
 }
 
 export default function RelatedTools({ currentSlug, maxTools = 3 }: RelatedToolsProps) {
-  // Find current tool
-  const currentTool = toolsData.find(t => t.slug === currentSlug);
-  const category = currentTool?.category || "PDF Tools";
-
-  // Filter tools: must be visible, published, not the current tool, and preferably in the same category
-  const related = toolsData
-    .filter(t => t.isVisible && t.status === 'published' && t.slug !== currentSlug)
-    .sort((a, b) => {
-      // Prioritize same category
-      if (a.category === category && b.category !== category) return -1;
-      if (a.category !== category && b.category === category) return 1;
-      // Then prioritize trending/featured
-      if (a.trending && !b.trending) return -1;
-      if (!a.trending && b.trending) return 1;
-      return 0;
-    })
-    .slice(0, maxTools);
+  const related = getRelatedTools(currentSlug, maxTools);
 
   if (related.length === 0) return null;
 

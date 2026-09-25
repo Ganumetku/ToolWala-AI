@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'excel-to-pdf-converter',
-    'Excel to PDF Converter – Convert Online | ToolWala AI',
-    'Convert Excel to PDF online free. Use our instant Excel to PDF converter to turn XLS & XLSX spreadsheets into print-ready PDF files securely.',
+    'Excel to PDF – XLSX, XLS, CSV to A4 PDF',
+    'Convert spreadsheets to printable PDF in the browser. Multi-sheet, A4/Letter/Legal, landscape, gridlines. 100 MB. Charts not drawn. No upload.',
     '/tools/excel-to-pdf-converter'
   );
 }

@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'pdf-to-excel-converter',
-    'PDF to Excel Converter – Convert Free | ToolWala AI',
-    'Free PDF to excel converter online. Convert PDF to Excel free and extract tables into XLS/XLSX spreadsheets instantly with 100% privacy.',
+    'PDF to Excel – Extract Tables to XLSX (100MB)',
+    'Pull PDF tables into Excel in the browser. Digital PDFs or scanned sheets with on-device OCR (English/Hindi). 100 MB limit. File never leaves the tab.',
     '/tools/pdf-to-excel-converter'
   );
 }

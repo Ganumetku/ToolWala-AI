@@ -3,9 +3,10 @@
 import React, { useMemo } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Sparkles } from 'lucide-react';
-import { toolsData, Tool } from '@/data/tools';
+import { toolsData } from '@/data/tools';
 import { useTranslation } from '@/components/I18nContext';
 import ToolCard from '@/components/ToolCard';
+import { getRelatedTools } from '@/lib/relatedTools';
 
 interface RelatedToolsSectionProps {
   currentSlug: string;
@@ -29,45 +30,10 @@ export default function RelatedToolsSection({
 
   const activeCategory = category || currentTool?.category || 'Utility Tools';
 
-  // Automatically determine 6 to 8 related tools based on category & tag matching
-  const relatedTools = useMemo(() => {
-    const cleanSlug = currentSlug.replace(/\/$/, '');
-
-    // Filter candidate tools
-    const candidates = toolsData.filter(
-      (t) => t.isVisible && t.status === 'published' && t.slug !== cleanSlug
-    );
-
-    // Score candidates based on relevance
-    const scored = candidates.map((toolItem) => {
-      let score = 0;
-
-      // Same category match (highest weight)
-      if (toolItem.category === activeCategory) {
-        score += 50;
-      }
-
-      // Shared tags match
-      if (currentTool && currentTool.tags) {
-        const sharedTags = toolItem.tags.filter((tag) =>
-          currentTool.tags.some((t) => t.toLowerCase() === tag.toLowerCase())
-        );
-        score += sharedTags.length * 10;
-      }
-
-      // Trending/featured bonus
-      if (toolItem.popular) score += 5;
-      if (toolItem.trending) score += 5;
-      if (toolItem.featured) score += 5;
-
-      return { tool: toolItem, score };
-    });
-
-    // Sort descending by score
-    scored.sort((a, b) => b.score - a.score);
-
-    return scored.slice(0, limit).map((item) => item.tool);
-  }, [currentSlug, activeCategory, currentTool, limit]);
+  const relatedTools = useMemo(
+    () => getRelatedTools(currentSlug, limit),
+    [currentSlug, limit]
+  );
 
   if (relatedTools.length === 0) return null;
 

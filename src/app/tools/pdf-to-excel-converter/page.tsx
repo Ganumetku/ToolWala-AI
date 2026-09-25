@@ -414,7 +414,7 @@ export default function PdfToExcelConverter() {
           </h1>
 
           <p className="text-sm sm:text-base text-slate-600 dark:text-neutral-300 leading-relaxed">
-            Convert PDF tables, invoices, reports, and bank statements into editable Excel spreadsheets (.xlsx) with browser-first processing.
+            Tables from a PDF into .xlsx. 100 MB cap. You get values, not live formulas. Scans need OCR.
           </p>
 
           {/* Privacy Badge */}

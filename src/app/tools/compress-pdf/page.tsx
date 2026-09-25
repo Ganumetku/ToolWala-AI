@@ -243,7 +243,7 @@ export default function CompressPdf() {
       <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12 font-sans">
         <ToolHero 
           title="Compress PDF"
-          description="Reduce PDF file size locally in your browser with full compression control, transparent size estimation, and 100% privacy."
+          description="pdf-lib rewrite in this tab. Text PDFs often barely shrink. Files are not uploaded."
           icon={<Minimize2 className="w-7 h-7" />}
         />
 

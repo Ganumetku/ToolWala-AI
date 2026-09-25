@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'rotate-pdf',
-    'Rotate PDF Online - Free PDF Rotation Tool | ToolWala AI',
-    'Rotate PDF pages online. Free, 100% secure client-side rotation. Turn pages clockwise, counter-clockwise, or flip them upside down instantly.',
+    'Rotate PDF – All Pages 90°, 180°, or 270°',
+    'Rotates every page in this tab. No thumbnail grid. One page only? Use Organize PDF. Files are not uploaded.',
     '/tools/rotate-pdf'
   );
 }

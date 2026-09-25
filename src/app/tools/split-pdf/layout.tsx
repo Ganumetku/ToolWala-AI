@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'split-pdf',
-    'Split PDF Online - Free PDF Page Extractor | ToolWala AI',
-    'Split PDF files online in seconds. Extract specific pages or divide documents into custom ranges. Free, 100% secure client-side processing.',
+    'Split PDF – Custom, Ranges, or Split All',
+    'Extract pages in this tab. Custom = one PDF. Ranges like 1-3, 5 = one file per block. Split All = one file per page. Files are not uploaded.',
     '/tools/split-pdf'
   );
 }

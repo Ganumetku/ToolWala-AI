@@ -342,7 +342,7 @@ export default function PdfToWord() {
                 </div>
                 <div>
                   <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">PDF to Word Converter</h1>
-                  <p className="text-slate-600 dark:text-gray-400 font-medium mt-1">Convert PDF files to editable Word documents (.docx) locally and securely.</p>
+                  <p className="text-slate-600 dark:text-gray-400 font-medium mt-1">Text PDF to .docx. 50 MB max. Scanned pages need OCR first. Password-locked files fail.</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 bg-emerald-500/10 px-4 py-2 rounded-xl border border-emerald-500/20 h-fit">

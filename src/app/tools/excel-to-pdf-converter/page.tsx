@@ -226,7 +226,7 @@ export default function ExcelToPdfConverter() {
           </h1>
 
           <p className="text-sm sm:text-base text-slate-600 dark:text-neutral-300 leading-relaxed">
-            Convert Excel spreadsheets (.xlsx, .xls, .csv) into clean, professional PDF documents instantly. Preserve table layout, formatting, gridlines, and page structure.
+            .xlsx, .xls, or .csv up to 100 MB. Cell text only — charts are not drawn. Wide sheets clip on A4 portrait; use landscape.
           </p>
 
           {/* Privacy Badge */}

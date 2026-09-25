@@ -74,7 +74,7 @@ export default function RotatePdf() {
       <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12">
         <ToolHero 
           title="Rotate PDF"
-          description="Rotate PDF pages clockwise by 90, 180, or 270 degrees locally and securely."
+          description="Rotates every page 90°, 180°, or 270°. No thumbnail grid. One page: Organize PDF."
           icon={<RotateCw className="w-7 h-7" />}
         />
 

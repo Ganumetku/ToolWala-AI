@@ -341,7 +341,7 @@ export default function SplitPdf() {
         {/* Header Banner */}
         <ToolHero 
           title="Split PDF"
-          description="Extract specific page segments or break PDFs into individual files securely."
+          description="Custom, ranges (1-3, 5), or Split All. Long-file thumbnails take time."
           icon={<Scissors className="w-7 h-7" />}
         />
 

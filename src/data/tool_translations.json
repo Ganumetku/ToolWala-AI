@@ -700,27 +700,27 @@
     "toolSlug": "merge-pdf",
     "locale": "en",
     "title": "Merge PDF",
-    "description": "Combine multiple PDF documents into a single organized PDF file securely.",
+    "description": "You need at least two PDFs. One file will not start. There is no coded megabyte cap — a huge batch can freeze the tab. A password lock often fails at merge.",
     "faq": [
       {
-        "question": "Is it safe to merge confidential documents here?",
-        "answer": "Yes, it is 100% safe. Unlike other tools that upload your files to external servers, ToolWala AI processes your PDFs locally on your own computer. The files never travel across the internet, meaning your confidential data remains entirely yours."
+        "question": "Why won’t one PDF merge?",
+        "answer": "The button needs at least two files. Add the second PDF."
       },
       {
         "question": "Is there a file size limit?",
-        "answer": "Since the merging is executed by your web browser, the size limit depends entirely on your device's available memory (RAM). Most modern computers and smartphones can easily merge files totaling up to 100MB or more without performance drops."
+        "answer": "No number is coded. The limit is whatever this tab can hold in memory. A very large stack can freeze."
       },
       {
-        "question": "Can I merge scanned images or password-protected PDFs?",
-        "answer": "You can merge standard PDFs and scanned PDF documents. However, if a PDF is encrypted or password-protected, you must decrypt or remove the password first, as client-side tools cannot read locked files without the password."
+        "question": "Can I merge a password PDF?",
+        "answer": "Usually no. Unlock it first, then drop it here."
       },
       {
-        "question": "Do I need to sign up or create an account?",
-        "answer": "No signup, registration, or email is required. You can merge your documents immediately and download the result for free, with no strings attached."
+        "question": "Are the PDFs uploaded?",
+        "answer": "No. Pages are copied in this browser tab."
       }
     ],
-    "seoTitle": "Merge PDF Online – Combine PDF Files Free",
-    "seoDescription": "Combine multiple PDF files into one document quickly. No software installation required.",
+    "seoTitle": "Merge PDF – Join 2+ Files in the Browser",
+    "seoDescription": "Join two or more PDFs in this tab. No coded MB cap. Password files often fail. Files are not uploaded.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-18T02:01:06.127Z"
   },
@@ -816,27 +816,27 @@
     "toolSlug": "split-pdf",
     "locale": "en",
     "title": "Split PDF",
-    "description": "Extract specific pages or split PDF documents into separate files instantly.",
+    "description": "Three modes, not one. Custom click = selected pages into a single PDF. Type 1-3, 5 = one file per block. Split All = every page its own file. Thumbnails of a long HDFC statement take time — that is not “milliseconds”.",
     "faq": [
       {
-        "question": "Are my files uploaded to a remote server?",
-        "answer": "No. The Split PDF tool processes your documents locally. All previews, selections, and file extractions run directly in your browser tab. Your files never touch our servers."
+        "question": "Custom vs Split All?",
+        "answer": "Custom makes one PDF from the pages you click. Split All writes a separate PDF for every page."
       },
       {
-        "question": "How do I specify which pages to split?",
-        "answer": "You can do this in two ways: click on the page previews to select them, or select 'Page Ranges' and enter page indexes (e.g. '1-3, 5')."
+        "question": "How do ranges work?",
+        "answer": "1-3, 5 means two files: pages 1–3, and page 5."
       },
       {
-        "question": "What is the difference between 'Custom Extraction' and 'Split All'?",
-        "answer": "'Custom Extraction' allows you to select specific pages and compile them into a single PDF. 'Split All' separates every single page of the document and downloads them as individual, standalone single-page PDFs."
+        "question": "Is the PDF uploaded?",
+        "answer": "No. Previews and splits stay in this tab."
       },
       {
-        "question": "Can I split secure or password-locked PDFs?",
-        "answer": "No. Due to security rules in web browsers, password-encrypted files must be decrypted before this tool can parse pages. Remove the password before uploading."
+        "question": "Password PDF?",
+        "answer": "Unlock it first. A locked file usually will not show thumbnails."
       }
     ],
-    "seoTitle": "Split PDF Online – Extract PDF Pages Free",
-    "seoDescription": "Divide a PDF file into individual pages or extract specific sections in seconds.",
+    "seoTitle": "Split PDF – Custom, Ranges, or Split All",
+    "seoDescription": "Extract pages in this tab. Custom = one PDF. Ranges like 1-3, 5 = one file per block. Split All = one file per page. Files are not uploaded.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-18T02:01:06.127Z"
   },
@@ -2949,23 +2949,23 @@
     "toolSlug": "pdf-to-word-converter",
     "locale": "en",
     "title": "PDF to Word Converter",
-    "description": "Turn a text PDF into an editable .docx in this tab. 50 MB limit. Scanned PDFs need OCR first. Files stay on your device.",
+    "description": "Hard limit is 50 MB. If you cannot highlight text in the PDF, this page will not invent it — run PDF OCR first. A password lock fails until you unlock the file.",
     "faq": [
       {
-        "question": "Does PDF to Word keep the original formatting?",
-        "answer": "Headings, paragraphs, and page breaks are rebuilt from text positions. Simple one-column docs look close to the PDF. Multi-column pages, text boxes, and form grids often flatten. Always proof the .docx before you file it."
+        "question": "Does formatting stay the same?",
+        "answer": "Simple one-column text is usually close. Two-column pages and text boxes often flatten. Always open the .docx before you file it."
       },
       {
-        "question": "Can I convert a scanned PDF to Word?",
-        "answer": "Not on this page. If you see the scanned-PDF warning, the file is mostly images. Run it through PDF OCR to get selectable text, then convert that result — or type from the scan."
+        "question": "Can I convert a scanned PDF here?",
+        "answer": "No. If you see the scanned warning, this page has almost no text to copy. Use PDF OCR first."
       },
       {
-        "question": "What is the PDF to Word file size limit?",
-        "answer": "50 MB. The tool blocks anything larger. For a smaller file, use Compress PDF first, then convert."
+        "question": "What is the size limit?",
+        "answer": "50 MB. Larger files never start."
       },
       {
-        "question": "Is my PDF uploaded when I convert to Word?",
-        "answer": "No. Conversion stays in the browser. We do not receive a copy of the file."
+        "question": "Is the PDF uploaded?",
+        "answer": "No. Conversion stays in the browser."
       }
     ],
     "seoTitle": "PDF to Word Converter – Free DOCX, 50MB, No Upload",
@@ -3101,23 +3101,23 @@
     "toolSlug": "word-to-pdf-converter",
     "locale": "en",
     "title": "Word to PDF Converter",
-    "description": "Turn a .docx file into PDF in this tab. 50 MB cap. Legacy .doc not supported. No upload.",
+    "description": "Only .docx, and only up to 50 MB. A 2003-era .doc will not load — Save As .docx first. Password-protected Word files also fail here.",
     "faq": [
       {
-        "question": "Why won’t my .doc file convert to PDF?",
-        "answer": "This tool only accepts .docx. Open the old .doc in Word or LibreOffice, use Save As → .docx, then drop that file here."
+        "question": "Why won’t my .doc convert?",
+        "answer": "The picker only accepts .docx. Open the old file in Word or LibreOffice, Save As .docx, then drop it here."
       },
       {
-        "question": "Does Word to PDF upload my document?",
-        "answer": "No. The .docx stays in the browser. We do not receive the file."
+        "question": "Will tables and lists look right?",
+        "answer": "Simple tables and lists usually do. Nested tables and SmartArt often do not. Trust the preview."
       },
       {
-        "question": "Will tables and bullet lists look right in the PDF?",
-        "answer": "Standard tables and lists usually do. Nested tables, text boxes, and SmartArt often do not. Check the preview before you send it."
+        "question": "What is the size limit?",
+        "answer": "50 MB. Shrink images in Word if you are over."
       },
       {
-        "question": "What is the Word to PDF size limit?",
-        "answer": "50 MB. Compress images inside the Word file, or split the document, if you are over the cap."
+        "question": "Is the document uploaded?",
+        "answer": "No."
       }
     ],
     "seoTitle": "Word to PDF – Convert DOCX Offline, 50MB Limit",
@@ -11680,23 +11680,23 @@
     "toolSlug": "pdf-to-excel-converter",
     "locale": "en",
     "title": "PDF to Excel Converter",
-    "description": "Pull PDF tables into Excel in the browser. Digital PDFs or scanned sheets with on-device OCR. 100 MB limit. File never leaves the tab.",
+    "description": "Limit is 100 MB. This page looks for tables — rows and columns — not essays. You get cell values. You do not get live Excel formulas from a printed PDF.",
     "faq": [
       {
-        "question": "How do I extract a table from a PDF to Excel?",
-        "answer": "Drop the PDF, wait for table detection, check the preview grid, then download .xlsx. If no table is found, the PDF is probably prose or a bad scan."
+        "question": "Do I get Excel formulas back?",
+        "answer": "No. The PDF already shows calculated numbers. You can add SUM yourself after download."
       },
       {
-        "question": "Can I convert a PDF bank statement to Excel?",
-        "answer": "Yes, if the statement is a real table (or a readable scan with OCR on). Always match closing balance and a few line amounts to the PDF. ToolWala never sees the statement."
+        "question": "HDFC statement — will it work?",
+        "answer": "If the statement is a real table (or a readable scan with OCR), usually yes. Check closing balance and 2–3 lines."
       },
       {
-        "question": "Does PDF to Excel work on scanned pages?",
-        "answer": "Enable OCR when the tool marks the file as scanned. English and Hindi are supported. Expect some wrong characters on poor scans."
+        "question": "Size limit?",
+        "answer": "100 MB."
       },
       {
-        "question": "What is the PDF to Excel file size limit?",
-        "answer": "100 MB. There is no daily conversion quota because the work runs on your machine."
+        "question": "Is the PDF uploaded?",
+        "answer": "No."
       }
     ],
     "seoTitle": "PDF to Excel – Extract Tables to XLSX (100MB)",
@@ -11707,26 +11707,84 @@
     "toolSlug": "excel-to-pdf-converter",
     "locale": "en",
     "title": "Excel to PDF Converter",
-    "description": "Convert spreadsheets to printable PDF in the browser. Multi-sheet, A4/Letter/Legal, landscape. 100 MB. Charts not drawn. No upload.",
+    "description": "Cap is 100 MB. .xlsx, .xls, and .csv are fine. Charts on a dashboard tab are not drawn — only cell text. A wide sheet on A4 portrait will clip; switch to landscape first.",
     "faq": [
       {
-        "question": "How do I convert Excel to PDF in landscape A4?",
-        "answer": "After the file loads, set paper size to A4 and orientation to Landscape, then convert. Use auto-fit if columns still clip."
+        "question": "Why is the right side of my sheet missing?",
+        "answer": "Portrait A4 is too narrow for many workbooks. Switch to landscape, turn on Fit Table to Page Width, or pick A3."
       },
       {
-        "question": "Can I convert a CSV file to PDF?",
-        "answer": "Yes. Drop the .csv the same way as .xlsx. You get a plain table, not Excel colors or charts."
+        "question": "Do Excel charts come through?",
+        "answer": "No. This page draws cell text. Print chart tabs from desktop Excel, or paste a chart image into Word and use Word to PDF."
       },
       {
-        "question": "Why are my Excel charts missing in the PDF?",
-        "answer": "This converter draws cells, not chart objects. Copy a chart as an image into Word and use Word to PDF, or print those sheets from desktop Excel."
+        "question": "Size limit?",
+        "answer": "100 MB. .xlsx, .xls, and .csv are accepted."
       },
       {
-        "question": "Is the Excel file uploaded?",
-        "answer": "No. Sheet parsing and PDF drawing stay in the browser. Limit is 100 MB."
+        "question": "Is the file uploaded?",
+        "answer": "No."
       }
     ],
     "seoTitle": "Excel to PDF – XLSX, XLS, CSV to A4 PDF",
     "seoDescription": "Convert spreadsheets to printable PDF in the browser. Multi-sheet, A4/Letter/Legal, landscape, gridlines. 100 MB. Charts not drawn. No upload."
+  },
+  {
+    "id": "trans-compress-pdf-en",
+    "toolSlug": "compress-pdf",
+    "locale": "en",
+    "title": "Compress PDF",
+    "description": "There is no hard megabyte cap in code. A typed circular often shrinks by almost nothing. The sliders do not recompress photos — they only change how the file is written back.",
+    "faq": [
+      {
+        "question": "Is this GDPR / HIPAA / CCPA certified?",
+        "answer": "No. We do not claim those labels. Processing happens locally in your browser. Files are not uploaded to any server."
+      },
+      {
+        "question": "Why did my PDF barely shrink?",
+        "answer": "Text and vector pages are already tight. The result card will say already optimized. Scans shrink more than circulars."
+      },
+      {
+        "question": "Do the quality sliders recompress images?",
+        "answer": "No. They change how pdf-lib writes the file. They do not run a JPEG pass on photos."
+      },
+      {
+        "question": "Is there a size limit?",
+        "answer": "None in code. A very large file can stall the tab."
+      },
+      {
+        "question": "Is the PDF uploaded?",
+        "answer": "No."
+      }
+    ],
+    "seoTitle": "Compress PDF – Rewrite in Browser, No Upload",
+    "seoDescription": "Shrink a PDF in this tab with pdf-lib. Text files often barely move. Processing stays in the browser — files are not uploaded."
+  },
+  {
+    "id": "trans-rotate-pdf-en",
+    "toolSlug": "rotate-pdf",
+    "locale": "en",
+    "title": "Rotate PDF",
+    "description": "This page rotates every page — 90°, 180°, or 270°. There is no thumbnail grid here. One sideways sheet in a 12-page pack? Use Organize PDF, or you will spin the good pages too.",
+    "faq": [
+      {
+        "question": "Can I rotate only page 3?",
+        "answer": "Not here. This tool turns every page. Use Organize PDF Pages for one sheet."
+      },
+      {
+        "question": "Will quality drop?",
+        "answer": "Rotation is a page flag. It does not recompress the images."
+      },
+      {
+        "question": "Is there a thumbnail preview?",
+        "answer": "No. Download and open the file."
+      },
+      {
+        "question": "Is the PDF uploaded?",
+        "answer": "No. The rotate runs in this tab."
+      }
+    ],
+    "seoTitle": "Rotate PDF – All Pages 90°, 180°, or 270°",
+    "seoDescription": "Rotates every page in this tab. No thumbnail grid. One page only? Use Organize PDF. Files are not uploaded."
   }
 ]

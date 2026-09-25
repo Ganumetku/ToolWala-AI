@@ -200,7 +200,7 @@ export default function MergePdf() {
         {/* Header Banner */}
         <ToolHero 
           title="Merge PDF"
-          description="Combine multiple PDF documents into one single file locally and securely."
+          description="Needs two or more PDFs. No coded MB cap. Password files often fail."
           icon={<Files className="w-7 h-7" />}
         />
 

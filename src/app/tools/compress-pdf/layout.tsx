@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'compress-pdf',
-    'Compress PDF Online - Free PDF Size Reducer | ToolWala AI',
-    'Reduce PDF file size online. Free, 100% secure client-side optimization. Shrink your document files instantly while keeping layout and quality.',
+    'Compress PDF – Rewrite in Browser, No Upload',
+    'Shrink a PDF in this tab with pdf-lib. Text files often barely move. Processing stays in the browser — files are not uploaded.',
     '/tools/compress-pdf'
   );
 }

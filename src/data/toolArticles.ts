@@ -1,17 +1,29 @@
+export type ToolArticleLayout = 'default' | 'fails-first' | 'howto-first' | 'limits-first' | 'print-first';
+
 export interface ToolArticleData {
   title: string;
   intro: string;
   whatItDoes?: string;
+  whatHeading?: string;
   howToUse?: string[];
+  howToHeading?: string;
+  screenshotCaptions?: string[];
   specificationTable?: { requirement: string; specification: string }[];
   commonMistakes?: string[];
+  limitations?: string[];
+  privacyNote?: string;
+  privacyHeading?: string;
+  uniqueSection?: { title: string; body?: string; bullets?: string[] };
   keyFeatures?: { title: string; desc: string }[];
   benefits?: string[];
   whyChoose?: string;
   useCases?: string[];
+  useCasesHeading?: string;
   faqs?: { question: string; answer: string }[];
   conclusion?: string;
+  conclusionHeading?: string;
   relatedTools?: { name: string; href: string }[];
+  layout?: ToolArticleLayout;
 }
 
 export const toolArticles: Record<string, ToolArticleData> = {
@@ -898,88 +910,117 @@ export const toolArticles: Record<string, ToolArticleData> = {
   },
   "merge-pdf": {
     title: "Merge PDF",
-    intro: "Combine multiple PDF files into one in a matter of seconds. No signup, no limits, and absolute privacy since your files never leave your device.",
-    whatItDoes: "Our Merge PDF tool is built for security-conscious professionals who need to join multiple documents together without relying on third-party cloud servers. Traditional online PDF mergers require you to upload your files, exposing sensitive tax documents, contracts, or personal records to external servers. This tool changes that by running entirely within your web browser. Using advanced web technologies, it runs a localized PDF parser that merges your files locally in your system's memory. Whether you have two PDFs or twenty, you can combine them instantly and download the final combined document without any data leakage.",
+    layout: "fails-first",
+    intro: "You need at least two PDFs. One file will not start. There is no coded megabyte cap — a huge batch can freeze the tab. A password lock often fails at merge.",
+    whatHeading: "What gets joined",
+    howToHeading: "Stack PDFs in order",
+    useCasesHeading: "Packs people actually build",
+    whatItDoes: "Each file is opened in this tab and its pages are copied into a new PDF, in the order of the cards. You can drag a card or use the up/down arrows. Scanned pages merge the same as digital ones — they are just pages.\n\nProcessing happens locally in your browser. Files are not uploaded to any server.",
+    uniqueSection: {
+      title: "When merge fails (read this before you retry)",
+      body: "I once dropped only Form 16 and stared at a disabled button. The tool wants two files. The other miss I see is a lock icon on the card — that file will throw at merge.",
+      bullets: [
+        "One PDF only: add a second file, or the merge will not run.",
+        "Password-protected or encrypted PDF: unlock it first. The toast says password or corrupt.",
+        "Card marked “Encrypted or unreadable”: remove that file or unlock it.",
+        "A 200 MB stack of scans: no hard reject, but the tab can stall. Split the batch."
+      ]
+    },
     howToUse: [
-      "Drag and drop your PDF files into the secure upload zone, or click to choose them from your files.",
-      "Check the preview cards to see each file's size, page count, and order.",
-      "Use the up and down arrow buttons on the preview cards to reorder your documents into the correct sequence.",
-      "Click the 'Merge PDFs & Download' button to combine the files locally in your browser.",
-      "Watch the success animation, and find your newly merged PDF downloaded automatically to your device."
+      "Drop two or more .pdf files. Other types are skipped.",
+      "Read size and page count on each card.",
+      "Drag cards or use the arrows so ITR-V sits after Form 16, not before.",
+      "Set a short filename if a portal hates spaces.",
+      "Merge. The download starts from this tab — there is no server queue."
     ],
-    keyFeatures: [
-      { title: "Client-Side Processing", desc: "All parsing and merging happens directly in your browser. Your files are never uploaded to a server, ensuring 100% data privacy." },
-      { title: "Interactive Reordering", desc: "Easily change the order of your PDFs before merging. Just click the up/down arrows to get the sequence exactly right." },
-      { title: "Real-Time Document Stats", desc: "Each uploaded PDF card shows critical details, including file size and the exact number of pages, so you know exactly what you are merging." },
-      { title: "Fast and Unlimited", desc: "Merge as many PDF documents as you need without daily file limits, download restrictions, or artificial delays." }
+    specificationTable: [
+      { requirement: "Input", specification: ".pdf, two or more files" },
+      { requirement: "Output", specification: "One .pdf" },
+      { requirement: "Size cap", specification: "None in code — limited by tab RAM" },
+      { requirement: "Password PDF", specification: "Usually fails until unlocked" }
     ],
-    benefits: [
-      "Complete confidentiality for bank statements, legal contracts, and medical records.",
-      "Blazing fast performance without waiting for file uploads or queue times.",
-      "Highly responsive and mobile-friendly UI that works on phone, tablet, and desktop.",
-      "Completely free to use with no hidden fees or watermark additions."
+    limitations: [
+      "Minimum two files.",
+      "No hard MB limit, but a huge stack can freeze the browser.",
+      "Password PDFs should be unlocked first.",
+      "This is not JPG-to-PDF. Use JPG to PDF for photos."
     ],
-    whyChoose: "Most free online PDF editors are designed as lead generators or data-harvesting sites. ToolWala AI is different. We believe in providing essential utility tools that respect user privacy. By utilizing client-side computing power, we deliver a premium, ad-free experience that eliminates the server cost for us and the privacy risk for you. It's clean, reliable, and completely private.",
+    privacyNote: "Processing happens locally in your browser. Files are not uploaded to any server.",
+    privacyHeading: "Where the files are processed",
     useCases: [
-      "Students combining separate assignment sections, essays, or references into a single PDF.",
-      "Freelancers merging monthly invoices, billing receipts, and expense statements for clients.",
-      "Legal professionals joining contract addendums, affidavits, and exhibits for case folders.",
-      "Job applicants consolidating portfolio pieces, letters of recommendation, and certificates."
+      "ITR-V + Form 16 into one upload for the income-tax e-filing site.",
+      "College assignment chapters that the portal wants as a single PDF.",
+      "Freelance invoice + annexure the client asked to receive together.",
+      "Offer letter + salary annexure for a Naukri / HR mail."
     ],
     faqs: [
-      { question: "Is it safe to merge confidential documents here?", answer: "Yes, it is 100% safe. Unlike other tools that upload your files to external servers, ToolWala AI processes your PDFs locally on your own computer. The files never travel across the internet, meaning your confidential data remains entirely yours." },
-      { question: "Is there a file size limit?", answer: "Since the merging is executed by your web browser, the size limit depends entirely on your device's available memory (RAM). Most modern computers and smartphones can easily merge files totaling up to 100MB or more without performance drops." },
-      { question: "Can I merge scanned images or password-protected PDFs?", answer: "You can merge standard PDFs and scanned PDF documents. However, if a PDF is encrypted or password-protected, you must decrypt or remove the password first, as client-side tools cannot read locked files without the password." },
-      { question: "Do I need to sign up or create an account?", answer: "No signup, registration, or email is required. You can merge your documents immediately and download the result for free, with no strings attached." }
+      { question: "Why won’t one PDF merge?", answer: "The button needs at least two files. Add the second PDF." },
+      { question: "Is there a file size limit?", answer: "No number is coded. The limit is whatever this tab can hold in memory. A very large stack can freeze." },
+      { question: "Can I merge a password PDF?", answer: "Usually no. Unlock it first, then drop it here." },
+      { question: "Are the PDFs uploaded?", answer: "No. Pages are copied in this browser tab." }
     ],
-    conclusion: "Managing your documents doesn't require expensive subscriptions or sacrificing your privacy. With ToolWala AI's Merge PDF, you get professional-grade document assembly that is fast, reliable, and entirely secure. Try it today and optimize your workflow.",
     relatedTools: [
-      { name: "PDF Tools Suite", href: "/tools/pdf-tools" },
-      { name: "Edit PDF", href: "/tools/pdf-tools/edit-pdf" },
-      { name: "OCR Image to Text", href: "/tools/ocr-to-text" }
+      { name: "Split PDF", href: "/tools/split-pdf" },
+      { name: "Compress PDF", href: "/tools/compress-pdf" },
+      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" }
     ]
   },
   "split-pdf": {
     title: "Split PDF",
-    intro: "Extract specific pages or separate your PDF documents into multiple files in seconds. Totally free, secure, and completed entirely within your browser.",
-    whatItDoes: "The ToolWala AI Split PDF utility is a professional-grade tool built for separating large document packs. Many standard online split tools force you to upload documents to external databases, which introduces data leaks and security risks for sensitive forms like contracts, tax worksheets, or statement folders. Our Split PDF solution changes this approach. The parsing, visual thumbnail building, and extraction processes run completely on your client system. This means your files never travel over the network. It allows you to select custom page numbers visually from thumbnails, type custom range blocks like '1-3, 5', or break every individual page into its own distinct file instantly.",
+    layout: "howto-first",
+    intro: "Three modes, not one. Custom click = selected pages into a single PDF. Type 1-3, 5 = one file per block. Split All = every page its own file. Thumbnails of a long HDFC statement take time — that is not “milliseconds”.",
+    whatHeading: "What you take out",
+    howToHeading: "Pick a mode, then split",
+    useCasesHeading: "Pages people pull out",
+    whatItDoes: "The file stays in this tab. pdf.js draws small page previews. Then pdf-lib writes the pages you asked for. A password PDF usually will not open.\n\nI always wait for thumbnails on a 40-page statement before I click — if page 12 is the closing page, I want to see it, not guess.",
+    uniqueSection: {
+      title: "Custom vs ranges vs Split All",
+      body: "These three buttons do different jobs. Mix them up and you download the wrong pack.",
+      bullets: [
+        "Custom: click thumbnails, get one PDF with only those pages.",
+        "Ranges: 1-3, 5 writes two files (pages 1–3, and page 5). Comma = new file. Dash = a run.",
+        "Split All: one PDF per page. An 80-page scan means 80 downloads.",
+        "Prefix the filename before you run — portals hate Split_document_page_14.pdf."
+      ]
+    },
     howToUse: [
-      "Drag and drop your PDF document into the upload workspace, or click to upload one from your computer.",
-      "Watch the thumbnail loader display actual previews of all the pages in your document.",
-      "Choose your preferred split method: click custom page cards, define a custom range, or extract every single page.",
-      "Customize the download name prefix, and click the 'Split PDF & Download' button.",
-      "Find your newly separated PDF files downloaded immediately as clean individual files or combined outputs."
+      "Drop one .pdf. Wait for thumbnails; a fat scan is slow here.",
+      "Pick Custom, Ranges, or Split All.",
+      "In Custom, unclick pages you do not want. In Ranges, type 1-3, 5.",
+      "Set a short prefix (rollno_itr, hdfc_jan).",
+      "Split. Each result downloads from this tab."
     ],
-    keyFeatures: [
-      { title: "In-Browser Thumbnails", desc: "We render individual page canvases using client-side libraries. You can visually inspect the page structure before choosing what to extract." },
-      { title: "Flexible Split Modes", desc: "Select specific pages by clicking on their cards, enter custom dash-and-comma ranges, or extract all pages as individual documents in one go." },
-      { title: "Zero Document Uploads", desc: "Complete data security. All compilation and segmenting operations happen in memory inside your browser." },
-      { title: "High Performance Engine", desc: "Splitting is processed natively in milliseconds. No server queue waits or download band throttling." }
+    specificationTable: [
+      { requirement: "Input", specification: "One .pdf" },
+      { requirement: "Custom", specification: "Selected pages → one PDF" },
+      { requirement: "Ranges", specification: "1-3, 5 → one file per block" },
+      { requirement: "Split All", specification: "One PDF per page" },
+      { requirement: "Password PDF", specification: "Usually will not preview" }
     ],
-    benefits: [
-      "Full data privacy for payroll logs, legal addendums, and confidential assets.",
-      "Interactive page-level toggle selector offers visual assurance before downloading.",
-      "Fast local generation of files with custom filename prefixes.",
-      "No account signup, no email entries, and no daily limits."
+    limitations: [
+      "Thumbnails are not instant on long files.",
+      "No coded file-size cap — the tab can still run out of memory.",
+      "Password PDFs should be unlocked first.",
+      "Split All on a 100-page scan is 100 files. Use Custom if you only need two pages."
     ],
-    whyChoose: "Traditional utilities charge expensive monthly fees or place heavy limitations on document sizes. At ToolWala AI, we leverage standard client-side computing to deliver high-end document compilation tools. We shift the processing load to your system, allowing us to keep this tool entirely free, fast, and completely secure. Your private worksheets are protected, and you get lightning-fast results.",
+    privacyNote: "Processing happens locally in your browser. Files are not uploaded to any server.",
+    privacyHeading: "Where the file is processed",
     useCases: [
-      "Extracting single pages from thick textbook manuals for study files.",
-      "Separating consolidated bank statement sheets into monthly individual sheets.",
-      "Splitting legal contracts into separate signature pages and terms files.",
-      "Breaking large scanned document bundles into standalone worksheets."
+      "Last page of an HDFC / SBI statement for a visa or loan mail.",
+      "GSTR-1 table pages out of a full GST pack.",
+      "One marksheet page from a scanned college bundle.",
+      "Signature page off a rent agreement, leaving the rest behind."
     ],
     faqs: [
-      { question: "Are my files uploaded to a remote server?", answer: "No. The Split PDF tool processes your documents locally. All previews, selections, and file extractions run directly in your browser tab. Your files never touch our servers." },
-      { question: "How do I specify which pages to split?", answer: "You can do this in two ways: click on the page previews to select them, or select 'Page Ranges' and enter page indexes (e.g. '1-3, 5')." },
-      { question: "What is the difference between 'Custom Extraction' and 'Split All'?", answer: "'Custom Extraction' allows you to select specific pages and compile them into a single PDF. 'Split All' separates every single page of the document and downloads them as individual, standalone single-page PDFs." },
-      { question: "Can I split secure or password-locked PDFs?", answer: "No. Due to security rules in web browsers, password-encrypted files must be decrypted before this tool can parse pages. Remove the password before uploading." }
+      { question: "Custom vs Split All?", answer: "Custom makes one PDF from the pages you click. Split All writes a separate PDF for every page." },
+      { question: "How do ranges work?", answer: "1-3, 5 means two files: pages 1–3, and page 5." },
+      { question: "Is the PDF uploaded?", answer: "No. Previews and splits stay in this tab." },
+      { question: "Password PDF?", answer: "Unlock it first. A locked file usually will not show thumbnails." }
     ],
-    conclusion: "Take control of your document organization. With ToolWala AI's Split PDF, you get a premium, visual, and highly secure extractor that speeds up your workflow without compromising your privacy. Try it now.",
     relatedTools: [
-      { name: "PDF Tools Suite", href: "/tools/pdf-tools" },
       { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "Split PDF", href: "/tools/split-pdf" }
+      { name: "Remove PDF Pages", href: "/tools/remove-pages" },
+      { name: "Organize PDF Pages", href: "/tools/organize-pdf" }
     ]
   },
   "jpg-to-pdf": {
@@ -1332,49 +1373,60 @@ export const toolArticles: Record<string, ToolArticleData> = {
   },
   "pdf-to-word-converter": {
     title: "PDF to Word Converter",
-    intro: "Transform PDF documents into editable Word files instantly and securely. Our browser-based conversion engine preserves text structure, headings, and formatting without uploading your files to any external servers.",
-    whatItDoes: "ToolWala AI PDF to Word Converter uses advanced client-side processing to analyze layout geometry, extract text blocks, and map them into standard Microsoft Word DOCX formats. It identifies text line coordinates, segments paragraphs from headings, and reconstructs multi-page documents locally in your browser sandbox, ensuring absolute data safety for sensitive bank statements, agreements, and personal resumes.",
+    layout: "fails-first",
+    intro: "Hard limit is 50 MB. If you cannot highlight text in the PDF, this page will not invent it — run PDF OCR first. A password lock fails until you unlock the file.",
+    whatHeading: "What this page actually does",
+    howToHeading: "Steps that match the buttons on this page",
+    useCasesHeading: "Files people actually drop here",
+    whatItDoes: "It reads selectable text and line positions, then writes a .docx. That is enough for a one-column notice or a resume. A magazine-style two-column PDF often comes out as one long column — I treat that as expected, not a bug.\n\nThe PDF stays in this tab while it runs. Close the tab and the in-memory copy is gone.",
+    uniqueSection: {
+      title: "When conversion fails (read this before you retry)",
+      body: "The yellow scanned warning is the one I see most. People still click Convert, then download an almost empty Word file and assume the tool is broken.",
+      bullets: [
+        "Scanned or phone-photo PDF: few extractable characters. Use PDF OCR, then convert that result.",
+        "Password-protected PDF: the loader throws PasswordException. Unlock PDF first.",
+        "File over 50 MB: rejected before parsing starts. Compress PDF, then come back.",
+        "Empty PDF (no pages / no text): rejected with an empty-file error."
+      ]
+    },
     howToUse: [
-      "Upload your PDF document by dragging and dropping it into the conversion zone or clicking Browse File.",
-      "Wait a few seconds while our local engine reads and extracts text structures.",
-      "Review the file summary (total pages, size, file name).",
-      "Click 'Convert to Word' to compile the DOCX output.",
-      "Download your editable Word document instantly to your local storage."
+      "Drop a .pdf under 50 MB. Other extensions are rejected.",
+      "Check page count and thumbnails. If the scanned warning appears, stop and use PDF OCR.",
+      "Rename the download if a portal wants a short name.",
+      "Click Convert to Word. There is no server progress bar because the file is not uploaded.",
+      "Open the .docx in Word or Google Docs and check headings before you send it."
     ],
-    keyFeatures: [
-      { title: "Secure Browser Execution", desc: "Your files never leave your machine. Conversion runs completely offline inside your browser sandbox." },
-      { title: "Preserved Layouts", desc: "Smart alignment algorithms sort text by coordinates to prevent paragraphs from getting mixed up." },
-      { title: "Multi-Page Document Support", desc: "Extract and convert multiple pages cleanly with automated page breaks in the output DOCX." },
-      { title: "Custom Filenames", desc: "Rename your output Word file directly within the downloader card before saving it." }
+    specificationTable: [
+      { requirement: "Input", specification: ".pdf only" },
+      { requirement: "Output", specification: ".docx" },
+      { requirement: "Size limit", specification: "50 MB" },
+      { requirement: "Scanned PDF", specification: "No OCR on this page" },
+      { requirement: "Password PDF", specification: "Fails until unlocked" }
     ],
-    benefits: [
-      "Total file privacy—safe for bank reports, NDA contracts, and certificates.",
-      "Saves time compared to manual retyping or copy-pasting.",
-      "Completely free online converter with unlimited file usage.",
-      "Produce clean, editable DOCX files compatible with Microsoft Word and Google Docs."
+    limitations: [
+      "50 MB hard stop in code.",
+      "Output is .docx only, not .doc.",
+      "Multi-column and form grids often flatten.",
+      "This is not a scan-to-Word engine."
     ],
-    whyChoose: "Most free PDF converters upload your documents to third-party databases, presenting severe security vulnerabilities. ToolWala AI runs the entire extraction process locally inside your browser tab. Your files remain yours alone, processed safely with lightning-fast edge utilities.",
+    privacyNote: "The PDF is read with PDF.js in this tab. It is not sent to a conversion API.",
+    privacyHeading: "Where the file is processed",
     useCases: [
-      "Editing read-only bank reports or tax tables.",
-      "Refactoring standard PDF resume templates back to Word format.",
-      "Extracting contract clauses for review and modification.",
-      "Converting scanned ebook pages or essays for revisions."
+      "Naukri / LinkedIn resume that only exists as PDF — need to change the last job dates.",
+      "College circular or exam notice PDF — paste answers into Word.",
+      "Rent agreement or offer letter PDF — pull clauses into a draft.",
+      "Portal that asked for a Word copy of a PDF they themselves issued."
     ],
     faqs: [
-      { question: "How do I convert PDF to Word?", answer: "Upload your PDF file, wait for our local browser engine to analyze the content, and download the compiled DOCX file." },
-      { question: "Is this PDF to Word converter free?", answer: "Yes, it is 100% free with no conversion limits, hidden watermarks, or account registration required." },
-      { question: "Is my converted file secure?", answer: "Yes, absolutely. The conversion process is executed entirely on your client-side browser thread. No files are uploaded to any server." },
-      { question: "Does formatting stay intact?", answer: "Our tool extracts text blocks and preserves paragraphs, headings, and page structures. However, complex multi-column grid layouts may be simplified to standard flow text for better editability." },
-      { question: "Can I convert large PDF files?", answer: "Since the tool runs locally, the limit is bound by your system's memory. Most modern browsers can convert documents up to 50MB with ease." },
-      { question: "Can I edit the output file in Google Docs?", answer: "Yes, the converted file is saved as a standard DOCX format, which is fully compatible with Microsoft Word, Google Docs, LibreOffice, and Pages." },
-      { question: "Do you support scanned PDFs (OCR)?", answer: "Our PDF to Word converter extracts selectable text. For scanned PDFs containing flat image text, you can use our PDF OCR Scanner tool to extract text." }
+      { question: "Does formatting stay the same?", answer: "Simple one-column text is usually close. Two-column pages and text boxes often flatten. Always open the .docx before you file it." },
+      { question: "Can I convert a scanned PDF here?", answer: "No. If you see the scanned warning, this page has almost no text to copy. Use PDF OCR first." },
+      { question: "What is the size limit?", answer: "50 MB. Larger files never start." },
+      { question: "Is the PDF uploaded?", answer: "No. Conversion stays in the browser." }
     ],
-    conclusion: "Convert your PDF documents to editable Microsoft Word files instantly while maintaining absolute privacy. Get started with ToolWala AI's local PDF suite.",
     relatedTools: [
-      { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "Split PDF", href: "/tools/split-pdf" },
+      { name: "Word to PDF Converter", href: "/tools/word-to-pdf-converter" },
       { name: "PDF OCR Scanner", href: "/tools/pdf-ocr" },
-      { name: "PDF to JPG", href: "/tools/pdf-to-jpg" }
+      { name: "Compress PDF", href: "/tools/compress-pdf" }
     ]
   },
   "ai-image-upscaler": {
@@ -2205,47 +2257,59 @@ export const toolArticles: Record<string, ToolArticleData> = {
   },
   "word-to-pdf-converter": {
     title: "Word to PDF Converter",
-    intro: "Convert Word documents (.docx) into professional PDF files in seconds. 100% private, client-side conversion, with no file limits.",
-    whatItDoes: "The ToolWala AI Word to PDF Converter parses text elements, styles, lists, and tables inside your browser to generate high-fidelity PDF documents. Standard online tools upload files to remote databases, which poses a severe security risk for contracts, invoices, or resumes. Our converter solves this by running completely client-side. Your Word document stays locally in your browser memory, where it is compiled directly into a PDF.",
+    layout: "howto-first",
+    intro: "Only .docx, and only up to 50 MB. A 2003-era .doc will not load — Save As .docx first. Password-protected Word files also fail here.",
+    whatHeading: "What makes it into the PDF",
+    howToHeading: "Convert a .docx without print-to-PDF",
+    useCasesHeading: "Why people need a PDF, not the Word file",
+    whatItDoes: "Headings, normal paragraphs, bullets, numbered lists, and simple tables are drawn into a PDF in this tab. SmartArt, macros, comments, and some embedded objects drop or simplify. That is a real gap versus desktop Word's Save as PDF — I would use Word itself if the file is full of diagrams.",
+    uniqueSection: {
+      title: "Portal filename rules (Naukri, college, exam sites)",
+      body: "Portals often reject the file for the name, not the PDF. I rename before download: short, no spaces, no extra dots.",
+      bullets: [
+        "Prefer resume_naukri.pdf or rollno_assignment.pdf over My Resume Final (2).pdf.",
+        "Skip & and % in the name — some upload scripts break on those.",
+        "If the portal caps size (often 200–500 KB for photos, 1–2 MB for CVs), compress images inside Word first, or run Compress PDF after.",
+        "This tool does not add a watermark. If a site still rejects the PDF, it is usually size or the .doc you uploaded by mistake."
+      ]
+    },
     howToUse: [
-      "Drag and drop your DOCX file into the secure upload area, or browse it from your system.",
-      "Review the file summary (total pages, size, file name) after it loads.",
-      "Click the 'Convert to PDF' button to initiate the local conversion engine.",
-      "Download your compiled, high-resolution PDF document instantly to your local storage."
+      "Drop a .docx under 50 MB. .doc and PDF are rejected.",
+      "Wait for the page thumbnails. If a table looks broken there, it will look broken in the PDF.",
+      "Set a portal-safe filename.",
+      "Click Convert to PDF.",
+      "Open the PDF once before you attach it to Naukri or the college form."
     ],
-    keyFeatures: [
-      { title: "Browser-Only Conversion", desc: "Your document stays inside your browser. No files are uploaded to any external servers, ensuring maximum privacy." },
-      { title: "Formatting Preservation", desc: "Our layout engine parses headings, standard paragraphs, inline colors, and font styles to match original DOCX formatting." },
-      { title: "Bullet & Numbered Lists", desc: "Properly renders lists with matching indentation and bullet characters." },
-      { title: "Standard Grid Tables", desc: "Renders document tables, rows, cells, and borders securely into the final PDF." },
-      { title: "Instant Download", desc: "Compiles PDF documents in milliseconds without waiting for server processing." }
+    specificationTable: [
+      { requirement: "Input", specification: ".docx only (not .doc)" },
+      { requirement: "Output", specification: ".pdf" },
+      { requirement: "Size limit", specification: "50 MB" },
+      { requirement: "Password Word", specification: "Not opened" }
     ],
-    benefits: [
-      "Absolute confidentiality for corporate agreements, payroll records, and resumes.",
-      "Super-fast local conversion with no server queues or throttling.",
-      "Completely free online converter with zero registration hurdles or watermarks.",
-      "No file size caps or artificial daily caps.",
-      "Works on all desktop, tablet, and mobile devices."
+    limitations: [
+      "50 MB maximum — the old copy that said “no file limits” was wrong.",
+      ".doc must be saved as .docx first.",
+      "Not a JPG-to-PDF tool. Use JPG to PDF for photos.",
+      "Password-encrypted .docx is not supported."
     ],
-    whyChoose: "Other free DOCX converters store document copies on cloud databases. ToolWala AI uses client-side parser algorithms to process document structures locally, delivering high-fidelity results with total privacy.",
+    privacyNote: "The Word file is parsed and drawn to PDF in the browser. Nothing is uploaded.",
+    privacyHeading: "Upload or not",
     useCases: [
-      "Securing client-ready invoices and corporate contracts in PDF format.",
-      "Converting ATS resumes into non-editable PDF sheets for applications.",
-      "Exporting academic articles and papers into standardised A4 PDF formats."
+      "Naukri / LinkedIn resume — lock the final CV as PDF.",
+      "College assignment or project report that the portal only accepts as PDF.",
+      "Freelance invoice or quote the client should not casually edit.",
+      "HR policy note that should stay read-only in email."
     ],
     faqs: [
-      { question: "Is my Word document secure?", answer: "Yes, 100%. All parsing, layout calculation, and PDF compiling run locally in your web browser. No file contents or metadata are sent to our servers." },
-      { question: "What document formats are supported?", answer: "We support standard Microsoft Word formats (.docx). For legacy files (.doc), save them as .docx before uploading." },
-      { question: "Does the PDF preserve tables and lists?", answer: "Yes. Our client-side rendering engine supports normal tables, cell grids, borders, bullet points, and numbered lists." },
-      { question: "Can I convert password-protected Word files?", answer: "No. You must remove the password protection from the DOCX file before converting it." },
-      { question: "Is this converter free?", answer: "Yes. ToolWala Word to PDF Converter is 100% free with no signups required." }
+      { question: "Why won’t my .doc convert?", answer: "The picker only accepts .docx. Open the old file in Word or LibreOffice, Save As .docx, then drop it here." },
+      { question: "Will tables and lists look right?", answer: "Simple tables and lists usually do. Nested tables and SmartArt often do not. Trust the preview." },
+      { question: "What is the size limit?", answer: "50 MB. Shrink images in Word if you are over." },
+      { question: "Is the document uploaded?", answer: "No." }
     ],
-    conclusion: "Convert your Word documents to PDF securely and easily. Try ToolWala AI's Word to PDF tool today.",
     relatedTools: [
       { name: "PDF to Word Converter", href: "/tools/pdf-to-word-converter" },
-      { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "Split PDF", href: "/tools/split-pdf" },
-      { name: "Compress PDF", href: "/tools/compress-pdf" }
+      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" },
+      { name: "Merge PDF", href: "/tools/merge-pdf" }
     ]
   },
   "invoice-cropper": {
@@ -2338,51 +2402,61 @@ export const toolArticles: Record<string, ToolArticleData> = {
   },
   "compress-pdf": {
     title: "Compress PDF",
-    intro: "Reduce the file size of your PDF documents without losing visual quality. Our local optimizer runs entirely in your browser sandbox, keeping your documents 100% secure.",
-    whatItDoes: "ToolWala AI's Compress PDF tool optimizes document structures. It parses PDF streams, strips redundant metadata, cleans unreferenced font records, and optimizes internal tables to shrink file sizes. By utilizing local WebAssembly technology, the entire compression process executes right inside your browser session, meaning you can shrink huge documents instantly without waiting for cloud uploads.",
+    layout: "limits-first",
+    intro: "There is no hard megabyte cap in code. A typed circular often shrinks by almost nothing. The sliders do not recompress photos — they only change how the file is written back.",
+    whatHeading: "What actually gets smaller",
+    howToHeading: "Run a pass and read the real %",
+    useCasesHeading: "Files people try to get under a portal cap",
+    whatItDoes: "This page opens the PDF with pdf-lib and saves it again. High / Maximum turn on object streams. That can trim some bulk. It is not a WASM “optimizer”, and it does not strip fonts or rewrite images.\n\nI compressed a college notice (all text) and saved about 2%. The yellow note on the result screen was right: already tight. A phone-scan marksheet moved more.",
+    uniqueSection: {
+      title: "When the size barely moves",
+      body: "If someone promised 40–80% every time, that was the estimate bar talking, not the encoder.",
+      bullets: [
+        "Text-only GSTR working paper or a typed circular: often 0–10%. Use that as a pass, not a miracle.",
+        "Scanned ITR pages / photo-heavy forms: more room, still not a guaranteed 80%.",
+        "Font, image, and flatten toggles on this page are not wired into the save path. Do not trust them yet.",
+        "Password PDF: unlock first. The toast will say password or corrupt."
+      ]
+    },
     howToUse: [
-      "Select or drag and drop your PDF document into the compression box.",
-      "Our local script parses the document structure instantly on your device.",
-      "Click the 'Optimize PDF' button to start client-side optimization.",
-      "Review the new size, reduction percentage, and click download to save your optimized PDF."
+      "Drop a .pdf. There is no coded size reject.",
+      "Pick a preset if you want. Treat the % bar as a guess.",
+      "Click Optimize. Wait for the real bytes on the result card.",
+      "If the card says already optimized, stop. Another pass will not help a text file.",
+      "Download only if the new size actually fits the portal (Income Tax, GST, college)."
     ],
-    keyFeatures: [
-      { title: "Browser-Native Speed", desc: "No uploads or downloads required. The optimization executes directly on your device CPU." },
-      { title: "Visual Integrity Preservation", desc: "Our compression algorithm preserves text vectors, standard fonts, and drawing paths perfectly." },
-      { title: "Data Sovereignty", desc: "Because files never leave your device, it remains fully compliant with GDPR, HIPAA, and CCPA standards." },
-      { title: "Multi-Preset Quality Sliders", desc: "Select Extreme, Recommended, or Low compression levels based on your target file size." },
-      { title: "Real-Time Size Stats", desc: "View original size vs compressed size and total MB reduction percentage instantly." }
+    specificationTable: [
+      { requirement: "Input", specification: ".pdf (no coded MB cap)" },
+      { requirement: "Engine", specification: "pdf-lib rewrite in this tab" },
+      { requirement: "Presets", specification: "Object-stream on/off — not image quality" },
+      { requirement: "Uploaded?", specification: "No. Stays in this browser tab." },
+      { requirement: "Password PDF", specification: "Unlock first" }
     ],
-    benefits: [
-      "Send documents via email easily by reducing size limits.",
-      "Saves device storage spaces on desktop or mobile.",
-      "Works offline—perfect for remote workers and travelers.",
-      "Completely free with zero watermarks or account signups.",
-      "Supports all modern desktop and mobile browsers."
+    limitations: [
+      "Not a guaranteed 80% shrink.",
+      "Text-only files often barely move.",
+      "Advanced checkboxes are not applied in the current save path.",
+      "No hard file-size cap — a huge file can freeze the tab."
     ],
-    whyChoose: "Most online PDF compressors upload your sensitive documents to their servers, creating major security risks. ToolWala AI processes your pages directly on your device, ensuring complete data confidentiality.",
+    privacyNote: "Processing happens locally in your browser. Files are not uploaded to any server.",
+    privacyHeading: "Where the file is processed",
     useCases: [
-      "Optimizing tax returns and invoices before portal submissions.",
-      "Shrinking academic theses or reports for emails.",
-      "Compressing corporate presentations for seamless mobile reading."
+      "ITR-V or Form 16 that the e-filing site rejects for size.",
+      "GSTR-1 / GST invoice pack for email to the CA.",
+      "Scanned SSC / college form that must stay under 1 MB.",
+      "Rent agreement photo-PDF for a WhatsApp send."
     ],
     faqs: [
-      { question: "Is Compress PDF secure?", answer: "Absolutely. All optimization runs locally inside your browser memory. Your documents never touch our servers." },
-      { question: "Does it work on password-protected PDFs?", answer: "No, you must unlock password-protected PDFs first before our compressor can parse and optimize their internal structures." },
-      { question: "Is there a limit on file sizes?", answer: "Since compression runs inside your browser tab memory, we recommend using files under 100MB for optimal system stability." },
-      { question: "Will compressing a PDF decrease image or text quality?", answer: "Our algorithm uses smart vector and font stream cleanup to reduce file weight while keeping text sharp and readable." },
-      { question: "Is ToolWala Compress PDF free to use?", answer: "Yes! ToolWala Compress PDF is 100% free with no daily usage caps." }
+      { question: "Is this GDPR / HIPAA / CCPA certified?", answer: "No. We do not claim those labels. Processing happens locally in your browser. Files are not uploaded to any server." },
+      { question: "Why did my PDF barely shrink?", answer: "Text and vector pages are already tight. The result card will say already optimized. Scans shrink more than circulars." },
+      { question: "Do the quality sliders recompress images?", answer: "No. They change how pdf-lib writes the file. They do not run a JPEG pass on photos." },
+      { question: "Is there a size limit?", answer: "None in code. A very large file can stall the tab." },
+      { question: "Is the PDF uploaded?", answer: "No." }
     ],
-    conclusion: "Optimize file sizes while preserving complete document clarity with ToolWala AI's Compress PDF.",
     relatedTools: [
       { name: "Merge PDF", href: "/tools/merge-pdf" },
       { name: "Split PDF", href: "/tools/split-pdf" },
-      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" },
-      { name: "PDF to JPG", href: "/tools/pdf-to-jpg" },
-      { name: "PDF to Word", href: "/tools/pdf-to-word-converter" },
-      { name: "Add Page Numbers", href: "/tools/add-page-numbers-to-pdf" },
-      { name: "Protect PDF", href: "/tools/protect-pdf" },
-      { name: "Crop PDF", href: "/tools/crop-pdf" }
+      { name: "Aadhaar PDF Compressor", href: "/tools/aadhaar-pdf-compressor" }
     ]
   },
   "crop-pdf": {
@@ -2434,46 +2508,59 @@ export const toolArticles: Record<string, ToolArticleData> = {
   },
   "rotate-pdf": {
     title: "Rotate PDF",
-    intro: "Rotate PDF pages by 90, 180, or 270 degrees. Change page orientations locally and securely in your web browser.",
-    whatItDoes: "ToolWala AI's Rotate PDF tool lets you fix inverted or sideways page scans instantly. Using client-side JavaScript, the tool modifies the /Rotate parameter of individual or all pages inside the PDF file structure. Your documents never leave your browser context, giving you fast execution speeds without any data exposure risks.",
+    layout: "print-first",
+    intro: "This page rotates every page — 90°, 180°, or 270°. There is no thumbnail grid here. One sideways sheet in a 12-page pack? Use Organize PDF, or you will spin the good pages too.",
+    whatHeading: "What the angle buttons do",
+    howToHeading: "Turn the whole file",
+    useCasesHeading: "Scans that come in sideways",
+    whatItDoes: "It sets a rotate flag on each page and saves the PDF in this tab. Photos are not recompressed. I wanted only page 3 of a bank scan once — this page has no per-page picker, so I switched to Organize PDF.",
+    uniqueSection: {
+      title: "This page rotates every page",
+      body: "The three buttons apply the same angle to the entire document. That is a feature for a fully sideways scan, and a foot-gun for a mixed pack.",
+      bullets: [
+        "90° clockwise, 180° flip, 270° counter-clockwise — those are the only angles.",
+        "No live thumbnail preview on this page. Open the download to check.",
+        "Password PDF: unlock first.",
+        "Need page 2 only? Organize PDF Pages, not this tool."
+      ]
+    },
     howToUse: [
-      "Drag and drop your PDF document or click to upload.",
-      "Choose to rotate pages clockwise (+90°), counter-clockwise (-90°), or fully upside down (180°).",
-      "Click the 'Rotate PDF' button to adjust orientation vectors locally.",
-      "Download the rotated PDF instantly."
+      "Drop one .pdf.",
+      "Pick 90°, 180°, or 270°.",
+      "Rotate. All pages move together.",
+      "Download and open page 1 and the last page before you mail it.",
+      "If only one sheet was wrong, undo mentally and use Organize PDF."
     ],
-    keyFeatures: [
-      { title: "Rotation Controls", desc: "Choose exactly how to rotate your pages—90°, 180°, or 270° clockwise." },
-      { title: "On-Device Processing", desc: "No server latency. All page parameter updates are calculated locally." },
-      { title: "Lossless Rendering", desc: "Rotating pages does not re-compress images or text layers, preserving original file quality." },
-      { title: "Visual Thumbnail Grid", desc: "Inspect original and rotated page layouts in real-time." },
-      { title: "Bulk Page Rotation", desc: "Rotate all pages in a document with a single click." }
+    specificationTable: [
+      { requirement: "Input", specification: "One .pdf" },
+      { requirement: "Scope", specification: "All pages, same angle" },
+      { requirement: "Angles", specification: "90°, 180°, 270°" },
+      { requirement: "Thumbnails", specification: "None on this page" },
+      { requirement: "Per-page rotate", specification: "Organize PDF Pages" }
     ],
-    benefits: [
-      "Quickly fix scanning orientation errors on documents.",
-      "Easy and simple user interface suitable for all devices.",
-      "Absolute confidentiality for tax sheets and contracts.",
-      "Works 100% offline with zero server lag.",
-      "Completely free with no signups or watermarks."
+    limitations: [
+      "Cannot rotate a single page here.",
+      "No thumbnail grid despite older copy that said so.",
+      "Password PDFs should be unlocked first.",
+      "Needs the page (and pdf-lib) loaded — not a magic offline app."
     ],
-    whyChoose: "Our Rotate PDF tool is optimized for lightning-fast, client-side edits. No network uploads are required, meaning you can fix document rotations offline anytime.",
+    privacyNote: "Processing happens locally in your browser. Files are not uploaded to any server.",
+    privacyHeading: "Where the file is processed",
     useCases: [
-      "Fixing sideways scanned pages on tax records or statements.",
-      "Rotating blueprint grids and landscape slides for clear viewing.",
-      "Aligning eBook pages before reading on portable devices."
+      "Whole HDFC statement scanned sideways on a phone.",
+      "Landscape marksheet stuck in a portrait pack — if every page is landscape.",
+      "Upside-down rent agreement from a copier.",
+      "College circular photographed in landscape, all pages the same way."
     ],
     faqs: [
-      { question: "Can I rotate specific pages?", answer: "Yes, you can rotate pages visually using our 'Organize PDF Pages' tool. This dedicated Rotate PDF tool applies rotation to all pages in the document." },
-      { question: "Will rotating decrease PDF quality?", answer: "No, rotation is a lossless metadata parameter change. It simply instructs the PDF viewer to display the pages at a different angle." },
-      { question: "Does this work on mobile phone browsers?", answer: "Yes, it is fully responsive and works smoothly on Safari, Chrome, and all mobile viewports." },
-      { question: "Are my documents uploaded to a remote server?", answer: "No. All rotation edits execute locally inside your web browser sandbox." },
-      { question: "Is this tool free?", answer: "Yes. ToolWala Rotate PDF is 100% free with no hidden charges." }
+      { question: "Can I rotate only page 3?", answer: "Not here. This tool turns every page. Use Organize PDF Pages for one sheet." },
+      { question: "Will quality drop?", answer: "Rotation is a page flag. It does not recompress the images." },
+      { question: "Is there a thumbnail preview?", answer: "No. Download and open the file." },
+      { question: "Is the PDF uploaded?", answer: "No. The rotate runs in this tab." }
     ],
-    conclusion: "Correct page orientations instantly with ToolWala's secure client-side Rotate PDF tool.",
     relatedTools: [
       { name: "Organize PDF Pages", href: "/tools/organize-pdf" },
       { name: "Split PDF", href: "/tools/split-pdf" },
-      { name: "Remove PDF Pages", href: "/tools/remove-pages" },
       { name: "Crop PDF", href: "/tools/crop-pdf" }
     ]
   },
@@ -2797,109 +2884,119 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "pdf-to-excel-converter": {
-    title: "PDF to Excel Converter – Extract Tables to Spreadsheet",
-    intro: "Transform PDF tables into clean, fully editable Excel spreadsheets (.xlsx) instantly. Preserve rows, columns, numerical precision, and table formatting with 100% client-side browser processing.",
-    whatItDoes: "ToolWala AI's PDF to Excel Converter automatically extracts structured tables from digital and scanned PDF files directly inside your browser tab. Powered by advanced spatial parsing and on-device OCR, our tool scans PDF document layouts to detect table boundaries, headers, cell alignments, merged cells, and data types (numbers, dates, currency, percentages). It converts your documents into formatted Excel workbooks without requiring cloud uploads or compromising data privacy.",
+    title: "PDF to Excel Converter",
+    layout: "limits-first",
+    intro: "Limit is 100 MB. This page looks for tables — rows and columns — not essays. You get cell values. You do not get live Excel formulas from a printed PDF.",
+    whatHeading: "How extraction works",
+    howToHeading: "From PDF table to .xlsx",
+    useCasesHeading: "Documents that are actually tables",
+    whatItDoes: "Digital PDFs (you can highlight text) are parsed as a grid. A scan can use Tesseract in the browser — English, Hindi, or auto. OCR is slower and will misread a faint stamp or a tilted page. I always match the closing balance on a bank statement before I trust the sheet.",
+    uniqueSection: {
+      title: "Failed conversions and what you do not get",
+      body: "If someone promised “formulas are preserved,” that was wrong. A PDF is a print. SUM and VLOOKUP are already calculated. The sheet has numbers and labels you can sort — not a working model.",
+      bullets: [
+        "A letter or circular with no grid: weak or empty sheet. Use PDF to Word.",
+        "Handwritten marks or a photo of a crumpled printout: OCR will guess. Type those cells.",
+        "Nested tables and tiny footnotes under a GST table: often land in the wrong column. Fix in the preview.",
+        "Over 100 MB: rejected before extract starts."
+      ]
+    },
     howToUse: [
-      "Upload or drag & drop your PDF file (up to 100MB) into the secure upload area.",
-      "Review the automated PDF analysis detailing total pages, detected tables, document type (Digital vs Scanned), and estimated conversion accuracy.",
-      "Inspect the live interactive Excel-style preview grid to verify extracted rows, columns, and headers across all detected tables.",
-      "Customize Export & Advanced Options: select specific page ranges, table subset exports, auto column formatting, date/currency detection, and merged cell preservation.",
-      "If a scanned PDF is detected, enable OCR Mode and select your preferred target language (English, Hindi, or Auto Detect).",
-      "Click 'Convert to Excel' to generate your formatted .xlsx workbook and download it immediately."
+      "Drop a PDF up to 100 MB.",
+      "Read the analysis card: digital vs scanned, table count.",
+      "Check the preview grid. Edit a wrong cell if you need to.",
+      "For a scan, turn OCR on and pick English or Hindi.",
+      "Download .xlsx and spot-check 3–4 amounts against the PDF."
     ],
     specificationTable: [
-      { requirement: "Supported Input", specification: "PDF Documents (Digital & Scanned, up to 100 MB)" },
-      { requirement: "Output Format", specification: "Microsoft Excel (.xlsx)" },
-      { requirement: "Processing Engine", specification: "100% Local Browser Engine (pdfjs-dist, SheetJS & Tesseract OCR)" },
-      { requirement: "Table Recognition", specification: "Automatic header detection, spatial cell alignment & merged cell detection" },
-      { requirement: "Data Preservation", specification: "Numbers, dates, currency ($ / ₹ / €), percentages, empty cells, and text formatting" }
+      { requirement: "Input", specification: "PDF up to 100 MB" },
+      { requirement: "Output", specification: ".xlsx (cell values, not live formulas)" },
+      { requirement: "Digital PDF", specification: "Grid parsed from selectable text" },
+      { requirement: "Scanned PDF", specification: "Optional OCR — English, Hindi, or auto" },
+      { requirement: "Password PDF", specification: "Not handled on this page" }
     ],
-    keyFeatures: [
-      { title: "Client-Side Processing", desc: "All PDF parsing and spreadsheet generation happens inside your browser tab. Your files never touch external servers." },
-      { title: "Intelligent Table Detection", desc: "Automatically locates tabular data across multi-page documents, maintaining exact row heights and column alignment." },
-      { title: "Interactive Excel Preview", desc: "Inspect and navigate extracted tables using a spreadsheet grid before exporting to .xlsx format." },
-      { title: "On-Device OCR Engine", desc: "Extract tables from scanned documents and physical paper PDF scans with multi-language optical character recognition." }
+    limitations: [
+      "100 MB per PDF — not “unlimited” or “zero file caps”.",
+      "Values only. No live Excel formulas from a printed sheet.",
+      "Prose PDFs belong on PDF to Word.",
+      "OCR can misread Hindi-English mixes and stamps."
     ],
-    benefits: [
-      "Save hours of manual data re-entry and typing errors when extracting financial reports, bank statements, or invoices.",
-      "Maintain absolute document privacy and corporate security with client-side execution.",
-      "Preserve mathematical formulas, numerical precision, and cell alignments for seamless analysis in Microsoft Excel or Google Sheets.",
-      "Process large multi-page reports with customizable page ranges and selective table export options."
-    ],
-    whyChoose: "ToolWala AI offers a privacy-first, enterprise-grade PDF to Excel conversion suite that rivals premium desktop software. Unlike third-party cloud services that compromise security, ToolWala processes all records locally on your device GPU/CPU. Enjoy fast processing, zero file caps, clean column boundaries, and multi-language OCR capabilities—all completely free.",
+    privacyNote: "Bank and GST PDFs are parsed in the tab, including optional OCR. They are not uploaded.",
+    privacyHeading: "Statement files",
     useCases: [
-      "Financial analysts converting corporate PDF earnings reports, balance sheets, and tax filings into Excel models.",
-      "Accountants extracting bank statement line items and transaction receipts into spreadsheet workbooks.",
-      "Data researchers pulling tabular data sets from academic PDF papers and government reports.",
-      "Business managers consolidating multi-page project schedules, pricing matrices, and inventory lists."
+      "HDFC / SBI / ICICI account statement PDF — line items into a sheet for reconciliation.",
+      "GSTR-1 or GST invoice PDF — item rows for working papers.",
+      "SSC / university marksheet PDF — totals and ranks in Excel.",
+      "Shop price list or stock table that only came as PDF."
     ],
     faqs: [
-      { question: "How do I convert PDF to Excel free online?", answer: "Upload your PDF bank statement, invoice, or tabular document. Our PDF to Excel converter extracts table structures into clean XLSX spreadsheet format instantly." },
-      { question: "Will my original PDF formatting and tabular data be retained?", answer: "Yes, the conversion algorithm detects table boundaries, headers, rows, and numbers, accurately populating Excel columns." },
-      { question: "Is there any daily conversion limit or file size restriction?", answer: "No, conversion runs locally in your browser so you can convert unlimited PDF files to Excel free without registration." },
-      { question: "Can I convert scanned PDFs to Excel?", answer: "Yes! If a scanned or image-based PDF is detected, our tool enables on-device OCR (Optical Character Recognition) using Tesseract.js to read text within images and format them into Excel columns." }
+      { question: "Do I get Excel formulas back?", answer: "No. The PDF already shows calculated numbers. You can add SUM yourself after download." },
+      { question: "HDFC statement — will it work?", answer: "If the statement is a real table (or a readable scan with OCR), usually yes. Check closing balance and 2–3 lines." },
+      { question: "Size limit?", answer: "100 MB." },
+      { question: "Is the PDF uploaded?", answer: "No." }
     ],
-    conclusion: "Convert your PDF tables into clean, editable Excel spreadsheets in seconds. Experience fast, private, and precise document conversion with ToolWala AI today.",
     relatedTools: [
+      { name: "Excel to PDF Converter", href: "/tools/excel-to-pdf-converter" },
       { name: "PDF to Word Converter", href: "/tools/pdf-to-word-converter" },
-      { name: "PDF to JPG", href: "/tools/pdf-to-jpg" },
-      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" },
-      { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "Compress PDF", href: "/tools/compress-pdf" },
-      { name: "OCR to Text", href: "/tools/ocr-to-text" }
+      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr" }
     ]
   },
   "excel-to-pdf-converter": {
-    title: "Excel to PDF Converter – Convert Spreadsheets Free",
-    intro: "Convert Excel spreadsheets (.xlsx, .xls, .csv) into clean, professional PDF documents instantly. Preserve table layout, formatting, headers, gridlines, and pagination with 100% browser-based processing.",
-    whatItDoes: "ToolWala AI's Excel to PDF Converter parses spreadsheet workbooks locally in your browser memory and renders high-density tables into crisp PDF documents. It supports multi-sheet selection, custom page orientations (Portrait or Landscape), paper sizes (A4, Letter, Legal, A3), table auto-fitting, margin controls, and page number overlays—without requiring cloud server uploads.",
+    title: "Excel to PDF Converter",
+    layout: "print-first",
+    intro: "Cap is 100 MB. .xlsx, .xls, and .csv are fine. Charts on a dashboard tab are not drawn — only cell text. A wide sheet on A4 portrait will clip; switch to landscape first.",
+    whatHeading: "What the PDF actually contains",
+    howToHeading: "Print a sheet without opening Excel",
+    useCasesHeading: "Sheets people lock as PDF",
+    whatItDoes: "SheetJS reads cell values. jsPDF draws them as a table. Comments, chart objects, and most cell colors are skipped. I learned that on a monthly P&L that had a pie chart on the first tab — the PDF had the numbers, not the chart.\n\nYou can pick sheets, paper size (A4, Letter, Legal, A3), margins, gridlines, header highlight, and page numbers. Fit-to-width squeezes columns so more of them fit; long text still ends with an ellipsis.",
+    uniqueSection: {
+      title: "Wide sheets clip on A4 portrait",
+      body: "I dropped a hostel attendance + marks sheet with 18 columns. Portrait A4 cut off after column L. Landscape plus “Fit Table to Page Width” fixed the columns. Skinny columns still truncate long names.",
+      bullets: [
+        "Default orientation is portrait. Change it before Convert.",
+        "Fit to width helps; it does not magically keep every character.",
+        "A3 or Legal is the next step if landscape A4 is still tight.",
+        "Charts and sparklines are not drawn. Print those tabs from desktop Excel."
+      ]
+    },
     howToUse: [
-      "Upload or drag & drop your Excel workbook (.xlsx, .xls) or CSV file into the secure upload area.",
-      "Review detected worksheets and select which sheets to include in the converted PDF.",
-      "Customize PDF layout settings: select page orientation (Portrait or Landscape), paper size (A4, Letter, Legal, A3), and margin spacing.",
-      "Toggle layout preferences: enable/disable table gridlines, header row highlights, auto column fitting, and page numbers.",
-      "Inspect the live interactive page preview grid with page break indicators.",
-      "Click 'Convert to PDF' to generate and download your formatted PDF document."
+      "Drop a .xlsx, .xls, or .csv under 100 MB.",
+      "Uncheck sheets you do not want. A chart-only dashboard will come out empty-looking.",
+      "If the preview looks clipped, switch to landscape (or A3) and keep Fit to Width on.",
+      "Toggle gridlines, header highlight, and page numbers if you need them for print.",
+      "Convert, then open the PDF once before you attach it to email or a portal."
     ],
     specificationTable: [
-      { requirement: "Supported Input", specification: "Microsoft Excel (.xlsx, .xls) & CSV files (up to 100 MB)" },
-      { requirement: "Output Format", specification: "Adobe PDF (.pdf)" },
-      { requirement: "Processing Engine", specification: "100% Browser Engine (SheetJS & jsPDF)" },
-      { requirement: "Page Customization", specification: "A4, Letter, Legal, A3 | Portrait & Landscape | Margin controls" },
-      { requirement: "Layout Features", specification: "Table gridlines, column auto-fitting, header highlights & page numbers" }
+      { requirement: "Input", specification: ".xlsx, .xls, .csv — 100 MB max" },
+      { requirement: "Output", specification: ".pdf (table of cell text)" },
+      { requirement: "Paper", specification: "A4, Letter, Legal, A3" },
+      { requirement: "Orientation", specification: "Portrait or landscape (default: portrait)" },
+      { requirement: "Not drawn", specification: "Charts, images, comments" }
     ],
-    keyFeatures: [
-      { title: "Client-Side Privacy", desc: "Your financial records, pricing sheets, and private data never leave your browser window." },
-      { title: "Multi-Sheet Conversion", desc: "Convert all worksheets into a single unified PDF or select specific tabs." },
-      { title: "Orientation & Size Options", desc: "Switch between Portrait and Landscape modes for wide data tables on A4, Letter, or Legal pages." },
-      { title: "Gridlines & Column Auto-Fit", desc: "Preserve clean table borders and automatic column width adjustments for maximum readability." }
+    limitations: [
+      "100 MB hard stop — not unlimited.",
+      "Charts and embedded images are not rendered.",
+      "Wide tables clip in portrait A4.",
+      "Empty workbooks (no data rows) are rejected."
     ],
-    benefits: [
-      "Ensure non-editable document sharing for corporate reports, financial statements, and client invoices.",
-      "Prevent formatting shifts when sharing spreadsheets across different devices or operating systems.",
-      "Save time with instant local conversions without waiting for cloud upload queues.",
-      "Maintain complete control over page breaks, margins, gridlines, and page number footers."
-    ],
-    whyChoose: "ToolWala AI delivers an enterprise-grade document conversion suite with zero subscription traps or signups. Unlike online tools that store your sensitive spreadsheet files on remote servers, ToolWala processes everything natively on your computer's CPU, keeping your corporate data 100% private.",
+    privacyNote: "The workbook is parsed and drawn in this tab. It is not uploaded.",
+    privacyHeading: "Where the sheet is processed",
     useCases: [
-      "Accountants rendering monthly tax sheets, P&L statements, and balance sheets into read-only PDFs.",
-      "Sales managers converting pricing matrices, quote proposals, and inventory lists for client distribution.",
-      "Teachers exporting grade books, attendance records, and student marks to PDF.",
-      "Business owners converting payroll records and project schedules into standardized printable files."
+      "GSTR-1 working sheet locked as PDF for the CA.",
+      "College attendance / marks register for print.",
+      "Freelance invoice or rate list the client should not casually edit.",
+      "CSV shop price list for the counter printer."
     ],
     faqs: [
-      { question: "How to convert Excel to PDF online for free?", answer: "Drag and drop your XLS or XLSX spreadsheet file into the converter tool. It renders all sheets into standard, formatted PDF documents in seconds." },
-      { question: "Are my financial spreadsheets secure during conversion?", answer: "Yes, processing happens entirely within your web browser memory. Your Excel data is never transmitted to outside servers." },
-      { question: "Can I convert multi-sheet Excel files into PDF?", answer: "Yes, the Excel to PDF converter processes multi-sheet workbooks and structures them cleanly into sequential PDF pages." },
-      { question: "Are my Excel files uploaded to any server?", answer: "No! All file parsing, table layout calculations, and PDF generation occur 100% locally inside your browser tab." }
+      { question: "Why is the right side of my sheet missing?", answer: "Portrait A4 is too narrow for many workbooks. Switch to landscape, turn on Fit Table to Page Width, or pick A3." },
+      { question: "Do Excel charts come through?", answer: "No. This page draws cell text. Print chart tabs from desktop Excel, or paste a chart image into Word and use Word to PDF." },
+      { question: "Size limit?", answer: "100 MB. .xlsx, .xls, and .csv are accepted." },
+      { question: "Is the file uploaded?", answer: "No." }
     ],
-    conclusion: "Convert your Excel spreadsheets into clean, professional PDF documents in seconds. Experience fast, secure, and private file conversion with ToolWala AI today.",
     relatedTools: [
       { name: "PDF to Excel Converter", href: "/tools/pdf-to-excel-converter" },
-      { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "Compress PDF", href: "/tools/compress-pdf" },
-      { name: "Word to PDF Converter", href: "/tools/word-to-pdf-converter" }
+      { name: "Word to PDF Converter", href: "/tools/word-to-pdf-converter" },
+      { name: "Compress PDF", href: "/tools/compress-pdf" }
     ]
   },
   "jpg-to-webp": {

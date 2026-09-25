@@ -306,7 +306,7 @@ export default function WordToPdf() {
                 </div>
                 <div>
                   <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">Word to PDF Converter</h1>
-                  <p className="text-slate-600 dark:text-gray-400 font-medium mt-1">Convert Microsoft Word files (.docx) to PDF format locally and securely.</p>
+                  <p className="text-slate-600 dark:text-gray-400 font-medium mt-1">.docx only, up to 50 MB. Legacy .doc will not load. Password-protected Word files fail.</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 bg-emerald-50 dark:bg-emerald-500/10 px-4 py-2 rounded-xl border border-emerald-200 dark:border-emerald-500/20 h-fit shadow-sm">

@@ -726,15 +726,18 @@
     },
     "merge-pdf": {
       "title": "Merge PDF",
-      "description": "Combine multiple PDF documents into a single file quickly and securely."
+      "description": "Join two or more PDFs in this tab. No coded MB cap. Password files often fail.",
+      "intro": "You need at least two PDFs. One file will not start. There is no coded megabyte cap — a huge batch can freeze the tab. A password lock often fails at merge."
     },
     "split-pdf": {
       "title": "Split PDF",
-      "description": "Extract specific pages or split your PDF documents into multiple files instantly."
+      "description": "Custom, ranges (1-3, 5), or Split All. Thumbnails of long files take time.",
+      "intro": "Three modes, not one. Custom click = selected pages into a single PDF. Type 1-3, 5 = one file per block. Split All = every page its own file. Thumbnails of a long HDFC statement take time — that is not “milliseconds”."
     },
     "compress-pdf": {
       "title": "Compress PDF",
-      "description": "Reduce PDF file size while maintaining optimal document quality."
+      "description": "pdf-lib rewrite in this tab. Text PDFs often barely shrink. Files are not uploaded.",
+      "intro": "There is no hard megabyte cap in code. A typed circular often shrinks by almost nothing. The sliders do not recompress photos — they only change how the file is written back."
     },
     "pdf-to-jpg": {
       "title": "PDF to JPG",
@@ -747,12 +750,22 @@
     "word-to-pdf-converter": {
       "title": "Word to PDF Converter",
       "description": "Turn a .docx file into PDF in this tab. 50 MB cap. Legacy .doc not supported. No upload.",
-      "intro": "Lock a Word file as PDF without printing or uploading. Accepts .docx only, up to 50 MB. The PDF is built in this tab. Legacy .doc files must be saved as .docx first."
+      "intro": "Only .docx, and only up to 50 MB. A 2003-era .doc will not load — Save As .docx first. Password-protected Word files also fail here."
     },
     "pdf-to-word-converter": {
       "title": "PDF to Word Converter",
       "description": "Turn a text PDF into an editable .docx in this tab. 50 MB limit. Files stay on your device.",
-      "intro": "Turn a text-based PDF into an editable .docx file in this browser tab. The file stays on your device. Hard cap is 50 MB. Output opens in Microsoft Word, Google Docs, and LibreOffice."
+      "intro": "Hard limit is 50 MB. If you cannot highlight text in the PDF, this page will not invent it — run PDF OCR first. A password lock fails until you unlock the file."
+    },
+    "pdf-to-excel-converter": {
+      "title": "PDF to Excel Converter",
+      "description": "Pull PDF tables into Excel in the browser. 100 MB limit. Values only — not live formulas.",
+      "intro": "Limit is 100 MB. This page looks for tables — rows and columns — not essays. You get cell values. You do not get live Excel formulas from a printed PDF."
+    },
+    "excel-to-pdf-converter": {
+      "title": "Excel to PDF Converter",
+      "description": "Convert .xlsx, .xls, or .csv to PDF in this tab. 100 MB. Charts not drawn.",
+      "intro": "Cap is 100 MB. .xlsx, .xls, and .csv are fine. Charts on a dashboard tab are not drawn — only cell text. A wide sheet on A4 portrait will clip; switch to landscape first."
     },
     "crop-pdf": {
       "title": "Crop PDF",
@@ -760,7 +773,8 @@
     },
     "rotate-pdf": {
       "title": "Rotate PDF",
-      "description": "Rotate PDF pages by 90, 180, or 270 degrees easily."
+      "description": "Rotates every page 90°, 180°, or 270°. No thumbnail grid. Per-page: Organize PDF.",
+      "intro": "This page rotates every page — 90°, 180°, or 270°. There is no thumbnail grid here. One sideways sheet in a 12-page pack? Use Organize PDF, or you will spin the good pages too."
     },
     "watermark-pdf": {
       "title": "Watermark PDF",

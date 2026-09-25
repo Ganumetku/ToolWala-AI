@@ -19,44 +19,60 @@ interface FAQ {
   answer: string;
 }
 
+type ArticleLayout = 'default' | 'fails-first' | 'howto-first' | 'limits-first' | 'print-first';
+
 interface ToolArticleProps {
   title: string;
   intro: string;
   whatItDoes?: string;
+  whatHeading?: string;
   howToUse?: string[];
+  howToHeading?: string;
   screenshotCaptions?: string[];
   specificationTable?: { requirement: string; specification: string }[];
   commonMistakes?: string[];
   limitations?: string[];
   privacyNote?: string;
+  privacyHeading?: string;
+  uniqueSection?: { title: string; body?: string; bullets?: string[] };
   keyFeatures?: { title: string; desc: string }[];
   benefits?: string[];
   whyChoose?: string;
   useCases?: string[];
+  useCasesHeading?: string;
   faqs?: FAQ[];
   conclusion?: string;
+  conclusionHeading?: string;
   relatedTools?: { name: string; href: string }[];
   toolId?: string;
+  layout?: ArticleLayout;
 }
 
 export default function ToolArticle({
   title,
   intro,
   whatItDoes = "",
+  whatHeading,
   howToUse = [],
+  howToHeading,
   screenshotCaptions = [],
   specificationTable = [],
   commonMistakes = [],
   limitations = [],
   privacyNote = "",
+  privacyHeading,
+  uniqueSection,
   keyFeatures = [],
   benefits = [],
   whyChoose = "",
   useCases = [],
+  useCasesHeading,
   faqs = [],
   conclusion = "",
+  conclusionHeading,
   relatedTools = [],
-  toolId
+  toolId,
+  layout = 'default'
 }: ToolArticleProps) {
   
   const { t, locale, messages, localizeHref } = useTranslation();
@@ -258,6 +274,8 @@ export default function ToolArticle({
     return items;
   }, [t, translatedTitle, parentCategory, locale]);
 
+  const numbered = layout === 'default';
+
   return (
     <section className="pt-8 pb-16 sm:pt-12 sm:pb-24 relative overflow-hidden bg-[#F6F8FC] dark:bg-[#030712] border-t border-[#E6ECF5] dark:border-white/5 transition-colors duration-250 font-sans">
       {/* Dynamic structured data */}
@@ -322,21 +340,60 @@ export default function ToolArticle({
               </div>
             </div>
 
-            {/* Content Sections */}
-            <div className="space-y-12">
+            {/* Content Sections — custom layouts change flex order so pages don't share one skeleton */}
+            <div className="flex flex-col gap-12">
+              {uniqueSection && (uniqueSection.body || (uniqueSection.bullets && uniqueSection.bullets.length > 0)) && (
+                <div
+                  style={{ order: layout === 'fails-first' ? 1 : layout === 'howto-first' ? 3 : layout === 'limits-first' ? 2 : layout === 'print-first' ? 3 : 6 }}
+                  className={`p-8 sm:p-10 rounded-[1.125rem] shadow-sm border ${
+                    layout === 'fails-first'
+                      ? 'bg-rose-50/50 dark:bg-rose-950/15 border-rose-200 dark:border-rose-500/20'
+                      : layout === 'limits-first'
+                        ? 'bg-amber-50/60 dark:bg-amber-950/15 border-amber-200 dark:border-amber-500/20'
+                        : layout === 'print-first'
+                          ? 'bg-sky-50/70 dark:bg-sky-950/15 border-sky-200 dark:border-sky-500/20'
+                          : 'bg-slate-50 dark:bg-white/[0.02] border-slate-200 dark:border-white/10'
+                  }`}
+                >
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4 tracking-tight">
+                    {uniqueSection.title}
+                  </h3>
+                  {uniqueSection.body && (
+                    <p className="text-slate-700 dark:text-gray-300 leading-relaxed text-sm sm:text-base font-medium font-sans mb-4">
+                      {uniqueSection.body}
+                    </p>
+                  )}
+                  {uniqueSection.bullets && uniqueSection.bullets.length > 0 && (
+                    <ul className="space-y-3 list-none p-0">
+                      {uniqueSection.bullets.map((item, i) => (
+                        <li key={i} className="flex items-start gap-3 text-slate-800 dark:text-gray-200 font-medium font-sans text-sm">
+                          <span className="text-slate-400 font-black flex-shrink-0 mt-0.5">•</span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
 
               {/* What is section with Specification Table immediately following the paragraph */}
               {translatedWhatItDoes && translatedWhatItDoes.trim().length > 0 && (
-                <div className="p-8 sm:p-10 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)] relative group">
+                <div style={{ order: layout === 'howto-first' ? 4 : layout === 'fails-first' ? 3 : layout === 'limits-first' ? 3 : layout === 'print-first' ? 4 : 1 }} className="p-8 sm:p-10 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)] relative group">
                   <div className="absolute top-0 right-10 h-[2px] w-24 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
                   <div className="relative space-y-6">
-                    <h3 className="text-xl font-black text-slate-900 dark:text-white flex items-center gap-3 uppercase tracking-tight">
-                      <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">01</span>
-                      {t('article.whatIs', 'What is {title}?').replace('{title}', translatedTitle)}
+                    <h3 className="text-xl font-black text-slate-900 dark:text-white flex items-center gap-3 tracking-tight">
+                      {numbered && (
+                        <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">01</span>
+                      )}
+                      {whatHeading || t('article.whatIs', 'What is {title}?').replace('{title}', translatedTitle)}
                     </h3>
-                    <p className="text-slate-700 dark:text-gray-300 leading-relaxed text-base font-sans font-medium">
-                      {translatedWhatItDoes}
-                    </p>
+                    <div className="space-y-4">
+                      {translatedWhatItDoes.split('\n\n').map((para, idx) => (
+                        <p key={idx} className="text-slate-700 dark:text-gray-300 leading-relaxed text-base font-sans font-medium">
+                          {para}
+                        </p>
+                      ))}
+                    </div>
 
                     {/* Markdown Specification Table immediately after paragraph */}
                     {specificationTable && specificationTable.length > 0 && (
@@ -372,8 +429,8 @@ export default function ToolArticle({
 
               {/* Common Mistakes Warning Card */}
               {commonMistakes && commonMistakes.length > 0 && (
-                <div className="p-8 sm:p-10 rounded-[1.125rem] bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-500/20 shadow-sm relative">
-                  <h3 className="text-xl font-black text-rose-950 dark:text-rose-300 mb-6 flex items-center gap-3 uppercase tracking-tight">
+                <div style={{ order: 5 }} className="p-8 sm:p-10 rounded-[1.125rem] bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-500/20 shadow-sm relative">
+                  <h3 className="text-xl font-black text-rose-950 dark:text-rose-300 mb-6 flex items-center gap-3 tracking-tight">
                     <span className="w-10 h-10 rounded-xl bg-rose-500 text-white flex items-center justify-center text-sm font-black shadow-sm">⚠️</span>
                     Common Mistakes That Cause Rejection
                   </h3>
@@ -390,10 +447,12 @@ export default function ToolArticle({
 
               {/* How to use */}
               {translatedHowToUse && translatedHowToUse.length > 0 && (
-                <div className="p-8 sm:p-10 rounded-[1.125rem] bg-[#FBFCFE] dark:bg-[#090d16] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.04)]">
-                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3 uppercase tracking-tight">
-                    <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">02</span>
-                    {t('article.howToUse', 'How to use {title}').replace('{title}', translatedTitle)}
+                <div style={{ order: layout === 'howto-first' ? 2 : layout === 'fails-first' ? 2 : layout === 'limits-first' ? 4 : layout === 'print-first' ? 2 : 2 }} className="p-8 sm:p-10 rounded-[1.125rem] bg-[#FBFCFE] dark:bg-[#090d16] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.04)]">
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3 tracking-tight">
+                    {numbered && (
+                      <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">02</span>
+                    )}
+                    {howToHeading || t('article.howToUse', 'How to use {title}').replace('{title}', translatedTitle)}
                   </h3>
                   <div className="grid gap-4">
                     {translatedHowToUse.map((step, i) => (
@@ -426,9 +485,11 @@ export default function ToolArticle({
 
               {/* Key Features */}
               {translatedKeyFeatures && translatedKeyFeatures.length > 0 && (
-                <div>
-                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3 uppercase tracking-tight">
-                    <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">03</span>
+                <div style={{ order: 7 }}>
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3 tracking-tight">
+                    {numbered && (
+                      <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">03</span>
+                    )}
                     {t('article.keyFeatures', 'Key Features')}
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -452,11 +513,13 @@ export default function ToolArticle({
 
               {/* Benefits & Use Cases */}
               {(translatedBenefits.length > 0 || translatedUseCases.length > 0) && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div style={{ order: layout === 'default' ? 8 : layout === 'print-first' ? 1 : 5 }} className={`grid gap-8 ${translatedBenefits.length > 0 && translatedUseCases.length > 0 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
                   {translatedBenefits.length > 0 && (
                     <div className="p-8 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
-                      <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 uppercase tracking-tight">
-                        <span className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xs font-black">04</span>
+                      <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 tracking-tight">
+                        {numbered && (
+                          <span className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xs font-black">04</span>
+                        )}
                         {t('article.benefits', 'Benefits')}
                       </h3>
                       <ul className="space-y-4 list-none p-0">
@@ -471,9 +534,11 @@ export default function ToolArticle({
                   )}
                   {translatedUseCases.length > 0 && (
                     <div className="p-8 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
-                      <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 uppercase tracking-tight">
-                        <span className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xs font-black">05</span>
-                        {t('article.useCases', 'Use Cases')}
+                      <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 tracking-tight">
+                        {numbered && (
+                          <span className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xs font-black">05</span>
+                        )}
+                        {useCasesHeading || t('article.useCases', 'Use Cases')}
                       </h3>
                       <ul className="space-y-3 list-none p-0">
                         {translatedUseCases.map((useCase, i) => (
@@ -489,8 +554,8 @@ export default function ToolArticle({
               )}
 
               {limitations.length > 0 && (
-                <div className="p-8 sm:p-10 rounded-[1.125rem] bg-amber-50/70 dark:bg-amber-950/15 border border-amber-200 dark:border-amber-500/20 shadow-sm">
-                  <h3 className="text-xl font-black text-amber-950 dark:text-amber-200 mb-6 flex items-center gap-3 uppercase tracking-tight">
+                <div style={{ order: layout === 'limits-first' ? 1 : 6 }} className="p-8 sm:p-10 rounded-[1.125rem] bg-amber-50/70 dark:bg-amber-950/15 border border-amber-200 dark:border-amber-500/20 shadow-sm">
+                  <h3 className="text-xl font-black text-amber-950 dark:text-amber-200 mb-6 flex items-center gap-3 tracking-tight">
                     <span className="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center text-sm font-black shadow-sm">!</span>
                     Limits and important notes
                   </h3>
@@ -506,14 +571,14 @@ export default function ToolArticle({
               )}
 
               {/* Privacy Trust Section: Files Never Leave Your Device */}
-              <div className="p-8 sm:p-10 rounded-[1.125rem] bg-slate-900 dark:bg-white/[0.02] text-white border border-slate-800 dark:border-white/10 shadow-xl relative overflow-hidden">
+              <div style={{ order: 9 }} className="p-8 sm:p-10 rounded-[1.125rem] bg-slate-900 dark:bg-white/[0.02] text-white border border-slate-800 dark:border-white/10 shadow-xl relative overflow-hidden">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-2xl flex-shrink-0">
                     🔒
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-white">
-                      Files never leave your device
+                    <h3 className="text-lg sm:text-xl font-black tracking-tight text-white">
+                      {privacyHeading || 'Files never leave your device'}
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-300 dark:text-gray-300 leading-relaxed font-sans font-medium">
                       {privacyNote || 'This tool runs in your browser tab. The file you drop is read in local memory and is not uploaded to ToolWala servers.'}
@@ -524,7 +589,7 @@ export default function ToolArticle({
 
               {/* Why ToolWala */}
               {translatedWhyChoose && translatedWhyChoose.trim().length > 0 && (
-                <div className="relative p-8 sm:p-10 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 overflow-hidden shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
+                <div style={{ order: 10 }} className="relative p-8 sm:p-10 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 overflow-hidden shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
                   <div className="relative">
                     <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4 uppercase tracking-tight">
@@ -539,7 +604,7 @@ export default function ToolArticle({
 
               {/* FAQs */}
               {translatedFaqs && translatedFaqs.length > 0 && (
-                <div>
+                <div style={{ order: 11 }}>
                   <div className="text-center mb-12">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-4">
                       <HelpCircle className="w-3.5 h-3.5" />
@@ -559,10 +624,10 @@ export default function ToolArticle({
 
               {/* Conclusion */}
               {translatedConclusion && translatedConclusion.trim().length > 0 && (
-                <div className="p-8 sm:p-12 rounded-[1.125rem] bg-gradient-to-br from-blue-50/80 via-[#FBFCFE] to-indigo-50/50 dark:from-blue-600/10 dark:via-transparent dark:to-transparent border border-blue-200 dark:border-blue-500/15 text-center relative overflow-hidden group shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
+                <div style={{ order: 12 }} className="p-8 sm:p-12 rounded-[1.125rem] bg-gradient-to-br from-blue-50/80 via-[#FBFCFE] to-indigo-50/50 dark:from-blue-600/10 dark:via-transparent dark:to-transparent border border-blue-200 dark:border-blue-500/15 text-center relative overflow-hidden group shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
                   <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" />
-                  <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-4 uppercase tracking-tight">
-                    {t('article.finalVerdict', 'Final Verdict')}
+                  <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-4 tracking-tight">
+                    {conclusionHeading || t('article.finalVerdict', 'Final Verdict')}
                   </h3>
                   <p className="text-slate-700 dark:text-gray-300 leading-relaxed text-base sm:text-lg font-medium max-w-2xl mx-auto relative z-10 font-sans">
                     {translatedConclusion}
@@ -572,7 +637,7 @@ export default function ToolArticle({
 
               {/* Relevant Blogs Section */}
               {relevantBlogs.length > 0 && (
-                <div className="pt-16 border-t border-[#E6ECF5] dark:border-white/10">
+                <div style={{ order: 20 }} className="pt-16 border-t border-[#E6ECF5] dark:border-white/10">
                   <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] mb-10 text-center select-none">
                     {t('blog.related_insights', 'Related Insights & Tutorials')}
                   </h4>
@@ -611,7 +676,7 @@ export default function ToolArticle({
 
               {/* Recommended Utilities Section */}
               {resolvedRelatedTools.length > 0 && (
-                <div className="pt-16 border-t border-[#E6ECF5] dark:border-white/10">
+                <div style={{ order: 21 }} className="pt-16 border-t border-[#E6ECF5] dark:border-white/10">
                   <div className="text-center mb-10">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-3">
                       <Sparkles className="w-3.5 h-3.5" />

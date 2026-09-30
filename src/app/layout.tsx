@@ -224,6 +224,7 @@ export async function generateMetadata(): Promise<Metadata> {
       "background remover",
       "ToolWala AI"
     ],
+    applicationName: "Toolwala.co",
     authors: [{ name: "ToolWala AI" }],
     creator: "ToolWala AI",
     publisher: "ToolWala AI",

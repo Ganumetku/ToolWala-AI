@@ -105,8 +105,8 @@ export default async function CategoriesIndexPage() {
     'isPartOf': {
       '@type': 'WebSite',
       '@id': 'https://toolwala.co/#website',
-      'url': 'https://toolwala.co',
-      'name': 'ToolWala AI'
+      'url': 'https://toolwala.co/',
+      'name': 'Toolwala.co'
     },
     'about': {
       '@type': 'Thing',

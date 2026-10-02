@@ -146,46 +146,6 @@ ToolWala's Aadhaar Hub runs 100% locally inside your web browser. The **Aadhaar 
     ]
   },
   {
-    slug: "pan-card-utilities",
-    id: "pan-hub",
-    title: "NSDL & UTIITSL PAN Card Document Hub",
-    h1: "PAN Card Photo & Signature Resizer",
-    description: "Format, crop, and compress passport photos and signatures to NSDL/UTIITSL specifications. Auto-crop to 213x213 pixels and compress under 50KB.",
-    intro: "Prepare documents for PAN card applications. Format signature scans and passport photos to the exact specifications required by NSDL and UTIITSL portals.",
-    icon: "IdCard",
-    badgeText: "NSDL & UTIITSL Specs",
-    keywords: ["pan card photo resize", "nsdl signature upload size", "pan card document compressor", "utiitsl photo size"],
-    content: `Applying for a Permanent Account Number (PAN) card via NSDL (Protean) or UTIITSL requires submitting photographs and signatures that match specific dimensions. Unlike other portals that accept general passport photos, the PAN card application system uses strict automated filters: if your photo has a non-white background or incorrect dimensions in pixels, your application will be put on hold, leading to processing delays.
-
-To ensure your PAN card documents are approved:
-- **Photograph Dimensions**: Must be exactly 2.5 cm x 3.5 cm (equivalent to 213 pixels x 213 pixels in square resolution).
-- **Photograph File Size**: Must be under 50 KB in JPG format. The photo should show the face clearly against a white background.
-- **Signature Specifications**: Scanned signature must be on plain white paper, with dimensions of 213 pixels x 213 pixels or 4.5 cm x 2.0 cm.
-- **Signature File Size**: Must be under 50 KB (NSDL) or under 30 KB (UTIITSL).
-- **Proof Documents**: Supporting identity, address, and date of birth documents must be compiled into a single PDF under 300KB (NSDL) or 500KB (UTIITSL).
-
-ToolWala's PAN Card Hub simplifies this process. The **PAN Card Resizer** crops your photo to the required 213x213 pixels square format, sets the target compression limit to 50KB, and lets you replace busy backdrops with a clean white color. The **PDF Compressor** helps you merge and optimize your proof documents under 300KB/500KB for easy uploading.`,
-    relatedTools: [
-      { title: "PAN Card Resize", slug: "pan-card-resize", icon: "IdCard" },
-      { title: "Signature Resizer", slug: "signature-resize", icon: "PenTool" },
-      { title: "Gov Form PDF Compressor", slug: "gov-form-pdf-compressor", icon: "FileMinus" }
-    ],
-    landingPages: [
-      { title: "PAN Card Photo Resize", slug: "pan-card-photo-resize" },
-      { title: "Compress PDF to 500KB", slug: "compress-pdf-to-500kb" }
-    ],
-    faqs: [
-      {
-        question: "What is the official pixel size for PAN card photos?",
-        answer: "The official dimension is 213 x 213 pixels in square format, representing 3.5 x 2.5 cm dimensions at 300 DPI."
-      },
-      {
-        question: "Can I crop and compress my PAN card signature scan here?",
-        answer: "Yes, you can scan your signature on white paper, upload it to the resizer, crop it to the required aspect ratio, and compress it under 30KB."
-      }
-    ]
-  },
-  {
     slug: "passport-seva-utilities",
     id: "passport-hub",
     title: "Passport Seva Document & Photo Optimization Hub",

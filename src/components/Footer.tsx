@@ -95,7 +95,6 @@ export default function Footer() {
     { name: "UPSC Exam Hub", href: "/hubs/upsc-exam-utilities/" },
     { name: "SSC Exam Hub", href: "/hubs/ssc-exam-utilities/" },
     { name: "Aadhaar Card Hub", href: "/hubs/aadhaar-utilities/" },
-    { name: "PAN Card Hub", href: "/hubs/pan-card-utilities/" },
     { name: "Passport Seva Hub", href: "/hubs/passport-seva-utilities/" }
   ];
 

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { IdCard } from "lucide-react";
 import ToolArticle from "@/components/ToolArticle";
 import { toolArticles } from "@/data/toolArticles";
@@ -104,17 +103,6 @@ export default function PANCardResizePage() {
               presets={PAN_PRESETS}
             />
           </div>
-        </div>
-
-        {/* Contextual Hub Banner */}
-        <div className="my-12 bg-blue-50/60 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-500/20 p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
-          <div>
-            <h4 className="text-sm font-black uppercase text-slate-900 dark:text-white tracking-wide">NSDL & UTIITSL PAN Card Document Guidance</h4>
-            <p className="text-xs text-slate-600 dark:text-gray-400 mt-1 font-medium">Need help formatting signature scans, compressing proof PDFs under 300KB/500KB, or checking PAN guidelines?</p>
-          </div>
-          <Link href="/hubs/pan-card-utilities/" className="px-5 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-black uppercase tracking-wider hover:bg-blue-700 transition-all shrink-0">
-            Visit PAN Card Hub →
-          </Link>
         </div>
 
         {/* SEO Article */}

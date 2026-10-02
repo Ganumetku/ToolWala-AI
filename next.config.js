@@ -95,6 +95,16 @@ const nextConfig = {
         destination: '/tools/crop-aadhaar-card/',
         permanent: true,
       },
+      {
+        source: '/hubs/pan-card-utilities',
+        destination: '/tools/pan-card-resize/',
+        permanent: true,
+      },
+      {
+        source: '/:locale(hi|es|pt)/hubs/pan-card-utilities',
+        destination: '/:locale/tools/pan-card-resize/',
+        permanent: true,
+      },
     ];
   },
 };

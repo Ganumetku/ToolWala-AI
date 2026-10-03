@@ -11,6 +11,7 @@ import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 type CaptionData = {
   imageFile: File | null;
@@ -297,9 +298,7 @@ Respond ONLY with a valid JSON object matching this schema (do not include markd
         <div className="glass rounded-[2.5rem] border border-white/5 p-8 sm:p-10 mb-10">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
             <div className="flex items-center gap-6">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_0_25px_rgba(37,99,235,0.4)] shrink-0">
-                <Type className="w-7 h-7" />
-              </div>
+              <PdfToolIcon toolId="caption-generator" size="xl" className="shrink-0" />
               <div>
                 <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">AI Caption Generator</h1>
                 <p className="text-gray-400 font-medium mt-1">Create engaging, highly-optimized captions for any social media platform.</p>

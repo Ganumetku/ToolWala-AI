@@ -9,6 +9,7 @@ import ToolResultScreen from '@/components/tools/ToolResultScreen';
 import ToolSchema from '@/components/analytics/ToolSchema';
 import { toolArticles } from '@/data/toolArticles';
 import { formatBytes } from '@/lib/utils/format';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 const SIZE_PRESETS = [
   { label: '20 KB', targetMB: 0.02, desc: 'SSC / UPSC Sign' },
@@ -297,11 +298,7 @@ export default function ImageCompressor() {
 
           <div className="p-8 sm:p-10 border-b border-white/5 bg-white/[0.02]">
             <div className="flex flex-col md:flex-row md:items-center gap-8">
-              <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-blue-600 text-white shadow-[0_0_30px_rgba(37,99,235,0.4)]">
-                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
-                </svg>
-              </div>
+              <PdfToolIcon toolId="image-compressor" size="xl" className="shrink-0" />
               <div>
                 <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">Image Compressor</h1>
                 <p className="text-gray-400 font-medium mt-1">Compress images up to 90% without losing visible quality.</p>

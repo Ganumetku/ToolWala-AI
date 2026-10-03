@@ -11,6 +11,7 @@ import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects'
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { toolArticles } from '@/data/toolArticles';
 import ToolArticle from '@/components/ToolArticle';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 const SEO_DESC = "Calculate your SIP returns, total investment, estimated gains, and future wealth instantly with our free SIP Calculator.";
 
@@ -400,6 +401,7 @@ export default function SipCalculatorPage() {
           </Link>
 
           <div className="text-center max-w-4xl mx-auto mb-16">
+            <PdfToolIcon toolId="sip-calculator" size="xl" className="mx-auto mb-4" />
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-emerald-400 text-xs font-black tracking-widest mb-6 shadow-2xl hover:border-emerald-500/30 transition-colors">
               <span>📈 Smart Investment Planning Tool</span>
             </div>

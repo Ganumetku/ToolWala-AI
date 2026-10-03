@@ -14,6 +14,7 @@ import { toast } from 'sonner';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { MeshGradient } from '@/components/BackgroundEffects';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 const uint8ArrayToArrayBuffer = (bytes: Uint8Array): ArrayBuffer => {
   return bytes.buffer.slice(
@@ -485,9 +486,7 @@ export default function WatermarkPdf() {
           <div className="p-5 sm:p-8 lg:p-10 border-b border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.02]">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6">
               <div className="flex items-start sm:items-center gap-3.5 sm:gap-6 flex-1 min-w-0">
-                <div className="flex h-12 w-12 sm:h-14 sm:w-14 aspect-square shrink-0 min-w-[3rem] min-h-[3rem] sm:min-w-[3.5rem] sm:min-h-[3.5rem] items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_4px_20px_rgba(37,99,235,0.35)]">
-                  <Type className="w-6 h-6 sm:w-7 sm:h-7 shrink-0" />
-                </div>
+                <PdfToolIcon toolId="watermark-pdf" size="xl" className="shrink-0" />
                 <div className="min-w-0 flex-1">
                   <h1 className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">Add Watermark to PDF</h1>
                   <p className="text-slate-600 dark:text-gray-400 text-xs sm:text-sm font-medium mt-1 leading-relaxed">Design and embed secure text or image watermarks client-side with visual preview.</p>

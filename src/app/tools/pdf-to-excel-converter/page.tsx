@@ -32,6 +32,7 @@ import {
 import { classifyPdfDocument } from './utils/docClassifier';
 import { extractPdfToExcelSheets } from './utils/tableExtractor';
 import { generateExcelFromSheets, formatBytes } from './utils/excelGenerator';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 export default function PdfToExcelConverter() {
   const [pdfjs, setPdfjs] = useState<any>(null);

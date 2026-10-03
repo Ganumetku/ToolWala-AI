@@ -20,6 +20,7 @@ import { toolArticles } from "@/data/toolArticles";
 import ToolArticle from "@/components/ToolArticle";
 import ToolCard from "@/components/ToolCard";
 import ToolIcon from "@/components/ToolIcon";
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -443,6 +444,7 @@ export default function AdSenseRevenueCalculatorPage() {
 
           {/* ── Hero ─────────────────────────────────────────────────────────── */}
           <div className="text-center max-w-4xl mx-auto mb-16">
+            <PdfToolIcon toolId="adsense-revenue-calculator" size="xl" className="mx-auto mb-4" />
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black tracking-widest mb-6 shadow-2xl">
               <BarChart3 className="w-4 h-4" />
               <span>Google AdSense Revenue Estimator</span>

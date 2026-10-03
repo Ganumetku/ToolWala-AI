@@ -12,6 +12,7 @@ import {
 import { toast } from 'sonner';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 // --- TYPES ---
 type ToneMode = 'Standard' | 'Natural' | 'Academic' | 'Professional' | 'Casual' | 'Creative' | 'Expand' | 'Shorten';
@@ -199,9 +200,7 @@ export default function ProfessionalTextHumanizer() {
         {/* HEADER SECTION */}
         <div className="glass rounded-[2.5rem] p-10 mb-10 border border-white/5 flex flex-col lg:flex-row items-center justify-between gap-10">
           <div className="flex items-center gap-8">
-            <div className="w-20 h-20 bg-blue-600 rounded-[2rem] flex items-center justify-center text-white shadow-[0_0_40px_rgba(37,99,235,0.4)] rotate-3">
-              <Sparkles className="w-10 h-10" />
-            </div>
+            <PdfToolIcon toolId="text-humanizer" size="xl" className="shrink-0" />
             <div>
               <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter">AI Text Humanizer</h1>
               <p className="text-gray-400 font-medium mt-2">Rewrite robotic AI content into natural, undetectable human writing.</p>

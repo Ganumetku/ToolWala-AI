@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 type Experience = { id: string, company: string, role: string, start: string, end: string, desc: string };
 type Education = { id: string, degree: string, institute: string, year: string };
@@ -348,9 +349,7 @@ export default function ResumeBuilder() {
         <div className="glass rounded-[2.5rem] border border-white/5 p-8 sm:p-10 mb-10">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
             <div className="flex items-center gap-6">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_0_25px_rgba(37,99,235,0.4)] shrink-0">
-                <FileText className="w-7 h-7" />
-              </div>
+              <PdfToolIcon toolId="resume-builder" size="xl" className="shrink-0" />
               <div>
                 <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">AI Resume Builder & ATS Checker</h1>
                 <p className="text-gray-400 font-medium mt-1">Create an ATS-friendly resume and optimize it against your target job instantly.</p>

@@ -10,6 +10,7 @@ import {
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { motion, AnimatePresence } from 'framer-motion';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 type VoicePreset = {
   id: string;
@@ -198,9 +199,7 @@ export default function VoiceGenerator() {
           <div className="absolute inset-0 bg-blue-600/5 blur-[80px] -z-10" />
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-8">
             <div className="flex items-center gap-6">
-              <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-blue-600 text-white shadow-[0_0_30px_rgba(37,99,235,0.4)] border border-blue-400/20">
-                <Mic className="w-8 h-8" />
-              </div>
+              <PdfToolIcon toolId="voice-generator" size="xl" className="shrink-0" />
               <div>
                 <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">AI Voice Generator</h1>
                 <p className="text-gray-400 font-medium mt-1">Transform text into lifelike speech with premium AI voices.</p>

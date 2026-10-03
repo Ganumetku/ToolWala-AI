@@ -12,6 +12,7 @@ import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { toolsData } from '@/data/tools';
 import { toolArticles } from '@/data/toolArticles';
 import ToolArticle from '@/components/ToolArticle';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 const SEO_TITLE = "Free Online Discount Calculator – Calculate Sale Price & Savings";
 const SEO_DESC = "Calculate final sale price, discount amount, double successive discounts, and GST tax instantly. 100% free and private client-side discount calculator.";
@@ -293,6 +294,7 @@ export default function DiscountCalculatorPage() {
 
           {/* Header & Hero Title */}
           <div className="text-center max-w-3xl mx-auto mb-12">
+            <PdfToolIcon toolId="discount-calculator" size="xl" className="mx-auto mb-4" />
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-200 dark:border-blue-500/20 mb-4 shadow-sm">
               <Percent className="w-3.5 h-3.5" />
               100% Private & Browser-Based

@@ -46,6 +46,7 @@ import {
   generateSvgCode,
 } from './logoEngine';
 import { SYMBOL_CATALOG } from './LogoSymbols';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 const INDUSTRY_ICONS: Record<string, React.ElementType> = {
   tech: Zap,
@@ -303,7 +304,9 @@ export default function ProfessionalLogoMaker() {
         <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-2">
+          <div className="flex items-start sm:items-center gap-4 sm:gap-6 flex-1 min-w-0">
+            <PdfToolIcon toolId="ai-logo-maker" size="xl" className="shrink-0" />
+            <div className="space-y-2 min-w-0 flex-1">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-700 dark:text-blue-400 text-[11px] font-extrabold uppercase tracking-widest">
               <Sparkles className="w-3.5 h-3.5" />
               <span>AI Vector Studio 3.0 · Commercial Ready</span>
@@ -315,6 +318,7 @@ export default function ProfessionalLogoMaker() {
               Create bespoke vector logos, luxury emblems, startup wordmarks, and full brand asset kits with zero watermarks.
             </p>
           </div>
+        </div>
 
           <div className="flex items-center gap-3 shrink-0">
             <div className="flex items-center gap-2 bg-emerald-50 dark:bg-emerald-500/10 px-4 py-2 rounded-2xl border border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-xs font-bold shadow-xs">

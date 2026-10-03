@@ -13,6 +13,7 @@ import { toolArticles } from '@/data/toolArticles';
 import ToolArticle from '@/components/ToolArticle';
 import ToolCard from '@/components/ToolCard';
 import ToolIcon from '@/components/ToolIcon';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 const SEO_TITLE = "Free GST Calculator Online - ToolWala AI";
 const SEO_DESC = "Calculate GST amount, total price, and reverse GST instantly with free GST Calculator.";
@@ -912,6 +913,7 @@ Calculated via ToolWala AI (https://toolwala.co/tools/gst-calculator)`;
 
           {/* Hero Section */}
           <div className="text-center max-w-4xl mx-auto mb-16">
+            <PdfToolIcon toolId="gst-calculator" size="xl" className="mx-auto mb-4" />
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 dark:bg-white/5 border border-emerald-200/60 dark:border-white/10 backdrop-blur-md text-emerald-600 dark:text-emerald-400 text-xs font-black tracking-widest mb-6 shadow-sm hover:border-emerald-500/30 transition-colors">
               <span>🧾 Smart Tax Planning Tool</span>
             </div>

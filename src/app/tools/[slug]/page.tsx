@@ -11,6 +11,7 @@ import ShareButtons from '@/components/ShareButtons';
 import { headers } from 'next/headers';
 import { getToolTranslationWithFallback } from '@/lib/tool-translation-service';
 import WorkflowRecommendations from '@/components/tools/WorkflowRecommendations';
+import PdfToolIcon from '@/components/PdfToolIcon';
 import { 
   generateToolMetadataHelper, 
   buildBreadcrumbJsonLd, 
@@ -123,9 +124,13 @@ export default async function DynamicToolPage({ params }: PageProps) {
             <div className="p-5 sm:p-8 lg:p-12 border-b border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.02]">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-8">
                 <div className="flex items-start sm:items-center gap-3.5 sm:gap-6 flex-1 min-w-0">
-                  <div className="flex h-12 w-12 sm:h-14 sm:w-14 aspect-square shrink-0 min-w-[3rem] min-h-[3rem] sm:min-w-[3.5rem] sm:min-h-[3.5rem] items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white shadow-[0_4px_20px_rgba(37,99,235,0.3)] text-xl sm:text-2xl font-bold">
-                    <ToolIcon icon={tool.icon} className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
-                  </div>
+                  <PdfToolIcon
+                    toolId={tool.id || slug}
+                    iconName={tool.icon}
+                    category={categoryName}
+                    size="xl"
+                    className="shrink-0"
+                  />
                   <div className="min-w-0 flex-1">
                     <h1 className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">{tool.title}</h1>
                     <p className="text-xs sm:text-sm text-slate-600 dark:text-gray-400 font-medium mt-1 font-sans leading-relaxed">{tool.description}</p>

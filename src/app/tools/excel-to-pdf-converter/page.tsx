@@ -26,6 +26,7 @@ import {
 
 import { parseExcelWorkbook } from './utils/excelParser';
 import { generatePdfFromSheets, formatBytes } from './utils/pdfGenerator';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 export default function ExcelToPdfConverter() {
   const [excelFile, setExcelFile] = useState<File | null>(null);
@@ -217,9 +218,7 @@ export default function ExcelToPdfConverter() {
 
         {/* HEADER SECTION - Blue + Purple Premium Gradient */}
         <div className="text-center space-y-3 max-w-3xl mx-auto">
-          <div className="inline-flex items-center justify-center p-3 bg-gradient-to-br from-blue-600/20 to-purple-600/30 rounded-2xl border border-blue-500/30 mb-1 shadow-lg shadow-blue-500/10">
-            <FileSpreadsheet className="w-9 h-9 text-blue-400" />
-          </div>
+          <PdfToolIcon toolId="excel-to-pdf-converter" size="xl" className="mx-auto mb-2" />
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight bg-gradient-to-r from-blue-700 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-purple-300 dark:to-indigo-400 bg-clip-text text-transparent">
             Free Excel to PDF Converter

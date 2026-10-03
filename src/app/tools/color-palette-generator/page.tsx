@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import ToolArticle from '@/components/ToolArticle';
 import { toast } from 'sonner';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 // Helper: Convert HSL to HEX
 function hslToHex(h: number, s: number, l: number): string {
@@ -457,9 +458,7 @@ ${palette.map((c, i) => `          ${(i + 1) * 100}: '${c.hex}',`).join('\n')}
           <div className="absolute inset-0 bg-blue-600/5 blur-[80px] -z-10" />
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
             <div className="flex items-center gap-6">
-              <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-blue-600 text-white shadow-[0_0_30px_rgba(37,99,235,0.4)] border border-blue-400/20 text-2xl">
-                🎨
-              </div>
+              <PdfToolIcon toolId="color-palette-generator" size="xl" className="shrink-0" />
               <div>
                 <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">AI Color Palette Harmonizer</h1>
                 <p className="text-gray-400 font-medium mt-1 font-sans">Extract color palettes from images, generate harmonies, and export code blueprints.</p>

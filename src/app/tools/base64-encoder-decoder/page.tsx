@@ -12,6 +12,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { useTranslation } from '@/components/I18nContext';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 type ToolMode = 'base64' | 'url';
 type OperationDirection = 'encode' | 'decode';
@@ -284,6 +285,7 @@ export default function Base64UrlEncoderDecoderPage() {
 
           {/* Hero Header */}
           <div className="text-center max-w-3xl mx-auto mb-10">
+            <PdfToolIcon toolId="base64-encoder-decoder" size="xl" className="mx-auto mb-4" />
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-4 shadow-sm">
               <Binary className="w-4 h-4" />
               <span>Developer Utilities</span>

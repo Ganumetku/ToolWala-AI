@@ -14,6 +14,7 @@ import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects'
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { toolArticles } from '@/data/toolArticles';
 import ToolArticle from '@/components/ToolArticle';
+import PdfToolIcon from '@/components/PdfToolIcon';
 import { 
   TAX_CONFIG, DEDUCTION_LIMITS, calculateSurchargeWithMarginalRelief,
   AgeCategory, FinancialYear, IncomeType, TaxSlab, RegimeConfig 
@@ -451,6 +452,7 @@ Calculated via ToolWala AI Income Tax Calculator: ${window.location.href}`;
 
           {/* Header Title Banner */}
           <div className="text-center max-w-3xl mx-auto mb-10">
+            <PdfToolIcon toolId="income-tax-calculator" size="xl" className="mx-auto mb-4" />
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-4 shadow-sm">
               <Calculator className="w-4 h-4" /> FY 2026-27 (AY 2027-28) Official Slabs
             </div>

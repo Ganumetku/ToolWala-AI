@@ -17,6 +17,7 @@ import { MeshGradient } from '@/components/BackgroundEffects';
 import { ConversionMode, ExtractedPage } from './types';
 import { validatePdf, parsePdf } from './utils/pdfParser';
 import { generateDocx } from './utils/docxGenerator';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 export default function PdfToWord() {
   const [pdfjs, setPdfjs] = useState<any>(null);
@@ -337,9 +338,7 @@ export default function PdfToWord() {
           <div className="p-8 sm:p-10 border-b border-white/5 bg-white/[0.02]">
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
               <div className="flex items-center gap-6">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_0_25px_rgba(37,99,235,0.4)] text-xl">
-                  📝
-                </div>
+                <PdfToolIcon toolId="pdf-to-word-converter" size="xl" className="shrink-0" />
                 <div>
                   <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">PDF to Word Converter</h1>
                   <p className="text-slate-600 dark:text-gray-400 font-medium mt-1">Text PDF to .docx. 50 MB max. Scanned pages need OCR first. Password-locked files fail.</p>

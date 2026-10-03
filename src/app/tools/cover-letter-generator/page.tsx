@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 type CoverLetterData = {
   name: string;
@@ -158,9 +159,7 @@ export default function CoverLetterGenerator() {
         <div className="glass rounded-[2rem] p-6 sm:p-8 mb-8 border border-white/5">
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.3)] shrink-0">
-                <FileText className="w-6 h-6" />
-              </div>
+              <PdfToolIcon toolId="cover-letter-generator" size="xl" className="shrink-0" />
               <div>
                 <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter">AI Cover Letter Generator</h1>
                 <p className="text-sm text-gray-400 font-medium mt-1">Generate highly tailored, professional cover letters in seconds.</p>

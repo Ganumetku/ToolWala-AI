@@ -12,6 +12,7 @@ import { toast } from 'sonner';
 import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects';
 import { useTranslation } from '@/components/I18nContext';
 import RelatedTools from '@/components/tools/RelatedTools';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 // Static translation sets to enforce exact strings
 const TRANSLATIONS: Record<string, Record<string, string>> = {
@@ -504,9 +505,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
           <div className="p-8 sm:p-12 border-b border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.02] print:border-b-2 print:border-black print:p-0 print:pb-6 print:bg-transparent">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
               <div className="flex items-center gap-6">
-                <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-blue-600 text-white shadow-[0_4px_20px_rgba(37,99,235,0.35)] text-2xl font-bold print:hidden">
-                  🎓
-                </div>
+                <PdfToolIcon toolId="exam-marks-calculator" size="xl" className="shrink-0" />
                 <div>
                   <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tighter uppercase print:text-black print:text-4xl">
                     {tStrings.title}

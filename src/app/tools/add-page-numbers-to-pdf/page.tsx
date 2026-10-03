@@ -14,6 +14,7 @@ import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { MeshGradient } from '@/components/BackgroundEffects';
 import ToolLayout from '@/components/tools/ToolLayout';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 const uint8ArrayToArrayBuffer = (bytes: Uint8Array): ArrayBuffer => {
   return bytes.buffer.slice(
@@ -336,9 +337,7 @@ export default function AddPageNumbersPdf() {
             <div className="p-8 sm:p-10 border-b border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.02]">
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
                 <div className="flex items-center gap-6">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_4px_20px_rgba(37,99,235,0.35)]">
-                    <ListOrdered className="w-7 h-7" />
-                  </div>
+                  <PdfToolIcon toolId="add-page-numbers-to-pdf" size="xl" className="shrink-0" />
                   <div>
                     <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">Add Page Numbers to PDF</h1>
                     <p className="text-slate-600 dark:text-gray-400 font-medium mt-1">Configure layout, numbering sequence, and positions locally on your device.</p>

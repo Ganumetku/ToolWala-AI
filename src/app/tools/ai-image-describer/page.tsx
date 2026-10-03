@@ -12,6 +12,7 @@ import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 type AnalysisMode = 'comprehensive' | 'social' | 'seo_alt' | 'ai_prompt' | 'ecommerce';
 type OutputLanguage = 'English' | 'Hindi' | 'Hinglish' | 'Spanish' | 'French' | 'German' | 'Arabic' | 'Indonesian';
@@ -340,6 +341,7 @@ Respond STRICTLY with a valid JSON object matching this exact JSON schema (witho
 
         {/* Header Hero */}
         <div className="text-center max-w-3xl mx-auto mb-10">
+            <PdfToolIcon toolId="ai-image-describer" size="xl" className="mx-auto mb-4" />
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-black uppercase tracking-widest border border-purple-200 dark:border-purple-500/20 mb-4 shadow-sm">
             <Eye className="w-3.5 h-3.5" />
             AI Computer Vision & Scene Detection

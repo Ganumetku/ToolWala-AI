@@ -30,6 +30,7 @@ import ToolLayout from '@/components/tools/ToolLayout';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { toast } from 'sonner';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 // QR Types
 type QRType = 'URL' | 'Text' | 'WiFi' | 'Email' | 'Phone' | 'SMS';
@@ -328,9 +329,7 @@ export default function ProfessionalQRCodeGenerator() {
       <div className="bg-white dark:bg-slate-900/75 border border-slate-200/80 dark:border-white/10 rounded-2xl p-4 sm:p-5 mb-6 shadow-xs backdrop-blur-md">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3.5">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-xs">
-              <QrCode className="w-5 h-5" />
-            </div>
+            <PdfToolIcon toolId="qr-code-generator" size="xl" className="shrink-0" />
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight">

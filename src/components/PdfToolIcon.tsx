@@ -734,7 +734,7 @@ export default function PdfToolIcon({
       />
       {/* Front layer — solid tile with icon, overlapping bottom-right */}
       <div
-        className={`absolute ${s.front} flex items-center justify-center text-white`}
+        className={`absolute ${s.front} flex items-center justify-center text-white shadow-xs`}
         style={{
           backgroundColor: solidColor,
           bottom: 0,
@@ -750,14 +750,14 @@ export default function PdfToolIcon({
       {/* Tiny format badge — attached to top-right corner of front tile */}
       {config.conversionBadge && (
         <div
-          className="absolute z-20 flex items-center rounded-sm px-[3px] py-[1px] pointer-events-none"
+          className="absolute z-20 flex items-center rounded-sm px-[3px] py-[1px] pointer-events-none shadow-xs"
           style={{
             backgroundColor: solidColor,
-            bottom: s.offset === 6 ? 22 : s.offset === 7 ? 28 : 32,
+            bottom: s.offset === 6 ? 22 : s.offset === 7 ? 28 : 38,
             right: 0,
           }}
         >
-          <span className="text-[5px] font-bold text-white leading-none tracking-tight uppercase">
+          <span className="text-[5.5px] font-bold text-white leading-none tracking-tight uppercase">
             {config.conversionBadge.to}
           </span>
         </div>

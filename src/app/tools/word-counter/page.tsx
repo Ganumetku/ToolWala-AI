@@ -13,6 +13,7 @@ import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects'
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { toolArticles } from '@/data/toolArticles';
 import ToolArticle from '@/components/ToolArticle';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 const SEO_DESC = "Count words, characters, sentences, paragraphs, reading time, and keyword density in real-time. 100% private, browser-based text counter.";
 
@@ -243,6 +244,7 @@ export default function WordCounterPage() {
 
           {/* Hero Header */}
           <div className="text-center max-w-3xl mx-auto mb-10">
+            <PdfToolIcon toolId="word-counter" size="xl" className="mx-auto mb-4" />
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-4 shadow-sm">
               <Type className="w-4 h-4" />
               <span>Utility Tools</span>

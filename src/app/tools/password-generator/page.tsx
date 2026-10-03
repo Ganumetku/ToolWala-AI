@@ -13,6 +13,7 @@ import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects'
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { toolArticles } from '@/data/toolArticles';
 import ToolArticle from '@/components/ToolArticle';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 // SEO details
 const SEO_TITLE = "Free Password Generator – Secure Random Password Creator | ToolWala AI";
@@ -260,6 +261,7 @@ export default function PasswordGeneratorPage() {
 
         {/* Hero Title Section */}
         <div className="text-center max-w-3xl mx-auto mb-16">
+            <PdfToolIcon toolId="password-generator" size="xl" className="mx-auto mb-4" />
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-blue-400 text-xs font-black tracking-widest mb-6 shadow-2xl hover:border-blue-500/30 transition-colors">
             <span className="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
             <span>🔒 Offline Client-Side Encryption</span>

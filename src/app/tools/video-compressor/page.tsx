@@ -12,6 +12,7 @@ import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects'
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { toolArticles } from '@/data/toolArticles';
 import ToolArticle from '@/components/ToolArticle';
+import PdfToolIcon from '@/components/PdfToolIcon';
 // Helper: Convert URL to Blob URL using native fetch (avoids Turbopack dynamic import issues)
 const fetchToBlobUrl = async (url: string, type: string): Promise<string> => {
   const res = await fetch(url);
@@ -406,6 +407,7 @@ Processed 100% Client-Side via ToolWala AI: ${window.location.href}`;
 
           {/* Header Title */}
           <div className="text-center max-w-3xl mx-auto mb-10">
+            <PdfToolIcon toolId="video-compressor" size="xl" className="mx-auto mb-4" />
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-black uppercase tracking-widest text-purple-600 dark:text-purple-400 mb-4 shadow-sm">
               <Video className="w-4 h-4" /> FFmpeg WebAssembly Transcoder Engine
             </div>

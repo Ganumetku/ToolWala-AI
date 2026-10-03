@@ -14,6 +14,7 @@ import { toolArticles } from '@/data/toolArticles';
 import ToolArticle from '@/components/ToolArticle';
 import ToolCard from '@/components/ToolCard';
 import ToolIcon from '@/components/ToolIcon';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 const SEO_DESC = "Calculate loan EMI, total interest, and total payment instantly for home loan, car loan, personal loan and more.";
 
@@ -436,6 +437,7 @@ export default function EmiCalculatorPage() {
 
           {/* Hero Section */}
           <div className="text-center max-w-4xl mx-auto mb-16">
+            <PdfToolIcon toolId="emi-calculator" size="xl" className="mx-auto mb-4" />
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-emerald-400 text-xs font-black tracking-widest mb-6 shadow-2xl hover:border-emerald-500/30 transition-colors">
               <span>📈 Smart Loan Planning Tool</span>
             </div>

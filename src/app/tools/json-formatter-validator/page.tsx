@@ -13,6 +13,7 @@ import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects'
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { toolArticles } from '@/data/toolArticles';
 import ToolArticle from '@/components/ToolArticle';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 const SEO_DESC = "Format, beautify, minify, validate, and convert JSON online. Line-number error detection, interactive tree view, and 100% in-browser privacy.";
 
@@ -454,6 +455,7 @@ export default function JsonFormatterValidatorPage() {
 
           {/* Hero Header */}
           <div className="text-center max-w-3xl mx-auto mb-10">
+            <PdfToolIcon toolId="json-formatter-validator" size="xl" className="mx-auto mb-4" />
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-4 shadow-sm">
               <Code className="w-4 h-4" />
               <span>Developer Utilities</span>

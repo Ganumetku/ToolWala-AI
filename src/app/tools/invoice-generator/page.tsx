@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 type InvoiceItem = {
   id: string;
@@ -390,9 +391,7 @@ export default function InvoiceGenerator() {
         
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
           <div className="flex items-center gap-6">
-            <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-blue-600 text-white shadow-[0_0_30px_rgba(37,99,235,0.4)]">
-              <Receipt className="w-8 h-8" />
-            </div>
+            <PdfToolIcon toolId="invoice-generator" size="xl" className="shrink-0" />
             <div>
               <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">Professional Invoice Generator</h1>
               <p className="text-gray-400 font-medium mt-1">Create, customize, and download beautiful PDF invoices instantly.</p>

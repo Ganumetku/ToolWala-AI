@@ -12,6 +12,7 @@ import {
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { useAnalytics } from '@/hooks/useAnalytics';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 
 
@@ -348,9 +349,7 @@ export default function AIImageUpscaler() {
           <div className="p-8 sm:p-12 border-b border-white/5 bg-white/[0.02]">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
               <div className="flex items-center gap-6">
-                <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-blue-600 text-white shadow-[0_0_30px_rgba(37,99,235,0.4)]">
-                  <Sparkles className="w-8 h-8" />
-                </div>
+                <PdfToolIcon toolId="ai-image-upscaler" size="xl" className="shrink-0" />
                 <div>
                   <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">AI Image Upscaler</h1>
                   <p className="text-gray-400 font-medium mt-1">Magnify, sharpen, and restore pixelated photos locally inside your browser.</p>

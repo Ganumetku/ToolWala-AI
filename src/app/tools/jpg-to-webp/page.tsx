@@ -25,6 +25,7 @@ import { toast } from 'sonner';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { formatBytes } from '@/lib/utils/format';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 interface QualityPreset {
   id: string;
@@ -588,9 +589,7 @@ export default function JPGToWebPConverterPage() {
           <div className="p-5 sm:p-8 lg:p-10 border-b border-white/5 bg-white/[0.02]">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
               <div className="flex items-start sm:items-center gap-3.5 sm:gap-6 flex-1 min-w-0">
-                <div className="flex h-12 w-12 sm:h-16 sm:w-16 min-w-[3rem] min-h-[3rem] sm:min-w-[4rem] sm:min-h-[4rem] aspect-square shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 text-white shadow-[0_0_30px_rgba(37,99,235,0.4)]">
-                  <Zap className="w-6 h-6 sm:w-8 sm:h-8 shrink-0" />
-                </div>
+                <PdfToolIcon toolId="jpg-to-webp" size="xl" className="shrink-0" />
                 <div className="min-w-0 flex-1">
                   <h1 className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase leading-tight">
                     Free JPG to WebP Converter

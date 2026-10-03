@@ -15,6 +15,7 @@ import { decryptPDF } from '@pdfsmaller/pdf-decrypt';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { MeshGradient } from '@/components/BackgroundEffects';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 const uint8ArrayToArrayBuffer = (bytes: Uint8Array): ArrayBuffer => {
   return bytes.buffer.slice(
@@ -210,9 +211,7 @@ export default function UnlockPdf() {
           <div className="p-8 sm:p-10 border-b border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.02]">
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
               <div className="flex items-center gap-6">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-[0_4px_20px_rgba(37,99,235,0.35)]">
-                  <Unlock className="w-7 h-7" />
-                </div>
+                <PdfToolIcon toolId="unlock-pdf" size="xl" className="shrink-0" />
                 <div>
                   <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">Unlock PDF</h1>
                   <p className="text-slate-600 dark:text-gray-400 font-medium mt-1">Remove passwords and security restrictions from your encrypted PDF documents instantly.</p>

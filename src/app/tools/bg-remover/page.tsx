@@ -13,6 +13,7 @@ import {
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { useAnalytics } from '@/hooks/useAnalytics';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 type ViewMode = 'slider' | 'side-by-side' | 'result';
 type ModelQuality = 'isnet_fp16' | 'isnet' | 'isnet_quint8';
@@ -348,9 +349,7 @@ export default function BackgroundRemover() {
           <div className="p-4 sm:p-6 border-b border-slate-200 dark:border-white/5 bg-slate-50/70 dark:bg-white/[0.02]">
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3.5">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.4)] shrink-0">
-                  <Sparkles className="w-5 h-5" />
-                </div>
+                <PdfToolIcon toolId="bg-remover" size="xl" className="shrink-0" />
                 <div>
                   <h1 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">AI Background Remover</h1>
                   <p className="text-slate-500 dark:text-gray-400 font-medium text-xs hidden sm:block">100% private in-browser AI subject separation.</p>

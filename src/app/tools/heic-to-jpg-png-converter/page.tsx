@@ -15,6 +15,7 @@ import { MeshGradient, FloatingParticles } from '@/components/BackgroundEffects'
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { toolArticles } from '@/data/toolArticles';
 import ToolArticle from '@/components/ToolArticle';
+import PdfToolIcon from '@/components/PdfToolIcon';
 
 const SEO_DESC = "Convert Apple HEIC and HEIF photos to JPG or PNG format instantly in your browser. 100% private, batch conversion, zero server uploads.";
 
@@ -286,6 +287,7 @@ export default function HeicToJpgPngConverterPage() {
 
           {/* Hero Header */}
           <div className="text-center max-w-3xl mx-auto mb-12">
+            <PdfToolIcon toolId="heic-to-jpg-png-converter" size="xl" className="mx-auto mb-4" />
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-4 shadow-sm">
               <ImageIcon className="w-4 h-4" />
               <span>Apple Image Converter</span>

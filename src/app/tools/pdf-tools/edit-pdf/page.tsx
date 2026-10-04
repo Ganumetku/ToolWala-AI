@@ -26,17 +26,18 @@ export default function EditPdfPage() {
 
   if (file && !saved) {
     return (
-      <div className="fixed inset-0 z-[200] flex flex-col bg-white">
-        <div className="flex h-12 shrink-0 items-center gap-3 border-b border-slate-200 px-3">
+      <div className="fixed inset-x-0 top-[68px] bottom-16 z-[200] flex flex-col border-t border-slate-200 bg-white md:bottom-0">
+        <div className="flex h-10 shrink-0 items-center gap-2 border-b border-slate-200 bg-white px-3">
           <button
             type="button"
             onClick={startOver}
-            className="rounded-lg px-3 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-100"
+            className="rounded-lg px-2.5 py-1 text-sm font-semibold text-slate-700 hover:bg-slate-100"
           >
             Back
           </button>
-          <p className="min-w-0 flex-1 truncate text-sm font-medium text-slate-900">{file.name}</p>
+          <p className="min-w-0 flex-1 truncate text-sm text-slate-500">{file.name}</p>
         </div>
+        <div className="min-h-0 flex-1">
         <EditPdfEmbed
           editorUrl={EDITOR_URL}
           file={file}
@@ -50,6 +51,7 @@ export default function EditPdfPage() {
             {error}
           </p>
         )}
+        </div>
       </div>
     );
   }

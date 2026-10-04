@@ -9,8 +9,9 @@ const cspHeader = `
   base-uri 'self';
   form-action 'self';
   frame-ancestors 'self';
+  frame-src 'self' https://apna-website-two.vercel.app;
   worker-src 'self' blob: https://unpkg.com https://cdn.jsdelivr.net https://staticimgly.com;
-  child-src 'self' blob:;
+  child-src 'self' blob: https://apna-website-two.vercel.app;
   connect-src 'self' blob: data: https://unpkg.com https://cdn.jsdelivr.net https://*.supabase.co https://www.google-analytics.com https://stats.g.doubleclick.net https://vitals.vercel-insights.com https://staticimgly.com;
 `.replace(/\s{2,}/g, ' ').trim();
 

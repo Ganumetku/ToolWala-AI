@@ -103,6 +103,7 @@ export default function EditPdfEmbed({
         <iframe
           ref={iframeRef}
           title="Edit PDF"
+          {...({ credentialless: "" } as React.IframeHTMLAttributes<HTMLIFrameElement>)}
           src={src}
           sandbox="allow-scripts allow-same-origin allow-downloads allow-modals"
           className="h-full w-full border-0"

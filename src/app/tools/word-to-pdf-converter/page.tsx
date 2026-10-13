@@ -39,6 +39,9 @@ export default function WordToPdf() {
   const [totalPages, setTotalPages] = useState<number>(0);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const conversionPromiseRef = useRef<Promise<Blob> | null>(null);
+  const conversionGenRef = useRef(0);
+  const [progressLabel, setProgressLabel] = useState('');
 
   // Initialize and load PDF.js dynamically using unpkg worker source for stable Next.js/Turbopack compatibility
   useEffect(() => {
@@ -61,6 +64,38 @@ export default function WordToPdf() {
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  };
+
+  const startConversion = (arrayBuffer: ArrayBuffer) => {
+    if (conversionPromiseRef.current) return conversionPromiseRef.current;
+
+    const gen = conversionGenRef.current;
+    conversionPromiseRef.current = convertDocxToPdf(arrayBuffer, {
+      onProgress: ({ page, total, phase }) => {
+        if (gen !== conversionGenRef.current) return;
+        if (total > 0) setTotalPages(total);
+        if (phase === 'render') {
+          setProgress(8);
+          setProgressLabel('Reading Word layout…');
+          return;
+        }
+        const pct = Math.min(95, Math.round((page / total) * 95));
+        setProgress(pct);
+        setProgressLabel(total ? `Rendering page ${page} of ${total}` : 'Rendering pages…');
+      },
+    }).then((blob) => {
+      if (gen !== conversionGenRef.current) {
+        throw new Error('Conversion cancelled');
+      }
+      return blob;
+    }).catch((err) => {
+      if (conversionGenRef.current === gen) {
+        conversionPromiseRef.current = null;
+      }
+      throw err;
+    });
+
+    return conversionPromiseRef.current;
   };
 
   // ------------------------------------
@@ -91,13 +126,12 @@ export default function WordToPdf() {
       setDocxBytes(arrayBuffer);
       setIsUploading(false);
 
-      // Perform background conversion for preview
-      if (pdfjs) {
-        setIsGeneratingPreviews(true);
-        try {
-          const pdfBlob = await convertDocxToPdf(arrayBuffer);
-          setConvertedFile(pdfBlob);
+      setIsGeneratingPreviews(true);
+      try {
+        const pdfBlob = await startConversion(arrayBuffer);
+        setConvertedFile(pdfBlob);
 
+        if (pdfjs) {
           const pdfData = new Uint8Array(await pdfBlob.arrayBuffer());
           const loadingTask = pdfjs.getDocument({ data: pdfData });
           const doc = await loadingTask.promise;
@@ -128,11 +162,11 @@ export default function WordToPdf() {
             }
           }
           setThumbnailUrls(urls);
-        } catch (previewErr) {
-          console.error("Preview generation failed:", previewErr);
-        } finally {
-          setIsGeneratingPreviews(false);
         }
+      } catch (previewErr) {
+        console.error("Preview generation failed:", previewErr);
+      } finally {
+        setIsGeneratingPreviews(false);
       }
     } catch (err: any) {
       setIsUploading(false);
@@ -157,6 +191,8 @@ export default function WordToPdf() {
   };
 
   const resetAll = () => {
+    conversionGenRef.current += 1;
+    conversionPromiseRef.current = null;
     setDocxFile(null);
     setDocxBytes(null);
     setConvertedFile(null);
@@ -164,6 +200,7 @@ export default function WordToPdf() {
     setTotalPages(0);
     setOutputName("converted_document");
     setProgress(0);
+    setProgressLabel('');
     setIsUploading(false);
     setIsConverting(false);
     setIsCompleted(false);
@@ -187,25 +224,13 @@ export default function WordToPdf() {
     setProgress(0);
     setError(null);
     setErrorMsg("");
-    toast.info("Conversion Started", { description: "Processing document formatting..." });
+    toast.info("Conversion Started", { description: "Keeping original Word layout. Large files take longer." });
 
     try {
-      // Simulate progress progression
-      const progressInterval = setInterval(() => {
-        setProgress(prev => {
-          if (prev >= 90) {
-            clearInterval(progressInterval);
-            return 90;
-          }
-          return prev + 10;
-        });
-      }, 150);
+      const pdfBlob = convertedFile || await startConversion(docxBytes);
 
-      // Perform DOCX to PDF conversion (using background converted file if available)
-      const pdfBlob = convertedFile || await convertDocxToPdf(docxBytes);
-      
-      clearInterval(progressInterval);
       setProgress(100);
+      setProgressLabel('Done');
 
       // Store in memory state
       setConvertedFile(pdfBlob);
@@ -441,7 +466,12 @@ export default function WordToPdf() {
                       {isGeneratingPreviews || (docxFile && thumbnailUrls.length === 0) ? (
                         <div className="flex flex-col items-center justify-center p-12 bg-slate-50/70 dark:bg-white/[0.01] border border-slate-200/80 dark:border-white/5 rounded-3xl gap-4 shadow-sm">
                           <RefreshCw className="w-5 h-5 text-blue-600 dark:text-blue-500 animate-spin" />
-                          <p className="text-xs text-slate-500 dark:text-gray-500 font-bold uppercase tracking-wider">Generating page previews...</p>
+                          <p className="text-xs text-slate-500 dark:text-gray-500 font-bold uppercase tracking-wider">
+                            {progressLabel || 'Generating page previews...'}
+                          </p>
+                          {progress > 0 && (
+                            <p className="text-[11px] text-slate-400 font-medium">{progress}%</p>
+                          )}
                         </div>
                       ) : (
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-h-[360px] overflow-y-auto pr-2 custom-scrollbar">
@@ -519,7 +549,9 @@ export default function WordToPdf() {
                   
                   <div className="space-y-2">
                     <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight uppercase">Converting your DOCX...</h3>
-                    <p className="text-sm text-slate-500 dark:text-gray-500 font-medium font-sans">Extracting character layouts and generating PDF pages.</p>
+                    <p className="text-sm text-slate-500 dark:text-gray-500 font-medium font-sans">
+                      {progressLabel || 'Keeping original Word layout. This can take a minute on large files.'}
+                    </p>
                   </div>
 
                   <div className="space-y-4">

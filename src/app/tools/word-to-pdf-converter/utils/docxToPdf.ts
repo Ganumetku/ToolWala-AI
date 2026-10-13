@@ -1,685 +1,242 @@
-import { jsPDF } from 'jspdf';
 import JSZip from 'jszip';
+import { jsPDF } from 'jspdf';
 
-interface RichWord {
-  text: string;
-  bold: boolean;
-  italic: boolean;
-  underline: boolean;
-  fontSize: number; // pt
-  color: string | null; // hex color
+/**
+ * Word → PDF conversion.
+ *
+ * Previous implementation unzipped document.xml, extracted a subset of runs,
+ * and rebuilt an A4 Helvetica PDF with jsPDF. That discards fonts, page size,
+ * margins, styles.xml, numbering, headers/footers, and real table geometry.
+ *
+ * This engine renders the DOCX with docx-preview (OOXML → paginated HTML that
+ * keeps Word page size, margins, styles, tables, headers/footers, and images),
+ * then captures each page into the PDF. Visual match is the goal; the PDF pages
+ * are rasterized, so text is not selectable.
+ */
+
+export type ConvertProgress = {
+  page: number;
+  total: number;
+  phase: 'render' | 'capture';
+};
+
+type ConvertOptions = {
+  onProgress?: (progress: ConvertProgress) => void;
+};
+
+const CSS_PX_TO_PT = 72 / 96;
+const HOST_ID = 'toolwala-docx-pdf-host';
+const CAPTURE_SCALE = 1.5;
+
+const FONT_FALLBACK_CSS = `
+@font-face { font-family: 'Calibri'; src: local('Calibri'), local('Carlito'), local('Liberation Sans'), local('Arial'); }
+@font-face { font-family: 'Calibri Light'; src: local('Calibri Light'), local('Carlito'), local('Arial'); }
+@font-face { font-family: 'Cambria'; src: local('Cambria'), local('Liberation Serif'), local('Georgia'), local('Times New Roman'); }
+@font-face { font-family: 'Cambria Math'; src: local('Cambria Math'), local('Cambria'), local('Times New Roman'); }
+@font-face { font-family: 'Times New Roman'; src: local('Times New Roman'), local('Times'), local('Liberation Serif'); }
+@font-face { font-family: 'Arial'; src: local('Arial'), local('Helvetica'), local('Liberation Sans'); }
+@font-face { font-family: 'Arial Black'; src: local('Arial Black'), local('Arial'); }
+@font-face { font-family: 'Georgia'; src: local('Georgia'), local('Cambria'), local('Times New Roman'); }
+@font-face { font-family: 'Courier New'; src: local('Courier New'), local('Courier'), local('Liberation Mono'); }
+@font-face { font-family: 'Verdana'; src: local('Verdana'), local('Geneva'), local('Arial'); }
+@font-face { font-family: 'Tahoma'; src: local('Tahoma'), local('Verdana'), local('Arial'); }
+@font-face { font-family: 'Comic Sans MS'; src: local('Comic Sans MS'), local('Comic Sans'), local('Chalkboard SE'); }
+@font-face { font-family: 'Trebuchet MS'; src: local('Trebuchet MS'), local('Trebuchet'), local('Arial'); }
+@font-face { font-family: 'Garamond'; src: local('Garamond'), local('EB Garamond'), local('Times New Roman'); }
+@font-face { font-family: 'Palatino Linotype'; src: local('Palatino Linotype'), local('Palatino'), local('Book Antiqua'); }
+`;
+
+const HOST_RESET_CSS = `
+.toolwala-docx-pdf-host { color-scheme: light; }
+.toolwala-docx-pdf-host img { max-width: none !important; max-height: none !important; }
+.toolwala-docx-pdf-host section.docx { box-shadow: none !important; margin: 0 !important; }
+.toolwala-docx-pdf-host .docx-wrapper { background: #ffffff !important; padding: 0 !important; gap: 0 !important; }
+`;
+
+function collectPages(root: ParentNode): HTMLElement[] {
+  const sections = Array.from(root.querySelectorAll('section.docx')) as HTMLElement[];
+  if (sections.length > 0) return sections;
+
+  const wrapperPages = Array.from(
+    root.querySelectorAll('.docx-wrapper > section, .docx-wrapper > article')
+  ) as HTMLElement[];
+  if (wrapperPages.length > 0) return wrapperPages;
+
+  return Array.from(root.querySelectorAll('.docx-wrapper > *')) as HTMLElement[];
 }
 
-interface ParsedParagraph {
-  type: 'paragraph' | 'heading1' | 'heading2' | 'heading3' | 'list-item';
-  alignment: 'left' | 'center' | 'right' | 'justify';
-  indent: number; // pt
-  bullet: boolean;
-  numbering: string | null;
-  words: RichWord[];
-  isPageBreak: boolean;
-}
+async function waitForResources(root: ParentNode & { defaultView?: Window | null }, doc: Document) {
+  const images = Array.from(doc.images);
+  await Promise.all(
+    images.map(
+      (img) =>
+        new Promise<void>((resolve) => {
+          if (img.complete) {
+            resolve();
+            return;
+          }
+          const done = () => resolve();
+          img.addEventListener('load', done, { once: true });
+          img.addEventListener('error', done, { once: true });
+        })
+    )
+  );
 
-interface ParsedTableCell {
-  elements: ParsedElement[];
-  width: number;
-}
-
-interface ParsedTableRow {
-  cells: ParsedTableCell[];
-}
-
-interface ParsedTable {
-  type: 'table';
-  rows: ParsedTableRow[];
-}
-
-interface ParsedImage {
-  type: 'image';
-  rId: string;
-  widthPt: number;
-  heightPt: number;
-}
-
-type ParsedElement = ParsedParagraph | ParsedTable | ParsedImage;
-
-// Helper to get element's children namespace-agnostically
-function getElementsByLocalName(parent: Element, localName: string): Element[] {
-  const elements: Element[] = [];
-  const walk = (node: Node) => {
-    if (node.nodeType === 1) {
-      const el = node as Element;
-      if (el.localName === localName) {
-        elements.push(el);
-      }
-      for (let i = 0; i < el.childNodes.length; i++) {
-        walk(el.childNodes[i]);
-      }
+  try {
+    if (doc.fonts?.ready) {
+      await Promise.race([
+        doc.fonts.ready,
+        new Promise<void>((resolve) => setTimeout(resolve, 1500)),
+      ]);
     }
-  };
-  for (let i = 0; i < parent.childNodes.length; i++) {
-    walk(parent.childNodes[i]);
-  }
-  return elements;
-}
-
-function getDirectChildByLocalName(parent: Element, localName: string): Element | null {
-  for (let i = 0; i < parent.childNodes.length; i++) {
-    const node = parent.childNodes[i];
-    if (node.nodeType === 1) {
-      const el = node as Element;
-      if (el.localName === localName) {
-        return el;
-      }
-    }
-  }
-  return null;
-}
-
-function parseParagraph(pNode: Element): ParsedParagraph {
-  let type: ParsedParagraph['type'] = 'paragraph';
-  let alignment: ParsedParagraph['alignment'] = 'left';
-  let indent = 0;
-  let bullet = false;
-  let numbering: string | null = null;
-  let isPageBreak = false;
-
-  // 1. Parse paragraph properties (pPr)
-  const pPr = getDirectChildByLocalName(pNode, 'pPr');
-  if (pPr) {
-    // Style (Heading 1, 2, 3)
-    const pStyle = getDirectChildByLocalName(pPr, 'pStyle');
-    if (pStyle) {
-      const styleVal = pStyle.getAttribute('w:val')?.toLowerCase() || '';
-      if (styleVal.includes('heading1') || styleVal === '1') {
-        type = 'heading1';
-      } else if (styleVal.includes('heading2') || styleVal === '2') {
-        type = 'heading2';
-      } else if (styleVal.includes('heading3') || styleVal === '3') {
-        type = 'heading3';
-      }
-    }
-
-    // Alignment (jc)
-    const jc = getDirectChildByLocalName(pPr, 'jc');
-    if (jc) {
-      const jcVal = jc.getAttribute('w:val')?.toLowerCase() || 'left';
-      if (jcVal === 'center') alignment = 'center';
-      else if (jcVal === 'right') alignment = 'right';
-      else if (jcVal === 'both') alignment = 'justify';
-    }
-
-    // List Numbering (numPr)
-    const numPr = getDirectChildByLocalName(pPr, 'numPr');
-    if (numPr) {
-      type = 'list-item';
-      const ilvl = getDirectChildByLocalName(numPr, 'ilvl');
-      const lvlVal = ilvl ? parseInt(ilvl.getAttribute('w:val') || '0', 10) : 0;
-      indent = 24 + lvlVal * 18; // indents per list level
-
-      const numId = getDirectChildByLocalName(numPr, 'numId');
-      const numIdVal = numId ? numId.getAttribute('w:val') : '1';
-      
-      // Basic check: odd numId values are usually bullet lists in Word, even are numbered.
-      if (numIdVal && parseInt(numIdVal, 10) % 2 === 0) {
-        numbering = '1.'; // standard fall-back prefix
-      } else {
-        bullet = true;
-      }
-    }
+  } catch {
+    // Font loading is best-effort; system fallbacks still apply.
   }
 
-  // 2. Parse text runs (r)
-  const runs = getElementsByLocalName(pNode, 'r');
-  const words: RichWord[] = [];
-
-  for (const rNode of runs) {
-    // Check if run has text or page breaks
-    const tNodes = getElementsByLocalName(rNode, 't');
-    const brNodes = getElementsByLocalName(rNode, 'br');
-    
-    if (brNodes.some(br => br.getAttribute('w:type')?.toLowerCase() === 'page')) {
-      isPageBreak = true;
-    }
-
-    if (tNodes.length === 0) continue;
-
-    // Run properties (rPr)
-    const rPr = getDirectChildByLocalName(rNode, 'rPr');
-    let bold = false;
-    let italic = false;
-    let underline = false;
-    let fontSize = 11; // default size
-    let color: string | null = null;
-
-    if (rPr) {
-      if (getDirectChildByLocalName(rPr, 'b')) bold = true;
-      if (getDirectChildByLocalName(rPr, 'i')) italic = true;
-      if (getDirectChildByLocalName(rPr, 'u')) underline = true;
-
-      // Font size is represented in half-points (sz)
-      const sz = getDirectChildByLocalName(rPr, 'sz');
-      if (sz) {
-        const val = parseInt(sz.getAttribute('w:val') || '22', 10);
-        fontSize = val / 2;
-      }
-
-      // Font Color (hex)
-      const colorEl = getDirectChildByLocalName(rPr, 'color');
-      if (colorEl) {
-        const val = colorEl.getAttribute('w:val');
-        if (val && val !== 'auto') color = `#${val}`;
-      }
-    }
-
-    // Adapt sizing if standard heading styles are used but no custom font sizing exists
-    if (!rPr || !getDirectChildByLocalName(rPr, 'sz')) {
-      if (type === 'heading1') fontSize = 20;
-      else if (type === 'heading2') fontSize = 16;
-      else if (type === 'heading3') fontSize = 13;
-    }
-
-    const runText = tNodes.map(t => t.textContent || '').join('');
-    
-    // Split into words, preserving formatting structure
-    const splitWords = runText.split(/(\s+)/);
-    for (const text of splitWords) {
-      if (!text) continue;
-      words.push({ text, bold, italic, underline, fontSize, color });
-    }
-  }
-
-  return { type, alignment, indent, bullet, numbering, words, isPageBreak };
+  void root;
 }
 
-function parseDrawing(drawingNode: Element): ParsedImage | null {
-  const blips = getElementsByLocalName(drawingNode, 'blip');
-  if (blips.length === 0) return null;
-  const blip = blips[0];
-  
-  let rId = '';
-  for (let j = 0; j < blip.attributes.length; j++) {
-    const attr = blip.attributes[j];
-    if (attr.localName === 'embed') {
-      rId = attr.value;
-      break;
-    }
-  }
-  if (!rId) return null;
-
-  const extents = getElementsByLocalName(drawingNode, 'extent');
-  let widthPt = 400; // default width
-  let heightPt = 300; // default height
-  if (extents.length > 0) {
-    const extent = extents[0];
-    const cx = parseInt(extent.getAttribute('cx') || '', 10);
-    const cy = parseInt(extent.getAttribute('cy') || '', 10);
-    if (!isNaN(cx) && !isNaN(cy)) {
-      widthPt = cx / 12700;
-      heightPt = cy / 12700;
-    }
-  }
+function pageSizePt(page: HTMLElement): { widthPt: number; heightPt: number } {
+  const style = getComputedStyle(page);
+  const widthPx = parseFloat(style.width) || page.offsetWidth || page.scrollWidth;
+  const heightPx =
+    parseFloat(style.minHeight) ||
+    parseFloat(style.height) ||
+    page.offsetHeight ||
+    page.scrollHeight;
 
   return {
-    type: 'image',
-    rId,
-    widthPt,
-    heightPt
+    widthPt: Math.max(1, widthPx * CSS_PX_TO_PT),
+    heightPt: Math.max(1, heightPx * CSS_PX_TO_PT),
   };
 }
 
-function parseParagraphNode(pNode: Element): ParsedElement[] {
-  const drawings = getElementsByLocalName(pNode, 'drawing');
-  if (drawings.length > 0) {
-    const parsedElements: ParsedElement[] = [];
-    for (const drawing of drawings) {
-      const img = parseDrawing(drawing);
-      if (img) {
-        parsedElements.push(img);
-      }
-    }
-    const textNodes = getElementsByLocalName(pNode, 't');
-    if (textNodes.length > 0) {
-      parsedElements.push(parseParagraph(pNode));
-    }
-    return parsedElements;
-  }
-  
-  return [parseParagraph(pNode)];
-}
-
-function parseTable(tblNode: Element): ParsedTable {
-  const rows: ParsedTableRow[] = [];
-  const trNodes = getElementsByLocalName(tblNode, 'tr');
-
-  for (const trNode of trNodes) {
-    const cells: ParsedTableCell[] = [];
-    const tcNodes = getDirectChildByLocalName(trNode, 'tc') 
-      ? getDirectChildByLocalName(trNode, 'tc')!.parentElement!.children 
-      : getElementsByLocalName(trNode, 'tc');
-
-    // Filter direct tc children
-    const directTcNodes: Element[] = [];
-    for (let i = 0; i < trNode.childNodes.length; i++) {
-      const child = trNode.childNodes[i];
-      if (child.nodeType === 1) {
-        const el = child as Element;
-        if (el.nodeName === 'w:tc' || el.localName === 'tc') {
-          directTcNodes.push(el);
-        }
-      }
-    }
-
-    for (const tcNode of directTcNodes) {
-      const elements: ParsedElement[] = [];
-      
-      // Parse cell contents (paragraphs or nested tables)
-      for (let i = 0; i < tcNode.childNodes.length; i++) {
-        const child = tcNode.childNodes[i];
-        if (child.nodeType === 1) {
-          const el = child as Element;
-          if (el.localName === 'p') {
-            elements.push(...parseParagraphNode(el));
-          } else if (el.localName === 'tbl') {
-            elements.push(parseTable(el));
-          }
-        }
-      }
-
-      // Cell width (tcW)
-      const tcPr = getDirectChildByLocalName(tcNode, 'tcPr');
-      let width = 1000; // default relative width
-      if (tcPr) {
-        const tcW = getDirectChildByLocalName(tcPr, 'tcW');
-        if (tcW) {
-          width = parseInt(tcW.getAttribute('w:val') || '1000', 10);
-        }
-      }
-
-      cells.push({ elements, width });
-    }
-    
-    if (cells.length > 0) {
-      rows.push({ cells });
-    }
+export async function convertDocxToPdf(
+  arrayBuffer: ArrayBuffer,
+  options: ConvertOptions = {}
+): Promise<Blob> {
+  if (typeof document === 'undefined') {
+    throw new Error('Word to PDF conversion must run in the browser.');
   }
 
-  return { type: 'table', rows };
-}
-
-export async function convertDocxToPdf(arrayBuffer: ArrayBuffer): Promise<Blob> {
-  const zip = await JSZip.loadAsync(arrayBuffer);
-  const documentXmlText = await zip.file('word/document.xml')?.async('text');
-  
-  if (!documentXmlText) {
-    throw new Error('Invalid DOCX: missing word/document.xml');
+  const source = arrayBuffer.slice(0);
+  const zip = await JSZip.loadAsync(source);
+  if (!zip.file('word/document.xml')) {
+    throw new Error('Invalid DOCX: missing word/document.xml. Legacy .doc files are not supported.');
   }
 
-  const parser = new DOMParser();
-  const xmlDoc = parser.parseFromString(documentXmlText, 'application/xml');
-  const body = getElementsByLocalName(xmlDoc.documentElement, 'body')[0];
+  options.onProgress?.({ page: 0, total: 1, phase: 'render' });
 
-  if (!body) {
-    throw new Error('Invalid DOCX: missing body structure');
-  }
+  const { renderAsync } = await import('docx-preview');
+  const html2canvas = (await import('html2canvas')).default;
 
-  // Parse relationship ID mappings
-  const relsXmlText = await zip.file('word/_rels/document.xml.rels')?.async('text');
-  const imageRels: Record<string, string> = {};
-  if (relsXmlText) {
-    const relsDoc = parser.parseFromString(relsXmlText, 'application/xml');
-    const relationships = getElementsByLocalName(relsDoc.documentElement, 'Relationship');
-    for (const rel of relationships) {
-      const id = rel.getAttribute('Id');
-      const type = rel.getAttribute('Type');
-      const target = rel.getAttribute('Target');
-      if (id && target && type?.includes('relationships/image')) {
-        imageRels[id] = target;
-      }
+  const host = document.createElement('div');
+  host.id = `${HOST_ID}-${Date.now()}`;
+  host.className = 'toolwala-docx-pdf-host';
+  host.setAttribute('aria-hidden', 'true');
+  host.style.cssText = [
+    'position:fixed',
+    'left:0',
+    'top:0',
+    'z-index:-1',
+    'pointer-events:none',
+    'background:#ffffff',
+  ].join(';');
+
+  const resetStyle = document.createElement('style');
+  resetStyle.textContent = `${FONT_FALLBACK_CSS}\n${HOST_RESET_CSS}`;
+  host.appendChild(resetStyle);
+
+  const bodyMount = document.createElement('div');
+  const styleMount = document.createElement('div');
+  host.appendChild(styleMount);
+  host.appendChild(bodyMount);
+  document.body.appendChild(host);
+
+  try {
+    await renderAsync(source, bodyMount, styleMount, {
+      className: 'docx',
+      inWrapper: true,
+      ignoreWidth: false,
+      ignoreHeight: false,
+      ignoreFonts: false,
+      breakPages: true,
+      ignoreLastRenderedPageBreak: false,
+      experimental: true,
+      useBase64URL: true,
+      renderHeaders: true,
+      renderFooters: true,
+      renderFootnotes: true,
+      renderEndnotes: true,
+      renderComments: false,
+      renderAltChunks: true,
+    });
+
+    await waitForResources(host, document);
+
+    const pages = collectPages(bodyMount);
+    if (pages.length === 0) {
+      throw new Error('No pages could be rendered from this Word document.');
     }
-  }
 
-  // Extract images from zip into base64 strings
-  const loadedImages: Record<string, { dataUrl: string; format: string }> = {};
-  for (const [rId, target] of Object.entries(imageRels)) {
-    let targetPath = target;
-    if (!targetPath.startsWith('word/')) {
-      if (targetPath.startsWith('/word/')) {
-        targetPath = targetPath.substring(1);
+    options.onProgress?.({ page: 0, total: pages.length, phase: 'capture' });
+
+    let pdf: jsPDF | null = null;
+
+    for (let i = 0; i < pages.length; i++) {
+      const page = pages[i];
+      page.style.boxShadow = 'none';
+      page.style.margin = '0';
+      page.style.background = '#ffffff';
+
+      const { widthPt, heightPt } = pageSizePt(page);
+      const widthPx = page.offsetWidth || Math.round(widthPt / CSS_PX_TO_PT);
+      const heightPx = page.offsetHeight || Math.round(heightPt / CSS_PX_TO_PT);
+      const orientation = widthPt > heightPt ? 'landscape' : 'portrait';
+
+      const canvas = await html2canvas(page, {
+        scale: CAPTURE_SCALE,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        logging: false,
+        imageTimeout: 8000,
+        windowWidth: Math.max(widthPx, 1),
+        windowHeight: Math.max(heightPx, 1),
+        width: Math.max(widthPx, 1),
+        height: Math.max(heightPx, 1),
+        onclone: (_clonedDoc, clonedEl) => {
+          clonedEl.style.boxShadow = 'none';
+          clonedEl.style.margin = '0';
+          clonedEl.style.background = '#ffffff';
+        },
+      });
+
+      if (!pdf) {
+        pdf = new jsPDF({
+          orientation,
+          unit: 'pt',
+          format: [widthPt, heightPt],
+          compress: true,
+        });
       } else {
-        targetPath = 'word/' + targetPath;
+        pdf.addPage([widthPt, heightPt], orientation);
       }
-    }
-    const imageFile = zip.file(targetPath);
-    if (imageFile) {
-      try {
-        const base64Data = await imageFile.async('base64');
-        const extension = targetPath.split('.').pop()?.toLowerCase() || 'png';
-        let format = 'PNG';
-        if (['jpg', 'jpeg'].includes(extension)) format = 'JPEG';
-        else if (extension === 'gif') format = 'GIF';
-        else if (extension === 'webp') format = 'WEBP';
 
-        loadedImages[rId] = {
-          dataUrl: `data:image/${extension === 'jpg' ? 'jpeg' : extension};base64,${base64Data}`,
-          format
-        };
-      } catch (err) {
-        console.error(`Failed to load image for rId ${rId}:`, err);
-      }
+      const imageData = canvas.toDataURL('image/jpeg', 0.88);
+      pdf.addImage(imageData, 'JPEG', 0, 0, widthPt, heightPt, undefined, 'FAST');
+      canvas.width = 0;
+      canvas.height = 0;
+
+      options.onProgress?.({ page: i + 1, total: pages.length, phase: 'capture' });
+      await new Promise((resolve) => setTimeout(resolve, 0));
     }
+
+    if (!pdf) {
+      throw new Error('PDF generation failed.');
+    }
+
+    return pdf.output('blob');
+  } finally {
+    host.remove();
   }
-
-  // Parse elements sequentially
-  const elements: ParsedElement[] = [];
-  for (let i = 0; i < body.childNodes.length; i++) {
-    const child = body.childNodes[i];
-    if (child.nodeType === 1) {
-      const el = child as Element;
-      if (el.localName === 'p') {
-        elements.push(...parseParagraphNode(el));
-      } else if (el.localName === 'tbl') {
-        elements.push(parseTable(el));
-      }
-    }
-  }
-
-  // Render to PDF using jsPDF
-  const doc = new jsPDF({
-    orientation: 'portrait',
-    unit: 'pt',
-    format: 'a4'
-  });
-
-  const pageWidth = 595.275;
-  const pageHeight = 841.89;
-  const margin = 54; // 0.75 in margin (54pt)
-  const contentWidth = pageWidth - margin * 2;
-  const bottomThreshold = pageHeight - margin;
-
-  let y = margin;
-  let pageNumber = 1;
-
-  const setWordStyle = (word: RichWord) => {
-    let style = 'normal';
-    if (word.bold && word.italic) style = 'bolditalic';
-    else if (word.bold) style = 'bold';
-    else if (word.italic) style = 'italic';
-    
-    doc.setFont('helvetica', style);
-    doc.setFontSize(word.fontSize);
-
-    if (word.color) {
-      doc.setTextColor(word.color);
-    } else {
-      doc.setTextColor('#111827'); // custom default black
-    }
-  };
-
-  const drawParagraph = (para: ParsedParagraph, startX: number, maxWidth: number): number => {
-    if (para.words.length === 0) {
-      return y + 12; // Empty paragraph spacing
-    }
-
-    // 1. Perform Word Wrapping
-    const lines: RichWord[][] = [];
-    let currentLine: RichWord[] = [];
-    let currentWidth = 0;
-
-    for (const word of para.words) {
-      setWordStyle(word);
-      const wordWidth = doc.getTextWidth(word.text);
-
-      if (currentWidth + wordWidth > maxWidth && currentLine.length > 0) {
-        lines.push(currentLine);
-        currentLine = [];
-        currentWidth = 0;
-      }
-
-      // Skip leading whitespace on line wrapped blocks
-      if (currentLine.length === 0 && word.text.trim() === '') {
-        continue;
-      }
-
-      currentLine.push(word);
-      currentWidth += wordWidth;
-    }
-    if (currentLine.length > 0) {
-      lines.push(currentLine);
-    }
-
-    // 2. Render Lines
-    for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
-      const line = lines[lineIndex];
-      
-      // Calculate total width of the line to evaluate alignments
-      let totalLineWidth = 0;
-      for (const word of line) {
-        setWordStyle(word);
-        totalLineWidth += doc.getTextWidth(word.text);
-      }
-
-      // Determine starting x coordinate
-      let lineX = startX;
-      if (para.alignment === 'center') {
-        lineX = startX + (maxWidth - totalLineWidth) / 2;
-      } else if (para.alignment === 'right') {
-        lineX = startX + (maxWidth - totalLineWidth);
-      }
-
-      // Evaluate font height spacing for line
-      const maxFontSize = Math.max(...line.map(w => w.fontSize));
-      const lineHeight = maxFontSize * 1.25;
-
-      // Check page break boundary
-      if (y + lineHeight > bottomThreshold) {
-        doc.addPage();
-        pageNumber++;
-        y = margin;
-      }
-
-      // Bullet or Numbering offsets
-      if (lineIndex === 0 && para.type === 'list-item') {
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(para.words[0].fontSize);
-        doc.setTextColor('#3B82F6'); // premium accent blue bullets
-        if (para.bullet) {
-          doc.text('•', startX - 12, y + maxFontSize);
-        } else if (para.numbering) {
-          doc.text(para.numbering, startX - 16, y + maxFontSize);
-        }
-      }
-
-      // Draw rich words in sequence
-      let currentWordX = lineX;
-      for (const word of line) {
-        setWordStyle(word);
-        doc.text(word.text, currentWordX, y + maxFontSize);
-
-        if (word.underline) {
-          doc.setDrawColor(word.color || '#111827');
-          doc.setLineWidth(0.5);
-          doc.line(currentWordX, y + maxFontSize + 1.5, currentWordX + doc.getTextWidth(word.text), y + maxFontSize + 1.5);
-        }
-
-        currentWordX += doc.getTextWidth(word.text);
-      }
-
-      y += lineHeight;
-    }
-
-    return y + 6; // Spacing after paragraph
-  };
-
-  const drawTable = (table: ParsedTable) => {
-    if (table.rows.length === 0) return;
-
-    // Evaluate cell layout column distributions
-    const numCols = Math.max(...table.rows.map(r => r.cells.length));
-    const colWidth = contentWidth / numCols;
-
-    for (const row of table.rows) {
-      // Step 1: Wrap cell paragraphs/images separately to determine total row height
-      const cellHeights: number[] = [];
-      
-      for (let colIdx = 0; colIdx < row.cells.length; colIdx++) {
-        const cell = row.cells[colIdx];
-        let cellYTemp = 0;
-        
-        for (const element of cell.elements) {
-          if (element.type === 'image') {
-            const img = element as ParsedImage;
-            let displayWidth = img.widthPt;
-            let displayHeight = img.heightPt;
-            const maxCellWidth = colWidth - 16;
-            if (displayWidth > maxCellWidth) {
-              const ratio = maxCellWidth / displayWidth;
-              displayHeight = displayHeight * ratio;
-            }
-            cellYTemp += displayHeight + 6;
-          } else if ('words' in element) {
-            // Render paragraph in a virtual height block (no drawing)
-            const lines: RichWord[][] = [];
-            let currentLine: RichWord[] = [];
-            let currentWidth = 0;
-
-            for (const word of element.words) {
-              setWordStyle(word);
-              const wordWidth = doc.getTextWidth(word.text);
-
-              if (currentWidth + wordWidth > colWidth - 16 && currentLine.length > 0) {
-                lines.push(currentLine);
-                currentLine = [];
-                currentWidth = 0;
-              }
-              if (currentLine.length === 0 && word.text.trim() === '') continue;
-              currentLine.push(word);
-              currentWidth += wordWidth;
-            }
-            if (currentLine.length > 0) lines.push(currentLine);
-
-            for (const line of lines) {
-              const maxFontSize = Math.max(...line.map(w => w.fontSize));
-              cellYTemp += maxFontSize * 1.25;
-            }
-            cellYTemp += 6; // spacing after
-          }
-        }
-        cellHeights.push(Math.max(cellYTemp, 20)); // min height
-      }
-
-      const rowHeight = Math.max(...cellHeights) + 8; // padding top/bottom
-
-      // Step 2: Page Break Check
-      if (y + rowHeight > bottomThreshold) {
-        doc.addPage();
-        pageNumber++;
-        y = margin;
-      }
-
-      // Step 3: Draw Cell Borders and Render Contents
-      let cellX = margin;
-      for (let colIdx = 0; colIdx < row.cells.length; colIdx++) {
-        const cell = row.cells[colIdx];
-        
-        // Draw Cell boundary outline box
-        doc.setDrawColor('#D1D5DB'); // light grey border
-        doc.setLineWidth(0.8);
-        doc.rect(cellX, y, colWidth, rowHeight);
-
-        // Draw Cell Content inside cell borders
-        let innerY = y + 6;
-        const savedY = y;
-        
-        // Redirect y temporarily
-        y = innerY;
-        for (const element of cell.elements) {
-          if (element.type === 'image') {
-            const img = element as ParsedImage;
-            const loadedImg = loadedImages[img.rId];
-            if (loadedImg) {
-              let displayWidth = img.widthPt;
-              let displayHeight = img.heightPt;
-              const maxCellWidth = colWidth - 16;
-              if (displayWidth > maxCellWidth) {
-                const ratio = maxCellWidth / displayWidth;
-                displayWidth = maxCellWidth;
-                displayHeight = displayHeight * ratio;
-              }
-              try {
-                doc.addImage(loadedImg.dataUrl, loadedImg.format, cellX + 8, y, displayWidth, displayHeight);
-              } catch (err) {
-                console.error("Failed to add cell image:", err);
-              }
-              y += displayHeight + 6;
-            }
-          } else if ('words' in element) {
-            y = drawParagraph(element as ParsedParagraph, cellX + 8, colWidth - 16);
-          }
-        }
-        // Restore y
-        y = savedY;
-
-        cellX += colWidth;
-      }
-
-      y += rowHeight;
-    }
-  };
-
-  const drawImage = (img: ParsedImage): number => {
-    const loadedImg = loadedImages[img.rId];
-    if (!loadedImg) return y;
-
-    let displayWidth = img.widthPt;
-    let displayHeight = img.heightPt;
-    if (displayWidth > contentWidth) {
-      const ratio = contentWidth / displayWidth;
-      displayWidth = contentWidth;
-      displayHeight = displayHeight * ratio;
-    }
-
-    if (y + displayHeight > bottomThreshold) {
-      doc.addPage();
-      pageNumber++;
-      y = margin;
-    }
-
-    const imageX = margin + (contentWidth - displayWidth) / 2;
-    try {
-      doc.addImage(loadedImg.dataUrl, loadedImg.format, imageX, y, displayWidth, displayHeight);
-    } catch (err) {
-      console.error("Failed to add image to jsPDF:", err);
-    }
-
-    return y + displayHeight + 12;
-  };
-
-  // Process all main parsed layout elements
-  for (const element of elements) {
-    if (element.type === 'table') {
-      drawTable(element as ParsedTable);
-    } else if (element.type === 'image') {
-      y = drawImage(element as ParsedImage);
-    } else {
-      const para = element as ParsedParagraph;
-      
-      if (para.isPageBreak) {
-        doc.addPage();
-        pageNumber++;
-        y = margin;
-      }
-
-      const indentX = margin + para.indent;
-      const wrapWidth = contentWidth - para.indent;
-
-      // Heading spacing
-      if (para.type === 'heading1') y += 10;
-      else if (para.type === 'heading2') y += 8;
-
-      y = drawParagraph(para, indentX, wrapWidth);
-    }
-  }
-
-  return doc.output('blob');
 }

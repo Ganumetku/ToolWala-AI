@@ -9,8 +9,9 @@ import ToolArticle from "@/components/ToolArticle";
 import EditPdfEmbed from "@/components/pdf/EditPdfEmbed";
 import { toolArticles } from "@/data/toolArticles";
 
-const EDITOR_URL =
-  process.env.NEXT_PUBLIC_EDIT_PDF_EDITOR_URL || "https://apna-website-two.vercel.app";
+const EDITOR_URL = process.env.NEXT_PUBLIC_EDITOR_URL;
+const MISSING_EDITOR =
+  "The PDF editor URL is not configured. Set NEXT_PUBLIC_EDITOR_URL and redeploy.";
 
 export default function EditPdfPage() {
   const [file, setFile] = useState<File | null>(null);
@@ -24,7 +25,17 @@ export default function EditPdfPage() {
     setError(null);
   };
 
-  if (file && !saved) {
+  if (file && !saved && !EDITOR_URL) {
+    return (
+      <ToolLayout>
+        <div className="mb-12 rounded-3xl border border-red-200 bg-red-50 p-6 text-red-700">
+          <p className="text-sm font-medium">{MISSING_EDITOR}</p>
+        </div>
+      </ToolLayout>
+    );
+  }
+
+  if (file && !saved && EDITOR_URL) {
     return (
       <div className="fixed inset-x-0 top-[68px] bottom-16 z-[200] flex flex-col border-t border-slate-200 bg-white md:bottom-0">
         <div className="flex h-10 shrink-0 items-center gap-2 border-b border-slate-200 bg-white px-3">
@@ -103,10 +114,10 @@ export default function EditPdfPage() {
         />
 
         <div className="p-6 sm:p-10">
-          {error && (
+          {(!EDITOR_URL || error) && (
             <div className="bg-red-50 dark:bg-red-950/20 text-red-600 dark:text-red-400 p-5 rounded-2xl flex items-start gap-4 border border-red-200 dark:border-red-900/50 text-left mb-6">
               <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-              <p className="text-sm font-medium">{error}</p>
+              <p className="text-sm font-medium">{error || MISSING_EDITOR}</p>
             </div>
           )}
 
@@ -114,6 +125,10 @@ export default function EditPdfPage() {
             onFilesSelected={(selectedFiles) => {
               const next = selectedFiles?.[0];
               if (!next) return;
+              if (!EDITOR_URL) {
+                setError(MISSING_EDITOR);
+                return;
+              }
               if (next.type !== "application/pdf" && !next.name.toLowerCase().endsWith(".pdf")) {
                 setError("Please choose a PDF file.");
                 return;

@@ -10,6 +10,8 @@ type EditorMessage =
   | { type: "PDF_SAVED"; payload: { buffer: ArrayBuffer; fileName: string; flattened: boolean } }
   | { type: "ERROR"; payload: { code: string; message: string } };
 
+const loadSent = new WeakSet<File>();
+
 function isEditorMessage(data: unknown): data is EditorMessage {
   if (!data || typeof data !== "object") return false;
   const type = (data as { type?: unknown }).type;
@@ -31,7 +33,6 @@ export default function EditPdfEmbed({
   const fileRef = useRef(file);
   const savedRef = useRef(onSaved);
   const errorRef = useRef(onError);
-  const sentFor = useRef<File | null>(null);
   const [phase, setPhase] = useState<Phase>("booting");
   const [status, setStatus] = useState("Opening editor...");
   const [error, setError] = useState<string | null>(null);
@@ -53,18 +54,27 @@ export default function EditPdfEmbed({
       if (event.data.type === "EDITOR_READY") {
         const target = iframeRef.current?.contentWindow;
         const current = fileRef.current;
-        if (!target || sentFor.current === current) {
+        if (!target || loadSent.has(current)) {
           setPhase((p) => (p === "booting" ? "opening" : p));
           return;
         }
-        sentFor.current = current;
+        loadSent.add(current);
         void current.arrayBuffer().then((buffer) => {
-          if (!iframeRef.current?.contentWindow) return;
-          iframeRef.current.contentWindow.postMessage(
+          const frame = iframeRef.current?.contentWindow;
+          if (!frame) {
+            loadSent.delete(current);
+            return;
+          }
+          frame.postMessage(
             { type: "LOAD_PDF", payload: { buffer, fileName: current.name } },
             editorOrigin,
             [buffer],
           );
+        }).catch(() => {
+          loadSent.delete(current);
+          setPhase("error");
+          setError("Could not read the PDF file.");
+          errorRef.current?.("Could not read the PDF file.");
         });
         setPhase("opening");
         setStatus("Opening PDF...");

@@ -14,6 +14,7 @@ import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import PdfToolIcon from '@/components/PdfToolIcon';
+import { refineCutout } from './utils/refineCutout';
 
 type ViewMode = 'slider' | 'side-by-side' | 'result';
 type ModelQuality = 'isnet_fp16' | 'isnet' | 'isnet_quint8';
@@ -50,7 +51,7 @@ export default function BackgroundRemover() {
   const [error, setError] = useState<string | null>(null);
   
   const [modelQuality, setModelQuality] = useState<ModelQuality>('isnet_fp16');
-  const [edgeCleanLevel, setEdgeCleanLevel] = useState<number>(20); // 0 to 50 alpha threshold
+  const [edgeCleanLevel, setEdgeCleanLevel] = useState<number>(0);
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>('slider');
@@ -66,57 +67,26 @@ export default function BackgroundRemover() {
     setMounted(true);
   }, []);
 
-  // Post-process mask to remove stray background specks & clean edge halos
-  const applyEdgeCleanup = useCallback((baseImageUrl: string, threshold: number): Promise<string> => {
-    return new Promise((resolve) => {
-      if (threshold === 0) {
-        resolve(baseImageUrl);
-        return;
-      }
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.naturalWidth || img.width;
-        canvas.height = img.naturalHeight || img.height;
-        const ctx = canvas.getContext('2d');
-        if (!ctx) {
-          resolve(baseImageUrl);
-          return;
-        }
-
-        ctx.drawImage(img, 0, 0);
-        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const data = imgData.data;
-
-        // Eliminate isolated low-alpha noise and soften edge halos
-        for (let i = 0; i < data.length; i += 4) {
-          const a = data[i + 3];
-          if (a > 0 && a < threshold) {
-            data[i + 3] = 0;
-          }
-        }
-        ctx.putImageData(imgData, 0, 0);
-        resolve(canvas.toDataURL('image/png'));
-      };
-      img.onerror = () => resolve(baseImageUrl);
-      img.src = baseImageUrl;
-    });
-  }, []);
-
-  // Re-apply edge cleanup whenever edgeCleanLevel or rawResultUrl changes
   useEffect(() => {
-    if (!rawResultUrl) return;
+    if (!rawResultUrl || !sourceUrl) return;
     let isCancelled = false;
-    applyEdgeCleanup(rawResultUrl, edgeCleanLevel).then((cleanedUrl) => {
-      if (!isCancelled) {
+    refineCutout(sourceUrl, rawResultUrl, edgeCleanLevel)
+      .then((cleanedUrl) => {
+        if (isCancelled) return;
         setResultUrl(cleanedUrl);
-      }
-    });
+        setProgress(100);
+        setIsProcessing(false);
+      })
+      .catch(() => {
+        if (isCancelled) return;
+        setResultUrl(rawResultUrl);
+        setProgress(100);
+        setIsProcessing(false);
+      });
     return () => {
       isCancelled = true;
     };
-  }, [rawResultUrl, edgeCleanLevel, applyEdgeCleanup]);
+  }, [rawResultUrl, sourceUrl, edgeCleanLevel]);
 
   const processImageWithQuality = async (file: File, quality: ModelQuality) => {
     setIsProcessing(true);
@@ -154,9 +124,9 @@ export default function BackgroundRemover() {
         }
       });
       
-      setProgress(100);
-      setLoadingText('Finalizing transparent cutout...');
-      
+      setProgress(96);
+      setLoadingText('Recovering shoulders and garment edges...');
+
       const url = URL.createObjectURL(blob);
       setRawResultUrl(url);
       trackToolRun('background-remover');
@@ -172,7 +142,6 @@ export default function BackgroundRemover() {
       setSourceUrl(null);
       setRawResultUrl(null);
       setResultUrl(null);
-    } finally {
       setIsProcessing(false);
     }
   };
@@ -603,7 +572,7 @@ export default function BackgroundRemover() {
 
                     {/* Compact Defringe Slider */}
                     <div className="flex items-center gap-1.5 pl-2 border-l border-slate-300 dark:border-white/10">
-                      <span className="text-[10px] font-bold text-slate-400 hidden md:inline">Defringe:</span>
+                      <span className="text-[10px] font-bold text-slate-400 hidden md:inline">Halo:</span>
                       <input
                         type="range"
                         min="0"

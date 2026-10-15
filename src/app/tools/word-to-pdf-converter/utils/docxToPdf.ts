@@ -26,7 +26,7 @@ type ConvertOptions = {
 
 const CSS_PX_TO_PT = 72 / 96;
 const HOST_ID = 'toolwala-docx-pdf-host';
-const CAPTURE_SCALE = 1.5;
+const CAPTURE_SCALE = 2;
 
 const FONT_FALLBACK_CSS = `
 @font-face { font-family: 'Calibri'; src: local('Calibri'), local('Carlito'), local('Liberation Sans'), local('Arial'); }
@@ -48,9 +48,21 @@ const FONT_FALLBACK_CSS = `
 
 const HOST_RESET_CSS = `
 .toolwala-docx-pdf-host { color-scheme: light; }
-.toolwala-docx-pdf-host img { max-width: none !important; max-height: none !important; }
-.toolwala-docx-pdf-host section.docx { box-shadow: none !important; margin: 0 !important; }
+.toolwala-docx-pdf-host, .toolwala-docx-pdf-host * { box-sizing: border-box; }
+.toolwala-docx-pdf-host img { max-width: none !important; max-height: none !important; display: inline-block; }
+.toolwala-docx-pdf-host section.docx { box-shadow: none !important; margin: 0 0 24px !important; background: #fff !important; }
 .toolwala-docx-pdf-host .docx-wrapper { background: #ffffff !important; padding: 0 !important; gap: 0 !important; }
+.toolwala-docx-pdf-host table {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+}
+.toolwala-docx-pdf-host table.layout-table,
+.toolwala-docx-pdf-host table.layout-table td,
+.toolwala-docx-pdf-host table.layout-table th {
+  border: none !important;
+  border-width: 0 !important;
+  outline: none !important;
+}
 `;
 
 function collectPages(root: ParentNode): HTMLElement[] {
@@ -63,6 +75,95 @@ function collectPages(root: ParentNode): HTMLElement[] {
   if (wrapperPages.length > 0) return wrapperPages;
 
   return Array.from(root.querySelectorAll('.docx-wrapper > *')) as HTMLElement[];
+}
+
+function isOneColumnTable(table: HTMLTableElement): boolean {
+  if (table.rows.length === 0) return false;
+  return Array.from(table.rows).every((row) => row.cells.length <= 1);
+}
+
+function stripCellBorders(el: HTMLElement) {
+  el.style.border = 'none';
+  el.style.borderWidth = '0';
+  el.style.borderStyle = 'none';
+  el.style.outline = 'none';
+  el.style.boxShadow = 'none';
+}
+
+function neutralizeLayoutTables(root: ParentNode) {
+  const tables = Array.from(root.querySelectorAll('table')) as HTMLTableElement[];
+  for (const table of tables) {
+    table.style.borderCollapse = 'separate';
+    table.style.borderSpacing = '0';
+
+    if (!isOneColumnTable(table)) continue;
+
+    table.classList.add('layout-table');
+    stripCellBorders(table);
+    for (const cell of Array.from(table.querySelectorAll('td, th')) as HTMLElement[]) {
+      stripCellBorders(cell);
+    }
+  }
+}
+
+function pageTargetHeight(page: HTMLElement): number {
+  const style = getComputedStyle(page);
+  return parseFloat(style.minHeight) || parseFloat(style.height) || 0;
+}
+
+function paginateOverflowingPages(root: ParentNode) {
+  const pages = collectPages(root);
+  for (let i = 0; i < pages.length; i++) {
+    let page = pages[i];
+    const targetHeight = pageTargetHeight(page);
+    if (!targetHeight) continue;
+
+    page.style.height = `${targetHeight}px`;
+    page.style.minHeight = `${targetHeight}px`;
+    page.style.overflow = 'hidden';
+
+    let article = page.querySelector(':scope > article') as HTMLElement | null;
+    if (!article || article.childElementCount < 2) continue;
+
+    const header = page.querySelector(':scope > header') as HTMLElement | null;
+    const footer = page.querySelector(':scope > footer') as HTMLElement | null;
+    const reserved = (header?.offsetHeight || 0) + (footer?.offsetHeight || 0);
+    const available = Math.max(80, targetHeight - reserved - 8);
+
+    let guard = 0;
+    while (guard++ < 40) {
+      const kids = Array.from(article.children) as HTMLElement[];
+      if (kids.length < 2) break;
+
+      let splitAt = -1;
+      for (let k = 0; k < kids.length; k++) {
+        const bottom = kids[k].offsetTop + kids[k].offsetHeight;
+        if (bottom > available) {
+          splitAt = k === 0 ? 1 : k;
+          break;
+        }
+      }
+      if (splitAt < 0 || splitAt >= kids.length) break;
+
+      const overflow = kids.slice(splitAt);
+      const nextPage = page.cloneNode(true) as HTMLElement;
+      const nextArticle = nextPage.querySelector(':scope > article');
+      if (!nextArticle) break;
+
+      nextArticle.innerHTML = '';
+      for (const node of overflow) {
+        nextArticle.appendChild(node);
+      }
+
+      nextPage.style.height = `${targetHeight}px`;
+      nextPage.style.minHeight = `${targetHeight}px`;
+      nextPage.style.overflow = 'hidden';
+      page.after(nextPage);
+      pages.splice(i + 1, 0, nextPage);
+      page = nextPage;
+      article = nextArticle;
+    }
+  }
 }
 
 async function waitForResources(root: ParentNode & { defaultView?: Window | null }, doc: Document) {
@@ -86,7 +187,7 @@ async function waitForResources(root: ParentNode & { defaultView?: Window | null
     if (doc.fonts?.ready) {
       await Promise.race([
         doc.fonts.ready,
-        new Promise<void>((resolve) => setTimeout(resolve, 1500)),
+        new Promise<void>((resolve) => setTimeout(resolve, 3000)),
       ]);
     }
   } catch {
@@ -173,6 +274,8 @@ export async function convertDocxToPdf(
     });
 
     await waitForResources(host, document);
+    neutralizeLayoutTables(bodyMount);
+    paginateOverflowingPages(bodyMount);
 
     const pages = collectPages(bodyMount);
     if (pages.length === 0) {
@@ -208,6 +311,7 @@ export async function convertDocxToPdf(
           clonedEl.style.boxShadow = 'none';
           clonedEl.style.margin = '0';
           clonedEl.style.background = '#ffffff';
+          neutralizeLayoutTables(clonedEl);
         },
       });
 
@@ -222,7 +326,7 @@ export async function convertDocxToPdf(
         pdf.addPage([widthPt, heightPt], orientation);
       }
 
-      const imageData = canvas.toDataURL('image/jpeg', 0.88);
+      const imageData = canvas.toDataURL('image/jpeg', 0.95);
       pdf.addImage(imageData, 'JPEG', 0, 0, widthPt, heightPt, undefined, 'FAST');
       canvas.width = 0;
       canvas.height = 0;

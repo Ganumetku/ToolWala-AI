@@ -893,60 +893,100 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "merge-pdf": {
-    title: "Merge PDF",
-    layout: "fails-first",
-    intro: "You need at least two PDFs. One file will not start. There is no coded megabyte cap — a huge batch can freeze the tab. A password lock often fails at merge.",
-    whatHeading: "What gets joined",
-    howToHeading: "Stack PDFs in order",
-    useCasesHeading: "Packs people actually build",
-    whatItDoes: "Each file is opened in this tab and its pages are copied into a new PDF, in the order of the cards. You can drag a card or use the up/down arrows. Scanned pages merge the same as digital ones — they are just pages.\n\nProcessing happens locally in your browser. Files are not uploaded to any server.",
+    title: "How to Combine PDF Files in 4 Steps",
+    layout: "default",
+    intro: "Combine multiple PDF documents into one cleanly organized file right in your browser. Whether you need to join PDF files for official applications or merge PDF online for client submissions, ToolWala offers a fast, free PDF merger with no signups and zero server uploads.",
+    whatHeading: "What Happens When You Join PDF Files",
+    whatItDoes: "Each file opens directly in your active browser tab, where its pages are copied and stitched into a fresh document matching your exact card sequence. You can rearrange pages by dragging the cards or using the simple arrow controls. Scanned forms and digital vector files merge identically — keeping your fonts, signatures, and page orientation intact.\n\nNeed a detailed walkthrough with screenshots? Check out our [full guide to merge PDF files online](/blog/how-to-merge-pdf/) for helpful productivity tips.",
+    howToHeading: "Step-by-Step: How to Merge PDF Files",
+    howToUse: [
+      "Select or drag two or more PDF files into the upload box above.",
+      "Check the thumbnail cards to confirm your page counts and document sizes.",
+      "Drag the cards or click the up/down arrows to put your documents in the exact sequence you want.",
+      "Optionally enter a clean custom filename so official portals accept your upload without error.",
+      "Click 'Merge & Download'. Your compiled PDF downloads instantly straight from your browser."
+    ],
+    keyFeatures: [
+      { title: "Browser-Local Compilation", desc: "Files combine in your device's active memory without waiting in remote server queues." },
+      { title: "No Signups or Paywalls", desc: "Merge PDF files into one without entering email addresses or creating user accounts." },
+      { title: "Lossless Quality", desc: "Merge PDF without losing quality — every vector line, scan, and font stays sharp." },
+      { title: "Mobile & Desktop Ready", desc: "Merge PDF on mobile phones, tablets, or office laptops with zero app installs." }
+    ],
+    benefits: [
+      "Merge PDF online 100% in your browser without transmitting sensitive papers across external servers.",
+      "No account signup, email confirmation, or subscription paywalls to navigate.",
+      "Reorder document pages visually so certificates and schedules appear in the right order.",
+      "Combine scanned receipts, high-resolution tax forms, and digital PDFs with equal reliability.",
+      "Fully responsive controls make it easy to merge PDF on mobile phones while on the move."
+    ],
+    whyChoose: "Most online document converters make you upload private legal files to remote servers, queue in lines, and hit arbitrary daily paywalls. ToolWala's PDF merger works right inside your browser window using client-side WebAssembly. You get fast compilations, total data sovereignty, and a clean interface that respects your time and privacy.",
+    useCasesHeading: "Practical Packs People Actually Build",
+    useCases: [
+      "ITR-V + Form 16: Combine your income tax acknowledgement and salary statement into a single PDF for tax filing and visa applications.",
+      "College assignments & certificates: Join multiple project chapters, research notes, and lab reports into one clean submission pack.",
+      "Freelance invoices & timesheets: Merge your monthly service bill and work proof annexures for smooth client clearance.",
+      "HR & job onboarding: Join your signed offer letter, experience certificates, and previous salary slips into a single employment file."
+    ],
     uniqueSection: {
-      title: "When merge fails (read this before you retry)",
-      body: "I once dropped only Form 16 and stared at a disabled button. The tool wants two files. The other miss I see is a lock icon on the card — that file will throw at merge.",
+      title: "Troubleshooting: Tips for a Smooth PDF Merge",
+      body: "Merging PDFs in your browser is quick and secure, but a few document quirks can stall the process. Here is everything you need to keep your merge running smoothly:",
       bullets: [
-        "One PDF only: add a second file, or the merge will not run.",
-        "Password-protected or encrypted PDF: unlock it first. The toast says password or corrupt.",
-        "Card marked “Encrypted or unreadable”: remove that file or unlock it.",
-        "A 200 MB stack of scans: no hard reject, but the tab can stall. Split the batch."
+        "Minimum two files required: The merge action requires at least two documents. A single PDF cannot be merged with itself — use our Organize or Split tool if you only need page reordering.",
+        "Unlock password-protected files first: Encrypted or password-locked PDFs cannot be read by the in-browser compiler. Please remove the password using an unlock tool before dropping them here.",
+        "Large document batches: While there is no hard file count limit, merging exceptionally large stacks (like 200MB+ of raw scanner sheets) depends on your device's available memory. If the tab slows down, try merging in smaller batches."
       ]
     },
-    howToUse: [
-      "Drop two or more .pdf files. Other types are skipped.",
-      "Read size and page count on each card.",
-      "Drag cards or use the arrows so ITR-V sits after Form 16, not before.",
-      "Set a short filename if a portal hates spaces.",
-      "Merge. The download starts from this tab — there is no server queue."
-    ],
     specificationTable: [
-      { requirement: "Input", specification: ".pdf, two or more files" },
-      { requirement: "Output", specification: "One .pdf" },
-      { requirement: "Size cap", specification: "None in code — limited by tab RAM" },
-      { requirement: "Password PDF", specification: "Usually fails until unlocked" }
+      { requirement: "Supported input", specification: "PDF documents (.pdf), minimum 2 files" },
+      { requirement: "Output format", specification: "Single merged PDF document (.pdf)" },
+      { requirement: "Recommended volume", specification: "Up to 100+ pages based on device memory" },
+      { requirement: "Password documents", specification: "Unlock password protection before merging" },
+      { requirement: "Execution environment", specification: "100% in-browser WebAssembly memory" }
     ],
     limitations: [
-      "Minimum two files.",
-      "No hard MB limit, but a huge stack can freeze the browser.",
-      "Password PDFs should be unlocked first.",
-      "This is not JPG-to-PDF. Use JPG to PDF for photos."
-    ],
-    privacyNote: "Processing happens locally in your browser. Files are not uploaded to any server.",
-    privacyHeading: "Where the files are processed",
-    useCases: [
-      "ITR-V + Form 16 into one upload for the income-tax e-filing site.",
-      "College assignment chapters that the portal wants as a single PDF.",
-      "Freelance invoice + annexure the client asked to receive together.",
-      "Offer letter + salary annexure for a Naukri / HR mail."
+      "Requires at least two PDF files to start the merge.",
+      "Password-protected files must be unlocked prior to joining.",
+      "Very large batches of uncompressed scans can briefly slow down low-memory mobile browsers."
     ],
     faqs: [
-      { question: "Why won’t one PDF merge?", answer: "The button needs at least two files. Add the second PDF." },
-      { question: "Is there a file size limit?", answer: "No number is coded. The limit is whatever this tab can hold in memory. A very large stack can freeze." },
-      { question: "Can I merge a password PDF?", answer: "Usually no. Unlock it first, then drop it here." },
-      { question: "Are the PDFs uploaded?", answer: "No. Pages are copied in this browser tab." }
+      {
+        question: "Is this PDF merger completely free to use?",
+        answer: "Yes, merging PDFs on ToolWala is 100% free with no hidden charges, daily caps, or watermarks added to your output."
+      },
+      {
+        question: "Can I merge PDF files on mobile?",
+        answer: "Yes. The tool runs directly inside Chrome, Safari, and other mobile browsers on Android and iOS devices without requiring app installations."
+      },
+      {
+        question: "Will merging reduce the quality of my text or images?",
+        answer: "No. Pages are merged lossless at their original DPI and vector resolution, ensuring certificates, scans, and text stay crisp."
+      },
+      {
+        question: "How many PDF files can I combine at once?",
+        answer: "You can combine multiple PDFs in a single session. For optimal performance on standard laptops and mobile phones, batches of 2 to 20 files work smoothest."
+      },
+      {
+        question: "Why do I need at least two PDFs to merge?",
+        answer: "A merge operation combines two or more individual documents into a single file. If you only need to reorder or remove pages from one document, use our Organize PDF or Split PDF utilities instead."
+      },
+      {
+        question: "Can I combine password-protected PDF files?",
+        answer: "No. Encrypted PDFs cannot be read in local browser memory without authentication. You should unlock the file first, then add it to your merge queue."
+      },
+      {
+        question: "Are my sensitive documents uploaded to any server?",
+        answer: "No. All page copying and document building happen strictly inside your browser sandbox. Your files never touch external servers or cloud storage."
+      },
+      {
+        question: "PDF merge kaise kare? (How to combine files online)",
+        answer: "PDF merge karne ke liye upar 'Select PDF files' par click karke 2 ya zyada files chunein, cards ko sahi kram (order) mein lagayein, aur 'Merge & Download' button dabayein. Nayi combined PDF turant aapke phone ya computer mein download ho jayegi."
+      }
     ],
     relatedTools: [
-      { name: "Split PDF", href: "/tools/split-pdf" },
-      { name: "Compress PDF", href: "/tools/compress-pdf" },
-      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" }
+      { name: "Split PDF", href: "/tools/split-pdf/" },
+      { name: "Compress PDF", href: "/tools/compress-pdf/" },
+      { name: "Organize PDF", href: "/tools/organize-pdf/" },
+      { name: "PDF to Word", href: "/tools/pdf-to-word-converter/" }
     ]
   },
   "split-pdf": {

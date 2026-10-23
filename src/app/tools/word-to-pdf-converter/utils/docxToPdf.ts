@@ -132,6 +132,7 @@ function paginateOverflowingPages(root: ParentNode) {
 
     let guard = 0;
     while (guard++ < 40) {
+      if (!article) break;
       const kids = Array.from(article.children) as HTMLElement[];
       if (kids.length < 2) break;
 
@@ -147,7 +148,7 @@ function paginateOverflowingPages(root: ParentNode) {
 
       const overflow = kids.slice(splitAt);
       const nextPage = page.cloneNode(true) as HTMLElement;
-      const nextArticle = nextPage.querySelector(':scope > article');
+      const nextArticle = nextPage.querySelector(':scope > article') as HTMLElement | null;
       if (!nextArticle) break;
 
       nextArticle.innerHTML = '';

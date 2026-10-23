@@ -213,17 +213,6 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: titleObj,
     description: descriptionStr,
-    keywords: [
-      "AI tools",
-      "image tools",
-      "PDF tools",
-      "QR generator",
-      "AI resume builder",
-      "AI caption generator",
-      "image compressor",
-      "background remover",
-      "ToolWala AI"
-    ],
     applicationName: "Toolwala.co",
     authors: [{ name: "ToolWala AI" }],
     creator: "ToolWala AI",

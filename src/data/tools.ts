@@ -353,9 +353,9 @@ export const toolsData: Tool[] = [
   {
     id: "merge-pdf",
     title: "Merge PDF",
-    description: "Combine multiple PDF documents into a single organized PDF file securely.",
+    description: "Merge PDF files online for free. Combine 2 or more PDFs into one in your browser. No upload, no signup. Reorder pages and download instantly.",
     icon: "Merge",
-    href: "/tools/merge-pdf",
+    href: "/tools/merge-pdf/",
     slug: "merge-pdf",
     category: "PDF Tools",
     featured: true,
@@ -365,7 +365,7 @@ export const toolsData: Tool[] = [
     status: 'published',
     isVisible: true,
     createdAt: '2024-01-01T00:00:00Z',
-    updatedAt: '2024-01-01T00:00:00Z'
+    updatedAt: '2026-03-24T00:00:00Z'
   },
   {
     id: "split-pdf",

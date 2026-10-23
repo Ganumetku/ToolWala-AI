@@ -4,9 +4,9 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'merge-pdf',
-    'Merge PDF – Join 2+ Files in the Browser',
-    'Join two or more PDFs in this tab. No coded MB cap. Password files often fail. Files are not uploaded.',
-    '/tools/merge-pdf'
+    'Merge PDF Online Free – Combine PDF Files in Browser | ToolWala',
+    'Merge PDF files online for free. Combine 2 or more PDFs into one in your browser. No upload, no signup. Reorder pages and download instantly.',
+    '/tools/merge-pdf/'
   );
 }
 

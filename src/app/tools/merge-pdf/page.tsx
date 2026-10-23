@@ -199,8 +199,8 @@ export default function MergePdf() {
         
         {/* Header Banner */}
         <ToolHero 
-          title="Merge PDF"
-          description="Needs two or more PDFs. No coded MB cap. Password files often fail."
+          title="Merge PDF Online – Free & Private"
+          description="Merge PDF files online for free. Combine 2 or more PDFs into one in your browser. No upload, no signup."
           icon={<Files className="w-7 h-7" />}
         />
 
@@ -239,13 +239,38 @@ export default function MergePdf() {
 
           {/* Layout Split */}
           {files.length === 0 ? (
-            <UploadZone
-              onFilesSelected={handleFiles}
-              accept="application/pdf"
-              multiple={true}
-              title="Select PDF files to Merge"
-              description="Drag and drop PDF files here, or click to browse. Processing is fully secured inside your browser."
-            />
+            <div className="space-y-8">
+              <UploadZone
+                onFilesSelected={handleFiles}
+                accept="application/pdf"
+                multiple={true}
+                title="Select PDF files to Merge"
+                description="Drag and drop PDF files here, or click to browse. Processing is fully secured inside your browser."
+              />
+
+              {/* Tool Demo Preview Visual & Freshness Badge */}
+              <div className="rounded-2xl border border-slate-200/80 dark:border-white/5 bg-slate-50/70 dark:bg-white/[0.01] p-4 sm:p-6 text-center max-w-3xl mx-auto shadow-sm">
+                <div className="flex items-center justify-between gap-2 mb-3 px-2">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-400">
+                    Interactive PDF Reorder Workspace
+                  </span>
+                  <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-500/20">
+                    Updated: March 2026
+                  </span>
+                </div>
+                <img
+                  src="/merge-pdf-demo.jpg"
+                  alt="Merge PDF tool showing two PDF files being reordered"
+                  className="mx-auto rounded-xl shadow-md border border-slate-200/70 dark:border-white/10 max-w-full h-auto"
+                  width={720}
+                  height={405}
+                  loading="lazy"
+                />
+                <p className="text-[11px] text-slate-500 dark:text-gray-400 font-medium mt-3 leading-relaxed">
+                  Arrange documents with drag-and-drop handles or arrow buttons before merging into a single download.
+                </p>
+              </div>
+            </div>
           ) : (
             
             /* Editor Workspace */

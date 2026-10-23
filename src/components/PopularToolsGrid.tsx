@@ -23,7 +23,7 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
     title: "Merge PDF Files",
     description: "Combine multiple PDF documents into a single organized PDF file instantly in your browser.",
     icon: "Merge",
-    href: "/tools/merge-pdf",
+    href: "/tools/merge-pdf/",
     category: "PDF Tools",
     badge: "Top Pick"
   },
@@ -32,7 +32,7 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
     title: "Split PDF",
     description: "Extract specific pages or split large PDF files into separate individual documents.",
     icon: "SplitSquareHorizontal",
-    href: "/tools/split-pdf",
+    href: "/tools/split-pdf/",
     category: "PDF Tools"
   },
   {
@@ -40,7 +40,7 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
     title: "Edit & Organize PDF",
     description: "Reorder pages, rotate canvas, split sections, and clean PDF documents online for free.",
     icon: "FilePenLine",
-    href: "/tools/organize-pdf",
+    href: "/tools/organize-pdf/",
     category: "PDF Tools",
   },
   {
@@ -48,7 +48,7 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
     title: "PDF to Word Converter",
     description: "Convert PDF files into editable Microsoft Word (.docx) documents with layout accuracy.",
     icon: "FileText",
-    href: "/tools/pdf-to-word-converter",
+    href: "/tools/pdf-to-word-converter/",
     category: "PDF Tools",
   },
   {
@@ -56,7 +56,7 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
     title: "Image Compressor",
     description: "Compress JPG, PNG, and WebP images up to 90% without visible quality loss.",
     icon: "ImageDown",
-    href: "/tools/image-compressor",
+    href: "/tools/image-compressor/",
     category: "Image Tools",
     badge: "Top Pick"
   },
@@ -65,7 +65,7 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
     title: "JPG to PDF Converter",
     description: "Convert JPG, PNG, and WebP images into a clean PDF document with custom margins.",
     icon: "Image",
-    href: "/tools/jpg-to-pdf",
+    href: "/tools/jpg-to-pdf/",
     category: "PDF Tools"
   },
   {
@@ -73,7 +73,7 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
     title: "Passport Photo Maker",
     description: "Create official passport photos for any country with AI background cleaning and exact sizing.",
     icon: "IdCard",
-    href: "/tools/passport-photo-maker",
+    href: "/tools/passport-photo-maker/",
     category: "Image Tools",
     badge: "Top Pick"
   },
@@ -82,7 +82,7 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
     title: "AI Background Remover",
     description: "Remove image backgrounds instantly in your browser using high-precision local AI.",
     icon: "Wand2",
-    href: "/tools/bg-remover",
+    href: "/tools/bg-remover/",
     category: "Image Tools",
   }
 ];
@@ -110,7 +110,7 @@ export default function PopularToolsGrid() {
           </div>
 
           <Link 
-            href={localizeHref('/tools')}
+            href={localizeHref('/tools/')}
             className="inline-flex items-center gap-2 px-5 py-3 border border-gray-200 dark:border-white/10 hover:border-blue-500/40 bg-white dark:bg-white/[0.02] hover:bg-gray-50 dark:hover:bg-white/[0.05] text-[10px] font-black uppercase tracking-widest text-gray-800 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all active:scale-95 shadow-sm"
           >
             <span>{t('tools.explore_all', 'Explore All 60+ Tools')}</span>

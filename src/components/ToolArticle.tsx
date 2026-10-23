@@ -5,9 +5,8 @@ import { ChevronDown, Sparkles, CheckCircle2, HelpCircle, ArrowRight } from 'luc
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import ShareButtons from './ShareButtons';
-import { toolsData, ToolCategory } from '@/data/tools';
+import { toolsData } from '@/data/tools';
 import ToolIcon from '@/components/ToolIcon';
-import ToolCard from '@/components/ToolCard';
 import { useTranslation } from '@/components/I18nContext';
 import { getTranslation } from '@/lib/i18n';
 import Breadcrumbs from './Breadcrumbs';
@@ -143,68 +142,6 @@ export default function ToolArticle({
     );
   }, [currentTool]);
 
-  // Resolve related tools dynamically from toolsData matching name/href to full Tool objects
-  const resolvedRelatedTools = useMemo(() => {
-    const rawList = relatedTools && relatedTools.length > 0 ? relatedTools : [];
-    
-    if (rawList.length === 0) {
-      if (!currentTool) {
-        return toolsData.filter(t => t.popular && t.isVisible).slice(0, 6);
-      }
-
-      const sameCategoryTools = toolsData.filter(t => 
-        t.category === currentTool.category && 
-        t.isVisible && 
-        t.id !== currentTool.id
-      );
-
-      let related = [...sameCategoryTools];
-      if (related.length < 6) {
-        const popularTools = toolsData.filter(t => 
-          t.popular && 
-          t.isVisible && 
-          t.id !== currentTool.id &&
-          !sameCategoryTools.some(st => st.id === t.id)
-        );
-        related = [...related, ...popularTools];
-      }
-      return related.slice(0, 6);
-    }
-
-    // Map given relatedTools (e.g. { name: "WebP to JPG", href: "/tools/webp-to-jpg-png-converter" }) to full tool objects
-    return rawList.map(rt => {
-      const hrefClean = rt.href.toLowerCase().replace(/\/$/, '');
-      const slugFromHref = hrefClean.replace(/^\/tools\//, '');
-
-      const matched = toolsData.find(t => 
-        t.href.toLowerCase().replace(/\/$/, '') === hrefClean ||
-        t.slug.toLowerCase() === slugFromHref ||
-        t.id.toLowerCase() === slugFromHref ||
-        t.title.toLowerCase().includes(rt.name.toLowerCase()) ||
-        rt.name.toLowerCase().includes(t.title.toLowerCase())
-      );
-
-      if (matched) return matched;
-
-      return {
-        id: slugFromHref || 'tool',
-        title: rt.name,
-        description: 'Fast, secure online tool for your daily workflow.',
-        icon: '⚡',
-        href: rt.href,
-        slug: slugFromHref,
-        category: (currentTool?.category || 'Image Tools') as ToolCategory,
-        featured: false,
-        trending: false,
-        popular: true,
-        tags: [],
-        status: 'published' as const,
-        isVisible: true,
-        createdAt: '',
-        updatedAt: ''
-      };
-    });
-  }, [currentTool, relatedTools]);
 
   const relevantBlogs = useMemo(() => {
     if (!currentTool) return [];
@@ -227,14 +164,16 @@ export default function ToolArticle({
     '@type': 'SoftwareApplication',
     'name': translatedTitle,
     'description': translatedIntro || translatedWhatItDoes,
-    'applicationCategory': 'BusinessApplication',
-    'operatingSystem': 'All',
+    'applicationCategory': 'UtilitiesApplication',
+    'operatingSystem': 'Any',
+    'url': currentTool ? (currentTool.href.startsWith('http') ? currentTool.href : `https://toolwala.co${currentTool.href.endsWith('/') ? currentTool.href : currentTool.href + '/'}`) : 'https://toolwala.co/tools/merge-pdf/',
+    'dateModified': currentTool?.updatedAt || '2026-03-24T00:00:00Z',
     'offers': {
       '@type': 'Offer',
       'price': '0',
       'priceCurrency': 'USD'
     }
-  }), [translatedTitle, translatedIntro, translatedWhatItDoes]);
+  }), [translatedTitle, translatedIntro, translatedWhatItDoes, currentTool]);
 
   const howToSchema = useMemo(() => (translatedHowToUse && translatedHowToUse.length > 0 ? {
     '@context': 'https://schema.org',
@@ -244,6 +183,7 @@ export default function ToolArticle({
     'step': translatedHowToUse.map((step, idx) => ({
       '@type': 'HowToStep',
       'position': idx + 1,
+      'name': `Step ${idx + 1}`,
       'text': step
     }))
   } : null), [translatedTitle, translatedIntro, translatedHowToUse]);
@@ -263,18 +203,29 @@ export default function ToolArticle({
 
   const breadcrumbItems = useMemo(() => {
     const items: { label: string; href?: string }[] = [
-      { label: t('nav.home', 'Home'), href: locale === 'en' ? '/' : `/${locale}` },
-      { label: t('nav.tools', 'Tools'), href: locale === 'en' ? '/tools' : `/${locale}/tools` }
+      { label: t('nav.home', 'Home'), href: locale === 'en' ? '/' : `/${locale}/` },
+      { label: t('nav.tools', 'Tools'), href: locale === 'en' ? '/tools/' : `/${locale}/tools/` }
     ];
     if (parentCategory) {
       items.push({
         label: t(`categories.${parentCategory.title}`, parentCategory.title),
-        href: locale === 'en' ? `/categories/${parentCategory.slug}` : `/${locale}/categories/${parentCategory.slug}`
+        href: locale === 'en' ? `/categories/${parentCategory.slug}/` : `/${locale}/categories/${parentCategory.slug}/`
       });
     }
     items.push({ label: translatedTitle });
     return items;
   }, [t, translatedTitle, parentCategory, locale]);
+
+  const breadcrumbSchema = useMemo(() => ({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': breadcrumbItems.map((item, idx) => ({
+      '@type': 'ListItem',
+      'position': idx + 1,
+      'name': item.label,
+      'item': item.href ? (item.href.startsWith('http') ? item.href : `https://toolwala.co${item.href.endsWith('/') ? item.href : item.href + '/'}`) : undefined
+    }))
+  }), [breadcrumbItems]);
 
   const numbered = layout === 'default';
 
@@ -285,6 +236,12 @@ export default function ToolArticle({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppSchema) }}
+        />
+      )}
+      {breadcrumbSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
       )}
       {howToSchema && (
@@ -572,22 +529,24 @@ export default function ToolArticle({
                 </div>
               )}
 
-              {/* Privacy Trust Section: Files Never Leave Your Device */}
-              <div style={{ order: 9 }} className="p-8 sm:p-10 rounded-[1.125rem] bg-slate-900 dark:bg-white/[0.02] text-white border border-slate-800 dark:border-white/10 shadow-xl relative overflow-hidden">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-2xl flex-shrink-0">
-                    🔒
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="text-lg sm:text-xl font-black tracking-tight text-white">
-                      {privacyHeading || 'Files never leave your device'}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-300 dark:text-gray-300 leading-relaxed font-sans font-medium">
-                      {privacyNote || 'This tool runs in your browser tab. The file you drop is read in local memory and is not uploaded to ToolWala servers.'}
-                    </p>
+              {/* Privacy Trust Section: Shown only if tool-specific note provided */}
+              {(privacyHeading || privacyNote) && (
+                <div style={{ order: 9 }} className="p-8 sm:p-10 rounded-[1.125rem] bg-slate-900 dark:bg-white/[0.02] text-white border border-slate-800 dark:border-white/10 shadow-xl relative overflow-hidden">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-2xl flex-shrink-0">
+                      🔒
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="text-lg sm:text-xl font-black tracking-tight text-white">
+                        {privacyHeading || 'Files never leave your device'}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-slate-300 dark:text-gray-300 leading-relaxed font-sans font-medium">
+                        {privacyNote}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {/* Why ToolWala */}
               {translatedWhyChoose && translatedWhyChoose.trim().length > 0 && (
@@ -676,31 +635,7 @@ export default function ToolArticle({
                 </div>
               )}
 
-              {/* Recommended Utilities Section */}
-              {resolvedRelatedTools.length > 0 && (
-                <div style={{ order: 21 }} className="pt-16 border-t border-[#E6ECF5] dark:border-white/10">
-                  <div className="text-center mb-10">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-3">
-                      <Sparkles className="w-3.5 h-3.5" />
-                      {t('article.recommendedUtilities', 'Recommended Utilities')}
-                    </div>
-                    <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">
-                      More Productivity Tools
-                    </h3>
-                  </div>
 
-                  <div className="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                    {resolvedRelatedTools.map((tool, i) => (
-                      <ToolCard
-                        key={tool.id || tool.slug || i}
-                        {...tool}
-                        isPopular={tool.popular}
-                        isTrending={tool.trending}
-                      />
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </motion.div>
@@ -719,31 +654,29 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
         : 'bg-white dark:bg-white/[0.01] border-[#E6ECF5] dark:border-white/5 shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:-translate-y-0.5'
     }`}>
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
         className="w-full p-6 flex items-center justify-between text-left hover:bg-slate-50/50 dark:hover:bg-white/[0.01] transition-colors cursor-pointer"
       >
         <span className={`text-base font-black tracking-tight pr-6 transition-colors ${isOpen ? 'text-blue-600 dark:text-blue-400' : 'text-slate-900 dark:text-white'}`}>{question}</span>
-        <div className={`w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-300 ${isOpen ? 'bg-blue-600 border-blue-600 text-white' : 'bg-blue-50 dark:bg-white/5 border-blue-100 dark:border-white/10 text-blue-600 dark:text-gray-500'}`}>
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-300 shrink-0 ${isOpen ? 'bg-blue-600 border-blue-600 text-white' : 'bg-blue-50 dark:bg-white/5 border-blue-100 dark:border-white/10 text-blue-600 dark:text-gray-500'}`}>
           <ChevronDown 
             className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
           />
         </div>
       </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
-          >
-            <div className="px-6 pb-6 text-slate-600 dark:text-gray-400 font-medium leading-relaxed text-sm font-sans">
-              <div className="h-px w-8 bg-blue-500/20 mb-4" />
-              {answer}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Permanent DOM inclusion for SEO crawlers with smooth transition */}
+      <div 
+        className={`px-6 transition-all duration-300 ease-in-out ${
+          isOpen ? 'max-h-[600px] pb-6 opacity-100 visible' : 'max-h-0 pb-0 opacity-0 overflow-hidden'
+        }`}
+      >
+        <div className="h-px w-8 bg-blue-500/20 mb-4" />
+        <div className="text-slate-600 dark:text-gray-400 font-medium leading-relaxed text-sm font-sans">
+          {answer}
+        </div>
+      </div>
     </div>
   );
 }

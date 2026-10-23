@@ -100,13 +100,9 @@ export async function proxy(request: NextRequest) {
   if (rewrittenPathname.startsWith('/tools/')) {
     const parts = rewrittenPathname.split('/').filter(Boolean);
     if (parts.length >= 3 && CATEGORY_SLUGS.includes(parts[1])) {
-      if (parts[1] === 'pdf-tools' && parts[2] === 'edit-pdf') {
-        // Valid route, do not redirect
-      } else {
-        const toolSlug = parts[2];
-        const targetPath = isLocalePrefix ? `/${locale}/tools/${toolSlug}/` : `/tools/${toolSlug}/`;
-        return NextResponse.redirect(new URL(targetPath + request.nextUrl.search, request.url), { status: 301 });
-      }
+      const toolSlug = parts[2];
+      const targetPath = isLocalePrefix ? `/${locale}/tools/${toolSlug}/` : `/tools/${toolSlug}/`;
+      return NextResponse.redirect(new URL(targetPath + request.nextUrl.search, request.url), { status: 301 });
     }
   }
 

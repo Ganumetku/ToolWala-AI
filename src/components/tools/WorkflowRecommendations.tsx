@@ -4,9 +4,8 @@ import Link from 'next/link';
 import { useTranslation } from '@/components/I18nContext';
 import { toolsData, type Tool } from '@/data/tools';
 import { getWorkflowRecommendations } from '@/data/workflow_recommendations';
-import { Zap, TrendingUp, Workflow, ArrowRight, CheckCircle2 } from 'lucide-react';
-import ToolIcon, { getCategoryStyle } from '@/components/ToolIcon';
-import ToolCard from '@/components/ToolCard';
+import { Zap, Workflow, CheckCircle2 } from 'lucide-react';
+import ToolIcon from '@/components/ToolIcon';
 
 interface WorkflowRecommendationsProps {
   slug: string;
@@ -26,20 +25,12 @@ export default function WorkflowRecommendations({ slug }: WorkflowRecommendation
     return toolsData.find((t) => t.slug === toolSlug);
   };
 
-  const nextTools = recommendations.nextRecommended
-    .map(getToolDetails)
-    .filter((t): t is Tool => !!t);
-
-  const togetherTools = recommendations.mostUsedTogether
-    .map(getToolDetails)
-    .filter((t): t is Tool => !!t);
-
   const workflowSteps = recommendations.workflow;
 
   // Find active step index in workflow
   const activeStepIndex = workflowSteps.findIndex((step) => step.slug === slug);
 
-  if (nextTools.length === 0 && togetherTools.length === 0 && workflowSteps.length === 0) {
+  if (workflowSteps.length === 0) {
     return null; // Don't render empty widget
   }
 
@@ -154,66 +145,7 @@ export default function WorkflowRecommendations({ slug }: WorkflowRecommendation
           </div>
         </div>
       )}
-
-      {/* Grid for Next Recommended & Most Used Together */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* 2. Next Recommended Tools (2/3 width on large screens) */}
-        {nextTools.length > 0 && (
-          <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-xs font-black uppercase tracking-[0.2em] text-gray-500 flex items-center gap-2 px-1">
-              <Zap className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-              {t('growth.next_recommended', 'Next Recommended Actions')}
-            </h4>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-              {nextTools.map((tool) => (
-                <ToolCard
-                  key={tool.id || tool.slug}
-                  {...tool}
-                  isPopular={tool.popular}
-                  isTrending={tool.trending}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* 3. Most Used Together (1/3 width on large screens) */}
-        {togetherTools.length > 0 && (
-          <div className="space-y-4">
-            <h4 className="text-xs font-black uppercase tracking-[0.2em] text-gray-500 flex items-center gap-2 px-1">
-              <TrendingUp className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
-              {t('growth.most_used_together', 'Frequently Used Together')}
-            </h4>
-
-            <div className="bg-white dark:glass p-6 rounded-[2rem] border border-gray-200 dark:border-white/5 space-y-4 shadow-sm">
-              {togetherTools.map((tool) => {
-                const title = t(`tools.${tool.slug}.title`, tool.title);
-                const linkHref = localizeHref(tool.href);
-                const catStyle = getCategoryStyle(tool.category);
-
-                return (
-                  <Link 
-                    key={tool.slug} 
-                    href={linkHref}
-                    className="flex items-center justify-between p-3.5 rounded-xl border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#0b0f19]/40 hover:border-indigo-500/30 transition-all group cursor-pointer"
-                  >
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div className={`flex h-9 w-9 items-center justify-center rounded-lg ${catStyle.bg} ${catStyle.text} border ${catStyle.border}`}>
-                        <ToolIcon icon={tool.icon} className="w-4.5 h-4.5" strokeWidth={1.75} />
-                      </div>
-                      <span className="text-xs font-black text-gray-900 dark:text-white truncate group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors uppercase tracking-tight">
-                        {title}
-                      </span>
-                    </div>
-                    <ArrowRight className="w-3.5 h-3.5 text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white group-hover:translate-x-0.5 transition-all flex-shrink-0" />
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        )}
-      </div>
     </div>
   );
 }
+

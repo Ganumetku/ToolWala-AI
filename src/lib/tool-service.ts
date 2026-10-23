@@ -18,12 +18,14 @@ export function resolveEffectiveStatus(row: DbTool): Tool['status'] {
 }
 
 export function dbToTool(row: DbTool): Tool {
+  const rawHref = row.href || `/tools/${row.slug}`;
+  const href = rawHref.endsWith('/') ? rawHref : `${rawHref}/`;
   return {
     id: row.slug,
     title: row.name,
     description: row.description,
     icon: row.icon || '🔧',
-    href: row.href || `/tools/${row.slug}`,
+    href,
     slug: row.slug,
     category: row.category as Tool['category'],
     featured: row.featured,
@@ -42,6 +44,8 @@ export function toolToDbRow(
   tool: Partial<Tool> & { slug: string; title?: string; name?: string }
 ): Record<string, unknown> {
   const now = new Date().toISOString();
+  const rawHref = tool.href ?? `/tools/${tool.slug}`;
+  const href = rawHref.endsWith('/') ? rawHref : `${rawHref}/`;
   return {
     name: tool.title || tool.name || tool.slug,
     slug: tool.slug,
@@ -54,7 +58,7 @@ export function toolToDbRow(
     trending: tool.trending ?? false,
     publish_date: tool.publishDate ?? null,
     icon: tool.icon ?? '🔧',
-    href: tool.href ?? `/tools/${tool.slug}`,
+    href,
     tags: tool.tags ?? [],
     updated_at: now,
   };

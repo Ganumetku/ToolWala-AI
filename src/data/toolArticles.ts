@@ -175,9 +175,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { question: "Does this Base64 tool support emojis and non-English text (UTF-8)?", answer: "Yes! Unlike traditional web tools that throw 'InvalidCharacterError' on characters outside the Latin1 range, ToolWala AI uses a UTF-8 safe TextEncoder/TextDecoder wrapper, correctly preserving Hindi, Arabic, Japanese, accents, and emojis." }
     ],
     relatedTools: [
-      { name: "JSON Formatter & Validator", href: "/tools/json-formatter-validator" },
-      { name: "Password Generator", href: "/tools/password-generator" },
-      { name: "QR Code Generator", href: "/tools/qr-code-generator" }
+      { name: "JSON Formatter & Validator", href: "/tools/json-formatter-validator/" },
+      { name: "Password Generator", href: "/tools/password-generator/" },
+      { name: "QR Code Generator", href: "/tools/qr-code-generator/" }
     ]
   },
   "heic-to-jpg-png-converter": {
@@ -292,9 +292,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "A good brand starts with a solid idea, not a massive design budget. Play around with a few styles, pick the one that feels right, and go build your business.",
     relatedTools: [
-      { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "QR Code Generator", href: "/tools/qr-code-generator" },
-      { name: "AI Image Upscaler", href: "/tools/ai-image-upscaler" }
+      { name: "Image Compressor", href: "/tools/image-compressor/" },
+      { name: "QR Code Generator", href: "/tools/qr-code-generator/" },
+      { name: "AI Image Upscaler", href: "/tools/ai-image-upscaler/" }
     ]
   },
   "bg-remover": {
@@ -332,9 +332,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Clean cutouts without the privacy headaches or expensive monthly software. Drop an image in, grab your transparent PNG, and get back to your day.",
     relatedTools: [
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-      { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "AI Image Upscaler", href: "/tools/ai-image-upscaler" }
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker/" },
+      { name: "Image Compressor", href: "/tools/image-compressor/" },
+      { name: "AI Image Upscaler", href: "/tools/ai-image-upscaler/" }
     ]
   },
   "qr-code-generator": {
@@ -375,9 +375,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Ready to connect with your audience in the physical world? Create your first branded QR code now and see how much difference a professional design makes.",
     relatedTools: [
-      { name: "AI Logo Maker", href: "/tools/ai-logo-maker" },
-      { name: "Invoice Generator", href: "/tools/invoice-generator" },
-      { name: "Password Generator", href: "/tools/password-generator" }
+      { name: "AI Logo Maker", href: "/tools/ai-logo-maker/" },
+      { name: "Invoice Generator", href: "/tools/invoice-generator/" },
+      { name: "Password Generator", href: "/tools/password-generator/" }
     ]
   },
   "image-compressor": {
@@ -415,12 +415,12 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Don't let giant images bog down your site or fail your upload forms. Trim the fat in seconds and keep things moving.",
     relatedTools: [
-      { name: "Background Remover", href: "/tools/bg-remover" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-      { name: "AI Image Upscaler", href: "/tools/ai-image-upscaler" },
-      { name: "JPG to WebP", href: "/tools/jpg-to-webp" },
-      { name: "PNG to WebP", href: "/tools/png-to-webp" },
-      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" }
+      { name: "Background Remover", href: "/tools/bg-remover/" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker/" },
+      { name: "AI Image Upscaler", href: "/tools/ai-image-upscaler/" },
+      { name: "JPG to WebP", href: "/tools/jpg-to-webp/" },
+      { name: "PNG to WebP", href: "/tools/png-to-webp/" },
+      { name: "JPG to PDF", href: "/tools/jpg-to-pdf/" }
     ]
   },
   "passport-photo-maker": {
@@ -461,11 +461,11 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Professional documentation shouldn't be expensive or complicated. Take control of your next passport photo and get it right the first time with our AI-powered maker.",
     relatedTools: [
-      { name: "Background Remover", href: "/tools/bg-remover" },
-      { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "Exam Photo Resizer", href: "/tools/exam-photo-resizer" },
-      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" },
-      { name: "JPG to WebP", href: "/tools/jpg-to-webp" }
+      { name: "Background Remover", href: "/tools/bg-remover/" },
+      { name: "Image Compressor", href: "/tools/image-compressor/" },
+      { name: "Exam Photo Resizer", href: "/tools/exam-photo-resizer/" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" },
+      { name: "JPG to WebP", href: "/tools/jpg-to-webp/" }
     ]
   },
   "pdf-tools": {
@@ -506,9 +506,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Stop struggling with clunky PDF editors. Experience the power of professional document management combined with total privacy. Try our PDF tools today.",
     relatedTools: [
-      { name: "Invoice Generator", href: "/tools/invoice-generator" },
-      { name: "AI Resume Builder", href: "/tools/resume-builder" },
-      { name: "Merge PDF", href: "/tools/merge-pdf" }
+      { name: "Invoice Generator", href: "/tools/invoice-generator/" },
+      { name: "AI Resume Builder", href: "/tools/resume-builder/" },
+      { name: "Merge PDF", href: "/tools/merge-pdf/" }
     ]
   },
   "resume-builder": {
@@ -549,9 +549,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Your next big career move starts with a great first impression. Build a resume you're proud of today and take the first step toward your new role.",
     relatedTools: [
-      { name: "AI Cover Letter Generator", href: "/tools/cover-letter-generator" },
-      { name: "AI Text Humanizer", href: "/tools/text-humanizer" },
-      { name: "ATS Resume Checker", href: "/tools/ats-resume-checker" }
+      { name: "AI Cover Letter Generator", href: "/tools/cover-letter-generator/" },
+      { name: "AI Text Humanizer", href: "/tools/text-humanizer/" },
+      { name: "ATS Resume Checker", href: "/tools/ats-resume-checker/" }
     ]
   },
   "ats-resume-checker": {
@@ -592,9 +592,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Don't let a bad parser stand between you and your dream job. Run your resume through our local ATS auditor, apply the suggestions, and submit your application with complete confidence.",
     relatedTools: [
-      { name: "AI Resume Builder", href: "/tools/resume-builder" },
-      { name: "AI Cover Letter Generator", href: "/tools/cover-letter-generator" },
-      { name: "Resume Bullet Generator", href: "/tools/resume-bullet-generator" }
+      { name: "AI Resume Builder", href: "/tools/resume-builder/" },
+      { name: "AI Cover Letter Generator", href: "/tools/cover-letter-generator/" },
+      { name: "Resume Bullet Generator", href: "/tools/resume-bullet-generator/" }
     ]
   },
   "caption-generator": {
@@ -630,9 +630,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Don't let a blank caption box stall your content schedule. Grab a quick draft, give it your personal spin, and hit publish.",
     relatedTools: [
-      { name: "AI Image Describer", href: "/tools/ai-image-describer" },
-      { name: "AI Text Humanizer", href: "/tools/text-humanizer" },
-      { name: "AI Resume Builder", href: "/tools/resume-builder" }
+      { name: "AI Image Describer", href: "/tools/ai-image-describer/" },
+      { name: "AI Text Humanizer", href: "/tools/text-humanizer/" },
+      { name: "AI Resume Builder", href: "/tools/resume-builder/" }
     ]
   },
   "ai-image-describer": {
@@ -675,9 +675,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Effortlessly understand and describe any photo with multimodal AI vision. Get detailed descriptions, SEO alt-tags, and viral captions instantly.",
     relatedTools: [
-      { name: "AI Caption Generator", href: "/tools/caption-generator" },
-      { name: "OCR Image to Text", href: "/tools/image-to-text-ocr" },
-      { name: "AI Text Humanizer", href: "/tools/text-humanizer" }
+      { name: "AI Caption Generator", href: "/tools/caption-generator/" },
+      { name: "OCR Image to Text", href: "/tools/image-to-text-ocr/" },
+      { name: "AI Text Humanizer", href: "/tools/text-humanizer/" }
     ]
   },
   "text-humanizer": {
@@ -718,9 +718,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "In a digital world increasingly filled with robotic content, authenticity is your greatest asset. Give your AI-generated text the human touch it needs to truly connect with your readers.",
     relatedTools: [
-      { name: "AI Caption Generator", href: "/tools/caption-generator" },
-      { name: "AI Resume Builder", href: "/tools/resume-builder" },
-      { name: "Voice Generator", href: "/tools/voice-generator" }
+      { name: "AI Caption Generator", href: "/tools/caption-generator/" },
+      { name: "AI Resume Builder", href: "/tools/resume-builder/" },
+      { name: "Voice Generator", href: "/tools/voice-generator/" }
     ]
   },
   "voice-generator": {
@@ -756,9 +756,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Great audio doesn't need to be complicated. Drop your script in, pick your tone, and give your project a clean voice.",
     relatedTools: [
-      { name: "AI Caption Generator", href: "/tools/caption-generator" },
-      { name: "AI Text Humanizer", href: "/tools/text-humanizer" },
-      { name: "YouTube Money Calculator", href: "/tools/youtube-money-calculator" }
+      { name: "AI Caption Generator", href: "/tools/caption-generator/" },
+      { name: "AI Text Humanizer", href: "/tools/text-humanizer/" },
+      { name: "YouTube Money Calculator", href: "/tools/youtube-money-calculator/" }
     ]
   },
   "invoice-generator": {
@@ -799,9 +799,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Take the stress out of tax season and client billing. Build professional, accurate, and branded invoices in minutes and keep your business moving forward.",
     relatedTools: [
-      { name: "AI Logo Maker", href: "/tools/ai-logo-maker" },
-      { name: "QR Code Generator", href: "/tools/qr-code-generator" },
-      { name: "Invoice Cropper", href: "/tools/invoice-cropper" }
+      { name: "AI Logo Maker", href: "/tools/ai-logo-maker/" },
+      { name: "QR Code Generator", href: "/tools/qr-code-generator/" },
+      { name: "Invoice Cropper", href: "/tools/invoice-cropper/" }
     ]
   },
   "cover-letter-generator": {
@@ -842,9 +842,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Don't let a generic cover letter hold back your career. Stand out from the crowd with a personalized, professional letter that showcases the best version of you.",
     relatedTools: [
-      { name: "AI Resume Builder", href: "/tools/resume-builder" },
-      { name: "AI Text Humanizer", href: "/tools/text-humanizer" },
-      { name: "ATS Resume Checker", href: "/tools/ats-resume-checker" }
+      { name: "AI Resume Builder", href: "/tools/resume-builder/" },
+      { name: "AI Text Humanizer", href: "/tools/text-humanizer/" },
+      { name: "ATS Resume Checker", href: "/tools/ats-resume-checker/" }
     ]
   },
   "pdf-compare": {
@@ -887,18 +887,18 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Comparing document revisions should be fast, accurate, and completely confidential. With ToolWala AI's PDF Compare, you get instant side-by-side text diffing that preserves your privacy and eliminates manual review errors. Try comparing your documents today.",
     relatedTools: [
-      { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr" },
-      { name: "PDF to Word Converter", href: "/tools/pdf-to-word-converter" }
+      { name: "Merge PDF", href: "/tools/merge-pdf/" },
+      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr/" },
+      { name: "PDF to Word Converter", href: "/tools/pdf-to-word-converter/" }
     ]
   },
   "merge-pdf": {
-    title: "How to Combine PDF Files in 4 Steps",
-    layout: "default",
+    title: "How to Combine PDF Files Online in 5 Steps",
+    layout: "howto-first",
     intro: "Combine multiple PDF documents into one cleanly organized file right in your browser. Whether you need to join PDF files for official applications or merge PDF online for client submissions, ToolWala offers a fast, free PDF merger with no signups and zero server uploads.",
     whatHeading: "What Happens When You Join PDF Files",
     whatItDoes: "Each file opens directly in your active browser tab, where its pages are copied and stitched into a fresh document matching your exact card sequence. You can rearrange pages by dragging the cards or using the simple arrow controls. Scanned forms and digital vector files merge identically — keeping your fonts, signatures, and page orientation intact.\n\nNeed a detailed walkthrough with screenshots? Check out our [full guide to merge PDF files online](/blog/how-to-merge-pdf/) for helpful productivity tips.",
-    howToHeading: "Step-by-Step: How to Merge PDF Files",
+    howToHeading: "Step-by-Step Instructions",
     howToUse: [
       "Select or drag two or more PDF files into the upload box above.",
       "Check the thumbnail cards to confirm your page counts and document sizes.",
@@ -1042,9 +1042,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { question: "Password PDF?", answer: "Unlock it first. A locked file usually will not show thumbnails." }
     ],
     relatedTools: [
-      { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "Remove PDF Pages", href: "/tools/remove-pages" },
-      { name: "Organize PDF Pages", href: "/tools/organize-pdf" }
+      { name: "Merge PDF", href: "/tools/merge-pdf/" },
+      { name: "Remove PDF Pages", href: "/tools/remove-pages/" },
+      { name: "Organize PDF Pages", href: "/tools/organize-pdf/" }
     ]
   },
   "jpg-to-pdf": {
@@ -1085,14 +1085,14 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Converting your images to PDF doesn't have to compromise your personal data security. With ToolWala AI's JPG to PDF converter, you get high-resolution outputs with flexible layouts and complete privacy. Try it now.",
     relatedTools: [
-      { name: "PDF Tools Suite", href: "/tools/pdf-tools" },
-      { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "Split PDF", href: "/tools/split-pdf" },
-      { name: "Compress PDF", href: "/tools/compress-pdf" },
-      { name: "PDF to JPG", href: "/tools/pdf-to-jpg" },
-      { name: "JPG to WebP", href: "/tools/jpg-to-webp" },
-      { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "PNG to WebP", href: "/tools/png-to-webp" }
+      { name: "PDF Tools Suite", href: "/tools/pdf-tools/" },
+      { name: "Merge PDF", href: "/tools/merge-pdf/" },
+      { name: "Split PDF", href: "/tools/split-pdf/" },
+      { name: "Compress PDF", href: "/tools/compress-pdf/" },
+      { name: "PDF to JPG", href: "/tools/pdf-to-jpg/" },
+      { name: "JPG to WebP", href: "/tools/jpg-to-webp/" },
+      { name: "Image Compressor", href: "/tools/image-compressor/" },
+      { name: "PNG to WebP", href: "/tools/png-to-webp/" }
     ]
   },
   "pdf-to-jpg": {
@@ -1133,13 +1133,13 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Extracting pages from PDF as images should be fast, private, and painless. Experience high-end local conversion with our PDF to JPG tool.",
     relatedTools: [
-      { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "Split PDF", href: "/tools/split-pdf" },
-      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" },
-      { name: "Compress PDF", href: "/tools/compress-pdf" },
-      { name: "PDF to Word", href: "/tools/pdf-to-word-converter" },
-      { name: "PDF to Excel", href: "/tools/pdf-to-excel-converter" },
-      { name: "JPG to WebP", href: "/tools/jpg-to-webp" }
+      { name: "Merge PDF", href: "/tools/merge-pdf/" },
+      { name: "Split PDF", href: "/tools/split-pdf/" },
+      { name: "JPG to PDF", href: "/tools/jpg-to-pdf/" },
+      { name: "Compress PDF", href: "/tools/compress-pdf/" },
+      { name: "PDF to Word", href: "/tools/pdf-to-word-converter/" },
+      { name: "PDF to Excel", href: "/tools/pdf-to-excel-converter/" },
+      { name: "JPG to WebP", href: "/tools/jpg-to-webp/" }
     ]
   },
   "protect-pdf": {
@@ -1180,9 +1180,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Securing your confidential documents doesn't have to be complicated or risky. Keep your PDFs safe and private with ToolWala AI's local Protect PDF tool.",
     relatedTools: [
-      { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "Split PDF", href: "/tools/split-pdf" },
-      { name: "PDF to JPG", href: "/tools/pdf-to-jpg" }
+      { name: "Merge PDF", href: "/tools/merge-pdf/" },
+      { name: "Split PDF", href: "/tools/split-pdf/" },
+      { name: "PDF to JPG", href: "/tools/pdf-to-jpg/" }
     ]
   },
   "unlock-pdf": {
@@ -1223,9 +1223,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Tired of typing passwords every time you open a PDF? Unlock your files permanently and securely with ToolWala AI's client-side decrypter.",
     relatedTools: [
-      { name: "Protect PDF", href: "/tools/protect-pdf" },
-      { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "Split PDF", href: "/tools/split-pdf" }
+      { name: "Protect PDF", href: "/tools/protect-pdf/" },
+      { name: "Merge PDF", href: "/tools/merge-pdf/" },
+      { name: "Split PDF", href: "/tools/split-pdf/" }
     ]
   },
   "watermark-pdf": {
@@ -1266,9 +1266,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Protect your intellectual property securely and customize your PDF presentation. Stamp your files locally using ToolWala AI's Watermark tool.",
     relatedTools: [
-      { name: "Protect PDF", href: "/tools/protect-pdf" },
-      { name: "Unlock PDF", href: "/tools/unlock-pdf" },
-      { name: "Merge PDF", href: "/tools/merge-pdf" }
+      { name: "Protect PDF", href: "/tools/protect-pdf/" },
+      { name: "Unlock PDF", href: "/tools/unlock-pdf/" },
+      { name: "Merge PDF", href: "/tools/merge-pdf/" }
     ]
   },
   "organize-pdf": {
@@ -1310,9 +1310,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Take control of your PDF documents with professional, client-side tools. Reorder, rotate, delete, or duplicate pages in seconds with ToolWala AI's PDF Organizer.",
     relatedTools: [
-      { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "Split PDF", href: "/tools/split-pdf" },
-      { name: "Add Watermark to PDF", href: "/tools/watermark-pdf" }
+      { name: "Merge PDF", href: "/tools/merge-pdf/" },
+      { name: "Split PDF", href: "/tools/split-pdf/" },
+      { name: "Add Watermark to PDF", href: "/tools/watermark-pdf/" }
     ]
   },
   "pdf-ocr": {
@@ -1353,9 +1353,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Convert scans into copyable documents instantly with secure client-side computing. Digitized, parsed, and exported locally using ToolWala AI.",
     relatedTools: [
-      { name: "OCR Image to Text", href: "/tools/ocr-to-text" },
-      { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "Split PDF", href: "/tools/split-pdf" }
+      { name: "OCR Image to Text", href: "/tools/ocr-to-text/" },
+      { name: "Merge PDF", href: "/tools/merge-pdf/" },
+      { name: "Split PDF", href: "/tools/split-pdf/" }
     ]
   },
   "crop-aadhaar-card": {
@@ -1389,9 +1389,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { question: "Is it safe to resize identity photos on ToolWala?", answer: "Yes! Image processing is conducted 100% inside your browser session using local HTML5 Canvas APIs, so your sensitive Aadhaar photos are never stored or uploaded." }
     ],
     relatedTools: [
-      { name: "PAN Card Resize", href: "/tools/pan-card-resize" },
-      { name: "Signature Resize", href: "/tools/signature-resize" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
+      { name: "PAN Card Resize", href: "/tools/pan-card-resize/" },
+      { name: "Signature Resize", href: "/tools/signature-resize/" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker/" },
       { name: "e-Aadhaar & Document Hub", href: "/hubs/aadhaar-utilities" }
     ]
   },
@@ -1448,9 +1448,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { question: "Is the PDF uploaded?", answer: "No. Conversion stays in the browser." }
     ],
     relatedTools: [
-      { name: "Word to PDF Converter", href: "/tools/word-to-pdf-converter" },
-      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr" },
-      { name: "Compress PDF", href: "/tools/compress-pdf" }
+      { name: "Word to PDF Converter", href: "/tools/word-to-pdf-converter/" },
+      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr/" },
+      { name: "Compress PDF", href: "/tools/compress-pdf/" }
     ]
   },
   "ai-image-upscaler": {
@@ -1494,10 +1494,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Enlarge and enhance your low-resolution images in seconds. Try ToolWala AI's premium, client-side AI Image Upscaler today.",
     relatedTools: [
-      { name: "AI Background Remover", href: "/tools/bg-remover" },
-      { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" }
+      { name: "AI Background Remover", href: "/tools/bg-remover/" },
+      { name: "Image Compressor", href: "/tools/image-compressor/" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker/" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" }
     ]
   },
   "signature-resize": {
@@ -1540,11 +1540,11 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Format and compress signature scans securely to meet portal guidelines. Start optimizing your files with ToolWala AI's signature resize tool.",
     relatedTools: [
-      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" },
-      { name: "PAN Card Resize", href: "/tools/pan-card-resize" },
-      { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-      { name: "Sign PDF", href: "/tools/sign-pdf" }
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" },
+      { name: "PAN Card Resize", href: "/tools/pan-card-resize/" },
+      { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize/" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker/" },
+      { name: "Sign PDF", href: "/tools/sign-pdf/" }
     ]
   },
   "pan-card-resize": {
@@ -1587,10 +1587,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Format your photo for PAN card NSDL and UTIITSL applications instantly. Try our secure, browser-based PAN Card Resize tool.",
     relatedTools: [
-      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" },
-      { name: "Signature Resize", href: "/tools/signature-resize" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-      { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize" }
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" },
+      { name: "Signature Resize", href: "/tools/signature-resize/" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker/" },
+      { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize/" }
     ]
   },
   "ssc-photo-resize": {
@@ -1633,10 +1633,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Format your Staff Selection Commission application photo in seconds. Try our secure, browser-native SSC Photo Resize tool today.",
     relatedTools: [
-      { name: "UPSC Photo Resize", href: "/tools/upsc-photo-resize" },
-      { name: "Signature Resize", href: "/tools/signature-resize" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" }
+      { name: "UPSC Photo Resize", href: "/tools/upsc-photo-resize/" },
+      { name: "Signature Resize", href: "/tools/signature-resize/" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker/" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" }
     ]
   },
   "upsc-photo-resize": {
@@ -1679,10 +1679,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Format your photo for UPSC Civil Services applications instantly. Try our secure, browser-based UPSC Photo Resize tool.",
     relatedTools: [
-      { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize" },
-      { name: "Signature Resize", href: "/tools/signature-resize" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" }
+      { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize/" },
+      { name: "Signature Resize", href: "/tools/signature-resize/" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker/" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" }
     ]
   },
   "aadhaar-pdf-compressor": {
@@ -1724,9 +1724,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Compress your e-Aadhaar PDF files securely. Start optimizing your files with ToolWala AI.",
     relatedTools: [
-      { name: "Government Form PDF Compressor", href: "/tools/gov-form-pdf-compressor" },
-      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" },
-      { name: "Aadhaar Masking Tool", href: "/tools/aadhaar-masking-tool" }
+      { name: "Government Form PDF Compressor", href: "/tools/gov-form-pdf-compressor/" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" },
+      { name: "Aadhaar Masking Tool", href: "/tools/aadhaar-masking-tool/" }
     ]
   },
   "gov-form-pdf-compressor": {
@@ -1765,9 +1765,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Compress your government application PDFs securely and instantly. Try ToolWala's free, browser-based Government Form PDF Compressor now.",
     relatedTools: [
-      { name: "Aadhaar PDF Compressor", href: "/tools/aadhaar-pdf-compressor" },
-      { name: "Compress PDF", href: "/tools/compress-pdf" },
-      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" }
+      { name: "Aadhaar PDF Compressor", href: "/tools/aadhaar-pdf-compressor/" },
+      { name: "Compress PDF", href: "/tools/compress-pdf/" },
+      { name: "JPG to PDF", href: "/tools/jpg-to-pdf/" }
     ]
   },
   "password-generator": {
@@ -1811,9 +1811,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Secure your digital footprint without compromise. Generate your next uncrackable password locally with ToolWala.",
     relatedTools: [
-      { name: "Protect PDF", href: "/tools/protect-pdf" },
-      { name: "Unlock PDF", href: "/tools/unlock-pdf" },
-      { name: "Aadhaar Masking Tool", href: "/tools/aadhaar-masking-tool" }
+      { name: "Protect PDF", href: "/tools/protect-pdf/" },
+      { name: "Unlock PDF", href: "/tools/unlock-pdf/" },
+      { name: "Aadhaar Masking Tool", href: "/tools/aadhaar-masking-tool/" }
     ]
   },
   "color-palette-generator": {
@@ -1851,9 +1851,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Good design starts with colors that work well together. Roll a few palettes, lock the ones you love, and build something beautiful.",
     relatedTools: [
-      { name: "AI Logo Maker", href: "/tools/ai-logo-maker" },
-      { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "AI Image Upscaler", href: "/tools/ai-image-upscaler" }
+      { name: "AI Logo Maker", href: "/tools/ai-logo-maker/" },
+      { name: "Image Compressor", href: "/tools/image-compressor/" },
+      { name: "AI Image Upscaler", href: "/tools/ai-image-upscaler/" }
     ]
   },
   "edit-pdf": {
@@ -1891,9 +1891,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Fixing a PDF shouldn't be an ordeal. Make your edits, sign what you need, and download a clean file in seconds.",
     relatedTools: [
-      { name: "PDF Tools Suite", href: "/tools/pdf-tools" },
-      { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "Sign PDF", href: "/tools/sign-pdf" }
+      { name: "PDF Tools Suite", href: "/tools/pdf-tools/" },
+      { name: "Merge PDF", href: "/tools/merge-pdf/" },
+      { name: "Sign PDF", href: "/tools/sign-pdf/" }
     ]
   },
   "ocr-to-text": {
@@ -1937,9 +1937,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Convert scans to editable documents with complete privacy. Extract text locally using ToolWala AI.",
     relatedTools: [
-      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr" },
-      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" },
-      { name: "Image Compressor", href: "/tools/image-compressor" }
+      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr/" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" },
+      { name: "Image Compressor", href: "/tools/image-compressor/" }
     ]
   },
   "age-calculator": {
@@ -1983,9 +1983,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Calculate chronological records instantly. Verify milestone details securely on ToolWala AI.",
     relatedTools: [
-      { name: "SIP Calculator", href: "/tools/sip-calculator" },
-      { name: "EMI Calculator", href: "/tools/emi-calculator" },
-      { name: "Exam Marks Calculator", href: "/tools/exam-marks-calculator" }
+      { name: "SIP Calculator", href: "/tools/sip-calculator/" },
+      { name: "EMI Calculator", href: "/tools/emi-calculator/" },
+      { name: "Exam Marks Calculator", href: "/tools/exam-marks-calculator/" }
     ]
   },
   "sip-calculator": {
@@ -2029,9 +2029,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Plan your financial future with precision compound math. Estimate your investments on ToolWala AI.",
     relatedTools: [
-      { name: "EMI Calculator", href: "/tools/emi-calculator" },
-      { name: "GST Calculator", href: "/tools/gst-calculator" },
-      { name: "Age Calculator", href: "/tools/age-calculator" }
+      { name: "EMI Calculator", href: "/tools/emi-calculator/" },
+      { name: "GST Calculator", href: "/tools/gst-calculator/" },
+      { name: "Age Calculator", href: "/tools/age-calculator/" }
     ]
   },
   "emi-calculator": {
@@ -2075,9 +2075,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Understand your loan repayment schedules completely. Calculate your EMI on ToolWala AI.",
     relatedTools: [
-      { name: "SIP Calculator", href: "/tools/sip-calculator" },
-      { name: "GST Calculator", href: "/tools/gst-calculator" },
-      { name: "Exam Marks Calculator", href: "/tools/exam-marks-calculator" }
+      { name: "SIP Calculator", href: "/tools/sip-calculator/" },
+      { name: "GST Calculator", href: "/tools/gst-calculator/" },
+      { name: "Exam Marks Calculator", href: "/tools/exam-marks-calculator/" }
     ]
   },
   "gst-calculator": {
@@ -2121,9 +2121,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Compute product taxes and invoice splits instantly. Calculate GST values on ToolWala AI.",
     relatedTools: [
-      { name: "Invoice Generator", href: "/tools/invoice-generator" },
-      { name: "EMI Calculator", href: "/tools/emi-calculator" },
-      { name: "SIP Calculator", href: "/tools/sip-calculator" }
+      { name: "Invoice Generator", href: "/tools/invoice-generator/" },
+      { name: "EMI Calculator", href: "/tools/emi-calculator/" },
+      { name: "SIP Calculator", href: "/tools/sip-calculator/" }
     ]
   },
   "discount-calculator": {
@@ -2168,10 +2168,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Compute sale prices, stacked coupons, and shopping deals instantly. Calculate discounts on ToolWala AI.",
     relatedTools: [
-      { name: "GST Calculator", href: "/tools/gst-calculator" },
-      { name: "EMI Calculator", href: "/tools/emi-calculator" },
-      { name: "SIP Calculator", href: "/tools/sip-calculator" },
-      { name: "Income Tax Calculator", href: "/tools/income-tax-calculator" }
+      { name: "GST Calculator", href: "/tools/gst-calculator/" },
+      { name: "EMI Calculator", href: "/tools/emi-calculator/" },
+      { name: "SIP Calculator", href: "/tools/sip-calculator/" },
+      { name: "Income Tax Calculator", href: "/tools/income-tax-calculator/" }
     ]
   },
   "youtube-money-calculator": {
@@ -2214,9 +2214,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Forecast your YouTube creator revenue accurately. Estimate your earnings with ToolWala AI.",
     relatedTools: [
-      { name: "AdSense Revenue Calculator", href: "/tools/adsense-revenue-calculator" },
-      { name: "Caption Generator", href: "/tools/caption-generator" },
-      { name: "GST Calculator", href: "/tools/gst-calculator" }
+      { name: "AdSense Revenue Calculator", href: "/tools/adsense-revenue-calculator/" },
+      { name: "Caption Generator", href: "/tools/caption-generator/" },
+      { name: "GST Calculator", href: "/tools/gst-calculator/" }
     ]
   },
   "adsense-revenue-calculator": {
@@ -2260,9 +2260,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Plan your site's monetization and estimate ad revenue. Calculate earnings on ToolWala AI.",
     relatedTools: [
-      { name: "YouTube Money Calculator", href: "/tools/youtube-money-calculator" },
-      { name: "Invoice Generator", href: "/tools/invoice-generator" },
-      { name: "GST Calculator", href: "/tools/gst-calculator" }
+      { name: "YouTube Money Calculator", href: "/tools/youtube-money-calculator/" },
+      { name: "Invoice Generator", href: "/tools/invoice-generator/" },
+      { name: "GST Calculator", href: "/tools/gst-calculator/" }
     ]
   },
   "word-to-pdf-converter": {
@@ -2317,9 +2317,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { question: "Is the document uploaded?", answer: "No." }
     ],
     relatedTools: [
-      { name: "PDF to Word Converter", href: "/tools/pdf-to-word-converter" },
-      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" },
-      { name: "Merge PDF", href: "/tools/merge-pdf" }
+      { name: "PDF to Word Converter", href: "/tools/pdf-to-word-converter/" },
+      { name: "JPG to PDF", href: "/tools/jpg-to-pdf/" },
+      { name: "Merge PDF", href: "/tools/merge-pdf/" }
     ]
   },
   "invoice-cropper": {
@@ -2360,11 +2360,11 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Format, crop, and clean your business invoices and receipt scans locally. Start editing with ToolWala AI.",
     relatedTools: [
-      { name: "PDF Compressor", href: "/tools/pdf-tools" },
-      { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "PDF to JPG", href: "/tools/pdf-to-jpg" },
-      { name: "Signature Resize", href: "/tools/signature-resize" },
-      { name: "OCR Image to Text", href: "/tools/ocr-to-text" }
+      { name: "PDF Compressor", href: "/tools/pdf-tools/" },
+      { name: "Image Compressor", href: "/tools/image-compressor/" },
+      { name: "PDF to JPG", href: "/tools/pdf-to-jpg/" },
+      { name: "Signature Resize", href: "/tools/signature-resize/" },
+      { name: "OCR Image to Text", href: "/tools/ocr-to-text/" }
     ]
   },
   "aadhaar-masking-tool": {
@@ -2404,10 +2404,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Protect your identity and comply with UIDAI guidelines. Mask your Aadhaar cards safely in the browser with ToolWala AI.",
     relatedTools: [
-      { name: "Invoice Cropper", href: "/tools/invoice-cropper" },
-      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr" },
-      { name: "OCR Image to Text", href: "/tools/ocr-to-text" },
-      { name: "Image Compressor", href: "/tools/image-compressor" }
+      { name: "Invoice Cropper", href: "/tools/invoice-cropper/" },
+      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr/" },
+      { name: "OCR Image to Text", href: "/tools/ocr-to-text/" },
+      { name: "Image Compressor", href: "/tools/image-compressor/" }
     ]
   },
   "compress-pdf": {
@@ -2464,9 +2464,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { question: "Is the PDF uploaded?", answer: "No." }
     ],
     relatedTools: [
-      { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "Split PDF", href: "/tools/split-pdf" },
-      { name: "Aadhaar PDF Compressor", href: "/tools/aadhaar-pdf-compressor" }
+      { name: "Merge PDF", href: "/tools/merge-pdf/" },
+      { name: "Split PDF", href: "/tools/split-pdf/" },
+      { name: "Aadhaar PDF Compressor", href: "/tools/aadhaar-pdf-compressor/" }
     ]
   },
   "crop-pdf": {
@@ -2509,11 +2509,11 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Clean up page margins and customize your document layouts with ToolWala's visual, private Crop PDF tool.",
     relatedTools: [
-      { name: "Organize PDF Pages", href: "/tools/organize-pdf" },
-      { name: "Rotate PDF", href: "/tools/rotate-pdf" },
-      { name: "Remove PDF Pages", href: "/tools/remove-pages" },
-      { name: "Compress PDF", href: "/tools/compress-pdf" },
-      { name: "Split PDF", href: "/tools/split-pdf" }
+      { name: "Organize PDF Pages", href: "/tools/organize-pdf/" },
+      { name: "Rotate PDF", href: "/tools/rotate-pdf/" },
+      { name: "Remove PDF Pages", href: "/tools/remove-pages/" },
+      { name: "Compress PDF", href: "/tools/compress-pdf/" },
+      { name: "Split PDF", href: "/tools/split-pdf/" }
     ]
   },
   "rotate-pdf": {
@@ -2569,9 +2569,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { question: "Is the PDF uploaded?", answer: "No. The rotate runs in this tab." }
     ],
     relatedTools: [
-      { name: "Organize PDF Pages", href: "/tools/organize-pdf" },
-      { name: "Split PDF", href: "/tools/split-pdf" },
-      { name: "Crop PDF", href: "/tools/crop-pdf" }
+      { name: "Organize PDF Pages", href: "/tools/organize-pdf/" },
+      { name: "Split PDF", href: "/tools/split-pdf/" },
+      { name: "Crop PDF", href: "/tools/crop-pdf/" }
     ]
   },
   "remove-pages": {
@@ -2613,10 +2613,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Clean up your documents and remove unwanted PDF pages securely with ToolWala AI.",
     relatedTools: [
-      { name: "Split PDF", href: "/tools/split-pdf" },
-      { name: "Organize PDF Pages", href: "/tools/organize-pdf" },
-      { name: "Crop PDF", href: "/tools/crop-pdf" },
-      { name: "Rotate PDF", href: "/tools/rotate-pdf" }
+      { name: "Split PDF", href: "/tools/split-pdf/" },
+      { name: "Organize PDF Pages", href: "/tools/organize-pdf/" },
+      { name: "Crop PDF", href: "/tools/crop-pdf/" },
+      { name: "Rotate PDF", href: "/tools/rotate-pdf/" }
     ]
   },
   "add-page-numbers-to-pdf": {
@@ -2659,10 +2659,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Structure your PDF files with customizable, secure page numbering using ToolWala AI.",
     relatedTools: [
-      { name: "Merge PDF", href: "/tools/merge-pdf" },
-      { name: "Organize PDF Pages", href: "/tools/organize-pdf" },
-      { name: "Sign PDF", href: "/tools/sign-pdf" },
-      { name: "Watermark PDF", href: "/tools/watermark-pdf" }
+      { name: "Merge PDF", href: "/tools/merge-pdf/" },
+      { name: "Organize PDF Pages", href: "/tools/organize-pdf/" },
+      { name: "Sign PDF", href: "/tools/sign-pdf/" },
+      { name: "Watermark PDF", href: "/tools/watermark-pdf/" }
     ]
   },
   "sign-pdf": {
@@ -2705,10 +2705,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Sign documents securely and respect your data sovereignty with ToolWala's browser-local Sign PDF tool.",
     relatedTools: [
-      { name: "Protect PDF", href: "/tools/protect-pdf" },
-      { name: "Watermark PDF", href: "/tools/watermark-pdf" },
-      { name: "Add Page Numbers to PDF", href: "/tools/add-page-numbers-to-pdf" },
-      { name: "Signature Resize", href: "/tools/signature-resize" }
+      { name: "Protect PDF", href: "/tools/protect-pdf/" },
+      { name: "Watermark PDF", href: "/tools/watermark-pdf/" },
+      { name: "Add Page Numbers to PDF", href: "/tools/add-page-numbers-to-pdf/" },
+      { name: "Signature Resize", href: "/tools/signature-resize/" }
     ]
   },
   "exam-photo-resizer": {
@@ -2751,10 +2751,10 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Format your photo for competitive exam portals instantly. Try our secure, browser-based Exam Photo Resizer.",
     relatedTools: [
-      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" },
-      { name: "PAN Card Resize", href: "/tools/pan-card-resize" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" },
-      { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize" }
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" },
+      { name: "PAN Card Resize", href: "/tools/pan-card-resize/" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker/" },
+      { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize/" }
     ]
   },
   "exam-marks-calculator": {
@@ -2797,9 +2797,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Assess academic marks and verify grades instantly. Try our secure, private Exam Marks Calculator today.",
     relatedTools: [
-      { name: "Age Calculator", href: "/tools/age-calculator" },
-      { name: "SIP Calculator", href: "/tools/sip-calculator" },
-      { name: "EMI Calculator", href: "/tools/emi-calculator" }
+      { name: "Age Calculator", href: "/tools/age-calculator/" },
+      { name: "SIP Calculator", href: "/tools/sip-calculator/" },
+      { name: "EMI Calculator", href: "/tools/emi-calculator/" }
     ]
   },
   "resume-bullet-generator": {
@@ -2843,9 +2843,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Upgrade your resume today. Use our AI Bullet Point Generator to stand out, beat the ATS filters, and land your next career milestone.",
     relatedTools: [
-      { name: "ATS Resume Checker", href: "/tools/ats-resume-checker" },
-      { name: "AI Cover Letter Generator", href: "/tools/cover-letter-generator" },
-      { name: "Resume Builder", href: "/tools/resume-builder" }
+      { name: "ATS Resume Checker", href: "/tools/ats-resume-checker/" },
+      { name: "AI Cover Letter Generator", href: "/tools/cover-letter-generator/" },
+      { name: "Resume Builder", href: "/tools/resume-builder/" }
     ]
   },
   "webp-to-jpg-png-converter": {
@@ -2888,9 +2888,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Convert your WebP images quickly, securely, and effortlessly. Experience privacy-first browser conversion with ToolWala today.",
     relatedTools: [
-      { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "AI Background Remover", href: "/tools/bg-remover" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker" }
+      { name: "Image Compressor", href: "/tools/image-compressor/" },
+      { name: "AI Background Remover", href: "/tools/bg-remover/" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker/" }
     ]
   },
   "pdf-to-excel-converter": {
@@ -2946,9 +2946,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { question: "Is the PDF uploaded?", answer: "No." }
     ],
     relatedTools: [
-      { name: "Excel to PDF Converter", href: "/tools/excel-to-pdf-converter" },
-      { name: "PDF to Word Converter", href: "/tools/pdf-to-word-converter" },
-      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr" }
+      { name: "Excel to PDF Converter", href: "/tools/excel-to-pdf-converter/" },
+      { name: "PDF to Word Converter", href: "/tools/pdf-to-word-converter/" },
+      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr/" }
     ]
   },
   "excel-to-pdf-converter": {
@@ -3004,9 +3004,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { question: "Is the file uploaded?", answer: "No." }
     ],
     relatedTools: [
-      { name: "PDF to Excel Converter", href: "/tools/pdf-to-excel-converter" },
-      { name: "Word to PDF Converter", href: "/tools/word-to-pdf-converter" },
-      { name: "Compress PDF", href: "/tools/compress-pdf" }
+      { name: "PDF to Excel Converter", href: "/tools/pdf-to-excel-converter/" },
+      { name: "Word to PDF Converter", href: "/tools/word-to-pdf-converter/" },
+      { name: "Compress PDF", href: "/tools/compress-pdf/" }
     ]
   },
   "jpg-to-webp": {
@@ -3056,12 +3056,12 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Supercharge your website performance and save disk space with ToolWala AI's JPG to WebP Converter. Convert single or batch images instantly in your browser with complete privacy.",
     relatedTools: [
-      { name: "WebP to JPG", href: "/tools/webp-to-jpg-png-converter" },
-      { name: "PNG to WebP", href: "/tools/png-to-webp" },
-      { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "JPG to PDF", href: "/tools/jpg-to-pdf" },
-      { name: "Background Remover", href: "/tools/bg-remover" },
-      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" }
+      { name: "WebP to JPG", href: "/tools/webp-to-jpg-png-converter/" },
+      { name: "PNG to WebP", href: "/tools/png-to-webp/" },
+      { name: "Image Compressor", href: "/tools/image-compressor/" },
+      { name: "JPG to PDF", href: "/tools/jpg-to-pdf/" },
+      { name: "Background Remover", href: "/tools/bg-remover/" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" }
     ]
   },
   "png-to-webp": {
@@ -3111,12 +3111,12 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Convert your PNG graphics to light, fast, and transparent WebP images in seconds. Enjoy maximum compression, local browser privacy, and batch ZIP downloads with ToolWala AI.",
     relatedTools: [
-      { name: "JPG to WebP", href: "/tools/jpg-to-webp" },
-      { name: "WebP to JPG", href: "/tools/webp-to-jpg-png-converter" },
-      { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card" },
-      { name: "Crop Image", href: "/tools/invoice-cropper" },
-      { name: "Convert Image", href: "/tools/gov-form-image-compressor" }
+      { name: "JPG to WebP", href: "/tools/jpg-to-webp/" },
+      { name: "WebP to JPG", href: "/tools/webp-to-jpg-png-converter/" },
+      { name: "Image Compressor", href: "/tools/image-compressor/" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" },
+      { name: "Crop Image", href: "/tools/invoice-cropper/" },
+      { name: "Convert Image", href: "/tools/gov-form-image-compressor/" }
     ]
   },
   "video-compressor": {
@@ -3149,9 +3149,9 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Compress and transcode video files in seconds with complete privacy. Try ToolWala AI's browser-native Video Compressor today!",
     relatedTools: [
-      { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "PDF Compressor", href: "/tools/compress-pdf" },
-      { name: "Voice Generator", href: "/tools/voice-generator" }
+      { name: "Image Compressor", href: "/tools/image-compressor/" },
+      { name: "PDF Compressor", href: "/tools/compress-pdf/" },
+      { name: "Voice Generator", href: "/tools/voice-generator/" }
     ]
   }
 };

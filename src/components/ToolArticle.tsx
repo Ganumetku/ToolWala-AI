@@ -212,9 +212,9 @@ export default function ToolArticle({
         href: locale === 'en' ? `/categories/${parentCategory.slug}/` : `/${locale}/categories/${parentCategory.slug}/`
       });
     }
-    items.push({ label: translatedTitle });
+    items.push({ label: currentTool ? t(`tools.${currentTool.slug}.title`, currentTool.title) : translatedTitle });
     return items;
-  }, [t, translatedTitle, parentCategory, locale]);
+  }, [t, translatedTitle, currentTool, parentCategory, locale]);
 
   const breadcrumbSchema = useMemo(() => ({
     '@context': 'https://schema.org',
@@ -303,7 +303,7 @@ export default function ToolArticle({
             <div className="flex flex-col gap-12">
               {uniqueSection && (uniqueSection.body || (uniqueSection.bullets && uniqueSection.bullets.length > 0)) && (
                 <div
-                  style={{ order: layout === 'fails-first' ? 1 : layout === 'howto-first' ? 3 : layout === 'limits-first' ? 2 : layout === 'print-first' ? 3 : 6 }}
+                  style={{ order: layout === 'fails-first' ? 1 : layout === 'howto-first' ? 4 : layout === 'limits-first' ? 2 : layout === 'print-first' ? 3 : 6 }}
                   className={`p-8 sm:p-10 rounded-[1.125rem] shadow-sm border ${
                     layout === 'fails-first'
                       ? 'bg-rose-50/50 dark:bg-rose-950/15 border-rose-200 dark:border-rose-500/20'
@@ -406,7 +406,7 @@ export default function ToolArticle({
 
               {/* How to use */}
               {translatedHowToUse && translatedHowToUse.length > 0 && (
-                <div style={{ order: layout === 'howto-first' ? 2 : layout === 'fails-first' ? 2 : layout === 'limits-first' ? 4 : layout === 'print-first' ? 2 : 2 }} className="p-8 sm:p-10 rounded-[1.125rem] bg-[#FBFCFE] dark:bg-[#090d16] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.04)]">
+                <div style={{ order: layout === 'howto-first' ? 1 : layout === 'fails-first' ? 2 : layout === 'limits-first' ? 4 : layout === 'print-first' ? 2 : 2 }} className="p-8 sm:p-10 rounded-[1.125rem] bg-[#FBFCFE] dark:bg-[#090d16] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.04)]">
                   <h3 className="text-xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3 tracking-tight">
                     {numbered && (
                       <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">02</span>
@@ -444,7 +444,7 @@ export default function ToolArticle({
 
               {/* Key Features */}
               {translatedKeyFeatures && translatedKeyFeatures.length > 0 && (
-                <div style={{ order: 7 }}>
+                <div style={{ order: layout === 'howto-first' ? 2 : 7 }}>
                   <h3 className="text-xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3 tracking-tight">
                     {numbered && (
                       <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">03</span>
@@ -472,7 +472,7 @@ export default function ToolArticle({
 
               {/* Benefits & Use Cases */}
               {(translatedBenefits.length > 0 || translatedUseCases.length > 0) && (
-                <div style={{ order: layout === 'default' ? 8 : layout === 'print-first' ? 1 : 5 }} className={`grid gap-8 ${translatedBenefits.length > 0 && translatedUseCases.length > 0 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
+                <div style={{ order: layout === 'howto-first' ? 3 : layout === 'default' ? 8 : layout === 'print-first' ? 1 : 5 }} className={`grid gap-8 ${translatedBenefits.length > 0 && translatedUseCases.length > 0 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
                   {translatedBenefits.length > 0 && (
                     <div className="p-8 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
                       <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 tracking-tight">
@@ -513,7 +513,7 @@ export default function ToolArticle({
               )}
 
               {limitations.length > 0 && (
-                <div style={{ order: layout === 'limits-first' ? 1 : 6 }} className="p-8 sm:p-10 rounded-[1.125rem] bg-amber-50/70 dark:bg-amber-950/15 border border-amber-200 dark:border-amber-500/20 shadow-sm">
+                <div style={{ order: layout === 'howto-first' ? 4 : layout === 'limits-first' ? 1 : 6 }} className="p-8 sm:p-10 rounded-[1.125rem] bg-amber-50/70 dark:bg-amber-950/15 border border-amber-200 dark:border-amber-500/20 shadow-sm">
                   <h3 className="text-xl font-black text-amber-950 dark:text-amber-200 mb-6 flex items-center gap-3 tracking-tight">
                     <span className="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center text-sm font-black shadow-sm">!</span>
                     Limits and important notes
@@ -550,7 +550,7 @@ export default function ToolArticle({
 
               {/* Why ToolWala */}
               {translatedWhyChoose && translatedWhyChoose.trim().length > 0 && (
-                <div style={{ order: 10 }} className="relative p-8 sm:p-10 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 overflow-hidden shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
+                <div style={{ order: layout === 'howto-first' ? 5 : 10 }} className="relative p-8 sm:p-10 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 overflow-hidden shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
                   <div className="relative">
                     <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4 uppercase tracking-tight">
@@ -565,7 +565,7 @@ export default function ToolArticle({
 
               {/* FAQs */}
               {translatedFaqs && translatedFaqs.length > 0 && (
-                <div style={{ order: 11 }}>
+                <div style={{ order: layout === 'howto-first' ? 6 : 11 }}>
                   <div className="text-center mb-12">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-4">
                       <HelpCircle className="w-3.5 h-3.5" />

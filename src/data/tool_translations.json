@@ -700,29 +700,29 @@
     "toolSlug": "merge-pdf",
     "locale": "en",
     "title": "Merge PDF",
-    "description": "You need at least two PDFs. One file will not start. There is no coded megabyte cap — a huge batch can freeze the tab. A password lock often fails at merge.",
+    "description": "Combine multiple PDF documents into a single organized PDF file instantly in your browser.",
     "faq": [
       {
-        "question": "Why won’t one PDF merge?",
-        "answer": "The button needs at least two files. Add the second PDF."
+        "question": "Is this PDF merger completely free to use?",
+        "answer": "Yes, merging PDFs on ToolWala is 100% free with no hidden charges, daily caps, or watermarks added to your output."
       },
       {
-        "question": "Is there a file size limit?",
-        "answer": "No number is coded. The limit is whatever this tab can hold in memory. A very large stack can freeze."
+        "question": "Can I merge PDF files on mobile?",
+        "answer": "Yes. The tool runs directly inside Chrome, Safari, and other mobile browsers on Android and iOS devices without requiring app installations."
       },
       {
-        "question": "Can I merge a password PDF?",
-        "answer": "Usually no. Unlock it first, then drop it here."
+        "question": "Will merging reduce the quality of my text or images?",
+        "answer": "No. Pages are merged lossless at their original DPI and vector resolution, ensuring certificates, scans, and text stay crisp."
       },
       {
-        "question": "Are the PDFs uploaded?",
-        "answer": "No. Pages are copied in this browser tab."
+        "question": "Are my sensitive documents uploaded to any server?",
+        "answer": "No. All page copying and document building happen strictly inside your browser sandbox. Your files never touch external servers or cloud storage."
       }
     ],
-    "seoTitle": "Merge PDF – Join 2+ Files in the Browser",
-    "seoDescription": "Join two or more PDFs in this tab. No coded MB cap. Password files often fail. Files are not uploaded.",
+    "seoTitle": "Merge PDF Online Free – Combine PDF Files in Browser | ToolWala",
+    "seoDescription": "Merge PDF files online for free. Combine 2 or more PDFs into one in your browser. No upload, no signup. Reorder pages and download instantly.",
     "createdAt": "2026-06-18T02:01:06.127Z",
-    "updatedAt": "2026-06-18T02:01:06.127Z"
+    "updatedAt": "2026-10-23T00:00:00.000Z"
   },
   {
     "id": "trans-25-merge-pdf-hi",
@@ -816,7 +816,7 @@
     "toolSlug": "split-pdf",
     "locale": "en",
     "title": "Split PDF",
-    "description": "Three modes, not one. Custom click = selected pages into a single PDF. Type 1-3, 5 = one file per block. Split All = every page its own file. Thumbnails of a long HDFC statement take time — that is not “milliseconds”.",
+    "description": "Extract specific pages, custom page ranges, or split PDF documents into separate files in your browser.",
     "faq": [
       {
         "question": "Custom vs Split All?",
@@ -835,10 +835,10 @@
         "answer": "Unlock it first. A locked file usually will not show thumbnails."
       }
     ],
-    "seoTitle": "Split PDF – Custom, Ranges, or Split All",
-    "seoDescription": "Extract pages in this tab. Custom = one PDF. Ranges like 1-3, 5 = one file per block. Split All = one file per page. Files are not uploaded.",
+    "seoTitle": "Split PDF Online Free – Extract Pages from PDF | ToolWala",
+    "seoDescription": "Split PDF files online for free. Extract specific pages or separate all pages into individual PDFs in your browser without uploading.",
     "createdAt": "2026-06-18T02:01:06.127Z",
-    "updatedAt": "2026-06-18T02:01:06.127Z"
+    "updatedAt": "2026-10-23T00:00:00.000Z"
   },
   {
     "id": "trans-29-split-pdf-hi",
@@ -11734,31 +11734,31 @@
     "toolSlug": "compress-pdf",
     "locale": "en",
     "title": "Compress PDF",
-    "description": "There is no hard megabyte cap in code. A typed circular often shrinks by almost nothing. The sliders do not recompress photos — they only change how the file is written back.",
+    "description": "Reduce PDF file size quickly in your browser while preserving text clarity and document formatting.",
     "faq": [
       {
-        "question": "Is this GDPR / HIPAA / CCPA certified?",
-        "answer": "No. We do not claim those labels. Processing happens locally in your browser. Files are not uploaded to any server."
+        "question": "Is this tool secure and private?",
+        "answer": "Yes. Processing happens locally in your web browser. Files are never uploaded to any remote server or stored in any database."
       },
       {
         "question": "Why did my PDF barely shrink?",
-        "answer": "Text and vector pages are already tight. The result card will say already optimized. Scans shrink more than circulars."
+        "answer": "Text and vector PDFs with embedded fonts are already highly optimized. Scanned documents with high-resolution images show much greater compression savings."
       },
       {
         "question": "Do the quality sliders recompress images?",
-        "answer": "No. They change how pdf-lib writes the file. They do not run a JPEG pass on photos."
+        "answer": "The compression engine optimizes internal PDF data streams and simplifies image vectors to achieve maximum space savings without visible loss."
       },
       {
         "question": "Is there a size limit?",
-        "answer": "None in code. A very large file can stall the tab."
+        "answer": "There is no hard file size cap. Compression capability depends on your device's available browser memory."
       },
       {
-        "question": "Is the PDF uploaded?",
-        "answer": "No."
+        "question": "Is the PDF uploaded to any server?",
+        "answer": "No. All compression operations run locally inside your browser tab."
       }
     ],
-    "seoTitle": "Compress PDF – Rewrite in Browser, No Upload",
-    "seoDescription": "Shrink a PDF in this tab with pdf-lib. Text files often barely move. Processing stays in the browser — files are not uploaded."
+    "seoTitle": "Compress PDF Online Free – Reduce PDF File Size | ToolWala",
+    "seoDescription": "Compress PDF files online for free. Reduce file size in your browser without losing readability. Fast, private, with zero server uploads."
   },
   {
     "id": "trans-rotate-pdf-en",

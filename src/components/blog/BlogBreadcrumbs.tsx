@@ -15,8 +15,8 @@ export default function BlogBreadcrumbs({ items, className = "" }: BlogBreadcrum
   if (items.length < 2) return null;
 
   return (
-    <nav aria-label="Breadcrumb" className={`mb-8 ${className}`}>
-      <ol className="flex flex-wrap items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-gray-500">
+    <nav aria-label="Breadcrumb" className={`mb-6 sm:mb-8 ${className}`}>
+      <ol className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
         {items.map((item, i) => {
           const isLast = i === items.length - 1;
           
@@ -32,18 +32,18 @@ export default function BlogBreadcrumbs({ items, className = "" }: BlogBreadcrum
           const href = localizeHref(item.href);
 
           return (
-            <li key={item.href} className="flex items-center gap-1.5">
-              {i > 0 && <ChevronRight className="w-3 h-3 text-gray-600 shrink-0" />}
+            <li key={item.href} className="flex items-center gap-1.5 sm:gap-2">
+              {i > 0 && <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-slate-600 shrink-0" />}
               {isLast ? (
-                <span className="text-gray-400 line-clamp-1 max-w-[200px] sm:max-w-none" aria-current="page">
+                <span className="text-slate-800 dark:text-slate-200 font-bold line-clamp-1 max-w-[200px] sm:max-w-md" aria-current="page">
                   {displayName}
                 </span>
               ) : (
                 <Link
                   href={href}
-                  className="hover:text-blue-400 transition-colors flex items-center gap-1 shrink-0"
+                  className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center gap-1.5 shrink-0"
                 >
-                  {i === 0 && <Home className="w-3 h-3" />}
+                  {i === 0 && <Home className="w-3.5 h-3.5" />}
                   <span className={i === 0 ? "sr-only sm:not-sr-only" : ""}>{displayName}</span>
                 </Link>
               )}

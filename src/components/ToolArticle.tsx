@@ -80,6 +80,8 @@ export default function ToolArticle({
   const resolvedToolId = useMemo(() => {
     if (toolId) return toolId;
     const found = toolsData.find(t => 
+      t.id === toolId ||
+      t.slug === toolId ||
       t.title.toLowerCase().includes(title.toLowerCase()) || 
       title.toLowerCase().includes(t.title.toLowerCase())
     );
@@ -130,6 +132,7 @@ export default function ToolArticle({
   const currentTool = useMemo(() => {
     return toolsData.find(t => 
       t.id === resolvedToolId ||
+      t.slug === resolvedToolId ||
       t.title.toLowerCase().includes(title.toLowerCase()) || 
       title.toLowerCase().includes(t.title.toLowerCase())
     );
@@ -162,7 +165,7 @@ export default function ToolArticle({
   const softwareAppSchema = useMemo(() => ({
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    'name': translatedTitle,
+    'name': currentTool ? currentTool.title : (toolId ? toolId.split('-').map((s: string) => s.charAt(0).toUpperCase() + s.slice(1)).join(' ') : translatedTitle),
     'description': translatedIntro || translatedWhatItDoes,
     'applicationCategory': 'UtilitiesApplication',
     'operatingSystem': 'Any',
@@ -173,12 +176,12 @@ export default function ToolArticle({
       'price': '0',
       'priceCurrency': 'USD'
     }
-  }), [translatedTitle, translatedIntro, translatedWhatItDoes, currentTool]);
+  }), [translatedTitle, translatedIntro, translatedWhatItDoes, currentTool, toolId]);
 
   const howToSchema = useMemo(() => (translatedHowToUse && translatedHowToUse.length > 0 ? {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
-    'name': `How to use ${translatedTitle}`,
+    'name': currentTool ? `How to use ${currentTool.title}` : `How to use ${translatedTitle}`,
     'description': translatedIntro,
     'step': translatedHowToUse.map((step, idx) => ({
       '@type': 'HowToStep',
@@ -186,7 +189,7 @@ export default function ToolArticle({
       'name': `Step ${idx + 1}`,
       'text': step
     }))
-  } : null), [translatedTitle, translatedIntro, translatedHowToUse]);
+  } : null), [translatedTitle, translatedIntro, translatedHowToUse, currentTool]);
 
   const faqSchema = useMemo(() => (translatedFaqs && translatedFaqs.length > 0 ? {
     '@context': 'https://schema.org',
@@ -212,9 +215,12 @@ export default function ToolArticle({
         href: locale === 'en' ? `/categories/${parentCategory.slug}/` : `/${locale}/categories/${parentCategory.slug}/`
       });
     }
-    items.push({ label: currentTool ? t(`tools.${currentTool.slug}.title`, currentTool.title) : translatedTitle });
+    const toolLabel = currentTool 
+      ? t(`tools.${currentTool.slug}.title`, currentTool.title) 
+      : (toolId ? toolId.split('-').map((s: string) => s.charAt(0).toUpperCase() + s.slice(1)).join(' ') : 'Tool');
+    items.push({ label: toolLabel });
     return items;
-  }, [t, translatedTitle, currentTool, parentCategory, locale]);
+  }, [t, currentTool, toolId, parentCategory, locale]);
 
   const breadcrumbSchema = useMemo(() => ({
     '@context': 'https://schema.org',
@@ -299,52 +305,124 @@ export default function ToolArticle({
               </div>
             </div>
 
-            {/* Content Sections — custom layouts change flex order so pages don't share one skeleton */}
+            {/* Content Sections in natural DOM order */}
             <div className="flex flex-col gap-12">
-              {uniqueSection && (uniqueSection.body || (uniqueSection.bullets && uniqueSection.bullets.length > 0)) && (
-                <div
-                  style={{ order: layout === 'fails-first' ? 1 : layout === 'howto-first' ? 4 : layout === 'limits-first' ? 2 : layout === 'print-first' ? 3 : 6 }}
-                  className={`p-8 sm:p-10 rounded-[1.125rem] shadow-sm border ${
-                    layout === 'fails-first'
-                      ? 'bg-rose-50/50 dark:bg-rose-950/15 border-rose-200 dark:border-rose-500/20'
-                      : layout === 'limits-first'
-                        ? 'bg-amber-50/60 dark:bg-amber-950/15 border-amber-200 dark:border-amber-500/20'
-                        : layout === 'print-first'
-                          ? 'bg-sky-50/70 dark:bg-sky-950/15 border-sky-200 dark:border-sky-500/20'
-                          : 'bg-slate-50 dark:bg-white/[0.02] border-slate-200 dark:border-white/10'
-                  }`}
-                >
-                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4 tracking-tight">
-                    {uniqueSection.title}
+              {/* 1. Step-by-Step: How to use */}
+              {translatedHowToUse && translatedHowToUse.length > 0 && (
+                <div className="p-8 sm:p-10 rounded-[1.125rem] bg-[#FBFCFE] dark:bg-[#090d16] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.04)]">
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3 tracking-tight">
+                    {numbered && (
+                      <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">01</span>
+                    )}
+                    {howToHeading || t('article.howToUse', 'How to use {title}').replace('{title}', currentTool ? currentTool.title : translatedTitle)}
                   </h3>
-                  {uniqueSection.body && (
-                    <p className="text-slate-700 dark:text-gray-300 leading-relaxed text-sm sm:text-base font-medium font-sans mb-4">
-                      {uniqueSection.body}
-                    </p>
-                  )}
-                  {uniqueSection.bullets && uniqueSection.bullets.length > 0 && (
-                    <ul className="space-y-3 list-none p-0">
-                      {uniqueSection.bullets.map((item, i) => (
-                        <li key={i} className="flex items-start gap-3 text-slate-800 dark:text-gray-200 font-medium font-sans text-sm">
-                          <span className="text-slate-400 font-black flex-shrink-0 mt-0.5">•</span>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                  <div className="grid gap-4">
+                    {translatedHowToUse.map((step, i) => (
+                      <motion.div 
+                        key={i}
+                        whileHover={{ x: 6 }}
+                        className="flex gap-5 p-5 rounded-[1rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 hover:border-blue-300 dark:hover:border-blue-500/30 transition-all shadow-[0_4px_20px_rgba(15,23,42,0.03)] group"
+                      >
+                        <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-600/10 border border-blue-200 dark:border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400 font-black text-sm">
+                          {i + 1}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-slate-800 dark:text-gray-200 font-medium leading-relaxed font-sans text-sm sm:text-base">{step}</p>
+                          {screenshotCaptions[i] && (
+                            <figure className="mt-3 rounded-xl border border-dashed border-slate-300 dark:border-white/15 bg-slate-50 dark:bg-white/[0.03] p-3">
+                              <div className="aspect-[16/6] rounded-lg bg-slate-200/80 dark:bg-white/5 flex items-center justify-center text-[10px] font-black uppercase tracking-[0.18em] text-slate-500 dark:text-gray-500">
+                                Screenshot placeholder
+                              </div>
+                              <figcaption className="mt-2 text-xs text-slate-500 dark:text-gray-400 font-medium leading-relaxed">
+                                {screenshotCaptions[i]}
+                              </figcaption>
+                            </figure>
+                          )}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               )}
 
-              {/* What is section with Specification Table immediately following the paragraph */}
+              {/* 2. Key Features */}
+              {translatedKeyFeatures && translatedKeyFeatures.length > 0 && (
+                <div>
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3 tracking-tight">
+                    {numbered && (
+                      <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">02</span>
+                    )}
+                    {t('article.keyFeatures', 'Key Features')}
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {translatedKeyFeatures.map((feature, i) => (
+                      <div key={i} className="p-6 sm:p-8 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 hover:border-blue-300 dark:hover:border-blue-500/30 transition-all shadow-[0_10px_35px_rgba(15,23,42,0.06)] hover:-translate-y-1 group relative overflow-hidden">
+                        <div className="absolute top-0 right-0 p-4 opacity-[0.05] group-hover:opacity-20 transition-opacity">
+                           <Sparkles className="w-12 h-12 text-blue-600 dark:text-white" />
+                        </div>
+                        <h4 className="text-slate-900 dark:text-white font-black mb-3 uppercase tracking-widest text-xs flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+                          {feature.title}
+                        </h4>
+                        <p className="text-slate-600 dark:text-gray-400 text-xs sm:text-sm leading-relaxed font-medium font-sans">
+                          {feature.desc}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* 3. Practical Packs / Use Cases */}
+              {translatedUseCases && translatedUseCases.length > 0 && (
+                <div className="p-8 sm:p-10 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 tracking-tight">
+                    {numbered && (
+                      <span className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xs font-black">03</span>
+                    )}
+                    {useCasesHeading || t('article.useCases', 'Practical Packs People Actually Build')}
+                  </h3>
+                  <ul className="space-y-3 list-none p-0">
+                    {translatedUseCases.map((useCase, i) => (
+                      <li key={i} className="bg-[#FBFCFE] dark:bg-white/[0.01] px-5 py-3.5 rounded-[16px] border border-[#E6ECF5] dark:border-white/5 text-slate-800 dark:text-gray-200 text-xs font-bold flex items-center justify-between group hover:border-blue-300 transition-all shadow-sm">
+                         <span className="font-sans leading-relaxed">{useCase}</span>
+                         <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors" />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* 4. Benefits */}
+              {translatedBenefits && translatedBenefits.length > 0 && (
+                <div className="p-8 sm:p-10 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 tracking-tight">
+                    {numbered && (
+                      <span className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xs font-black">04</span>
+                    )}
+                    {t('article.benefits', 'Benefits')}
+                  </h3>
+                  <ul className="space-y-4 list-none p-0">
+                    {translatedBenefits.map((benefit, i) => (
+                      <li key={i} className="flex items-start gap-3 text-slate-700 dark:text-gray-300 font-medium font-sans text-sm">
+                        <CheckCircle2 className="w-5 h-5 text-blue-600 dark:text-blue-500 flex-shrink-0 mt-0.5" />
+                        {benefit}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* 5. What is / What Happens section with Specification Table */}
               {translatedWhatItDoes && translatedWhatItDoes.trim().length > 0 && (
-                <div style={{ order: layout === 'howto-first' ? 4 : layout === 'fails-first' ? 3 : layout === 'limits-first' ? 3 : layout === 'print-first' ? 4 : 1 }} className="p-8 sm:p-10 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)] relative group">
+                <div className="p-8 sm:p-10 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)] relative group">
                   <div className="absolute top-0 right-10 h-[2px] w-24 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
                   <div className="relative space-y-6">
                     <h3 className="text-xl font-black text-slate-900 dark:text-white flex items-center gap-3 tracking-tight">
                       {numbered && (
-                        <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">01</span>
+                        <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">05</span>
                       )}
-                      {whatHeading || t('article.whatIs', 'What is {title}?').replace('{title}', translatedTitle)}
+                      {whatHeading || t('article.whatIs', 'What is {title}?').replace('{title}', currentTool ? currentTool.title : translatedTitle)}
                     </h3>
                     <div className="space-y-4">
                       {translatedWhatItDoes.split('\n\n').map((para, idx) => (
@@ -386,9 +464,47 @@ export default function ToolArticle({
                 </div>
               )}
 
-              {/* Common Mistakes Warning Card */}
+              {/* 6. Troubleshooting & Limits (Merged Single Section) */}
+              {uniqueSection && (uniqueSection.body || (uniqueSection.bullets && uniqueSection.bullets.length > 0)) ? (
+                <div className="p-8 sm:p-10 rounded-[1.125rem] shadow-sm border bg-amber-50/60 dark:bg-amber-950/15 border-amber-200 dark:border-amber-500/20">
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4 tracking-tight">
+                    {uniqueSection.title}
+                  </h3>
+                  {uniqueSection.body && (
+                    <p className="text-slate-700 dark:text-gray-300 leading-relaxed text-sm sm:text-base font-medium font-sans mb-4">
+                      {uniqueSection.body}
+                    </p>
+                  )}
+                  {uniqueSection.bullets && uniqueSection.bullets.length > 0 && (
+                    <ul className="space-y-3 list-none p-0">
+                      {uniqueSection.bullets.map((item, i) => (
+                        <li key={i} className="flex items-start gap-3 text-slate-800 dark:text-gray-200 font-medium font-sans text-sm">
+                          <span className="text-amber-600 font-black flex-shrink-0 mt-0.5">•</span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ) : limitations.length > 0 ? (
+                <div className="p-8 sm:p-10 rounded-[1.125rem] bg-amber-50/70 dark:bg-amber-950/15 border border-amber-200 dark:border-amber-500/20 shadow-sm">
+                  <h3 className="text-xl font-black text-amber-950 dark:text-amber-200 mb-6 tracking-tight">
+                    Limits and important notes
+                  </h3>
+                  <ul className="space-y-3 list-none p-0">
+                    {limitations.map((note, i) => (
+                      <li key={i} className="flex items-start gap-3 text-amber-950 dark:text-amber-100 font-medium font-sans text-sm">
+                        <span className="text-amber-600 font-black flex-shrink-0 mt-0.5">•</span>
+                        {note}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              {/* Common Mistakes Warning Card (if provided) */}
               {commonMistakes && commonMistakes.length > 0 && (
-                <div style={{ order: 5 }} className="p-8 sm:p-10 rounded-[1.125rem] bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-500/20 shadow-sm relative">
+                <div className="p-8 sm:p-10 rounded-[1.125rem] bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-500/20 shadow-sm relative">
                   <h3 className="text-xl font-black text-rose-950 dark:text-rose-300 mb-6 flex items-center gap-3 tracking-tight">
                     <span className="w-10 h-10 rounded-xl bg-rose-500 text-white flex items-center justify-center text-sm font-black shadow-sm">⚠️</span>
                     Common Mistakes That Cause Rejection
@@ -404,134 +520,9 @@ export default function ToolArticle({
                 </div>
               )}
 
-              {/* How to use */}
-              {translatedHowToUse && translatedHowToUse.length > 0 && (
-                <div style={{ order: layout === 'howto-first' ? 1 : layout === 'fails-first' ? 2 : layout === 'limits-first' ? 4 : layout === 'print-first' ? 2 : 2 }} className="p-8 sm:p-10 rounded-[1.125rem] bg-[#FBFCFE] dark:bg-[#090d16] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.04)]">
-                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3 tracking-tight">
-                    {numbered && (
-                      <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">02</span>
-                    )}
-                    {howToHeading || t('article.howToUse', 'How to use {title}').replace('{title}', translatedTitle)}
-                  </h3>
-                  <div className="grid gap-4">
-                    {translatedHowToUse.map((step, i) => (
-                      <motion.div 
-                        key={i}
-                        whileHover={{ x: 6 }}
-                        className="flex gap-5 p-5 rounded-[1rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 hover:border-blue-300 dark:hover:border-blue-500/30 transition-all shadow-[0_4px_20px_rgba(15,23,42,0.03)] group"
-                      >
-                        <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-600/10 border border-blue-200 dark:border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400 font-black text-sm">
-                          {i + 1}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <p className="text-slate-800 dark:text-gray-200 font-medium leading-relaxed font-sans text-sm sm:text-base">{step}</p>
-                          {screenshotCaptions[i] && (
-                            <figure className="mt-3 rounded-xl border border-dashed border-slate-300 dark:border-white/15 bg-slate-50 dark:bg-white/[0.03] p-3">
-                              <div className="aspect-[16/6] rounded-lg bg-slate-200/80 dark:bg-white/5 flex items-center justify-center text-[10px] font-black uppercase tracking-[0.18em] text-slate-500 dark:text-gray-500">
-                                Screenshot placeholder
-                              </div>
-                              <figcaption className="mt-2 text-xs text-slate-500 dark:text-gray-400 font-medium leading-relaxed">
-                                {screenshotCaptions[i]}
-                              </figcaption>
-                            </figure>
-                          )}
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Key Features */}
-              {translatedKeyFeatures && translatedKeyFeatures.length > 0 && (
-                <div style={{ order: layout === 'howto-first' ? 2 : 7 }}>
-                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3 tracking-tight">
-                    {numbered && (
-                      <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">03</span>
-                    )}
-                    {t('article.keyFeatures', 'Key Features')}
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {translatedKeyFeatures.map((feature, i) => (
-                      <div key={i} className="p-6 sm:p-8 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 hover:border-blue-300 dark:hover:border-blue-500/30 transition-all shadow-[0_10px_35px_rgba(15,23,42,0.06)] hover:-translate-y-1 group relative overflow-hidden">
-                        <div className="absolute top-0 right-0 p-4 opacity-[0.05] group-hover:opacity-20 transition-opacity">
-                           <Sparkles className="w-12 h-12 text-blue-600 dark:text-white" />
-                        </div>
-                        <h4 className="text-slate-900 dark:text-white font-black mb-3 uppercase tracking-widest text-xs flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
-                          {feature.title}
-                        </h4>
-                        <p className="text-slate-600 dark:text-gray-400 text-xs sm:text-sm leading-relaxed font-medium font-sans">
-                          {feature.desc}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Benefits & Use Cases */}
-              {(translatedBenefits.length > 0 || translatedUseCases.length > 0) && (
-                <div style={{ order: layout === 'howto-first' ? 3 : layout === 'default' ? 8 : layout === 'print-first' ? 1 : 5 }} className={`grid gap-8 ${translatedBenefits.length > 0 && translatedUseCases.length > 0 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
-                  {translatedBenefits.length > 0 && (
-                    <div className="p-8 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
-                      <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 tracking-tight">
-                        {numbered && (
-                          <span className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xs font-black">04</span>
-                        )}
-                        {t('article.benefits', 'Benefits')}
-                      </h3>
-                      <ul className="space-y-4 list-none p-0">
-                        {translatedBenefits.map((benefit, i) => (
-                          <li key={i} className="flex items-start gap-3 text-slate-700 dark:text-gray-300 font-medium font-sans text-sm">
-                            <CheckCircle2 className="w-5 h-5 text-blue-600 dark:text-blue-500 flex-shrink-0 mt-0.5" />
-                            {benefit}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  {translatedUseCases.length > 0 && (
-                    <div className="p-8 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
-                      <h3 className="text-xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 tracking-tight">
-                        {numbered && (
-                          <span className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xs font-black">05</span>
-                        )}
-                        {useCasesHeading || t('article.useCases', 'Use Cases')}
-                      </h3>
-                      <ul className="space-y-3 list-none p-0">
-                        {translatedUseCases.map((useCase, i) => (
-                          <li key={i} className="bg-[#FBFCFE] dark:bg-white/[0.01] px-5 py-3.5 rounded-[16px] border border-[#E6ECF5] dark:border-white/5 text-slate-800 dark:text-gray-200 text-xs font-bold flex items-center justify-between group hover:border-blue-300 transition-all shadow-sm">
-                             <span className="font-sans leading-relaxed">{useCase}</span>
-                             <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors" />
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {limitations.length > 0 && (
-                <div style={{ order: layout === 'howto-first' ? 4 : layout === 'limits-first' ? 1 : 6 }} className="p-8 sm:p-10 rounded-[1.125rem] bg-amber-50/70 dark:bg-amber-950/15 border border-amber-200 dark:border-amber-500/20 shadow-sm">
-                  <h3 className="text-xl font-black text-amber-950 dark:text-amber-200 mb-6 flex items-center gap-3 tracking-tight">
-                    <span className="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center text-sm font-black shadow-sm">!</span>
-                    Limits and important notes
-                  </h3>
-                  <ul className="space-y-3 list-none p-0">
-                    {limitations.map((note, i) => (
-                      <li key={i} className="flex items-start gap-3 text-amber-950 dark:text-amber-100 font-medium font-sans text-sm">
-                        <span className="text-amber-600 font-black flex-shrink-0 mt-0.5">•</span>
-                        {note}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
               {/* Privacy Trust Section: Shown only if tool-specific note provided */}
               {(privacyHeading || privacyNote) && (
-                <div style={{ order: 9 }} className="p-8 sm:p-10 rounded-[1.125rem] bg-slate-900 dark:bg-white/[0.02] text-white border border-slate-800 dark:border-white/10 shadow-xl relative overflow-hidden">
+                <div className="p-8 sm:p-10 rounded-[1.125rem] bg-slate-900 dark:bg-white/[0.02] text-white border border-slate-800 dark:border-white/10 shadow-xl relative overflow-hidden">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-2xl flex-shrink-0">
                       🔒
@@ -548,9 +539,9 @@ export default function ToolArticle({
                 </div>
               )}
 
-              {/* Why ToolWala */}
+              {/* 7. Why ToolWala */}
               {translatedWhyChoose && translatedWhyChoose.trim().length > 0 && (
-                <div style={{ order: layout === 'howto-first' ? 5 : 10 }} className="relative p-8 sm:p-10 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 overflow-hidden shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
+                <div className="relative p-8 sm:p-10 rounded-[1.125rem] bg-white dark:bg-white/[0.01] border border-[#E6ECF5] dark:border-white/5 overflow-hidden shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
                   <div className="relative">
                     <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4 uppercase tracking-tight">
@@ -563,9 +554,9 @@ export default function ToolArticle({
                 </div>
               )}
 
-              {/* FAQs */}
+              {/* 8. FAQs */}
               {translatedFaqs && translatedFaqs.length > 0 && (
-                <div style={{ order: layout === 'howto-first' ? 6 : 11 }}>
+                <div>
                   <div className="text-center mb-12">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-4">
                       <HelpCircle className="w-3.5 h-3.5" />

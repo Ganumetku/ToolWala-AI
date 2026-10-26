@@ -2,10 +2,10 @@
 
 import { useEffect, useMemo } from "react";
 import Link from "next/link";
-import { Calendar, Clock, ArrowLeft, ArrowRight, User } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, ArrowRight, User, Sparkles } from "lucide-react";
 import type { Tool } from "@/data/tools";
 import type { BlogPost } from "@/types/blog";
-import type { TocItem } from "@/lib/blog-seo";
+import type { BreadcrumbItem, TocItem } from "@/lib/blog-seo";
 import { matchRelatedBlogs } from "@/lib/blog-utils";
 import ReadingProgressBar from "@/components/blog/ReadingProgressBar";
 import BlogShareButtons from "@/components/blog/BlogShareButtons";
@@ -14,6 +14,8 @@ import BlogFaqSection from "@/components/blog/BlogFaqSection";
 import RelatedTools from "@/components/blog/RelatedTools";
 import BlogNewsletter from "@/components/blog/BlogNewsletter";
 import BlogTableOfContents from "@/components/blog/BlogTableOfContents";
+import BlogBreadcrumbs from "@/components/blog/BlogBreadcrumbs";
+import LazyBlogImage from "@/components/blog/LazyBlogImage";
 import { useTranslation } from "@/components/I18nContext";
 import { categoriesData } from "@/data/categories";
 import ToolIcon from "@/components/ToolIcon";
@@ -30,7 +32,7 @@ const formatDateShort = (dateString: string, locale: string) => {
   if (!dateString) return "";
   const date = new Date(dateString);
   if (isNaN(date.getTime())) return "";
-  return new Intl.DateTimeFormat(locale, { month: 'short', day: 'numeric' }).format(date);
+  return new Intl.DateTimeFormat(locale, { month: 'short', day: 'numeric', year: 'numeric' }).format(date);
 };
 
 interface BlogDetailClientProps {
@@ -39,6 +41,7 @@ interface BlogDetailClientProps {
   relatedTools: Tool[];
   allTools: Tool[];
   pageUrl: string;
+  breadcrumbs: BreadcrumbItem[];
   tocItems: TocItem[];
   processedHtml?: string;
 }
@@ -49,6 +52,7 @@ export default function BlogDetailClient({
   relatedTools,
   allTools,
   pageUrl,
+  breadcrumbs,
   tocItems,
   processedHtml,
 }: BlogDetailClientProps) {
@@ -100,78 +104,114 @@ export default function BlogDetailClient({
     <>
       <ReadingProgressBar />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12" data-no-translate>
-        <div className="lg:col-span-1 lg:sticky lg:top-32 h-fit hidden lg:block">
+      {/* Breadcrumb Navigation */}
+      <BlogBreadcrumbs items={breadcrumbs} className="mb-6 sm:mb-8" />
+
+      {/* Article Hero Header - Above the Fold Clarity */}
+      <header className="mb-8 sm:mb-10 space-y-5 max-w-4xl">
+        {/* Category & Badges */}
+        <div className="flex flex-wrap items-center gap-2.5">
+          <Link
+            href={localizeHref(`/blog/category/${blog.category.toLowerCase().replace(/\s+/g, "-")}`)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-bold text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 transition-colors"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
+            {translatedCategory}
+          </Link>
+          {blog.trending && (
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-bold text-purple-600 dark:text-purple-400">
+              <Sparkles className="w-3.5 h-3.5" />
+              {t('blog.trending_badge', 'Trending')}
+            </span>
+          )}
+        </div>
+
+        {/* H1 Main Title: Clear, bold, readable natural capitalization */}
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.2]">
+          {translatedTitle}
+        </h1>
+
+        {/* Subtitle / Excerpt lead paragraph if present */}
+        {translatedExcerpt && (
+          <p className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 font-normal leading-relaxed">
+            {translatedExcerpt}
+          </p>
+        )}
+
+        {/* Author Meta Row */}
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-200/80 dark:border-white/10 text-xs text-slate-600 dark:text-slate-400">
+          <div className="flex items-center gap-3">
+            {blog.author.avatar ? (
+              <Image
+                src={blog.author.avatar}
+                alt={blog.author.name}
+                width={40}
+                height={40}
+                className="w-10 h-10 rounded-full border-2 border-blue-500/20 object-cover shrink-0"
+              />
+            ) : (
+              <div className="w-10 h-10 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">
+                <User className="w-5 h-5" />
+              </div>
+            )}
+            <div>
+              <span className="text-slate-900 dark:text-white font-bold text-sm block">
+                {blog.author.name}
+              </span>
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-medium block">
+                {blog.author.role || t('blog.writer_role', 'Writer')}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 text-xs font-medium">
+            <span className="flex items-center gap-1.5">
+              <Calendar className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+              {formatDateLong(blog.publishedAt || blog.createdAt, locale)}
+            </span>
+            <span className="text-slate-300 dark:text-slate-700">•</span>
+            <span className="flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+              {translatedReadingTime}
+            </span>
+          </div>
+        </div>
+      </header>
+
+      {/* Featured Visual Showcase - Well proportioned, bounded height */}
+      {blog.thumbnail && (
+        <div className="w-full mb-10 sm:mb-14">
+          <div className="relative w-full aspect-[16/9] sm:aspect-[21/10] max-h-[440px] rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 shadow-2xl shadow-blue-500/5 bg-[#0d082d] flex items-center justify-center group">
+            <LazyBlogImage
+              src={blog.thumbnail}
+              alt={translatedTitle}
+              priority
+              objectFit="contain"
+              className="w-full h-full transform group-hover:scale-[1.01] transition-transform duration-500"
+              aspectRatio="w-full h-full"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* 3-Column Content Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12" data-no-translate>
+        {/* Left Sticky Share Bar */}
+        <div className="lg:col-span-1 lg:sticky lg:top-28 h-fit hidden lg:block">
           <BlogShareButtons title={translatedTitle} url={pageUrl} layout="vertical" />
         </div>
 
-        <div className="lg:col-span-8 space-y-12">
-          <article className="glass rounded-[2.5rem] overflow-hidden border border-gray-200 dark:border-white/5 shadow-2xl p-6 sm:p-14 bg-white/80 dark:bg-white/[0.01]">
-            <header className="border-b border-gray-200 dark:border-white/5 pb-8 mb-10 space-y-6">
-              <div className="flex flex-wrap items-center gap-3">
-                <Link
-                  href={localizeHref(`/blog/category/${blog.category.toLowerCase().replace(/\s+/g, "-")}`)}
-                  className="px-3 py-1.5 rounded bg-blue-500/10 border border-blue-500/20 text-xs font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 transition-colors"
-                >
-                  {translatedCategory}
-                </Link>
-                {blog.trending && (
-                  <span className="px-3 py-1.5 rounded bg-purple-500/10 border border-purple-500/20 text-xs font-black uppercase tracking-widest text-purple-600 dark:text-purple-400">
-                    {t('blog.trending_badge', 'Trending')}
-                  </span>
-                )}
+        {/* Center Main Reading Column (8 cols) */}
+        <div className="lg:col-span-8 space-y-10">
+          <article className="bg-white dark:bg-[#0c1222]/90 backdrop-blur-xl rounded-3xl border border-slate-200 dark:border-slate-800/80 shadow-xl shadow-slate-200/50 dark:shadow-none p-6 sm:p-10 md:p-12">
+            {/* Mobile TOC */}
+            {tocItems.length > 0 && (
+              <div className="lg:hidden mb-8 pb-6 border-b border-slate-200 dark:border-white/10">
+                <BlogTableOfContents items={tocItems} syncFromDom contentKey={translatedContent} />
               </div>
+            )}
 
-              <h1 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tighter leading-tight uppercase">
-                {translatedTitle}
-              </h1>
-
-              <div className="flex flex-wrap items-center gap-6 pt-4 text-xs font-black uppercase tracking-widest text-gray-600 dark:text-gray-400">
-                <div className="flex items-center gap-2">
-                  {blog.author.avatar ? (
-                    <Image
-                      src={blog.author.avatar}
-                      alt={blog.author.name}
-                      width={32}
-                      height={32}
-                      className="w-8 h-8 rounded-full border border-gray-300 dark:border-white/10 shrink-0"
-                    />
-                  ) : (
-                    <div className="w-8 h-8 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center">
-                      <User className="w-4 h-4" />
-                    </div>
-                  )}
-                  <div>
-                    <span className="text-gray-900 dark:text-white block">{blog.author.name}</span>
-                    <span className="text-[9px] text-gray-500 font-bold block mt-0.5">
-                      {blog.author.role || t('blog.writer_role', 'Writer')}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 border-l border-gray-300 dark:border-white/10 pl-6 h-8">
-                  <span className="flex items-center gap-1.5">
-                    <Calendar className="w-4 h-4" />
-                    {formatDateLong(blog.publishedAt || blog.createdAt, locale)}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Clock className="w-4 h-4" />
-                    {translatedReadingTime}
-                  </span>
-                </div>
-              </div>
-
-              {tocItems.length > 0 && (
-                <div className="lg:hidden pt-4 border-t border-gray-200 dark:border-white/5">
-                  <BlogTableOfContents items={tocItems} syncFromDom contentKey={translatedContent} />
-                </div>
-              )}
-
-              <div className="lg:hidden pt-2">
-                <BlogShareButtons title={translatedTitle} url={pageUrl} layout="horizontal" />
-              </div>
-            </header>
-
+            {/* Main Content Body */}
             <div id="blog-article-body">
               <BlogRichContent
                 content={translatedContent}
@@ -183,15 +223,18 @@ export default function BlogDetailClient({
               />
             </div>
 
+            {/* FAQs Accordion */}
             <BlogFaqSection faqs={translatedFaqs} />
 
+            {/* Tags */}
             {blog.tags.length > 0 && (
-              <div className="flex flex-wrap gap-2 pt-8 mt-12 border-t border-gray-200 dark:border-white/5">
+              <div className="flex flex-wrap items-center gap-2 pt-8 mt-10 border-t border-slate-200 dark:border-white/10">
+                <span className="text-xs font-bold text-slate-500 dark:text-slate-400 mr-1">Tags:</span>
                 {blog.tags.map((tag) => (
                   <Link
                     key={tag}
                     href={localizeHref(`/blog/tag/${tag.toLowerCase().replace(/\s+/g, "-")}`)}
-                    className="px-3 py-1 rounded-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/5 text-xs text-gray-700 dark:text-gray-400 font-bold hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-500/30 transition-colors"
+                    className="px-3 py-1 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-700 dark:text-slate-300 font-semibold hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-500/30 transition-colors"
                   >
                     #{tag}
                   </Link>
@@ -199,25 +242,56 @@ export default function BlogDetailClient({
               </div>
             )}
 
+            {/* Author Bio Box */}
+            <div className="mt-10 p-6 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 flex flex-col sm:flex-row items-center sm:items-start gap-4">
+              {blog.author.avatar ? (
+                <Image
+                  src={blog.author.avatar}
+                  alt={blog.author.name}
+                  width={56}
+                  height={56}
+                  className="w-14 h-14 rounded-full border-2 border-blue-500/20 object-cover shrink-0"
+                />
+              ) : (
+                <div className="w-14 h-14 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                  <User className="w-7 h-7" />
+                </div>
+              )}
+              <div className="text-center sm:text-left space-y-1">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">Written By</span>
+                <h4 className="text-base font-bold text-slate-900 dark:text-white">{blog.author.name}</h4>
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
+                  {blog.author.role ? `${blog.author.role} at ToolWala AI.` : "Content specialist at ToolWala AI."} Writing clear, in-depth guides to simplify complex workflows with client-side, privacy-first tools.
+                </p>
+              </div>
+            </div>
+
+            {/* Mobile Share Buttons */}
+            <div className="lg:hidden pt-6 mt-6 border-t border-slate-200 dark:border-white/10">
+              <span className="text-xs font-bold text-slate-500 block mb-3">Share this article:</span>
+              <BlogShareButtons title={translatedTitle} url={pageUrl} layout="horizontal" />
+            </div>
+
+            {/* Related Categories Pills */}
             {relatedCategories.length > 0 && (
-              <div className="pt-8 mt-8 border-t border-gray-200 dark:border-white/5">
-                <h4 className="text-xs font-black uppercase tracking-widest text-gray-600 dark:text-gray-400 mb-4">
+              <div className="pt-8 mt-8 border-t border-slate-200 dark:border-white/10">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4">
                   {t('blog.related_categories', 'Related Categories')}
                 </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {relatedCategories.map((cat) => (
                     <Link
                       key={cat.slug}
                       href={localizeHref(`/categories/${cat.slug}`)}
-                      className="p-4 rounded-xl bg-gray-50 dark:bg-white/[0.01] border border-gray-200 dark:border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 transition-all flex items-center justify-between group"
+                      className="p-3.5 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 hover:border-blue-500/30 hover:bg-blue-500/5 transition-all flex items-center justify-between group"
                     >
-                      <div className="flex items-center gap-2">
-                        <ToolIcon icon={cat.icon} className="w-5 h-5 shrink-0 text-blue-600 dark:text-blue-400" />
-                        <span className="text-xs font-black text-gray-800 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-white uppercase truncate">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <ToolIcon icon={cat.icon} className="w-4 h-4 shrink-0 text-blue-600 dark:text-blue-400" />
+                        <span className="text-xs font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-white truncate">
                           {t(`categories.${cat.title}`, cat.title)}
                         </span>
                       </div>
-                      <ArrowRight className="w-3.5 h-3.5 text-gray-500 group-hover:text-blue-500 transition-colors shrink-0" />
+                      <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0" />
                     </Link>
                   ))}
                 </div>
@@ -225,56 +299,74 @@ export default function BlogDetailClient({
             )}
           </article>
 
+          {/* Related Tools */}
           <RelatedTools tools={relatedTools} />
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-between items-center bg-gray-50 dark:bg-white/[0.01] border border-gray-200 dark:border-white/5 p-6 rounded-3xl backdrop-blur-md">
+          {/* Prev / Next Navigation */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {prevPost ? (
-              <Link href={localizeHref(`/blog/${prevPost.slug}`)} className="flex items-center gap-4 group text-left w-full sm:w-auto">
-                <div className="p-3 rounded-2xl bg-gray-100 dark:bg-white/5 group-hover:bg-blue-600/10 border border-gray-200 dark:border-white/5 group-hover:border-blue-500/20 text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-all">
+              <Link
+                href={localizeHref(`/blog/${prevPost.slug}`)}
+                className="group p-5 rounded-2xl bg-white dark:bg-[#0c1222]/90 border border-slate-200 dark:border-slate-800/80 hover:border-blue-500/30 shadow-sm transition-all flex items-center gap-3.5"
+              >
+                <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/5 group-hover:bg-blue-600/10 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-all shrink-0">
                   <ArrowLeft className="w-4 h-4" />
                 </div>
-                <div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-gray-500 block">{t('blog.previous', 'Previous')}</span>
-                  <span className="text-xs font-black uppercase text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
+                <div className="min-w-0">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-0.5">
+                    {t('blog.previous', 'Previous')}
+                  </span>
+                  <span className="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1 block">
                     {t(`blogs.${prevPost.slug}.title`, prevPost.title)}
                   </span>
                 </div>
               </Link>
-            ) : (
-              <div />
-            )}
+            ) : <div />}
 
             {nextPost ? (
-              <Link href={localizeHref(`/blog/${nextPost.slug}`)} className="flex items-center gap-4 group text-right w-full sm:w-auto justify-end ml-auto">
-                <div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-gray-500 block text-right">{t('blog.next', 'Next')}</span>
-                  <span className="text-xs font-black uppercase text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1 text-right">
+              <Link
+                href={localizeHref(`/blog/${nextPost.slug}`)}
+                className="group p-5 rounded-2xl bg-white dark:bg-[#0c1222]/90 border border-slate-200 dark:border-slate-800/80 hover:border-blue-500/30 shadow-sm transition-all flex items-center justify-end gap-3.5 text-right sm:ml-auto w-full"
+              >
+                <div className="min-w-0">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-0.5">
+                    {t('blog.next', 'Next')}
+                  </span>
+                  <span className="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1 block">
                     {t(`blogs.${nextPost.slug}.title`, nextPost.title)}
                   </span>
                 </div>
-                <div className="p-3 rounded-2xl bg-gray-100 dark:bg-white/5 group-hover:bg-blue-600/10 border border-gray-200 dark:border-white/5 group-hover:border-blue-500/20 text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-all">
+                <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/5 group-hover:bg-blue-600/10 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-all shrink-0">
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </Link>
-            ) : (
-              <div />
-            )}
+            ) : <div />}
           </div>
 
-          <div className="space-y-6 pt-6">
-            <h3 className="text-lg font-black text-gray-900 dark:text-white uppercase tracking-widest">{t('blog.related_insights', 'Related Insights')}</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          {/* Related Insights */}
+          <div className="space-y-5 pt-4">
+            <div className="flex items-center gap-3">
+              <span className="w-1.5 h-6 rounded-full bg-blue-600 dark:bg-blue-500" />
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+                {t('blog.related_insights', 'Related Insights')}
+              </h3>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {relatedPosts.map((rBlog) => (
                 <Link
                   key={rBlog.id}
                   href={localizeHref(`/blog/${rBlog.slug}`)}
-                  className="group p-6 rounded-[2rem] border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-white/[0.01] hover:bg-gray-100 dark:hover:bg-white/[0.02] transition-all"
+                  className="group p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-[#0c1222]/90 hover:border-blue-500/30 shadow-sm transition-all flex flex-col justify-between"
                 >
-                  <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-500">{t(`categories.${rBlog.category}`, rBlog.category)}</span>
-                  <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 mt-2">
-                    {t(`blogs.${rBlog.slug}.title`, rBlog.title)}
-                  </h4>
-                  <div className="flex items-center gap-3 pt-4 mt-4 border-t border-gray-200 dark:border-white/5 text-[9px] font-black uppercase tracking-widest text-gray-500">
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">
+                      {t(`categories.${rBlog.category}`, rBlog.category)}
+                    </span>
+                    <h4 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 mt-2 leading-snug">
+                      {t(`blogs.${rBlog.slug}.title`, rBlog.title)}
+                    </h4>
+                  </div>
+                  <div className="flex items-center gap-3 pt-4 mt-4 border-t border-slate-100 dark:border-white/5 text-[11px] font-medium text-slate-500">
                     <span>{formatReadingTime(rBlog.readingTime)}</span>
                     <span>•</span>
                     <span>{formatDateShort(rBlog.publishedAt || rBlog.createdAt, locale)}</span>
@@ -284,26 +376,31 @@ export default function BlogDetailClient({
             </div>
           </div>
 
+          {/* Newsletter */}
           <BlogNewsletter />
         </div>
 
-        <div className="lg:col-span-3 lg:sticky lg:top-32 h-fit space-y-8 hidden lg:block">
+        {/* Right Sticky Sidebar (3 cols) */}
+        <div className="lg:col-span-3 lg:sticky lg:top-28 h-fit space-y-6 hidden lg:block">
           <BlogTableOfContents items={tocItems} syncFromDom contentKey={translatedContent} />
 
           {relatedTools.length > 0 && (
-            <div className="glass rounded-[2rem] border border-gray-200 dark:border-white/5 p-6 space-y-4">
-              <h3 className="text-xs font-black uppercase tracking-widest text-gray-900 dark:text-white border-b border-gray-200 dark:border-white/5 pb-3">
-                {t('blog.try_tools', 'Try These Tools')}
+            <div className="bg-white dark:bg-[#0c1222]/90 rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-sm p-5 space-y-3.5">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white border-b border-slate-200 dark:border-white/10 pb-3 flex items-center justify-between">
+                <span>{t('blog.try_tools', 'Try These Tools')}</span>
+                <span className="text-[10px] text-blue-600 dark:text-blue-400 font-semibold lowercase">free & private</span>
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {relatedTools.slice(0, 3).map((tool) => (
                   <Link
                     key={tool.slug}
                     href={localizeHref(tool.href)}
-                    className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/[0.02] border border-gray-200 dark:border-white/5 hover:border-blue-500/30 transition-all group"
+                    className="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-blue-500/5 transition-all group"
                   >
-                    <ToolIcon icon={tool.icon} className="w-4.5 h-4.5 shrink-0 text-blue-600 dark:text-blue-400" />
-                    <span className="text-xs font-black text-gray-900 dark:text-white uppercase group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-2">
+                    <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center shrink-0">
+                      <ToolIcon icon={tool.icon} className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-2 leading-tight">
                       {t(`tools.${tool.slug}.title`, tool.title)}
                     </span>
                   </Link>
@@ -313,24 +410,24 @@ export default function BlogDetailClient({
           )}
 
           {relatedCategories.length > 0 && (
-            <div className="glass rounded-[2rem] border border-gray-200 dark:border-white/5 p-6 space-y-4">
-              <h3 className="text-xs font-black uppercase tracking-widest text-gray-900 dark:text-white border-b border-gray-200 dark:border-white/5 pb-3">
+            <div className="bg-white dark:bg-[#0c1222]/90 rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-sm p-5 space-y-3.5">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white border-b border-slate-200 dark:border-white/10 pb-3">
                 {t('blog.explore_categories_title', 'Explore Related Categories')}
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {relatedCategories.map((cat) => (
                   <Link
                     key={cat.slug}
                     href={localizeHref(`/categories/${cat.slug}`)}
-                    className="flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-white/[0.02] border border-gray-200 dark:border-white/5 hover:border-blue-500/30 transition-all group"
+                    className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 hover:bg-blue-500/5 transition-all group"
                   >
-                    <div className="flex items-center gap-2.5">
-                      <ToolIcon icon={cat.icon} className="w-4.5 h-4.5 shrink-0 text-blue-600 dark:text-blue-400" />
-                      <span className="text-xs font-black text-gray-900 dark:text-white uppercase group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <ToolIcon icon={cat.icon} className="w-4 h-4 shrink-0 text-blue-600 dark:text-blue-400" />
+                      <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate">
                         {t(`categories.${cat.title}`, cat.title)}
                       </span>
                     </div>
-                    <ArrowRight className="w-3.5 h-3.5 text-gray-500 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all" />
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0" />
                   </Link>
                 ))}
               </div>
@@ -341,4 +438,3 @@ export default function BlogDetailClient({
     </>
   );
 }
-

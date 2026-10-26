@@ -67,6 +67,12 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL(targetPath + request.nextUrl.search, request.url), { status: 301 });
   }
 
+  // 301 redirect duplicate tool /tools/pdf-tools/ to /categories/pdf-tools/
+  if (normalizedRewritten === '/tools/pdf-tools/') {
+    const targetPath = isLocalePrefix ? `/${locale}/categories/pdf-tools/` : '/categories/pdf-tools/';
+    return NextResponse.redirect(new URL(targetPath + request.nextUrl.search, request.url), { status: 301 });
+  }
+
   // 301 redirect legacy blog post slugs to active replacements
   const LEGACY_BLOG_REDIRECTS: Record<string, string> = {
     'why-pan-card-document-upload-failed': '/blog/resize-photo-signature-pan-card-application/',

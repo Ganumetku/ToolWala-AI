@@ -66,11 +66,12 @@ export default function BlogTableOfContents({
   if (!items.length) return null;
 
   return (
-    <div className="glass rounded-[2rem] border border-gray-200 dark:border-white/5 p-6 space-y-4">
-      <h3 className="text-xs font-black uppercase tracking-widest text-gray-900 dark:text-white border-b border-gray-200 dark:border-white/5 pb-3">
-        {t('blog.table_of_contents', 'Table of Contents')}
+    <div className="bg-white dark:bg-[#0c1222]/90 rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-sm p-5 space-y-3.5">
+      <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white border-b border-slate-200 dark:border-white/10 pb-3 flex items-center justify-between">
+        <span>{t('blog.table_of_contents', 'Table of Contents')}</span>
+        <span className="text-[10px] text-blue-600 dark:text-blue-400 font-semibold">{items.length} sections</span>
       </h3>
-      <ul className="space-y-3 text-xs font-bold tracking-wide max-h-[50vh] overflow-y-auto">
+      <ul className="space-y-2 text-xs font-medium tracking-normal max-h-[50vh] overflow-y-auto pr-1">
         {items.map((item) => (
           <li key={item.id} style={{ paddingLeft: `${(item.level - 2) * 12}px` }}>
             <a
@@ -79,10 +80,10 @@ export default function BlogTableOfContents({
                 e.preventDefault();
                 document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth" });
               }}
-              className={`block transition-all hover:text-blue-600 dark:hover:text-blue-400 line-clamp-2 ${
+              className={`block transition-all hover:text-blue-600 dark:hover:text-blue-400 line-clamp-2 py-0.5 ${
                 activeId === item.id
-                  ? "text-blue-600 dark:text-blue-400 font-extrabold pl-2 border-l-2 border-blue-600 dark:border-blue-500"
-                  : "text-gray-600 dark:text-gray-400"
+                  ? "text-blue-600 dark:text-blue-400 font-bold pl-2 border-l-2 border-blue-600 dark:border-blue-500 bg-blue-50/60 dark:bg-blue-900/10 rounded-r"
+                  : "text-slate-600 dark:text-slate-400"
               }`}
             >
               {item.text}

@@ -44,7 +44,7 @@ function WhatsAppIcon(props: React.SVGProps<SVGSVGElement>) {
 }
 
 const btnClass =
-  "p-3 rounded-xl bg-white/5 border border-white/5 hover:border-blue-500/30 hover:bg-blue-600/10 text-gray-400 hover:text-blue-400 active:scale-95 transition-all";
+  "p-2.5 rounded-xl bg-slate-100 hover:bg-blue-50 dark:bg-white/5 dark:hover:bg-blue-600/10 border border-slate-200 dark:border-white/10 hover:border-blue-500/30 text-slate-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 active:scale-95 transition-all flex items-center justify-center";
 
 export default function BlogShareButtons({ title, url, layout = "vertical" }: BlogShareButtonsProps) {
   const copyLink = () => {
@@ -64,14 +64,14 @@ export default function BlogShareButtons({ title, url, layout = "vertical" }: Bl
 
   return (
     <div
-      className={`flex items-center gap-4 ${
+      className={`flex items-center gap-2.5 ${
         layout === "vertical"
-          ? "lg:flex-col lg:py-6 bg-white/[0.01] border border-white/5 rounded-2xl p-4"
+          ? "lg:flex-col lg:py-4 bg-white dark:bg-[#0c1222]/90 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-2.5 shadow-sm"
           : "flex-row flex-wrap"
       }`}
     >
       {layout === "vertical" && (
-        <span className="text-[9px] font-black uppercase tracking-widest text-gray-500 hidden lg:block mb-2">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 hidden lg:block mb-1">
           Share
         </span>
       )}

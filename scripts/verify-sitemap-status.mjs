@@ -1,36 +1,18 @@
 /**
  * verify-sitemap-status.mjs
- * Fetches the sitemap from live or constructs URL list from codebase,
- * verifies each URL returns 200 OK directly with NO 301/308 redirect or 404.
+ * Fetches all URLs from https://toolwala.co/sitemap.xml,
+ * tests each URL with HTTP HEAD (no redirect follow),
+ * saves results to scripts/sitemap-status-results.csv,
+ * and prints summary of any 301/308/404/noindex entries.
  */
 
 import https from 'https';
+import fs from 'fs';
+import path from 'path';
 
 const BASE_URL = 'https://toolwala.co';
-
-async function fetchUrl(url) {
-  return new Promise((resolve) => {
-    try {
-      const req = https.request(url, { method: 'HEAD', headers: { 'User-Agent': 'ToolWala-Sitemap-Validator/1.0' } }, (res) => {
-        resolve({
-          url,
-          status: res.statusCode,
-          location: res.headers.location || null
-        });
-      });
-      req.on('error', (err) => {
-        resolve({ url, status: 0, error: err.message });
-      });
-      req.setTimeout(8000, () => {
-        req.destroy();
-        resolve({ url, status: 0, error: 'TIMEOUT' });
-      });
-      req.end();
-    } catch (e) {
-      resolve({ url, status: 0, error: e.message });
-    }
-  });
-}
+const CONCURRENCY = 8;
+const CSV_PATH = path.join(process.cwd(), 'scripts', 'sitemap-status-results.csv');
 
 async function fetchText(url) {
   return new Promise((resolve) => {
@@ -43,75 +25,123 @@ async function fetchText(url) {
   });
 }
 
+async function checkUrl(url) {
+  return new Promise((resolve) => {
+    try {
+      const req = https.request(url, {
+        method: 'HEAD',
+        headers: { 'User-Agent': 'ToolWala-Sitemap-Audit/1.0' }
+      }, (res) => {
+        resolve({
+          url,
+          status: res.statusCode,
+          location: res.headers.location || '',
+          xRobots: res.headers['x-robots-tag'] || ''
+        });
+      });
+      req.on('error', (err) => {
+        resolve({ url, status: 0, location: '', xRobots: '', error: err.message });
+      });
+      req.setTimeout(10000, () => {
+        req.destroy();
+        resolve({ url, status: 0, location: '', xRobots: '', error: 'TIMEOUT' });
+      });
+      req.end();
+    } catch (e) {
+      resolve({ url, status: 0, location: '', xRobots: '', error: e.message });
+    }
+  });
+}
+
 async function main() {
   console.log('Fetching live sitemap from', `${BASE_URL}/sitemap.xml ...`);
   const xml = await fetchText(`${BASE_URL}/sitemap.xml`);
-  
+
   let urls = [];
   const locRegex = /<loc>(https?:\/\/[^<]+)<\/loc>/g;
   let match;
   while ((match = locRegex.exec(xml)) !== null) {
-    urls.push(match[1]);
+    const loc = match[1].trim();
+    if (!loc.endsWith('.xml')) {
+      urls.push(loc);
+    }
   }
 
-  // Deduplicate
   urls = Array.from(new Set(urls));
-  console.log(`Found ${urls.length} URLs in live sitemap.`);
+  console.log(`Found ${urls.length} unique URLs in sitemap.`);
 
   if (urls.length === 0) {
-    console.log('No URLs found in live sitemap.xml. Testing sample key tool URLs...');
-    urls = [
-      `${BASE_URL}/`,
-      `${BASE_URL}/tools/`,
-      `${BASE_URL}/categories/`,
-      `${BASE_URL}/tools/merge-pdf/`,
-      `${BASE_URL}/tools/split-pdf/`,
-      `${BASE_URL}/tools/compress-pdf/`,
-      `${BASE_URL}/tools/edit-pdf/`,
-      `${BASE_URL}/tools/pdf-to-word/`,
-      `${BASE_URL}/tools/word-to-pdf/`,
-      `${BASE_URL}/tools/image-to-pdf/`,
-    ];
+    console.error('No URLs found in sitemap.xml. Aborting.');
+    return;
   }
-
-  // Sample or full run: run concurrently in batches of 15
-  const sampleUrls = urls.slice(0, 50); // test up to 50 URLs or all if <= 50
-  console.log(`Verifying ${sampleUrls.length} URLs for HTTP 200 OK (no redirects)...`);
 
   const results = [];
-  const concurrency = 10;
-  for (let i = 0; i < sampleUrls.length; i += concurrency) {
-    const chunk = sampleUrls.slice(i, i + concurrency);
-    const chunkResults = await Promise.all(chunk.map(fetchUrl));
+  console.log(`Auditing all ${urls.length} URLs with concurrency ${CONCURRENCY}...`);
+
+  for (let i = 0; i < urls.length; i += CONCURRENCY) {
+    const chunk = urls.slice(i, i + CONCURRENCY);
+    const chunkResults = await Promise.all(chunk.map(checkUrl));
     results.push(...chunkResults);
+
+    if ((i + CONCURRENCY) % 100 < CONCURRENCY || i + CONCURRENCY >= urls.length) {
+      const processed = Math.min(i + CONCURRENCY, urls.length);
+      console.log(`Progress: ${processed} / ${urls.length} tested (${Math.round(processed / urls.length * 100)}%)`);
+    }
   }
 
+  // Write CSV
+  const csvLines = ['url,status,redirect_location,x_robots_tag'];
+  for (const r of results) {
+    const escapedLoc = (r.location || '').replace(/"/g, '""');
+    const escapedRobots = (r.xRobots || '').replace(/"/g, '""');
+    csvLines.push(`"${r.url}",${r.status},"${escapedLoc}","${escapedRobots}"`);
+  }
+  fs.writeFileSync(CSV_PATH, csvLines.join('\n'), 'utf8');
+  console.log(`CSV written successfully to ${CSV_PATH}`);
+
+  // Calculate summary
   let okCount = 0;
-  let redirectCount = 0;
-  let errorCount = 0;
+  const redirects = [];
+  const errors = [];
+  const noindexList = [];
 
   for (const r of results) {
     if (r.status === 200) {
       okCount++;
     } else if (r.status === 301 || r.status === 308) {
-      redirectCount++;
-      console.warn(`[REDIRECT ${r.status}] ${r.url} -> ${r.location}`);
+      redirects.push(r);
     } else {
-      errorCount++;
-      console.error(`[FAIL ${r.status}] ${r.url} ${r.error || ''}`);
+      errors.push(r);
+    }
+
+    if (r.xRobots && r.xRobots.toLowerCase().includes('noindex')) {
+      noindexList.push(r);
     }
   }
 
-  console.log('--- Verification Summary ---');
-  console.log(`Total Checked: ${results.length}`);
-  console.log(`200 OK: ${okCount}`);
-  console.log(`Redirects (301/308): ${redirectCount}`);
-  console.log(`Errors (404/500/timeout): ${errorCount}`);
-  
-  if (redirectCount === 0 && errorCount === 0) {
-    console.log('SUCCESS: All checked URLs in sitemap returned 200 OK!');
-  } else {
-    console.log('ATTENTION: Some URLs encountered redirects or errors.');
+  console.log('\n=======================================');
+  console.log('       SITEMAP AUDIT SUMMARY');
+  console.log('=======================================');
+  console.log(`Total URLs Audited: ${results.length}`);
+  console.log(`200 OK: ${okCount} (${((okCount / results.length) * 100).toFixed(1)}%)`);
+  console.log(`Redirects (301/308): ${redirects.length}`);
+  console.log(`Errors (404/500/timeout): ${errors.length}`);
+  console.log(`Noindex tags: ${noindexList.length}`);
+  console.log('=======================================\n');
+
+  if (redirects.length > 0) {
+    console.log('--- REDIRECTING URLS (301/308) ---');
+    redirects.forEach(r => console.log(`[${r.status}] ${r.url} -> ${r.location}`));
+  }
+
+  if (errors.length > 0) {
+    console.log('--- ERROR URLS (Non-200) ---');
+    errors.forEach(r => console.log(`[${r.status}] ${r.url} ${r.error || ''}`));
+  }
+
+  if (noindexList.length > 0) {
+    console.log('--- NOINDEX URLS ---');
+    noindexList.forEach(r => console.log(`[NOINDEX] ${r.url} (${r.xRobots})`));
   }
 }
 

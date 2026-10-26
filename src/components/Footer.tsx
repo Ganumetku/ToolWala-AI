@@ -151,7 +151,7 @@ export default function Footer() {
             </div>
             <div className="flex items-center gap-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
               <Lock className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0" />
-              <span>Zero server uploads</span>
+              <span>Local Tab Processing</span>
             </div>
             <div className="flex items-center gap-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
               <Clock className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
@@ -159,7 +159,7 @@ export default function Footer() {
             </div>
             <div className="flex items-center gap-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 col-span-2 sm:col-span-1">
               <Zap className="w-4 h-4 text-teal-600 dark:text-teal-400 shrink-0" />
-              <span>Free forever utilities</span>
+              <span>Free Browser Utilities</span>
             </div>
           </div>
         </div>
@@ -184,7 +184,7 @@ export default function Footer() {
             </Link>
             
             <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-medium text-sm">
-              {t('footer.tagline', 'Free utility tools that prioritize user privacy. Core tools run 100% locally in your browser, while AI features use secure encrypted processing with zero data retention.')}
+              {t('footer.tagline', 'Free utility tools that prioritize user privacy. Files are processed in your browser and are not uploaded.')}
             </p>
 
             <div className="space-y-3">
@@ -214,7 +214,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 bg-blue-500/10 px-4 py-2 rounded-full border border-blue-500/20">
                 <Sparkles className="w-3.5 h-3.5 fill-blue-600 dark:fill-blue-400" />
-                {t('footer.gdpr_compliant', 'GDPR Compliant')}
+                {t('footer.in_browser_privacy', 'In-Browser Privacy')}
               </div>
             </div>
           </div>

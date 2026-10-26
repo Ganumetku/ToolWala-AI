@@ -454,7 +454,7 @@ export default function MergePdf() {
 
       {/* SEO Deep-Dive Article Section */}
       {toolArticles['merge-pdf'] && (
-        <ToolArticle {...toolArticles['merge-pdf']} />
+        <ToolArticle toolId="merge-pdf" {...toolArticles['merge-pdf']} />
       )}
     </ToolLayout>
   );

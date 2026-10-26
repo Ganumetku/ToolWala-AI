@@ -1,8 +1,6 @@
 import { notFound } from "next/navigation";
 import { MeshGradient, FloatingParticles } from "@/components/BackgroundEffects";
 import BlogDetailClient from "./BlogDetailClient";
-import BlogBreadcrumbs from "@/components/blog/BlogBreadcrumbs";
-import LazyBlogImage from "@/components/blog/LazyBlogImage";
 import { getBlogBySlug, getPublicBlogs, resolveRelatedToolSlugs } from "@/lib/blogs-server";
 import { getPublicTools } from "@/lib/tools-server";
 import { buildBlogMetadata, buildBlogStructuredData, getSiteUrl } from "@/lib/seo";
@@ -82,32 +80,18 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      <div className="bg-slate-50/50 dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden select-none transition-colors duration-250">
+      <div className="bg-slate-50/60 dark:bg-[#030712] min-h-screen pt-8 pb-24 relative overflow-hidden transition-colors duration-250">
         <MeshGradient />
         <FloatingParticles />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
-          <BlogBreadcrumbs items={breadcrumbs} />
-
-          {translatedBlog.thumbnail && (
-            <div className="w-full aspect-[16/9] rounded-2xl sm:rounded-[2.5rem] overflow-hidden border border-gray-200 dark:border-white/5 shadow-2xl relative mb-8 sm:mb-12 bg-[#0d082d]/90 dark:bg-black/60 flex items-center justify-center p-1 sm:p-2">
-              <LazyBlogImage
-                src={translatedBlog.thumbnail}
-                alt={translatedBlog.title}
-                priority
-                objectFit="contain"
-                className="w-full h-full"
-                aspectRatio="w-full h-full"
-              />
-            </div>
-          )}
-
           <BlogDetailClient
             blog={translatedBlog}
             allBlogs={activeBlogs}
             relatedTools={relatedTools}
             allTools={allTools}
             pageUrl={pageUrl}
+            breadcrumbs={breadcrumbs}
             tocItems={tocItems}
             processedHtml={processedHtml}
           />

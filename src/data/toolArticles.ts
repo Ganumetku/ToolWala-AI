@@ -919,7 +919,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Combine scanned receipts, high-resolution tax forms, and digital PDFs with equal reliability.",
       "Fully responsive controls make it easy to merge PDF on mobile phones while on the move."
     ],
-    whyChoose: "Most online document converters make you upload private legal files to remote servers, queue in lines, and hit arbitrary daily paywalls. ToolWala's PDF merger works right inside your browser window using client-side WebAssembly. You get fast compilations, total data sovereignty, and a clean interface that respects your time and privacy.",
+    whyChoose: "Most online document converters make you upload private legal files to remote servers, queue in lines, and hit arbitrary daily paywalls. ToolWala's PDF merger works right inside your browser window using client-side WebAssembly. You get fast compilations, complete local control and privacy, and a clean interface that respects your time.",
     useCasesHeading: "Practical Packs People Actually Build",
     useCases: [
       "ITR-V + Form 16: Combine your income tax acknowledgement and salary statement into a single PDF for tax filing and visa applications.",
@@ -928,30 +928,25 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "HR & job onboarding: Join your signed offer letter, experience certificates, and previous salary slips into a single employment file."
     ],
     uniqueSection: {
-      title: "Troubleshooting: Tips for a Smooth PDF Merge",
-      body: "Merging PDFs in your browser is quick and secure, but a few document quirks can stall the process. Here is everything you need to keep your merge running smoothly:",
+      title: "Troubleshooting & Limits",
+      body: "Merging PDFs in your browser is fast, private, and straightforward. Keep these three practical considerations in mind for smooth document processing:",
       bullets: [
-        "Minimum two files required: The merge action requires at least two documents. A single PDF cannot be merged with itself — use our Organize or Split tool if you only need page reordering.",
-        "Unlock password-protected files first: Encrypted or password-locked PDFs cannot be read by the in-browser compiler. Please remove the password using an unlock tool before dropping them here.",
-        "Large document batches: While there is no hard file count limit, merging exceptionally large stacks (like 200MB+ of raw scanner sheets) depends on your device's available memory. If the tab slows down, try merging in smaller batches."
+        "Minimum two files required: The merge tool joins two or more separate documents. If you only need to reorder, rotate, or remove pages from a single document, use our Organize PDF or Split PDF utilities instead.",
+        "Unlock password-protected files first: Password-encrypted PDFs cannot be read in local browser memory without authentication. Remove the password using an unlock tool before dropping files into the merge queue.",
+        "Device memory & batch size: Merging executes entirely in your local RAM. For the smoothest performance across standard laptops and mobile phones, batches of 2 to 20 files (or up to ~100MB combined) work best."
       ]
     },
     specificationTable: [
       { requirement: "Supported input", specification: "PDF documents (.pdf), minimum 2 files" },
       { requirement: "Output format", specification: "Single merged PDF document (.pdf)" },
-      { requirement: "Recommended volume", specification: "Up to 100+ pages based on device memory" },
+      { requirement: "Recommended batch", specification: "2 to 20 files (or up to ~100MB combined)" },
       { requirement: "Password documents", specification: "Unlock password protection before merging" },
       { requirement: "Execution environment", specification: "100% in-browser WebAssembly memory" }
-    ],
-    limitations: [
-      "Requires at least two PDF files to start the merge.",
-      "Password-protected files must be unlocked prior to joining.",
-      "Very large batches of uncompressed scans can briefly slow down low-memory mobile browsers."
     ],
     faqs: [
       {
         question: "Is this PDF merger completely free to use?",
-        answer: "Yes, merging PDFs on ToolWala is 100% free with no hidden charges, daily caps, or watermarks added to your output."
+        answer: "Yes, merging PDFs on ToolWala is 100% free with no signups, watermarks, or hidden paywalls."
       },
       {
         question: "Can I merge PDF files on mobile?",

@@ -261,23 +261,6 @@ export const toolsData: Tool[] = [
     updatedAt: '2024-01-01T00:00:00Z'
   },
   {
-    id: "pdf-tools",
-    title: "PDF Tools",
-    description: "Merge, split, compress, and convert PDF files easily and securely.",
-    icon: "FileText",
-    href: "/tools/pdf-tools/",
-    slug: "pdf-tools",
-    category: "PDF Tools",
-    featured: false,
-    trending: false,
-    popular: false,
-    tags: ["pdf", "merge", "split", "compress", "convert", "document"],
-    status: 'published',
-    isVisible: true,
-    createdAt: '2024-01-01T00:00:00Z',
-    updatedAt: '2024-01-01T00:00:00Z'
-  },
-  {
     id: "edit-pdf",
     title: "Edit PDF",
     description: "Add text to PDF, fill PDF forms, and download edited PDF online.",

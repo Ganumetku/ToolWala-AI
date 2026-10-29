@@ -8,7 +8,8 @@ import {
   FileText, Download, Sparkles, RefreshCw, Copy, CheckCircle,
   AlertCircle, Building, User, Settings, AlignLeft, ChevronLeft,
   Palette, Type, Printer, Sliders, Briefcase, GraduationCap,
-  PenTool, Eye, Check, ExternalLink, Globe, MapPin, Mail, Phone
+  PenTool, Eye, Check, ExternalLink, Globe, MapPin, Mail, Phone,
+  ArrowRight, ArrowLeft
 } from 'lucide-react';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
@@ -117,6 +118,7 @@ const PRESETS: { title: string; desc: string; icon: any; data: CoverLetterData }
 
 export default function CoverLetterGenerator() {
   const [data, setData] = useState<CoverLetterData>(PRESETS[0].data);
+  const [currentStep, setCurrentStep] = useState<number>(1);
   const [template, setTemplate] = useState<TemplateId>('modern');
   const [accentColor, setAccentColor] = useState(ACCENT_COLORS[0]);
   const [fontStyle, setFontStyle] = useState<FontStyle>('sans');
@@ -198,17 +200,36 @@ export default function CoverLetterGenerator() {
     return `${today}\n\n${manager}\n${company}\n${d.companyAddress ? d.companyAddress + '\n' : ''}\n${salutation}\n\n${hook}${body1}\n\n${body2}\n\n${closing}\n\nSincerely,\n\n${d.name || 'Your Name'}`;
   }
 
+  // Navigation handlers with validation
+  const goToStep = (step: number) => {
+    if (step > currentStep) {
+      if (currentStep === 1 && !data.name.trim()) {
+        setError('Please provide your full name before proceeding.');
+        return;
+      }
+      if (currentStep === 2 && (!data.jobTitle.trim() || !data.companyName.trim())) {
+        setError('Job title and company name are required to continue.');
+        return;
+      }
+    }
+    setError(null);
+    setCurrentStep(step);
+  };
+
   const handleGenerate = async () => {
     if (!data.name.trim()) {
       setError('Please provide your full name.');
+      setCurrentStep(1);
       return;
     }
     if (!data.jobTitle.trim()) {
       setError('Please specify the target job title.');
+      setCurrentStep(2);
       return;
     }
     if (!data.companyName.trim()) {
       setError('Please specify the company name.');
+      setCurrentStep(2);
       return;
     }
 
@@ -216,7 +237,6 @@ export default function CoverLetterGenerator() {
     setIsGenerating(true);
 
     try {
-      // Call AI run endpoint
       const response = await fetch('/api/ai/run', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -245,7 +265,6 @@ export default function CoverLetterGenerator() {
       if (response.ok) {
         const result = await response.json();
         if (result.success && result.output && result.output.trim().length > 50) {
-          // Clean output from any markdown code fences if AI wrapped it
           const cleaned = result.output
             .replace(/^```[a-z]*\n/i, '')
             .replace(/\n```$/, '')
@@ -294,6 +313,7 @@ export default function CoverLetterGenerator() {
     });
     setGeneratedLetter('');
     setError(null);
+    setCurrentStep(1);
   };
 
   const downloadPDF = async () => {
@@ -308,7 +328,6 @@ export default function CoverLetterGenerator() {
       const originalMinWidth = element.style.minWidth;
       const originalMaxWidth = element.style.maxWidth;
 
-      // Force standard A4 aspect pixel width for capture
       element.style.width = '794px';
       element.style.minWidth = '794px';
       element.style.maxWidth = '794px';
@@ -344,7 +363,6 @@ export default function CoverLetterGenerator() {
     window.print();
   };
 
-  // Word count & estimated reading time calculation
   const wordCount = generatedLetter.trim() ? generatedLetter.trim().split(/\s+/).length : 0;
   const readingTime = Math.max(1, Math.round(wordCount / 200));
 
@@ -354,6 +372,12 @@ export default function CoverLetterGenerator() {
       : fontStyle === 'mono'
       ? 'font-mono'
       : 'font-sans';
+
+  const STEPS = [
+    { step: 1, title: 'Your Details', subtitle: 'Name & Contact' },
+    { step: 2, title: 'Target Role', subtitle: 'Company & Role' },
+    { step: 3, title: 'Story & Tone', subtitle: 'Skills & AI Voice' },
+  ];
 
   return (
     <div className="bg-[#F8FAFC] dark:bg-[#030712] min-h-screen py-10 relative overflow-hidden transition-colors font-sans">
@@ -381,11 +405,11 @@ export default function CoverLetterGenerator() {
                     AI Cover Letter Generator
                   </h1>
                   <span className="px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 rounded-full">
-                    Free • No Sign-up
+                    Free • Step-by-Step
                   </span>
                 </div>
                 <p className="text-sm text-slate-600 dark:text-slate-400 font-medium mt-1">
-                  Build custom, job-tailored cover letters that pass ATS filters and impress hiring teams.
+                  Guided 3-step wizard to craft tailored, ATS-friendly cover letters in seconds.
                 </p>
               </div>
             </div>
@@ -427,298 +451,402 @@ export default function CoverLetterGenerator() {
         {/* MAIN BUILDER WORKSPACE */}
         <div className="flex flex-col lg:flex-row gap-8 items-start mb-16">
 
-          {/* LEFT: FORM INPUTS */}
+          {/* LEFT: STEP-BY-STEP GUIDED WIZARD */}
           <div className="w-full lg:w-[46%] space-y-6">
 
-            {/* 1. Applicant Contact Info */}
-            <section className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-white/10 shadow-sm">
-              <div className="flex items-center gap-2.5 pb-4 mb-4 border-b border-slate-100 dark:border-white/5">
-                <div className="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-xs">
-                  1
-                </div>
-                <div>
-                  <h2 className="text-base font-bold text-slate-900 dark:text-white">Your Contact Details</h2>
-                  <p className="text-xs text-slate-400">Personal info displayed on your letterhead</p>
-                </div>
+            {/* STEP PROGRESS INDICATOR TABS */}
+            <div className="bg-white dark:bg-slate-900 rounded-3xl p-3 border border-slate-200 dark:border-white/10 shadow-sm">
+              <div className="grid grid-cols-3 gap-2">
+                {STEPS.map((s) => {
+                  const isActive = currentStep === s.step;
+                  const isCompleted = currentStep > s.step;
+                  return (
+                    <button
+                      key={s.step}
+                      type="button"
+                      onClick={() => goToStep(s.step)}
+                      className={`flex flex-col sm:flex-row items-center gap-2 p-2.5 rounded-2xl transition-all text-left ${
+                        isActive
+                          ? 'bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/50 text-blue-700 dark:text-blue-300 shadow-xs'
+                          : isCompleted
+                          ? 'bg-emerald-50/50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50'
+                          : 'text-slate-400 dark:text-slate-500 hover:bg-slate-50 dark:hover:bg-white/5'
+                      }`}
+                    >
+                      <div
+                        className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-black shrink-0 transition-all ${
+                          isActive
+                            ? 'bg-blue-600 text-white shadow-xs shadow-blue-500/40'
+                            : isCompleted
+                            ? 'bg-emerald-500 text-white'
+                            : 'bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-400'
+                        }`}
+                      >
+                        {isCompleted ? '✓' : s.step}
+                      </div>
+                      <div className="min-w-0 text-center sm:text-left">
+                        <p className="text-xs font-bold truncate leading-tight">{s.title}</p>
+                        <p className="text-[10px] opacity-75 hidden sm:block truncate">{s.subtitle}</p>
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                <div className="sm:col-span-2">
-                  <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={data.name}
-                    onChange={handleChange}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all"
-                    placeholder="e.g. Alex Morgan"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={data.email}
-                    onChange={handleChange}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all"
-                    placeholder="alex@example.com"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
-                    Phone
-                  </label>
-                  <input
-                    type="text"
-                    name="phone"
-                    value={data.phone}
-                    onChange={handleChange}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all"
-                    placeholder="+1 (555) 123-4567"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
-                    City, Country / State
-                  </label>
-                  <input
-                    type="text"
-                    name="location"
-                    value={data.location}
-                    onChange={handleChange}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all"
-                    placeholder="e.g. San Francisco, CA"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
-                    Portfolio / LinkedIn
-                  </label>
-                  <input
-                    type="text"
-                    name="portfolio"
-                    value={data.portfolio}
-                    onChange={handleChange}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all"
-                    placeholder="linkedin.com/in/alex"
-                  />
-                </div>
+              {/* Progress bar line */}
+              <div className="w-full bg-slate-100 dark:bg-white/5 h-1.5 rounded-full mt-3 overflow-hidden">
+                <div
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 h-full transition-all duration-300 rounded-full"
+                  style={{ width: `${(currentStep / 3) * 100}%` }}
+                />
               </div>
-            </section>
+            </div>
 
-            {/* 2. Target Job & Recipient */}
-            <section className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-white/10 shadow-sm">
-              <div className="flex items-center gap-2.5 pb-4 mb-4 border-b border-slate-100 dark:border-white/5">
-                <div className="w-8 h-8 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xs">
-                  2
+            {/* STEP 1: APPLICANT CONTACT INFO */}
+            {currentStep === 1 && (
+              <section className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-white/10 shadow-sm animate-fade-in">
+                <div className="flex items-center gap-2.5 pb-4 mb-4 border-b border-slate-100 dark:border-white/5">
+                  <div className="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-xs">
+                    1
+                  </div>
+                  <div>
+                    <h2 className="text-base font-bold text-slate-900 dark:text-white">Your Contact Details</h2>
+                    <p className="text-xs text-slate-400">Step 1 of 3: How the employer can reach you</p>
+                  </div>
                 </div>
-                <div>
-                  <h2 className="text-base font-bold text-slate-900 dark:text-white">Target Position & Company</h2>
-                  <p className="text-xs text-slate-400">Who is receiving this cover letter?</p>
-                </div>
-              </div>
 
-              <div className="space-y-3.5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div className="space-y-3.5">
                   <div>
                     <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
-                      Job Title *
+                      Full Name *
                     </label>
                     <input
                       type="text"
-                      name="jobTitle"
-                      value={data.jobTitle}
+                      name="name"
+                      value={data.name}
                       onChange={handleChange}
                       className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all"
-                      placeholder="e.g. Senior Frontend Engineer"
+                      placeholder="e.g. Alex Morgan"
+                      autoFocus
                     />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
+                        Email Address
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={data.email}
+                        onChange={handleChange}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all"
+                        placeholder="alex@example.com"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
+                        Phone Number
+                      </label>
+                      <input
+                        type="text"
+                        name="phone"
+                        value={data.phone}
+                        onChange={handleChange}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all"
+                        placeholder="+1 (555) 123-4567"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
+                        City, Country / State
+                      </label>
+                      <input
+                        type="text"
+                        name="location"
+                        value={data.location}
+                        onChange={handleChange}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all"
+                        placeholder="e.g. San Francisco, CA"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
+                        Portfolio / LinkedIn URL
+                      </label>
+                      <input
+                        type="text"
+                        name="portfolio"
+                        value={data.portfolio}
+                        onChange={handleChange}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all"
+                        placeholder="linkedin.com/in/alex"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 1 Footer Action */}
+                <div className="mt-8 pt-4 border-t border-slate-100 dark:border-white/5 flex justify-end">
+                  <button
+                    type="button"
+                    onClick={() => goToStep(2)}
+                    className="px-6 py-3 rounded-2xl font-bold text-sm text-white bg-blue-600 hover:bg-blue-500 active:scale-[0.99] transition-all shadow-md shadow-blue-500/20 flex items-center gap-2"
+                  >
+                    <span>Next: Target Role</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </section>
+            )}
+
+            {/* STEP 2: TARGET ROLE & COMPANY */}
+            {currentStep === 2 && (
+              <section className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-white/10 shadow-sm animate-fade-in">
+                <div className="flex items-center gap-2.5 pb-4 mb-4 border-b border-slate-100 dark:border-white/5">
+                  <div className="w-8 h-8 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xs">
+                    2
+                  </div>
+                  <div>
+                    <h2 className="text-base font-bold text-slate-900 dark:text-white">Target Position & Company</h2>
+                    <p className="text-xs text-slate-400">Step 2 of 3: Details about the role and recipient</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
+                        Target Job Title *
+                      </label>
+                      <input
+                        type="text"
+                        name="jobTitle"
+                        value={data.jobTitle}
+                        onChange={handleChange}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all"
+                        placeholder="e.g. Senior Frontend Engineer"
+                        autoFocus
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
+                        Company Name *
+                      </label>
+                      <input
+                        type="text"
+                        name="companyName"
+                        value={data.companyName}
+                        onChange={handleChange}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all"
+                        placeholder="e.g. TechFlow Innovations"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
+                        Hiring Manager / Team Title
+                      </label>
+                      <input
+                        type="text"
+                        name="hiringManager"
+                        value={data.hiringManager}
+                        onChange={handleChange}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all"
+                        placeholder="e.g. Sarah Jenkins (or Hiring Team)"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
+                        Company Address / Location
+                      </label>
+                      <input
+                        type="text"
+                        name="companyAddress"
+                        value={data.companyAddress}
+                        onChange={handleChange}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all"
+                        placeholder="e.g. San Francisco, CA"
+                      />
+                    </div>
                   </div>
 
                   <div>
                     <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
-                      Company Name *
+                      Job Description (Optional – for ATS Keyword Match)
                     </label>
-                    <input
-                      type="text"
-                      name="companyName"
-                      value={data.companyName}
+                    <textarea
+                      name="jobDescription"
+                      rows={3}
+                      value={data.jobDescription}
                       onChange={handleChange}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all"
-                      placeholder="e.g. TechFlow Innovations"
+                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all resize-none"
+                      placeholder="Paste key requirements or excerpt from the job listing for automatic keyword integration..."
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                {/* Step 2 Footer Navigation */}
+                <div className="mt-8 pt-4 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => goToStep(1)}
+                    className="px-5 py-2.5 rounded-2xl font-bold text-xs text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 transition-all flex items-center gap-1.5"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5" />
+                    <span>Back</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => goToStep(3)}
+                    className="px-6 py-3 rounded-2xl font-bold text-sm text-white bg-blue-600 hover:bg-blue-500 active:scale-[0.99] transition-all shadow-md shadow-blue-500/20 flex items-center gap-2"
+                  >
+                    <span>Next: Story & Tone</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </section>
+            )}
+
+            {/* STEP 3: STORY, SKILLS & AI TONE */}
+            {currentStep === 3 && (
+              <section className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-white/10 shadow-sm animate-fade-in">
+                <div className="flex items-center gap-2.5 pb-4 mb-4 border-b border-slate-100 dark:border-white/5">
+                  <div className="w-8 h-8 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold text-xs">
+                    3
+                  </div>
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
-                      Hiring Manager Name / Title
-                    </label>
-                    <input
-                      type="text"
-                      name="hiringManager"
-                      value={data.hiringManager}
-                      onChange={handleChange}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all"
-                      placeholder="e.g. Sarah Jenkins (or Hiring Team)"
-                    />
+                    <h2 className="text-base font-bold text-slate-900 dark:text-white">Your Story & AI Tone</h2>
+                    <p className="text-xs text-slate-400">Step 3 of 3: Achievements, skills, and voice</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
+                        Experience Level
+                      </label>
+                      <select
+                        name="experience"
+                        value={data.experience}
+                        onChange={handleChange}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm text-slate-900 dark:text-white"
+                      >
+                        <option value="Fresher" className="bg-white dark:bg-slate-900">Fresher / Graduate</option>
+                        <option value="1-2 years" className="bg-white dark:bg-slate-900">1-2 years (Entry)</option>
+                        <option value="3-5 years" className="bg-white dark:bg-slate-900">3-5 years (Mid-Level)</option>
+                        <option value="5+ years" className="bg-white dark:bg-slate-900">5+ years (Senior/Lead)</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
+                        Writing Tone
+                      </label>
+                      <select
+                        name="tone"
+                        value={data.tone}
+                        onChange={handleChange}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm text-slate-900 dark:text-white"
+                      >
+                        <option value="Professional" className="bg-white dark:bg-slate-900">Professional & Balanced</option>
+                        <option value="Confident" className="bg-white dark:bg-slate-900">Confident & High-Impact</option>
+                        <option value="Friendly" className="bg-white dark:bg-slate-900">Friendly & Conversational</option>
+                        <option value="Short" className="bg-white dark:bg-slate-900">Short & Direct (3 Paras)</option>
+                      </select>
+                    </div>
                   </div>
 
                   <div>
                     <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
-                      Company Address / City
+                      Core Skills & Technologies
                     </label>
                     <input
                       type="text"
-                      name="companyAddress"
-                      value={data.companyAddress}
-                      onChange={handleChange}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all"
-                      placeholder="e.g. San Francisco, CA"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
-                    Job Description (Optional – for ATS Keyword Match)
-                  </label>
-                  <textarea
-                    name="jobDescription"
-                    rows={3}
-                    value={data.jobDescription}
-                    onChange={handleChange}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-900 dark:text-white transition-all resize-none"
-                    placeholder="Paste keywords or the job listing text so AI matches the exact qualifications..."
-                  />
-                </div>
-              </div>
-            </section>
-
-            {/* 3. Skills, Achievements & Tone */}
-            <section className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-white/10 shadow-sm">
-              <div className="flex items-center gap-2.5 pb-4 mb-4 border-b border-slate-100 dark:border-white/5">
-                <div className="w-8 h-8 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold text-xs">
-                  3
-                </div>
-                <div>
-                  <h2 className="text-base font-bold text-slate-900 dark:text-white">Your Story & Tone</h2>
-                  <p className="text-xs text-slate-400">Achievements and voice preference</p>
-                </div>
-              </div>
-
-              <div className="space-y-3.5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                  <div>
-                    <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
-                      Experience Level
-                    </label>
-                    <select
-                      name="experience"
-                      value={data.experience}
+                      name="skills"
+                      value={data.skills}
                       onChange={handleChange}
                       className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm text-slate-900 dark:text-white"
-                    >
-                      <option value="Fresher" className="bg-white dark:bg-slate-900">Fresher / Graduate</option>
-                      <option value="1-2 years" className="bg-white dark:bg-slate-900">1-2 years (Entry)</option>
-                      <option value="3-5 years" className="bg-white dark:bg-slate-900">3-5 years (Mid-Level)</option>
-                      <option value="5+ years" className="bg-white dark:bg-slate-900">5+ years (Senior/Lead)</option>
-                    </select>
+                      placeholder="e.g. React, Next.js, Cloud Services, Team Leadership"
+                    />
                   </div>
 
                   <div>
                     <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
-                      Writing Tone
+                      Notable Achievement (Optional)
                     </label>
-                    <select
-                      name="tone"
-                      value={data.tone}
+                    <textarea
+                      name="keyAchievement"
+                      rows={2}
+                      value={data.keyAchievement}
                       onChange={handleChange}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm text-slate-900 dark:text-white"
-                    >
-                      <option value="Professional" className="bg-white dark:bg-slate-900">Professional & Balanced</option>
-                      <option value="Confident" className="bg-white dark:bg-slate-900">Confident & High-Impact</option>
-                      <option value="Friendly" className="bg-white dark:bg-slate-900">Friendly & Conversational</option>
-                      <option value="Short" className="bg-white dark:bg-slate-900">Short & Direct (3 Paras)</option>
-                    </select>
+                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm text-slate-900 dark:text-white resize-none"
+                      placeholder="e.g. Led redesign project increasing conversion by 28%..."
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
+                      Why this company specifically?
+                    </label>
+                    <textarea
+                      name="whyCompany"
+                      rows={2}
+                      value={data.whyCompany}
+                      onChange={handleChange}
+                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm text-slate-900 dark:text-white resize-none"
+                      placeholder="e.g. I admire your team's open-source contributions and product ergonomics..."
+                    />
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
-                    Core Skills & Technologies
-                  </label>
-                  <input
-                    type="text"
-                    name="skills"
-                    value={data.skills}
-                    onChange={handleChange}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm text-slate-900 dark:text-white"
-                    placeholder="e.g. React, Next.js, Cloud Services, Team Leadership"
-                  />
-                </div>
+                {/* Step 3 Navigation & Generate Trigger */}
+                <div className="mt-8 pt-4 border-t border-slate-100 dark:border-white/5 flex items-center justify-between gap-3 flex-wrap">
+                  <button
+                    type="button"
+                    onClick={() => goToStep(2)}
+                    className="px-5 py-2.5 rounded-2xl font-bold text-xs text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 transition-all flex items-center gap-1.5"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5" />
+                    <span>Back</span>
+                  </button>
 
-                <div>
-                  <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
-                    Notable Achievement (Optional)
-                  </label>
-                  <textarea
-                    name="keyAchievement"
-                    rows={2}
-                    value={data.keyAchievement}
-                    onChange={handleChange}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm text-slate-900 dark:text-white resize-none"
-                    placeholder="e.g. Led redesign project increasing conversion by 28%..."
-                  />
+                  <button
+                    type="button"
+                    onClick={handleGenerate}
+                    disabled={isGenerating}
+                    className="px-6 py-3.5 rounded-2xl font-black text-sm tracking-wide text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-500 hover:to-indigo-600 active:scale-[0.99] transition-all shadow-lg shadow-blue-500/25 flex items-center gap-2.5 disabled:opacity-50"
+                  >
+                    {isGenerating ? (
+                      <>
+                        <RefreshCw className="w-4 h-4 animate-spin" />
+                        <span>Crafting Letter...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-4 h-4" />
+                        <span>Generate Cover Letter</span>
+                      </>
+                    )}
+                  </button>
                 </div>
-
-                <div>
-                  <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">
-                    Why this company specifically?
-                  </label>
-                  <textarea
-                    name="whyCompany"
-                    rows={2}
-                    value={data.whyCompany}
-                    onChange={handleChange}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm text-slate-900 dark:text-white resize-none"
-                    placeholder="e.g. I admire your team's open-source contributions and product ergonomics..."
-                  />
-                </div>
-              </div>
-
-              {/* Action Button */}
-              <button
-                type="button"
-                onClick={handleGenerate}
-                disabled={isGenerating}
-                className="w-full mt-6 py-4 px-6 rounded-2xl font-black text-sm tracking-wide text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-500 hover:to-indigo-600 active:scale-[0.99] transition-all shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2.5 disabled:opacity-50"
-              >
-                {isGenerating ? (
-                  <>
-                    <RefreshCw className="w-4 h-4 animate-spin" />
-                    <span>Tailoring Cover Letter...</span>
-                  </>
-                ) : (
-                  <>
-                    <Sparkles className="w-4 h-4" />
-                    <span>Generate Cover Letter</span>
-                  </>
-                )}
-              </button>
-            </section>
+              </section>
+            )}
           </div>
 
-          {/* RIGHT: PREVIEW & DESIGN CONTROLS */}
+          {/* RIGHT: LIVE PREVIEW & DESIGN CONTROLS */}
           <div className="w-full lg:w-[54%] sticky top-6 space-y-4">
 
             {/* Template & Style Customization Bar (Kickresume Style) */}

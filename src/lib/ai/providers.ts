@@ -248,7 +248,14 @@ export function buildToolPrompt(
   const templates: Record<string, string> = {
     'caption-generator': `Generate 5 engaging social media captions for:\n${inputText}`,
     'ai-image-describer': `Analyze the provided image in detail and describe what you see:\n${inputText}`,
-    'cover-letter-generator': `Write a professional cover letter based on:\n${inputText}`,
+    'cover-letter-generator': `You are an expert executive career writer and hiring consultant. Write a highly persuasive, tailored, and realistic cover letter based on these details:
+${inputText}
+
+Rules:
+- Output ONLY the clean cover letter text (starting with the formal date/recipient, salutation, compelling opening hook, 2-3 body paragraphs connecting applicant achievements to company needs, and a confident closing call to action).
+- Do NOT include any conversational preamble or meta-text (e.g. "Here is your letter:").
+- Strictly reflect the requested tone and experience level.
+- Ensure natural, engaging human phrasing that sounds genuine and authentic.`,
     'text-humanizer': `Rewrite this text to sound more natural and human:\n${inputs.text || inputText}`,
     'voice-generator': `Generate a voice script based on:\n${inputText}`,
   };

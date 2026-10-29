@@ -6,7 +6,7 @@ export async function generateMetadata(): Promise<Metadata> {
     'cover-letter-generator',
     'Free AI Cover Letter Generator – Professional Letters',
     'Create customized, professional cover letters tailored to any job description. Land more interviews with AI-optimized content.',
-    '/tools/cover-letter-generator'
+    '/tools/cover-letter-generator/'
   );
 }
 

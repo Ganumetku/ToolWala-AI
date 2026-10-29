@@ -805,42 +805,56 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "cover-letter-generator": {
-    title: "AI Cover Letter Generator",
-    intro: "Make a powerful first impression. Generate personalized, compelling cover letters that highlight your skills and grab the attention of hiring managers.",
-    whatItDoes: "The ToolWala AI Cover Letter Generator is your personal career advocate. It bridges the gap between your resume and a job description, crafting a narrative that explains exactly why you're the best fit for the role. By analyzing your experience and the specific requirements of the job, the AI produces a structured, professional letter that is tailored to each application. It avoids generic 'to whom it may concern' templates, focusing instead on impact-driven writing that resonates with real people.",
+    title: "AI Cover Letter Generator – Professional Letters",
+    intro: "Writing a cover letter from scratch is easily the most draining part of applying for jobs. Most people stare at a blank screen for twenty minutes, copy an old template, and hope for the best. This tool does the heavy lifting for you—matching your actual experience directly with what the job listing asks for, without sounding like a robot.",
+    whatItDoes: "Most automated cover letters sound stiff, repetitive, and painfully obvious. Our generator takes a different approach. You plug in your role, the company name, your top skills, and a quick paste of the job description. The tool pulls out the core keywords hiring teams care about and drafts a clean 3-paragraph letter that actually reads like a person wrote it. You can pick your tone—from crisp corporate to relaxed startup—and jump right in to tweak any line before downloading your PDF.",
     howToUse: [
-      "Paste the job description or title for the position you're applying for.",
-      "Upload your resume or paste a summary of your key skills and experiences.",
-      "Select a 'Tone' (Confident, Enthusiastic, Professional) that matches the company culture.",
-      "Click 'Generate' and let the AI draft a custom cover letter based on your unique profile.",
-      "Review the draft, add your personal touches, and download your polished document."
+      "Pick a starter preset or type your target role, company, and key skills.",
+      "Paste in the job description so the generator can mirror the right keywords for recruiter filters.",
+      "Choose a design template and accent color that matches your personal resume style.",
+      "Hit Generate—then edit sentences directly on the live page until you're completely happy.",
+      "Download a print-ready PDF or copy the clean text straight into your email application."
     ],
     keyFeatures: [
-      { title: "Contextual Tailoring", desc: "Intelligently links your specific skills to the requirements listed in the job description." },
-      { title: "Multiple Tones", desc: "Adjust the voice of your letter to match everything from a fast-paced startup to a traditional corporate firm." },
-      { title: "Impact Focus", desc: "Prioritizes showing your achievements rather than just listing your duties." },
-      { title: "Perfect Formatting", desc: "Generates clean, professionally structured letters that are ready for immediate use." }
+      { title: "Direct On-Page Editing", desc: "No locked boxes. Click straight into your letter draft to rephrase lines, swap details, or add personal anecdotes on the fly." },
+      { title: "Recruiter-Approved Templates", desc: "Choose between Modern, Executive, Minimalist, and Classic designs with customizable accent colors that match top career standards." },
+      { title: "Keyword Match for ATS", desc: "Aligns your skills directly with the job description so your application sails through automated applicant tracking filters." },
+      { title: "Multiple Writing Tones", desc: "Switch between Confident, Professional, Conversational, or Short depending on whether you're emailing a fast-paced agency or a legacy bank." }
     ],
     benefits: [
-      "Save hours of writing time for every single job application.",
-      "Overcome the 'blank page' syndrome with high-quality first drafts.",
-      "Ensure your cover letter is always relevant to the specific job you're targeting.",
-      "Maintain a professional and consistent brand across all your application materials."
+      "Skip the awkward blank-page paralysis and get a tailored first draft in under 10 seconds.",
+      "Apply to 5x more targeted openings without sacrificing the personal touch each recruiter expects.",
+      "High-resolution A4 PDF export formatted with clean margins that print and display flawlessly.",
+      "Zero accounts or paywalls—generate, tweak, and export as many letters as you need for free."
     ],
-    whyChoose: "Applying for jobs is a numbers game, but quality still matters. Our tool allows you to maintain a high standard of personalization without spending hours on every letter. ToolWala AI focuses on 'persuasive' writing, helping you tell your professional story in a way that gets you through the door and into the interview.",
+    whyChoose: "Kickresume and similar platforms lock their best templates, fonts, and PDF downloads behind steep monthly paywalls. ToolWala gives you full styling control, customizable layouts, and instant PDF exports completely free. No watermarks, no forced sign-ups, and no artificial limits on how many jobs you can apply to.",
     useCases: [
-      "Job seekers applying for multiple roles who need a fast way to personalize.",
-      "Candidates transitioning to a new industry needing to explain their move.",
-      "Busy professionals who want to ensure their cover letters are top-tier.",
-      "New graduates who aren't sure how to structure their first professional letter."
+      "Job seekers tailoring custom letters across 20+ openings without burning out.",
+      "College seniors and freshers who aren't sure how to frame academic projects into real work experience.",
+      "Engineers, marketers, and designers wanting a polished letterhead that matches their portfolio aesthetic.",
+      "Career changers needing to connect past skills with a brand-new industry."
+    ],
+    specificationTable: [
+      { requirement: "Supported Formats", specification: "Vector A4 PDF, Formatted Plain Text, Direct Print" },
+      { requirement: "Recommended Word Count", specification: "250 – 350 words (ideal recruiter sweet spot)" },
+      { requirement: "Design Styles", specification: "Modern Minimal, Executive Border, Two-Tone Split, Creative Badge, Classic Formal" },
+      { requirement: "Privacy & Data Storage", specification: "No resumes stored on server; runs real-time and client-side safe" },
+      { requirement: "Cost & Limits", specification: "100% Free, Unlimited generations" }
+    ],
+    commonMistakes: [
+      "Rehashing your entire resume line-by-line instead of spotlighting 1 or 2 high-impact wins.",
+      "Addressing the letter to generic greetings like 'Dear Sir/Madam' when a quick LinkedIn search can find the hiring manager's name.",
+      "Letting AI write without reviewing—always add one personal detail about why the company's work excites you.",
+      "Writing an essay: anything longer than one page almost never gets read by busy recruiters."
     ],
     faqs: [
-      { question: "Will it look like a template?", answer: "No. Because it uses your specific resume data and the job description, each letter is uniquely crafted for that specific pairing." },
-      { question: "Should I edit the generated letter?", answer: "We highly recommend it! Use the AI to do the heavy lifting, then add a specific detail about the company to show you've done your research." },
-      { question: "How long are the generated letters?", answer: "The AI typically produces a standard 3-4 paragraph letter (around 250-400 words), which is the length most recruiters prefer." },
-      { question: "Is my personal data safe?", answer: "Yes. Your resume and job details are processed in real-time to generate the letter and are not stored on our servers." }
+      { question: "Do hiring managers actually read cover letters in 2026?", answer: "Yes—especially when choosing between two candidates with identical resume experience. A well-written letter shows communication ability and genuine interest in the specific company rather than blind mass-applying." },
+      { question: "Can I edit the generated letter before downloading?", answer: "Yes, 100%. You can click right into the preview on screen to edit, delete, or rewrite any paragraph. Your edits carry straight through to the downloaded PDF." },
+      { question: "How does this compare to paid tools like Kickresume?", answer: "Kickresume charges $19/month or more for PDF downloads and unlimited templates. ToolWala gives you modern templates, custom accent colors, and direct A4 PDF exports completely free without requiring an account." },
+      { question: "Will my cover letter pass automated ATS filters?", answer: "Yes. When you paste the job description, the generator weaves the exact skills and industry keywords into your paragraphs, helping your file rank higher in applicant tracking systems." },
+      { question: "Is my personal career information stored?", answer: "No. Your contact info and job history are only used to draft the document in your active browser session. We don't store your details or sell applicant data." }
     ],
-    conclusion: "Don't let a generic cover letter hold back your career. Stand out from the crowd with a personalized, professional letter that showcases the best version of you.",
+    conclusion: "A thoughtful cover letter can easily be the difference between an automated rejection and a first-round interview invite. Pick a template, drop in your details, and walk away with a letter you're actually proud to submit.",
     relatedTools: [
       { name: "AI Resume Builder", href: "/tools/resume-builder/" },
       { name: "AI Text Humanizer", href: "/tools/text-humanizer/" },

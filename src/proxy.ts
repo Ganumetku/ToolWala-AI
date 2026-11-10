@@ -8,6 +8,22 @@ const LOCALES = ['hi', 'es', 'fr', 'de', 'pt', 'ar', 'id'];
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // 0. 301 redirect accidental nested full URLs (e.g. /https://toolwala.co/...)
+  const decodedPath = decodeURIComponent(pathname);
+  if (
+    pathname.startsWith('/http:/') ||
+    pathname.startsWith('/https:/') ||
+    decodedPath.startsWith('/http:/') ||
+    decodedPath.startsWith('/https:/') ||
+    (decodedPath.includes('toolwala.co') && decodedPath !== '/toolwala.co')
+  ) {
+    const match = decodedPath.match(/https?:\/\/[^\/]+(\/.*)$/);
+    if (match && match[1]) {
+      const target = match[1].endsWith('/') ? match[1] : `${match[1]}/`;
+      return NextResponse.redirect(new URL(target + request.nextUrl.search, request.url), { status: 301 });
+    }
+  }
+
   // Bypass proxy for all public API routes to preserve POST request bodies
   const isAdminApi = pathname.startsWith('/api/admin') || pathname.startsWith('/api/admin/');
   if (pathname.startsWith('/api') && !isAdminApi) {
@@ -79,15 +95,60 @@ export async function proxy(request: NextRequest) {
     'indian-government-scheme-document-sizes': '/blog/upload-documents-government-portals/',
     'nsdl-pan-card-document-specifications': '/blog/resize-photo-signature-pan-card-application/',
     'resize-upsc-signature-350x350-pixels': '/blog/upsc-photo-signature-resize-specifications/',
+    'compress-image-government-portals': '/blog/upload-documents-government-portals/',
+    'ibps-po-photo-signature-upload-requirements': '/blog/ibps-bank-exam-photo-signature-size-spec/',
+    'ssc-cgl-photo-signature-specifications': '/blog/upload-photo-signature-ssc-application/',
+    'neet-ug-photo-document-upload-specifications': '/blog/upload-documents-government-portals/',
+    'railway-exam-photo-resize': '/blog/rrb-alp-photo-signature-size-guidelines/',
+    'resize-photo-signature-rrb-group-d': '/blog/rrb-alp-photo-signature-size-guidelines/',
+    'passport-photo-size-online': '/blog/passport-size-photo-maker-online-free/',
+    'why-ssc-rejected-application-photo-solutions': '/blog/new-ssc-photo-guidelines-live-upload/',
+    'image-resize-in-kb': '/blog/photo-resize-to-20kb/',
+    'compress-jpg-images-kb-limit': '/blog/photo-resize-to-20kb/',
+    'compress-pan-card-pdf-limit': '/blog/resize-photo-signature-pan-card-application/',
+    'compress-passport-pdf-scans-1mb': '/blog/upload-passport-documents-seva-portal/',
+    'pan-card-photo-resize': '/tools/pan-card-resize/',
+    'aadhaar-photo-resize': '/tools/crop-aadhaar-card/',
   };
+
+  // 301 redirect tool categories mistakenly accessed under /blog/category/
+  if (rewrittenPathname.startsWith('/blog/category/')) {
+    const parts = rewrittenPathname.split('/').filter(Boolean);
+    const catSlug = parts[2];
+    if (catSlug) {
+      const cleanCatSlug = catSlug.replace(/-&-/g, '-');
+      const toolCategories = [
+        'resume-career',
+        'calculator-tools',
+        'developer-tools',
+        'utility-tools',
+        'financial-calculators',
+        'social-media',
+        'ai-tools',
+        'image-tools',
+        'pdf-tools',
+      ];
+      if (toolCategories.includes(cleanCatSlug)) {
+        const targetPath = isLocalePrefix ? `/${locale}/categories/${cleanCatSlug}/` : `/categories/${cleanCatSlug}/`;
+        return NextResponse.redirect(new URL(targetPath + request.nextUrl.search, request.url), { status: 301 });
+      }
+    }
+  }
 
   if (rewrittenPathname.startsWith('/blog/')) {
     const parts = rewrittenPathname.split('/').filter(Boolean);
     const blogSlug = parts[1];
-    if (blogSlug && LEGACY_BLOG_REDIRECTS[blogSlug]) {
-      const targetBase = LEGACY_BLOG_REDIRECTS[blogSlug];
-      const targetPath = isLocalePrefix ? `/${locale}${targetBase}` : targetBase;
-      return NextResponse.redirect(new URL(targetPath + request.nextUrl.search, request.url), { status: 301 });
+    if (blogSlug) {
+      if (LEGACY_BLOG_REDIRECTS[blogSlug]) {
+        const targetBase = LEGACY_BLOG_REDIRECTS[blogSlug];
+        const targetPath = isLocalePrefix ? `/${locale}${targetBase}` : targetBase;
+        return NextResponse.redirect(new URL(targetPath + request.nextUrl.search, request.url), { status: 301 });
+      }
+      // If a landing page was accessed as /blog/[slug]/, redirect to /landing/[slug]/
+      if (landingPagesData.some((lp) => lp.slug === blogSlug)) {
+        const targetPath = isLocalePrefix ? `/${locale}/landing/${blogSlug}/` : `/landing/${blogSlug}/`;
+        return NextResponse.redirect(new URL(targetPath + request.nextUrl.search, request.url), { status: 301 });
+      }
     }
   }
 
@@ -124,12 +185,18 @@ export async function proxy(request: NextRequest) {
 
   // 301 redirect raw Hindi translated routes
   const decodedPathname = decodeURIComponent(pathname);
-  if (decodedPathname.startsWith('/टूल/') || decodedPathname.startsWith('/ब्लॉग/')) {
+  if (
+    decodedPathname.startsWith('/टूल/') ||
+    decodedPathname.startsWith('/टूल्स/') ||
+    decodedPathname.startsWith('/ब्लॉग/')
+  ) {
     let targetPath = '/hi/tools/';
-    if (decodedPathname.startsWith('/टूल/')) {
-      const slug = decodedPathname.replace('/टूल/', '').replace(/\/$/, '');
+    if (decodedPathname.startsWith('/टूल/') || decodedPathname.startsWith('/टूल्स/')) {
+      const slug = decodedPathname.replace(/^\/(?:टूल|टूल्स)\//, '').replace(/\/$/, '');
       if (slug === 'प्रोटेक्ट-पीडीएफ') {
         targetPath = '/hi/tools/protect-pdf/';
+      } else if (slug === 'पासपोर्ट-फोटो-मेकर') {
+        targetPath = '/hi/tools/passport-photo-maker/';
       } else if (slug) {
         targetPath = `/hi/tools/${slug}/`;
       }

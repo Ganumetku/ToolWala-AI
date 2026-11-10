@@ -167,16 +167,20 @@ export default function SEOPageTemplate({ slug }: SEOPageTemplateProps) {
               <section className="space-y-6 pt-6 border-t border-gray-200 dark:border-white/5">
                 <h4 className="text-xs font-black uppercase tracking-[0.2em] text-gray-500">Related Articles & Guides</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {pageData.relatedBlogs.map((blog) => (
-                    <Link 
-                      key={blog.slug} 
-                      href={localizeHref(`/blog/${blog.slug}`)}
-                      className="p-5 rounded-2xl border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#0b0f19]/40 hover:border-blue-500/30 hover:bg-blue-50/50 dark:hover:bg-blue-500/[0.01] transition-all group flex items-center justify-between cursor-pointer shadow-sm"
-                    >
-                      <span className="text-xs font-black text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase tracking-tight line-clamp-1">{blog.title}</span>
-                      <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-white group-hover:translate-x-0.5 transition-all flex-shrink-0" />
-                    </Link>
-                  ))}
+                  {pageData.relatedBlogs.map((blog) => {
+                    const isLanding = landingPagesData.some((lp) => lp.slug === blog.slug);
+                    const targetPath = isLanding ? `/landing/${blog.slug}/` : `/blog/${blog.slug}/`;
+                    return (
+                      <Link 
+                        key={blog.slug} 
+                        href={localizeHref(targetPath)}
+                        className="p-5 rounded-2xl border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#0b0f19]/40 hover:border-blue-500/30 hover:bg-blue-50/50 dark:hover:bg-blue-500/[0.01] transition-all group flex items-center justify-between cursor-pointer shadow-sm"
+                      >
+                        <span className="text-xs font-black text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase tracking-tight line-clamp-1">{blog.title}</span>
+                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-white group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+                      </Link>
+                    );
+                  })}
                 </div>
               </section>
             )}

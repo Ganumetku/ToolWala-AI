@@ -630,8 +630,8 @@ Since Aadhaar photos are sensitive biometric data linked to your unique identity
     category: "Image Tools",
     relatedTools: ["gov-form-image-compressor", "image-compressor", "signature-resize"],
     relatedBlogs: [
-      { title: "SSC CGL Photo & Signature Specifications Guide", slug: "ssc-cgl-photo-signature-specifications" },
-      { title: "How to Compress Image for Government Portals", slug: "compress-image-government-portals" }
+      { title: "SSC Photo & Signature Specifications Guide", slug: "upload-photo-signature-ssc-application" },
+      { title: "How to Compress Image for Government Portals", slug: "upload-documents-government-portals" }
     ],
     faqs: [
       {
@@ -697,8 +697,8 @@ Since government exam photos contain your personal biometric data, privacy matte
     category: "Image Tools",
     relatedTools: ["gov-form-image-compressor", "image-compressor", "aadhaar-photo-resize"],
     relatedBlogs: [
-      { title: "IBPS PO Photo & Signature Upload Requirements", slug: "ibps-po-photo-signature-upload-requirements" },
-      { title: "How to Compress Image for Government Portals", slug: "compress-image-government-portals" }
+      { title: "IBPS Bank Exam Photo & Signature Specifications", slug: "ibps-bank-exam-photo-signature-size-spec" },
+      { title: "How to Compress Image for Government Portals", slug: "upload-documents-government-portals" }
     ],
     faqs: [
       {
@@ -766,7 +766,7 @@ Bank exam applications contain your PAN number, Aadhaar number, and other sensit
     relatedTools: ["image-compressor", "gov-form-image-compressor", "passport-photo-maker"],
     relatedBlogs: [
       { title: "NEET UG Photo & Document Upload Specifications", slug: "neet-ug-photo-document-upload-specifications" },
-      { title: "How to Compress Image for Government Portals", slug: "compress-image-government-portals" }
+      { title: "How to Compress Image for Government Portals", slug: "upload-documents-government-portals" }
     ],
     faqs: [
       {
@@ -832,7 +832,7 @@ Student admission photos are tied to identity verification systems. Processing t
     category: "Image Tools",
     relatedTools: ["image-compressor", "gov-form-image-compressor", "bg-remover"],
     relatedBlogs: [
-      { title: "How to Compress Image for Government Portals", slug: "compress-image-government-portals" },
+      { title: "How to Compress Image for Government Portals", slug: "upload-documents-government-portals" },
       { title: "Official Indian Passport Photo Size & Dimensions", slug: "official-indian-passport-photo-specifications" }
     ],
     faqs: [
@@ -894,7 +894,7 @@ Since 200KB images often include scanned identity documents with Aadhaar numbers
     category: "Image Tools",
     relatedTools: ["image-compressor", "gov-form-image-compressor", "aadhaar-photo-resize"],
     relatedBlogs: [
-      { title: "How to Compress Image for Government Portals", slug: "compress-image-government-portals" },
+      { title: "How to Compress Image for Government Portals", slug: "upload-documents-government-portals" },
       { title: "Official Indian Passport Photo Size & Dimensions", slug: "official-indian-passport-photo-specifications" }
     ],
     faqs: [
@@ -1019,7 +1019,7 @@ Visa application photos are among the most sensitive personal images you can upl
     relatedTools: ["image-compressor", "bg-remover", "ai-image-upscaler"],
     relatedBlogs: [
       { title: "Official Indian Passport Photo Size & Dimensions", slug: "official-indian-passport-photo-specifications" },
-      { title: "How to Compress Image for Government Portals", slug: "compress-image-government-portals" }
+      { title: "How to Compress Image for Government Portals", slug: "upload-documents-government-portals" }
     ],
     faqs: [
       {

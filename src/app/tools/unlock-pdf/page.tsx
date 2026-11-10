@@ -446,7 +446,7 @@ export default function UnlockPdf() {
             
             {/* Protect PDF Card */}
             <Link 
-              href="/tools/protect-pdf"
+              href="/tools/protect-pdf/"
               className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 glass"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -472,7 +472,7 @@ export default function UnlockPdf() {
 
             {/* Merge PDF Card */}
             <Link 
-              href="/tools/merge-pdf"
+              href="/tools/merge-pdf/"
               className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 glass"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -498,7 +498,7 @@ export default function UnlockPdf() {
 
             {/* PDF to JPG Card */}
             <Link 
-              href="/tools/pdf-to-jpg"
+              href="/tools/pdf-to-jpg/"
               className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 glass"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

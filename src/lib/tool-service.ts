@@ -64,8 +64,18 @@ export function toolToDbRow(
   };
 }
 
+const EXCLUDED_TOOL_SLUGS = new Set([
+  'pan-photo-tool',
+  'signature-crop-tool',
+  'aadhaar-photo-resizer',
+  'aadhaar-photo-resize',
+  'aadhar-card-cropper',
+  'crop-aadhar-card',
+  'pdf-tools',
+]);
+
 export function mergeToolsWithCatalog(dbTools: DbTool[]): Tool[] {
-  const filteredDbTools = dbTools.filter((t) => t.slug !== 'pan-photo-tool' && t.slug !== 'signature-crop-tool');
+  const filteredDbTools = dbTools.filter((t) => !EXCLUDED_TOOL_SLUGS.has(t.slug));
   const dbMap = new Map(filteredDbTools.map((t) => [t.slug, dbToTool(t)]));
   const merged: Tool[] = [];
 

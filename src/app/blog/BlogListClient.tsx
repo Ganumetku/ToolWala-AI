@@ -322,7 +322,7 @@ export default function BlogListClient({
             </h3>
             <div className="space-y-3">
               <Link
-                href={localizeHref('/tools/pdf-tools/edit-pdf')}
+                href={localizeHref('/tools/edit-pdf/')}
                 className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/[0.02] border border-gray-200 dark:border-white/5 hover:border-blue-500/30 transition-all group"
               >
                 <span className="text-lg">✍️</span>

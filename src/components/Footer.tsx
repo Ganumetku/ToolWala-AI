@@ -84,7 +84,7 @@ export default function Footer() {
 
   const topTools = [
     { name: "Aadhaar Masking Tool", href: "/tools/aadhaar-masking-tool/" },
-    { name: "Aadhaar Photo Resizer", href: "/tools/aadhaar-photo-resizer/" },
+    { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" },
     { name: "Background Remover", href: "/tools/bg-remover/" },
     { name: "Image Compressor", href: "/tools/image-compressor/" },
     { name: "Passport Photo Maker", href: "/tools/passport-photo-maker/" },

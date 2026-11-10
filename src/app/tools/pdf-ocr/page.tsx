@@ -723,7 +723,7 @@ export default function PdfOcrScanner() {
               <p className="text-sm text-gray-400 mt-1 font-medium">{t('tools.related_tools_desc', 'Discover more professional document operations tools.')}</p>
             </div>
             <Link 
-              href={localizeHref("/tools")} 
+              href={localizeHref("/tools/")} 
               className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-blue-500 hover:text-blue-400 transition-colors group cursor-pointer"
             >
               {t('nav.tools', 'All Tools')}
@@ -735,7 +735,7 @@ export default function PdfOcrScanner() {
             
             {/* Image OCR Card */}
             <Link 
-              href={localizeHref("/tools/ocr-to-text")}
+              href={localizeHref("/tools/ocr-to-text/")}
               className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 glass"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -761,7 +761,7 @@ export default function PdfOcrScanner() {
 
             {/* Merge PDF Card */}
             <Link 
-              href={localizeHref("/tools/merge-pdf")}
+              href={localizeHref("/tools/merge-pdf/")}
               className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 glass"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -787,7 +787,7 @@ export default function PdfOcrScanner() {
 
             {/* Split PDF Card */}
             <Link 
-              href={localizeHref("/tools/split-pdf")}
+              href={localizeHref("/tools/split-pdf/")}
               className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.03] p-7 transition-all duration-500 hover:bg-white/[0.05] hover:border-blue-500/50 glass"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

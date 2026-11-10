@@ -755,7 +755,7 @@ export default function PdfToJpg() {
             
             {/* Split PDF Card */}
             <Link 
-              href="/tools/split-pdf"
+              href="/tools/split-pdf/"
               className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.03] p-7 transition-all duration-300 hover:border-blue-500/50 shadow-sm"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -781,7 +781,7 @@ export default function PdfToJpg() {
 
             {/* Merge PDF Card */}
             <Link 
-              href="/tools/merge-pdf"
+              href="/tools/merge-pdf/"
               className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.03] p-7 transition-all duration-300 hover:border-blue-500/50 shadow-sm"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -807,7 +807,7 @@ export default function PdfToJpg() {
 
             {/* JPG to PDF Card */}
             <Link 
-              href="/tools/jpg-to-pdf"
+              href="/tools/jpg-to-pdf/"
               className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.03] p-7 transition-all duration-300 hover:border-blue-500/50 shadow-sm"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

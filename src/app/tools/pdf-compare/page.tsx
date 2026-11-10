@@ -250,7 +250,7 @@ export default function PdfComparePage() {
                 </div>
               </div>
               <Link
-                href="/tools/unlock-pdf"
+                href="/tools/unlock-pdf/"
                 className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-black uppercase tracking-wider rounded-xl bg-amber-600 text-white hover:bg-amber-700 transition-colors shrink-0 shadow-xs"
               >
                 Go to Unlock PDF
@@ -276,7 +276,7 @@ export default function PdfComparePage() {
                 </div>
               </div>
               <Link
-                href="/tools/pdf-ocr"
+                href="/tools/pdf-ocr/"
                 className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-black uppercase tracking-wider rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-colors shrink-0 shadow-xs"
               >
                 Open PDF OCR

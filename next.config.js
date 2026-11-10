@@ -82,8 +82,18 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/:locale(hi|es|pt)/tools/aadhaar-photo-resizer',
+        destination: '/:locale/tools/crop-aadhaar-card/',
+        permanent: true,
+      },
+      {
         source: '/tools/aadhaar-photo-resize',
         destination: '/tools/crop-aadhaar-card/',
+        permanent: true,
+      },
+      {
+        source: '/:locale(hi|es|pt)/tools/aadhaar-photo-resize',
+        destination: '/:locale/tools/crop-aadhaar-card/',
         permanent: true,
       },
       {
@@ -92,8 +102,58 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/:locale(hi|es|pt)/tools/aadhar-card-cropper',
+        destination: '/:locale/tools/crop-aadhaar-card/',
+        permanent: true,
+      },
+      {
         source: '/tools/crop-aadhar-card',
         destination: '/tools/crop-aadhaar-card/',
+        permanent: true,
+      },
+      {
+        source: '/:locale(hi|es|pt)/tools/crop-aadhar-card',
+        destination: '/:locale/tools/crop-aadhaar-card/',
+        permanent: true,
+      },
+      {
+        source: '/tools/pan-photo-tool',
+        destination: '/tools/pan-card-resize/',
+        permanent: true,
+      },
+      {
+        source: '/:locale(hi|es|pt)/tools/pan-photo-tool',
+        destination: '/:locale/tools/pan-card-resize/',
+        permanent: true,
+      },
+      {
+        source: '/tools/signature-crop-tool',
+        destination: '/tools/signature-resize/',
+        permanent: true,
+      },
+      {
+        source: '/:locale(hi|es|pt)/tools/signature-crop-tool',
+        destination: '/:locale/tools/signature-resize/',
+        permanent: true,
+      },
+      {
+        source: '/tools/pdf-tools',
+        destination: '/categories/pdf-tools/',
+        permanent: true,
+      },
+      {
+        source: '/:locale(hi|es|pt)/tools/pdf-tools',
+        destination: '/:locale/categories/pdf-tools/',
+        permanent: true,
+      },
+      {
+        source: '/tools/pdf-tools/edit-pdf',
+        destination: '/tools/edit-pdf/',
+        permanent: true,
+      },
+      {
+        source: '/:locale(hi|es|pt)/tools/pdf-tools/edit-pdf',
+        destination: '/:locale/tools/edit-pdf/',
         permanent: true,
       },
       {

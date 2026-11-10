@@ -396,7 +396,7 @@ export default function PdfToExcelConverter() {
         {/* Back Navigation */}
         <div>
           <Link
-            href="/tools/pdf-tools"
+            href="/categories/pdf-tools/"
             className="inline-flex items-center text-xs font-semibold text-slate-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group"
           >
             <ChevronLeft className="w-4 h-4 mr-1 group-hover:-translate-x-1 transition-transform" />

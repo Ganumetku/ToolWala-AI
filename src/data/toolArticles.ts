@@ -1094,7 +1094,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Converting your images to PDF doesn't have to compromise your personal data security. With ToolWala AI's JPG to PDF converter, you get high-resolution outputs with flexible layouts and complete privacy. Try it now.",
     relatedTools: [
-      { name: "PDF Tools Suite", href: "/tools/pdf-tools/" },
+      { name: "PDF Tools Suite", href: "/categories/pdf-tools/" },
       { name: "Merge PDF", href: "/tools/merge-pdf/" },
       { name: "Split PDF", href: "/tools/split-pdf/" },
       { name: "Compress PDF", href: "/tools/compress-pdf/" },
@@ -1900,7 +1900,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Fixing a PDF shouldn't be an ordeal. Make your edits, sign what you need, and download a clean file in seconds.",
     relatedTools: [
-      { name: "PDF Tools Suite", href: "/tools/pdf-tools/" },
+      { name: "PDF Tools Suite", href: "/categories/pdf-tools/" },
       { name: "Merge PDF", href: "/tools/merge-pdf/" },
       { name: "Sign PDF", href: "/tools/sign-pdf/" }
     ]
@@ -2369,7 +2369,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     conclusion: "Format, crop, and clean your business invoices and receipt scans locally. Start editing with ToolWala AI.",
     relatedTools: [
-      { name: "PDF Compressor", href: "/tools/pdf-tools/" },
+      { name: "PDF Compressor", href: "/tools/compress-pdf/" },
       { name: "Image Compressor", href: "/tools/image-compressor/" },
       { name: "PDF to JPG", href: "/tools/pdf-to-jpg/" },
       { name: "Signature Resize", href: "/tools/signature-resize/" },

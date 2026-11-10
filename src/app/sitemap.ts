@@ -94,23 +94,43 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let blogEntries: MetadataRoute.Sitemap = [];
   let tagEntries: MetadataRoute.Sitemap = [];
 
+  const EXCLUDED_TOOL_SLUGS = new Set([
+    'aadhaar-photo-resizer',
+    'aadhaar-photo-resize',
+    'aadhar-card-cropper',
+    'crop-aadhar-card',
+    'pan-photo-tool',
+    'signature-crop-tool',
+    'pdf-tools',
+  ]);
+
+  const normalizeToolHref = (href: string) => {
+    if (href.includes('/pdf-tools/edit-pdf')) return '/tools/edit-pdf/';
+    return href;
+  };
+
   try {
-    const publicTools = await getPublicTools();
+    const rawTools = await getPublicTools();
+    const publicTools = rawTools.filter((t) => !EXCLUDED_TOOL_SLUGS.has(t.slug));
     toolEntries = publicTools.flatMap((t) => {
+      const href = normalizeToolHref(t.href);
       const localesToUse = t.slug === 'exam-marks-calculator'
         ? seoLocales.filter((loc) => loc === 'en' || loc === 'hi')
         : seoLocales;
-      return localesToUse.map((loc) => buildItem(t.href, t.updatedAt ? new Date(t.updatedAt) : now, 'weekly', 0.8, loc));
+      return localesToUse.map((loc) => buildItem(href, t.updatedAt ? new Date(t.updatedAt) : now, 'weekly', 0.8, loc));
     });
   } catch {
     const { toolsData } = await import('@/data/tools');
     const { isToolLive } = await import('@/lib/tools');
-    toolEntries = toolsData.filter(isToolLive).flatMap((t) => {
-      const localesToUse = t.slug === 'exam-marks-calculator'
-        ? seoLocales.filter((loc) => loc === 'en' || loc === 'hi')
-        : seoLocales;
-      return localesToUse.map((loc) => buildItem(t.href, now, 'weekly', 0.8, loc));
-    });
+    toolEntries = toolsData
+      .filter((t) => isToolLive(t) && !EXCLUDED_TOOL_SLUGS.has(t.slug))
+      .flatMap((t) => {
+        const href = normalizeToolHref(t.href);
+        const localesToUse = t.slug === 'exam-marks-calculator'
+          ? seoLocales.filter((loc) => loc === 'en' || loc === 'hi')
+          : seoLocales;
+        return localesToUse.map((loc) => buildItem(href, now, 'weekly', 0.8, loc));
+      });
   }
 
   try {

@@ -60,7 +60,7 @@ export function PDFToolbar({
     <header className="h-16 border-b border-slate-200 dark:border-slate-800/80 px-6 flex items-center justify-between bg-white/90 dark:bg-slate-900/90 backdrop-blur-md z-30 select-none shadow-sm dark:shadow-none">
       {/* Left Section */}
       <div className="flex items-center gap-4">
-        <Link href={localizeHref('/tools/pdf-tools')} className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">
+        <Link href={localizeHref('/categories/pdf-tools/')} className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">
           <ChevronLeft className="w-4 h-4" />
           PDF Tools
         </Link>

@@ -201,8 +201,8 @@ export default function OcrToText() {
     ],
     conclusion: "Convert any image format into searchable, copyable text instantly without installing complex scanning applications.",
     relatedTools: [
-      { name: "Image Compressor", href: "/tools/image-compressor" },
-      { name: "PDF Tools", href: "/tools/pdf-tools" }
+      { name: "Image Compressor", href: "/tools/image-compressor/" },
+      { name: "PDF Tools", href: "/categories/pdf-tools/" }
     ]
   };
 

@@ -55,21 +55,21 @@ export async function proxy(request: NextRequest) {
 
   const normalizedRewritten = rewrittenPathname.endsWith('/') ? rewrittenPathname : rewrittenPathname + '/';
 
-  // 301 redirect duplicate tool /tools/pan-photo-tool/ to /tools/pan-card-resize/
-  if (normalizedRewritten === '/tools/pan-photo-tool/') {
-    const targetPath = isLocalePrefix ? `/${locale}/tools/pan-card-resize/` : '/tools/pan-card-resize/';
-    return NextResponse.redirect(new URL(targetPath + request.nextUrl.search, request.url), { status: 301 });
-  }
+  // 301 redirect legacy & duplicate tool routes
+  const LEGACY_TOOL_REDIRECTS: Record<string, string> = {
+    '/tools/aadhaar-photo-resizer/': '/tools/crop-aadhaar-card/',
+    '/tools/aadhaar-photo-resize/': '/tools/crop-aadhaar-card/',
+    '/tools/aadhar-card-cropper/': '/tools/crop-aadhaar-card/',
+    '/tools/crop-aadhar-card/': '/tools/crop-aadhaar-card/',
+    '/tools/pan-photo-tool/': '/tools/pan-card-resize/',
+    '/tools/signature-crop-tool/': '/tools/signature-resize/',
+    '/tools/pdf-tools/': '/categories/pdf-tools/',
+    '/tools/pdf-tools/edit-pdf/': '/tools/edit-pdf/',
+  };
 
-  // 301 redirect legacy tool /tools/signature-crop-tool/ to /tools/signature-resize/
-  if (normalizedRewritten === '/tools/signature-crop-tool/') {
-    const targetPath = isLocalePrefix ? `/${locale}/tools/signature-resize/` : '/tools/signature-resize/';
-    return NextResponse.redirect(new URL(targetPath + request.nextUrl.search, request.url), { status: 301 });
-  }
-
-  // 301 redirect duplicate tool /tools/pdf-tools/ to /categories/pdf-tools/
-  if (normalizedRewritten === '/tools/pdf-tools/') {
-    const targetPath = isLocalePrefix ? `/${locale}/categories/pdf-tools/` : '/categories/pdf-tools/';
+  if (LEGACY_TOOL_REDIRECTS[normalizedRewritten]) {
+    const targetBase = LEGACY_TOOL_REDIRECTS[normalizedRewritten];
+    const targetPath = isLocalePrefix ? `/${locale}${targetBase}` : targetBase;
     return NextResponse.redirect(new URL(targetPath + request.nextUrl.search, request.url), { status: 301 });
   }
 

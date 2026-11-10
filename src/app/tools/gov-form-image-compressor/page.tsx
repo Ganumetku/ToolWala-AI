@@ -40,7 +40,7 @@ export default function GovFormImageCompressor() {
               Launch our high-performance image compression tool with custom KB size targeting for SSC, UPSC, IBPS, and state portals.
             </p>
             <Link
-              href={localizeHref("/tools/image-compressor")}
+              href={localizeHref("/tools/image-compressor/")}
               className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase tracking-wider rounded-2xl transition-all shadow-[0_4px_20px_rgba(37,99,235,0.35)] hover:scale-105 active:scale-95 cursor-pointer font-sans"
             >
               Open Image Compressor

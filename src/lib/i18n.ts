@@ -38,19 +38,25 @@ export async function loadTranslations(locale: string): Promise<any> {
 
 /** Prepends the current language code to local links, preserving routes */
 export function localizeHref(href: string, locale: string): string {
-  if (!locale || locale === DEFAULT_LOCALE) return href;
+  if (!href) return href;
   if (
     href.startsWith('/admin') ||
     href.startsWith('/api') ||
     href.startsWith('http') ||
     href.startsWith('//') ||
-    href.startsWith('#')
+    href.startsWith('#') ||
+    href.includes('.')
   ) {
     return href;
   }
-  const cleanHref = href.startsWith('/') ? href : `/${href}`;
+  let cleanHref = href.startsWith('/') ? href : `/${href}`;
+  // Ensure trailing slash for page routes to match Next.js trailingSlash: true
+  if (!cleanHref.includes('?') && !cleanHref.includes('#') && !cleanHref.endsWith('/')) {
+    cleanHref += '/';
+  }
+  if (!locale || locale === DEFAULT_LOCALE) return cleanHref;
   // Prevent duplicate prefixes e.g. /hi/hi/...
-  if (cleanHref.startsWith(`/${locale}/`) || cleanHref === `/${locale}`) {
+  if (cleanHref.startsWith(`/${locale}/`) || cleanHref === `/${locale}/`) {
     return cleanHref;
   }
   return `/${locale}${cleanHref}`;

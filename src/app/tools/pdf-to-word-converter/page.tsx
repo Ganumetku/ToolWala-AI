@@ -358,7 +358,7 @@ export default function PdfToWord() {
               <div className="mb-8 p-6 bg-red-500/10 border border-red-500/20 rounded-2xl text-center">
                 <div className="text-red-500 dark:text-red-400 text-sm font-bold flex flex-col items-center gap-3">
                   <FileWarning className="w-8 h-8 text-red-500" />
-                  <span>This PDF is password-protected. Please unlock the file using our <Link href="/tools/unlock-pdf" className="text-blue-600 dark:text-blue-400 underline hover:text-blue-500 dark:hover:text-blue-300">Unlock PDF</Link> tool before uploading.</span>
+                  <span>This PDF is password-protected. Please unlock the file using our <Link href="/tools/unlock-pdf/" className="text-blue-600 dark:text-blue-400 underline hover:text-blue-500 dark:hover:text-blue-300">Unlock PDF</Link> tool before uploading.</span>
                 </div>
                 <button onClick={resetAll} className="mt-4 px-5 py-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-700 dark:text-gray-300 rounded-xl hover:bg-slate-200 dark:hover:bg-white/10 transition-all cursor-pointer">
                   Try Another File

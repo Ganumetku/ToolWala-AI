@@ -48,7 +48,7 @@ export function useTranslation() {
       messages: {},
       enabledLocales: ['en', 'hi', 'es', 'fr', 'de', 'pt', 'ar', 'id'],
       t: (key: string, fallback?: any) => fallback !== undefined ? fallback : key,
-      localizeHref: (href: string) => href,
+      localizeHref: (href: string) => localizeHref(href, 'en'),
     };
   }
   return context;

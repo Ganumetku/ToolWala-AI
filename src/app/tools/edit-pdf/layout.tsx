@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
     'edit-pdf',
     'Edit PDF Online – Free Browser PDF Editor | ToolWala AI',
     'Edit PDF online free without signups. Add text to PDF free, insert signatures, draw, and annotate documents securely inside your browser.',
-    '/tools/pdf-tools/edit-pdf'
+    '/tools/edit-pdf/'
   );
 }
 

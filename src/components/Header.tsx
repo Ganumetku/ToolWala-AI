@@ -249,7 +249,7 @@ export default function Header() {
         toolHoverText: 'group-hover:text-purple-600 dark:group-hover:text-purple-400',
       },
       tools: [
-        { name: 'Edit PDF', href: '/tools/pdf-tools/edit-pdf', icon: 'FilePenLine', badge: 'POPULAR', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'Add text, forms & draw' },
+        { name: 'Edit PDF', href: '/tools/edit-pdf/', icon: 'FilePenLine', badge: 'POPULAR', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'Add text, forms & draw' },
         { name: 'Sign PDF', href: '/tools/sign-pdf', icon: 'PenTool', badge: 'E-SIGN', badgeColor: 'bg-purple-50/80 dark:bg-purple-500/10 text-purple-600/90 dark:text-purple-400/90 border border-purple-200/50 dark:border-purple-500/15', desc: 'Draw, type signature' },
         { name: 'Crop PDF', href: '/tools/crop-pdf', icon: 'Crop', badge: 'Trim', desc: 'Trim page margins' },
         { name: 'Rotate PDF', href: '/tools/rotate-pdf', icon: 'RotateCw', badge: 'Turn', desc: 'Rotate 90° or 180°' },

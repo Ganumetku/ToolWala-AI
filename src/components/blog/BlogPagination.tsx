@@ -20,6 +20,12 @@ export default function BlogPagination({
 
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
+  const normalizedBase = basePath
+    ? basePath.endsWith('/')
+      ? basePath
+      : `${basePath}/`
+    : undefined;
+
   const PageButton = ({ p }: { p: number }) => {
     const isActive = p === page;
     const className = `min-w-10 h-10 flex items-center justify-center rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
@@ -28,8 +34,8 @@ export default function BlogPagination({
         : "bg-white dark:bg-white/5 text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white hover:bg-blue-50 dark:hover:bg-white/10 border border-slate-200/90 dark:border-white/10 shadow-sm"
     }`;
 
-    if (basePath) {
-      const href = p === 1 ? basePath : `${basePath}?page=${p}`;
+    if (normalizedBase) {
+      const href = p === 1 ? normalizedBase : `${normalizedBase}?page=${p}`;
       return (
         <Link href={href} className={className}>
           {p}
@@ -47,9 +53,9 @@ export default function BlogPagination({
   return (
     <nav className="flex items-center justify-center gap-2 pt-10" aria-label="Blog pagination">
       {page > 1 ? (
-        basePath ? (
+        normalizedBase ? (
           <Link
-            href={page === 2 ? basePath : `${basePath}?page=${page - 1}`}
+            href={page === 2 ? normalizedBase : `${normalizedBase}?page=${page - 1}`}
             className="p-2.5 rounded-xl bg-white dark:bg-white/5 border border-slate-200/90 dark:border-white/10 text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white hover:bg-blue-50 dark:hover:bg-white/10 transition-colors shadow-sm"
             aria-label="Previous page"
           >
@@ -76,9 +82,9 @@ export default function BlogPagination({
       </div>
 
       {page < totalPages ? (
-        basePath ? (
+        normalizedBase ? (
           <Link
-            href={`${basePath}?page=${page + 1}`}
+            href={`${normalizedBase}?page=${page + 1}`}
             className="p-2.5 rounded-xl bg-white dark:bg-white/5 border border-slate-200/90 dark:border-white/10 text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white hover:bg-blue-50 dark:hover:bg-white/10 transition-colors shadow-sm"
             aria-label="Next page"
           >

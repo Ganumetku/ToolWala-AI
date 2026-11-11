@@ -219,7 +219,7 @@
     "id": "trans-8-image-compressor-en",
     "toolSlug": "image-compressor",
     "locale": "en",
-    "title": "Image Compressor",
+    "title": "Image Compressor Online",
     "description": "Compress JPG, PNG, and WebP images up to 90% without quality loss.",
     "faq": [
       {
@@ -239,16 +239,16 @@
         "answer": "It's faster (no upload/download delay) and significantly more secure because your images never leave your local machine."
       }
     ],
-    "seoTitle": "Free Online Image Compressor – Compress PNG & JPG",
-    "seoDescription": "Reduce image file size without losing quality. Compress PNG, JPG, and WebP images quickly and securely in your browser.",
+    "seoTitle": "Compress Images Online Free – Reduce JPG, PNG & WebP (Custom KB) | ToolWala",
+    "seoDescription": "Compress JPG, PNG, and WebP images to exact KB targets (20KB, 50KB, 100KB) without losing quality. Ideal for job portals, exams, and fast web loading.",
     "createdAt": "2026-06-18T02:01:06.127Z",
-    "updatedAt": "2026-06-18T02:01:06.127Z"
+    "updatedAt": "2026-11-11T12:39:35.578Z"
   },
   {
     "id": "trans-9-image-compressor-hi",
     "toolSlug": "image-compressor",
     "locale": "hi",
-    "title": "इमेज कंप्रेसर",
+    "title": "इमेज कंप्रेसर ऑनलाइन",
     "description": "गुणवत्ता खोए बिना JPG, PNG और WebP छवियों का आकार कम करें।",
     "faq": [
       {
@@ -268,16 +268,16 @@
         "answer": "आप सीधे अपने ब्राउज़र में JPG, JPEG, PNG, और WebP प्रारूपों को आसानी से संपीड़ित कर सकते हैं।"
       }
     ],
-    "seoTitle": "इमेज कंप्रेसर - ToolWala AI",
-    "seoDescription": "गुणवत्ता खोए बिना छवि फ़ाइल का आकार कम करें। अपने ब्राउज़र में PNG, JPG और WebP छवियों को तेज़ी से और सुरक्षित रूप से संपीड़ित करें।",
+    "seoTitle": "इमेज कंप्रेसर ऑनलाइन मुफ्त – फ़ोटो का साइज़ कम करें (20KB, 50KB) | ToolWala",
+    "seoDescription": "क्वालिटी खोए बिना JPG, PNG और WebP तस्वीरों का आकार कम करें। सरकारी फॉर्म और एग्ज़ाम के लिए सटीक KB (20KB, 50KB) में फ़ोटो कंप्रेस करें।",
     "createdAt": "2026-06-18T02:01:06.127Z",
-    "updatedAt": "2026-06-18T02:01:06.127Z"
+    "updatedAt": "2026-11-11T12:39:35.579Z"
   },
   {
     "id": "trans-10-image-compressor-es",
     "toolSlug": "image-compressor",
     "locale": "es",
-    "title": "Compresor de imagen",
+    "title": "Compresor de Imágenes Online",
     "description": "Comprime imágenes hasta un 90% sin perder calidad visible. Rápido y seguro.",
     "faq": [
       {
@@ -297,10 +297,10 @@
         "answer": "Es más rápido (sin demoras en la carga/descarga) y significativamente más seguro porque sus imágenes nunca salen de su máquina local."
       }
     ],
-    "seoTitle": "Compresor de imágenes en línea gratuito: comprimir PNG y JPG",
-    "seoDescription": "Reduzca el tamaño del archivo de imagen sin perder calidad. Comprime imágenes PNG, JPG y WebP de forma rápida y segura en tu navegador.",
+    "seoTitle": "Comprimir Imágenes Gratis – Reducir JPG, PNG y WebP al Instante | ToolWala",
+    "seoDescription": "Reduce el tamaño de tus fotos JPG, PNG y WebP sin perder calidad. Elige el tamaño exacto en KB que necesitas. 100% gratis, rápido y privado.",
     "createdAt": "2026-06-18T02:01:06.127Z",
-    "updatedAt": "2026-06-19T01:06:50.260Z"
+    "updatedAt": "2026-11-11T12:39:35.578Z"
   },
   {
     "id": "trans-11-image-compressor-fr",
@@ -931,7 +931,7 @@
     "id": "trans-32-jpg-to-pdf-en",
     "toolSlug": "jpg-to-pdf",
     "locale": "en",
-    "title": "JPG to PDF",
+    "title": "JPG to PDF Converter",
     "description": "Convert JPG, PNG, and WebP images into a single clean PDF document.",
     "faq": [
       {
@@ -951,16 +951,16 @@
         "answer": "Yes. The preview workspace displays files as interactive cards. You can drag cards, use the up/down arrows to change page order, and rotate images 90 degrees at a time to correct orientation errors."
       }
     ],
-    "seoTitle": "Convert JPG to PDF Online – Image to PDF Free",
-    "seoDescription": "Turn images (JPG, PNG, WebP) into high-quality PDF files instantly. Client-side processing.",
+    "seoTitle": "Convert JPG to PDF Online Free – Fast, No Sign-up & Secure | ToolWala",
+    "seoDescription": "Turn your JPG, PNG, and WebP images into clean, high-quality PDF files in seconds. 100% free with zero file size limits and complete privacy in your browser.",
     "createdAt": "2026-06-18T02:01:06.127Z",
-    "updatedAt": "2026-06-18T02:01:06.127Z"
+    "updatedAt": "2026-11-11T12:39:35.569Z"
   },
   {
     "id": "trans-33-jpg-to-pdf-hi",
     "toolSlug": "jpg-to-pdf",
     "locale": "hi",
-    "title": "JPG से PDF",
+    "title": "JPG से PDF कन्वर्टर",
     "description": "JPG, PNG और अन्य छवियों को एक PDF दस्तावेज़ में बदलें।",
     "faq": [
       {
@@ -980,16 +980,16 @@
         "answer": "हाँ। पूर्वावलोकन कार्यक्षेत्र फ़ाइलों को इंटरैक्टिव कार्ड के रूप में प्रदर्शित करता है। आप कार्ड खींच सकते हैं, पृष्ठ क्रम बदलने के लिए ऊपर/नीचे तीरों का उपयोग कर सकते हैं, और ओरिएंटेशन त्रुटियों को ठीक करने के लिए छवियों को एक बार में 90 डिग्री घुमा सकते हैं।"
       }
     ],
-    "seoTitle": "JPG से PDF - ToolWala AI",
-    "seoDescription": "छवियों (JPG, PNG, WebP) को तुरंत उच्च-गुणवत्ता वाली PDF फ़ाइलों में बदलें। क्लाइंट-साइड प्रोसेसिंग।",
+    "seoTitle": "JPG से PDF कन्वर्टर ऑनलाइन मुफ्त – बिना साइनअप, 100% सुरक्षित | ToolWala",
+    "seoDescription": "अपनी JPG, PNG और WebP तस्वीरों को तुरंत उच्च-गुणवत्ता वाली PDF में बदलें। 100% मुफ्त, बिना किसी फ़ाइल सीमा और पूरी प्राइवेसी के साथ।",
     "createdAt": "2026-06-18T02:01:06.127Z",
-    "updatedAt": "2026-06-18T02:14:48.367Z"
+    "updatedAt": "2026-11-11T12:39:35.578Z"
   },
   {
     "id": "trans-34-jpg-to-pdf-es",
     "toolSlug": "jpg-to-pdf",
     "locale": "es",
-    "title": "JPG a PDF",
+    "title": "Convertir JPG a PDF",
     "description": "Convierta imágenes JPG, JPEG y PNG en un único documento PDF de forma rápida y segura.",
     "faq": [
       {
@@ -1009,10 +1009,10 @@
         "answer": "Sí. El espacio de trabajo de vista previa muestra archivos como tarjetas interactivas. Puede arrastrar tarjetas, usar las flechas arriba/abajo para cambiar el orden de las páginas y rotar las imágenes 90 grados a la vez para corregir errores de orientación."
       }
     ],
-    "seoTitle": "Convierta JPG a PDF en línea – Imagen a PDF Gratis",
-    "seoDescription": "Convierta imágenes (JPG, PNG, WebP) en archivos PDF de alta calidad al instante. Procesamiento del lado del cliente.",
+    "seoTitle": "Convertir JPG a PDF Gratis – Rápido, Seguro y Sin Registro | ToolWala",
+    "seoDescription": "Convierte imágenes JPG, PNG o WebP a PDF en segundos. 100% gratis, sin límites de tamaño y con total privacidad: tus fotos nunca salen de tu dispositivo.",
     "createdAt": "2026-06-18T02:01:06.127Z",
-    "updatedAt": "2026-06-19T01:06:50.260Z"
+    "updatedAt": "2026-11-11T12:39:35.578Z"
   },
   {
     "id": "trans-35-jpg-to-pdf-fr",
@@ -1743,7 +1743,7 @@
     "id": "trans-60-crop-aadhaar-card-en",
     "toolSlug": "crop-aadhaar-card",
     "locale": "en",
-    "title": "Crop & Resize Aadhaar Card Photo",
+    "title": "Crop Aadhaar Card for Print",
     "description": "Crop and resize Aadhaar card photos to official standard sizes online.",
     "faq": [
       {
@@ -1763,16 +1763,16 @@
         "answer": "Yes. While optimized for Aadhaar, you can select standard passport dimensions and custom background colors/KB sizes to meet SSC, UPSC, and State exam criteria."
       }
     ],
-    "seoTitle": "Aadhaar Photo Resize & Crop Tool – Official UIDAI Photo Specs",
-    "seoDescription": "Crop and resize Aadhaar card photos to official UIDAI specifications (3.5x4.5 cm, <50KB) online free with clean white background and 100% privacy.",
+    "seoTitle": "Crop Aadhaar Card Online Free – Front & Back PVC Print (UIDAI Specs) | ToolWala",
+    "seoDescription": "Crop e-Aadhaar card PDF or photo into front and back parts for instant PVC printing or laminating. 100% private in-browser tool compliant with UIDAI size guidelines.",
     "createdAt": "2026-06-18T02:01:06.127Z",
-    "updatedAt": "2026-06-18T02:01:06.127Z"
+    "updatedAt": "2026-11-11T12:39:35.579Z"
   },
   {
     "id": "trans-61-crop-aadhaar-card-hi",
     "toolSlug": "crop-aadhaar-card",
     "locale": "hi",
-    "title": "आधार कार्ड क्रॉप करें",
+    "title": "आधार कार्ड क्रॉप और प्रिंट टूल",
     "description": "आधार कार्ड PDF को प्रिंटिंग और लेमिनेशन के लिए सटीक आकार में क्रॉप करें।",
     "faq": [
       {
@@ -1792,10 +1792,10 @@
         "answer": "हाँ। आधार के लिए अनुकूलित होने पर, आप एसएससी, यूपीएससी और राज्य परीक्षा मानदंडों को पूरा करने के लिए मानक पासपोर्ट आयाम और कस्टम पृष्ठभूमि रंग/केबी आकार का चयन कर सकते हैं।"
       }
     ],
-    "seoTitle": "आधार कार्ड क्रॉप करें - ToolWala AI",
-    "seoDescription": "आधार, यूआईडीएआई और आधिकारिक सरकारी अपडेट के लिए पासपोर्ट फोटो का आकार बदलें, काटें और संपीड़ित करें।",
+    "seoTitle": "आधार कार्ड ऑनलाइन क्रॉप करें – फ्रंट और बैक प्रिंटिंग (UIDAI मानक) | ToolWala",
+    "seoDescription": "अपने ई-आधार कार्ड को PVC प्रिंट या लेमिनेशन के लिए फ्रंट और बैक दो भागों में आसानी से क्रॉप करें। 100% सुरक्षित, मुफ़्त और तत्काल ब्राउज़र टूल।",
     "createdAt": "2026-06-18T02:01:06.127Z",
-    "updatedAt": "2026-06-18T02:15:54.658Z"
+    "updatedAt": "2026-11-11T12:39:35.579Z"
   },
   {
     "id": "trans-62-crop-aadhaar-card-es",
@@ -2968,10 +2968,10 @@
         "answer": "No. Conversion stays in the browser."
       }
     ],
-    "seoTitle": "PDF to Word Converter – Free DOCX, 50MB, No Upload",
-    "seoDescription": "Convert a text PDF to editable .docx in your browser. 50 MB limit. Scanned PDFs need OCR first. Files stay on your device — ToolWala never uploads them.",
+    "seoTitle": "PDF to Word Converter Online Free – Instant DOCX (No Sign-up) | ToolWala",
+    "seoDescription": "Convert text PDF documents into editable Word (.docx) files right in your browser. 100% free, completely private, and files never leave your device.",
     "createdAt": "2026-06-18T02:01:06.127Z",
-    "updatedAt": "2026-06-18T02:01:06.127Z"
+    "updatedAt": "2026-11-11T12:39:35.578Z"
   },
   {
     "id": "trans-105-pdf-to-word-converter-hi",
@@ -3009,16 +3009,16 @@
         "answer": "हमारा पीडीएफ टू वर्ड कनवर्टर चयन योग्य टेक्स्ट निकालता है। फ्लैट छवि टेक्स्ट वाले स्कैन किए गए पीडीएफ के लिए, आप टेक्स्ट निकालने के लिए हमारे पीडीएफ ओसीआर स्कैनर टूल का उपयोग कर सकते हैं।"
       }
     ],
-    "seoTitle": "PDF से Word कन्वर्टर - ToolWala AI",
-    "seoDescription": "पीडीएफ फाइलों को ऑनलाइन संपादन योग्य वर्ड दस्तावेजों में बदलें। सुरक्षित और तेज़ ब्राउज़र-आधारित रूपांतरण।",
+    "seoTitle": "PDF से Word कन्वर्टर ऑनलाइन मुफ्त – संपादन योग्य DOCX | ToolWala",
+    "seoDescription": "अपनी PDF फ़ाइलों को संपादन योग्य Word (.docx) दस्तावेज़ों में आसानी से बदलें। 100% सुरक्षित और तेज़ ब्राउज़र रूपांतरण बिना किसी लॉगिन के।",
     "createdAt": "2026-06-18T02:01:06.127Z",
-    "updatedAt": "2026-06-18T02:17:26.335Z"
+    "updatedAt": "2026-11-11T12:39:35.578Z"
   },
   {
     "id": "trans-106-pdf-to-word-converter-es",
     "toolSlug": "pdf-to-word-converter",
     "locale": "es",
-    "title": "PDF a Convertidor de Word",
+    "title": "Convertidor de PDF a Word",
     "description": "Transforme documentos PDF en archivos de Word editables de forma instantánea y segura. Nuestro motor de conversión basado en navegador conserva la estructura del texto, los encabezados y el formato sin cargar sus archivos en ningún servidor externo.",
     "faq": [
       {
@@ -3050,10 +3050,10 @@
         "answer": "Nuestro conversor de PDF a Word extrae texto seleccionable. Para archivos PDF escaneados que contienen texto de imagen plana, puede utilizar nuestra herramienta de escáner PDF OCR para extraer texto."
       }
     ],
-    "seoTitle": "Convertidor de PDF a Word – Herramienta gratuita en línea",
-    "seoDescription": "Convierta archivos PDF en documentos de Word editables en línea. Conversión basada en navegador segura y rápida.",
+    "seoTitle": "Convertir PDF a Word Gratis – Rápido, Editable y Sin Registro | ToolWala",
+    "seoDescription": "Convierte tus archivos PDF en documentos de Word (.docx) editables al instante. 100% gratuito y seguro: la conversión se realiza directamente en tu navegador.",
     "createdAt": "2026-06-18T02:01:06.127Z",
-    "updatedAt": "2026-06-21T18:58:00.000Z"
+    "updatedAt": "2026-11-11T12:39:35.578Z"
   },
   {
     "id": "trans-107-pdf-to-word-converter-fr",
@@ -4052,7 +4052,7 @@
     "id": "trans-144-pan-card-resize-en",
     "toolSlug": "pan-card-resize",
     "locale": "en",
-    "title": "PAN Card Resize",
+    "title": "PAN Card Photo & Signature Resizer",
     "description": "Resize and format passport photos for NSDL and UTIITSL PAN cards.",
     "faq": [
       {
@@ -4068,16 +4068,16 @@
         "answer": "Yes. Our tool is optimized for mobile touch screens, including pinch gestures and drags."
       }
     ],
-    "seoTitle": "PAN Card Resize – Free Online Tool",
-    "seoDescription": "Format and resize passport photos to official NSDL/UTIITSL PAN card specifications.",
+    "seoTitle": "PAN Card Photo & Signature Resizer – 213x213 px (NSDL & UTIITSL) | ToolWala",
+    "seoDescription": "Resize photos to mandatory 213x213 pixels (<50KB) and signatures (<30KB) for NSDL and UTIITSL online PAN applications. Instant browser processing with white background.",
     "createdAt": "2026-06-18T02:01:06.127Z",
-    "updatedAt": "2026-06-18T02:01:06.127Z"
+    "updatedAt": "2026-11-11T12:39:35.579Z"
   },
   {
     "id": "trans-145-pan-card-resize-hi",
     "toolSlug": "pan-card-resize",
     "locale": "hi",
-    "title": "पैन कार्ड रिसाइज़र",
+    "title": "पैन कार्ड फोटो और सिग्नेचर रिसाइज़र",
     "description": "पैन कार्ड आवेदन के लिए फोटो और हस्ताक्षर का आकार बदलें।",
     "faq": [
       {
@@ -4093,10 +4093,10 @@
         "answer": "हाँ। हमारा टूल मोबाइल टच स्क्रीन के लिए अनुकूलित है, जिसमें पिंच जेस्चर और ड्रैग शामिल हैं।"
       }
     ],
-    "seoTitle": "पैन कार्ड रिसाइज़र - ToolWala AI",
-    "seoDescription": "आधिकारिक एनएसडीएल/यूटीआईआईटीएसएल पैन कार्ड विनिर्देशों के अनुसार पासपोर्ट फोटो को प्रारूपित करें और उनका आकार बदलें।",
+    "seoTitle": "पैन कार्ड फ़ोटो और सिग्नेचर रिसाइज़र – 213x213 px (NSDL & UTIITSL) | ToolWala",
+    "seoDescription": "NSDL और UTIITSL नए पैन कार्ड आवेदन के लिए अपनी फ़ोटो (213x213 पिक्सल, <50KB) और सिग्नेचर को तुरंत सही सरकारी साइज़ में रिसाइज़ और क्रॉप करें।",
     "createdAt": "2026-06-18T02:01:06.127Z",
-    "updatedAt": "2026-06-18T02:18:51.554Z"
+    "updatedAt": "2026-11-11T12:39:35.579Z"
   },
   {
     "id": "trans-146-pan-card-resize-es",
@@ -4152,7 +4152,7 @@
     "id": "trans-148-exam-photo-resizer-en",
     "toolSlug": "exam-photo-resizer",
     "locale": "en",
-    "title": "Exam Photo Resizer",
+    "title": "Exam Photo & Signature Resizer",
     "description": "Resize and format passport photos for SSC, UPSC, and bank exam portals.",
     "faq": [
       {
@@ -4168,16 +4168,16 @@
         "answer": "Yes, our tool runs fully in your browser memory. Your personal documents are never uploaded to any servers."
       }
     ],
-    "seoTitle": "Exam Photo Resizer – Free Online Tool",
-    "seoDescription": "Resize passport photos for competitive exams (SSC, UPSC, IBPS, JEE, NEET).",
+    "seoTitle": "Exam Photo & Signature Resizer – SSC, UPSC, IBPS (20KB - 50KB) | ToolWala",
+    "seoDescription": "Resize and crop passport photos and signatures to exact official dimensions and file sizes (20KB to 50KB) for SSC CGL, UPSC, IBPS, and state PSC application portals.",
     "createdAt": "2026-06-18T02:01:06.127Z",
-    "updatedAt": "2026-06-18T02:01:06.127Z"
+    "updatedAt": "2026-11-11T12:39:35.579Z"
   },
   {
     "id": "trans-149-exam-photo-resizer-hi",
     "toolSlug": "exam-photo-resizer",
     "locale": "hi",
-    "title": "एग्जाम फोटो रिसाइज़र",
+    "title": "एग्जाम फोटो और सिग्नेचर रिसाइज़र",
     "description": "विभिन्न प्रतियोगी परीक्षाओं के लिए फोटो और हस्ताक्षर का आकार बदलें।",
     "faq": [
       {
@@ -4193,10 +4193,10 @@
         "answer": "हां, हमारा टूल आपके ब्राउज़र मेमोरी में पूरी तरह से चलता है। आपके व्यक्तिगत दस्तावेज़ कभी भी किसी सर्वर पर अपलोड नहीं किए जाते हैं।"
       }
     ],
-    "seoTitle": "एग्जाम फोटो रिसाइज़र - ToolWala AI",
-    "seoDescription": "प्रतियोगी परीक्षाओं (एसएससी, यूपीएससी, आईबीपीएस, जेईई, एनईईटी) के लिए पासपोर्ट फोटो का आकार बदलें।",
+    "seoTitle": "एग्ज़ाम फ़ोटो और सिग्नेचर रिसाइज़र – SSC, UPSC, IBPS (20KB - 50KB) | ToolWala",
+    "seoDescription": "SSC, UPSC, IBPS और रेलवे भर्ती फॉर्म के लिए पासपोर्ट फ़ोटो (20KB-50KB) और हस्ताक्षर (10KB-20KB) को सटीक सरकारी नियमों के अनुसार ऑनलाइन रिसाइज़ करें।",
     "createdAt": "2026-06-18T02:01:06.127Z",
-    "updatedAt": "2026-06-18T02:18:59.136Z"
+    "updatedAt": "2026-11-11T12:39:35.579Z"
   },
   {
     "id": "trans-150-exam-photo-resizer-es",
@@ -4618,10 +4618,10 @@
     "id": "trans-image-compressor-pt",
     "toolSlug": "image-compressor",
     "locale": "pt",
-    "title": "Compressor de imagem",
+    "title": "Compressor de Imagens Online",
     "description": "Comprima imagens em até 90% sem perder a qualidade visível. Rápido e seguro.",
-    "seoTitle": "Compressor de imagem online gratuito – compactar PNG e JPG",
-    "seoDescription": "Reduza o tamanho do arquivo de imagem sem perder qualidade. Compacte imagens PNG, JPG e WebP com rapidez e segurança em seu navegador.",
+    "seoTitle": "Comprimir Imagens Grátis – Reduzir Tamanho de JPG, PNG e WebP | ToolWala",
+    "seoDescription": "Reduza o tamanho das suas imagens JPG, PNG e WebP sem perder qualidade visual. Defina o tamanho exato em KB. 100% gratuito, rápido e seguro.",
     "faq": [
       {
         "question": "Minhas imagens ficarão borradas?",
@@ -4641,7 +4641,7 @@
       }
     ],
     "createdAt": "2026-06-19T01:41:28.875Z",
-    "updatedAt": "2026-06-19T01:42:18.426Z"
+    "updatedAt": "2026-11-11T12:39:35.579Z"
   },
   {
     "id": "trans-qr-code-generator-pt",
@@ -4796,10 +4796,10 @@
     "id": "trans-jpg-to-pdf-pt",
     "toolSlug": "jpg-to-pdf",
     "locale": "pt",
-    "title": "JPG para PDF",
+    "title": "Converter JPG para PDF",
     "description": "Converta imagens JPG, JPEG e PNG em um único documento PDF com rapidez e segurança.",
-    "seoTitle": "Converter JPG para PDF Online – Imagem para PDF Grátis",
-    "seoDescription": "Transforme imagens (JPG, PNG, WebP) em arquivos PDF de alta qualidade instantaneamente. Processamento do lado do cliente.",
+    "seoTitle": "Converter JPG para PDF Grátis – Rápido, Seguro e Sem Cadastro | ToolWala",
+    "seoDescription": "Junte fotos JPG, PNG ou WebP em um PDF de alta qualidade em segundos. 100% gratuito, sem limites e com total privacidade no seu próprio navegador.",
     "faq": [
       {
         "question": "É seguro converter meu cartão de identificação ou digitalizações privadas aqui?",
@@ -4819,7 +4819,7 @@
       }
     ],
     "createdAt": "2026-06-19T01:41:28.875Z",
-    "updatedAt": "2026-06-19T01:42:18.426Z"
+    "updatedAt": "2026-11-11T12:39:35.578Z"
   },
   {
     "id": "trans-pdf-to-jpg-pt",
@@ -5293,10 +5293,10 @@
     "id": "trans-pdf-to-word-converter-pt",
     "toolSlug": "pdf-to-word-converter",
     "locale": "pt",
-    "title": "PDF para conversor de palavras",
+    "title": "Conversor de PDF para Word",
     "description": "Transforme documentos PDF em arquivos Word editáveis de forma instantânea e segura. Nosso mecanismo de conversão baseado em navegador preserva a estrutura, os títulos e a formatação do texto sem enviar seus arquivos para servidores externos.",
-    "seoTitle": "PDF para conversor de Word – ferramenta online gratuita",
-    "seoDescription": "Converta arquivos PDF em documentos editáveis ​​do Word online. Conversão segura e rápida baseada em navegador.",
+    "seoTitle": "Converter PDF para Word Grátis – Editável, Rápido e Sem Cadastro | ToolWala",
+    "seoDescription": "Transforme seus arquivos PDF em documentos Word (.docx) totalmente editáveis. 100% gratuito, rápido e privado diretamente no seu navegador.",
     "faq": [
       {
         "question": "Como faço para converter PDF para Word?",
@@ -5328,7 +5328,7 @@
       }
     ],
     "createdAt": "2026-06-19T01:41:28.875Z",
-    "updatedAt": "2026-06-19T01:42:18.427Z"
+    "updatedAt": "2026-11-11T12:39:35.578Z"
   },
   {
     "id": "trans-word-to-pdf-converter-pt",

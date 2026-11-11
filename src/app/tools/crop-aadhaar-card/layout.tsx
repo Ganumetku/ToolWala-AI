@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'crop-aadhaar-card',
-    'Aadhaar Photo Resize & Crop Tool – Official UIDAI Specs | ToolWala AI',
-    'Crop and resize Aadhaar card photos online free to official UIDAI specs (3.5x4.5 cm, <50KB) with clean white background. 100% private browser processing.',
+    'Crop Aadhaar Card Online Free – Front & Back PVC Print (UIDAI Specs) | ToolWala',
+    'Crop e-Aadhaar card PDF or photo into front and back parts for instant PVC printing or laminating. 100% private in-browser tool compliant with UIDAI size guidelines.',
     '/tools/crop-aadhaar-card'
   );
 }

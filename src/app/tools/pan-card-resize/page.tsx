@@ -7,12 +7,6 @@ import ImageCropperClientWrapper from "@/components/ImageCropperClientWrapper";
 import WorkflowRecommendations from "@/components/tools/WorkflowRecommendations";
 import ToolLayout from "@/components/tools/ToolLayout";
 import ToolHero from "@/components/tools/ToolHero";
-import {
-  buildFAQSchema,
-  buildWebPageSchema,
-  buildEnrichedToolJsonLd,
-  buildBreadcrumbJsonLd
-} from "@/lib/seo";
 
 const PAN_PRESETS: CropperPreset[] = [
   {
@@ -47,45 +41,8 @@ const PAN_PRESETS: CropperPreset[] = [
 ];
 
 export default function PANCardResizePage() {
-  const article = toolArticles["pan-card-resize"];
-  const faqs = article?.faqs || [];
-  const faqSchema = buildFAQSchema(faqs);
-  const toolUrl = "https://toolwala.co/tools/pan-card-resize/";
-
-  const breadcrumbItems = [
-    { name: "Home", href: "/" },
-    { name: "Tools", href: "/tools" },
-    { name: "PAN Card Resize", href: "/tools/pan-card-resize" }
-  ];
-
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      buildEnrichedToolJsonLd(
-        {
-          title: "PAN Card Resize Online",
-          description: "Format, crop, and resize passport photos to official NSDL and UTIITSL PAN card specifications. Complies with the mandatory 213 x 213 pixels dimension and whiteness checks."
-        },
-        toolUrl,
-        "Image Tools"
-      ),
-      buildWebPageSchema(
-        "PAN Card Resize Online",
-        "Format, crop, and resize passport photos to official NSDL and UTIITSL PAN card specifications. Complies with the mandatory 213 x 213 pixels dimension and whiteness checks.",
-        toolUrl,
-        "en"
-      ),
-      buildBreadcrumbJsonLd(breadcrumbItems),
-      ...(faqSchema ? [faqSchema] : [])
-    ]
-  };
-
   return (
     <ToolVisibilityGuard slug="pan-card-resize">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
       <ToolLayout>
         {/* Main Workspace Card */}
         <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12">

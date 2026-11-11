@@ -22,10 +22,12 @@ export default function ToolsLayout({ children }: ToolsLayoutProps) {
   // Render schema and footer only for individual tool routes
   // (Skip root /tools directory and category-like /tools/pdf-tools suite page)
   const isToolPage = slug && slug !== 'pdf-tools';
+  const hasCustomLayoutSchema = slug === 'exam-marks-calculator' || slug === 'base64-encoder-decoder';
+  const shouldRenderAutoSchema = isToolPage && !hasCustomLayoutSchema;
 
   return (
     <>
-      {isToolPage && <AutoToolSchema slug={slug} />}
+      {shouldRenderAutoSchema && <AutoToolSchema slug={slug} />}
       {children}
       {isToolPage && (
         <div className="w-full bg-[#F6F8FC] dark:bg-[#030712] border-t border-[#E6ECF5] dark:border-white/5 pb-20 relative z-20 transition-colors duration-250 font-sans">

@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'jpg-to-pdf',
-    'Convert JPG to PDF Online - Free Image to PDF | ToolWala AI',
-    'Convert JPG, JPEG, and PNG images into a single professional PDF document in seconds. Customize page layout sizes, orientation, margins, and reorder files instantly. 100% secure.',
+    'Convert JPG to PDF Online Free – Fast, No Sign-up & Secure | ToolWala',
+    'Turn your JPG, PNG, and WebP images into clean, high-quality PDF files in seconds. 100% free with zero file size limits and complete privacy in your browser.',
     '/tools/jpg-to-pdf'
   );
 }

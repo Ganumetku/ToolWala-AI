@@ -162,21 +162,6 @@ export default function ToolArticle({
   }, [currentTool]);
 
   // Construct structured JSON-LD schemas
-  const softwareAppSchema = useMemo(() => ({
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    'name': currentTool ? currentTool.title : (toolId ? toolId.split('-').map((s: string) => s.charAt(0).toUpperCase() + s.slice(1)).join(' ') : translatedTitle),
-    'description': translatedIntro || translatedWhatItDoes,
-    'applicationCategory': 'UtilitiesApplication',
-    'operatingSystem': 'Any',
-    'url': currentTool ? (currentTool.href.startsWith('http') ? currentTool.href : `https://toolwala.co${currentTool.href.endsWith('/') ? currentTool.href : currentTool.href + '/'}`) : 'https://toolwala.co/tools/merge-pdf/',
-    'dateModified': currentTool?.updatedAt || '2026-03-24T00:00:00Z',
-    'offers': {
-      '@type': 'Offer',
-      'price': '0',
-      'priceCurrency': 'USD'
-    }
-  }), [translatedTitle, translatedIntro, translatedWhatItDoes, currentTool, toolId]);
 
   const howToSchema = useMemo(() => (translatedHowToUse && translatedHowToUse.length > 0 ? {
     '@context': 'https://schema.org',
@@ -237,13 +222,7 @@ export default function ToolArticle({
 
   return (
     <section className="pt-8 pb-16 sm:pt-12 sm:pb-24 relative overflow-hidden bg-[#F6F8FC] dark:bg-[#030712] border-t border-[#E6ECF5] dark:border-white/5 transition-colors duration-250 font-sans">
-      {/* Dynamic structured data */}
-      {softwareAppSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppSchema) }}
-        />
-      )}
+      {/* Dynamic structured data: BreadcrumbList, HowTo, FAQPage (SoftwareApplication is handled canonically by AutoToolSchema) */}
       {breadcrumbSchema && (
         <script
           type="application/ld+json"

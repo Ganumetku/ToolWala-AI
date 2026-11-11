@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'exam-photo-resizer',
-    'Exam Photo Resizer - Resize & Format Passport Photos Online | ToolWala AI',
-    'Resize and format passport photos to official guidelines for various exam portals like SSC, UPSC, and IBPS banking exams. Automatically center faces, replace backgrounds, and compress securely.',
+    'Exam Photo & Signature Resizer – SSC, UPSC, IBPS (20KB - 50KB) | ToolWala',
+    'Resize and crop passport photos and signatures to exact official dimensions and file sizes (20KB to 50KB) for SSC CGL, UPSC, IBPS, and state PSC application portals.',
     '/tools/exam-photo-resizer'
   );
 }

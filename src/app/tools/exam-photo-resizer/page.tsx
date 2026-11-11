@@ -7,12 +7,6 @@ import ImageCropperClientWrapper from "@/components/ImageCropperClientWrapper";
 import WorkflowRecommendations from "@/components/tools/WorkflowRecommendations";
 import ToolLayout from "@/components/tools/ToolLayout";
 import ToolHero from "@/components/tools/ToolHero";
-import {
-  buildFAQSchema,
-  buildWebPageSchema,
-  buildEnrichedToolJsonLd,
-  buildBreadcrumbJsonLd
-} from "@/lib/seo";
 
 const EXAM_PRESETS: CropperPreset[] = [
   {
@@ -60,45 +54,8 @@ const EXAM_PRESETS: CropperPreset[] = [
 ];
 
 export default function ExamPhotoResizerPage() {
-  const article = toolArticles["exam-photo-resizer"];
-  const faqs = article?.faqs || [];
-  const faqSchema = buildFAQSchema(faqs);
-  const toolUrl = "https://toolwala.co/tools/exam-photo-resizer/";
-
-  const breadcrumbItems = [
-    { name: "Home", href: "/" },
-    { name: "Tools", href: "/tools" },
-    { name: "Exam Photo Resizer", href: "/tools/exam-photo-resizer" }
-  ];
-
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      buildEnrichedToolJsonLd(
-        {
-          title: "Exam Photo Resizer Online",
-          description: "Resize, crop, and compress passport photos to official guidelines for various exam portals like SSC, UPSC, and IBPS banking exams."
-        },
-        toolUrl,
-        "Image Tools"
-      ),
-      buildWebPageSchema(
-        "Exam Photo Resizer Online",
-        "Resize, crop, and compress passport photos to official guidelines for various exam portals like SSC, UPSC, and IBPS banking exams.",
-        toolUrl,
-        "en"
-      ),
-      buildBreadcrumbJsonLd(breadcrumbItems),
-      ...(faqSchema ? [faqSchema] : [])
-    ]
-  };
-
   return (
     <ToolVisibilityGuard slug="exam-photo-resizer">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
       <ToolLayout>
         {/* Main Workspace Card */}
         <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12">

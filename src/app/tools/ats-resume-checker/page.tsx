@@ -340,40 +340,6 @@ export default function AtsResumeChecker() {
     loadPdfjs();
   }, []);
 
-  // Handle Dynamic SEO schemas
-  const jsonLdSchema = useMemo(() => {
-    return {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "SoftwareApplication",
-          "@id": "https://toolwala.co/tools/ats-resume-checker#software",
-          "name": "ATS Resume Checker",
-          "description": "Evaluate and audit your CV resume against modern Applicant Tracking System guidelines client-side for 100% data safety.",
-          "applicationCategory": "BusinessApplication",
-          "operatingSystem": "Web Browser",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          }
-        },
-        {
-          "@type": "FAQPage",
-          "@id": "https://toolwala.co/tools/ats-resume-checker#faq",
-          "mainEntity": GUIDES.map(g => ({
-            "@type": "Question",
-            "name": g.title,
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": g.summary
-            }
-          }))
-        }
-      ]
-    };
-  }, []);
-
   // ----------------------------------------------------------------------
   // UTILITIES & HELPER PARSERS
   // ----------------------------------------------------------------------
@@ -1049,12 +1015,6 @@ export default function AtsResumeChecker() {
       {/* Background Glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/5 blur-[120px] -z-10 print:hidden" />
       <div className="absolute top-0 left-0 right-0 h-full bg-grid-pattern opacity-[0.02] -z-20 print:hidden" />
-
-      {/* JSON-LD Schema scripts */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
-      />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 print:px-0">
         

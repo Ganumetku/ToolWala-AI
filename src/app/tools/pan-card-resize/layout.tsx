@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'pan-card-resize',
-    'PAN Card Photo Resize & Crop Online - NSDL & UTIITSL Specs | ToolWala AI',
-    'Resize and crop your passport photo to official PAN card specifications (213 x 213 px / 3.5cm x 2.5cm) under 50KB limit locally. Safe, private, and 100% in-browser.',
+    'PAN Card Photo & Signature Resizer – 213x213 px (NSDL & UTIITSL) | ToolWala',
+    'Resize photos to mandatory 213x213 pixels (<50KB) and signatures (<30KB) for NSDL and UTIITSL online PAN applications. Instant browser processing with white background.',
     '/tools/pan-card-resize'
   );
 }

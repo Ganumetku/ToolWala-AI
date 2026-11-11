@@ -196,21 +196,6 @@ export default function PasswordGeneratorPage() {
     return { poolSize, entropy, strength, crackTime };
   }, [password, excludeSimilar, excludeAmbiguous]);
 
-  // Structured Data Schema markup
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    'name': 'Password Generator',
-    'description': SEO_DESC,
-    'applicationCategory': 'SecurityApplication',
-    'operatingSystem': 'All',
-    'offers': {
-      '@type': 'Offer',
-      'price': '0',
-      'priceCurrency': 'USD'
-    }
-  };
-
   const faqs = [
     {
       q: "How secure are generated passwords?",
@@ -237,11 +222,6 @@ export default function PasswordGeneratorPage() {
   return (
     <ToolVisibilityGuard slug="password-generator">
       <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250 font-sans">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      
       <MeshGradient />
       <FloatingParticles />
       

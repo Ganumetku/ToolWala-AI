@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'pdf-to-word-converter',
-    'PDF to Word Converter – Free DOCX, 50MB, No Upload',
-    'Convert a text PDF to editable .docx in your browser. 50 MB limit. Scanned PDFs need OCR first. Files stay on your device — ToolWala never uploads them.',
+    'PDF to Word Converter Online Free – Instant DOCX (No Sign-up) | ToolWala',
+    'Convert text PDF documents into editable Word (.docx) files right in your browser. 100% free, completely private, and files never leave your device.',
     '/tools/pdf-to-word-converter'
   );
 }

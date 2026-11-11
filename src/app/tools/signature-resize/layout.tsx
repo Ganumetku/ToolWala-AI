@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'signature-resize',
-    'Signature Resize & Crop Online - SSC, Bank & Portal Specs | ToolWala AI',
-    'Crop, resize, and compress signature scans online. Preconfigured templates for banks (4:1), SSC (6x3 cm), and government forms. Instant local background cleanup.',
+    'Signature Resizer Online – SSC, Bank PO, UPSC (10KB - 20KB) | ToolWala',
+    'Resize and compress signature scans to 10KB-20KB for SSC, UPSC, and IBPS bank recruitment forms. Crisp signature clarity with instant white background cleanup.',
     '/tools/signature-resize'
   );
 }

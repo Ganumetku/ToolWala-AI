@@ -836,20 +836,6 @@ Calculated via ToolWala AI (https://toolwala.co/tools/gst-calculator)`;
 
   const relatedTools = toolsData.filter(t => ['emi-calculator', 'sip-calculator', 'age-calculator'].includes(t.slug));
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    'name': 'GST Calculator',
-    'description': SEO_DESC,
-    'applicationCategory': 'FinanceApplication',
-    'operatingSystem': 'All',
-    'offers': {
-      '@type': 'Offer',
-      'price': '0',
-      'priceCurrency': 'USD'
-    }
-  };
-
   const faqs = [
     {
       q: "What is GST?",
@@ -880,11 +866,6 @@ Calculated via ToolWala AI (https://toolwala.co/tools/gst-calculator)`;
   return (
     <ToolVisibilityGuard slug="gst-calculator">
       <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250 font-sans">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        
         <MeshGradient />
         <FloatingParticles />
         

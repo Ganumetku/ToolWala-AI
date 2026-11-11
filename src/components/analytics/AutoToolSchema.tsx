@@ -65,6 +65,7 @@ export default function AutoToolSchema({ slug }: AutoToolSchemaProps) {
       category={category}
       slug={cleanSlug}
       imageUrl="https://toolwala.co/icon-512.png"
+      disableHowTo={true}
     />
   );
 }

@@ -6,6 +6,7 @@ import { BLOG_CATEGORIES } from '@/types/blog';
 import { getEnabledLocales, getLanguagesConfig } from '@/lib/languages';
 import { hubsData } from '@/data/hubs';
 import { landingPagesData } from '@/data/landingPages';
+import { INDIA_ONLY_SLUGS } from '@/lib/seo';
 
 export const revalidate = 3600; // Regenerate sitemap at most once per hour
 
@@ -86,9 +87,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     seoLocales.map((loc) => buildItem(`/hubs/${h.slug}`, now, 'weekly', 0.8, loc))
   );
 
-  const landingPageEntries: MetadataRoute.Sitemap = landingPagesData.flatMap((lp) =>
-    seoLocales.map((loc) => buildItem(`/landing/${lp.slug}`, now, 'weekly', 0.8, loc))
-  );
+  const landingPageEntries: MetadataRoute.Sitemap = landingPagesData.flatMap((lp) => {
+    const isIndiaOnly = INDIA_ONLY_SLUGS.has(lp.slug);
+    const localesToUse = isIndiaOnly
+      ? seoLocales.filter((loc) => loc === 'en' || loc === 'hi')
+      : seoLocales;
+    return localesToUse.map((loc) => buildItem(`/landing/${lp.slug}`, now, 'weekly', 0.8, loc));
+  });
 
   let toolEntries: MetadataRoute.Sitemap = [];
   let blogEntries: MetadataRoute.Sitemap = [];
@@ -114,7 +119,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const publicTools = rawTools.filter((t) => !EXCLUDED_TOOL_SLUGS.has(t.slug));
     toolEntries = publicTools.flatMap((t) => {
       const href = normalizeToolHref(t.href);
-      const localesToUse = t.slug === 'exam-marks-calculator'
+      const isIndiaOnly = INDIA_ONLY_SLUGS.has(t.slug);
+      const localesToUse = isIndiaOnly
         ? seoLocales.filter((loc) => loc === 'en' || loc === 'hi')
         : seoLocales;
       return localesToUse.map((loc) => buildItem(href, t.updatedAt ? new Date(t.updatedAt) : now, 'weekly', 0.8, loc));
@@ -126,7 +132,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter((t) => isToolLive(t) && !EXCLUDED_TOOL_SLUGS.has(t.slug))
       .flatMap((t) => {
         const href = normalizeToolHref(t.href);
-        const localesToUse = t.slug === 'exam-marks-calculator'
+        const isIndiaOnly = INDIA_ONLY_SLUGS.has(t.slug);
+        const localesToUse = isIndiaOnly
           ? seoLocales.filter((loc) => loc === 'en' || loc === 'hi')
           : seoLocales;
         return localesToUse.map((loc) => buildItem(href, now, 'weekly', 0.8, loc));
@@ -136,7 +143,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const blogs = await getPublicBlogs();
     blogEntries = blogs.flatMap((b) => {
-      const localesToUse = b.slug === 'how-to-calculate-exam-percentage-easily'
+      const isIndiaOnly = INDIA_ONLY_SLUGS.has(b.slug);
+      const localesToUse = isIndiaOnly
         ? seoLocales.filter((loc) => loc === 'en' || loc === 'hi')
         : seoLocales;
       return localesToUse.map((loc) =>

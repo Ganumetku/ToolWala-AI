@@ -19,6 +19,34 @@ export function getSiteUrl(path = ''): string {
   return `${base}${p}`;
 }
 
+export const INDIA_ONLY_SLUGS = new Set([
+  'ssc-photo-resize',
+  'upsc-photo-resize',
+  'crop-aadhaar-card',
+  'aadhaar-pdf-compressor',
+  'aadhaar-masking-tool',
+  'pan-card-resize',
+  'income-tax-calculator',
+  'gst-calculator',
+  'exam-marks-calculator',
+  'exam-photo-resizer',
+  'gov-form-image-compressor',
+  'gov-form-pdf-compressor',
+  'how-to-calculate-exam-percentage-easily',
+  // Landing pages
+  'photo-resize-to-20kb',
+  'photo-resize-to-50kb',
+  'photo-resize-to-100kb',
+  'signature-resize-to-20kb',
+  'signature-resize-to-50kb',
+  'compress-image-to-20kb',
+  'compress-image-to-50kb',
+  'compress-pdf-to-100kb',
+  'compress-pdf-to-200kb',
+  'image-resize-in-kb',
+  'compress-image-government-portals',
+]);
+
 export function getAlternateLanguages(pathname: string): Record<string, string> {
   const siteUrl = "https://toolwala.co";
   const parts = pathname.split('/');
@@ -35,11 +63,11 @@ export function getAlternateLanguages(pathname: string): Record<string, string> 
   
   const enabledLocales = getEnabledLocales();
   const config = getLanguagesConfig();
-  const isExamMarksOrBlog = cleanPathNoSlash.includes('exam-marks-calculator') || cleanPathNoSlash.includes('how-to-calculate-exam-percentage-easily');
+  const isIndiaOnly = Array.from(INDIA_ONLY_SLUGS).some((slug) => cleanPathNoSlash.includes(slug));
   
   enabledLocales.forEach((loc) => {
     if (loc !== 'en' && config[loc]?.seo_enabled) {
-      if (isExamMarksOrBlog && loc !== 'hi') {
+      if (isIndiaOnly && loc !== 'hi') {
         return;
       }
       languages[loc] = `${siteUrl}/${loc}${cleanPathNoSlash}/`;
@@ -464,26 +492,7 @@ export async function generateToolMetadataHelper(
   }
 
   const siteUrl = "https://toolwala.co";
-  const parts = originalPathname.split('/');
-  const cleanPath = ['hi', 'es', 'fr', 'de', 'pt', 'ar', 'id'].includes(parts[1])
-    ? '/' + parts.slice(2).join('/')
-    : originalPathname;
-  
-  const cleanPathNoSlash = cleanPath.replace(/\/$/, '');
-  
-  const languages: Record<string, string> = {
-    'x-default': `${siteUrl}${cleanPathNoSlash}/`,
-    'en': `${siteUrl}${cleanPathNoSlash}/`
-  };
-  
-  const enabledLocales = getEnabledLocales();
-  const config = getLanguagesConfig();
-  enabledLocales.forEach((loc) => {
-    if (loc !== 'en' && config[loc]?.seo_enabled) {
-      languages[loc] = `${siteUrl}/${loc}${cleanPathNoSlash}/`;
-    }
-  });
-
+  const languages = getAlternateLanguages(originalPathname);
   const canonicalPath = originalPathname.endsWith('/') ? originalPathname : `${originalPathname}/`;
   const canonicalUrl = `${siteUrl}${canonicalPath}`;
 

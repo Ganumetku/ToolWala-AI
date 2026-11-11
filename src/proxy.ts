@@ -71,6 +71,44 @@ export async function proxy(request: NextRequest) {
 
   const normalizedRewritten = rewrittenPathname.endsWith('/') ? rewrittenPathname : rewrittenPathname + '/';
 
+  // 301 redirect India-only tools and landing pages mistakenly requested with non-en/hi locales (e.g. /es/tools/ssc-photo-resize/ -> /tools/ssc-photo-resize/)
+  const INDIA_ONLY_SLUGS_SET = new Set([
+    'ssc-photo-resize',
+    'upsc-photo-resize',
+    'crop-aadhaar-card',
+    'aadhaar-pdf-compressor',
+    'aadhaar-masking-tool',
+    'pan-card-resize',
+    'income-tax-calculator',
+    'gst-calculator',
+    'exam-marks-calculator',
+    'exam-photo-resizer',
+    'gov-form-image-compressor',
+    'gov-form-pdf-compressor',
+    'photo-resize-to-20kb',
+    'photo-resize-to-50kb',
+    'photo-resize-to-100kb',
+    'signature-resize-to-20kb',
+    'signature-resize-to-50kb',
+    'compress-image-to-20kb',
+    'compress-image-to-50kb',
+    'compress-pdf-to-100kb',
+    'compress-pdf-to-200kb',
+    'image-resize-in-kb',
+    'compress-image-government-portals',
+    'how-to-calculate-exam-percentage-easily',
+  ]);
+
+  if (isLocalePrefix && locale !== 'hi') {
+    const slug = pathnameParts.filter(Boolean).pop();
+    if (slug && INDIA_ONLY_SLUGS_SET.has(slug)) {
+      const redirectUrl = new URL(normalizedRewritten + request.nextUrl.search, request.url);
+      const response = NextResponse.redirect(redirectUrl, { status: 301 });
+      response.cookies.set('NEXT_LOCALE', 'en', { path: '/' });
+      return response;
+    }
+  }
+
   // 301 redirect legacy & duplicate tool routes
   const LEGACY_TOOL_REDIRECTS: Record<string, string> = {
     '/tools/aadhaar-photo-resizer/': '/tools/crop-aadhaar-card/',

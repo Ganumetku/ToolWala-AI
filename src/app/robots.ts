@@ -15,7 +15,7 @@ export default function robots(): MetadataRoute.Robots {
     .filter((loc) => !enabledLocales.includes(loc))
     .map((loc) => `/${loc}/`);
 
-  const baseDisallow = ['/api/', '/admin/', '/login', '/auth/'];
+  const baseDisallow = ['/api/', '/admin/', '/login', '/auth/', '/_next/static/media/'];
   const allDisallow = [...baseDisallow, ...disabledLocalePaths];
   // Only block known junk/private query params, not ALL query strings.
   // Blocking /*?* would prevent Googlebot from following UTM/share links to valid pages.

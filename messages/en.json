@@ -918,8 +918,8 @@
   "blog": {
     "table_of_contents": "Table of Contents",
     "related_tools": "Related Tools",
-    "newsletter_heading": "Subscribe to ToolWala Insights",
-    "newsletter_sub": "Get browser-native AI updates, new tool launches, and deep-dive guides. No spam.",
+    "newsletter_heading": "Get the useful ones",
+    "newsletter_sub": "A note when a portal changes photo or PDF size rules. No weekly fluff.",
     "newsletter_placeholder": "you@email.com",
     "newsletter_join": "Join Newsletter",
     "newsletter_joining": "Joining...",
@@ -927,9 +927,9 @@
     "newsletter_failed": "Subscription failed. Please try again.",
     "newsletter_error": "Something went wrong.",
     "trending_badge": "Trending",
-    "badge": "LATEST INSIGHTS",
-    "title": "From the ToolWala Blog",
-    "subtitle": "Explore advanced concepts in browser-native processing, data security, and productivity hacks.",
+    "badge": "From the blog",
+    "title": "From the ToolWala blog",
+    "subtitle": "Passport photos, PDF caps, tax — written like you'd explain it to a friend.",
     "read_all": "Read All Articles",
     "minutes_read": "{count} min read",
     "previous": "Previous",
@@ -938,12 +938,12 @@
     "related_categories": "Related Categories",
     "explore_categories_title": "Explore Related Categories",
     "try_tools": "Try These Tools",
-    "insights_badge": "ToolWala Insights",
-    "insights_title": "Tech, AI & Design",
-    "insights_subtitle": "Without the Servers",
-    "insights_desc": "Explore advanced concepts in browser-native processing, data confidentiality, and digital efficiency.",
-    "seo_title": "ToolWala AI Blog – Modern AI, PDF & Design Insights",
-    "seo_desc": "Stay ahead with guides on local browser OCR, image compression, ATS resumes, and high-performance developer utilities on ToolWala AI.",
+    "insights_badge": "From the blog",
+    "insights_title": "Notes on PDFs, photos, and forms",
+    "insights_subtitle": "that stay on this device",
+    "insights_desc": "Size caps, passport photos, tax slabs. Straight answers — then the tool if you want it.",
+    "seo_title": "ToolWala Blog – PDF, photo, and form guides",
+    "seo_desc": "Passport photos, SSC sizes, PDF under 300KB, tax slabs. Written like a person would explain it. Files stay in your browser.",
     "search_placeholder": "Search articles & tags...",
     "featured_badge": "Featured",
     "writer_role": "Writer",
@@ -955,13 +955,13 @@
   "blogs": {
     "why-local-ocr-is-the-future": {
       "title": "Why Browser-Native OCR is the Future of Data Safety",
-      "excerpt": "Traditional optical character recognition uploads documents to cloud databases. This article outlines the transition to client-side WebAssembly rendering, protecting sensitive data locally.",
-      "content": "Traditional optical character recognition (OCR) uploads documents to cloud databases. This article outlines the transition to client-side WebAssembly rendering, protecting sensitive data locally.\n\n### The Problem with Cloud OCR\nEvery time you upload a receipt, ID card, or invoice to a remote OCR server, you risk exposing sensitive information. Cloud services process your file, extract the text, and store it. In many cases, these files are saved for training models or analytics, which could violate privacy standards like GDPR.\n\n### Enter Client-Side WebAssembly\nWith advancements in WebAssembly (WASM), we can run powerful neural network models directly inside the browser. ToolWala AI uses Tesseract.js running locally in your browser sandbox. Your files never leave your computer, ensuring absolute privacy."
+      "excerpt": "Most OCR sites copy your scan to a server first. This one reads the page in the tab. Fine for a receipt. Necessary for an ID.",
+      "content": "You photograph a marksheet. A site says \"upload for OCR.\" That file is now on someone else's disk. Maybe they delete it. Maybe they don't.\n\nThat's the whole argument for reading text in the browser.\n\n### Why cloud OCR feels convenient — and isn't\nThe server has a fat model. You wait. You get text. You also gave them a bank statement, or an Aadhaar page, or a doctor's scan. For a public flyer, fine. For ID, I'd rather the pixels never leave this laptop.\n\n### What actually runs here\n[PDF OCR](/tools/pdf-ocr/) uses a model in the tab (Tesseract in WebAssembly). The page is drawn, letters are guessed, you copy the text. Close the tab and the file is gone from memory — we never received a copy.\n\nIt's slower on a 80-page scan than a datacenter. That's the trade.\n\n### When to use it\nReceipts, form scans, a page you need to paste into Excel. Don't expect magic on a crumpled photocopy. If the scan is sideways, rotate it first.\n\n[cta tool=\"pdf-ocr\" title=\"Read text from a PDF here\" description=\"The file stays in this tab. Nothing is sent to a server.\"]"
     },
     "how-to-merge-pdf": {
       "title": "How to Merge PDF Files Online: The Complete Free Guide",
-      "excerpt": "Learn how to combine multiple PDF documents into a single file quickly, securely, and completely free in your web browser.",
-      "content": "Combining multiple documents is one of the most common tasks. Learn how to merge PDFs online using ToolWala AI's local browser tools.\n\n### Why Merge PDFs?\nMerging files simplifies document management, makes emailing multiple attachments easier, and allows compiling reports into a single, cohesive file.\n\n### How to Merge PDFs on ToolWala AI\n1. Visit the [Merge PDF Tool](/tools/merge-pdf).\n2. Drag and drop your PDF files into the upload area.\n3. Arrange the files in your preferred order.\n4. Click the Merge button to compile the files.\n5. Download your merged PDF document immediately.\n\n### Secure Local Processing\nToolWala AI uses client-side WebAssembly to compile documents. Your PDFs are never sent to a cloud database, keeping your data confidential.\n\n[cta tool=\"merge-pdf\" title=\"Merge PDFs Online Free\" description=\"Combine multiple PDF files into one document instantly in your browser.\"]",
+      "excerpt": "ITR-V plus Form 16, or five assignment scans. Drop the files, drag the cards, download one PDF. Nothing is sent out.",
+      "content": "You have three PDFs and a portal that wants one. That's merge.\n\n### Do this\n1. Open [Merge PDF](/tools/merge-pdf/).\n2. Drop two or more files — they stay in this tab.\n3. Drag the cards so the order matches the paperwork (acknowledgement on top, annexure after).\n4. Give it a short name if the site hates spaces.\n5. Merge & Download.\n\nNeed two files minimum. One PDF you only want to shuffle? Use Organize PDF.\n\n### Don't\nDon't merge a password file until you unlock it. Don't dump 40 fat scans into a phone tab and expect it to fly — batches of a dozen are kinder.\n\nIf the pack is still too big, run [Compress PDF](/tools/compress-pdf/) after. Typed files often barely shrink. Scans do more.\n\n[cta tool=\"merge-pdf\" title=\"Merge PDFs here\" description=\"Drop the files, check the order, download one. Nothing is uploaded.\"]",
       "faqs": {
         "0": {
           "question": "Can I merge PDF files offline?",
@@ -975,8 +975,8 @@
     },
     "compress-pdf-without-losing-quality": {
       "title": "How to Compress PDF Files Without Losing Quality",
-      "excerpt": "Discover how to shrink your PDF file size while preserving crystal-clear image quality and text formatting.",
-      "content": "Reducing file sizes is key for uploading files to government portals. Learn how to optimize PDFs without losing quality.\n\n### Hitting the Perfect Size\nPortals like UIDAI require files to be under 300KB. ToolWala AI's compressors adjust pixel density and clean redundant metadata to reduce sizes visually losslessly.\n\n### How to Compress PDF\n1. Go to the [PDF Compressor](/tools/compress-pdf).\n2. Drop your PDF file.\n3. Select compression intensity.\n4. Download the compressed file.\n\n[cta tool=\"compress-pdf\" title=\"Compress PDF Free\" description=\"Shrink your PDF documents locally without losing clarity.\"]",
+      "excerpt": "Typed circulars barely shrink. Scans usually do. Don't trust the 80% bar — wait for the real size on the card.",
+      "content": "Portals love a KB cap. Compressors love a fake 80% bar.\n\nThis page opens the PDF and writes it again in your browser. Text-only circulars often move 0–10%. Phone-scan marksheets move more. That's normal — not a bug.\n\n### Steps\n1. Go to [Compress PDF](/tools/compress-pdf/).\n2. Drop the file.\n3. Run a pass. Read the **result card**, not the estimate.\n4. If it says already tight, stop. A second pass won't invent room.\n5. e-Aadhaar under 300KB? Use the [Aadhaar compressor](/tools/aadhaar-pdf-compressor/) instead.\n\nPassword PDFs: unlock first.\n\n[cta tool=\"compress-pdf\" title=\"Compress a PDF in this tab\" description=\"See the real size. The file is not uploaded.\"]",
       "faqs": {
         "0": {
           "question": "How does lossless PDF compression work?",
@@ -990,8 +990,8 @@
     },
     "pdf-to-jpg-guide": {
       "title": "The Ultimate PDF to JPG Conversion Guide",
-      "excerpt": "A complete step-by-step guide to extract high-quality JPG image pages from any PDF document.",
-      "content": "Converting PDF pages into individual images is useful for presentations and social media. Let's check how to convert PDFs to JPG.\n\n### Extracting Images Easily\nPDF files store pages in vector format. To view them on standard photo galleries, you must convert them to JPGs.\n\n### Steps to Convert PDF to JPG\n1. Open the [PDF to JPG Converter](/tools/pdf-to-jpg).\n2. Upload your PDF file.\n3. The engine renders each page on an image canvas.\n4. Click Download to save all pages as a zip of JPG images.\n\n[cta tool=\"pdf-to-jpg\" title=\"Convert PDF to JPG\" description=\"Extract high-resolution images from any PDF locally in seconds.\"]",
+      "excerpt": "Need page 3 as a picture for WhatsApp, or every slide as a JPG. Drawn in this tab. Pick the pages, skip the blanks.",
+      "content": "Someone wants images, not a PDF. Or you want page 3 in the family WhatsApp.\n\n### Steps\n1. Open [PDF to JPG](/tools/pdf-to-jpg/).\n2. Drop the PDF. Wait for thumbnails — a fat scan is slow here.\n3. Low / Medium / High is sharpness, not magic. High is heavier.\n4. Tick only the pages you need.\n5. Download one JPG or a ZIP of the lot.\n\nDrawn in this tab. Close it and the PDF is gone from memory.\n\nNeed the other direction? [JPG to PDF](/tools/jpg-to-pdf/).\n\n[cta tool=\"pdf-to-jpg\" title=\"Turn PDF pages into JPGs\" description=\"Pick the pages. Nothing is sent to a server.\"]",
       "faqs": {
         "0": {
           "question": "Can I convert multiple pages at once?",
@@ -1005,8 +1005,8 @@
     },
     "pdf-security-guide": {
       "title": "PDF Security Guide: How to Protect and Unlock PDF Files",
-      "excerpt": "Learn the best practices to encrypt, protect, and unlock PDF files to keep your confidential documents safe.",
-      "content": "Protecting sensitive documents with passwords prevents unauthorized access. Learn how to secure and unlock PDF files.\n\n### Encryption Standards\nToolWala AI allows local password encryption using standard browser APIs, ensuring your documents remain private.\n\n### Steps to Protect a PDF\n1. Navigate to [Protect PDF](/tools/protect-pdf).\n2. Choose your document.\n3. Enter a secure password.\n4. Download your encrypted PDF.\n\n[cta tool=\"protect-pdf\" title=\"Encrypt PDF Online\" description=\"Secure your files with strong local password encryption.\"]",
+      "excerpt": "Lock a PDF, or unlock one you already have the password for. Both happen here. We never see the password.",
+      "content": "Two jobs, don't mix them.\n\n**Lock:** you choose a password, the PDF is encrypted here, you download. If you forget it, nobody can fish it out of our servers — we never had it.\n\n**Unlock:** you already know the password (e-Aadhaar is name + year). The file opens in this tab, you save a copy without the lock. Then compress if UIDAI wants 300KB.\n\n### Tools\n- [Protect PDF](/tools/protect-pdf/)\n- [Unlock PDF](/tools/unlock-pdf/)\n\nDon't email the unlocked Aadhaar around. Mask it if you're attaching to a job form.\n\n[cta tool=\"protect-pdf\" title=\"Password-protect a PDF\" description=\"The password and the file stay in this browser tab.\"]",
       "faqs": {
         "0": {
           "question": "Is local PDF unlocking secure?",
@@ -1020,8 +1020,8 @@
     },
     "best-image-compressor": {
       "title": "Best Image Compressor: How to Shrink PNG & JPG Files",
-      "excerpt": "A detailed comparison of modern image compression techniques to speed up your web layout loads.",
-      "content": "Speed up your web layouts by optimizing images. Learn how browser-native compression shrinks files up to 90%.\n\n### WebP and AVIF Ratios\nModern image compression balances pixel clarity with byte sizes. ToolWala AI helps you convert PNG/JPG to WebP format easily.\n\n### How to Compress Images\n1. Open the [Image Compressor](/tools/image-compressor).\n2. Drag and drop your image.\n3. Adjust quality settings.\n4. Download optimized files.\n\n[cta tool=\"image-compressor\" title=\"Compress Images Now\" description=\"Reduce image sizes visually losslessly in WebP and JPG formats.\"]",
+      "excerpt": "PNG vs JPG vs WebP, and when shrinking a photo actually helps a form. The file stays on this device.",
+      "content": "You don't need a 12MB selfie for a form. You also don't need a smeary 8KB face.\n\n### Quick rules\n- Crop to the required size **first**.\n- JPG for photos. PNG if you need sharp text or a signature on white.\n- WebP is smaller, but many Indian portals still want JPG.\n\nDrop the file on the [image compressor](/tools/image-compressor/). Watch the face, not just the KB number.\n\nFor exam photos with a hard cap, use the SSC / UPSC / PAN resizers — they already know the centimetres.\n\n[cta tool=\"image-compressor\" title=\"Compress an image here\" description=\"Stays on this device. No account.\"]",
       "faqs": {
         "0": {
           "question": "Why should I convert images to WebP?",
@@ -1035,8 +1035,8 @@
     },
     "resize-images-for-government-forms": {
       "title": "How to Resize Images for Indian Government Forms",
-      "excerpt": "Official photo and signature dimensions guide for NSDL PAN, UPSC, and SSC online application portal uploads.",
-      "content": "Struggling with upload limits on portal forms? This guide details how to resize images for official government forms.\n\n### Indian Portal Specifications\n- **NSDL PAN:** 3.5 x 2.5 cm photo, under 50KB.\n- **SSC Exams:** 3.5 x 4.5 cm photo, under 50KB.\n- **UPSC Exams:** 350x350 pixels, under 40KB.\n\n### How to Resize Online\nUse ToolWala's dedicated templates to crop and format passport photos in seconds.\n\n[cta tool=\"ssc-photo-resize\" title=\"SSC Photo Resizer\" description=\"Format and resize passport photos to official SSC specifications.\"]",
+      "excerpt": "PAN wants one size, SSC another, UPSC a square. Wrong crop = bounce. The usual centimetre and KB caps in one place.",
+      "content": "Each portal picked a different box. That's why one \"passport photo\" file keeps getting rejected.\n\n### Usual numbers (check the live notice)\n- **SSC:** about 3.5 × 4.5 cm, often 20–50KB\n- **UPSC OTR:** 350 × 350 px, often 20–40KB\n- **NSDL PAN photo:** 3.5 × 2.5 cm, under ~50KB\n- **PAN signature:** small strip, often under 20KB\n\n### Order\nCrop to the ratio. Then compress. Then rename something boring like `ssc_photo.jpg`.\n\nTools: [SSC photo](/tools/ssc-photo-resize/), [UPSC photo](/tools/upsc-photo-resize/), [PAN resize](/tools/pan-card-resize/).\n\n[cta tool=\"ssc-photo-resize\" title=\"Crop an SSC photo\" description=\"The picture stays in this tab.\"]",
       "faqs": {
         "0": {
           "question": "What is the NSDL PAN signature spec?",
@@ -1050,8 +1050,8 @@
     },
     "ai-caption-generator": {
       "title": "AI Caption Generator: How to Write Social Media Captions with AI",
-      "excerpt": "Create engaging social media captions, hashtags, and subtitles using client-side AI templates instantly.",
-      "content": "Write high-converting captions for Instagram, LinkedIn, and YouTube. Learn how to generate subtitles using AI.\n\n### Writing Compelling Copy\nA good caption includes a strong hook, structured body, call to action, and context-relevant hashtags.\n\n### Steps to Write Captions\n1. Open [AI Caption Generator](/tools/caption-generator).\n2. Input target topics and tone.\n3. Copy generated captions.\n\n[cta tool=\"caption-generator\" title=\"Generate AI Captions\" description=\"Create catchy, high-engagement captions for social media with AI.\"]",
+      "excerpt": "A first draft for Instagram or LinkedIn. Tweak the tone, copy it, move on. Not a growth lecture.",
+      "content": "You need a caption, not a branding workshop.\n\nOpen the [caption generator](/tools/caption-generator/), dump the topic, pick a tone, copy what isn't cringe. Add one real detail — a place, a date — so it doesn't sound like every other post.\n\nHashtags: a few specific ones beat twenty generic ones. The tool doesn't know your audience. You do.\n\n[cta tool=\"caption-generator\" title=\"Draft a caption\" description=\"Edit it before you post. That's the job.\"]",
       "faqs": {
         "0": {
           "question": "Can I customize the caption tone?",
@@ -1065,8 +1065,8 @@
     },
     "ai-content-tools": {
       "title": "Top AI Content Tools to Boost Your Daily Writing Productivity",
-      "excerpt": "Boost your daily productivity with AI assistants for text humanization, summarizing, and cover letters.",
-      "content": "Leverage AI engines to speed up document drafting. Discover local utility assistants for ATS resumes and summarizing.\n\n### Top AI Content Utilities\n- **AI PDF Summarizer:** Summarize large documents locally.\n- **Text Humanizer:** Refine text layout structures.\n- **Cover Letter Generator:** Build tailored job application letters.\n\n[cta tool=\"text-humanizer\" title=\"Humanize AI Text\" description=\"Refine AI generated copy to sound natural and pass detector scans.\"]",
+      "excerpt": "Cover letter, humanizer, summarizer — the ones we actually ship. No 'boost your productivity' filler.",
+      "content": "The useful ones on this site, without the pitch deck:\n\n- [Cover letter](/tools/cover-letter-generator/) — paste the JD, get a draft, rewrite one paragraph so it sounds like you\n- [Text humanizer](/tools/text-humanizer/) — for stiff AI copy, not for lying on a resume\n- [ATS checker](/tools/ats-resume-checker/) — tables and text boxes that parsers hate\n- Summarizer, when you don't want to upload a 40-page PDF to a chatbot\n\nEverything above runs in the browser session. Don't paste secrets into a tool you wouldn't paste into Notes.\n\n[cta tool=\"cover-letter-generator\" title=\"Draft a cover letter\" description=\"Edit on the page. Download a PDF. No account.\"]",
       "faqs": {
         "0": {
           "question": "Can these AI tools bypass ATS scanners?",
@@ -1077,6 +1077,157 @@
           "answer": "No, your text input data is processed locally inside your active browser session. We do not store or track text uploads."
         }
       }
+    },
+    "new-vs-old-tax-regime": {
+      "title": "New vs Old Tax Regime FY 2026-27 (AY 2027-28): Which One Saves You More Money?",
+      "excerpt": "HR still asks New or Old every April. Here's the slab table, three salary examples, and when 80C actually beats the new regime."
+    },
+    "gst-calculator-complete-guide": {
+      "title": "GST Calculator Kaise Use Karein: Complete Guide & Tax Invoicing Rules (2026)",
+      "excerpt": "CGST/SGST vs IGST, price with GST vs without. A few examples, then the calculator so you don't babysit Excel."
+    },
+    "indian-passport-photo-size-2026-why-old-2x2-inch-photo-no-longer-accepted": {
+      "title": "Indian Passport Photo Size 2026: Why the Old 2x2 Inch Photo Is No Longer Accepted",
+      "excerpt": "The old 2×2 inch square is out. Passport Seva wants 35×45 mm. Crop what you already shot — don't book a studio for that."
+    },
+    "pan-card-photo-size-2026-new-requirement": {
+      "title": "PAN Card Photo Size Specs: NSDL & UTIITSL Guidelines",
+      "excerpt": "NSDL wants 3.5×2.5 cm. UTIITSL wants a square. Form 49AA is paper. Don't mix them up."
+    },
+    "webp-to-jpg-png-converter-guide": {
+      "title": "WebP to JPG / PNG Converter – Convert WebP Images Online for Free",
+      "excerpt": "WhatsApp and some forms still hate WebP. Convert to JPG or PNG in this tab if you need a picture that actually opens."
+    },
+    "how-to-compress-government-form-pdf-online": {
+      "title": "Best Government Form PDF Compressor: Online PDF Under 100KB, 200KB & 300KB Compress Karein",
+      "excerpt": "SSC, EPFO, PAN — each portal has its own KB cap. Pick the target, drop the PDF, see the real size. File stays here."
+    },
+    "ats-resume-optimization-secrets": {
+      "title": "Free ATS Resume Checker – Test Your Resume Score Online (2026 Guide)",
+      "excerpt": "Paste a resume, get a score, see what an ATS actually chokes on. Tables, text boxes, and missing keywords — not vibes."
+    },
+    "how-to-calculate-exam-percentage-easily": {
+      "title": "How to Calculate Exam Percentage Easily (2026 Guide)",
+      "excerpt": "All subjects equal? Divide by the max. Practicals and extra papers mess that up. Worked examples, then a calculator if you want it."
+    },
+    "mastering-image-compression-balancing-size-and-quality": {
+      "title": "Mastering Image Compression: Hitting the Perfect Balance",
+      "excerpt": "A 8MB phone photo will bounce on SSC. How far you can shrink a JPG before the face looks like plastic.",
+      "content": "A phone photo is often 4–12MB. SSC wants 20–50KB. That's not a gentle squeeze.\n\n### What you're trading\nJPG throws away detail on purpose. PNG usually doesn't, so it stays fat. WebP sits in the middle. If a portal only takes JPG, convert after you shrink — not before you crop.\n\nI always crop first. Shrinking a full sofa photo to 20KB makes the face look like wax.\n\n### A sane order\n1. Crop to the size the form wants (3.5×4.5 cm, 350×350, whatever the PDF says).\n2. Drop it on the [image compressor](/tools/image-compressor/).\n3. Look at the face at 100%, not the thumbnail.\n4. If it's mush, go a little larger. Portals that say 50KB max often accept 40.\n\n### Honest limit\nYou cannot keep every pore and hit 20KB on a noisy indoor shot. Retake in daylight, plain wall, then compress.\n\n[cta tool=\"image-compressor\" title=\"Shrink a photo in this tab\" description=\"JPG, PNG, or WebP. The file never leaves this device.\"]"
+    },
+    "the-rise-of-edge-ai-local-models": {
+      "title": "The Rise of Edge AI: Running Models Directly in Your Web Browser",
+      "excerpt": "Background removal and passport crops can run in the browser. No speech about 'the future' — just what that means for your photo.",
+      "content": "People say \"AI in the browser\" like it's a TED talk. Practically: the model downloads once, then your photo is processed here. No account. No copy on our disk.\n\n### What that is good for\n- Cutting a busy wall off a passport photo\n- Finding a face so the crop box isn't random\n- Reading text off a scan (OCR)\n\nIt's not good for writing a novel or training a new model. Those still need a server. We don't pretend otherwise.\n\n### What you should still check\nBackground removal leaves a halo on hair. Face crop can sit the eyes too low. You still drag the box. The model is a first pass.\n\nClose the tab when you're done. That's the privacy model — not a certificate on the wall.\n\nRelated: [passport photo](/tools/passport-photo-maker/), [background remover](/tools/bg-remover/)."
+    },
+    "maximizing-ai-productivity-for-developers": {
+      "title": "Maximizing AI Productivity: Practical Prompt Engineering for Developers",
+      "excerpt": "Vague prompts get vague code. A few habits that make the model less annoying — without leaking the repo to a random API.",
+      "content": "If you paste the whole repo into a chat box, you get noise and a privacy problem.\n\nSay what file, what error, what you already tried. Ask for a patch, not a rewrite of the universe. Run it locally.\n\nThat's the whole post. The \"prompt studio\" we mentioned earlier isn't a product yet — don't wait on it."
+    },
+    "edit-pdf-online-free-guide": {
+      "title": "How to Edit PDF Online for Free (Complete 2026 Guide)",
+      "excerpt": "Need a date changed on a PDF and don't want Acrobat. What this editor can do in the tab, and what it still can't."
+    },
+    "new-ssc-photo-guidelines-live-upload": {
+      "title": "New SSC Photo Guidelines: Live Photo Capture vs Upload Rules",
+      "excerpt": "Some SSC notices want a live camera shot, some still take a file. How to size the upload so the portal doesn't spit it back."
+    },
+    "upsc-photo-signature-resize-specifications": {
+      "title": "UPSC Photo and Signature Resize Specifications: Complete Steps",
+      "excerpt": "UPSC OTR is picky: 350×350 photo, tiny signature. The pixel and KB numbers, then crop it here."
+    },
+    "compress-eaadhaar-pdf-under-300kb": {
+      "title": "How to Compress e-Aadhaar PDF File Under 300KB",
+      "excerpt": "UIDAI and e-KYC keep rejecting a fat e-Aadhaar PDF. Aim is under 300KB, in this tab — the file never leaves the phone."
+    },
+    "open-password-aadhaar-remove-lock": {
+      "title": "How to Open Password-Protected Aadhaar PDF and Remove Lock",
+      "excerpt": "Password is first four letters of your name in CAPS plus birth year. Unlock it here, then compress if the portal wants 300KB."
+    },
+    "resize-photo-signature-pan-card-application": {
+      "title": "How to Resize Photo and Signature for PAN Card Application",
+      "excerpt": "NSDL and UTIITSL don't want the same photo. Crop and KB limits for both, without sending the picture to a random site."
+    },
+    "signature-size-pan-card-uploads": {
+      "title": "Standard Signature Size for PAN Card Online Uploads",
+      "excerpt": "A fat signature scan will fail PAN upload. Crop the ink, keep it under 20KB. That's the whole job."
+    },
+    "official-indian-passport-photo-specifications": {
+      "title": "Official Indian Passport Photo Size & Dimensions Guidelines",
+      "excerpt": "35×45 mm, white background, face not cropped. The Passport Seva rules in plain English, plus a cropper that stays local."
+    },
+    "make-passport-photo-blue-background": {
+      "title": "How to Make Passport Size Photo with Blue Background",
+      "excerpt": "Some visas want light blue, not white. Swap the wall after you crop. Check the edges before you print."
+    },
+    "upload-photo-signature-ssc-application": {
+      "title": "How to Upload Photo and Signature in SSC Application Form",
+      "excerpt": "3.5×4.5 cm, 20–50KB, both ears if the notice says so. Format the files, then attach them on SSC."
+    },
+    "upload-passport-documents-seva-portal": {
+      "title": "How to Upload Passport Documents on Passport Seva Portal",
+      "excerpt": "Passport Seva wants supporting scans under 1MB. Merge, compress, name the file something a portal will accept."
+    },
+    "compress-upsc-pdf-documents-under-300kb": {
+      "title": "How to Compress UPSC PDF Documents Under 300KB",
+      "excerpt": "Marksheets and certificates for UPSC often sit over 300KB. A pass in the browser — not a promise of 80% every time."
+    },
+    "rrb-alp-photo-signature-size-guidelines": {
+      "title": "RRB ALP Photo and Signature Size Guidelines & Resizer",
+      "excerpt": "RRB ALP has its own photo and signature KB window. Get the crop right before the application clock runs out."
+    },
+    "upload-documents-government-portals": {
+      "title": "How to Upload Documents on Government Portals Without Rejection",
+      "excerpt": "Wrong size, wrong filename, password still on. The usual bounce reasons — and how to fix the file on this device."
+    },
+    "compress-pdf-under-kb-job-portals": {
+      "title": "How to Compress PDF Under 100KB/200KB for Job Portals",
+      "excerpt": "Job sites that want a marksheet under 100 or 200KB. One file, one cap. Don't upload it twice to two compressors."
+    },
+    "ibps-bank-exam-photo-signature-size-spec": {
+      "title": "IBPS Bank Exam Photo and Signature Size Requirements: Complete Steps",
+      "excerpt": "IBPS and SBI photo/signature sizes are close to SSC, not identical. Check the notice, then crop."
+    },
+    "how-to-mask-aadhaar-card-online": {
+      "title": "How to Mask Aadhaar Card Number for Security Compliance",
+      "excerpt": "Black out the first 8 digits, leave the last 4. Do it in the tab so the unmasked card never sits on a server."
+    },
+    "resize-scanned-signature-ssc-cgl-portal": {
+      "title": "How to Resize Scanned Signature for SSC CGL Portal",
+      "excerpt": "SSC CGL signatures are tiny — often 10–20KB. Crop the ink, not the whole A4 scan."
+    },
+    "upsc-otr-photo-document-upload-guide": {
+      "title": "UPSC OTR (One Time Registration) Photo & Document Upload Guide",
+      "excerpt": "OTR wants a square photo and a small signature. Format both before you start the long form."
+    },
+    "crop-aadhaar-card-photo-uidai-specs": {
+      "title": "How to Crop Aadhaar Card Photo to Official UIDAI Specs",
+      "excerpt": "UIDAI photo is 3.5×4.5 cm, light background, under 50KB. Crop the face, don't squeeze a group selfie."
+    },
+    "make-passport-size-photo-mobile-phone": {
+      "title": "How to Make Passport Size Photo on Mobile Phone",
+      "excerpt": "You can do 35×45 mm on a phone: even light, crop, white background. Skip the studio if the shot is already decent."
+    },
+    "passport-size-photo-maker-online-free": {
+      "title": "Passport Size Photo Maker Online Free: The Ultimate Guide to Biometric Document Preparation",
+      "excerpt": "Shadows, a dark wall, or the old 2×2 inch square — that's why Passport Seva bounces photos. Crop to 35×45 mm here."
+    },
+    "photo-resize-to-20kb": {
+      "title": "Photo Resize to 20KB Online: How to Format and Compress Images for Official Applications",
+      "excerpt": "SSC and some police forms want the photo under 20KB. That's small. Here's how far you can go before it blurs."
+    },
+    "signature-resize-to-20kb": {
+      "title": "Signature Resize to 20KB Online: Sizing Scanned Signatures for Online Applications",
+      "excerpt": "A phone photo of a signature on A4 is huge. Crop the ink, land between 10 and 20KB."
+    },
+    "compress-pdf-to-100kb": {
+      "title": "Compress PDF to 100KB Online: Sizing Certificates for Government Portals",
+      "excerpt": "EPFO and a few boards want 100KB. Text PDFs may already be there. Scans need a real pass — and honesty if they don't move."
+    },
+    "aadhaar-photo-resize-online": {
+      "title": "Aadhaar Photo Resize Online: How to Format Photos for UIDAI Card Updates",
+      "excerpt": "Aadhaar updates want 3.5×4.5 cm, white-ish background, under 50KB. Same family as a passport photo, different cap."
     }
   },
   "pdf_ocr": {

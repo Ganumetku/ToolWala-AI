@@ -184,11 +184,11 @@ export default function BlogListClient({
                           <Clock className="w-3 h-3" /> {t('blog.minutes_read', '{count} min read').replace('{count}', featuredPost.readingTime.replace(/[^0-9]/g, ''))}
                         </span>
                       </div>
-                      <h2 className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white leading-tight uppercase group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                        {featuredPost.title}
+                      <h2 className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        {t(`blogs.${featuredPost.slug}.title`, featuredPost.title)}
                       </h2>
                       <p className="text-gray-600 dark:text-gray-400 text-sm font-semibold leading-relaxed line-clamp-3 font-sans">
-                        {featuredPost.excerpt}
+                        {t(`blogs.${featuredPost.slug}.excerpt`, featuredPost.excerpt)}
                       </p>
                     </div>
                     <div className="flex items-center gap-3 mt-6 pt-6 border-t border-gray-100 dark:border-white/5">
@@ -251,11 +251,11 @@ export default function BlogListClient({
                               <Clock className="w-3 h-3" /> {t('blog.minutes_read', '{count} min read').replace('{count}', blog.readingTime.replace(/[^0-9]/g, ''))}
                             </span>
                           </div>
-                          <h3 className="text-lg font-black text-gray-900 dark:text-white uppercase tracking-tight leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
-                            {blog.title}
+                          <h3 className="text-lg font-black text-gray-900 dark:text-white tracking-tight leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+                            {t(`blogs.${blog.slug}.title`, blog.title)}
                           </h3>
                           <p className="text-gray-600 dark:text-gray-400 text-xs font-semibold leading-relaxed line-clamp-3 font-sans">
-                            {blog.excerpt}
+                            {t(`blogs.${blog.slug}.excerpt`, blog.excerpt)}
                           </p>
                         </div>
 
@@ -307,8 +307,8 @@ export default function BlogListClient({
                     <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-500">
                       {t('categories.' + trending.category, trending.category)}
                     </span>
-                    <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
-                      {trending.title}
+                    <h4 className="text-sm font-black text-gray-900 dark:text-white leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+                      {t(`blogs.${trending.slug}.title`, trending.title)}
                     </h4>
                   </div>
                 </Link>
@@ -322,30 +322,30 @@ export default function BlogListClient({
             </h3>
             <div className="space-y-3">
               <Link
-                href={localizeHref('/tools/edit-pdf/')}
+                href={localizeHref('/tools/jpg-to-pdf/')}
                 className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/[0.02] border border-gray-200 dark:border-white/5 hover:border-blue-500/30 transition-all group"
               >
-                <span className="text-lg">✍️</span>
-                <span className="text-xs font-black text-gray-900 dark:text-white uppercase group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-1">
-                  {t('tools.edit-pdf.title', 'Edit PDF Online')}
+                <span className="text-lg">🖼️</span>
+                <span className="text-xs font-black text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-1">
+                  {t('tools.jpg-to-pdf.title', 'JPG to PDF')}
                 </span>
               </Link>
               <Link
-                href={localizeHref('/tools/pdf-ocr')}
+                href={localizeHref('/tools/merge-pdf/')}
                 className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/[0.02] border border-gray-200 dark:border-white/5 hover:border-blue-500/30 transition-all group"
               >
-                <span className="text-lg">🔍</span>
-                <span className="text-xs font-black text-gray-900 dark:text-white uppercase group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-1">
-                  {t('tools.pdf-ocr.title', 'PDF OCR Scanner')}
+                <span className="text-lg">📎</span>
+                <span className="text-xs font-black text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-1">
+                  {t('tools.merge-pdf.title', 'Merge PDF')}
                 </span>
               </Link>
               <Link
-                href={localizeHref('/tools/image-compressor')}
+                href={localizeHref('/tools/passport-photo-maker/')}
                 className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/[0.02] border border-gray-200 dark:border-white/5 hover:border-blue-500/30 transition-all group"
               >
-                <span className="text-lg">📉</span>
-                <span className="text-xs font-black text-gray-900 dark:text-white uppercase group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-1">
-                  {t('tools.image-compressor.title', 'Image Compressor')}
+                <span className="text-lg">📷</span>
+                <span className="text-xs font-black text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-1">
+                  {t('tools.passport-photo-maker.title', 'Passport Photo Maker')}
                 </span>
               </Link>
             </div>

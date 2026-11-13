@@ -9,8 +9,8 @@ export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   const { t, locale } = await getTranslationServer();
-  const title = t('blog.seo_title', 'ToolWala AI Blog – Modern AI, PDF & Design Insights');
-  const description = t('blog.seo_desc', 'Stay ahead with guides on local browser OCR, image compression, ATS resumes, and high-performance developer utilities on ToolWala AI.');
+  const title = t('blog.seo_title', 'ToolWala Blog – PDF, photo, and form guides');
+  const description = t('blog.seo_desc', 'Passport photos, SSC sizes, PDF under 300KB, tax slabs. Written like a person would explain it. Files stay in your browser.');
 
   const { getAlternateLanguages, getLocalizedCanonicalUrl } = await import('@/lib/seo');
   const canonical = getLocalizedCanonicalUrl('/blog', locale);
@@ -56,16 +56,16 @@ export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <span className="px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-xs font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 inline-block mb-3 sm:mb-4 animate-pulse-slow">
-            {t('blog.insights_badge', 'ToolWala Insights')}
+            {t('blog.insights_badge', 'From the blog')}
           </span>
-          <h1 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase mb-3 sm:mb-4 leading-tight">
-            {t('blog.insights_title', 'Tech, AI & Design')} <br />
+          <h1 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-3 sm:mb-4 leading-tight">
+            {t('blog.insights_title', 'Notes on PDFs, photos, and forms')} <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-500">
-              {t('blog.insights_subtitle', 'Without the Servers')}
+              {t('blog.insights_subtitle', 'that stay on this device')}
             </span>
           </h1>
           <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 font-medium leading-relaxed max-w-2xl mx-auto">
-            {t('blog.insights_desc', 'Explore advanced concepts in browser-native processing, data confidentiality, and digital efficiency.')}
+            {t('blog.insights_desc', 'Size caps, passport photos, tax slabs. Straight answers — then the tool if you want it.')}
           </p>
         </div>
 

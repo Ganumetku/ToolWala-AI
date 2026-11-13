@@ -40,11 +40,11 @@ export default function BlogPreview() {
               <BookOpen className="w-3.5 h-3.5" />
               {t('blog.badge', 'LATEST INSIGHTS')}
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase">
+            <h2 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight">
               {t('blog.title', 'From the ToolWala Blog')}
             </h2>
             <p className="text-gray-600 dark:text-gray-500 mt-3 font-medium">
-              {t('blog.subtitle', 'Explore advanced concepts in browser-native processing, data security, and productivity hacks.')}
+              {t('blog.subtitle', 'Passport photos, PDF caps, tax — written like you would explain it to a friend.')}
             </p>
           </div>
 
@@ -109,7 +109,7 @@ export default function BlogPreview() {
                       </span>
                     </div>
 
-                    <h3 className="text-lg sm:text-xl font-black text-gray-900 dark:text-white tracking-tight uppercase group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug mb-3">
+                    <h3 className="text-lg sm:text-xl font-black text-gray-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug mb-3">
                       <Link href={localizeHref(`/blog/${blog.slug}`)}>
                         {blogTitle}
                       </Link>

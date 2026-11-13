@@ -183,8 +183,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const finalTitle = toolTitle || pricingTitle || loginTitle || "";
   const finalDesc = toolDesc || pricingDesc || loginDesc || "";
 
-  const defaultTitle = "ToolWala AI – Free Online PDF, Image & AI Tools";
-  const defaultDesc = "ToolWala AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.";
+  const defaultTitle = "Free PDF Tools That Never Upload Your Files | ToolWala";
+  const defaultDesc = "Merge PDFs, convert JPG to PDF, compress Aadhaar under 300KB, and make passport photos in your browser. Files stay on your device — no signup.";
 
   const titleObj = finalTitle ? { default: finalTitle, template: "%s | ToolWala AI" } : {
     default: defaultTitle,
@@ -285,7 +285,7 @@ const jsonLd = {
       "@id": "https://toolwala.co/#website",
       "url": "https://toolwala.co",
       "name": "ToolWala AI",
-      "description": "ToolWala AI offers fast and free AI tools for image editing, QR codes, resumes, PDFs, voice generation, captions, and more. Simple, powerful, and easy to use.",
+      "description": "Free PDF, image, and resume tools that run in your browser. Files stay on your device — no signup.",
       "publisher": {
         "@id": "https://toolwala.co/#organization"
       },
@@ -333,6 +333,16 @@ export default async function RootLayout({
       ...messages.tools,
       ...dbTranslations
     };
+    // Card copy should lead with the job, not the limit. DB/admin rows can lag.
+    const cardDescriptionFixes: Record<string, string> = {
+      'pdf-to-word-converter': 'Convert a text PDF into an editable Word file in your browser. Files stay on your device.',
+      'word-to-pdf-converter': 'Turn a Word (.docx) file into a PDF in your browser. No upload, no signup.',
+    };
+    for (const [slug, description] of Object.entries(cardDescriptionFixes)) {
+      if (messages.tools?.[slug] && locale === 'en') {
+        messages.tools[slug] = { ...messages.tools[slug], description };
+      }
+    }
   } catch (err) {
     console.error(`Failed to inject dynamic tool translations:`, err);
   }

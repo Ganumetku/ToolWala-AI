@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'compress-pdf',
-    'Compress PDF – Rewrite in Browser, No Upload',
-    'Shrink a PDF in this tab with pdf-lib. Text files often barely move. Processing stays in the browser — files are not uploaded.',
+    'Compress PDF in Your Browser – No Upload',
+    'Shrink a PDF on this page. Processing stays on your device — we never see the file.',
     '/tools/compress-pdf'
   );
 }

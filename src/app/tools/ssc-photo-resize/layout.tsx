@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'ssc-photo-resize',
-    'SSC Photo Resizer Online - CGL, CHSL, MTS Dimensions | ToolWala AI',
-    'Resize and crop your passport photo to official Staff Selection Commission (SSC) guidelines (3.5 cm x 4.5 cm) under 50KB limit locally. Safe, private, and 100% in-browser.',
+    'SSC Photo Resize – 35×45mm Under 50KB, No Upload',
+    'Crop a photo to SSC size (3.5 × 4.5 cm) under 50KB in your browser. Nothing is uploaded to a server.',
     '/tools/ssc-photo-resize'
   );
 }

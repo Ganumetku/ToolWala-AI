@@ -62,10 +62,14 @@
   },
   "home": {
     "badge": "🔒 100% Browser-Based • No Upload Required • Privacy First",
-    "hero_title_1": "Free ",
-    "hero_title_highlight": "PDF, Image & Resume Tools",
+    "hero_title_1": "PDF tools that ",
+    "hero_title_highlight": "never upload your files",
     "hero_title_2": "Built for Everyone",
-    "hero_subtitle": "Edit PDFs, convert images, create passport photos, compress files, optimize resumes, and use powerful browser-based utilities — all without uploading your files. Fast, secure, and completely free.",
+    "hero_subtitle": "Merge PDFs, convert JPG to PDF, compress Aadhaar to 300KB, and make passport photos in this browser tab. Close the tab and the file is gone from our side — because it never arrived.",
+    "quick_jpg": "JPG to PDF",
+    "quick_merge": "Merge PDF",
+    "quick_aadhaar": "Aadhaar 300KB",
+    "quick_passport": "Passport Photo",
     "search_placeholder": "Search PDF, Image, Resume & AI tools...",
     "primary_cta": "Explore Free Tools",
     "secondary_cta": "Browse Categories",
@@ -82,12 +86,13 @@
     "edge_subtitle_1": "Professional tools,",
     "edge_subtitle_2": "Zero complexity.",
     "edge_desc": "We bridge the gap between complex AI models and everyday utility. No confusing interfaces, no subscription traps—just powerful AI that works for you.",
-    "feat1_title": "Edge Processing",
-    "feat1_desc": "Most tools run directly in your browser, ensuring lightning-fast results without server delays.",
-    "feat2_title": "Encrypted Data",
-    "feat2_desc": "Your files never leave your device. We use end-to-end encryption for any cloud-based processing.",
-    "feat3_title": "Curated Models",
-    "feat3_desc": "We select and fine-tune the best AI models specifically for each tool's unique purpose.",
+    "feat1_title": "Files stay on your device",
+    "feat1_desc": "Your PDF or photo is read in this tab. Close it and the file is gone. We never get a copy.",
+    "feat2_title": "Nothing to leak",
+    "feat2_desc": "No filename logs. No training on your docs. There is nothing on our side that could leak.",
+    "feat3_title": "No account wall",
+    "feat3_desc": "Open a tool, drop a file, download. That is the whole flow — no signup to get your own PDF back.",
+    "feat4_desc": "No daily cap, no watermark, no “upgrade to download”. Use it, then close the tab.",
     "recent_visited": "Recently Visited Utilities",
     "no_tools_found": "No tools found",
     "no_tools_sub": "Try checking tag queries or clear filters to view all directories.",
@@ -112,10 +117,10 @@
       "gdpr": "GDPR & CCPA Private",
       "local": "100% Edge Processing",
       "no_upload": "No Cloud Database Logs",
-      "free": "Always Free Beta"
+      "free": "Free while we are in beta"
     },
     "popular_shelf_title": "Popular Handpicked Tools",
-    "why_use_title": "Why Professionals Choose ToolWala AI",
+    "why_use_title": "What you get that most converters skip",
     "how_it_works_title": "How ToolWala Works",
     "sandbox_diagram": {
       "title": "On-Device Browser Sandbox vs Cloud Uploads",
@@ -749,13 +754,13 @@
     },
     "word-to-pdf-converter": {
       "title": "Word to PDF Converter",
-      "description": "Turn a .docx file into PDF in this tab. 50 MB cap. Legacy .doc not supported. No upload.",
-      "intro": "Only .docx, and only up to 50 MB. A 2003-era .doc will not load — Save As .docx first. Password-protected Word files also fail here."
+      "description": "Turn a Word (.docx) file into a PDF in your browser. No upload, no signup.",
+      "intro": "Drop a .docx file (up to 50 MB). Older .doc files need a Save As first. Password-protected Word files will not open here."
     },
     "pdf-to-word-converter": {
       "title": "PDF to Word Converter",
-      "description": "Turn a text PDF into an editable .docx in this tab. 50 MB limit. Files stay on your device.",
-      "intro": "Hard limit is 50 MB. If you cannot highlight text in the PDF, this page will not invent it — run PDF OCR first. A password lock fails until you unlock the file."
+      "description": "Convert a text PDF into an editable Word file in your browser. Files stay on your device.",
+      "intro": "Works on text PDFs up to 50 MB. If you cannot highlight the words, run PDF OCR first. A password lock has to be removed before conversion."
     },
     "pdf-to-excel-converter": {
       "title": "PDF to Excel Converter",

@@ -13,6 +13,57 @@ import { landingPagesData } from '@/data/landingPages';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolwala.co';
 const SITE_NAME = 'ToolWala AI';
 
+/** English SERP copy that beats stale DB/admin titles. Privacy is the click reason. */
+const SEO_COPY_OVERRIDES: Record<string, { title: string; description: string }> = {
+  'jpg-to-pdf': {
+    title: 'JPG to PDF – No Upload, Files Stay on Your Device',
+    description: 'Turn JPG, PNG, or WebP images into a PDF in your browser. Nothing is uploaded. No signup, no watermark.',
+  },
+  'merge-pdf': {
+    title: 'Merge PDF – Combine Files in Your Browser, No Upload',
+    description: 'Join two or more PDFs in this tab. Reorder pages and download. Files never leave your device.',
+  },
+  'compress-pdf': {
+    title: 'Compress PDF in Your Browser – No Upload',
+    description: 'Shrink a PDF on this page. Processing stays on your device — we never see the file.',
+  },
+  'cover-letter-generator': {
+    title: 'Free Cover Letter Generator – No Signup | ToolWala',
+    description: 'Write a cover letter from your details and the job post. Free, no account, ready to copy or download.',
+  },
+  'aadhaar-pdf-compressor': {
+    title: 'Compress Aadhaar PDF under 300KB – No Upload',
+    description: 'Shrink e-Aadhaar to under 300KB in your browser. The password stays on your device. Built for UIDAI and KYC portals.',
+  },
+  'ssc-photo-resize': {
+    title: 'SSC Photo Resize – 35×45mm Under 50KB, No Upload',
+    description: 'Crop a photo to SSC size (3.5 × 4.5 cm) under 50KB in your browser. Nothing is uploaded to a server.',
+  },
+  'passport-photo-maker': {
+    title: 'Passport Photo Maker – 35×45mm, No Upload',
+    description: 'Make an India passport photo (35×45mm) from a selfie in your browser. White background. Files stay on your phone.',
+  },
+};
+
+const HI_SEO_COPY_OVERRIDES: Record<string, { title: string; description: string }> = {
+  'jpg-to-pdf': {
+    title: 'JPG से PDF – बिना अपलोड, फ़ाइल डिवाइस पर रहती है',
+    description: 'JPG, PNG या WebP को ब्राउज़र में PDF बनाएं। कुछ अपलोड नहीं होता। साइनअप नहीं, वॉटरमार्क नहीं।',
+  },
+  'aadhaar-pdf-compressor': {
+    title: 'आधार PDF 300KB में कंप्रेस करें – बिना अपलोड',
+    description: 'e-Aadhaar को ब्राउज़र में 300KB से कम करें। पासवर्ड आपके डिवाइस पर रहता है। UIDAI और KYC पोर्टल के लिए।',
+  },
+  'ssc-photo-resize': {
+    title: 'SSC फोटो रिसाइज़ – 35×45mm, 50KB, बिना अपलोड',
+    description: 'SSC साइज़ (3.5 × 4.5 सेमी) और 50KB के अंदर फोटो काटें। फ़ाइल सर्वर पर नहीं जाती।',
+  },
+  'passport-photo-maker': {
+    title: 'पासपोर्ट फोटो मेकर – 35×45mm, बिना अपलोड',
+    description: 'सेल्फी से भारत का पासपोर्ट फोटो (35×45mm) ब्राउज़र में बनाएं। सफेद बैकग्राउंड। फोटो फोन पर रहती है।',
+  },
+};
+
 export function getSiteUrl(path = ''): string {
   const base = SITE_URL.replace(/\/$/, '');
   const p = path.startsWith('/') ? path : `/${path}`;
@@ -412,10 +463,13 @@ export async function generateToolMetadataHelper(
   let description = '';
 
   if (locale === 'en') {
-    title = (dbTranslation.seoTitle && dbTranslation.seoTitle !== toolId) ? dbTranslation.seoTitle : 
-      (landingPage ? landingPage.title : (dbTranslation.title && dbTranslation.title !== toolId ? dbTranslation.title : fallbackTitle));
-    description = (dbTranslation.seoDescription && dbTranslation.seoDescription !== "") ? dbTranslation.seoDescription : 
-      (landingPage ? landingPage.metaDescription : (dbTranslation.description || fallbackDesc));
+    const override = SEO_COPY_OVERRIDES[toolId];
+    title = override?.title
+      || ((dbTranslation.seoTitle && dbTranslation.seoTitle !== toolId) ? dbTranslation.seoTitle :
+      (landingPage ? landingPage.title : (dbTranslation.title && dbTranslation.title !== toolId ? dbTranslation.title : fallbackTitle)));
+    description = override?.description
+      || ((dbTranslation.seoDescription && dbTranslation.seoDescription !== "") ? dbTranslation.seoDescription :
+      (landingPage ? landingPage.metaDescription : (dbTranslation.description || fallbackDesc)));
   } else {
     // Non-English locale. Build SEO title/description safely.
     let toolTitle = dbTranslation.title && dbTranslation.title !== toolId ? dbTranslation.title : '';
@@ -434,8 +488,11 @@ export async function generateToolMetadataHelper(
       toolDesc = translatedData.description;
     }
 
+    const hiOverride = locale === 'hi' ? HI_SEO_COPY_OVERRIDES[toolId] : undefined;
+
     // Try to get clean seoTitle
-    let rawSeoTitle = (dbTranslation.seoTitle && dbTranslation.seoTitle !== toolId) ? dbTranslation.seoTitle : '';
+    let rawSeoTitle = hiOverride?.title
+      || ((dbTranslation.seoTitle && dbTranslation.seoTitle !== toolId) ? dbTranslation.seoTitle : '');
     
     if (rawSeoTitle) {
       title = rawSeoTitle;
@@ -465,15 +522,19 @@ export async function generateToolMetadataHelper(
       const englishName = baseEn.title;
       const escapedEnglishName = englishName.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
       const regex = new RegExp(escapedEnglishName, 'gi');
-      title = title.replace(regex, toolTitle);
-      
-      if (dbTranslation.seoDescription) {
+      if (!hiOverride) {
+        title = title.replace(regex, toolTitle);
+      }
+
+      if (hiOverride?.description) {
+        description = hiOverride.description;
+      } else if (dbTranslation.seoDescription) {
         description = dbTranslation.seoDescription.replace(regex, toolTitle);
       } else {
         description = toolDesc.replace(regex, toolTitle);
       }
     } else {
-      description = dbTranslation.seoDescription || toolDesc;
+      description = hiOverride?.description || dbTranslation.seoDescription || toolDesc;
     }
 
     // Ensure proper casing & translation of AI -> IA for Romance languages, and AI -> एआई for Hindi

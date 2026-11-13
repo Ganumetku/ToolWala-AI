@@ -10,12 +10,17 @@ import ToolCard from '@/components/ToolCard';
 import ToolAutocompleteSearch from '@/components/ToolAutocompleteSearch';
 import { toolsData, type Tool } from '@/data/tools';
 import { HOMEPAGE_TOP_TOOL_IDS } from '@/data/homepageTools';
-import dynamic from 'next/dynamic';
+import HomepageFAQ from '@/components/HomepageFAQ';
 import { useTranslation } from '@/components/I18nContext';
 import { startTopProgress } from '@/components/TopProgressBar';
 import PageBackground from '@/components/PageBackground';
 
-const HomepageFAQ = dynamic(() => import('@/components/HomepageFAQ'), { ssr: false });
+const QUICK_TOOLS = [
+  { id: 'jpg-to-pdf', href: '/tools/jpg-to-pdf/', labelKey: 'home.quick_jpg', fallback: 'JPG to PDF' },
+  { id: 'merge-pdf', href: '/tools/merge-pdf/', labelKey: 'home.quick_merge', fallback: 'Merge PDF' },
+  { id: 'aadhaar-pdf-compressor', href: '/tools/aadhaar-pdf-compressor/', labelKey: 'home.quick_aadhaar', fallback: 'Aadhaar 300KB' },
+  { id: 'passport-photo-maker', href: '/tools/passport-photo-maker/', labelKey: 'home.quick_passport', fallback: 'Passport Photo' },
+] as const;
 
 function resolveHomepageTools(): Tool[] {
   const seen = new Set<string>();
@@ -54,15 +59,28 @@ export default function Home() {
           </div>
 
           <h1 className="font-bold text-3xl sm:text-5xl md:text-6xl tracking-tight sm:tracking-tighter text-[#33333b] dark:text-white leading-[1.12] mb-3 max-w-4xl mx-auto">
-            {t('home.hero_title_1', 'Free ')}
-            <span className="text-[#2563EB] dark:text-blue-400">
-              {t('home.hero_title_highlight', 'PDF, Image & Resume Tools')}
+            {t('home.hero_title_1', 'PDF tools that ')}
+            <span className="text-[#2563EB] dark:text-blue-400 sm:whitespace-nowrap">
+              {t('home.hero_title_highlight', 'never upload your files')}
             </span>
           </h1>
 
-          <p className="mx-auto max-w-xl text-xs sm:text-sm font-normal text-[#707078] dark:text-gray-400 leading-relaxed mb-5">
-            {t('home.hero_subtitle', 'Edit PDFs, compress images, and build resumes locally in your browser with zero data retention.')}
+          <p className="mx-auto max-w-2xl text-xs sm:text-sm font-normal text-[#707078] dark:text-gray-400 leading-relaxed mb-5">
+            {t('home.hero_subtitle', 'Merge PDFs, convert JPG to PDF, compress Aadhaar to 300KB, and make passport photos in this browser tab. Close the tab and the file is gone from our side — because it never arrived.')}
           </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-6">
+            {QUICK_TOOLS.map((tool) => (
+              <Link
+                key={tool.id}
+                href={localizeHref(tool.href)}
+                onClick={() => startTopProgress()}
+                className="inline-flex items-center px-3.5 py-2 rounded-full bg-white dark:bg-white/[0.06] border border-slate-200/90 dark:border-white/10 text-[12px] sm:text-[13px] font-semibold text-slate-700 dark:text-slate-200 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 hover:shadow-sm transition-all"
+              >
+                {t(tool.labelKey, tool.fallback)}
+              </Link>
+            ))}
+          </div>
 
           <div className="mx-auto max-w-xl mb-8 relative z-30">
             <ToolAutocompleteSearch
@@ -103,7 +121,7 @@ export default function Home() {
               {t('home.edge_title', 'The ToolWala Edge')}
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-              {t('home.why_use_title', 'Why Professionals Choose ToolWala AI')}
+              {t('home.why_use_title', 'What you get that most converters skip')}
             </h2>
           </div>
 
@@ -112,36 +130,36 @@ export default function Home() {
               <div className="w-11 h-11 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400">
                 <Cpu className="w-5 h-5" />
               </div>
-              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat1_title', '100% In-Browser (WASM)')}</h4>
+              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat1_title', 'Files stay on your device')}</h4>
               <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold">
-                PDFs, images, and calculations process directly inside device RAM without uploading files to remote servers.
+                {t('home.feat1_desc', 'Your PDF or photo is read in this tab. Close it and the file is gone. We never get a copy.')}
               </p>
             </div>
             <div className="premium-card p-6 flex flex-col items-start gap-3 border border-gray-200 dark:border-white/5 bg-white dark:bg-white/[0.02]">
               <div className="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
                 <ShieldCheck className="w-5 h-5" />
               </div>
-              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat2_title', 'Zero AI Retention')}</h4>
+              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat2_title', 'Nothing to leak')}</h4>
               <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold">
-                Your documents and inputs are never stored, logged, or used to train third-party AI models.
+                {t('home.feat2_desc', 'No filename logs. No training on your docs. There is nothing on our side that could leak.')}
               </p>
             </div>
             <div className="premium-card p-6 flex flex-col items-start gap-3 border border-gray-200 dark:border-white/5 bg-white dark:bg-white/[0.02]">
               <div className="w-11 h-11 rounded-xl bg-purple-50 dark:bg-purple-500/10 border border-purple-200 dark:border-white/5 flex items-center justify-center text-purple-600 dark:text-purple-400">
                 <UserX className="w-5 h-5" />
               </div>
-              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">No Account Traps</h4>
+              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat3_title', 'No account wall')}</h4>
               <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold">
-                Skip standard login sheets. Open any tool and process files instantly inside your active browser tab.
+                {t('home.feat3_desc', 'Open a tool, drop a file, download. That is the whole flow — no signup to get your own PDF back.')}
               </p>
             </div>
             <div className="premium-card p-6 flex flex-col items-start gap-3 border border-gray-200 dark:border-white/5 bg-white dark:bg-white/[0.02]">
               <div className="w-11 h-11 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400">
                 <Gift className="w-5 h-5" />
               </div>
-              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.trust_banner.free', '100% Free Always')}</h4>
+              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.trust_banner.free', 'Free while we are in beta')}</h4>
               <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold">
-                Enjoy unlimited document splits, PDF compressions, background removals, and calculations without fees.
+                {t('home.feat4_desc', 'No daily cap, no watermark, no “upgrade to download”. Use it, then close the tab.')}
               </p>
             </div>
           </div>

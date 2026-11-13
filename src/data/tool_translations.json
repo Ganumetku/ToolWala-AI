@@ -719,8 +719,8 @@
         "answer": "No. All page copying and document building happen strictly inside your browser sandbox. Your files never touch external servers or cloud storage."
       }
     ],
-    "seoTitle": "Merge PDF Online Free – Combine PDF Files in Browser | ToolWala",
-    "seoDescription": "Merge PDF files online for free. Combine 2 or more PDFs into one in your browser. No upload, no signup. Reorder pages and download instantly.",
+    "seoTitle": "Merge PDF – Combine Files in Your Browser, No Upload",
+    "seoDescription": "Join two or more PDFs in this tab. Reorder pages and download. Files never leave your device.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-10-23T00:00:00.000Z"
   },
@@ -951,8 +951,8 @@
         "answer": "Yes. The preview workspace displays files as interactive cards. You can drag cards, use the up/down arrows to change page order, and rotate images 90 degrees at a time to correct orientation errors."
       }
     ],
-    "seoTitle": "Convert JPG to PDF Online Free – Fast, No Sign-up & Secure | ToolWala",
-    "seoDescription": "Turn your JPG, PNG, and WebP images into clean, high-quality PDF files in seconds. 100% free with zero file size limits and complete privacy in your browser.",
+    "seoTitle": "JPG to PDF – No Upload, Files Stay on Your Device",
+    "seoDescription": "Turn JPG, PNG, or WebP images into a PDF in your browser. Nothing is uploaded. No signup, no watermark.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-11-11T12:39:35.569Z"
   },
@@ -2652,8 +2652,8 @@
         "answer": "Yes. Your resume and job details are processed in real-time to generate the letter and are not stored on our servers."
       }
     ],
-    "seoTitle": "AI Cover Letter Generator – Free Online Tool",
-    "seoDescription": "Generate tailored, professional cover letters optimized for any job application.",
+    "seoTitle": "Free Cover Letter Generator – No Signup | ToolWala",
+    "seoDescription": "Write a cover letter from your details and the job post. Free, no account, ready to copy or download.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-18T02:01:06.127Z"
   },
@@ -2949,7 +2949,7 @@
     "toolSlug": "pdf-to-word-converter",
     "locale": "en",
     "title": "PDF to Word Converter",
-    "description": "Hard limit is 50 MB. If you cannot highlight text in the PDF, this page will not invent it — run PDF OCR first. A password lock fails until you unlock the file.",
+    "description": "Convert a text PDF into an editable Word file in your browser. Files stay on your device.",
     "faq": [
       {
         "question": "Does formatting stay the same?",
@@ -3101,7 +3101,7 @@
     "toolSlug": "word-to-pdf-converter",
     "locale": "en",
     "title": "Word to PDF Converter",
-    "description": "Only .docx, and only up to 50 MB. A 2003-era .doc will not load — Save As .docx first. Password-protected Word files also fail here.",
+    "description": "Turn a Word (.docx) file into a PDF in your browser. No upload, no signup.",
     "faq": [
       {
         "question": "Why won’t my .doc convert?",
@@ -11757,8 +11757,8 @@
         "answer": "No. All compression operations run locally inside your browser tab."
       }
     ],
-    "seoTitle": "Compress PDF Online Free – Reduce PDF File Size | ToolWala",
-    "seoDescription": "Compress PDF files online for free. Reduce file size in your browser without losing readability. Fast, private, with zero server uploads."
+    "seoTitle": "Compress PDF in Your Browser – No Upload",
+    "seoDescription": "Shrink a PDF on this page. Processing stays on your device — we never see the file."
   },
   {
     "id": "trans-rotate-pdf-en",

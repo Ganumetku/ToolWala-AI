@@ -366,12 +366,12 @@ export default function JpgToPdf() {
                 <PdfToolIcon toolId="jpg-to-pdf" size="xl" className="shrink-0" />
                 <div>
                   <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">JPG to PDF</h1>
-                  <p className="text-slate-600 dark:text-gray-400 font-medium mt-1">Convert JPEG, JPG, and PNG images into a beautifully formatted PDF document locally.</p>
+                  <p className="text-slate-600 dark:text-gray-400 font-medium mt-1">Convert JPG, PNG, or WebP into a PDF in this tab. Files never leave your device.</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 bg-emerald-50 dark:bg-emerald-500/10 px-4 py-2 rounded-xl border border-emerald-200 dark:border-emerald-500/20 h-fit shadow-sm">
                 <Shield className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400">100% Secure</span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400">No Upload</span>
               </div>
             </div>
           </div>

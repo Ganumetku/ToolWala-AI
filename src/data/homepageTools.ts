@@ -1,20 +1,20 @@
-/** Homepage shows only these tools. Edit this list to change Top Picks. */
+/** Homepage shows only these tools. Edit this list to change the grid. */
 export const HOMEPAGE_TOP_TOOL_IDS = [
+  'jpg-to-pdf',
   'merge-pdf',
   'compress-pdf',
-  'edit-pdf',
-  'pdf-to-word-converter',
-  'word-to-pdf-converter',
-  'image-compressor',
-  'bg-remover',
+  'aadhaar-pdf-compressor',
   'passport-photo-maker',
-  'resume-builder',
-  'jpg-to-pdf',
+  'ssc-photo-resize',
+  'cover-letter-generator',
+  'image-compressor',
 ] as const;
 
+/** Keep this tiny — a badge on every card means nothing. */
 export const HOMEPAGE_TOP_PICK_IDS = new Set<string>([
-  ...HOMEPAGE_TOP_TOOL_IDS,
-  'background-remover',
+  'jpg-to-pdf',
+  'aadhaar-pdf-compressor',
+  'passport-photo-maker',
 ]);
 
 export const DIRECTORY_FILTERS = [

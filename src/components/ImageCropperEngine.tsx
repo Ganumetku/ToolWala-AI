@@ -1973,7 +1973,7 @@ export default function ImageCropperEngine({
               onClick={resetAll}
               className="flex-1 sm:flex-initial px-6 py-4 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white text-[10px] font-black uppercase tracking-widest rounded-2xl transition-all border border-slate-200 dark:border-white/5 cursor-pointer"
             >
-              Upload Different Photo
+              Choose a different photo
             </button>
             <button
               onClick={handleDownload}

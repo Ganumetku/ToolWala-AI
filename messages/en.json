@@ -710,7 +710,7 @@
     "related_blog_insights": "Related Blog Insights",
     "recommended_utilities": "Recommended Category Utilities",
     "try_tool": "Try Tool",
-    "badge_client_side": "100% Client-Side & Secure",
+    "badge_client_side": "Files stay on this device",
     "related_tools_desc": "Discover more professional document operations tools.",
     "search_placeholder_filter": "Filter by name, tag or category...",
     "found_count": "Found {count} tools for \"{query}\"",
@@ -1306,6 +1306,11 @@
     "transparency_title": "Transparency Statement",
     "transparency_desc": "As the AI landscape evolves, so does ToolWala AI. We are committed to transparency and will update this disclaimer as our technology matures. If you find any significant inaccuracies in our tool outputs, please help us improve by reporting them to our technical team.",
     "last_updated": "Last updated: May 16, 2026 • © ToolWala AI"
+  },
+  "trust_badges": {
+    "on_device": "Stays on this device",
+    "no_upload": "Files never leave this tab",
+    "no_account": "No account needed"
   },
   "privacy_hub": {
     "badge_title": "PRIVACY-FIRST ASSURANCE",

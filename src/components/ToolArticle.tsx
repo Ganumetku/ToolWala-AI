@@ -37,6 +37,7 @@ interface ToolArticleProps {
   keyFeatures?: { title: string; desc: string }[];
   benefits?: string[];
   whyChoose?: string;
+  whyChooseHeading?: string;
   useCases?: string[];
   useCasesHeading?: string;
   faqs?: FAQ[];
@@ -45,6 +46,8 @@ interface ToolArticleProps {
   relatedTools?: { name: string; href: string }[];
   toolId?: string;
   layout?: ArticleLayout;
+  hideHero?: boolean;
+  preferArticleCopy?: boolean;
 }
 
 export default function ToolArticle({
@@ -64,6 +67,7 @@ export default function ToolArticle({
   keyFeatures = [],
   benefits = [],
   whyChoose = "",
+  whyChooseHeading,
   useCases = [],
   useCasesHeading,
   faqs = [],
@@ -71,7 +75,9 @@ export default function ToolArticle({
   conclusionHeading,
   relatedTools = [],
   toolId,
-  layout = 'default'
+  layout = 'default',
+  hideHero = true,
+  preferArticleCopy = false
 }: ToolArticleProps) {
   
   const { t, locale, messages, localizeHref } = useTranslation();
@@ -88,46 +94,48 @@ export default function ToolArticle({
     return found ? found.id : null;
   }, [toolId, title]);
 
+  const useMessages = Boolean(resolvedToolId) && !preferArticleCopy;
+
   // Try to load translated values from messages for this tool
-  const translatedTitle = resolvedToolId ? t(`tools.${resolvedToolId}.title`, title) : title;
-  const translatedIntro = resolvedToolId ? t(`tools.${resolvedToolId}.intro`, intro) : intro;
+  const translatedTitle = useMessages ? t(`tools.${resolvedToolId}.title`, title) : title;
+  const translatedIntro = useMessages ? t(`tools.${resolvedToolId}.intro`, intro) : intro;
   const translatedWhatItDoes: string = String(
-    resolvedToolId ? t(`tools.${resolvedToolId}.whatItDoes`, whatItDoes) : whatItDoes
+    useMessages ? t(`tools.${resolvedToolId}.whatItDoes`, whatItDoes) : whatItDoes
   );
   
   const translatedHowToUse = useMemo(() => {
-    if (!resolvedToolId) return howToUse || [];
+    if (!useMessages) return howToUse || [];
     const val = getTranslation(messages, `tools.${resolvedToolId}.howToUse`);
     return Array.isArray(val) ? val : (howToUse || []);
-  }, [messages, resolvedToolId, howToUse]);
+  }, [messages, resolvedToolId, howToUse, useMessages]);
 
   const translatedKeyFeatures = useMemo(() => {
-    if (!resolvedToolId) return keyFeatures || [];
+    if (!useMessages) return keyFeatures || [];
     const val = getTranslation(messages, `tools.${resolvedToolId}.keyFeatures`);
     return Array.isArray(val) ? val : (keyFeatures || []);
-  }, [messages, resolvedToolId, keyFeatures]);
+  }, [messages, resolvedToolId, keyFeatures, useMessages]);
 
   const translatedBenefits = useMemo(() => {
-    if (!resolvedToolId) return benefits || [];
+    if (!useMessages) return benefits || [];
     const val = getTranslation(messages, `tools.${resolvedToolId}.benefits`);
     return Array.isArray(val) ? val : (benefits || []);
-  }, [messages, resolvedToolId, benefits]);
+  }, [messages, resolvedToolId, benefits, useMessages]);
 
-  const translatedWhyChoose = resolvedToolId ? t(`tools.${resolvedToolId}.whyChoose`, whyChoose) : whyChoose;
+  const translatedWhyChoose = useMessages ? t(`tools.${resolvedToolId}.whyChoose`, whyChoose) : whyChoose;
 
   const translatedUseCases = useMemo(() => {
-    if (!resolvedToolId) return useCases || [];
+    if (!useMessages) return useCases || [];
     const val = getTranslation(messages, `tools.${resolvedToolId}.useCases`);
     return Array.isArray(val) ? val : (useCases || []);
-  }, [messages, resolvedToolId, useCases]);
+  }, [messages, resolvedToolId, useCases, useMessages]);
 
   const translatedFaqs = useMemo(() => {
-    if (!resolvedToolId) return faqs || [];
+    if (!useMessages) return faqs || [];
     const val = getTranslation(messages, `tools.${resolvedToolId}.faqs`);
     return Array.isArray(val) ? val : (faqs || []);
-  }, [messages, resolvedToolId, faqs]);
+  }, [messages, resolvedToolId, faqs, useMessages]);
 
-  const translatedConclusion = resolvedToolId ? t(`tools.${resolvedToolId}.conclusion`, conclusion) : conclusion;
+  const translatedConclusion = useMessages ? t(`tools.${resolvedToolId}.conclusion`, conclusion) : conclusion;
 
   const currentTool = useMemo(() => {
     return toolsData.find(t => 
@@ -154,6 +162,16 @@ export default function ToolArticle({
       if (blog.category.toLowerCase() === currentTool.category.toLowerCase()) return true;
       if (blog.tags?.some(tag => currentTool.tags?.some(t => t.toLowerCase() === tag.toLowerCase()))) return true;
       return false;
+    });
+    matched.sort((a, b) => {
+      const rank = (blog: typeof a) => {
+        if (blog.relatedToolSlugs?.includes(currentTool.slug)) return 0;
+        const sharedTag = blog.tags?.some((tag) =>
+          currentTool.tags?.some((t) => t.toLowerCase() === tag.toLowerCase() && tag.toLowerCase() !== 'pdf')
+        );
+        return sharedTag ? 1 : 2;
+      };
+      return rank(a) - rank(b);
     });
     if (matched.length === 0) {
       return activeBlogs.slice(0, 3);
@@ -256,7 +274,7 @@ export default function ToolArticle({
           transition={{ duration: 0.6 }}
         >
           <div className="max-w-[72ch] mx-auto">
-            {/* Header */}
+            {!hideHero && (
             <div className="text-center mb-16 space-y-6">
               {parentCategory && (
                 <div className="flex justify-center mb-2">
@@ -283,6 +301,7 @@ export default function ToolArticle({
                 <ShareButtons title={translatedTitle} />
               </div>
             </div>
+            )}
 
             {/* Content Sections in natural DOM order */}
             <div className="flex flex-col gap-12">
@@ -359,7 +378,7 @@ export default function ToolArticle({
                     {numbered && (
                       <span className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xs font-black">03</span>
                     )}
-                    {useCasesHeading || t('article.useCases', 'Practical Packs People Actually Build')}
+                    {useCasesHeading || t('article.useCases', 'People use this for')}
                   </h3>
                   <ul className="space-y-3 list-none p-0">
                     {translatedUseCases.map((useCase, i) => (
@@ -524,7 +543,7 @@ export default function ToolArticle({
                   <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
                   <div className="relative">
                     <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4 uppercase tracking-tight">
-                      {t('article.whyChoose', 'Why Choose ToolWala AI?')}
+                      {whyChooseHeading || t('article.whyChoose', 'Why this instead of the usual converters')}
                     </h3>
                     <p className="text-slate-700 dark:text-gray-300 leading-relaxed text-base font-sans font-medium">
                       {translatedWhyChoose}
@@ -558,7 +577,7 @@ export default function ToolArticle({
                 <div style={{ order: 12 }} className="p-8 sm:p-12 rounded-[1.125rem] bg-gradient-to-br from-blue-50/80 via-[#FBFCFE] to-indigo-50/50 dark:from-blue-600/10 dark:via-transparent dark:to-transparent border border-blue-200 dark:border-blue-500/15 text-center relative overflow-hidden group shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
                   <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" />
                   <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-4 tracking-tight">
-                    {conclusionHeading || t('article.finalVerdict', 'Final Verdict')}
+                    {conclusionHeading || t('article.finalVerdict', "That's the idea")}
                   </h3>
                   <p className="text-slate-700 dark:text-gray-300 leading-relaxed text-base sm:text-lg font-medium max-w-2xl mx-auto relative z-10 font-sans">
                     {translatedConclusion}

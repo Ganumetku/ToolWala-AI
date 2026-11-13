@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  FileText, Download, UploadCloud, Trash2,
+  FileText, Download, Trash2,
   Files, AlertCircle, CheckCircle, RefreshCw,
   ChevronLeft, ArrowRight, Shield, FileUp, Sparkles,
   Image, FileArchive, CheckSquare, Grid, Layers, Eye
@@ -437,16 +437,15 @@ export default function PdfToJpg() {
                 
                 <div className="relative z-10">
                   <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-105 group-hover:border-blue-500/50 transition-all duration-300 shadow-sm">
-                    <UploadCloud className="w-8 h-8 text-blue-600 dark:text-gray-400 group-hover:text-blue-500 transition-colors" />
+                    <FileText className="w-8 h-8 text-blue-600 dark:text-gray-400 group-hover:text-blue-500 transition-colors" />
                   </div>
-                  <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase mb-2">Upload your PDF</h3>
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Drop your PDF here</h3>
                   <p className="text-slate-500 dark:text-gray-400 font-medium max-w-sm mx-auto mb-5 text-sm">
-                    Drag & drop your PDF file here, or click to browse from your folders.
+                    It stays in this tab — nothing is sent to a server.
                   </p>
-                  
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-white/5 text-[10px] font-bold text-slate-600 dark:text-gray-400 border border-slate-200 dark:border-white/5 uppercase tracking-wider">
-                    🔒 Client-side security. Files never leave your browser.
-                  </div>
+                  <button className="rounded-xl bg-blue-600 hover:bg-blue-500 text-white px-7 py-3 text-xs font-black uppercase tracking-wider transition-all shadow-md cursor-pointer">
+                    Choose PDF
+                  </button>
                 </div>
                 
                 <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] pointer-events-none" />
@@ -838,7 +837,7 @@ export default function PdfToJpg() {
 
       {/* SEO Deep-Dive Article Section */}
       {toolArticles['pdf-to-jpg'] && (
-        <ToolArticle {...toolArticles['pdf-to-jpg']} />
+        <ToolArticle preferArticleCopy {...toolArticles['pdf-to-jpg']} />
       )}
     </div>
   );

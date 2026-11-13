@@ -142,8 +142,8 @@ export default function GovFormPdfCompressor() {
                 onFilesSelected={handleFiles}
                 accept="application/pdf"
                 multiple={false}
-                title="Select Government PDF to Compress"
-                description={`Drag and drop the document scan here. It will be compressed under the ${activeLimit.label} rule.`}
+                title="Drop the form PDF here"
+                description={`It stays in this tab. Target size: ${activeLimit.label}.`}
               />
             ) : (
               <div className="space-y-8 max-w-4xl mx-auto">

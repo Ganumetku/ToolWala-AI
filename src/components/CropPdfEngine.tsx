@@ -610,9 +610,9 @@ export default function CropPdfEngine({ seoArticle }: CropPdfEngineProps) {
               onFilesSelected={handleFilesSelected}
               accept="application/pdf"
               multiple={false}
-              title="Upload PDF to Crop Margins"
-              description="Drag & drop your PDF file here. 100% private & client-side processing."
-              buttonText="Select PDF File"
+              title="Drop a PDF here to crop"
+              description="It stays in this tab. Nothing is sent to a server."
+              buttonText="Choose PDF"
             />
           ) : (
             <div className="space-y-6">

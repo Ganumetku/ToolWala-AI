@@ -120,7 +120,10 @@
       "description": "Learn how to optimize web layouts by compressing images. Hitting the perfect balance between quality and speed."
     },
     "faqs": [],
-    "relatedToolSlugs": [],
+    "relatedToolSlugs": [
+      "image-compressor",
+      "jpg-to-pdf"
+    ],
     "viewCount": 0,
     "readingTime": "4 min read"
   },
@@ -433,6 +436,7 @@
     "relatedToolSlugs": [
       "merge-pdf",
       "split-pdf",
+      "jpg-to-pdf",
       "pdf-tools"
     ],
     "viewCount": 0,

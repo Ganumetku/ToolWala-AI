@@ -243,7 +243,7 @@ export default function CompressPdf() {
       <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12 font-sans">
         <ToolHero 
           title="Compress PDF"
-          description="pdf-lib rewrite in this tab. Text PDFs often barely shrink. Files are not uploaded."
+          description="Shrink a PDF in this tab. Typed files often barely move. The file is not uploaded."
           icon={<Minimize2 className="w-7 h-7" />}
         />
 
@@ -253,8 +253,8 @@ export default function CompressPdf() {
               onFilesSelected={handleFiles}
               accept="application/pdf"
               multiple={false}
-              title="Select PDF file to Compress"
-              description="Drag and drop a PDF file here, or click to browse. Processing is fully secured inside your browser."
+              title="Drop a PDF here"
+              description="It stays in this tab. Nothing is sent to a server."
             />
           ) : (
             <div className="space-y-10 max-w-5xl mx-auto">
@@ -587,7 +587,7 @@ export default function CompressPdf() {
       </div>
 
       {toolArticles['compress-pdf'] && (
-        <ToolArticle {...toolArticles['compress-pdf']} />
+        <ToolArticle preferArticleCopy {...toolArticles['compress-pdf']} />
       )}
     </ToolLayout>
   );

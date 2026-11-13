@@ -50,7 +50,7 @@ export default function SSCPhotoResize() {
 
         {/* SEO Article */}
         {toolArticles["ssc-photo-resize"] && (
-          <ToolArticle {...toolArticles["ssc-photo-resize"]} />
+          <ToolArticle preferArticleCopy {...toolArticles["ssc-photo-resize"]} />
         )}
 
         {/* Workflow Recommendations */}

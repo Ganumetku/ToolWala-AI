@@ -139,9 +139,9 @@ export default function EditPdfPage() {
             }}
             accept="application/pdf"
             multiple={false}
-            title="Upload PDF Document to Edit"
-            description="Drag and drop your PDF here, or click to choose from your device. 100% private and processed locally."
-            buttonText="Select PDF File"
+            title="Drop a PDF here to edit"
+            description="It stays in this tab. Nothing is sent to a server."
+            buttonText="Choose PDF"
           />
         </div>
       </div>

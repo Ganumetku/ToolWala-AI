@@ -413,8 +413,8 @@ export default function OrganizePdf() {
                 }}
                 accept="application/pdf"
                 multiple={false}
-                title="Upload a PDF to Organize"
-                description="Drag and drop your PDF here, or click to choose from your device. Files remain strictly inside your browser."
+                title="Drop a PDF here to organize"
+                description="It stays in this tab. Nothing is sent to a server."
               />
             </div>
           ) : (

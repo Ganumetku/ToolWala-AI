@@ -936,19 +936,19 @@
     "faq": [
       {
         "question": "Is it safe to convert my ID card or private scans here?",
-        "answer": "Yes, absolutely. Unlike typical online tools, ToolWala AI does not upload your files to any cloud server. The entire conversion runs locally inside your browser, ensuring that your private photos and documents remain entirely on your device."
+        "answer": "Yes. The images never leave this device. The PDF is built in your browser. Close the tab and the files are gone from memory — we don't keep a copy because we never received one."
       },
       {
         "question": "What image formats are supported?",
-        "answer": "We support standard image formats including JPG, JPEG, and PNG. All files can be combined and converted simultaneously."
+        "answer": "JPG, JPEG, PNG, and WebP. You can mix them in one PDF."
       },
       {
-        "question": "Does this tool compress or optimize the generated PDF size?",
-        "answer": "Yes. Our engine compresses embedded images to reduce the final file size while preserving high visual clarity, making the PDF perfect for email attachments or official application portals."
+        "question": "Does this tool compress the PDF?",
+        "answer": "It keeps the file reasonable. If a portal wants something tiny — 300KB for Aadhaar, for example — convert first, then use Compress PDF or the Aadhaar compressor."
       },
       {
-        "question": "Can I reorder or rotate files after uploading them?",
-        "answer": "Yes. The preview workspace displays files as interactive cards. You can drag cards, use the up/down arrows to change page order, and rotate images 90 degrees at a time to correct orientation errors."
+        "question": "Can I reorder or rotate files after adding them?",
+        "answer": "Yes. Use the arrows on each thumbnail to change page order, and rotate 90° if a scan is sideways."
       }
     ],
     "seoTitle": "JPG to PDF – No Upload, Files Stay on Your Device",

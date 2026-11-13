@@ -374,14 +374,14 @@ export default function WordToPdf() {
 
                   <div className="relative z-10">
                     <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-blue-600 dark:text-gray-400 border border-slate-200 dark:border-white/10 group-hover:text-blue-500 group-hover:scale-105 transition-all duration-300 shadow-sm">
-                      <UploadCloud className="w-8 h-8" />
+                      <FileText className="w-8 h-8" />
                     </div>
-                    <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight mb-2 uppercase">Upload DOCX to Convert</h3>
+                    <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Drop your Word file here</h3>
                     <p className="text-sm text-slate-500 dark:text-gray-400 mb-5 max-w-sm mx-auto font-medium leading-relaxed font-sans">
-                      Drag and drop your Word (.docx) file here, or click to choose from your device. Files remain strictly inside your browser. (Max 50MB)
+                      .docx only. It stays in this tab — nothing is sent to a server. Max 50MB.
                     </p>
                     <button className="rounded-xl bg-blue-600 hover:bg-blue-500 text-white px-7 py-3 text-xs font-black uppercase tracking-wider transition-all shadow-md cursor-pointer">
-                      Browse File
+                      Choose file
                     </button>
                   </div>
                 </motion.div>

@@ -244,8 +244,8 @@ export default function MergePdf() {
                 onFilesSelected={handleFiles}
                 accept="application/pdf"
                 multiple={true}
-                title="Select PDF files to Merge"
-                description="Drag and drop PDF files here, or click to browse. Processing is fully secured inside your browser."
+                title="Drop PDFs here to merge"
+                description="Two or more files. They stay in this tab — nothing is sent to a server."
               />
             </div>
           ) : (
@@ -454,7 +454,7 @@ export default function MergePdf() {
 
       {/* SEO Deep-Dive Article Section */}
       {toolArticles['merge-pdf'] && (
-        <ToolArticle toolId="merge-pdf" {...toolArticles['merge-pdf']} />
+        <ToolArticle toolId="merge-pdf" preferArticleCopy {...toolArticles['merge-pdf']} />
       )}
     </ToolLayout>
   );

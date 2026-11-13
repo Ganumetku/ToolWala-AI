@@ -411,14 +411,14 @@ export default function PdfToWord() {
 
                   <div className="relative z-10">
                     <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 dark:text-gray-500 border border-slate-200 dark:border-white/5 group-hover:text-blue-500 dark:group-hover:text-blue-400 group-hover:bg-blue-500/10 group-hover:scale-105 transition-all duration-300 shadow-sm">
-                      <UploadCloud className="w-7 h-7 sm:w-8 sm:h-8" />
+                      <FileText className="w-7 h-7 sm:w-8 sm:h-8" />
                     </div>
-                    <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight mb-2 uppercase">Upload PDF to Convert</h3>
+                    <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Drop your PDF here</h3>
                     <p className="text-xs sm:text-sm text-slate-500 dark:text-gray-500 mb-5 max-w-sm mx-auto font-medium leading-relaxed font-sans">
-                      Drag and drop your PDF here, or click to choose from your device. Files remain strictly inside your browser. (Max 50MB)
+                      It stays in this tab — nothing is sent to a server. Max 50MB.
                     </p>
                     <button className="rounded-xl bg-blue-600 dark:bg-white text-white dark:text-black px-6 py-2.5 sm:px-7 sm:py-3 text-xs font-black uppercase tracking-wider hover:scale-105 transition-all shadow-[0_4px_20px_rgba(37,99,235,0.3)] dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)] cursor-pointer">
-                      Browse File
+                      Choose PDF
                     </button>
                   </div>
                 </motion.div>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from 'react';
-import { UploadCloud } from 'lucide-react';
+import { FilePlus } from 'lucide-react';
 import TrustBadges from '@/components/TrustBadges';
 
 interface UploadZoneProps {
@@ -17,9 +17,9 @@ export default function UploadZone({
   onFilesSelected,
   accept = "application/pdf",
   multiple = true,
-  title = "Select PDF files to Merge",
-  description = "Drag and drop PDF files here, or click to browse. Processing is fully secured inside your browser.",
-  buttonText = "Browse Files"
+  title = "Drop PDF files here",
+  description = "They stay in this tab. Nothing is sent to a server.",
+  buttonText = "Choose files"
 }: UploadZoneProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -83,20 +83,20 @@ export default function UploadZone({
               ? 'bg-blue-600 text-white border-blue-400 scale-110 shadow-blue-500/50 animate-bounce' 
               : 'bg-blue-50 dark:bg-white/5 text-blue-600 dark:text-gray-400 border-blue-100 dark:border-white/10 group-hover:text-blue-600 group-hover:bg-blue-100 dark:group-hover:bg-blue-500/10 group-hover:scale-105'
           }`}>
-            <UploadCloud className="w-7 h-7 sm:w-8 sm:h-8" />
+            <FilePlus className="w-7 h-7 sm:w-8 sm:h-8" />
           </div>
-          <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight mb-2 uppercase transition-colors">
-            {isDragging ? 'Drop Files Here to Upload!' : title}
+          <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight mb-2 transition-colors">
+            {isDragging ? 'Drop files here' : title}
           </h3>
           <p className="text-xs sm:text-sm text-slate-500 dark:text-gray-400 mb-5 max-w-md mx-auto font-medium leading-relaxed font-sans">
-            {isDragging ? 'Release your files now to begin processing instantly.' : description}
+            {isDragging ? 'Release to add them. They stay in this tab.' : description}
           </p>
           <button className={`rounded-xl text-white px-6 py-2.5 sm:px-7 sm:py-3 text-xs font-black uppercase tracking-widest transition-all duration-300 cursor-pointer pointer-events-none ${
             isDragging 
               ? 'bg-blue-600 shadow-[0_0_30px_rgba(37,99,235,0.6)] scale-105' 
               : 'bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 shadow-[0_4px_20px_rgba(37,99,235,0.25)] hover:shadow-[0_8px_30px_rgba(99,102,241,0.35)]'
           }`}>
-            {isDragging ? 'Release To Upload' : buttonText}
+            {isDragging ? 'Release to add' : buttonText}
           </button>
         </div>
       </div>

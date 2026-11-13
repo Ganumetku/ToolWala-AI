@@ -140,8 +140,8 @@ export default function RemovePages() {
               onFilesSelected={handleFiles}
               accept="application/pdf"
               multiple={false}
-              title="Select PDF file to Edit"
-              description="Drag and drop a PDF file here, or click to browse. Processing is fully secured inside your browser."
+              title="Drop a PDF here"
+              description="It stays in this tab. Nothing is sent to a server."
             />
           ) : (
             <div className="space-y-8 max-w-4xl mx-auto">

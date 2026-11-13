@@ -109,7 +109,7 @@ export default function PassportPhotoMaker() {
 
         {/* SEO Article */}
         {toolArticles['passport-photo-maker'] && (
-          <ToolArticle {...toolArticles['passport-photo-maker']} />
+          <ToolArticle preferArticleCopy {...toolArticles['passport-photo-maker']} />
         )}
 
         {/* Workflow Recommendations */}

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  FileText, Download, UploadCloud, Trash2,
+  FileText, Download, Trash2,
   Files, AlertCircle, CheckCircle, RefreshCw,
   ChevronLeft, ArrowRight, Shield, FileUp, Sparkles,
   Image as ImageIcon, RotateCw, ArrowUp, ArrowDown, GripVertical, Settings, Plus
@@ -365,7 +365,7 @@ export default function JpgToPdf() {
               <div className="flex items-center gap-6">
                 <PdfToolIcon toolId="jpg-to-pdf" size="xl" className="shrink-0" />
                 <div>
-                  <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">JPG to PDF</h1>
+                  <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">JPG to PDF</h1>
                   <p className="text-slate-600 dark:text-gray-400 font-medium mt-1">Convert JPG, PNG, or WebP into a PDF in this tab. Files never leave your device.</p>
                 </div>
               </div>
@@ -439,14 +439,14 @@ export default function JpgToPdf() {
 
                 <div className="relative z-10">
                   <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-blue-600 dark:text-gray-400 border border-slate-200 dark:border-white/10 group-hover:text-blue-500 group-hover:scale-105 transition-all duration-300 shadow-sm">
-                    <UploadCloud className="w-8 h-8" />
+                    <ImageIcon className="w-8 h-8" />
                   </div>
-                  <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight mb-2 uppercase">Upload your Images to Convert</h3>
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Drop images here</h3>
                   <p className="text-sm text-slate-500 dark:text-gray-400 mb-5 max-w-sm mx-auto font-medium leading-relaxed">
-                    Drag and drop JPG, JPEG, PNG, or WebP files here, or click to browse. Conversion processes offline in your browser.
+                    JPG, PNG, or WebP. They stay in this tab — nothing is sent to a server.
                   </p>
                   <button className="rounded-xl bg-blue-600 hover:bg-blue-500 text-white px-7 py-3 text-xs font-black uppercase tracking-wider transition-all shadow-md cursor-pointer">
-                    Browse Images
+                    Choose images
                   </button>
                 </div>
               </div>
@@ -795,7 +795,15 @@ export default function JpgToPdf() {
 
       {/* SEO Deep-Dive Article Section */}
       {toolArticles['jpg-to-pdf'] && (
-        <ToolArticle {...toolArticles['jpg-to-pdf']} />
+        <ToolArticle
+          {...toolArticles['jpg-to-pdf']}
+          toolId="jpg-to-pdf"
+          hideHero
+          preferArticleCopy
+          useCasesHeading="People use this for"
+          whyChooseHeading="Why this instead of the usual converters"
+          conclusionHeading="That's the idea"
+        />
       )}
     </div>
   );

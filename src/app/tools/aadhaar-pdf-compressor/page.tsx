@@ -121,8 +121,8 @@ export default function AadhaarPdfCompressor() {
                 onFilesSelected={handleFiles}
                 accept="application/pdf"
                 multiple={false}
-                title="Select e-Aadhaar PDF to Compress"
-                description="Drag and drop your Aadhaar PDF file here, or click to browse. Processing is fully secured locally inside your browser."
+                title="Drop your e-Aadhaar PDF here"
+                description="It stays in this tab. Aim is under 300KB for UIDAI and e-KYC sites."
               />
             ) : (
               <div className="space-y-8 max-w-4xl mx-auto">
@@ -225,7 +225,7 @@ export default function AadhaarPdfCompressor() {
 
 
         {toolArticles['aadhaar-pdf-compressor'] && (
-          <ToolArticle {...toolArticles['aadhaar-pdf-compressor']} />
+          <ToolArticle preferArticleCopy {...toolArticles['aadhaar-pdf-compressor']} />
         )}
       </ToolLayout>
     </ToolVisibilityGuard>

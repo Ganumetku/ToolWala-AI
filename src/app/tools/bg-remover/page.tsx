@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Download, RefreshCw, UploadCloud, 
+  Download, RefreshCw, 
   ImageIcon, Sparkles, AlertCircle, Maximize2,
   ChevronLeft, Trash2, ShieldCheck, Zap, Share2,
   Copy, Check, Palette, Eye, Columns2, SlidersHorizontal,
@@ -375,13 +375,13 @@ export default function BackgroundRemover() {
                       ? 'bg-blue-600 text-white border-blue-400 shadow-lg scale-105 animate-bounce' 
                       : 'text-blue-600 dark:text-blue-400 bg-blue-100/70 dark:bg-blue-500/10 border-blue-200 dark:border-blue-500/20 shadow-md group-hover:scale-105'
                   }`}>
-                    <UploadCloud className="w-8 h-8" />
+                    <ImageIcon className="w-8 h-8" />
                   </div>
                   <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mb-1.5 tracking-tight">
-                    {isDragging ? 'Drop Image to Remove Background!' : 'Drop photo here or click to browse'}
+                    Drop photo here
                   </h3>
                   <p className="text-slate-500 dark:text-gray-400 mb-6 max-w-sm mx-auto font-medium text-xs leading-relaxed">
-                    Supports JPG, PNG, and WebP. Works automatically for portraits, products, and graphics.
+                    JPG, PNG, or WebP. The photo stays in this tab — nothing is sent to a server.
                   </p>
 
                   {/* Quality Mode Picker before upload */}

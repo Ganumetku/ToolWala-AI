@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { UploadCloud, Clipboard } from 'lucide-react';
+import { Image as ImageIcon, Clipboard } from 'lucide-react';
+import TrustBadges from '@/components/TrustBadges';
 
 interface ImageUploadPlaceholderProps {
   onClick?: () => void;
@@ -12,9 +13,9 @@ interface ImageUploadPlaceholderProps {
 export default function ImageUploadPlaceholder({ 
   onClick, 
   onDrop,
-  title = "Drop photo here or click to browse",
-  description = "Supports JPG, PNG, and WebP up to 20MB. All processing happens safely in your browser.",
-  buttonText = "Select Image File"
+  title = "Drop photo here",
+  description = "JPG, PNG, or WebP. The photo stays in this tab — nothing is sent to a server.",
+  buttonText = "Choose photo"
 }: ImageUploadPlaceholderProps) {
   const [isDragging, setIsDragging] = useState(false);
 
@@ -77,6 +78,7 @@ export default function ImageUploadPlaceholder({
   };
 
   return (
+    <div className="flex flex-col gap-6 w-full">
     <div
       onClick={onClick}
       onDragOver={handleDragOver}
@@ -96,13 +98,13 @@ export default function ImageUploadPlaceholder({
             ? 'bg-blue-600 text-white border-blue-400 scale-110 shadow-blue-500/50 animate-bounce'
             : 'bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-500 border-blue-100 dark:border-blue-500/20 group-hover:scale-105 shadow-sm dark:shadow-2xl'
         }`}>
-          <UploadCloud className="w-7 h-7 sm:w-8 sm:h-8" />
+          <ImageIcon className="w-7 h-7 sm:w-8 sm:h-8" />
         </div>
-        <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mb-2 tracking-tight uppercase transition-colors">
-          {isDragging ? 'Drop Image Here to Upload!' : title}
+        <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mb-2 tracking-tight transition-colors">
+          {isDragging ? 'Drop photo here' : title}
         </h3>
         <p className="text-slate-500 dark:text-gray-400 mb-5 max-w-md mx-auto font-medium text-xs sm:text-sm leading-relaxed font-sans">
-          {isDragging ? 'Release your file now to start processing.' : description}
+          {isDragging ? 'Release to add it. It stays in this tab.' : description}
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -111,7 +113,7 @@ export default function ImageUploadPlaceholder({
               ? 'bg-blue-600 shadow-[0_0_30px_rgba(37,99,235,0.6)] scale-105'
               : 'bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 shadow-[0_4px_20px_rgba(37,99,235,0.25)] hover:shadow-[0_8px_30px_rgba(99,102,241,0.35)] hover:-translate-y-0.5'
           }`}>
-            {isDragging ? 'Release To Upload' : buttonText}
+            {isDragging ? 'Release to add' : buttonText}
           </div>
           
           {!isDragging && (
@@ -122,6 +124,8 @@ export default function ImageUploadPlaceholder({
           )}
         </div>
       </div>
+    </div>
+    <TrustBadges />
     </div>
   );
 }

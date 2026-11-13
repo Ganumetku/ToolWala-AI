@@ -1131,7 +1131,7 @@ export default function CoverLetterGenerator() {
       </div>
 
       {/* SEO & COMPREHENSIVE GUIDE SECTION */}
-      <ToolArticle {...toolArticles['cover-letter-generator']} />
+      <ToolArticle preferArticleCopy {...toolArticles['cover-letter-generator']} />
     </div>
   );
 }

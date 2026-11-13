@@ -32,7 +32,7 @@ export default function ToolHero({
   const pathParts = pathname ? pathname.replace(/\/$/, '').split('/').filter(Boolean) : [];
   const slugFromPath = pathParts.length > 0 ? pathParts[pathParts.length - 1] : '';
   const effectiveToolId = toolId || slugFromPath;
-  const displayBadgeText = badgeText || t('tools.badge_client_side', '100% Client-Side & Secure');
+  const displayBadgeText = badgeText || t('tools.badge_client_side', 'Files stay on this device');
 
   return (
     <div className="p-5 sm:p-8 lg:p-10 border-b border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.02] flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6">

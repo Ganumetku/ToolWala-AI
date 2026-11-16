@@ -4,7 +4,8 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import {
   IdCard, Upload, RotateCw, RotateCcw, Trash2, Download, Printer,
   Layers, CheckCircle2, Shield, Sparkles, FileText, Settings2,
-  RefreshCw, Scissors, Eye, Image as ImageIcon, ArrowUpDown, ArrowLeftRight
+  RefreshCw, Scissors, Eye, Image as ImageIcon, ZoomIn, ZoomOut,
+  Maximize2, MoveVertical, Sparkle
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { jsPDF } from 'jspdf';
@@ -17,6 +18,7 @@ import { toolArticles } from '@/data/toolArticles';
 
 type LayoutMode = 'a4-stacked' | 'side-by-side' | '4x6-pvc';
 type CardSizing = 'cr80' | 'proportional';
+type PagePlacement = 'center' | 'top';
 
 // Standard CR80 Dimensions in mm (Credit / ID card standard)
 const CR80_WIDTH_MM = 85.60;
@@ -27,10 +29,14 @@ export default function MergeIdFrontAndBackPage() {
   const [backImage, setBackImage] = useState<string | null>(null);
   const [frontRotation, setFrontRotation] = useState<number>(0);
   const [backRotation, setBackRotation] = useState<number>(0);
+  const [frontZoom, setFrontZoom] = useState<number>(1.0); // 1.0 to 2.0
+  const [backZoom, setBackZoom] = useState<number>(1.0); // 1.0 to 2.0
 
-  // Settings
+  // Layout & Sizing Settings
   const [layoutMode, setLayoutMode] = useState<LayoutMode>('a4-stacked');
+  const [cardWidthMm, setCardWidthMm] = useState<number>(CR80_WIDTH_MM); // Adjustable card width
   const [cardSizing, setCardSizing] = useState<CardSizing>('cr80');
+  const [pagePlacement, setPagePlacement] = useState<PagePlacement>('center');
   const [showBorder, setShowBorder] = useState<boolean>(true);
   const [showCornerGuides, setShowCornerGuides] = useState<boolean>(true);
   const [spacingMm, setSpacingMm] = useState<number>(10);
@@ -81,6 +87,7 @@ export default function MergeIdFrontAndBackPage() {
         if (target === 'front') {
           setFrontImage(url1);
           setFrontRotation(0);
+          setFrontZoom(1.0);
           toast.success("Front side extracted from Page 1.");
           
           // If PDF has 2 pages and back is empty, auto-fill back side!
@@ -94,11 +101,13 @@ export default function MergeIdFrontAndBackPage() {
             await page2.render({ canvasContext: ctx2!, viewport: viewport2 }).promise;
             setBackImage(canvas2.toDataURL('image/png'));
             setBackRotation(0);
+            setBackZoom(1.0);
             toast.success("Back side auto-extracted from Page 2!");
           }
         } else {
           setBackImage(url1);
           setBackRotation(0);
+          setBackZoom(1.0);
           toast.success("Back side extracted from PDF.");
         }
       } catch (err) {
@@ -115,10 +124,12 @@ export default function MergeIdFrontAndBackPage() {
       if (target === 'front') {
         setFrontImage(result);
         setFrontRotation(0);
+        setFrontZoom(1.0);
         toast.success("Front side uploaded.");
       } else {
         setBackImage(result);
         setBackRotation(0);
+        setBackZoom(1.0);
         toast.success("Back side uploaded.");
       }
     };
@@ -199,15 +210,14 @@ export default function MergeIdFrontAndBackPage() {
     const frontCanvas = frontImgEl ? getOrientedCardCanvas(frontImgEl, frontRotation) : null;
     const backCanvas = backImgEl ? getOrientedCardCanvas(backImgEl, backRotation) : null;
 
-    // Target card dimensions in mm
-    let targetCardWidthMm = CR80_WIDTH_MM;
-    let targetCardHeightMm = CR80_HEIGHT_MM;
+    // Calculate Target Card Dimensions in mm
+    let targetCardWidthMm = cardWidthMm;
+    let targetCardHeightMm = cardWidthMm * (CR80_HEIGHT_MM / CR80_WIDTH_MM);
 
     if (cardSizing === 'proportional') {
       const sample = frontCanvas || backCanvas;
       if (sample) {
         const ratio = sample.width / sample.height;
-        targetCardWidthMm = CR80_WIDTH_MM;
         targetCardHeightMm = targetCardWidthMm / ratio;
       }
     }
@@ -222,19 +232,24 @@ export default function MergeIdFrontAndBackPage() {
     let backY = 0;
 
     if (layoutMode === 'a4-stacked') {
-      // Centered vertically, front above back
+      // Centered horizontally, stacked vertically
       frontX = (canvasWidth - cardWPx) / 2;
       backX = frontX;
 
       const totalH = cardHPx * 2 + spacingPx;
-      const startY = (canvasHeight - totalH) / 2;
+      const startY = pagePlacement === 'top'
+        ? Math.round(25 * DPI_SCALE) // 25mm margin from top
+        : (canvasHeight - totalH) / 2;
+
       frontY = startY;
       backY = startY + cardHPx + spacingPx;
     } else {
       // Horizontal side-by-side (A4 horizontal or 4x6 photo sheet)
       const totalW = cardWPx * 2 + spacingPx;
       const startX = (canvasWidth - totalW) / 2;
-      const startY = (canvasHeight - cardHPx) / 2;
+      const startY = pagePlacement === 'top'
+        ? Math.round(25 * DPI_SCALE)
+        : (canvasHeight - cardHPx) / 2;
 
       frontX = startX;
       frontY = startY;
@@ -242,15 +257,30 @@ export default function MergeIdFrontAndBackPage() {
       backY = startY;
     }
 
-    // Helper to draw single card with border & corner guides
-    const drawCard = (cardC: HTMLCanvasElement | null, x: number, y: number, label: string) => {
+    // Helper to draw single card with clipping, zoom, border & corner guides
+    const drawCard = (cardC: HTMLCanvasElement | null, x: number, y: number, zoom: number, label: string) => {
+      ctx.save();
+      // Clip to card boundary so zoomed content stays strictly inside the frame
+      ctx.beginPath();
+      ctx.rect(x, y, cardWPx, cardHPx);
+      ctx.clip();
+
       if (cardC) {
-        // High quality smoothing
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
-        ctx.drawImage(cardC, x, y, cardWPx, cardHPx);
+
+        // Compute zoomed dimensions and center offset
+        const drawW = cardWPx * zoom;
+        const drawH = cardHPx * zoom;
+        const offsetX = x - (drawW - cardWPx) / 2;
+        const offsetY = y - (drawH - cardHPx) / 2;
+
+        ctx.drawImage(cardC, offsetX, offsetY, drawW, drawH);
       } else {
         // Empty slot placeholder
+        ctx.fillStyle = '#F8FAFC';
+        ctx.fillRect(x, y, cardWPx, cardHPx);
+
         ctx.strokeStyle = '#CBD5E1';
         ctx.lineWidth = 4;
         ctx.setLineDash([12, 12]);
@@ -262,6 +292,7 @@ export default function MergeIdFrontAndBackPage() {
         ctx.textAlign = 'center';
         ctx.fillText(`Drop ${label} Card Here`, x + cardWPx / 2, y + cardHPx / 2);
       }
+      ctx.restore();
 
       // 1px Cutting Border Guide
       if (showBorder) {
@@ -275,7 +306,7 @@ export default function MergeIdFrontAndBackPage() {
       if (showCornerGuides) {
         ctx.strokeStyle = '#64748B';
         ctx.lineWidth = 1.5;
-        const markLen = 20;
+        const markLen = 22;
 
         // Top Left
         ctx.beginPath();
@@ -303,17 +334,20 @@ export default function MergeIdFrontAndBackPage() {
       }
     };
 
-    drawCard(frontCanvas, frontX, frontY, "Front");
-    drawCard(backCanvas, backX, backY, "Back");
+    drawCard(frontCanvas, frontX, frontY, frontZoom, "Front");
+    drawCard(backCanvas, backX, backY, backZoom, "Back");
 
-    // Add subtle header metadata for print verification
+    // Add subtle footer metadata for print verification
     ctx.fillStyle = '#94A3B8';
     ctx.font = '500 18px sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText("ToolWala ID Merge • Ready-to-Print 100% Scale (Do not scale when printing)", canvasWidth / 2, canvasHeight - 40);
+    ctx.fillText(`ToolWala ID Merge • Card Size: ${Math.round(targetCardWidthMm)} x ${Math.round(targetCardHeightMm)} mm (Print at 100% scale)`, canvasWidth / 2, canvasHeight - 40);
 
     return canvas;
-  }, [frontImage, backImage, frontRotation, backRotation, layoutMode, cardSizing, showBorder, showCornerGuides, spacingMm]);
+  }, [
+    frontImage, backImage, frontRotation, backRotation, frontZoom, backZoom,
+    layoutMode, cardWidthMm, cardSizing, pagePlacement, showBorder, showCornerGuides, spacingMm
+  ]);
 
   // Re-render whenever settings or images update
   useEffect(() => {
@@ -327,6 +361,12 @@ export default function MergeIdFrontAndBackPage() {
     } else {
       setBackRotation((prev) => (prev + delta + 360) % 360);
     }
+  };
+
+  // Card size quick preset handler
+  const applySizePreset = (widthMm: number) => {
+    setCardWidthMm(widthMm);
+    toast.info(`Card size set to ${widthMm} mm width`);
   };
 
   // Download PDF
@@ -435,6 +475,9 @@ export default function MergeIdFrontAndBackPage() {
     setBackImage(null);
     setFrontRotation(0);
     setBackRotation(0);
+    setFrontZoom(1.0);
+    setBackZoom(1.0);
+    setCardWidthMm(CR80_WIDTH_MM);
     toast.info("Cleared workspace.");
   };
 
@@ -463,8 +506,8 @@ export default function MergeIdFrontAndBackPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               
               {/* Front Side Card */}
-              <div className="flex flex-col bg-slate-50/70 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 rounded-2xl p-5 shadow-sm">
-                <div className="flex items-center justify-between mb-3">
+              <div className="flex flex-col bg-slate-50/70 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 rounded-2xl p-5 shadow-sm space-y-3">
+                <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="flex items-center justify-center w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-black">1</span>
                     <h3 className="text-sm font-black uppercase tracking-wider text-slate-900 dark:text-white">Front Side</h3>
@@ -473,21 +516,21 @@ export default function MergeIdFrontAndBackPage() {
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => handleRotate('front', -90)}
-                        className="p-1.5 hover:bg-slate-200 dark:hover:bg-white/10 rounded-lg text-slate-700 dark:text-gray-300 transition-colors"
+                        className="p-1.5 hover:bg-slate-200 dark:hover:bg-white/10 rounded-lg text-slate-700 dark:text-gray-300 transition-colors cursor-pointer"
                         title="Rotate Left 90°"
                       >
                         <RotateCcw className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => handleRotate('front', 90)}
-                        className="p-1.5 hover:bg-slate-200 dark:hover:bg-white/10 rounded-lg text-slate-700 dark:text-gray-300 transition-colors"
+                        className="p-1.5 hover:bg-slate-200 dark:hover:bg-white/10 rounded-lg text-slate-700 dark:text-gray-300 transition-colors cursor-pointer"
                         title="Rotate Right 90°"
                       >
                         <RotateCw className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => setFrontImage(null)}
-                        className="p-1.5 hover:bg-red-50 text-red-500 rounded-lg transition-colors"
+                        className="p-1.5 hover:bg-red-50 text-red-500 rounded-lg transition-colors cursor-pointer"
                         title="Remove Front"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -497,17 +540,49 @@ export default function MergeIdFrontAndBackPage() {
                 </div>
 
                 {frontImage ? (
-                  <div className="relative aspect-[85/54] w-full rounded-xl overflow-hidden bg-slate-900/5 dark:bg-black/30 border border-slate-200 dark:border-white/10 flex items-center justify-center p-2">
-                    <img
-                      src={frontImage}
-                      alt="Front preview"
-                      className="max-w-full max-h-full object-contain transition-transform duration-300"
-                      style={{ transform: `rotate(${frontRotation}deg)` }}
-                    />
-                    <span className="absolute bottom-2 right-2 px-2 py-0.5 bg-emerald-600/90 text-white text-[10px] font-bold rounded-md shadow-sm">
-                      Ready
-                    </span>
-                  </div>
+                  <>
+                    <div className="relative aspect-[85/54] w-full rounded-xl overflow-hidden bg-slate-900/5 dark:bg-black/30 border border-slate-200 dark:border-white/10 flex items-center justify-center p-2">
+                      <img
+                        src={frontImage}
+                        alt="Front preview"
+                        className="max-w-full max-h-full object-contain transition-transform duration-300"
+                        style={{
+                          transform: `rotate(${frontRotation}deg) scale(${frontZoom})`
+                        }}
+                      />
+                      <span className="absolute bottom-2 right-2 px-2 py-0.5 bg-emerald-600/90 text-white text-[10px] font-bold rounded-md shadow-sm">
+                        Ready
+                      </span>
+                    </div>
+
+                    {/* Front Photo Zoom Slider */}
+                    <div className="flex items-center justify-between gap-3 pt-1">
+                      <span className="text-[11px] font-bold text-slate-600 dark:text-gray-400 flex items-center gap-1">
+                        <ZoomIn className="w-3.5 h-3.5 text-blue-500" />
+                        Crop / Zoom:
+                      </span>
+                      <input
+                        type="range"
+                        min="1.0"
+                        max="2.0"
+                        step="0.05"
+                        value={frontZoom}
+                        onChange={(e) => setFrontZoom(Number(e.target.value))}
+                        className="flex-1 h-1.5 bg-slate-300 dark:bg-white/20 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                      />
+                      <span className="text-[11px] font-mono font-bold text-blue-600 min-w-[42px] text-right">
+                        {Math.round(frontZoom * 100)}%
+                      </span>
+                      {frontZoom > 1.0 && (
+                        <button
+                          onClick={() => setFrontZoom(1.0)}
+                          className="text-[10px] text-slate-400 hover:text-slate-600 dark:hover:text-white underline cursor-pointer"
+                        >
+                          Reset
+                        </button>
+                      )}
+                    </div>
+                  </>
                 ) : (
                   <div
                     onClick={() => frontInputRef.current?.click()}
@@ -531,8 +606,8 @@ export default function MergeIdFrontAndBackPage() {
               </div>
 
               {/* Back Side Card */}
-              <div className="flex flex-col bg-slate-50/70 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 rounded-2xl p-5 shadow-sm">
-                <div className="flex items-center justify-between mb-3">
+              <div className="flex flex-col bg-slate-50/70 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 rounded-2xl p-5 shadow-sm space-y-3">
+                <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="flex items-center justify-center w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-black">2</span>
                     <h3 className="text-sm font-black uppercase tracking-wider text-slate-900 dark:text-white">Back Side</h3>
@@ -541,21 +616,21 @@ export default function MergeIdFrontAndBackPage() {
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => handleRotate('back', -90)}
-                        className="p-1.5 hover:bg-slate-200 dark:hover:bg-white/10 rounded-lg text-slate-700 dark:text-gray-300 transition-colors"
+                        className="p-1.5 hover:bg-slate-200 dark:hover:bg-white/10 rounded-lg text-slate-700 dark:text-gray-300 transition-colors cursor-pointer"
                         title="Rotate Left 90°"
                       >
                         <RotateCcw className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => handleRotate('back', 90)}
-                        className="p-1.5 hover:bg-slate-200 dark:hover:bg-white/10 rounded-lg text-slate-700 dark:text-gray-300 transition-colors"
+                        className="p-1.5 hover:bg-slate-200 dark:hover:bg-white/10 rounded-lg text-slate-700 dark:text-gray-300 transition-colors cursor-pointer"
                         title="Rotate Right 90°"
                       >
                         <RotateCw className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => setBackImage(null)}
-                        className="p-1.5 hover:bg-red-50 text-red-500 rounded-lg transition-colors"
+                        className="p-1.5 hover:bg-red-50 text-red-500 rounded-lg transition-colors cursor-pointer"
                         title="Remove Back"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -565,17 +640,49 @@ export default function MergeIdFrontAndBackPage() {
                 </div>
 
                 {backImage ? (
-                  <div className="relative aspect-[85/54] w-full rounded-xl overflow-hidden bg-slate-900/5 dark:bg-black/30 border border-slate-200 dark:border-white/10 flex items-center justify-center p-2">
-                    <img
-                      src={backImage}
-                      alt="Back preview"
-                      className="max-w-full max-h-full object-contain transition-transform duration-300"
-                      style={{ transform: `rotate(${backRotation}deg)` }}
-                    />
-                    <span className="absolute bottom-2 right-2 px-2 py-0.5 bg-emerald-600/90 text-white text-[10px] font-bold rounded-md shadow-sm">
-                      Ready
-                    </span>
-                  </div>
+                  <>
+                    <div className="relative aspect-[85/54] w-full rounded-xl overflow-hidden bg-slate-900/5 dark:bg-black/30 border border-slate-200 dark:border-white/10 flex items-center justify-center p-2">
+                      <img
+                        src={backImage}
+                        alt="Back preview"
+                        className="max-w-full max-h-full object-contain transition-transform duration-300"
+                        style={{
+                          transform: `rotate(${backRotation}deg) scale(${backZoom})`
+                        }}
+                      />
+                      <span className="absolute bottom-2 right-2 px-2 py-0.5 bg-emerald-600/90 text-white text-[10px] font-bold rounded-md shadow-sm">
+                        Ready
+                      </span>
+                    </div>
+
+                    {/* Back Photo Zoom Slider */}
+                    <div className="flex items-center justify-between gap-3 pt-1">
+                      <span className="text-[11px] font-bold text-slate-600 dark:text-gray-400 flex items-center gap-1">
+                        <ZoomIn className="w-3.5 h-3.5 text-blue-500" />
+                        Crop / Zoom:
+                      </span>
+                      <input
+                        type="range"
+                        min="1.0"
+                        max="2.0"
+                        step="0.05"
+                        value={backZoom}
+                        onChange={(e) => setBackZoom(Number(e.target.value))}
+                        className="flex-1 h-1.5 bg-slate-300 dark:bg-white/20 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                      />
+                      <span className="text-[11px] font-mono font-bold text-blue-600 min-w-[42px] text-right">
+                        {Math.round(backZoom * 100)}%
+                      </span>
+                      {backZoom > 1.0 && (
+                        <button
+                          onClick={() => setBackZoom(1.0)}
+                          className="text-[10px] text-slate-400 hover:text-slate-600 dark:hover:text-white underline cursor-pointer"
+                        >
+                          Reset
+                        </button>
+                      )}
+                    </div>
+                  </>
                 ) : (
                   <div
                     onClick={() => backInputRef.current?.click()}
@@ -600,14 +707,97 @@ export default function MergeIdFrontAndBackPage() {
 
             </div>
 
-            {/* Layout Controls Bar */}
+            {/* Adjustable Card Size & Print Layout Controls */}
             <div className="p-6 bg-slate-100/70 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-2xl space-y-6">
-              <div className="flex items-center gap-2 border-b border-slate-200 dark:border-white/10 pb-3">
-                <Settings2 className="w-4 h-4 text-blue-600" />
-                <h4 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white">Print & Layout Settings</h4>
+              
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 dark:border-white/10 pb-3">
+                <div className="flex items-center gap-2">
+                  <Settings2 className="w-4 h-4 text-blue-600" />
+                  <h4 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white">Adjustable Card Size & Print Settings</h4>
+                </div>
+                <span className="text-[11px] font-semibold text-slate-500 dark:text-gray-400">
+                  Current Card Dimensions: <strong className="text-blue-600 font-mono">{Math.round(cardWidthMm)} x {Math.round(cardWidthMm * (54/85.6))} mm</strong>
+                </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* Card Size Quick Presets & Slider */}
+              <div className="space-y-3">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <label className="text-xs font-bold text-slate-700 dark:text-gray-300 flex items-center gap-1.5">
+                    <Maximize2 className="w-3.5 h-3.5 text-blue-600" />
+                    <span>Card Size on Page:</span>
+                  </label>
+                  
+                  {/* Preset Buttons */}
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => applySizePreset(85.6)}
+                      className={`px-2.5 py-1 text-[11px] font-bold rounded-lg border transition-all cursor-pointer ${
+                        Math.round(cardWidthMm) === 86
+                          ? 'bg-blue-600 border-blue-600 text-white shadow-sm'
+                          : 'bg-white dark:bg-white/5 border-slate-300 dark:border-white/10 text-slate-700 dark:text-gray-300 hover:border-blue-400'
+                      }`}
+                    >
+                      PVC Standard (85.6 mm)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => applySizePreset(115)}
+                      className={`px-2.5 py-1 text-[11px] font-bold rounded-lg border transition-all cursor-pointer ${
+                        Math.round(cardWidthMm) === 115
+                          ? 'bg-blue-600 border-blue-600 text-white shadow-sm'
+                          : 'bg-white dark:bg-white/5 border-slate-300 dark:border-white/10 text-slate-700 dark:text-gray-300 hover:border-blue-400'
+                      }`}
+                    >
+                      Medium (115 mm)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => applySizePreset(145)}
+                      className={`px-2.5 py-1 text-[11px] font-bold rounded-lg border transition-all cursor-pointer ${
+                        Math.round(cardWidthMm) === 145
+                          ? 'bg-blue-600 border-blue-600 text-white shadow-sm'
+                          : 'bg-white dark:bg-white/5 border-slate-300 dark:border-white/10 text-slate-700 dark:text-gray-300 hover:border-blue-400'
+                      }`}
+                    >
+                      Large A4 (145 mm)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => applySizePreset(175)}
+                      className={`px-2.5 py-1 text-[11px] font-bold rounded-lg border transition-all cursor-pointer ${
+                        Math.round(cardWidthMm) === 175
+                          ? 'bg-blue-600 border-blue-600 text-white shadow-sm'
+                          : 'bg-white dark:bg-white/5 border-slate-300 dark:border-white/10 text-slate-700 dark:text-gray-300 hover:border-blue-400'
+                      }`}
+                    >
+                      Full Width (175 mm)
+                    </button>
+                  </div>
+                </div>
+
+                {/* Free Size Slider */}
+                <div className="flex items-center gap-3 bg-white dark:bg-slate-900/60 p-3 rounded-xl border border-slate-200 dark:border-white/10">
+                  <span className="text-[11px] font-bold text-slate-500">60 mm (Small)</span>
+                  <input
+                    type="range"
+                    min="60"
+                    max="180"
+                    step="2"
+                    value={cardWidthMm}
+                    onChange={(e) => setCardWidthMm(Number(e.target.value))}
+                    className="flex-1 h-2 bg-slate-300 dark:bg-white/20 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                  />
+                  <span className="text-[11px] font-bold text-slate-500">180 mm (Max)</span>
+                  <span className="text-xs font-mono font-black text-blue-600 min-w-[55px] text-right">
+                    {Math.round(cardWidthMm)} mm
+                  </span>
+                </div>
+              </div>
+
+              {/* Secondary Layout Options */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
                 
                 {/* Layout Mode */}
                 <div>
@@ -623,16 +813,19 @@ export default function MergeIdFrontAndBackPage() {
                   </select>
                 </div>
 
-                {/* Sizing Preset */}
+                {/* Page Placement */}
                 <div>
-                  <label className="text-xs font-bold text-slate-700 dark:text-gray-300 block mb-1.5">Card Proportions</label>
+                  <label className="text-xs font-bold text-slate-700 dark:text-gray-300 block mb-1.5 flex items-center gap-1">
+                    <MoveVertical className="w-3.5 h-3.5 text-blue-500" />
+                    <span>Page Placement</span>
+                  </label>
                   <select
-                    value={cardSizing}
-                    onChange={(e) => setCardSizing(e.target.value as CardSizing)}
+                    value={pagePlacement}
+                    onChange={(e) => setPagePlacement(e.target.value as PagePlacement)}
                     className="w-full text-xs font-semibold px-3 py-2.5 rounded-xl border border-slate-300 dark:border-white/15 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500"
                   >
-                    <option value="cr80">Standard CR80 (85.6 x 54 mm)</option>
-                    <option value="proportional">Auto Proportional</option>
+                    <option value="center">Center of Page</option>
+                    <option value="top">Top of Page (Save Paper)</option>
                   </select>
                 </div>
 
@@ -644,12 +837,12 @@ export default function MergeIdFrontAndBackPage() {
                   </div>
                   <input
                     type="range"
-                    min="2"
-                    max="30"
+                    min="0"
+                    max="35"
                     step="2"
                     value={spacingMm}
                     onChange={(e) => setSpacingMm(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-300 dark:bg-white/20 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                    className="w-full h-2 bg-slate-300 dark:bg-white/20 rounded-lg appearance-none cursor-pointer accent-blue-600 mt-2"
                   />
                 </div>
 
@@ -745,20 +938,20 @@ export default function MergeIdFrontAndBackPage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
               <div className="p-4 bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 rounded-2xl">
                 <span className="text-xl">🖨️</span>
-                <h5 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white mt-2">100% Scale Printing</h5>
-                <p className="text-[11px] text-slate-500 dark:text-gray-400 mt-1">In your printer dialog, select <strong>Actual Size</strong> or <strong>100%</strong> to ensure cards match real PVC dimensions exactly.</p>
+                <h5 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white mt-2">Adjustable Print Scale</h5>
+                <p className="text-[11px] text-slate-500 dark:text-gray-400 mt-1">Keep it at <strong>PVC Standard (85.6 mm)</strong> for wallet cards, or scale up to <strong>Large/Full A4</strong> for elder-friendly big prints.</p>
+              </div>
+
+              <div className="p-4 bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 rounded-2xl">
+                <span className="text-xl">🔍</span>
+                <h5 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white mt-2">Individual Crop & Zoom</h5>
+                <p className="text-[11px] text-slate-500 dark:text-gray-400 mt-1">Use the <strong>Crop / Zoom</strong> sliders under the front and back photos to zoom in and remove unwanted table or bedsheet margins.</p>
               </div>
 
               <div className="p-4 bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 rounded-2xl">
                 <span className="text-xl">✂️</span>
                 <h5 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white mt-2">Built-in Cutting Borders</h5>
                 <p className="text-[11px] text-slate-500 dark:text-gray-400 mt-1">The subtle 1px border gives you a crisp guide for scissors, paper trimmers, or corner-rounding punches.</p>
-              </div>
-
-              <div className="p-4 bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 rounded-2xl">
-                <span className="text-xl">📱</span>
-                <h5 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white mt-2">Rotate Sideways Snaps</h5>
-                <p className="text-[11px] text-slate-500 dark:text-gray-400 mt-1">Took the picture sideways on your phone? Use the 90° rotate buttons to straighten the card before merging.</p>
               </div>
             </div>
 

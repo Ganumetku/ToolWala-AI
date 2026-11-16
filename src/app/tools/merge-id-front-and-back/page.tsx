@@ -5,7 +5,7 @@ import {
   IdCard, Upload, RotateCw, RotateCcw, Trash2, Download, Printer,
   Layers, CheckCircle2, Shield, Sparkles, FileText, Settings2,
   RefreshCw, Scissors, Eye, Image as ImageIcon, ZoomIn, ZoomOut,
-  Maximize2, MoveVertical, Sparkle
+  Maximize2, MoveVertical, Sparkle, Crop
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { jsPDF } from 'jspdf';
@@ -15,6 +15,7 @@ import ToolArticle from '@/components/ToolArticle';
 import WorkflowRecommendations from '@/components/tools/WorkflowRecommendations';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { toolArticles } from '@/data/toolArticles';
+import CardCropModal from './CardCropModal';
 
 type LayoutMode = 'a4-stacked' | 'side-by-side' | '4x6-pvc';
 type AspectMode = 'auto' | 'cr80-fit' | 'cr80-fill';
@@ -27,6 +28,11 @@ const CR80_HEIGHT_MM = 53.98;
 export default function MergeIdFrontAndBackPage() {
   const [frontImage, setFrontImage] = useState<string | null>(null);
   const [backImage, setBackImage] = useState<string | null>(null);
+  const [rawFrontImage, setRawFrontImage] = useState<string | null>(null);
+  const [rawBackImage, setRawBackImage] = useState<string | null>(null);
+  const [cropModalOpen, setCropModalOpen] = useState<boolean>(false);
+  const [cropModalTarget, setCropModalTarget] = useState<'front' | 'back'>('front');
+
   const [frontRotation, setFrontRotation] = useState<number>(0);
   const [backRotation, setBackRotation] = useState<number>(0);
   const [frontZoom, setFrontZoom] = useState<number>(1.0); // 1.0 to 2.0
@@ -85,10 +91,13 @@ export default function MergeIdFrontAndBackPage() {
         const url1 = canvas1.toDataURL('image/png');
 
         if (target === 'front') {
+          setRawFrontImage(url1);
           setFrontImage(url1);
           setFrontRotation(0);
           setFrontZoom(1.0);
-          toast.success("Front side extracted from Page 1.");
+          setCropModalTarget('front');
+          setCropModalOpen(true);
+          toast.success("Front side extracted. Adjust crop if needed.");
           
           // If PDF has 2 pages and back is empty, auto-fill back side!
           if (doc.numPages >= 2 && !backImage) {
@@ -99,16 +108,20 @@ export default function MergeIdFrontAndBackPage() {
             canvas2.height = viewport2.height;
             const ctx2 = canvas2.getContext('2d');
             await page2.render({ canvasContext: ctx2!, viewport: viewport2 }).promise;
-            setBackImage(canvas2.toDataURL('image/png'));
+            const url2 = canvas2.toDataURL('image/png');
+            setRawBackImage(url2);
+            setBackImage(url2);
             setBackRotation(0);
             setBackZoom(1.0);
-            toast.success("Back side auto-extracted from Page 2!");
           }
         } else {
+          setRawBackImage(url1);
           setBackImage(url1);
           setBackRotation(0);
           setBackZoom(1.0);
-          toast.success("Back side extracted from PDF.");
+          setCropModalTarget('back');
+          setCropModalOpen(true);
+          toast.success("Back side extracted. Adjust crop if needed.");
         }
       } catch (err) {
         console.error(err);
@@ -122,18 +135,49 @@ export default function MergeIdFrontAndBackPage() {
     reader.onload = (e) => {
       const result = e.target?.result as string;
       if (target === 'front') {
+        setRawFrontImage(result);
         setFrontImage(result);
         setFrontRotation(0);
         setFrontZoom(1.0);
-        toast.success("Front side uploaded.");
+        setCropModalTarget('front');
+        setCropModalOpen(true);
+        toast.success("Front side uploaded. Adjust crop if needed.");
       } else {
+        setRawBackImage(result);
         setBackImage(result);
         setBackRotation(0);
         setBackZoom(1.0);
-        toast.success("Back side uploaded.");
+        setCropModalTarget('back');
+        setCropModalOpen(true);
+        toast.success("Back side uploaded. Adjust crop if needed.");
       }
     };
     reader.readAsDataURL(file);
+  };
+
+  // Open cropper for either front or back
+  const openCropper = (target: 'front' | 'back') => {
+    const src = target === 'front' ? (rawFrontImage || frontImage) : (rawBackImage || backImage);
+    if (!src) {
+      toast.error(`Please upload ${target} side photo first.`);
+      return;
+    }
+    setCropModalTarget(target);
+    setCropModalOpen(true);
+  };
+
+  // Crop completion handler
+  const handleCropComplete = (croppedDataUrl: string) => {
+    if (cropModalTarget === 'front') {
+      setFrontImage(croppedDataUrl);
+      setFrontZoom(1.0);
+      toast.success("Front card cropped! Merge canvas updated.");
+    } else {
+      setBackImage(croppedDataUrl);
+      setBackZoom(1.0);
+      toast.success("Back card cropped! Merge canvas updated.");
+    }
+    setCropModalOpen(false);
   };
 
   // Helper to load an HTMLImageElement
@@ -533,12 +577,15 @@ export default function MergeIdFrontAndBackPage() {
   const handleReset = () => {
     setFrontImage(null);
     setBackImage(null);
+    setRawFrontImage(null);
+    setRawBackImage(null);
     setFrontRotation(0);
     setBackRotation(0);
     setFrontZoom(1.0);
     setBackZoom(1.0);
     setCardWidthMm(CR80_WIDTH_MM);
     setAspectMode('auto');
+    setCropModalOpen(false);
     toast.info("Cleared workspace.");
   };
 
@@ -574,7 +621,15 @@ export default function MergeIdFrontAndBackPage() {
                     <h3 className="text-sm font-black uppercase tracking-wider text-slate-900 dark:text-white">Front Side</h3>
                   </div>
                   {frontImage && (
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        onClick={() => openCropper('front')}
+                        className="px-2.5 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800/60 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                        title="Crop Front Card"
+                      >
+                        <Crop className="w-3.5 h-3.5 text-blue-600" />
+                        <span>Crop</span>
+                      </button>
                       <button
                         onClick={() => handleRotate('front', -90)}
                         className="p-1.5 hover:bg-slate-200 dark:hover:bg-white/10 rounded-lg text-slate-700 dark:text-gray-300 transition-colors cursor-pointer"
@@ -590,7 +645,10 @@ export default function MergeIdFrontAndBackPage() {
                         <RotateCw className="w-4 h-4" />
                       </button>
                       <button
-                        onClick={() => setFrontImage(null)}
+                        onClick={() => {
+                          setFrontImage(null);
+                          setRawFrontImage(null);
+                        }}
                         className="p-1.5 hover:bg-red-50 text-red-500 rounded-lg transition-colors cursor-pointer"
                         title="Remove Front"
                       >
@@ -602,7 +660,7 @@ export default function MergeIdFrontAndBackPage() {
 
                 {frontImage ? (
                   <>
-                    <div className="relative aspect-[85/54] w-full rounded-xl overflow-hidden bg-slate-900/5 dark:bg-black/30 border border-slate-200 dark:border-white/10 flex items-center justify-center p-2">
+                    <div className="relative aspect-[85/54] w-full rounded-xl overflow-hidden bg-slate-900/5 dark:bg-black/30 border border-slate-200 dark:border-white/10 flex items-center justify-center p-2 group">
                       <img
                         src={frontImage}
                         alt="Front preview"
@@ -611,6 +669,14 @@ export default function MergeIdFrontAndBackPage() {
                           transform: `rotate(${frontRotation}deg) scale(${frontZoom})`
                         }}
                       />
+                      <button
+                        onClick={() => openCropper('front')}
+                        className="absolute top-2.5 left-2.5 px-3 py-1.5 bg-slate-950/80 hover:bg-blue-600 text-white text-xs font-bold rounded-xl shadow-lg transition-all flex items-center gap-1.5 cursor-pointer backdrop-blur-sm"
+                        title="Open Card Cropper"
+                      >
+                        <Crop className="w-3.5 h-3.5 text-blue-400" />
+                        <span>✂️ Crop Card</span>
+                      </button>
                       <span className="absolute bottom-2 right-2 px-2 py-0.5 bg-emerald-600/90 text-white text-[10px] font-bold rounded-md shadow-sm">
                         Ready
                       </span>
@@ -674,7 +740,15 @@ export default function MergeIdFrontAndBackPage() {
                     <h3 className="text-sm font-black uppercase tracking-wider text-slate-900 dark:text-white">Back Side</h3>
                   </div>
                   {backImage && (
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        onClick={() => openCropper('back')}
+                        className="px-2.5 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800/60 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                        title="Crop Back Card"
+                      >
+                        <Crop className="w-3.5 h-3.5 text-blue-600" />
+                        <span>Crop</span>
+                      </button>
                       <button
                         onClick={() => handleRotate('back', -90)}
                         className="p-1.5 hover:bg-slate-200 dark:hover:bg-white/10 rounded-lg text-slate-700 dark:text-gray-300 transition-colors cursor-pointer"
@@ -690,7 +764,10 @@ export default function MergeIdFrontAndBackPage() {
                         <RotateCw className="w-4 h-4" />
                       </button>
                       <button
-                        onClick={() => setBackImage(null)}
+                        onClick={() => {
+                          setBackImage(null);
+                          setRawBackImage(null);
+                        }}
                         className="p-1.5 hover:bg-red-50 text-red-500 rounded-lg transition-colors cursor-pointer"
                         title="Remove Back"
                       >
@@ -702,7 +779,7 @@ export default function MergeIdFrontAndBackPage() {
 
                 {backImage ? (
                   <>
-                    <div className="relative aspect-[85/54] w-full rounded-xl overflow-hidden bg-slate-900/5 dark:bg-black/30 border border-slate-200 dark:border-white/10 flex items-center justify-center p-2">
+                    <div className="relative aspect-[85/54] w-full rounded-xl overflow-hidden bg-slate-900/5 dark:bg-black/30 border border-slate-200 dark:border-white/10 flex items-center justify-center p-2 group">
                       <img
                         src={backImage}
                         alt="Back preview"
@@ -711,6 +788,14 @@ export default function MergeIdFrontAndBackPage() {
                           transform: `rotate(${backRotation}deg) scale(${backZoom})`
                         }}
                       />
+                      <button
+                        onClick={() => openCropper('back')}
+                        className="absolute top-2.5 left-2.5 px-3 py-1.5 bg-slate-950/80 hover:bg-blue-600 text-white text-xs font-bold rounded-xl shadow-lg transition-all flex items-center gap-1.5 cursor-pointer backdrop-blur-sm"
+                        title="Open Card Cropper"
+                      >
+                        <Crop className="w-3.5 h-3.5 text-blue-400" />
+                        <span>✂️ Crop Card</span>
+                      </button>
                       <span className="absolute bottom-2 right-2 px-2 py-0.5 bg-emerald-600/90 text-white text-[10px] font-bold rounded-md shadow-sm">
                         Ready
                       </span>
@@ -1097,6 +1182,16 @@ export default function MergeIdFrontAndBackPage() {
 
         {/* Workflow Cross-Links */}
         <WorkflowRecommendations slug="merge-id-front-and-back" />
+
+        {/* Interactive Lossless Card Cropper Modal */}
+        <CardCropModal
+          isOpen={cropModalOpen}
+          imageSrc={cropModalTarget === 'front' ? (rawFrontImage || frontImage) : (rawBackImage || backImage)}
+          cardLabel={cropModalTarget === 'front' ? 'Front' : 'Back'}
+          onClose={() => setCropModalOpen(false)}
+          onApplyCrop={handleCropComplete}
+          onSkipCrop={() => setCropModalOpen(false)}
+        />
 
       </ToolLayout>
     </ToolVisibilityGuard>

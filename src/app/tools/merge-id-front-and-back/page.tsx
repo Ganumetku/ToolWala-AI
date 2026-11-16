@@ -17,7 +17,7 @@ import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { toolArticles } from '@/data/toolArticles';
 
 type LayoutMode = 'a4-stacked' | 'side-by-side' | '4x6-pvc';
-type CardSizing = 'cr80' | 'proportional';
+type AspectMode = 'auto' | 'cr80-fit' | 'cr80-fill';
 type PagePlacement = 'center' | 'top';
 
 // Standard CR80 Dimensions in mm (Credit / ID card standard)
@@ -35,7 +35,7 @@ export default function MergeIdFrontAndBackPage() {
   // Layout & Sizing Settings
   const [layoutMode, setLayoutMode] = useState<LayoutMode>('a4-stacked');
   const [cardWidthMm, setCardWidthMm] = useState<number>(CR80_WIDTH_MM); // Adjustable card width
-  const [cardSizing, setCardSizing] = useState<CardSizing>('cr80');
+  const [aspectMode, setAspectMode] = useState<AspectMode>('auto'); // 'auto' preserves original image ratio (no distortion)
   const [pagePlacement, setPagePlacement] = useState<PagePlacement>('center');
   const [showBorder, setShowBorder] = useState<boolean>(true);
   const [showCornerGuides, setShowCornerGuides] = useState<boolean>(true);
@@ -210,20 +210,29 @@ export default function MergeIdFrontAndBackPage() {
     const frontCanvas = frontImgEl ? getOrientedCardCanvas(frontImgEl, frontRotation) : null;
     const backCanvas = backImgEl ? getOrientedCardCanvas(backImgEl, backRotation) : null;
 
-    // Calculate Target Card Dimensions in mm
-    let targetCardWidthMm = cardWidthMm;
-    let targetCardHeightMm = cardWidthMm * (CR80_HEIGHT_MM / CR80_WIDTH_MM);
+    // Width in pixels based on user cardWidthMm
+    const cardWPx = Math.round(cardWidthMm * DPI_SCALE);
 
-    if (cardSizing === 'proportional') {
-      const sample = frontCanvas || backCanvas;
-      if (sample) {
-        const ratio = sample.width / sample.height;
-        targetCardHeightMm = targetCardWidthMm / ratio;
-      }
+    // Calculate aspect ratio for Front and Back cards
+    const cr80Ratio = CR80_WIDTH_MM / CR80_HEIGHT_MM; // ~1.5857
+    const frontRatio = frontCanvas ? frontCanvas.width / frontCanvas.height : cr80Ratio;
+    const backRatio = backCanvas ? backCanvas.width / backCanvas.height : (frontCanvas ? frontRatio : cr80Ratio);
+
+    // Calculate heights based on aspectMode
+    let frontHPx: number;
+    let backHPx: number;
+
+    if (aspectMode === 'auto') {
+      // 100% Original Image Ratio (Zero Distortion - As Uploaded)
+      frontHPx = Math.round(cardWPx / frontRatio);
+      backHPx = Math.round(cardWPx / backRatio);
+    } else {
+      // Standard CR80 Card Box (85.6 x 54 mm ratio)
+      const cr80HPx = Math.round(cardWidthMm * (CR80_HEIGHT_MM / CR80_WIDTH_MM) * DPI_SCALE);
+      frontHPx = cr80HPx;
+      backHPx = cr80HPx;
     }
 
-    const cardWPx = Math.round(targetCardWidthMm * DPI_SCALE);
-    const cardHPx = Math.round(targetCardHeightMm * DPI_SCALE);
     const spacingPx = Math.round(spacingMm * DPI_SCALE);
 
     let frontX = 0;
@@ -236,61 +245,108 @@ export default function MergeIdFrontAndBackPage() {
       frontX = (canvasWidth - cardWPx) / 2;
       backX = frontX;
 
-      const totalH = cardHPx * 2 + spacingPx;
+      const totalH = frontHPx + backHPx + spacingPx;
       const startY = pagePlacement === 'top'
         ? Math.round(25 * DPI_SCALE) // 25mm margin from top
         : (canvasHeight - totalH) / 2;
 
       frontY = startY;
-      backY = startY + cardHPx + spacingPx;
+      backY = startY + frontHPx + spacingPx;
     } else {
       // Horizontal side-by-side (A4 horizontal or 4x6 photo sheet)
       const totalW = cardWPx * 2 + spacingPx;
       const startX = (canvasWidth - totalW) / 2;
+      const maxH = Math.max(frontHPx, backHPx);
       const startY = pagePlacement === 'top'
         ? Math.round(25 * DPI_SCALE)
-        : (canvasHeight - cardHPx) / 2;
+        : (canvasHeight - maxH) / 2;
 
       frontX = startX;
-      frontY = startY;
+      frontY = startY + (maxH - frontHPx) / 2;
       backX = startX + cardWPx + spacingPx;
-      backY = startY;
+      backY = startY + (maxH - backHPx) / 2;
     }
 
     // Helper to draw single card with clipping, zoom, border & corner guides
-    const drawCard = (cardC: HTMLCanvasElement | null, x: number, y: number, zoom: number, label: string) => {
+    const drawCard = (
+      cardC: HTMLCanvasElement | null,
+      x: number,
+      y: number,
+      boxW: number,
+      boxH: number,
+      zoom: number,
+      label: string
+    ) => {
       ctx.save();
-      // Clip to card boundary so zoomed content stays strictly inside the frame
+      // Clip to card boundary so border guides and zoom are respected
       ctx.beginPath();
-      ctx.rect(x, y, cardWPx, cardHPx);
+      ctx.rect(x, y, boxW, boxH);
       ctx.clip();
 
       if (cardC) {
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
 
-        // Compute zoomed dimensions and center offset
-        const drawW = cardWPx * zoom;
-        const drawH = cardHPx * zoom;
-        const offsetX = x - (drawW - cardWPx) / 2;
-        const offsetY = y - (drawH - cardHPx) / 2;
+        const imgRatio = cardC.width / cardC.height;
+        const boxRatio = boxW / boxH;
+
+        let drawW = boxW * zoom;
+        let drawH = boxH * zoom;
+
+        if (aspectMode === 'cr80-fit') {
+          // Fit inside box without cropping - 100% natural aspect ratio preserved
+          if (imgRatio > boxRatio) {
+            drawW = boxW * zoom;
+            drawH = (boxW / imgRatio) * zoom;
+          } else {
+            drawH = boxH * zoom;
+            drawW = (boxH * imgRatio) * zoom;
+          }
+        } else if (aspectMode === 'cr80-fill') {
+          // Fill box completely - 100% aspect ratio preserved, excess clipped cleanly
+          if (imgRatio > boxRatio) {
+            drawH = boxH * zoom;
+            drawW = (boxH * imgRatio) * zoom;
+          } else {
+            drawW = boxW * zoom;
+            drawH = (boxW / imgRatio) * zoom;
+          }
+        } else {
+          // 'auto' / 'original' - Maintain 100% natural aspect ratio without any distortion
+          if (Math.abs(imgRatio - boxRatio) > 0.01) {
+            if (imgRatio > boxRatio) {
+              drawW = boxW * zoom;
+              drawH = (boxW / imgRatio) * zoom;
+            } else {
+              drawH = boxH * zoom;
+              drawW = (boxH * imgRatio) * zoom;
+            }
+          } else {
+            drawW = boxW * zoom;
+            drawH = boxH * zoom;
+          }
+        }
+
+        // Center within the card frame
+        const offsetX = x + (boxW - drawW) / 2;
+        const offsetY = y + (boxH - drawH) / 2;
 
         ctx.drawImage(cardC, offsetX, offsetY, drawW, drawH);
       } else {
         // Empty slot placeholder
         ctx.fillStyle = '#F8FAFC';
-        ctx.fillRect(x, y, cardWPx, cardHPx);
+        ctx.fillRect(x, y, boxW, boxH);
 
         ctx.strokeStyle = '#CBD5E1';
         ctx.lineWidth = 4;
         ctx.setLineDash([12, 12]);
-        ctx.strokeRect(x, y, cardWPx, cardHPx);
+        ctx.strokeRect(x, y, boxW, boxH);
         ctx.setLineDash([]);
 
         ctx.fillStyle = '#94A3B8';
         ctx.font = '600 32px sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText(`Drop ${label} Card Here`, x + cardWPx / 2, y + cardHPx / 2);
+        ctx.fillText(`Drop ${label} Card Here`, x + boxW / 2, y + boxH / 2);
       }
       ctx.restore();
 
@@ -299,7 +355,7 @@ export default function MergeIdFrontAndBackPage() {
         ctx.strokeStyle = '#0F172A';
         ctx.lineWidth = 2; // ~0.17 mm at 300 DPI
         ctx.setLineDash([]);
-        ctx.strokeRect(x, y, cardWPx, cardHPx);
+        ctx.strokeRect(x, y, boxW, boxH);
       }
 
       // Corner Guide Crosshairs for Scissors / Cutter
@@ -316,37 +372,41 @@ export default function MergeIdFrontAndBackPage() {
 
         // Top Right
         ctx.beginPath();
-        ctx.moveTo(x + cardWPx + 5, y); ctx.lineTo(x + cardWPx + markLen, y);
-        ctx.moveTo(x + cardWPx, y - markLen); ctx.lineTo(x + cardWPx, y - 5);
+        ctx.moveTo(x + boxW + 5, y); ctx.lineTo(x + boxW + markLen, y);
+        ctx.moveTo(x + boxW, y - markLen); ctx.lineTo(x + boxW, y - 5);
         ctx.stroke();
 
         // Bottom Left
         ctx.beginPath();
-        ctx.moveTo(x - markLen, y + cardHPx); ctx.lineTo(x - 5, y + cardHPx);
-        ctx.moveTo(x, y + cardHPx + 5); ctx.lineTo(x, y + cardHPx + markLen);
+        ctx.moveTo(x - markLen, y + boxH); ctx.lineTo(x - 5, y + boxH);
+        ctx.moveTo(x, y + boxH + 5); ctx.lineTo(x, y + boxH + markLen);
         ctx.stroke();
 
         // Bottom Right
         ctx.beginPath();
-        ctx.moveTo(x + cardWPx + 5, y + cardHPx); ctx.lineTo(x + cardWPx + markLen, y + cardHPx);
-        ctx.moveTo(x + cardWPx, y + cardHPx + 5); ctx.lineTo(x + cardWPx, y + cardHPx + markLen);
+        ctx.moveTo(x + boxW + 5, y + boxH); ctx.lineTo(x + boxW + markLen, y + boxH);
+        ctx.moveTo(x + boxW, y + boxH + 5); ctx.lineTo(x + boxW, y + boxH + markLen);
         ctx.stroke();
       }
     };
 
-    drawCard(frontCanvas, frontX, frontY, frontZoom, "Front");
-    drawCard(backCanvas, backX, backY, backZoom, "Back");
+    drawCard(frontCanvas, frontX, frontY, cardWPx, frontHPx, frontZoom, "Front");
+    drawCard(backCanvas, backX, backY, cardWPx, backHPx, backZoom, "Back");
 
     // Add subtle footer metadata for print verification
     ctx.fillStyle = '#94A3B8';
     ctx.font = '500 18px sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText(`ToolWala ID Merge • Card Size: ${Math.round(targetCardWidthMm)} x ${Math.round(targetCardHeightMm)} mm (Print at 100% scale)`, canvasWidth / 2, canvasHeight - 40);
+    ctx.fillText(
+      `ToolWala ID Merge • Card Width: ${Math.round(cardWidthMm)} mm (${aspectMode === 'auto' ? 'Original Aspect Ratio' : 'CR80 Standard'}) • Print at 100% scale`,
+      canvasWidth / 2,
+      canvasHeight - 40
+    );
 
     return canvas;
   }, [
     frontImage, backImage, frontRotation, backRotation, frontZoom, backZoom,
-    layoutMode, cardWidthMm, cardSizing, pagePlacement, showBorder, showCornerGuides, spacingMm
+    layoutMode, cardWidthMm, aspectMode, pagePlacement, showBorder, showCornerGuides, spacingMm
   ]);
 
   // Re-render whenever settings or images update
@@ -478,6 +538,7 @@ export default function MergeIdFrontAndBackPage() {
     setFrontZoom(1.0);
     setBackZoom(1.0);
     setCardWidthMm(CR80_WIDTH_MM);
+    setAspectMode('auto');
     toast.info("Cleared workspace.");
   };
 
@@ -715,9 +776,18 @@ export default function MergeIdFrontAndBackPage() {
                   <Settings2 className="w-4 h-4 text-blue-600" />
                   <h4 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white">Adjustable Card Size & Print Settings</h4>
                 </div>
-                <span className="text-[11px] font-semibold text-slate-500 dark:text-gray-400">
-                  Current Card Dimensions: <strong className="text-blue-600 font-mono">{Math.round(cardWidthMm)} x {Math.round(cardWidthMm * (54/85.6))} mm</strong>
-                </span>
+                <div className="text-[11px] font-semibold text-slate-500 dark:text-gray-400">
+                  {aspectMode === 'auto' ? (
+                    <span className="text-emerald-700 dark:text-emerald-400 font-bold flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
+                      <span>Natural Proportions: Width <strong className="font-mono">{Math.round(cardWidthMm)} mm</strong> (Zero Distortion)</span>
+                    </span>
+                  ) : (
+                    <span>
+                      Standard CR80 Frame: <strong className="text-blue-600 font-mono">{Math.round(cardWidthMm)} x {Math.round(cardWidthMm * (54/85.6))} mm</strong>
+                    </span>
+                  )}
+                </div>
               </div>
 
               {/* Card Size Quick Presets & Slider */}
@@ -793,6 +863,68 @@ export default function MergeIdFrontAndBackPage() {
                   <span className="text-xs font-mono font-black text-blue-600 min-w-[55px] text-right">
                     {Math.round(cardWidthMm)} mm
                   </span>
+                </div>
+              </div>
+
+              {/* Natural Proportion vs Box Shape Selector */}
+              <div className="p-4 bg-white dark:bg-slate-900/60 rounded-xl border border-slate-200 dark:border-white/10 space-y-2.5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div>
+                    <label className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+                      <span>Aspect Ratio (Image Shape)</span>
+                    </label>
+                    <p className="text-[11px] text-slate-500 dark:text-gray-400 mt-0.5">
+                      Fixes squeezed/squashed photos and keeps your ID card in its true shape.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAspectMode('auto');
+                        toast.success("Set to Natural Proportions (Zero Distortion)");
+                      }}
+                      className={`px-3 py-1.5 text-xs font-bold rounded-xl border transition-all cursor-pointer flex items-center gap-1.5 ${
+                        aspectMode === 'auto'
+                          ? 'bg-emerald-600 border-emerald-600 text-white shadow-sm ring-2 ring-emerald-500/20'
+                          : 'bg-slate-50 dark:bg-white/5 border-slate-300 dark:border-white/10 text-slate-700 dark:text-gray-300 hover:border-emerald-400'
+                      }`}
+                    >
+                      <span>✨ Original Photo (No Squish)</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAspectMode('cr80-fit');
+                        toast.info("Standard CR80 Box - Fitted without distortion");
+                      }}
+                      className={`px-3 py-1.5 text-xs font-bold rounded-xl border transition-all cursor-pointer flex items-center gap-1.5 ${
+                        aspectMode === 'cr80-fit'
+                          ? 'bg-blue-600 border-blue-600 text-white shadow-sm ring-2 ring-blue-500/20'
+                          : 'bg-slate-50 dark:bg-white/5 border-slate-300 dark:border-white/10 text-slate-700 dark:text-gray-300 hover:border-blue-400'
+                      }`}
+                    >
+                      <span>💳 Standard PVC (Fit inside)</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAspectMode('cr80-fill');
+                        toast.info("Standard CR80 Box - Filled & auto-cropped");
+                      }}
+                      className={`px-3 py-1.5 text-xs font-bold rounded-xl border transition-all cursor-pointer flex items-center gap-1.5 ${
+                        aspectMode === 'cr80-fill'
+                          ? 'bg-blue-600 border-blue-600 text-white shadow-sm ring-2 ring-blue-500/20'
+                          : 'bg-slate-50 dark:bg-white/5 border-slate-300 dark:border-white/10 text-slate-700 dark:text-gray-300 hover:border-blue-400'
+                      }`}
+                    >
+                      <span>✂️ Standard PVC (Fill & Crop)</span>
+                    </button>
+                  </div>
                 </div>
               </div>
 

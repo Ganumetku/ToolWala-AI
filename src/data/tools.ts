@@ -504,6 +504,28 @@ export const toolsData: Tool[] = [
     updatedAt: '2026-06-20T00:00:00Z'
   },
   {
+    id: "merge-id-front-and-back",
+    title: "Merge ID Card Front & Back",
+    description: "Combine front and back sides of any ID card, Aadhaar, Voter, or Driving License onto a single page for printing.",
+    icon: "IdCard",
+    href: "/tools/merge-id-front-and-back/",
+    slug: "merge-id-front-and-back",
+    category: "Image Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["merge id card", "id card front and back", "merge aadhaar front and back", "join id card front back", "print id card front and back", "merge voter card front back", "pan card front and back join", "combine two sides of id card", "pvc id card maker", "merge id front back online"],
+    status: 'published',
+    isVisible: true,
+    seoMetadata: {
+      title: "Merge ID Card Front & Back Online Free – Join 2 Sides on 1 Page | ToolWala",
+      description: "Combine front and back photos of your Aadhaar, Voter ID, Driver License, or PAN card onto a single A4 or 4x6 page for printing. 100% free and private in your browser.",
+      keywords: ["merge id card front and back", "join id card front back", "merge aadhaar front and back online", "print id card front and back", "combine two sides of id card", "id card front and back on one page"]
+    },
+    createdAt: '2026-11-16T00:00:00Z',
+    updatedAt: '2026-11-16T00:00:00Z'
+  },
+  {
     id: "crop-aadhaar-card",
     title: "Crop Aadhaar Card",
     description: "Crop and resize Aadhaar card photos to official standard sizes online.",

@@ -11786,5 +11786,49 @@
     ],
     "seoTitle": "Rotate PDF – All Pages 90°, 180°, or 270°",
     "seoDescription": "Rotates every page in this tab. No thumbnail grid. One page only? Use Organize PDF. Files are not uploaded."
+  },
+  {
+    "id": "trans-1794849844984-merge-id-front-and-back-en",
+    "toolSlug": "merge-id-front-and-back",
+    "locale": "en",
+    "title": "Merge ID Card Front and Back",
+    "description": "Combine front and back sides of any identity card onto a single A4 or 4x6 sheet for printing.",
+    "seoTitle": "Merge ID Card Front and Back Online Free – Join 2 Sides on 1 Page | ToolWala",
+    "seoDescription": "Combine front and back photos of your Aadhaar, Voter ID, Driver License, or PAN card onto a single A4 or 4x6 page for printing. 100% free and private in your browser.",
+    "createdAt": "2026-11-16T17:24:04.984Z",
+    "updatedAt": "2026-11-16T17:24:04.996Z"
+  },
+  {
+    "id": "trans-1794849844996-merge-id-front-and-back-hi",
+    "toolSlug": "merge-id-front-and-back",
+    "locale": "hi",
+    "title": "आईडी कार्ड फ्रंट और बैक मर्ज टूल",
+    "description": "प्रिंटिंग के लिए किसी भी पहचान पत्र (आधार, वोटर, पैन) के फ्रंट और बैक को एक ही पेज पर जोड़ें।",
+    "seoTitle": "आईडी कार्ड फ्रंट और बैक ऑनलाइन जोड़ें – एक पेज पर प्रिंट करें | ToolWala",
+    "seoDescription": "अपने आधार, वोटर आईडी, पैन या ड्राइविंग लाइसेंस के आगे और पीछे के दोनों हिस्सों को एक ही A4 या फोटो पेपर पर मुफ्त में जोड़ें और प्रिंट करें। 100% सुरक्षित ब्राउज़र टूल।",
+    "createdAt": "2026-11-16T17:24:04.996Z",
+    "updatedAt": "2026-11-16T17:24:04.996Z"
+  },
+  {
+    "id": "trans-1794849844996-merge-id-front-and-back-es",
+    "toolSlug": "merge-id-front-and-back",
+    "locale": "es",
+    "title": "Unir Anverso y Reverso de Tarjeta ID",
+    "description": "Combina el frente y el dorso de cualquier identificación o carnet en una sola hoja para imprimir.",
+    "seoTitle": "Unir Anverso y Reverso de ID Gratis – Imprimir 2 Lados en 1 Hoja | ToolWala",
+    "seoDescription": "Junta las fotos de ambos lados de tu tarjeta de identidad, credencial o licencia de conducir en una sola página A4 lista para imprimir. 100% gratis y privado en tu navegador.",
+    "createdAt": "2026-11-16T17:24:04.996Z",
+    "updatedAt": "2026-11-16T17:24:04.996Z"
+  },
+  {
+    "id": "trans-1794849844996-merge-id-front-and-back-pt",
+    "toolSlug": "merge-id-front-and-back",
+    "locale": "pt",
+    "title": "Juntar Frente e Verso de Documento / Cartão ID",
+    "description": "Combine a frente e o verso do seu documento de identidade ou CNH em uma única página para impressão.",
+    "seoTitle": "Juntar Frente e Verso de ID Online Grátis – Imprimir em 1 Página | ToolWala",
+    "seoDescription": "Junte a frente e o verso do seu RG, CNH ou cartão de identificação em uma única folha A4 pronta para impressão. 100% gratuito e seguro no seu navegador.",
+    "createdAt": "2026-11-16T17:24:04.996Z",
+    "updatedAt": "2026-11-16T17:24:04.996Z"
   }
 ]

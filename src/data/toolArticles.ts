@@ -1366,6 +1366,59 @@ export const toolArticles: Record<string, ToolArticleData> = {
       { name: "Split PDF", href: "/tools/split-pdf/" }
     ]
   },
+  "merge-id-front-and-back": {
+    title: "Merge ID Card Front and Back Online – Join Both Sides on One Page",
+    intro: "Ever tried uploading an Aadhaar, Voter card, or driver's license only to discover the government portal demands both sides inside a single file? Most of us snap two quick photos on our phone, then struggle with awkward photo collage apps or rush to a local cyber cafe. This tool fixes that in about twenty seconds. Drop your front and back photos, pick your layout, and download a crisp, print-ready document.",
+    whatItDoes: "This tool takes two separate photos—or scanned PDF pages of any identity document—and aligns them neatly onto a single A4 sheet or standard PVC card format. You can rotate sideways smartphone snaps, trim messy backgrounds, and add a clean cutting line so your scissors have an exact border to follow. Everything runs right inside your web browser. Nothing gets uploaded to any server, keeping your sensitive national ID numbers strictly between you and your screen.",
+    howToUse: [
+      "Upload or drop the front side of your card. If your phone took it sideways, click the 90° rotate button until it sits straight.",
+      "Upload the back side of your card in the second box and check the alignment.",
+      "Choose your preferred layout: pick A4 Stacked for official job or bank KYC forms, or Side-by-Side if you are printing onto a PVC card sheet.",
+      "Check the live preview canvas. You can toggle the 1px cutting border to make trimming with scissors effortless.",
+      "Click Download PDF or Print. Grab your clean document instantly with zero wait times."
+    ],
+    specificationTable: [
+      { requirement: "Standard Card Size", specification: "85.60 mm x 53.98 mm (CR80 standard credit card format)" },
+      { requirement: "Supported Inputs", specification: "JPG, PNG, WebP, and PDF" },
+      { requirement: "Output Formats", specification: "Print-ready PDF (300 DPI), High-res JPG, Direct Print" },
+      { requirement: "Layout Modes", specification: "A4 Stacked (Vertical), Side-by-Side (Horizontal), 4x6 Photo Sheet" },
+      { requirement: "Privacy Architecture", specification: "100% Client-Side In-Browser Processing (Zero Server Storage)" }
+    ],
+    commonMistakes: [
+      "Uploading sideways phone photos without rotating them first—verification officers will reject sideways text.",
+      "Leaving messy bedsheet or table margins around the card edges instead of using a tight photo crop.",
+      "Choosing the wrong paper layout when using a specialized PVC card printer tray or 4x6 photo sheet.",
+      "Forgetting to verify your portal's maximum PDF size limit before submitting."
+    ],
+    faqs: [
+      {
+        question: "Can I merge the front and back of an Aadhaar card for print?",
+        answer: "Yes, absolutely. Most cyber cafes and official kiosks use this exact layout—either stacked vertically on A4 for document verification or side-by-side for laminating into a wallet-sized card."
+      },
+      {
+        question: "Will my card details or Aadhaar numbers be saved on your servers?",
+        answer: "Not a single byte leaves your device. The merging and PDF compilation happen 100% inside your browser using local canvas code. Once you close this tab, your images are completely wiped."
+      },
+      {
+        question: "What should I choose: A4 Stacked or Side-by-Side?",
+        answer: "Go with A4 Stacked if you are submitting documents for bank KYC, college admissions, or government job portals. Choose Side-by-Side if you are printing on photo paper to fold, laminate, or punch into a PVC card."
+      },
+      {
+        question: "Can I use photos taken from my smartphone camera?",
+        answer: "Yes, definitely. Just make sure you take them under decent lighting with minimal glare. If your phone rotated the photo sideways, click our 90-degree rotate button to straighten it in one second."
+      },
+      {
+        question: "Is this tool free to use?",
+        answer: "Yes, 100% free with zero watermarks, no account registration required, and no hidden limits."
+      }
+    ],
+    relatedTools: [
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" },
+      { name: "PAN Card Photo Resize", href: "/tools/pan-card-resize/" },
+      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker/" },
+      { name: "Image Compressor", href: "/tools/image-compressor/" }
+    ]
+  },
   "crop-aadhaar-card": {
     title: "Crop & Resize Aadhaar Card Photo – Official UIDAI Size",
     intro: "UIDAI Aadhaar portal applications and updates require photographs to meet strict physical and digital dimension standards. Crop and resize Aadhaar Card photo online for free with ToolWala to remove unwanted background, white space, and margins instantly.",

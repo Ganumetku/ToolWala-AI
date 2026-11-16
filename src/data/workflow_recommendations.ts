@@ -217,6 +217,15 @@ const WORKFLOWS: Record<string, ToolWorkflow> = {
       { slug: 'signature-resize', label: 'Signature Resize', icon: 'PenTool' }
     ]
   },
+  'merge-id-front-and-back': {
+    nextRecommended: ['crop-aadhaar-card', 'passport-photo-maker', 'image-compressor', 'compress-pdf'],
+    mostUsedTogether: ['crop-aadhaar-card', 'signature-resize', 'pan-card-resize'],
+    workflow: [
+      { slug: 'crop-aadhaar-card', label: 'Crop Card', icon: 'Crop' },
+      { slug: 'merge-id-front-and-back', label: 'Merge Front & Back', icon: 'IdCard' },
+      { slug: 'compress-pdf', label: 'Compress PDF', icon: 'Shrink' }
+    ]
+  },
   'crop-aadhaar-card': {
     nextRecommended: ['signature-resize', 'gov-form-image-compressor', 'passport-photo-maker'],
     mostUsedTogether: ['exam-photo-resizer', 'bg-remover', 'aadhaar-pdf-compressor'],

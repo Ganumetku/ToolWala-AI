@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BottomNavBar from "@/components/BottomNavBar";
@@ -16,9 +16,17 @@ export default function PublicLayoutWrapper({
   const { trackPageView, trackEvent } = useAnalytics();
   const isAdmin = pathname?.startsWith('/admin');
   const isLogin = pathname === '/login' || pathname === '/login/';
+  const lastTrackedRouteRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (!pathname || pathname.startsWith('/admin')) return;
+
+    // Deduplicate: avoid duplicate pageview dispatches for identical routes within same navigation
+    const currentUrl = typeof window !== 'undefined' ? (pathname + (window.location.search || '')) : pathname;
+    if (lastTrackedRouteRef.current === currentUrl) {
+      return;
+    }
+    lastTrackedRouteRef.current = currentUrl;
 
     // Defer analytics tracking to browser idle time to avoid main thread blocking
     const runTracking = () => {

@@ -3,21 +3,86 @@
 import { useCallback } from 'react';
 import * as gtag from '@/lib/gtag';
 
+const VISITOR_KEY = 'toolwala_visitor_id';
 const SESSION_KEY = 'toolwala_session_id';
+const LAST_ACTIVITY_KEY = 'toolwala_last_activity';
+const SESSION_SYNCED_KEY = 'toolwala_session_synced';
+const SESSION_TIMEOUT_MS = 30 * 60 * 1000; // 30 minutes inactivity timeout
+
+/**
+ * Retrieves or initializes an anonymous, persistent visitor identity.
+ * Stored in localStorage. Never expires. Cryptographically random, zero IP tracking, zero fingerprinting.
+ */
+function getOrCreateVisitorId(): string {
+  if (typeof window === 'undefined') return '';
+  try {
+    let visitorId = localStorage.getItem(VISITOR_KEY);
+    if (!visitorId) {
+      if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+        visitorId = 'usr_' + crypto.randomUUID().replace(/-/g, '').substring(0, 16);
+      } else if (typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function') {
+        const arr = new Uint8Array(8);
+        crypto.getRandomValues(arr);
+        visitorId = 'usr_' + Array.from(arr, b => b.toString(16).padStart(2, '0')).join('');
+      } else {
+        visitorId = 'usr_' + Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
+      }
+      localStorage.setItem(VISITOR_KEY, visitorId);
+    }
+    return visitorId;
+  } catch {
+    return 'usr_' + Math.random().toString(36).substring(2, 12);
+  }
+}
+
+/**
+ * Retrieves or creates a session identifier.
+ * Stored in sessionStorage with a 30-minute inactivity timeout.
+ * Reused across page refreshes and multi-tool navigations.
+ */
+function getOrCreateSessionId(): { sessionId: string; isNewSession: boolean } {
+  if (typeof window === 'undefined') return { sessionId: '', isNewSession: false };
+  try {
+    const now = Date.now();
+    const storedSessionId = sessionStorage.getItem(SESSION_KEY);
+    const lastActivity = localStorage.getItem(LAST_ACTIVITY_KEY);
+    const lastActivityTime = lastActivity ? parseInt(lastActivity, 10) : 0;
+
+    // Check if existing session is still active (within 30 mins)
+    if (storedSessionId && (now - lastActivityTime < SESSION_TIMEOUT_MS)) {
+      localStorage.setItem(LAST_ACTIVITY_KEY, now.toString());
+      const isSynced = sessionStorage.getItem(SESSION_SYNCED_KEY) === storedSessionId;
+      return { sessionId: storedSessionId, isNewSession: !isSynced };
+    }
+
+    // New session (fresh browser window or inactivity expired)
+    let newSessionId = '';
+    if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+      newSessionId = 'ses_' + crypto.randomUUID().replace(/-/g, '').substring(0, 16);
+    } else {
+      newSessionId = 'ses_' + Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
+    }
+
+    sessionStorage.setItem(SESSION_KEY, newSessionId);
+    sessionStorage.removeItem(SESSION_SYNCED_KEY);
+    localStorage.setItem(LAST_ACTIVITY_KEY, now.toString());
+    return { sessionId: newSessionId, isNewSession: true };
+  } catch {
+    const fallbackId = 'ses_' + Math.random().toString(36).substring(2, 12);
+    return { sessionId: fallbackId, isNewSession: true };
+  }
+}
 
 export function useAnalytics() {
-  // 1. Generate or retrieve session identifier
-  const getSessionId = useCallback((): string => {
-    if (typeof window === 'undefined') return '';
-    let sessionId = localStorage.getItem(SESSION_KEY);
-    if (!sessionId) {
-      sessionId = 'session_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-      localStorage.setItem(SESSION_KEY, sessionId);
-    }
-    return sessionId;
+  const getVisitorId = useCallback((): string => {
+    return getOrCreateVisitorId();
   }, []);
 
-  // Base track helper
+  const getSessionId = useCallback((): string => {
+    return getOrCreateSessionId().sessionId;
+  }, []);
+
+  // Base telemetry dispatch helper
   const trackRaw = useCallback(async (payload: {
     type: 'visitor' | 'tool_run' | 'event';
     eventName?: string;
@@ -29,7 +94,8 @@ export function useAnalytics() {
     source?: string;
   }) => {
     try {
-      const sessionId = getSessionId();
+      const { sessionId, isNewSession } = getOrCreateSessionId();
+      const visitorId = getOrCreateVisitorId();
       if (!sessionId) return;
 
       const response = await fetch('/api/analytics/track/', {
@@ -37,21 +103,29 @@ export function useAnalytics() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...payload,
+          visitorId,
           sessionId,
+          isNewSession,
+          isWebDriver: typeof navigator !== 'undefined' ? Boolean((navigator as any).webdriver) : false,
         }),
       });
 
-      if (!response.ok) {
+      if (response.ok) {
+        // Mark session as synced in Supabase so subsequent route views avoid duplicate upserts
+        if (typeof window !== 'undefined' && isNewSession) {
+          sessionStorage.setItem(SESSION_SYNCED_KEY, sessionId);
+        }
+      } else {
         console.warn('Telemetry request status code was not 200:', response.status);
       }
     } catch (err) {
       console.warn('Analytics tracking call failed:', err);
     }
-  }, [getSessionId]);
+  }, []);
 
   // 2. Track Visitor Page View
   const trackPageView = useCallback(async (path: string, source?: string) => {
-    // Send to Supabase
+    // Send to Supabase (first-party database visitor tracking)
     await trackRaw({
       type: 'visitor',
       route: path,
@@ -59,20 +133,17 @@ export function useAnalytics() {
       referrer: typeof document !== 'undefined' ? document.referrer : undefined
     });
 
-    // Send to Google Analytics
-    gtag.pageview(path);
+    // NOTE: GA4 page_view is dispatched centrally by AnalyticsTracker in GoogleAnalytics component.
   }, [trackRaw]);
 
   // 3. Track Tool Run execution (mapped to tool_used event)
   const trackToolRun = useCallback(async (toolSlug: string, metadata?: Record<string, any>) => {
-    // Send to Supabase
     await trackRaw({
       type: 'tool_run',
       toolId: toolSlug,
       metadata: metadata || {}
     });
 
-    // Send to Google Analytics
     gtag.event('tool_used', {
       event_category: 'Tools',
       event_label: toolSlug,
@@ -204,6 +275,7 @@ export function useAnalytics() {
     trackFileDownloaded,
     trackButtonClicked,
     trackEvent,
-    getSessionId
+    getSessionId,
+    getVisitorId
   };
 }

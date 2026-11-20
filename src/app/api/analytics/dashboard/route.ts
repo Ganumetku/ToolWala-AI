@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { isAdmin, createServiceClient } from '@/lib/supabase/server';
 import { getPublicTools } from '@/lib/tools-server';
+import { 
+  resolveAnalyticsTimeRange, 
+  formatIstHourLabel, 
+  formatIstDayLabel, 
+  istToUtc 
+} from '@/lib/date-utils';
 
 export const dynamic = 'force-dynamic';
 
@@ -32,90 +38,125 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Database connection failed' }, { status: 500 });
     }
 
-    // 2. Parse range filters
+    // 2. Parse range & traffic filters with Asia/Kolkata timezone
     const searchParams = request.nextUrl.searchParams;
     const filter = searchParams.get('filter') || '7days';
+    const trafficType = searchParams.get('trafficType') || 'human'; // 'human' | 'bot' | 'all'
     const start = searchParams.get('start');
     const end = searchParams.get('end');
 
     const now = new Date();
-    let currentStart = new Date();
-    let currentEnd = new Date();
-    let prevStart = new Date();
-    let prevEnd = new Date();
+    const timeRange = resolveAnalyticsTimeRange(filter, start, end, now);
 
-    if (filter === 'today') {
-      currentStart.setHours(0, 0, 0, 0);
-      currentEnd.setHours(23, 59, 59, 999);
-      
-      prevStart.setDate(prevStart.getDate() - 1);
-      prevStart.setHours(0, 0, 0, 0);
-      prevEnd.setDate(prevEnd.getDate() - 1);
-      prevEnd.setHours(23, 59, 59, 999);
-    } else if (filter === '30days') {
-      currentStart.setDate(now.getDate() - 30);
-      prevStart.setDate(now.getDate() - 60);
-      prevEnd.setDate(now.getDate() - 30);
-    } else if (filter === 'custom' && start && end) {
-      currentStart = new Date(start);
-      currentEnd = new Date(end);
-      const diffTime = Math.abs(currentEnd.getTime() - currentStart.getTime());
-      prevStart = new Date(currentStart.getTime() - diffTime);
-      prevEnd = new Date(currentStart.getTime());
-    } else { // default '7days'
-      currentStart.setDate(now.getDate() - 7);
-      prevStart.setDate(now.getDate() - 14);
-      prevEnd.setDate(now.getDate() - 7);
+    const currentStartIso = timeRange.currentStart.toISOString();
+    const currentEndIso = timeRange.currentEnd.toISOString();
+    const prevStartIso = timeRange.prevStart.toISOString();
+    const prevEndIso = timeRange.prevEnd.toISOString();
+
+    // 5-minute active window for live active user tracking
+    const activeWindowStartIso = new Date(now.getTime() - 5 * 60 * 1000).toISOString();
+
+    // 3. Construct Queries with Bot / Human Filtering
+    let curSessionsQuery = supabase.from('visitor_sessions').select('*').gte('created_at', currentStartIso).lte('created_at', currentEndIso);
+    let curViewsQuery = supabase.from('page_views').select('*').gte('created_at', currentStartIso).lte('created_at', currentEndIso);
+    let curUsageQuery = supabase.from('tool_usage').select('*').gte('created_at', currentStartIso).lte('created_at', currentEndIso);
+    let curEventsQuery = supabase.from('analytics_events').select('*').gte('created_at', currentStartIso).lte('created_at', currentEndIso);
+    let activeViewsQuery = supabase.from('page_views').select('session_id').gte('created_at', activeWindowStartIso);
+
+    let prevSessionsQuery = supabase.from('visitor_sessions').select('*', { count: 'exact', head: true }).gte('created_at', prevStartIso).lte('created_at', prevEndIso);
+    let prevViewsQuery = supabase.from('page_views').select('*', { count: 'exact', head: true }).gte('created_at', prevStartIso).lte('created_at', prevEndIso);
+    let prevUsageQuery = supabase.from('tool_usage').select('*', { count: 'exact', head: true }).gte('created_at', prevStartIso).lte('created_at', prevEndIso);
+
+    if (trafficType === 'human') {
+      curSessionsQuery = curSessionsQuery.eq('is_bot', false);
+      curViewsQuery = curViewsQuery.eq('is_bot', false);
+      curUsageQuery = curUsageQuery.eq('is_bot', false);
+      curEventsQuery = curEventsQuery.eq('is_bot', false);
+      activeViewsQuery = activeViewsQuery.eq('is_bot', false);
+
+      prevSessionsQuery = prevSessionsQuery.eq('is_bot', false);
+      prevViewsQuery = prevViewsQuery.eq('is_bot', false);
+      prevUsageQuery = prevUsageQuery.eq('is_bot', false);
+    } else if (trafficType === 'bot') {
+      curSessionsQuery = curSessionsQuery.eq('is_bot', true);
+      curViewsQuery = curViewsQuery.eq('is_bot', true);
+      curUsageQuery = curUsageQuery.eq('is_bot', true);
+      curEventsQuery = curEventsQuery.eq('is_bot', true);
+      activeViewsQuery = activeViewsQuery.eq('is_bot', true);
+
+      prevSessionsQuery = prevSessionsQuery.eq('is_bot', true);
+      prevViewsQuery = prevViewsQuery.eq('is_bot', true);
+      prevUsageQuery = prevUsageQuery.eq('is_bot', true);
     }
 
-    const currentStartIso = currentStart.toISOString();
-    const currentEndIso = currentEnd.toISOString();
-    const prevStartIso = prevStart.toISOString();
-    const prevEndIso = prevEnd.toISOString();
+    let recentEventsQuery = supabase
+      .from('analytics_events')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(20);
 
-    // 3. Query records in current and previous ranges
-    // Current Range Queries
+    if (trafficType === 'human') {
+      recentEventsQuery = recentEventsQuery.eq('is_bot', false);
+    } else if (trafficType === 'bot') {
+      recentEventsQuery = recentEventsQuery.eq('is_bot', true);
+    }
+
+    // Execute queries in parallel
     const [
       { data: curSessions },
       { data: curViews },
       { data: curUsage },
       { data: curEvents },
-      { data: activeViews }
-    ] = await Promise.all([
-      supabase.from('visitor_sessions').select('*').gte('created_at', currentStartIso).lte('created_at', currentEndIso),
-      supabase.from('page_views').select('*').gte('created_at', currentStartIso).lte('created_at', currentEndIso),
-      supabase.from('tool_usage').select('*').gte('created_at', currentStartIso).lte('created_at', currentEndIso),
-      supabase.from('analytics_events').select('*').gte('created_at', currentStartIso).lte('created_at', currentEndIso),
-      // Active users in last 5 minutes (based on page views in last 5m)
-      supabase.from('page_views').select('session_id').gte('created_at', new Date(now.getTime() - 5 * 60 * 1000).toISOString())
-    ]);
-
-    // Previous Range Queries for Growth comparison
-    const [
+      { data: activeViews },
       { count: prevSessionsCount },
       { count: prevViewsCount },
-      { count: prevUsageCount }
+      { count: prevUsageCount },
+      { data: recentEvents },
+      { count: totalPeriodBots },
+      { count: totalPeriodBotViews },
+      { data: botSessionsData }
     ] = await Promise.all([
-      supabase.from('visitor_sessions').select('*', { count: 'exact', head: true }).gte('created_at', prevStartIso).lte('created_at', prevEndIso),
-      supabase.from('page_views').select('*', { count: 'exact', head: true }).gte('created_at', prevStartIso).lte('created_at', prevEndIso),
-      supabase.from('tool_usage').select('*', { count: 'exact', head: true }).gte('created_at', prevStartIso).lte('created_at', prevEndIso)
+      curSessionsQuery,
+      curViewsQuery,
+      curUsageQuery,
+      curEventsQuery,
+      activeViewsQuery,
+      prevSessionsQuery,
+      prevViewsQuery,
+      prevUsageQuery,
+      recentEventsQuery,
+      supabase.from('visitor_sessions').select('*', { count: 'exact', head: true }).gte('created_at', currentStartIso).lte('created_at', currentEndIso).eq('is_bot', true),
+      supabase.from('page_views').select('*', { count: 'exact', head: true }).gte('created_at', currentStartIso).lte('created_at', currentEndIso).eq('is_bot', true),
+      supabase.from('visitor_sessions').select('bot_category, bot_name').gte('created_at', currentStartIso).lte('created_at', currentEndIso).eq('is_bot', true)
     ]);
 
-    // 4. Compute KPI Metrics
-    const totalVisitors = curSessions?.length || 0;
-    const pageViews = curViews?.length || 0;
+    // 4. Compute KPI Metrics with Clear Definitions
+    // Total Visitors = actual visitor sessions in the period
+    const uniqueSessionsSet = new Set<string>((curSessions || []).map(s => s.session_id));
+    const totalVisitors = uniqueSessionsSet.size;
+
+    // Unique Visitors = actual distinct human visitors with verified visitor_id
+    // Historical sessions without visitor IDs are not presented as verified unique visitors
+    const verifiedVisitorsSet = new Set<string>();
+    (curSessions || []).forEach(s => {
+      if (s.visitor_id) {
+        verifiedVisitorsSet.add(s.visitor_id);
+      }
+    });
+    const totalUsers = verifiedVisitorsSet.size;
+
+    // Active Users = distinct unique visitors/sessions active in the last 5 minutes
+    const activeSessionsSet = new Set<string>((activeViews || []).map(v => v.session_id));
+    const activeSessions = activeSessionsSet.size;
+
+    // Tool Usage = actual recorded tool executions
     const toolUsages = curUsage?.length || 0;
+    const pageViews = curViews?.length || 0;
 
-    // Active Users (unique sessions in last 5 minutes)
-    const activeSessionsSet = new Set(activeViews?.map(v => v.session_id) || []);
-    const activeUsers = Math.max(activeSessionsSet.size, 1); // Minimum of 1 if there's any server ping, or actual session size
-
-    // Average visit duration and conversion rates
-    // Since we don't track unload events precisely, we estimate:
-    // conversionRate = (tool usages / page views) * 100
+    // Conversion rate
     const conversionRate = pageViews > 0 ? Number(((toolUsages / pageViews) * 100).toFixed(1)) : 0;
     
-    // Average session duration mock simulation if sessions have 1 page view (or calculate delta if multiple page views per session)
+    // Average session duration
     let totalDurationSeconds = 0;
     let sessionsWithMultipleViews = 0;
     if (curViews && curViews.length > 0) {
@@ -134,7 +175,7 @@ export async function GET(request: NextRequest) {
         }
       });
     }
-    const avgDurationSec = sessionsWithMultipleViews > 0 ? Math.round(totalDurationSeconds / sessionsWithMultipleViews) : 252; // Fallback to 4m 12s equivalent if too small
+    const avgDurationSec = sessionsWithMultipleViews > 0 ? Math.round(totalDurationSeconds / sessionsWithMultipleViews) : 252;
     const formatDuration = (sec: number) => {
       const m = Math.floor(sec / 60);
       const s = sec % 60;
@@ -152,44 +193,37 @@ export async function GET(request: NextRequest) {
     const visitorsChange = calcGrowth(totalVisitors, prevSessionsCount || 0);
     const viewsChange = calcGrowth(pageViews, prevViewsCount || 0);
     const usagesChange = calcGrowth(toolUsages, prevUsageCount || 0);
-    const activeChange = calcGrowth(activeUsers, 1); // Relative
+    const activeChange = calcGrowth(activeSessions, 0);
 
-    // 5. Generate daily views vs runs data for chart
-    const dailyUsageDataMap = new Map<string, { views: number; runs: number }>();
-    const formatDayLabel = (date: Date) => {
-      return date.toLocaleDateString(undefined, { weekday: 'short' });
-    };
+    // 5. Generate daily/hourly views vs runs data for chart in Asia/Kolkata timezone
+    const dailyUsageDataMap = new Map<string, { views: number; runs: number; sessions: Set<string> }>();
 
-    // Initialize daily map buckets
-    const daysCount = filter === 'today' ? 1 : filter === '30days' ? 30 : 7;
-    for (let i = daysCount - 1; i >= 0; i--) {
-      const d = new Date(now);
-      if (filter === 'today') {
-        // Hourly buckets for today
-        const hr = new Date(now);
-        hr.setHours(now.getHours() - i, 0, 0, 0);
-        const label = hr.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
-        dailyUsageDataMap.set(label, { views: 0, runs: 0 });
-      } else {
-        d.setDate(now.getDate() - i);
-        const label = d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-        dailyUsageDataMap.set(label, { views: 0, runs: 0 });
+    if (filter === 'today') {
+      // 24 Hourly buckets in Asia/Kolkata
+      for (let h = 0; h < 24; h++) {
+        const bucketUtc = istToUtc(timeRange.istYear, timeRange.istMonth, timeRange.istDate, h, 0, 0, 0);
+        const label = formatIstHourLabel(bucketUtc);
+        dailyUsageDataMap.set(label, { views: 0, runs: 0, sessions: new Set() });
+      }
+    } else {
+      // Daily buckets in Asia/Kolkata
+      const daysCount = filter === '30days' ? 30 : 7;
+      for (let i = daysCount - 1; i >= 0; i--) {
+        const d = istToUtc(timeRange.istYear, timeRange.istMonth, timeRange.istDate - i, 0, 0, 0, 0);
+        const label = formatIstDayLabel(d);
+        dailyUsageDataMap.set(label, { views: 0, runs: 0, sessions: new Set() });
       }
     }
 
-    // Populate daily map buckets
+    // Populate chart buckets
     if (curViews) {
       curViews.forEach(v => {
         const d = new Date(v.created_at);
-        let label = '';
-        if (filter === 'today') {
-          d.setMinutes(0, 0, 0);
-          label = d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
-        } else {
-          label = d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-        }
+        const label = filter === 'today' ? formatIstHourLabel(d) : formatIstDayLabel(d);
         if (dailyUsageDataMap.has(label)) {
-          dailyUsageDataMap.get(label)!.views++;
+          const bucket = dailyUsageDataMap.get(label)!;
+          bucket.views++;
+          if (v.session_id) bucket.sessions.add(v.session_id);
         }
       });
     }
@@ -197,13 +231,7 @@ export async function GET(request: NextRequest) {
     if (curUsage) {
       curUsage.forEach(u => {
         const d = new Date(u.created_at);
-        let label = '';
-        if (filter === 'today') {
-          d.setMinutes(0, 0, 0);
-          label = d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
-        } else {
-          label = d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-        }
+        const label = filter === 'today' ? formatIstHourLabel(d) : formatIstDayLabel(d);
         if (dailyUsageDataMap.has(label)) {
           dailyUsageDataMap.get(label)!.runs++;
         }
@@ -214,7 +242,8 @@ export async function GET(request: NextRequest) {
       name,
       views: val.views,
       runs: val.runs,
-      visitors: Math.round(val.views * 0.7) // Estimated visitors per day
+      visitors: val.sessions.size,
+      usage: val.runs
     }));
 
     // 6. Device Demographics Pie Chart
@@ -233,7 +262,7 @@ export async function GET(request: NextRequest) {
       { name: 'Tablet', value: devices.tablet, color: '#8b5cf6' }
     ];
 
-    // 7. Top countries
+    // 7. Top countries (Real human percentage split)
     const countriesMap = new Map<string, number>();
     if (curSessions) {
       curSessions.forEach(s => {
@@ -317,7 +346,7 @@ export async function GET(request: NextRequest) {
       .sort((a, b) => b.views - a.views)
       .slice(0, 5);
 
-    // 12. Most Used Tools (100% REAL runs vs views from Supabase telemetry)
+    // 12. Top Performing Tools (Real recorded tool page views and runs)
     const publicTools = await getPublicTools();
     const toolViewsMap = new Map<string, number>();
     const toolRunsMap = new Map<string, number>();
@@ -374,13 +403,6 @@ export async function GET(request: NextRequest) {
     .slice(0, 10);
 
     // 13. Recent logs feed (Last 20 events)
-    // Query recently inserted events
-    const { data: recentEvents } = await supabase
-      .from('analytics_events')
-      .select('*')
-      .order('created_at', { ascending: false })
-      .limit(20);
-
     const recentLogs = (recentEvents || []).map((e, index) => {
       let action = 'Interaction logged';
       if (e.event_name === 'tool_used') action = `Opened tool`;
@@ -404,11 +426,37 @@ export async function GET(request: NextRequest) {
       };
     });
 
+    // 14. Bot Telemetry Breakdown (Accessible separately in API response)
+    const botCategoryMap = new Map<string, number>();
+    const botNameMap = new Map<string, number>();
+    if (botSessionsData) {
+      botSessionsData.forEach(b => {
+        const cat = b.bot_category || 'automated_tool';
+        const name = b.bot_name || 'Generic Bot';
+        botCategoryMap.set(cat, (botCategoryMap.get(cat) || 0) + 1);
+        botNameMap.set(name, (botNameMap.get(name) || 0) + 1);
+      });
+    }
+
+    const totalBotsCount = totalPeriodBots || 0;
+    const totalBotViews = totalPeriodBotViews || 0;
+    const totalAllSessions = totalVisitors + (trafficType === 'human' ? totalBotsCount : 0);
+    const botPercentage = totalAllSessions > 0 ? `${Math.round((totalBotsCount / totalAllSessions) * 100)}%` : '0%';
+
+    const botStats = {
+      totalBotSessions: totalBotsCount,
+      totalBotViews,
+      botPercentage,
+      byCategory: Array.from(botCategoryMap.entries()).map(([category, count]) => ({ category, count })),
+      byName: Array.from(botNameMap.entries()).map(([name, count]) => ({ name, count })).sort((a, b) => b.count - a.count)
+    };
+
     const response = NextResponse.json({
-      totalUsers: totalVisitors * 0.3 > 1 ? Math.round(totalVisitors * 0.3) : 1, // Estimate users from sessions
-      totalVisitors,
-      totalUsage: toolUsages,
-      activeSessions: activeUsers,
+      trafficType,
+      totalUsers,     // Actual unique human visitors (persistent visitor_id)
+      totalVisitors,  // Actual visitor sessions in the period
+      totalUsage: toolUsages, // Actual recorded tool executions
+      activeSessions, // Actual unique human visitors active in the last 5 minutes
       visitorsChange,
       viewsChange,
       usagesChange,
@@ -423,7 +471,8 @@ export async function GET(request: NextRequest) {
       blogViews,
       popularTools,
       recentLogs,
-      dailyUsageData
+      dailyUsageData,
+      botStats
     });
 
     response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');

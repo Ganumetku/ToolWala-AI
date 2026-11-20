@@ -189,7 +189,7 @@ export default function AdminDashboard() {
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6">
         <StatCard 
-          title="Total Users" 
+          title="Unique Visitors" 
           value={stats.totalUsers.toLocaleString()} 
           icon={Users} 
           change={stats.visitorsChange || "+0%"} 
@@ -198,7 +198,7 @@ export default function AdminDashboard() {
           delay={0.05}
         />
         <StatCard 
-          title="Total Visitors" 
+          title="Total Sessions" 
           value={stats.totalVisitors.toLocaleString()} 
           icon={Eye} 
           change={stats.visitorsChange || "+0%"} 
@@ -216,7 +216,7 @@ export default function AdminDashboard() {
           delay={0.15}
         />
         <StatCard 
-          title="Active Users" 
+          title="Active Visitors" 
           value={stats.activeSessions.toString()} 
           icon={Cpu} 
           change={stats.activeChange || "+0%"} 

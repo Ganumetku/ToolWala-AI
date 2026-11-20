@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { isAdmin, createServiceClient } from '@/lib/supabase/server';
 import { getPublicTools } from '@/lib/tools-server';
+import { resolveAnalyticsTimeRange } from '@/lib/date-utils';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,13 +17,34 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Database connection failed' }, { status: 500 });
     }
 
-    // 2. Fetch all raw page views and tool usage events
+    const searchParams = request.nextUrl.searchParams;
+    const trafficType = searchParams.get('trafficType') || 'human';
+    const filter = searchParams.get('filter');
+
+    // 2. Fetch raw page views and tool usage events with traffic filtering
+    let viewsQuery = supabase.from('page_views').select('route');
+    let runsQuery = supabase.from('tool_usage').select('tool_name');
+
+    if (filter) {
+      const timeRange = resolveAnalyticsTimeRange(filter);
+      viewsQuery = viewsQuery.gte('created_at', timeRange.currentStart.toISOString()).lte('created_at', timeRange.currentEnd.toISOString());
+      runsQuery = runsQuery.gte('created_at', timeRange.currentStart.toISOString()).lte('created_at', timeRange.currentEnd.toISOString());
+    }
+
+    if (trafficType === 'human') {
+      viewsQuery = viewsQuery.eq('is_bot', false);
+      runsQuery = runsQuery.eq('is_bot', false);
+    } else if (trafficType === 'bot') {
+      viewsQuery = viewsQuery.eq('is_bot', true);
+      runsQuery = runsQuery.eq('is_bot', true);
+    }
+
     const [
       { data: viewsData },
       { data: runsData }
     ] = await Promise.all([
-      supabase.from('page_views').select('route'),
-      supabase.from('tool_usage').select('tool_name')
+      viewsQuery,
+      runsQuery
     ]);
 
     const publicTools = await getPublicTools();
@@ -69,7 +91,7 @@ export async function GET(request: NextRequest) {
       };
     }).sort((a, b) => b.runs - a.runs);
 
-    return NextResponse.json({ success: true, tools: toolsAnalytics });
+    return NextResponse.json({ success: true, trafficType, tools: toolsAnalytics });
   } catch (error: any) {
     console.error('Error generating tools analytics:', error);
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });

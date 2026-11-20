@@ -2,26 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createServiceClient } from '@/lib/supabase/server';
 import { userAgent } from 'next/server';
 import { toolsData } from '@/data/tools';
+import { classifyVisitor } from '@/lib/bot-detection';
+import { resolveCountryName } from '@/lib/geo';
 
 export const dynamic = 'force-dynamic';
-
-const COUNTRY_NAMES: Record<string, string> = {
-  'US': 'United States',
-  'IN': 'India',
-  'GB': 'United Kingdom',
-  'CA': 'Canada',
-  'DE': 'Germany',
-  'AU': 'Australia',
-  'FR': 'France',
-  'JP': 'Japan',
-  'BR': 'Brazil',
-  'ZA': 'South Africa',
-  'SG': 'Singapore',
-  'AE': 'United Arab Emirates',
-  'NL': 'Netherlands',
-  'IT': 'Italy',
-  'ES': 'Spain'
-};
 
 const DEV_COUNTRIES = ['US', 'IN', 'GB', 'CA', 'DE', 'AU', 'FR', 'BR', 'JP', 'ZA'];
 
@@ -32,11 +16,25 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: 'Request body is empty' }, { status: 400 });
     }
     const body = JSON.parse(bodyText);
-    const { type, sessionId, eventName, toolId, toolName: bodyToolName, route: bodyRoute, referrer: bodyReferrer, metadata = {} } = body;
+    const { 
+      type, 
+      sessionId, 
+      visitorId,
+      isNewSession = true,
+      eventName, 
+      toolId, 
+      toolName: bodyToolName, 
+      route: bodyRoute, 
+      referrer: bodyReferrer, 
+      metadata = {},
+      isWebDriver = false
+    } = body;
 
     if (!sessionId) {
       return NextResponse.json({ success: false, error: 'Session ID is required' }, { status: 400 });
     }
+
+    const resolvedVisitorId = visitorId || sessionId;
 
     const supabase = createServiceClient();
     if (!supabase) {
@@ -49,10 +47,13 @@ export async function POST(request: NextRequest) {
     const browser = ua.browser.name || 'Unknown Browser';
     const device = ua.device.type || 'desktop';
 
-    // 2. Resolve Referrer
+    // 2. Classify Visitor (Human vs Bot)
+    const { isBot, botCategory, botName } = classifyVisitor(userAgentStr, Boolean(isWebDriver));
+
+    // 3. Resolve Referrer
     const referrer = bodyReferrer || request.headers.get('referer') || 'Direct';
 
-    // 3. Resolve Country (including realistic dev emulation)
+    // 4. Resolve Country (No hardcoded US fallback; clean ISO-3166 resolution)
     let countryCode = request.headers.get('x-vercel-ip-country') || 
                       request.headers.get('cf-ipcountry') || 
                       request.headers.get('x-country-code') || 
@@ -63,17 +64,18 @@ export async function POST(request: NextRequest) {
 
     if (!countryCode || countryCode === 'XX' || countryCode === '127.0.0.1') {
       if (isLocalhost) {
-        // Distribute countries deterministically by sessionId so that a single session gets the same country code
+        // Distribute countries deterministically by sessionId for local dev emulation
         let sum = 0;
         for (let i = 0; i < sessionId.length; i++) sum += sessionId.charCodeAt(i);
         countryCode = DEV_COUNTRIES[sum % DEV_COUNTRIES.length];
       } else {
-        countryCode = 'US';
+        // Missing or unknown IP headers in production -> resolve as Unknown, NOT US
+        countryCode = '';
       }
     }
-    const country = COUNTRY_NAMES[countryCode.toUpperCase()] || countryCode;
+    const country = resolveCountryName(countryCode);
 
-    // 4. Resolve Tool metadata if applicable
+    // 5. Resolve Tool metadata if applicable
     let resolvedToolName = bodyToolName || '';
     let resolvedCategory = metadata.category || '';
     let resolvedRoute = bodyRoute || '';
@@ -96,30 +98,41 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // 5. Secure Session registration (Upsert visitor session)
-    const { error: sessionError } = await supabase.from('visitor_sessions').upsert({
-      session_id: sessionId,
-      country,
-      device,
-      browser,
-      user_agent: userAgentStr,
-      referrer,
-      created_at: new Date().toISOString()
-    }, { onConflict: 'session_id' });
+    // 6. Secure Session registration (Upsert visitor session with bot classification)
+    // Optimize for Supabase Free tier: only upsert if new session or first visit
+    if (isNewSession) {
+      const { error: sessionError } = await supabase.from('visitor_sessions').upsert({
+        session_id: sessionId,
+        visitor_id: resolvedVisitorId,
+        country,
+        device,
+        browser,
+        user_agent: userAgentStr,
+        referrer,
+        is_bot: isBot,
+        bot_category: botCategory,
+        bot_name: botName,
+        created_at: new Date().toISOString()
+      }, { onConflict: 'session_id' });
 
-    if (sessionError) {
-      console.error('Failed to upsert visitor session:', sessionError);
+      if (sessionError) {
+        console.error('Failed to upsert visitor session:', sessionError);
+      }
     }
 
-    // 6. Route event to appropriate table
+    // 7. Route event to appropriate table
     if (type === 'visitor') {
       const { error: err } = await supabase.from('page_views').insert({
         session_id: sessionId,
+        visitor_id: resolvedVisitorId,
         route: resolvedRoute || bodyRoute || '/',
         referrer,
         country,
         device,
-        browser
+        browser,
+        is_bot: isBot,
+        bot_category: botCategory,
+        bot_name: botName
       });
       if (err) console.error('Failed to insert page view:', err);
 
@@ -131,11 +144,14 @@ export async function POST(request: NextRequest) {
         route: resolvedRoute || bodyRoute || '',
         country,
         device,
-        browser
+        browser,
+        is_bot: isBot,
+        bot_category: botCategory,
+        bot_name: botName
       });
       if (err) console.error('Failed to insert tool usage:', err);
 
-      // Duplicate as analytics_events for comprehensive auditing logs
+      // Audit log event
       await supabase.from('analytics_events').insert({
         session_id: sessionId,
         event_name: 'tool_used',
@@ -144,7 +160,10 @@ export async function POST(request: NextRequest) {
         metadata: { ...metadata, resolvedCategory },
         country,
         device,
-        browser
+        browser,
+        is_bot: isBot,
+        bot_category: botCategory,
+        bot_name: botName
       });
 
     } else if (type === 'event') {
@@ -157,11 +176,14 @@ export async function POST(request: NextRequest) {
         metadata,
         country,
         device,
-        browser
+        browser,
+        is_bot: isBot,
+        bot_category: botCategory,
+        bot_name: botName
       });
       if (err) console.error('Failed to insert analytics event:', err);
 
-      // If it's a calculator or major tool calculation trigger, also count it as a tool usage count!
+      // If it's a calculator or major tool calculation trigger, also record tool usage
       if (name === 'calculator_used' || name === 'image_uploaded' || name === 'pdf_processed' || name === 'ai_generated') {
         const { error: uerr } = await supabase.from('tool_usage').insert({
           session_id: sessionId,
@@ -170,13 +192,16 @@ export async function POST(request: NextRequest) {
           route: resolvedRoute || bodyRoute || '',
           country,
           device,
-          browser
+          browser,
+          is_bot: isBot,
+          bot_category: botCategory,
+          bot_name: botName
         });
         if (uerr) console.error('Failed to insert tool usage fallback:', uerr);
       }
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, isBot, botName });
   } catch (error: any) {
     console.error('Error handling track POST request:', error);
     return NextResponse.json({ success: false, error: 'Tracking failed' }, { status: 500 });

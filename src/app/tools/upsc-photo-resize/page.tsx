@@ -5,7 +5,6 @@ import ToolArticle from "@/components/ToolArticle";
 import { toolArticles } from "@/data/toolArticles";
 import ToolVisibilityGuard from "@/components/ToolVisibilityGuard";
 import ImageCropperEngine, { CropperPreset } from "@/components/ImageCropperEngine";
-import WorkflowRecommendations from "@/components/tools/WorkflowRecommendations";
 import ToolLayout from "@/components/tools/ToolLayout";
 import ToolHero from "@/components/tools/ToolHero";
 
@@ -52,9 +51,6 @@ export default function UPSCPhotoResize() {
         {toolArticles["upsc-photo-resize"] && (
           <ToolArticle {...toolArticles["upsc-photo-resize"]} />
         )}
-
-        {/* Workflow Recommendations */}
-        <WorkflowRecommendations slug="upsc-photo-resize" />
       </ToolLayout>
     </ToolVisibilityGuard>
   );

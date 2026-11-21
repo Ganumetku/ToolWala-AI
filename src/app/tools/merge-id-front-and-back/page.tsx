@@ -12,7 +12,6 @@ import { jsPDF } from 'jspdf';
 import ToolLayout from '@/components/tools/ToolLayout';
 import ToolHero from '@/components/tools/ToolHero';
 import ToolArticle from '@/components/ToolArticle';
-import WorkflowRecommendations from '@/components/tools/WorkflowRecommendations';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import { toolArticles } from '@/data/toolArticles';
 import CardCropModal from './CardCropModal';
@@ -1179,9 +1178,6 @@ export default function MergeIdFrontAndBackPage() {
         {toolArticles['merge-id-front-and-back'] && (
           <ToolArticle {...toolArticles['merge-id-front-and-back']} />
         )}
-
-        {/* Workflow Cross-Links */}
-        <WorkflowRecommendations slug="merge-id-front-and-back" />
 
         {/* Interactive Lossless Card Cropper Modal */}
         <CardCropModal

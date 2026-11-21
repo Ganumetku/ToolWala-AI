@@ -4,7 +4,6 @@ import { toolArticles } from "@/data/toolArticles";
 import ToolVisibilityGuard from "@/components/ToolVisibilityGuard";
 import { CropperPreset } from "@/components/ImageCropperEngine";
 import ImageCropperClientWrapper from "@/components/ImageCropperClientWrapper";
-import WorkflowRecommendations from "@/components/tools/WorkflowRecommendations";
 import ToolLayout from "@/components/tools/ToolLayout";
 import ToolHero from "@/components/tools/ToolHero";
 
@@ -66,9 +65,6 @@ export default function PANCardResizePage() {
         {toolArticles["pan-card-resize"] && (
           <ToolArticle {...toolArticles["pan-card-resize"]} />
         )}
-
-        {/* Workflow Recommendations */}
-        <WorkflowRecommendations slug="pan-card-resize" />
       </ToolLayout>
     </ToolVisibilityGuard>
   );

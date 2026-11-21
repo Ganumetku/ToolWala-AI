@@ -9,9 +9,10 @@ import WorkflowRecommendations from '@/components/tools/WorkflowRecommendations'
 
 interface ToolLayoutProps {
   children: React.ReactNode;
+  hideWorkflow?: boolean;
 }
 
-export default function ToolLayout({ children }: ToolLayoutProps) {
+export default function ToolLayout({ children, hideWorkflow = false }: ToolLayoutProps) {
   const { t, localizeHref } = useTranslation();
   const pathname = usePathname();
 
@@ -36,7 +37,7 @@ export default function ToolLayout({ children }: ToolLayoutProps) {
         {children}
 
         {/* Dynamic Workflow Recommendations */}
-        {isToolPage && (
+        {isToolPage && !hideWorkflow && (
           <WorkflowRecommendations slug={slug} />
         )}
       </div>

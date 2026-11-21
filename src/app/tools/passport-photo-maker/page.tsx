@@ -6,7 +6,6 @@ import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import ImageCropperEngine, { CropperPreset } from '@/components/ImageCropperEngine';
-import WorkflowRecommendations from '@/components/tools/WorkflowRecommendations';
 import ToolLayout from '@/components/tools/ToolLayout';
 import ToolHero from '@/components/tools/ToolHero';
 
@@ -111,9 +110,6 @@ export default function PassportPhotoMaker() {
         {toolArticles['passport-photo-maker'] && (
           <ToolArticle preferArticleCopy {...toolArticles['passport-photo-maker']} />
         )}
-
-        {/* Workflow Recommendations */}
-        <WorkflowRecommendations slug="passport-photo-maker" />
       </ToolLayout>
     </ToolVisibilityGuard>
   );

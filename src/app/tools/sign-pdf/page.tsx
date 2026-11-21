@@ -1,19 +1,17 @@
 "use client";
 
-import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FileText, Download, UploadCloud, Trash2,
   Shield, RefreshCw, AlertCircle, CheckCircle,
-  ChevronLeft, ArrowRight, Sparkles, Sliders,
+  ArrowRight, Sparkles, Sliders,
   HelpCircle, ChevronDown, PenTool, Type, Image as ImageIcon,
   Check, X, Layers
 } from 'lucide-react';
 import { toast } from 'sonner';
 import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
-import { MeshGradient } from '@/components/BackgroundEffects';
 import ToolLayout from '@/components/tools/ToolLayout';
 import PdfToolIcon from '@/components/PdfToolIcon';
 
@@ -643,18 +641,8 @@ export default function SignPdf() {
 
   return (
     <ToolLayout>
-      <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans transition-colors duration-250 font-sans">
-        <MeshGradient />
-
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
-          {/* Navigation Link */}
-          <Link href="/tools" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group cursor-pointer">
-            <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            Back to Directory
-          </Link>
-
-          {/* Main Workspace Card */}
-          <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12">
+      {/* Main Workspace Card */}
+      <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12">
             
             {/* Header Banner */}
             <div className="p-8 sm:p-10 border-b border-[#E6ECF5] dark:border-white/5 bg-[#FBFCFE] dark:bg-white/[0.02]">
@@ -1024,13 +1012,11 @@ export default function SignPdf() {
               )}
             </div>
           </div>
-        </div>
 
         {/* SEO content */}
         {toolArticles['sign-pdf'] && (
           <ToolArticle {...toolArticles['sign-pdf']} />
         )}
-      </div>
     </ToolLayout>
   );
 }

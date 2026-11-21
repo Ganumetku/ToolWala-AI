@@ -5,7 +5,6 @@ import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import AadhaarMaskingEngine from '@/components/AadhaarMaskingEngine';
-import WorkflowRecommendations from '@/components/tools/WorkflowRecommendations';
 import ToolLayout from '@/components/tools/ToolLayout';
 import ToolHero from '@/components/tools/ToolHero';
 
@@ -34,9 +33,6 @@ export default function AadhaarMaskingTool() {
         {toolArticles['aadhaar-masking-tool'] && (
           <ToolArticle {...toolArticles['aadhaar-masking-tool']} />
         )}
-
-        {/* Workflow Recommendations */}
-        <WorkflowRecommendations slug="aadhaar-masking-tool" />
       </ToolLayout>
     </ToolVisibilityGuard>
   );

@@ -6,7 +6,6 @@ import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import ToolVisibilityGuard from '@/components/ToolVisibilityGuard';
 import ImageCropperEngine, { CropperPreset } from '@/components/ImageCropperEngine';
-import WorkflowRecommendations from '@/components/tools/WorkflowRecommendations';
 import ToolLayout from '@/components/tools/ToolLayout';
 import ToolHero from '@/components/tools/ToolHero';
 
@@ -67,9 +66,6 @@ export default function CropAadhaarCardPage() {
         {article && (
           <ToolArticle {...article} />
         )}
-
-        {/* Workflow Recommendations */}
-        <WorkflowRecommendations slug="crop-aadhaar-card" />
       </ToolLayout>
     </ToolVisibilityGuard>
   );

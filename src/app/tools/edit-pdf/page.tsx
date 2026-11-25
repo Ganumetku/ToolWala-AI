@@ -9,7 +9,7 @@ import ToolArticle from "@/components/ToolArticle";
 import EditPdfEmbed from "@/components/pdf/EditPdfEmbed";
 import { toolArticles } from "@/data/toolArticles";
 
-// PDF Editor iframe URL configured via NEXT_PUBLIC_EDITOR_URL
+// PDF Editor iframe URL configured via NEXT_PUBLIC_EDITOR_URL (e.g. https://editor.toolwala.co)
 const EDITOR_URL = process.env.NEXT_PUBLIC_EDITOR_URL;
 const MISSING_EDITOR =
   "The PDF editor URL is not configured. Set NEXT_PUBLIC_EDITOR_URL and redeploy.";

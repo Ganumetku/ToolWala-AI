@@ -4,8 +4,9 @@ export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 export const maxDuration = 60;
 
-function engineBase(): string {
-  return (process.env.PDF_ENGINE_URL || 'http://127.0.0.1:8787').replace(/\/$/, '');
+function getEngineBase(): string {
+  const base = process.env.PDF_ENGINE_URL || 'http://127.0.0.1:8787';
+  return base.endsWith('/') ? base : `${base}/`;
 }
 
 export async function GET(
@@ -18,7 +19,8 @@ export async function GET(
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
   }
   try {
-    const res = await fetch(`${engineBase()}/health`, { cache: 'no-store' });
+    const healthUrl = new URL('health', getEngineBase());
+    const res = await fetch(healthUrl, { cache: 'no-store' });
     const json = await res.json();
     return NextResponse.json(json, { status: res.status });
   } catch {
@@ -50,7 +52,8 @@ export async function POST(
   }
 
   try {
-    const res = await fetch(`${engineBase()}/v1/${rel}`, {
+    const actionUrl = new URL(`v1/${rel}`, getEngineBase());
+    const res = await fetch(actionUrl, {
       method: 'POST',
       body: outbound,
     });

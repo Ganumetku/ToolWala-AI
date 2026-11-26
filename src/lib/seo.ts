@@ -16,31 +16,47 @@ const SITE_NAME = 'ToolWala AI';
 /** English SERP copy that beats stale DB/admin titles. Privacy is the click reason. */
 const SEO_COPY_OVERRIDES: Record<string, { title: string; description: string }> = {
   'jpg-to-pdf': {
-    title: 'JPG to PDF – No Upload, Files Stay on Your Device',
-    description: 'Turn JPG, PNG, or WebP images into a PDF in your browser. Nothing is uploaded. No signup, no watermark.',
+    title: 'JPG to PDF Converter Free – No Upload | ToolWala',
+    description: 'Turn JPG, PNG, or WebP images into a single PDF in your browser. Nothing is uploaded. Fast, private, and free without watermarks.',
   },
   'merge-pdf': {
-    title: 'Merge PDF – Combine Files in Your Browser, No Upload',
-    description: 'Join two or more PDFs in this tab. Reorder pages and download. Files never leave your device.',
+    title: 'Merge PDF – Combine Files in Your Browser, No Upload | ToolWala',
+    description: 'Join two or more PDFs into a single file in this tab. Reorder pages and download. Files never leave your device.',
   },
   'compress-pdf': {
-    title: 'Compress PDF in Your Browser – No Upload',
-    description: 'Shrink a PDF on this page. Processing stays on your device — we never see the file.',
+    title: 'Compress PDF in Your Browser – No Upload | ToolWala',
+    description: 'Shrink PDF file sizes right on this page. Processing stays on your device—we never see the file.',
   },
   'cover-letter-generator': {
     title: 'Free Cover Letter Generator – No Signup | ToolWala',
-    description: 'Write a cover letter from your details and the job post. Free, no account, ready to copy or download.',
+    description: 'Generate a tailored, professional cover letter from your details and job description. 100% free with instant copy or download.',
   },
   'aadhaar-pdf-compressor': {
-    title: 'Compress Aadhaar PDF under 300KB – No Upload',
+    title: 'Compress Aadhaar PDF under 300KB – No Upload | ToolWala',
     description: 'Shrink e-Aadhaar to under 300KB in your browser. The password stays on your device. Built for UIDAI and KYC portals.',
   },
+  'edit-pdf': {
+    title: 'Edit PDF Pages Online Free – 100% Private | ToolWala',
+    description: 'Edit PDF pages directly in your browser without uploading to any server. Fix text, annotate, sign, and organize pages privately and securely.',
+  },
+  'text-humanizer': {
+    title: 'AI Text Humanizer Free Online | ToolWala',
+    description: 'Convert robotic AI text into natural, human-sounding writing with conversational tone, improved rhythm, and clarity.',
+  },
+  'organize-pdf': {
+    title: 'Organize PDF Pages Online Free – Reorder & Delete | ToolWala',
+    description: 'Rearrange, rotate, or remove pages from any PDF document in your browser. Instant preview and secure local processing.',
+  },
+  'image-compressor': {
+    title: 'Online Image Compressor & JPG Size Reducer | ToolWala',
+    description: 'Compress JPG, PNG, and WebP images up to 80% without losing visual clarity. Fast, browser-native compression with zero uploads.',
+  },
   'ssc-photo-resize': {
-    title: 'SSC Photo Resize – 35×45mm Under 50KB, No Upload',
+    title: 'SSC Photo Resize – 35×45mm Under 50KB, No Upload | ToolWala',
     description: 'Crop a photo to SSC size (3.5 × 4.5 cm) under 50KB in your browser. Nothing is uploaded to a server.',
   },
   'passport-photo-maker': {
-    title: 'Passport Photo Maker – 35×45mm, No Upload',
+    title: 'Passport Photo Maker – 35×45mm, No Upload | ToolWala',
     description: 'Make an India passport photo (35×45mm) from a selfie in your browser. White background. Files stay on your phone.',
   },
 };
@@ -619,8 +635,8 @@ export function buildWebPageSchema(title: string, description: string, url: stri
     'inLanguage': locale === 'en' ? 'en-US' : `${locale}-${locale.toUpperCase()}`,
     'isPartOf': {
       '@type': 'WebSite',
-      '@id': 'https://toolwala.co/#website',
-      'url': 'https://toolwala.co',
+      '@id': 'https://www.toolwala.co/#website',
+      'url': 'https://www.toolwala.co/',
       'name': 'ToolWala AI'
     }
   };
@@ -653,7 +669,7 @@ export function buildEnrichedToolJsonLd(tool: any, url: string, categoryName: st
     },
     provider: {
       '@type': 'Organization',
-      '@id': 'https://toolwala.co/#organization',
+      '@id': 'https://www.toolwala.co/#organization',
       name: SITE_NAME,
       url: SITE_URL,
     },

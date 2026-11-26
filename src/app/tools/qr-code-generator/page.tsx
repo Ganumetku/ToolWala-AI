@@ -64,7 +64,7 @@ const COLOR_PRESETS = [
 
 export default function ProfessionalQRCodeGenerator() {
   const [activeTab, setActiveTab] = useState<QRType>('URL');
-  const [inputText, setInputText] = useState('https://toolwala.co');
+  const [inputText, setInputText] = useState('https://www.toolwala.co');
   
   // WiFi Fields
   const [wifiSsid, setWifiSsid] = useState('');
@@ -308,7 +308,7 @@ export default function ProfessionalQRCodeGenerator() {
   };
 
   const resetAll = () => {
-    setInputText('https://toolwala.co');
+    setInputText('https://www.toolwala.co');
     setWifiSsid('');
     setWifiPassword('');
     setEmailTo('');

@@ -1011,9 +1011,9 @@ export default function CoverLetterGenerator() {
                     {/* Applicant Header */}
                     <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 pb-6 border-b border-slate-200">
                       <div>
-                        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950">
+                        <div className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950">
                           {data.name || 'Your Full Name'}
-                        </h1>
+                        </div>
                         <p className="text-sm font-semibold tracking-wide uppercase mt-1" style={{ color: accentColor.hex }}>
                           {data.jobTitle || 'Target Job Title'}
                         </p>
@@ -1033,9 +1033,9 @@ export default function CoverLetterGenerator() {
                 {/* TEMPLATE VARIANT 2: EXECUTIVE BORDER */}
                 {template === 'executive' && (
                   <div className="relative pl-6 border-l-4 mb-6" style={{ borderColor: accentColor.hex }}>
-                    <h1 className="text-3xl font-bold tracking-tight text-slate-950">
+                    <div className="text-3xl font-bold tracking-tight text-slate-950">
                       {data.name || 'Your Full Name'}
-                    </h1>
+                    </div>
                     <p className="text-sm font-semibold uppercase tracking-wider text-slate-600 mt-1">
                       {data.jobTitle || 'Target Job Title'}
                     </p>
@@ -1053,9 +1053,9 @@ export default function CoverLetterGenerator() {
                   <div className="p-6 -mx-8 -mt-8 sm:-mx-12 sm:-mt-12 mb-8 rounded-b-2xl border-b" style={{ backgroundColor: accentColor.light, borderColor: accentColor.border }}>
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div>
-                        <h1 className="text-2xl sm:text-3xl font-black tracking-tight" style={{ color: accentColor.hex }}>
+                        <div className="text-2xl sm:text-3xl font-black tracking-tight" style={{ color: accentColor.hex }}>
                           {data.name || 'Your Full Name'}
-                        </h1>
+                        </div>
                         <p className="text-xs font-bold uppercase tracking-widest text-slate-700 mt-1">
                           {data.jobTitle || 'Target Job Title'}
                         </p>
@@ -1075,9 +1075,9 @@ export default function CoverLetterGenerator() {
                     <div className="inline-block px-3 py-1 rounded-full text-xs font-bold text-white mb-3" style={{ backgroundColor: accentColor.hex }}>
                       Application for {data.jobTitle || 'Target Role'}
                     </div>
-                    <h1 className="text-3xl font-extrabold tracking-tight text-slate-950">
+                    <div className="text-3xl font-extrabold tracking-tight text-slate-950">
                       {data.name || 'Your Full Name'}
-                    </h1>
+                    </div>
                     <div className="flex flex-wrap gap-2 text-xs text-slate-600 mt-3">
                       {data.email && <span className="bg-slate-100 px-2 py-0.5 rounded-md">{data.email}</span>}
                       {data.phone && <span className="bg-slate-100 px-2 py-0.5 rounded-md">{data.phone}</span>}
@@ -1090,9 +1090,9 @@ export default function CoverLetterGenerator() {
                 {/* TEMPLATE VARIANT 5: CLASSIC FORMAL */}
                 {template === 'classic' && (
                   <div className="text-center pb-6 mb-8 border-b border-double border-slate-400">
-                    <h1 className="text-2xl font-serif font-bold tracking-widest uppercase text-slate-950">
+                    <div className="text-2xl font-serif font-bold tracking-widest uppercase text-slate-950">
                       {data.name || 'Your Full Name'}
-                    </h1>
+                    </div>
                     <p className="text-xs font-sans uppercase tracking-wider text-slate-500 mt-1">
                       {data.jobTitle || 'Target Job Title'}
                     </p>

@@ -12,6 +12,7 @@ import { getTranslation } from '@/lib/i18n';
 import Breadcrumbs from './Breadcrumbs';
 import { categoriesData } from '@/data/categories';
 import blogsData from '@/data/dynamic_blogs.json';
+import { getLocalizedToolArticle } from '@/data/localizedToolArticles';
 
 interface FAQ {
   question: string;
@@ -94,48 +95,59 @@ export default function ToolArticle({
     return found ? found.id : null;
   }, [toolId, title]);
 
-  const useMessages = Boolean(resolvedToolId) && !preferArticleCopy;
+  // Load rich humanized localized article data if available for non-en locales
+  const localizedArticle = useMemo(() => {
+    if (!resolvedToolId || locale === 'en') return null;
+    return getLocalizedToolArticle(resolvedToolId, locale);
+  }, [resolvedToolId, locale]);
 
-  // Try to load translated values from messages for this tool
-  const translatedTitle = useMessages ? t(`tools.${resolvedToolId}.title`, title) : title;
-  const translatedIntro = useMessages ? t(`tools.${resolvedToolId}.intro`, intro) : intro;
+  const useMessages = Boolean(resolvedToolId) && !preferArticleCopy && !localizedArticle;
+
+  // Try to load translated values from localized articles or messages
+  const translatedTitle = localizedArticle?.title || (useMessages ? t(`tools.${resolvedToolId}.title`, title) : title);
+  const translatedIntro = localizedArticle?.intro || (useMessages ? t(`tools.${resolvedToolId}.intro`, intro) : intro);
   const translatedWhatItDoes: string = String(
-    useMessages ? t(`tools.${resolvedToolId}.whatItDoes`, whatItDoes) : whatItDoes
+    localizedArticle?.whatItDoes || (useMessages ? t(`tools.${resolvedToolId}.whatItDoes`, whatItDoes) : whatItDoes)
   );
   
   const translatedHowToUse = useMemo(() => {
+    if (localizedArticle?.howToUse) return localizedArticle.howToUse;
     if (!useMessages) return howToUse || [];
     const val = getTranslation(messages, `tools.${resolvedToolId}.howToUse`);
     return Array.isArray(val) ? val : (howToUse || []);
-  }, [messages, resolvedToolId, howToUse, useMessages]);
+  }, [messages, resolvedToolId, howToUse, useMessages, localizedArticle]);
 
   const translatedKeyFeatures = useMemo(() => {
+    if (localizedArticle?.keyFeatures) return localizedArticle.keyFeatures;
     if (!useMessages) return keyFeatures || [];
     const val = getTranslation(messages, `tools.${resolvedToolId}.keyFeatures`);
     return Array.isArray(val) ? val : (keyFeatures || []);
-  }, [messages, resolvedToolId, keyFeatures, useMessages]);
+  }, [messages, resolvedToolId, keyFeatures, useMessages, localizedArticle]);
 
   const translatedBenefits = useMemo(() => {
+    if (localizedArticle?.benefits) return localizedArticle.benefits;
     if (!useMessages) return benefits || [];
     const val = getTranslation(messages, `tools.${resolvedToolId}.benefits`);
     return Array.isArray(val) ? val : (benefits || []);
-  }, [messages, resolvedToolId, benefits, useMessages]);
+  }, [messages, resolvedToolId, benefits, useMessages, localizedArticle]);
 
-  const translatedWhyChoose = useMessages ? t(`tools.${resolvedToolId}.whyChoose`, whyChoose) : whyChoose;
+  const translatedWhyChoose = localizedArticle?.whyChoose || (useMessages ? t(`tools.${resolvedToolId}.whyChoose`, whyChoose) : whyChoose);
 
   const translatedUseCases = useMemo(() => {
+    if (localizedArticle?.useCases) return localizedArticle.useCases;
     if (!useMessages) return useCases || [];
     const val = getTranslation(messages, `tools.${resolvedToolId}.useCases`);
     return Array.isArray(val) ? val : (useCases || []);
-  }, [messages, resolvedToolId, useCases, useMessages]);
+  }, [messages, resolvedToolId, useCases, useMessages, localizedArticle]);
 
   const translatedFaqs = useMemo(() => {
+    if (localizedArticle?.faqs) return localizedArticle.faqs;
     if (!useMessages) return faqs || [];
     const val = getTranslation(messages, `tools.${resolvedToolId}.faqs`);
     return Array.isArray(val) ? val : (faqs || []);
-  }, [messages, resolvedToolId, faqs, useMessages]);
+  }, [messages, resolvedToolId, faqs, useMessages, localizedArticle]);
 
-  const translatedConclusion = useMessages ? t(`tools.${resolvedToolId}.conclusion`, conclusion) : conclusion;
+  const translatedConclusion = localizedArticle?.conclusion || (useMessages ? t(`tools.${resolvedToolId}.conclusion`, conclusion) : conclusion);
 
   const currentTool = useMemo(() => {
     return toolsData.find(t => 
@@ -145,6 +157,12 @@ export default function ToolArticle({
       title.toLowerCase().includes(t.title.toLowerCase())
     );
   }, [resolvedToolId, title]);
+
+  const effectiveHowToHeading = localizedArticle?.howToHeading || howToHeading || t('article.howToUse', 'How to use {title}').replace('{title}', currentTool ? currentTool.title : translatedTitle);
+  const effectiveUseCasesHeading = localizedArticle?.useCasesHeading || useCasesHeading || t('article.useCases', 'People use this for');
+  const effectiveWhatHeading = localizedArticle?.whatHeading || whatHeading || t('article.whatIs', 'What is {title}?').replace('{title}', currentTool ? currentTool.title : translatedTitle);
+  const effectiveWhyChooseHeading = localizedArticle?.whyChooseHeading || whyChooseHeading || t('article.whyChoose', 'Why this instead of the usual converters');
+  const effectiveConclusionHeading = localizedArticle?.conclusionHeading || conclusionHeading || t('article.finalVerdict', "That's the idea");
 
   const parentCategory = useMemo(() => {
     if (!currentTool) return null;
@@ -312,7 +330,7 @@ export default function ToolArticle({
                     {numbered && (
                       <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">01</span>
                     )}
-                    {howToHeading || t('article.howToUse', 'How to use {title}').replace('{title}', currentTool ? currentTool.title : translatedTitle)}
+                    {effectiveHowToHeading}
                   </h3>
                   <div className="grid gap-4">
                     {translatedHowToUse.map((step, i) => (
@@ -378,7 +396,7 @@ export default function ToolArticle({
                     {numbered && (
                       <span className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xs font-black">03</span>
                     )}
-                    {useCasesHeading || t('article.useCases', 'People use this for')}
+                    {effectiveUseCasesHeading}
                   </h3>
                   <ul className="space-y-3 list-none p-0">
                     {translatedUseCases.map((useCase, i) => (
@@ -420,7 +438,7 @@ export default function ToolArticle({
                       {numbered && (
                         <span className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-sm font-black shadow-sm">05</span>
                       )}
-                      {whatHeading || t('article.whatIs', 'What is {title}?').replace('{title}', currentTool ? currentTool.title : translatedTitle)}
+                      {effectiveWhatHeading}
                     </h3>
                     <div className="space-y-4">
                       {translatedWhatItDoes.split('\n\n').map((para, idx) => (
@@ -543,7 +561,7 @@ export default function ToolArticle({
                   <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
                   <div className="relative">
                     <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4 uppercase tracking-tight">
-                      {whyChooseHeading || t('article.whyChoose', 'Why this instead of the usual converters')}
+                      {effectiveWhyChooseHeading}
                     </h3>
                     <p className="text-slate-700 dark:text-gray-300 leading-relaxed text-base font-sans font-medium">
                       {translatedWhyChoose}
@@ -577,7 +595,7 @@ export default function ToolArticle({
                 <div style={{ order: 12 }} className="p-8 sm:p-12 rounded-[1.125rem] bg-gradient-to-br from-blue-50/80 via-[#FBFCFE] to-indigo-50/50 dark:from-blue-600/10 dark:via-transparent dark:to-transparent border border-blue-200 dark:border-blue-500/15 text-center relative overflow-hidden group shadow-[0_10px_35px_rgba(15,23,42,0.06)]">
                   <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" />
                   <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-4 tracking-tight">
-                    {conclusionHeading || t('article.finalVerdict', "That's the idea")}
+                    {effectiveConclusionHeading}
                   </h3>
                   <p className="text-slate-700 dark:text-gray-300 leading-relaxed text-base sm:text-lg font-medium max-w-2xl mx-auto relative z-10 font-sans">
                     {translatedConclusion}

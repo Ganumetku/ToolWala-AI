@@ -183,8 +183,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const finalTitle = toolTitle || pricingTitle || loginTitle || "";
   const finalDesc = toolDesc || pricingDesc || loginDesc || "";
 
-  const defaultTitle = "Free PDF Tools That Never Upload Your Files | ToolWala";
-  const defaultDesc = "Merge PDFs, convert JPG to PDF, compress Aadhaar under 300KB, and make passport photos in your browser. Files stay on your device — no signup.";
+  const defaultTitle = "Free Online PDF, Photo & Aadhaar Tools | ToolWala";
+  const defaultDesc = "Free, private online tools to merge PDF, convert JPG to PDF, compress Aadhaar to 300KB, resize photos, and convert documents in your browser. No files uploaded, no signups.";
 
   const titleObj = finalTitle ? { default: finalTitle, template: "%s | ToolWala AI" } : {
     default: defaultTitle,

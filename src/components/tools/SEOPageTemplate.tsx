@@ -10,6 +10,7 @@ import { landingPagesData } from '@/data/landingPages';
 import { toolsData } from '@/data/tools';
 import { getLocalizedCanonicalUrl } from '@/lib/seo-client';
 import { renderMarkdown } from '@/lib/markdown';
+import LandingPresetCompressor from '@/components/tools/LandingPresetCompressor';
 
 interface SEOPageTemplateProps {
   slug: string;
@@ -118,16 +119,41 @@ export default function SEOPageTemplate({ slug }: SEOPageTemplateProps) {
               </p>
 
               {/* Core Call-to-Action Link Above the Fold */}
-              <div className="pt-6">
-                <Link
-                  href={localizeHref(pageData.ctaHref)}
-                  className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-black uppercase tracking-[0.2em] rounded-2xl transition-all shadow-md hover:scale-105 active:scale-95 cursor-pointer font-sans"
-                >
-                  {pageData.ctaText}
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
+              {slug !== 'photo-resize-to-100kb' && slug !== 'signature-resize-to-50kb' && (
+                <div className="pt-6">
+                  <Link
+                    href={localizeHref(pageData.ctaHref)}
+                    className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-black uppercase tracking-[0.2em] rounded-2xl transition-all shadow-md hover:scale-105 active:scale-95 cursor-pointer font-sans"
+                  >
+                    {pageData.ctaText}
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              )}
             </div>
+
+            {/* Embedded Functional Pilot Resizers */}
+            {slug === 'photo-resize-to-100kb' && (
+              <LandingPresetCompressor
+                targetKB={100}
+                mode="photo"
+                title="Photo Resizer to 100KB Online"
+                description="Drop any passport or document photo here to compress it strictly under 100KB. 100% private, processed in browser memory."
+                fullToolHref={localizeHref('/tools/exam-photo-resizer')}
+                fullToolLabel="Need exact 35×45mm cropping? Open Exam Photo Resizer"
+              />
+            )}
+
+            {slug === 'signature-resize-to-50kb' && (
+              <LandingPresetCompressor
+                targetKB={50}
+                mode="signature"
+                title="Signature Resizer to 50KB Online"
+                description="Drop any scanned signature to compress it strictly under 50KB for UPSC, SSC, and banking portals. 100% private."
+                fullToolHref={localizeHref('/tools/signature-resize')}
+                fullToolLabel="Need custom aspect ratios? Open Signature Studio"
+              />
+            )}
 
             {/* Secure Notification Banner */}
             <div className="flex items-center gap-4 bg-emerald-50 dark:bg-emerald-500/5 border border-emerald-200 dark:border-emerald-500/10 p-5 rounded-2xl max-w-2xl mx-auto">

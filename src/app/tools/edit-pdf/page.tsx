@@ -72,7 +72,7 @@ export default function EditPdfPage() {
     return (
       <ToolLayout>
         <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12 p-6 sm:p-10 text-center">
-          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white">Your PDF is ready</h1>
+          <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">Your PDF is ready</h2>
           <p className="mt-2 text-sm text-slate-500">{saved.fileName}</p>
           {saved.flattened && (
             <p className="mt-4 text-sm text-amber-700 dark:text-amber-400">

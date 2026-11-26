@@ -6,6 +6,7 @@ import { getBlogsByTag, getPublicBlogs } from "@/lib/blogs-server";
 import { getTrendingBlogs } from "@/lib/blog-utils";
 import { buildTagBreadcrumbs } from "@/lib/blog-seo";
 import { buildBlogArchiveMetadata, buildBreadcrumbJsonLd } from "@/lib/seo";
+import { isIndexableTag } from "@/lib/tag-policy";
 
 export const revalidate = 3600;
 
@@ -69,13 +70,30 @@ export async function generateMetadata({ params }: TagPageProps) {
     description = description.replace(/\bAI\b/gi, 'एआई');
   }
 
-  return buildBlogArchiveMetadata(
+  const baseMeta = buildBlogArchiveMetadata(
     title,
     description,
     `/blog/tag/${tag}`,
     [label, "blog", "ToolWala AI"],
     locale
   );
+
+  // Apply noindex, follow to thin / low-value tag archives while keeping HTTP 200
+  if (!isIndexableTag(tag)) {
+    return {
+      ...baseMeta,
+      robots: {
+        index: false,
+        follow: true,
+        googleBot: {
+          index: false,
+          follow: true,
+        },
+      },
+    };
+  }
+
+  return baseMeta;
 }
 
 export default async function BlogTagPage({ params }: TagPageProps) {

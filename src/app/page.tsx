@@ -59,10 +59,7 @@ export default function Home() {
           </div>
 
           <h1 className="font-bold text-3xl sm:text-5xl md:text-6xl tracking-tight sm:tracking-tighter text-[#33333b] dark:text-white leading-[1.12] mb-3 max-w-4xl mx-auto">
-            {t('home.hero_title_1', 'PDF tools that ')}
-            <span className="text-[#2563EB] dark:text-blue-400 sm:whitespace-nowrap">
-              {t('home.hero_title_highlight', 'never upload your files')}
-            </span>
+            {t('home.hero_title_1', 'Free Online PDF, Photo & Aadhaar Tools')}
           </h1>
 
           <p className="mx-auto max-w-2xl text-xs sm:text-sm font-normal text-[#707078] dark:text-gray-400 leading-relaxed mb-5">

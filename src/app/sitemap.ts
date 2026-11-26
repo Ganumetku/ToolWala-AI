@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { getPublicTools } from '@/lib/tools-server';
 import { getPublicBlogs, slugifyTag } from '@/lib/blogs-server';
+import { isIndexableTag } from '@/lib/tag-policy';
 import { categoriesData } from '@/data/categories';
 import { BLOG_CATEGORIES } from '@/types/blog';
 import { getEnabledLocales, getLanguagesConfig } from '@/lib/languages';
@@ -175,12 +176,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
 
     const tags = new Set<string>();
-    for (const blog of standaloneBlogs) {
+    for (const blog of blogs) {
       for (const tag of blog.tags) {
         tags.add(slugifyTag(tag));
       }
     }
-    tagEntries = Array.from(tags).flatMap((tag) => {
+    const indexableTags = Array.from(tags).filter((tag) => isIndexableTag(tag));
+    tagEntries = indexableTags.flatMap((tag) => {
       const isIndiaOnly = INDIA_ONLY_SLUGS.has(tag);
       const localesToUse = isIndiaOnly
         ? seoLocales.filter((loc) => loc === 'en' || loc === 'hi')

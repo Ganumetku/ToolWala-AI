@@ -405,7 +405,7 @@ export default function ExamMarksCalculator() {
 🔥 ${tStrings.highestMarks}: ${stats.highest.toFixed(1)} (${stats.highestSubject})
 ❄️ ${tStrings.lowestMarks}: ${stats.lowest.toFixed(1)} (${stats.lowestSubject})
 ------------------------------------------
-Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
+Calculate yours at: https://www.toolwala.co/tools/exam-marks-calculator/`;
 
     navigator.clipboard.writeText(reportStr);
     toast.success(tStrings.copied);
@@ -419,7 +419,7 @@ Calculate yours at: https://toolwala.co/tools/exam-marks-calculator/`;
     const shareData = {
       title: tStrings.title,
       text: `${tStrings.title} - I scored ${stats.percentage.toFixed(2)}% (Grade: ${stats.grade})!`,
-      url: 'https://toolwala.co/tools/exam-marks-calculator/'
+      url: 'https://www.toolwala.co/tools/exam-marks-calculator/'
     };
 
     if (navigator.share) {

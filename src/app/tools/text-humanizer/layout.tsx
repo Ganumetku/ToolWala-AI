@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'text-humanizer',
-    'Free AI Text Humanizer – Bypass AI Detectors',
-    'Rewrite AI-generated content to sound natural and human-like. Improve readability and bypass standard AI detectors.',
+    'AI Text Humanizer Free Online | ToolWala',
+    'Convert robotic AI text into natural, human-sounding writing with conversational tone, improved rhythm, and clarity.',
     '/tools/text-humanizer'
   );
 }

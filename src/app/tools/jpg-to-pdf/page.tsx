@@ -14,6 +14,7 @@ import ToolArticle from '@/components/ToolArticle';
 import { toolArticles } from '@/data/toolArticles';
 import { MeshGradient } from '@/components/BackgroundEffects';
 import PdfToolIcon from '@/components/PdfToolIcon';
+import { useTranslation } from '@/components/I18nContext';
 
 interface ImageFile {
   id: string;
@@ -36,6 +37,7 @@ const uint8ArrayToArrayBuffer = (bytes: Uint8Array): ArrayBuffer => {
 };
 
 export default function JpgToPdf() {
+  const { t, locale, localizeHref } = useTranslation();
   const [images, setImages] = useState<ImageFile[]>([]);
   const [pageSize, setPageSize] = useState<PageSizeOption>('a4');
   const [orientation, setOrientation] = useState<OrientationOption>('portrait');
@@ -365,13 +367,25 @@ export default function JpgToPdf() {
               <div className="flex items-center gap-6">
                 <PdfToolIcon toolId="jpg-to-pdf" size="xl" className="shrink-0" />
                 <div>
-                  <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">JPG to PDF</h1>
-                  <p className="text-slate-600 dark:text-gray-400 font-medium mt-1">Convert JPG, PNG, or WebP into a PDF in this tab. Files never leave your device.</p>
+                  <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">
+                    {locale === 'es' ? 'Convertir JPG a PDF' : locale === 'pt' ? 'Converter JPG para PDF' : locale === 'hi' ? 'JPG से PDF कन्वर्टर' : 'JPG to PDF Converter Online'}
+                  </h1>
+                  <p className="text-slate-600 dark:text-gray-400 font-medium mt-1">
+                    {locale === 'es'
+                      ? 'Convierte imágenes JPG, PNG o WebP a PDF en esta pestaña. Nada sale de tu dispositivo.'
+                      : locale === 'pt'
+                      ? 'Converta imagens JPG, PNG ou WebP em PDF nesta aba. Nada sai do seu aparelho.'
+                      : locale === 'hi'
+                      ? 'JPG, PNG या WebP फ़ाइलों को इस टैब में PDF में बदलें। फ़ाइलें कभी आपके डिवाइस से बाहर नहीं जातीं।'
+                      : 'Convert JPG, PNG, or WebP into a PDF in this tab. Files never leave your device.'}
+                  </p>
                 </div>
               </div>
               <div className="flex items-center gap-3 bg-emerald-50 dark:bg-emerald-500/10 px-4 py-2 rounded-xl border border-emerald-200 dark:border-emerald-500/20 h-fit shadow-sm">
                 <Shield className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400">No Upload</span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
+                  {locale === 'es' ? 'Sin subidas' : locale === 'pt' ? 'Sem envio' : locale === 'hi' ? 'बिना अपलोड' : 'No Upload'}
+                </span>
               </div>
             </div>
           </div>
@@ -441,12 +455,20 @@ export default function JpgToPdf() {
                   <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-blue-600 dark:text-gray-400 border border-slate-200 dark:border-white/10 group-hover:text-blue-500 group-hover:scale-105 transition-all duration-300 shadow-sm">
                     <ImageIcon className="w-8 h-8" />
                   </div>
-                  <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Drop images here</h3>
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight mb-2">
+                    {locale === 'es' ? 'Suelta las imágenes aquí' : locale === 'pt' ? 'Solte as imagens aqui' : locale === 'hi' ? 'यहाँ तस्वीरें डालें' : 'Drop images here'}
+                  </h3>
                   <p className="text-sm text-slate-500 dark:text-gray-400 mb-5 max-w-sm mx-auto font-medium leading-relaxed">
-                    JPG, PNG, or WebP. They stay in this tab — nothing is sent to a server.
+                    {locale === 'es'
+                      ? 'JPG, PNG o WebP. Se procesan en esta pestaña — nada viaja a un servidor.'
+                      : locale === 'pt'
+                      ? 'JPG, PNG ou WebP. Ficam nesta aba — nada é enviado a um servidor.'
+                      : locale === 'hi'
+                      ? 'JPG, PNG या WebP। फ़ाइलें इस टैब में रहती हैं — सर्वर पर कुछ नहीं भेजा जाता।'
+                      : 'JPG, PNG, or WebP. They stay in this tab — nothing is sent to a server.'}
                   </p>
                   <button className="rounded-xl bg-blue-600 hover:bg-blue-500 text-white px-7 py-3 text-xs font-black uppercase tracking-wider transition-all shadow-md cursor-pointer">
-                    Choose images
+                    {locale === 'es' ? 'Elegir imágenes' : locale === 'pt' ? 'Escolher imagens' : locale === 'hi' ? 'इमेज चुनें' : 'Choose images'}
                   </button>
                 </div>
               </div>
@@ -577,13 +599,14 @@ export default function JpgToPdf() {
                   <div className="bg-[#FBFCFE] dark:bg-white/[0.01] rounded-3xl border border-[#E6ECF5] dark:border-white/5 p-6 sm:p-8 space-y-6 sticky top-28 self-start shadow-sm">
                     
                     <h4 className="text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-[0.2em] pb-3 border-b border-[#E6ECF5] dark:border-white/5 flex items-center gap-2">
-                      <Settings className="w-4 h-4 text-blue-600 dark:text-blue-400" /> Layout Settings
+                      <Settings className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      {locale === 'es' ? 'Configuración de diseño' : locale === 'pt' ? 'Configuração da página' : locale === 'hi' ? 'लेआउट सेटिंग्स' : 'Layout Settings'}
                     </h4>
 
                     {/* Page format selector */}
                     <div className="space-y-2">
                       <label className="block text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest ml-1">
-                        Page Size
+                        {locale === 'es' ? 'Tamaño de página' : locale === 'pt' ? 'Tamanho da folha' : locale === 'hi' ? 'पेज साइज' : 'Page Size'}
                       </label>
                       <div className="grid grid-cols-3 gap-2">
                         {(['a4', 'letter', 'auto'] as const).map(option => (
@@ -597,7 +620,7 @@ export default function JpgToPdf() {
                               }
                             `}
                           >
-                            {option === 'a4' ? 'A4' : option === 'letter' ? 'Letter' : 'Auto'}
+                            {option === 'a4' ? 'A4' : option === 'letter' ? 'Letter' : (locale === 'es' || locale === 'pt' ? 'Auto' : locale === 'hi' ? 'ऑटो' : 'Auto')}
                           </button>
                         ))}
                       </div>
@@ -607,7 +630,7 @@ export default function JpgToPdf() {
                     {pageSize !== 'auto' && (
                       <div className="space-y-2">
                         <label className="block text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest ml-1">
-                          Orientation
+                          {locale === 'es' ? 'Orientación' : locale === 'pt' ? 'Orientação' : locale === 'hi' ? 'ओरिएंटेशन' : 'Orientation'}
                         </label>
                         <div className="grid grid-cols-2 gap-2">
                           {(['portrait', 'landscape'] as const).map(option => (
@@ -621,7 +644,9 @@ export default function JpgToPdf() {
                                 }
                               `}
                             >
-                              {option}
+                              {option === 'portrait'
+                                ? (locale === 'es' ? 'Vertical' : locale === 'pt' ? 'Retrato' : locale === 'hi' ? 'पोर्ट्रेट' : 'Portrait')
+                                : (locale === 'es' ? 'Horizontal' : locale === 'pt' ? 'Paisagem' : locale === 'hi' ? 'लैंडस्केप' : 'Landscape')}
                             </button>
                           ))}
                         </div>
@@ -631,7 +656,7 @@ export default function JpgToPdf() {
                     {/* Margin option */}
                     <div className="space-y-2">
                       <label className="block text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest ml-1">
-                        Margins
+                        {locale === 'es' ? 'Márgenes' : locale === 'pt' ? 'Margens' : locale === 'hi' ? 'मार्जिन' : 'Margins'}
                       </label>
                       <div className="grid grid-cols-3 gap-2">
                         {(['none', 'thin', 'thick'] as const).map(option => (
@@ -645,7 +670,11 @@ export default function JpgToPdf() {
                               }
                             `}
                           >
-                            {option}
+                            {option === 'none'
+                              ? (locale === 'es' ? 'Ninguno' : locale === 'pt' ? 'Sem' : locale === 'hi' ? 'शून्य' : 'None')
+                              : option === 'thin'
+                              ? (locale === 'es' ? 'Fino' : locale === 'pt' ? 'Fina' : locale === 'hi' ? 'पतला' : 'Thin')
+                              : (locale === 'es' ? 'Ancho' : locale === 'pt' ? 'Larga' : locale === 'hi' ? 'मोटा' : 'Thick')}
                           </button>
                         ))}
                       </div>
@@ -654,7 +683,7 @@ export default function JpgToPdf() {
                     {/* Document naming */}
                     <div className="space-y-2">
                       <label className="block text-[10px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest ml-1">
-                        Output Name
+                        {locale === 'es' ? 'Nombre del archivo' : locale === 'pt' ? 'Nome do arquivo' : locale === 'hi' ? 'फ़ाइल का नाम' : 'Output Name'}
                       </label>
                       <div className="relative">
                         <input 
@@ -671,11 +700,15 @@ export default function JpgToPdf() {
                     {/* Stats display */}
                     <div className="pt-4 border-t border-[#E6ECF5] dark:border-white/5 space-y-2 text-xs font-bold text-slate-600 dark:text-gray-400">
                       <div className="flex justify-between">
-                        <span className="font-medium text-slate-500 dark:text-gray-500">Total Images</span>
+                        <span className="font-medium text-slate-500 dark:text-gray-500">
+                          {locale === 'es' ? 'Total imágenes' : locale === 'pt' ? 'Total de fotos' : locale === 'hi' ? 'कुल इमेज' : 'Total Images'}
+                        </span>
                         <span className="text-slate-900 dark:text-white font-bold">{totalFiles}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="font-medium text-slate-500 dark:text-gray-500">Combined Size</span>
+                        <span className="font-medium text-slate-500 dark:text-gray-500">
+                          {locale === 'es' ? 'Tamaño total' : locale === 'pt' ? 'Tamanho total' : locale === 'hi' ? 'कुल साइज' : 'Combined Size'}
+                        </span>
                         <span className="text-slate-900 dark:text-white font-bold">{formatBytes(totalSize)}</span>
                       </div>
                     </div>
@@ -684,7 +717,9 @@ export default function JpgToPdf() {
                     {isProcessing && (
                       <div className="space-y-2">
                         <div className="flex justify-between text-xs font-bold text-blue-600 dark:text-blue-400">
-                          <span>Generating PDF...</span>
+                          <span>
+                            {locale === 'es' ? 'Generando PDF...' : locale === 'pt' ? 'Gerando PDF...' : locale === 'hi' ? 'PDF बन रही है...' : 'Generating PDF...'}
+                          </span>
                           <span>{progress}%</span>
                         </div>
                         <div className="w-full h-1.5 bg-slate-200 dark:bg-white/5 rounded-full overflow-hidden">
@@ -710,7 +745,9 @@ export default function JpgToPdf() {
                         ) : (
                           <Download className="w-4 h-4" />
                         )}
-                        {isProcessing ? 'Processing PDF...' : 'Convert to PDF'}
+                        {isProcessing
+                          ? (locale === 'es' ? 'Procesando PDF...' : locale === 'pt' ? 'Processando PDF...' : locale === 'hi' ? 'प्रोसेसिंग...' : 'Processing PDF...')
+                          : (locale === 'es' ? 'Convertir a PDF' : locale === 'pt' ? 'Converter para PDF' : locale === 'hi' ? 'PDF में बदलें' : 'Convert to PDF')}
                       </button>
 
                       <button
@@ -718,7 +755,7 @@ export default function JpgToPdf() {
                         disabled={isProcessing}
                         className="w-full px-6 py-3 text-[10px] font-black uppercase tracking-[0.2em] text-slate-600 dark:text-gray-400 bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 rounded-xl transition-all disabled:opacity-30 cursor-pointer shadow-sm"
                       >
-                        Reset Workspace
+                        {locale === 'es' ? 'Restablecer' : locale === 'pt' ? 'Reiniciar' : locale === 'hi' ? 'रीसेट करें' : 'Reset Workspace'}
                       </button>
                     </div>
 

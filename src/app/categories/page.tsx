@@ -69,7 +69,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title,
       description: ogDescription,
-      url: `https://toolwala.co/${locale === 'en' ? 'categories' : locale + '/categories'}/`,
+      url: `https://www.toolwala.co/${locale === 'en' ? 'categories' : locale + '/categories'}/`,
       type: "website"
     }
   };
@@ -92,8 +92,8 @@ export default async function CategoriesIndexPage() {
   
   // SEO Schemas
   const breadcrumbItems = [
-    { name: t('nav.home', 'Home'), href: locale === 'en' ? '/' : `/${locale}` },
-    { name: t('nav.categories', 'Categories'), href: locale === 'en' ? '/categories' : `/${locale}/categories` }
+    { name: t('nav.home', 'Home'), href: locale === 'en' ? '/' : `/${locale}/` },
+    { name: t('nav.categories', 'Categories'), href: locale === 'en' ? '/categories/' : `/${locale}/categories/` }
   ];
 
   const collectionPageSchema = {
@@ -104,8 +104,8 @@ export default async function CategoriesIndexPage() {
     'description': t('categories.seo_desc', 'Browse categorized directories of 25+ browser-local design, PDF, AI, document, resume, and developer tools. Fast, secure, and GDPR compliant.').replace('25+', `${initialMergedTools.length}+`).replace('25', initialMergedTools.length.toString()),
     'isPartOf': {
       '@type': 'WebSite',
-      '@id': 'https://toolwala.co/#website',
-      'url': 'https://toolwala.co/',
+      '@id': 'https://www.toolwala.co/#website',
+      'url': 'https://www.toolwala.co/',
       'name': 'Toolwala.co'
     },
     'about': {
@@ -118,7 +118,7 @@ export default async function CategoriesIndexPage() {
       'itemListElement': categoriesData.map((cat, index) => ({
         '@type': 'ListItem',
         'position': index + 1,
-        'url': `https://toolwala.co${locale === 'en' ? '' : '/' + locale}/categories/${cat.slug}/`
+        'url': `https://www.toolwala.co${locale === 'en' ? '' : '/' + locale}/categories/${cat.slug}/`
       }))
     }
   };

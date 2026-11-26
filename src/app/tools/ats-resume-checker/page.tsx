@@ -1020,7 +1020,7 @@ export default function AtsResumeChecker() {
         
         {/* Back link */}
         <Link
-          href="/tools"
+          href="/tools/"
           className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group print:hidden"
         >
           <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />

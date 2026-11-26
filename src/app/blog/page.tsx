@@ -26,10 +26,10 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title,
       description,
-      url: `https://toolwala.co/${locale === 'en' ? 'blog' : locale + '/blog'}/`,
+      url: `https://www.toolwala.co/${locale === 'en' ? 'blog' : locale + '/blog'}/`,
       siteName: 'ToolWala AI',
       type: 'website',
-      images: [{ url: 'https://toolwala.co/og-image.png', width: 1200, height: 630, alt: 'ToolWala AI Blog' }],
+      images: [{ url: 'https://www.toolwala.co/og-image.png', width: 1200, height: 630, alt: 'ToolWala AI Blog' }],
     },
     twitter: { card: 'summary_large_image', title, description },
   };

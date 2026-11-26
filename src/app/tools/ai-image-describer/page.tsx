@@ -332,7 +332,7 @@ Respond STRICTLY with a valid JSON object matching this exact JSON schema (witho
         
         {/* Navigation Breadcrumb */}
         <div className="mb-6 flex items-center gap-2 text-xs font-semibold text-gray-500 dark:text-gray-400">
-          <Link href="/tools" className="hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 transition-colors">
+          <Link href="/tools/" className="hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 transition-colors">
             <ChevronLeft className="w-4 h-4" /> All Tools
           </Link>
           <span>/</span>

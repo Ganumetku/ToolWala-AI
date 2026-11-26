@@ -43,8 +43,8 @@ export default function SEOPageTemplate({ slug }: SEOPageTemplateProps) {
     'inLanguage': localeLang,
     'isPartOf': {
       '@type': 'WebSite',
-      '@id': 'https://toolwala.co/#website',
-      'url': 'https://toolwala.co/',
+      '@id': 'https://www.toolwala.co/#website',
+      'url': 'https://www.toolwala.co/',
       'name': 'Toolwala.co'
     }
   };
@@ -55,7 +55,7 @@ export default function SEOPageTemplate({ slug }: SEOPageTemplateProps) {
       '@type': 'ListItem',
       'position': index + 1,
       'name': item.name,
-      'item': item.href.startsWith('http') ? item.href : `https://toolwala.co${item.href}`
+      'item': item.href.startsWith('http') ? item.href : `https://www.toolwala.co${item.href}`
     }))
   };
 

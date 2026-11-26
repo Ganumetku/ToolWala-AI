@@ -121,35 +121,35 @@ export default function Header() {
     toPdf: [
       { 
         name: 'JPG to PDF', 
-        href: '/tools/jpg-to-pdf', 
+        href: '/tools/jpg-to-pdf/', 
         badge: 'JPG',
         badgeColor: 'bg-amber-50/80 dark:bg-amber-500/10 text-amber-600/90 dark:text-amber-400/90 border border-amber-200/50 dark:border-amber-500/15',
         desc: 'Convert JPG, PNG to PDF' 
       },
       { 
         name: 'Word to PDF', 
-        href: '/tools/word-to-pdf-converter', 
+        href: '/tools/word-to-pdf-converter/', 
         badge: 'DOC',
         badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15',
         desc: 'Convert DOC, DOCX to PDF' 
       },
       { 
         name: 'PowerPoint to PDF', 
-        href: '/tools/powerpoint-to-pdf', 
+        href: '/tools/powerpoint-to-pdf/', 
         badge: 'PPT',
         badgeColor: 'bg-rose-50/80 dark:bg-rose-500/10 text-rose-600/90 dark:text-rose-400/90 border border-rose-200/50 dark:border-rose-500/15',
         desc: 'Convert PPTX to PDF' 
       },
       { 
         name: 'Excel to PDF', 
-        href: '/tools/excel-to-pdf-converter', 
+        href: '/tools/excel-to-pdf-converter/', 
         badge: 'XLS',
         badgeColor: 'bg-emerald-50/80 dark:bg-emerald-500/10 text-emerald-600/90 dark:text-emerald-400/90 border border-emerald-200/50 dark:border-emerald-500/15',
         desc: 'Spreadsheet to PDF' 
       },
       { 
         name: 'HEIC to PDF', 
-        href: '/tools/heic-to-jpg-png-converter', 
+        href: '/tools/heic-to-jpg-png-converter/', 
         badge: 'HEIC',
         badgeColor: 'bg-purple-50/80 dark:bg-purple-500/10 text-purple-600/90 dark:text-purple-400/90 border border-purple-200/50 dark:border-purple-500/15',
         desc: 'Apple photos to PDF' 
@@ -158,35 +158,35 @@ export default function Header() {
     fromPdf: [
       { 
         name: 'PDF to JPG', 
-        href: '/tools/pdf-to-jpg', 
+        href: '/tools/pdf-to-jpg/', 
         badge: 'JPG',
         badgeColor: 'bg-amber-50/80 dark:bg-amber-500/10 text-amber-600/90 dark:text-amber-400/90 border border-amber-200/50 dark:border-amber-500/15',
         desc: 'Extract pages as JPG' 
       },
       { 
         name: 'PDF to Word', 
-        href: '/tools/pdf-to-word-converter', 
+        href: '/tools/pdf-to-word-converter/', 
         badge: 'DOC',
         badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15',
         desc: 'Convert to editable DOCX' 
       },
       { 
         name: 'PDF to PowerPoint', 
-        href: '/tools/pdf-to-powerpoint', 
+        href: '/tools/pdf-to-powerpoint/', 
         badge: 'PPT',
         badgeColor: 'bg-rose-50/80 dark:bg-rose-500/10 text-rose-600/90 dark:text-rose-400/90 border border-rose-200/50 dark:border-rose-500/15',
         desc: 'Convert PDF to PPTX' 
       },
       { 
         name: 'PDF to Excel', 
-        href: '/tools/pdf-to-excel-converter', 
+        href: '/tools/pdf-to-excel-converter/', 
         badge: 'XLS',
         badgeColor: 'bg-emerald-50/80 dark:bg-emerald-500/10 text-emerald-600/90 dark:text-emerald-400/90 border border-emerald-200/50 dark:border-emerald-500/15',
         desc: 'Extract tables to Excel' 
       },
       { 
         name: 'PDF to Text / OCR', 
-        href: '/tools/pdf-ocr', 
+        href: '/tools/pdf-ocr/', 
         badge: 'OCR',
         badgeColor: 'bg-indigo-50/80 dark:bg-indigo-500/10 text-indigo-600/90 dark:text-indigo-400/90 border border-indigo-200/50 dark:border-indigo-500/15',
         desc: 'Extract selectable text' 
@@ -207,12 +207,12 @@ export default function Header() {
         toolHoverText: 'group-hover:text-blue-600 dark:group-hover:text-blue-400',
       },
       tools: [
-        { name: 'PDF Compare', href: '/tools/pdf-compare', icon: 'GitCompare', badge: 'DIFF', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'Side-by-side text diff' },
-        { name: 'Merge PDF', href: '/tools/merge-pdf', icon: 'Merge', badge: 'Combine', desc: 'Join multiple files into one' },
-        { name: 'Split PDF', href: '/tools/split-pdf', icon: 'SplitSquareHorizontal', badge: 'Extract', desc: 'Extract pages to separate files' },
-        { name: 'Organize PDF', href: '/tools/organize-pdf', icon: 'LayoutGrid', badge: 'Sort', desc: 'Reorder, rotate & delete pages' },
-        { name: 'Remove Pages', href: '/tools/remove-pages', icon: 'FileMinus', badge: 'Delete', desc: 'Delete unwanted pages' },
-        { name: 'Add Page Numbers', href: '/tools/add-page-numbers-to-pdf', icon: 'Hash', badge: 'Number', desc: 'Custom numbering' },
+        { name: 'PDF Compare', href: '/tools/pdf-compare/', icon: 'GitCompare', badge: 'DIFF', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'Side-by-side text diff' },
+        { name: 'Merge PDF', href: '/tools/merge-pdf/', icon: 'Merge', badge: 'Combine', desc: 'Join multiple files into one' },
+        { name: 'Split PDF', href: '/tools/split-pdf/', icon: 'SplitSquareHorizontal', badge: 'Extract', desc: 'Extract pages to separate files' },
+        { name: 'Organize PDF', href: '/tools/organize-pdf/', icon: 'LayoutGrid', badge: 'Sort', desc: 'Reorder, rotate & delete pages' },
+        { name: 'Remove Pages', href: '/tools/remove-pages/', icon: 'FileMinus', badge: 'Delete', desc: 'Delete unwanted pages' },
+        { name: 'Add Page Numbers', href: '/tools/add-page-numbers-to-pdf/', icon: 'Hash', badge: 'Number', desc: 'Custom numbering' },
       ]
     },
     {
@@ -227,14 +227,14 @@ export default function Header() {
         toolHoverText: 'group-hover:text-emerald-600 dark:group-hover:text-emerald-400',
       },
       tools: [
-        { name: 'Word to PDF', href: '/tools/word-to-pdf-converter', icon: 'FileOutput', badge: 'DOC', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'DOCX to clean PDF' },
-        { name: 'PDF to Word', href: '/tools/pdf-to-word-converter', icon: 'FileText', badge: 'DOC', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'PDF to editable DOCX' },
-        { name: 'Excel to PDF', href: '/tools/excel-to-pdf-converter', icon: 'FileSpreadsheet', badge: 'XLS', badgeColor: 'bg-emerald-50/80 dark:bg-emerald-500/10 text-emerald-600/90 dark:text-emerald-400/90 border border-emerald-200/50 dark:border-emerald-500/15', desc: 'Spreadsheet to PDF' },
-        { name: 'PDF to Excel', href: '/tools/pdf-to-excel-converter', icon: 'FileSpreadsheet', badge: 'XLS', badgeColor: 'bg-emerald-50/80 dark:bg-emerald-500/10 text-emerald-600/90 dark:text-emerald-400/90 border border-emerald-200/50 dark:border-emerald-500/15', desc: 'Extract table data' },
-        { name: 'PowerPoint to PDF', href: '/tools/powerpoint-to-pdf', icon: 'Presentation', badge: 'PPT', badgeColor: 'bg-rose-50/80 dark:bg-rose-500/10 text-rose-600/90 dark:text-rose-400/90 border border-rose-200/50 dark:border-rose-500/15', desc: 'PPTX to PDF slides' },
-        { name: 'PDF to PowerPoint', href: '/tools/pdf-to-powerpoint', icon: 'Presentation', badge: 'PPT', badgeColor: 'bg-rose-50/80 dark:bg-rose-500/10 text-rose-600/90 dark:text-rose-400/90 border border-rose-200/50 dark:border-rose-500/15', desc: 'PDF to PPTX slides' },
-        { name: 'JPG to PDF', href: '/tools/jpg-to-pdf', icon: 'Image', badge: 'JPG', badgeColor: 'bg-amber-50/80 dark:bg-amber-500/10 text-amber-600/90 dark:text-amber-400/90 border border-amber-200/50 dark:border-amber-500/15', desc: 'Images to single PDF' },
-        { name: 'PDF to JPG', href: '/tools/pdf-to-jpg', icon: 'FileImage', badge: 'JPG', badgeColor: 'bg-amber-50/80 dark:bg-amber-500/10 text-amber-600/90 dark:text-amber-400/90 border border-amber-200/50 dark:border-amber-500/15', desc: 'Extract high-res JPG' },
+        { name: 'Word to PDF', href: '/tools/word-to-pdf-converter/', icon: 'FileOutput', badge: 'DOC', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'DOCX to clean PDF' },
+        { name: 'PDF to Word', href: '/tools/pdf-to-word-converter/', icon: 'FileText', badge: 'DOC', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'PDF to editable DOCX' },
+        { name: 'Excel to PDF', href: '/tools/excel-to-pdf-converter/', icon: 'FileSpreadsheet', badge: 'XLS', badgeColor: 'bg-emerald-50/80 dark:bg-emerald-500/10 text-emerald-600/90 dark:text-emerald-400/90 border border-emerald-200/50 dark:border-emerald-500/15', desc: 'Spreadsheet to PDF' },
+        { name: 'PDF to Excel', href: '/tools/pdf-to-excel-converter/', icon: 'FileSpreadsheet', badge: 'XLS', badgeColor: 'bg-emerald-50/80 dark:bg-emerald-500/10 text-emerald-600/90 dark:text-emerald-400/90 border border-emerald-200/50 dark:border-emerald-500/15', desc: 'Extract table data' },
+        { name: 'PowerPoint to PDF', href: '/tools/powerpoint-to-pdf/', icon: 'Presentation', badge: 'PPT', badgeColor: 'bg-rose-50/80 dark:bg-rose-500/10 text-rose-600/90 dark:text-rose-400/90 border border-rose-200/50 dark:border-rose-500/15', desc: 'PPTX to PDF slides' },
+        { name: 'PDF to PowerPoint', href: '/tools/pdf-to-powerpoint/', icon: 'Presentation', badge: 'PPT', badgeColor: 'bg-rose-50/80 dark:bg-rose-500/10 text-rose-600/90 dark:text-rose-400/90 border border-rose-200/50 dark:border-rose-500/15', desc: 'PDF to PPTX slides' },
+        { name: 'JPG to PDF', href: '/tools/jpg-to-pdf/', icon: 'Image', badge: 'JPG', badgeColor: 'bg-amber-50/80 dark:bg-amber-500/10 text-amber-600/90 dark:text-amber-400/90 border border-amber-200/50 dark:border-amber-500/15', desc: 'Images to single PDF' },
+        { name: 'PDF to JPG', href: '/tools/pdf-to-jpg/', icon: 'FileImage', badge: 'JPG', badgeColor: 'bg-amber-50/80 dark:bg-amber-500/10 text-amber-600/90 dark:text-amber-400/90 border border-amber-200/50 dark:border-amber-500/15', desc: 'Extract high-res JPG' },
       ]
     },
     {
@@ -250,10 +250,10 @@ export default function Header() {
       },
       tools: [
         { name: 'Edit PDF', href: '/tools/edit-pdf/', icon: 'FilePenLine', badge: 'POPULAR', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'Add text, forms & draw' },
-        { name: 'Sign PDF', href: '/tools/sign-pdf', icon: 'PenTool', badge: 'E-SIGN', badgeColor: 'bg-purple-50/80 dark:bg-purple-500/10 text-purple-600/90 dark:text-purple-400/90 border border-purple-200/50 dark:border-purple-500/15', desc: 'Draw, type signature' },
-        { name: 'Crop PDF', href: '/tools/crop-pdf', icon: 'Crop', badge: 'Trim', desc: 'Trim page margins' },
-        { name: 'Rotate PDF', href: '/tools/rotate-pdf', icon: 'RotateCw', badge: 'Turn', desc: 'Rotate 90° or 180°' },
-        { name: 'Watermark PDF', href: '/tools/watermark-pdf', icon: 'Droplets', badge: 'Stamp', desc: 'Stamp text or image' },
+        { name: 'Sign PDF', href: '/tools/sign-pdf/', icon: 'PenTool', badge: 'E-SIGN', badgeColor: 'bg-purple-50/80 dark:bg-purple-500/10 text-purple-600/90 dark:text-purple-400/90 border border-purple-200/50 dark:border-purple-500/15', desc: 'Draw, type signature' },
+        { name: 'Crop PDF', href: '/tools/crop-pdf/', icon: 'Crop', badge: 'Trim', desc: 'Trim page margins' },
+        { name: 'Rotate PDF', href: '/tools/rotate-pdf/', icon: 'RotateCw', badge: 'Turn', desc: 'Rotate 90° or 180°' },
+        { name: 'Watermark PDF', href: '/tools/watermark-pdf/', icon: 'Droplets', badge: 'Stamp', desc: 'Stamp text or image' },
       ]
     },
     {
@@ -268,12 +268,12 @@ export default function Header() {
         toolHoverText: 'group-hover:text-amber-600 dark:group-hover:text-amber-400',
       },
       tools: [
-        { name: 'Compress PDF', href: '/tools/compress-pdf', icon: 'Shrink', badge: 'FAST', badgeColor: 'bg-emerald-50/80 dark:bg-emerald-500/10 text-emerald-600/90 dark:text-emerald-400/90 border border-emerald-200/50 dark:border-emerald-500/15', desc: 'Shrink MB size' },
-        { name: 'Protect PDF', href: '/tools/protect-pdf', icon: 'Lock', badge: 'Lock', desc: 'Add password encryption' },
-        { name: 'Unlock PDF', href: '/tools/unlock-pdf', icon: 'LockOpen', badge: 'Unlock', desc: 'Remove password' },
-        { name: 'Aadhaar Masking', href: '/tools/aadhaar-masking-tool', icon: 'EyeOff', badge: 'PRIVACY', badgeColor: 'bg-rose-50/80 dark:bg-rose-500/10 text-rose-600/90 dark:text-rose-400/90 border border-rose-200/50 dark:border-rose-500/15', desc: 'Mask first 8 digits' },
-        { name: 'Aadhaar 300KB', href: '/tools/aadhaar-pdf-compressor', icon: 'Shrink', badge: '300KB', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'UIDAI portal limit' },
-        { name: 'Govt Form PDF', href: '/tools/gov-form-pdf-compressor', icon: 'FileMinus', badge: 'GOVT', badgeColor: 'bg-amber-50/80 dark:bg-amber-500/10 text-amber-600/90 dark:text-amber-400/90 border border-amber-200/50 dark:border-amber-500/15', desc: 'UPSC / SSC forms' },
+        { name: 'Compress PDF', href: '/tools/compress-pdf/', icon: 'Shrink', badge: 'FAST', badgeColor: 'bg-emerald-50/80 dark:bg-emerald-500/10 text-emerald-600/90 dark:text-emerald-400/90 border border-emerald-200/50 dark:border-emerald-500/15', desc: 'Shrink MB size' },
+        { name: 'Protect PDF', href: '/tools/protect-pdf/', icon: 'Lock', badge: 'Lock', desc: 'Add password encryption' },
+        { name: 'Unlock PDF', href: '/tools/unlock-pdf/', icon: 'LockOpen', badge: 'Unlock', desc: 'Remove password' },
+        { name: 'Aadhaar Masking', href: '/tools/aadhaar-masking-tool/', icon: 'EyeOff', badge: 'PRIVACY', badgeColor: 'bg-rose-50/80 dark:bg-rose-500/10 text-rose-600/90 dark:text-rose-400/90 border border-rose-200/50 dark:border-rose-500/15', desc: 'Mask first 8 digits' },
+        { name: 'Aadhaar 300KB', href: '/tools/aadhaar-pdf-compressor/', icon: 'Shrink', badge: '300KB', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'UIDAI portal limit' },
+        { name: 'Govt Form PDF', href: '/tools/gov-form-pdf-compressor/', icon: 'FileMinus', badge: 'GOVT', badgeColor: 'bg-amber-50/80 dark:bg-amber-500/10 text-amber-600/90 dark:text-amber-400/90 border border-amber-200/50 dark:border-amber-500/15', desc: 'UPSC / SSC forms' },
       ]
     },
     {
@@ -288,9 +288,9 @@ export default function Header() {
         toolHoverText: 'group-hover:text-violet-600 dark:group-hover:text-violet-400',
       },
       tools: [
-        { name: 'AI PDF Summarizer', href: '/tools/pdf-summarizer', icon: 'Sparkles', badge: 'AI LAB', badgeColor: 'bg-purple-50/80 dark:bg-purple-500/10 text-purple-600/90 dark:text-purple-400/90 border border-purple-200/50 dark:border-purple-500/15', desc: 'Client-side summary' },
-        { name: 'PDF OCR Scanner', href: '/tools/pdf-ocr', icon: 'ScanText', badge: 'OCR', badgeColor: 'bg-indigo-50/80 dark:bg-indigo-500/10 text-indigo-600/90 dark:text-indigo-400/90 border border-indigo-200/50 dark:border-indigo-500/15', desc: 'Scan & extract text' },
-        { name: 'All PDF Directory', href: '/categories/pdf-tools', icon: 'ArrowRight', badge: '26 TOOLS', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'View all category tools' },
+        { name: 'AI PDF Summarizer', href: '/tools/pdf-summarizer/', icon: 'Sparkles', badge: 'AI LAB', badgeColor: 'bg-purple-50/80 dark:bg-purple-500/10 text-purple-600/90 dark:text-purple-400/90 border border-purple-200/50 dark:border-purple-500/15', desc: 'Client-side summary' },
+        { name: 'PDF OCR Scanner', href: '/tools/pdf-ocr/', icon: 'ScanText', badge: 'OCR', badgeColor: 'bg-indigo-50/80 dark:bg-indigo-500/10 text-indigo-600/90 dark:text-indigo-400/90 border border-indigo-200/50 dark:border-indigo-500/15', desc: 'Scan & extract text' },
+        { name: 'All PDF Directory', href: '/categories/pdf-tools/', icon: 'ArrowRight', badge: '26 TOOLS', badgeColor: 'bg-blue-50/80 dark:bg-blue-500/10 text-blue-600/90 dark:text-blue-400/90 border border-blue-200/50 dark:border-blue-500/15', desc: 'View all category tools' },
       ]
     }
   ];
@@ -307,16 +307,16 @@ export default function Header() {
       href: '#', 
       isAllPdf: true 
     },
-    { name: t('nav.tools', 'All Tools'), href: '/tools' },
-    { name: t('nav.categories', 'Categories'), href: '/categories' },
-    { name: t('nav.pricing', 'Pricing'), href: '/pricing' },
-    { name: t('nav.blog', 'Blog'), href: '/blog' },
+    { name: t('nav.tools', 'All Tools'), href: '/tools/' },
+    { name: t('nav.categories', 'Categories'), href: '/categories/' },
+    { name: t('nav.pricing', 'Pricing'), href: '/pricing/' },
+    { name: t('nav.blog', 'Blog'), href: '/blog/' },
   ];
 
   const secondaryNavigation = [
-    { name: t('nav.privacy', 'Privacy Hub'), href: '/privacy', icon: 'ShieldCheck' },
-    { name: t('nav.about', 'About'), href: '/about', icon: 'Sparkles' },
-    { name: t('nav.contact', 'Contact Us'), href: '/contact', icon: 'Mail' },
+    { name: t('nav.privacy', 'Privacy Hub'), href: '/privacy/', icon: 'ShieldCheck' },
+    { name: t('nav.about', 'About'), href: '/about/', icon: 'Sparkles' },
+    { name: t('nav.contact', 'Contact Us'), href: '/contact/', icon: 'Mail' },
   ];
 
   const getToolDisplayName = (href: string, fallbackName: string) => {
@@ -515,7 +515,7 @@ export default function Header() {
                           <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
                           <span>{t('nav.image_converters', 'Image Converters:')}</span>
                           <Link 
-                            href={localizeHref('/tools/heic-to-jpg-png-converter')} 
+                            href={localizeHref('/tools/heic-to-jpg-png-converter/')} 
                             onClick={() => setIsConvertDropdownOpen(false)}
                             className="font-medium text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
                           >
@@ -523,7 +523,7 @@ export default function Header() {
                           </Link>
                           <span>•</span>
                           <Link 
-                            href={localizeHref('/tools/webp-to-jpg-png-converter')} 
+                            href={localizeHref('/tools/webp-to-jpg-png-converter/')} 
                             onClick={() => setIsConvertDropdownOpen(false)}
                             className="font-medium text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
                           >
@@ -531,7 +531,7 @@ export default function Header() {
                           </Link>
                         </div>
                         <Link 
-                          href={localizeHref('/categories/pdf-tools')} 
+                          href={localizeHref('/categories/pdf-tools/')} 
                           onClick={() => setIsConvertDropdownOpen(false)}
                           className="font-medium text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
                         >
@@ -744,7 +744,7 @@ export default function Header() {
                           <span>{t('pdf_mega_menu.footer_sandbox', 'Client-Side Sandbox: Files stay 100% on your machine & never upload to any cloud.')}</span>
                         </div>
                         <Link 
-                          href={localizeHref('/categories/pdf-tools')} 
+                          href={localizeHref('/categories/pdf-tools/')} 
                           onClick={() => setIsPdfDropdownOpen(false)}
                           className="font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 shrink-0 ml-2"
                         >
@@ -823,7 +823,7 @@ export default function Header() {
           </div>
 
           <Link 
-            href={localizeHref('/tools')} 
+            href={localizeHref('/tools/')} 
             className="h-9 group relative flex items-center gap-1.5 rounded-full bg-blue-600 text-white hover:bg-blue-700 dark:bg-white dark:text-black dark:hover:bg-gray-100 px-3.5 xl:px-5 text-xs xl:text-[13px] font-bold shadow-sm hover:brightness-105 active:scale-95 transition-all duration-150 overflow-hidden whitespace-nowrap shrink-0"
           >
             <Rocket className="w-3.5 h-3.5 relative z-10" suppressHydrationWarning />
@@ -1082,7 +1082,7 @@ export default function Header() {
 
             <div className="mt-4 pt-4 border-t border-gray-200 dark:border-white/5">
               <Link 
-                href={localizeHref('/tools')} 
+                href={localizeHref('/tools/')} 
                 className="flex items-center justify-center gap-3 rounded-2xl bg-blue-600 p-4.5 text-lg font-black text-white shadow-lg active:scale-[0.98] transition-all"
                 onClick={() => setIsMobileMenuOpen(false)}
               >

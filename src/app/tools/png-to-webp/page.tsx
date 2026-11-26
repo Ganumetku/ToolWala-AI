@@ -612,7 +612,7 @@ export default function PNGToWebPConverterPage() {
         
         {/* Navigation Breadcrumb */}
         <Link 
-          href="/tools" 
+          href="/tools/" 
           className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-8 group"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -56,8 +56,11 @@ export default async function DynamicToolPage({ params }: PageProps) {
 
   const { t, locale } = await getTranslationServer();
   const localizeHref = (href: string) => {
-    if (locale === 'en') return href;
-    const cleanHref = href.startsWith('/') ? href : '/' + href;
+    let cleanHref = href.startsWith('/') ? href : '/' + href;
+    if (!cleanHref.includes('?') && !cleanHref.includes('#') && !cleanHref.endsWith('/')) {
+      cleanHref += '/';
+    }
+    if (locale === 'en') return cleanHref;
     return `/${locale}${cleanHref}`;
   };
 
@@ -73,9 +76,9 @@ export default async function DynamicToolPage({ params }: PageProps) {
   const categoryName = tool.category?.title || tool.categoryName || 'Utilities';
 
   const breadcrumbItems = [
-    { name: t('nav.home', 'Home'), href: locale === 'en' ? '/' : `/${locale}` },
-    { name: t('nav.tools', 'Tools'), href: localizeHref('/tools') },
-    { name: tool.title, href: localizeHref(`/tools/${slug}`) }
+    { name: t('nav.home', 'Home'), href: locale === 'en' ? '/' : `/${locale}/` },
+    { name: t('nav.tools', 'Tools'), href: localizeHref('/tools/') },
+    { name: tool.title, href: localizeHref(`/tools/${slug}/`) }
   ];
 
   const graph: any[] = [
@@ -110,7 +113,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
 
           {/* Navigation link */}
           <Link
-            href={localizeHref('/tools')}
+            href={localizeHref('/tools/')}
             className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-slate-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-10 group cursor-pointer"
           >
             <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />

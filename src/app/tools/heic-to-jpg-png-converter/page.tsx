@@ -274,7 +274,7 @@ export default function HeicToJpgPngConverterPage() {
           {/* Top Navigation */}
           <div className="flex items-center justify-between mb-8">
             <Link 
-              href="/tools" 
+              href="/tools/" 
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-white/10 transition-all shadow-sm"
             >
               <ChevronLeft className="w-4 h-4" /> Back to Tools

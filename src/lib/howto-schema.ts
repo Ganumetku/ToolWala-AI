@@ -17,7 +17,7 @@ export interface HowToSchemaOptions {
  */
 export function generateHowToSteps(slug: string, title: string, category: string = ''): HowToStepItem[] {
   const cleanSlug = slug.toLowerCase().replace(/\/$/, '');
-  const baseUrl = `https://toolwala.co/tools/${cleanSlug}/`;
+  const baseUrl = `https://www.toolwala.co/tools/${cleanSlug}/`;
 
   // 1. PDF Compression
   if (cleanSlug.includes('compress-pdf') || cleanSlug.includes('pdf-compressor')) {
@@ -113,7 +113,7 @@ export function generateHowToSteps(slug: string, title: string, category: string
  */
 export function buildHowToSchema({ slug, title, category, description }: HowToSchemaOptions) {
   const cleanSlug = slug.toLowerCase().replace(/\/$/, '');
-  const url = `https://toolwala.co/tools/${cleanSlug}/`;
+  const url = `https://www.toolwala.co/tools/${cleanSlug}/`;
   const steps = generateHowToSteps(cleanSlug, title, category);
 
   return {

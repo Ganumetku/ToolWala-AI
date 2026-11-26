@@ -11,8 +11,7 @@ import { INDIA_ONLY_SLUGS } from '@/lib/seo';
 export const revalidate = 3600; // Regenerate sitemap at most once per hour
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolwala.co';
-  const now = new Date();
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.toolwala.co';
   
   // Get currently enabled locales and filter to SEO enabled ones
   const enabledLocales = getEnabledLocales();
@@ -20,12 +19,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const seoLocales = enabledLocales.filter((loc) => loc === 'en' || config[loc]?.seo_enabled);
 
   // Helper to build a sitemap item with alternates
+  // Omits lastModified when a reliable, genuine publication/modification date is unavailable
   const buildItem = (
     path: string,
-    lastModified: Date,
+    lastModified: Date | undefined,
     changeFrequency: 'daily' | 'weekly' | 'monthly',
     priority: number,
-    itemLocale = 'en'
+    itemLocale = 'en',
+    alternateLocales?: string[]
   ) => {
     // Respect Next.js trailingSlash: true configuration
     const cleanPath = path === '' ? '/' : path.endsWith('/') ? path : `${path}/`;
@@ -36,7 +37,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       'en': `${baseUrl}${cleanPath}`
     };
     
-    seoLocales.forEach((loc) => {
+    const targetLocales = alternateLocales || seoLocales;
+    targetLocales.forEach((loc) => {
       if (loc !== 'en') {
         languages[loc] = `${baseUrl}/${loc}${cleanPath}`;
       }
@@ -44,7 +46,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return {
       url: canonicalUrl,
-      lastModified,
+      ...(lastModified ? { lastModified } : {}),
       changeFrequency,
       priority,
       alternates: {
@@ -60,7 +62,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '',
     '/tools',
     '/categories',
-    // '/pricing', // Not yet published — uncomment when the page is live
+    '/pricing',
+    '/privacy',
     '/blog',
     '/about',
     '/contact',
@@ -72,19 +75,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.flatMap((route) => {
     const changeFreq = route === '' ? 'daily' as const : route === '/blog' ? 'daily' as const : 'monthly' as const;
     const priority = route === '' ? 1.0 : route === '/blog' ? 0.9 : 0.5;
-    return seoLocales.map((loc) => buildItem(route, now, changeFreq, priority, loc));
+    return seoLocales.map((loc) => buildItem(route, undefined, changeFreq, priority, loc));
   });
 
   const categoryEntries: MetadataRoute.Sitemap = categoriesData.flatMap((c) =>
-    seoLocales.map((loc) => buildItem(`/categories/${c.slug}`, now, 'weekly', 0.6, loc))
+    seoLocales.map((loc) => buildItem(`/categories/${c.slug}`, undefined, 'weekly', 0.6, loc))
   );
 
-  const blogCategoryEntries: MetadataRoute.Sitemap = BLOG_CATEGORIES.flatMap((c) =>
-    seoLocales.map((loc) => buildItem(`/blog/category/${c.toLowerCase().replace(/\s+/g, '-')}`, now, 'weekly', 0.65, loc))
+  // Filter out blog categories that collide with tool categories (which redirect to /categories/...)
+  const validBlogCategories = BLOG_CATEGORIES.filter(
+    (c) => !['AI Tools', 'PDF Tools'].includes(c)
+  );
+
+  const blogCategoryEntries: MetadataRoute.Sitemap = validBlogCategories.flatMap((c) =>
+    seoLocales.map((loc) => buildItem(`/blog/category/${c.toLowerCase().replace(/\s+/g, '-')}`, undefined, 'weekly', 0.65, loc))
   );
 
   const hubEntries: MetadataRoute.Sitemap = hubsData.flatMap((h) =>
-    seoLocales.map((loc) => buildItem(`/hubs/${h.slug}`, now, 'weekly', 0.8, loc))
+    seoLocales.map((loc) => buildItem(`/hubs/${h.slug}`, undefined, 'weekly', 0.8, loc))
   );
 
   const landingPageEntries: MetadataRoute.Sitemap = landingPagesData.flatMap((lp) => {
@@ -92,7 +100,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const localesToUse = isIndiaOnly
       ? seoLocales.filter((loc) => loc === 'en' || loc === 'hi')
       : seoLocales;
-    return localesToUse.map((loc) => buildItem(`/landing/${lp.slug}`, now, 'weekly', 0.8, loc));
+    return localesToUse.map((loc) => buildItem(`/landing/${lp.slug}`, undefined, 'weekly', 0.8, loc, localesToUse));
   });
 
   let toolEntries: MetadataRoute.Sitemap = [];
@@ -116,14 +124,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     const rawTools = await getPublicTools();
-    const publicTools = rawTools.filter((t) => !EXCLUDED_TOOL_SLUGS.has(t.slug));
-    toolEntries = publicTools.flatMap((t) => {
+    const { toolsData } = await import('@/data/tools');
+    const existingSlugs = new Set(rawTools.map((t) => t.slug));
+    const staticExtras = toolsData.filter((t) => !existingSlugs.has(t.slug));
+    const allTools = [...rawTools, ...staticExtras].filter((t) => !EXCLUDED_TOOL_SLUGS.has(t.slug));
+
+    toolEntries = allTools.flatMap((t) => {
       const href = normalizeToolHref(t.href);
       const isIndiaOnly = INDIA_ONLY_SLUGS.has(t.slug);
       const localesToUse = isIndiaOnly
         ? seoLocales.filter((loc) => loc === 'en' || loc === 'hi')
         : seoLocales;
-      return localesToUse.map((loc) => buildItem(href, t.updatedAt ? new Date(t.updatedAt) : now, 'weekly', 0.8, loc));
+      const rawDate = t.updatedAt || t.publishDate || t.createdAt;
+      const lastMod = rawDate ? new Date(rawDate) : undefined;
+      return localesToUse.map((loc) => buildItem(href, lastMod, 'weekly', 0.8, loc, localesToUse));
     });
   } catch {
     const { toolsData } = await import('@/data/tools');
@@ -136,31 +150,43 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         const localesToUse = isIndiaOnly
           ? seoLocales.filter((loc) => loc === 'en' || loc === 'hi')
           : seoLocales;
-        return localesToUse.map((loc) => buildItem(href, now, 'weekly', 0.8, loc));
+        const rawDate = t.updatedAt || t.publishDate || t.createdAt;
+        const lastMod = rawDate ? new Date(rawDate) : undefined;
+        return localesToUse.map((loc) => buildItem(href, lastMod, 'weekly', 0.8, loc, localesToUse));
       });
   }
 
   try {
     const blogs = await getPublicBlogs();
-    blogEntries = blogs.flatMap((b) => {
+    const landingSlugs = new Set(landingPagesData.map((lp) => lp.slug));
+    // Exclude posts whose slugs match landing pages (they are served under /landing/ and 301 redirect if requested under /blog/)
+    const standaloneBlogs = blogs.filter((b) => !landingSlugs.has(b.slug));
+
+    blogEntries = standaloneBlogs.flatMap((b) => {
       const isIndiaOnly = INDIA_ONLY_SLUGS.has(b.slug);
       const localesToUse = isIndiaOnly
         ? seoLocales.filter((loc) => loc === 'en' || loc === 'hi')
         : seoLocales;
+      const rawDate = b.updatedAt || b.publishedAt || b.createdAt;
+      const lastMod = rawDate ? new Date(rawDate) : undefined;
       return localesToUse.map((loc) =>
-        buildItem(`/blog/${b.slug}`, new Date(b.updatedAt || b.publishedAt || b.createdAt), 'weekly', b.featured ? 0.75 : 0.7, loc)
+        buildItem(`/blog/${b.slug}`, lastMod, 'weekly', b.featured ? 0.75 : 0.7, loc, localesToUse)
       );
     });
 
     const tags = new Set<string>();
-    for (const blog of blogs) {
+    for (const blog of standaloneBlogs) {
       for (const tag of blog.tags) {
         tags.add(slugifyTag(tag));
       }
     }
-    tagEntries = Array.from(tags).flatMap((tag) =>
-      seoLocales.map((loc) => buildItem(`/blog/tag/${tag}`, now, 'weekly', 0.6, loc))
-    );
+    tagEntries = Array.from(tags).flatMap((tag) => {
+      const isIndiaOnly = INDIA_ONLY_SLUGS.has(tag);
+      const localesToUse = isIndiaOnly
+        ? seoLocales.filter((loc) => loc === 'en' || loc === 'hi')
+        : seoLocales;
+      return localesToUse.map((loc) => buildItem(`/blog/tag/${tag}`, undefined, 'weekly', 0.6, loc, localesToUse));
+    });
   } catch {
     // ignore
   }

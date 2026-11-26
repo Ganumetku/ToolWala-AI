@@ -55,7 +55,7 @@ export default function AutoToolSchema({ slug }: AutoToolSchemaProps) {
     }
   }
 
-  const url = `https://toolwala.co/tools/${cleanSlug}/`;
+  const url = `https://www.toolwala.co/tools/${cleanSlug}/`;
 
   return (
     <ToolSchema
@@ -64,7 +64,7 @@ export default function AutoToolSchema({ slug }: AutoToolSchemaProps) {
       url={url}
       category={category}
       slug={cleanSlug}
-      imageUrl="https://toolwala.co/icon-512.png"
+      imageUrl="https://www.toolwala.co/icon-512.png"
       disableHowTo={true}
     />
   );

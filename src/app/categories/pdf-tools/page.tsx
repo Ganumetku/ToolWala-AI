@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { 
-  ChevronRight, Sparkles, Layers, ShieldCheck, 
-  Clock, Cpu, HelpCircle, ChevronDown, Grid, ArrowRight 
+import {
+  ChevronRight, Sparkles, Layers, ShieldCheck,
+  Clock, Cpu, HelpCircle, ChevronDown, Grid, ArrowRight
 } from 'lucide-react';
 import { categoriesData, getToolsByCategory } from '@/data/categories';
 import { toolsData } from '@/data/tools';
@@ -16,12 +16,12 @@ import PdfToolIcon from '@/components/PdfToolIcon';
 import { getTranslationServer } from '@/lib/i18n-server';
 import { getPublicBlogs } from '@/lib/blogs-server';
 import { getBlogTranslationWithFallback } from '@/lib/blog-translation-service';
-import { 
-  buildCategoryMetadata, 
-  buildFAQSchema, 
-  buildWebPageSchema, 
-  buildBreadcrumbJsonLd, 
-  getLocalizedCanonicalUrl 
+import {
+  buildCategoryMetadata,
+  buildFAQSchema,
+  buildWebPageSchema,
+  buildBreadcrumbJsonLd,
+  getLocalizedCanonicalUrl
 } from '@/lib/seo';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -35,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
     const { headers } = await import('next/headers');
     const headerList = await headers();
     locale = headerList.get('x-locale') || 'en';
-  } catch (e) {}
+  } catch (e) { }
 
   let seoTitle = category.seoTitle;
   let seoDescription = category.seoDescription;
@@ -49,7 +49,7 @@ export async function generateMetadata(): Promise<Metadata> {
       seoTitle = messages.categories[category.id].seoTitle || seoTitle;
       seoDescription = messages.categories[category.id].seoDescription || seoDescription;
     }
-  } catch (e) {}
+  } catch (e) { }
 
   return buildCategoryMetadata(seoTitle, seoDescription, category.slug, category.keywords, locale);
 }
@@ -74,7 +74,7 @@ export default async function Page() {
       seoTitle = messages.categories[category.id].seoTitle || seoTitle;
       seoDescription = messages.categories[category.id].seoDescription || seoDescription;
     }
-  } catch (e) {}
+  } catch (e) { }
 
   const categoryUrl = getLocalizedCanonicalUrl(`/categories/${category.slug}`, locale);
 
@@ -88,7 +88,7 @@ export default async function Page() {
 
   // Find related public blog posts for this category
   const allBlogs = await getPublicBlogs();
-  const matchedBlogs = allBlogs.filter(blog => 
+  const matchedBlogs = allBlogs.filter(blog =>
     blog.category.toLowerCase() === category.title.toLowerCase() ||
     categoryTools.some(tool => blog.relatedToolSlugs?.includes(tool.slug)) ||
     blog.tags.some(tag => category.keywords.some(kw => kw.toLowerCase() === tag.toLowerCase()))
@@ -106,8 +106,8 @@ export default async function Page() {
     'description': seoDescription,
     'isPartOf': {
       '@type': 'WebSite',
-      '@id': 'https://toolwala.co/#website',
-      'url': 'https://toolwala.co/',
+      '@id': 'https://www.toolwala.co/#website',
+      'url': 'https://www.toolwala.co/',
       'name': 'Toolwala.co'
     },
     'about': {
@@ -120,7 +120,7 @@ export default async function Page() {
       'itemListElement': categoryTools.map((tool, index) => ({
         '@type': 'ListItem',
         'position': index + 1,
-        'url': `https://toolwala.co${locale === 'en' ? '' : '/' + locale}${tool.href}`
+        'url': `https://www.toolwala.co${locale === 'en' ? '' : '/' + locale}${tool.href}`
       }))
     }
   };
@@ -147,8 +147,12 @@ export default async function Page() {
   };
 
   const localizeHref = (href: string) => {
-    if (locale === 'en') return href;
-    return `/${locale}${href}`;
+    let cleanHref = href.startsWith('/') ? href : '/' + href;
+    if (!cleanHref.includes('?') && !cleanHref.includes('#') && !cleanHref.endsWith('/')) {
+      cleanHref += '/';
+    }
+    if (locale === 'en') return cleanHref;
+    return `/${locale}${cleanHref}`;
   };
 
   const popularTools = categoryTools.filter(tool => tool.popular).slice(0, 4);
@@ -159,7 +163,7 @@ export default async function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      
+
       <div className="min-h-screen bg-[#F6F8FC] dark:bg-[#030712] text-slate-900 dark:text-white relative overflow-hidden font-sans">
         <MeshGradient />
         <FloatingParticles />
@@ -167,7 +171,7 @@ export default async function Page() {
         <div className="absolute top-0 left-0 w-full h-[600px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500/5 dark:from-blue-900/10 via-transparent to-transparent pointer-events-none z-0" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-16 sm:pb-24 relative z-10">
-          
+
           {/* Static Header with Breadcrumbs */}
           <div className="text-center max-w-4xl mx-auto mb-8 sm:mb-10">
             <nav className="flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-gray-400 mb-4 sm:mb-5">
@@ -206,7 +210,7 @@ export default async function Page() {
 
             {/* Content Deck */}
             <div className="flex-1 w-full space-y-16">
-              
+
               {/* 500+ Word Rich Intro and Quick Stats */}
               <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 p-6 sm:p-8 rounded-[2.5rem] shadow-sm">
                 <div className="lg:col-span-2 space-y-5 text-left">
@@ -216,7 +220,7 @@ export default async function Page() {
                       {t('categories.hub_badge', 'Categorized Hub')}
                     </span>
                   </div>
-                  
+
                   <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-slate-900 dark:text-white">
                     {t(`categories.${category.id}.seoTitle`, category.seoTitle)}
                   </h2>
@@ -295,8 +299,8 @@ export default async function Page() {
                   </div>
                   <div className="grid grid-cols-1 min-[480px]:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                     {popularTools.map((tool) => (
-                      <ToolCard 
-                        key={tool.id} 
+                      <ToolCard
+                        key={tool.id}
                         {...tool}
                         isPopular={true}
                       />
@@ -351,8 +355,8 @@ export default async function Page() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {category.whyUse.map((benefit, idx) => (
-                    <div 
-                      key={idx} 
+                    <div
+                      key={idx}
                       className="p-6 rounded-2xl bg-white dark:bg-white/[0.01] border border-slate-200 dark:border-white/5 hover:border-blue-500/30 transition-all shadow-sm text-left"
                     >
                       <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-white/5 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4 border border-blue-100 dark:border-white/5">
@@ -380,8 +384,8 @@ export default async function Page() {
 
                 <div className="space-y-4">
                   {category.faqs.map((faq, index) => (
-                    <details 
-                      key={index} 
+                    <details
+                      key={index}
                       className="group border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[0.01] rounded-2xl overflow-hidden shadow-sm [&_summary::-webkit-details-marker]:hidden"
                     >
                       <summary className="flex items-center justify-between p-5.5 text-left cursor-pointer focus:outline-none select-none">

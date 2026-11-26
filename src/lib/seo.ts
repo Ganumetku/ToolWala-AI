@@ -10,7 +10,7 @@ import { headers } from 'next/headers';
 import { getToolTranslationWithFallback } from '@/lib/tool-translation-service';
 import { landingPagesData } from '@/data/landingPages';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolwala.co';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.toolwala.co';
 const SITE_NAME = 'ToolWala AI';
 
 /** English SERP copy that beats stale DB/admin titles. Privacy is the click reason. */
@@ -66,7 +66,10 @@ const HI_SEO_COPY_OVERRIDES: Record<string, { title: string; description: string
 
 export function getSiteUrl(path = ''): string {
   const base = SITE_URL.replace(/\/$/, '');
-  const p = path.startsWith('/') ? path : `/${path}`;
+  let p = path.startsWith('/') ? path : `/${path}`;
+  if (!p.includes('?') && !p.includes('#') && !/\.[a-z0-9]+$/i.test(p) && !p.endsWith('/')) {
+    p += '/';
+  }
   return `${base}${p}`;
 }
 
@@ -99,23 +102,23 @@ export const INDIA_ONLY_SLUGS = new Set([
 ]);
 
 export function getAlternateLanguages(pathname: string): Record<string, string> {
-  const siteUrl = "https://toolwala.co";
+  const siteUrl = SITE_URL;
   const parts = pathname.split('/');
   const cleanPath = ['hi', 'es', 'fr', 'de', 'pt', 'ar', 'id'].includes(parts[1])
     ? '/' + parts.slice(2).join('/')
     : pathname;
-  
+
   const cleanPathNoSlash = cleanPath.replace(/\/$/, '');
-  
+
   const languages: Record<string, string> = {
     'x-default': `${siteUrl}${cleanPathNoSlash}/`,
     'en': `${siteUrl}${cleanPathNoSlash}/`
   };
-  
+
   const enabledLocales = getEnabledLocales();
   const config = getLanguagesConfig();
   const isIndiaOnly = Array.from(INDIA_ONLY_SLUGS).some((slug) => cleanPathNoSlash.includes(slug));
-  
+
   enabledLocales.forEach((loc) => {
     if (loc !== 'en' && config[loc]?.seo_enabled) {
       if (isIndiaOnly && loc !== 'hi') {
@@ -124,7 +127,7 @@ export function getAlternateLanguages(pathname: string): Record<string, string> 
       languages[loc] = `${siteUrl}/${loc}${cleanPathNoSlash}/`;
     }
   });
-  
+
   return languages;
 }
 
@@ -141,7 +144,7 @@ export function buildToolMetadata(tool: Tool): Metadata {
     title,
     description,
     keywords: tool.tags,
-    alternates: { canonical: tool.href },
+    alternates: { canonical: url },
     openGraph: {
       title,
       description,
@@ -221,7 +224,7 @@ export function buildBlogMetadata(blog: BlogPost, locale: string = 'en'): Metada
     blog.content.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().slice(0, 160);
   const keywords =
     blog.seoMetadata?.keywords?.split(',').map((k) => k.trim()).filter(Boolean) || blog.tags;
-  
+
   const path = `/blog/${blog.slug}`;
   const canonical = getLocalizedCanonicalUrl(path, locale);
   const languages = getAlternateLanguages(path);
@@ -309,12 +312,12 @@ export function buildBlogIndexMetadata(): Metadata {
   const title = 'ToolWala AI Blog – Modern AI, PDF & Design Insights';
   const description =
     'Stay ahead with guides on local browser OCR, image compression, ATS resumes, and high-performance developer utilities on ToolWala AI.';
-  const url = getSiteUrl('/blog');
+  const url = getSiteUrl('/blog/');
 
   return {
     title,
     description,
-    alternates: { canonical: '/blog' },
+    alternates: { canonical: url },
     openGraph: {
       title,
       description,
@@ -466,10 +469,10 @@ export async function generateToolMetadataHelper(
     const override = SEO_COPY_OVERRIDES[toolId];
     title = override?.title
       || ((dbTranslation.seoTitle && dbTranslation.seoTitle !== toolId) ? dbTranslation.seoTitle :
-      (landingPage ? landingPage.title : (dbTranslation.title && dbTranslation.title !== toolId ? dbTranslation.title : fallbackTitle)));
+        (landingPage ? landingPage.title : (dbTranslation.title && dbTranslation.title !== toolId ? dbTranslation.title : fallbackTitle)));
     description = override?.description
       || ((dbTranslation.seoDescription && dbTranslation.seoDescription !== "") ? dbTranslation.seoDescription :
-      (landingPage ? landingPage.metaDescription : (dbTranslation.description || fallbackDesc)));
+        (landingPage ? landingPage.metaDescription : (dbTranslation.description || fallbackDesc)));
   } else {
     // Non-English locale. Build SEO title/description safely.
     let toolTitle = dbTranslation.title && dbTranslation.title !== toolId ? dbTranslation.title : '';
@@ -493,7 +496,7 @@ export async function generateToolMetadataHelper(
     // Try to get clean seoTitle
     let rawSeoTitle = hiOverride?.title
       || ((dbTranslation.seoTitle && dbTranslation.seoTitle !== toolId) ? dbTranslation.seoTitle : '');
-    
+
     if (rawSeoTitle) {
       title = rawSeoTitle;
     } else {
@@ -552,7 +555,7 @@ export async function generateToolMetadataHelper(
     // ignore
   }
 
-  const siteUrl = "https://toolwala.co";
+  const siteUrl = SITE_URL;
   const languages = getAlternateLanguages(originalPathname);
   const canonicalPath = originalPathname.endsWith('/') ? originalPathname : `${originalPathname}/`;
   const canonicalUrl = `${siteUrl}${canonicalPath}`;
@@ -624,10 +627,10 @@ export function buildWebPageSchema(title: string, description: string, url: stri
 }
 
 export function buildEnrichedToolJsonLd(tool: any, url: string, categoryName: string) {
-  const applicationCategory = 
+  const applicationCategory =
     categoryName === 'Image Tools' ? 'MultimediaApplication' :
-    categoryName === 'PDF Tools' ? 'DesignApplication' :
-    'UtilitiesApplication';
+      categoryName === 'PDF Tools' ? 'DesignApplication' :
+        'UtilitiesApplication';
 
   return {
     '@type': 'SoftwareApplication',

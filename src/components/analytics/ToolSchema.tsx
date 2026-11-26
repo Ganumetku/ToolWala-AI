@@ -52,7 +52,7 @@ export default function ToolSchema({
   url,
   category = 'Utility Tools',
   slug,
-  imageUrl = 'https://toolwala.co/icon-512.png',
+  imageUrl = 'https://www.toolwala.co/icon-512.png',
   ratingValue,
   ratingCount,
   faqs = [],
@@ -83,10 +83,10 @@ export default function ToolSchema({
     publisher: {
       '@type': 'Organization',
       name: 'ToolWala AI',
-      url: 'https://toolwala.co',
+      url: 'https://www.toolwala.co',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://toolwala.co/icon-512.png',
+        url: 'https://www.toolwala.co/icon-512.png',
       },
     },
   };

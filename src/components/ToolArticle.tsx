@@ -232,7 +232,7 @@ export default function ToolArticle({
       '@type': 'ListItem',
       'position': idx + 1,
       'name': item.label,
-      'item': item.href ? (item.href.startsWith('http') ? item.href : `https://toolwala.co${item.href.endsWith('/') ? item.href : item.href + '/'}`) : undefined
+      'item': item.href ? (item.href.startsWith('http') ? item.href : `https://www.toolwala.co${item.href.endsWith('/') ? item.href : item.href + '/'}`) : undefined
     }))
   }), [breadcrumbItems]);
 

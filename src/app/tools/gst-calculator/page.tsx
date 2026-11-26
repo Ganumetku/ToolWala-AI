@@ -875,7 +875,7 @@ Calculated via ToolWala AI (https://toolwala.co/tools/gst-calculator)`;
           
           <div className="flex items-center justify-between mb-10">
             <Link 
-              href="/tools" 
+              href="/tools/" 
               className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-slate-500 dark:text-gray-500 hover:text-emerald-600 dark:hover:text-emerald-500 transition-colors group"
             >
               <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />

@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { headers } from 'next/headers';
 import { ChevronLeft, Sparkles, ArrowRight, HelpCircle } from 'lucide-react';
 import { getTranslationServer } from '@/lib/i18n-server';
 import { MeshGradient } from '@/components/BackgroundEffects';
@@ -10,11 +11,12 @@ import { renderMarkdown } from '@/lib/markdown';
 import { toolsData } from '@/data/tools';
 import ToolCard from '@/components/ToolCard';
 import ToolIcon from '@/components/ToolIcon';
-import { 
-  buildWebPageSchema, 
-  buildBreadcrumbJsonLd, 
+import {
+  buildWebPageSchema,
+  buildBreadcrumbJsonLd,
   buildFAQSchema,
-  getLocalizedCanonicalUrl 
+  getLocalizedCanonicalUrl,
+  getAlternateLanguages
 } from '@/lib/seo';
 
 interface HubPageProps {
@@ -37,11 +39,32 @@ export async function generateMetadata({ params }: HubPageProps) {
     };
   }
 
+  let locale = 'en';
+  try {
+    const headerList = await headers();
+    locale = headerList.get('x-locale') || 'en';
+  } catch (e) {
+    // fallback
+  }
+
+  const path = `/hubs/${hub.slug}`;
+  const canonical = getLocalizedCanonicalUrl(path, locale);
+  const languages = getAlternateLanguages(path);
+
   return {
     title: hub.title,
     description: hub.description,
     alternates: {
-      canonical: `https://toolwala.co/hubs/${hub.slug}/`,
+      canonical,
+      languages,
+    },
+    openGraph: {
+      title: hub.title,
+      description: hub.description,
+      url: canonical,
+      siteName: 'ToolWala AI',
+      type: 'website',
+      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
     }
   };
 }
@@ -56,8 +79,11 @@ export default async function HubPage({ params }: HubPageProps) {
 
   const { t, locale } = await getTranslationServer();
   const localizeHref = (href: string) => {
-    if (locale === 'en') return href;
-    const cleanHref = href.startsWith('/') ? href : '/' + href;
+    let cleanHref = href.startsWith('/') ? href : '/' + href;
+    if (!cleanHref.includes('?') && !cleanHref.includes('#') && !cleanHref.endsWith('/')) {
+      cleanHref += '/';
+    }
+    if (locale === 'en') return cleanHref;
     return `/${locale}${cleanHref}`;
   };
 
@@ -65,8 +91,8 @@ export default async function HubPage({ params }: HubPageProps) {
 
   // Setup breadcrumbs
   const breadcrumbItems = [
-    { name: t('nav.home', 'Home'), href: locale === 'en' ? '/' : `/${locale}` },
-    { name: t('nav.tools', 'Tools'), href: localizeHref('/tools') },
+    { name: t('nav.home', 'Home'), href: locale === 'en' ? '/' : `/${locale}/` },
+    { name: t('nav.tools', 'Tools'), href: localizeHref('/tools/') },
     { name: hub.title, href: hubUrl }
   ];
 
@@ -93,14 +119,14 @@ export default async function HubPage({ params }: HubPageProps) {
 
       <div className="bg-[#F6F8FC] dark:bg-[#030712] min-h-screen py-24 relative overflow-hidden font-sans">
         <MeshGradient />
-        
+
         {/* Decorative Glow Grid */}
         <div className="absolute top-0 left-0 w-full h-[600px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent pointer-events-none z-0" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative z-10 text-left">
           {/* Breadcrumb Navigation */}
-          <Link 
-            href={localizeHref('/tools')} 
+          <Link
+            href={localizeHref('/tools/')}
             className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group cursor-pointer"
           >
             <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -148,11 +174,11 @@ export default async function HubPage({ params }: HubPageProps) {
 
             {/* 800+ Words Guidelines */}
             <section className="space-y-6 pt-6 border-t border-white/5 content-renderer prose prose-invert max-w-none text-gray-300 leading-relaxed font-sans">
-              <div 
+              <div
                 className="space-y-4 text-sm [&_h2]:text-2xl [&_h2]:font-black [&_h2]:text-white [&_h2]:uppercase [&_h2]:tracking-tight [&_h2]:mt-8 [&_h2]:border-b [&_h2]:border-white/5 [&_h2]:pb-2 [&_h3]:text-xl [&_h3]:font-black [&_h3]:text-white [&_h3]:mt-6 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:space-y-2 [&_p]:mb-4 [&_strong]:font-bold [&_strong]:text-white"
-                dangerouslySetInnerHTML={{ 
+                dangerouslySetInnerHTML={{
                   __html: renderMarkdown(hub.content)
-                }} 
+                }}
               />
             </section>
 
@@ -165,8 +191,8 @@ export default async function HubPage({ params }: HubPageProps) {
                     const isLanding = landingPagesData.some(item => item.slug === lp.slug);
                     const targetHref = isLanding ? `/landing/${lp.slug}` : `/tools/${lp.slug}`;
                     return (
-                      <Link 
-                        key={lp.slug} 
+                      <Link
+                        key={lp.slug}
                         href={localizeHref(targetHref)}
                         className="p-5 rounded-2xl border border-white/5 bg-[#0b0f19]/40 hover:border-blue-500/20 hover:bg-blue-500/[0.01] transition-all group flex items-center justify-between cursor-pointer"
                       >

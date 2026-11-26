@@ -192,7 +192,7 @@ export default function ProfessionalTextHumanizer() {
       <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-indigo-600/5 blur-[120px] -z-10" />
 
       <div className="container mx-auto px-4 max-w-7xl">
-        <Link href="/tools" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group">
+        <Link href="/tools/" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-10 group">
           <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Back to Directory
         </Link>
@@ -416,7 +416,7 @@ export default function ProfessionalTextHumanizer() {
                           <p className="text-sm font-medium text-blue-100 opacity-80">Advanced multi-model bypassing coming next week.</p>
                         </div>
                       </div>
-                      <Link href="/tools" className="bg-white text-blue-600 px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl">
+                      <Link href="/tools/" className="bg-white text-blue-600 px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl">
                         Explore Tools
                       </Link>
                     </div>

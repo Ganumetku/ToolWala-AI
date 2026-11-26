@@ -387,7 +387,7 @@ export default function CoverLetterGenerator() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
         {/* Navigation Breadcrumb */}
         <Link
-          href="/tools"
+          href="/tools/"
           className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors mb-6 group"
         >
           <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />

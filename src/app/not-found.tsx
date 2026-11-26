@@ -53,7 +53,7 @@ export default function NotFound() {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8">
           <Link
-            href="/tools"
+            href="/tools/"
             className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 bg-blue-600 hover:bg-blue-500 rounded-xl text-xs font-black uppercase tracking-widest text-white shadow-[0_4px_20px_rgba(37,99,235,0.3)] active:scale-95 transition-all cursor-pointer"
           >
             <Search className="w-4 h-4" /> Tools Directory

@@ -4,7 +4,22 @@ import { getEnabledLocales } from '@/lib/languages';
 export const revalidate = 86400; // Regenerate robots.txt at most once per day
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolwala.co';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.toolwala.co';
+
+  // Protect Vercel preview deployments from search engine crawling
+  const isPreview = process.env.VERCEL_ENV === 'preview' || process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview';
+  if (isPreview) {
+    return {
+      rules: [
+        {
+          userAgent: '*',
+          disallow: '/',
+        },
+      ],
+      sitemap: `${baseUrl}/sitemap.xml`,
+      host: baseUrl,
+    };
+  }
 
   // All supported locale codes (excluding 'en' which uses root path)
   const ALL_LOCALES = ['hi', 'es', 'fr', 'de', 'pt', 'ar', 'id'];
@@ -15,7 +30,7 @@ export default function robots(): MetadataRoute.Robots {
     .filter((loc) => !enabledLocales.includes(loc))
     .map((loc) => `/${loc}/`);
 
-  const baseDisallow = ['/api/', '/admin/', '/login', '/auth/', '/_next/static/media/'];
+  const baseDisallow = ['/api/', '/admin/', '/login', '/auth/'];
   const allDisallow = [...baseDisallow, ...disabledLocalePaths];
   // Only block known junk/private query params, not ALL query strings.
   // Blocking /*?* would prevent Googlebot from following UTM/share links to valid pages.

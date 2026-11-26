@@ -130,7 +130,7 @@ export function injectInternalLinks(
 
   for (const blog of sortedBlogs) {
     termMap.set(blog.title.toLowerCase(), {
-      href: `/blog/${blog.slug}`,
+      href: `/blog/${blog.slug}/`,
       title: blog.title,
     });
   }
@@ -200,9 +200,9 @@ export function buildBlogBreadcrumbs(blog: BlogPost): BreadcrumbItem[] {
   const categorySlug = blog.category.toLowerCase().replace(/\s+/g, '-');
   return [
     { name: 'Home', href: '/' },
-    { name: 'Blog', href: '/blog' },
-    { name: blog.category, href: `/blog/category/${categorySlug}` },
-    { name: blog.title, href: `/blog/${blog.slug}` },
+    { name: 'Blog', href: '/blog/' },
+    { name: blog.category, href: `/blog/category/${categorySlug}/` },
+    { name: blog.title, href: `/blog/${blog.slug}/` },
   ];
 }
 
@@ -210,8 +210,8 @@ export function buildBlogBreadcrumbs(blog: BlogPost): BreadcrumbItem[] {
 export function buildCategoryBreadcrumbs(category: string, slug: string): BreadcrumbItem[] {
   return [
     { name: 'Home', href: '/' },
-    { name: 'Blog', href: '/blog' },
-    { name: category, href: `/blog/category/${slug}` },
+    { name: 'Blog', href: '/blog/' },
+    { name: category, href: `/blog/category/${slug}/` },
   ];
 }
 
@@ -219,8 +219,8 @@ export function buildCategoryBreadcrumbs(category: string, slug: string): Breadc
 export function buildTagBreadcrumbs(tagLabel: string, tagSlug: string): BreadcrumbItem[] {
   return [
     { name: 'Home', href: '/' },
-    { name: 'Blog', href: '/blog' },
-    { name: `#${tagLabel}`, href: `/blog/tag/${tagSlug}` },
+    { name: 'Blog', href: '/blog/' },
+    { name: `#${tagLabel}`, href: `/blog/tag/${tagSlug}/` },
   ];
 }
 

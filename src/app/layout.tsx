@@ -54,7 +54,7 @@ export async function generateMetadata(): Promise<Metadata> {
     // fallback
   }
 
-  const siteUrl = "https://toolwala.co";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.toolwala.co";
   const parts = originalPathname.split('/');
   const cleanPath = ['hi', 'es', 'fr', 'de', 'pt', 'ar', 'id'].includes(parts[1])
     ? '/' + parts.slice(2).join('/')
@@ -192,7 +192,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
   const descriptionStr = finalDesc || defaultDesc;
 
-  const shouldNoindex = cleanPathNoSlash.startsWith('/admin') ||
+  const isPreview = process.env.VERCEL_ENV === 'preview' || process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview';
+  const shouldNoindex = isPreview ||
+                        cleanPathNoSlash.startsWith('/admin') ||
                         cleanPathNoSlash.startsWith('/login') ||
                         cleanPathNoSlash.startsWith('/auth');
 
@@ -217,7 +219,7 @@ export async function generateMetadata(): Promise<Metadata> {
     authors: [{ name: "ToolWala AI" }],
     creator: "ToolWala AI",
     publisher: "ToolWala AI",
-    metadataBase: new URL("https://toolwala.co"),
+    metadataBase: new URL(siteUrl),
     alternates: {
       canonical: `${siteUrl}${originalPathname.endsWith('/') ? originalPathname : originalPathname + '/'}`,
       languages
@@ -266,14 +268,14 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://toolwala.co/#organization",
+      "@id": "https://www.toolwala.co/#organization",
       "name": "ToolWala AI",
-      "url": "https://toolwala.co",
+      "url": "https://www.toolwala.co",
       "logo": {
         "@type": "ImageObject",
-        "@id": "https://toolwala.co/#logo",
-        "url": "https://toolwala.co/icon-512.png",
-        "contentUrl": "https://toolwala.co/icon-512.png",
+        "@id": "https://www.toolwala.co/#logo",
+        "url": "https://www.toolwala.co/icon-512.png",
+        "contentUrl": "https://www.toolwala.co/icon-512.png",
         "caption": "ToolWala AI Logo",
         "inLanguage": "en-US",
         "width": 512,
@@ -282,19 +284,19 @@ const jsonLd = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://toolwala.co/#website",
-      "url": "https://toolwala.co",
+      "@id": "https://www.toolwala.co/#website",
+      "url": "https://www.toolwala.co",
       "name": "ToolWala AI",
       "description": "Free PDF, image, and resume tools that run in your browser. Files stay on your device — no signup.",
       "publisher": {
-        "@id": "https://toolwala.co/#organization"
+        "@id": "https://www.toolwala.co/#organization"
       },
       "potentialAction": [
         {
           "@type": "SearchAction",
           "target": {
             "@type": "EntryPoint",
-            "urlTemplate": "https://toolwala.co/?search={search_term_string}"
+            "urlTemplate": "https://www.toolwala.co/?search={search_term_string}"
           },
           "query-input": "required name=search_term_string"
         }

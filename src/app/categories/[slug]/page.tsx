@@ -112,8 +112,8 @@ export default async function Page({ params }: PageProps) {
     'description': seoDescription,
     'isPartOf': {
       '@type': 'WebSite',
-      '@id': 'https://toolwala.co/#website',
-      'url': 'https://toolwala.co/',
+      '@id': 'https://www.toolwala.co/#website',
+      'url': 'https://www.toolwala.co/',
       'name': 'Toolwala.co'
     },
     'about': {
@@ -126,7 +126,7 @@ export default async function Page({ params }: PageProps) {
       'itemListElement': categoryTools.map((tool, index) => ({
         '@type': 'ListItem',
         'position': index + 1,
-        'url': `https://toolwala.co${locale === 'en' ? '' : '/' + locale}${tool.href}`
+        'url': `https://www.toolwala.co${locale === 'en' ? '' : '/' + locale}${tool.href}`
       }))
     }
   };

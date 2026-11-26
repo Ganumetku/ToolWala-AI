@@ -266,7 +266,7 @@ export default function DiscountCalculatorPage() {
           
           {/* Breadcrumb Navigation */}
           <Link 
-            href="/tools" 
+            href="/tools/" 
             className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-8 group"
           >
             <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />

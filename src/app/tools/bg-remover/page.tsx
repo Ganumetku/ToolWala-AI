@@ -308,7 +308,7 @@ export default function BackgroundRemover() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[350px] bg-blue-600/5 blur-[100px] -z-10" />
 
       <div className="container mx-auto px-3 sm:px-6 max-w-5xl">
-        <Link href="/tools" className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-4 group">
+        <Link href="/tools/" className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-gray-500 hover:text-blue-500 transition-colors mb-4 group">
           <ChevronLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
           Back to Directory
         </Link>

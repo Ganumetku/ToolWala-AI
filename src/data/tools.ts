@@ -1058,6 +1058,23 @@ export const toolsData: Tool[] = [
     updatedAt: '2026-06-20T00:00:00Z'
   },
   {
+    id: "gov-form-image-compressor",
+    title: "Government Form Image Compressor",
+    description: "Compress images and photos under 20KB, 50KB, or 100KB for government job portals.",
+    icon: "ImageDown",
+    href: "/tools/gov-form-image-compressor/",
+    slug: "gov-form-image-compressor",
+    category: "Image Tools",
+    featured: true,
+    trending: true,
+    popular: true,
+    tags: ["image", "compress", "government", "ssc", "upsc", "ibps", "photo", "portal"],
+    status: 'published',
+    isVisible: true,
+    createdAt: '2026-06-20T00:00:00Z',
+    updatedAt: '2026-06-20T00:00:00Z'
+  },
+  {
     id: "gov-form-pdf-compressor",
     title: "Government Form PDF Compressor",
     description: "Compress government job application PDF attachments under portal limits.",

@@ -444,7 +444,7 @@ export const LOCALIZED_TOOL_ARTICLES: Record<string, Record<string, LocalizedArt
       ],
       faqs: [
         { question: '¿Es realmente seguro editar documentos confidenciales aquí?', answer: 'Sí, totalmente seguro. A diferencia de otras páginas web, ToolWala no transfiere tu archivo a ningún servidor. Todo el código corre localmente en tu navegador.' },
-        { question: '¿Puedo editar texto existente o solo añadir cajas nuevas?', answer: 'Puedes hacer ambas cosas: hacer clic en el texto existente para corregir palabras o pulsar en cualquier zona vacía para insertar texto nuevo.' },
+        { question: '¿Puedo editar texto existente o solo añadir cajas nuevas?', answer: 'Puedes añadir nuevos bloques de texto, firmas y anotaciones, o utilizar la herramienta de borrado (whiteout) para cubrir texto antiguo y escribir encima. Los documentos escaneados requieren OCR previo para extraer texto.' },
         { question: '¿Mantiene la calidad de los documentos de varias páginas?', answer: 'Sí, todas las páginas conservan su nitidez vectorial intacta sin perder definición.' }
       ],
       conclusionHeading: 'Rápido y confidencial',
@@ -484,7 +484,7 @@ export const LOCALIZED_TOOL_ARTICLES: Record<string, Record<string, LocalizedArt
       ],
       faqs: [
         { question: 'É seguro editar documentos com dados bancários ou pessoais aqui?', answer: 'Sim. Seus documentos nunca são enviados para a internet. Toda a edição ocorre localmente na memória do seu navegador.' },
-        { question: 'Consigo editar textos que já estavam no PDF?', answer: 'Sim. Você pode clicar no texto original para alterar caracteres ou adicionar caixas de texto complementares.' },
+        { question: 'Consigo editar textos que já estavam no PDF?', answer: 'Você pode adicionar novas caixas de texto, assinaturas e anotações, além de cobrir dados antigos com a ferramenta de máscara branca (whiteout) para digitar por cima. PDFs escaneados precisam de OCR prévio.' },
         { question: 'O editor funciona com arquivos de várias páginas?', answer: 'Sim. Você pode navegar por todas as páginas e editar cada uma delas sem perder a nitidez vetorial.' }
       ],
       conclusionHeading: 'Edite e salve em instantes',
@@ -524,7 +524,7 @@ export const LOCALIZED_TOOL_ARTICLES: Record<string, Record<string, LocalizedArt
       ],
       faqs: [
         { question: 'क्या यहाँ पर्सनल कागजात एडिट करना सुरक्षित है?', answer: 'हाँ, बिल्कुल। टूलवाला आपकी फ़ाइल को किसी भी सर्वर पर अपलोड नहीं करता। सारा काम आपके डिवाइस के अंदर ही होता है।' },
-        { question: 'क्या पुराने टेक्स्ट को भी बदला जा सकता है?', answer: 'हाँ, आप पहले से मौजूद टेक्स्ट पर क्लिक करके शब्द बदल सकते हैं या नई टेक्स्ट बॉक्स जोड़ सकते हैं।' },
+        { question: 'क्या पुराने टेक्स्ट को भी बदला जा सकता है?', answer: 'आप नए टेक्स्ट बॉक्स, साइन और नोट्स जोड़ सकते हैं, या पुराने टेक्स्ट को व्हाइटआउट (सफेद मास्क) से छिपाकर उसके ऊपर नया टेक्स्ट टाइप कर सकते हैं। स्कैन की गई PDF के लिए पहले OCR की आवश्यकता होती है।' },
         { question: 'क्या कई पेजों वाली PDF भी सपोर्ट होती है?', answer: 'हाँ, आप सभी पेजों को स्क्रॉल करके देख सकते हैं और किसी भी पेज पर एडिट कर सकते हैं।' }
       ],
       conclusionHeading: 'आसान और निजी',

@@ -4,8 +4,8 @@ import { generateToolMetadataHelper } from '@/lib/seo';
 export async function generateMetadata(): Promise<Metadata> {
   return generateToolMetadataHelper(
     'aadhaar-pdf-compressor',
-    'Compress Aadhaar PDF under 300KB – No Upload',
-    'Shrink e-Aadhaar to under 300KB in your browser. The password stays on your device. Built for UIDAI and KYC portals.',
+    'Compress Aadhaar PDF to 300KB Online – No Upload | ToolWala',
+    'Compress e-Aadhaar PDF strictly under 300KB in your browser. The password stays on your device. Ideal for EPFO, recruitment, and bank KYC portal uploads.',
     '/tools/aadhaar-pdf-compressor'
   );
 }

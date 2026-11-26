@@ -2394,13 +2394,12 @@
     ]
   },
   "hi:how-to-merge-pdf": {
-    "title": "How to Merge PDF Files Online: The Complete Free Guide",
-    "excerpt": "Learn how to combine multiple PDF documents into a single file quickly, securely, and completely free in your web browser.",
+    "title": "ऑनलाइन PDF फाइलें कैसे मर्ज करें: पूरा मुफ्त गाइड",
+    "excerpt": "कई PDF प्रमाणपत्रों, मार्कशीट और फॉर्म को एक ही फाइल में जोड़ें। पेज क्रम सेट करने और सुरक्षा की पूरी जानकारी।",
     "content": "Combining multiple documents is one of the most common tasks. Learn how to merge PDFs online using ToolWala AI's local browser tools.\n\n### Why Merge PDFs?\nMerging files simplifies document management, makes emailing multiple attachments easier, and allows compiling reports into a single, cohesive file.\n\n### How to Merge PDFs on ToolWala AI\n1. Visit the [Merge PDF Tool](/tools/merge-pdf/).\n2. Drag and drop your PDF files into the upload area.\n3. Arrange the files in your preferred order.\n4. Click the Merge button to compile the files.\n5. Download your merged PDF document immediately.\n\n### Secure Local Processing\nToolWala AI uses client-side WebAssembly to compile documents. Your PDFs are never sent to a cloud database, keeping your data confidential.\n\n[cta tool=\"merge-pdf\" title=\"Merge PDFs Online Free\" description=\"Combine multiple PDF files into one document instantly in your browser.\"]",
     "seoMetadata": {
-      "title": "How to Merge PDF Files Online Free | ToolWala AI",
-      "description": "Combine multiple PDF documents into a single file online for free. Safe and secure client-side browser merging without downloads.",
-      "keywords": "PDF, Merge PDF, Document Management"
+      "title": "ऑनलाइन PDF मर्ज कैसे करें – मुफ्त व सुरक्षित तरीका | ToolWala",
+      "description": "कई PDF फाइलों को अपने ब्राउज़र में बिना अपलोड किए एक साथ जोड़ें। सही पेज क्रम और संपूर्ण डेटा गोपनीयता।"
     },
     "faqs": [
       {
@@ -2831,13 +2830,12 @@
     ]
   },
   "hi:compress-eaadhaar-pdf-under-300kb": {
-    "title": "How to Compress e-Aadhaar PDF File Under 300KB",
-    "excerpt": "Optimize and compress your downloaded UIDAI Aadhaar PDF safely inside your browser without uploading files to remote servers.",
+    "title": "e-Aadhaar PDF को 300KB के अंदर कैसे कंप्रेस करें (पोर्टल अपलोड हेतु)",
+    "excerpt": "e-Aadhaar PDF को 300KB के अंदर कंप्रेस करने का सुरक्षित तरीका। पासवर्ड नियम, QR कोड स्पष्टता और डिजिटल हस्ताक्षर की सही जानकारी।",
     "content": "When submitting document proofs to official portals, you are often required to upload your Aadhaar card in PDF format. However, downloaded PDFs from UIDAI are typically large and password-protected, which can cause portal upload failures.\n\n### e-Aadhaar Sizing Requirements\n- **Maximum File Size**: 300 KB.\n- **File Format**: PDF.\n- **Security Lock**: Decrypted/unlocked versions are recommended for automated verification systems.\n\nUse ToolWala's Aadhaar PDF Compressor to decrypt your document locally and optimize its file size under 300KB. All calculations run client-side in browser cache, ensuring complete security for your biometric data.",
     "seoMetadata": {
-      "title": "Compress e-Aadhaar PDF Under 300KB Online | ToolWala AI",
-      "description": "Securely compress UIDAI e-Aadhaar PDFs to meet the 300KB upload limit. Processes 100% locally in your browser.",
-      "keywords": "Aadhaar, Compress PDF, UIDAI"
+      "title": "e-Aadhaar PDF 300KB से कम कंप्रेस करें – 100% सुरक्षित | ToolWala",
+      "description": "e-Aadhaar PDF को विभिन्न ऑनलाइन फॉर्म के लिए 300KB के अंदर कंप्रेस करें। पासवर्ड सुरक्षा, QR कोड स्पष्टता और डिजिटल हस्ताक्षर की तकनीकी जानकारी।"
     },
     "faqs": [
       {
@@ -3226,13 +3224,12 @@
     "faqs": []
   },
   "hi:open-password-aadhaar-remove-lock": {
-    "title": "How to Open Password-Protected Aadhaar PDF and Remove Lock",
-    "excerpt": "Remove password security locks from your downloaded e-Aadhaar PDF files locally using browser-native libraries.",
+    "title": "पासवर्ड प्रोटेक्टेड Aadhaar PDF कैसे खोलें और हमेशा के लिए लॉक हटाएं",
+    "excerpt": "e-Aadhaar PDF खोलने का सही 8-अक्षरों वाला पासवर्ड फॉर्मूला जानें। सरकारी और बैंक फॉर्म के लिए पासवर्ड लॉक आसानी से हटाएं।",
     "content": "UIDAI protects all e-Aadhaar downloads with a secure password lock. While this keeps your document safe, many registration portals cannot parse encrypted PDFs, leading to validation errors.\n\n### How to Remove Password from Aadhaar PDF\nTo decrypt your Aadhaar PDF locally without software:\n1. Open ToolWala's Unlock PDF tool.\n2. Upload your password-protected Aadhaar PDF.\n3. Enter the 8-character password when prompted (e.g., first 4 letters of your name in CAPITALS followed by your year of birth).\n4. Click **Unlock** and download the decrypted PDF.\n\nThis process is completed locally in your browser memory, ensuring your identity details are never exposed to external servers.",
     "seoMetadata": {
-      "title": "Remove Password Lock from Aadhaar PDF | ToolWala AI",
-      "description": "Decrypt and unlock password-protected e-Aadhaar PDFs locally. Free, secure, and browser-native.",
-      "keywords": "Aadhaar, Unlock PDF, Security"
+      "title": "Aadhaar PDF का पासवर्ड लॉक कैसे हटाएं – आसान गाइड | ToolWala",
+      "description": "e-Aadhaar खोलने का सही पासवर्ड फॉर्मूला (नाम के 4 अक्षर + जन्म वर्ष) और पासवर्ड लॉक हमेशा के लिए हटाने का तरीका।"
     },
     "faqs": [
       {
@@ -3462,13 +3459,12 @@
     ]
   },
   "hi:official-indian-passport-photo-specifications": {
-    "title": "Official Indian Passport Photo Size & Dimensions Guidelines",
-    "excerpt": "Learn the official guidelines for passport photo backgrounds, dimensions, and framing for Indian passport applications.",
+    "title": "भारतीय पासपोर्ट फोटो साइज और आयाम: आधिकारिक गाइड",
+    "excerpt": "पासपोर्ट सेवा केंद्र (PSK) में लाइव फोटो नियम और विदेश में भारतीय पासपोर्ट नवीनीकरण (VFS 2x2 इंच व 35x45mm) की सही जानकारी।",
     "content": "Indian passport applications are subject to strict review by the Ministry of External Affairs. Using a photo with a colored background, shadows, or incorrect framing will cause rejections.\n\n### Official Indian Passport Photo Specifications\n- **Dimensions**: 3.5 cm x 4.5 cm (35 mm x 45 mm).\n- **Face Coverage**: Face must cover 70-80% of the image (32 mm to 36 mm from top of head to chin).\n- **Background**: Solid white background with no shadows or borders.\n- **File size**: 20 KB to 50 KB in JPEG format.\n\nUse our Passport Photo Maker to center your face automatically and remove backgrounds. All rendering runs client-side to keep your personal photos secure.",
     "seoMetadata": {
-      "title": "Indian Passport Photo Sizing & Specs | ToolWala AI",
-      "description": "Official photo dimensions, face alignment, and background colors for Passport Seva.",
-      "keywords": "Passport, Photo Size, Govt Guidelines"
+      "title": "भारतीय पासपोर्ट फोटो साइज 2026 – 35x45mm व 2x2 इंच नियम | ToolWala",
+      "description": "भारतीय पासपोर्ट व वीजा के लिए सही फोटो साइज। घरेलू PSK में बच्चों के फोटो नियम और विदेश में VFS नवीनीकरण के सटीक आयाम।"
     },
     "faqs": [
       {
@@ -3606,13 +3602,12 @@
     ]
   },
   "hi:new-ssc-photo-guidelines-live-upload": {
-    "title": "New SSC Photo Guidelines: Live Photo Capture vs Upload Rules",
-    "excerpt": "Learn how the Staff Selection Commission (SSC) handles photograph updates, and how to format uploads for CGL, CHSL, and MTS forms.",
+    "title": "SSC नए फोटो व सिग्नेचर नियम: लाइव वेबकैम कैप्चर बनाम सिग्नेचर अपलोड",
+    "excerpt": "ssc.gov.in पर लाइव वेबकैम फोटो कैप्चर और परीक्षा-अनुसार सिग्नेचर अपलोड (10KB–20KB) के आधिकारिक नियम।",
     "content": "The Staff Selection Commission (SSC) has introduced updated rules for candidates applying to recruitment exams like SSC CGL, CHSL, MTS, and GD Constable. The primary change is the mandatory live webcam photo capture inside the SSC application form. However, signature uploads and certificate uploads still require manual resizing.\n\n### SSC Photo Specifications\nFor portals that still require uploaded passport-size photographs, the official specifications are:\n- **Dimensions**: 3.5 cm width x 4.5 cm height (354 x 472 pixels).\n- **File Size**: Between 20 KB and 50 KB.\n- **Background**: Plain white or light color with clear ear and eye visibility.\n\nUse ToolWala's SSC Photo Resizer to crop your images to these dimensions instantly. If you are uploading signatures, they must be formatted on white paper using black or blue ink under 20KB.",
     "seoMetadata": {
-      "title": "New SSC Photo & Signature Guidelines | ToolWala AI",
-      "description": "Understand the Staff Selection Commission's rules for live captures and scanned signatures.",
-      "keywords": "SSC, Photo Resize, Recruitment"
+      "title": "SSC CGL, CHSL, MTS नए फोटो नियम 2026 – लाइव कैप्चर व सिग्नेचर साइज | ToolWala",
+      "description": "SSC CGL, CHSL, MTS, Steno फॉर्म के लिए लाइव फोटो कैप्चर और सिग्नेचर 10KB-20KB साइज अपलोड करने की पूरी जानकारी।"
     },
     "faqs": [
       {

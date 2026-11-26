@@ -37,7 +37,7 @@ export default function CropAadhaarCardPage() {
         <div className="bg-[#FBFCFE] dark:bg-white/[0.02] border border-[#E6ECF5] dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl mb-12">
           <ToolHero
             title="Crop Aadhaar Card & Photo"
-            description="Crop and resize Aadhaar photos to official UIDAI specifications (3.5x4.5 cm, <50KB) securely in browser."
+            description="Crop and format Aadhaar card front & back or photos for document upload and card printing securely in your browser."
             icon={<Crop className="w-6 h-6 sm:w-7 sm:h-7" />}
           />
 

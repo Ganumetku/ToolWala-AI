@@ -122,7 +122,7 @@ export default function AadhaarPdfCompressor() {
                 accept="application/pdf"
                 multiple={false}
                 title="Drop your e-Aadhaar PDF here"
-                description="It stays in this tab. Aim is under 300KB for UIDAI and e-KYC sites."
+                description="It stays in this tab. Aim is under 300KB for EPFO, recruitment, and e-KYC portal forms."
               />
             ) : (
               <div className="space-y-8 max-w-4xl mx-auto">

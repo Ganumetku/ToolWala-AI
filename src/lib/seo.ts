@@ -32,8 +32,8 @@ const SEO_COPY_OVERRIDES: Record<string, { title: string; description: string }>
     description: 'Generate a tailored, professional cover letter from your details and job description. 100% free with instant copy or download.',
   },
   'aadhaar-pdf-compressor': {
-    title: 'Compress Aadhaar PDF under 300KB – No Upload | ToolWala',
-    description: 'Shrink e-Aadhaar to under 300KB in your browser. The password stays on your device. Built for UIDAI and KYC portals.',
+    title: 'Compress Aadhaar PDF to 300KB Online – No Upload | ToolWala',
+    description: 'Compress e-Aadhaar PDF under 300KB in your browser. The password stays on your device. Useful for portal uploads with strict file size caps.',
   },
   'edit-pdf': {
     title: 'Edit PDF Pages Online Free – 100% Private | ToolWala',
@@ -52,12 +52,12 @@ const SEO_COPY_OVERRIDES: Record<string, { title: string; description: string }>
     description: 'Compress JPG, PNG, and WebP images up to 80% without losing visual clarity. Fast, browser-native compression with zero uploads.',
   },
   'ssc-photo-resize': {
-    title: 'SSC Photo Resize – 35×45mm Under 50KB, No Upload | ToolWala',
-    description: 'Crop a photo to SSC size (3.5 × 4.5 cm) under 50KB in your browser. Nothing is uploaded to a server.',
+    title: 'SSC Photo & Signature Resize – Presets & Guidelines | ToolWala',
+    description: 'Format photo and signature for SSC examinations with 4×2 cm, 6×2 cm, and custom presets between 10KB and 20KB in your browser.',
   },
   'passport-photo-maker': {
-    title: 'Passport Photo Maker – 35×45mm, No Upload | ToolWala',
-    description: 'Make an India passport photo (35×45mm) from a selfie in your browser. White background. Files stay on your phone.',
+    title: 'Passport Photo Maker Online – 35×45mm & Custom Sizes | ToolWala',
+    description: 'Create passport and ID photos with 35×45mm, 2×2 inch, and custom presets in your browser. White background option. Zero file uploads.',
   },
 };
 

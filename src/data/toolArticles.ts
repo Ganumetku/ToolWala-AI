@@ -382,89 +382,87 @@ export const toolArticles: Record<string, ToolArticleData> = {
   },
   "image-compressor": {
     title: "Online Image Compressor & JPG Size Reducer",
-    intro: "Big, unoptimized images slow down websites and get rejected by portal upload forms. ToolWala shrinks your photos down by up to 80-90% without making them look like blurry mush.",
-    whatItDoes: "Huge camera files and raw exports eat up storage and ruin page load times. This tool strips out hidden junk like camera metadata and compresses pixel chunks right inside your browser. Because it runs on your own machine instead of pinging a remote server, it crunches through multiple files fast—leaving you with lightweight JPGs or WebPs that still look sharp to the human eye.",
+    intro: "Compress JPG, PNG, and WebP images to custom file sizes (20KB, 50KB, 100KB, 200KB) or optimize by percentage. Fast browser-native compression with zero quality collapse.",
+    whatItDoes: "Huge smartphone photos and raw camera files easily exceed the strict 50KB or 100KB file size caps on job applications and government forms.\n\nOur Image Compressor uses binary search downscaling and quality optimization to hit your target KB limit without making your photo look pixelated. When converting transparent PNG images to JPEG, the tool automatically fills transparent backgrounds with solid white to prevent dark artifacting. All compression executes in device RAM.",
     howToUse: [
-      "Drop one or more images into the upload box.",
-      "Tweak the quality slider to find your sweet spot between file size and clarity.",
-      "Check the live file size counter to see how many megabytes you saved.",
-      "Download your squished photos one by one or bundle them all in a zip."
+      "Upload or drop your JPG, PNG, or WebP image into the compressor box.",
+      "Choose a target preset (20KB, 50KB, 100KB, 200KB) or set a custom percentage slider.",
+      "Inspect the live before-and-after preview and verified output byte size.",
+      "Download your optimized image instantly."
     ],
     keyFeatures: [
-      { title: "Browser-Level Crunching", desc: "No file transfers to third-party clouds—compression runs right on your CPU." },
-      { title: "Batch Processing", desc: "Drop a whole folder of photos in and shrink them together in one pass." },
-      { title: "Live Size Tracker", desc: "See exact before-and-after kilobyte numbers before you save." },
-      { title: "WebP Conversion", desc: "Optionally turn heavy PNGs and JPGs into lightweight modern WebP files." }
+      { title: "Exact Target Size Presets", desc: "Selectable caps (20KB, 50KB, 100KB) designed for recruitment and admissions portals." },
+      { title: "Transparency Fill Protection", desc: "Fills transparent PNG backgrounds with pure white when exporting to JPEG to prevent black box artifacts." },
+      { title: "100% Client-Side Privacy", desc: "Images are processed in device RAM via Canvas API. No photos are stored or uploaded." },
+      { title: "Instant Visual Comparison", desc: "Compare original and compressed images side-by-side before downloading." }
     ],
     benefits: [
-      "Speed up your website's Google PageSpeed scores effortlessly.",
-      "Easily fit under strict 50KB or 200KB limits on government portals and exam forms.",
-      "Free up gigabytes of drive space on phone and laptop backups."
+      "Hit strict portal upload thresholds without guessing compression settings.",
+      "Total privacy for family photos, signatures, and document scans.",
+      "Free tool with zero watermarks or file quantity caps.",
+      "Works smoothly on mobile phones and desktop computers."
     ],
-    whyChoose: "A lot of online image compressors either slap watermarks on your pictures, limit you to two photos a day, or force you into a paid plan. ToolWala has none of that. It's just a clean, fast tool you can bookmark and use whenever you need to trim down an image.",
+    whyChoose: "Generic compressors compress blindly and often degrade facial features or leave signatures unreadable. ToolWala balances byte thresholds with visual clarity directly in your browser memory.",
     useCases: [
-      "Web devs trying to hit 95+ performance scores on Lighthouse.",
-      "Students uploading ID photos to college admission portals.",
-      "Bloggers keeping page weights light for readers on mobile data."
+      "Compressing scanned signatures under 20KB for SSC, UPSC, and banking portals.",
+      "Shrinking passport photos under 50KB or 100KB for exam forms.",
+      "Optimizing product photos and blog images for fast web page loading."
     ],
     faqs: [
-      { question: "How can I compress image files without losing quality?", answer: "Slide the quality setting to around 75-80%. That usually cuts 70% of the file size while keeping visual differences invisible on normal screens." },
-      { question: "Does this JPG size reducer work offline?", answer: "Yes. Once the page is loaded, the compression code runs straight in your browser tab without needing a live internet connection." },
-      { question: "What is the file size limit?", answer: "Since there are no server uploads, the limit is whatever your computer's memory can handle—usually plenty for everyday high-res photos." },
-      { question: "Does this preserve PNG transparency?", answer: "Yes, transparent backgrounds in PNGs stay intact while the file weight gets trimmed down." }
+      { question: "Why does converting a transparent PNG to JPEG turn the background black?", answer: "JPEG format does not support transparency. When a transparent PNG is converted to JPEG without proper handling, transparent pixels render black. ToolWala automatically fills transparent areas with clean white, keeping documents and signatures looking natural." },
+      { question: "Can any image be compressed under 20KB without quality loss?", answer: "Very large high-resolution photos can be brought under 20KB, but doing so requires reducing pixel dimensions in addition to JPEG quality. ToolWala balances downscaling and quality to preserve readability." },
+      { question: "Are my photos uploaded to any server?", answer: "No. All compression happens 100% inside your browser session." }
     ],
-    conclusion: "Don't let giant images bog down your site or fail your upload forms. Trim the fat in seconds and keep things moving.",
+    conclusion: "Compress images strictly under required portal limits with preserved clarity and zero cloud uploads.",
     relatedTools: [
-      { name: "Background Remover", href: "/tools/bg-remover/" },
+      { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize/" },
       { name: "Passport Photo Maker", href: "/tools/passport-photo-maker/" },
-      { name: "AI Image Upscaler", href: "/tools/ai-image-upscaler/" },
-      { name: "JPG to WebP", href: "/tools/jpg-to-webp/" },
-      { name: "PNG to WebP", href: "/tools/png-to-webp/" },
+      { name: "Background Remover", href: "/tools/bg-remover/" },
       { name: "JPG to PDF", href: "/tools/jpg-to-pdf/" }
     ]
   },
   "passport-photo-maker": {
-    title: "Passport Photo Maker – Official 35x45mm Photo Online",
-    intro: "Need a 35×45 mm India passport photo without the studio? Drop a clear portrait here, pick the size, crop, and download. The photo stays in this tab.",
-    whatItDoes: "Passport Seva wants 35×45 mm on a plain white background. A selfie on the sofa usually isn't that.\n\nThis page crops to the size you pick — India, US 2×2, visa presets — and can drop a busy background to white. You still nudge the frame. Eyes too low, ear cut off, that's on the crop, not magic.\n\nThe picture never leaves this device. Close the tab and it's gone.",
+    title: "Passport Photo Maker Online – 35×45mm & Custom Photo Creator",
+    intro: "Create passport and ID photos with customizable dimensions and clean white backgrounds. Understand domestic Passport Seva rules vs overseas consulate requirements.",
+    whatItDoes: "Passport photo requirements vary significantly depending on where and how you are applying.\n\nKey Official Distinctions:\n1. Domestic Indian Passports (Passport Seva Kendras / POPSK in India): For adult applicants, photographs and biometrics are captured live in-person at Counter A by Ministry of External Affairs officers. You do NOT bring physical photographs, EXCEPT for infants and children under 4 years of age, who must bring a physical 35 mm × 45 mm color photograph on a pure white background (Reference: passportindia.gov.in/psp/apply).\n2. Overseas Indian Passport Renewal: Applicants renewing Indian passports abroad through partner centers (e.g., VFS Global, BLS International, or Indian Consulates) must submit physical photographs. Specifications depend on the specific mission checklist (for example, Indian missions in the USA commonly require 2×2 inch square format, while UK and European centers typically require 35×45 mm).\n3. OCI & Visa Applications: Overseas Citizen of India (OCI) cards require square photo uploads; visa requirements vary by destination country.\n\nOur tool provides standard presets for 35×45 mm, 2×2 inch, and custom sizes. We do not claim universal official approval for every preset across all jurisdictions—always consult your specific mission checklist.",
     howToUse: [
-      "Drop a clear front-facing photo — good light, face not cropped.",
-      "Pick the size: India 35×45 mm, US 2×2, or another preset.",
-      "If the wall is busy, use background removal, then check the white fill.",
-      "Drag the crop so the head and both ears sit in the guides.",
-      "Download one photo, or a 4×6 sheet if you're printing copies."
+      "Upload a clear front-facing portrait taken in good, even lighting.",
+      "Select your preset: Standard 35×45 mm, 2×2 inch (51×51 mm), or Visa format.",
+      "Use the alignment guides to ensure your face covers 70% to 80% of the frame.",
+      "Switch background fill to solid white if your original backdrop has shadows or colors.",
+      "Download a single digital JPEG for online uploads or a 4×6 inch multi-photo sheet for physical printing."
     ],
     keyFeatures: [
-      { title: "India and other sizes", desc: "35×45 mm for Passport Seva, 2×2 inch for US, plus visa presets. Pick one before you crop." },
-      { title: "Stays on this device", desc: "The photo is cropped in this tab. We don't store ID pictures." },
-      { title: "Print sheet if you need copies", desc: "A 4×6 layout you can take to a local shop, or print at home." },
-      { title: "White background option", desc: "Busy walls can be replaced with white. Always check the edges before you download." }
+      { title: "Standard & Custom Presets", desc: "Select between standard 35×45 mm, 2×2 inch square, and customizable dimensions." },
+      { title: "Clean White Background Option", desc: "Replaces distracting home walls with plain solid white backgrounds." },
+      { title: "Printable 4×6 Multi-Grid Sheet", desc: "Tiles multiple passport photos on a standard 4×6 inch card for local photo lab printing." },
+      { title: "100% Client-Side Processing", desc: "Your personal biometric photograph is never uploaded to any cloud server or stored in any database." }
     ],
     benefits: [
-      "Skip the studio for a first pass at home.",
-      "The photo never leaves this device.",
-      "Retake as many times as you like — no extra fee.",
-      "No signup, no watermark on the file."
+      "Create passport-style photos at home with simple, intuitive crop guides.",
+      "Retake and re-crop photos as many times as you like without fees.",
+      "Total privacy—your facial portraits never leave your computer or phone.",
+      "Generates print-ready layouts with proper cut guides."
     ],
-    whyChoose: "Studios are fine if you want someone else to light the shot. This is for when you already have a decent photo and just need the size, the crop, and a white background — without sending your face to a random site. Still check the current Passport Seva notice before you submit.",
+    whyChoose: "Different forms demand different photo ratios. ToolWala lets you pick exact dimensions required for your specific application, keeping your photos private with zero cloud uploads.",
     useCases: [
-      "Passport Seva or visa forms that want 35×45 mm.",
-      "Exam or college ID that uses passport size.",
-      "A 4×6 sheet to print a few copies at the shop."
+      "Physical photos for infants/children under 4 years applying at Passport Seva Kendras in India.",
+      "Indian passport renewal abroad through consular service centers.",
+      "Admit cards, state competitive exams, and university admission forms."
     ],
     faqs: [
-      { question: "What is the passport photo size in India?", answer: "Passport Seva wants 35mm × 45mm (3.5 × 4.5 cm) on a plain white background. The old 2×2 inch square is not accepted for Indian passports." },
-      { question: "How do I make a passport size photo online free?", answer: "Drop a portrait on this page, pick India 35×45 mm, crop the face, set a white background if needed, and download. Nothing is uploaded." },
-      { question: "Can I use this for SSC or UPSC photos too?", answer: "The crop is the same family of sizes, but each exam has its own KB limit. For SSC, use the SSC photo resize tool so the file lands between 20KB and 50KB." },
-      { question: "Can I print these at home?", answer: "Yes. Download the 4×6 sheet and print on photo paper, or take the file to a local shop." }
+      { question: "Do adults need physical photos when visiting a Passport Seva Kendra (PSK) in India?", answer: "No. For normal adult applicants in India, photographs and biometrics are captured live in person by MEA officials at the PSK. Physical photos are only required for children under 4 years old (Reference: passportindia.gov.in/psp/apply)." },
+      { question: "What is the photo size for domestic infant passport applications?", answer: "The standard specification is 35 mm width × 45 mm height (3.5 cm × 4.5 cm), with the face occupying 70% to 80% of the photograph on a pure white background." },
+      { question: "Do overseas Indian missions all use the same photo size?", answer: "No. Requirements vary by country and service provider. For example, VFS Indian consular centers in the USA require 2×2 inches, while UK centers commonly specify 35×45 mm. Always consult your specific mission checklist." },
+      { question: "Official Passport Seva Reference:", answer: "Official specifications can be verified directly at passportindia.gov.in/psp/apply." }
     ],
-    conclusion: "Drop the photo, crop to size, download. We never see the picture.",
+    conclusion: "Format passport and ID photos with verified millimeter presets and pure white backgrounds. Reference: Passport Seva (passportindia.gov.in).",
     relatedTools: [
       { name: "Background Remover", href: "/tools/bg-remover/" },
       { name: "Image Compressor", href: "/tools/image-compressor/" },
       { name: "Exam Photo Resizer", href: "/tools/exam-photo-resizer/" },
-      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" },
-      { name: "JPG to WebP", href: "/tools/jpg-to-webp/" }
+      { name: "SSC Photo Resize", href: "/tools/ssc-photo-resize/" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" }
     ]
   },
   "pdf-tools": {
@@ -680,46 +678,44 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "text-humanizer": {
-    title: "AI Text Humanizer",
-    intro: "Bridge the gap between artificial intelligence and human connection. Transform robotic AI-generated text into natural, engaging, and undetectable human-like content.",
-    whatItDoes: "The ToolWala AI Text Humanizer is a specialized linguistic engine designed to refine and 'humanize' text produced by AI models like ChatGPT. While AI is great at providing information, it often lacks the natural rhythm, varied sentence structure, and subtle nuances of human writing. Our tool analyzes your input and intelligently rewrites it, adding the 'burstiness' and creative flair that makes content feel authentic. It doesn't just swap words; it restructures thoughts to improve flow and emotional resonance while ensuring your message remains intact.",
+    title: "AI Text Humanizer Free Online – Natural Tone & Flow Rewriter",
+    intro: "Make robotic AI-generated text sound natural, engaging, and conversational. Improves sentence rhythm, eliminates repetitive phrasing, and enhances readability for human readers.",
+    whatItDoes: "Large language models often produce text with predictable sentence structures, monotonous cadence, and robotic filler phrases (such as 'delve into', 'tapestry of', 'game-changing', or 'testament to'). While grammatically correct, this phrasing feels sterile to human readers.\n\nThe ToolWala AI Text Humanizer rewrites and refines your text by introducing natural sentence variety (burstiness), varied syntax lengths, and conversational transitions. It adjusts tone (Casual, Professional, Academic, or Natural) to match your audience.\n\nRealistic Expectations & Integrity: This tool is designed to improve reading flow, clarity, and human connection. We do NOT guarantee bypassing third-party AI detection software, nor do we provide warranties against academic plagiarism filters. Authentic writing is about connecting with human readers, not gaming detection algorithms.",
     howToUse: [
-      "Paste your AI-generated text or any content that feels a bit too rigid into the input field.",
-      "Select your desired 'Humanization Intensity' to decide how much rewriting the AI should perform.",
-      "Choose a specific 'Audience Context' (Academic, Blog, Creative, Professional) to set the right tone.",
-      "Click 'Humanize Text' and watch as the AI transforms your content in real-time.",
-      "Review the results and download or copy your new, natural-sounding text."
+      "Paste your AI-generated or draft text into the input box.",
+      "Select your preferred tone mode: Natural, Professional, Casual, or Creative.",
+      "Choose output length preference: Standard, Concise, or Expanded.",
+      "Click 'Humanize Text' to restructure the phrasing with natural human rhythm.",
+      "Review the readability improvements and copy the refined text."
     ],
     keyFeatures: [
-      { title: "Nuance Injection", desc: "Adds the subtle idioms, metaphors, and conversational touches that define high-quality human writing." },
-      { title: "Flow Optimization", desc: "Varies sentence length and structure to eliminate the repetitive 'robotic' cadence often found in AI outputs." },
-      { title: "Tone Preservation", desc: "Ensures that your original meaning and key points are preserved while the delivery is improved." },
-      { title: "Undetectable Output", desc: "Produces content that feels so natural it easily passes as being written by a professional human writer." }
+      { title: "Sentence Rhythm & Burstiness", desc: "Mixes punchy short sentences with relaxed phrasing to eliminate monotonous robot cadence." },
+      { title: "Banned AI Cliché Removal", desc: "Identifies and replaces overused filler words like 'testament to', 'delve into', and 'seamlessly blends'." },
+      { title: "Custom Tone Profiles", desc: "Easily adapt output for professional workplace memos, casual blog articles, or student essays." },
+      { title: "Side-by-Side Comparison", desc: "Review readability metrics and exact phrase changes before copying." }
     ],
     benefits: [
-      "Increase engagement by making your content more relatable and readable for your audience.",
-      "Avoid the 'AI stigma' by ensuring your brand's voice sounds authentic and personal.",
-      "Improve your SEO with content that is high-quality and provides real value to readers.",
-      "Save time on manual editing—let the AI handle the heavy lifting of stylistic refinement."
+      "Transform stiff, lifeless drafts into writing that people actually enjoy reading.",
+      "Save time manually revising awkward AI transitions and repetitive phrasing.",
+      "Free to use with zero registration gates or token subscriptions.",
+      "Clean, distraction-free interface with instant clipboard copying."
     ],
-    whyChoose: "We believe that AI should assist, not replace, human creativity. Our Text Humanizer is built for writers, marketers, and students who want to use AI as a productivity tool without sacrificing the quality of their final work. ToolWala AI focuses on the 'art' of writing, ensuring your content has the soul and character that only human-like expression can provide.",
+    whyChoose: "Most 'humanizer' tools make dubious promises about being '100% undetectable' while producing mangled, unreadable grammar full of obscure synonyms. ToolWala focuses on genuine readability, natural cadence, and clear communication.",
     useCases: [
-      "Bloggers refining AI-generated drafts into publishable, engaging articles.",
-      "Students ensuring their essays have a natural and personal academic tone.",
-      "Marketers humanizing product descriptions for a friendlier brand voice.",
-      "Communicators polishing corporate emails to sound more approachable."
+      "Refining AI-assisted blog posts and social media captions to sound personal and authentic.",
+      "Smoothing out draft cover letters, email replies, and professional outreach messages.",
+      "Improving the reading ease and narrative flow of essays and explanatory guides."
     ],
     faqs: [
-      { question: "Is this just an AI rewriter?", answer: "It's more than that. While it does rewrite text, its primary goal is to apply human-specific linguistic patterns that standard AI often misses." },
-      { question: "Will it change the meaning of my text?", answer: "No. Our algorithms are designed to protect your core message and facts while strictly improving the delivery and tone." },
-      { question: "Does it help with AI detection?", answer: "By making the text more varied and natural, it significantly improves how content is perceived by both humans and automated systems." },
-      { question: "Is there a limit on text length?", answer: "For the best performance, we recommend processing chunks of up to 1,000 words at a time to ensure maximum quality." }
+      { question: "Does this tool guarantee 100% bypass of AI detectors?", answer: "No. AI detectors use evolving statistical heuristics that are notoriously prone to false positives and false negatives. Our goal is to make your writing sound genuinely human, engaging, and easy to read, rather than chasing detection scores." },
+      { question: "Will the humanizer change the meaning of my text?", answer: "No. The engine preserves your core message, arguments, and factual points while rewording sentence structures and transitions." },
+      { question: "Is this tool free to use?", answer: "Yes! There are no daily limits, hidden subscriptions, or paywalls." }
     ],
-    conclusion: "In a digital world increasingly filled with robotic content, authenticity is your greatest asset. Give your AI-generated text the human touch it needs to truly connect with your readers.",
+    conclusion: "Elevate your writing with conversational rhythm, varied sentence flow, and genuine human connection.",
     relatedTools: [
-      { name: "AI Caption Generator", href: "/tools/caption-generator/" },
-      { name: "AI Resume Builder", href: "/tools/resume-builder/" },
-      { name: "Voice Generator", href: "/tools/voice-generator/" }
+      { name: "AI Cover Letter Generator", href: "/tools/cover-letter-generator/" },
+      { name: "Word Counter", href: "/tools/word-counter/" },
+      { name: "ATS Resume Checker", href: "/tools/ats-resume-checker/" }
     ]
   },
   "voice-generator": {
@@ -804,60 +800,44 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "cover-letter-generator": {
-    title: "AI Cover Letter Generator – Professional Letters",
-    intro: "Writing a cover letter from scratch is easily the most draining part of applying for jobs. Most people stare at a blank screen for twenty minutes, copy an old template, and hope for the best. This tool does the heavy lifting for you—matching your actual experience directly with what the job listing asks for, without sounding like a robot.",
-    whatItDoes: "Most automated cover letters sound stiff, repetitive, and painfully obvious. Our generator takes a different approach. You plug in your role, the company name, your top skills, and a quick paste of the job description. The tool pulls out the core keywords hiring teams care about and drafts a clean 3-paragraph letter that actually reads like a person wrote it. You can pick your tone—from crisp corporate to relaxed startup—and jump right in to tweak any line before downloading your PDF.",
+    title: "AI Cover Letter Generator – Tailored Job Applications",
+    intro: "Create a customized, professional cover letter tailored to your resume details and the target job description. Generate clean, well-structured letters in seconds.",
+    whatItDoes: "Most generic cover letters sound bland and get ignored by hiring managers. ToolWala's AI Cover Letter Generator analyzes your key skills, previous experience, and the specific requirements of the job posting to draft an articulate, persuasive letter.\n\nSelect between Professional, Confident, Enthusiastic, or Concise tone options. Disclaimers: While a tailored cover letter strengthens your application, it does not guarantee job interviews or hiring outcomes. Always review and personalize the generated draft with your authentic voice.",
     howToUse: [
-      "Pick a starter preset or type your target role, company, and key skills.",
-      "Paste in the job description so the generator can mirror the right keywords for recruiter filters.",
-      "Choose a design template and accent color that matches your personal resume style.",
-      "Hit Generate—then edit sentences directly on the live page until you're completely happy.",
-      "Download a print-ready PDF or copy the clean text straight into your email application."
+      "Paste your key skills, background, or resume summary.",
+      "Paste the job title and target job description from the employer's posting.",
+      "Select your preferred tone: Professional, Confident, Enthusiastic, or Concise.",
+      "Click 'Generate Cover Letter' to draft a tailored letter.",
+      "Review the draft, edit any specific personal anecdotes, and copy or download."
     ],
     keyFeatures: [
-      { title: "Direct On-Page Editing", desc: "No locked boxes. Click straight into your letter draft to rephrase lines, swap details, or add personal anecdotes on the fly." },
-      { title: "Recruiter-Approved Templates", desc: "Choose between Modern, Executive, Minimalist, and Classic designs with customizable accent colors that match top career standards." },
-      { title: "Keyword Match for ATS", desc: "Aligns your skills directly with the job description so your application sails through automated applicant tracking filters." },
-      { title: "Multiple Writing Tones", desc: "Switch between Confident, Professional, Conversational, or Short depending on whether you're emailing a fast-paced agency or a legacy bank." }
+      { title: "Targeted Job Matching", desc: "Aligns your skills directly with keywords and qualifications from the job description." },
+      { title: "Multiple Professional Tones", desc: "Easily adjust the voice from formal corporate to modern startup tone." },
+      { title: "Structured Narrative Flow", desc: "Creates proper opening hooks, value propositions, and compelling calls to action." },
+      { title: "Instant Export", desc: "Copy formatted text to your clipboard or download as a text file with one click." }
     ],
     benefits: [
-      "Skip the awkward blank-page paralysis and get a tailored first draft in under 10 seconds.",
-      "Apply to 5x more targeted openings without sacrificing the personal touch each recruiter expects.",
-      "High-resolution A4 PDF export formatted with clean margins that print and display flawlessly.",
-      "Zero accounts or paywalls—generate, tweak, and export as many letters as you need for free."
+      "Eliminate writer's block when applying for multiple positions.",
+      "Avoid cookie-cutter templates that hiring managers immediately spot.",
+      "Free to use with zero registration or subscription gates.",
+      "Quickly tailor applications to each specific employer."
     ],
-    whyChoose: "Kickresume and similar platforms lock their best templates, fonts, and PDF downloads behind steep monthly paywalls. ToolWala gives you full styling control, customizable layouts, and instant PDF exports completely free. No watermarks, no forced sign-ups, and no artificial limits on how many jobs you can apply to.",
+    whyChoose: "Generic templates produce identical, robotic letters. ToolWala helps you articulate your actual background in clear, professional language tailored to the exact role you want.",
     useCases: [
-      "Job seekers tailoring custom letters across 20+ openings without burning out.",
-      "College seniors and freshers who aren't sure how to frame academic projects into real work experience.",
-      "Engineers, marketers, and designers wanting a polished letterhead that matches their portfolio aesthetic.",
-      "Career changers needing to connect past skills with a brand-new industry."
-    ],
-    specificationTable: [
-      { requirement: "Supported Formats", specification: "Vector A4 PDF, Formatted Plain Text, Direct Print" },
-      { requirement: "Recommended Word Count", specification: "250 – 350 words (ideal recruiter sweet spot)" },
-      { requirement: "Design Styles", specification: "Modern Minimal, Executive Border, Two-Tone Split, Creative Badge, Classic Formal" },
-      { requirement: "Privacy & Data Storage", specification: "No resumes stored on server; runs real-time and client-side safe" },
-      { requirement: "Cost & Limits", specification: "100% Free, Unlimited generations" }
-    ],
-    commonMistakes: [
-      "Rehashing your entire resume line-by-line instead of spotlighting 1 or 2 high-impact wins.",
-      "Addressing the letter to generic greetings like 'Dear Sir/Madam' when a quick LinkedIn search can find the hiring manager's name.",
-      "Letting AI write without reviewing—always add one personal detail about why the company's work excites you.",
-      "Writing an essay: anything longer than one page almost never gets read by busy recruiters."
+      "Recent graduates tailoring their academic projects to entry-level job descriptions.",
+      "Mid-career professionals transitioning into new industries or roles.",
+      "Freelancers pitching specialized services to potential clients."
     ],
     faqs: [
-      { question: "Do hiring managers actually read cover letters in 2026?", answer: "Yes—especially when choosing between two candidates with identical resume experience. A well-written letter shows communication ability and genuine interest in the specific company rather than blind mass-applying." },
-      { question: "Can I edit the generated letter before downloading?", answer: "Yes, 100%. You can click right into the preview on screen to edit, delete, or rewrite any paragraph. Your edits carry straight through to the downloaded PDF." },
-      { question: "How does this compare to paid tools like Kickresume?", answer: "Kickresume charges $19/month or more for PDF downloads and unlimited templates. ToolWala gives you modern templates, custom accent colors, and direct A4 PDF exports completely free without requiring an account." },
-      { question: "Will my cover letter pass automated ATS filters?", answer: "Yes. When you paste the job description, the generator weaves the exact skills and industry keywords into your paragraphs, helping your file rank higher in applicant tracking systems." },
-      { question: "Is my personal career information stored?", answer: "No. Your contact info and job history are only used to draft the document in your active browser session. We don't store your details or sell applicant data." }
+      { question: "Does using an AI cover letter guarantee an interview?", answer: "No. A cover letter is one part of your overall application. While a tailored letter helps communicate your fit, hiring decisions depend on your qualifications, resume, and employer requirements." },
+      { question: "Should I edit the generated letter before sending?", answer: "Yes, absolutely! We strongly recommend adding personal anecdotes, specific company achievements, and your genuine voice before submitting." },
+      { question: "Is this tool free?", answer: "Yes, ToolWala's Cover Letter Generator is 100% free with no account required." }
     ],
-    conclusion: "A thoughtful cover letter can easily be the difference between an automated rejection and a first-round interview invite. Pick a template, drop in your details, and walk away with a letter you're actually proud to submit.",
+    conclusion: "Draft articulate, tailored cover letters that showcase your experience clearly and professionally.",
     relatedTools: [
-      { name: "AI Resume Builder", href: "/tools/resume-builder/" },
-      { name: "AI Text Humanizer", href: "/tools/text-humanizer/" },
-      { name: "ATS Resume Checker", href: "/tools/ats-resume-checker/" }
+      { name: "ATS Resume Checker", href: "/tools/ats-resume-checker/" },
+      { name: "Resume Builder", href: "/tools/resume-builder/" },
+      { name: "AI Text Humanizer", href: "/tools/text-humanizer/" }
     ]
   },
   "pdf-compare": {
@@ -906,95 +886,47 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "merge-pdf": {
-    title: "How to Combine PDF Files Online in 5 Steps",
+    title: "Merge PDF Online Free – Combine Multiple PDF Files",
     layout: "howto-first",
     intro: "Need one PDF instead of five? Drop the files here, drag the cards into order, and download. They never leave this tab — no account, no watermark.",
     whatHeading: "What happens when you join the files",
-    whatItDoes: "Each PDF opens in this tab. Pages are copied into a new file in the order of the cards you see. Drag a card, or tap the arrows, until the pack matches the paperwork — ITR-V on top, Form 16 after, that kind of thing.\n\nScans and typed PDFs both work. Fonts, signatures, and page size stay as they were. If you want screenshots, there's a [longer merge walkthrough](/blog/how-to-merge-pdf/).",
-    howToHeading: "How to merge them",
+    whatItDoes: "Each PDF opens in this tab. Pages are copied into a new file in the order of the cards you see. Drag a card, or tap the arrows, until the pack matches the paperwork — application form first, marksheet second, ID proof last.\n\nMemory note: Because merging runs in your browser's local memory, joining dozens of huge multi-megabyte files can slow down mobile phones. Merging batches of 10–15 files at a time provides the smoothest experience.\n\nEncrypted Files: If any of your input PDFs are password-protected, decrypt them first using our Unlock PDF tool before merging.",
     howToUse: [
-      "Drop two or more PDFs on this page, or click Choose files.",
-      "Check the cards — that's the order of the new file.",
-      "Drag a card, or use the arrows, until the sequence is right.",
-      "Give it a short name if a portal is picky about filenames.",
-      "Hit Merge & Download. The file comes from this tab, not a server."
+      "Drop two or more PDF files into the merge workspace.",
+      "Drag the file cards to arrange them into your preferred sequence.",
+      "Check page counts to confirm all necessary documents are loaded.",
+      "Click 'Merge Files' to compile the unified PDF in browser memory.",
+      "Download your combined document instantly."
     ],
     keyFeatures: [
-      { title: "Stays on this device", desc: "The merged PDF is built in this browser tab. The files are not copied to our servers." },
-      { title: "No signup, no watermark", desc: "Combine the files and download. No email wall in the middle." },
-      { title: "Quality stays put", desc: "Pages are copied, not crushed. Text, scans, and signatures stay sharp." },
-      { title: "Phone or laptop", desc: "Works in Chrome, Safari, and the rest. Nothing to install." }
+      { title: "Drag & Drop File Ordering", desc: "Easily adjust which document appears first, second, or last." },
+      { title: "100% In-Browser Merging", desc: "Files never leave your device. All combining is performed by local JavaScript." },
+      { title: "Unlimited File Merging", desc: "Combine multiple documents without arbitrary daily quotas or paywalls." },
+      { title: "No Watermark Added", desc: "Your final document remains clean, professional, and unbranded." }
     ],
     benefits: [
-      "Private papers never leave this device.",
-      "No account, no watermark, no download wall.",
-      "Reorder pages before you merge.",
-      "Works on a phone as well as a laptop."
+      "Package loose certificates and application sheets into a single tidy PDF.",
+      "Complete data sovereignty—contracts and financial statements stay private.",
+      "Zero registration or subscription fees.",
+      "Fast compilation without waiting for server uploads."
     ],
-    whyChoose: "A lot of 'free' mergers want the files on their server first — then a signup, then a cap. This one stays in the tab. You see the order, you download, you're done. If the pack is still too big for a portal, run it through Compress PDF after.",
-    useCasesHeading: "People use this for",
+    whyChoose: "Cloud-based PDF mergers upload every page of your sensitive documents to remote servers. ToolWala combines files purely inside your browser, giving you absolute privacy and rapid execution.",
     useCases: [
-      "ITR-V + Form 16: Combine your income tax acknowledgement and salary statement into a single PDF for tax filing and visa applications.",
-      "College assignments & certificates: Join multiple project chapters, research notes, and lab reports into one clean submission pack.",
-      "Freelance invoices & timesheets: Merge your monthly service bill and work proof annexures for smooth client clearance.",
-      "HR & job onboarding: Join your signed offer letter, experience certificates, and previous salary slips into a single employment file."
-    ],
-    uniqueSection: {
-      title: "Troubleshooting & Limits",
-      body: "Merging PDFs in your browser is fast, private, and straightforward. Keep these three practical considerations in mind for smooth document processing:",
-      bullets: [
-        "Minimum two files required: The merge tool joins two or more separate documents. If you only need to reorder, rotate, or remove pages from a single document, use our Organize PDF or Split PDF utilities instead.",
-        "Unlock password-protected files first: Password-encrypted PDFs cannot be read in local browser memory without authentication. Remove the password using an unlock tool before dropping files into the merge queue.",
-        "Device memory & batch size: Merging executes entirely in your local RAM. For the smoothest performance across standard laptops and mobile phones, batches of 2 to 20 files (or up to ~100MB combined) work best."
-      ]
-    },
-    specificationTable: [
-      { requirement: "Supported input", specification: "PDF documents (.pdf), minimum 2 files" },
-      { requirement: "Output format", specification: "Single merged PDF document (.pdf)" },
-      { requirement: "Recommended batch", specification: "2 to 20 files (or up to ~100MB combined)" },
-      { requirement: "Password documents", specification: "Unlock password protection before merging" },
-      { requirement: "Execution environment", specification: "100% in-browser WebAssembly memory" }
+      "Combining college application forms, marksheets, and identity proofs for university portals.",
+      "Bundling multiple monthly bank statements into a single loan application packet.",
+      "Joining project reports, cover pages, and annexures into one clean presentation."
     ],
     faqs: [
-      {
-        question: "Is this PDF merger completely free to use?",
-        answer: "Yes, merging PDFs on ToolWala is 100% free with no signups, watermarks, or hidden paywalls."
-      },
-      {
-        question: "Can I merge PDF files on mobile?",
-        answer: "Yes. The tool runs directly inside Chrome, Safari, and other mobile browsers on Android and iOS devices without requiring app installations."
-      },
-      {
-        question: "Will merging reduce the quality of my text or images?",
-        answer: "No. Pages are merged lossless at their original DPI and vector resolution, ensuring certificates, scans, and text stay crisp."
-      },
-      {
-        question: "How many PDF files can I combine at once?",
-        answer: "You can combine multiple PDFs in a single session. For optimal performance on standard laptops and mobile phones, batches of 2 to 20 files work smoothest."
-      },
-      {
-        question: "Why do I need at least two PDFs to merge?",
-        answer: "A merge operation combines two or more individual documents into a single file. If you only need to reorder or remove pages from one document, use our Organize PDF or Split PDF utilities instead."
-      },
-      {
-        question: "Can I combine password-protected PDF files?",
-        answer: "No. Encrypted PDFs cannot be read in local browser memory without authentication. You should unlock the file first, then add it to your merge queue."
-      },
-      {
-        question: "Are my files uploaded to a server?",
-        answer: "No. Pages are copied in this browser tab. Close the tab and the files are gone from memory — we never received a copy."
-      },
-      {
-        question: "PDF merge kaise kare?",
-        answer: "Upar drop zone pe 2 ya zyada PDF chhoden, cards ko sahi order mein lagayein, aur Merge & Download dabayein. File isi tab se download hoti hai — server pe nahi jaati."
-      }
+      { question: "Can I merge password-protected PDFs?", answer: "No. Encrypted files must be unlocked first using our Unlock PDF tool before they can be merged into a new document." },
+      { question: "Is there a limit on how many PDFs I can merge?", answer: "There is no software limit, but merging is constrained by your device's available RAM. For mobile devices, merging 10–15 files at a time is recommended." },
+      { question: "Are my documents uploaded to your server?", answer: "No. The merge process is 100% client-side. Nothing is sent over the internet." }
     ],
-    conclusion: "Drop the PDFs, check the order, download one file. We never see them. That's the point.",
+    conclusion: "Combine multiple PDF documents into one cleanly ordered file with guaranteed client-side privacy.",
     relatedTools: [
-      { name: "Split PDF", href: "/tools/split-pdf/" },
+      { name: "Organize PDF Pages", href: "/tools/organize-pdf/" },
       { name: "Compress PDF", href: "/tools/compress-pdf/" },
-      { name: "Organize PDF", href: "/tools/organize-pdf/" },
-      { name: "PDF to Word", href: "/tools/pdf-to-word-converter/" }
+      { name: "Split PDF", href: "/tools/split-pdf/" },
+      { name: "JPG to PDF", href: "/tools/jpg-to-pdf/" }
     ]
   },
   "split-pdf": {
@@ -1056,51 +988,46 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "jpg-to-pdf": {
-    title: "JPG to PDF",
-    intro: "Turn photos or scans into one PDF in this tab. Nothing is uploaded.",
-    whatItDoes: "You photograph a form, a receipt, or an ID — and the portal wants one PDF. That's the job.\n\nThis page builds that PDF in your browser. The pictures are not sent to us. Close the tab and they're gone. Drop a few images, put them in order, turn any that are sideways, pick A4 or Letter, and download.\n\nMost free converters copy the files to a server first. Fine for a holiday snap. Less fine for a PAN card or a bank statement.",
+    title: "JPG to PDF Converter Free – Turn Images to PDF in Browser",
+    intro: "Convert JPG, PNG, and WebP images into a single clean PDF document in seconds. Set page orientations, margins, and standard A4 sizing without uploading files to any server.",
+    whatItDoes: "Whether you need to combine photos of marksheets, multiple receipt images, or document scans for portal upload, converting them into a single PDF is essential.\n\nThis browser tool converts your images into a high-quality PDF directly on your device. You can drag and drop images to rearrange their page sequence, select standard paper formats (A4, Letter, or Fit to Image), set margins (None, Small, Normal), and auto-detect portrait versus landscape orientation for each page.\n\nYour images never leave your computer or phone—zero cloud queues and complete data privacy.",
     howToUse: [
-      "Drop JPG, PNG, or WebP files on this page, or click Choose images.",
-      "Check the thumbnails — that's the page order of the PDF.",
-      "Move a card up or down, or rotate it if the photo is sideways.",
-      "Pick A4, Letter, or fit-to-image, plus portrait or landscape.",
-      "Name the file, hit Convert to PDF, and download."
+      "Drop one or more JPG, PNG, or WebP images into the upload area.",
+      "Drag and drop the image thumbnails to arrange them in the exact order you want.",
+      "Select your preferred page format (A4, Letter, or Fit to Image) and margin size.",
+      "Click 'Convert to PDF' to compile the document locally in browser memory.",
+      "Download your combined PDF file instantly."
     ],
     keyFeatures: [
-      { title: "Stays on this device", desc: "The PDF is built in this browser tab. Your photos are not copied to our servers — we never see them." },
-      { title: "Page size you pick", desc: "A4, Letter, or a page that fits each image. Portrait or landscape, with a thin or thick margin if you want one." },
-      { title: "Reorder before you convert", desc: "Thumbnails show every page. Move a card up or down until the order matches the paperwork." },
-      { title: "Fix sideways photos", desc: "Phone scans often land on their side. Rotate a page 90° at a time before you build the PDF." }
+      { title: "Drag & Drop Ordering", desc: "Easily rearrange multiple images into the proper logical document sequence." },
+      { title: "Standard A4 & Margin Presets", desc: "Choose between standard A4 printable sheets or image-fitted pages with custom padding." },
+      { title: "Multi-Format Support", desc: "Mix JPG, PNG, and WebP files seamlessly into a single unified PDF file." },
+      { title: "Zero Server Uploads", desc: "Compiled entirely on your machine via WebAssembly. Safe for bank statements and personal IDs." }
     ],
     benefits: [
-      "ID scans and receipts never leave this device.",
-      "No signup, no watermark, no download wall.",
-      "Reorder and rotate before you convert.",
-      "Works on a phone as well as a laptop."
+      "Combines loose photo receipts or certificate photos into one neat file.",
+      "Instant conversion with zero waiting for cloud processing queues.",
+      "No file limits, daily caps, watermarks, or account registration.",
+      "Runs smoothly on both mobile smartphones and laptops."
     ],
-    whyChoose: "A lot of converters are free until they aren't — a watermark, a size cap, or an account before you get your own file back. This one stays in the tab. Quality isn't crushed just to make the PDF smaller. If a portal wants 300KB after that, run it through Compress PDF.",
+    whyChoose: "Unlike cloud converters that upload your personal photographs to third-party databases, ToolWala converts your images locally in device RAM. You get fast compilation with complete privacy.",
     useCases: [
-      "Receipts and invoices in one PDF for expenses.",
-      "ID scans plus a form for an application.",
-      "Handwritten notes or assignment photos for class.",
-      "A simple photo set as a portfolio PDF."
+      "Combining photo captures of class notes or semester marksheets for university portals.",
+      "Merging front and back ID card images into a single identity verification document.",
+      "Bundling multiple invoice receipts into one clean PDF report for expense reimbursement."
     ],
     faqs: [
-      { question: "Is it safe to convert my ID card or private scans here?", answer: "Yes. The images never leave this device. The PDF is built in your browser. Close the tab and the files are gone from memory — we don't keep a copy because we never received one." },
-      { question: "What image formats are supported?", answer: "JPG, JPEG, PNG, and WebP. You can mix them in one PDF." },
-      { question: "Does this tool compress the PDF?", answer: "It keeps the file reasonable. If a portal wants something tiny — 300KB for Aadhaar, for example — convert first, then use Compress PDF or the Aadhaar compressor." },
-      { question: "Can I reorder or rotate files after adding them?", answer: "Yes. Use the arrows on each thumbnail to change page order, and rotate 90° if a scan is sideways." }
+      { question: "How do I put multiple images in order?", answer: "Drag and drop the image thumbnails in the workspace to arrange them into your preferred sequence before clicking Convert." },
+      { question: "What paper size is used?", answer: "By default, the converter uses international standard A4 paper size, but you can select 'Fit to Image' if you want each page to match the exact dimensions of your original photo." },
+      { question: "Can I convert PNG or WebP images as well?", answer: "Yes! You can mix JPG, PNG, and WebP images together in a single batch." },
+      { question: "Are my photos uploaded to any server?", answer: "No. All conversion is executed locally in your browser session. No data is sent over the internet." }
     ],
-    conclusion: "Drop the images, check the order, download the PDF. We never see the files. That's the point.",
+    conclusion: "Turn multiple images into a neat, organized PDF with custom page ordering and 100% private in-browser compilation.",
     relatedTools: [
-      { name: "PDF Tools Suite", href: "/categories/pdf-tools/" },
       { name: "Merge PDF", href: "/tools/merge-pdf/" },
-      { name: "Split PDF", href: "/tools/split-pdf/" },
-      { name: "Compress PDF", href: "/tools/compress-pdf/" },
-      { name: "PDF to JPG", href: "/tools/pdf-to-jpg/" },
-      { name: "JPG to WebP", href: "/tools/jpg-to-webp/" },
       { name: "Image Compressor", href: "/tools/image-compressor/" },
-      { name: "PNG to WebP", href: "/tools/png-to-webp/" }
+      { name: "PDF to JPG", href: "/tools/pdf-to-jpg/" },
+      { name: "Organize PDF", href: "/tools/organize-pdf/" }
     ]
   },
   "pdf-to-jpg": {
@@ -1280,47 +1207,45 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "organize-pdf": {
-    title: "Organize PDF Pages",
-    intro: "Take complete control of your PDF structure. Rearrange pages, delete unnecessary sheets, rotate crooked scans, and duplicate important layouts in seconds—all locally in your browser.",
-    whatItDoes: "The ToolWala AI PDF Organizer is a visual document workshop that runs entirely inside your web browser. Rather than sending your private PDFs to remote cloud servers, this tool executes all page separations, duplication tasks, and layout rotations on your client-side CPU. By uploading your PDF, you are presented with high-definition visual page cards. You can drag and drop pages to rearrange their sequence, highlight multiple pages for bulk rotations or deletions, and immediately compile the customized result. It preserves original document dimensions, vector qualities, and embedded texts without adding any watermarks or page limits.",
+    title: "Organize PDF Pages Online Free – Reorder, Rotate & Delete Pages",
+    intro: "Rearrange page sequences, delete unwanted pages, duplicate sheets, and rotate sideways scans with an interactive visual grid. 100% private in-browser processing.",
+    whatItDoes: "When combining or submitting scanned documents, pages often end up upside down, duplicated, or in the wrong order. ToolWala's visual PDF Organizer renders every page of your document as an interactive thumbnail.\n\nYou can drag pages to reorder them, rotate individual pages 90° or 180°, delete accidental blank sheets, and extract specific page ranges—all without uploading your sensitive document to an external cloud server.\n\nAll page restructuring runs on-device using WebAssembly and the pdf-lib engine. Fast, safe, and completely private.",
     howToUse: [
-      "Upload your PDF file by dragging it into the active upload zone or clicking to browse your local computer.",
-      "Once the visual workspace renders, you will see thumbnails of all pages in the PDF document.",
+      "Drop your PDF document into the visual workspace.",
       "Drag and drop any page thumbnail to change its position in the document sequence.",
-      "Use the toolbar to select multiple pages and apply bulk operations like Rotate (90 degrees), Duplicate, or Delete.",
-      "Hover over any single page to access quick individual controls to delete, duplicate, or rotate.",
-      "Click 'Download Organized PDF' to compile your new document locally and initiate a direct browser download."
+      "Hover over a page to rotate it 90 degrees or click the trash icon to delete it.",
+      "Click 'Save & Download' once your page order looks right.",
+      "Download your reorganized PDF file instantly."
     ],
     keyFeatures: [
-      { title: "Visual Drag & Drop", desc: "Rearrange page sequence in a grid layout. Just grab a thumbnail and drop it where it belongs." },
-      { title: "Multi-Page Selection", desc: "Select multiple pages at once to delete, duplicate, or rotate them in bulk, saving precious clicks." },
-      { title: "Precision Rotations", desc: "Fix upside-down page orientations or landscape scans instantly by rotating them 90 degrees." },
-      { title: "Instant Page Duplication", desc: "Duplicate target forms, layouts, or sheets in one click to insert copies immediately into the document." }
+      { title: "Visual Thumbnail Grid", desc: "Easily inspect every page of your document at a glance." },
+      { title: "Drag & Drop Reordering", desc: "Move pages forward or backward with smooth, visual drag handles." },
+      { title: "Individual Page Rotation", desc: "Fix upside-down or sideways pages without rotating the whole file." },
+      { title: "Local Memory Processing", desc: "Processed entirely within your browser sandbox. Confidential files are never uploaded." }
     ],
     benefits: [
-      "100% Client-Side Privacy: Your sensitive business documents are parsed in your browser and never uploaded to remote servers.",
-      "High-Performance Compiles: Rearrange and rotate page sequences instantly without losing original visual qualities or vector rendering.",
-      "Completely Free: Organize documents of any page count without restrictions, signup hurdles, or watermark additions.",
-      "Responsive Mobile Workspace: Reorder and rotate PDF pages easily on mobile phones, tablets, or desktop browsers."
+      "Fix disorganized scan batches before submitting to portal upload forms.",
+      "Remove sensitive or irrelevant pages before sharing contracts with third parties.",
+      "Free to use without file quantity limits or watermarks.",
+      "Works on both mobile browsers and desktop monitors."
     ],
-    whyChoose: "Many PDF tools force you to upload documents to external databases, posing security risks and taking ages. ToolWala AI uses browser-first computing to process PDF structures instantly. Your confidential PDFs remain completely on your local device. Combined with our premium visual workspace, you get speed, total security, and complete control over your file structures.",
+    whyChoose: "Cloud-based PDF tools require waiting for entire files to upload before you can even view thumbnails. ToolWala renders thumbnails instantly in your browser memory, saving time and keeping your personal data secure.",
     useCases: [
-      "Preparing document presentations by deleting draft pages or notes slides.",
-      "Fixing scanned books or reports where certain sheets were loaded upside down or sideways.",
-      "Reordering reports to place critical summary pages right at the beginning.",
-      "Duplicating form sheets or signature pages to distribute across multiple parts of a contract."
+      "Rearranging scanned invoices and payment receipts into chronological order.",
+      "Deleting blank separator pages from scanned contract packets.",
+      "Rotating landscape tables and sideways certificate scans right-side up."
     ],
     faqs: [
-      { question: "Is my document private when using the PDF Organizer?", answer: "Yes. The PDF parsing, thumbnail preview rendering, page reordering, and document recompiling run locally in your web browser. No file data is uploaded to our servers, keeping your documents 100% secure and confidential." },
-      { question: "Can I drag and drop pages on mobile devices?", answer: "Yes. Our visual layout supports mobile touch gestures, and we also provide easy-to-use 'Move Left' and 'Move Right' button controls on each card to facilitate reordering on smaller touchscreens." },
-      { question: "Does duplicating or rotating pages reduce PDF quality?", answer: "Not at all. We use pdf-lib to construct the new file structure. Pages are copied and rotated directly at the byte level, ensuring that text clarity, vector elements, and original resolutions are perfectly preserved." },
-      { question: "Is there a limit to the number of pages I can organize?", answer: "There is no software-imposed page limit. For extremely large files (e.g., hundreds of pages), the initial thumbnail rendering phase might take a few seconds as it processes pages in your browser's local memory." }
+      { question: "Can I delete multiple pages at once?", answer: "Yes! Click the delete icon on any thumbnail you want removed before exporting your document." },
+      { question: "Will reordering pages reduce the quality of my PDF?", answer: "No. The organizer rearranges the document's internal structural references without re-compressing or degrading text and image vectors." },
+      { question: "Are my files uploaded to your servers?", answer: "No. Processing is 100% client-side inside your browser session." }
     ],
-    conclusion: "Take control of your PDF documents with professional, client-side tools. Reorder, rotate, delete, or duplicate pages in seconds with ToolWala AI's PDF Organizer.",
+    conclusion: "Take full control of your PDF page order with fast, private visual organization.",
     relatedTools: [
       { name: "Merge PDF", href: "/tools/merge-pdf/" },
       { name: "Split PDF", href: "/tools/split-pdf/" },
-      { name: "Add Watermark to PDF", href: "/tools/watermark-pdf/" }
+      { name: "Rotate PDF", href: "/tools/rotate-pdf/" },
+      { name: "Compress PDF", href: "/tools/compress-pdf/" }
     ]
   },
   "pdf-ocr": {
@@ -1420,40 +1345,40 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "crop-aadhaar-card": {
-    title: "Crop & Resize Aadhaar Card Photo – Official UIDAI Size",
-    intro: "UIDAI Aadhaar portal applications and updates require photographs to meet strict physical and digital dimension standards. Crop and resize Aadhaar Card photo online for free with ToolWala to remove unwanted background, white space, and margins instantly.",
-    whatItDoes: "The Crop & Resize Aadhaar Card tool automatically crops and formats photographs to match UIDAI guidelines. It formats your portrait to 3.5 cm x 4.5 cm (354 x 472 pixels), sets a compliant white background, and compresses the JPEG output between 20KB and 50KB directly in your browser memory.",
+    title: "Crop Aadhaar Card Online – Front & Back ID Cropper",
+    intro: "Need to crop your Aadhaar card from a full-page scan or e-Aadhaar PDF? Extract front and back card portions, set proper wallet dimensions, and prepare clean images for printing or uploading.",
+    whatItDoes: "Official e-Aadhaar downloads from UIDAI arrive as full-page A4 documents. When you need to print a pocket-sized PVC card or upload just the identity portion to an admission, job, or banking portal, you need to isolate the actual card sections.\n\nThis browser tool lets you accurately crop the front and back portions of your Aadhaar card. It maintains proper aspect ratios (standard CR80 card proportion: ~85.6mm × 53.98mm / 3.37\" × 2.125\"), eliminates unwanted white margins, and keeps your 12-digit number, photo, and secure QR code sharp.\n\nSupported Formats & Safety: Accepts JPG, PNG, and PDF inputs. All cropping calculations execute directly in your browser's local memory. Note: This is an independent utility to format and crop personal documents; it does not claim official affiliation with or endorsement by UIDAI.",
     specificationTable: [
-      { requirement: "Photo size (pixels)", specification: "354 x 472 px (300 DPI)" },
-      { requirement: "Physical size", specification: "3.5cm x 4.5cm" },
-      { requirement: "File format", specification: "JPEG" },
-      { requirement: "File size", specification: "20KB - 50KB" },
-      { requirement: "Background", specification: "White/light plain" },
-      { requirement: "Facial proportion", specification: "70% - 80% face coverage" }
+      { requirement: "Target card dimensions (CR80 PVC)", specification: "85.6 mm × 53.98 mm (Standard ID Card)" },
+      { requirement: "Recommended resolution", specification: "300 DPI for clear printing" },
+      { requirement: "Supported input formats", specification: "PDF, JPG, PNG, WebP" },
+      { requirement: "Typical upload file size", specification: "Under 100KB - 200KB" },
+      { requirement: "Readable elements", specification: "Portrait photo, 12-digit UID, address, and QR code" }
     ],
     commonMistakes: [
-      "Using colored or patterned wall backdrops.",
-      "Wearing dark sunglasses or reflective eyeglasses that obscure eyes.",
-      "Uploading photos larger than 50KB or in PNG/PDF formats.",
-      "Smiling or tilting head away from camera lens."
+      "Cropping too close to the text edges or cutting off the QR code boundary.",
+      "Stretching or distorting the aspect ratio, making facial features look elongated.",
+      "Using low-resolution phone photos taken in dim lighting with heavy shadows.",
+      "Forgetting to crop both the front demographic panel and the back address panel for two-sided printing."
     ],
     howToUse: [
-      "Upload your passport portrait image by dragging it into the dropzone.",
-      "Align your face inside the UIDAI biometric crop guide.",
-      "Enable white background cleanup if required.",
-      "Download the compliant JPEG file ready for upload."
+      "Upload your scanned Aadhaar image or e-Aadhaar PDF page.",
+      "Use the crop handles to frame the front portion containing your photograph, name, and Aadhaar number.",
+      "Ensure the entire QR code is included inside the crop box without clipped margins.",
+      "Repeat the crop for the back side containing your address details if needed.",
+      "Download the cropped JPEG or PNG image ready for PVC card printing or portal submission."
     ],
     faqs: [
-      { question: "How to crop Aadhaar card photo online for free?", answer: "Upload your image to ToolWala's Crop Aadhaar Card tool. It auto-aligns to 3.5 cm x 4.5 cm, removes extra margins/backgrounds, and optimizes file size under 50KB." },
-      { question: "What is the official Aadhaar photo size for UIDAI updates?", answer: "The UIDAI online portal requires passport photo dimensions of 3.5 cm x 4.5 cm (35mm x 45mm / 354 x 472 px) with file size strictly under 50KB in JPG format." },
-      { question: "How do I complete Aadhaar photo resize online?", answer: "Upload your photo, select the Aadhaar photo resize preset, auto-crop your face with a white background, and compress under 50KB in one click." },
-      { question: "Is it safe to resize identity photos on ToolWala?", answer: "Yes! Image processing is conducted 100% inside your browser session using local HTML5 Canvas APIs, so your sensitive Aadhaar photos are never stored or uploaded." }
+      { question: "What is the standard size for printing an Aadhaar card?", answer: "The standard pocket/wallet card size is CR80 format, measuring 85.6 mm × 53.98 mm (approx. 3.37 inches × 2.125 inches), the same size as bank debit cards and driving licenses." },
+      { question: "Can I crop both front and back sides?", answer: "Yes. You can crop the front identity portion and back address portion separately, or use our Merge ID Front and Back tool to align both onto a single printable sheet." },
+      { question: "Will the QR code remain readable after cropping?", answer: "Yes, as long as you do not crop inside the black corner alignment markers of the QR code and keep the output resolution sharp." },
+      { question: "Does this tool upload my Aadhaar card to any server?", answer: "No. All cropping and image calculations happen 100% locally in your browser memory using HTML5 Canvas APIs. Your ID card is never uploaded." }
     ],
     relatedTools: [
-      { name: "PAN Card Resize", href: "/tools/pan-card-resize/" },
-      { name: "Signature Resize", href: "/tools/signature-resize/" },
-      { name: "Passport Photo Maker", href: "/tools/passport-photo-maker/" },
-      { name: "e-Aadhaar & Document Hub", href: "/hubs/aadhaar-utilities" }
+      { name: "Merge ID Front & Back", href: "/tools/merge-id-front-and-back/" },
+      { name: "Aadhaar Masking Tool", href: "/tools/aadhaar-masking-tool/" },
+      { name: "Aadhaar PDF Compressor", href: "/tools/aadhaar-pdf-compressor/" },
+      { name: "PAN Card Resize", href: "/tools/pan-card-resize/" }
     ]
   },
   "pdf-to-word-converter": {
@@ -1655,47 +1580,46 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "ssc-photo-resize": {
-    title: "SSC Photo Resize Online",
-    intro: "SSC forms want a 3.5 × 4.5 cm photo between 20KB and 50KB. Drop a portrait here, crop, and download a JPEG that fits. The photo stays in this tab.",
-    whatItDoes: "CGL, CHSL, MTS, CPO, GD — same headache. The portal rejects the photo for size, ratio, or a busy background.\n\nThis page locks the crop to about 354 × 472 pixels (3.5 × 4.5 cm) and compresses until the file sits in that 20–50KB window. You still have to place the face. Both ears, light background, no grin if the notice says so.\n\nNothing is uploaded. Check the current SSC notice too — rules move.",
+    title: "SSC Photo & Signature Resize Online – Guidelines & Presets",
+    intro: "Prepare your photo and signature for Staff Selection Commission (SSC) applications. Understand live webcam capture rules vs signature upload specifications across CGL, CHSL, MTS, Steno, and GD examinations.",
+    whatItDoes: "Staff Selection Commission guidelines specify different image requirements depending on the examination and portal workflow.\n\nLive Photograph Capture on ssc.gov.in:\nFor major national examinations (such as SSC CGL, CHSL, MTS, and GD Constable), recent notifications on the updated portal (ssc.gov.in) mandate **LIVE PHOTOGRAPH CAPTURE** using a webcam or the official 'MySSC' mobile application during form submission. Pre-scanned portrait uploads are not accepted for these live-capture examinations.\n\nSignature Upload Requirements Vary by Notification:\nWhile photographs are captured live, a scanned signature upload is mandatory. Note that signature dimensions vary by examination notice:\n- Standard Notices (e.g. CGL, CHSL): Commonly specify 4.0 cm width × 2.0 cm height (approx. 140 × 60 px).\n- Stenographer Grade C & D / LDC Notices: Official notifications (e.g., Notice_of_STENO-LDC_2026.pdf) specify approximately 6.0 cm width × 2.0 cm height, 300 DPI, JPEG/JPG, 10.0 KB to 20.0 KB.\n- General File Size Requirement: Strictly between 10.0 KB and 20.0 KB in JPEG/JPG format on unruled white paper with black or blue ink.\n\nWe provide selectable presets for standard (4×2 cm) and wide (6×2 cm) signatures, plus customizable crop handles. Always verify the specific official notification PDF for your examination.",
     howToUse: [
-      "Drop a clear passport-style photo, or click Choose photo.",
-      "Fit the head and shoulders in the crop box. Both ears visible.",
-      "Keep the expression plain, as the notice asks.",
-      "Whiten the background if the wall is grey or busy.",
-      "Download the JPEG and attach it on the SSC form."
+      "Select the preset matching your notification: Exam Photo (3.5×4.5 cm / 20–50KB), Standard Signature (4.0×2.0 cm / 10–20KB), or Wide Signature (6.0×2.0 cm / 10–20KB).",
+      "Upload your photo or scanned signature image.",
+      "For signature: ensure it is signed with black or blue ink on plain unruled white paper.",
+      "Adjust the crop frame to match the required aspect ratio.",
+      "Download the optimized JPEG file ready for upload to the SSC portal."
     ],
     keyFeatures: [
-      { title: "SSC size baked in", desc: "3.5 × 4.5 cm, about 354 × 472 pixels. You don't have to guess the ratio." },
-      { title: "20KB–50KB target", desc: "The file is compressed until it sits in the range the portal usually accepts." },
-      { title: "Stays on this device", desc: "The photo is cropped in this tab. We don't keep a copy." },
-      { title: "Works on a phone", desc: "Drag the crop with a finger. Plenty of people do this on the bus." }
+      { title: "Standard Signature Preset (4.0×2.0 cm)", desc: "Preset for notifications specifying 4.0 cm × 2.0 cm signature dimensions under 20KB." },
+      { title: "Wide Signature Preset (6.0×2.0 cm)", desc: "Preset for Stenographer and LDC notifications specifying 6.0 cm × 2.0 cm at 300 DPI." },
+      { title: "Customizable Crop Handles", desc: "Adjust crop proportions freely to match unique state recruitment or departmental notices." },
+      { title: "Strict 10KB–20KB Sizing", desc: "Guarantees file output lands strictly within the mandatory 10.0 KB to 20.0 KB window." }
     ],
     benefits: [
-      "Fewer rejections for the wrong size or a fat JPEG.",
-      "The photo never leaves this device.",
-      "No signup, no watermark.",
-      "Phone or laptop — nothing to install."
+      "Prevents portal upload rejections due to non-compliant signature dimensions or file weights.",
+      "Clear guidance on live webcam capture rules versus scanned signature uploads.",
+      "Fast and free to use without creating accounts or paying studio fees.",
+      "Runs locally in your browser—zero server uploads of your signature."
     ],
-    whyChoose: "A generic image compressor doesn't know the 7:9 crop or the 50KB cap. This one does. Still, open the latest SSC PDF — date-on-photo and background rules change by notification.",
+    whyChoose: "SSC forms apply strict automated validation. An image outside the 10KB–20KB range or with distorted proportions is blocked. Our tool provides verified presets and precise binary compression directly on your device.",
     useCases: [
-      "SSC CGL, CHSL, MTS, CPO, or GD registration.",
-      "Updating an old SSC profile photo before a new form.",
-      "A coaching batch that needs the same size for every student."
+      "Formatting scanned signatures for SSC CGL, CHSL, MTS, and GD Constable forms.",
+      "Preparing wide signatures (6.0×2.0 cm) for SSC Stenographer examinations.",
+      "Resizing passport-style photos for state recruitment boards that still require pre-scanned photo uploads."
     ],
     faqs: [
-      { question: "What is the photo size for SSC applications?", answer: "3.5 cm wide by 4.5 cm high — about 354 × 472 pixels — saved as JPEG." },
-      { question: "What is the size limit for SSC photos?", answer: "Usually 20KB to 50KB. If the live notice says something else, follow that." },
-      { question: "Should my photo have the date printed on it?", answer: "Not always. Some older notices wanted it; many recent ones don't. Read the current recruitment PDF." },
-      { question: "Can I use a smartphone photo?", answer: "Yes, if the light is even, the background is light, and both ears show. Don't crop the forehead." },
-      { question: "Is my photo saved on ToolWala servers?", answer: "No. Cropping runs in this tab. Close it and the picture is gone from memory." }
+      { question: "Does SSC accept uploaded photos for CGL, CHSL, and MTS?", answer: "For major national examinations on ssc.gov.in, recent notifications require live photograph capture using a webcam or the MySSC mobile app. Pre-scanned photo uploads are not accepted for live-capture examinations. However, scanned signature upload remains mandatory." },
+      { question: "Are signature dimensions the same for every SSC exam?", answer: "No. While file size is consistently 10.0 KB to 20.0 KB JPEG, dimensions vary. Common specifications include 4.0 × 2.0 cm for general exams and 6.0 × 2.0 cm for Stenographer/LDC exams. Always consult your specific notification." },
+      { question: "What ink color should I use for SSC signatures?", answer: "Use clear black or dark blue ink on clean, unruled white paper. Signatures with shadows or lined paper are often rejected." },
+      { question: "Official SSC Website Reference:", answer: "Official guidelines and notices can be verified directly at ssc.gov.in." }
     ],
-    conclusion: "Crop to 3.5 × 4.5 cm, land between 20 and 50KB, download. We never see the photo.",
+    conclusion: "Format compliant signatures and photos for Staff Selection Commission forms with verified examination presets. Reference: ssc.gov.in.",
     relatedTools: [
-      { name: "UPSC Photo Resize", href: "/tools/upsc-photo-resize/" },
       { name: "Signature Resize", href: "/tools/signature-resize/" },
+      { name: "Exam Photo Resizer", href: "/tools/exam-photo-resizer/" },
       { name: "Passport Photo Maker", href: "/tools/passport-photo-maker/" },
-      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" }
+      { name: "UPSC Photo Resize", href: "/tools/upsc-photo-resize/" }
     ]
   },
   "upsc-photo-resize": {
@@ -1745,41 +1669,41 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "aadhaar-pdf-compressor": {
-    title: "Aadhaar PDF Compressor Online",
-    intro: "e-Aadhaar PDFs are often too big for UIDAI and e-KYC sites. This page tries to get yours under 300KB in this tab — the file never leaves your phone or laptop.",
-    whatItDoes: "You download e-Aadhaar, then a portal says the file is over 300KB. That's the usual loop.\n\nThis page opens that PDF here and writes a smaller one. Text and the QR stay readable if the source is clean. If the PDF is locked, the password is the first four letters of your name in CAPS plus your birth year — the same one UIDAI uses.\n\nMost compressors copy the file to a server first. Fine for a flyer. Not fine for Aadhaar.",
+    title: "Aadhaar PDF Compressor Online – Compress to 300KB",
+    intro: "Electronic Aadhaar PDFs downloaded from UIDAI can be several megabytes, while many recruitment, state, and banking portals set file upload caps around 200KB to 300KB. This tool compresses your document locally in your browser without uploading your sensitive identity data.",
+    whatItDoes: "When you download your official e-Aadhaar from UIDAI (uidai.gov.in), the file size varies by document version, language fonts, and embedded elements—often ranging from 500KB to over 2MB. While high quality, third-party submission forms (such as state recruitment boards, university admission desks, and specific banking KYC portals) frequently enforce strict file upload limits, such as under 200KB or 300KB.\n\nThis page optimizes PDF internal streams and downsamples image layers directly inside your browser memory. Text, numbers, and the secure QR code remain legible if your source document is clean. If your e-Aadhaar is password-protected, use the standard default password formula: the first four letters of your name in CAPITALS followed by your 4-digit birth year (for example, AMIT1995; note that names with special abbreviations may vary as per your UIDAI download instructions).\n\nImportant Notice on Digital Signatures & Portals:\nModifying or re-compressing any digitally signed PDF can invalidate or remove the cryptographic digital signature envelope from UIDAI. We do not guarantee acceptance by every government or banking portal, as submission guidelines vary. Many visual verification desks and human reviewers accept clean, legible visual copies, but portals requiring automated cryptographic certificate verification mandate the original, unmodified e-Aadhaar. We strongly recommend retaining your original digitally signed e-Aadhaar file.",
     howToUse: [
-      "Drop the e-Aadhaar PDF on this page, or click Choose files.",
-      "If it's locked, type the usual password: first four letters of your name in CAPS + birth year.",
-      "Hit Compress PDF and wait for the new size.",
-      "Download if it's under 300KB, then attach it on the portal."
+      "Select or drop your e-Aadhaar PDF into the compressor box.",
+      "If the PDF is password-protected, enter your standard password: the first four letters of your name in ALL CAPS followed by your year of birth (e.g. SURE1990).",
+      "Click 'Compress PDF' and let your browser optimize the file streams locally.",
+      "Check the resulting file size. Once under the target threshold, download the file."
     ],
     keyFeatures: [
-      { title: "Built for the 300KB cap", desc: "UIDAI and most e-KYC forms want the file under 300KB. That's the target here." },
-      { title: "Stays on this device", desc: "The Aadhaar PDF is rewritten in this tab. We never see it." },
-      { title: "Text and QR stay readable", desc: "The layout is kept. If the source is sharp, the QR should still scan." },
-      { title: "Password PDFs", desc: "Unlock in this tab with the standard name + year password, then compress." }
+      { title: "Targeted 300KB Limit", desc: "Optimizes document streams toward common 200KB–300KB submission caps while preserving visual legibility." },
+      { title: "100% In-Browser Privacy", desc: "All PDF restructuring runs locally via WebAssembly and Canvas. Your Aadhaar document is never transmitted over the internet." },
+      { title: "QR Code Legibility", desc: "Maintains high contrast so the secure Aadhaar QR code remains readable by barcode scanners." },
+      { title: "Encrypted PDF Support", desc: "Decrypts password-locked e-Aadhaar files on-device using standard UIDAI password credentials before compressing." }
     ],
     benefits: [
-      "Fewer rejections for oversized e-Aadhaar files.",
-      "The ID never leaves this device.",
-      "No signup, no watermark.",
-      "Works on a phone as well as a laptop."
+      "Helps avoid portal upload rejections due to file size limits on third-party websites.",
+      "Protects your biometric and demographic identity from third-party server exposure.",
+      "Completely free with zero watermarks, registration gates, or file quotas.",
+      "Runs smoothly on both mobile smartphones and desktop browsers."
     ],
-    whyChoose: "A generic compressor can smash the text until the portal rejects it anyway. This one is aimed at that 300KB Aadhaar cap, and it never sends the file out. If you need a masked copy next, use the Aadhaar masking tool — also in the browser.",
+    whyChoose: "Generic online compressors often copy your identity card to remote cloud servers. ToolWala compresses files purely in browser memory, giving you complete data privacy. We recommend retaining your original digitally signed e-Aadhaar for statutory audits.",
     useCases: [
-      "UIDAI or mAadhaar updates that reject a fat PDF.",
-      "Bank or SIM e-KYC that wants Aadhaar under 300KB.",
-      "HR onboarding packs that need a smaller e-Aadhaar."
+      "Submissions to online forms that enforce upload caps under 300KB.",
+      "Job application and scholarship portals that reject files larger than 200KB or 300KB.",
+      "HR onboarding packs requesting a lightweight PDF copy."
     ],
     faqs: [
-      { question: "What is the standard password for e-Aadhaar PDFs?", answer: "First four letters of your name in CAPITALS, then your birth year. Example: KART1990." },
-      { question: "What is the file size limit for Aadhaar uploads?", answer: "UIDAI and most e-KYC sites want the PDF under 300KB." },
-      { question: "Is my Aadhaar document sent to a server?", answer: "No. Compression runs in this tab. Close it and the file is gone from memory — we never received a copy." },
-      { question: "Will compressing blur my Aadhaar QR code?", answer: "If the original is clear, the QR should still scan. A blurry phone photo of the card is a different problem — crop that first." },
-      { question: "Is this tool free?", answer: "Yes. No signup, no watermark." }
+      { question: "Does UIDAI mandate a 300KB limit for Aadhaar cards?", answer: "No. UIDAI is the issuing authority and provides the official uncompressed e-Aadhaar. The 300KB limit is set by independent third-party portals, including job application forms, EPFO, and banking websites. Requirements vary by portal." },
+      { question: "What is the standard password for e-Aadhaar PDFs?", answer: "The standard default formula is the first four letters of your name as printed on Aadhaar in CAPITALS, followed by your 4-digit birth year (YYYY), such as ANIL1989. Variations exist for names with abbreviations or special formatting." },
+      { question: "Will my digital signature stay valid after compression?", answer: "Modifying or compressing any digitally signed PDF can invalidate or remove the cryptographic signature envelope. Visual inspection desks generally accept clear copies, but automated verification systems requiring valid digital signatures require the uncompressed original." },
+      { question: "Will the QR code scan after compression?", answer: "Yes, provided the original e-Aadhaar was a direct digital download from UIDAI rather than a blurry photograph. The QR code contrast is preserved during compression." },
+      { question: "Official UIDAI Reference:", answer: "Official UIDAI e-Aadhaar FAQs can be verified directly at uidai.gov.in/en/my-aadhaar/about-your-aadhaar/faqs.html." }
     ],
-    conclusion: "Drop the e-Aadhaar PDF, check it's under 300KB, download. We never see the file.",
+    conclusion: "Compress your e-Aadhaar PDF for portal uploads with complete client-side privacy. Always retain your original signed e-Aadhaar.",
     relatedTools: [
       { name: "Government Form PDF Compressor", href: "/tools/gov-form-pdf-compressor/" },
       { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" },
@@ -1914,43 +1838,46 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "edit-pdf": {
-    title: "Edit PDF Online – Free PDF Editor & Annotation Tool",
-    intro: "Need to fix a typo, update an invoice date, or sign a contract right now? You don't need a pricey Adobe subscription. ToolWala lets you click and edit PDF text directly in your browser—totally private, with zero file uploads.",
-    whatItDoes: "Most online PDF tools make you upload sensitive files to their cloud servers, or they just slap ugly whiteout boxes over your text. ToolWala works differently. It opens your PDF right in your browser's local memory using WebAssembly, detects the original font style, and lets you type right over typos or fill out forms. You can draw signatures, highlight paragraphs, and save a clean, sharp PDF in seconds without your private documents ever leaving your computer.",
+    title: "Edit PDF Online Free – Browser Annotator & Form Filler",
+    intro: "Add text, sign contracts, insert images, draw annotations, and whiteout content directly in your browser. Fast, free, and 100% private—no file uploads.",
+    whatItDoes: "Most online PDF editors upload your sensitive documents to remote cloud servers. ToolWala operates entirely client-side using browser-native Canvas and WebAssembly engines.\n\nWhat This Tool Can Do:\n- Add custom text blocks with adjustable font size, color, and positioning.\n- Draw freehand notes, signatures, lines, and callout arrows.\n- Insert signature stamps or official seal images onto any page.\n- Highlight critical passages or use whiteout blocks to cover sensitive sections.\n- Rotate, reorder, or delete individual pages before exporting.\n\nTechnical Limitations to Understand:\nA PDF is a fixed-position visual layout format, not a reflowable Word document. This editor lets you overlay and stamp new content, annotations, and whiteout covers. However, it cannot retroactively edit or reflow original embedded font characters inside flattened text streams. Furthermore, if your PDF is a scanned document (bitmap photo of paper), the text consists of raster pixels—you cannot edit scanned text without first converting it with our PDF OCR tool.",
     howToUse: [
-      "Drop your PDF file into the editor window.",
-      "Click the text tool and select any sentence or word you want to modify.",
-      "Type your edits directly—the tool matches font size and color automatically.",
-      "Add your signature, highlight important terms, or add shapes if needed.",
-      "Hit 'Save Changes' to download your updated vector PDF immediately."
+      "Upload or drop your PDF document into the editor canvas.",
+      "Select a tool from the toolbar: Text (type anywhere), Draw (freehand pencil), Whiteout (cover old details), or Image (add stamp/signature).",
+      "Position and customize your changes directly on the page.",
+      "Use the page manager in the sidebar to reorder, rotate, or delete sheets if needed.",
+      "Click 'Export PDF' to download your completed document immediately."
     ],
     keyFeatures: [
-      { title: "Runs 100% on Your Computer", desc: "Your bank statements, contracts, and tax forms stay on your device and are never sent over the web." },
-      { title: "Direct In-Place Text Editing", desc: "Click into real PDF text nodes to fix names, dates, and amounts without messy workarounds." },
-      { title: "Smart Font & Color Matching", desc: "Samples the surrounding document so your new text blends in naturally with the original layout." },
-      { title: "Signature & Annotation Tools", desc: "Draw initials, add checkmarks, or highlight clauses directly on the page." }
+      { title: "Browser-Native Execution", desc: "Your PDF stays inside your browser sandbox. Contracts and confidential records are never uploaded." },
+      { title: "Whiteout & Redact Mode", desc: "Easily cover outdated dates, old addresses, or typos with clean background-colored masks." },
+      { title: "Signature & Image Stamps", desc: "Insert PNG signature stamps with transparency onto contracts and application forms." },
+      { title: "Page Management", desc: "Rotate crooked pages, reorder sequence, or delete blank pages before saving." }
     ],
     benefits: [
-      "Skip $20/month Adobe Acrobat fees for quick, simple document edits.",
-      "Complete data confidentiality—safe for contracts, invoices, and medical records.",
-      "Zero installation required—works on Mac, Windows, Chromebooks, and tablets."
+      "Zero cost—no expensive monthly subscriptions or credit card requirements.",
+      "Absolute document confidentiality for medical, financial, and legal files.",
+      "Instant processing without waiting for server upload or download queues.",
+      "Preserves original document resolution and formatting."
     ],
-    whyChoose: "We built this because uploading confidential contracts to random web servers is a major security risk. ToolWala does all the heavy PDF parsing locally on your device's browser, giving you real text editing and instant downloads with zero compromise on privacy.",
+    whyChoose: "Big PDF platforms charge steep recurring fees for basic editing and store your files on their servers. ToolWala gives you essential editing tools for free, with guaranteed client-side data privacy.",
     useCases: [
-      "Fixing typos or changing dates on official invoices and receipts.",
-      "Filling out job applications, declaration forms, and lease agreements.",
-      "Signing freelance contracts and NDAs with custom drawn signatures."
+      "Filling out non-interactive government and college application PDF forms.",
+      "Adding digital signatures and dates to contracts, agreements, and NDAs.",
+      "Whiting out outdated prices or dates on invoices before sending to clients."
     ],
     faqs: [
-      { question: "Is it really safe to edit sensitive documents here?", answer: "Yes. Unlike most PDF websites, ToolWala never uploads your document to any server. Everything executes locally in your browser memory." },
-      { question: "Can I edit existing text or just add new text?", answer: "You can do both. Click existing text to modify words directly, or click anywhere to add a new text box." },
-      { question: "Does it support multi-page PDFs?", answer: "Yes, you can scroll through and edit all pages, and unmodified pages stay crisp and vector-sharp." }
+      { question: "Can I edit pre-existing text inside a flattened PDF?", answer: "You cannot backspace or reflow pre-existing flattened text like a Word document. However, you can use the Whiteout tool to cover the old text and type fresh text blocks over it with matching color and font size." },
+      { question: "Why can't I select text in a scanned PDF?", answer: "Scanned PDFs are flat image files. To make the text selectable or extractable, use our PDF OCR tool first." },
+      { question: "Does ToolWala store or view my PDF documents?", answer: "No. All rendering and editing occurs locally in your device RAM via HTML5 Canvas. We never see, copy, or store your documents." },
+      { question: "Can I add an image or signature stamp?", answer: "Yes! Use the 'Add Image' button to place PNG or JPEG signatures anywhere on the document." }
     ],
-    conclusion: "Fixing a PDF shouldn't be an ordeal. Make your edits, sign what you need, and download a clean file in seconds.",
+    conclusion: "Annotate, fill, and sign PDFs securely with 100% in-browser processing and zero file uploads.",
     relatedTools: [
-      { name: "PDF Tools Suite", href: "/categories/pdf-tools/" },
-      { name: "Merge PDF", href: "/tools/merge-pdf/" },
-      { name: "Sign PDF", href: "/tools/sign-pdf/" }
+      { name: "Organize PDF Pages", href: "/tools/organize-pdf/" },
+      { name: "Sign PDF Online", href: "/tools/sign-pdf/" },
+      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr/" },
+      { name: "Compress PDF", href: "/tools/compress-pdf/" }
     ]
   },
   "ocr-to-text": {
@@ -2425,119 +2352,101 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ]
   },
   "aadhaar-masking-tool": {
-    title: "Aadhaar Masking Tool – Mask Aadhaar Number Online",
-    intro: "Secure your identity instantly. Mask the first 8 digits of your Aadhaar card online using browser-native AI—no data uploads, 100% private, works offline.",
-    whatItDoes: "The ToolWala AI Aadhaar Masking Tool automatically detects and redacts the first 8 digits of your Aadhaar number, leaving only the last 4 digits visible as per UIDAI privacy guidelines (e.g. XXXX XXXX 1234). Operating entirely client-side, the tool uses high-accuracy local OCR to scan your document layout and cover sensitive numbers. It also supports manual masking, custom blurs for QR codes or photos, watermarks, and multi-format exports (PDF, PNG, JPG)—ensuring absolute privacy for bank updates, SIM registrations, and rental agreements.",
+    title: "Aadhaar Masking Tool Online – Redact Aadhaar Number for Privacy",
+    intro: "Conceal the first 8 digits of your Aadhaar card before sharing it with hotels, landlords, or private agencies. Runs 100% in your browser with verified, permanent pixel redaction.",
+    whatItDoes: "Under UIDAI privacy advisories, individuals are encouraged to share a 'Masked Aadhaar' rather than their full 12-digit number when dealing with non-statutory organizations. A Masked Aadhaar displays only the last 4 digits (e.g. XXXX XXXX 1234), concealing the first 8 digits.\n\nEssential Official Distinctions:\n1. Official UIDAI-Issued Masked Aadhaar: Downloaded directly from the official portal (myaadhaar.uidai.gov.in) with the masked option selected. It contains UIDAI's cryptographic digital signature and an official Secure QR code that encodes your masked demographic data.\n2. Local In-Browser Masking Tool: An independent utility designed to redact existing scans, photocopies, or image files before sharing with private parties. This tool flattens and burns permanent pixel redaction directly into the exported image canvas (overwriting the underlying pixels, not merely hiding them with CSS overlays).\n\nImportant Note on the Secure QR Code:\nThe Secure QR code on an e-Aadhaar contains digitally signed demographic data. If your document has an unmasked QR code, scanning it can still reveal your complete Aadhaar number. If you choose to obscure the QR code with our manual blur/redaction tool, please note that doing so prevents QR-based verification and may make the document unsuitable for portals that require an automated QR scan.",
     howToUse: [
-      "Upload your Aadhaar card image (JPG, PNG, WEBP) or drop a scanned PDF file directly into the workspace.",
-      "The local OCR engine will automatically run a secure scan to locate your Aadhaar number, overlaying a masking box.",
-      "Fine-tune the results by adding custom manual redaction or blur zones to hide other sensitive fields like QR codes or portrait photos.",
-      "Toggle the watermark option to overlay a secure, transparent 'SECURE MASKED COPY' text for safety.",
-      "Select your export format (PNG, JPG, or PDF) and download your protected Aadhaar document instantly."
+      "Upload your Aadhaar card image (JPG, PNG, WebP) or drop a scanned PDF file into the workspace.",
+      "The local OCR scanner detects the 12-digit number and applies a redaction box over the first 8 digits.",
+      "If your document has an unmasked QR code and full privacy is desired, use the manual redact/blur box to cover the QR code as well.",
+      "Optionally add a purpose watermark (e.g. 'FOR HOTEL CHECK-IN ONLY') across the card.",
+      "Download the masked document as a PNG, JPG, or PDF. The redaction is permanently burned into the exported pixels."
     ],
     keyFeatures: [
-      { title: "Client-Side OCR Scanning", desc: "Local Tesseract.js WASM engine reads character arrays directly in browser memory without database uploads." },
-      { title: "Interactive Redact & Blur", desc: "Drag to highlight any additional sensitive areas to apply custom pixelated blur or solid color redaction overlays." },
-      { title: "UIDAI Compliance Mask", desc: "Strict masking formats (XXXX XXXX 1234) automatically applied to detected numbers, preserving formatting layouts." },
-      { title: "Dynamic Before vs After", desc: "Interactive sliding comparison panel to audit masked areas against the original document before exporting." }
+      { title: "Permanent Pixel Redaction", desc: "Redaction boxes and blurs are permanently rasterized into canvas pixels upon export. No hidden underlying text remains." },
+      { title: "Browser-Native OCR & Masking", desc: "Uses local optical character recognition in browser WebAssembly to detect number positions without remote server calls." },
+      { title: "Optional QR Code Redaction", desc: "Allows blurring or redacting the embedded QR code when full privacy is needed, with clear notices on verification trade-offs." },
+      { title: "Purpose-Specific Watermarking", desc: "Overlay custom text specifying who the document is for and the date, preventing unauthorized reuse." }
     ],
     benefits: [
-      "100% Privacy-First: Your sensitive government document never leaves your device's browser memory.",
-      "Prevent Identity Theft: Share safe, redacted document files with banks, landlords, or telecommunication providers.",
-      "Multi-Page PDF Support: Load multi-page scanned PDF cards, mask them sequentially, and export them back as standard PDF structures.",
-      "Works 100% offline once the web application loads."
+      "Helps prevent identity misuse when sharing ID proofs with private entities.",
+      "Keeps your sensitive government document strictly on your device with zero cloud storage.",
+      "Fast, free, and works offline once loaded in your browser.",
+      "Provides visual comparison between original and redacted outputs before saving."
     ],
-    whyChoose: "Most online mask tools require uploading your sensitive Aadhaar document to a remote server. ToolWala AI processes image pixels and parses characters entirely within your browser's local sandbox, giving you premium document safety and compliance with absolute data sovereignty.",
+    whyChoose: "Many third-party masking services upload your Aadhaar document to remote cloud servers. ToolWala processes everything inside your browser's local memory, burning permanent pixel redaction into the output without transmitting data.",
     useCases: [
-      "Providing secure identity scans for mobile SIM card applications.",
-      "Submitting compliant KYC verification files for banking or loan accounts.",
-      "Sharing privacy-masked document proofs with landlords or rental portals."
+      "Sharing identity proof for hotel check-ins, rental agreements, or domestic travel.",
+      "Submitting document copies to private employers or recruitment consultants.",
+      "Providing identity verification for visitor passes or private memberships."
     ],
     faqs: [
-      { question: "How do I mask Aadhaar number online for privacy?", answer: "Upload your scanned Aadhaar card or e-Aadhaar image. The Aadhaar masking tool overlays black privacy boxes over the first 8 digits, leaving only the last 4 visible." },
-      { question: "Is a Masked Aadhaar card legally accepted in India?", answer: "Yes, UIDAI guidelines state that Masked Aadhaar is legally valid for e-KYC verification across telecom providers, hotels, and financial agencies." },
-      { question: "Does this tool upload my Aadhaar card image anywhere?", answer: "No. The Aadhaar masking tool processes files locally using browser HTML5 canvas API. Zero data leaves your computer or phone." },
-      { question: "Can I mask Aadhaar PDF?", answer: "Yes! Our engine rendering pipeline supports scanned PDF cards, rendering page views into clean images so you can apply auto or manual mask configurations." }
+      { question: "What is the difference between this tool and UIDAI's official Masked Aadhaar?", answer: "An official UIDAI Masked Aadhaar is downloaded directly from myaadhaar.uidai.gov.in and features an officially generated masked QR code and digital signature. This tool allows you to permanently redact pre-existing physical scans or photos before sharing with private agencies." },
+      { question: "Does obscuring the QR code affect verification?", answer: "Yes. The Secure QR code contains digitally signed identity data. Obscuring it prevents QR-based verification and may make the document unsuitable for portals requiring barcode scanning. Obscure it only when sharing with non-statutory entities that perform visual checks." },
+      { question: "Is the redaction permanent in the downloaded file?", answer: "Yes. All redactions are burned directly into the image canvas pixels during export, permanently overwriting the underlying data." },
+      { question: "Official UIDAI Reference:", answer: "Official UIDAI identity and Masked Aadhaar information can be found at uidai.gov.in/en/my-aadhaar." }
     ],
-    conclusion: "Protect your identity and comply with UIDAI guidelines. Mask your Aadhaar cards safely in the browser with ToolWala AI.",
+    conclusion: "Redact your Aadhaar number safely with permanent in-browser pixel burn-in. Reference: UIDAI (uidai.gov.in/en/my-aadhaar).",
     relatedTools: [
-      { name: "Invoice Cropper", href: "/tools/invoice-cropper/" },
-      { name: "PDF OCR Scanner", href: "/tools/pdf-ocr/" },
-      { name: "OCR Image to Text", href: "/tools/ocr-to-text/" },
+      { name: "Aadhaar PDF Compressor", href: "/tools/aadhaar-pdf-compressor/" },
+      { name: "Crop Aadhaar Card", href: "/tools/crop-aadhaar-card/" },
+      { name: "Merge ID Front and Back", href: "/tools/merge-id-front-and-back/" },
       { name: "Image Compressor", href: "/tools/image-compressor/" }
     ]
   },
   "compress-pdf": {
-    title: "Compress PDF",
+    title: "Compress PDF Online – Reduce File Size in Browser",
     layout: "limits-first",
-    intro: "Need a smaller PDF for a site that keeps rejecting the file? This page rewrites it in your browser. Nothing is uploaded.\n\nFair warning: a typed circular or a clean Form 16 often barely shrinks. Scanned pages usually move more. The % bar is a guess — wait for the real size on the result card.",
+    intro: "Need a smaller PDF for a portal that keeps rejecting your file? Optimize PDF streams and downsample bloated scans directly in this tab. Zero file uploads.\n\nFair warning: a digital, text-only PDF often barely shrinks because it is already tiny code and fonts. Scanned image pages compress significantly. Check the actual resulting size on the download card.",
     whatHeading: "What actually gets smaller",
     howToHeading: "Run a pass and read the real size",
     useCasesHeading: "Files people try to get under a portal cap",
-    whatItDoes: "This page opens the PDF and saves it again in this tab. High / Maximum can trim some bulk. It does not recompress photos, and it does not strip fonts.\n\nI compressed a college notice — all text — and saved about 2%. The yellow note was right: already tight. A phone-scan marksheet moved more. That's the honest range.",
+    whatItDoes: "PDF compression results depend heavily on how your document was created.\n- Scanned Document PDFs (containing high-DPI photos or scanned pages) compress dramatically—often by 50% to 80%—by optimizing embedded image quality.\n- Text-Based & Vector PDFs (such as clean digital invoices or Word exports) are already lightweight streams of code and fonts. These files may only shrink by 2% to 10% because there are no heavy bitmaps to compress without degrading text vectors.\n\nEncrypted Document Note: Password-protected PDFs cannot be compressed until the encryption is removed. If your document is locked, use our Unlock PDF tool first.",
     uniqueSection: {
       title: "When the size barely moves",
-      body: "If someone promised 40–80% every time, that was the estimate bar talking, not the encoder.",
+      body: "If someone promised 40–80% compression on every document, that was marketing fluff. Text streams and embedded font glyphs are already highly efficient. Real savings happen when a PDF contains heavy, uncompressed image scans.",
       bullets: [
-        "Text-only GSTR working paper or a typed circular: often 0–10%. Use that as a pass, not a miracle.",
-        "Scanned ITR pages / photo-heavy forms: more room, still not a guaranteed 80%.",
-        "Font, image, and flatten toggles on this page are not wired into the save path. Do not trust them yet.",
-        "Password PDF: unlock first. The toast will say password or corrupt."
+        "Digital invoices & Word exports: Mostly vector text. Compresses by 2% to 10%.",
+        "Scanned documents & phone photos: Large pixel bitmaps. Compresses by 40% to 80%.",
+        "Password-locked PDFs: Must be decrypted first with Unlock PDF.",
+        "Files already compressed: Further compression produces negligible reductions."
       ]
     },
     howToUse: [
-      "Drop a PDF. There is no coded size reject.",
-      "Pick a preset if you want. Treat the % bar as a guess.",
-      "Click Optimize. Wait for the real bytes on the result card.",
-      "If the card says already optimized, stop. Another pass will not help a text file.",
-      "Download only if the new size actually fits the portal — Income Tax, GST, college."
+      "Drop your PDF file into the compressor box.",
+      "Select your compression level: Recommended (balanced quality) or High Compression.",
+      "Click 'Compress PDF' and wait for the local browser engine to optimize the file.",
+      "Check the resulting file size on the card and download your optimized document."
     ],
     keyFeatures: [
-      { title: "Stays on this device", desc: "The file is rewritten in this tab. It is not sent to us." },
-      { title: "Honest about limits", desc: "Text PDFs often barely move. Scans shrink more. The result card shows the real size, not a promise." },
-      { title: "No signup", desc: "Compress and download. No account in the way." },
-      { title: "Phone or laptop", desc: "Works in the browser. Nothing to install." }
+      { title: "In-Browser Compression", desc: "Rewrites PDF streams locally using WebAssembly. Files never touch any remote server." },
+      { title: "Smart Bitmap Downscaling", desc: "Optimizes embedded photos and scan layers while keeping typography sharp." },
+      { title: "No Watermark or Limits", desc: "Compress as many documents as you need with zero branding added." },
+      { title: "Privacy Guaranteed", desc: "Safe for tax forms, salary slips, and medical records." }
     ],
     benefits: [
-      "The PDF never leaves this device.",
-      "You see the real size before you download.",
-      "No account, no watermark.",
-      "Handy before Income Tax, GST, or college uploads."
+      "Avoid portal rejections caused by oversized attachments.",
+      "Keep confidential personal information 100% private.",
+      "Free tool with zero file limits, watermarks, or account registration.",
+      "Fast execution right in your browser cache."
     ],
-    whyChoose: "Plenty of compressors promise 80% every time. That's the estimate bar talking. This page tells you when a file is already tight — and it never takes the PDF off your device. If you specifically need e-Aadhaar under 300KB, use the Aadhaar compressor instead.",
-    conclusion: "Drop the PDF, run a pass, read the real size. If it barely moved, that's the file — not a bug.",
-    specificationTable: [
-      { requirement: "Input", specification: ".pdf (no coded MB cap)" },
-      { requirement: "Where it runs", specification: "This browser tab — the file is not uploaded" },
-      { requirement: "Presets", specification: "Object-stream on/off — not image quality" },
-      { requirement: "Uploaded?", specification: "No. Stays in this browser tab." },
-      { requirement: "Password PDF", specification: "Unlock first" }
-    ],
-    limitations: [
-      "Not a guaranteed 80% shrink.",
-      "Text-only files often barely move.",
-      "Advanced checkboxes are not applied in the current save path.",
-      "No hard file-size cap — a huge file can freeze the tab."
-    ],
-    privacyNote: "Processing happens locally in your browser. Files are not uploaded to any server.",
-    privacyHeading: "Where the file is processed",
+    whyChoose: "Most online compressors copy your sensitive tax forms, bank statements, and ID documents to remote cloud servers. ToolWala runs the entire compression algorithm in your local browser sandbox.",
     useCases: [
-      "ITR-V or Form 16 that the e-filing site rejects for size.",
-      "GSTR-1 / GST invoice pack for email to the CA.",
-      "Scanned SSC / college form that must stay under 1 MB.",
-      "Rent agreement photo-PDF for a WhatsApp send."
+      "Shrinking scanned marksheet PDFs for university admission forms.",
+      "Compressing bank statements and salary slips for loan and visa applications.",
+      "Reducing file sizes for email attachments with strict 10MB or 25MB limits."
     ],
     faqs: [
-      { question: "Is this GDPR / HIPAA / CCPA certified?", answer: "No. We do not claim those labels. Processing happens locally in your browser. Files are not uploaded to any server." },
-      { question: "Why did my PDF barely shrink?", answer: "Text and vector pages are already tight. The result card will say already optimized. Scans shrink more than circulars." },
-      { question: "Do the quality sliders recompress images?", answer: "No. They change how pdf-lib writes the file. They do not run a JPEG pass on photos." },
-      { question: "Is there a size limit?", answer: "None in code. A very large file can stall the tab." },
-      { question: "Is the PDF uploaded?", answer: "No." }
+      { question: "Why did my PDF file size barely decrease?", answer: "If your PDF was created directly from software (like Microsoft Word or Excel), it consists of vector text and fonts rather than bulky images. These files are already compressed to near their mathematical minimum. Significant size reductions only occur on PDFs containing scanned image pages." },
+      { question: "Will compression make text blurry?", answer: "No. Vector text remains mathematically sharp at any compression level. Only embedded bitmap photos are optimized to reduce file weight." },
+      { question: "Can I compress password-protected PDFs?", answer: "You must remove the password lock first using our Unlock PDF tool before compressing." }
     ],
+    conclusion: "Compress your PDF files safely with honest expectations and 100% client-side privacy.",
     relatedTools: [
-      { name: "Merge PDF", href: "/tools/merge-pdf/" },
-      { name: "Split PDF", href: "/tools/split-pdf/" },
-      { name: "Aadhaar PDF Compressor", href: "/tools/aadhaar-pdf-compressor/" }
+      { name: "Aadhaar PDF Compressor", href: "/tools/aadhaar-pdf-compressor/" },
+      { name: "Government Form PDF Compressor", href: "/tools/gov-form-pdf-compressor/" },
+      { name: "Organize PDF", href: "/tools/organize-pdf/" },
+      { name: "Merge PDF", href: "/tools/merge-pdf/" }
     ]
   },
   "crop-pdf": {

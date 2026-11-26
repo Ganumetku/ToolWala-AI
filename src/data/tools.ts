@@ -144,7 +144,7 @@ export const toolsData: Tool[] = [
   {
     id: "passport-photo-maker",
     title: "Passport Photo Maker",
-    description: "Create official passport photos for any country with AI background cleaning.",
+    description: "Create passport-size photos with customizable dimensions, backgrounds and printable layouts.",
     icon: "IdCard",
     href: "/tools/passport-photo-maker/",
     slug: "passport-photo-maker",
@@ -177,8 +177,8 @@ export const toolsData: Tool[] = [
   },
   {
     id: "image-compressor",
-    title: "Image Compressor",
-    description: "Compress JPG, PNG, and WebP images up to 90% without quality loss.",
+    title: "Image Compressor Online",
+    description: "Reduce JPG, PNG and WebP image file sizes with adjustable compression settings and quality controls.",
     icon: "ImageDown",
     href: "/tools/image-compressor/",
     slug: "image-compressor",
@@ -336,7 +336,7 @@ export const toolsData: Tool[] = [
   {
     id: "merge-pdf",
     title: "Merge PDF",
-    description: "Merge PDF files online for free. Combine 2 or more PDFs into one in your browser. No upload, no signup. Reorder pages and download instantly.",
+    description: "Combine multiple PDF files into one organized document without uploading them to a server.",
     icon: "Merge",
     href: "/tools/merge-pdf/",
     slug: "merge-pdf",
@@ -369,8 +369,8 @@ export const toolsData: Tool[] = [
   },
   {
     id: "jpg-to-pdf",
-    title: "JPG to PDF",
-    description: "Convert JPG, PNG, and WebP images into a single clean PDF document.",
+    title: "JPG to PDF Converter",
+    description: "Convert JPG, PNG and WebP images into a single PDF document directly in your browser.",
     icon: "Image",
     href: "/tools/jpg-to-pdf/",
     slug: "jpg-to-pdf",
@@ -703,7 +703,7 @@ export const toolsData: Tool[] = [
   {
     id: "cover-letter-generator",
     title: "AI Cover Letter Generator",
-    description: "Generate tailored cover letters optimized for any job application.",
+    description: "Create personalized cover letters based on your skills, experience and job requirements.",
     icon: "Mail",
     href: "/tools/cover-letter-generator/",
     slug: "cover-letter-generator",
@@ -991,8 +991,8 @@ export const toolsData: Tool[] = [
   },
   {
     id: "ssc-photo-resize",
-    title: "SSC Photo Resize",
-    description: "Resize passport photos to official Staff Selection Commission (SSC) guidelines.",
+    title: "SSC Photo & Signature Resize",
+    description: "Resize photos and signatures using exam-specific dimensions and file-size presets. Check the latest application notification before submitting.",
     icon: "IdCard",
     href: "/tools/ssc-photo-resize/",
     slug: "ssc-photo-resize",
@@ -1043,7 +1043,7 @@ export const toolsData: Tool[] = [
   {
     id: "aadhaar-pdf-compressor",
     title: "Aadhaar PDF Compressor",
-    description: "Compress e-Aadhaar PDF files under the official 300KB upload limit.",
+    description: "Compress e-Aadhaar PDF files for application forms and portals that require files under 300KB.",
     icon: "Shrink",
     href: "/tools/aadhaar-pdf-compressor/",
     slug: "aadhaar-pdf-compressor",
@@ -1128,7 +1128,7 @@ export const toolsData: Tool[] = [
   {
     id: "compress-pdf",
     title: "Compress PDF",
-    description: "Reduce PDF file size locally while preserving document layout and quality.",
+    description: "Reduce PDF file size with adjustable compression settings to balance file size and document quality.",
     icon: "Shrink",
     href: "/tools/compress-pdf/",
     slug: "compress-pdf",
@@ -1264,7 +1264,7 @@ export const toolsData: Tool[] = [
   {
     id: "video-compressor",
     title: "Video Compressor",
-    description: "Compress MP4, MOV, and WebM videos in your browser without quality loss.",
+    description: "Compress MP4, MOV, and WebM videos in your browser with adjustable compression settings.",
     icon: "Video",
     href: "/tools/video-compressor/",
     slug: "video-compressor",

@@ -53,8 +53,8 @@ export const ESSENTIAL_TOOLS: EssentialToolItem[] = [
   },
   {
     id: "image-compressor",
-    title: "Image Compressor",
-    description: "Compress JPG, PNG, and WebP images up to 90% without visible quality loss.",
+    title: "Image Compressor Online",
+    description: "Reduce JPG, PNG, and WebP image file sizes with adjustable compression settings and quality controls.",
     icon: "ImageDown",
     href: "/tools/image-compressor/",
     category: "Image Tools",

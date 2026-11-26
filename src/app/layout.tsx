@@ -180,11 +180,29 @@ export async function generateMetadata(): Promise<Metadata> {
     }
   }
 
-  const finalTitle = toolTitle || pricingTitle || loginTitle || "";
-  const finalDesc = toolDesc || pricingDesc || loginDesc || "";
+  let homeTitle = "";
+  let homeDesc = "";
+  if (cleanPathNoSlash === '/') {
+    if (locale === 'hi') {
+      homeTitle = "मुफ़्त ऑनलाइन पीडीएफ और इमेज टूल्स | ToolWala AI";
+      homeDesc = "अपने ब्राउज़र में सीधे फ़ाइलें एडिट, कन्वर्ट, मर्ज, कंप्रेस और रिसाइज़ करने के लिए मुफ़्त ऑनलाइन टूल का उपयोग करें। कोई फ़ाइल अपलोड करने की आवश्यकता नहीं है।";
+    } else if (locale === 'es') {
+      homeTitle = "Herramientas gratuitas de PDF e imágenes en línea | ToolWala AI";
+      homeDesc = "Use herramientas gratuitas en línea para editar, convertir, unir, comprimir y redimensionar archivos directamente en su navegador. Sin subir archivos.";
+    } else if (locale === 'pt') {
+      homeTitle = "Ferramentas gratuitas de PDF e imagem online | ToolWala AI";
+      homeDesc = "Use ferramentas online gratuitas de PDF, imagem e documentos para editar, converter, juntar, comprimir e redimensionar arquivos no navegador.";
+    } else {
+      homeTitle = "Free Online PDF & Image Tools | ToolWala AI";
+      homeDesc = "Use free online PDF, image and document tools to edit, convert, merge, compress and resize files directly in your browser. No file uploads required.";
+    }
+  }
 
-  const defaultTitle = "Free Online PDF, Photo & Aadhaar Tools | ToolWala";
-  const defaultDesc = "Free, private online tools to merge PDF, convert JPG to PDF, compress Aadhaar to 300KB, resize photos, and convert documents in your browser. No files uploaded, no signups.";
+  const finalTitle = homeTitle || toolTitle || pricingTitle || loginTitle || "";
+  const finalDesc = homeDesc || toolDesc || pricingDesc || loginDesc || "";
+
+  const defaultTitle = "Free Online PDF & Image Tools | ToolWala AI";
+  const defaultDesc = "Use free online PDF, image and document tools to edit, convert, merge, compress and resize files directly in your browser. No file uploads required.";
 
   const titleObj = finalTitle ? { default: finalTitle, template: "%s | ToolWala AI" } : {
     default: defaultTitle,

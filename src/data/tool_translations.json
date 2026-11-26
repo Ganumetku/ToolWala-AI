@@ -4,7 +4,7 @@
     "toolSlug": "passport-photo-maker",
     "locale": "en",
     "title": "Passport Photo Maker",
-    "description": "Create official passport photos for any country with AI background cleaning.",
+    "description": "Create passport-size photos with customizable dimensions, backgrounds and printable layouts.",
     "faq": [
       {
         "question": "Are these photos legally acceptable?",
@@ -23,8 +23,8 @@
         "answer": "Absolutely. You can download the 4x6 sheet and print it on any photo-capable printer, or take it to a kiosk at CVS, Walgreens, or Walmart."
       }
     ],
-    "seoTitle": "AI Passport Photo Maker Online – Free Visa Photo Maker",
-    "seoDescription": "Convert selfies into compliant passport photos. Remove backgrounds, crop to size, and download.",
+    "seoTitle": "Passport Photo Maker – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Create passport-size photos with customizable dimensions, backgrounds and printable layouts.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-18T02:01:06.127Z"
   },
@@ -33,7 +33,7 @@
     "toolSlug": "passport-photo-maker",
     "locale": "hi",
     "title": "पासपोर्ट फोटो मेकर",
-    "description": "AI बैकग्राउंड हटाने के साथ किसी भी देश के लिए पासपोर्ट आकार की फोटो बनाएं।",
+    "description": "कस्टमाइज़ेबल साइज, बैकग्राउंड और प्रिंट लेआउट के साथ पासपोर्ट साइज फोटो तैयार करें।",
     "faq": [
       {
         "question": "क्या ये तस्वीरें कानूनी रूप से स्वीकार्य हैं?",
@@ -52,8 +52,8 @@
         "answer": "बिल्कुल। आप 4x6 शीट डाउनलोड कर सकते हैं और इसे किसी भी फोटो-सक्षम प्रिंटर पर प्रिंट कर सकते हैं, या इसे CVS, Walgreens, या Walmart के कियोस्क पर ले जा सकते हैं।"
       }
     ],
-    "seoTitle": "पासपोर्ट फोटो मेकर - ToolWala AI",
-    "seoDescription": "सेल्फी को नियमों के अनुरूप पासपोर्ट फोटो में बदलें। बैकग्राउंड हटाएं, आकार में क्रॉप करें और डाउनलोड करें।",
+    "seoTitle": "पासपोर्ट फोटो मेकर – Free & 100% Private | ToolWala AI",
+    "seoDescription": "कस्टमाइज़ेबल साइज, बैकग्राउंड और प्रिंट लेआउट के साथ पासपोर्ट साइज फोटो तैयार करें।",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-18T02:13:53.254Z"
   },
@@ -61,8 +61,8 @@
     "id": "trans-2-passport-photo-maker-es",
     "toolSlug": "passport-photo-maker",
     "locale": "es",
-    "title": "Creador de fotografías de pasaporte",
-    "description": "Cree fotografías de pasaporte de tamaño perfecto para cualquier país con la eliminación del fondo de IA.",
+    "title": "Creador de fotos de pasaporte",
+    "description": "Crea fotos tamaño pasaporte con dimensiones personalizadas, fondos limpios y hojas para imprimir.",
     "faq": [
       {
         "question": "¿Son estas fotografías legalmente aceptables?",
@@ -81,8 +81,8 @@
         "answer": "Absolutamente. Puede descargar la hoja de 4x6 e imprimirla en cualquier impresora con capacidad fotográfica o llevarla a un quiosco en CVS, Walgreens o Walmart."
       }
     ],
-    "seoTitle": "Creador de fotos de pasaporte con IA en línea – Creador de fotos de visa gratis",
-    "seoDescription": "Convierta selfies en fotografías de pasaporte compatibles. Elimine fondos, recorte al tamaño y descargue.",
+    "seoTitle": "Creador de fotos de pasaporte – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Crea fotos tamaño pasaporte con dimensiones personalizadas, fondos limpios y hojas para imprimir.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-21T18:58:00.000Z"
   },
@@ -220,7 +220,7 @@
     "toolSlug": "image-compressor",
     "locale": "en",
     "title": "Image Compressor Online",
-    "description": "Compress JPG, PNG, and WebP images up to 90% without quality loss.",
+    "description": "Reduce JPG, PNG and WebP image file sizes with adjustable compression settings and quality controls.",
     "faq": [
       {
         "question": "Will my images look blurry?",
@@ -239,8 +239,8 @@
         "answer": "It's faster (no upload/download delay) and significantly more secure because your images never leave your local machine."
       }
     ],
-    "seoTitle": "Compress Images Online Free – Reduce JPG, PNG & WebP (Custom KB) | ToolWala",
-    "seoDescription": "Compress JPG, PNG, and WebP images to exact KB targets (20KB, 50KB, 100KB) without losing quality. Ideal for job portals, exams, and fast web loading.",
+    "seoTitle": "Image Compressor Online – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Reduce JPG, PNG and WebP image file sizes with adjustable compression settings and quality controls.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-11-11T12:39:35.578Z"
   },
@@ -248,8 +248,8 @@
     "id": "trans-9-image-compressor-hi",
     "toolSlug": "image-compressor",
     "locale": "hi",
-    "title": "इमेज कंप्रेसर ऑनलाइन",
-    "description": "गुणवत्ता खोए बिना JPG, PNG और WebP छवियों का आकार कम करें।",
+    "title": "ऑनलाइन इमेज कंप्रेसर",
+    "description": "एडजस्टेबल कंप्रेशन सेटिंग्स और क्वालिटी नियंत्रण के साथ JPG, PNG और WebP तस्वीरों का साइज कम करें।",
     "faq": [
       {
         "question": "क्या इमेज कंप्रेसर का उपयोग करना मुफ़्त है?",
@@ -268,8 +268,8 @@
         "answer": "आप सीधे अपने ब्राउज़र में JPG, JPEG, PNG, और WebP प्रारूपों को आसानी से संपीड़ित कर सकते हैं।"
       }
     ],
-    "seoTitle": "इमेज कंप्रेसर ऑनलाइन मुफ्त – फ़ोटो का साइज़ कम करें (20KB, 50KB) | ToolWala",
-    "seoDescription": "क्वालिटी खोए बिना JPG, PNG और WebP तस्वीरों का आकार कम करें। सरकारी फॉर्म और एग्ज़ाम के लिए सटीक KB (20KB, 50KB) में फ़ोटो कंप्रेस करें।",
+    "seoTitle": "ऑनलाइन इमेज कंप्रेसर – Free & 100% Private | ToolWala AI",
+    "seoDescription": "एडजस्टेबल कंप्रेशन सेटिंग्स और क्वालिटी नियंत्रण के साथ JPG, PNG और WebP तस्वीरों का साइज कम करें।",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-11-11T12:39:35.579Z"
   },
@@ -277,8 +277,8 @@
     "id": "trans-10-image-compressor-es",
     "toolSlug": "image-compressor",
     "locale": "es",
-    "title": "Compresor de Imágenes Online",
-    "description": "Comprime imágenes hasta un 90% sin perder calidad visible. Rápido y seguro.",
+    "title": "Compresor de imágenes online",
+    "description": "Reduce el tamaño de imágenes JPG, PNG y WebP con controles de calidad y compresión ajustables.",
     "faq": [
       {
         "question": "¿Mis imágenes se verán borrosas?",
@@ -297,8 +297,8 @@
         "answer": "Es más rápido (sin demoras en la carga/descarga) y significativamente más seguro porque sus imágenes nunca salen de su máquina local."
       }
     ],
-    "seoTitle": "Comprimir Imágenes Gratis – Reducir JPG, PNG y WebP al Instante | ToolWala",
-    "seoDescription": "Reduce el tamaño de tus fotos JPG, PNG y WebP sin perder calidad. Elige el tamaño exacto en KB que necesitas. 100% gratis, rápido y privado.",
+    "seoTitle": "Compresor de imágenes online – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Reduce el tamaño de imágenes JPG, PNG y WebP con controles de calidad y compresión ajustables.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-11-11T12:39:35.578Z"
   },
@@ -700,7 +700,7 @@
     "toolSlug": "merge-pdf",
     "locale": "en",
     "title": "Merge PDF",
-    "description": "Combine multiple PDF documents into a single organized PDF file instantly in your browser.",
+    "description": "Combine multiple PDF files into one organized document without uploading them to a server.",
     "faq": [
       {
         "question": "Is this PDF merger completely free to use?",
@@ -719,8 +719,8 @@
         "answer": "No. All page copying and document building happen strictly inside your browser sandbox. Your files never touch external servers or cloud storage."
       }
     ],
-    "seoTitle": "Merge PDF – Combine Files in Your Browser, No Upload",
-    "seoDescription": "Join two or more PDFs in this tab. Reorder pages and download. Files never leave your device.",
+    "seoTitle": "Merge PDF – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Combine multiple PDF files into one organized document without uploading them to a server.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-10-23T00:00:00.000Z"
   },
@@ -728,8 +728,8 @@
     "id": "trans-25-merge-pdf-hi",
     "toolSlug": "merge-pdf",
     "locale": "hi",
-    "title": "PDF मर्ज करें",
-    "description": "एकाधिक PDF दस्तावेजों को एक साथ जोड़ें।",
+    "title": "Merge PDF",
+    "description": "बिना किसी सर्वर पर अपलोड किए कई PDF फाइलों को एक व्यवस्थित दस्तावेज़ में जोड़ें।",
     "faq": [
       {
         "question": "क्या गोपनीय दस्तावेज़ों को यहां मर्ज करना सुरक्षित है?",
@@ -748,8 +748,8 @@
         "answer": "किसी साइनअप, पंजीकरण या ईमेल की आवश्यकता नहीं है। आप अपने दस्तावेज़ों को तुरंत मर्ज कर सकते हैं और बिना किसी शर्त के मुफ्त में परिणाम डाउनलोड कर सकते हैं।"
       }
     ],
-    "seoTitle": "PDF मर्ज करें - ToolWala AI",
-    "seoDescription": "एकाधिक PDF फ़ाइलों को एक दस्तावेज़ में तेज़ी से संयोजित करें। किसी सॉफ़्टवेयर स्थापना की आवश्यकता नहीं है।",
+    "seoTitle": "Merge PDF – Free & 100% Private | ToolWala AI",
+    "seoDescription": "बिना किसी सर्वर पर अपलोड किए कई PDF फाइलों को एक व्यवस्थित दस्तावेज़ में जोड़ें।",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-18T02:14:30.378Z"
   },
@@ -757,8 +757,8 @@
     "id": "trans-26-merge-pdf-es",
     "toolSlug": "merge-pdf",
     "locale": "es",
-    "title": "Fusionar PDF",
-    "description": "Combine varios documentos PDF en un único archivo de calidad profesional de forma rápida y segura.",
+    "title": "Unir PDF",
+    "description": "Combina varios archivos PDF en un documento organizado sin subirlos a ningún servidor.",
     "faq": [
       {
         "question": "¿Es seguro fusionar documentos confidenciales aquí?",
@@ -777,8 +777,8 @@
         "answer": "No es necesario registrarse, registrarse ni enviar un correo electrónico. Puede fusionar sus documentos inmediatamente y descargar el resultado de forma gratuita, sin condiciones."
       }
     ],
-    "seoTitle": "Fusionar PDF en línea - Combinar archivos PDF gratis",
-    "seoDescription": "Combine varios archivos PDF en un solo documento rápidamente. No se requiere instalación de software.",
+    "seoTitle": "Unir PDF – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Combina varios archivos PDF en un documento organizado sin subirlos a ningún servidor.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-19T01:06:50.260Z"
   },
@@ -932,7 +932,7 @@
     "toolSlug": "jpg-to-pdf",
     "locale": "en",
     "title": "JPG to PDF Converter",
-    "description": "Convert JPG, PNG, and WebP images into a single clean PDF document.",
+    "description": "Convert JPG, PNG and WebP images into a single PDF document directly in your browser.",
     "faq": [
       {
         "question": "Is it safe to convert my ID card or private scans here?",
@@ -951,8 +951,8 @@
         "answer": "Yes. Use the arrows on each thumbnail to change page order, and rotate 90° if a scan is sideways."
       }
     ],
-    "seoTitle": "JPG to PDF – No Upload, Files Stay on Your Device",
-    "seoDescription": "Turn JPG, PNG, or WebP images into a PDF in your browser. Nothing is uploaded. No signup, no watermark.",
+    "seoTitle": "JPG to PDF Converter – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Convert JPG, PNG and WebP images into a single PDF document directly in your browser.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-11-11T12:39:35.569Z"
   },
@@ -960,8 +960,8 @@
     "id": "trans-33-jpg-to-pdf-hi",
     "toolSlug": "jpg-to-pdf",
     "locale": "hi",
-    "title": "JPG से PDF कन्वर्टर",
-    "description": "JPG, PNG और अन्य छवियों को एक PDF दस्तावेज़ में बदलें।",
+    "title": "JPG to PDF कनवर्टर",
+    "description": "अपने ब्राउज़र में JPG, PNG और WebP तस्वीरों को एक साफ़ PDF दस्तावेज़ में बदलें।",
     "faq": [
       {
         "question": "क्या यहां अपना आईडी कार्ड या निजी स्कैन परिवर्तित करना सुरक्षित है?",
@@ -980,8 +980,8 @@
         "answer": "हाँ। पूर्वावलोकन कार्यक्षेत्र फ़ाइलों को इंटरैक्टिव कार्ड के रूप में प्रदर्शित करता है। आप कार्ड खींच सकते हैं, पृष्ठ क्रम बदलने के लिए ऊपर/नीचे तीरों का उपयोग कर सकते हैं, और ओरिएंटेशन त्रुटियों को ठीक करने के लिए छवियों को एक बार में 90 डिग्री घुमा सकते हैं।"
       }
     ],
-    "seoTitle": "JPG से PDF कन्वर्टर ऑनलाइन मुफ्त – बिना साइनअप, 100% सुरक्षित | ToolWala",
-    "seoDescription": "अपनी JPG, PNG और WebP तस्वीरों को तुरंत उच्च-गुणवत्ता वाली PDF में बदलें। 100% मुफ्त, बिना किसी फ़ाइल सीमा और पूरी प्राइवेसी के साथ।",
+    "seoTitle": "JPG to PDF कनवर्टर – Free & 100% Private | ToolWala AI",
+    "seoDescription": "अपने ब्राउज़र में JPG, PNG और WebP तस्वीरों को एक साफ़ PDF दस्तावेज़ में बदलें।",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-11-11T12:39:35.578Z"
   },
@@ -989,8 +989,8 @@
     "id": "trans-34-jpg-to-pdf-es",
     "toolSlug": "jpg-to-pdf",
     "locale": "es",
-    "title": "Convertir JPG a PDF",
-    "description": "Convierta imágenes JPG, JPEG y PNG en un único documento PDF de forma rápida y segura.",
+    "title": "Convertidor de JPG a PDF",
+    "description": "Convierte imágenes JPG, PNG y WebP en un único documento PDF directamente en tu navegador.",
     "faq": [
       {
         "question": "¿Es seguro convertir mi documento de identidad o escaneos privados aquí?",
@@ -1009,8 +1009,8 @@
         "answer": "Sí. El espacio de trabajo de vista previa muestra archivos como tarjetas interactivas. Puede arrastrar tarjetas, usar las flechas arriba/abajo para cambiar el orden de las páginas y rotar las imágenes 90 grados a la vez para corregir errores de orientación."
       }
     ],
-    "seoTitle": "Convertir JPG a PDF Gratis – Rápido, Seguro y Sin Registro | ToolWala",
-    "seoDescription": "Convierte imágenes JPG, PNG o WebP a PDF en segundos. 100% gratis, sin límites de tamaño y con total privacidad: tus fotos nunca salen de tu dispositivo.",
+    "seoTitle": "Convertidor de JPG a PDF – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Convierte imágenes JPG, PNG y WebP en un único documento PDF directamente en tu navegador.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-11-11T12:39:35.578Z"
   },
@@ -2633,7 +2633,7 @@
     "toolSlug": "cover-letter-generator",
     "locale": "en",
     "title": "AI Cover Letter Generator",
-    "description": "Generate tailored cover letters optimized for any job application.",
+    "description": "Create personalized cover letters based on your skills, experience and job requirements.",
     "faq": [
       {
         "question": "Will it look like a template?",
@@ -2652,8 +2652,8 @@
         "answer": "Yes. Your resume and job details are processed in real-time to generate the letter and are not stored on our servers."
       }
     ],
-    "seoTitle": "Free Cover Letter Generator – No Signup | ToolWala",
-    "seoDescription": "Write a cover letter from your details and the job post. Free, no account, ready to copy or download.",
+    "seoTitle": "AI Cover Letter Generator – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Create personalized cover letters based on your skills, experience and job requirements.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-18T02:01:06.127Z"
   },
@@ -2662,7 +2662,7 @@
     "toolSlug": "cover-letter-generator",
     "locale": "hi",
     "title": "AI कवर लेटर जनरेटर",
-    "description": "नौकरी आवेदन के लिए अनुकूलित कवर लेटर तैयार करें।",
+    "description": "अपने कौशल, अनुभव और नौकरी की ज़रूरतों के आधार पर पर्सनलाइज़्ड कवर लेटर तैयार करें।",
     "faq": [
       {
         "question": "क्या यह एक टेम्पलेट की तरह दिखेगा?",
@@ -2681,8 +2681,8 @@
         "answer": "हाँ। आपके बायोडाटा और नौकरी के विवरण को पत्र तैयार करने के लिए वास्तविक समय में संसाधित किया जाता है और हमारे सर्वर पर संग्रहीत नहीं किया जाता है।"
       }
     ],
-    "seoTitle": "AI कवर लेटर जनरेटर - ToolWala AI",
-    "seoDescription": "किसी भी नौकरी आवेदन के लिए अनुकूलित, अनुकूलित पेशेवर कवर लेटर तैयार करें।",
+    "seoTitle": "AI कवर लेटर जनरेटर – Free & 100% Private | ToolWala AI",
+    "seoDescription": "अपने कौशल, अनुभव और नौकरी की ज़रूरतों के आधार पर पर्सनलाइज़्ड कवर लेटर तैयार करें।",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-18T02:16:58.193Z"
   },
@@ -2691,7 +2691,7 @@
     "toolSlug": "cover-letter-generator",
     "locale": "es",
     "title": "Generador de cartas de presentación con IA",
-    "description": "Da una poderosa primera impresión. Genere cartas de presentación personalizadas y convincentes que destaquen sus habilidades y capten la atención de los gerentes de contratación.",
+    "description": "Crea cartas de presentación personalizadas según tus habilidades, experiencia y requisitos del puesto.",
     "faq": [
       {
         "question": "¿Parecerá una plantilla?",
@@ -2710,8 +2710,8 @@
         "answer": "Sí. Su currículum y los detalles del trabajo se procesan en tiempo real para generar la carta y no se almacenan en nuestros servidores."
       }
     ],
-    "seoTitle": "Generador de cartas de presentación con IA: herramienta gratuita en línea",
-    "seoDescription": "Genere cartas de presentación profesionales y personalizadas optimizadas para cualquier solicitud de empleo.",
+    "seoTitle": "Generador de cartas de presentación con IA – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Crea cartas de presentación personalizadas según tus habilidades, experiencia y requisitos del puesto.",
     "createdAt": "2026-06-18T02:01:06.127Z",
     "updatedAt": "2026-06-19T01:06:50.261Z"
   },
@@ -4564,10 +4564,10 @@
     "id": "trans-passport-photo-maker-pt",
     "toolSlug": "passport-photo-maker",
     "locale": "pt",
-    "title": "Criador de fotos para passaporte",
-    "description": "Crie fotos de passaporte de tamanho perfeito para qualquer país com remoção de fundo por IA.",
-    "seoTitle": "AI Passport Photo Maker Online – Criador de fotos Visa grátis",
-    "seoDescription": "Converta selfies em fotos de passaporte compatíveis. Remova fundos, corte no tamanho certo e faça o download.",
+    "title": "Criador de foto tipo passe",
+    "description": "Crie fotos tipo passe com dimensões personalizáveis, fundo ajustável e folhas prontas para impressão.",
+    "seoTitle": "Criador de foto tipo passe – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Crie fotos tipo passe com dimensões personalizáveis, fundo ajustável e folhas prontas para impressão.",
     "faq": [
       {
         "question": "Essas fotos são legalmente aceitáveis?",
@@ -4618,10 +4618,10 @@
     "id": "trans-image-compressor-pt",
     "toolSlug": "image-compressor",
     "locale": "pt",
-    "title": "Compressor de Imagens Online",
-    "description": "Comprima imagens em até 90% sem perder a qualidade visível. Rápido e seguro.",
-    "seoTitle": "Comprimir Imagens Grátis – Reduzir Tamanho de JPG, PNG e WebP | ToolWala",
-    "seoDescription": "Reduza o tamanho das suas imagens JPG, PNG e WebP sem perder qualidade visual. Defina o tamanho exato em KB. 100% gratuito, rápido e seguro.",
+    "title": "Compressor de imagens online",
+    "description": "Reduza o tamanho de imagens JPG, PNG e WebP com configurações de compressão e controles de qualidade.",
+    "seoTitle": "Compressor de imagens online – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Reduza o tamanho de imagens JPG, PNG e WebP com configurações de compressão e controles de qualidade.",
     "faq": [
       {
         "question": "Minhas imagens ficarão borradas?",
@@ -4738,10 +4738,10 @@
     "id": "trans-merge-pdf-pt",
     "toolSlug": "merge-pdf",
     "locale": "pt",
-    "title": "Mesclar PDF",
-    "description": "Combine vários documentos PDF em um único arquivo de nível profissional com rapidez e segurança.",
-    "seoTitle": "Mesclar PDF Online – Combine arquivos PDF gratuitamente",
-    "seoDescription": "Combine vários arquivos PDF em um documento rapidamente. Não é necessária instalação de software.",
+    "title": "Juntar PDF",
+    "description": "Combine vários arquivos PDF em um documento organizado sem enviar para nenhum servidor.",
+    "seoTitle": "Juntar PDF – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Combine vários arquivos PDF em um documento organizado sem enviar para nenhum servidor.",
     "faq": [
       {
         "question": "É seguro mesclar documentos confidenciais aqui?",
@@ -4796,10 +4796,10 @@
     "id": "trans-jpg-to-pdf-pt",
     "toolSlug": "jpg-to-pdf",
     "locale": "pt",
-    "title": "Converter JPG para PDF",
-    "description": "Converta imagens JPG, JPEG e PNG em um único documento PDF com rapidez e segurança.",
-    "seoTitle": "Converter JPG para PDF Grátis – Rápido, Seguro e Sem Cadastro | ToolWala",
-    "seoDescription": "Junte fotos JPG, PNG ou WebP em um PDF de alta qualidade em segundos. 100% gratuito, sem limites e com total privacidade no seu próprio navegador.",
+    "title": "Conversor de JPG para PDF",
+    "description": "Converta imagens JPG, PNG e WebP em um único documento PDF diretamente no seu navegador.",
+    "seoTitle": "Conversor de JPG para PDF – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Converta imagens JPG, PNG e WebP em um único documento PDF diretamente no seu navegador.",
     "faq": [
       {
         "question": "É seguro converter meu cartão de identificação ou digitalizações privadas aqui?",
@@ -5214,10 +5214,10 @@
     "id": "trans-cover-letter-generator-pt",
     "toolSlug": "cover-letter-generator",
     "locale": "pt",
-    "title": "Gerador de cartas de apresentação de IA",
-    "description": "Cause uma primeira impressão poderosa. Gere cartas de apresentação personalizadas e atraentes que destacam suas habilidades e chamam a atenção dos gerentes de contratação.",
-    "seoTitle": "Gerador de carta de apresentação AI – ferramenta online gratuita",
-    "seoDescription": "Gere cartas de apresentação profissionais e personalizadas, otimizadas para qualquer candidatura de emprego.",
+    "title": "Gerador de carta de apresentação com IA",
+    "description": "Crie cartas de apresentação personalizadas com base em suas habilidades, experiência e requisitos da vaga.",
+    "seoTitle": "Gerador de carta de apresentação com IA – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Crie cartas de apresentação personalizadas com base em suas habilidades, experiência e requisitos da vaga.",
     "faq": [
       {
         "question": "Será parecido com um modelo?",
@@ -9153,8 +9153,8 @@
     "id": "wi4d8g5",
     "toolSlug": "compress-pdf",
     "locale": "hi",
-    "title": "PDF कंप्रेस करें",
-    "description": "गुणवत्ता बनाए रखते हुए PDF का आकार कम करें।",
+    "title": "Compress PDF",
+    "description": "फाइल साइज और क्वालिटी के संतुलन के लिए एडजस्टेबल सेटिंग्स के साथ PDF का साइज कम करें।",
     "faq": [
       {
         "question": "क्या कंप्रेस पीडीएफ सुरक्षित है?",
@@ -9169,8 +9169,8 @@
         "answer": "चूँकि कम्प्रेशन आपके ब्राउज़र टैब मेमोरी के अंदर चलता है, हम इष्टतम सिस्टम स्थिरता के लिए 100 एमबी से कम की फ़ाइलों का उपयोग करने की सलाह देते हैं।"
       }
     ],
-    "seoTitle": "PDF कंप्रेस करें - ToolWala AI",
-    "seoDescription": "दृश्य गुणवत्ता खोए बिना अपने पीडीएफ दस्तावेज़ों का फ़ाइल आकार कम करें। हमारा स्थानीय ऑप्टिमाइज़र पूरी तरह से आपके ब्राउज़र सैंडबॉक्स में चलता है, जिससे आपके दस्तावेज़ 100% सुरक्षित रहते हैं।",
+    "seoTitle": "Compress PDF – Free & 100% Private | ToolWala AI",
+    "seoDescription": "फाइल साइज और क्वालिटी के संतुलन के लिए एडजस्टेबल सेटिंग्स के साथ PDF का साइज कम करें।",
     "createdAt": "2026-06-21T08:05:07.217Z",
     "updatedAt": "2026-06-21T08:05:07.217Z"
   },
@@ -9265,8 +9265,8 @@
     "id": "jd9106m",
     "toolSlug": "aadhaar-pdf-compressor",
     "locale": "es",
-    "title": "Compresor de PDF Aadhaar en línea",
-    "description": "Comprima archivos PDF de e-Aadhaar de forma segura bajo el límite de carga oficial de 300 KB de UIDAI. Optimice sus documentos de verificación de identidad localmente en la zona de pruebas de su navegador.",
+    "title": "Compresor de PDF Aadhaar",
+    "description": "Comprime archivos PDF de e-Aadhaar para formularios y portales que requieren archivos de menos de 300KB.",
     "faq": [
       {
         "question": "¿Cuál es la contraseña estándar para los archivos PDF de e-Aadhaar?",
@@ -9281,8 +9281,8 @@
         "answer": "Sí. Todo el procesamiento se ejecuta 100% localmente en su navegador. Sus documentos nunca tocan nuestros servidores ni ninguna base de datos en la nube."
       }
     ],
-    "seoTitle": "Compresor de PDF Aadhaar en línea",
-    "seoDescription": "Comprima archivos PDF de e-Aadhaar de forma segura bajo el límite de carga oficial de 300 KB de UIDAI. Optimice sus documentos de verificación de identidad localmente en la zona de pruebas de su navegador.",
+    "seoTitle": "Compresor de PDF Aadhaar – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Comprime archivos PDF de e-Aadhaar para formularios y portales que requieren archivos de menos de 300KB.",
     "createdAt": "2026-06-21T08:05:07.615Z",
     "updatedAt": "2026-06-21T08:05:07.615Z"
   },
@@ -9440,8 +9440,8 @@
     "id": "htu9cof",
     "toolSlug": "aadhaar-pdf-compressor",
     "locale": "hi",
-    "title": "आधार PDF कंप्रेसर",
-    "description": "आधार कार्ड PDF फाइल का आकार 200KB से कम करें।",
+    "title": "Aadhaar PDF कंप्रेसर",
+    "description": "उन सरकारी और ऑनलाइन पोर्टल्स के लिए ई-आधार PDF कंप्रेस करें जहाँ 300KB से कम फाइल की ज़रूरत होती है।",
     "faq": [
       {
         "question": "ई-आधार पीडीएफ के लिए मानक पासवर्ड क्या है?",
@@ -9456,8 +9456,8 @@
         "answer": "हाँ। सभी प्रोसेसिंग आपके ब्राउज़र में 100% स्थानीय रूप से निष्पादित होती है। आपके दस्तावेज़ कभी भी हमारे सर्वर या किसी क्लाउड डेटाबेस को नहीं छूते।"
       }
     ],
-    "seoTitle": "आधार PDF कंप्रेसर - ToolWala AI",
-    "seoDescription": "आधिकारिक UIDAI 300KB अपलोड सीमा के तहत ई-आधार पीडीएफ फाइलों को सुरक्षित रूप से संपीड़ित करें। अपने ब्राउज़र सैंडबॉक्स में अपने पहचान सत्यापन दस्तावेज़ों को स्थानीय रूप से अनुकूलित करें।",
+    "seoTitle": "Aadhaar PDF कंप्रेसर – Free & 100% Private | ToolWala AI",
+    "seoDescription": "उन सरकारी और ऑनलाइन पोर्टल्स के लिए ई-आधार PDF कंप्रेस करें जहाँ 300KB से कम फाइल की ज़रूरत होती है।",
     "createdAt": "2026-06-21T08:05:08.081Z",
     "updatedAt": "2026-06-21T08:05:08.081Z"
   },
@@ -9466,7 +9466,7 @@
     "toolSlug": "compress-pdf",
     "locale": "es",
     "title": "Comprimir PDF",
-    "description": "Reduzca el tamaño de archivo de sus documentos PDF sin perder calidad visual. Nuestro optimizador local se ejecuta completamente en la zona de pruebas de su navegador, manteniendo sus documentos 100% seguros.",
+    "description": "Reduce el tamaño de tus archivos PDF con ajustes configurables para equilibrar peso y calidad.",
     "faq": [
       {
         "question": "¿Es seguro comprimir PDF?",
@@ -9481,8 +9481,8 @@
         "answer": "Dado que la compresión se ejecuta dentro de la memoria de la pestaña de su navegador, recomendamos utilizar archivos de menos de 100 MB para una estabilidad óptima del sistema."
       }
     ],
-    "seoTitle": "Comprimir PDF",
-    "seoDescription": "Reduzca el tamaño de archivo de sus documentos PDF sin perder calidad visual. Nuestro optimizador local se ejecuta completamente en la zona de pruebas de su navegador, manteniendo sus documentos 100% seguros.",
+    "seoTitle": "Comprimir PDF – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Reduce el tamaño de tus archivos PDF con ajustes configurables para equilibrar peso y calidad.",
     "createdAt": "2026-06-21T08:05:08.109Z",
     "updatedAt": "2026-06-21T08:05:08.109Z"
   },
@@ -9565,8 +9565,8 @@
     "id": "x8x9yog",
     "toolSlug": "ssc-photo-resize",
     "locale": "es",
-    "title": "Cambiar el tamaño de la foto SSC en línea",
-    "description": "Cambie el tamaño, recorte y comprima fotografías de pasaporte según las pautas oficiales de la Comisión de Selección de Personal (SSC). Genere fácilmente fotografías de 3,5 x 4,5 cm de menos de 50 KB con los formatos de fecha correctos.",
+    "title": "Redimensionar foto y firma para SSC",
+    "description": "Ajusta fotos y firmas con medidas y límites de tamaño por examen. Revisa la convocatoria oficial antes de enviar.",
     "faq": [
       {
         "question": "¿Cuál es el tamaño de la foto para las aplicaciones SSC?",
@@ -9581,8 +9581,8 @@
         "answer": "En avisos recientes del SSC, imprimir la fecha de la fotografía ya no es universalmente obligatorio a menos que se especifique explícitamente en la notificación de reclutamiento activo. Consulte las pautas de notificación actuales."
       }
     ],
-    "seoTitle": "Cambiar el tamaño de la foto SSC en línea",
-    "seoDescription": "Cambie el tamaño, recorte y comprima fotografías de pasaporte según las pautas oficiales de la Comisión de Selección de Personal (SSC). Genere fácilmente fotografías de 3,5 x 4,5 cm de menos de 50 KB con los formatos de fecha correctos.",
+    "seoTitle": "Redimensionar foto y firma para SSC – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Ajusta fotos y firmas con medidas y límites de tamaño por examen. Revisa la convocatoria oficial antes de enviar.",
     "createdAt": "2026-06-21T08:05:08.559Z",
     "updatedAt": "2026-06-21T08:05:10.240Z"
   },
@@ -9665,8 +9665,8 @@
     "id": "j7icruc",
     "toolSlug": "ssc-photo-resize",
     "locale": "hi",
-    "title": "SSC फोटो रिसाइज़र",
-    "description": "कर्मचारी चयन आयोग (SSC) फॉर्म के लिए फोटो का आकार समायोजित करें।",
+    "title": "SSC फोटो और सिग्नेचर रिसाइज़",
+    "description": "परीक्षा-विशिष्ट आयामों और फाइल साइज प्रीसेट के अनुसार फोटो और सिग्नेचर रिसाइज़ करें। सबमिट करने से पहले आधिकारिक नोटिफिकेशन अवश्य जांचें।",
     "faq": [
       {
         "question": "SSC आवेदनों के लिए फोटो का आकार क्या है?",
@@ -9681,8 +9681,8 @@
         "answer": "हाल के एसएससी नोटिस में, फोटो की तारीख प्रिंट करना अब सार्वभौमिक रूप से अनिवार्य नहीं है जब तक कि सक्रिय भर्ती अधिसूचना में स्पष्ट रूप से निर्दिष्ट न किया गया हो। कृपया वर्तमान अधिसूचना दिशानिर्देश जांचें।"
       }
     ],
-    "seoTitle": "SSC फोटो रिसाइज़र - ToolWala AI",
-    "seoDescription": "कर्मचारी चयन आयोग (एसएससी) के आधिकारिक दिशानिर्देशों के अनुसार पासपोर्ट फ़ोटो का आकार बदलें, काटें और संपीड़ित करें। आसानी से सही दिनांक प्रारूप के साथ 50 केबी के अंतर्गत 3.5 x 4.5 सेमी फ़ोटो बनाएं।",
+    "seoTitle": "SSC फोटो और सिग्नेचर रिसाइज़ – Free & 100% Private | ToolWala AI",
+    "seoDescription": "परीक्षा-विशिष्ट आयामों और फाइल साइज प्रीसेट के अनुसार फोटो और सिग्नेचर रिसाइज़ करें। सबमिट करने से पहले आधिकारिक नोटिफिकेशन अवश्य जांचें।",
     "createdAt": "2026-06-21T08:05:09.830Z",
     "updatedAt": "2026-06-21T08:05:09.830Z"
   },
@@ -9773,8 +9773,8 @@
     "id": "f07frgk",
     "toolSlug": "aadhaar-pdf-compressor",
     "locale": "pt",
-    "title": "Compressor de PDF Aadhaar on-line",
-    "description": "Compacte arquivos PDF do e-Aadhaar sob o limite oficial de upload de 300 KB do UIDAI com segurança. Otimize seus documentos de verificação de identidade localmente na sandbox do seu navegador.",
+    "title": "Compressor de PDF Aadhaar",
+    "description": "Comprima arquivos PDF do e-Aadhaar para formulários e portais que exigem arquivos com menos de 300KB.",
     "faq": [
       {
         "question": "Qual é a senha padrão para PDFs e-Aadhaar?",
@@ -9789,8 +9789,8 @@
         "answer": "Sim. Todo o processamento é executado 100% localmente no seu navegador. Seus documentos nunca tocam em nossos servidores ou em qualquer banco de dados em nuvem."
       }
     ],
-    "seoTitle": "Compressor de PDF Aadhaar on-line",
-    "seoDescription": "Compacte arquivos PDF do e-Aadhaar sob o limite oficial de upload de 300 KB do UIDAI com segurança. Otimize seus documentos de verificação de identidade localmente na sandbox do seu navegador.",
+    "seoTitle": "Compressor de PDF Aadhaar – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Comprima arquivos PDF do e-Aadhaar para formulários e portais que exigem arquivos com menos de 300KB.",
     "createdAt": "2026-06-21T08:05:12.484Z",
     "updatedAt": "2026-06-21T08:05:12.484Z"
   },
@@ -9848,8 +9848,8 @@
     "id": "cfh66ce",
     "toolSlug": "ssc-photo-resize",
     "locale": "pt",
-    "title": "Redimensionamento de fotos SSC on-line",
-    "description": "Redimensione, corte e comprima fotos de passaporte de acordo com as diretrizes oficiais da Comissão de Seleção de Pessoal (SSC). Gere facilmente fotos de 3,5 x 4,5 cm com menos de 50 KB com formatos de data corretos.",
+    "title": "Redimensionar foto e assinatura para SSC",
+    "description": "Redimensione fotos e assinaturas com medidas e limites específicos de exames. Confira o edital oficial antes de enviar.",
     "faq": [
       {
         "question": "Qual é o tamanho da foto para aplicações SSC?",
@@ -9864,8 +9864,8 @@
         "answer": "Em avisos recentes do SSC, a impressão da data da fotografia já não é universalmente obrigatória, a menos que seja explicitamente especificada na notificação de recrutamento ativa. Verifique as diretrizes de notificação atuais."
       }
     ],
-    "seoTitle": "Redimensionamento de fotos SSC on-line",
-    "seoDescription": "Redimensione, corte e comprima fotos de passaporte de acordo com as diretrizes oficiais da Comissão de Seleção de Pessoal (SSC). Gere facilmente fotos de 3,5 x 4,5 cm com menos de 50 KB com formatos de data corretos.",
+    "seoTitle": "Redimensionar foto e assinatura para SSC – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Redimensione fotos e assinaturas com medidas e limites específicos de exames. Confira o edital oficial antes de enviar.",
     "createdAt": "2026-06-21T08:05:13.496Z",
     "updatedAt": "2026-06-21T08:05:14.981Z"
   },
@@ -9873,8 +9873,8 @@
     "id": "0icbutz",
     "toolSlug": "compress-pdf",
     "locale": "pt",
-    "title": "Compactar PDF",
-    "description": "Reduza o tamanho dos seus documentos PDF sem perder a qualidade visual. Nosso otimizador local é executado inteiramente na sandbox do seu navegador, mantendo seus documentos 100% seguros.",
+    "title": "Comprimir PDF",
+    "description": "Reduza o tamanho de arquivos PDF com ajustes práticos para equilibrar qualidade e tamanho.",
     "faq": [
       {
         "question": "Compactar PDF é seguro?",
@@ -9889,8 +9889,8 @@
         "answer": "Como a compactação é executada na memória da guia do navegador, recomendamos o uso de arquivos com menos de 100 MB para obter a estabilidade ideal do sistema."
       }
     ],
-    "seoTitle": "Compactar PDF",
-    "seoDescription": "Reduza o tamanho dos seus documentos PDF sem perder a qualidade visual. Nosso otimizador local é executado inteiramente na sandbox do seu navegador, mantendo seus documentos 100% seguros.",
+    "seoTitle": "Comprimir PDF – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Reduza o tamanho de arquivos PDF com ajustes práticos para equilibrar qualidade e tamanho.",
     "createdAt": "2026-06-21T08:05:13.539Z",
     "updatedAt": "2026-06-21T08:05:18.951Z"
   },
@@ -11734,7 +11734,7 @@
     "toolSlug": "compress-pdf",
     "locale": "en",
     "title": "Compress PDF",
-    "description": "Reduce PDF file size quickly in your browser while preserving text clarity and document formatting.",
+    "description": "Reduce PDF file size with adjustable compression settings to balance file size and document quality.",
     "faq": [
       {
         "question": "Is this tool secure and private?",
@@ -11757,8 +11757,8 @@
         "answer": "No. All compression operations run locally inside your browser tab."
       }
     ],
-    "seoTitle": "Compress PDF in Your Browser – No Upload",
-    "seoDescription": "Shrink a PDF on this page. Processing stays on your device — we never see the file."
+    "seoTitle": "Compress PDF – Free & 100% Private | ToolWala AI",
+    "seoDescription": "Reduce PDF file size with adjustable compression settings to balance file size and document quality."
   },
   {
     "id": "trans-rotate-pdf-en",

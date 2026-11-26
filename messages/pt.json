@@ -38,7 +38,7 @@
   },
   "footer": {
     "copyright": "© 2026 ToolWala AI. Todos os direitos reservados.",
-    "tagline": "Utilitários de IA gratuitos que rodam 100% localmente no seu navegador. Sem registro, sem latência, sem uploads para o servidor. Experimente o processamento que prioriza a privacidade.",
+    "tagline": "Ferramentas gratuitas de PDF, imagem e utilitários diários. Converta, comprima, edite e redimensione arquivos com processamento simples no navegador.",
     "tools": "Ferramentas",
     "company": "Empresa",
     "legal": "Jurídico",
@@ -57,15 +57,17 @@
     "made_with": "Feito com",
     "for_community": "para a comunidade de IA",
     "subscribe_success": "Inscrito com sucesso! Bem-vindo à comunidade ToolWala ⚡",
-    "subscribe_error": "Insira um endereço de e-mail válido."
+    "subscribe_error": "Insira um endereço de e-mail válido.",
+    "trust_badge": "Ferramentas seguras no navegador",
+    "built_for": "Criado para tarefas digitais do dia a dia."
   },
   "home": {
-    "badge": "🔒 Processamento de IA local 100% do lado do cliente",
-    "hero_title_1": "Turbine seu dia a dia",
+    "badge": "NO SEU NAVEGADOR • SEM ENVIAR ARQUIVOS • MÁXIMA PRIVACIDADE",
+    "hero_title_1": "Ferramentas gratuitas de PDF e imagem online",
     "hero_title_2": "Fluxo de trabalho com IA",
-    "hero_subtitle": "Utilitários de IA gratuitos que são executados 100% localmente no seu navegador. Sem registro, sem latência, sem uploads de servidor. Seus dados permanecem inteiramente no seu dispositivo.",
-    "search_placeholder": "Pesquise mais de 25 utilitários off-line...",
-    "search_btn": "Utilitários de pesquisa",
+    "hero_subtitle": "Edite PDFs, converta arquivos, comprima imagens e acesse ferramentas úteis diretamente no seu navegador. Rápido, gratuito e privado — sem necessidade de cadastro.",
+    "search_placeholder": "Buscar ferramentas de PDF, imagem e mais...",
+    "search_btn": "BUSCAR FERRAMENTAS",
     "suggestions_label": "Sugestões:",
     "browse_categories": "Navegar por categoria",
     "browse_categories_sub": "Explore diretórios locais contendo utilitários de navegador compatíveis.",
@@ -78,12 +80,12 @@
     "edge_subtitle_1": "Ferramentas profissionais,",
     "edge_subtitle_2": "Complexidade zero.",
     "edge_desc": "Nós preenchemos a lacuna entre modelos complexos de IA e utilidade cotidiana. Sem interfaces confusas, sem armadilhas de assinatura – apenas uma IA poderosa que funciona para você.",
-    "feat1_title": "Processamento de borda",
-    "feat1_desc": "A maioria das ferramentas é executada diretamente no seu navegador, garantindo resultados extremamente rápidos e sem atrasos no servidor.",
-    "feat2_title": "Dados criptografados",
-    "feat2_desc": "Seus arquivos nunca saem do seu dispositivo. Usamos criptografia ponta a ponta para qualquer processamento baseado em nuvem.",
-    "feat3_title": "Modelos selecionados",
-    "feat3_desc": "Selecionamos e ajustamos os melhores modelos de IA especificamente para a finalidade exclusiva de cada ferramenta.",
+    "feat1_title": "Processamento no navegador",
+    "feat1_desc": "Os arquivos são processados diretamente no seu navegador. Os documentos nunca saem do seu dispositivo, garantindo velocidade máxima e privacidade total.",
+    "feat2_title": "Privacidade por padrão",
+    "feat2_desc": "Não armazenamos, visualizamos nem registramos seus arquivos. Como o processamento ocorre localmente, seus documentos ficam totalmente sob seu controle.",
+    "feat3_title": "Sem necessidade de cadastro",
+    "feat3_desc": "Acesse todas as ferramentas instantaneamente sem criar conta ou fornecer dados pessoais. Abra a ferramenta, processe o arquivo e baixe.",
     "recent_visited": "Utilitários visitados recentemente",
     "no_tools_found": "Nenhuma ferramenta encontrada",
     "no_tools_sub": "Tente verificar as consultas de tags ou limpar os filtros para visualizar todos os diretórios.",
@@ -123,7 +125,10 @@
     "search_placeholder_filter": "Filtro ao vivo por palavra-chave ou tag...",
     "recently_added": "Adicionado recentemente",
     "popular": "Populares",
-    "trending": "Tendências"
+    "trending": "Tendências",
+    "why_use_title": "Por que escolher o ToolWala?",
+    "feat4_title": "Gratuito e fácil de usar",
+    "feat4_desc": "Aproveite acesso completo a todas as ferramentas sem assinaturas, limites de uso ou marcas d'água. Feito para ser simples, rápido e acessível."
   },
   "categories": {
     "All": "Todos",
@@ -179,7 +184,7 @@
         "q1": "O removedor de fundo AI é executado localmente?",
         "a1": "Sim. Ele aproveita modelos WebAssembly de borda de @imgly/background-removal dentro do seu navegador. Nenhum upload de servidor é necessário.",
         "q2": "Quais formatos o Compressor de imagem suporta?",
-        "a2": "Suporta os formatos JPG, JPEG, PNG e WebP, compactando imagens em até 90% sem perder a clareza visual."
+        "a2": "Suporta os formatos JPG, JPEG, PNG e WebP, comprimindo imagens com configurações ajustáveis para equilibrar o tamanho do arquivo e a qualidade visual."
       },
       "seoTitle": "Ferramentas de imagem e editores de fotos on-line | ToolWala AI",
       "seoDescription": "Padronize fotos de passaporte, recorte cartões Aadhaar, remova fundos de imagens e compacte fotos com mecanismos de navegador locais."
@@ -333,7 +338,7 @@
     },
     "merge-pdf": {
       "title": "Juntar PDF",
-      "description": "Combine vários documentos PDF em um único arquivo de forma rápida e segura."
+      "description": "Combine vários arquivos PDF em um documento organizado sem enviar para nenhum servidor."
     },
     "split-pdf": {
       "title": "Dividir PDF",
@@ -341,7 +346,35 @@
     },
     "compress-pdf": {
       "title": "Comprimir PDF",
-      "description": "Reduza o tamanho do arquivo PDF mantendo a qualidade visual."
+      "description": "Reduza o tamanho de arquivos PDF com ajustes práticos para equilibrar qualidade e tamanho."
+    },
+    "jpg-to-pdf": {
+      "title": "Conversor de JPG para PDF",
+      "description": "Converta imagens JPG, PNG e WebP em um único documento PDF diretamente no seu navegador."
+    },
+    "aadhaar-pdf-compressor": {
+      "title": "Compressor de PDF Aadhaar",
+      "description": "Comprima arquivos PDF do e-Aadhaar para formulários e portais que exigem arquivos com menos de 300KB."
+    },
+    "passport-photo-maker": {
+      "title": "Criador de foto tipo passe",
+      "description": "Crie fotos tipo passe com dimensões personalizáveis, fundo ajustável e folhas prontas para impressão."
+    },
+    "ssc-photo-resize": {
+      "title": "Redimensionar foto e assinatura para SSC",
+      "description": "Redimensione fotos e assinaturas com medidas e limites específicos de exames. Confira o edital oficial antes de enviar."
+    },
+    "cover-letter-generator": {
+      "title": "Gerador de carta de apresentação com IA",
+      "description": "Crie cartas de apresentação personalizadas com base em suas habilidades, experiência e requisitos da vaga."
+    },
+    "image-compressor": {
+      "title": "Compressor de imagens online",
+      "description": "Reduza o tamanho de imagens JPG, PNG e WebP com configurações de compressão e controles de qualidade."
+    },
+    "video-compressor": {
+      "title": "Compressor de vídeo",
+      "description": "Comprima vídeos MP4, MOV e WebM no seu navegador com configurações de compressão ajustáveis."
     }
   },
   "form": {
@@ -453,16 +486,18 @@
     "support_center": "CENTRO DE SUPORTE",
     "title": "Perguntas frequentes",
     "subtitle": "Respostas a perguntas comuns sobre processamento local, segurança de arquivos e especificações.",
-    "q1": "Como ToolWala AI processa arquivos sem carregá-los?",
-    "a1": "ToolWala AI usa tecnologias modernas nativas do navegador, como WebAssembly (WASM), WebGL e operações de tela JavaScript. Quando você seleciona uma imagem ou PDF, o arquivo é lido diretamente do seu disco local para a memória sandbox privada do seu navegador. A computação (como corte, compactação ou remoção de plano de fundo) é executada nos threads locais da CPU/GPU, o que significa que seus arquivos nunca saem do computador.",
-    "q2": "Posso usar essas ferramentas offline?",
-    "a2": "Sim! Depois de carregar uma página de ferramenta (como o Background Remover ou Aadhaar Resizer) enquanto estiver on-line, os ativos e modelos serão armazenados em cache pelo seu navegador. Você pode se desconectar da Internet e continuar usando os principais recursos de processamento off-line, pois nenhuma comunicação com o servidor é necessária.",
-    "q3": "O uso de ToolWala AI é totalmente gratuito?",
-    "a3": "ToolWala AI está atualmente em versão beta gratuita. Todas as ferramentas, geradores e compressores estão disponíveis a custo zero, sem registro, limites ou armadilhas de assinatura.",
-    "q4": "Meus documentos estão seguros e em conformidade com as leis de dados?",
-    "a4": "Como processamos todos os arquivos localmente na memória do seu navegador e não os carregamos para servidores externos em nuvem, somos inerentemente compatíveis com o GDPR e seguimos os mais altos padrões de segurança de dados. Seus documentos privados (currículos, assinaturas, fotos Aadhaar, faturas) são totalmente confidenciais.",
-    "q5": "Como padronizar minhas fotos tipo passaporte/Aadhaar de acordo com os tamanhos desejados?",
-    "a5": "Basta enviar sua foto para o Resizer. Nosso algoritmo localiza o rosto, alinha-o às posições de corte de identificação padrão e permite selecionar modelos oficiais. Ao fazer download, você pode optar por compactar a saída dinamicamente nos limites de 20 KB, 50 KB ou 100 KB."
+    "q1": "Meus arquivos são enviados para algum servidor?",
+    "a1": "A maioria das ferramentas de PDF e imagem processa arquivos diretamente no seu navegador usando tecnologias web modernas. Seus arquivos nunca saem do seu dispositivo. Em ferramentas de texto com IA (como o Gerador de Cartas de Apresentação), os textos são transmitidos com segurança para gerar a resposta, mas nenhum documento fica salvo permanentemente.",
+    "q2": "O ToolWala é gratuito?",
+    "a2": "Sim. Todas as ferramentas de PDF, imagem e utilitários são gratuitas. Não há cobranças de assinatura, taxas ocultas ou limites diários de uso.",
+    "q3": "Preciso criar uma conta para usar as ferramentas?",
+    "a3": "Não. Você pode usar qualquer ferramenta do ToolWala sem criar conta ou fornecer informações pessoais. Basta abrir a ferramenta, selecionar seu arquivo e baixar o resultado.",
+    "q4": "Quais formatos de arquivo são suportados?",
+    "a4": "O ToolWala suporta os principais formatos como PDF, JPG, PNG e WebP. Algumas ferramentas também realizam conversões de HEIC, Word (DOCX), Excel (XLSX) e PowerPoint (PPTX).",
+    "q5": "Qual o tamanho máximo de arquivo suportado?",
+    "a5": "Como o processamento ocorre no próprio navegador, o limite depende da memória RAM disponível no seu dispositivo. A maioria dos navegadores modernos processa com facilidade arquivos de até 50–100MB.",
+    "q6": "Como o processamento no navegador protege minha privacidade?",
+    "a6": "Os conversores convencionais exigem o envio de arquivos para servidores em nuvem, onde podem ser salvos ou monitorados. O processamento no navegador executa tudo localmente, garantindo que documentos confidenciais, documentos de identidade e fotos privadas nunca trafeguem pela rede."
   },
   "testimonials": {
     "badge": "AVALIAÇÕES DE USUÁRIOS",

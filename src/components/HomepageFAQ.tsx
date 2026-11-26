@@ -15,29 +15,50 @@ export default function HomepageFAQ() {
 
   const faqs = [
     {
-      question: t('faq.q1', 'How does ToolWala AI process files without uploading them?'),
-      answer: t('faq.a1', 'ToolWala AI uses modern browser-native technologies like WebAssembly (WASM), WebGL, and JavaScript canvas operations. When you select an image or a PDF, the file is read directly from your local disk into your browser\'s private sandbox memory. The computation (like cropping, compressing, or background removal) runs on your local CPU/GPU threads, meaning your files never leave your computer.')
+      question: t('faq.q1', 'Are my files uploaded to any server?'),
+      answer: t('faq.a1', 'Most PDF and image tools process files directly inside your web browser using modern web technologies. Your files do not leave your device during processing. For select text-based AI utilities (such as the AI Cover Letter Generator), text inputs are sent securely to generate responses, but files and documents are not permanently stored.')
     },
     {
-      question: t('faq.q2', 'Can I use these tools offline?'),
-      answer: t('faq.a2', 'Yes! Once you have loaded a tool page (like the Background Remover or Aadhaar Resizer) while online, the assets and models are cached by your browser. You can disconnect from the internet and continue using the core processing features offline, as no server communication is required.')
+      question: t('faq.q2', 'Is ToolWala free to use?'),
+      answer: t('faq.a2', 'Yes. All PDF, image, and utility tools on ToolWala are free to use. There are no subscription fees, hidden paywalls, or daily usage limits.')
     },
     {
-      question: t('faq.q3', 'Is ToolWala AI completely free to use?'),
-      answer: t('faq.a3', 'ToolWala AI is currently in free beta. All tools, generators, and compressors are available at zero cost, without registration, limits, or subscription traps.')
+      question: t('faq.q3', 'Do I need to create an account to use the tools?'),
+      answer: t('faq.a3', 'No. You can access and use every tool on ToolWala without creating an account or providing personal information. Simply open the tool, select your file, and download the result.')
     },
     {
-      question: t('faq.q4', 'Are my documents secure and compliant with data laws?'),
-      answer: t('faq.a4', 'Because we process all files locally in your browser memory and do not upload them to external cloud servers, we are inherently GDPR compliant and follow the highest standards of data safety. Your private documents (resumes, signatures, Aadhaar photos, invoices) are completely confidential.')
+      question: t('faq.q4', 'What file formats are supported?'),
+      answer: t('faq.a4', 'ToolWala supports common document and image formats including PDF, JPG, PNG, and WebP. Certain tools also support HEIC, Word (DOCX), Excel (XLSX), and PowerPoint (PPTX) conversions.')
     },
     {
-      question: t('faq.q5', 'How do I standardise my passport/Aadhaar photos under target sizes?'),
-      answer: t('faq.a5', 'Simply upload your photo into the Resizer. Our algorithm locates the face, aligns it to standard ID crop positions, and lets you select official templates. When downloading, you can choose to compress the output dynamically under 20KB, 50KB, or 100KB limits.')
+      question: t('faq.q5', 'What is the maximum file size I can process?'),
+      answer: t('faq.a5', 'Because processing occurs directly within your browser, file-size limits depend primarily on your device’s available memory (RAM). Most modern browsers easily handle documents and images up to 50–100MB. For larger files, processing speed may vary depending on device performance.')
+    },
+    {
+      question: t('faq.q6', 'How does browser-based processing protect my privacy?'),
+      answer: t('faq.a6', 'Traditional online converters require you to upload your files to remote cloud servers, where they may be stored, logged, or temporarily cached. Browser-based processing performs calculations locally on your computer or phone, meaning sensitive documents such as ID cards, financial records, and private photos never transfer over the network.')
     }
   ];
 
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer
+      }
+    }))
+  };
+
   return (
     <section className="py-24 relative overflow-hidden bg-gray-50/50 dark:bg-black/20 border-b border-gray-200 dark:border-white/5 transition-colors duration-250">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-4xl">
         
         {/* Header Section */}

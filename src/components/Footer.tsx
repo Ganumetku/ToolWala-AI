@@ -184,7 +184,7 @@ export default function Footer() {
             </Link>
             
             <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-medium text-sm">
-              {t('footer.tagline', 'Free utility tools that prioritize user privacy. Files are processed in your browser and are not uploaded.')}
+              {t('footer.tagline', 'Free online PDF, image and everyday utility tools. Convert, compress, edit and resize files with simple, browser-based processing.')}
             </p>
 
             <div className="space-y-3">
@@ -308,7 +308,7 @@ export default function Footer() {
 
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                <span>100% Client-Side & Operational</span>
+                <span>{t('footer.trust_badge', 'Privacy-Focused Browser Tools')}</span>
               </div>
             </div>
           </div>
@@ -351,8 +351,8 @@ export default function Footer() {
             </div>
           </div>
           
-          <p className="flex items-center gap-2 text-xs text-gray-500 font-bold">
-            {t('footer.made_with', 'Made with')} <Heart className="w-3.5 h-3.5 fill-red-500 text-red-500 animate-pulse" /> {t('footer.for_community', 'for the AI community')}
+          <p className="text-xs text-gray-500 font-bold">
+            {t('footer.built_for', 'Built for everyday digital tasks.')}
           </p>
         </div>
       </div>

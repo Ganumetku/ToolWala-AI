@@ -380,7 +380,7 @@ export default function ToolAutocompleteSearch({
     );
   };
 
-  const defaultPlaceholder = t('tools.search_placeholder_filter', 'Search PDF, Image, Resume & AI tools...');
+  const defaultPlaceholder = t('home.search_placeholder', 'Search PDF, image and other tools...');
 
   return (
     <div ref={containerRef} className={`relative w-full ${isOpen ? 'z-50' : 'z-20'} ${className}`}>
@@ -430,7 +430,7 @@ export default function ToolAutocompleteSearch({
             onClick={() => handleSearchSubmit()}
             className="hidden sm:flex items-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold px-6 py-3 rounded-xl text-xs uppercase tracking-widest shadow-[0_2px_8px_-1px_rgba(37,99,235,0.35)] hover:shadow-[0_4px_14px_-2px_rgba(37,99,235,0.45)] hover:brightness-105 active:scale-[0.98] transition-all duration-200 shrink-0 cursor-pointer ml-2"
           >
-            {t('home.search_btn', 'Search')}
+            {t('home.search_btn', 'SEARCH TOOLS')}
           </button>
         </div>
       </div>

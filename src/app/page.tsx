@@ -55,15 +55,15 @@ export default function Home() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 max-w-7xl">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-50/90 dark:bg-slate-900/60 border border-slate-200/90 dark:border-white/10 text-slate-600 dark:text-slate-300 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest mb-3.5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] select-none">
             <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-500 ring-2 ring-emerald-500/20" />
-            <span>{t('home.badge', '🔒 100% In-Browser • Zero Uploads • Free & Private')}</span>
+            <span>{t('home.badge', 'BROWSER-BASED • NO FILE UPLOADS • PRIVACY FIRST')}</span>
           </div>
 
           <h1 className="font-bold text-3xl sm:text-5xl md:text-6xl tracking-tight sm:tracking-tighter text-[#33333b] dark:text-white leading-[1.12] mb-3 max-w-4xl mx-auto">
-            {t('home.hero_title_1', 'Free Online PDF, Photo & Aadhaar Tools')}
+            {t('home.hero_title_1', 'Free Online PDF & Image Tools')}
           </h1>
 
           <p className="mx-auto max-w-2xl text-xs sm:text-sm font-normal text-[#707078] dark:text-gray-400 leading-relaxed mb-5">
-            {t('home.hero_subtitle', 'Merge PDFs, convert JPG to PDF, compress Aadhaar to 300KB, and make passport photos in this browser tab. Close the tab and the file is gone from our side — because it never arrived.')}
+            {t('home.hero_subtitle', 'Edit PDFs, convert files, compress images and access everyday utilities directly in your browser. Fast, free and private — no sign-up required.')}
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-6">
@@ -84,6 +84,7 @@ export default function Home() {
               value={searchQuery}
               onChange={setSearchQuery}
               onSubmitSearch={goToDirectory}
+              placeholder={t('home.search_placeholder', 'Search PDF, image and other tools...')}
             />
           </div>
 
@@ -118,7 +119,7 @@ export default function Home() {
               {t('home.edge_title', 'The ToolWala Edge')}
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-              {t('home.why_use_title', 'What you get that most converters skip')}
+              {t('home.why_use_title', 'Why Choose ToolWala?')}
             </h2>
           </div>
 
@@ -127,36 +128,36 @@ export default function Home() {
               <div className="w-11 h-11 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400">
                 <Cpu className="w-5 h-5" />
               </div>
-              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat1_title', 'Files stay on your device')}</h4>
+              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat1_title', 'Browser-Based Processing')}</h4>
               <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold">
-                {t('home.feat1_desc', 'Your PDF or photo is read in this tab. Close it and the file is gone. We never get a copy.')}
+                {t('home.feat1_desc', 'Files are processed directly in your web browser. Documents never leave your device, ensuring maximum speed and complete privacy.')}
               </p>
             </div>
             <div className="premium-card p-6 flex flex-col items-start gap-3 border border-gray-200 dark:border-white/5 bg-white dark:bg-white/[0.02]">
               <div className="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
                 <ShieldCheck className="w-5 h-5" />
               </div>
-              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat2_title', 'Nothing to leak')}</h4>
+              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat2_title', 'Privacy by Design')}</h4>
               <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold">
-                {t('home.feat2_desc', 'No filename logs. No training on your docs. There is nothing on our side that could leak.')}
+                {t('home.feat2_desc', 'We do not store, view, or log your files. Because processing happens locally, your sensitive documents remain entirely under your control.')}
               </p>
             </div>
             <div className="premium-card p-6 flex flex-col items-start gap-3 border border-gray-200 dark:border-white/5 bg-white dark:bg-white/[0.02]">
               <div className="w-11 h-11 rounded-xl bg-purple-50 dark:bg-purple-500/10 border border-purple-200 dark:border-white/5 flex items-center justify-center text-purple-600 dark:text-purple-400">
                 <UserX className="w-5 h-5" />
               </div>
-              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat3_title', 'No account wall')}</h4>
+              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat3_title', 'No Sign-Up Required')}</h4>
               <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold">
-                {t('home.feat3_desc', 'Open a tool, drop a file, download. That is the whole flow — no signup to get your own PDF back.')}
+                {t('home.feat3_desc', 'Access all tools instantly without creating an account or providing personal details. Open a tool, process your file, and download.')}
               </p>
             </div>
             <div className="premium-card p-6 flex flex-col items-start gap-3 border border-gray-200 dark:border-white/5 bg-white dark:bg-white/[0.02]">
               <div className="w-11 h-11 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400">
                 <Gift className="w-5 h-5" />
               </div>
-              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.trust_banner.free', 'Free while we are in beta')}</h4>
+              <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat4_title', 'Free & Easy to Use')}</h4>
               <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold">
-                {t('home.feat4_desc', 'No daily cap, no watermark, no “upgrade to download”. Use it, then close the tab.')}
+                {t('home.feat4_desc', 'Enjoy full access to every tool without subscription fees, usage limits, or watermarks. Built to be simple, fast, and accessible to everyone.')}
               </p>
             </div>
           </div>

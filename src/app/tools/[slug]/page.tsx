@@ -82,7 +82,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
   ];
 
   const graph: any[] = [
-    buildEnrichedToolJsonLd(tool, toolUrl, categoryName),
+    buildEnrichedToolJsonLd(tool, toolUrl, categoryName, locale),
     buildWebPageSchema(tool.title, tool.description, toolUrl, locale),
     buildBreadcrumbJsonLd(breadcrumbItems)
   ];

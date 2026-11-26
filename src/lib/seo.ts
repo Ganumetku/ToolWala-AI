@@ -52,8 +52,8 @@ const SEO_COPY_OVERRIDES: Record<string, { title: string; description: string }>
     description: 'Compress JPG, PNG, and WebP images up to 80% without losing visual clarity. Fast, browser-native compression with zero uploads.',
   },
   'ssc-photo-resize': {
-    title: 'SSC Photo & Signature Resize – Presets & Guidelines | ToolWala',
-    description: 'Format photo and signature for SSC examinations with 4×2 cm, 6×2 cm, and custom presets between 10KB and 20KB in your browser.',
+    title: 'SSC Photo & Signature Resize – Verified Presets | ToolWala',
+    description: 'Format photo and signature for SSC CGL 2026, GD, Steno, and CHSL/MTS with verified 6×2 cm, 4×2 cm, and custom presets strictly between 10KB and 20KB.',
   },
   'passport-photo-maker': {
     title: 'Passport Photo Maker Online – 35×45mm & Custom Sizes | ToolWala',
@@ -71,8 +71,8 @@ const HI_SEO_COPY_OVERRIDES: Record<string, { title: string; description: string
     description: 'e-Aadhaar को ब्राउज़र में 300KB से कम करें। पासवर्ड आपके डिवाइस पर रहता है। UIDAI और KYC पोर्टल के लिए।',
   },
   'ssc-photo-resize': {
-    title: 'SSC फोटो रिसाइज़ – 35×45mm, 50KB, बिना अपलोड',
-    description: 'SSC साइज़ (3.5 × 4.5 सेमी) और 50KB के अंदर फोटो काटें। फ़ाइल सर्वर पर नहीं जाती।',
+    title: 'SSC फोटो व सिग्नेचर रिसाइज़ – ऑफिशियल साइज़ व प्रीसेट | ToolWala',
+    description: 'SSC CGL 2026, GD, Steno और CHSL/MTS के लिए फोटो (35×45mm) और सिग्नेचर (10–20KB) काटें। ब्राउज़र में 100% सुरक्षित।',
   },
   'passport-photo-maker': {
     title: 'पासपोर्ट फोटो मेकर – 35×45mm, बिना अपलोड',
@@ -373,6 +373,20 @@ export async function buildArticleJsonLd(blog: BlogPost) {
 
   const localeLang = locale === 'hi' ? 'hi-IN' : locale === 'en' ? 'en-US' : `${locale}-${locale.toUpperCase()}`;
 
+  const isEditorialOrg = blog.author.name === 'ToolWala Editorial' || blog.author.name.toLowerCase().includes('toolwala');
+  const authorNode = isEditorialOrg
+    ? {
+        '@type': 'Organization',
+        '@id': `${SITE_URL}/#organization`,
+        name: 'ToolWala',
+        url: `${SITE_URL}/`,
+      }
+    : {
+        '@type': 'Person',
+        name: blog.author.name,
+        ...(blog.author.avatar ? { image: blog.author.avatar } : {}),
+      };
+
   return {
     '@type': 'Article',
     '@id': `${url}#article`,
@@ -382,18 +396,15 @@ export async function buildArticleJsonLd(blog: BlogPost) {
     url,
     datePublished: blog.publishedAt || blog.createdAt,
     dateModified: blog.updatedAt,
-    author: {
-      '@type': 'Person',
-      name: blog.author.name,
-      ...(blog.author.avatar ? { image: blog.author.avatar } : {}),
-    },
+    author: authorNode,
     publisher: {
       '@type': 'Organization',
-      name: SITE_NAME,
-      url: SITE_URL,
+      '@id': `${SITE_URL}/#organization`,
+      name: 'ToolWala',
+      url: `${SITE_URL}/`,
       logo: {
         '@type': 'ImageObject',
-        url: `${SITE_URL}/og-image.png`,
+        url: `${SITE_URL}/icon-512.png`,
       },
     },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
@@ -433,23 +444,28 @@ export function buildWebsiteJsonLd() {
       {
         '@type': 'Organization',
         '@id': `${SITE_URL}/#organization`,
-        name: SITE_NAME,
-        url: SITE_URL,
+        name: 'ToolWala',
+        url: `${SITE_URL}/`,
+        logo: {
+          '@type': 'ImageObject',
+          '@id': `${SITE_URL}/#logo`,
+          url: `${SITE_URL}/icon-512.png`,
+          contentUrl: `${SITE_URL}/icon-512.png`,
+          caption: 'ToolWala Logo',
+          inLanguage: 'en-US',
+          width: 512,
+          height: 512,
+        },
+        description: 'Free, browser-native PDF, image, resume, and document utility tools running 100% locally with zero server uploads.',
       },
       {
         '@type': 'WebSite',
         '@id': `${SITE_URL}/#website`,
-        url: SITE_URL,
-        name: SITE_NAME,
+        url: `${SITE_URL}/`,
+        name: 'ToolWala',
+        description: 'Free PDF, image, and utility tools that run directly in your browser. Files stay on your device with zero cloud storage.',
         publisher: { '@id': `${SITE_URL}/#organization` },
-        potentialAction: {
-          '@type': 'SearchAction',
-          target: {
-            '@type': 'EntryPoint',
-            urlTemplate: `${SITE_URL}/?search={search_term_string}`,
-          },
-          'query-input': 'required name=search_term_string',
-        },
+        inLanguage: 'en-US',
       },
     ],
   };
@@ -637,41 +653,48 @@ export function buildWebPageSchema(title: string, description: string, url: stri
       '@type': 'WebSite',
       '@id': 'https://www.toolwala.co/#website',
       'url': 'https://www.toolwala.co/',
-      'name': 'ToolWala AI'
+      'name': 'ToolWala'
     }
   };
 }
 
-export function buildEnrichedToolJsonLd(tool: any, url: string, categoryName: string) {
+export function buildEnrichedToolJsonLd(tool: any, url: string, categoryName: string, locale: string = 'en') {
   const applicationCategory =
     categoryName === 'Image Tools' ? 'MultimediaApplication' :
-      categoryName === 'PDF Tools' ? 'DesignApplication' :
-        'UtilitiesApplication';
+      categoryName === 'PDF Tools' ? 'UtilitiesApplication' :
+        categoryName === 'Business Tools' || categoryName === 'Resume & Career' ? 'BusinessApplication' :
+          categoryName === 'Developer Tools' ? 'DeveloperApplication' :
+            'UtilitiesApplication';
+
+  const inLanguage = locale === 'hi' ? 'hi-IN' : locale === 'en' ? 'en-US' : `${locale}-${locale.toUpperCase()}`;
 
   return {
-    '@type': 'SoftwareApplication',
-    '@id': `${url}#software`,
+    '@type': ['WebApplication', 'SoftwareApplication'],
+    '@id': `${url}#webapp`,
     name: tool.title,
     description: tool.description,
     url: url,
     applicationCategory: applicationCategory,
-    operatingSystem: 'Web Browser',
-    browserRequirements: 'Requires HTML5 compatible web browser',
+    operatingSystem: 'Any (Web Browser)',
+    browserRequirements: 'Requires HTML5 and JavaScript compatible modern web browser',
+    inLanguage: inLanguage,
     featureList: [
-      '100% Client-Side Processing',
-      'No Signups required',
-      'GDPR & CCPA Private (Local Only)'
+      '100% Client-Side Processing in Browser RAM',
+      'Zero Server Uploads for Supported Tools',
+      'No Account or Registration Required',
+      'Free Access'
     ],
     offers: {
       '@type': 'Offer',
       price: '0',
       priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
     },
     provider: {
       '@type': 'Organization',
       '@id': 'https://www.toolwala.co/#organization',
-      name: SITE_NAME,
-      url: SITE_URL,
+      name: 'ToolWala',
+      url: 'https://www.toolwala.co/',
     },
   };
 }

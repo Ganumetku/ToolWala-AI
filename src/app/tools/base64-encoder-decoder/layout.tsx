@@ -81,7 +81,7 @@ export default async function Base64UrlEncoderDecoderLayout({
   };
 
   const graph: any[] = [
-    buildEnrichedToolJsonLd(mockTool, toolUrl, 'Developer Tools'),
+    buildEnrichedToolJsonLd(mockTool, toolUrl, 'Developer Tools', locale),
     buildWebPageSchema(mockTool.title, mockTool.description, toolUrl, locale),
     buildBreadcrumbJsonLd(breadcrumbItems)
   ];

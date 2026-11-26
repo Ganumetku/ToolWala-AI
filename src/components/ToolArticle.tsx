@@ -239,7 +239,11 @@ export default function ToolArticle({
     const toolLabel = currentTool 
       ? t(`tools.${currentTool.slug}.title`, currentTool.title) 
       : (toolId ? toolId.split('-').map((s: string) => s.charAt(0).toUpperCase() + s.slice(1)).join(' ') : 'Tool');
-    items.push({ label: toolLabel });
+    const toolSlug = currentTool ? currentTool.slug : toolId;
+    const currentToolHref = toolSlug 
+      ? (locale === 'en' ? `/tools/${toolSlug}/` : `/${locale}/tools/${toolSlug}/`)
+      : undefined;
+    items.push({ label: toolLabel, href: currentToolHref });
     return items;
   }, [t, currentTool, toolId, parentCategory, locale]);
 

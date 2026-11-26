@@ -62,14 +62,14 @@ export default function PrivacyPolicyClient() {
           <div className="space-y-12">
             <DetailedSection 
               icon={<Globe className="w-6 h-6" />}
-              title={t('privacy.analytics_title', 'Analytics and Tracking')}
-              content={t('privacy.analytics_desc', 'We use privacy-centric analytics (like Google Analytics with IP anonymization) to understand site traffic and improve our tools. We do not track individual user behavior or share data with advertising networks.')}
+              title="Local Document Processing vs. Telemetry"
+              content="Files processed by supported client-side tools (such as PDF editors, image compressors, and signature croppers) remain strictly inside your device memory (RAM) and are never transmitted to or stored on ToolWala servers. Separately, the website collects operational telemetry: Google Analytics 4 records page paths, referral sources, and high-level device information, while our internal custom telemetry uses pseudonymous session tokens to track tool execution counts, session duration, and country codes derived from Vercel edge headers (x-vercel-ip-country). Telemetry records are stored in our Supabase database solely to maintain system stability and detect broken features."
             />
             
             <DetailedSection 
               icon={<Cookie className="w-6 h-6" />}
-              title={t('privacy.cookies_title', 'Cookie Usage')}
-              content={t('privacy.cookies_desc', 'We use essential cookies to remember your tool preferences (like dark mode or language settings). These cookies are functional only and do not contain personal identifiers.')}
+              title="Cookies, Local Storage & Session State"
+              content="We use browser localStorage for functional settings (such as dark/light mode preferences, selected UI language, and pseudonymous visitor tokens) and sessionStorage for session deduplication. Authentication cookies are strictly restricted to administrative portal access; regular public visitors do not receive tracking cookies or cross-site advertising identifiers."
             />
 
             <DetailedSection 

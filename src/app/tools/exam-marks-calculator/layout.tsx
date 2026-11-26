@@ -61,7 +61,7 @@ export default async function ExamMarksCalculatorLayout({
   };
 
   const graph: any[] = [
-    buildEnrichedToolJsonLd(mockTool, toolUrl, 'Calculator Tools'),
+    buildEnrichedToolJsonLd(mockTool, toolUrl, 'Calculator Tools', locale),
     buildWebPageSchema(mockTool.title, mockTool.description, toolUrl, locale),
     buildBreadcrumbJsonLd(breadcrumbItems)
   ];

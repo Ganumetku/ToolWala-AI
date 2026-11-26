@@ -10,8 +10,60 @@ import ToolHero from "@/components/tools/ToolHero";
 
 const SSC_PRESETS: CropperPreset[] = [
   {
+    id: "ssc-cgl-gd-2026-signature",
+    label: "SSC CGL 2026 & GD 2026 Official Signature (6.0×2.0 cm / 10–20 KB)",
+    width: 709,
+    height: 236, // 3:1 aspect ratio (6.0 cm × 2.0 cm at 300 DPI)
+    targetKb: 20,
+    allowBgRemoval: false,
+    bgColors: [
+      { name: "White", hex: "#ffffff" },
+    ],
+    description: "Verified in official SSC CGL 2026 and GD 2026 notifications: ~6.0 × 2.0 cm, JPEG format, 10.0 KB to 20.0 KB.",
+    specs: "6.0 × 2.0 cm (approx 3:1 aspect ratio). File size: strictly 10.0 KB – 20.0 KB. Format: JPEG.",
+  },
+  {
+    id: "ssc-steno-2026-signature",
+    label: "SSC Stenographer 2026 Official Signature (6.0×2.0 cm / 300 DPI / 10–20 KB)",
+    width: 709,
+    height: 236, // 3:1 aspect ratio (~300 DPI)
+    targetKb: 20,
+    allowBgRemoval: false,
+    bgColors: [
+      { name: "White", hex: "#ffffff" },
+    ],
+    description: "Verified in SSC Stenographer 2026 notice: ~6.0 × 2.0 cm at ~300 DPI resolution, JPEG format, 10.0 KB to 20.0 KB.",
+    specs: "6.0 × 2.0 cm (approx 3:1 aspect ratio, ~300 DPI). File size: strictly 10.0 KB – 20.0 KB. Format: JPEG.",
+  },
+  {
+    id: "ssc-chsl-mts-signature",
+    label: "SSC CHSL & MTS Signature Preset (6.0×2.0 cm / 10–20 KB — Confirm Notice)",
+    width: 709,
+    height: 236, // 3:1 aspect ratio
+    targetKb: 20,
+    allowBgRemoval: false,
+    bgColors: [
+      { name: "White", hex: "#ffffff" },
+    ],
+    description: "Commonly specified as ~6.0 × 2.0 cm, 10–20 KB in recent CHSL and MTS cycles. Verify specific notification before submission.",
+    specs: "6.0 × 2.0 cm (3:1 aspect ratio). File size: strictly 10.0 KB – 20.0 KB. Format: JPEG.",
+  },
+  {
+    id: "ssc-signature-4x2",
+    label: "Legacy Annexure Signature (4.0×2.0 cm / 10–20 KB — Non-Universal)",
+    width: 472,
+    height: 236, // 2:1 aspect ratio (4.0 cm × 2.0 cm at 300 DPI)
+    targetKb: 20,
+    allowBgRemoval: false,
+    bgColors: [
+      { name: "White", hex: "#ffffff" },
+    ],
+    description: "Referenced in select legacy application sub-forms or older regional annexures. Not universally applicable.",
+    specs: "4.0 × 2.0 cm (2:1 aspect ratio). File size: strictly 10.0 KB – 20.0 KB. Format: JPEG.",
+  },
+  {
     id: "ssc-photo",
-    label: "SSC Exam Photo (3.5×4.5 cm / 20–50 KB)",
+    label: "SSC Exam Photo (3.5×4.5 cm / 20–50 KB — Offline / Special Submissions Only)",
     width: 354,
     height: 472, // ~7:9 aspect ratio
     targetKb: 50,
@@ -20,38 +72,12 @@ const SSC_PRESETS: CropperPreset[] = [
       { name: "White", hex: "#ffffff" },
       { name: "Light Blue", hex: "#eff6ff" },
     ],
-    description: "Standard 3.5×4.5 cm photo for examinations permitting uploaded portrait photos.",
-    specs: "3.5 × 4.5 cm (approx 354×472 px). Target size: 20KB – 50KB.",
-  },
-  {
-    id: "ssc-signature-standard",
-    label: "SSC Signature (Standard 4.0×2.0 cm / 10–20 KB)",
-    width: 280,
-    height: 140, // 2:1 aspect ratio
-    targetKb: 20,
-    allowBgRemoval: false,
-    bgColors: [
-      { name: "White", hex: "#ffffff" },
-    ],
-    description: "Common specification for SSC notices specifying 4.0 cm × 2.0 cm.",
-    specs: "4.0 × 2.0 cm. File size: strictly 10.0 KB – 20.0 KB. JPEG format.",
-  },
-  {
-    id: "ssc-signature-wide",
-    label: "SSC Signature (Wide 6.0×2.0 cm / 10–20 KB)",
-    width: 360,
-    height: 120, // 3:1 aspect ratio
-    targetKb: 20,
-    allowBgRemoval: false,
-    bgColors: [
-      { name: "White", hex: "#ffffff" },
-    ],
-    description: "Specified in notifications such as SSC Stenographer Grade C & D / LDC.",
-    specs: "6.0 × 2.0 cm (approx 300 DPI). File size: strictly 10.0 KB – 20.0 KB. JPEG format.",
+    description: "For offline forms or state boards. Note: Major exams on ssc.gov.in (CGL/GD/CHSL) require live webcam capture.",
+    specs: "3.5 × 4.5 cm (approx 354×472 px). Target size: 20KB – 50KB. Format: JPEG.",
   },
   {
     id: "ssc-signature-custom",
-    label: "Custom Exam Signature (Adjustable / 10–20 KB)",
+    label: "Custom Exam Signature (Adjustable Dimensions / 10–20 KB)",
     width: 300,
     height: 100,
     targetKb: 20,
@@ -60,7 +86,7 @@ const SSC_PRESETS: CropperPreset[] = [
       { name: "White", hex: "#ffffff" },
     ],
     description: "Customizable signature crop for state recruitment boards and notifications with unique dimension rules.",
-    specs: "Adjustable dimensions. Target size: 10KB – 20KB. JPEG format.",
+    specs: "Adjustable dimensions. Target size: 10KB – 20KB. Format: JPEG.",
   }
 ];
 

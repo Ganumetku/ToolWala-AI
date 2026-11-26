@@ -17,6 +17,7 @@ export interface ToolSchemaProps {
   ratingCount?: number;
   faqs?: FAQItem[];
   disableHowTo?: boolean;
+  locale?: string;
 }
 
 /**
@@ -57,22 +58,32 @@ export default function ToolSchema({
   ratingCount,
   faqs = [],
   disableHowTo = false,
+  locale = 'en',
 }: ToolSchemaProps) {
   const canonicalUrl = url.endsWith('/') ? url : `${url}/`;
   const appCategory = mapToApplicationCategory(category);
   const toolSlug = slug || url.replace(/^https?:\/\/[^\/]+\/tools\//, '').replace(/\/$/, '');
+  const inLanguage = locale === 'hi' ? 'hi-IN' : locale === 'en' ? 'en-US' : `${locale}-${locale.toUpperCase()}`;
 
-  // 1. Construct Google Rich Results compliant SoftwareApplication schema
+  // 1. Construct Google Rich Results compliant WebApplication/SoftwareApplication schema
   const softwareAppSchema: Record<string, any> = {
     '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
+    '@type': ['WebApplication', 'SoftwareApplication'],
+    '@id': `${canonicalUrl}#webapp`,
     name: name,
     description: description,
     url: canonicalUrl,
     image: imageUrl,
     applicationCategory: appCategory,
-    operatingSystem: 'Web Browser',
-    browserRequirements: 'Requires JavaScript. Requires HTML5 web browser.',
+    operatingSystem: 'Any (Web Browser)',
+    browserRequirements: 'Requires HTML5 and JavaScript compatible modern web browser',
+    inLanguage: inLanguage,
+    featureList: [
+      '100% Client-Side Processing in Browser RAM',
+      'Zero Server Uploads for Supported Tools',
+      'No Account or Registration Required',
+      'Free Access'
+    ],
     softwareVersion: '1.0.0',
     offers: {
       '@type': 'Offer',
@@ -82,8 +93,9 @@ export default function ToolSchema({
     },
     publisher: {
       '@type': 'Organization',
-      name: 'ToolWala AI',
-      url: 'https://www.toolwala.co',
+      '@id': 'https://www.toolwala.co/#organization',
+      name: 'ToolWala',
+      url: 'https://www.toolwala.co/',
       logo: {
         '@type': 'ImageObject',
         url: 'https://www.toolwala.co/icon-512.png',

@@ -22,7 +22,12 @@ export default function ToolsLayout({ children }: ToolsLayoutProps) {
   // Render schema and footer only for individual tool routes
   // (Skip root /tools directory and category-like /tools/pdf-tools suite page)
   const isToolPage = slug && slug !== 'pdf-tools';
-  const hasCustomLayoutSchema = slug === 'exam-marks-calculator' || slug === 'base64-encoder-decoder';
+  const hasCustomLayoutSchema =
+    slug === 'exam-marks-calculator' ||
+    slug === 'base64-encoder-decoder' ||
+    slug === 'pdf-summarizer' ||
+    slug === 'pdf-to-powerpoint' ||
+    slug === 'powerpoint-to-pdf';
   const shouldRenderAutoSchema = isToolPage && !hasCustomLayoutSchema;
 
   return (

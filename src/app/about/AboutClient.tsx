@@ -61,6 +61,30 @@ export default function AboutClient() {
                   {t('about.speed_desc', 'Our platform is optimized for performance. By leveraging WebAssembly and Edge AI, we deliver results in milliseconds, not minutes.')}
                 </p>
               </div>
+
+              <div className="bg-white dark:bg-slate-900/60 backdrop-blur-xl p-8 rounded-[2.5rem] border border-gray-200 dark:border-white/10 relative group shadow-sm">
+                <div className="flex items-center gap-6 mb-4">
+                  <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 shrink-0">
+                    <Heart className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-black text-gray-900 dark:text-white tracking-tight uppercase">Technical Capabilities & Limitations</h3>
+                </div>
+                <p className="text-gray-600 dark:text-gray-300 font-medium leading-relaxed text-sm sm:text-base">
+                  Because file processing runs entirely in your local browser memory (RAM), your device hardware determines performance. Very large files (hundreds of megabytes) or complex OCR tasks may take longer on low-memory mobile devices. Additionally, recompressing digitally signed PDFs (such as official e-Aadhaar files) modifies the underlying file structure and invalidates the embedded cryptographic signature container; users should always retain the uncompressed original.
+                </p>
+              </div>
+
+              <div className="bg-white dark:bg-slate-900/60 backdrop-blur-xl p-8 rounded-[2.5rem] border border-gray-200 dark:border-white/10 relative group shadow-sm">
+                <div className="flex items-center gap-6 mb-4">
+                  <div className="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/20 shrink-0">
+                    <Sparkles className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-black text-gray-900 dark:text-white tracking-tight uppercase">Editorial Standards & Guidelines</h3>
+                </div>
+                <p className="text-gray-600 dark:text-gray-300 font-medium leading-relaxed text-sm sm:text-base">
+                  Our presets for government recruitment (SSC, UPSC, etc.) and identity documents are verified directly against primary official gazettes and notification PDFs. Because examination boards periodically update application appendices, candidates should always verify output parameters against their specific active exam notification. Found a discrepancy? Report it directly to developtechx@gmail.com.
+                </p>
+              </div>
             </div>
             
             <div className="mt-16">

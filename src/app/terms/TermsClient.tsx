@@ -66,6 +66,18 @@ export default function TermsClient() {
             />
 
             <DetailedClause 
+              icon={<FileText className="w-6 h-6" />}
+              title="Government Portal Submission & User Verification Responsibility"
+              content="ToolWala provides formatting presets designed around published government recruitment and identity guidelines (such as SSC, UPSC, and Passport Seva). However, recruitment boards and portal administrators periodically change their technical requirements without notice. ToolWala does not guarantee that external third-party or government systems will accept any uploaded file. Candidates and users are solely responsible for independently confirming that their processed file dimensions, aspect ratios, file sizes, and image resolutions match their specific active examination notification before submitting."
+            />
+
+            <DetailedClause 
+              icon={<FileText className="w-6 h-6" />}
+              title="Digitally Signed Documents & Cryptographic Integrity"
+              content="Recompressing, rasterizing, or editing digitally signed PDF documents (such as e-Aadhaar cards or digitally certified records) modifies the underlying PDF container and invalidates or removes the embedded cryptographic PKI digital signature (e.g. adbe.pkcs7.detached). While recompressed documents may be visually legible and accepted by portals requiring simple visual identity proof, they cannot pass automated cryptographic signature validation. Users must always preserve their original, untampered digital document for official verification."
+            />
+
+            <DetailedClause 
               icon={<Scale className="w-6 h-6" />}
               title={t('terms.liability_title', 'Limitation of Liability')}
               content={t('terms.liability_desc', 'ToolWala AI and its creators shall not be liable for any indirect, incidental, or consequential damages resulting from the use or inability to use our tools, including loss of data or business interruption.')}

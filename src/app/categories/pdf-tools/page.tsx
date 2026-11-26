@@ -108,7 +108,7 @@ export default async function Page() {
       '@type': 'WebSite',
       '@id': 'https://www.toolwala.co/#website',
       'url': 'https://www.toolwala.co/',
-      'name': 'Toolwala.co'
+      'name': 'ToolWala'
     },
     'about': {
       '@type': 'Thing',

@@ -13,7 +13,6 @@ import ToolHero from '@/components/tools/ToolHero';
 import UploadZone from '@/components/tools/UploadZone';
 import ToolArticle from '@/components/ToolArticle';
 import ToolResultScreen from '@/components/tools/ToolResultScreen';
-import ToolSchema from '@/components/analytics/ToolSchema';
 import { toolArticles } from '@/data/toolArticles';
 import { formatBytes } from '@/lib/utils/format';
 import { uint8ArrayToArrayBuffer } from '@/lib/pdf/pdfUtils';

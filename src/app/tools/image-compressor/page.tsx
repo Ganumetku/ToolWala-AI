@@ -6,7 +6,6 @@ import imageCompression from 'browser-image-compression';
 import ToolArticle from '@/components/ToolArticle';
 import BeforeAfterSlider from '@/components/tools/BeforeAfterSlider';
 import ToolResultScreen from '@/components/tools/ToolResultScreen';
-import ToolSchema from '@/components/analytics/ToolSchema';
 import { toolArticles } from '@/data/toolArticles';
 import { formatBytes } from '@/lib/utils/format';
 import PdfToolIcon from '@/components/PdfToolIcon';

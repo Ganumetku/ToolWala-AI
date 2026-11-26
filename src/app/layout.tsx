@@ -269,38 +269,29 @@ const jsonLd = {
     {
       "@type": "Organization",
       "@id": "https://www.toolwala.co/#organization",
-      "name": "ToolWala AI",
-      "url": "https://www.toolwala.co",
+      "name": "ToolWala",
+      "url": "https://www.toolwala.co/",
       "logo": {
         "@type": "ImageObject",
         "@id": "https://www.toolwala.co/#logo",
         "url": "https://www.toolwala.co/icon-512.png",
         "contentUrl": "https://www.toolwala.co/icon-512.png",
-        "caption": "ToolWala AI Logo",
+        "caption": "ToolWala Logo",
         "inLanguage": "en-US",
         "width": 512,
         "height": 512
-      }
+      },
+      "description": "Free, browser-native PDF, image, resume, and document utility tools running 100% locally with zero server uploads."
     },
     {
       "@type": "WebSite",
       "@id": "https://www.toolwala.co/#website",
-      "url": "https://www.toolwala.co",
-      "name": "ToolWala AI",
-      "description": "Free PDF, image, and resume tools that run in your browser. Files stay on your device — no signup.",
+      "url": "https://www.toolwala.co/",
+      "name": "ToolWala",
+      "description": "Free PDF, image, and utility tools that run directly in your browser. Files stay on your device with zero cloud storage.",
       "publisher": {
         "@id": "https://www.toolwala.co/#organization"
       },
-      "potentialAction": [
-        {
-          "@type": "SearchAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": "https://www.toolwala.co/?search={search_term_string}"
-          },
-          "query-input": "required name=search_term_string"
-        }
-      ],
       "inLanguage": "en-US"
     }
   ]

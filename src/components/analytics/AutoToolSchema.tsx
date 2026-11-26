@@ -3,6 +3,7 @@
 import React from 'react';
 import { toolsData } from '@/data/tools';
 import ToolSchema from './ToolSchema';
+import { useTranslation } from '@/components/I18nContext';
 
 interface AutoToolSchemaProps {
   slug: string;
@@ -11,9 +12,10 @@ interface AutoToolSchemaProps {
 /**
  * AutoToolSchema component:
  * Automatically resolves tool metadata for any slug and renders 
- * a Google Rich Results compliant SoftwareApplication JSON-LD schema.
+ * a Google Rich Results compliant WebApplication JSON-LD schema.
  */
 export default function AutoToolSchema({ slug }: AutoToolSchemaProps) {
+  const { t, locale } = useTranslation();
   if (!slug || slug === 'pdf-tools') return null;
 
   // Clean slug
@@ -29,8 +31,8 @@ export default function AutoToolSchema({ slug }: AutoToolSchemaProps) {
   let category = 'Utility Tools';
 
   if (tool) {
-    title = tool.title;
-    description = tool.description;
+    title = t(`tools.${tool.slug}.title`, tool.title);
+    description = t(`tools.${tool.slug}.description`, tool.description);
     category = tool.category;
   } else {
     // Format dynamic or unlisted tool slug into human-readable title
@@ -40,7 +42,7 @@ export default function AutoToolSchema({ slug }: AutoToolSchemaProps) {
       .join(' ');
 
     title = formattedTitle;
-    description = `Free online ${formattedTitle} tool by ToolWala AI. Fast, secure, and 100% browser-based.`;
+    description = `Free online ${formattedTitle} tool by ToolWala. Fast, secure, and 100% browser-based.`;
 
     if (cleanSlug.includes('pdf')) {
       category = 'PDF Tools';
@@ -55,7 +57,9 @@ export default function AutoToolSchema({ slug }: AutoToolSchemaProps) {
     }
   }
 
-  const url = `https://www.toolwala.co/tools/${cleanSlug}/`;
+  const url = locale === 'en'
+    ? `https://www.toolwala.co/tools/${cleanSlug}/`
+    : `https://www.toolwala.co/${locale}/tools/${cleanSlug}/`;
 
   return (
     <ToolSchema
@@ -66,6 +70,7 @@ export default function AutoToolSchema({ slug }: AutoToolSchemaProps) {
       slug={cleanSlug}
       imageUrl="https://www.toolwala.co/icon-512.png"
       disableHowTo={true}
+      locale={locale}
     />
   );
 }

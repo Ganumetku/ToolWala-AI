@@ -1581,20 +1581,20 @@ export const toolArticles: Record<string, ToolArticleData> = {
   },
   "ssc-photo-resize": {
     title: "SSC Photo & Signature Resize Online – Guidelines & Presets",
-    intro: "Prepare your photo and signature for Staff Selection Commission (SSC) applications. Understand live webcam capture rules vs signature upload specifications across CGL, CHSL, MTS, Steno, and GD examinations.",
-    whatItDoes: "Staff Selection Commission guidelines specify different image requirements depending on the examination and portal workflow.\n\nLive Photograph Capture on ssc.gov.in:\nFor major national examinations (such as SSC CGL, CHSL, MTS, and GD Constable), recent notifications on the updated portal (ssc.gov.in) mandate **LIVE PHOTOGRAPH CAPTURE** using a webcam or the official 'MySSC' mobile application during form submission. Pre-scanned portrait uploads are not accepted for these live-capture examinations.\n\nSignature Upload Requirements Vary by Notification:\nWhile photographs are captured live, a scanned signature upload is mandatory. Note that signature dimensions vary by examination notice:\n- Standard Notices (e.g. CGL, CHSL): Commonly specify 4.0 cm width × 2.0 cm height (approx. 140 × 60 px).\n- Stenographer Grade C & D / LDC Notices: Official notifications (e.g., Notice_of_STENO-LDC_2026.pdf) specify approximately 6.0 cm width × 2.0 cm height, 300 DPI, JPEG/JPG, 10.0 KB to 20.0 KB.\n- General File Size Requirement: Strictly between 10.0 KB and 20.0 KB in JPEG/JPG format on unruled white paper with black or blue ink.\n\nWe provide selectable presets for standard (4×2 cm) and wide (6×2 cm) signatures, plus customizable crop handles. Always verify the specific official notification PDF for your examination.",
+    intro: "Prepare your photo and signature for Staff Selection Commission (SSC) applications. Understand live webcam capture rules vs signature upload specifications across verified CGL, GD, Steno, CHSL, and MTS examinations.",
+    whatItDoes: "Staff Selection Commission guidelines specify distinct image requirements depending on the examination and portal workflow.\n\nLive Photograph Capture on ssc.gov.in:\nFor major national examinations (including SSC CGL, CHSL, MTS, and GD Constable), notifications on the official Commission portal (ssc.gov.in) mandate **LIVE PHOTOGRAPH CAPTURE** using a webcam or the official 'MySSC' mobile application during form submission. Pre-scanned portrait uploads are not accepted for these live-capture examinations.\n\nVerified Scanned Signature Upload Requirements:\nWhile photos are captured live, candidates must upload a scanned signature file under strict automated validation:\n- SSC CGL 2026 & SSC GD 2026: Official notices (Notice_of_adv_cgl_2026.pdf and Notice_of_CTGD_2026.pdf) specify approximately 6.0 cm width × 2.0 cm height, 10.0 KB to 20.0 KB, JPEG format.\n- SSC Stenographer 2026: Official notice (Notice_of_STENO-LDC_2026.pdf) specifies approximately 6.0 cm width × 2.0 cm height at ~300 DPI, 10.0 KB to 20.0 KB, JPEG format.\n- SSC CHSL & MTS: Main notification text specifies ~6.0 cm × 2.0 cm, 10.0 KB to 20.0 KB, while select older annexures reference 4.0 cm × 2.0 cm.\n- Legacy / Annexure Submissions: 4.0 cm × 2.0 cm preset maintained for specific application sub-forms.\n- General File Size Requirement: Strictly 10.0 KB to 20.0 KB in JPEG/JPG format on unruled white paper with black or blue ink.\n\nWe provide verified examination presets and custom crop handles. Always verify the specific official notification PDF for your examination.",
     howToUse: [
-      "Select the preset matching your notification: Exam Photo (3.5×4.5 cm / 20–50KB), Standard Signature (4.0×2.0 cm / 10–20KB), or Wide Signature (6.0×2.0 cm / 10–20KB).",
+      "Select the verified preset for your examination: CGL/GD 2026 (6.0×2.0 cm), Steno 2026 (6.0×2.0 cm / 300 DPI), CHSL/MTS (6.0×2.0 cm), Annexure (4.0×2.0 cm), or Exam Photo (3.5×4.5 cm).",
       "Upload your photo or scanned signature image.",
-      "For signature: ensure it is signed with black or blue ink on plain unruled white paper.",
-      "Adjust the crop frame to match the required aspect ratio.",
-      "Download the optimized JPEG file ready for upload to the SSC portal."
+      "For signatures: sign clearly with dark blue or black ink on clean white unruled paper.",
+      "Adjust crop handles to frame the signature without cutting off edges.",
+      "Download the optimized JPEG file guaranteed to stay within the strict 10.0 KB – 20.0 KB limit."
     ],
     keyFeatures: [
-      { title: "Standard Signature Preset (4.0×2.0 cm)", desc: "Preset for notifications specifying 4.0 cm × 2.0 cm signature dimensions under 20KB." },
-      { title: "Wide Signature Preset (6.0×2.0 cm)", desc: "Preset for Stenographer and LDC notifications specifying 6.0 cm × 2.0 cm at 300 DPI." },
-      { title: "Customizable Crop Handles", desc: "Adjust crop proportions freely to match unique state recruitment or departmental notices." },
-      { title: "Strict 10KB–20KB Sizing", desc: "Guarantees file output lands strictly within the mandatory 10.0 KB to 20.0 KB window." }
+      { title: "SSC CGL & GD 2026 Verified Preset", desc: "Formats signatures to 6.0 × 2.0 cm with strict 10–20 KB JPEG encoding per official 2026 notices." },
+      { title: "Stenographer 2026 300 DPI Preset", desc: "Formats wide signatures to 6.0 × 2.0 cm at 300 DPI resolution as specified in official Steno notices." },
+      { title: "CHSL & MTS Presets", desc: "Preset matching the 6.0 × 2.0 cm dimensions specified in recent higher-secondary and multi-tasking staff notices." },
+      { title: "Customizable Crop Handles", desc: "Adjust crop proportions freely to match unique state recruitment or departmental notices." }
     ],
     benefits: [
       "Prevents portal upload rejections due to non-compliant signature dimensions or file weights.",
@@ -1604,14 +1604,14 @@ export const toolArticles: Record<string, ToolArticleData> = {
     ],
     whyChoose: "SSC forms apply strict automated validation. An image outside the 10KB–20KB range or with distorted proportions is blocked. Our tool provides verified presets and precise binary compression directly on your device.",
     useCases: [
-      "Formatting scanned signatures for SSC CGL, CHSL, MTS, and GD Constable forms.",
-      "Preparing wide signatures (6.0×2.0 cm) for SSC Stenographer examinations.",
-      "Resizing passport-style photos for state recruitment boards that still require pre-scanned photo uploads."
+      "Formatting scanned signatures for SSC CGL 2026, GD 2026, CHSL, MTS, and Stenographer applications.",
+      "Preparing legacy 4.0×2.0 cm signatures for regional annexures or state commission portals.",
+      "Resizing passport-style photos (3.5×4.5 cm / 20–50 KB) for state recruitment boards that still require pre-scanned photo uploads."
     ],
     faqs: [
       { question: "Does SSC accept uploaded photos for CGL, CHSL, and MTS?", answer: "For major national examinations on ssc.gov.in, recent notifications require live photograph capture using a webcam or the MySSC mobile app. Pre-scanned photo uploads are not accepted for live-capture examinations. However, scanned signature upload remains mandatory." },
-      { question: "Are signature dimensions the same for every SSC exam?", answer: "No. While file size is consistently 10.0 KB to 20.0 KB JPEG, dimensions vary. Common specifications include 4.0 × 2.0 cm for general exams and 6.0 × 2.0 cm for Stenographer/LDC exams. Always consult your specific notification." },
-      { question: "What ink color should I use for SSC signatures?", answer: "Use clear black or dark blue ink on clean, unruled white paper. Signatures with shadows or lined paper are often rejected." },
+      { question: "What are the verified signature dimensions for SSC CGL and GD?", answer: "Official 2026 notifications for SSC CGL and SSC GD Constable specify a scanned signature of approximately 6.0 cm width × 2.0 cm height, in JPEG format, with a file size strictly between 10.0 KB and 20.0 KB." },
+      { question: "Why does the Stenographer notification mention 300 DPI?", answer: "The official Stenographer Grade C & D / LDC notice explicitly notes ~300 DPI resolution alongside 6.0 × 2.0 cm dimensions and 10–20 KB JPEG file size to ensure signature clarity during document verification." },
       { question: "Official SSC Website Reference:", answer: "Official guidelines and notices can be verified directly at ssc.gov.in." }
     ],
     conclusion: "Format compliant signatures and photos for Staff Selection Commission forms with verified examination presets. Reference: ssc.gov.in.",

@@ -59,10 +59,121 @@ const sharpenCanvas = (canvas: HTMLCanvasElement, value: number) => {
   ctx.putImageData(imgData, 0, 0);
 };
 
+// Helper to pad JPEG with COM marker and inject JFIF 300 DPI for government portal compliance
+function adjustJpegCompliance(
+  dataUrl: string,
+  minKb?: number,
+  targetKb?: number,
+  targetDpi: number = 300
+): string {
+  try {
+    const commaIdx = dataUrl.indexOf(",");
+    if (commaIdx === -1) return dataUrl;
+    const header = dataUrl.substring(0, commaIdx + 1);
+    const b64 = dataUrl.substring(commaIdx + 1);
+    const binary = atob(b64);
+    let bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
+    }
+
+    // Verify SOI (0xFF, 0xD8)
+    if (bytes[0] !== 0xff || bytes[1] !== 0xd8) return dataUrl;
+
+    // 1. Ensure JFIF 300 DPI
+    if (targetDpi > 0) {
+      if (bytes[2] === 0xff && bytes[3] === 0xe0) {
+        // APP0 present
+        if (
+          bytes[6] === 0x4a &&
+          bytes[7] === 0x46 &&
+          bytes[8] === 0x49 &&
+          bytes[9] === 0x46 &&
+          bytes[10] === 0x00
+        ) {
+          bytes[13] = 1; // 1 = dots per inch (DPI)
+          bytes[14] = (targetDpi >> 8) & 0xff;
+          bytes[15] = targetDpi & 0xff;
+          bytes[16] = (targetDpi >> 8) & 0xff;
+          bytes[17] = targetDpi & 0xff;
+        }
+      } else {
+        // Inject APP0
+        const app0 = new Uint8Array([
+          0xff, 0xe0, 0x00, 0x10, 0x4a, 0x46, 0x49, 0x46, 0x00, 0x01, 0x02, 0x01,
+          (targetDpi >> 8) & 0xff, targetDpi & 0xff,
+          (targetDpi >> 8) & 0xff, targetDpi & 0xff,
+          0x00, 0x00,
+        ]);
+        const merged = new Uint8Array(bytes.length + app0.length);
+        merged.set(bytes.subarray(0, 2), 0);
+        merged.set(app0, 2);
+        merged.set(bytes.subarray(2), 2 + app0.length);
+        bytes = merged;
+      }
+    }
+
+    // 2. Check if size is below minKb
+    if (minKb && minKb > 0) {
+      const minBytes = minKb * 1024;
+      if (bytes.length < minBytes) {
+        // Calculate safe padding to reach mid-range of [minKb, targetKb]
+        const maxAllowed = targetKb ? targetKb * 1024 - 1024 : minBytes + 5120;
+        const desiredBytes = Math.min(maxAllowed, Math.max(minBytes + 2048, 14 * 1024));
+        const needed = desiredBytes - bytes.length;
+        if (needed > 4) {
+          const segLen = needed; // includes the 2 length bytes
+          const seg = new Uint8Array(segLen + 2);
+          seg[0] = 0xff;
+          seg[1] = 0xfe; // COM marker
+          seg[2] = (segLen >> 8) & 0xff;
+          seg[3] = segLen & 0xff;
+          const prefix = "ToolWala Government Portal Compliance Padding: ";
+          for (let i = 0; i < prefix.length && i + 4 < seg.length; i++) {
+            seg[4 + i] = prefix.charCodeAt(i);
+          }
+          for (let i = 4 + prefix.length; i < seg.length; i++) {
+            seg[i] = 0x20; // spaces
+          }
+
+          // Insert after APP0 if present, else after SOI
+          let insertPos = 2;
+          if (bytes[2] === 0xff && bytes[3] === 0xe0) {
+            const app0Len = (bytes[4] << 8) | bytes[5];
+            insertPos = 4 + app0Len;
+          }
+
+          const padded = new Uint8Array(bytes.length + seg.length);
+          padded.set(bytes.subarray(0, insertPos), 0);
+          padded.set(seg, insertPos);
+          padded.set(bytes.subarray(insertPos), insertPos + seg.length);
+          bytes = padded;
+        }
+      }
+    }
+
+    // Convert back to base64
+    let binStr = "";
+    const len = bytes.length;
+    for (let i = 0; i < len; i += 8192) {
+      binStr += String.fromCharCode.apply(
+        null,
+        bytes.subarray(i, Math.min(i + 8192, len)) as any
+      );
+    }
+    return header + btoa(binStr);
+  } catch (e) {
+    console.warn("Failed to adjust JPEG compliance:", e);
+    return dataUrl;
+  }
+}
+
 // Helper to compress canvas to JPEG below target KB size using multi-pass quality & resolution scaling
 const compressToKbLimit = (
   canvas: HTMLCanvasElement,
-  targetKb: number
+  targetKb: number,
+  minKb?: number,
+  targetDpi?: number
 ): Promise<string> => {
   return new Promise((resolve) => {
     const targetBytes = targetKb * 1024;
@@ -122,7 +233,8 @@ const compressToKbLimit = (
     tryCompressCanvas(canvas).then(async (result) => {
       if (result && result.qualityUsed >= 0.35) {
         // High visual quality achieved at full resolution
-        resolve(result.dataUrl);
+        const finalUrl = adjustJpegCompliance(result.dataUrl, minKb, targetKb, targetDpi);
+        resolve(finalUrl);
         return;
       }
 
@@ -149,10 +261,13 @@ const compressToKbLimit = (
       }
 
       if (bestAttempt) {
-        resolve(bestAttempt.dataUrl);
+        const finalUrl = adjustJpegCompliance(bestAttempt.dataUrl, minKb, targetKb, targetDpi);
+        resolve(finalUrl);
       } else {
         // Safe fallback
-        resolve(canvas.toDataURL("image/jpeg", 0.5));
+        const rawFallback = canvas.toDataURL("image/jpeg", 0.5);
+        const finalUrl = adjustJpegCompliance(rawFallback, minKb, targetKb, targetDpi);
+        resolve(finalUrl);
       }
     });
   });
@@ -403,6 +518,8 @@ export interface CropperPreset {
   width: number;
   height: number;
   targetKb: number;
+  minKb?: number;
+  targetDpi?: number;
   allowBgRemoval: boolean;
   allowPrintSheet?: boolean;
   bgColors: { name: string; hex: string }[];
@@ -721,7 +838,9 @@ export default function ImageCropperEngine({
         setDownloadSizeInfo(formatBytes(approxBytes));
       } else {
         const targetLimit = targetKbMode === "preset" ? activePreset.targetKb : customTargetKb;
-        finalUrl = await compressToKbLimit(canvas, targetLimit);
+        const minLimit = targetKbMode === "preset" ? activePreset.minKb : undefined;
+        const targetDpi = targetKbMode === "preset" ? activePreset.targetDpi : 300;
+        finalUrl = await compressToKbLimit(canvas, targetLimit, minLimit, targetDpi);
         const approxBytes = Math.round((finalUrl.length - 814) * 0.75);
         setDownloadSizeInfo(formatBytes(approxBytes));
       }

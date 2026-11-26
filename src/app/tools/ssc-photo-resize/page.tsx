@@ -15,6 +15,8 @@ const SSC_PRESETS: CropperPreset[] = [
     width: 709,
     height: 236, // 3:1 aspect ratio (6.0 cm × 2.0 cm at 300 DPI)
     targetKb: 20,
+    minKb: 10,
+    targetDpi: 300,
     allowBgRemoval: false,
     bgColors: [
       { name: "White", hex: "#ffffff" },
@@ -28,6 +30,8 @@ const SSC_PRESETS: CropperPreset[] = [
     width: 709,
     height: 236, // 3:1 aspect ratio (~300 DPI)
     targetKb: 20,
+    minKb: 10,
+    targetDpi: 300,
     allowBgRemoval: false,
     bgColors: [
       { name: "White", hex: "#ffffff" },
@@ -41,6 +45,8 @@ const SSC_PRESETS: CropperPreset[] = [
     width: 709,
     height: 236, // 3:1 aspect ratio
     targetKb: 20,
+    minKb: 10,
+    targetDpi: 300,
     allowBgRemoval: false,
     bgColors: [
       { name: "White", hex: "#ffffff" },
@@ -54,6 +60,8 @@ const SSC_PRESETS: CropperPreset[] = [
     width: 472,
     height: 236, // 2:1 aspect ratio (4.0 cm × 2.0 cm at 300 DPI)
     targetKb: 20,
+    minKb: 10,
+    targetDpi: 300,
     allowBgRemoval: false,
     bgColors: [
       { name: "White", hex: "#ffffff" },
@@ -67,6 +75,8 @@ const SSC_PRESETS: CropperPreset[] = [
     width: 354,
     height: 472, // ~7:9 aspect ratio
     targetKb: 50,
+    minKb: 20,
+    targetDpi: 300,
     allowBgRemoval: true,
     bgColors: [
       { name: "White", hex: "#ffffff" },
@@ -81,6 +91,8 @@ const SSC_PRESETS: CropperPreset[] = [
     width: 300,
     height: 100,
     targetKb: 20,
+    minKb: 10,
+    targetDpi: 300,
     allowBgRemoval: false,
     bgColors: [
       { name: "White", hex: "#ffffff" },

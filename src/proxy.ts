@@ -8,6 +8,14 @@ const LOCALES = ['hi', 'es', 'fr', 'de', 'pt', 'ar', 'id'];
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Apex to www 301 permanent redirect
+  const hostHeader = (request.headers.get('host') || '').toLowerCase();
+  const rawHost = hostHeader.split(':')[0];
+  if (rawHost === 'toolwala.co') {
+    const wwwUrl = new URL(request.nextUrl.pathname + request.nextUrl.search, 'https://www.toolwala.co');
+    return NextResponse.redirect(wwwUrl, { status: 301 });
+  }
+
   // 0. 301 redirect accidental nested full URLs (e.g. /https://toolwala.co/...)
   const decodedPath = decodeURIComponent(pathname);
   if (
@@ -282,6 +290,19 @@ export async function proxy(request: NextRequest) {
   const allCookies = request.cookies.getAll();
   const hasAuthCookie = allCookies.some(c => c.name.startsWith('sb-') && (c.name.includes('token') || c.name.includes('auth')));
 
+  // Protect preview / staging deployments (non-canonical domains) from search indexing
+  const isProductionDomain =
+    rawHost === 'www.toolwala.co' ||
+    rawHost === 'localhost' ||
+    rawHost === '127.0.0.1';
+
+  const finalizeResponse = (res: NextResponse) => {
+    if (!isProductionDomain) {
+      res.headers.set('X-Robots-Tag', 'noindex, nofollow');
+    }
+    return res;
+  };
+
   // Fast path for non-protected routes without auth cookies (drastically saves Vercel Fluid CPU)
   if (!isProtected && !hasAuthCookie) {
     let response: NextResponse;
@@ -295,7 +316,7 @@ export async function proxy(request: NextRequest) {
         request: { headers: requestHeaders }
       });
     }
-    return response;
+    return finalizeResponse(response);
   }
 
   if (!supabaseConfigured) {
@@ -310,7 +331,7 @@ export async function proxy(request: NextRequest) {
         request: { headers: requestHeaders }
       });
     }
-    return response;
+    return finalizeResponse(response);
   }
 
   // Run Supabase session updates for logged-in or protected routes
@@ -333,7 +354,7 @@ export async function proxy(request: NextRequest) {
     supabaseResponse.cookies.getAll().forEach((cookie) => {
       response.cookies.set(cookie.name, cookie.value);
     });
-    return response;
+    return finalizeResponse(response);
   }
 
   // Admin protection logic: Redirect if unauthenticated
@@ -344,7 +365,7 @@ export async function proxy(request: NextRequest) {
     supabaseResponse.cookies.getAll().forEach((cookie) => {
       response.cookies.set(cookie.name, cookie.value);
     });
-    return response;
+    return finalizeResponse(response);
   }
 
   // Authorized user accessing admin route - forward without Edge DB bottleneck
@@ -362,7 +383,7 @@ export async function proxy(request: NextRequest) {
   supabaseResponse.cookies.getAll().forEach((cookie) => {
     response.cookies.set(cookie.name, cookie.value);
   });
-  return response;
+  return finalizeResponse(response);
 }
 
 export const config = {

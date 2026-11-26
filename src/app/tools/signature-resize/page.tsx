@@ -25,17 +25,19 @@ const SIGNATURE_PRESETS: CropperPreset[] = [
   },
   {
     id: "ssc-signature",
-    label: "SSC Exam Signature (6x3 cm)",
-    width: 280,
-    height: 140, // 2:1 aspect ratio
+    label: "SSC Official Signature (6.0×2.0 cm / 10–20 KB)",
+    width: 709,
+    height: 236, // 3:1 aspect ratio (6.0 cm × 2.0 cm at 300 DPI)
     targetKb: 20,
+    minKb: 10,
+    targetDpi: 300,
     allowBgRemoval: false,
     bgColors: [
       { name: "White", hex: "#ffffff" },
       { name: "Transparent", hex: "transparent" },
     ],
-    description: "Official Staff Selection Commission (SSC) signature size specifications.",
-    specs: "6.0 x 3.0 cm, Target size: 10KB - 20KB",
+    description: "Official Staff Selection Commission (SSC) signature size specifications: 6.0 × 2.0 cm, strictly 10.0 KB to 20.0 KB.",
+    specs: "6.0 × 2.0 cm (approx 3:1 aspect ratio, ~300 DPI). File size: strictly 10.0 KB – 20.0 KB. Format: JPEG.",
   },
   {
     id: "ibps-signature",
@@ -43,6 +45,8 @@ const SIGNATURE_PRESETS: CropperPreset[] = [
     width: 140,
     height: 60, // ~7:3 aspect ratio
     targetKb: 20,
+    minKb: 10,
+    targetDpi: 300,
     allowBgRemoval: false,
     bgColors: [
       { name: "White", hex: "#ffffff" },

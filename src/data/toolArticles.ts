@@ -865,7 +865,7 @@ export const toolArticles: Record<string, ToolArticleData> = {
       "Works instantly in any modern web browser without installing heavy software suites.",
       "Completely free with no file limits, watermarks, or account registration required."
     ],
-    whyChoose: "Most free PDF comparison tools upload your sensitive legal agreements or financial statements to remote servers, retaining copies or using your text for AI training. ToolWala AI takes a fundamentally different privacy-first approach. By leveraging cutting-edge WebAssembly and local JavaScript processing, our tool parses your files entirely inside your device's browser. It offers enterprise-grade visual diffing without the enterprise price tag or privacy vulnerabilities.",
+    whyChoose: "Most free PDF comparison tools upload your sensitive legal agreements or financial statements to remote servers, retaining copies or using your text for AI training. ToolWala AI takes a fundamentally different privacy-first approach. By leveraging modern WebAssembly and local JavaScript processing, our tool parses your files entirely inside your device's browser. It offers enterprise-grade visual diffing without the enterprise price tag or privacy vulnerabilities.",
     useCases: [
       "Legal teams comparing draft versions of contracts, NDAs, leases, and terms of service.",
       "Publishing editors and academic researchers checking revised manuscripts against original submissions.",

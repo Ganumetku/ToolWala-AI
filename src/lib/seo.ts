@@ -512,7 +512,7 @@ export async function generateToolMetadataHelper(
       const enTitle = baseEn.title && baseEn.title !== toolId ? baseEn.title : (landingPage ? landingPage.title : fallbackTitle);
       const { getToolTranslationWithFallback: getFallback } = await import('@/lib/tool-translation-service');
       const translatedData = await getFallback(toolId, locale);
-      toolTitle = translatedData.title;
+      toolTitle = (translatedData.title && translatedData.title !== toolId) ? translatedData.title : enTitle;
     }
 
     let toolDesc = dbTranslation.description || '';
@@ -520,7 +520,7 @@ export async function generateToolMetadataHelper(
       const enDesc = baseEn.description || (landingPage ? landingPage.metaDescription : fallbackDesc);
       const { getToolTranslationWithFallback: getFallback } = await import('@/lib/tool-translation-service');
       const translatedData = await getFallback(toolId, locale);
-      toolDesc = translatedData.description;
+      toolDesc = translatedData.description || enDesc;
     }
 
     const hiOverride = locale === 'hi' ? HI_SEO_COPY_OVERRIDES[toolId] : undefined;

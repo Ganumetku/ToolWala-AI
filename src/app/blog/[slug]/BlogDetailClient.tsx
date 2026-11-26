@@ -147,6 +147,7 @@ export default function BlogDetailClient({
                 alt={blog.author.name}
                 width={40}
                 height={40}
+                unoptimized
                 className="w-10 h-10 rounded-full border-2 border-blue-500/20 object-cover shrink-0"
               />
             ) : (
@@ -250,6 +251,7 @@ export default function BlogDetailClient({
                   alt={blog.author.name}
                   width={56}
                   height={56}
+                  unoptimized
                   className="w-14 h-14 rounded-full border-2 border-blue-500/20 object-cover shrink-0"
                 />
               ) : (

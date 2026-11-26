@@ -198,6 +198,7 @@ export default function BlogListClient({
                           alt={featuredPost.author.name}
                           width={32}
                           height={32}
+                          unoptimized
                           className="w-8 h-8 rounded-full border border-gray-200 dark:border-white/10 shrink-0"
                         />
                       )}

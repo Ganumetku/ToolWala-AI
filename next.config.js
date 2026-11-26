@@ -20,7 +20,7 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   images: {
-    unoptimized: false,
+    unoptimized: true,
     remotePatterns: [
       { protocol: 'https', hostname: '**.supabase.co' },
       { protocol: 'https', hostname: 'images.unsplash.com' },

@@ -22,6 +22,12 @@ export default function LazyBlogImage({
 }: LazyBlogImageProps) {
   const [loaded, setLoaded] = useState(false);
 
+  if (!src) {
+    return (
+      <div className={`relative overflow-hidden bg-slate-900/40 ${aspectRatio || "w-full h-full"}`} />
+    );
+  }
+
   const isBase64 = src.startsWith("data:") || src.startsWith("blob:");
 
   const fitClass = objectFit === "contain" ? "object-contain" : objectFit === "fill" ? "object-fill" : "object-cover";
@@ -38,6 +44,7 @@ export default function LazyBlogImage({
           loading={priority ? "eager" : "lazy"}
           decoding="async"
           onLoad={() => setLoaded(true)}
+          onError={() => setLoaded(true)}
           className={`transition-opacity duration-500 ${fitClass} ${loaded ? "opacity-100" : "opacity-0"} ${className}`}
         />
       </div>
@@ -53,9 +60,11 @@ export default function LazyBlogImage({
         src={src}
         alt={alt}
         priority={priority}
+        unoptimized
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         onLoad={() => setLoaded(true)}
+        onError={() => setLoaded(true)}
         className={`transition-opacity duration-500 ${fitClass} ${loaded ? "opacity-100" : "opacity-0"} ${className}`}
       />
     </div>

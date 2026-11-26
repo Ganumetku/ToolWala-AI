@@ -40,7 +40,7 @@ const graphik = localFont({
   variable: "--font-graphik",
   display: "swap",
   fallback: ["-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
-  preload: true,
+  preload: false,
 });
 
 export async function generateMetadata(): Promise<Metadata> {

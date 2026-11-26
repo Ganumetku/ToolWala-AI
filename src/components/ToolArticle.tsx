@@ -11,7 +11,7 @@ import { useTranslation } from '@/components/I18nContext';
 import { getTranslation } from '@/lib/i18n';
 import Breadcrumbs from './Breadcrumbs';
 import { categoriesData } from '@/data/categories';
-import blogsData from '@/data/dynamic_blogs.json';
+import blogsData from '@/data/blogSummaries.json';
 import { getLocalizedToolArticle } from '@/data/localizedToolArticles';
 
 interface FAQ {

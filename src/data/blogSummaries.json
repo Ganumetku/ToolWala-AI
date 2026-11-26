@@ -1,0 +1,990 @@
+[
+  {
+    "id": "1786591070122",
+    "slug": "new-vs-old-tax-regime",
+    "title": "New vs Old Tax Regime FY 2026-27 (AY 2027-28): Which One Saves You More Money?",
+    "description": "",
+    "excerpt": "HR still asks New or Old every April. Here's the slab table, three salary examples, and when 80C actually beats the new regime.",
+    "category": "Calculator Tools",
+    "date": "",
+    "readingTime": "8 min read",
+    "tags": [
+      "Income Tax",
+      "Tax Slabs",
+      "New Regime",
+      "Old Regime",
+      "Tax Calculator",
+      "Financial Planning"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "income-tax-calculator",
+      "emi-calculator",
+      "gst-calculator",
+      "sip-calculator"
+    ]
+  },
+  {
+    "id": "1",
+    "slug": "why-local-ocr-is-the-future",
+    "title": "Why Browser-Native OCR is the Future of Data Safety",
+    "description": "",
+    "excerpt": "Most OCR sites copy your scan to a server first. This one reads the page in the tab. Fine for a receipt. Necessary for an ID.",
+    "category": "PDF Tools",
+    "date": "",
+    "readingTime": "3 min read",
+    "tags": [
+      "Security",
+      "OCR",
+      "WebAssembly"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "pdf-tools",
+      "protect-pdf",
+      "edit-pdf",
+      "invoice-generator"
+    ]
+  },
+  {
+    "id": "2",
+    "slug": "mastering-image-compression-balancing-size-and-quality",
+    "title": "Mastering Image Compression: Hitting the Perfect Balance",
+    "description": "",
+    "excerpt": "A 8MB phone photo will bounce on SSC. How far you can shrink a JPG before the face looks like plastic.",
+    "category": "Image Editing",
+    "date": "",
+    "readingTime": "4 min read",
+    "tags": [
+      "Image Compression",
+      "WebPerformance",
+      "SEO"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "image-compressor",
+      "jpg-to-pdf"
+    ]
+  },
+  {
+    "id": "3",
+    "slug": "the-rise-of-edge-ai-local-models",
+    "title": "The Rise of Edge AI: Running Models Directly in Your Web Browser",
+    "description": "",
+    "excerpt": "Background removal and passport crops can run in the browser. No speech about 'the future' — just what that means for your photo.",
+    "category": "AI Tools",
+    "date": "",
+    "readingTime": "5 min read",
+    "tags": [
+      "Artificial Intelligence",
+      "EdgeComputing",
+      "WebDev"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "passport-photo-maker",
+      "aadhaar-photo-resizer",
+      "ssc-photo-resize",
+      "upsc-photo-resize"
+    ]
+  },
+  {
+    "id": "4",
+    "slug": "ats-resume-optimization-secrets",
+    "title": "Free ATS Resume Checker – Test Your Resume Score Online (2026 Guide)",
+    "description": "",
+    "excerpt": "Paste a resume, get a score, see what an ATS actually chokes on. Tables, text boxes, and missing keywords — not vibes.",
+    "category": "Resume & Career",
+    "date": "",
+    "readingTime": "5 min read",
+    "tags": [
+      "Resume",
+      "Career",
+      "ATS",
+      "Job Search"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "ats-resume-checker",
+      "resume-builder",
+      "pdf-to-word-converter",
+      "word-to-pdf-converter"
+    ]
+  },
+  {
+    "id": "5",
+    "slug": "maximizing-ai-productivity-for-developers",
+    "title": "Maximizing AI Productivity: Practical Prompt Engineering for Developers",
+    "description": "",
+    "excerpt": "Vague prompts get vague code. A few habits that make the model less annoying — without leaking the repo to a random API.",
+    "category": "AI Tools",
+    "date": "",
+    "readingTime": "4 min read",
+    "tags": [
+      "Productivity",
+      "AI",
+      "PromptEngineering"
+    ],
+    "status": "draft",
+    "relatedToolSlugs": []
+  },
+  {
+    "id": "6",
+    "slug": "edit-pdf-online-free-guide",
+    "title": "How to Edit PDF Online for Free (Complete 2026 Guide)",
+    "description": "",
+    "excerpt": "Need a date changed on a PDF and don't want Acrobat. What this editor can do in the tab, and what it still can't.",
+    "category": "PDF Tools",
+    "date": "",
+    "readingTime": "16 min read",
+    "tags": [
+      "PDF Editor",
+      "Edit PDF Free",
+      "Document Management",
+      "PDF Tools"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "edit-pdf",
+      "image-compressor",
+      "merge-pdf",
+      "split-pdf",
+      "pdf-to-word-converter",
+      "word-to-pdf-converter",
+      "pdf-ocr"
+    ]
+  },
+  {
+    "id": "7",
+    "slug": "how-to-merge-pdf",
+    "title": "How to Merge PDF Files Online: The Complete Free Guide",
+    "description": "",
+    "excerpt": "Combine multiple PDF certificates, marksheet scans, and invoices into a single organized document. A complete guide with page ordering and privacy best practices.",
+    "category": "PDF Tools",
+    "date": "",
+    "readingTime": "3 min read",
+    "tags": [
+      "PDF",
+      "Merge PDF",
+      "Document Management"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "merge-pdf",
+      "split-pdf",
+      "jpg-to-pdf",
+      "pdf-tools"
+    ]
+  },
+  {
+    "id": "8",
+    "slug": "compress-pdf-without-losing-quality",
+    "title": "How to Compress PDF Files Without Losing Quality",
+    "description": "",
+    "excerpt": "Typed circulars barely shrink. Scans usually do. Don't trust the 80% bar — wait for the real size on the card.",
+    "category": "PDF Tools",
+    "date": "",
+    "readingTime": "4 min read",
+    "tags": [
+      "PDF",
+      "Compress PDF",
+      "Optimization"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "compress-pdf",
+      "aadhaar-pdf-compressor",
+      "gov-form-pdf-compressor"
+    ]
+  },
+  {
+    "id": "9",
+    "slug": "pdf-to-jpg-guide",
+    "title": "The Ultimate PDF to JPG Conversion Guide",
+    "description": "",
+    "excerpt": "Need page 3 as a picture for WhatsApp, or every slide as a JPG. Drawn in this tab. Pick the pages, skip the blanks.",
+    "category": "PDF Tools",
+    "date": "",
+    "readingTime": "3 min read",
+    "tags": [
+      "PDF",
+      "PDF to JPG",
+      "Conversion",
+      "Image Tools"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "pdf-to-jpg",
+      "jpg-to-pdf",
+      "image-compressor"
+    ]
+  },
+  {
+    "id": "10",
+    "slug": "pdf-security-guide",
+    "title": "PDF Security Guide: How to Protect and Unlock PDF Files",
+    "description": "",
+    "excerpt": "Lock a PDF, or unlock one you already have the password for. Both happen here. We never see the password.",
+    "category": "PDF Tools",
+    "date": "",
+    "readingTime": "3 min read",
+    "tags": [
+      "PDF",
+      "PDF Security",
+      "Encryption"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "protect-pdf",
+      "unlock-pdf",
+      "pdf-tools"
+    ]
+  },
+  {
+    "id": "11",
+    "slug": "best-image-compressor",
+    "title": "Best Image Compressor: How to Shrink PNG & JPG Files",
+    "description": "",
+    "excerpt": "PNG vs JPG vs WebP, and when shrinking a photo actually helps a form. The file stays on this device.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "4 min read",
+    "tags": [
+      "Image Compression",
+      "SEO",
+      "Optimization",
+      "WebPerformance"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "image-compressor",
+      "bg-remover",
+      "ai-image-upscaler"
+    ]
+  },
+  {
+    "id": "12",
+    "slug": "resize-images-for-government-forms",
+    "title": "How to Resize Images for Indian Government Forms",
+    "description": "",
+    "excerpt": "PAN wants one size, SSC another, UPSC a square. Wrong crop = bounce. The usual centimetre and KB caps in one place.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "5 min read",
+    "tags": [
+      "Image Tools",
+      "Government Forms",
+      "Resize Image"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "ssc-photo-resize",
+      "upsc-photo-resize",
+      "pan-card-resize",
+      "signature-resize"
+    ]
+  },
+  {
+    "id": "13",
+    "slug": "ai-caption-generator",
+    "title": "AI Caption Generator: How to Write Social Media Captions with AI",
+    "description": "",
+    "excerpt": "A first draft for Instagram or LinkedIn. Tweak the tone, copy it, move on. Not a growth lecture.",
+    "category": "AI Tools",
+    "date": "",
+    "readingTime": "3 min read",
+    "tags": [
+      "AI Tools",
+      "Caption Generator",
+      "Social Media"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "caption-generator",
+      "ai-logo-maker",
+      "voice-generator"
+    ]
+  },
+  {
+    "id": "14",
+    "slug": "ai-content-tools",
+    "title": "Top AI Content Tools to Boost Your Daily Writing Productivity",
+    "description": "",
+    "excerpt": "Cover letter, humanizer, summarizer — the ones we actually ship. No 'boost your productivity' filler.",
+    "category": "AI Tools",
+    "date": "",
+    "readingTime": "4 min read",
+    "tags": [
+      "AI Tools",
+      "Productivity",
+      "Writing Tools"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "text-humanizer",
+      "cover-letter-generator",
+      "pdf-summarizer"
+    ]
+  },
+  {
+    "id": "10",
+    "slug": "new-ssc-photo-guidelines-live-upload",
+    "title": "New SSC Photo Guidelines: Live Photo Capture vs Scanned Signature Rules",
+    "description": "",
+    "excerpt": "Staff Selection Commission rules explained: live webcam capture on ssc.gov.in vs examination-specific signature upload requirements across CGL, GD, Steno, CHSL, and MTS.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "4 min read",
+    "tags": [
+      "SSC",
+      "Photo Resize",
+      "Recruitment"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "ssc-photo-resize",
+      "signature-resize"
+    ]
+  },
+  {
+    "id": "11",
+    "slug": "upsc-photo-signature-resize-specifications",
+    "title": "UPSC Photo and Signature Resize Specifications: Complete Steps",
+    "description": "",
+    "excerpt": "UPSC OTR is picky: 350×350 photo, tiny signature. The pixel and KB numbers, then crop it here.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "4 min read",
+    "tags": [
+      "UPSC",
+      "Photo Resize",
+      "Civil Services"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "upsc-photo-resize",
+      "signature-resize"
+    ]
+  },
+  {
+    "id": "12",
+    "slug": "compress-eaadhaar-pdf-under-300kb",
+    "title": "How to Compress e-Aadhaar PDF File Under 300KB for Online Portals",
+    "description": "",
+    "excerpt": "Official e-Aadhaar PDFs often exceed the upload caps on recruitment, state, and banking portals. Here is how to compress your file locally while preserving legibility.",
+    "category": "PDF Tools",
+    "date": "",
+    "readingTime": "3 min read",
+    "tags": [
+      "Aadhaar",
+      "Compress PDF",
+      "UIDAI"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "aadhaar-pdf-compressor",
+      "unlock-pdf"
+    ]
+  },
+  {
+    "id": "13",
+    "slug": "open-password-aadhaar-remove-lock",
+    "title": "How to Open Password-Protected Aadhaar PDF and Remove the Lock",
+    "description": "",
+    "excerpt": "Learn the exact 8-character formula to unlock your e-Aadhaar PDF. Remove the password permanently for job and government portal uploads.",
+    "category": "PDF Tools",
+    "date": "",
+    "readingTime": "3 min read",
+    "tags": [
+      "Aadhaar",
+      "Unlock PDF",
+      "Security"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "unlock-pdf",
+      "aadhaar-pdf-compressor"
+    ]
+  },
+  {
+    "id": "14",
+    "slug": "resize-photo-signature-pan-card-application",
+    "title": "How to Resize Photo and Signature for PAN Card Application",
+    "description": "",
+    "excerpt": "NSDL and UTIITSL don't want the same photo. Crop and KB limits for both, without sending the picture to a random site.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "4 min read",
+    "tags": [
+      "PAN Card",
+      "Photo Resize",
+      "NSDL"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "pan-card-resize",
+      "signature-resize"
+    ]
+  },
+  {
+    "id": "15",
+    "slug": "signature-size-pan-card-uploads",
+    "title": "Standard Signature Size for PAN Card Online Uploads",
+    "description": "",
+    "excerpt": "A fat signature scan will fail PAN upload. Crop the ink, keep it under 20KB. That's the whole job.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "3 min read",
+    "tags": [
+      "PAN Card",
+      "Signature",
+      "NSDL"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "signature-resize",
+      "pan-card-resize"
+    ]
+  },
+  {
+    "id": "16",
+    "slug": "official-indian-passport-photo-specifications",
+    "title": "Official Indian Passport Photo Size & Dimensions Guidelines",
+    "description": "",
+    "excerpt": "Clear rules on domestic Passport Seva Kendra live capture vs overseas Indian passport renewal (VFS/BLS guidelines). Official photo specifications.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "4 min read",
+    "tags": [
+      "Passport",
+      "Photo Size",
+      "Govt Guidelines"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "passport-photo-maker",
+      "image-compressor"
+    ]
+  },
+  {
+    "id": "17",
+    "slug": "make-passport-photo-blue-background",
+    "title": "How to Make Passport Size Photo with Blue Background",
+    "description": "",
+    "excerpt": "Some visas want light blue, not white. Swap the wall after you crop. Check the edges before you print.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "3 min read",
+    "tags": [
+      "Passport",
+      "Background Changer",
+      "Visa"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "passport-photo-maker",
+      "bg-remover"
+    ]
+  },
+  {
+    "id": "18",
+    "slug": "upload-photo-signature-ssc-application",
+    "title": "How to Upload Photo and Signature in SSC Application Form",
+    "description": "",
+    "excerpt": "3.5×4.5 cm, 20–50KB, both ears if the notice says so. Format the files, then attach them on SSC.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "3 min read",
+    "tags": [
+      "SSC",
+      "Form Upload",
+      "Signature Crop"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "ssc-photo-resize",
+      "signature-resize"
+    ]
+  },
+  {
+    "id": "19",
+    "slug": "upload-passport-documents-seva-portal",
+    "title": "How to Upload Passport Documents on Passport Seva Portal",
+    "description": "",
+    "excerpt": "Passport Seva wants supporting scans under 1MB. Merge, compress, name the file something a portal will accept.",
+    "category": "PDF Tools",
+    "date": "",
+    "readingTime": "4 min read",
+    "tags": [
+      "Passport",
+      "PDF Compress",
+      "Seva Portal"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "gov-form-pdf-compressor",
+      "unlock-pdf"
+    ]
+  },
+  {
+    "id": "20",
+    "slug": "compress-upsc-pdf-documents-under-300kb",
+    "title": "How to Compress UPSC PDF Documents Under 300KB",
+    "description": "",
+    "excerpt": "Marksheets and certificates for UPSC often sit over 300KB. A pass in the browser — not a promise of 80% every time.",
+    "category": "PDF Tools",
+    "date": "",
+    "readingTime": "3 min read",
+    "tags": [
+      "UPSC",
+      "PDF Compress",
+      "Mains Certificate"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "gov-form-pdf-compressor",
+      "merge-pdf"
+    ]
+  },
+  {
+    "id": "21",
+    "slug": "rrb-alp-photo-signature-size-guidelines",
+    "title": "RRB ALP Photo and Signature Size Guidelines & Resizer",
+    "description": "",
+    "excerpt": "RRB ALP has its own photo and signature KB window. Get the crop right before the application clock runs out.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "4 min read",
+    "tags": [
+      "RRB",
+      "Railway Exam",
+      "Photo Sizing"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "exam-photo-resizer",
+      "signature-resize"
+    ]
+  },
+  {
+    "id": "22",
+    "slug": "upload-documents-government-portals",
+    "title": "How to Upload Documents on Government Portals Without Rejection",
+    "description": "",
+    "excerpt": "Wrong size, wrong filename, password still on. The usual bounce reasons — and how to fix the file on this device.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "4 min read",
+    "tags": [
+      "Form Upload",
+      "Portal Sizing",
+      "Govt Guidelines"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "gov-form-pdf-compressor",
+      "exam-photo-resizer"
+    ]
+  },
+  {
+    "id": "23",
+    "slug": "compress-pdf-under-kb-job-portals",
+    "title": "How to Compress PDF Under 100KB/200KB for Job Portals",
+    "description": "",
+    "excerpt": "Job sites that want a marksheet under 100 or 200KB. One file, one cap. Don't upload it twice to two compressors.",
+    "category": "PDF Tools",
+    "date": "",
+    "readingTime": "3 min read",
+    "tags": [
+      "Compress PDF",
+      "Job Portal",
+      "PDF Optimization"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "gov-form-pdf-compressor",
+      "compress-pdf"
+    ]
+  },
+  {
+    "id": "24",
+    "slug": "ibps-bank-exam-photo-signature-size-spec",
+    "title": "IBPS Bank Exam Photo and Signature Size Requirements: Complete Steps",
+    "description": "",
+    "excerpt": "IBPS and SBI photo/signature sizes are close to SSC, not identical. Check the notice, then crop.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "4 min read",
+    "tags": [
+      "Bank Exam",
+      "IBPS",
+      "Photo Sizing"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "exam-photo-resizer",
+      "signature-resize"
+    ]
+  },
+  {
+    "id": "25",
+    "slug": "how-to-mask-aadhaar-card-online",
+    "title": "How to Mask Aadhaar Card Number for Security Compliance",
+    "description": "",
+    "excerpt": "Black out the first 8 digits, leave the last 4. Do it in the tab so the unmasked card never sits on a server.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "3 min read",
+    "tags": [
+      "Aadhaar",
+      "Mask Aadhaar",
+      "Privacy"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "aadhaar-masking-tool",
+      "aadhaar-pdf-compressor"
+    ]
+  },
+  {
+    "id": "26",
+    "slug": "resize-scanned-signature-ssc-cgl-portal",
+    "title": "How to Resize Scanned Signature for SSC CGL Portal",
+    "description": "",
+    "excerpt": "SSC CGL signatures are tiny — often 10–20KB. Crop the ink, not the whole A4 scan.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "3 min read",
+    "tags": [
+      "SSC",
+      "Signature",
+      "CGL Form"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "signature-resize",
+      "ssc-photo-resize"
+    ]
+  },
+  {
+    "id": "27",
+    "slug": "upsc-otr-photo-document-upload-guide",
+    "title": "UPSC OTR (One Time Registration) Photo & Document Upload Guide",
+    "description": "",
+    "excerpt": "OTR wants a square photo and a small signature. Format both before you start the long form.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "4 min read",
+    "tags": [
+      "UPSC",
+      "OTR Form",
+      "Photo Sizing"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "upsc-photo-resize",
+      "signature-resize"
+    ]
+  },
+  {
+    "id": "28",
+    "slug": "crop-aadhaar-card-photo-uidai-specs",
+    "title": "How to Crop Aadhaar Card Photo to Official UIDAI Specs",
+    "description": "",
+    "excerpt": "UIDAI photo is 3.5×4.5 cm, light background, under 50KB. Crop the face, don't squeeze a group selfie.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "3 min read",
+    "tags": [
+      "Aadhaar",
+      "Photo Sizing",
+      "UIDAI Guidelines"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "crop-aadhaar-card",
+      "bg-remover"
+    ]
+  },
+  {
+    "id": "29",
+    "slug": "make-passport-size-photo-mobile-phone",
+    "title": "How to Make Passport Size Photo on Mobile Phone",
+    "description": "",
+    "excerpt": "You can do 35×45 mm on a phone: even light, crop, white background. Skip the studio if the shot is already decent.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "3 min read",
+    "tags": [
+      "Passport",
+      "Mobile Editor",
+      "Biometric Photo"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "passport-photo-maker",
+      "bg-remover"
+    ]
+  },
+  {
+    "id": "30",
+    "slug": "passport-size-photo-maker-online-free",
+    "title": "Passport Size Photo Maker Online Free: The Ultimate Guide to Biometric Document Preparation",
+    "description": "",
+    "excerpt": "Shadows, a dark wall, or the old 2×2 inch square — that's why Passport Seva bounces photos. Crop to 35×45 mm here.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "6 min read",
+    "tags": [
+      "Passport Photo",
+      "Image Sizing",
+      "Biometrics",
+      "Document Prep",
+      "Free Tools"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "passport-photo-maker",
+      "bg-remover"
+    ]
+  },
+  {
+    "id": "31",
+    "slug": "photo-resize-to-20kb",
+    "title": "Photo Resize to 20KB Online: How to Format and Compress Images for Official Applications",
+    "description": "",
+    "excerpt": "SSC and some police forms want the photo under 20KB. That's small. Here's how far you can go before it blurs.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "6 min read",
+    "tags": [
+      "Photo Resize",
+      "20KB Limit",
+      "SSC Photo",
+      "Exam Form",
+      "Passport Photo",
+      "Image Compression",
+      "Government Forms"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "exam-photo-resizer",
+      "image-compressor",
+      "ssc-photo-resize",
+      "signature-resize"
+    ]
+  },
+  {
+    "id": "32",
+    "slug": "signature-resize-to-20kb",
+    "title": "Signature Resize to 20KB Online: Sizing Scanned Signatures for Online Applications",
+    "description": "",
+    "excerpt": "A phone photo of a signature on A4 is huge. Crop the ink, land between 10 and 20KB.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "6 min read",
+    "tags": [
+      "Signature Resize",
+      "20KB Limit",
+      "SSC Signature",
+      "Exam Forms",
+      "Scanned Signature",
+      "Document Formatting",
+      "Free Tools"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "signature-resize",
+      "image-compressor",
+      "ssc-photo-resize",
+      "exam-photo-resizer"
+    ]
+  },
+  {
+    "id": "33",
+    "slug": "compress-pdf-to-100kb",
+    "title": "Compress PDF to 100KB Online: Sizing Certificates for Government Portals",
+    "description": "",
+    "excerpt": "EPFO and a few boards want 100KB. Text PDFs may already be there. Scans need a real pass — and honesty if they don't move.",
+    "category": "PDF Tools",
+    "date": "",
+    "readingTime": "6 min read",
+    "tags": [
+      "PDF Compressor",
+      "Government Forms",
+      "EPFO",
+      "SSC",
+      "Certificate Upload",
+      "Document Compression",
+      "Free Tools"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "compress-pdf",
+      "gov-form-pdf-compressor",
+      "merge-pdf",
+      "sign-pdf"
+    ]
+  },
+  {
+    "id": "34",
+    "slug": "aadhaar-photo-resize-online",
+    "title": "Aadhaar Photo Resize Online: How to Format Photos for UIDAI Card Updates",
+    "description": "",
+    "excerpt": "Aadhaar updates want 3.5×4.5 cm, white-ish background, under 50KB. Same family as a passport photo, different cap.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "6 min read",
+    "tags": [
+      "Aadhaar Card",
+      "UIDAI",
+      "Photo Resize",
+      "Biometric Photo",
+      "Government ID",
+      "Image Crop",
+      "Free Tools"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "exam-photo-resizer",
+      "image-compressor",
+      "aadhaar-masking-tool",
+      "aadhaar-pdf-compressor"
+    ]
+  },
+  {
+    "id": "5",
+    "slug": "how-to-calculate-exam-percentage-easily",
+    "title": "How to Calculate Exam Percentage Easily (2026 Guide)",
+    "description": "",
+    "excerpt": "All subjects equal? Divide by the max. Practicals and extra papers mess that up. Worked examples, then a calculator if you want it.",
+    "category": "Calculator Tools",
+    "date": "",
+    "readingTime": "5 min read",
+    "tags": [
+      "Education",
+      "Marks Calculation",
+      "Study Tips"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "exam-marks-calculator",
+      "age-calculator"
+    ]
+  },
+  {
+    "id": "6",
+    "slug": "how-to-compress-government-form-pdf-online",
+    "title": "Best Government Form PDF Compressor: Online PDF Under 100KB, 200KB & 300KB Compress Karein",
+    "description": "",
+    "excerpt": "SSC, EPFO, PAN — each portal has its own KB cap. Pick the target, drop the PDF, see the real size. File stays here.",
+    "category": "PDF Tools",
+    "date": "",
+    "readingTime": "4 min read",
+    "tags": [
+      "Government Form",
+      "PDF Compressor",
+      "EPFO",
+      "UPSC",
+      "SSC"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "gov-form-pdf-compressor",
+      "aadhaar-pdf-compressor",
+      "compress-pdf"
+    ]
+  },
+  {
+    "id": "webp-to-jpg-png-converter-guide",
+    "slug": "webp-to-jpg-png-converter-guide",
+    "title": "WebP to JPG / PNG Converter – Convert WebP Images Online for Free",
+    "description": "",
+    "excerpt": "WhatsApp and some forms still hate WebP. Convert to JPG or PNG in this tab if you need a picture that actually opens.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "12 min read",
+    "tags": [
+      "WebP",
+      "WebP to JPG",
+      "WebP to PNG",
+      "Image Converter",
+      "ToolWala"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "webp-to-jpg-png-converter",
+      "image-compressor",
+      "bg-remover"
+    ]
+  },
+  {
+    "id": "pan-card-photo-size-2026-new-requirement",
+    "slug": "pan-card-photo-size-2026-new-requirement",
+    "title": "PAN Card Photo Size Specs: NSDL & UTIITSL Guidelines",
+    "description": "",
+    "excerpt": "NSDL wants 3.5×2.5 cm. UTIITSL wants a square. Form 49AA is paper. Don't mix them up.",
+    "category": "Document Tools",
+    "date": "",
+    "readingTime": "4 min read",
+    "tags": [
+      "PAN Card",
+      "PAN Card Photo Size",
+      "NSDL",
+      "UTIITSL",
+      "Photo Resizer"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "pan-card-resize",
+      "signature-resize",
+      "gov-form-pdf-compressor"
+    ]
+  },
+  {
+    "id": "indian-passport-photo-size-2026-why-old-2x2-inch-photo-no-longer-accepted",
+    "slug": "indian-passport-photo-size-2026-why-old-2x2-inch-photo-no-longer-accepted",
+    "title": "Indian Passport Photo Size 2026: Why the Old 2x2 Inch Photo Is No Longer Accepted",
+    "description": "",
+    "excerpt": "The old 2×2 inch square is out. Passport Seva wants 35×45 mm. Crop what you already shot — don't book a studio for that.",
+    "category": "Image Tools",
+    "date": "",
+    "readingTime": "5 min read",
+    "tags": [
+      "Passport Photo Size India 2026",
+      "Passport Photo Maker",
+      "Passport Seva",
+      "Passport Photo Requirements Changed",
+      "ToolWala"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "passport-photo-maker",
+      "image-compressor",
+      "gov-form-pdf-compressor"
+    ]
+  },
+  {
+    "id": "gst-calculator-complete-guide",
+    "slug": "gst-calculator-complete-guide",
+    "title": "GST Calculator Kaise Use Karein: Complete Guide & Tax Invoicing Rules (2026)",
+    "description": "",
+    "excerpt": "CGST/SGST vs IGST, price with GST vs without. A few examples, then the calculator so you don't babysit Excel.",
+    "category": "Calculator Tools",
+    "date": "",
+    "readingTime": "6 min read",
+    "tags": [
+      "GST Calculator",
+      "GST",
+      "CGST SGST IGST",
+      "Tax Invoicing",
+      "ToolWala"
+    ],
+    "status": "published",
+    "relatedToolSlugs": [
+      "gst-calculator",
+      "emi-calculator",
+      "sip-calculator"
+    ]
+  }
+]

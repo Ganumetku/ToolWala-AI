@@ -1,13 +1,22 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import { AlertCircle, Download, FilePenLine } from "lucide-react";
 import ToolLayout from "@/components/tools/ToolLayout";
 import ToolHero from "@/components/tools/ToolHero";
 import UploadZone from "@/components/tools/UploadZone";
 import ToolArticle from "@/components/ToolArticle";
-import EditPdfEmbed from "@/components/pdf/EditPdfEmbed";
 import { toolArticles } from "@/data/toolArticles";
+
+const EditPdfEmbed = dynamic(() => import("@/components/pdf/EditPdfEmbed"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-64 items-center justify-center">
+      <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
+    </div>
+  ),
+});
 
 // PDF Editor iframe URL configured via NEXT_PUBLIC_EDITOR_URL (e.g. https://editor.toolwala.co)
 const EDITOR_URL = process.env.NEXT_PUBLIC_EDITOR_URL;

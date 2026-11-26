@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
-import imageCompression from 'browser-image-compression';
 import ToolArticle from '@/components/ToolArticle';
 import BeforeAfterSlider from '@/components/tools/BeforeAfterSlider';
 import ToolResultScreen from '@/components/tools/ToolResultScreen';
@@ -193,6 +192,7 @@ export default function ImageCompressor() {
       let compressedBlob: Blob | null = null;
 
       try {
+        const imageCompression = (await import('browser-image-compression')).default;
         const options = {
           maxSizeMB: Math.min(targetSizeMB, originalSizeMB * 0.9),
           maxWidthOrHeight: maxDim,

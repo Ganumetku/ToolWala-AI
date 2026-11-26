@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import * as LucideIcons from "lucide-react";
 import {
   GitMerge,
   GitCompare,
@@ -57,8 +56,127 @@ import {
   Code2,
   Share2,
   Calculator,
+  CheckCircle2,
+  DollarSign,
+  Droplets,
+  EyeOff,
+  FileImage,
+  FileMinus,
+  FilePenLine,
+  FileUser,
+  GraduationCap,
+  ListChecks,
+  Lock,
+  LockOpen,
+  Mail,
+  Merge,
+  MessageSquareText,
+  ScanEye,
+  Shapes,
+  Shrink,
+  SplitSquareHorizontal,
+  Wand2,
+  BarChart2,
+  Gift,
+  Headphones,
+  Monitor,
+  Power,
+  Ruler,
+  Sliders,
+  Target,
+  User,
+  Zap,
   type LucideIcon,
 } from "lucide-react";
+
+// Named dynamic icon map for categories and custom tool icons to enable full tree-shaking
+const DYNAMIC_ICON_MAP: Record<string, LucideIcon> = {
+  GitMerge,
+  GitCompare,
+  Scissors,
+  Minimize2,
+  RotateCw,
+  FileText,
+  Table,
+  Presentation,
+  Image: ImageIcon,
+  ImageIcon,
+  FileOutput,
+  FileSpreadsheet,
+  MonitorPlay,
+  ImagePlus,
+  PenLine,
+  PenTool,
+  Stamp,
+  LockKeyholeOpen,
+  ShieldCheck,
+  LayoutGrid,
+  ScanText,
+  Trash2,
+  Crop,
+  Hash,
+  Sparkles,
+  ArrowRightLeft,
+  Camera,
+  ImageDown,
+  Palette,
+  QrCode,
+  KeyRound,
+  FileJson2,
+  Binary,
+  Type,
+  Receipt,
+  Cake,
+  TrendingUp,
+  Landmark,
+  Percent,
+  Tag,
+  Play,
+  IndianRupee,
+  IdCard,
+  HeartPulse,
+  Mic,
+  Video,
+  Eye,
+  UserCheck,
+  MessageSquare,
+  Folder,
+  Wrench,
+  Briefcase,
+  Code2,
+  Share2,
+  Calculator,
+  CheckCircle2,
+  DollarSign,
+  Droplets,
+  EyeOff,
+  FileImage,
+  FileMinus,
+  FilePenLine,
+  FileUser,
+  GraduationCap,
+  ListChecks,
+  Lock,
+  LockOpen,
+  Mail,
+  Merge,
+  MessageSquareText,
+  ScanEye,
+  Shapes,
+  Shrink,
+  SplitSquareHorizontal,
+  Wand2,
+  BarChart2,
+  Gift,
+  Headphones,
+  Monitor,
+  Power,
+  Ruler,
+  Sliders,
+  Target,
+  User,
+  Zap,
+};
 
 export interface PremiumTileConfig {
   id: string;
@@ -596,12 +714,12 @@ export function getFallbackTileConfig(
     return ALL_TOOL_TILES[cleanId];
   }
 
-  // Resolve Lucide Icon component
+  // Resolve Lucide Icon component via tree-shakeable lookup
   let IconComponent: LucideIcon = Sparkles;
   if (rawIconName) {
     IconComponent =
-      (LucideIcons as any)[rawIconName] ||
-      (LucideIcons as any)[rawIconName + "Icon"] ||
+      DYNAMIC_ICON_MAP[rawIconName] ||
+      DYNAMIC_ICON_MAP[rawIconName.replace(/Icon$/, "")] ||
       Sparkles;
   }
 

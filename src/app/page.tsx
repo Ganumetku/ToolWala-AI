@@ -130,7 +130,7 @@ export default function Home() {
               </div>
               <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat1_title', 'Browser-Based Processing')}</h4>
               <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold">
-                {t('home.feat1_desc', 'Files are processed directly in your web browser. Documents never leave your device, ensuring maximum speed and complete privacy.')}
+                {t('home.feat1_desc', 'Process supported PDF and image files directly in your browser without uploading them to a server.')}
               </p>
             </div>
             <div className="premium-card p-6 flex flex-col items-start gap-3 border border-gray-200 dark:border-white/5 bg-white dark:bg-white/[0.02]">
@@ -139,7 +139,7 @@ export default function Home() {
               </div>
               <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat2_title', 'Privacy by Design')}</h4>
               <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold">
-                {t('home.feat2_desc', 'We do not store, view, or log your files. Because processing happens locally, your sensitive documents remain entirely under your control.')}
+                {t('home.feat2_desc', 'Supported local tools keep your files on your device during processing. Read our Privacy Policy to learn more about analytics and data handling.')}
               </p>
             </div>
             <div className="premium-card p-6 flex flex-col items-start gap-3 border border-gray-200 dark:border-white/5 bg-white dark:bg-white/[0.02]">
@@ -148,7 +148,7 @@ export default function Home() {
               </div>
               <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat3_title', 'No Sign-Up Required')}</h4>
               <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold">
-                {t('home.feat3_desc', 'Access all tools instantly without creating an account or providing personal details. Open a tool, process your file, and download.')}
+                {t('home.feat3_desc', 'Use supported free tools without creating an account. Open a tool, process your file and download the result.')}
               </p>
             </div>
             <div className="premium-card p-6 flex flex-col items-start gap-3 border border-gray-200 dark:border-white/5 bg-white dark:bg-white/[0.02]">
@@ -157,7 +157,7 @@ export default function Home() {
               </div>
               <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">{t('home.feat4_title', 'Free & Easy to Use')}</h4>
               <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-semibold">
-                {t('home.feat4_desc', 'Enjoy full access to every tool without subscription fees, usage limits, or watermarks. Built to be simple, fast, and accessible to everyone.')}
+                {t('home.feat4_desc', 'Access essential PDF, image and everyday utility tools through a simple, browser-based interface.')}
               </p>
             </div>
           </div>

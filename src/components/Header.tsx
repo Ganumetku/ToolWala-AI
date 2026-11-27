@@ -827,7 +827,7 @@ export default function Header() {
             className="h-9 group relative flex items-center gap-1.5 rounded-full bg-blue-600 text-white hover:bg-blue-700 dark:bg-white dark:text-black dark:hover:bg-gray-100 px-3.5 xl:px-5 text-xs xl:text-[13px] font-bold shadow-sm hover:brightness-105 active:scale-95 transition-all duration-150 overflow-hidden whitespace-nowrap shrink-0"
           >
             <Rocket className="w-3.5 h-3.5 relative z-10" suppressHydrationWarning />
-            <span className="relative z-10 whitespace-nowrap">{t('nav.start_free', 'Start Free')}</span>
+            <span className="relative z-10 whitespace-nowrap">{t('nav.explore_tools', 'Explore Tools')}</span>
           </Link>
         </div>
  
@@ -1087,7 +1087,7 @@ export default function Header() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <Rocket className="w-5 h-5" suppressHydrationWarning />
-                {t('nav.get_started_free', 'Get Started Free')}
+                {t('nav.explore_tools', 'Explore Tools')}
               </Link>
             </div>
           </div>

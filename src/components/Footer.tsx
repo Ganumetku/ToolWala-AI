@@ -1,9 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { useState } from 'react';
-import { Mail, ShieldCheck, Heart, Sparkles, Send, Globe, UserCheck, Lock, Clock, Zap } from 'lucide-react';
-import { toast } from 'sonner';
+import { Mail, ShieldCheck, Heart, Sparkles, Globe, UserCheck, Lock, Clock, Zap, ArrowRight } from 'lucide-react';
 import { useTranslation } from '@/components/I18nContext';
 
 const LANGUAGES = [
@@ -19,21 +17,10 @@ const LANGUAGES = [
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const [email, setEmail] = useState("");
   
   const { t, locale, enabledLocales, localizeHref } = useTranslation();
 
   const activeLanguages = LANGUAGES.filter(lang => enabledLocales.includes(lang.code));
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !email.includes("@")) {
-      toast.error(t('footer.subscribe_error', 'Please enter a valid email address.'));
-      return;
-    }
-    toast.success(t('footer.subscribe_success', 'Subscribed successfully! Welcome to the ToolWala community ⚡'));
-    setEmail("");
-  };
 
   const handleLanguageChange = (newLocale: string) => {
     document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
@@ -187,24 +174,22 @@ export default function Footer() {
               {t('footer.tagline', 'Free online PDF, image and everyday utility tools. Convert, compress, edit and resize files with simple, browser-based processing.')}
             </p>
 
-            <div className="space-y-3">
-              <h4 className="text-xs font-black uppercase tracking-wider text-gray-900 dark:text-white">{t('footer.subscribe_releases', 'Subscribe to Releases')}</h4>
-              <form onSubmit={handleSubscribe} className="flex max-w-sm rounded-xl overflow-hidden bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 p-1.5 focus-within:border-blue-500/50 transition-colors">
-                <input 
-                  type="email" 
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@email.com"
-                  className="bg-transparent text-xs outline-none border-none py-2 px-3 flex-1 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-600 focus:ring-0"
-                />
-                <button 
-                  type="submit"
-                  className="bg-blue-600 hover:bg-blue-500 p-2 rounded-lg text-white transition-colors flex items-center justify-center cursor-pointer"
-                  aria-label="Subscribe"
+            <div className="space-y-2.5">
+              <h4 className="text-xs font-black uppercase tracking-wider text-gray-900 dark:text-white">
+                {t('footer.need_help_title', 'Need Help?')}
+              </h4>
+              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-medium">
+                {t('footer.need_help_desc', "Have a question, found an issue, or want to suggest a new tool? We'd love to hear from you.")}
+              </p>
+              <div>
+                <Link
+                  href={localizeHref('/contact/')}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-sm active:scale-95"
                 >
-                  <Send className="w-3.5 h-3.5" />
-                </button>
-              </form>
+                  <span>{t('footer.contact_us', 'Contact Us')}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             </div>
             
             <div className="flex flex-wrap gap-2.5">

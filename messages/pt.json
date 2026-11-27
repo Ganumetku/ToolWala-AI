@@ -13,9 +13,11 @@
     "contact": "Contato",
     "privacy": "Central de privacidade",
     "company_and_trust": "Empresa e confiança",
-    "start_free": "Comece grátis",
+    "start_free": "Explorar ferramentas",
     "select_language": "Selecione o idioma",
-    "pdf_suite": "Suite PDF"
+    "pdf_suite": "Suite PDF",
+    "explore_tools": "Explorar ferramentas",
+    "get_started_free": "Explorar ferramentas"
   },
   "pdf_mega_menu": {
     "studio_title": "ToolWala PDF Studio",
@@ -47,7 +49,6 @@
     "disclaimer": "Isenção de responsabilidade",
     "about": "Sobre",
     "contact": "Contato",
-    "subscribe_releases": "Assine os lançamentos",
     "browser_native": "Nativo do navegador",
     "gdpr_compliant": "Compatível com GDPR",
     "social_connect": "Conexão social",
@@ -56,10 +57,11 @@
     "copyright_notice": "Todos os direitos reservados.",
     "made_with": "Feito com",
     "for_community": "para a comunidade de IA",
-    "subscribe_success": "Inscrito com sucesso! Bem-vindo à comunidade ToolWala ⚡",
-    "subscribe_error": "Insira um endereço de e-mail válido.",
     "trust_badge": "Ferramentas seguras no navegador",
-    "built_for": "Criado para tarefas digitais do dia a dia."
+    "built_for": "Criado para tarefas digitais do dia a dia.",
+    "need_help_title": "Precisa de ajuda?",
+    "need_help_desc": "Tem alguma dúvida, encontrou um problema ou quer sugerir uma nova ferramenta? Adoraríamos ouvir você.",
+    "contact_us": "Fale conosco"
   },
   "home": {
     "badge": "NO SEU NAVEGADOR • SEM ENVIAR ARQUIVOS • MÁXIMA PRIVACIDADE",
@@ -81,11 +83,11 @@
     "edge_subtitle_2": "Complexidade zero.",
     "edge_desc": "Nós preenchemos a lacuna entre modelos complexos de IA e utilidade cotidiana. Sem interfaces confusas, sem armadilhas de assinatura – apenas uma IA poderosa que funciona para você.",
     "feat1_title": "Processamento no navegador",
-    "feat1_desc": "Os arquivos são processados diretamente no seu navegador. Os documentos nunca saem do seu dispositivo, garantindo velocidade máxima e privacidade total.",
+    "feat1_desc": "Processe arquivos PDF e imagens compatíveis diretamente no seu navegador sem enviá-los para um servidor.",
     "feat2_title": "Privacidade por padrão",
-    "feat2_desc": "Não armazenamos, visualizamos nem registramos seus arquivos. Como o processamento ocorre localmente, seus documentos ficam totalmente sob seu controle.",
+    "feat2_desc": "As ferramentas locais compatíveis mantêm seus arquivos no seu dispositivo durante o processamento. Leia nossa Política de Privacidade para saber mais sobre análise e manuseio de dados.",
     "feat3_title": "Sem necessidade de cadastro",
-    "feat3_desc": "Acesse todas as ferramentas instantaneamente sem criar conta ou fornecer dados pessoais. Abra a ferramenta, processe o arquivo e baixe.",
+    "feat3_desc": "Use ferramentas gratuitas compatíveis sem criar uma conta. Abra uma ferramenta, processe seu arquivo e baixe o resultado.",
     "recent_visited": "Utilitários visitados recentemente",
     "no_tools_found": "Nenhuma ferramenta encontrada",
     "no_tools_sub": "Tente verificar as consultas de tags ou limpar os filtros para visualizar todos os diretórios.",
@@ -128,7 +130,7 @@
     "trending": "Tendências",
     "why_use_title": "Por que escolher o ToolWala?",
     "feat4_title": "Gratuito e fácil de usar",
-    "feat4_desc": "Aproveite acesso completo a todas as ferramentas sem assinaturas, limites de uso ou marcas d'água. Feito para ser simples, rápido e acessível."
+    "feat4_desc": "Acesse ferramentas essenciais de PDF, imagem e utilitários diários por meio de uma interface simples baseada no navegador."
   },
   "categories": {
     "All": "Todos",
@@ -487,17 +489,17 @@
     "title": "Perguntas frequentes",
     "subtitle": "Respostas a perguntas comuns sobre processamento local, segurança de arquivos e especificações.",
     "q1": "Meus arquivos são enviados para algum servidor?",
-    "a1": "A maioria das ferramentas de PDF e imagem processa arquivos diretamente no seu navegador usando tecnologias web modernas. Seus arquivos nunca saem do seu dispositivo. Em ferramentas de texto com IA (como o Gerador de Cartas de Apresentação), os textos são transmitidos com segurança para gerar a resposta, mas nenhum documento fica salvo permanentemente.",
+    "a1": "As ferramentas de PDF e imagem compatíveis processam arquivos diretamente no seu navegador sem enviá-los para um servidor. Para ferramentas de texto com IA, como o Gerador de Cartas de Apresentação, os dados inseridos são enviados a um serviço de IA para gerar o conteúdo.",
     "q2": "O ToolWala é gratuito?",
-    "a2": "Sim. Todas as ferramentas de PDF, imagem e utilitários são gratuitas. Não há cobranças de assinatura, taxas ocultas ou limites diários de uso.",
+    "a2": "Sim. As ferramentas compatíveis de PDF, imagem e utilitários no ToolWala são gratuitas, sem taxas de assinatura ou barreiras de pagamento.",
     "q3": "Preciso criar uma conta para usar as ferramentas?",
-    "a3": "Não. Você pode usar qualquer ferramenta do ToolWala sem criar conta ou fornecer informações pessoais. Basta abrir a ferramenta, selecionar seu arquivo e baixar o resultado.",
+    "a3": "Não. Você pode usar as ferramentas gratuitas compatíveis sem criar uma conta ou fornecer dados pessoais. Basta abrir uma ferramenta, processar seu arquivo e baixar o resultado.",
     "q4": "Quais formatos de arquivo são suportados?",
     "a4": "O ToolWala suporta os principais formatos como PDF, JPG, PNG e WebP. Algumas ferramentas também realizam conversões de HEIC, Word (DOCX), Excel (XLSX) e PowerPoint (PPTX).",
     "q5": "Qual o tamanho máximo de arquivo suportado?",
-    "a5": "Como o processamento ocorre no próprio navegador, o limite depende da memória RAM disponível no seu dispositivo. A maioria dos navegadores modernos processa com facilidade arquivos de até 50–100MB.",
+    "a5": "Os tamanhos de arquivo suportados dependem da ferramenta selecionada, do seu navegador e da memória disponível no seu dispositivo. Arquivos maiores podem levar mais tempo para processar ou exceder as limitações do dispositivo.",
     "q6": "Como o processamento no navegador protege minha privacidade?",
-    "a6": "Os conversores convencionais exigem o envio de arquivos para servidores em nuvem, onde podem ser salvos ou monitorados. O processamento no navegador executa tudo localmente, garantindo que documentos confidenciais, documentos de identidade e fotos privadas nunca trafeguem pela rede."
+    "a6": "Os conversores convencionais enviam seus arquivos para servidores na nuvem para processamento. As ferramentas compatíveis no navegador executam as operações localmente no seu dispositivo, garantindo que os arquivos permaneçam no seu computador ou celular em vez de trafegar pela rede."
   },
   "testimonials": {
     "badge": "AVALIAÇÕES DE USUÁRIOS",

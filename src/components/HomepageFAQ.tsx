@@ -16,15 +16,15 @@ export default function HomepageFAQ() {
   const faqs = [
     {
       question: t('faq.q1', 'Are my files uploaded to any server?'),
-      answer: t('faq.a1', 'Most PDF and image tools process files directly inside your web browser using modern web technologies. Your files do not leave your device during processing. For select text-based AI utilities (such as the AI Cover Letter Generator), text inputs are sent securely to generate responses, but files and documents are not permanently stored.')
+      answer: t('faq.a1', 'Supported PDF and image tools process files directly in your web browser without uploading them to a server. For text-based AI tools such as the AI Cover Letter Generator, entered details are sent to an AI service to generate content.')
     },
     {
       question: t('faq.q2', 'Is ToolWala free to use?'),
-      answer: t('faq.a2', 'Yes. All PDF, image, and utility tools on ToolWala are free to use. There are no subscription fees, hidden paywalls, or daily usage limits.')
+      answer: t('faq.a2', 'Yes. Supported PDF, image and utility tools on ToolWala are free to use without subscription fees or paywalls.')
     },
     {
       question: t('faq.q3', 'Do I need to create an account to use the tools?'),
-      answer: t('faq.a3', 'No. You can access and use every tool on ToolWala without creating an account or providing personal information. Simply open the tool, select your file, and download the result.')
+      answer: t('faq.a3', 'No. You can use supported free tools on ToolWala without creating an account or providing personal details. Simply open a tool, process your file and download the result.')
     },
     {
       question: t('faq.q4', 'What file formats are supported?'),
@@ -32,11 +32,11 @@ export default function HomepageFAQ() {
     },
     {
       question: t('faq.q5', 'What is the maximum file size I can process?'),
-      answer: t('faq.a5', 'Because processing occurs directly within your browser, file-size limits depend primarily on your device’s available memory (RAM). Most modern browsers easily handle documents and images up to 50–100MB. For larger files, processing speed may vary depending on device performance.')
+      answer: t('faq.a5', "Supported file sizes depend on the selected tool, your browser and your device's available memory. Larger files may take longer to process or exceed device limitations.")
     },
     {
       question: t('faq.q6', 'How does browser-based processing protect my privacy?'),
-      answer: t('faq.a6', 'Traditional online converters require you to upload your files to remote cloud servers, where they may be stored, logged, or temporarily cached. Browser-based processing performs calculations locally on your computer or phone, meaning sensitive documents such as ID cards, financial records, and private photos never transfer over the network.')
+      answer: t('faq.a6', 'Traditional online converters upload your files to remote cloud servers for processing. Supported browser-based tools perform calculations locally on your device, meaning files stay on your computer or phone rather than being transferred over the network.')
     }
   ];
 
